@@ -1,0 +1,322 @@
+<h1>Smart Legend</h1>
+<h2>Figure</h2>
+<p>Image alone should create a figure</p>
+<figure><img alt="" src="https://zestedesavoir.com/media/galleries/3014/bee33fae-2216-463a-8b85-d1d9efe2c374.png"><figcaption>My Image</figcaption>
+</figure>
+<p>Legend could be specified</p>
+<figure><img alt="toto" src="https://zestedesavoir.com/media/galleries/3014/bee33fae-2216-463a-8b85-d1d9efe2c374.png"><figcaption>My Image</figcaption>
+</figure>
+<p>Figure should be optional</p>
+<figure><img alt="toto" src="https://zestedesavoir.com/media/galleries/3014/bee33fae-2216-463a-8b85-d1d9efe2c374.png"><figcaption>My Image</figcaption>
+</figure>
+<p>A free line can be used</p>
+<figure><img alt="toto" src="https://zestedesavoir.com/media/galleries/3014/bee33fae-2216-463a-8b85-d1d9efe2c374.png"><figcaption>My Image</figcaption>
+</figure>
+<p>A smiley should not become a figure</p>
+<p><img alt=":D" src="/static/smileys/heureux.png"></p>
+<h2>Blockquote</h2>
+<p>Normal blockquote</p>
+<blockquote>
+<p>My citation</p>
+</blockquote>
+<p>With Legend</p>
+<figure>
+<blockquote>
+<p>My citation</p>
+</blockquote>
+<figcaption>Toto</figcaption>
+</figure>
+<p>With Legend without Source</p>
+<figure>
+<blockquote>
+<p>My citation</p>
+</blockquote>
+<figcaption>Toto</figcaption>
+</figure>
+<p>With empty line</p>
+<figure>
+<blockquote>
+<p>My citation</p>
+</blockquote>
+<figcaption>Toto</figcaption>
+</figure>
+<p>With multi blockquote</p>
+<figure>
+<blockquote>
+<p>My citation</p>
+<p>My other citation</p>
+</blockquote>
+<figcaption>Toto</figcaption>
+</figure>
+<p>With multi blockquote and  empty line</p>
+<figure>
+<blockquote>
+<p>My citation</p>
+<p>My other citation</p>
+</blockquote>
+<figcaption>Toto</figcaption>
+</figure>
+<p>Multi-line legend</p>
+<figure>
+<blockquote>
+<p>My citation</p>
+</blockquote>
+<figcaption>Toto
+toto2</figcaption>
+</figure>
+<p>Grid-table</p>
+<figure>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>A</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>B</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>C</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="2">
+<p>D</p>
+</td>
+<td colspan="2" rowspan="1">
+<p>E</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>F</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>G</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption>My legend</figcaption>
+</figure>
+<figure>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th colspan="1" rowspan="1">
+<p>A</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>B</p>
+</th>
+<th colspan="1" rowspan="1">
+<p>C</p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="1" rowspan="2">
+<p>D</p>
+</td>
+<td colspan="2" rowspan="1">
+<p>E</p>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1">
+<p>F</p>
+</td>
+<td colspan="1" rowspan="1">
+<p>G</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption>My legend</figcaption>
+</figure>
+<p>Video</p>
+<iframe allowfullscreen="true" frameborder="0" height="315" src="https://www.youtube.com/embed/BpJKvrjLUp0" width="560"></iframe>
+<figure>
+<iframe allowfullscreen="true" frameborder="0" height="315" src="https://www.youtube.com/embed/BpJKvrjLUp0" width="560"></iframe>
+<figcaption>My video</figcaption>
+</figure>
+<figure>
+<iframe allowfullscreen="true" frameborder="0" height="315" src="https://www.youtube.com/embed/BpJKvrjLUp0" width="560"></iframe>
+<figcaption>My video</figcaption>
+</figure>
+<p>Fenced-code</p>
+<div><pre><code class="python">def foo():
+    print(&quot;bar&quot;)
+</code></pre></div>
+<figure>
+<div><pre><code class="python">def foo():
+    print(&quot;bar&quot;)
+</code></pre></div>
+<figcaption>My code</figcaption>
+</figure>
+<p>Math, bug #34</p>
+<div class="mathjax-wrapper"><mathjax>$$\frac 12+\frac 13+\frac 16=1$$</mathjax></div>
+<figure>
+<div class="mathjax-wrapper"><mathjax>$$\frac 12+\frac 13+\frac 16=1$$</mathjax></div>
+<figcaption>My equation</figcaption>
+</figure>
+<hr>
+<p>Bug #57</p>
+<figure>
+<blockquote>
+<p>blablabla je fais une citations</p>
+<p>Et cette ligne fera un doublon</p>
+</blockquote>
+<figcaption>Le doubleur</figcaption>
+</figure>
+<p>Bug #60</p>
+<blockquote>
+<p>Personne ne s'accordait vraiment sur la nature de la fin du monde. Guerre nucléaire, jugement dernier, météorite insoupçonnée, les théories allaient foison, mais finalement, tout s'est passé en... douceur. C'est ce qui s'est passé après qui a été mouvementé.</p>
+</blockquote>
+<p>Bug #66</p>
+<figure><img alt="" src="/lien/vers/image"><figcaption>Ma super légende</figcaption>
+</figure>
+<figure><img alt="Ma super légende" src="/lien/vers/image"><figcaption>Ma super légende</figcaption>
+</figure>
+<p>Bug #67</p>
+<figure>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th><strong>Valeur</strong></th>
+<th><code>isset($a)</code></th>
+<th><code>empty($a)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$a = ''</code></td>
+<td><strong><code>true</code></strong></td>
+<td><strong><code>true</code></strong></td>
+</tr>
+<tr>
+<td><code>$a = 1</code></td>
+<td><strong><code>true</code></strong></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>$a = 0</code></td>
+<td><strong><code>true</code></strong></td>
+<td><strong><code>true</code></strong></td>
+</tr>
+<tr>
+<td><code>unset($a)</code></td>
+<td><code>false</code></td>
+<td><strong><code>true</code></strong></td>
+</tr>
+<tr>
+<td><code>$a = ' '</code></td>
+<td><strong><code>true</code></strong></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>$a = 'a'</code></td>
+<td><strong><code>true</code></strong></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>$a = null</code></td>
+<td><code>false</code></td>
+<td><strong><code>true</code></strong></td>
+</tr>
+<tr>
+<td><code>$a = false</code></td>
+<td><strong><code>true</code></strong></td>
+<td><strong><code>true</code></strong></td>
+</tr>
+<tr>
+<td><code>$a = true</code></td>
+<td><strong><code>true</code></strong></td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption><strong>Table de vérité</strong></figcaption>
+</figure>
+<p>Bug #67 - 2</p>
+<figure>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th><strong>Valeur</strong></th>
+<th><code>isset($a)</code></th>
+<th><code>empty($a)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$a = ''</code></td>
+<td><strong><code>true</code></strong></td>
+<td><strong><code>true</code></strong></td>
+</tr>
+<tr>
+<td><code>$a = 1</code></td>
+<td><strong><code>true</code></strong></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>$a = 0</code></td>
+<td><strong><code>true</code></strong></td>
+<td><strong><code>true</code></strong></td>
+</tr>
+<tr>
+<td><code>unset($a)</code></td>
+<td><code>false</code></td>
+<td><strong><code>true</code></strong></td>
+</tr>
+<tr>
+<td><code>$a = ' '</code></td>
+<td><strong><code>true</code></strong></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>$a = 'a'</code></td>
+<td><strong><code>true</code></strong></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>$a = null</code></td>
+<td><code>false</code></td>
+<td><strong><code>true</code></strong></td>
+</tr>
+<tr>
+<td><code>$a = false</code></td>
+<td><strong><code>true</code></strong></td>
+<td><strong><code>true</code></strong></td>
+</tr>
+<tr>
+<td><code>$a = true</code></td>
+<td><strong><code>true</code></strong></td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption><strong>Table de vérité</strong></figcaption>
+</figure>
+<p>Bug #95</p>
+<figure><img alt="" src="/media/galleries/3307/15ad3914-2b9f-4a66-af54-1c48bd4832c7.gif"><figcaption>Pas de variable locale avant sa déclaration<sup id="fnref-theme"><a class="footnote-ref" href="#fn-theme">1</a></sup></figcaption>
+</figure>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn-theme">
+<p>Et oui, je suis passé à un thème sombre.&#160;<a class="footnote-backref" href="#fnref-theme" title="Retourner au texte de la note 1">&#8617;</a></p>
+</li>
+</ol>
+</div>

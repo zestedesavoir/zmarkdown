@@ -1,0 +1,111 @@
+<h3 id="bloc-de-code">Bloc de code<a href="#bloc-de-code"><span class="anchor-link"></span></a></h3>
+<p>Il n&rsquo;est pas rare d&rsquo;illustrer son propos d&rsquo;un petit exemple de code&#x202F;:</p>
+<figure>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<figcaption>Mon exemple de code</figcaption>
+</figure>
+<p>Pour cela, il existe plusieurs solutions.</p>
+<p>Première solution&#x202F;: entourer votre code d&rsquo;au moins trois accents graves ``` (<kbd>Alt Gr</kbd> + <kbd>7</kbd>), avant et après&#x202F;: </p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>```
+#!/usr/bin/env python3
+
+print(&quot;Hello, World!&quot;)
+```
+</pre></div>
+</td></tr></table></div>
+<p>Le langage utilisé sera détecté automatiquement et donc coloré en conséquence. Si tel n&rsquo;est pas le cas, vous pouvez forcer le langage en l&rsquo;indiquant à la suite des caractères ouvrants&#x202F;:</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>```python
+#!/usr/bin/env python3
+
+print(&quot;Hello, World!&quot;)
+```
+</pre></div>
+</td></tr></table></div>
+<p>La liste des langages supportés est celle de <strong>pygment</strong>, vous la trouverez <a href="http://pygments.org/languages" title="Langages pygment">ici</a>. Les mots-clés à insérer pour déclencher la coloration sont les &laquo;&nbsp;short names&nbsp;&raquo; disponibles sur <a href="http://pygments.org/docs/lexers" title="Mots-clé pygment">cette page</a>.</p>
+<p>Seconde solution, faites précéder chaque ligne de quatre espaces ou bien d&rsquo;une tabulation&#x202F;:</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    #!/usr/bin/env python3
+
+    print(&quot;Hello, World!&quot;)
+</pre></div>
+</td></tr></table></div>
+<p>Pour forcer le langage, utilisez cette fois trois symboles de deux-points de suite&#x202F;:</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    :::python
+    #!/usr/bin/env python3
+
+    print(&quot;Hello, World!&quot;)
+</pre></div>
+</td></tr></table></div>
+<p>Là encore, vous pouvez mettre une légende à votre bloc de code en ajoutant, juste en dessous du bloc, une ligne <code>Code:Votre légende</code>.</p>
+<h3 id="mise-en-evidence-de-lignes-de-code">Mise en évidence de lignes de code<a href="#mise-en-evidence-de-lignes-de-code"><span class="anchor-link"></span></a></h3>
+<p>Mettre en évidence une portion de code permet d&rsquo;appuyer votre explication&#x202F;:</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="hll"><span class="k">use</span> <span class="n">strict</span><span class="p">;</span>
+</span><span class="k">use</span> <span class="n">warnings</span><span class="p">;</span>
+
+<span class="hll"><span class="k">print</span> <span class="s">&quot;Comment vous appelez-vous ? &quot;</span><span class="p">;</span>
+</span><span class="hll"><span class="k">my</span> <span class="nv">$nom</span> <span class="o">=</span> <span class="o">&lt;&gt;</span><span class="p">;</span> <span class="c1"># Récupération du nom de l&#39;utilisateur</span>
+</span><span class="hll"><span class="nb">chomp</span> <span class="nv">$nom</span><span class="p">;</span>   <span class="c1"># Retrait du saut de ligne</span>
+</span><span class="k">print</span> <span class="s">&quot;Bonjour, $nom !\n&quot;</span><span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Après le nom du langage, indiquez simplement les lignes à surligner avec la mention <code>hl_lines</code>. Vous pouvez surligner les lignes unes à unes ou par groupes. Le syntaxe est la suivante&#x202F;:</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>```perl hl_lines=&quot;1 4-6&quot;
+use strict;
+use warnings;
+
+print &quot;Comment vous appelez-vous ? &quot;;
+my $nom = &lt;&gt;; # Récupération du nom de l&#39;utilisateur
+chomp $nom;   # Retrait du saut de ligne
+print &quot;Bonjour, $nom !\n&quot;;
+```
+</pre></div>
+</td></tr></table></div>
+<h3 id="debut-de-la-numerotation">Début de la numérotation<a href="#debut-de-la-numerotation"><span class="anchor-link"></span></a></h3>
+<p>Il est possible de spécifier le début de numération. Par exemple&#x202F;:</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>10
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="hll"><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">truc</span><span class="p">):</span>      <span class="c1"># Cette ligne est en évidence et est numérotée 10</span>
+</span>    <span class="k">print</span> <span class="n">truc</span>         <span class="c1"># Cette ligne est numéroté 11</span>
+                         <span class="c1"># Cette ligne est numéroté 12</span>
+<span class="hll"><span class="n">test</span><span class="p">(</span><span class="s2">&quot;coucou&quot;</span><span class="p">)</span>     <span class="c1"># Cette ligne est en évidence et est numérotée 13</span>
+</span></pre></div>
+</td></tr></table></div>
+<p>On utilise le mot-clé <code>linenostart</code> de la même façon que le <code>hl_lines</code> vu précédemment.</p>
+<h3 id="code-inline">Code inline<a href="#code-inline"><span class="anchor-link"></span></a></h3>
+<p>Enfin, si vous souhaitez insérer un petit élément de code dans votre phrase (comme <code>print</code> par exemple), alors un seul accent grave autour du mot suffira&#x202F;:</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>comme `print` par exemple
+</pre></div>
+</td></tr></table></div>

@@ -1,0 +1,81 @@
+# Des tableaux simples
+
+Pour faire un tableau, la façon la plus simple est encore de le dessiner, à l'aide de barres verticales et de tirets :
+
+```text
+Nom     |   Age
+------|-----
+Fred |   39
+Sam |   38
+Alice  |   35
+Mathilde  | 35
+```
+
+L'exemple ci-dessus donnera donc :
+
+Nom     |   Age
+------|-----
+Fred |   39
+Sam |   38
+Alice  |   35
+Mathilde  | 35
+
+Cette syntaxe est simple mais elle a ses limites : il est impossible de revenir à la ligne dans une cellule ou bien de fusionner des lignes ou des colonnes. Si vous avez vraiment besoin de faire cela, il vous faudra utiliser une autre syntaxe de tableau, plus lourde mais plus complète, comme nous allons le voir à présent.
+
+# Tableaux complexes
+
+Pour des tableaux plus complexes, dans lesquels vous pourrez notamment revenir à la ligne dans une cellule et fusionner des lignes ou colonnes, il vous faut utiliser la syntaxe dite « grid-table » :
+
+```text
++-------+----------+------+
+| Table Headings   | Here |
++-------+----------+------+
+| Sub   | Headings | Too  |
++=======+==========+======+
+| cell  | column spanning |
++ spans +----------+------+
+| rows  | normal   | cell |
++-------+----------+------+
+| multi | cells can be    |
+| line  | *formatted*     |
+|       | **paragraphs**  |
+| cells |                 |
+| too   |                 |
++-------+-----------------+
+```
+
+Ce qui vous donnera :
+
++-------+----------+------+
+| Table Headings   | Here |
++-------+----------+------+
+| Sub   | Headings | Too  |
++=======+==========+======+
+| cell  | column spanning |
++ spans +----------+------+
+| rows  | normal   | cell |
++-------+----------+------+
+| multi | cells can be    |
+| line  | *formatted*     |
+|       | **paragraphs**  |
+| cells |                 |
+| too   |                 |
++-------+-----------------+
+
+# Légendes de tableaux
+
+Quelle que soit la syntaxe utilisée, vous pouvez indiquer une légende à votre tableau en ajoutant une ligne `Table: Ma légende` juste en dessous du tableau.
+
+Le mot « Table » est optionnel, pas les deux-points. Il peut y avoir un espace entre « Table » et les deux-points.
+
+# Lignes horizontales
+
+Pour tracer une ligne horizontale, le principe est le même : *dessinez-là*. La syntaxe est cette fois bien plus simple puisqu'elle n'est constituée que de trois tirets (ou plus, ça ne change rien au résultat) :
+
+```
+------
+```
+
+Voici le résultat :
+
+----

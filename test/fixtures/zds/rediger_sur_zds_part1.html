@@ -1,0 +1,91 @@
+<h3 id="paragraphes">Paragraphes<a href="#paragraphes"><span class="anchor-link"></span></a></h3>
+<p>Les paragraphes s&rsquo;écrivent naturellement, en sautant une ligne&#x202F;:</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Ceci est mon premier paragraphe.
+
+Ceci est mon second paragraphe.
+</pre></div>
+</td></tr></table></div>
+<p>Tout comme avec le Markdown standard, on change de paragraphe en <strong>sautant une ligne</strong>. Un simple retour à la ligne ne suffit donc pas et sera interprété comme un simple espace&#x202F;:</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Ceci est mon premier paragraphe.
+Ici je reviens à la ligne mais cette phrase sera toujours dans le premier paragraphe.
+
+Ceci est mon second paragraphe.
+</pre></div>
+</td></tr></table></div>
+<p>Si vraiment vous tenez à revenir à la ligne sans changer de paragraphe, comme ceci<br>
+par exemple, alors il suffit de terminer la première ligne par deux espaces.</p>
+<p>De plus, le Markdown standard autorise l&rsquo;insertion de HTML, mais pour des raisons de sécurité nous avons choisi de ne pas laisser cette possibilité. Si vous écrivez du HTML, celui-ci apparaitra donc tel quel dans votre texte.</p>
+<h3 id="titres">Titres<a href="#titres"><span class="anchor-link"></span></a></h3>
+<p>Les titres sont précédés d&rsquo;un ou plusieurs croisillons suivant le niveau hiérarchique voulu. Ainsi un titre de premier niveau s&rsquo;écrit avec un seul croisillon, un titre de deuxième niveau avec deux croisillons, etc.</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span># Titre de niveau 1
+
+## Titre de niveau 2
+
+### Titre de niveau 3
+
+#### Titre de niveau 4
+</pre></div>
+</td></tr></table></div>
+<p>Quatre niveaux hiérarchiques sont possibles. J&rsquo;attire d&rsquo;ailleurs votre attention sur ce point car il est très important de donner la bonne hiérarchie à vos titres lorsque vous rédigerez vos tutoriels.</p>
+<h3 id="emphases">Emphases<a href="#emphases"><span class="anchor-link"></span></a></h3>
+<p>Les emphases permettent de mettre un morceau de votre texte en valeur. Deux types d&rsquo;emphases sont disponibles&#x202F;: l&rsquo;italique et le gras.</p>
+<p>Pour mettre du texte en <em>italique</em>, utilisez l&rsquo;astérisque ou le souligné (<em>underscore</em>)&#x202F;:</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Le mot *italique* est en italique.
+</pre></div>
+</td></tr></table></div>
+<p>ou</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Le mot _italique_ est en italique.
+</pre></div>
+</td></tr></table></div>
+<div class="warning ico-after">
+<p>Si la syntaxe avec underscore est utilisée en milieu de mot, alors le texte ne sera pas transformé. Ainsi <code>truc_bidule_mush</code> ne sera pas transformé alors que <code>truc*bidule*mush</code> le sera. Cela tient du fait que les expressions avec des underscores sont communes en informatique comme Mon_super_nom_de_fichier.txt par exemple.</p>
+</div>
+<p>Pour mettre du texte en <strong>gras</strong> le principe est le même, en doublant le symbole&#x202F;:</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Le mot **gras** est en gras.
+</pre></div>
+</td></tr></table></div>
+<p>ou</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Le mot __gras__ est en gras.
+</pre></div>
+</td></tr></table></div>
+<p>Par souci de simplicité et de lisibilité, vous ne pourrez pas mettre du texte en couleur, le souligner, changer sa taille ou bien encore en changer la police.</p>
+<h3 id="barrer">Barrer<a href="#barrer"><span class="anchor-link"></span></a></h3>
+<p>Barrer du texte (<del>comme ceci</del>) se fait en utilisant deux tildes successifs avant et après la portion de texte concernée&#x202F;:</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Le mot ~~barré~~ est barré.
+</pre></div>
+</td></tr></table></div>
+<p>Pour information, il s&rsquo;agit de la syntaxe utilisée par Pandoc.</p>
+<h3 id="alignement-du-texte">Alignement du texte<a href="#alignement-du-texte"><span class="anchor-link"></span></a></h3>
+<p>Par défaut, le texte est bien évidemment aligné à gauche. Comme nous le verrons plus loin, certains éléments sont centrés automatiquement, comme les images seules dans leur paragraphe par exemple. Vous n&rsquo;avez donc en général pas à vous soucier de l&rsquo;alignement du texte&#x202F;: le site s&rsquo;en charge pour vous.</p>
+<p>Dans les rares cas où vous souhaiteriez centrer volontairement un texte (si l&rsquo;envie vous prenait d&rsquo;écrire un poème par exemple), vous pourriez néanmoins utiliser la syntaxe ci-dessous&#x202F;:</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>-&gt; Ce texte est centré. &lt;-
+</pre></div>
+</td></tr></table></div>
+<p>Le texte est simplement entouré de deux petites flèches (tiret et chevron) de directions inversées. Pour aligner à droite, on utilise deux flèches dirigées vers la droite&#x202F;:</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>-&gt; Ce texte est aligné à droite. -&gt;
+</pre></div>
+</td></tr></table></div>
+<p>Il est impossible d&rsquo;imbriquer des alignements. Cela n&rsquo;aurait de toute façon pas de sens (comment aligner à droite un texte centré&#x202F;?).</p>
+<p>Encore une fois, l&rsquo;alignement est géré automatiquement dans la majorité des cas. N&rsquo;en abusez pas, cela pourrait gêner la lecture.</p>
+<p>Enfin, sachez qu&rsquo;il est impossible de justifier du texte sur le site.</p>
+<h3 id="indices-et-exposants">Indices et exposants<a href="#indices-et-exposants"><span class="anchor-link"></span></a></h3>
+<p>Là encore, ce sont les syntaxes de Pandoc qui sont utilisées pour mettre en indice ou en exposant une portion de texte.</p>
+<p>On utilise l&rsquo;accent circonflexe pour l&rsquo;exposant. Si par exemple on veut écrire que 2<sup>10</sup> vaut 1024, alors on écrira&#x202F;:</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>2^10^ vaut 1024.
+</pre></div>
+</td></tr></table></div>
+<p>Pour l&rsquo;indice, comme dans H<sub>2</sub>O par exemple, on utilise cette fois le tilde&#x202F;:</p>
+<div><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>La molécule de l&#39;eau est H~2~O.
+</pre></div>
+</td></tr></table></div>

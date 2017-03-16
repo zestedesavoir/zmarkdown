@@ -1,0 +1,51 @@
+# Balises attention, erreur, information, question et secret
+
+Les tutoriels et articles de ZdS sont parsemés de balises telles que la balise "information" :
+
+[[information]]
+| Ceci est une balise d'information.
+|
+| Cool, non ?
+
+Elle se fait avec la syntaxe suivante :
+
+```text
+[[information]]
+| Ceci est une balise d'information.
+|
+| Cool, non ?
+```
+
+Ou dans sa version raccourcie :
+
+```text
+[[i]]
+| Ceci est une balise d'information.
+|
+| Cool, non ?
+```
+
+Les balises disponibles sont : 
+
+- attention
+- erreur
+- information
+- question
+- secret
+
+La balise "secret" (appelée "spoiler" sur certains sites) a ceci de spécial qu'elle masque son contenu par défaut et ne le rend visible qu'au clic de l'utilisateur.
+
+# Citations
+
+Les citations permettent de séparer votre propos de celui que vous rapportez. D'ailleurs, si l'on en croit ce vieux proverbe nous venant d'une petite planète quelque part aux confins de Bételgeuse, il ne faut pas s'en priver :
+
+> Les citations, c'est bien.
+Source: Petite planète quelque part aux confins de Bételgeuse
+
+On utilise pour cela un chevron devant chaque début de ligne, avec optionnellement votre source, écrite de la même façon que les légendes (avec le mot-clé `Source`) :
+
+```text
+> Ceci est une citation
+> sur plusieurs lignes
+Source: Citez vos sources !
+```

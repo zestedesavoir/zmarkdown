@@ -1,0 +1,25 @@
+Il existe deux façons d'écrire des liens : avec ou sans texte d'ancrage.
+
+# Liens et emails avec texte d'ancrage
+
+Pour faire un [lien](http://www.zestedesavoir.com "Zeste de Savoir") sur un morceau de texte (qu'on appelle donc texte d'ancrage, ici le mot "lien"), on utilise la syntaxe suivante :
+
+```text
+Pour faire un [lien](http://www.zestedesavoir.com "Zeste de Savoir") sur un morceau de texte
+```
+
+Attention à ne pas mettre d'espace entre la partie concernant le texte d'ancrage (entre crochets) et la partie concernant l'URL (entre parenthèses).
+
+Le titre du lien (ici "Zeste de Savoir" entre guillemets) est optionnel. S'il est renseigné, il apparaît sur le lien au passage de la souris.
+
+Les emails peuvent s'écrire de la même façon que les liens. Pensez simplement à ajouter la mention "mailto:" :
+
+```text
+Pour nous contacter, cliquez [ici](mailto:contact@monsite.com).
+```
+
+# Liens présentés sous forme d'URL ou d'email
+
+Si vous ne souhaitez pas utiliser de texte d'ancrage et ainsi rendre une URL ou un email cliquable, alors vous n'avez rien à faire : URL et emails seront automatiquement cliquables.
+
+Pour les emails, vous n'avez donc même pas besoin de vous soucier du "mailto".

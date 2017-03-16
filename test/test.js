@@ -27,6 +27,16 @@ describe('HTML rendering', function () {
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
     })
+
+    describe.skip('#extra', function () {
+      const files = glob.sync(`${__dirname}/fixtures/extensions/extra/*.txt`)
+
+      files.forEach(function (filepath) {
+        it(`properly renders ${filepath}`, function () {
+          expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+        })
+      })
+    })
   })
 
   describe.skip('#misc', function () {
@@ -57,14 +67,36 @@ describe('HTML rendering', function () {
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
     })
+
+    describe('#extra', function () {
+      const files = glob.sync(`${__dirname}/fixtures/php/extra/*.txt`)
+
+      files.forEach(function (filepath) {
+        it(`properly renders ${filepath}`, function () {
+          expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+        })
+      })
+    })
   })
 
   describe.skip('#pl', function () {
-    const files = glob.sync(`${__dirname}/fixtures/pl/*.txt`)
+    describe('#2004', function () {
+      const files = glob.sync(`${__dirname}/fixtures/pl/Tests_2004/*.txt`)
 
-    files.forEach(function (filepath) {
-      it(`properly renders ${filepath}`, function () {
-        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      files.forEach(function (filepath) {
+        it(`properly renders ${filepath}`, function () {
+          expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+        })
+      })
+    })
+
+    describe('#2007', function () {
+      const files = glob.sync(`${__dirname}/fixtures/pl/Tests_2007/*.txt`)
+
+      files.forEach(function (filepath) {
+        it(`properly renders ${filepath}`, function () {
+          expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+        })
       })
     })
   })
@@ -75,6 +107,16 @@ describe('HTML rendering', function () {
     files.forEach(function (filepath) {
       it(`properly renders ${filepath}`, function () {
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+    })
+
+    describe('#extensions', function () {
+      const files = glob.sync(`${__dirname}/fixtures/zds/extensions/*.txt`)
+
+      files.forEach(function (filepath) {
+        it(`properly renders ${filepath}`, function () {
+          expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+        })
       })
     })
   })

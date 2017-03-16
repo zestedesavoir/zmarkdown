@@ -1,0 +1,126 @@
+# Images
+
+L'insertion d'une image ressemble à celle d'un lien, à ceci près que le texte d'ancrage doit être remplacé par un texte alternatif :
+
+```text
+![Logo Creative Commons](http://mirrors.creativecommons.org/presskit/logos/cc.logo.png)
+```
+
+Il y a une petite différence de comportement selon que vous placiez votre image seule dans un paragraphe (ou dans un bloc de texte type citation, information, secret, etc.) ou bien au cours d'une phrase dans votre texte.
+
+Lorsque l'image est seule, alors elle est présentée comme figure **avec légende**. Ainsi, si on prend l'exemple suivant :
+
+```text
+Bla bla bla
+
+![Logo Creative Commons](http://mirrors.creativecommons.org/presskit/logos/cc.logo.png)
+
+Bla bla bla encore
+```
+
+Alors le rendu sera la suivant :
+
+------
+
+Bla bla bla
+
+![Logo Creative Commons](http://mirrors.creativecommons.org/presskit/logos/cc.logo.png)
+
+Bla bla bla encore
+
+------
+
+Si en revanche l'image est placée au cours d'un texte, alors le comportement sera plus classique et l'image apparaîtra naturellement dans la phrase :
+
+```text
+Appuyez sur l'icône ![Icône machintruc](icone.png) et admirez le résultat.
+``` 
+
+[[attention]]
+| Dans tous les cas, le texte alternatif **doit** être renseigné. Il sert à apporter la même information que l'image si celle-ci ne peut être chargée ou bien ne peut être vue (notamment pour les synthétiseurs vocaux pour les non-voyants).
+
+Il est possible de définir à la fois un texte alternatif et une légende, en utilisant le mot-clé `Figure` de la même façon que pour les légendes de tableaux ou blocs de code :
+
+```text
+Bla bla bla
+
+![Mon super alt](logo.png)
+Figure : Ma super légende !
+
+Bla bla bla
+```
+
+Ainsi, le texte alternatif et la légende sont bien différents.
+
+# Vidéos
+
+Les vidéos doivent être insérées avec une syntaxe dédié : `!(URL Vidéo)`. Elles ne peuvent être inline (au sein d'une phrase). 
+
+Pour insérer une vidéo on peut donc faire :
+
+```text
+Bla bla bla
+
+!(http://www.youtube.com/watch?v=oavMtUWDBTM)
+
+Bla bla bla
+```
+ou avec une légende :
+
+```text
+Bla bla bla
+
+!(http://www.youtube.com/watch?v=oavMtUWDBTM)
+Video : Ma super légende
+
+Bla bla bla
+```
+
+Par exemple :
+
+!(http://www.youtube.com/watch?v=oavMtUWDBTM)
+Video : Ma super légende
+
+# Touches
+
+Pour représenter une touche, utilisez deux barres verticales avant et après le nom de la touche :
+
+```
+Utilisez ||Ctrl|| + ||C|| pour copier.
+```
+
+Vous pouvez bien sûr mettre ||ce que vous voulez|| comme nom de touche.
+
+# Smileys
+
+Que serait un forum sans smileys ? Un forum plus agréable ? Peut-être. Il n'empêche que les fameux smileys sont incontournables. Sur ZdS, les smileys que vous écrivez seront automatiquement transformés en image. Ci-dessous une liste (non exhaustive) des smileys disponibles :
+
+Entrée | Résultat
+-----|-----
+`:)` | :)
+`:D` | :D
+`;)` | ;)
+`:p` | :p
+`:lol:` | :lol:
+`:euh:` | :euh:
+`:(` | :(
+`:o` | :o
+`:colere2:` | :colere2:
+`o_O` | o_O
+`^^` | ^^
+`:-°` | :-°
+`:ange:` | :ange:
+`:colere:` | :colere:
+`:diable:` | :diable:
+`:magicien:` | :magicien:
+`:ninja:` | :ninja:
+`>_<` | >_<
+`:pirate:` | :pirate:
+`:'(` | :'(
+`:honte:` | :honte:
+`:soleil:` | :soleil:
+`:waw:` | :waw:
+`:zorro:` | :zorro:
+: Liste non exhaustive des smileys
+
+N'oubliez pas : l'abus de smileys est dangereux pour votre santé et celle de vos proches, utilisez-les avec modération. ;)

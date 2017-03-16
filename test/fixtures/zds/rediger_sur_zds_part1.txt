@@ -1,0 +1,120 @@
+# Paragraphes
+
+Les paragraphes s'écrivent naturellement, en sautant une ligne :
+
+```text
+Ceci est mon premier paragraphe.
+
+Ceci est mon second paragraphe.
+```
+
+Tout comme avec le Markdown standard, on change de paragraphe en **sautant une ligne**. Un simple retour à la ligne ne suffit donc pas et sera interprété comme un simple espace :
+
+```text
+Ceci est mon premier paragraphe.
+Ici je reviens à la ligne mais cette phrase sera toujours dans le premier paragraphe.
+
+Ceci est mon second paragraphe.
+```
+
+Si vraiment vous tenez à revenir à la ligne sans changer de paragraphe, comme ceci  
+par exemple, alors il suffit de terminer la première ligne par deux espaces.
+
+De plus, le Markdown standard autorise l'insertion de HTML, mais pour des raisons de sécurité nous avons choisi de ne pas laisser cette possibilité. Si vous écrivez du HTML, celui-ci apparaitra donc tel quel dans votre texte.
+
+# Titres
+
+Les titres sont précédés d'un ou plusieurs croisillons suivant le niveau hiérarchique voulu. Ainsi un titre de premier niveau s'écrit avec un seul croisillon, un titre de deuxième niveau avec deux croisillons, etc.
+
+```text
+# Titre de niveau 1
+
+## Titre de niveau 2
+
+### Titre de niveau 3
+
+#### Titre de niveau 4
+```
+
+Quatre niveaux hiérarchiques sont possibles. J'attire d'ailleurs votre attention sur ce point car il est très important de donner la bonne hiérarchie à vos titres lorsque vous rédigerez vos tutoriels.
+
+# Emphases
+
+Les emphases permettent de mettre un morceau de votre texte en valeur. Deux types d'emphases sont disponibles : l'italique et le gras.
+
+Pour mettre du texte en *italique*, utilisez l'astérisque ou le souligné (*underscore*) :
+
+```text
+Le mot *italique* est en italique.
+```
+
+ou
+
+```text
+Le mot _italique_ est en italique.
+```
+
+[[attention]]
+| Si la syntaxe avec underscore est utilisée en milieu de mot, alors le texte ne sera pas transformé. Ainsi `truc_bidule_mush` ne sera pas transformé alors que `truc*bidule*mush` le sera. Cela tient du fait que les expressions avec des underscores sont communes en informatique comme Mon_super_nom_de_fichier.txt par exemple.
+
+Pour mettre du texte en **gras** le principe est le même, en doublant le symbole :
+
+```text
+Le mot **gras** est en gras.
+```
+
+ou
+
+```text
+Le mot __gras__ est en gras.
+```
+
+Par souci de simplicité et de lisibilité, vous ne pourrez pas mettre du texte en couleur, le souligner, changer sa taille ou bien encore en changer la police.
+
+# Barrer
+
+Barrer du texte (~~comme ceci~~) se fait en utilisant deux tildes successifs avant et après la portion de texte concernée :
+
+```text
+Le mot ~~barré~~ est barré.
+```
+
+Pour information, il s'agit de la syntaxe utilisée par Pandoc.
+
+# Alignement du texte
+
+Par défaut, le texte est bien évidemment aligné à gauche. Comme nous le verrons plus loin, certains éléments sont centrés automatiquement, comme les images seules dans leur paragraphe par exemple. Vous n'avez donc en général pas à vous soucier de l'alignement du texte : le site s'en charge pour vous.
+
+Dans les rares cas où vous souhaiteriez centrer volontairement un texte (si l'envie vous prenait d'écrire un poème par exemple), vous pourriez néanmoins utiliser la syntaxe ci-dessous :
+
+```text
+-> Ce texte est centré. <-
+```
+
+Le texte est simplement entouré de deux petites flèches (tiret et chevron) de directions inversées. Pour aligner à droite, on utilise deux flèches dirigées vers la droite :
+
+```text
+-> Ce texte est aligné à droite. ->
+```
+
+Il est impossible d'imbriquer des alignements. Cela n'aurait de toute façon pas de sens (comment aligner à droite un texte centré ?).
+
+Encore une fois, l'alignement est géré automatiquement dans la majorité des cas. N'en abusez pas, cela pourrait gêner la lecture.
+
+Enfin, sachez qu'il est impossible de justifier du texte sur le site.
+
+# Indices et exposants
+
+Là encore, ce sont les syntaxes de Pandoc qui sont utilisées pour mettre en indice ou en exposant une portion de texte.
+
+On utilise l'accent circonflexe pour l'exposant. Si par exemple on veut écrire que 2^10^ vaut 1024, alors on écrira :
+
+```text
+2^10^ vaut 1024.
+```
+
+Pour l'indice, comme dans H~2~O par exemple, on utilise cette fois le tilde :
+
+```text
+La molécule de l'eau est H~2~O.
+```

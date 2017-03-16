@@ -1,0 +1,9 @@
+Test comments config
+====================
+
+Blabla%DEBUT% hahaha %FIN%Balbla
+
+```
+Blabla%DEBUT% hahaha %FIN%Balbla
+```
+

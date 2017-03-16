@@ -1,0 +1,29 @@
+# Abréviations
+
+Il est souvent utile de préciser la signification d'une abréviation (notamment d'un acronyme ou d'un sigle), sans toutefois la faire figurer dans le corps du texte. En utilisant la syntaxe suivante, la signification apparaîtra au passage de la souris sur l'abréviation :
+
+```text
+Bienvenue sur ZdS !
+
+*[ZdS]: Zeste de Savoir
+```
+
+Bienvenue, donc, sur ZdS !
+
+*[ZdS]: Zeste de Savoir
+
+# Notes de bas de page
+
+Toujours dans l'idée d'enrichir votre texte[^enrich], vous pouvez utiliser des notes de base de page :
+
+[^enrich]: Sans pour autant l'alourdir.
+
+```text
+Markdown[^mdown] est une syntaxe légère d'écriture de documents. Pandoc[^pandoc] est un convertisseur de documents.
+
+[^mdown]: Plus d'informations sur [Markdown](http://daringfireball.net/projects/markdown/).
+
+[^pandoc]: Plus d'informations sur [Pandoc](http://johnmacfarlane.net/pandoc/).
+```
+
+Les notes sont alors numérotées automatiquement. Vous n'avez à vous soucier que du nom que vous donner à votre note.

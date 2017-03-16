@@ -1,0 +1,14 @@
+Test subsuperscript
+===================
+
+Blabla ^truc^ kxcvj ^sdv sd^ sdff
+
+sdf ^ df
+
+sfdgs \^ qssfdgs \^ qs
+
+Blabla ~truc~ kxcvj ~sdv sd~ sdff
+
+sdf ~ df
+
+sfdgs \~ qssfdgs \~ qs

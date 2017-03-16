@@ -1,0 +1,24 @@
+Une formule mathématique s'écrit à l'aide d'expressions TeX Math, en l'entourant de deux caractères dollars `$$` :
+
+```text
+$$a \cdot x^2 + b \cdot x + c = 0 \quad \Longrightarrow \quad x = \frac {-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+```
+
+Ce qui donne :
+
+$$a \cdot x^2 + b \cdot x + c = 0 \quad \Longrightarrow \quad x = \frac {-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+
+En faisant ainsi, votre formule est en mode *displayed* : elle est dans son propre paragrpahe et s'affiche en prenant ses aises. Ainsi les chiffres et autres symboles sont écrits en grande taille et sont facilement lisibles.
+
+Si vous voulez écrire votre formule au sein même d'un paragraphe (comme ceci : $a \cdot x^2 + b \cdot x + c = 0$), alors n'utilisez cette fois qu'un seul caractère dollar `$` avant et après votre formule. Par exemple :
+
+```text
+Si vous voulez écrire votre formule au sein même d'un paragraphe (comme ceci : $a \cdot x^2 + b \cdot x + c = 0$), alors n'utilisez cette fois qu'un seul caractère dollar `$` avant et après votre formule.
+```
+
+Comme pour les tableaux, vous pouvez mettre une légende à votre formule, en ajoutant une ligne `Equation: Ma légende` juste en dessous. Le mot-clé `Equation` est optionnel.
+
+Si vous souhaitez écrire deux symboles $ dans une même ligne, alors il vous faut **échapper** au moins l'un des deux (c'est-à-dire les faire précéder d'un antislash : \$) afin que le texte ne soit pas considéré comme une formule mathématique.
+
+[[information]]
+| Pour en savoir plus sur l'utilisation des expressions mathématiques, vous pouvez consulter le tutoriel dédié : [Comment rédiger des maths sur Zeste de Savoir ? ](http://zestedesavoir.com/tutoriels/202/comment-rediger-des-maths-sur-zeste-de-savoir/)
