@@ -71,7 +71,7 @@ input:
 ```markdown
 This short paragraph is wrapped at 40
 columns and a line which starts with eg
-1. does render as a list. It is much
+1. does not render as a list. It's much
 better that way.
 
 An asterisk followed by a space should
@@ -84,7 +84,7 @@ before:
 ```html
 <p>This short paragraph is wrapped at 40
 columns and a line which starts with eg
-1. does render as a list. It is much
+1. does not render as a list. It's much
 better that way.</p>
 <p>An asterisk followed by a space should
 * create a list anyway! That's what we
@@ -96,7 +96,7 @@ after:
 ```html
 <p>This short paragraph is wrapped at 40
 columns and a line which starts with eg
-1. does render as a list. It is much
+1. does not render as a list. It's much
 better that way.</p>
 <p>An asterisk followed by a space should</p>
 <ul><li>create a list anyway! That's what we
