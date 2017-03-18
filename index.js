@@ -36,6 +36,7 @@ const render = (zmd) => {
 
   const ast = processor.parse(zmd)
   const transformedAST = processor.runSync(ast)
+  // uncomment this to inspect the AST
   // logO(transformedAST)
   const stringFromAST = processor.stringify(transformedAST)
 

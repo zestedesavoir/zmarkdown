@@ -18,6 +18,7 @@ zmarkdown is [remark](https://github.com/wooorm/remark)-based reimplementation o
 * Enable a test by remove its `.skip`.
 * Run tests, see how it fails.
 * Write a plugin solving the issue or fix the test fixture. Each plugin is a `packages/` subfolder.
+* You can inspect the AST at various transform stages, see `index.js`
 * Once you wrote a plugin, `use()` it in `index.js`.
 * Make sure tests are still passing and coverage isn't going down.
 
