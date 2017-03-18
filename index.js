@@ -3,8 +3,10 @@ const unified = require('unified')
 const parse = require('remark-parse')
 const math = require('remark-math')
 const katex = require('remark-html-katex')
-const html = require('remark-html')
+const stringify = require('rehype-stringify')
+const remark2rehype = require('remark-rehype')
 
+const htmlBlocks = require('./packages/html-blocks')
 const escapeEscaped = require('./packages/escape-escaped')
 const kbd = require('./packages/kbd')
 
@@ -20,12 +22,17 @@ const render = (zmd) => {
       commonmark: false,
       yaml: false,
       footnotes: true,
+      /* sets list of known blocks to nothing, otherwise <h3>hey</h3> would become
+      &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
+      blocks: [],
     })
+    .use(remark2rehype, { allowDangerousHTML: true })
+    .use(htmlBlocks)
     .use(escapeEscaped())
     .use(kbd)
     .use(math)
     .use(katex)
-    .use(html)
+    .use(stringify)
 
   const ast = processor.parse(zmd)
   const transformedAST = processor.runSync(ast)
