@@ -8,22 +8,29 @@ function transformer (tree) {
   visit(tree, 'raw', visitor)
 }
 
-function visitor (node) {
-  node.type = 'text'
-  if (node.position.start.line !== node.position.end.line) {
-    node.type = 'element'
-    node.tagName = 'p'
-    node.properties = {}
-    node.children = [
-      {
+function visitor (node, index, parent) {
+  let replacement
+
+  if (!parent) return
+
+  if (parent.tagName !== 'p') {
+    replacement = {
+      type: 'element',
+      tagName: 'p',
+      properties: {},
+      children: [{
         type: 'text',
-        value: node.value,
-        position: node.position
-      }
-    ]
-    node.value = undefined
-    node.position = undefined
+        value: node.value
+      }]
+    }
+  } else {
+    replacement = {
+      type: 'text',
+      value: node.value
+    }
   }
+
+  parent.children[index] = replacement
 }
 
 module.exports = plugin
