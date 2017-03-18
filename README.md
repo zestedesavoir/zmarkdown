@@ -1,6 +1,26 @@
 [![Build Status](https://travis-ci.org/zestedesavoir/zmarkdown.svg?branch=master)](https://travis-ci.org/zestedesavoir/zmarkdown)
 [![Coverage Status](https://coveralls.io/repos/zestedesavoir/zmarkdown/badge.svg)](https://coveralls.io/r/zestedesavoir/zmarkdown)
 
+# zmarkdown
+
+zmarkdown is [remark](https://github.com/wooorm/remark)-based reimplementation of [Python-ZMarkdown](https://github.com/zestedesavoir/Python-ZMarkdown).
+
+## Install
+
+*This project requires node >= 6.*
+
+1. clone
+2. `$ yarn` or `npm install`
+3. `npm run test`
+
+## Contribute
+
+* Enable a test by remove its `.skip`.
+* Run tests, see how it fails.
+* Write a plugin solving the issue or fix the test fixture. Each plugin is a `packages/` subfolder.
+* Once you wrote a plugin, `use()` it in `index.js`.
+* Make sure tests are still passing and coverage isn't going down.
+
 # diff
 
 ## link title, link URL encoding
