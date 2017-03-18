@@ -19,8 +19,8 @@
     "mocha": "^3.2.0"
   },
   "scripts": {
-    "test": "mocha --reporter dot",
-    "test-output": "mocha",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "mocha",
+    "test-travis": "npm run lint && mocha"
   }
 }
