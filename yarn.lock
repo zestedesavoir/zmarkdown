@@ -586,13 +586,6 @@ hast-util-parse-selector@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/hast-util-parse-selector/-/hast-util-parse-selector-2.1.0.tgz#b55c0f4bb7bb2040c889c325ef87ab29c38102b4"
 
-hast-util-sanitize@^1.0.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/hast-util-sanitize/-/hast-util-sanitize-1.1.0.tgz#9b4bc3731043fe92e1253a9a4ca7bcc4148d06f2"
-  dependencies:
-    has "^1.0.1"
-    xtend "^4.0.1"
-
 hast-util-to-html@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/hast-util-to-html/-/hast-util-to-html-3.0.0.tgz#19a257cd7af464777c1cccf4d2d53d33147466c1"
@@ -908,7 +901,7 @@ mdast-util-definitions@^1.2.0:
     has "^1.0.1"
     unist-util-visit "^1.0.0"
 
-mdast-util-to-hast@^2.1.1:
+mdast-util-to-hast@^2.2.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/mdast-util-to-hast/-/mdast-util-to-hast-2.4.0.tgz#63ce8e43c61d8e5728954a3515e0c936a3b26cea"
   dependencies:
@@ -1125,6 +1118,13 @@ rehype-parse@^3.0.0:
     parse5 "^2.1.5"
     xtend "^4.0.1"
 
+rehype-stringify:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/rehype-stringify/-/rehype-stringify-3.0.0.tgz#9fef0868213c2dce2f780b76f3d0488c85e819eb"
+  dependencies:
+    hast-util-to-html "^3.0.0"
+    xtend "^4.0.1"
+
 remark:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/remark/-/remark-7.0.0.tgz#ce9c788c390d98d9a67cb7738e98246732e79144"
@@ -1132,15 +1132,6 @@ remark:
     remark-parse "^3.0.0"
     remark-stringify "^3.0.0"
     unified "^6.0.0"
-
-remark-html:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/remark-html/-/remark-html-6.0.0.tgz#ade7d94b60e452158f28615218450682601dbfc1"
-  dependencies:
-    hast-util-sanitize "^1.0.0"
-    hast-util-to-html "^3.0.0"
-    mdast-util-to-hast "^2.1.1"
-    xtend "^4.0.1"
 
 remark-html-katex:
   version "0.2.2"
@@ -1178,6 +1169,12 @@ remark-parse@^3.0.0:
     unist-util-remove-position "^1.0.0"
     vfile-location "^2.0.0"
     xtend "^4.0.1"
+
+remark-rehype:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/remark-rehype/-/remark-rehype-2.0.0.tgz#f8e02286715bbf1eeafa8c229150d7023ae3cc3c"
+  dependencies:
+    mdast-util-to-hast "^2.2.0"
 
 remark-stringify@^3.0.0:
   version "3.0.0"

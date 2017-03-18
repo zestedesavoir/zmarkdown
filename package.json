@@ -5,10 +5,11 @@
   "author": "vhf",
   "license": "MIT",
   "dependencies": {
+    "rehype-stringify": "^3.0.0",
     "remark": "^7.0.0",
-    "remark-html": "^6.0.0",
     "remark-html-katex": "^0.2.2",
-    "remark-math": "^0.2.3"
+    "remark-math": "^0.2.3",
+    "remark-rehype": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
