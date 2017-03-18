@@ -57,22 +57,22 @@ describe('HTML rendering', function () {
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders inline-html-comments.txt`, function () {
+    it(`properly renders inline-html-comments.txt`, function () {
       const filepath = `${dir}/inline-html-comments.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders inline-html-simple.txt`, function () {
+    it(`properly renders inline-html-simple.txt`, function () {
       const filepath = `${dir}/inline-html-simple.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders links-inline.txt`, function () {
+    it(`properly renders links-inline.txt`, function () {
       const filepath = `${dir}/links-inline.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders links-reference.txt`, function () {
+    it(`properly renders links-reference.txt`, function () {
       const filepath = `${dir}/links-reference.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
