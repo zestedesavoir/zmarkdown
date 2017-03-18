@@ -63,3 +63,42 @@ after:
   </li>
 </ul>
 ```
+
+## hard wrap is Commonmark compliant
+
+input:
+
+```markdown
+This short paragraph is wrapped at 40
+columns and a line which starts with eg
+1. does render as a list. It is much
+better that way.
+
+An asterisk followed by a space should
+* create a list anyway! That's what we
+want.
+```
+
+before:
+
+```html
+<p>This short paragraph is wrapped at 40
+columns and a line which starts with eg
+1. does render as a list. It is much
+better that way.</p>
+<p>An asterisk followed by a space should
+* create a list anyway! That's what we
+want.</p>
+```
+
+after:
+
+```html
+<p>This short paragraph is wrapped at 40
+columns and a line which starts with eg
+1. does render as a list. It is much
+better that way.</p>
+<p>An asterisk followed by a space should</p>
+<ul><li>create a list anyway! That's what we
+want.</li></ul>
+```
