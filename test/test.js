@@ -4,10 +4,7 @@ const helper = require('./helper')
 const fs = require('fs')
 
 chai.use(helper)
-const loadFixture = (filepath) => {
-  const content = String(fs.readFileSync(filepath.replace('.txt', '.html')))
-  return content
-}
+const loadFixture = (filepath) => String(fs.readFileSync(filepath.replace('.txt', '.html')))
 
 const { renderFile } = require('../')
 
