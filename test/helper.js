@@ -13,7 +13,7 @@ module.exports = (chai) => {
 
     this.assert(
       isSameHtml,
-      `Green is extra, red is missing:\n${diffResult}\n---\nOutput:\n${left}`,
+      `Green is extra, red is missing:\n${diffResult}`,
       `Red is extra, green is missing:\n${diffResult}`,
       right,
       left
