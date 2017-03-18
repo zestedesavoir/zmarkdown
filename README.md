@@ -9,3 +9,21 @@ becomes
 
 instead of
 `<p><a href="simple link" title>link</a>`
+
+## list item indented code block
+
+before:
+
+```
+* list item
+
+        indented code
+```
+
+after:
+
+```
+* list item
+
+      indented code
+```

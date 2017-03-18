@@ -1,9 +1,9 @@
 * A list item with a code block
 
-        Some *code*
+      Some *code*
 
 * Another list item
 
-        More code
+      More code
 
-        And more code
+      And more code
