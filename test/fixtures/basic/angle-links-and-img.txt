@@ -1,4 +1,4 @@
-[link](<simple link> "title")
+[link](<simple link> "my title")
 ![image](<http://example.com/image.jpg>)
 [link](<http://example.com/(()((())923)(>)
 ![image](<link(()))(>)
