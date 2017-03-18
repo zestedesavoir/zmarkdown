@@ -9,7 +9,7 @@ const loadFixture = (filepath) => String(fs.readFileSync(filepath.replace('.txt'
 const { renderFile } = require('../')
 
 describe('HTML rendering', function () {
-  describe('#basic', function () {
+  describe.only('#basic', function () {
     const files = glob.sync(`${__dirname}/fixtures/basic/*.txt`)
 
     files.forEach(function (filepath) {
@@ -19,7 +19,7 @@ describe('HTML rendering', function () {
     })
   })
 
-  describe.skip('#extensions', function () {
+  describe('#extensions', function () {
     const files = glob.sync(`${__dirname}/fixtures/extensions/*.txt`)
 
     files.forEach(function (filepath) {
@@ -28,7 +28,7 @@ describe('HTML rendering', function () {
       })
     })
 
-    describe.skip('#extra', function () {
+    describe('#extra', function () {
       const files = glob.sync(`${__dirname}/fixtures/extensions/extra/*.txt`)
 
       files.forEach(function (filepath) {
@@ -39,7 +39,7 @@ describe('HTML rendering', function () {
     })
   })
 
-  describe.skip('#misc', function () {
+  describe('#misc', function () {
     const files = glob.sync(`${__dirname}/fixtures/misc/*.txt`)
 
     files.forEach(function (filepath) {
@@ -49,7 +49,7 @@ describe('HTML rendering', function () {
     })
   })
 
-  describe.skip('#options', function () {
+  describe('#options', function () {
     const files = glob.sync(`${__dirname}/fixtures/options/*.txt`)
 
     files.forEach(function (filepath) {
@@ -59,7 +59,7 @@ describe('HTML rendering', function () {
     })
   })
 
-  describe.skip('#php', function () {
+  describe('#php', function () {
     const files = glob.sync(`${__dirname}/fixtures/php/*.txt`)
 
     files.forEach(function (filepath) {
@@ -79,7 +79,7 @@ describe('HTML rendering', function () {
     })
   })
 
-  describe.skip('#pl', function () {
+  describe('#pl', function () {
     describe('#2004', function () {
       const files = glob.sync(`${__dirname}/fixtures/pl/Tests_2004/*.txt`)
 
@@ -101,7 +101,7 @@ describe('HTML rendering', function () {
     })
   })
 
-  describe.skip('#zds', function () {
+  describe('#zds', function () {
     const files = glob.sync(`${__dirname}/fixtures/zds/*.txt`)
 
     files.forEach(function (filepath) {

@@ -6,7 +6,9 @@
   "license": "MIT",
   "dependencies": {
     "remark": "^7.0.0",
-    "remark-html": "^6.0.0"
+    "remark-html": "^6.0.0",
+    "remark-html-katex": "^0.2.2",
+    "remark-math": "^0.2.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",
