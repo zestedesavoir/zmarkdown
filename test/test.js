@@ -204,11 +204,6 @@ describe('HTML rendering', function () {
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders autolinks_with_asterisks_russian.txt`, function () {
-      const filepath = `${dir}/autolinks_with_asterisks_russian.txt`
-      expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
-    })
-
     it.skip(`properly renders autolinks_with_asterisks.txt`, function () {
       const filepath = `${dir}/autolinks_with_asterisks.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
@@ -529,7 +524,7 @@ describe('HTML rendering', function () {
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders russian.txt`, function () {
+    it(`properly renders russian.txt`, function () {
       const filepath = `${dir}/russian.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
