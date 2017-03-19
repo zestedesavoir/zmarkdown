@@ -121,11 +121,6 @@ describe('HTML rendering', function () {
   describe.skip('#extensions', function () {
     const dir = `${__dirname}/fixtures/extensions/`
 
-    it(`properly renders codehilite.txt`, function () {
-      const filepath = `${dir}/codehilite.txt`
-      expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
-    })
-
     it(`properly renders fenced_code.txt`, function () {
       const filepath = `${dir}/fenced_code.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
@@ -590,6 +585,274 @@ describe('HTML rendering', function () {
     })
   })
 
+  describe('#php', function () {
+    const dir = `${__dirname}/fixtures/php/`
+
+    it(`properly renders Code Spans.txt`, function () {
+      const filepath = `${dir}/Code Spans.txt`
+      expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+    })
+
+    it(`properly renders Code block on second line.txt`, function () {
+      const filepath = `${dir}/Code block on second line.txt`
+      expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+    })
+
+    it.skip(`properly renders Email auto links.txt`, function () {
+      const filepath = `${dir}/Email auto links.txt`
+      expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+    })
+
+    it(`properly renders Horizontal Rules.txt`, function () {
+      const filepath = `${dir}/Horizontal Rules.txt`
+      expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+    })
+
+    it.skip(`properly renders Inline HTML (Simple).txt`, function () {
+      const filepath = `${dir}/Inline HTML (Simple).txt`
+      expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+    })
+
+    it(`properly renders Inline HTML comments.txt`, function () {
+      const filepath = `${dir}/Inline HTML comments.txt`
+      expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+    })
+
+    it.skip(`properly renders Links, inline style.txt`, function () {
+      const filepath = `${dir}/Links, inline style.txt`
+      expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+    })
+
+    it(`properly renders MD5 Hashes.txt`, function () {
+      const filepath = `${dir}/MD5 Hashes.txt`
+      expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+    })
+
+    it.skip(`properly renders Nesting.txt`, function () {
+      const filepath = `${dir}/Nesting.txt`
+      expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+    })
+
+    it.skip(`properly renders Parens in URL.txt`, function () {
+      const filepath = `${dir}/Parens in URL.txt`
+      expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+    })
+
+    it.skip(`properly renders Tight blocks.txt`, function () {
+      const filepath = `${dir}/Tight blocks.txt`
+      expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+    })
+  })
+
+  describe('#pl', function () {
+    describe.skip('#Tests_2004', function () {
+      const dir = `${__dirname}/fixtures/pl/Tests_2004/`
+
+      it(`properly renders Amps and angle encoding.txt`, function () {
+        const filepath = `${dir}/Amps and angle encoding.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Auto links.txt`, function () {
+        const filepath = `${dir}/Auto links.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Backslash escapes.txt`, function () {
+        const filepath = `${dir}/Backslash escapes.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Blockquotes with code blocks.txt`, function () {
+        const filepath = `${dir}/Blockquotes with code blocks.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Hard-wrapped paragraphs with list-like lines.txt`, function () {
+        const filepath = `${dir}/Hard-wrapped paragraphs with list-like lines.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Horizontal rules.txt`, function () {
+        const filepath = `${dir}/Horizontal rules.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Inline HTML (Advanced).txt`, function () {
+        const filepath = `${dir}/Inline HTML (Advanced).txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Inline HTML (Simple).txt`, function () {
+        const filepath = `${dir}/Inline HTML (Simple).txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Inline HTML comments.txt`, function () {
+        const filepath = `${dir}/Inline HTML comments.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Links, inline style.txt`, function () {
+        const filepath = `${dir}/Links, inline style.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Links, reference style.txt`, function () {
+        const filepath = `${dir}/Links, reference style.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Literal quotes in titles.txt`, function () {
+        const filepath = `${dir}/Literal quotes in titles.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Markdown Documentation - Basics.txt`, function () {
+        const filepath = `${dir}/Markdown Documentation - Basics.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Markdown Documentation - Syntax.txt`, function () {
+        const filepath = `${dir}/Markdown Documentation - Syntax.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Nested blockquotes.txt`, function () {
+        const filepath = `${dir}/Nested blockquotes.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Ordered and unordered lists.txt`, function () {
+        const filepath = `${dir}/Ordered and unordered lists.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Strong and em together.txt`, function () {
+        const filepath = `${dir}/Strong and em together.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Tabs.txt`, function () {
+        const filepath = `${dir}/Tabs.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Tidyness.txt`, function () {
+        const filepath = `${dir}/Tidyness.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Yuri-Attributes.txt`, function () {
+        const filepath = `${dir}/Yuri-Attributes.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Yuri-Email.txt`, function () {
+        const filepath = `${dir}/Yuri-Email.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Yuri-Links-in-Headers.txt`, function () {
+        const filepath = `${dir}/Yuri-Links-in-Headers.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+    })
+
+    describe('#Tests_2007', function () {
+      const dir = `${__dirname}/fixtures/pl/Tests_2007/`
+
+      it(`properly renders Amps and angle encoding.txt`, function () {
+        const filepath = `${dir}/Amps and angle encoding.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Auto links.txt`, function () {
+        const filepath = `${dir}/Auto links.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Blockquotes with code blocks.txt`, function () {
+        const filepath = `${dir}/Blockquotes with code blocks.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it.skip(`properly renders Hard-wrapped paragraphs with list-like lines.txt`, function () {
+        const filepath = `${dir}/Hard-wrapped paragraphs with list-like lines.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Horizontal rules.txt`, function () {
+        const filepath = `${dir}/Horizontal rules.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it.skip(`properly renders Inline HTML (Advanced).txt`, function () {
+        const filepath = `${dir}/Inline HTML (Advanced).txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it.skip(`properly renders Inline HTML (Simple).txt`, function () {
+        const filepath = `${dir}/Inline HTML (Simple).txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it.skip(`properly renders Inline HTML comments.txt`, function () {
+        const filepath = `${dir}/Inline HTML comments.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it.skip(`properly renders Links, inline style.txt`, function () {
+        const filepath = `${dir}/Links, inline style.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it.skip(`properly renders Links, shortcut references.txt`, function () {
+        const filepath = `${dir}/Links, shortcut references.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it.skip(`properly renders Literal quotes in titles.txt`, function () {
+        const filepath = `${dir}/Literal quotes in titles.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Markdown Documentation - Basics.txt`, function () {
+        const filepath = `${dir}/Markdown Documentation - Basics.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it.skip(`properly renders Markdown Documentation - Syntax.txt`, function () {
+        const filepath = `${dir}/Markdown Documentation - Syntax.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Nested blockquotes.txt`, function () {
+        const filepath = `${dir}/Nested blockquotes.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it.skip(`properly renders Ordered and unordered lists.txt`, function () {
+        const filepath = `${dir}/Ordered and unordered lists.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Strong and em together.txt`, function () {
+        const filepath = `${dir}/Strong and em together.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it.skip(`properly renders Tabs.txt`, function () {
+        const filepath = `${dir}/Tabs.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+
+      it(`properly renders Tidyness.txt`, function () {
+        const filepath = `${dir}/Tidyness.txt`
+        expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
+      })
+    })
+  })
   describe('#zds', function () {
     const dir = `${__dirname}/fixtures/zds/`
 
