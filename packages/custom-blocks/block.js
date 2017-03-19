@@ -13,13 +13,16 @@ module.exports = (blocks) => function blockPlugin (opts = {}) {
   const regex = new RegExp(`\\[\\[(${pattern})\\]\\]`)
 
   function blockTokenizer (eat, value, silent) {
+    const now = eat.now()
     const keep = regex.exec(value)
-
     if (!keep) return
-    if (keep.index !== 0) return
-    if (value.indexOf('[[') !== 0) return
+    // if (keep.index !== 0) return
 
-    const eaten = []
+    if (value.indexOf('[[') !== 0) {
+      return
+    }
+
+    const linesToEat = []
     const content = []
 
     let idx = 0
@@ -30,28 +33,27 @@ module.exports = (blocks) => function blockPlugin (opts = {}) {
       if (lineToEat[0] !== C_FENCE) break
       // remove leading `FENCE ` or leading `FENCE`
       const line = lineToEat.slice(lineToEat.startsWith(`${C_FENCE} `) ? 2 : 1)
-      eaten.push(lineToEat)
+      linesToEat.push(lineToEat)
       content.push(line)
       value = value.slice(idx + 1)
     }
 
     const contentString = content.join(C_NEWLINE)
-    const eatenString = `${keep[0]}\n${eaten.join(C_NEWLINE)}`
+    const stringToEat = `${keep[0]}${C_NEWLINE}${linesToEat.join(C_NEWLINE)}`
 
-    return eat(eatenString)({
+    const add = eat(stringToEat)
+    const exit = this.enterBlock()
+    const contents = this.tokenizeBlock(contentString, now)
+    exit()
+
+    return add({
       type: 'custom',
-      value: contentString,
+      children: contents,
       data: {
         hName: 'div',
         hProperties: {
-          className: keep[1]
-        },
-        hChildren: [
-          {
-            type: 'text',
-            value: contentString
-          }
-        ]
+          className: blocks[keep[1]]
+        }
       }
     })
   }
@@ -64,11 +66,11 @@ module.exports = (blocks) => function blockPlugin (opts = {}) {
   blockTokenizers.custom_blocks = blockTokenizer
   blockMethods.splice(blockMethods.indexOf('fencedCode') + 1, 0, 'custom_blocks')
 
-  // // Inject math to interrupt rules
-  // const interruptParagraph = Parser.prototype.interruptParagraph
-  // const interruptList = Parser.prototype.interruptList
-  // const interruptBlockquote = Parser.prototype.interruptBlockquote
-  // interruptParagraph.splice(interruptParagraph.indexOf('fencedCode') + 1, 0, ['math'])
-  // interruptList.splice(interruptList.indexOf('fencedCode') + 1, 0, ['math'])
-  // interruptBlockquote.splice(interruptBlockquote.indexOf('fencedCode') + 1, 0, ['math'])
+  // Inject into interrupt rules
+  const interruptParagraph = Parser.prototype.interruptParagraph
+  const interruptList = Parser.prototype.interruptList
+  const interruptBlockquote = Parser.prototype.interruptBlockquote
+  interruptParagraph.splice(interruptParagraph.indexOf('fencedCode') + 1, 0, ['custom_blocks'])
+  interruptList.splice(interruptList.indexOf('fencedCode') + 1, 0, ['custom_blocks'])
+  interruptBlockquote.splice(interruptBlockquote.indexOf('fencedCode') + 1, 0, ['custom_blocks'])
 }
