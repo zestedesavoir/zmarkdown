@@ -13,8 +13,8 @@ function inlinePlugin (opts = {}) {
       if (silent) {
         return true
       }
-      if(keep.length < 2 || keep[1] === ""){
-        return true;
+      if (keep.length < 2 || keep[1] === '') {
+        return true
       }
       eat(keep[0])({
         type: 'del',
