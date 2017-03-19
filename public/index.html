@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ZMarkdown test</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      /*color: #555;*/
+    }
+
+    section {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      flex-direction: row;
+    }
+
+    .wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border: solid 1px #CCC;
+    }
+
+    #editor {
+      font-family: monospace;
+      background-color: #F5F5F5;
+      font-size: 16px;
+      width: 99%;
+      height: 100%;
+    }
+    #editor:focus {
+      background-color: #FFF;
+      outline: none;
+    }
+    .textarea {
+      margin: 0;
+      padding: 0;
+    }
+
+    #render {
+      font-family: sans-serif;
+      font-size: 16px;
+      padding-left: 10px;
+    }
+    .textarea, .ast, .output, .html {
+      flex: 1;
+      margin: 0;
+    }
+    .ast, .html {
+      background-color: #D5D5D5;
+      font-family: monospace;
+      font-size: 12px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <div class="wrapper">
+      <div class="textarea">
+        <textarea id="editor" placeholder="Write here…" autofocus></textarea>
+      </div>
+      <div class="ast">
+        <pre id="ast"></pre>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div id="render" class="output"></div>
+      <div class="html">
+        <pre id="html"></pre>
+      </div>
+    </div>
+  </section>
+  <script src="bundle.js"></script>
+  <script type="text/javascript">
+    var render = document.getElementById("render");
+    var editor = document.getElementById("editor");
+    var ast = document.getElementById("ast");
+    var html = document.getElementById("html");
+    editor.addEventListener("input", function() {
+      var rendered = ZMarkdown.renderString(editor.value);
+      render.innerHTML = rendered;
+      html.textContent = rendered;
+      ast.textContent = JSON.stringify(ZMarkdown.getAST(editor.value), null, 2);
+    });
+  </script>
+</body>
+</html>
