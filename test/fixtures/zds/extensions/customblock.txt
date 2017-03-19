@@ -3,8 +3,14 @@
 [[s]]
 | Secret Block
 
+[[s]]
+|Secret Block
+
 [[secret]]
-| an other
+| another
+
+> [[s]]
+> | > Blockquote in secret block in blockquote
 
 [[i]]
 | Information Block
@@ -49,5 +55,5 @@
 
 content before
 [[s]]
-|Block
+|Not Block
 with content after
