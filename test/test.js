@@ -666,7 +666,7 @@ describe('HTML rendering', function () {
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it.skip(`properly renders customblock.txt`, function () {
+      it(`properly renders customblock.txt`, function () {
         const filepath = `${dir}/customblock.txt`
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })

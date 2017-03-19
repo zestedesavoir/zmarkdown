@@ -9,6 +9,7 @@ const remark2rehype = require('remark-rehype')
 const htmlBlocks = require('./packages/html-blocks')
 const escapeEscaped = require('./packages/escape-escaped')
 const kbd = require('./packages/kbd')
+const customBlocks = require('./packages/custom-blocks')
 
 const fromFile = (filepath) => fs.readFileSync(filepath)
 const logO = (...xs) => // eslint-disable-line no-unused-vars
@@ -27,6 +28,18 @@ const render = (zmd) => {
       blocks: [],
     })
     .use(remark2rehype, { allowDangerousHTML: true })
+    .use(customBlocks({
+      secret: 'spoiler',
+      s: 'spoiler',
+      i: 'information ico-after',
+      information: 'information ico-after',
+      q: 'question ico-after',
+      question: 'question ico-after',
+      a: 'warning ico-after',
+      attention: 'warning ico-after',
+      e: 'error ico-after',
+      erreur: 'error ico-after',
+    }))
     .use(htmlBlocks)
     .use(escapeEscaped())
     .use(kbd)
