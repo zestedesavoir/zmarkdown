@@ -23,6 +23,6 @@
   "scripts": {
     "lint": "eslint .",
     "test": "mocha",
-    "test-travis": "npm run lint && ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
   }
 }

@@ -1,0 +1,3 @@
+fail_on_violations: true
+eslint:
+  enabled: true
