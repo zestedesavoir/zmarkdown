@@ -822,7 +822,7 @@ describe('HTML rendering', function () {
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it.skip(`properly renders Markdown Documentation - Syntax.txt`, function () {
+      it(`properly renders Markdown Documentation - Syntax.txt`, function () {
         const filepath = `${dir}/Markdown Documentation - Syntax.txt`
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
