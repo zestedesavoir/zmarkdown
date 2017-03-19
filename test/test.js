@@ -194,7 +194,7 @@ describe('HTML rendering', function () {
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders arabic.txt`, function () {
+    it(`properly renders arabic.txt`, function () {
       const filepath = `${dir}/arabic.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
@@ -244,7 +244,7 @@ describe('HTML rendering', function () {
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders blockquote.txt`, function () {
+    it(`properly renders blockquote.txt`, function () {
       const filepath = `${dir}/blockquote.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
@@ -299,12 +299,12 @@ describe('HTML rendering', function () {
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders em-around-links.txt`, function () {
+    it(`properly renders em-around-links.txt`, function () {
       const filepath = `${dir}/em-around-links.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders email.txt`, function () {
+    it(`properly renders email.txt`, function () {
       const filepath = `${dir}/email.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
@@ -399,7 +399,7 @@ describe('HTML rendering', function () {
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders lists.txt`, function () {
+    it(`properly renders lists.txt`, function () {
       const filepath = `${dir}/lists.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
@@ -409,12 +409,12 @@ describe('HTML rendering', function () {
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders lists3.txt`, function () {
+    it(`properly renders lists3.txt`, function () {
       const filepath = `${dir}/lists3.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders lists4.txt`, function () {
+    it(`properly renders lists4.txt`, function () {
       const filepath = `${dir}/lists4.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
@@ -429,7 +429,7 @@ describe('HTML rendering', function () {
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders lists7.txt`, function () {
+    it(`properly renders lists7.txt`, function () {
       const filepath = `${dir}/lists7.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
@@ -489,7 +489,7 @@ describe('HTML rendering', function () {
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders normalize.txt`, function () {
+    it(`properly renders normalize.txt`, function () {
       const filepath = `${dir}/normalize.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
