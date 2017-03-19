@@ -34,6 +34,16 @@ function inlinePlugin (opts = {}) {
   const inlineMethods = Parser.prototype.inlineMethods
   inlineTokenizers.kbd = inlineTokenizer
   inlineMethods.splice(inlineMethods.indexOf('text'), 0, 'kbd')
+
+  const Compiler = this.Compiler
+
+  // Stringify
+  if (Compiler != null) {
+    const visitors = Compiler.prototype.visitors
+    visitors.kdb = function (node) {
+      return `||${node.data.hChildren[0].value}||`
+    }
+  }
 }
 
 module.exports = inlinePlugin
