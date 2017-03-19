@@ -64,11 +64,11 @@ diff:
 ```diff
  <ul>
    <li>
--    <li>foo
+-    foo
 +    <p>foo</p>
      <ul>
        <li>
--        <li>bar
+-        bar
 +        <p>bar</p>
          <ul>
            <li>baz</li>
