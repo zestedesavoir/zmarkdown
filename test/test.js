@@ -666,7 +666,7 @@ describe('HTML rendering', function () {
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it.skip(`properly renders delext.txt`, function () {
+      it(`properly renders delext.txt`, function () {
         const filepath = `${dir}/delext.txt`
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })

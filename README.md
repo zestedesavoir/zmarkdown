@@ -126,3 +126,27 @@ better that way.</p>
 <ul><li>create a list anyway! That's what we
 want.</li></ul>
 ```
+
+## del is consistent
+
+input:
+
+```markdown
+~~foo~~
+
+bar ~~~~ baz
+```
+
+before:
+
+```html
+<p><del>foo</del></p>
+<p>bar ~~~~ baz</p>
+```
+
+after:
+
+```html
+<p><del>foo</del></p>
+<p>bar <del></del> baz</p>
+```
