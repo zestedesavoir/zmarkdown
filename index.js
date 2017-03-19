@@ -16,47 +16,48 @@ const logO = (...xs) => // eslint-disable-line no-unused-vars
   xs.forEach(x =>
     console.log(JSON.stringify(x, null, 2))) // eslint-disable-line no-console
 
-const render = (zmd) => {
-  const processor = unified()
-    .use(parse, {
-      gfm: true,
-      commonmark: false,
-      yaml: false,
-      footnotes: true,
-      /* sets list of known blocks to nothing, otherwise <h3>hey</h3> would become
-      &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
-      blocks: [],
-    })
-    .use(remark2rehype, { allowDangerousHTML: true })
-    .use(customBlocks({
-      secret: 'spoiler',
-      s: 'spoiler',
-      i: 'information ico-after',
-      information: 'information ico-after',
-      q: 'question ico-after',
-      question: 'question ico-after',
-      a: 'warning ico-after',
-      attention: 'warning ico-after',
-      e: 'error ico-after',
-      erreur: 'error ico-after',
-    }))
-    .use(htmlBlocks)
-    .use(escapeEscaped())
-    .use(kbd)
-    .use(math)
-    .use(katex)
-    .use(stringify)
+const processor = unified()
+  .use(parse, {
+    gfm: true,
+    commonmark: false,
+    yaml: false,
+    footnotes: true,
+    /* sets list of known blocks to nothing, otherwise <h3>hey</h3> would become
+    &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
+    blocks: [],
+  })
+  .use(remark2rehype, { allowDangerousHTML: true })
+  .use(customBlocks({
+    secret: 'spoiler',
+    s: 'spoiler',
+    i: 'information ico-after',
+    information: 'information ico-after',
+    q: 'question ico-after',
+    question: 'question ico-after',
+    a: 'warning ico-after',
+    attention: 'warning ico-after',
+    e: 'error ico-after',
+    erreur: 'error ico-after',
+  }))
+  .use(htmlBlocks)
+  .use(escapeEscaped())
+  .use(kbd)
+  .use(math)
+  .use(katex)
+  .use(stringify)
 
+const getAST = (zmd) => {
   const ast = processor.parse(zmd)
   const transformedAST = processor.runSync(ast)
   // uncomment this to inspect the AST
   // logO(transformedAST)
-  const stringFromAST = processor.stringify(transformedAST)
-
-  return stringFromAST
+  return transformedAST
 }
 
+const render = (ast) => processor.stringify(ast)
+
 module.exports = {
-  renderFile: (filepath) => render(fromFile(filepath)),
-  renderString: (string) => render(string),
+  getAST: getAST,
+  renderFile: (filepath) => render(getAST(fromFile(filepath))),
+  renderString: (string) => render(getAST(string)),
 }

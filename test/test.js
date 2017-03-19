@@ -118,15 +118,15 @@ describe('HTML rendering', function () {
     })
   })
 
-  describe.skip('#extensions', function () {
+  describe('#extensions', function () {
     const dir = `${__dirname}/fixtures/extensions/`
 
-    it(`properly renders fenced_code.txt`, function () {
+    it.skip(`properly renders fenced_code.txt`, function () {
       const filepath = `${dir}/fenced_code.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it(`properly renders github_flavored.txt`, function () {
+    it.skip(`properly renders github_flavored.txt`, function () {
       const filepath = `${dir}/github_flavored.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
@@ -144,7 +144,7 @@ describe('HTML rendering', function () {
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it(`properly renders footnote_many_footnotes.txt`, function () {
+      it.skip(`properly renders footnote_many_footnotes.txt`, function () {
         const filepath = `${dir}/footnote_many_footnotes.txt`
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
