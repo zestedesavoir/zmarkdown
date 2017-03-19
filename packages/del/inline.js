@@ -35,7 +35,7 @@ function inlinePlugin (opts = {}) {
   // Inject inlineTokenizer
   const inlineTokenizers = Parser.prototype.inlineTokenizers
   const inlineMethods = Parser.prototype.inlineMethods
-  inlineTokenizers.kbd = inlineTokenizer
+  inlineTokenizers.del = inlineTokenizer
   inlineMethods.splice(inlineMethods.indexOf('text'), 0, 'del')
 }
 
