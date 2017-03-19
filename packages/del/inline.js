@@ -5,7 +5,7 @@ function locator (value, fromIndex) {
 
 function inlinePlugin (opts = {}) {
   function inlineTokenizer (eat, value, silent) {
-    const keep = /~~(\w(\w|\s)*?)~~/.exec(value)
+    const keep = /~~(\w(\w|\s)*)~~/.exec(value)
     if (keep) {
       if (keep.index !== 0) {
         return true
