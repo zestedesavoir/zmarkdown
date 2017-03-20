@@ -1,10 +1,11 @@
 const fs = require('fs')
 const unified = require('unified')
-const parse = require('remark-parse')
+const reParse = require('remark-parse')
 const math = require('remark-math')
-const katex = require('remark-html-katex')
+const katex = require('rehype-katex')
 const stringify = require('rehype-stringify')
 const remark2rehype = require('remark-rehype')
+const inspect = require('unist-util-inspect')
 
 const htmlBlocks = require('./packages/html-blocks')
 const escapeEscaped = require('./packages/escape-escaped')
@@ -12,12 +13,9 @@ const kbd = require('./packages/kbd')
 const customBlocks = require('./packages/custom-blocks')
 
 const fromFile = (filepath) => fs.readFileSync(filepath)
-const logO = (...xs) => // eslint-disable-line no-unused-vars
-  xs.forEach(x =>
-    console.log(JSON.stringify(x, null, 2))) // eslint-disable-line no-console
 
 const processor = unified()
-  .use(parse, {
+  .use(reParse, {
     gfm: true,
     commonmark: false,
     yaml: false,
@@ -30,34 +28,33 @@ const processor = unified()
   .use(customBlocks({
     secret: 'spoiler',
     s: 'spoiler',
-    i: 'information ico-after',
     information: 'information ico-after',
-    q: 'question ico-after',
+    i: 'information ico-after',
     question: 'question ico-after',
-    a: 'warning ico-after',
+    q: 'question ico-after',
     attention: 'warning ico-after',
-    e: 'error ico-after',
+    a: 'warning ico-after',
     erreur: 'error ico-after',
+    e: 'error ico-after',
   }))
+  .use(math)
   .use(htmlBlocks)
   .use(escapeEscaped())
   .use(kbd)
-  .use(math)
   .use(katex)
   .use(stringify)
 
-const getAST = (zmd) => {
-  const ast = processor.parse(zmd)
-  const transformedAST = processor.runSync(ast)
-  // uncomment this to inspect the AST
-  // logO(transformedAST)
-  return transformedAST
-}
-
+const parse = (zmd) => processor.parse(zmd)
+const transform = (ast) => processor.runSync(ast)
 const render = (ast) => processor.stringify(ast)
 
+const renderFile = (filepath) => render(transform(parse(fromFile(filepath))))
+const renderString = (string) => render(transform(parse(string)))
+
 module.exports = {
-  getAST: getAST,
-  renderFile: (filepath) => render(getAST(fromFile(filepath))),
-  renderString: (string) => render(getAST(string)),
+  parse,
+  transform,
+  inspect,
+  renderFile,
+  renderString,
 }
