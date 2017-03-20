@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>ZMarkdown test</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/9.10.0/styles/monokai.min.css" async>
   <script src="./ansi_up.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" crossorigin="anonymous">
   <style>
     html, body {
       margin: 0;
@@ -110,8 +109,10 @@ $$
       var rendered = ZMarkdown.renderString(editor.value)
       render.innerHTML = rendered
       html.textContent = rendered
-      ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(ZMarkdown.parse(editor.value)))
-      html.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(ZMarkdown.transform(ZMarkdown.parse(editor.value))))
+      var mdast = ZMarkdown.parse(editor.value)
+      var hast = ZMarkdown.transform(mdast)
+      ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(mdast))
+      html.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(hast))
     }
   </script>
 </body>
