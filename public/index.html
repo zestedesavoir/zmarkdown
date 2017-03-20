@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>ZMarkdown test</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/9.10.0/styles/monokai.min.css" async>
-  <script src="https://cdn.jsdelivr.net/highlight.js/9.10.0/highlight.min.js"></script>
   <script src="./ansi_up.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <style>
@@ -69,7 +68,7 @@
     <div class="wrapper">
       <textarea id="editor" placeholder="Write here…" autofocus># title 1
 
-Lift($L$) can be determined by Lift Coefficient ($C_L$) like the following equation.
+Lift($L$) can be determined by Lift[^foo] Coefficient ($C_L$) like the following[^bar] equation.
 
 $$
 L = \frac{1}{2} \rho v^2 S C_L
@@ -81,15 +80,18 @@ $$
 > | > respoil
 
 **Foo!**
+
+[^bar]: bar
+[^foo]: foo
 </textarea>
       <div class="debug">
-        <pre><code class="bash" id="ast"></code></pre>
+        <pre><code id="ast"></code></pre>
       </div>
     </div>
     <div class="wrapper">
       <div id="render" class="markdown-body"></div>
       <div class="debug" id="debug-ast">
-        <pre><code class="html" id="html"></code></pre>
+        <pre><code id="html"></code></pre>
       </div>
     </div>
   </section>
@@ -108,10 +110,8 @@ $$
       var rendered = ZMarkdown.renderString(editor.value)
       render.innerHTML = rendered
       html.textContent = rendered
-      ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(ZMarkdown.getAST(editor.value)))
-
-      hljs.highlightBlock(ast)
-      hljs.highlightBlock(html)
+      ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(ZMarkdown.parse(editor.value)))
+      html.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(ZMarkdown.transform(ZMarkdown.parse(editor.value))))
     }
   </script>
 </body>

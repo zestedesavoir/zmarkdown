@@ -1,6 +1,6 @@
 const fs = require('fs')
 const unified = require('unified')
-const parse = require('remark-parse')
+const reParse = require('remark-parse')
 const math = require('remark-math')
 const katex = require('rehype-katex')
 const stringify = require('rehype-stringify')
@@ -15,7 +15,7 @@ const customBlocks = require('./packages/custom-blocks')
 const fromFile = (filepath) => fs.readFileSync(filepath)
 
 const processor = unified()
-  .use(parse, {
+  .use(reParse, {
     gfm: true,
     commonmark: false,
     yaml: false,
@@ -44,17 +44,17 @@ const processor = unified()
   .use(katex)
   .use(stringify)
 
-const getAST = (zmd) => {
-  const ast = processor.parse(zmd)
-  const transformedAST = processor.runSync(ast)
-  return transformedAST
-}
-
+const parse = (zmd) => processor.parse(zmd)
+const transform = (ast) => processor.runSync(ast)
 const render = (ast) => processor.stringify(ast)
 
+const renderFile = (filepath) => render(transform(parse(fromFile(filepath))))
+const renderString = (string) => render(transform(parse(string)))
+
 module.exports = {
-  getAST: getAST,
-  inspect: inspect,
-  renderFile: (filepath) => render(getAST(fromFile(filepath))),
-  renderString: (string) => render(getAST(string)),
+  parse,
+  transform,
+  inspect,
+  renderFile,
+  renderString,
 }
