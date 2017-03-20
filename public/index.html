@@ -5,6 +5,7 @@
   <title>ZMarkdown test</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/9.10.0/styles/monokai.min.css" async>
   <script src="https://cdn.jsdelivr.net/highlight.js/9.10.0/highlight.min.js"></script>
+  <script src="./ansi_up.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <style>
     html, body {
@@ -66,9 +67,23 @@
 <body>
   <section>
     <div class="wrapper">
-      <textarea id="editor" placeholder="Write here…" autofocus></textarea>
+      <textarea id="editor" placeholder="Write here…" autofocus># title 1
+
+Lift($L$) can be determined by Lift Coefficient ($C_L$) like the following equation.
+
+$$
+L = \frac{1}{2} \rho v^2 S C_L
+$$
+
+
+> [[secret]]
+> | [spoil](http://example.com)
+> | > respoil
+
+**Foo!**
+</textarea>
       <div class="debug">
-        <pre><code class="json" id="ast"></code></pre>
+        <pre><code class="bash" id="ast"></code></pre>
       </div>
     </div>
     <div class="wrapper">
@@ -80,24 +95,23 @@
   </section>
   <script src="bundle.js"></script>
   <script type="text/javascript">
-    var render = document.getElementById('render');
-    var editor = document.getElementById('editor');
-    var ast = document.getElementById('ast');
-    var html = document.getElementById('html');
-    editor.addEventListener('input', update);
+    var ansiUp = new AnsiUp()
+    var render = document.getElementById('render')
+    var editor = document.getElementById('editor')
+    var ast = document.getElementById('ast')
+    var html = document.getElementById('html')
+    editor.addEventListener('input', update)
 
-    document.addEventListener('DOMContentLoaded', update);
+    document.addEventListener('DOMContentLoaded', update)
 
     function update() {
-      var rendered = ZMarkdown.renderString(editor.value);
-      render.innerHTML = rendered;
-      html.textContent = rendered;
-      ast.textContent = JSON.stringify(ZMarkdown.getAST(editor.value), null, 2);
+      var rendered = ZMarkdown.renderString(editor.value)
+      render.innerHTML = rendered
+      html.textContent = rendered
+      ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(ZMarkdown.getAST(editor.value)))
 
-      if (typeof hljs !== 'undefined') {
-        hljs.highlightBlock(ast);
-        hljs.highlightBlock(html);
-      }
+      hljs.highlightBlock(ast)
+      hljs.highlightBlock(html)
     }
   </script>
 </body>

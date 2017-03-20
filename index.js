@@ -5,6 +5,7 @@ const math = require('remark-math')
 const katex = require('rehype-katex')
 const stringify = require('rehype-stringify')
 const remark2rehype = require('remark-rehype')
+const inspect = require('unist-util-inspect')
 
 const htmlBlocks = require('./packages/html-blocks')
 const escapeEscaped = require('./packages/escape-escaped')
@@ -12,9 +13,6 @@ const kbd = require('./packages/kbd')
 const customBlocks = require('./packages/custom-blocks')
 
 const fromFile = (filepath) => fs.readFileSync(filepath)
-const logO = (...xs) => // eslint-disable-line no-unused-vars
-  xs.forEach(x =>
-    console.log(JSON.stringify(x, null, 2))) // eslint-disable-line no-console
 
 const processor = unified()
   .use(parse, {
@@ -49,8 +47,6 @@ const processor = unified()
 const getAST = (zmd) => {
   const ast = processor.parse(zmd)
   const transformedAST = processor.runSync(ast)
-  // uncomment this to inspect the AST
-  // logO(transformedAST)
   return transformedAST
 }
 
@@ -58,6 +54,7 @@ const render = (ast) => processor.stringify(ast)
 
 module.exports = {
   getAST: getAST,
+  inspect: inspect,
   renderFile: (filepath) => render(getAST(fromFile(filepath))),
   renderString: (string) => render(getAST(string)),
 }

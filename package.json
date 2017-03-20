@@ -9,7 +9,8 @@
     "rehype-stringify": "^3.0.0",
     "remark": "^7.0.0",
     "remark-math": "^0.2.3",
-    "remark-rehype": "^2.0.0"
+    "remark-rehype": "^2.0.0",
+    "unist-util-inspect": "^4.1.0"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.0",
