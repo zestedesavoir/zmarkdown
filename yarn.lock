@@ -2505,6 +2505,16 @@ regjsparser@^0.1.4:
   dependencies:
     jsesc "~0.5.0"
 
+rehype-katex:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/rehype-katex/-/rehype-katex-0.2.2.tgz#6ae899cafe5c76ade2e28224c3f71b829cbcd68f"
+  dependencies:
+    katex "^0.7.1"
+    rehype-parse "^3.0.0"
+    unified "^6.1.1"
+    unist-util-position "^3.0.0"
+    unist-util-visit "^1.1.1"
+
 rehype-parse@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/rehype-parse/-/rehype-parse-3.1.0.tgz#7f5227a597a3f39fc4b938646161539c444ee728"
@@ -2527,16 +2537,6 @@ remark:
     remark-parse "^3.0.0"
     remark-stringify "^3.0.0"
     unified "^6.0.0"
-
-remark-html-katex:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/remark-html-katex/-/remark-html-katex-0.2.2.tgz#2fd2995e9e52d20b6629161afed1bd09996a1c86"
-  dependencies:
-    katex "^0.7.1"
-    rehype-parse "^3.0.0"
-    unified "^6.1.1"
-    unist-util-position "^3.0.0"
-    unist-util-visit "^1.1.1"
 
 remark-math:
   version "0.2.3"

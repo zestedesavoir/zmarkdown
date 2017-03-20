@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <title>ZMarkdown test</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/9.10.0/styles/monokai.min.css" async>
-  <script src="https://cdn.jsdelivr.net/highlight.js/9.10.0/highlight.min.js" async></script>
+  <script src="https://cdn.jsdelivr.net/highlight.js/9.10.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <style>
     html, body {
       margin: 0;
@@ -21,12 +22,15 @@
 
     .wrapper {
       flex: 1;
+      max-width: 50%;
       display: flex;
       flex-direction: column;
     }
 
     .wrapper > * {
       border: solid 1px #CCC;
+      overflow: auto;
+      min-height: 200px;
     }
 
     #editor {
@@ -34,7 +38,6 @@
       background-color: #F5F5F5;
       font-size: 16px;
       margin: 0;
-      padding: 20px;
     }
 
     #editor:focus {
@@ -43,23 +46,20 @@
     }
 
     .debug {
-      height: 300px;
       background-color: #272822;
-      color: #FFF;
-      border-color: #222;
-      overflow-x: none;
-      overflow-y: auto;
-    }
-
-    #render {
-      font-family: sans-serif;
-      font-size: 16px;
-      padding-left: 10px;
-    }
-
-    #editor, #render {
       flex: 1;
-      margin: 0;
+      color: #FFF;
+      overflow: auto;
+      border-color: #222;
+    }
+
+    .debug pre {
+      display: inline-block;
+    }
+
+    #render, #editor {
+      padding: 25px;
+      resize: vertical;
     }
   </style>
 </head>
@@ -72,21 +72,21 @@
       </div>
     </div>
     <div class="wrapper">
-      <div id="render"></div>
-      <div class="debug">
+      <div id="render" class="markdown-body"></div>
+      <div class="debug" id="debug-ast">
         <pre><code class="html" id="html"></code></pre>
       </div>
     </div>
   </section>
   <script src="bundle.js"></script>
   <script type="text/javascript">
-    var render = document.getElementById("render");
-    var editor = document.getElementById("editor");
-    var ast = document.getElementById("ast");
-    var html = document.getElementById("html");
-    editor.addEventListener("input", update);
+    var render = document.getElementById('render');
+    var editor = document.getElementById('editor');
+    var ast = document.getElementById('ast');
+    var html = document.getElementById('html');
+    editor.addEventListener('input', update);
 
-    document.addEventListener("DOMContentLoaded", update);
+    document.addEventListener('DOMContentLoaded', update);
 
     function update() {
       var rendered = ZMarkdown.renderString(editor.value);
@@ -94,7 +94,7 @@
       html.textContent = rendered;
       ast.textContent = JSON.stringify(ZMarkdown.getAST(editor.value), null, 2);
 
-      if (hljs) {
+      if (typeof hljs !== 'undefined') {
         hljs.highlightBlock(ast);
         hljs.highlightBlock(html);
       }

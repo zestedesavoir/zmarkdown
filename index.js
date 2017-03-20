@@ -2,7 +2,7 @@ const fs = require('fs')
 const unified = require('unified')
 const parse = require('remark-parse')
 const math = require('remark-math')
-const katex = require('remark-html-katex')
+const katex = require('rehype-katex')
 const stringify = require('rehype-stringify')
 const remark2rehype = require('remark-rehype')
 
@@ -30,19 +30,19 @@ const processor = unified()
   .use(customBlocks({
     secret: 'spoiler',
     s: 'spoiler',
-    i: 'information ico-after',
     information: 'information ico-after',
-    q: 'question ico-after',
+    i: 'information ico-after',
     question: 'question ico-after',
-    a: 'warning ico-after',
+    q: 'question ico-after',
     attention: 'warning ico-after',
-    e: 'error ico-after',
+    a: 'warning ico-after',
     erreur: 'error ico-after',
+    e: 'error ico-after',
   }))
+  .use(math)
   .use(htmlBlocks)
   .use(escapeEscaped())
   .use(kbd)
-  .use(math)
   .use(katex)
   .use(stringify)
 
