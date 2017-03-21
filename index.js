@@ -13,7 +13,7 @@ const escapeEscaped = require('./packages/escape-escaped')
 const kbd = require('./packages/kbd')
 const customBlocks = require('./packages/custom-blocks')
 const subSuper = require('./packages/sub-super')
-const remove_backslash = require('./packages/remove-backslash')
+const removeBackslash = require('./packages/remove-backslash')
 
 const fromFile = (filepath) => fs.readFileSync(filepath)
 
