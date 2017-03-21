@@ -6,6 +6,7 @@ const fs = require('fs')
 chai.use(helper)
 const loadFixture = (filepath) => String(fs.readFileSync(filepath.replace('.txt', '.html')))
 
+global.test = true
 const { renderFile } = require('../')
 
 describe('HTML rendering', function () {

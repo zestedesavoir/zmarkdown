@@ -7,6 +7,7 @@ const stringify = require('rehype-stringify')
 const remark2rehype = require('remark-rehype')
 const inspect = require('unist-util-inspect')
 
+const headingShift = require('./packages/heading-shift')
 const htmlBlocks = require('./packages/html-blocks')
 const escapeEscaped = require('./packages/escape-escaped')
 const kbd = require('./packages/kbd')
@@ -24,6 +25,7 @@ const processor = unified()
     &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
     blocks: [],
   })
+  .use(headingShift(global.test === true ? 0 : 1))
   .use(remark2rehype, { allowDangerousHTML: true })
   .use(customBlocks({
     secret: 'spoiler',
