@@ -6,10 +6,26 @@ const fs = require('fs')
 chai.use(helper)
 const loadFixture = (filepath) => String(fs.readFileSync(filepath.replace('.txt', '.html')))
 
-global.test = true
-const { renderFile } = require('../')
+const { renderFile } = require('../')()
 
 describe('HTML rendering', function () {
+  describe('#heading-shift', function () {
+    it(`shifts in range`, function () {
+      const { renderString } = require('../')({ headingShift: 1 })
+      expect(renderString('### should be h4')).to.have.html('<h4> should be h4</h4>')
+    })
+
+    it(`shifts past range`, function () {
+      const { renderString } = require('../')({ headingShift: 10 })
+      expect(renderString('### should be h6')).to.have.html('<h6> should be h6</h6>')
+    })
+
+    it(`shifts before range`, function () {
+      const { renderString } = require('../')({ headingShift: -10 })
+      expect(renderString('### should be h1')).to.have.html('<h1> should be h1</h1>')
+    })
+  })
+
   describe('#basic', function () {
     const dir = `${__dirname}/fixtures/basic/`
 
