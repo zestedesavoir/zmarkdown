@@ -976,7 +976,7 @@ describe('HTML rendering', function () {
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it.skip(`properly renders subsuperscript.txt`, function () {
+      it(`properly renders subsuperscript.txt`, function () {
         const filepath = `${dir}/subsuperscript.txt`
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })

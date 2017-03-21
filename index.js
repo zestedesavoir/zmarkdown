@@ -12,6 +12,8 @@ const htmlBlocks = require('./packages/html-blocks')
 const escapeEscaped = require('./packages/escape-escaped')
 const kbd = require('./packages/kbd')
 const customBlocks = require('./packages/custom-blocks')
+const sub_super = require('./packages/sub_super')
+const remove_backslash = require('./packages/remove_backslash')
 
 const fromFile = (filepath) => fs.readFileSync(filepath)
 
