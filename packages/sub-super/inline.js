@@ -5,10 +5,10 @@ function locator (value, fromIndex) {
 
 function inlinePlugin (opts = {}) {
   function inlineTokenizer (eat, value, silent) {
-    if(value.startsWith("~") && !value.startsWith("~ ")) {
-      let escaped = value.indexOf("\\~")
+    if(value.startsWith('~') && !value.startsWith('~ ')) {
+      let escaped = value.indexOf('\\~')
       let i = 1
-      while (i < value.length && (value[i] !== "~" || value[i - 1] === "\\")) {
+      while (i < value.length && (value[i] !== '~' || value[i - 1] ==='\\')) {
         i++
       }
       if(i !== value.length) {
@@ -27,9 +27,9 @@ function inlinePlugin (opts = {}) {
         })
       }
     }
-    else if (value.startsWith("^") && !value.startsWith("^ ")) {
+    else if (value.startsWith('^') && !value.startsWith('^ ')) {
       let i = 1
-      while (i < value.length && (value[i] !== "^" || value[i - 1] === "\\")) {
+      while (i < value.length && (value[i] !== '^' || value[i - 1] === '\\')) {
         i++
       }
       if(i !== value.length) {
@@ -57,8 +57,8 @@ function inlinePlugin (opts = {}) {
   // Inject inlineTokenizer
   const inlineTokenizers = Parser.prototype.inlineTokenizers
   const inlineMethods = Parser.prototype.inlineMethods
-  inlineTokenizers.sub_super = inlineTokenizer
-  inlineMethods.splice(inlineMethods.indexOf('text'), 0, 'sub_super')
+  inlineTokenizers.subSuper = inlineTokenizer
+  inlineMethods.splice(inlineMethods.indexOf('text'), 0, 'subSuper')
 }
 
 module.exports = inlinePlugin
