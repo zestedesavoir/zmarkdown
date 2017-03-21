@@ -1,17 +1,17 @@
 function locator (value, fromIndex) {
-  const index = value.indexOf('^', fromIndex) == -1? value.indexOf('~', fromIndex):value.indexOf('^', fromIndex)
+  let index = value.indexOf('^', fromIndex) === -1
+  index = index === -1 ? value.indexOf('~', fromIndex) : value.indexOf('^', fromIndex)
   return index
 }
 
 function inlinePlugin (opts = {}) {
   function inlineTokenizer (eat, value, silent) {
-    if(value.startsWith('~') && !value.startsWith('~ ')) {
-      let escaped = value.indexOf('\\~')
+    if (value.startsWith('~') && !value.startsWith('~ ')) {
       let i = 1
-      while (i < value.length && (value[i] !== '~' || value[i - 1] ==='\\')) {
+      while (i < value.length && (value[i] !== '~' || value[i - 1] === '\\')) {
         i++
       }
-      if(i !== value.length) {
+      if (i !== value.length) {
         if (silent) {
           return true
         }
@@ -26,17 +26,16 @@ function inlinePlugin (opts = {}) {
           },
         })
       }
-    }
-    else if (value.startsWith('^') && !value.startsWith('^ ')) {
+    } else if (value.startsWith('^') && !value.startsWith('^ ')) {
       let i = 1
       while (i < value.length && (value[i] !== '^' || value[i - 1] === '\\')) {
         i++
       }
-      if(i !== value.length) {
+      if (i !== value.length) {
         if (silent) {
           return true
         }
-        eat(value.substring(0, i +1))({
+        eat(value.substring(0, i + 1))({
           type: 'sup',
           data: {
             hName: 'sup',
