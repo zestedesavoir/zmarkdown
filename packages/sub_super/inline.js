@@ -1,5 +1,5 @@
 function locator (value, fromIndex) {
-  let index = value.indexOf('^', fromIndex) === -1
+  let index = value.indexOf('^', fromIndex)
   index = index === -1 ? value.indexOf('~', fromIndex) : value.indexOf('^', fromIndex)
   return index
 }
