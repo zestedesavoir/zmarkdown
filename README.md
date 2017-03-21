@@ -15,12 +15,20 @@ zmarkdown is [remark](https://github.com/wooorm/remark)-based reimplementation o
 
 ## Contribute
 
+### Make an existing skipped test pass
+
 * Enable a test by remove its `.skip`.
 * Run tests, see how it fails.
 * Write a plugin solving the issue or fix the test fixture. Each plugin is a `packages/` subfolder.
 * You can inspect the AST at various transform stages, see `index.js`
 * Once you wrote a plugin, `use()` it in `index.js`.
 * Make sure tests are still passing and coverage isn't going down.
+
+### Have a live view of what you're working on
+
+* Take a look at `wip.js`
+* It's easy to edit it, and if you:
+* `npm run wip`, it'll auto-reload `wip.js` when you modify anything in the project and display in your terminal the HTML render and the AST!
 
 # diff
 

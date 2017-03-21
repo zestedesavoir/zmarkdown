@@ -26,6 +26,7 @@
     "html-differ": "^1.3.4",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
     "uglifyify": "^3.0.4"
   },
   "bin": {
@@ -35,6 +36,7 @@
     "lint": "eslint .",
     "test": "mocha",
     "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
-    "web": "browserify index.js -g [ envify --NODE_ENV production ] -g [ babelify --presets [ es2015 ] ] -g uglifyify -d -s ZMarkdown | exorcist public/bundle.js.map > public/bundle.js"
+    "web": "browserify index.js -g [ envify --NODE_ENV production ] -g [ babelify --presets [ es2015 ] ] -g uglifyify -d -s ZMarkdown | exorcist public/bundle.js.map > public/bundle.js",
+    "wip": "nodemon -q -e js wip.js"
   }
 }
