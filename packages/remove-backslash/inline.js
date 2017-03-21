@@ -4,7 +4,7 @@ function locator (value, fromIndex) {
 
 function inlinePlugin (opts = {}) {
   function inlineTokenizer (eat, value, silent) {
-    if (value.startsWith("\\~") || value.startsWith("\\^")) {
+    if (value.startsWith("\\~") || value.startsWith('\\^')) {
       if (silent) {
         return true
       }
