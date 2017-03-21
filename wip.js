@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const { renderString, parse, inspect } = require('./index.js')
+const { renderString, parse, inspect } = require('./index.js')({ headingShift: 1 })
 
 /*
 1. Write a plugin
@@ -9,7 +9,7 @@ const { renderString, parse, inspect } = require('./index.js')
 */
 
 const markdown = `
-# hello
+### hello
 `
 
 const now = String(new Date())
