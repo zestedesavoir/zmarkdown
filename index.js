@@ -46,6 +46,8 @@ const processor = ({ headingShift } = {}) =>
     .use(htmlBlocks)
     .use(escapeEscaped())
     .use(kbd)
+    .use(subSuper)
+    .use(removeBackslash)
     .use(katex)
     .use(stringify)
 
