@@ -6,39 +6,23 @@ function locator (value, fromIndex) {
 
 function inlinePlugin (opts = {}) {
   function inlineTokenizer (eat, value, silent) {
-    if (value.startsWith('~') && !value.startsWith('~ ') && !value.startsWith('~~')) {
+    const usedChar = value[0]
+    const SPACE = ' '
+    const charMap = {'~': 'sub', '^': 'sup'}
+    if (!(usedChar in charMap)) {
+      return
+    }
+    if (!value.startsWith(usedChar + SPACE) && !value.startsWith(usedChar + usedChar)) {
       let i = 1
-      while (i < value.length && (value[i] !== '~' || value[i - 1] === '\\')) {
-        i++
-      }
-      if (i !== value.length) {
+      for (; i < value.length && (value[i] !== usedChar || value[i - 1] === '\\'); i++);
+      if (i !== value.length && (i === value.length - 1 || value[i + 1] !== usedChar)) {
         if (silent) {
           return true
         }
         eat(value.substring(0, i + 1))({
-          type: 'sub',
+          type: charMap[usedChar],
           data: {
-            hName: 'sub',
-            hChildren: [{
-              type: 'text',
-              value: value.substring(1, i),
-            }],
-          },
-        })
-      }
-    } else if (value.startsWith('^') && !value.startsWith('^ ') && !value.startsWith('^^')) {
-      let i = 1
-      while (i < value.length && (value[i] !== '^' || value[i - 1] === '\\')) {
-        i++
-      }
-      if (i !== value.length) {
-        if (silent) {
-          return true
-        }
-        eat(value.substring(0, i + 1))({
-          type: 'sup',
-          data: {
-            hName: 'sup',
+            hName: charMap[usedChar],
             hChildren: [{
               type: 'text',
               value: value.substring(1, i),
