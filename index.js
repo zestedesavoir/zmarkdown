@@ -12,7 +12,7 @@ const htmlBlocks = require('./packages/html-blocks')
 const escapeEscaped = require('./packages/escape-escaped')
 const kbd = require('./packages/kbd')
 const customBlocks = require('./packages/custom-blocks')
-const subSuper = require('./packages/sub_super')
+const subSuper = require('./packages/sub-super')
 
 const fromFile = (filepath) => fs.readFileSync(filepath)
 
