@@ -1,6 +1,40 @@
 const visit = require('unist-util-visit')
 
-const inline = ['p', 'kbd', 'del', 'sup']
+const inline = [
+  'a',
+  'b',
+  'big',
+  'i',
+  'small',
+  'tt',
+  'abbr',
+  'acronym',
+  'cite',
+  'code',
+  'dfn',
+  'em',
+  'kbd',
+  'strong',
+  'samp',
+  'time',
+  'var',
+  'bdo',
+  'br',
+  'img',
+  'map',
+  'object',
+  'p',
+  'q',
+  'script',
+  'span',
+  'sub',
+  'sup',
+  'button',
+  'input',
+  'label',
+  'select',
+  'textarea'
+]
 
 function plugin () {
   return transformer
