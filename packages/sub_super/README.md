@@ -1,1 +1,1 @@
-This plugin parses `^something^` and `~something~`, if compiled to HTML, renders as `<sup>something</sup>` and respectively to `<sub>`.
+This plugin parses `^something^` and `~something~`, and if compiled to HTML it renders them as `<sup>something</sup>`, respectively `<sub>something</sub>`.

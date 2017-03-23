@@ -1,35 +1,51 @@
+const SPACE = ' '
+const markers = {
+  '~': 'sub',
+  '^': 'sup',
+}
+
 function locator (value, fromIndex) {
-  let index = value.indexOf('^', fromIndex)
-  index = index === -1 ? value.indexOf('~', fromIndex) : value.indexOf('^', fromIndex)
+  let index = -1
+  for (const marker of Object.keys(markers)) {
+    index = value.indexOf(marker, fromIndex)
+    if (index !== -1) return index
+  }
+
   return index
 }
 
 function inlinePlugin (opts = {}) {
   function inlineTokenizer (eat, value, silent) {
-    const usedChar = value[0]
-    const SPACE = ' '
-    const charMap = {'~': 'sub', '^': 'sup'}
-    if (!(usedChar in charMap)) {
+    // allow escaping of all markers
+    for (const marker of Object.keys(markers)) {
+      if (!this.escape.includes(marker)) this.escape.push(marker)
+    }
+
+    const marker = value[0]
+    const now = eat.now()
+    now.column += 1
+    now.offset += 1
+
+    if (!(marker in markers)) {
       return
     }
-    if (!value.startsWith(usedChar + SPACE) && !value.startsWith(usedChar + usedChar)) {
-      let i = 1
-      for (; i < value.length && (value[i] !== usedChar || value[i - 1] === '\\'); i++);
-      if (i !== value.length && (i === value.length - 1 || value[i + 1] !== usedChar)) {
-        if (silent) {
-          return true
-        }
-        eat(value.substring(0, i + 1))({
-          type: charMap[usedChar],
-          data: {
-            hName: charMap[usedChar],
-            hChildren: [{
-              type: 'text',
-              value: value.substring(1, i),
-            }],
-          },
-        })
+    if (!value.startsWith(marker + SPACE) && !value.startsWith(marker + marker)) {
+      let endMarkerIndex = 1
+      for (; value[endMarkerIndex] !== marker && endMarkerIndex < value.length; endMarkerIndex++);
+
+      // if we consumed the whole value without finding the closing marker
+      if (endMarkerIndex === value.length) return
+
+      if (silent) {
+        return true
       }
+      eat(value.substring(0, endMarkerIndex + 1))({
+        type: markers[marker],
+        children: this.tokenizeInline(value.substring(1, endMarkerIndex), now),
+        data: {
+          hName: markers[marker],
+        },
+      })
     }
   }
 
