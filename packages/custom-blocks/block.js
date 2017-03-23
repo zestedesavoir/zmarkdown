@@ -19,10 +19,6 @@ module.exports = (blocks) => function blockPlugin (opts = {}) {
     if (keep.index !== 0) return
     if (silent) return
 
-    if (value.indexOf('[[') !== 0) {
-      return
-    }
-
     const linesToEat = []
     const content = []
 
