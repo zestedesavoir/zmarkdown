@@ -18,6 +18,7 @@ module.exports = (entitiesToKeep = ['&']) => {
         if (keep.index !== 0) {
           return true
         }
+        /* istanbul ignore if - never used (yet) */
         if (silent) {
           return true
         }
