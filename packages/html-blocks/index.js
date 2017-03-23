@@ -1,5 +1,7 @@
 const visit = require('unist-util-visit')
 
+const inline = ['p', 'kbd', 'del', 'sup']
+
 function plugin () {
   return transformer
 }
@@ -10,10 +12,9 @@ function transformer (tree) {
 
 function visitor (node, index, parent) {
   let replacement
-
   if (!parent) return
 
-  if (parent.tagName !== 'p') {
+  if (!inline.includes(parent.tagName)) {
     replacement = {
       type: 'element',
       tagName: 'p',

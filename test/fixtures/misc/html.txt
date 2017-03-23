@@ -1,7 +1,7 @@
 
 <h1>Block level html</h1>
 
-Some inline <b>stuff<b>.  
+Some inline <b>stuff<b>.
 
 Now some <arbitrary>arbitrary tags</arbitrary>.
 
@@ -27,3 +27,4 @@ And one with other stuff but no closing bracket:
 
 < foo
 
+Make sure we don't put block elements inside inline elements when compiling inlines, e.g. kbd: ||<strong>|| doesn't break anything.

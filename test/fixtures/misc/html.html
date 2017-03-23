@@ -13,3 +13,4 @@ Html with various attributes.
 <p>&lt;</p>
 <p>And one with other stuff but no closing bracket:</p>
 <p>&lt; foo</p>
+<p>Make sure we don't put block elements inside inline elements when compiling inlines, e.g. kbd: <kbd>&#x3C;strong></kbd> doesn't break anything.</p>
