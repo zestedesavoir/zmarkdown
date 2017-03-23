@@ -26,10 +26,10 @@ function inlinePlugin (opts = {}) {
     now.column += 1
     now.offset += 1
 
-    if (!(marker in markers)) {
-      return
-    }
-    if (!value.startsWith(marker + SPACE) && !value.startsWith(marker + marker)) {
+    if (markers.hasOwnProperty(marker) &&
+      !value.startsWith(marker + SPACE) &&
+      !value.startsWith(marker + marker)
+    ) {
       let endMarkerIndex = 1
       for (; value[endMarkerIndex] !== marker && endMarkerIndex < value.length; endMarkerIndex++);
 
