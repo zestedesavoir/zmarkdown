@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/zestedesavoir/zmarkdown.svg?branch=master)](https://travis-ci.org/zestedesavoir/zmarkdown)
-[![Coverage Status](https://coveralls.io/repos/zestedesavoir/zmarkdown/badge.svg)](https://coveralls.io/r/zestedesavoir/zmarkdown)
+[![Coverage Status](https://coveralls.io/repos/github/zestedesavoir/zmarkdown/badge.svg?branch=master)](https://coveralls.io/github/zestedesavoir/zmarkdown?branch=master)
 
 # zmarkdown
 
