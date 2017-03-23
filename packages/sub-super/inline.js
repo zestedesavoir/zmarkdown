@@ -33,12 +33,14 @@ function inlinePlugin (opts = {}) {
       let endMarkerIndex = 1
       for (; value[endMarkerIndex] !== marker && endMarkerIndex < value.length; endMarkerIndex++);
 
-      // if we consumed the whole value without finding the closing marker
+      // if it's actually empty, don't tokenize (disallows e.g. <sup></sup>)
       if (endMarkerIndex === value.length) return
 
+      /* istanbul ignore if - never used (yet) */
       if (silent) {
         return true
       }
+
       eat(value.substring(0, endMarkerIndex + 1))({
         type: markers[marker],
         children: this.tokenizeInline(value.substring(1, endMarkerIndex), now),
