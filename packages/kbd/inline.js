@@ -1,28 +1,60 @@
+const whitespace = require('is-whitespace-character')
+
+const C_PIPE = '|'
+const DOUBLE = '||'
+
 function locator (value, fromIndex) {
-  const index = value.indexOf('||', fromIndex)
+  const index = value.indexOf(DOUBLE, fromIndex)
   return index
 }
 
 function inlinePlugin (opts = {}) {
   function inlineTokenizer (eat, value, silent) {
-    const keep = /\|\|(.+?)\|\|/.exec(value)
-    if (keep) {
-      if (keep.index !== 0) {
-        return true
+    if (
+      !this.options.gfm ||
+      value.charAt(0) !== C_PIPE ||
+      value.charAt(1) !== C_PIPE ||
+      value.startsWith(C_PIPE.repeat(4)) ||
+      whitespace(value.charAt(2))
+    ) {
+      return
+    }
+
+    let character = ''
+    let previous = ''
+    let preceding = ''
+    let subvalue = ''
+    let index = 1
+    const length = value.length
+    const now = eat.now()
+    now.column += 2
+    now.offset += 2
+
+    while (++index < length) {
+      character = value.charAt(index)
+
+      if (
+        character === C_PIPE &&
+        previous === C_PIPE &&
+        (!preceding || !whitespace(preceding))
+      ) {
+        /* istanbul ignore if - never used (yet) */
+        if (silent) {
+          return true
+        }
+
+        return eat(DOUBLE + subvalue + DOUBLE)({
+          type: 'kbd',
+          children: this.tokenizeInline(subvalue, now),
+          data: {
+            hName: 'kbd',
+          },
+        })
       }
-      if (silent) {
-        return true
-      }
-      eat(keep[0])({
-        type: 'kbd',
-        data: {
-          hName: 'kbd',
-          hChildren: [{
-            type: 'text',
-            value: keep[1],
-          }],
-        },
-      })
+
+      subvalue += previous
+      preceding = previous
+      previous = character
     }
   }
   inlineTokenizer.locator = locator
@@ -41,7 +73,7 @@ function inlinePlugin (opts = {}) {
   if (Compiler != null) {
     const visitors = Compiler.prototype.visitors
     visitors.kdb = function (node) {
-      return `||${node.data.hChildren[0].value}||`
+      return `||${this.all(node).join('')}||`
     }
   }
 }
