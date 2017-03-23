@@ -13,7 +13,6 @@ const escapeEscaped = require('./packages/escape-escaped')
 const kbd = require('./packages/kbd')
 const customBlocks = require('./packages/custom-blocks')
 const subSuper = require('./packages/sub_super')
-const removeBackslash = require('./packages/remove-backslash')
 
 const fromFile = (filepath) => fs.readFileSync(filepath)
 
@@ -47,7 +46,6 @@ const processor = ({ headingShift } = {}) =>
     .use(escapeEscaped())
     .use(kbd)
     .use(subSuper)
-    .use(removeBackslash)
     .use(katex)
     .use(stringify)
 
