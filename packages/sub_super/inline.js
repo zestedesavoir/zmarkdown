@@ -1,0 +1,47 @@
+function locator (value, fromIndex) {
+  let index = value.indexOf('^', fromIndex)
+  index = index === -1 ? value.indexOf('~', fromIndex) : value.indexOf('^', fromIndex)
+  return index
+}
+
+function inlinePlugin (opts = {}) {
+  function inlineTokenizer (eat, value, silent) {
+    const usedChar = value[0]
+    const SPACE = ' '
+    const charMap = {'~': 'sub', '^': 'sup'}
+    if (!(usedChar in charMap)) {
+      return
+    }
+    if (!value.startsWith(usedChar + SPACE) && !value.startsWith(usedChar + usedChar)) {
+      let i = 1
+      for (; i < value.length && (value[i] !== usedChar || value[i - 1] === '\\'); i++);
+      if (i !== value.length && (i === value.length - 1 || value[i + 1] !== usedChar)) {
+        if (silent) {
+          return true
+        }
+        eat(value.substring(0, i + 1))({
+          type: charMap[usedChar],
+          data: {
+            hName: charMap[usedChar],
+            hChildren: [{
+              type: 'text',
+              value: value.substring(1, i),
+            }],
+          },
+        })
+      }
+    }
+  }
+
+  inlineTokenizer.locator = locator
+
+  const Parser = this.Parser
+
+  // Inject inlineTokenizer
+  const inlineTokenizers = Parser.prototype.inlineTokenizers
+  const inlineMethods = Parser.prototype.inlineMethods
+  inlineTokenizers.sub_super = inlineTokenizer
+  inlineMethods.splice(inlineMethods.indexOf('text'), 0, 'sub_super')
+}
+
+module.exports = inlinePlugin
