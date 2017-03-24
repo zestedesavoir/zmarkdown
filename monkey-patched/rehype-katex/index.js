@@ -20,7 +20,10 @@ module.exports = function plugin (opts = {}) {
       const isInlineMath = element.tagName === 'span' &&
         element.properties.className &&
         element.properties.className.includes('inlineMath')
-      const isMath = element.tagName === 'div' && element.properties.className === 'math'
+      const isMath = (
+          element.properties.className &&
+          element.properties.className.includes('inlineMathDouble')
+        ) || (element.tagName === 'div' && element.properties.className === 'math')
 
       if (isInlineMath || isMath) {
         let renderedValue
