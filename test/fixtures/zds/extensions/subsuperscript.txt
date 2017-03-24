@@ -1,14 +1,19 @@
-Test subsuperscript
-===================
+Test superscript
+================
 
-Blabla ^truc^ kxcvj ^sdv sd^ sdff
+Foo ^sup^ kxcvj ^sup *string*^ bar
 
-sdf ^ df
+not ^ here
 
-sfdgs \^ qssfdgs \^ qs
+neither \^ here ^ because it's escaped
 
-Blabla ~truc~ kxcvj ~sdv sd~ sdff
+Test subscript
+==============
 
-sdf ~ df
+Foo ~sup~ kxcvj ~sup *string*~ bar
 
-sfdgs \~ qssfdgs \~ qs
+not ~ here
+
+neither \~ here ~ because it's escaped
+
+foo ^^a^^ bar

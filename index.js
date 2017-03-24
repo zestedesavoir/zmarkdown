@@ -12,6 +12,7 @@ const htmlBlocks = require('./packages/html-blocks')
 const escapeEscaped = require('./packages/escape-escaped')
 const kbd = require('./packages/kbd')
 const customBlocks = require('./packages/custom-blocks')
+const subSuper = require('./packages/sub-super')
 
 const fromFile = (filepath) => fs.readFileSync(filepath)
 
@@ -44,6 +45,7 @@ const processor = ({ headingShift } = {}) =>
     .use(htmlBlocks)
     .use(escapeEscaped())
     .use(kbd)
+    .use(subSuper)
     .use(katex)
     .use(stringify)
 
