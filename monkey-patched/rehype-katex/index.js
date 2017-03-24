@@ -18,6 +18,7 @@ module.exports = function plugin (opts = {}) {
   return function transform (node, file) {
     visit(node, 'element', function (element) {
       const isInlineMath = element.tagName === 'span' &&
+        element.properties.className &&
         element.properties.className.includes('inlineMath')
       const isMath = element.tagName === 'div' && element.properties.className === 'math'
 

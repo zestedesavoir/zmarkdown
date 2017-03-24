@@ -1,0 +1,3 @@
+.zmarkdown > p > .inlineMathDouble {
+  display: block;
+}
