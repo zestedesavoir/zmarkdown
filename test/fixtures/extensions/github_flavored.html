@@ -1,5 +1,5 @@
 <p>index 0000000..6e956a9</p>
-<div><pre><code class="diff">--- /dev/null
+<pre><code class="language-diff">--- /dev/null
 +++ b/test/data/stripped_text/mike-30-lili
 @@ -0,0 +1,27 @@
 +Summary:
@@ -29,18 +29,18 @@
 +     return _wrap_diff(CONTEXT_DIFF_HEADER_PATTERN,
 +                       CONTEXT_DIFF_LINE_PATTERN,
 +```
-</code></pre></div>
+</code></pre>
 <p>Test support for foo+bar lexer names.</p>
-<div><pre><code class="html+jinja">&lt;title&gt;{% block title %}{% endblock %}&lt;/title&gt;
+<pre><code class="language-html+jinja">&lt;title&gt;{% block title %}{% endblock %}&lt;/title&gt;
 &lt;ul&gt;
 {% for user in users %}
   &lt;li&gt;&lt;a href=&quot;{{ user.url }}&quot;&gt;{{ user.username }}&lt;/a&gt;&lt;/li&gt;
 {% endfor %}
 &lt;/ul&gt;
-</code></pre></div>
+</code></pre>
 <p>Test support for foo+bar lexer names in citation.</p>
 <blockquote>
-<div><pre><code class="html+jinja">&lt;title&gt;{% block title %}{% endblock %}&lt;/title&gt;
+<pre><code class="language-html+jinja">&lt;title&gt;{% block title %}{% endblock %}&lt;/title&gt;
 &lt;ul&gt;
 
 {% for user in users %}
@@ -48,10 +48,10 @@
 {% endfor %}
 
 &lt;/ul&gt;
-</code></pre></div>
+</code></pre>
 </blockquote>
 <p>Test support for foo+bar lexer names with hightlight.</p>
-<div><pre><code class="html+jinja">&lt;title&gt;{% block title %}{% endblock %}&lt;/title&gt;
+<pre><code class="language-html+jinja">&lt;title&gt;{% block title %}{% endblock %}&lt;/title&gt;
 &lt;ul&gt;
 
 {% for user in users %}
@@ -59,9 +59,9 @@
 {% endfor %}
 
 &lt;/ul&gt;
-</code></pre></div>
+</code></pre>
 <p>Test support for foo+bar lexer names with linenostart.</p>
-<div><pre><code class="html+jinja">&lt;title&gt;{% block title %}{% endblock %}&lt;/title&gt;
+<pre><code class="language-html+jinja">&lt;title&gt;{% block title %}{% endblock %}&lt;/title&gt;
 &lt;ul&gt;
 
 {% for user in users %}
@@ -69,24 +69,26 @@
 {% endfor %}
 
 &lt;/ul&gt;
-</code></pre></div>
+</code></pre>
 <p>Test support for foo+bar lexer names with both.</p>
-<div><pre><code class="html+jinja">&lt;title&gt;{% block title %}{% endblock %}&lt;/title&gt;
+<pre><code class="language-html+jinja">&lt;title&gt;{% block title %}{% endblock %}&lt;/title&gt;
 &lt;ul&gt;
 {% for user in users %}
   &lt;li&gt;&lt;a href=&quot;{{ user.url }}&quot;&gt;{{ user.username }}&lt;/a&gt;&lt;/li&gt;
 {% endfor %}
 &lt;/ul&gt;
-</code></pre></div>
+</code></pre>
 <p>Code without matching end</p>
-<p>~~~~html</p>
-<p>~~~</p>
-<p>Code into paragraph</p>
-<div><pre><code class="html+jinja">&lt;title&gt;{% block title %}{% endblock %}&lt;/title&gt;
-&lt;ul&gt;
+<pre><code class="language-html">~~~
+
+Code into paragraph
+```html+jinja hl_lines= "2-4" linenostart=10
+&#x3C;title>{% block title %}{% endblock %}&#x3C;/title>
+&#x3C;ul>
 {% for user in users %}
-  &lt;li&gt;&lt;a href=&quot;{{ user.url }}&quot;&gt;{{ user.username }}&lt;/a&gt;&lt;/li&gt;
+  &#x3C;li>&#x3C;a href="{{ user.url }}">{{ user.username }}&#x3C;/a>&#x3C;/li>
 {% endfor %}
-&lt;/ul&gt;
-</code></pre></div>
-<p>with end</p>
+&#x3C;/ul>
+```
+with end
+</code></pre>

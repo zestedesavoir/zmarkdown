@@ -143,7 +143,7 @@ describe('HTML rendering', function () {
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders github_flavored.txt`, function () {
+    it(`properly renders github_flavored.txt`, function () {
       const filepath = `${dir}/github_flavored.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
