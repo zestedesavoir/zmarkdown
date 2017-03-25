@@ -124,7 +124,7 @@ describe('HTML rendering', function () {
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders tabs.txt`, function () {
+    it(`properly renders tabs.txt`, function () {
       const filepath = `${dir}/tabs.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
