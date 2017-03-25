@@ -138,7 +138,7 @@ describe('HTML rendering', function () {
   describe('#extensions', function () {
     const dir = `${__dirname}/fixtures/extensions/`
 
-    it.skip(`properly renders fenced_code.txt`, function () {
+    it(`properly renders fenced_code.txt`, function () {
       const filepath = `${dir}/fenced_code.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
