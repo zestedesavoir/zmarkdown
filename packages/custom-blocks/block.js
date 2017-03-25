@@ -5,7 +5,7 @@ function escapeRegExp (str) {
 const C_NEWLINE = '\n'
 const C_FENCE = '|'
 
-module.exports = (blocks) => function blockPlugin (opts = {}) {
+module.exports = function blockPlugin (blocks) {
   const pattern = Object
     .keys(blocks)
     .map(escapeRegExp)

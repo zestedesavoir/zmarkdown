@@ -27,9 +27,9 @@ const processor = ({ headingShift } = {}) =>
       &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
       blocks: [],
     })
-    .use(headingShifter(headingShift || 0))
+    .use(headingShifter, headingShift || 0)
     .use(remark2rehype, { allowDangerousHTML: true })
-    .use(customBlocks({
+    .use(customBlocks, {
       secret: 'spoiler',
       s: 'spoiler',
       information: 'information ico-after',
@@ -40,10 +40,10 @@ const processor = ({ headingShift } = {}) =>
       a: 'warning ico-after',
       erreur: 'error ico-after',
       e: 'error ico-after',
-    }))
+    })
     .use(math)
     .use(htmlBlocks)
-    .use(escapeEscaped())
+    .use(escapeEscaped)
     .use(kbd)
     .use(subSuper)
     .use(katex)
