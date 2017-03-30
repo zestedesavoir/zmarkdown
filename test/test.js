@@ -951,7 +951,7 @@ describe('HTML rendering', function () {
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it.skip(`properly renders emoticons.txt`, function () {
+      it(`properly renders emoticons.txt`, function () {
         const filepath = `${dir}/emoticons.txt`
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })

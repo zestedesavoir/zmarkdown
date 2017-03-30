@@ -13,6 +13,7 @@ const escapeEscaped = require('./packages/escape-escaped')
 const kbd = require('./packages/kbd')
 const customBlocks = require('./packages/custom-blocks')
 const subSuper = require('./packages/sub-super')
+const emoticons = require('./packages/emoticons')
 
 const fromFile = (filepath) => fs.readFileSync(filepath)
 
@@ -46,6 +47,32 @@ const processor = ({ headingShift } = {}) =>
     .use(escapeEscaped)
     .use(kbd)
     .use(subSuper)
+    .use(emoticons({
+      ':ange:': '/static/smileys/ange.png',
+      ':colere:': '/static/smileys/angry.gif',
+      'o_O': '/static/smileys/blink.gif',
+      ';)': '/static/smileys/clin.png',
+      ':diable:': '/static/smileys/diable.png',
+      ':D': '/static/smileys/heureux.png',
+      '^^': '/static/smileys/hihi.png',
+      ':o': '/static/smileys/huh.png',
+      ':p': '/static/smileys/langue.png',
+      ':magicien:': '/static/smileys/magicien.png',
+      ':colere2:': '/static/smileys/mechant.png',
+      ':ninja:': '/static/smileys/ninja.png',
+      '&gt;_&lt;': '/static/smileys/pinch.png',
+      ':pirate:': '/static/smileys/pirate.png',
+      ':\'(': '/static/smileys/pleure.png',
+      ':lol:': '/static/smileys/rire.gif',
+      ':honte:': '/static/smileys/rouge.png',
+      ':-°': '/static/smileys/siffle.png',
+      ':)': '/static/smileys/smile.png',
+      ':soleil:': '/static/smileys/soleil.png',
+      ':(': '/static/smileys/triste.png',
+      ':euh:': '/static/smileys/unsure.gif',
+      ':waw:': '/static/smileys/waw.png',
+      ':zorro:': '/static/smileys/zorro.png',
+    }))
     .use(katex)
     .use(stringify)
 
