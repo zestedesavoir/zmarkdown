@@ -47,7 +47,7 @@ const processor = ({ headingShift } = {}) =>
     .use(escapeEscaped)
     .use(kbd)
     .use(subSuper)
-    .use(emoticons({
+    .use(emoticons, {
       ':ange:': '/static/smileys/ange.png',
       ':colere:': '/static/smileys/angry.gif',
       'o_O': '/static/smileys/blink.gif',

@@ -4,7 +4,7 @@ function escapeRegExp (str) {
 
 const SPACE = ' '
 
-module.exports = (emoticons) => function inlinePlugin (opts = {}) {
+module.exports = function inlinePlugin (emoticons = {}) {
   const pattern = Object.keys(emoticons).map(escapeRegExp).join('|')
   const regex = new RegExp(`(\\s|^)(${pattern})(\\s|$)`)
 
