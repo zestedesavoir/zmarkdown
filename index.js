@@ -44,7 +44,7 @@ const processor = ({ headingShift } = {}) =>
     })
     .use(math)
     .use(htmlBlocks)
-    .use(escapeEscaped)
+    .use(escapeEscaped, ['&'])
     .use(kbd)
     .use(subSuper)
     .use(emoticons, {
@@ -60,7 +60,7 @@ const processor = ({ headingShift } = {}) =>
       ':magicien:': '/static/smileys/magicien.png',
       ':colere2:': '/static/smileys/mechant.png',
       ':ninja:': '/static/smileys/ninja.png',
-      '&gt;_&lt;': '/static/smileys/pinch.png',
+      'x(': '/static/smileys/pinch.png',
       ':pirate:': '/static/smileys/pirate.png',
       ":'(": '/static/smileys/pleure.png',
       ':lol:': '/static/smileys/rire.gif',
