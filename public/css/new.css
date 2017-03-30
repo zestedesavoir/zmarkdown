@@ -1,0 +1,4 @@
+.zmarkdown > p > .inlineMathDouble {
+  display: block;
+  text-align: center;
+}

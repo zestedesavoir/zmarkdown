@@ -3122,7 +3122,7 @@ remark-math:
   dependencies:
     trim-trailing-lines "^1.1.0"
 
-remark-parse@^3.0.0:
+remark-parse, remark-parse@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/remark-parse/-/remark-parse-3.0.0.tgz#f078c8c9976efb0f2afd011c79f30708354593b1"
   dependencies:

@@ -62,7 +62,7 @@ const processor = ({ headingShift } = {}) =>
       ':ninja:': '/static/smileys/ninja.png',
       '&gt;_&lt;': '/static/smileys/pinch.png',
       ':pirate:': '/static/smileys/pirate.png',
-      ':\'(': '/static/smileys/pleure.png',
+      ":'(": '/static/smileys/pleure.png',
       ':lol:': '/static/smileys/rire.gif',
       ':honte:': '/static/smileys/rouge.png',
       ':-°': '/static/smileys/siffle.png',
@@ -72,8 +72,10 @@ const processor = ({ headingShift } = {}) =>
       ':euh:': '/static/smileys/unsure.gif',
       ':waw:': '/static/smileys/waw.png',
       ':zorro:': '/static/smileys/zorro.png',
-    }))
-    .use(katex)
+    })
+    .use(katex, {
+      inlineDoubleDisplay: true
+    })
     .use(stringify)
 
 const parse = (opts) => (zmd) => processor(opts).parse(zmd)
