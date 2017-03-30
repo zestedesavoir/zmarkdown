@@ -148,15 +148,15 @@ describe('HTML rendering', function () {
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    describe.skip('#extra', function () {
+    describe('#extra', function () {
       const dir = `${__dirname}/fixtures/extensions/extra/`
 
-      it(`properly renders abbr.txt`, function () {
+      it.skip(`properly renders abbr.txt`, function () {
         const filepath = `${dir}/abbr.txt`
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it(`properly renders extra_config.txt`, function () {
+      it.skip(`properly renders extra_config.txt`, function () {
         const filepath = `${dir}/extra_config.txt`
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
@@ -166,27 +166,27 @@ describe('HTML rendering', function () {
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it(`properly renders footnote_placeholder.txt`, function () {
+      it.skip(`properly renders footnote_placeholder.txt`, function () {
         const filepath = `${dir}/footnote_placeholder.txt`
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it(`properly renders footnote.txt`, function () {
+      it.skip(`properly renders footnote.txt`, function () {
         const filepath = `${dir}/footnote.txt`
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it(`properly renders markdown-syntax.txt`, function () {
+      it.skip(`properly renders markdown-syntax.txt`, function () {
         const filepath = `${dir}/markdown-syntax.txt`
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it(`properly renders named_markers.txt`, function () {
+      it.skip(`properly renders named_markers.txt`, function () {
         const filepath = `${dir}/named_markers.txt`
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it(`properly renders tables.txt`, function () {
+      it.skip(`properly renders tables.txt`, function () {
         const filepath = `${dir}/tables.txt`
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })
