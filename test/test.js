@@ -992,12 +992,12 @@ describe('HTML rendering', function () {
         expect(renderFile()(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it.skip(`properly renders video_extra.txt`, function () {
+      it(`properly renders video_extra.txt`, function () {
         const filepath = `${dir}/video_extra.txt`
         expect(renderFile()(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it.skip(`properly renders video.txt`, function () {
+      it(`properly renders video.txt`, function () {
         const filepath = `${dir}/video.txt`
         expect(renderFile()(filepath)).to.have.html(loadFixture(filepath))
       })

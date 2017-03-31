@@ -17,6 +17,7 @@ const subSuper = require('./packages/sub-super')
 const emoticons = require('./packages/emoticons')
 const numberedFootnotes = require('./packages/numbered-footnotes')
 const footnotesTitles = require('./packages/footnotes-title')
+const video = require('./packages/video')
 
 const defaultConfig = require('./config')
 
@@ -35,6 +36,70 @@ const processor = (config) =>
     .use(htmlBlocks)
     .use(escapeEscaped, config.escapeEscaped)
     .use(kbd)
+    .use(video({
+      'www.dailymotion.com': {
+        tag: 'iframe',
+        width: 400,
+        height: 270,
+        activated: true
+      },
+      'www.vimeo.com': {
+        tag: 'iframe',
+        width: 500,
+        height: 281,
+        activated: true
+      },
+      'vimeo.com': {
+        tag: 'iframe',
+        width: 500,
+        height: 281,
+        activated: true
+      },
+      'www.youtube.com': {
+        tag: 'iframe',
+        width: 560,
+        height: 315,
+        activated: true
+      },
+      'youtube.com': {
+        tag: 'iframe',
+        width: 560,
+        height: 315,
+        activated: true
+      },
+      'youtu.be': {
+        tag: 'iframe',
+        width: 560,
+        height: 315,
+        activated: true
+      },
+      'screen.yahoo.com': {
+        tag: 'iframe',
+        width: 624,
+        height: 351,
+        activated: true
+      },
+      'www.ina.fr': {
+        tag: 'iframe',
+        width: 620,
+        height: 349,
+        activated: true
+      },
+      'www.jsfiddle.net': {
+        tag: 'iframe',
+        width: 560,
+        height: 560,
+        activated: true
+      },
+      'jsfiddle.net': {
+        tag: 'iframe',
+        width: 560,
+        height: 315,
+        activated: true
+      }
+    }))
+    .use(katex)
+    .use(stringify)
     .use(subSuper)
     .use(emoticons, config.emoticons)
     .use(katex, config.katex)
