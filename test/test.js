@@ -326,13 +326,8 @@ describe('HTML rendering', function () {
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders escaped_chars_in_js.txt`, function () {
+    it(`properly renders escaped_chars_in_js.txt`, function () {
       const filepath = `${dir}/escaped_chars_in_js.txt`
-      expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
-    })
-
-    it.skip(`properly renders escaped_links.txt`, function () {
-      const filepath = `${dir}/escaped_links.txt`
       expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
     })
 
