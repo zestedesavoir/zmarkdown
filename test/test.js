@@ -921,7 +921,7 @@ describe('HTML rendering', function () {
     describe('#extensions', function () {
       const dir = `${__dirname}/fixtures/zds/extensions/`
 
-      it.skip(`properly renders align.txt`, function () {
+      it(`properly renders align.txt`, function () {
         const filepath = `${dir}/align.txt`
         expect(renderFile(filepath)).to.have.html(loadFixture(filepath))
       })

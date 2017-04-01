@@ -7,6 +7,7 @@ const stringify = require('rehype-stringify')
 const remark2rehype = require('remark-rehype')
 const inspect = require('unist-util-inspect')
 
+const align = require('./packages/align')
 const headingShifter = require('./packages/heading-shift')
 const htmlBlocks = require('./packages/html-blocks')
 const escapeEscaped = require('./packages/escape-escaped')
@@ -46,6 +47,7 @@ const processor = ({ headingShift } = {}) =>
       erreur: 'error ico-after',
       e: 'error ico-after',
     })
+    .use(align)
     .use(math)
     .use(htmlBlocks)
     .use(escapeEscaped, ['&'])
