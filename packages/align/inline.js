@@ -51,14 +51,14 @@ module.exports = function alignPlugin () {
     const contents = this.tokenizeBlock(stringToEat, now)
     exit()
 
-    const type = endMarker === '->' ? 'right' : 'center'
+    const type = endMarker === '->' ? 'align-right' : 'align-center'
     return add({
       type: type,
       children: contents,
       data: {
         hName: 'div',
         hProperties: {
-          align: type
+          class: type
         }
       }
     })
