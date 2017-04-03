@@ -29,7 +29,7 @@ module.exports = function inlinePlugin (opts = {}) {
   function inlineTokenizer (eat, value, silent) {
     let eatenValue = ''
     let url = ''
-    for (let i = 0; i < value.length && value[i] !== ')'; i++) {
+    for (let i = 0; i < value.length && value[i - 1] !== ')'; i++) {
       eatenValue += value[i]
       if (value[i] !== '!' && value[i] !== '(' && value[i] !== ')') {
         url += value[i]
@@ -39,22 +39,29 @@ module.exports = function inlinePlugin (opts = {}) {
       return url.length > 0
     }
     const provider = extractProvider(url)
-    if (!provider || provider.activated === false) {
+    if (!provider) {
       return false
-    }
-    eat(eatenValue)({
-      type: 'iframe',
-      data: {
-        hName: provider.tag,
-        hProperties: {
-          src: computeFinalUrl(provider, url),
-          width: provider.width,
-          height: provider.height,
-          allowfullscreen: true,
-          frameborder: '0'
+    } else if (provider.enabled === false ||
+      (provider.domain && provider.domain.match && !provider.domain.match.exec(url))) {
+      eat(eatenValue)({
+        type: 'text',
+        value: eatenValue
+      })
+    } else {
+      eat(eatenValue)({
+        type: 'iframe',
+        data: {
+          hName: provider.tag,
+          hProperties: {
+            src: computeFinalUrl(provider, url),
+            width: provider.width,
+            height: provider.height,
+            allowfullscreen: true,
+            frameborder: '0'
+          }
         }
-      }
-    })
+      })
+    }
   }
   inlineTokenizer.locator = locator
 

@@ -17,7 +17,7 @@ const subSuper = require('./packages/sub-super')
 const emoticons = require('./packages/emoticons')
 const numberedFootnotes = require('./packages/numbered-footnotes')
 const footnotesTitles = require('./packages/footnotes-title')
-const video = require('./packages/iframes')
+const iframes = require('./packages/iframes')
 
 const defaultConfig = require('./config')
 
@@ -36,111 +36,7 @@ const processor = (config) =>
     .use(htmlBlocks)
     .use(escapeEscaped, config.escapeEscaped)
     .use(kbd)
-    .use(video, {
-      'www.dailymotion.com': {
-        tag: 'iframe',
-        width: 480,
-        height: 270,
-        activated: true,
-        replace: {
-          'video/': 'embed/video/'
-        }
-      },
-      'www.vimeo.com': {
-        tag: 'iframe',
-        width: 500,
-        height: 281,
-        activated: true,
-        replace: {
-          'http://': 'https://',
-          'www.': '',
-          'vimeo.com/': 'player.vimeo.com/video/'
-        }
-      },
-      'vimeo.com': {
-        tag: 'iframe',
-        width: 500,
-        height: 281,
-        activated: true,
-        replace: {
-          'http://': 'https://',
-          'www.': '',
-          'vimeo.com/': 'player.vimeo.com/video/'
-        }
-      },
-      'www.youtube.com': {
-        tag: 'iframe',
-        width: 560,
-        height: 315,
-        activated: true,
-        replace: {
-          'watch?v=': 'embed/',
-          'http://': 'https://'
-        },
-        removeAfter: '&'
-      },
-      'youtube.com': {
-        tag: 'iframe',
-        width: 560,
-        height: 315,
-        activated: true,
-        replace: {
-          'watch?v=': 'embed/',
-          'http://': 'https://'
-        },
-        removeAfter: '&'
-      },
-      'youtu.be': {
-        tag: 'iframe',
-        width: 560,
-        height: 315,
-        activated: true,
-        replace: {
-          'watch?v=': 'embed/',
-          'youtu.be': 'www.youtube.com/embed'
-        },
-        removeAfter: '&'
-      },
-      'screen.yahoo.com': {
-        tag: 'iframe',
-        width: 624,
-        height: 351,
-        activated: true,
-        append: '?format=embed&amp;player_autoplay=false'
-      },
-      'www.ina.fr': {
-        tag: 'iframe',
-        width: 620,
-        height: 349,
-        activated: true,
-        replace: {
-          'www.': 'player.',
-          '/video/': '/player/embed/'
-        },
-        append: '/1/1b0bd203fbcd702f9bc9b10ac3d0fc21/560/315/1/148db8',
-        removeFileName: true
-      },
-      'www.jsfiddle.net': {
-        tag: 'iframe',
-        width: 560,
-        height: 560,
-        activated: true,
-        replace: {
-          'http://': 'https://'
-        },
-        append: 'embedded/result,js,html,css/'
-      },
-      'jsfiddle.net': {
-        tag: 'iframe',
-        width: 560,
-        height: 560,
-        activated: true,
-        replace: {
-          'http://': 'https://'
-        },
-        append: 'embedded/result,js,html,css/'
-      }
-    })
+    .use(iframes, config.iframes)
     .use(katex)
     .use(stringify)
     .use(subSuper)

@@ -62,7 +62,117 @@ const config = {
   katex: {
     inlineDoubleDisplay: true
   },
-
+  iframes: {
+    'www.dailymotion.com': {
+      tag: 'iframe',
+      width: 480,
+      height: 270,
+      enabled: true,
+      replace: {
+        'video/': 'embed/video/'
+      }
+    },
+    'www.vimeo.com': {
+      tag: 'iframe',
+      width: 500,
+      height: 281,
+      enabled: true,
+      replace: {
+        'http://': 'https://',
+        'www.': '',
+        'vimeo.com/': 'player.vimeo.com/video/'
+      }
+    },
+    'vimeo.com': {
+      tag: 'iframe',
+      width: 500,
+      height: 281,
+      enabled: true,
+      replace: {
+        'http://': 'https://',
+        'www.': '',
+        'vimeo.com/': 'player.vimeo.com/video/'
+      }
+    },
+    'www.youtube.com': {
+      tag: 'iframe',
+      width: 560,
+      height: 315,
+      enabled: true,
+      replace: {
+        'watch?v=': 'embed/',
+        'http://': 'https://'
+      },
+      removeAfter: '&'
+    },
+    'youtube.com': {
+      tag: 'iframe',
+      width: 560,
+      height: 315,
+      enabled: true,
+      replace: {
+        'watch?v=': 'embed/',
+        'http://': 'https://'
+      },
+      removeAfter: '&'
+    },
+    'youtu.be': {
+      tag: 'iframe',
+      width: 560,
+      height: 315,
+      enabled: true,
+      replace: {
+        'watch?v=': 'embed/',
+        'youtu.be': 'www.youtube.com/embed'
+      },
+      removeAfter: '&'
+    },
+    'screen.yahoo.com': {
+      tag: 'iframe',
+      width: 624,
+      height: 351,
+      enabled: true,
+      append: '?format=embed&player_autoplay=false'
+    },
+    'www.ina.fr': {
+      tag: 'iframe',
+      width: 620,
+      height: 349,
+      enabled: true,
+      replace: {
+        'www.': 'player.',
+        '/video/': '/player/embed/'
+      },
+      append: '/1/1b0bd203fbcd702f9bc9b10ac3d0fc21/560/315/1/148db8',
+      removeFileName: true
+    },
+    'www.jsfiddle.net': {
+      tag: 'iframe',
+      width: 560,
+      height: 560,
+      enabled: true,
+      replace: {
+        'http://': 'https://'
+      },
+      append: 'embedded/result,js,html,css/',
+      domain: {
+        match: /https?:\/\/(www\.)?jsfiddle\.net\/([\w\d]+\/[\w\d]+\/\d+\/?|[\w\d]+\/\d+\/?|[\w\d]+\/?)$/
+      }
+    },
+    'jsfiddle.net': {
+      tag: 'iframe',
+      width: 560,
+      height: 560,
+      enabled: true,
+      replace: {
+        'http://': 'https://'
+      },
+      append: 'embedded/result,js,html,css/',
+      domain: {
+        match: /https?:\/\/(www\.)?jsfiddle\.net\/([\w\d]+\/[\w\d]+\/\d+\/?|[\w\d]+\/\d+\/?|[\w\d]+\/?)$/
+      }
+    }
+  }
 }
 
 module.exports = config
