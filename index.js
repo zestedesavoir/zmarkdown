@@ -17,7 +17,7 @@ const subSuper = require('./packages/sub-super')
 const emoticons = require('./packages/emoticons')
 const numberedFootnotes = require('./packages/numbered-footnotes')
 const footnotesTitles = require('./packages/footnotes-title')
-const video = require('./packages/video')
+const video = require('./packages/iframes')
 
 const defaultConfig = require('./config')
 
@@ -36,7 +36,7 @@ const processor = (config) =>
     .use(htmlBlocks)
     .use(escapeEscaped, config.escapeEscaped)
     .use(kbd)
-    .use(video({
+    .use(video, {
       'www.dailymotion.com': {
         tag: 'iframe',
         width: 480,
@@ -75,7 +75,7 @@ const processor = (config) =>
         activated: true,
         replace: {
           'watch?v=': 'embed/',
-          'https://': 'https://'
+          'http://': 'https://'
         },
         removeAfter: '&'
       },
@@ -85,7 +85,8 @@ const processor = (config) =>
         height: 315,
         activated: true,
         replace: {
-          'watch?v=': 'embed/'
+          'watch?v=': 'embed/',
+          'http://': 'https://'
         },
         removeAfter: '&'
       },
@@ -139,7 +140,7 @@ const processor = (config) =>
         },
         append: 'embedded/result,js,html,css/'
       }
-    }))
+    })
     .use(katex)
     .use(stringify)
     .use(subSuper)

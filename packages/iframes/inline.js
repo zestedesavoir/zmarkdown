@@ -1,12 +1,11 @@
-const regexp = /!\((https?:\/\/[a-zA-Z0-9_./?=&%-]+)\)/
+const urlParse = require('url').parse
 
-module.exports = (providers) => function inlinePlugin (opts = {}) {
+module.exports = function inlinePlugin (opts = {}) {
   function extractProvider (url) {
-    const endOfProtocoleIndex = url.indexOf('//') + 2
-    const endOfDomainIndex = url.substring(endOfProtocoleIndex).indexOf('/') + endOfProtocoleIndex
-    return providers[url.substring(endOfProtocoleIndex, endOfDomainIndex)]
+    const hostname = urlParse(url).hostname
+    return opts[hostname]
   }
-  function computeFinalUrl(provider, url) {
+  function computeFinalUrl (provider, url) {
     let finalUrl = url
     if (provider.replace) {
       for (const key in provider.replace) {
@@ -25,28 +24,33 @@ module.exports = (providers) => function inlinePlugin (opts = {}) {
     return finalUrl
   }
   function locator (value, fromIndex) {
-    const found = regexp.exec(value.substring(fromIndex))
-    return found === null ? -1 : found.index
+    return value.indexOf('!(http', fromIndex)
   }
   function inlineTokenizer (eat, value, silent) {
-    const found = regexp.exec(value)
-    if (found === null || found.index !== 0 || silent) {
-      return silent
+    let eatenValue = ''
+    let url = ''
+    for (let i = 0; i < value.length && value[i] !== ')'; i++) {
+      eatenValue += value[i]
+      if (value[i] !== '!' && value[i] !== '(' && value[i] !== ')') {
+        url += value[i]
+      }
     }
-    const provider = extractProvider(found[1])
+    if (silent) {
+      return url.length > 0
+    }
+    const provider = extractProvider(url)
     if (!provider || provider.activated === false) {
       return false
     }
-    console.log(found[0], found[1], found[found.length - 1])
-    eat(found[0])({
-      type: 'video',
+    eat(eatenValue)({
+      type: 'iframe',
       data: {
         hName: provider.tag,
         hProperties: {
-          src: computeFinalUrl(provider, found[1]),
+          src: computeFinalUrl(provider, url),
           width: provider.width,
           height: provider.height,
-          allowfullscreen: 'true',
+          allowfullscreen: true,
           frameborder: '0'
         }
       }
@@ -59,6 +63,6 @@ module.exports = (providers) => function inlinePlugin (opts = {}) {
   // Inject inlineTokenizer
   const inlineTokenizers = Parser.prototype.inlineTokenizers
   const inlineMethods = Parser.prototype.inlineMethods
-  inlineTokenizers.video = inlineTokenizer
-  inlineMethods.unshift('video')
+  inlineTokenizers.iframes = inlineTokenizer
+  inlineMethods.splice(inlineMethods.indexOf('autoLink'), 0, 'iframes')
 }
