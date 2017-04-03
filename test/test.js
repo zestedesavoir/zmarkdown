@@ -992,12 +992,35 @@ describe('HTML rendering', function () {
         expect(renderFile()(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it.skip(`properly renders video_extra.txt`, function () {
+      it(`properly renders video_extra.txt`, function () {
         const filepath = `${dir}/video_extra.txt`
-        expect(renderFile()(filepath)).to.have.html(loadFixture(filepath))
+        const config = configOverride({ iframes: {
+          'www.youtube.com': {
+            tag: 'iframe',
+            width: 560,
+            height: 315,
+            enabled: true,
+            replace: {
+              'watch?v=': 'embed/',
+              'http://': 'https://'
+            },
+            removeAfter: '&'
+          },
+          'jsfiddle.net': {
+            tag: 'iframe',
+            width: 560,
+            height: 560,
+            enabled: false,
+            replace: {
+              'http://': 'https://'
+            },
+            append: 'embedded/result,js,html,css/'
+          }
+        }})
+        expect(renderFile(config)(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it.skip(`properly renders video.txt`, function () {
+      it(`properly renders video.txt`, function () {
         const filepath = `${dir}/video.txt`
         expect(renderFile()(filepath)).to.have.html(loadFixture(filepath))
       })

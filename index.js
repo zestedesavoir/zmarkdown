@@ -17,6 +17,7 @@ const subSuper = require('./packages/sub-super')
 const emoticons = require('./packages/emoticons')
 const numberedFootnotes = require('./packages/numbered-footnotes')
 const footnotesTitles = require('./packages/footnotes-title')
+const iframes = require('./packages/iframes')
 
 const defaultConfig = require('./config')
 
@@ -35,6 +36,9 @@ const processor = (config) =>
     .use(htmlBlocks)
     .use(escapeEscaped, config.escapeEscaped)
     .use(kbd)
+    .use(iframes, config.iframes)
+    .use(katex)
+    .use(stringify)
     .use(subSuper)
     .use(emoticons, config.emoticons)
     .use(katex, config.katex)
