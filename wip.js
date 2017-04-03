@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const { renderString, parse, inspect } = require('./index.js')({ headingShift: 1 })
+const { renderString, parse, inspect } = require('./index.js')()
 
 /*
 1. Write a plugin
