@@ -6,11 +6,9 @@ module.exports = function alignPlugin () {
     const lines = value.match(/.*\n/g) || []
     // Check if first line is not empty,
     // here, we don't use \s because a line with a tab is not empty
-    const regexEmptyLine = new RegExp(/^$| +/)
-    if (regexEmptyLine.exec(lines[0])) return
+    if (/^$| +/.exec(lines[0])) return
     // and if the second line is a heading with trailing spaces
-    const regexHeading = new RegExp(/^-+|=+\s+\n?$/)
-    if (!regexHeading.exec(lines[1])) return
+    if (!/^-+|=+\s+\n?$/.exec(lines[1])) return
 
     const now = eat.now()
     const head = lines[0] + lines[1]
