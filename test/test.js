@@ -972,9 +972,23 @@ describe('HTML rendering', function () {
         expect(renderFile()(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it.skip(`properly renders mathjax.txt`, function () {
-        const filepath = `${dir}/mathjax.txt`
-        expect(renderFile()(filepath)).to.have.html(loadFixture(filepath))
+      it(`properly renders math.txt without custom config`, function () {
+        const filepath = `${dir}/math.txt`
+        const config = configOverride({ katex: {}, math: {} })
+        const rendered = renderFile(config)(filepath)
+        expect((rendered.match(/katex-mathml/g) || []).length).to.equal(4)
+        expect((rendered.match(/span class="katex-display"/g) || []).length).to.equal(1)
+        expect((rendered.match(/inlineMath inlineMathDouble/g) || []).length).to.equal(0)
+        expect((rendered.match(/div class="math"/g) || []).length).to.equal(1)
+      })
+
+      it(`properly renders math.txt`, function () {
+        const filepath = `${dir}/math.txt`
+        const rendered = renderFile()(filepath)
+        expect((rendered.match(/katex-mathml/g) || []).length).to.equal(4)
+        expect((rendered.match(/span class="katex-display"/g) || []).length).to.equal(3)
+        expect((rendered.match(/inlineMath inlineMathDouble/g) || []).length).to.equal(2)
+        expect((rendered.match(/div class="math"/g) || []).length).to.equal(1)
       })
 
       it.skip(`properly renders smart_legend.txt`, function () {

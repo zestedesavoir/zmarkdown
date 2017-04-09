@@ -1,0 +1,9 @@
+inline $simple$ math
+
+inline $$doubledisplay$$ math
+
+$$
+display
+$$
+
+$$again$$

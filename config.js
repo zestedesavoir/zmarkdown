@@ -59,9 +59,14 @@ const config = {
     ':zorro:': '/static/smileys/zorro.png',
   },
 
-  katex: {
-    inlineDoubleDisplay: true
+  math: {
+    inlineMathDouble: true
   },
+
+  katex: {
+    inlineMathDoubleDisplay: true
+  },
+
   iframes: {
     'www.dailymotion.com': {
       tag: 'iframe',
