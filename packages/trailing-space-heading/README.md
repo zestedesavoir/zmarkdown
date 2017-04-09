@@ -1,12 +1,26 @@
-This package manages headers with trailing spaces (after `===` or `---`).
+This package manages headers with trailing spaces.
 
-Example:
+Examples, here `·` represents a space ` `
+
 ```
-H1
-==
+Header
+------··
+
+### H3···
+
+H1··
+=
+
+H2
+--··
+
 ```
 
 Result:
+
 ```
+<h2>Header</h2>
+<h3>H3</h3>
 <h1>H1</h1>
+<h2>H2</h2>
 ```

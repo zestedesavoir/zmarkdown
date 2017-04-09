@@ -40,7 +40,6 @@ const processor = (config) =>
     .use(escapeEscaped, config.escapeEscaped)
     .use(kbd)
     .use(iframes, config.iframes)
-    .use(stringify)
     .use(subSuper)
     .use(emoticons, config.emoticons)
     .use(stringify)
