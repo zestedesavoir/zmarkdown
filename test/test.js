@@ -347,7 +347,7 @@ describe('HTML rendering', function () {
       expect(renderFile()(filepath)).to.have.html(loadFixture(filepath))
     })
 
-    it.skip(`properly renders h1.txt`, function () {
+    it(`properly renders h1.txt`, function () {
       const filepath = `${dir}/h1.txt`
       expect(renderFile()(filepath)).to.have.html(loadFixture(filepath))
     })
