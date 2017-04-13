@@ -942,7 +942,7 @@ describe('HTML rendering', function () {
         expect(renderFile()(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it.skip(`properly renders comments.txt`, function () {
+      it(`properly renders comments.txt`, function () {
         const filepath = `${dir}/comments.txt`
         expect(renderFile()(filepath)).to.have.html(loadFixture(filepath))
       })

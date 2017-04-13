@@ -19,6 +19,7 @@ const emoticons = require('./packages/emoticons')
 const numberedFootnotes = require('./packages/numbered-footnotes')
 const footnotesTitles = require('./packages/footnotes-title')
 const iframes = require('./packages/iframes')
+const comments = require('./packages/comments')
 
 const defaultConfig = require('./config')
 
@@ -39,6 +40,7 @@ const processor = (config) =>
     .use(htmlBlocks)
     .use(escapeEscaped, config.escapeEscaped)
     .use(kbd)
+    .use(comments)
     .use(iframes, config.iframes)
     .use(subSuper)
     .use(emoticons, config.emoticons)
