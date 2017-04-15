@@ -1,23 +1,22 @@
-const beginMarker = '<--COMMENTS'
-const endMarker = 'COMMENTS-->'
+const BEGINMARKER = '<--COMMENTS'
+const ENDMARKER = 'COMMENTS-->'
 const SPACE = ' '
 
 function locator (value, fromIndex) {
-  const index = value.indexOf(beginMarker, fromIndex)
-  return index
+  return value.indexOf(BEGINMARKER, fromIndex)
 }
 
 function inlinePlugin (opts = {}) {
   function inlineTokenizer (eat, value, silent) {
 
-    if (silent) return
-
-    const keepBegin = value.indexOf(beginMarker)
-    const keepEnd = value.indexOf(endMarker)
+    const keepBegin = value.indexOf(BEGINMARKER)
+    const keepEnd = value.indexOf(ENDMARKER)
     if (keepBegin !== 0 || keepEnd === -1) return
 
-    const comment = value.substring(beginMarker.length + 1, keepEnd - 1)
-    return eat(beginMarker + SPACE + comment + SPACE + endMarker)
+    if (silent) return silent
+
+    const comment = value.substring(BEGINMARKER.length + 1, keepEnd - 1)
+    return eat(BEGINMARKER + SPACE + comment + SPACE + ENDMARKER)
   }
   inlineTokenizer.locator = locator
 
