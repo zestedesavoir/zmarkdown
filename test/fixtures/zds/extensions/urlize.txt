@@ -11,8 +11,6 @@ google.fr
 
 <http://www.google.fr>
 
-toto@gmail.com
-
 Voici mon super lien qui termine une phrase http://www.google.fr.
 
 https://fr.wikipedia.org/wiki/Compactifié_d'Alexandrov

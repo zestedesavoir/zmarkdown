@@ -1001,7 +1001,7 @@ describe('HTML rendering', function () {
         expect(renderFile()(filepath)).to.have.html(loadFixture(filepath))
       })
 
-      it.skip(`properly renders urlize.txt`, function () {
+      it(`properly renders urlize.txt`, function () {
         const filepath = `${dir}/urlize.txt`
         expect(renderFile()(filepath)).to.have.html(loadFixture(filepath))
       })
