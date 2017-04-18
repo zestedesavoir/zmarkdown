@@ -156,3 +156,28 @@ diff:
    </blockquote>
  </blockquote>
 ```
+
+## autourlize only for protocoled url and htmlchars
+
+input :
+
+```markdown
+www.google.fr
+
+http://google.fr
+
+https://fr.wikipedia.org/wiki/Compactifi%C3%A9_d%27Alexandrov
+
+toto@gmail.com
+```
+
+diff
+
+```diff
+- <p><a href="http://www.google.fr">www.google.fr</a></p>
++ <p>www.google.fr</p>
+<p><a href="http://google.fr">http://google.fr</a></p>
+- <p><a href="https://fr.wikipedia.org/wiki/Compactifi%C3%A9_d%27Alexandrov">https://fr.wikipedia.org/wiki/Compactifi%C3%A9_d%27Alexandrov</a></p>
++ <p><a href="https://fr.wikipedia.org/wiki/Compactifi%C3%A9_d&#39;Alexandrov">https://fr.wikipedia.org/wiki/Compactifi%C3%A9_d%27Alexandrov</a></p>
+- <p><a href="mailto:toto@gmail.com">toto@gmail.com</a></p>
++ <p>toto@gmail.com</p>
