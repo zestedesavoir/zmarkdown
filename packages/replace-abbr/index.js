@@ -10,19 +10,18 @@ function plugin () {
 
   function find (abbrs) {
     function one (node, index, parent) {
-      if (
-        node.tagName === 'p'
-      ) {
+      if (node.tagName === 'p') {
         for (let i = 0; i < node.children.length; ++i) {
-          if (node.children[i].tagName === 'abbr') {
-            abbrs[node.children[i].properties.word] = node.children[i].properties.desc
+          const child = node.children[i]
+          if (child.tagName === 'abbr') {
+            // Store abbreviation
+            abbrs[child.properties.word] = child.properties.desc
             node.children.splice(i, 1)
             i -= 1
           }
         }
-        if (node.children.length === 0) {
-          parent.children.splice(index, 1)
-        }
+        // Remove paragraph if there is no child
+        if (node.children.length === 0) parent.children.splice(index, 1)
       }
     }
     return one
@@ -39,6 +38,7 @@ function plugin () {
     function one (node, index, parent) {
       if (Object.keys(abbrs).length === 0) return
       if (node.type !== 'text') return
+
       const keep = regex.exec(node.value)
       if (keep) {
         const newTexts = node.value.split(regex)

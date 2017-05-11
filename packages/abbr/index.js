@@ -29,8 +29,8 @@ function inlinePlugin (opts = {}) {
   // Inject inlineTokenizer
   const inlineTokenizers = Parser.prototype.inlineTokenizers
   const inlineMethods = Parser.prototype.inlineMethods
-  inlineTokenizers.get_abbr = inlineTokenizer
-  inlineMethods.splice(0, 0, 'get_abbr')
+  inlineTokenizers.abbr = inlineTokenizer
+  inlineMethods.splice(0, 0, 'abbr')
 }
 
 module.exports = inlinePlugin
