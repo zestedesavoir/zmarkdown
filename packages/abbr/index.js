@@ -76,7 +76,7 @@ function plugin () {
         parent.children = []
         for (let i = 0; i < newTexts.length; ++i) {
           const content = newTexts[i]
-          if (Object.keys(abbrs).indexOf(content) >= 0) {
+          if (abbrs.hasOwnProperty(content)) {
             parent.children[i] = {
               type: 'element',
               tagName: 'abbr',
