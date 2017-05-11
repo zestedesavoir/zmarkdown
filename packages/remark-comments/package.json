@@ -1,0 +1,30 @@
+{
+  "name": "remark-comments",
+  "version": "0.0.2",
+  "repository": {
+    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-comments",
+    "type": "git"
+  },
+  "author": "Sébastien (AmarOk) Blin <contact@enconn.fr>",
+  "contributors": [
+    "Sébastien (AmarOk) Blin <contact@enconn.fr>"
+  ],
+  "scripts": {
+    "pretest": "eslint index.js",
+    "prepublish": "del-cli dist && BABEL_ENV=production babel --out-dir dist index.js",
+    "test": "npm run prepublish && nyc ava __tests__",
+    "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov > coverage/coverage.lcov"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "LICENSE-MIT",
+    "dist"
+  ],
+  "engines": {
+    "node": ">=4"
+  },
+  "keywords": [
+    "remark"
+  ],
+  "license": "MIT"
+}

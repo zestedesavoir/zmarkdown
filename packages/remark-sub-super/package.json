@@ -1,0 +1,21 @@
+{
+  "name": "remark-sub-super",
+  "version": "0.0.2",
+  "repository": {
+    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/sub-super",
+    "type": "git"
+  },
+  "author": "Victor Felder <victor@draft.li> (https://draft.li)",
+  "contributors": [
+    "Victor Felder <victor@draft.li> (https://draft.li)"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "test": "mocha",
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
+  },
+  "keywords": [
+    "remark"
+  ],
+  "license": "MIT"
+}

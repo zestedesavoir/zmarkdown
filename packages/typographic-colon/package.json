@@ -1,0 +1,21 @@
+{
+  "name": "typographic-colon",
+  "version": "0.0.3",
+  "repository": {
+    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/typographic-colon",
+    "type": "git"
+  },
+  "author": "Victor Felder <victor@draft.li> (https://draft.li)",
+  "contributors": [
+    "Victor Felder <victor@draft.li> (https://draft.li)"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "test": "mocha",
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
+  },
+  "keywords": [
+    "textr"
+  ],
+  "license": "MIT"
+}
