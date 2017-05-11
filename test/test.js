@@ -162,7 +162,7 @@ describe('HTML rendering', function () {
     describe('#extra', function () {
       const dir = `${__dirname}/fixtures/extensions/extra/`
 
-      it.skip(`properly renders abbr.txt`, function () {
+      it(`properly renders abbr.txt`, function () {
         const filepath = `${dir}/abbr.txt`
         expect(renderFile()(filepath)).to.have.html(loadFixture(filepath))
       })
