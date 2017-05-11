@@ -5,14 +5,24 @@ function plugin () {
   function transformer (tree) {
     const abbrs = {}
     visit(tree, 'element', find(abbrs))
-    visit(tree, 'element', removeAbbrsParagraph)
     visit(tree, replace(abbrs))
   }
 
   function find (abbrs) {
     function one (node, index, parent) {
-      if (node.tagName === 'abbr') {
-        abbrs[node.properties.word] = node.properties.desc
+      if (
+        node.tagName === 'p'
+      ) {
+        for (let i = 0; i < node.children.length; ++i) {
+          if (node.children[i].tagName === 'abbr') {
+            abbrs[node.children[i].properties.word] = node.children[i].properties.desc
+            node.children.splice(i, 1)
+            i -= 1
+          }
+        }
+        if (node.children.length === 0) {
+          parent.children.splice(index, 1)
+        }
       }
     }
     return one
@@ -55,21 +65,6 @@ function plugin () {
     return one
   }
 
-  function removeAbbrsParagraph (node, index, parent) {
-    if (
-      node.tagName === 'p'
-    ) {
-      for (let i = 0; i < node.children.length; ++i) {
-        if (node.children[i].tagName === 'abbr') {
-          node.children.splice(i, 1)
-          i -= 1
-        }
-      }
-      if (node.children.length === 0) {
-        parent.children.splice(index, 1)
-      }
-    }
-  }
   return transformer
 }
 
