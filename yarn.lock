@@ -3196,6 +3196,13 @@ remark-stringify@^3.0.0:
     unherit "^1.0.4"
     xtend "^4.0.1"
 
+remark-textr:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/remark-textr/-/remark-textr-3.0.0.tgz#dd48525e05985c48526d8802e317bfeab0389689"
+  dependencies:
+    textr "^0.3.0"
+    unist-util-visit "^1.0.0"
+
 remark@^7.0.0:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/remark/-/remark-7.0.1.tgz#a5de4dacfabf0f60a49826ef24c479807f904bfb"
@@ -3650,6 +3657,10 @@ text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
 
+textr@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/textr/-/textr-0.3.0.tgz#717361286962ac8df36b7a2619fb773a15b9b7f7"
+
 through@^2.3.6, "through@>=2.2.7 <3", through@~2.3, through@~2.3.1, through@~2.3.4, through@2:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
@@ -3754,6 +3765,89 @@ type-detect@0.1.1:
 typedarray@^0.0.6, typedarray@~0.0.5:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
+
+typographic-apostrophes-for-possessive-plurals@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/typographic-apostrophes-for-possessive-plurals/-/typographic-apostrophes-for-possessive-plurals-1.0.5.tgz#ca31b6f3d27ba800d6902d62fba29b548f639b99"
+
+typographic-apostrophes@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/typographic-apostrophes/-/typographic-apostrophes-1.1.1.tgz#bc6905eb949048a736fa8399f8b90aafa8894787"
+
+typographic-arrows@^1.0.0:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/typographic-arrows/-/typographic-arrows-1.0.3.tgz#fdd4692ce660024b42fd1605100c34337380c925"
+
+typographic-base:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/typographic-base/-/typographic-base-1.0.4.tgz#8bb74e8e3262401915c5bd2d6b5d520bd2d15697"
+  dependencies:
+    textr "^0.3.0"
+    typographic-apostrophes "^1.1.1"
+    typographic-apostrophes-for-possessive-plurals "^1.0.5"
+    typographic-arrows "^1.0.0"
+    typographic-copyright "^1.0.1"
+    typographic-currency "^1.1.0"
+    typographic-ellipses "^1.0.11"
+    typographic-em-dashes "^1.0.2"
+    typographic-en-dashes "^1.0.1"
+    typographic-math-symbols "^1.1.5"
+    typographic-quotes "^1.2.1"
+    typographic-registered-trademark "^1.0.1"
+    typographic-single-spaces "^1.0.2"
+    typographic-trademark "^1.0.1"
+
+typographic-copyright@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/typographic-copyright/-/typographic-copyright-1.0.1.tgz#4c4a0b6d7dba271c29b741f204002f4c6d4b00c0"
+
+typographic-currency-db@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/typographic-currency-db/-/typographic-currency-db-1.0.0.tgz#32f8a6daf0c91209a641360fdaa69ce54fed0c67"
+
+typographic-currency@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/typographic-currency/-/typographic-currency-1.1.1.tgz#ba1dcb93e44261db471ab17bd5ef0efc9bcf736d"
+  dependencies:
+    typographic-currency-db "1.0.0"
+
+typographic-ellipses@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/typographic-ellipses/-/typographic-ellipses-1.0.11.tgz#a69143b4b8c5611dd3a669b7c3052603e8a69487"
+
+typographic-em-dashes@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/typographic-em-dashes/-/typographic-em-dashes-1.0.2.tgz#754cafb1b0be64713ed2f0d3f32d7d9a64feb1a5"
+
+typographic-en-dashes@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/typographic-en-dashes/-/typographic-en-dashes-1.0.1.tgz#a37739fdc43ed38c351bbf70a80c2503ccb022e0"
+
+typographic-math-symbols@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/typographic-math-symbols/-/typographic-math-symbols-1.1.5.tgz#56f756c6e5cb3d6d3ab2172e49d91e823028de4e"
+
+typographic-quotes-l10n-db@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/typographic-quotes-l10n-db/-/typographic-quotes-l10n-db-1.0.0.tgz#1304d2fa95ac71fec3efd8327834ee49b013b254"
+
+typographic-quotes@^1.2.1:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/typographic-quotes/-/typographic-quotes-1.2.2.tgz#906e28dba2b13062d29b57f10ac931472080e062"
+  dependencies:
+    typographic-quotes-l10n-db "^1.0.0"
+
+typographic-registered-trademark@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/typographic-registered-trademark/-/typographic-registered-trademark-1.0.1.tgz#1830b693bf782cfc23560ec80d61a2672a98c8dd"
+
+typographic-single-spaces@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/typographic-single-spaces/-/typographic-single-spaces-1.0.2.tgz#82c3115437db6ddb2e17aef55494dd907e941f7f"
+
+typographic-trademark@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/typographic-trademark/-/typographic-trademark-1.0.1.tgz#573165bc6f50307e6ec758832677483377844580"
 
 uglify-js@^2.6, uglify-js@2.x.x:
   version "2.8.27"

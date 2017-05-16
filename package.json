@@ -11,6 +11,8 @@
     "remark-math": "^1.0.0",
     "remark-parse": "^3.0.0",
     "remark-rehype": "^2.0.0",
+    "remark-textr": "^3.0.0",
+    "typographic-base": "^1.0.4",
     "unist-util-inspect": "^4.1.0"
   },
   "devDependencies": {

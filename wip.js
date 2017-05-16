@@ -9,19 +9,13 @@ const { renderString, parse, inspect } = require('./index.js')()
 */
 
 const markdown = `
-An ABBR: "REF".
-ref and REFERENCE should be ignored.
+a : b
 
-*[REF]: Reference
-*[ABBR]: This gets overriden by the next one.
-*[ABBR]: Abbreviation
+ç'a
 
-The HTML specification
-is maintained by the W3C.
+foo!
 
-*[HTML]: Hyper Text Markup Language
-*[W3C]:  World Wide Web Consortium
-
+bar !
 `
 
 const now = String(new Date())

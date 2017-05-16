@@ -9,6 +9,15 @@ const config = {
     blocks: [],
   },
 
+  textr: {
+    plugins: [
+      'typographic-base',
+    ],
+    options: {
+      locale: 'fr',
+    },
+  },
+
   headingShifter: 0,
 
   remark2rehype: {

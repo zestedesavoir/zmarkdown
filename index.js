@@ -6,6 +6,8 @@ const katex = require('rehype-katex')
 const stringify = require('rehype-stringify')
 const remark2rehype = require('remark-rehype')
 const inspect = require('unist-util-inspect')
+const textr = require('remark-textr')
+
 
 const abbr = require('./packages/abbr')
 const align = require('./packages/align')
@@ -29,6 +31,7 @@ const fromFile = (filepath) => fs.readFileSync(filepath)
 const processor = (config) =>
   unified()
     .use(reParse, config.reParse)
+    .use(textr, config.textr)
     .use(trailingSpaceHeading)
     .use(headingShifter, config.headingShifter)
     .use(numberedFootnotes)
