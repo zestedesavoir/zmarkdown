@@ -1,9 +1,9 @@
 {
-  "name": "typographic-colon",
-  "version": "0.0.2",
+  "name": "remark-trailing-space-heading",
+  "version": "0.0.3",
   "main": "index.js",
   "repository": {
-    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/typographic-colon",
+    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-trailing-space-heading",
     "type": "git"
   },
   "author": "AmarOk1412",
