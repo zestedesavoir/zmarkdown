@@ -8,22 +8,31 @@ const { renderString, parse, inspect } = require('./index.js')()
 4. Changing the markdown below or modifying your plugin will refresh your terminal
 */
 
-const markdown = `
-a : b
-
-ç'a
-
-foo!
-
-bar !
-`
-
+// const markdown = `
+// a : b
+//
+// ç'a
+//
+// foo!
+//
+// bar !
+// `
+//
 const now = String(new Date())
 const dash = '='.repeat(Math.floor((80 - now.length) / 2))
 console.log(`\n${dash}${now}${dash}${dash % 2 ? '' : '='}\n`)
-
-console.log(renderString(markdown))
-
+//
+// console.log(renderString(markdown))
+//
+const pattern = / :(\s|$)/gim;
+const beforeColon = 'NBSP'
+console.log(`foo: bar
+bar : baz
+qux  : flack
+`.replace(pattern, (withColon, afterColon) => {
+  console.log({withColon, afterColon})
+  return `${beforeColon}:${afterColon}`
+}))
 console.log(`\n${'-'.repeat(80)}\n`)
-
-console.error(inspect(parse(markdown)))
+//
+// console.error(inspect(parse(markdown)))
