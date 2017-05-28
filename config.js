@@ -1,4 +1,4 @@
-const typoColon = require('./packages/typographic-colon')
+const typoColon = require('typographic-colon')
 
 const config = {
   reParse: {

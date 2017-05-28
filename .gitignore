@@ -1,6 +1,7 @@
-node_modules
-npm-debug.log
-coverage
-public/bundle.js
-public/bundle.js.map
-*.orig
+.DS_Store
+/node_modules
+/packages/*/node_modules
+/npm-debug.log
+/coverage
+/public/bundle.js
+/public/bundle.js.map
