@@ -8,7 +8,6 @@ const remark2rehype = require('remark-rehype')
 const inspect = require('unist-util-inspect')
 const textr = require('remark-textr')
 
-
 const abbr = require('./packages/abbr')
 const align = require('./packages/align')
 const trailingSpaceHeading = require('./packages/trailing-space-heading')

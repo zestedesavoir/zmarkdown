@@ -1,3 +1,5 @@
+const typoColon = require('./packages/typographic-colon')
+
 const config = {
   reParse: {
     gfm: true,
@@ -12,6 +14,7 @@ const config = {
   textr: {
     plugins: [
       'typographic-base',
+      typoColon,
     ],
     options: {
       locale: 'fr',
