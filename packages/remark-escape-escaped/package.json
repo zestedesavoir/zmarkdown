@@ -1,9 +1,9 @@
 {
-  "name": "typographic-colon",
+  "name": "remark-escape-escaped",
   "version": "0.0.2",
   "main": "index.js",
   "repository": {
-    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/typographic-colon",
+    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-escape-escaped",
     "type": "git"
   },
   "author": "vhf",
@@ -16,7 +16,7 @@
     "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
   },
   "keywords": [
-    "textr"
+    "remark"
   ],
   "license": "MIT",
   "devDependencies": {

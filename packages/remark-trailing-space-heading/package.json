@@ -6,8 +6,9 @@
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/typographic-colon",
     "type": "git"
   },
-  "author": "vhf",
+  "author": "AmarOk1412",
   "contributors": [
+    "AmarOk1412",
     "vhf"
   ],
   "scripts": {
@@ -16,7 +17,7 @@
     "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
   },
   "keywords": [
-    "textr"
+    "remark"
   ],
   "license": "MIT",
   "devDependencies": {
