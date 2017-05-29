@@ -1,7 +1,7 @@
 This plug-in replaces abbreviations.
 
 ```
-This is an abbreviation: REF.
+This is an abbreviation: "REF".
 ref and REFERENCE should be ignored.
 
 *[REF]: Reference
