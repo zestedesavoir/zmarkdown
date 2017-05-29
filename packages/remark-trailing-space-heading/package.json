@@ -1,0 +1,34 @@
+{
+  "name": "remark-trailing-space-heading",
+  "version": "0.0.3",
+  "repository": {
+    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-trailing-space-heading",
+    "type": "git"
+  },
+  "author": "Sébastien (AmarOk) Blin <contact@enconn.fr>",
+  "contributors": [
+    "Sébastien (AmarOk) Blin <contact@enconn.fr>",
+    "Victor Felder <victor@draft.li> (https://draft.li)"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "test": "mocha",
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
+  },
+  "keywords": [
+    "remark"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^0.19.1",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.0.0",
+    "coveralls": "^2.13.1",
+    "del-cli": "^1.0.0",
+    "eslint": "^3.19.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.4.2",
+    "nyc": "^10.3.2",
+    "remark": "^7.0.1"
+  }
+}

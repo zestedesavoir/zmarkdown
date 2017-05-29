@@ -1,0 +1,59 @@
+{
+  "name": "zmarkdown",
+  "version": "0.0.1",
+
+  "author": "Victor Felder <victor@draft.li> (https://draft.li)",
+  "license": "MIT",
+  "dependencies": {
+    "rehype-katex": "^1.0.1",
+    "rehype-stringify": "^3.0.0",
+    "remark": "^7.0.0",
+    "remark-math": "^1.0.0",
+    "remark-parse": "^3.0.0",
+    "remark-rehype": "^2.0.0",
+    "remark-textr": "^3.0.0",
+    "typographic-base": "^1.0.4",
+    "unist-util-inspect": "^4.1.0",
+    "remark-abbr": "v0.0.2",
+    "remark-align":"v0.0.2",
+    "remark-comments":"v0.0.2",
+    "remark-custom-blocks": "v0.0.2",
+    "remark-emoticons": "v0.0.2",
+    "remark-escape-escaped":"v0.0.2",
+    "remark-footnotes-title": "v0.0.2",
+    "remark-heading-shift": "v0.0.2",
+    "remark-html-blocks":"v0.0.2",
+    "remark-iframes": "v0.0.2",
+    "remark-kbd": "v0.0.2",
+    "remark-numbered-footnotes": "v0.0.2",
+    "remark-sub-super": "v0.0.2",
+    "remark-trailing-space-heading": "v0.0.3",
+    "typographic-colon": "v0.0.3"
+  },
+  "devDependencies": {
+    "babelify": "^7.3.0",
+    "browserify": "^14.3.0",
+    "chai": "^3.5.0",
+    "coveralls": "^2.13.0",
+    "dedent": "^0.7.0",
+    "envify": "^4.0.0",
+    "exorcist": "^0.4.0",
+    "glob": "^7.1.1",
+    "html-differ": "^1.3.4",
+    "istanbul": "^0.4.5",
+    "lerna": "^2.0.0-rc.5",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "uglifyify": "^3.0.4"
+  },
+  "bin": {
+    "zmarkdown": "./bin/index.js"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "mocha",
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
+    "web": "browserify index.js -g [ envify --NODE_ENV production ] -g [ babelify --presets [ es2015 ] ] -g uglifyify -d -s ZMarkdown | exorcist ../../public/bundle.js.map > ../../public/bundle.js",
+    "wip": "nodemon -q -e js wip.js"
+  }
+}
