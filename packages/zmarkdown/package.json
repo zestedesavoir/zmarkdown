@@ -1,7 +1,7 @@
 {
   "name": "zmarkdown",
   "version": "0.0.1",
-  "main": "index.js",
+
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
   "license": "MIT",
   "dependencies": {

@@ -1,7 +1,8 @@
 .DS_Store
 /node_modules
 /packages/*/node_modules
+/packages/*/coverage
+/packages/*/.nyc_output
 /npm-debug.log
-/coverage
 /public/bundle.js
 /public/bundle.js.map
