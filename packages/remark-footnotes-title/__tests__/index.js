@@ -18,19 +18,42 @@ const specs = directory(base).reduce((tests, contents) => {
   return tests
 }, {})
 
-Object.keys(specs).filter(Boolean).forEach(name => {
-  const spec = specs[name]
 
-  ava(name, t => {
-    const {contents} = unified()
-      .use(reParse, {
-        footnotes: true
-      })
-      .use(remark2rehype)
-      .use(plugin, 'Foo bar $id')
-      .use(stringify)
-      .processSync(spec.fixture)
+ava('config', t => {
+  const {contents} = unified()
+    .use(reParse, {
+      footnotes: true
+    })
+    .use(remark2rehype)
+    .use(plugin, 'Foo bar $id')
+    .use(stringify)
+    .processSync(specs['config'].fixture)
 
-    t.deepEqual(contents, spec.expected.trim())
-  })
+  t.deepEqual(contents, specs['config'].expected.trim())
+})
+
+ava('config2', t => {
+  const {contents} = unified()
+    .use(reParse, {
+      footnotes: true
+    })
+    .use(remark2rehype)
+    .use(plugin, 'Baz $id qux?')
+    .use(stringify)
+    .processSync(specs['config2'].fixture)
+
+  t.deepEqual(contents, specs['config2'].expected.trim())
+})
+
+ava('noconfig', t => {
+  const {contents} = unified()
+    .use(reParse, {
+      footnotes: true
+    })
+    .use(remark2rehype)
+    .use(plugin)
+    .use(stringify)
+    .processSync(specs['noconfig'].fixture)
+
+  t.deepEqual(contents, specs['noconfig'].expected.trim())
 })
