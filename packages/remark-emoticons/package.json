@@ -11,9 +11,18 @@
     "Victor Felder <victor@draft.li> (https://draft.li)"
   ],
   "scripts": {
-    "lint": "eslint .",
-    "test": "mocha",
-    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*"
+    "pretest": "eslint index.js",
+    "prepublish": "del-cli dist && BABEL_ENV=production babel --out-dir dist index.js",
+    "test": "npm run prepublish && nyc ava __tests__",
+    "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov > coverage/coverage.lcov"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "LICENSE-MIT",
+    "dist"
+  ],
+  "engines": {
+    "node": ">=4"
   },
   "keywords": [
     "remark"
