@@ -37,9 +37,7 @@ function inlinePlugin (opts = {}) {
       if (endMarkerIndex === value.length) return
 
       /* istanbul ignore if - never used (yet) */
-      if (silent) {
-        return true
-      }
+      if (silent) return true
 
       eat(value.substring(0, endMarkerIndex + 1))({
         type: markers[marker],

@@ -35,9 +35,10 @@ module.exports = function inlinePlugin (opts = {}) {
         url += value[i]
       }
     }
-    if (silent) {
-      return url.length > 0
-    }
+
+    /* istanbul ignore if - never used (yet) */
+    if (silent) return true
+
     const provider = extractProvider(url)
     if (!provider) {
       return false

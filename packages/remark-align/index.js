@@ -10,7 +10,9 @@ module.exports = function alignPlugin () {
     const keep = regex.exec(value)
     if (!keep) return
     if (keep.index !== 0) return
-    if (silent) return
+
+    /* istanbul ignore if - never used (yet) */
+    if (silent) return true
 
     let idx = 0
     let linesToEat = []

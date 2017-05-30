@@ -20,7 +20,9 @@ module.exports = function blockPlugin (blocks = {}) {
     const keep = regex.exec(value)
     if (!keep) return
     if (keep.index !== 0) return
-    if (silent) return
+
+    /* istanbul ignore if - never used (yet) */
+    if (silent) return true
 
     const linesToEat = []
     const content = []

@@ -14,13 +14,11 @@ module.exports = function escapeEscaped (entitiesToKeep = ['&']) {
   function inlineTokenizer (eat, value, silent) {
     const keep = regex.exec(value)
     if (keep) {
-      if (keep.index !== 0) {
-        return true
-      }
+      if (keep.index !== 0) return true
+
       /* istanbul ignore if - never used (yet) */
-      if (silent) {
-        return true
-      }
+      if (silent) return true
+
       eat(keep[0])({
         type: 'text',
         value: keep[0]

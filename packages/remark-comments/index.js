@@ -13,7 +13,8 @@ function inlinePlugin (opts = {}) {
     const keepEnd = value.indexOf(ENDMARKER)
     if (keepBegin !== 0 || keepEnd === -1) return
 
-    if (silent) return silent
+    /* istanbul ignore if - never used (yet) */
+    if (silent) return true
 
     const comment = value.substring(BEGINMARKER.length + 1, keepEnd - 1)
     return eat(BEGINMARKER + SPACE + comment + SPACE + ENDMARKER)
