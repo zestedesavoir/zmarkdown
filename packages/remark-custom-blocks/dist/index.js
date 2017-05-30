@@ -7,8 +7,13 @@ function escapeRegExp(str) {
 var C_NEWLINE = '\n';
 var C_FENCE = '|';
 
-module.exports = function blockPlugin(blocks) {
+module.exports = function blockPlugin() {
+  var blocks = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
   var pattern = Object.keys(blocks).map(escapeRegExp).join('|');
+  if (!pattern) {
+    throw new Error('remark-custom-blocks needs to be passed a configuration object as option');
+  }
   var regex = new RegExp('\\[\\[(' + pattern + ')\\]\\]');
 
   function blockTokenizer(eat, value, silent) {
