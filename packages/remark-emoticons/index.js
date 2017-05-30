@@ -6,6 +6,11 @@ const SPACE = ' '
 
 module.exports = function inlinePlugin (emoticons = {}) {
   const pattern = Object.keys(emoticons).map(escapeRegExp).join('|')
+
+  if (!pattern) {
+    throw new Error('remark-emoticons needs to be passed a configuration object as option')
+  }
+
   const regex = new RegExp(`(\\s|^)(${pattern})(\\s|$)`)
 
   function locator (value, fromIndex) {
@@ -22,12 +27,10 @@ module.exports = function inlinePlugin (emoticons = {}) {
   function inlineTokenizer (eat, value, silent) {
     const keep = regex.exec(value)
     if (keep) {
-      if (keep.index !== 0) {
-        return true
-      }
-      if (silent) {
-        return true
-      }
+      if (keep.index !== 0) return true
+
+      /* istanbul ignore if - never used (yet) */
+      if (silent) return true
 
       let emoticon = keep[0]
       if (emoticon.charAt(emoticon.length - 1) === SPACE) {
