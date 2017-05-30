@@ -5,11 +5,14 @@ function escapeRegExp (str) {
 const C_NEWLINE = '\n'
 const C_FENCE = '|'
 
-module.exports = function blockPlugin (blocks) {
+module.exports = function blockPlugin (blocks = {}) {
   const pattern = Object
     .keys(blocks)
     .map(escapeRegExp)
     .join('|')
+  if (!pattern) {
+    throw new Error('remark-custom-blocks needs to be passed a configuration object as option')
+  }
   const regex = new RegExp(`\\[\\[(${pattern})\\]\\]`)
 
   function blockTokenizer (eat, value, silent) {

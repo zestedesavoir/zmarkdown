@@ -43,3 +43,18 @@ Object.keys(specs).filter(Boolean).forEach(name => {
     t.deepEqual(contents, spec.expected.trim())
   })
 })
+
+ava('Errors without config', t => {
+  const fail = () => unified()
+    .use(reParse)
+    .use(remark2rehype)
+    .use(plugin)
+    .use(stringify)
+    .processSync('')
+
+  t.throws(
+    fail,
+    Error,
+    'remark-custom-blocks needs to be passed a configuration object as option'
+  )
+})
