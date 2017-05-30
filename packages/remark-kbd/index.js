@@ -38,10 +38,9 @@ function inlinePlugin (opts = {}) {
         previous === C_PIPE &&
         (!preceding || !whitespace(preceding))
       ) {
+
         /* istanbul ignore if - never used (yet) */
-        if (silent) {
-          return true
-        }
+        if (silent) return true
 
         return eat(DOUBLE + subvalue + DOUBLE)({
           type: 'kbd',

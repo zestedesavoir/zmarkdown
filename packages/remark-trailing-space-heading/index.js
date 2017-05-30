@@ -1,7 +1,8 @@
 module.exports = function alignPlugin () {
 
   function headingTokenizer (eat, value, silent) {
-    if (silent) return
+    /* istanbul ignore if - never used (yet) */
+    if (silent) return true
 
     const lines = value.match(/.*\n/g) || []
     // Check if first line is not empty,
