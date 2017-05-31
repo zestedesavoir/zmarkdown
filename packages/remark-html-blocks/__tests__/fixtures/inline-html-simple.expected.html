@@ -1,0 +1,46 @@
+<p>Here's a simple block:</p>
+<p>&#x3C;div>
+	foo
+&#x3C;/div></p>
+<p>This should be a code block, though:</p>
+<pre><code>&#x3C;div>
+    foo
+&#x3C;/div>
+</code></pre>
+<p>As should this:</p>
+<pre><code>&#x3C;div>foo&#x3C;/div>
+</code></pre>
+<p>Now, nested:</p>
+<p>&#x3C;div>
+	&#x3C;div>
+		&#x3C;div>
+			foo
+		&#x3C;/div>
+	&#x3C;/div>
+&#x3C;/div></p>
+<p>This should just be an HTML comment:</p>
+<p>&#x3C;!-- Comment --></p>
+<p>Multiline:</p>
+<p>&#x3C;!--
+Blah
+Blah
+--></p>
+<p>Code block:</p>
+<pre><code>&#x3C;!-- Comment -->
+</code></pre>
+<p>Just plain comment, with trailing spaces on the line:</p>
+<p>&#x3C;!-- foo -->   </p>
+<p>Code:</p>
+<pre><code>&#x3C;hr />
+</code></pre>
+<p>Hr's:</p>
+<p>&#x3C;hr></p>
+<p>&#x3C;hr/></p>
+<p>&#x3C;hr /></p>
+<p>&#x3C;hr>   </p>
+<p>&#x3C;hr/>  </p>
+<p>&#x3C;hr /> </p>
+<p>&#x3C;hr class="foo" id="bar" /></p>
+<p>&#x3C;hr class="foo" id="bar"/></p>
+<p>&#x3C;hr class="foo" id="bar" ></p>
+<p>&#x3C;some <a href="http://example.com">weird</a> stuff></p>
