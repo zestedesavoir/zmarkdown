@@ -37,6 +37,7 @@
     "exorcist": "^0.4.0",
     "glob": "^7.1.1",
     "html-differ": "^1.3.4",
+    "mocha": "^3.4.2",
     "uglifyify": "^3.0.4"
   },
   "bin": {
