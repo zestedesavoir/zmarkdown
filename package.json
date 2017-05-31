@@ -17,7 +17,8 @@
   },
   "scripts": {
     "test": "lerna exec npm run test",
-    "coverage": "lerna exec npm run coverage",
-    "coverage:combine": "nyc report --include \"./packages/**/coverage/coverage.lcov\" lcovonly text-summary"
+    "coverage": "lerna exec npm run coverage --ignore zmarkdown",
+    "coverage:concat": "cat packages/*/coverage/coverage.lcov > ./coverage/coverage.lcov && cp packages/*/.nyc_output/*.json ./.nyc_output/",
+    "coverage:combine": "npm run coverage:concat && nyc report --reporter=text-lcov >> ./coverage/lcov.info && nyc report lcovonly text-summary"
   }
 }
