@@ -14,7 +14,7 @@ function locator (value, fromIndex) {
   return index
 }
 
-function inlinePlugin (opts = {}) {
+function inlinePlugin () {
   function inlineTokenizer (eat, value, silent) {
     // allow escaping of all markers
     for (const marker of Object.keys(markers)) {
