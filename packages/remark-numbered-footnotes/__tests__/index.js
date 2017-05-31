@@ -21,7 +21,7 @@ const specs = directory(base).reduce((tests, contents) => {
 Object.keys(specs).filter(Boolean).forEach(name => {
   const spec = specs[name]
 
-  ava(name, t => {
+  ava.skip(name, t => {
     const {contents} = unified()
       .use(reParse, {
         footnotes: true
