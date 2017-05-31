@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "pretest": "eslint index.js",
-    "prepublish": "del-cli dist && BABEL_ENV=production babel --out-dir dist index.js",
+    "prepublish": "del-cli dist && BABEL_ENV=production babel --out-dir dist index.js db.js",
     "test": "npm run prepublish && nyc ava __tests__",
     "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov > coverage/coverage.lcov"
   },
