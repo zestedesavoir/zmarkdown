@@ -1,6 +1,6 @@
 {
   "name": "zmarkdown",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
   "license": "MIT",
   "dependencies": {
@@ -23,7 +23,7 @@
     "remark-rehype": "^2.0.0",
     "remark-sub-super": "v0.0.2",
     "remark-textr": "^3.0.0",
-    "remark-trailing-space-heading": "v0.0.3",
+    "remark-heading-trailing-spaces": "v0.0.3",
     "typographic-base": "^1.0.4",
     "typographic-colon": "v0.0.3",
     "unist-util-inspect": "^4.1.0"
