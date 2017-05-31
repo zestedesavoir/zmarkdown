@@ -4,7 +4,7 @@ function escapeRegExp (str) {
 
 module.exports = function escapeEscaped (entitiesToKeep = ['&']) {
   if (!Array.isArray(entitiesToKeep) || !entitiesToKeep.length) {
-    throw new Error('remark-escape-escaped needs to be passed a configuration object as option')
+    throw new Error('remark-escape-escaped needs to be passed a configuration array as option')
   }
   const pattern = entitiesToKeep.map(escapeRegExp).join('|')
   const regex = new RegExp(`(${pattern})`)

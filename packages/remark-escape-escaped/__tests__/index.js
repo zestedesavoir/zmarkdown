@@ -39,7 +39,7 @@ ava('without', t => {
   t.deepEqual(contents, specs['without'].expected.trim())
 })
 
-ava('Errors without invalid config: []', t => {
+ava('Errors with invalid config: []', t => {
   const fail = () => unified()
     .use(reParse)
     .use(remark2rehype)
@@ -50,21 +50,21 @@ ava('Errors without invalid config: []', t => {
   t.throws(
     fail,
     Error,
-    'remark-escape-escaped needs to be passed a configuration object as option'
+    'remark-escape-escaped needs to be passed a configuration array as option'
   )
 })
 
-ava('Errors without invalid config: 1', t => {
+ava('Errors with invalid config: 1', t => {
   const fail = () => unified()
     .use(reParse)
     .use(remark2rehype)
-    .use(plugin, [])
+    .use(plugin, 1)
     .use(stringify)
     .processSync('')
 
   t.throws(
     fail,
     Error,
-    'remark-escape-escaped needs to be passed a configuration object as option'
+    'remark-escape-escaped needs to be passed a configuration array as option'
   )
 })
