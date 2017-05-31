@@ -18,7 +18,9 @@ const specs = directory(base).reduce((tests, contents) => {
   return tests
 }, {})
 
-Object.keys(specs).filter(Boolean).forEach(name => {
+const disabledTests = ['regression-1']
+
+Object.keys(specs).filter(name => !disabledTests.includes(name)).forEach(name => {
   const spec = specs[name]
 
   ava(name, t => {
