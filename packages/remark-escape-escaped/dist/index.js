@@ -10,7 +10,7 @@ module.exports = function escapeEscaped() {
   var entitiesToKeep = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ['&'];
 
   if (!Array.isArray(entitiesToKeep) || !entitiesToKeep.length) {
-    throw new Error('remark-escape-escaped needs to be passed a configuration object as option');
+    throw new Error('remark-escape-escaped needs to be passed a configuration array as option');
   }
   var pattern = entitiesToKeep.map(escapeRegExp).join('|');
   var regex = new RegExp('(' + pattern + ')');
