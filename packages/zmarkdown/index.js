@@ -10,7 +10,7 @@ const textr = require('remark-textr')
 
 const abbr = require('remark-abbr')
 const align = require('remark-align')
-const trailingSpaceHeading = require('remark-trailing-space-heading')
+const trailingSpaceHeading = require('remark-heading-trailing-spaces')
 const headingShifter = require('remark-heading-shift')
 const htmlBlocks = require('remark-html-blocks')
 const escapeEscaped = require('remark-escape-escaped')

@@ -12,7 +12,9 @@ module.exports = function alignPlugin() {
     var keep = regex.exec(value);
     if (!keep) return;
     if (keep.index !== 0) return;
-    if (silent) return;
+
+    /* istanbul ignore if - never used (yet) */
+    if (silent) return true;
 
     var idx = 0;
     var linesToEat = [];

@@ -11,7 +11,8 @@ function plugin() {
     var regex = new RegExp(/[*]\[([^\]]*)\]:\s*(.+)\n*/);
     var keep = regex.exec(value);
 
-    if (silent) return silent;
+    /* istanbul ignore if - never used (yet) */
+    if (silent) return true;
     if (!keep || keep.index !== 0) return;
 
     return eat(keep[0])({

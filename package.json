@@ -19,6 +19,5 @@
     "test": "lerna exec npm run test",
     "coverage": "lerna exec npm run coverage",
     "coverage:combine": "nyc report --include \"./packages/**/coverage/coverage.lcov\" lcovonly text-summary"
-  },
-  "dependencies": {}
+  }
 }
