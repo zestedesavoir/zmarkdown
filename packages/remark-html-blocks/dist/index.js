@@ -14,7 +14,7 @@ function transformer(tree) {
 
 function visitor(node, index, parent) {
   var replacement = void 0;
-  // if (!parent) return
+  if (!parent) return;
 
   if (!inline.includes(parent.tagName)) {
     replacement = {

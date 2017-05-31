@@ -18,7 +18,7 @@ const configOverride = (config) => {
   return newConfig
 }
 
-describe('HTML rendering', function () {
+describe.skip('HTML rendering', function () {
   describe('#heading-shift', function () {
 
     it(`shifts in range`, function () {

@@ -14,6 +14,8 @@
     "remark-escape-escaped": "v0.0.3",
     "remark-footnotes-title": "v0.0.3",
     "remark-heading-shift": "v0.0.3",
+    "remark-heading-trailing-spaces": "v0.0.3",
+    "remark-html-blocks": "v0.0.3",
     "remark-iframes": "v0.0.3",
     "remark-kbd": "v0.0.3",
     "remark-math": "^1.0.0",
@@ -22,7 +24,6 @@
     "remark-rehype": "^2.0.0",
     "remark-sub-super": "v0.0.3",
     "remark-textr": "^3.0.0",
-    "remark-heading-trailing-spaces": "v0.0.3",
     "typographic-base": "^1.0.4",
     "typographic-colon": "v0.0.3",
     "unist-util-inspect": "^4.1.0"
@@ -30,6 +31,7 @@
   "devDependencies": {
     "babelify": "^7.3.0",
     "browserify": "^14.3.0",
+    "chai": "^4.0.0",
     "dedent": "^0.7.0",
     "envify": "^4.0.0",
     "exorcist": "^0.4.0",
