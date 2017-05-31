@@ -8,7 +8,7 @@ function locator (value, fromIndex) {
   return index
 }
 
-function inlinePlugin (opts = {}) {
+function plugin () {
   function inlineTokenizer (eat, value, silent) {
     if (
       !this.options.gfm ||
@@ -69,12 +69,12 @@ function inlinePlugin (opts = {}) {
   const Compiler = this.Compiler
 
   // Stringify
-  if (Compiler != null) {
+  if (Compiler) {
     const visitors = Compiler.prototype.visitors
-    visitors.kdb = function (node) {
+    visitors.kbd = function (node) {
       return `||${this.all(node).join('')}||`
     }
   }
 }
 
-module.exports = inlinePlugin
+module.exports = plugin
