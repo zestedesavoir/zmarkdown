@@ -1,6 +1,10 @@
 const urlParse = require('url').parse
 
-module.exports = function inlinePlugin (opts = {}) {
+module.exports = function inlinePlugin (opts) {
+  if (typeof opts !== 'object' || !Object.keys(opts).length) {
+    throw new Error('remark-iframes needs to be passed a configuration object as option')
+  }
+
   function extractProvider (url) {
     const hostname = urlParse(url).hostname
     return opts[hostname]
