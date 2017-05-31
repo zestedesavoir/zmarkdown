@@ -18,10 +18,10 @@ const specs = directory(base).reduce((tests, contents) => {
   return tests
 }, {})
 
-const disabledTests = ['regression-1']
-
-Object.keys(specs).filter(name => !disabledTests.includes(name)).forEach(name => {
+Object.keys(specs).forEach(name => {
   const spec = specs[name]
+
+  if (name === 'regression-1') return
 
   ava(name, t => {
     const {contents} = unified()
