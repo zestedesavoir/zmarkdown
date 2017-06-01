@@ -11,8 +11,8 @@
     "Victor Felder <victor@draft.li> (https://draft.li)"
   ],
   "scripts": {
-    "pretest": "eslint index.js",
-    "prepublish": "del-cli dist && BABEL_ENV=production babel --out-dir dist index.js",
+    "pretest": "eslint src",
+    "prepublish": "del-cli dist && BABEL_ENV=production babel --out-dir dist src",
     "test": "npm run prepublish && nyc ava __tests__",
     "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov > coverage/coverage.lcov"
   },
