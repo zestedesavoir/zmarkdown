@@ -1,12 +1,14 @@
 {
   "name": "typographic-colon",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/typographic-colon",
     "type": "git"
   },
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
   "contributors": [
+    "Sébastien (AmarOk) Blin <contact@enconn.fr>",
+    "François (artragis) Dambrine <perso@francoisdambrine.me>",
     "Victor Felder <victor@draft.li> (https://draft.li)"
   ],
   "scripts": {

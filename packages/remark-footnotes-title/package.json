@@ -1,12 +1,14 @@
 {
   "name": "remark-footnotes-title",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-footnotes-title",
     "type": "git"
   },
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
   "contributors": [
+    "Sébastien (AmarOk) Blin <contact@enconn.fr>",
+    "François (artragis) Dambrine <perso@francoisdambrine.me>",
     "Victor Felder <victor@draft.li> (https://draft.li)"
   ],
   "scripts": {

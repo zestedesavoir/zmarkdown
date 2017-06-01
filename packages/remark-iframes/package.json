@@ -1,12 +1,13 @@
 {
   "name": "remark-iframes",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-iframes",
     "type": "git"
   },
   "author": "François (artragis) Dambrine <perso@francoisdambrine.me>",
   "contributors": [
+    "Sébastien (AmarOk) Blin <contact@enconn.fr>",
     "François (artragis) Dambrine <perso@francoisdambrine.me>",
     "Victor Felder <victor@draft.li> (https://draft.li)"
   ],

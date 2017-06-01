@@ -1,12 +1,14 @@
 {
   "name": "remark-kbd",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-kbd",
     "type": "git"
   },
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
   "contributors": [
+    "Sébastien (AmarOk) Blin <contact@enconn.fr>",
+    "François (artragis) Dambrine <perso@francoisdambrine.me>",
     "Victor Felder <victor@draft.li> (https://draft.li)"
   ],
   "scripts": {
@@ -31,7 +33,7 @@
     "is-whitespace-character": "^1.0.0"
   },
   "devDependencies": {
-    "remark-custom-blocks": "^0.0.5",
+    "remark-custom-blocks": "^0.0.6",
     "remark-stringify": "^3.0.1"
   }
 }
