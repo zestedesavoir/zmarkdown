@@ -27,8 +27,6 @@ entrypoints.forEach(entrypoint => {
   Object.keys(specs).forEach(name => {
     const spec = specs[name]
 
-    if (name === 'regression-1') return
-
     ava(name, t => {
       const {contents} = unified()
         .use(reParse)
