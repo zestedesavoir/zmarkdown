@@ -1,4 +1,4 @@
 content before
 [[s]]
-|Not Block
+|Block
 with content after
