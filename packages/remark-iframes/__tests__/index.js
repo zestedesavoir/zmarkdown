@@ -135,8 +135,8 @@ entrypoints.forEach(entrypoint => {
 
     const {contents} = unified()
       .use(reParse)
-      .use(remark2rehype)
       .use(plugin, config)
+      .use(remark2rehype)
       .use(stringify)
       .processSync(specs['video'].fixture)
 
@@ -170,8 +170,8 @@ entrypoints.forEach(entrypoint => {
 
     const {contents} = unified()
       .use(reParse)
-      .use(remark2rehype)
       .use(plugin, config)
+      .use(remark2rehype)
       .use(stringify)
       .processSync(specs['extra'].fixture)
 
@@ -181,8 +181,8 @@ entrypoints.forEach(entrypoint => {
   ava('Errors without config', t => {
     const fail = () => unified()
       .use(reParse)
-      .use(remark2rehype)
       .use(plugin)
+      .use(remark2rehype)
       .use(stringify)
       .processSync('')
 
@@ -196,8 +196,8 @@ entrypoints.forEach(entrypoint => {
   ava('Errors with empty config', t => {
     const fail = () => unified()
       .use(reParse)
-      .use(remark2rehype)
       .use(plugin, {})
+      .use(remark2rehype)
       .use(stringify)
       .processSync('')
 
@@ -212,8 +212,8 @@ entrypoints.forEach(entrypoint => {
   ava('Errors with invalid config', t => {
     const fail = () => unified()
       .use(reParse)
-      .use(remark2rehype)
       .use(plugin, 'foo')
+      .use(remark2rehype)
       .use(stringify)
       .processSync('')
 

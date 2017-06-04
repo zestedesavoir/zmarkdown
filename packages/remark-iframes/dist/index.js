@@ -59,10 +59,14 @@ module.exports = function plugin(opts) {
     var provider = extractProvider(url);
 
     if (!provider || provider.disabled === true || provider.match && provider.match instanceof RegExp && !provider.match.test(url)) {
-      eat(eatenValue)({
-        type: 'text',
-        value: eatenValue
-      });
+      if (eatenValue.startsWith('!(http')) {
+        eat(eatenValue)({
+          type: 'text',
+          value: eatenValue
+        });
+      } else {
+        return;
+      }
     } else {
       eat(eatenValue)({
         type: 'iframe',

@@ -9,6 +9,8 @@ Test video
 
 !(https://screen.yahoo.com/weatherman-gives-forecast-using-taylor-191821481.html)
 
+A [link with **bold**](http://example.com)
+
 !(https://youtu.be/BpJKvrjLUp0)
 
 !(http://youtube.com/watch?v=BpJKvrjLUp0)
