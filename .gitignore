@@ -7,4 +7,4 @@
 /lerna-debug.log
 /.nyc_output/*
 /coverage/*
-
+/public/bundle*
