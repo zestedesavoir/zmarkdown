@@ -1,1 +1,1 @@
-Remove comments from AST (`<--COMMENTS xxx COMMENTS-->`)
+This plugin makes remark ignore comments from Markdown input (`<--COMMENTS xxx COMMENTS-->`)

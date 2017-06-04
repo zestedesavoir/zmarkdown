@@ -1,4 +1,4 @@
-This plugin adds a `title` attribute to the footnote links.
+This plugin adds a `title` attribute to the footnote links, mainly for accessibility purpose.
 
 
 ```diff

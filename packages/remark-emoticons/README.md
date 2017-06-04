@@ -1,1 +1,1 @@
-This plugin parses emoticons (like `:D`, `:)`, etc) and, if compiled to HTML, renders as `<img alt=":D" src="image.png" >`.
+This plugin parses emoticons (like `:D`, `:)`) and renders as HTML `<img alt=":D" src="image.png" >`.

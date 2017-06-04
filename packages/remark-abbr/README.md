@@ -1,4 +1,4 @@
-This plug-in replaces abbreviations.
+This plug-in adds custom Markdown syntax to use HTML abbreviations.
 
 ```
 This is an abbreviation: "REF".

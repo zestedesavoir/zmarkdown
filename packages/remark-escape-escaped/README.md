@@ -1,4 +1,6 @@
-remark does
+This plugin escapes HTML entities from Markdown input.
+
+This is the default behavior though, it's configurable.
 
 * `&` -> `&#x26;`
 * `&amp;` -> `&#x26;`
