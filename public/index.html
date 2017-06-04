@@ -67,27 +67,32 @@
 <body>
   <section>
     <div class="wrapper">
-      <textarea id="editor" placeholder="Write here…" autofocus># title 1
+      <textarea id="editor" placeholder="Write here…" autofocus>!(https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+# title 1
 
-Lift($L$) can be determined by Lift[^foo] Coefficient ($C_L$) like the following[^bar] equation.
+A [link with **bold**](http://example.com)
+
+Some ZDS and ||key|| with a~~One~~ b~two~ c^three^
+
+A sentence ($S$) with *italic*[^italic] and inline match ($C_L$) and another[^bar] footnote.
 
 $$
 L = \frac{1}{2} \rho v^2 S C_L
 $$
 
-Quote:
-> Custom block:
+A quote:
+> With a custom block:
 >
 > [[attention]]
-> | Link: [example](http://example.com)
-> | > Re-quote!
-> | It's fun!
-> End of custom block.
+> | A link: [example](http://example.com)
+> | > A nested quote!
+> | After the nested quote.
+> Outside the block.
+After the quote.
 
-**Foo!**
-
+*[ZDS]: Look, title!
 [^bar]: bar
-[^foo]: foo
+[^italic]: italic
 </textarea>
       <div class="debug">
         <pre><code id="ast"></code></pre>
