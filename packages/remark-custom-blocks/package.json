@@ -1,6 +1,6 @@
 {
   "name": "remark-custom-blocks",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-custom-blocks",
     "type": "git"
@@ -12,7 +12,9 @@
     "Victor Felder <victor@draft.li> (https://draft.li)"
   ],
   "nyc": {
-    "exclude": ["dist"]
+    "exclude": [
+      "dist"
+    ]
   },
   "scripts": {
     "pretest": "eslint src",
