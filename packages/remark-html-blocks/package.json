@@ -1,6 +1,6 @@
 {
   "name": "remark-html-blocks",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-html-blocks",
     "type": "git"
