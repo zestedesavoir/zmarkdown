@@ -11,6 +11,9 @@
     "François (artragis) Dambrine <perso@francoisdambrine.me>",
     "Victor Felder <victor@draft.li> (https://draft.li)"
   ],
+  "nyc": {
+    "exclude": ["dist"]
+  },
   "scripts": {
     "pretest": "eslint src",
     "prepublish": "del-cli dist && BABEL_ENV=production babel --out-dir dist src",
