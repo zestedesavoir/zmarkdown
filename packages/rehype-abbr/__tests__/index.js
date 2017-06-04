@@ -25,8 +25,6 @@ entrypoints.forEach(entrypoint => {
   const plugin = require(entrypoint)
 
   Object.keys(specs).filter(Boolean).forEach(name => {
-    if (name === 'regression-1') return
-
     const spec = specs[name]
 
     ava(name, t => {
