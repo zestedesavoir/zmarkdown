@@ -9,10 +9,10 @@ function plugin() {
 
   function inlineTokenizer(eat, value, silent) {
     var regex = new RegExp(/[*]\[([^\]]*)\]:\s*(.+)\n*/);
-    var keep = regex.exec(value
+    var keep = regex.exec(value);
 
     /* istanbul ignore if - never used (yet) */
-    );if (silent) return true;
+    if (silent) return true;
     if (!keep || keep.index !== 0) return;
 
     return eat(keep[0])({
@@ -63,40 +63,40 @@ function plugin() {
 
   function replace(abbrs) {
     function escapeRegExp(str) {
-      return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&' // eslint-disable-line no-useless-escape
-      );
+      return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&'); // eslint-disable-line no-useless-escape
     }
 
     var pattern = Object.keys(abbrs).map(escapeRegExp).join('|');
     var regex = new RegExp('\\b(' + pattern + ')\\b');
 
     function one(node, index, parent) {
+
       if (Object.keys(abbrs).length === 0) return;
       if (node.type !== 'text') return;
+      if (parent && parent.tagName === 'abbr') return;
 
       var keep = regex.exec(node.value);
       if (keep) {
         var newTexts = node.value.split(regex);
-        parent.children = [];
+        parent.children.splice(index, 1);
         for (var i = 0; i < newTexts.length; ++i) {
           var content = newTexts[i];
           if (abbrs.hasOwnProperty(content)) {
-            parent.children[i] = {
+            parent.children.splice(index + i, 0, {
               type: 'element',
               tagName: 'abbr',
               properties: { title: abbrs[content] },
               children: [{ type: 'text', value: content }]
-            };
+            });
           } else {
-            parent.children[i] = {
+            parent.children.splice(index + i, 0, {
               type: 'text',
               value: content
-            };
+            });
           }
         }
       }
     }
-
     return one;
   }
 

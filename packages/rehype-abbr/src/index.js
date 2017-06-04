@@ -68,32 +68,33 @@ function plugin () {
     const regex = new RegExp(`\\b(${pattern})\\b`)
 
     function one (node, index, parent) {
+
       if (Object.keys(abbrs).length === 0) return
       if (node.type !== 'text') return
+      if (parent && parent.tagName === 'abbr') return
 
       const keep = regex.exec(node.value)
       if (keep) {
         const newTexts = node.value.split(regex)
-        parent.children = []
+        parent.children.splice(index, 1)
         for (let i = 0; i < newTexts.length; ++i) {
           const content = newTexts[i]
           if (abbrs.hasOwnProperty(content)) {
-            parent.children[i] = {
+            parent.children.splice(index + i, 0, {
               type: 'element',
               tagName: 'abbr',
               properties: { title: abbrs[content] },
               children: [ { type: 'text', value: content } ]
-            }
+            })
           } else {
-            parent.children[i] = {
+            parent.children.splice(index + i, 0, {
               type: 'text',
               value: content,
-            }
+            })
           }
         }
       }
     }
-
     return one
   }
 
