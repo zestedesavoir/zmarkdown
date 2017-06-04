@@ -23,7 +23,7 @@ implemented by <a href="https://github.com/wooorm/rehype">rehype</a></p>
 
 ## Installation
 
-[npm][]:
+[npm][npm]:
 
 ```bash
 npm install rehype-abbr
@@ -67,3 +67,7 @@ unified()
 [coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown
 
 [license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/rehype-abbr/LICENSE-MIT
+
+[zds]: https://zestedesavoir.com
+
+[npm]: https://www.npmjs.com/package/rehype-abbr
