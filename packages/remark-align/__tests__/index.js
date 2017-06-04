@@ -30,8 +30,8 @@ entrypoints.forEach(entrypoint => {
     ava(name, t => {
       const {contents} = unified()
         .use(reParse)
-        .use(remark2rehype)
         .use(plugin)
+        .use(remark2rehype)
         .use(stringify)
         .processSync(spec.fixture)
 

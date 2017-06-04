@@ -1,7 +1,7 @@
 const C_NEWLINE = '\n'
 const C_NEWPARAGRAPH = '\n\n'
 
-module.exports = function alignPlugin () {
+module.exports = function plugin () {
   const regex = new RegExp(`->(.+)`)
   const endMarkers = ['->', '<-']
 
@@ -53,14 +53,15 @@ module.exports = function alignPlugin () {
     const contents = this.tokenizeBlock(stringToEat, now)
     exit()
 
-    const type = endMarker === '->' ? 'align-right' : 'align-center'
+    const elementType = endMarker === '->' ? 'RightAligned' : 'CenterAligned'
+    const className = endMarker === '->' ? 'align-right' : 'align-center'
     return add({
-      type: type,
+      type: elementType,
       children: contents,
       data: {
         hName: 'div',
         hProperties: {
-          class: type
+          class: className
         }
       }
     })

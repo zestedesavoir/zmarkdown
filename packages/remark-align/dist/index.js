@@ -3,7 +3,7 @@
 var C_NEWLINE = '\n';
 var C_NEWPARAGRAPH = '\n\n';
 
-module.exports = function alignPlugin() {
+module.exports = function plugin() {
   var regex = new RegExp('->(.+)');
   var endMarkers = ['->', '<-'];
 
@@ -53,14 +53,15 @@ module.exports = function alignPlugin() {
     var contents = this.tokenizeBlock(stringToEat, now);
     exit();
 
-    var type = endMarker === '->' ? 'align-right' : 'align-center';
+    var elementType = endMarker === '->' ? 'RightAligned' : 'CenterAligned';
+    var className = endMarker === '->' ? 'align-right' : 'align-center';
     return add({
-      type: type,
+      type: elementType,
       children: contents,
       data: {
         hName: 'div',
         hProperties: {
-          class: type
+          class: className
         }
       }
     });

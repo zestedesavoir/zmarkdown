@@ -1,6 +1,6 @@
 # rehype-abbr [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
-This plug-in parses custom Markdown syntax to produce HTML abbreviations.
+This plugin parses custom Markdown syntax to produce HTML abbreviations.
 
 ## Syntax
 
