@@ -13,7 +13,8 @@
   ],
   "nyc": {
     "exclude": [
-      "dist"
+      "dist",
+      "__tests__"
     ]
   },
   "scripts": {
