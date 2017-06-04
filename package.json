@@ -2,6 +2,7 @@
   "devDependencies": {
     "ava": "^0.19.1",
     "babel-cli": "^6.24.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.24.1",
     "coveralls": "^2.13.1",
     "del-cli": "^1.0.0",
