@@ -1,183 +1,42 @@
-[![Build Status](https://travis-ci.org/zestedesavoir/zmarkdown.svg?branch=master)](https://travis-ci.org/zestedesavoir/zmarkdown)
-[![Coverage Status](https://coveralls.io/repos/github/zestedesavoir/zmarkdown/badge.svg?branch=master)](https://coveralls.io/github/zestedesavoir/zmarkdown?branch=master)
+# zmarkdown [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
-# zmarkdown
+This repository forms the basis for zmarkdown, the JavaScript project intended to replace [Python-ZMarkdown][pyzmd], the current Markdown engine powering [Zeste de Savoir][zds].
 
-zmarkdown is [remark](https://github.com/wooorm/remark)-based reimplementation of [Python-ZMarkdown](https://github.com/zestedesavoir/Python-ZMarkdown).
+It is a collection of packages extending the [**remark**
+processor][processor] and its [**MDAST**][mdast] syntax tree, [**rehype**][rehype] (for HTML processing) and [**textr**][textr] (text transformation framework).
 
 ## Install
 
 *This project requires node >= 6.*
 
 1. clone
-2. `$ yarn` or `npm install`
+2. `yarn` or `npm install`
 3. `npm run test`
 
-## Contribute
+## License
 
-### Make an existing skipped test pass
+[MIT][license] © [Zeste de Savoir][zds]
 
-* Enable a test by remove its `.skip`.
-* Run tests, see how it fails.
-* Write a plugin solving the issue or fix the test fixture. Each plugin is a `packages/` subfolder.
-* You can inspect the AST at various transform stages, see `index.js`
-* Once you wrote a plugin, `use()` it in `index.js`.
-* Make sure tests are still passing and coverage isn't going down.
+<!-- Definitions -->
 
-### Have a live view of what you're working on
+[build-badge]: https://img.shields.io/travis/zestedesavoir/zmarkdown.svg
 
-* Take a look at `wip.js`
-* It's easy to edit it, and if you:
-* `npm run wip`, it'll auto-reload `wip.js` when you modify anything in the project and display in your terminal the HTML render and the AST!
+[build-status]: https://travis-ci.org/zestedesavoir/zmarkdown
 
-# diff
+[coverage-badge]: https://img.shields.io/coveralls/zestedesavoir/zmarkdown.svg
 
-## link title, link URL encoding
+[coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown
 
-input:
+[license]: https://github.com/zestedesavoir/zmarkdown/blob/master/LICENSE-MIT
 
-`[link](<simple link> "my title")`
+[processor]: https://github.com/wooorm/remark/blob/master/packages/remark
 
-diff:
+[mdast]: https://github.com/wooorm/mdast
 
-```diff
--<p><a href="simple link" title>link</a>
-+<p><a href="simple%20link" title="my title">link</a>
-```
+[pyzmd]: https://github.com/zestedesavoir/Python-ZMarkdown
 
+[zds]: https://zestedesavoir.com
 
-## list item indented code block
+[rehype]: https://github.com/wooorm/rehype
 
-diff:
-
-```diff
- * list item
-
--        indented code
-+      indented code
-```
-
-## list items with list children are wrapped
-
-input:
-
-```markdown
-* foo
-  * bar
-    * baz
-```
-
-diff:
-
-```diff
- <ul>
-   <li>
--    foo
-+    <p>foo</p>
-     <ul>
-       <li>
--        bar
-+        <p>bar</p>
-         <ul>
-           <li>baz</li>
-         </ul>
-       </li>
-     </ul>
-   </li>
- </ul>
-```
-
-## hard wrap is Commonmark compliant
-
-input:
-
-```markdown
-This short paragraph is wrapped at 40
-columns and a line which starts with eg
-1. does not render as a list. It's much
-better that way.
-
-An asterisk followed by a space should
-* create a list anyway! That's what we
-want.
-```
-
-diff:
-
-```diff
- <p>This short paragraph is wrapped at 40
- columns and a line which starts with eg
- 1. does not render as a list. It's much
- better that way.</p>
- <p>An asterisk followed by a space should</p>
--* create a list anyway! That's what we
--want.</p>
-+<ul><li>create a list anyway! That's what we
-+want.</li></ul>
-```
-
-## del is consistent
-
-input:
-
-```markdown
-~~foo~~
-
-bar ~~~~ baz
-```
-
-diff:
-
-```diff
- <p><del>foo</del></p>
--<p>bar ~~~~ baz</p>
-+<p>bar <del></del> baz</p>
-```
-
-## new blockquote after blank line
-
-input:
-
-```markdown
->    > foo
-
->    > bar
-```
-
-diff:
-
-```diff
- <blockquote>
-   <blockquote>
-     <p>foo</p>
-+  </blockquote>
-+  <blockquote>
-     <p>bar</p>
-   </blockquote>
- </blockquote>
-```
-
-## autourlize only for protocoled url and htmlchars
-
-input :
-
-```markdown
-www.google.fr
-
-http://google.fr
-
-https://fr.wikipedia.org/wiki/Compactifi%C3%A9_d%27Alexandrov
-
-toto@gmail.com
-```
-
-diff
-
-```diff
-- <p><a href="http://www.google.fr">www.google.fr</a></p>
-+ <p>www.google.fr</p>
-<p><a href="http://google.fr">http://google.fr</a></p>
-- <p><a href="https://fr.wikipedia.org/wiki/Compactifi%C3%A9_d%27Alexandrov">https://fr.wikipedia.org/wiki/Compactifi%C3%A9_d%27Alexandrov</a></p>
-+ <p><a href="https://fr.wikipedia.org/wiki/Compactifi%C3%A9_d&#39;Alexandrov">https://fr.wikipedia.org/wiki/Compactifi%C3%A9_d%27Alexandrov</a></p>
-- <p><a href="mailto:toto@gmail.com">toto@gmail.com</a></p>
-+ <p>toto@gmail.com</p>
+[textr]: https://github.com/A/textr

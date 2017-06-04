@@ -16,6 +16,7 @@
     "unified": "^6.1.4"
   },
   "scripts": {
+    "postinstall": "lerna bootstrap",
     "test": "lerna exec npm run test",
     "coverage": "lerna exec npm run coverage --ignore zmarkdown",
     "coverage:concat": "cat packages/*/coverage/coverage.lcov > ./coverage/coverage.lcov && cp packages/*/.nyc_output/*.json ./.nyc_output/",
