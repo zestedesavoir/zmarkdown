@@ -1,5 +1,7 @@
 'use strict';
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var urlParse = require('url').parse;
@@ -15,12 +17,17 @@ module.exports = function inlinePlugin(opts) {
   }
   function computeFinalUrl(provider, url) {
     var finalUrl = url;
-    if (provider.replace) {
-      for (var key in provider.replace) {
-        finalUrl = finalUrl.replace(key, provider.replace[key]);
-      }
+    if (provider.replace && provider.replace.length) {
+      provider.replace.forEach(function (rule) {
+        var _rule = _slicedToArray(rule, 2),
+            from = _rule[0],
+            to = _rule[1];
+
+        if (from && to) finalUrl = finalUrl.replace(from, to);
+      });
     }
     if (provider.removeFileName) {
+      // this is buggy, use urlParse instead
       finalUrl = finalUrl.substring(0, finalUrl.lastIndexOf('/'));
     }
     if (provider.append) {
@@ -48,9 +55,8 @@ module.exports = function inlinePlugin(opts) {
     if (silent) return true;
 
     var provider = extractProvider(url);
-    if (!provider) {
-      return false;
-    } else if (provider.enabled === false || provider.domain && provider.domain.match && !provider.domain.match.exec(url)) {
+
+    if (!provider || provider.disabled === true || provider.match && provider.match instanceof RegExp && !provider.match.test(url)) {
       eat(eatenValue)({
         type: 'text',
         value: eatenValue

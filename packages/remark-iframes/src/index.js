@@ -11,12 +11,14 @@ module.exports = function inlinePlugin (opts) {
   }
   function computeFinalUrl (provider, url) {
     let finalUrl = url
-    if (provider.replace) {
-      for (const key in provider.replace) {
-        finalUrl = finalUrl.replace(key, provider.replace[key])
-      }
+    if (provider.replace && provider.replace.length) {
+      provider.replace.forEach((rule) => {
+        const [from, to] = rule
+        if (from && to) finalUrl = finalUrl.replace(from, to)
+      })
     }
     if (provider.removeFileName) {
+      // this is buggy, use urlParse instead
       finalUrl = finalUrl.substring(0, finalUrl.lastIndexOf('/'))
     }
     if (provider.append) {
@@ -44,10 +46,11 @@ module.exports = function inlinePlugin (opts) {
     if (silent) return true
 
     const provider = extractProvider(url)
-    if (!provider) {
-      return false
-    } else if (provider.enabled === false ||
-      (provider.domain && provider.domain.match && !provider.domain.match.exec(url))) {
+
+    if (
+      (!provider || provider.disabled === true) ||
+      (provider.match && provider.match instanceof RegExp && !provider.match.test(url))
+    ) {
       eat(eatenValue)({
         type: 'text',
         value: eatenValue
