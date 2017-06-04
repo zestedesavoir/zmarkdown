@@ -30,6 +30,11 @@ const config = {
 
   footnotesTitles: 'Retourner au texte de la note $id',
 
+  alignBlocks: {
+    center: 'align-center',
+    right: 'align-right',
+  },
+
   customBlocks: {
     secret: 'spoiler',
     s: 'spoiler',

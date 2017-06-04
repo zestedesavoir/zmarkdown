@@ -7,10 +7,7 @@ It adds two new node types to the [mdast][mdast] produced by [remark][remark]:
 * `CenterAligned`
 * `RightAligned`
 
-If you are using [rehype][rehype], the stringified HTML result will be `div`s with one of these CSS class names:
-
-* `align-center`
-* `align-right`
+If you are using [rehype][rehype], the stringified HTML result will be `div`s with configurable CSS classes.
 
 It is up to you to have CSS rules producing the desired result for these two classes.
 
@@ -27,8 +24,8 @@ Alignment is done by wrapping something in arrows indicating the alignment:
 produces:
 
 ```html
-<div class="align-center"><p>paragraph</p></div>
-<div class="align-right"><p>paragraph</p></div>
+<div class="some-class"><p>paragraph</p></div>
+<div class="some-other-class"><p>paragraph</p></div>
 ```
 
 ## Installation
@@ -57,7 +54,10 @@ Usage:
 ```javascript
 unified()
   .use(remarkParse)
-  .use(remarkAlign)
+  .use(remarkAlign, {
+    right: 'align-right',
+    center: 'align-center'
+  })
   .use(remark2rehype)
   .use(stringify)
 ```
