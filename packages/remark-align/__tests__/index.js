@@ -28,9 +28,13 @@ entrypoints.forEach(entrypoint => {
     const spec = specs[name]
 
     ava(name, t => {
+      const pluginConfig = name == 'align-custom-config' ? {
+        right: 'custom-right',
+        center: 'custom-center'
+      } : {};
       const {contents} = unified()
         .use(reParse)
-        .use(plugin)
+        .use(plugin, pluginConfig)
         .use(remark2rehype)
         .use(stringify)
         .processSync(spec.fixture)
