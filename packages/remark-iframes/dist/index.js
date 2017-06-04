@@ -4,9 +4,10 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var urlParse = require('url').parse;
+var URL = require('url');
+var urlParse = URL.parse;
 
-module.exports = function inlinePlugin(opts) {
+module.exports = function plugin(opts) {
   if ((typeof opts === 'undefined' ? 'undefined' : _typeof(opts)) !== 'object' || !Object.keys(opts).length) {
     throw new Error('remark-iframes needs to be passed a configuration object as option');
   }
@@ -27,8 +28,9 @@ module.exports = function inlinePlugin(opts) {
       });
     }
     if (provider.removeFileName) {
-      // this is buggy, use urlParse instead
-      finalUrl = finalUrl.substring(0, finalUrl.lastIndexOf('/'));
+      var parsed = urlParse(finalUrl);
+      parsed.pathname = parsed.pathname.substring(0, parsed.pathname.lastIndexOf('/'));
+      finalUrl = URL.format(parsed);
     }
     if (provider.append) {
       finalUrl += provider.append;

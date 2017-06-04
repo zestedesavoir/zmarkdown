@@ -1,6 +1,7 @@
-const urlParse = require('url').parse
+const URL = require('url')
+const urlParse = URL.parse
 
-module.exports = function inlinePlugin (opts) {
+module.exports = function plugin (opts) {
   if (typeof opts !== 'object' || !Object.keys(opts).length) {
     throw new Error('remark-iframes needs to be passed a configuration object as option')
   }
@@ -18,8 +19,9 @@ module.exports = function inlinePlugin (opts) {
       })
     }
     if (provider.removeFileName) {
-      // this is buggy, use urlParse instead
-      finalUrl = finalUrl.substring(0, finalUrl.lastIndexOf('/'))
+      const parsed = urlParse(finalUrl)
+      parsed.pathname = parsed.pathname.substring(0, parsed.pathname.lastIndexOf('/'))
+      finalUrl = URL.format(parsed)
     }
     if (provider.append) {
       finalUrl += provider.append
