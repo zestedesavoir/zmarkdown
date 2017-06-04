@@ -21,7 +21,7 @@
     "remark-custom-blocks": "^0.0.6",
     "remark-emoticons": "^0.0.5",
     "remark-escape-escaped": "^0.0.5",
-    "remark-footnotes-title": "^0.0.5",
+    "rehype-footnotes-title": "^0.0.5",
     "remark-heading-shift": "^0.0.5",
     "remark-heading-trailing-spaces": "^0.0.5",
     "remark-html-blocks": "^0.0.5",

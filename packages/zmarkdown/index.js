@@ -19,7 +19,7 @@ const htmlBlocks = require('remark-html-blocks')
 const subSuper = require('remark-sub-super')
 const emoticons = require('remark-emoticons')
 const numberedFootnotes = require('remark-numbered-footnotes')
-const footnotesTitles = require('remark-footnotes-title')
+const footnotesTitles = require('rehype-footnotes-title')
 const iframes = require('remark-iframes')
 const comments = require('remark-comments')
 
