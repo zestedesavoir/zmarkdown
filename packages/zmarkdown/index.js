@@ -8,7 +8,7 @@ const remark2rehype = require('remark-rehype')
 const inspect = require('unist-util-inspect')
 const textr = require('remark-textr')
 
-const abbr = require('remark-abbr')
+const abbr = require('rehype-abbr')
 const align = require('remark-align')
 const trailingSpaceHeading = require('remark-heading-trailing-spaces')
 const headingShifter = require('remark-heading-shift')

@@ -15,7 +15,7 @@
   "dependencies": {
     "rehype-katex": "^1.0.1",
     "rehype-stringify": "^3.0.0",
-    "remark-abbr": "^0.0.6",
+    "rehype-abbr": "^0.0.6",
     "remark-align": "^0.0.6",
     "remark-comments": "^0.0.6",
     "remark-custom-blocks": "^0.0.6",

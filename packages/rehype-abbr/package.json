@@ -1,8 +1,8 @@
 {
-  "name": "remark-abbr",
+  "name": "rehype-abbr",
   "version": "0.0.6",
   "repository": {
-    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-abbr",
+    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rehype-abbr",
     "type": "git"
   },
   "author": "Sébastien (AmarOk) Blin <contact@enconn.fr>",
@@ -26,7 +26,7 @@
     "node": ">=4"
   },
   "keywords": [
-    "remark"
+    "rehype"
   ],
   "license": "MIT",
   "dependencies": {
