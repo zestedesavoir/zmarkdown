@@ -49,7 +49,7 @@ module.exports = function blockPlugin (blocks = {}) {
     exit()
 
     return add({
-      type: 'custom',
+      type: `${keep[1]}CustomBlock`,
       children: contents,
       data: {
         hName: 'div',
