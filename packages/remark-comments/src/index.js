@@ -6,7 +6,7 @@ function locator (value, fromIndex) {
   return value.indexOf(BEGINMARKER, fromIndex)
 }
 
-function inlinePlugin (opts = {}) {
+function plugin (opts = {}) {
   function inlineTokenizer (eat, value, silent) {
 
     const keepBegin = value.indexOf(BEGINMARKER)
@@ -30,4 +30,4 @@ function inlinePlugin (opts = {}) {
   inlineMethods.splice(inlineMethods.indexOf('text'), 0, 'comments')
 }
 
-module.exports = inlinePlugin
+module.exports = plugin

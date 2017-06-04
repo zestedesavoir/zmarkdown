@@ -8,7 +8,7 @@ function locator(value, fromIndex) {
   return value.indexOf(BEGINMARKER, fromIndex);
 }
 
-function inlinePlugin() {
+function plugin() {
   var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   function inlineTokenizer(eat, value, silent) {
@@ -34,4 +34,4 @@ function inlinePlugin() {
   inlineMethods.splice(inlineMethods.indexOf('text'), 0, 'comments');
 }
 
-module.exports = inlinePlugin;
+module.exports = plugin;
