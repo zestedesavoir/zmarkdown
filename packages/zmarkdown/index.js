@@ -39,7 +39,7 @@ const processor = (config) =>
     .use(rehypeFootnotesTitles, config.footnotesTitles)
     .use(customBlocks, config.customBlocks)
     .use(htmlBlocks)
-    .use(align)
+    .use(align, config.alignBlocks)
     .use(rehypeAbbr)
     .use(math, config.math)
     .use(katex, config.katex)

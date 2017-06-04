@@ -1,7 +1,7 @@
 const C_NEWLINE = '\n'
 const C_NEWPARAGRAPH = '\n\n'
 
-module.exports = function plugin () {
+module.exports = function plugin (classNames = {}) {
   const regex = new RegExp(`->(.+)`)
   const endMarkers = ['->', '<-']
 
@@ -54,7 +54,9 @@ module.exports = function plugin () {
     exit()
 
     const elementType = endMarker === '->' ? 'RightAligned' : 'CenterAligned'
-    const className = endMarker === '->' ? 'align-right' : 'align-center'
+    const rightClassName = classNames.right ? classNames.right : 'align-right'
+    const centerClassName = classNames.center ? classNames.center : 'align-center'
+    const className = endMarker === '->' ? rightClassName : centerClassName
     return add({
       type: elementType,
       children: contents,
