@@ -9,10 +9,10 @@ function plugin() {
 
   function inlineTokenizer(eat, value, silent) {
     var regex = new RegExp(/[*]\[([^\]]*)\]:\s*(.+)\n*/);
-    var keep = regex.exec(value);
+    var keep = regex.exec(value
 
     /* istanbul ignore if - never used (yet) */
-    if (silent) return true;
+    );if (silent) return true;
     if (!keep || keep.index !== 0) return;
 
     return eat(keep[0])({
@@ -63,7 +63,8 @@ function plugin() {
 
   function replace(abbrs) {
     function escapeRegExp(str) {
-      return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&'); // eslint-disable-line no-useless-escape
+      return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&' // eslint-disable-line no-useless-escape
+      );
     }
 
     var pattern = Object.keys(abbrs).map(escapeRegExp).join('|');

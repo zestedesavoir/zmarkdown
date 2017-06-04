@@ -4,8 +4,6 @@
 /packages/*/coverage
 /packages/*/.nyc_output
 /npm-debug.log
-/public/bundle.js
-/public/bundle.js.map
 /lerna-debug.log
 /.nyc_output/*
 /coverage/*

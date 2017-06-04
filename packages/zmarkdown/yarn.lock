@@ -170,7 +170,7 @@ babel-types@^6.24.1:
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
-babelify@^7.3.0:
+babelify:
   version "7.3.0"
   resolved "https://registry.yarnpkg.com/babelify/-/babelify-7.3.0.tgz#aa56aede7067fd7bd549666ee16dc285087e88e5"
   dependencies:
@@ -178,8 +178,8 @@ babelify@^7.3.0:
     object-assign "^4.0.0"
 
 babylon@^6.11.0, babylon@^6.15.0:
-  version "6.17.1"
-  resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.17.1.tgz#17f14fddf361b695981fe679385e4f1c01ebd86f"
+  version "6.17.2"
+  resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.17.2.tgz#201d25ef5f892c41bae49488b08db0dd476e9f5c"
 
 bail@^1.0.0:
   version "1.0.1"
@@ -227,6 +227,58 @@ browser-resolve@^1.11.0, browser-resolve@^1.7.0:
 browser-stdout@1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/browser-stdout/-/browser-stdout-1.3.0.tgz#f351d32969d32fa5d7a5567154263d928ae3bd1f"
+
+browserify:
+  version "14.4.0"
+  resolved "https://registry.yarnpkg.com/browserify/-/browserify-14.4.0.tgz#089a3463af58d0e48d8cd4070b3f74654d5abca9"
+  dependencies:
+    assert "^1.4.0"
+    browser-pack "^6.0.1"
+    browser-resolve "^1.11.0"
+    browserify-zlib "~0.1.2"
+    buffer "^5.0.2"
+    cached-path-relative "^1.0.0"
+    concat-stream "~1.5.1"
+    console-browserify "^1.1.0"
+    constants-browserify "~1.0.0"
+    crypto-browserify "^3.0.0"
+    defined "^1.0.0"
+    deps-sort "^2.0.0"
+    domain-browser "~1.1.0"
+    duplexer2 "~0.1.2"
+    events "~1.1.0"
+    glob "^7.1.0"
+    has "^1.0.0"
+    htmlescape "^1.1.0"
+    https-browserify "^1.0.0"
+    inherits "~2.0.1"
+    insert-module-globals "^7.0.0"
+    JSONStream "^1.0.3"
+    labeled-stream-splicer "^2.0.0"
+    module-deps "^4.0.8"
+    os-browserify "~0.1.1"
+    parents "^1.0.1"
+    path-browserify "~0.0.0"
+    process "~0.11.0"
+    punycode "^1.3.2"
+    querystring-es3 "~0.2.0"
+    read-only-stream "^2.0.0"
+    readable-stream "^2.0.2"
+    resolve "^1.1.4"
+    shasum "^1.0.0"
+    shell-quote "^1.6.1"
+    stream-browserify "^2.0.0"
+    stream-http "^2.0.0"
+    string_decoder "~1.0.0"
+    subarg "^1.0.0"
+    syntax-error "^1.1.1"
+    through2 "^2.0.0"
+    timers-browserify "^1.0.1"
+    tty-browserify "~0.0.0"
+    url "~0.11.0"
+    util "~0.10.1"
+    vm-browserify "~0.0.1"
+    xtend "^4.0.0"
 
 browserify-aes@^1.0.0, browserify-aes@^1.0.4:
   version "1.0.6"
@@ -279,62 +331,6 @@ browserify-zlib@~0.1.2:
   dependencies:
     pako "~0.2.0"
 
-browserify@^14.3.0:
-  version "14.4.0"
-  resolved "https://registry.yarnpkg.com/browserify/-/browserify-14.4.0.tgz#089a3463af58d0e48d8cd4070b3f74654d5abca9"
-  dependencies:
-    assert "^1.4.0"
-    browser-pack "^6.0.1"
-    browser-resolve "^1.11.0"
-    browserify-zlib "~0.1.2"
-    buffer "^5.0.2"
-    cached-path-relative "^1.0.0"
-    concat-stream "~1.5.1"
-    console-browserify "^1.1.0"
-    constants-browserify "~1.0.0"
-    crypto-browserify "^3.0.0"
-    defined "^1.0.0"
-    deps-sort "^2.0.0"
-    domain-browser "~1.1.0"
-    duplexer2 "~0.1.2"
-    events "~1.1.0"
-    glob "^7.1.0"
-    has "^1.0.0"
-    htmlescape "^1.1.0"
-    https-browserify "^1.0.0"
-    inherits "~2.0.1"
-    insert-module-globals "^7.0.0"
-    JSONStream "^1.0.3"
-    labeled-stream-splicer "^2.0.0"
-    module-deps "^4.0.8"
-    os-browserify "~0.1.1"
-    parents "^1.0.1"
-    path-browserify "~0.0.0"
-    process "~0.11.0"
-    punycode "^1.3.2"
-    querystring-es3 "~0.2.0"
-    read-only-stream "^2.0.0"
-    readable-stream "^2.0.2"
-    resolve "^1.1.4"
-    shasum "^1.0.0"
-    shell-quote "^1.6.1"
-    stream-browserify "^2.0.0"
-    stream-http "^2.0.0"
-    string_decoder "~1.0.0"
-    subarg "^1.0.0"
-    syntax-error "^1.1.1"
-    through2 "^2.0.0"
-    timers-browserify "^1.0.1"
-    tty-browserify "~0.0.0"
-    url "~0.11.0"
-    util "~0.10.1"
-    vm-browserify "~0.0.1"
-    xtend "^4.0.0"
-
-buffer-shims@~1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/buffer-shims/-/buffer-shims-1.0.0.tgz#9978ce317388c649ad8793028c3477ef044a8b51"
-
 buffer-xor@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/buffer-xor/-/buffer-xor-1.0.3.tgz#26e61ed1422fb70dd42e6e36729ed51d855fe8d9"
@@ -373,9 +369,9 @@ center-align@^0.1.1:
     align-text "^0.1.3"
     lazy-cache "^1.0.3"
 
-chai:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/chai/-/chai-4.0.0.tgz#f6c989e45a5707d40c54d97ddd7ca89b30a6a06a"
+chai@^4.0.0:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/chai/-/chai-4.0.1.tgz#9e41e808e17a7f10807721e2ac5a589d5bb09082"
   dependencies:
     assertion-error "^1.0.1"
     check-error "^1.0.1"
@@ -656,7 +652,7 @@ elliptic@^6.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.0"
 
-envify@^4.0.0:
+envify:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/envify/-/envify-4.0.0.tgz#f791343e3d11cc29cce41150300a8af61c66cab0"
   dependencies:
@@ -685,7 +681,7 @@ evp_bytestokey@^1.0.0:
   dependencies:
     create-hash "^1.1.1"
 
-exorcist@^0.4.0:
+exorcist:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/exorcist/-/exorcist-0.4.0.tgz#1230ffdedd9248f42fbccf8b4a44d4cab29e3c64"
   dependencies:
@@ -1410,8 +1406,10 @@ querystring@0.2.0:
   resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
 
 randombytes@^2.0.0, randombytes@^2.0.1:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/randombytes/-/randombytes-2.0.3.tgz#674c99760901c3c4112771a31e521dc349cc09ec"
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/randombytes/-/randombytes-2.0.4.tgz#9551df208422c8f80eb58e2326dd0b840ff22efd"
+  dependencies:
+    safe-buffer "^5.0.1"
 
 read-only-stream@^2.0.0:
   version "2.0.0"
@@ -1420,14 +1418,14 @@ read-only-stream@^2.0.0:
     readable-stream "^2.0.2"
 
 readable-stream@^2.0.2, readable-stream@^2.1.5, readable-stream@^2.2.6:
-  version "2.2.9"
-  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.2.9.tgz#cf78ec6f4a6d1eb43d26488cac97f042e74b7fc8"
+  version "2.2.10"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.2.10.tgz#effe72bb7c884c0dd335e2379d526196d9d011ee"
   dependencies:
-    buffer-shims "~1.0.0"
     core-util-is "~1.0.0"
     inherits "~2.0.1"
     isarray "~1.0.0"
     process-nextick-args "~1.0.6"
+    safe-buffer "^5.0.1"
     string_decoder "~1.0.0"
     util-deprecate "~1.0.1"
 
@@ -1445,6 +1443,18 @@ readable-stream@~2.0.0:
 regenerator-runtime@^0.10.0:
   version "0.10.5"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
+
+rehype-abbr@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/rehype-abbr/-/rehype-abbr-0.0.7.tgz#efa5160b6b2ff2ec8d863b2cf29d7515c8de5c07"
+  dependencies:
+    unist-util-visit "^1.1.1"
+
+rehype-footnotes-title@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/rehype-footnotes-title/-/rehype-footnotes-title-0.0.6.tgz#83e35a90e00473733028f08c96a48b128ef4d813"
+  dependencies:
+    unist-util-visit "^1.1.1"
 
 rehype-katex@^1.0.1:
   version "1.0.1"
@@ -1471,11 +1481,63 @@ rehype-stringify@^3.0.0:
     hast-util-to-html "^3.0.0"
     xtend "^4.0.1"
 
+remark-align@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/remark-align/-/remark-align-0.0.7.tgz#6fdb7ea9e4ff83bfb688a5491f4bff62d33e1e62"
+
+remark-comments@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/remark-comments/-/remark-comments-0.0.7.tgz#ef19a4405b7f5a28dc2697b19219f15d34f1d93e"
+
+remark-custom-blocks@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/remark-custom-blocks/-/remark-custom-blocks-0.0.7.tgz#91cb317746f1f0814d0237ff449b8ac628a5e22b"
+
+remark-emoticons@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/remark-emoticons/-/remark-emoticons-0.0.6.tgz#738d06e90420a9e6c0adb4fac139634df94cd876"
+
+remark-escape-escaped@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/remark-escape-escaped/-/remark-escape-escaped-0.0.6.tgz#a42bc012812ebff5b37086cc01a318848395f917"
+
+remark-heading-shift@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/remark-heading-shift/-/remark-heading-shift-0.0.5.tgz#61bbe164de047389b2b61c4b3cf4564286740749"
+  dependencies:
+    unist-util-visit "^1.1.1"
+
+remark-heading-trailing-spaces@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/remark-heading-trailing-spaces/-/remark-heading-trailing-spaces-0.0.5.tgz#4f02c82a5c5915d975e6a605cf5bbc26f3073a6e"
+
+remark-html-blocks@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/remark-html-blocks/-/remark-html-blocks-0.0.6.tgz#791c484ac45e62e613e0a18911f81f5b8801583d"
+  dependencies:
+    unist-util-visit "^1.1.1"
+
+remark-iframes@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/remark-iframes/-/remark-iframes-0.0.6.tgz#00d85ee51becea47cbfc6ba25815141b608bdad5"
+
+remark-kbd@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/remark-kbd/-/remark-kbd-0.0.7.tgz#385d9fc63b83ba1ea5859906b810178fcc48ca98"
+  dependencies:
+    is-whitespace-character "^1.0.0"
+
 remark-math@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/remark-math/-/remark-math-1.0.0.tgz#9c0dbc6dab61072200e380c1c1a1b867b0ca0ade"
   dependencies:
     trim-trailing-lines "^1.1.0"
+
+remark-numbered-footnotes@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/remark-numbered-footnotes/-/remark-numbered-footnotes-0.0.6.tgz#b801c06bb4b32ab14db0285e6f739d90a8d530f6"
+  dependencies:
+    unist-util-visit "^1.1.1"
 
 remark-parse@^3.0.0:
   version "3.0.1"
@@ -1503,6 +1565,10 @@ remark-rehype@^2.0.0:
   resolved "https://registry.yarnpkg.com/remark-rehype/-/remark-rehype-2.0.0.tgz#f8e02286715bbf1eeafa8c229150d7023ae3cc3c"
   dependencies:
     mdast-util-to-hast "^2.2.0"
+
+remark-sub-super@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/remark-sub-super/-/remark-sub-super-0.0.5.tgz#c334e35c29fb2da826214684838a358e02368182"
 
 remark-textr@^3.0.0:
   version "3.0.1"
@@ -1549,8 +1615,8 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     inherits "^2.0.1"
 
 safe-buffer@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.0.1.tgz#d263ca54696cd8a306b5ca6551e92de57918fbe7"
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.0.tgz#fe4c8460397f9eaaaa58e73be46273408a45e223"
 
 sha.js@^2.4.0, sha.js@^2.4.8, sha.js@~2.4.4:
   version "2.4.8"
@@ -1791,6 +1857,10 @@ typographic-base@^1.0.4:
     typographic-single-spaces "^1.0.2"
     typographic-trademark "^1.0.1"
 
+typographic-colon@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/typographic-colon/-/typographic-colon-0.0.7.tgz#f0df3288006114b1475c87898b29d82cecfc5b8e"
+
 typographic-copyright@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/typographic-copyright/-/typographic-copyright-1.0.1.tgz#4c4a0b6d7dba271c29b741f204002f4c6d4b00c0"
@@ -1844,8 +1914,8 @@ typographic-trademark@^1.0.1:
   resolved "https://registry.yarnpkg.com/typographic-trademark/-/typographic-trademark-1.0.1.tgz#573165bc6f50307e6ec758832677483377844580"
 
 uglify-js@2.x.x:
-  version "2.8.27"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.27.tgz#47787f912b0f242e5b984343be8e35e95f694c9c"
+  version "2.8.28"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.28.tgz#e335032df9bb20dcb918f164589d5af47f38834a"
   dependencies:
     source-map "~0.5.1"
     yargs "~3.10.0"
@@ -1856,7 +1926,7 @@ uglify-to-browserify@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
 
-uglifyify@^3.0.4:
+uglifyify:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/uglifyify/-/uglifyify-3.0.4.tgz#487e080a5a7798880e68e90def9b06681fb13bd2"
   dependencies:

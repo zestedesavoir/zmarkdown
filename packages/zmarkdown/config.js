@@ -1,3 +1,4 @@
+const typoBase = require('typographic-base')
 const typoColon = require('typographic-colon')
 
 const config = {
@@ -13,7 +14,7 @@ const config = {
 
   textr: {
     plugins: [
-      'typographic-base',
+      typoBase,
       typoColon,
     ],
     options: {

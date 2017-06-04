@@ -102,7 +102,9 @@ Quote:
   </section>
   <script src="bundle.js"></script>
   <script type="text/javascript">
-    ZMarkdown = ZMarkdown({ headingShift: 1 })
+    var config = ZMarkdown().config
+    config.headingShifter = 1
+    ZMarkdown = ZMarkdown(config)
     var ansiUp = new AnsiUp()
     var render = document.getElementById('render')
     var editor = document.getElementById('editor')
