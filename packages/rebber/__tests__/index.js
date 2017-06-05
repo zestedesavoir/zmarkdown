@@ -44,3 +44,26 @@ ava('heading with custom config', t => {
 
   t.deepEqual(contents, expected)
 })
+
+ava('paragraph', t => {
+  const spec = specs['paragraph']
+  const {contents} = unified()
+    .use(reParse)
+    .use(stringify)
+    .processSync(spec.fixture)
+
+  t.deepEqual(contents.trim(), spec.expected.trim())
+})
+
+Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEach(name => {
+  const spec = specs[name]
+
+  ava(name, t => {
+    const {contents} = unified()
+      .use(reParse)
+      .use(stringify)
+      .processSync(spec.fixture)
+
+    t.deepEqual(contents.trim(), spec.expected.trim())
+  })
+})

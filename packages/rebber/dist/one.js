@@ -12,8 +12,12 @@ var handlers = {};
 handlers.root = require('./all');
 handlers.heading = require('./types/heading');
 handlers.paragraph = require('./types/paragraph');
-handlers.text = require('./types/text');
 handlers.comment = require('./types/comment');
+
+handlers.text = require('./types/text');
+handlers.strong = require('./types/strong');
+handlers.emphasis = require('./types/emphasis');
+handlers.delete = require('./types/delete');
 
 /* Stringify `node`. */
 function one(ctx, node, index, parent) {

@@ -1,10 +1,11 @@
+const all = require('../all')
+
 /* Expose. */
 module.exports = paragraph
 
 /* Stringify a paragraph `node`.
  */
 function paragraph (ctx, node) {
-  const text = node.text
-
-  return text
+  const contents = all(ctx, node)
+  return `${contents}\n\n`
 }
