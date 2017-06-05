@@ -30,11 +30,10 @@ module.exports = function plugin() {
 
       if (lineToEat.length > 2 && endMarkers.indexOf(lineToEat.slice(-2)) !== -1) {
         if (endMarker === '') endMarker = lineToEat.slice(-2);
-        if (lineToEat.slice(-2) !== endMarker) break;else {
-          finishedBlocks.push(linesToEat.join(C_NEWLINE)
-          // Check if another block is following
-          );if (value.indexOf('->', next) !== next + 1) break;else linesToEat = [];
-        }
+
+        finishedBlocks.push(linesToEat.join(C_NEWLINE));
+        // Check if another block is following
+        if (value.indexOf('->', next) !== next + 1) break;else linesToEat = [];
       }
 
       idx = next + 1;
@@ -44,10 +43,7 @@ module.exports = function plugin() {
     if (finishedBlocks.length === 0) return;
     var stringToEat = '';
     finishedBlocks.forEach(function (block) {
-      var contentBlock = block.slice(2, -2);
-      if (contentBlock.length > 0) {
-        stringToEat += block.slice(2, -2) + C_NEWPARAGRAPH;
-      }
+      stringToEat += block.slice(2, -2) + C_NEWPARAGRAPH;
     });
 
     var add = eat(finishedBlocks.join(C_NEWLINE));

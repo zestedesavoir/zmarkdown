@@ -24,22 +24,78 @@ const entrypoints = [
 entrypoints.forEach(entrypoint => {
   const plugin = require(entrypoint)
 
-  Object.keys(specs).filter(Boolean).forEach(name => {
-    const spec = specs[name]
+  ava('align', t => {
+    const spec = specs['align']
+    const {contents} = unified()
+      .use(reParse)
+      .use(plugin)
+      .use(remark2rehype)
+      .use(stringify)
+      .processSync(spec.fixture)
 
-    ava(name, t => {
-      const pluginConfig = name === 'align-custom-config' ? {
+    t.deepEqual(contents, spec.expected.trim())
+  })
+
+  ava('align-custom-config', t => {
+    const spec = specs['align-custom-config']
+    const {contents} = unified()
+      .use(reParse)
+      .use(plugin, {
         right: 'custom-right',
         center: 'custom-center'
-      } : {}
-      const {contents} = unified()
-        .use(reParse)
-        .use(plugin, pluginConfig)
-        .use(remark2rehype)
-        .use(stringify)
-        .processSync(spec.fixture)
+      })
+      .use(remark2rehype)
+      .use(stringify)
+      .processSync(spec.fixture)
 
-      t.deepEqual(contents, spec.expected.trim())
-    })
+    t.deepEqual(contents, spec.expected.trim())
+  })
+
+  ava('block-wrap', t => {
+    const spec = specs['block-wrap']
+    const {contents} = unified()
+      .use(reParse)
+      .use(plugin)
+      .use(remark2rehype)
+      .use(stringify)
+      .processSync(spec.fixture)
+
+    t.deepEqual(contents, spec.expected.trim())
+  })
+
+  ava('center-no-start', t => {
+    const spec = specs['center-no-start']
+    const {contents} = unified()
+      .use(reParse)
+      .use(plugin)
+      .use(remark2rehype)
+      .use(stringify)
+      .processSync(spec.fixture)
+
+    t.deepEqual(contents, spec.expected.trim())
+  })
+
+  ava('right-no-end', t => {
+    const spec = specs['right-no-end']
+    const {contents} = unified()
+      .use(reParse)
+      .use(plugin)
+      .use(remark2rehype)
+      .use(stringify)
+      .processSync(spec.fixture)
+
+    t.deepEqual(contents, spec.expected.trim())
+  })
+
+  ava('right-no-start', t => {
+    const spec = specs['right-no-start']
+    const {contents} = unified()
+      .use(reParse)
+      .use(plugin)
+      .use(remark2rehype)
+      .use(stringify)
+      .processSync(spec.fixture)
+
+    t.deepEqual(contents, spec.expected.trim())
   })
 })
