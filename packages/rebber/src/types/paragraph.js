@@ -5,7 +5,6 @@ module.exports = paragraph
  */
 function paragraph (ctx, node) {
   const text = node.text
-  // console.log({node})
 
   return text
 }

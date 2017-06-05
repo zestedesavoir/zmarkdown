@@ -7,7 +7,6 @@ module.exports = paragraph;
  */
 function paragraph(ctx, node) {
   var text = node.text;
-  // console.log({node})
 
   return text;
 }
