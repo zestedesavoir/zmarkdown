@@ -1,6 +1,3 @@
-const typoBase = require('typographic-base')
-const typoColon = require('typographic-colon')
-
 const config = {
   reParse: {
     gfm: true,
@@ -10,16 +7,6 @@ const config = {
     /* sets list of known blocks to nothing, otherwise <h3>hey</h3> would become
     &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
     blocks: [],
-  },
-
-  textr: {
-    plugins: [
-      typoBase,
-      typoColon,
-    ],
-    options: {
-      locale: 'fr',
-    },
   },
 
   headingShifter: 0,

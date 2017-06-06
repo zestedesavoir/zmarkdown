@@ -55,5 +55,5 @@
 
 content before
 [[s]]
-|Not Block
+|A Block
 with content after

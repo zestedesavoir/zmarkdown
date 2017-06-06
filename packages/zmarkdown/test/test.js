@@ -3,6 +3,7 @@ const fs = require('fs')
 const chai = require('chai')
 const expect = require('chai').expect
 const defaultConfig = require('../config')
+defaultConfig.isTest = true
 
 chai.use(require('./helper'))
 
@@ -18,7 +19,7 @@ const configOverride = (config) => {
   return newConfig
 }
 
-describe.skip('HTML rendering', function () {
+describe('HTML rendering', function () {
   describe('#heading-shift', function () {
 
     it(`shifts in range`, function () {
@@ -1013,21 +1014,21 @@ describe.skip('HTML rendering', function () {
             tag: 'iframe',
             width: 560,
             height: 315,
-            enabled: true,
-            replace: {
-              'watch?v=': 'embed/',
-              'http://': 'https://'
-            },
+            disabled: false,
+            replace: [
+              ['watch?v=', 'embed/'],
+              ['http://', 'https://'],
+            ],
             removeAfter: '&'
           },
           'jsfiddle.net': {
             tag: 'iframe',
             width: 560,
             height: 560,
-            enabled: false,
-            replace: {
-              'http://': 'https://'
-            },
+            disabled: true,
+            replace: [
+              ['http://', 'https://'],
+            ],
             append: 'embedded/result,js,html,css/'
           }
         }})

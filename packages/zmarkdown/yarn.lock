@@ -1432,18 +1432,6 @@ regenerator-runtime@^0.10.0:
   version "0.10.5"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
 
-rehype-abbr@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/rehype-abbr/-/rehype-abbr-0.0.8.tgz#f678c958f0b1862661699d10f393092c860e83da"
-  dependencies:
-    unist-util-visit "^1.1.1"
-
-rehype-footnotes-title@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/rehype-footnotes-title/-/rehype-footnotes-title-0.0.7.tgz#92cc308039366c1989b9e249b116a7b92895d501"
-  dependencies:
-    unist-util-visit "^1.1.1"
-
 rehype-katex@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/rehype-katex/-/rehype-katex-1.0.1.tgz#8d825d431bb5ced8fc7cf469356f80103dbbee35"
@@ -1469,63 +1457,17 @@ rehype-stringify@^3.0.0:
     hast-util-to-html "^3.0.0"
     xtend "^4.0.1"
 
-remark-align@^0.0.8:
+remark-html-blocks@^0.0.8:
   version "0.0.8"
-  resolved "https://registry.yarnpkg.com/remark-align/-/remark-align-0.0.8.tgz#b04b6a4d1a36e9a844cfe07e4b3a001777d5cb1d"
-
-remark-comments@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/remark-comments/-/remark-comments-0.0.8.tgz#d750f372941bde2cc673b5fc606917e6d4fbe579"
-
-remark-custom-blocks@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/remark-custom-blocks/-/remark-custom-blocks-0.0.8.tgz#36a079ed74c284ee547e8fcf5ebdb6a81691cd9c"
-
-remark-emoticons@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/remark-emoticons/-/remark-emoticons-0.0.7.tgz#ab1ffb48aec0d7503e5d0681b32dc3fc3a6cdb8d"
-
-remark-escape-escaped@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/remark-escape-escaped/-/remark-escape-escaped-0.0.7.tgz#45384ddb62acab2052b338ffea8af06d2bef77ef"
-
-remark-heading-shift@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/remark-heading-shift/-/remark-heading-shift-0.0.6.tgz#970ec2bf266434659485df060d0bf6ba6f157c83"
+  resolved "https://registry.yarnpkg.com/remark-html-blocks/-/remark-html-blocks-0.0.8.tgz#306cfe763de9b47d7630367e80713f76b3ada24d"
   dependencies:
     unist-util-visit "^1.1.1"
-
-remark-heading-trailing-spaces@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/remark-heading-trailing-spaces/-/remark-heading-trailing-spaces-0.0.6.tgz#03c8648028edac3f91df5814875bf8ab89d7b5d5"
-
-remark-html-blocks@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/remark-html-blocks/-/remark-html-blocks-0.0.7.tgz#6c0aca5dcc924fc351601adef1427622882a135e"
-  dependencies:
-    unist-util-visit "^1.1.1"
-
-remark-iframes@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/remark-iframes/-/remark-iframes-0.0.7.tgz#22fe1df25689f907e152d1f4b59e63e9fe1505d9"
-
-remark-kbd@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/remark-kbd/-/remark-kbd-0.0.8.tgz#bb1297eb71f77dbdce5c3df957df2a54926058b0"
-  dependencies:
-    is-whitespace-character "^1.0.0"
 
 remark-math@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/remark-math/-/remark-math-1.0.0.tgz#9c0dbc6dab61072200e380c1c1a1b867b0ca0ade"
   dependencies:
     trim-trailing-lines "^1.1.0"
-
-remark-numbered-footnotes@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/remark-numbered-footnotes/-/remark-numbered-footnotes-0.0.7.tgz#3e57b43e5c76fc83930dde724905df5135250ce3"
-  dependencies:
-    unist-util-visit "^1.1.1"
 
 remark-parse@^3.0.0:
   version "3.0.1"
@@ -1553,10 +1495,6 @@ remark-rehype@^2.0.0:
   resolved "https://registry.yarnpkg.com/remark-rehype/-/remark-rehype-2.0.0.tgz#f8e02286715bbf1eeafa8c229150d7023ae3cc3c"
   dependencies:
     mdast-util-to-hast "^2.2.0"
-
-remark-sub-super@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/remark-sub-super/-/remark-sub-super-0.0.6.tgz#2256d3c609223c65db197a68796267095d250f5b"
 
 remark-textr@^3.0.0:
   version "3.0.1"
@@ -1844,10 +1782,6 @@ typographic-base@^1.0.4:
     typographic-registered-trademark "^1.0.1"
     typographic-single-spaces "^1.0.2"
     typographic-trademark "^1.0.1"
-
-typographic-colon@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/typographic-colon/-/typographic-colon-0.0.8.tgz#33e8aab930ca03e16498ea91d9f7668e3c60f401"
 
 typographic-copyright@^1.0.1:
   version "1.0.1"
