@@ -1,6 +1,6 @@
 {
   "name": "zmarkdown",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
   "contributors": [
     "Sébastien (AmarOk) Blin <contact@enconn.fr>",
@@ -17,10 +17,10 @@
     "rehype-footnotes-title": "^0.0.8",
     "rehype-katex": "^1.0.1",
     "rehype-stringify": "^3.0.0",
-    "remark-align": "^0.0.9",
+    "remark-align": "^0.0.10",
     "remark-comments": "^0.0.9",
     "remark-custom-blocks": "^0.0.9",
-    "remark-emoticons": "^0.0.8",
+    "remark-emoticons": "^0.0.9",
     "remark-escape-escaped": "^0.0.8",
     "remark-heading-shift": "^0.0.7",
     "remark-heading-trailing-spaces": "^0.0.7",
