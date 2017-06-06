@@ -35,6 +35,7 @@
     "remark-textr": "^3.0.0",
     "typographic-base": "^1.0.4",
     "typographic-colon": "^0.0.9",
+    "typographic-apostroph": "^0.0.9",
     "unist-util-inspect": "^4.1.0"
   },
   "devDependencies": {

@@ -1,5 +1,6 @@
 const typoBase = require('typographic-base')
 const typoColon = require('typographic-colon')
+const typoApostroph = require('typographic-apostroph')
 
 const config = {
   reParse: {
@@ -16,6 +17,7 @@ const config = {
     plugins: [
       typoBase,
       typoColon,
+      typoApostroph,
     ],
     options: {
       locale: 'fr',
