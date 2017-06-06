@@ -1,8 +1,8 @@
 {
-  "name": "remark-html-blocks",
+  "name": "rehype-html-blocks",
   "version": "0.0.8",
   "repository": {
-    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-html-blocks",
+    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rehype-html-blocks",
     "type": "git"
   },
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
@@ -32,7 +32,7 @@
     "node": ">=4"
   },
   "keywords": [
-    "remark"
+    "rehype"
   ],
   "license": "MIT",
   "dependencies": {
