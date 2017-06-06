@@ -15,7 +15,6 @@ module.exports = function inlinePlugin() {
     throw new Error('remark-emoticons needs to be passed a configuration object as option');
   }
 
-  //                           0        1         2
   var regex = new RegExp('(\\s|^)(' + pattern + ')(\\s|$)');
 
   function locator(value, fromIndex) {

@@ -1432,6 +1432,24 @@ regenerator-runtime@^0.10.0:
   version "0.10.5"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
 
+rehype-abbr@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/rehype-abbr/-/rehype-abbr-0.0.9.tgz#6eb1bc5782a3487c705a54221b546512e857d21b"
+  dependencies:
+    unist-util-visit "^1.1.1"
+
+rehype-footnotes-title@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/rehype-footnotes-title/-/rehype-footnotes-title-0.0.8.tgz#66d56f907e49d59d5b0303640f491fb0dc4be9e6"
+  dependencies:
+    unist-util-visit "^1.1.1"
+
+rehype-html-blocks@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/rehype-html-blocks/-/rehype-html-blocks-0.0.9.tgz#44d38ba3805bb1fb6bb644c471e2eeaec3b68e52"
+  dependencies:
+    unist-util-visit "^1.1.1"
+
 rehype-katex@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/rehype-katex/-/rehype-katex-1.0.1.tgz#8d825d431bb5ced8fc7cf469356f80103dbbee35"
@@ -1457,17 +1475,63 @@ rehype-stringify@^3.0.0:
     hast-util-to-html "^3.0.0"
     xtend "^4.0.1"
 
+remark-align@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/remark-align/-/remark-align-0.0.10.tgz#1702f2c5e06b00f4b9bbd48af251314406ad7111"
+
+remark-comments@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/remark-comments/-/remark-comments-0.0.9.tgz#90072fce7de5ecc777b538222515e735b5b2d9fd"
+
+remark-custom-blocks@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/remark-custom-blocks/-/remark-custom-blocks-0.0.9.tgz#9c40519bd49420f33100263884b397150cd19a66"
+
+remark-emoticons@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/remark-emoticons/-/remark-emoticons-0.0.9.tgz#9cb26d4fd0e879dba45192c42bfb3d3ec1f3e859"
+
+remark-escape-escaped@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/remark-escape-escaped/-/remark-escape-escaped-0.0.8.tgz#7eea6ce01fc6a966ba2466145cad9eece605eb94"
+
+remark-heading-shift@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/remark-heading-shift/-/remark-heading-shift-0.0.7.tgz#bead927730100c37c878c89b38aaeb51314f6619"
+  dependencies:
+    unist-util-visit "^1.1.1"
+
+remark-heading-trailing-spaces@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/remark-heading-trailing-spaces/-/remark-heading-trailing-spaces-0.0.7.tgz#9d6049bb014d67472e738095b7b86b48f3891f2e"
+
 remark-html-blocks@^0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/remark-html-blocks/-/remark-html-blocks-0.0.8.tgz#306cfe763de9b47d7630367e80713f76b3ada24d"
   dependencies:
     unist-util-visit "^1.1.1"
 
+remark-iframes@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/remark-iframes/-/remark-iframes-0.0.8.tgz#25b88aada234fe73340f00bfa82b0f2319b02ad9"
+
+remark-kbd@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/remark-kbd/-/remark-kbd-0.0.9.tgz#04885e5ef81bb6db834c5e689a71869e12b20fc1"
+  dependencies:
+    is-whitespace-character "^1.0.0"
+
 remark-math@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/remark-math/-/remark-math-1.0.0.tgz#9c0dbc6dab61072200e380c1c1a1b867b0ca0ade"
   dependencies:
     trim-trailing-lines "^1.1.0"
+
+remark-numbered-footnotes@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/remark-numbered-footnotes/-/remark-numbered-footnotes-0.0.8.tgz#c3ac16290665f93009cef7220ea9217ad848522b"
+  dependencies:
+    unist-util-visit "^1.1.1"
 
 remark-parse@^3.0.0:
   version "3.0.1"
@@ -1496,12 +1560,9 @@ remark-rehype@^2.0.0:
   dependencies:
     mdast-util-to-hast "^2.2.0"
 
-remark-textr@^3.0.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/remark-textr/-/remark-textr-3.0.1.tgz#47387f7cb06e76aa722076654ccac394c4a3e5f4"
-  dependencies:
-    textr "^0.3.0"
-    unist-util-visit "^1.0.0"
+remark-sub-super@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/remark-sub-super/-/remark-sub-super-0.0.7.tgz#19bd94561d8ab97ad532cedb1cad8c7a10077b1b"
 
 repeat-string@^1.5.2, repeat-string@^1.5.4:
   version "1.6.1"
@@ -1760,42 +1821,13 @@ typographic-apostrophes@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/typographic-apostrophes/-/typographic-apostrophes-1.1.1.tgz#bc6905eb949048a736fa8399f8b90aafa8894787"
 
-typographic-arrows@^1.0.0:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/typographic-arrows/-/typographic-arrows-1.0.3.tgz#fdd4692ce660024b42fd1605100c34337380c925"
-
-typographic-base@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/typographic-base/-/typographic-base-1.0.4.tgz#8bb74e8e3262401915c5bd2d6b5d520bd2d15697"
-  dependencies:
-    textr "^0.3.0"
-    typographic-apostrophes "^1.1.1"
-    typographic-apostrophes-for-possessive-plurals "^1.0.5"
-    typographic-arrows "^1.0.0"
-    typographic-copyright "^1.0.1"
-    typographic-currency "^1.1.0"
-    typographic-ellipses "^1.0.11"
-    typographic-em-dashes "^1.0.2"
-    typographic-en-dashes "^1.0.1"
-    typographic-math-symbols "^1.1.5"
-    typographic-quotes "^1.2.1"
-    typographic-registered-trademark "^1.0.1"
-    typographic-single-spaces "^1.0.2"
-    typographic-trademark "^1.0.1"
+typographic-colon@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/typographic-colon/-/typographic-colon-0.0.9.tgz#25d575af78dd054304df4e1761fa05257b7bf1e6"
 
 typographic-copyright@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/typographic-copyright/-/typographic-copyright-1.0.1.tgz#4c4a0b6d7dba271c29b741f204002f4c6d4b00c0"
-
-typographic-currency-db@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/typographic-currency-db/-/typographic-currency-db-1.0.0.tgz#32f8a6daf0c91209a641360fdaa69ce54fed0c67"
-
-typographic-currency@^1.1.0:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/typographic-currency/-/typographic-currency-1.1.2.tgz#cec5f4763c13c608b0494d85f70f42d69026da40"
-  dependencies:
-    typographic-currency-db "1.0.0"
 
 typographic-ellipses@^1.0.11:
   version "1.0.11"
@@ -1809,17 +1841,13 @@ typographic-en-dashes@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/typographic-en-dashes/-/typographic-en-dashes-1.0.1.tgz#a37739fdc43ed38c351bbf70a80c2503ccb022e0"
 
-typographic-math-symbols@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/typographic-math-symbols/-/typographic-math-symbols-1.1.5.tgz#56f756c6e5cb3d6d3ab2172e49d91e823028de4e"
-
 typographic-quotes-l10n-db@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/typographic-quotes-l10n-db/-/typographic-quotes-l10n-db-1.0.0.tgz#1304d2fa95ac71fec3efd8327834ee49b013b254"
 
-typographic-quotes@^1.2.1:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/typographic-quotes/-/typographic-quotes-1.2.2.tgz#906e28dba2b13062d29b57f10ac931472080e062"
+typographic-quotes@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/typographic-quotes/-/typographic-quotes-2.0.1.tgz#625b6d4bb8d4faef491b123a7217ef3801596785"
   dependencies:
     typographic-quotes-l10n-db "^1.0.0"
 

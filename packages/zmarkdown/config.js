@@ -1,3 +1,15 @@
+const textrColon = require('typographic-colon')
+const textrApostrophes = require('typographic-apostrophes')
+const textrQuotes = require('typographic-quotes')
+const textrApostrophesForPlurals = require('typographic-apostrophes-for-possessive-plurals')
+const textrCopyright = require('typographic-copyright')
+const textrEllipses = require('typographic-ellipses')
+const textrEmDashes = require('typographic-em-dashes')
+const textrEnDashes = require('typographic-en-dashes')
+const textrRegisteredTrademark = require('typographic-registered-trademark')
+const textrSingleSpaces = require('typographic-single-spaces')
+const textrTrademark = require('typographic-trademark')
+
 const config = {
   reParse: {
     gfm: true,
@@ -7,6 +19,25 @@ const config = {
     /* sets list of known blocks to nothing, otherwise <h3>hey</h3> would become
     &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
     blocks: [],
+  },
+
+  textr: {
+    plugins: [
+      textrColon,
+      textrApostrophes,
+      textrQuotes,
+      textrApostrophesForPlurals,
+      textrEllipses,
+      textrEmDashes,
+      textrEnDashes,
+      textrCopyright,
+      textrRegisteredTrademark,
+      textrSingleSpaces,
+      textrTrademark,
+    ],
+    options: {
+      locale: 'fr',
+    },
   },
 
   headingShifter: 0,

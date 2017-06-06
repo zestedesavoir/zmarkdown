@@ -15,7 +15,7 @@ const remarkKbd = require('remark-kbd')
 const remarkMath = require('remark-math')
 const remarkNumberedFootnotes = require('remark-numbered-footnotes')
 const remarkSubSuper = require('remark-sub-super')
-const remarkTextr = require('remark-textr')
+const remarkTextr = require('./remark-textr')
 const remarkTrailingSpaceHeading = require('remark-heading-trailing-spaces')
 
 const remark2rehype = require('remark-rehype')

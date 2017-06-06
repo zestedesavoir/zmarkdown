@@ -15,6 +15,7 @@
   "dependencies": {
     "rehype-abbr": "^0.0.9",
     "rehype-footnotes-title": "^0.0.8",
+    "rehype-html-blocks": "^0.0.9",
     "rehype-katex": "^1.0.1",
     "rehype-stringify": "^3.0.0",
     "remark-align": "^0.0.10",
@@ -32,9 +33,18 @@
     "remark-parse": "^3.0.0",
     "remark-rehype": "^2.0.0",
     "remark-sub-super": "^0.0.7",
-    "remark-textr": "^3.0.0",
-    "typographic-base": "^1.0.4",
+    "textr": "^0.3.0",
+    "typographic-apostrophes": "^1.1.1",
+    "typographic-apostrophes-for-possessive-plurals": "^1.0.5",
     "typographic-colon": "^0.0.9",
+    "typographic-copyright": "^1.0.1",
+    "typographic-ellipses": "^1.0.11",
+    "typographic-em-dashes": "^1.0.2",
+    "typographic-en-dashes": "^1.0.1",
+    "typographic-quotes": "^2.0.1",
+    "typographic-registered-trademark": "^1.0.1",
+    "typographic-single-spaces": "^1.0.2",
+    "typographic-trademark": "^1.0.1",
     "unist-util-inspect": "^4.1.0"
   },
   "devDependencies": {

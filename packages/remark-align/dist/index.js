@@ -32,6 +32,7 @@ module.exports = function plugin() {
         if (endMarker === '') endMarker = lineToEat.slice(-2);
 
         finishedBlocks.push(linesToEat.join(C_NEWLINE));
+
         // Check if another block is following
         if (value.indexOf('->', next) !== next + 1) break;else linesToEat = [];
       }
