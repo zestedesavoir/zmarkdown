@@ -34,5 +34,6 @@
   "keywords": [
     "remark"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {}
 }

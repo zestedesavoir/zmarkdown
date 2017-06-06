@@ -15,16 +15,12 @@ module.exports = function inlinePlugin() {
     throw new Error('remark-emoticons needs to be passed a configuration object as option');
   }
 
+  //                           0        1         2
   var regex = new RegExp('(\\s|^)(' + pattern + ')(\\s|$)');
 
   function locator(value, fromIndex) {
     var keep = regex.exec(value);
-    if (keep) {
-      if (value[keep.index] === SPACE) {
-        return keep.index + 1;
-      }
-      return keep.index;
-    }
+    if (keep && value[keep.index] === SPACE) return keep.index + 1;
     return -1;
   }
 
@@ -36,15 +32,22 @@ module.exports = function inlinePlugin() {
       /* istanbul ignore if - never used (yet) */
       if (silent) return true;
 
-      var emoticon = keep[0];
-      if (emoticon.charAt(emoticon.length - 1) === SPACE) {
-        emoticon = emoticon.substring(0, emoticon.length - 1);
+      var toEat = keep[0];
+      if (toEat.charAt(toEat.length - 1) === SPACE) {
+        toEat = toEat.substring(0, toEat.length - 1);
       }
+      var emoticon = toEat.trim();
 
-      eat(emoticon)({
-        type: 'image',
-        url: emoticons[emoticon],
-        alt: emoticon
+      eat(toEat)({
+        type: 'emoticon',
+        code: emoticon,
+        data: {
+          hName: 'img',
+          hProperties: {
+            src: emoticons[emoticon],
+            alt: emoticon
+          }
+        }
       });
     }
   }

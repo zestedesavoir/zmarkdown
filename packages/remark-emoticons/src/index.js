@@ -15,12 +15,7 @@ module.exports = function inlinePlugin (emoticons = {}) {
 
   function locator (value, fromIndex) {
     const keep = regex.exec(value)
-    if (keep) {
-      if (value[keep.index] === SPACE) {
-        return keep.index + 1
-      }
-      return keep.index
-    }
+    if (keep && value[keep.index] === SPACE) return keep.index + 1
     return -1
   }
 
@@ -32,15 +27,22 @@ module.exports = function inlinePlugin (emoticons = {}) {
       /* istanbul ignore if - never used (yet) */
       if (silent) return true
 
-      let emoticon = keep[0]
-      if (emoticon.charAt(emoticon.length - 1) === SPACE) {
-        emoticon = emoticon.substring(0, emoticon.length - 1)
+      let toEat = keep[0]
+      if (toEat.charAt(toEat.length - 1) === SPACE) {
+        toEat = toEat.substring(0, toEat.length - 1)
       }
+      const emoticon = toEat.trim()
 
-      eat(emoticon)({
-        type: 'image',
-        url: emoticons[emoticon],
-        alt: emoticon
+      eat(toEat)({
+        type: 'emoticon',
+        code: emoticon,
+        data: {
+          hName: 'img',
+          hProperties: {
+            src: emoticons[emoticon],
+            alt: emoticon
+          }
+        }
       })
     }
   }

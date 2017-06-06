@@ -30,7 +30,6 @@ entrypoints.forEach(entrypoint => {
     ava(name, t => {
       const {contents} = unified()
         .use(reParse)
-        .use(remark2rehype)
         .use(plugin, {
           ':ange:': '/static/smileys/ange.png',
           ':colere:': '/static/smileys/angry.gif',
@@ -57,6 +56,7 @@ entrypoints.forEach(entrypoint => {
           ':waw:': '/static/smileys/waw.png',
           ':zorro:': '/static/smileys/zorro.png',
         })
+        .use(remark2rehype)
         .use(stringify)
         .processSync(spec.fixture)
 
