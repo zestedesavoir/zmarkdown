@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ZMarkdown test</title>
+  <script src="./ansi_up.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/md.css">
+  <link rel="stylesheet" href="css/new.css">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      color: #555;
+    }
+
+    section {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      flex-direction: row;
+    }
+
+    .wrapper {
+      flex: 1;
+      max-width: 50%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrapper > * {
+      border: solid 1px #CCC;
+      overflow: auto;
+      min-height: 200px;
+    }
+
+    #editor {
+      font-family: monospace;
+      background-color: #F5F5F5;
+      font-size: 16px;
+      margin: 0;
+    }
+
+    #editor:focus {
+      background-color: #FFF;
+      outline: none;
+    }
+
+    .debug {
+      background-color: #272822;
+      flex: 1;
+      color: #FFF;
+      overflow: auto;
+      border-color: #222;
+    }
+
+    .debug pre {
+      display: inline-block;
+    }
+
+    #render, #editor {
+      padding: 25px;
+      resize: vertical;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <div class="wrapper">
+      <textarea id="editor" placeholder="Write here…" autofocus>!(https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+# title 1
+
+A [link with **bold**](http://example.com)
+
+Some ZDS and ||key|| with a~~One~~ b~two~ c^three^
+
+A sentence ($S$) with *italic*[^italic] and inline match ($C_L$) and another[^bar] footnote.
+
+$$
+L = \frac{1}{2} \rho v^2 S C_L
+$$
+
+A quote:
+> With a custom block:
+>
+> [[attention]]
+> | A link: [example](http://example.com)
+> | > A nested quote!
+> | After the nested quote.
+> Outside the block.
+After the quote.
+
+*[ZDS]: Look, title!
+[^bar]: bar
+[^italic]: italic
+</textarea>
+      <div class="debug">
+        <pre><code id="ast"></code></pre>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div id="render" class="zmarkdown"></div>
+      <div class="debug" id="debug-ast">
+        <pre><code id="html"></code></pre>
+      </div>
+    </div>
+  </section>
+  <script src="bundle.js"></script>
+  <script type="text/javascript">
+    var config = ZMarkdown().config
+    config.headingShifter = 1
+    ZMarkdown = ZMarkdown(config)
+    var ansiUp = new AnsiUp()
+    var render = document.getElementById('render')
+    var editor = document.getElementById('editor')
+    var ast = document.getElementById('ast')
+    var html = document.getElementById('html')
+    editor.addEventListener('input', update)
+
+    document.addEventListener('DOMContentLoaded', update)
+
+    function update() {
+      var rendered = ZMarkdown.renderString(editor.value)
+      render.innerHTML = rendered
+      html.textContent = rendered
+      var mdast = ZMarkdown.parse(editor.value)
+      var hast = ZMarkdown.transform(mdast)
+      ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(mdast))
+      html.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(hast))
+    }
+  </script>
+</body>
+</html>
