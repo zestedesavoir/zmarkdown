@@ -2,5 +2,5 @@
 module.exports = inlineCode
 
 function inlineCode (ctx, node) {
-  return `\texttt{${node.value}}`
+  return `\\texttt{${node.value}}`
 }
