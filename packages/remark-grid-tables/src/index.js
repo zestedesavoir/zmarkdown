@@ -160,6 +160,148 @@ module.exports = function plugin () {
     return mergeColumnsStartingPositions(linesInfo)
   }
 
+  var Table = function(linesInfos) {
+      this._parts = []
+      this._linesInfos = linesInfos
+      this.addPart()
+  }
+
+  Table.prototype.lastPart = function () {
+    return this._parts[this._parts.length - 1]
+  }
+
+  Table.prototype.addPart = function () {
+    this._parts.push(new TablePart(this._linesInfos))
+  }
+
+  var TablePart = function(linesInfos) {
+    this._rows = []
+    this._linesInfos = linesInfos
+    this.addRow()
+  }
+
+  TablePart.prototype.addRow = function () {
+    this._rows.push(new TableRow(this._linesInfos))
+  }
+
+  TablePart.prototype.removeLastRow = function () {
+    this._rows.pop()
+  }
+
+  TablePart.prototype.lastRow = function () {
+    return this._rows[this._rows.length - 1]
+  }
+
+  TablePart.prototype.updateWithMainLine = function (line, isEndLine) {
+    const mergeChars = isEndLine ? '+|' : '|'
+    let newCells = [this.lastRow()._cells[0]]
+    for (let c = 1; c < this.lastRow()._cells.length; ++c) {
+      let cell = this.lastRow()._cells[c]
+
+      // Only cells with rowspan equals can be merged
+      if (cell._rowspan === newCells[newCells.length - 1]._rowspan
+        && mergeChars.indexOf(line[cell._startPosition - 1]) === - 1) {
+          newCells[newCells.length - 1].mergeWith(cell)
+      } else {
+        newCells.push(cell)
+      }
+    }
+    this.lastRow()._cells = newCells
+  }
+
+  TablePart.prototype.updateWithPartLine = function (line) {
+    let remainingCells = []
+    for (let c = 0; c < this.lastRow()._cells.length; ++c) {
+      let cell = this.lastRow()._cells[c]
+      const partLine = line.substring(cell._startPosition - 1, cell._endPosition + 1)
+      if (!isSeparationLine(partLine)) {
+        cell._lines.push(line.substring(cell._startPosition, cell._endPosition))
+        cell._rowspan += 1
+        remainingCells.push(cell)
+      }
+    }
+    this.addRow()
+    let newCells = []
+    for (let c = 0; c < remainingCells.length; ++c) {
+      let remainingCell = remainingCells[c]
+      for (let cc = 0; cc < this.lastRow()._cells.length; ++cc) {
+        const cell = this.lastRow()._cells[cc]
+        if (cell._endPosition < remainingCell._startPosition)
+          newCells.push(cell)
+      }
+      newCells.push(remainingCell)
+      for (let cc = 0; cc < this.lastRow()._cells.length; ++cc) {
+        const cell = this.lastRow()._cells[cc]
+        if (cell._startPosition > remainingCell._endPosition)
+          newCells.push(cell)
+      }
+    }
+    this.lastRow()._cells = newCells
+  }
+
+  var TableRow = function(linesInfos) {
+    this._linesInfos = linesInfos
+    this._cells = []
+    for (let i = 0; i < linesInfos.length - 1; ++i) {
+        this._cells.push(new TableCell(linesInfos[i] + 1, linesInfos[i+1]))
+    }
+  }
+
+  TableRow.prototype.updateContent = function (line) {
+    for (let c = 0; c < this._cells.length; ++c) {
+      let cell = this._cells[c]
+      cell._lines.push(line.substring(cell._startPosition, cell._endPosition))
+    }
+  }
+
+  var TableCell = function(startPosition, endPosition) {
+    this._startPosition = startPosition
+    this._endPosition = endPosition
+    this._colspan = 1
+    this._rowspan = 1
+    this._lines = []
+  }
+
+  TableCell.prototype.mergeWith = function (other) {
+    this._endPosition = other._endPosition
+    this._colspan += other._colspan
+    let newLines = []
+    for (let l = 0; l < this._lines.length; ++l) {
+      if (!other._lines) break;
+      newLines.push(this._lines[l] + '|' + other._lines[l])
+    }
+    this._lines = newLines
+  }
+
+  function extractTableContent(lines, linesInfos, hasHeader) {
+    const table = new Table(linesInfos)
+
+    for (let l = 0; l < lines.length; ++l) {
+      const line = lines[l]
+      const matchHeader = hasHeader & isHeaderLine(line) !== null
+      const isEndLine = matchHeader | isPartLine(line) !== null
+
+      if (isEndLine) {
+        table.lastPart().updateWithMainLine(line, isEndLine)
+        if (l !== 0) {
+          if (matchHeader) {
+            table.addPart()
+          } else if (isSeparationLine(line)) {
+            table.lastPart().addRow()
+          } else {
+            table.lastPart().updateWithPartLine(line)
+          }
+        }
+        table.lastPart().updateWithMainLine(line, isEndLine)
+      } else {
+        table.lastPart().updateWithMainLine(line, isEndLine)
+        table.lastPart().lastRow().updateContent(line)
+      }
+    }
+    table.lastPart().removeLastRow()
+    return table
+  }
+
   function gridTableTokenizer (eat, value, silent) {
     const keep = mainLineRegex.exec(value)
     if (!keep) return
@@ -168,7 +310,8 @@ module.exports = function plugin () {
     if (gridTable.length < 3) return
 
     const linesInfos = computeColumnStartingPositions(gridTable)
-    console.log(linesInfos)
+    const tableContent = extractTableContent(gridTable, linesInfos, hasHeader)
+    console.log(tableContent._parts[1]._rows[0]._cells[1])
 
     console.log(gridTable)
 
