@@ -6,7 +6,7 @@ module.exports = blockquote
 function blockquote (ctx, node) {
   const source = node.author || 'Anonymous'
   const innerText = all(ctx, node)
-  return `\\begin{Quotation}{${source}
+  return `\\begin{Quotation}{${source}}
 ${innerText}
 \\end{Quotation}`
 }
