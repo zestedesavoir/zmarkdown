@@ -16,6 +16,7 @@ handlers.text = require('./types/text')
 handlers.strong = require('./types/strong')
 handlers.emphasis = require('./types/emphasis')
 handlers.delete = require('./types/delete')
+handlers.inlineCode = require('./types/inlinecode')
 
 /* Stringify `node`. */
 function one (ctx, node, index, parent) {
