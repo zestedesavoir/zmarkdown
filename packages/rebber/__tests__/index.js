@@ -67,3 +67,16 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
     t.deepEqual(contents.trim(), spec.expected.trim())
   })
 })
+
+Object.keys(specs).filter(Boolean).filter(name => name.startsWith('inline-code')).forEach(name => {
+  const spec = specs[name]
+
+  ava(name, t => {
+    const {contents} = unified()
+      .use(reParse)
+      .use(stringify)
+      .processSync(spec.fixture)
+
+    t.deepEqual(contents.trim(), spec.expected.trim())
+  })
+})
