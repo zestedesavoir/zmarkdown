@@ -4,7 +4,7 @@ import {join} from 'path'
 import ava from 'ava'
 import unified from 'unified'
 import reParse from 'remark-parse'
-import stringify from '../src'
+import rebber from '../src'
 
 const base = join(__dirname, 'fixtures')
 const specs = directory(base).reduce((tests, contents) => {
@@ -20,7 +20,7 @@ ava('heading', t => {
   const spec = specs['heading']
   const {contents} = unified()
     .use(reParse)
-    .use(stringify)
+    .use(rebber)
     .processSync(spec.fixture)
 
   t.deepEqual(contents, spec.expected)
@@ -30,7 +30,7 @@ ava('heading with custom config', t => {
   const [fixture, expected] = [specs['heading'].fixture, specs['heading-config'].expected]
   const {contents} = unified()
     .use(reParse)
-    .use(stringify, {
+    .use(rebber, {
       heading: [
         (val) => `\\LevelOneTitle{${val}}\n`,
         (val) => `\\LevelTwoTitle{${val}}\n`,
@@ -50,7 +50,7 @@ ava('paragraph', t => {
   const spec = specs['paragraph']
   const {contents} = unified()
     .use(reParse)
-    .use(stringify)
+    .use(rebber)
     .processSync(spec.fixture)
 
   t.deepEqual(contents.trim(), spec.expected.trim())
@@ -60,7 +60,7 @@ ava('inline-code', t => {
   const spec = specs['inline-code']
   const {contents} = unified()
     .use(reParse)
-    .use(stringify)
+    .use(rebber)
     .processSync(spec.fixture)
 
   t.deepEqual(contents.trim(), spec.expected.trim())
@@ -68,12 +68,36 @@ ava('inline-code', t => {
 
 ava('blockquote', t => {
   const spec = specs['blockquote']
-  const {contents} = unified()
+  let compiled = unified()
     .use(reParse)
-    .use(stringify)
+    .use(rebber)
     .processSync(spec.fixture)
 
-  t.deepEqual(contents.trim(), spec.expected.trim())
+  t.deepEqual(compiled.contents.trim(), spec.expected.trim())
+
+  compiled = unified()
+    .use(reParse)
+    .use(rebber, {
+      blockquote: {}
+    })
+    .processSync(spec.fixture)
+
+  t.deepEqual(compiled.contents.trim(), spec.expected.trim())
+})
+
+ava('blockquote with custom config', t => {
+  const [fixture, expected] = [specs['blockquote'].fixture, specs['blockquote-config'].expected]
+  const {contents} = unified()
+    .use(reParse)
+    .use(rebber, {
+      blockquote: {
+        macro: 'Foo',
+        useSource: true,
+      },
+    })
+    .processSync(fixture)
+
+  t.deepEqual(contents.trim(), expected.trim())
 })
 
 Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEach(name => {
@@ -82,7 +106,12 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
   ava(name, t => {
     const {contents} = unified()
       .use(reParse)
-      .use(stringify)
+      .use(rebber, {
+        blockquote: {
+          macro: 'Quotation',
+          useSource: true,
+        },
+      })
       .processSync(spec.fixture)
 
     if (contents.trim() !== spec.expected.trim()) console.log(contents)

@@ -6,7 +6,13 @@ module.exports = blockquote;
 
 /* Stringify a comment `node`. */
 function blockquote(ctx, node) {
-  var source = node.author || 'Anonymous';
+  var macro = 'Quotation';
+  var useSource = false;
+  if (ctx && ctx.blockquote) {
+    if (ctx.blockquote.macro) macro = ctx.blockquote.macro;
+    if (ctx.blockquote.useSource === true) useSource = true;
+  }
+  var source = '{' + (node.author || 'Anonymous') + '}';
   var innerText = all(ctx, node);
-  return '\\begin{Quotation}{' + source + '}\n' + innerText.trim() + '\n\\end{Quotation}\n\n';
+  return '\\begin{' + macro + '}' + (useSource ? source : '') + '\n' + innerText.trim() + '\n\\end{' + macro + '}\n\n';
 }

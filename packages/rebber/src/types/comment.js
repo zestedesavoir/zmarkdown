@@ -5,5 +5,5 @@ module.exports = comment
 function comment (ctx, node) {
   return `\\begin{comment}
 ${node.value}
-\\end{comment}`
+\\end{comment}\n`
 }
