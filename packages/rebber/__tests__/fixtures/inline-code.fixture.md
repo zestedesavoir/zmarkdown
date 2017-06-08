@@ -4,6 +4,6 @@ a paragraph `with inline code`.
 multiline
 inlinecode`
 
-`a code with \\` 
+`a code with \` 
 
 `a \text in \LaTeX \\`
