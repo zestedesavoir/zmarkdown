@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {readdirSync as directory, readFileSync as file} from 'fs'
 import {join} from 'path'
 import ava from 'ava'
