@@ -117,27 +117,27 @@ module.exports = function plugin () {
     return mergeColumnsStartingPositions(allPos, false)
   }
 
-  // TODO this is not correct! https://github.com/zestedesavoir/Python-ZMarkdown/blob/master-zds/zmarkdown/extensions/grid_tables.py#L208
-  function mergeColumnsStartingPositions(allPos, strict = false) {
+  function mergeColumnsStartingPositions(allPos, strict = true) {
     if (allPos.length <= 1) return allPos
+
     let positions = []
     if (!strict) {
-      positions = allPos[0]
+      positions = newAllPos[0]
     }
 
     allPos.forEach(function (posRow) {
       posRow.forEach(function (pos) {
         const idxOfPos = positions.indexOf(pos)
-        if (idxOfPos === -1) {
-          if (strict)
-            positions.push(pos)
-          else
-            positions.splice(idxOfPos, 1)
-        }
+        if (strict && idxOfPos === -1)
+          positions.push(pos)
+        else if (!strict && idxOfPos !== -1)
+          positions.splice(idxOfPos, 1)
       })
     })
 
-    return positions
+    return positions.sort(function (a, b) {
+      return a - b
+    })
   }
 
   function computeColumnStartingPositions(lines) {
@@ -210,6 +210,7 @@ module.exports = function plugin () {
 
   TablePart.prototype.updateWithPartLine = function (line) {
     let remainingCells = []
+    let hasTrueSep = false
     for (let c = 0; c < this.lastRow()._cells.length; ++c) {
       let cell = this.lastRow()._cells[c]
       const partLine = line.substring(cell._startPosition - 1, cell._endPosition + 1)
@@ -217,7 +218,19 @@ module.exports = function plugin () {
         cell._lines.push(line.substring(cell._startPosition, cell._endPosition))
         cell._rowspan += 1
         remainingCells.push(cell)
+      } else {
+          hasTrueSep = true
       }
+    }
+    if (!hasTrueSep) {
+      for (let c = 0; c < this.lastRow()._cells.length; ++c) {
+        let cell = this.lastRow()._cells[c]
+        const partLine = line.substring(cell._startPosition - 1, cell._endPosition + 1)
+        if (!isSeparationLine(partLine)) {
+          cell._rowspan -= 1
+        }
+      }
+      return
     }
     this.addRow()
     let newCells = []
@@ -225,16 +238,39 @@ module.exports = function plugin () {
       let remainingCell = remainingCells[c]
       for (let cc = 0; cc < this.lastRow()._cells.length; ++cc) {
         const cell = this.lastRow()._cells[cc]
-        if (cell._endPosition < remainingCell._startPosition)
+        if (cell._endPosition < remainingCell._startPosition && newCells.indexOf(cell) === -1)
           newCells.push(cell)
       }
+      if (newCells.indexOf(remainingCell) === -1)
       newCells.push(remainingCell)
       for (let cc = 0; cc < this.lastRow()._cells.length; ++cc) {
         const cell = this.lastRow()._cells[cc]
-        if (cell._startPosition > remainingCell._endPosition)
+        if (cell._startPosition > remainingCell._endPosition && newCells.indexOf(cell) === -1)
           newCells.push(cell)
       }
     }
+
+    // Remove duplicates
+    for (let nc = 0; nc < newCells.length; ++nc) {
+      let newCell = newCells[nc]
+      for (let ncc = 0; ncc < newCells.length; ++ncc) {
+        if (nc != ncc) {
+          let other = newCells[ncc]
+          if (other._startPosition === newCell._startPosition &&
+          other._endPosition === newCell._endPosition) {
+            if (other._lines.length === 0) {
+              newCells.splice(ncc, 1)
+              ncc -= 1
+              if (nc > ncc) {
+                nc -= 1
+                newCell = newCells[nc]
+              }
+            }
+          }
+        }
+      }
+    }
+
     this.lastRow()._cells = newCells
   }
 
@@ -411,8 +447,7 @@ module.exports = function plugin () {
 
 // TODO
 // 1. text before/after
-// 2. mergeColumnsStartingPositions
-// 3. tests
-
+// 2. table into table
+// 3. comment and readme
 
 }
