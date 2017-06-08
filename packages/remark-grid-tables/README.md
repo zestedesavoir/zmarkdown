@@ -2,11 +2,11 @@
 
 This plugin parses custom Markdown syntax to describes tables.
 
-It adds a wrapper element to the AST which contains the resulting table.
+It adds the resulting table to the AST.
 
-If you are using [rehype][rehype], the stringified HTML result will be a `div` with a configurable CSS class and a `table`.
+If you are using [rehype][rehype], the stringified HTML result will be a `table`.
 
-It is up to you to have CSS rules producing the desired result for these `div`.
+It is up to you to have CSS rules producing the desired result for these `table`.
 
 ## Syntax
 
@@ -39,42 +39,40 @@ produces:
 ```html
 <h1>Grid table</h1>
 <h2>Basic example</h2>
-<div class="custom-name">
-  <table>
-    <thead>
-      <tr>
-        <th colspan="2" rowspan="1"><p>Table Headings</p></th>
-        <th colspan="1" rowspan="1"><p>Here</p></th>
-      </tr>
-      <tr>
-        <th colspan="1" rowspan="1"><p>Sub</p></th>
-        <th colspan="1" rowspan="1"><p>Headings</p></th>
-        <th colspan="1" rowspan="1"><p>Too</p></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td colspan="1" rowspan="2"><p>cell
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="2" rowspan="1"><p>Table Headings</p></th>
+      <th colspan="1" rowspan="1"><p>Here</p></th>
+    </tr>
+    <tr>
+      <th colspan="1" rowspan="1"><p>Sub</p></th>
+      <th colspan="1" rowspan="1"><p>Headings</p></th>
+      <th colspan="1" rowspan="1"><p>Too</p></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="1" rowspan="2"><p>cell
 spans
 rows</p></td>
-        <td colspan="2" rowspan="1"><p>column spanning</p></td>
-      </tr>
-      <tr>
-        <td colspan="1" rowspan="1"><p>normal</p></td>
-        <td colspan="1" rowspan="1"><p>cell</p></td>
-      </tr>
-      <tr>
-        <td colspan="1" rowspan="1"><p>multi
+      <td colspan="2" rowspan="1"><p>column spanning</p></td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="1"><p>normal</p></td>
+      <td colspan="1" rowspan="1"><p>cell</p></td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="1"><p>multi
 line</p><p>cells
 too</p></td>
-        <td colspan="2" rowspan="1"><p>cells can be
+      <td colspan="2" rowspan="1"><p>cells can be
 <em>formatted</em>
 <strong>paragraphs</strong></p></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
+    </tr>
+  </tbody>
+</table>
 ```
 
 ## Installation
@@ -103,9 +101,7 @@ Usage:
 ```javascript
 unified()
   .use(remarkParse)
-  .use(remarkGridTables, {
-    wrapper: 'table-wrapper',
-  })
+  .use(remarkGridTables)
   .use(remark2rehype)
   .use(stringify)
 ```

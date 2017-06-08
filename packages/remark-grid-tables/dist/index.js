@@ -2,16 +2,19 @@
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 var visit = require('unist-util-visit');
 
-module.exports = function plugin() {
-  var classNames = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+var mainLineRegex = new RegExp(/((\+)|(\|)).+((\|)|(\+))/);
+var totalMainLineRegex = new RegExp(/^((\+)|(\|)).+((\|)|(\+))$/);
+var headerLineRegex = new RegExp(/^\+=[=+]+=\+$/);
+var partLineRegex = new RegExp(/\+-[-+]+-\+/);
+var separationLineRegex = new RegExp(/^\+-[-+]+-\+$/);
 
-  var mainLineRegex = new RegExp(/((\+)|(\|)).+((\|)|(\+))/);
-  var totalMainLineRegex = new RegExp(/^((\+)|(\|)).+((\|)|(\+))$/);
-  var headerLineRegex = new RegExp(/^\+=[=+]+=\+$/);
-  var partLineRegex = new RegExp(/\+-[-+]+-\+/);
-  var separationLineRegex = new RegExp(/^\+-[-+]+-\+$/);
+module.exports = function plugin() {
 
   function extractTable(value, eat, tokenizer) {
     // Extract lines before the grid table
@@ -71,13 +74,13 @@ module.exports = function plugin() {
   }
 
   function merge(beforeTable, gridTable, afterTable) {
-    // get the eated text
+    // get the eaten text
     var total = beforeTable.join('\n');
-    if (beforeTable.join('\n').length > 0) {
+    if (total.length) {
       total += '\n';
     }
     total += gridTable.join('\n');
-    if (afterTable.join('\n').length > 0) {
+    if (afterTable.join('\n').length) {
       total += '\n';
     }
     total += afterTable.join('\n');
@@ -100,7 +103,7 @@ module.exports = function plugin() {
     var pos = [];
     for (var i = 0; i < content.length; ++i) {
       var char = content[i];
-      if (characters.indexOf(char) !== -1) {
+      if (characters.includes(char)) {
         pos.push(i);
       }
     }
@@ -116,9 +119,8 @@ module.exports = function plugin() {
     var positions = [];
 
     allPos.forEach(function (posRow) {
-      posRow.forEach(function (pos) {
-        var idxOfPos = positions.indexOf(pos);
-        if (idxOfPos === -1) {
+      return posRow.forEach(function (pos) {
+        if (!positions.includes(pos)) {
           positions.push(pos);
         }
       });
@@ -142,149 +144,193 @@ module.exports = function plugin() {
   }
 
   // A small class helping table generation
-  var Table = function Table(linesInfos) {
-    this._parts = [];
-    this._linesInfos = linesInfos;
-    this.addPart();
-  };
 
-  Table.prototype.lastPart = function () {
-    return this._parts[this._parts.length - 1];
-  };
+  var Table = function () {
+    function Table(linesInfos) {
+      _classCallCheck(this, Table);
 
-  Table.prototype.addPart = function () {
-    this._parts.push(new TablePart(this._linesInfos));
-  };
-
-  var TablePart = function TablePart(linesInfos) {
-    this._rows = [];
-    this._linesInfos = linesInfos;
-    this.addRow();
-  };
-
-  TablePart.prototype.addRow = function () {
-    this._rows.push(new TableRow(this._linesInfos));
-  };
-
-  TablePart.prototype.removeLastRow = function () {
-    this._rows.pop();
-  };
-
-  TablePart.prototype.lastRow = function () {
-    return this._rows[this._rows.length - 1];
-  };
-
-  TablePart.prototype.updateWithMainLine = function (line, isEndLine) {
-    // Update last row according to a line.
-    var mergeChars = isEndLine ? '+|' : '|';
-    var newCells = [this.lastRow()._cells[0]];
-    for (var c = 1; c < this.lastRow()._cells.length; ++c) {
-      var cell = this.lastRow()._cells[c];
-
-      // Only cells with rowspan equals can be merged
-      // Test if the char before the cell is a separation character
-      if (cell._rowspan === newCells[newCells.length - 1]._rowspan && mergeChars.indexOf(line[cell._startPosition - 1]) === -1) {
-        newCells[newCells.length - 1].mergeWith(cell);
-      } else {
-        newCells.push(cell);
-      }
+      this._parts = [];
+      this._linesInfos = linesInfos;
+      this.addPart();
     }
-    this.lastRow()._cells = newCells;
-  };
 
-  TablePart.prototype.updateWithPartLine = function (line) {
-    // Get cells not finished
-    var remainingCells = [];
-    for (var c = 0; c < this.lastRow()._cells.length; ++c) {
-      var cell = this.lastRow()._cells[c];
-      var partLine = line.substring(cell._startPosition - 1, cell._endPosition + 1);
-      if (!isSeparationLine(partLine)) {
-        cell._lines.push(line.substring(cell._startPosition, cell._endPosition));
-        cell._rowspan += 1;
-        remainingCells.push(cell);
+    _createClass(Table, [{
+      key: 'lastPart',
+      value: function lastPart() {
+        return this._parts[this._parts.length - 1];
       }
+    }, {
+      key: 'addPart',
+      value: function addPart() {
+        this._parts.push(new TablePart(this._linesInfos));
+      }
+    }]);
+
+    return Table;
+  }();
+
+  var TablePart = function () {
+    function TablePart(linesInfos) {
+      _classCallCheck(this, TablePart);
+
+      this._rows = [];
+      this._linesInfos = linesInfos;
+      this.addRow();
     }
-    // Generate new row
-    this.addRow();
-    var newCells = [];
-    for (var _c = 0; _c < remainingCells.length; ++_c) {
-      var remainingCell = remainingCells[_c];
-      for (var cc = 0; cc < this.lastRow()._cells.length; ++cc) {
-        var _cell = this.lastRow()._cells[cc];
-        if (_cell._endPosition < remainingCell._startPosition && newCells.indexOf(_cell) === -1) {
-          newCells.push(_cell);
+
+    _createClass(TablePart, [{
+      key: 'addRow',
+      value: function addRow() {
+        this._rows.push(new TableRow(this._linesInfos));
+      }
+    }, {
+      key: 'removeLastRow',
+      value: function removeLastRow() {
+        this._rows.pop();
+      }
+    }, {
+      key: 'lastRow',
+      value: function lastRow() {
+        return this._rows[this._rows.length - 1];
+      }
+    }, {
+      key: 'updateWithMainLine',
+      value: function updateWithMainLine(line, isEndLine) {
+        // Update last row according to a line.
+        var mergeChars = isEndLine ? '+|' : '|';
+        var newCells = [this.lastRow()._cells[0]];
+        for (var c = 1; c < this.lastRow()._cells.length; ++c) {
+          var cell = this.lastRow()._cells[c];
+
+          // Only cells with rowspan equals can be merged
+          // Test if the char before the cell is a separation character
+          if (cell._rowspan === newCells[newCells.length - 1]._rowspan && !mergeChars.includes(line[cell._startPosition - 1])) {
+            newCells[newCells.length - 1].mergeWith(cell);
+          } else {
+            newCells.push(cell);
+          }
         }
+        this.lastRow()._cells = newCells;
       }
-      newCells.push(remainingCell);
-      for (var _cc = 0; _cc < this.lastRow()._cells.length; ++_cc) {
-        var _cell2 = this.lastRow()._cells[_cc];
-        if (_cell2._startPosition > remainingCell._endPosition && newCells.indexOf(_cell2) === -1) {
-          newCells.push(_cell2);
+    }, {
+      key: 'updateWithPartLine',
+      value: function updateWithPartLine(line) {
+        // Get cells not finished
+        var remainingCells = [];
+        for (var c = 0; c < this.lastRow()._cells.length; ++c) {
+          var cell = this.lastRow()._cells[c];
+          var partLine = line.substring(cell._startPosition - 1, cell._endPosition + 1);
+          if (!isSeparationLine(partLine)) {
+            cell._lines.push(line.substring(cell._startPosition, cell._endPosition));
+            cell._rowspan += 1;
+            remainingCells.push(cell);
+          }
         }
-      }
-    }
+        // Generate new row
+        this.addRow();
+        var newCells = [];
+        for (var _c = 0; _c < remainingCells.length; ++_c) {
+          var remainingCell = remainingCells[_c];
+          for (var cc = 0; cc < this.lastRow()._cells.length; ++cc) {
+            var _cell = this.lastRow()._cells[cc];
+            if (_cell._endPosition < remainingCell._startPosition && !newCells.includes(_cell)) {
+              newCells.push(_cell);
+            }
+          }
+          newCells.push(remainingCell);
+          for (var _cc = 0; _cc < this.lastRow()._cells.length; ++_cc) {
+            var _cell2 = this.lastRow()._cells[_cc];
+            if (_cell2._startPosition > remainingCell._endPosition && !newCells.includes(_cell2)) {
+              newCells.push(_cell2);
+            }
+          }
+        }
 
-    // Remove duplicates
-    for (var nc = 0; nc < newCells.length; ++nc) {
-      var newCell = newCells[nc];
-      for (var ncc = 0; ncc < newCells.length; ++ncc) {
-        if (nc !== ncc) {
-          var other = newCells[ncc];
-          if (other._startPosition >= newCell._startPosition && other._endPosition <= newCell._endPosition) {
-            if (other._lines.length === 0) {
-              newCells.splice(ncc, 1);
-              ncc -= 1;
-              if (nc > ncc) {
-                nc -= 1;
-                newCell = newCells[nc];
+        // Remove duplicates
+        for (var nc = 0; nc < newCells.length; ++nc) {
+          var newCell = newCells[nc];
+          for (var ncc = 0; ncc < newCells.length; ++ncc) {
+            if (nc !== ncc) {
+              var other = newCells[ncc];
+              if (other._startPosition >= newCell._startPosition && other._endPosition <= newCell._endPosition) {
+                if (other._lines.length === 0) {
+                  newCells.splice(ncc, 1);
+                  ncc -= 1;
+                  if (nc > ncc) {
+                    nc -= 1;
+                    newCell = newCells[nc];
+                  }
+                }
               }
             }
           }
         }
+        this.lastRow()._cells = newCells;
+      }
+    }]);
+
+    return TablePart;
+  }();
+
+  var TableRow = function () {
+    function TableRow(linesInfos) {
+      _classCallCheck(this, TableRow);
+
+      this._linesInfos = linesInfos;
+      this._cells = [];
+      for (var i = 0; i < linesInfos.length - 1; ++i) {
+        this._cells.push(new TableCell(linesInfos[i] + 1, linesInfos[i + 1]));
       }
     }
-    this.lastRow()._cells = newCells;
-  };
 
-  var TableRow = function TableRow(linesInfos) {
-    this._linesInfos = linesInfos;
-    this._cells = [];
-    for (var i = 0; i < linesInfos.length - 1; ++i) {
-      this._cells.push(new TableCell(linesInfos[i] + 1, linesInfos[i + 1]));
+    _createClass(TableRow, [{
+      key: 'updateContent',
+      value: function updateContent(line) {
+        for (var c = 0; c < this._cells.length; ++c) {
+          var cell = this._cells[c];
+          cell._lines.push(line.substring(cell._startPosition, cell._endPosition));
+        }
+      }
+    }]);
+
+    return TableRow;
+  }();
+
+  var TableCell = function () {
+    function TableCell(startPosition, endPosition) {
+      _classCallCheck(this, TableCell);
+
+      this._startPosition = startPosition;
+      this._endPosition = endPosition;
+      this._colspan = 1;
+      this._rowspan = 1;
+      this._lines = [];
     }
-  };
 
-  TableRow.prototype.updateContent = function (line) {
-    for (var c = 0; c < this._cells.length; ++c) {
-      var cell = this._cells[c];
-      cell._lines.push(line.substring(cell._startPosition, cell._endPosition));
-    }
-  };
+    _createClass(TableCell, [{
+      key: 'mergeWith',
+      value: function mergeWith(other) {
+        this._endPosition = other._endPosition;
+        this._colspan += other._colspan;
+        var newLines = [];
+        for (var l = 0; l < this._lines.length; ++l) {
+          newLines.push(this._lines[l] + '|' + other._lines[l]);
+        }
+        this._lines = newLines;
+      }
+    }]);
 
-  var TableCell = function TableCell(startPosition, endPosition) {
-    this._startPosition = startPosition;
-    this._endPosition = endPosition;
-    this._colspan = 1;
-    this._rowspan = 1;
-    this._lines = [];
-  };
-
-  TableCell.prototype.mergeWith = function (other) {
-    this._endPosition = other._endPosition;
-    this._colspan += other._colspan;
-    var newLines = [];
-    for (var l = 0; l < this._lines.length; ++l) {
-      newLines.push(this._lines[l] + '|' + other._lines[l]);
-    }
-    this._lines = newLines;
-  };
+    return TableCell;
+  }();
 
   function extractTableContent(lines, linesInfos, hasHeader) {
     var table = new Table(linesInfos);
 
     for (var l = 0; l < lines.length; ++l) {
       var line = lines[l];
+      // Get if the line separate the head of the table from the body
       var matchHeader = hasHeader & isHeaderLine(line) !== null;
+      // Get if the line close some cells
       var isEndLine = matchHeader | isPartLine(line) !== null;
 
       if (isEndLine) {
@@ -292,7 +338,7 @@ module.exports = function plugin() {
         // First, update the last row
         table.lastPart().updateWithMainLine(line, isEndLine
 
-        // Create the new raw
+        // Create the new row
         );if (l !== 0) {
           if (matchHeader) {
             table.addPart();
@@ -316,21 +362,7 @@ module.exports = function plugin() {
   }
 
   function generateTable(tableContent, now, tokenizer) {
-    var wrapperClassName = 'table-wrapper';
-    if (classNames.wrapper) {
-      wrapperClassName = classNames.wrapper;
-    }
     // Generate the gridTable node to insert in the AST
-    var tableWrapper = {
-      type: 'element',
-      children: [],
-      data: {
-        hName: 'div',
-        hProperties: {
-          class: wrapperClassName
-        }
-      }
-    };
     var tableElt = {
       type: 'gridTable',
       children: [],
@@ -344,7 +376,7 @@ module.exports = function plugin() {
     for (var p = 0; p < tableContent._parts.length; ++p) {
       var part = tableContent._parts[p];
       var partElt = {
-        type: 'gridTableHeader',
+        type: 'tableHeader',
         children: [],
         data: {
           hName: hasHeader && p === 0 ? 'thead' : 'tbody'
@@ -353,7 +385,7 @@ module.exports = function plugin() {
       for (var r = 0; r < part._rows.length; ++r) {
         var row = part._rows[r];
         var rowElt = {
-          type: 'gridTableRow',
+          type: 'tableRow',
           children: [],
           data: {
             hName: 'tr'
@@ -362,7 +394,7 @@ module.exports = function plugin() {
         for (var c = 0; c < row._cells.length; ++c) {
           var cell = row._cells[c];
           var cellElt = {
-            type: 'gridTableCell',
+            type: 'tableCell',
             children: tokenizer.tokenizeBlock(cell._lines.map(function (e) {
               return e.trim();
             }).join('\n'), now),
@@ -394,9 +426,7 @@ module.exports = function plugin() {
       tableElt.children.push(partElt);
     }
 
-    tableWrapper.children.push(tableElt);
-
-    return tableWrapper;
+    return tableElt;
   }
 
   function gridTableTokenizer(eat, value, silent) {
@@ -424,11 +454,11 @@ module.exports = function plugin() {
       tagName: 'WrapperBlock',
       children: []
     };
-    if (before.length > 0) {
+    if (before.length) {
       wrapperBlock.children.push(this.tokenizeBlock(before.join('\n'), now)[0]);
     }
     wrapperBlock.children.push(tableElt);
-    if (after.length > 0) {
+    if (after.length) {
       wrapperBlock.children.push(this.tokenizeBlock(after.join('\n'), now)[0]);
     }
     return eat(merged)(wrapperBlock);
