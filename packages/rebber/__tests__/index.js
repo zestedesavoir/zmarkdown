@@ -55,6 +55,16 @@ ava('paragraph', t => {
   t.deepEqual(contents.trim(), spec.expected.trim())
 })
 
+ava('inline-code', t => {
+  const spec = specs['inline-code']
+  const {contents} = unified()
+    .use(reParse)
+    .use(stringify)
+    .processSync(spec.fixture)
+
+  t.deepEqual(contents.trim(), spec.expected.trim())
+})
+
 Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEach(name => {
   const spec = specs[name]
 
