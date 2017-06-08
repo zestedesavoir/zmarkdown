@@ -465,8 +465,4 @@ module.exports = function plugin () {
   }
 
   return transformer
-
-// TODO
-// 1. comment and readme
-
 }
