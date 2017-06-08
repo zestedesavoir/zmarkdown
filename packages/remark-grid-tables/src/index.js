@@ -1,6 +1,6 @@
 const visit = require('unist-util-visit')
 
-module.exports = function plugin () {
+module.exports = function plugin (classNames = {}) {
   const mainLineRegex = new RegExp(/((\+)|(\|)).+((\|)|(\+))/)
   const totalMainLineRegex = new RegExp(/^((\+)|(\|)).+((\|)|(\+))$/)
   const headerLineRegex = new RegExp(/^\+=[=+]+=\+$/)
@@ -312,6 +312,10 @@ module.exports = function plugin () {
   }
 
   function generateTable (tableContent, now, tokenizer) {
+    let wrapperClassName = 'table-wrapper'
+    if (classNames.wrapper) {
+      wrapperClassName = classNames.wrapper
+    }
     // Generate the gridTable node to insert in the AST
     const tableWrapper = {
       type: 'element',
@@ -319,7 +323,7 @@ module.exports = function plugin () {
       data: {
         hName: 'div',
         hProperties: {
-          class: 'table-wrapper'
+          class: wrapperClassName
         }
       }
     }

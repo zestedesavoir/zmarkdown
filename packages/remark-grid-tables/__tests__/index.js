@@ -27,15 +27,30 @@ entrypoints.forEach(entrypoint => {
   Object.keys(specs).filter(Boolean).forEach(name => {
     const spec = specs[name]
 
-    ava(name, t => {
-      const {contents} = unified()
-        .use(reParse)
-        .use(plugin)
-        .use(remark2rehype)
-        .use(stringify)
-        .processSync(spec.fixture)
+    if (name === 'grid-tables-custom') {
+      ava(name, t => {
+        const {contents} = unified()
+          .use(reParse)
+          .use(plugin, {
+            wrapper: 'custom-name'
+          })
+          .use(remark2rehype)
+          .use(stringify)
+          .processSync(spec.fixture)
 
-      t.deepEqual(contents, spec.expected.trim())
-    })
+        t.deepEqual(contents, spec.expected.trim())
+      })
+    } else {
+      ava(name, t => {
+        const {contents} = unified()
+          .use(reParse)
+          .use(plugin)
+          .use(remark2rehype)
+          .use(stringify)
+          .processSync(spec.fixture)
+
+        t.deepEqual(contents, spec.expected.trim())
+      })
+    }
   })
 })

@@ -5,6 +5,8 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 var visit = require('unist-util-visit');
 
 module.exports = function plugin() {
+  var classNames = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
   var mainLineRegex = new RegExp(/((\+)|(\|)).+((\|)|(\+))/);
   var totalMainLineRegex = new RegExp(/^((\+)|(\|)).+((\|)|(\+))$/);
   var headerLineRegex = new RegExp(/^\+=[=+]+=\+$/);
@@ -314,13 +316,18 @@ module.exports = function plugin() {
   }
 
   function generateTable(tableContent, now, tokenizer) {
+    var wrapperClassName = 'table-wrapper';
+    if (classNames.wrapper) {
+      wrapperClassName = classNames.wrapper;
+    }
+    // Generate the gridTable node to insert in the AST
     var tableWrapper = {
       type: 'element',
       children: [],
       data: {
         hName: 'div',
         hProperties: {
-          class: 'table-wrapper'
+          class: wrapperClassName
         }
       }
     };
@@ -436,6 +443,7 @@ module.exports = function plugin() {
   blockMethods.splice(blockMethods.indexOf('fencedCode'), 0, 'grid_table');
 
   function transformer(tree) {
+    // Remove the temp block previously inserted
     visit(tree, deleteWrapperBlock());
   }
 
@@ -443,7 +451,6 @@ module.exports = function plugin() {
     function one(node, index, parent) {
       if (!node.children) return;
 
-      // If a text node is present in child nodes, check if an abbreviation is present
       var newChildren = [];
       var replace = false;
       for (var c = 0; c < node.children.length; ++c) {
