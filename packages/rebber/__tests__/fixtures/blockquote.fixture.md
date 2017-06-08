@@ -1,5 +1,5 @@
 > a quote
 
-> a 
+> a
 > multiline
 > quote
