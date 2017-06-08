@@ -1,26 +1,29 @@
+const visit = require('unist-util-visit')
+
 module.exports = function plugin () {
   const mainLineRegex = new RegExp(/((\+)|(\|)).+((\|)|(\+))/)
   const totalMainLineRegex = new RegExp(/^((\+)|(\|)).+((\|)|(\+))$/)
   const headerLineRegex = new RegExp(/^\+=[=+]+=\+$/)
-  const partLineRegex = new RegExp(/\+\-[-+]+\-\+/)
-  const separationLineRegex = new RegExp(/^\+\-[-+]+\-\+$/)
+  const partLineRegex = new RegExp(/\+-[-+]+-\+/)
+  const separationLineRegex = new RegExp(/^\+-[-+]+-\+$/)
 
 
   function extractTable (value, eat, tokenizer) {
     // Extract lines before grid table
     const possibleGridTable = value.split('\n')
-    let i = 0;
-    let before = [];
+    let i = 0
+    const before = []
     for (; i < possibleGridTable.length; ++i) {
       const line = possibleGridTable[i]
-      if (line.substring(0, 2) === '+-') break
+      if (isSeparationLine(line)) break
       if (line.length === 0) break
       before.push(line)
     }
 
     // Extract table
-    const lineLength = possibleGridTable[i+1].length
-    let gridTable = [];
+    if (!possibleGridTable[i + 1]) return [null, null, null, null]
+    const lineLength = possibleGridTable[i + 1].length
+    const gridTable = []
     let hasHeader = false
     for (; i < possibleGridTable.length; ++i) {
       const line = possibleGridTable[i]
@@ -36,11 +39,11 @@ module.exports = function plugin () {
             const isSeparation = separationLineRegex.exec(gridTable[j])
             if (isSeparation) break
             gridTable.pop()
-            i -= 1;
+            i--
           }
           break
         }
-        gridTable.push(line);
+        gridTable.push(line)
       } else {
         // this line is not in the grid table.
         break
@@ -54,12 +57,12 @@ module.exports = function plugin () {
         const isSeparation = separationLineRegex.exec(gridTable[j])
         if (isSeparation) break
         gridTable.pop()
-        i -= 1;
+        i -= 1
       }
     }
 
     // Extract lines after table
-    let after = [];
+    const after = []
     for (; i < possibleGridTable.length; ++i) {
       const line = possibleGridTable[i]
       if (line.length === 0) break
@@ -69,35 +72,35 @@ module.exports = function plugin () {
     return [before, gridTable, after, hasHeader]
   }
 
-  function merge(beforeTable, gridTable, afterTable) {
+  function merge (beforeTable, gridTable, afterTable) {
     let total = beforeTable.join('\n')
-    if (beforeTable.join('\n').length > 0 ) total += '\n'
+    if (beforeTable.join('\n').length > 0) {
+      total += '\n'
+    }
     total += gridTable.join('\n')
-    if (afterTable.join('\n').length > 0 ) total += '\n'
+    if (afterTable.join('\n').length > 0) {
+      total += '\n'
+    }
     total += afterTable.join('\n')
     return total
   }
 
-  function isSeparationLine(line) {
+  function isSeparationLine (line) {
     return separationLineRegex.exec(line)
   }
 
-  function isHeaderLine(line) {
+  function isHeaderLine (line) {
     return headerLineRegex.exec(line)
   }
 
-  function isMainLine(line) {
-    return mainLineRegex.exec(line)
-  }
-
-  function isPartLine(line) {
+  function isPartLine (line) {
     return partLineRegex.exec(line)
   }
 
-  function findAll(content, characters) {
-    let pos = []
+  function findAll (content, characters) {
+    const pos = []
     for (let i = 0; i < content.length; ++i) {
-      char = content[i]
+      const char = content[i]
       if (characters.indexOf(char) !== -1) {
         pos.push(i)
       }
@@ -105,33 +108,19 @@ module.exports = function plugin () {
     return pos
   }
 
-  function computePlainLineColumnsStartingPositions(line) {
+  function computePlainLineColumnsStartingPositions (line) {
     return findAll(line, '+|')
   }
 
-  function computeMainLinesColumnsStartingPositions(lines) {
-    let allPos = []
-    lines.forEach(function (line) {
-      allPos.push(findAll(line, '|'))
-    })
-    return mergeColumnsStartingPositions(allPos, false)
-  }
-
-  function mergeColumnsStartingPositions(allPos, strict = true) {
-    if (allPos.length <= 1) return allPos
-
-    let positions = []
-    if (!strict) {
-      positions = newAllPos[0]
-    }
+  function mergeColumnsStartingPositions (allPos) {
+    const positions = []
 
     allPos.forEach(function (posRow) {
       posRow.forEach(function (pos) {
         const idxOfPos = positions.indexOf(pos)
-        if (strict && idxOfPos === -1)
+        if (idxOfPos === -1) {
           positions.push(pos)
-        else if (!strict && idxOfPos !== -1)
-          positions.splice(idxOfPos, 1)
+        }
       })
     })
 
@@ -140,29 +129,29 @@ module.exports = function plugin () {
     })
   }
 
-  function computeColumnStartingPositions(lines) {
-    let linesInfo = []
+  function computeColumnStartingPositions (lines) {
+    const linesInfo = []
     let stackLines = []
 
     lines.forEach(function (line) {
-        if (isHeaderLine(line) || isPartLine(line)) {
-          if (stackLines.length > 0) {
-            linesInfo.push(computePlainLineColumnsStartingPositions(stackLines))
-            stackLines = []
-          }
-          linesInfo.push(computePlainLineColumnsStartingPositions(line))
-        } else {
-          stackLines.push(line)
+      if (isHeaderLine(line) || isPartLine(line)) {
+        if (stackLines.length > 0) {
+          linesInfo.push(computePlainLineColumnsStartingPositions(stackLines))
+          stackLines = []
         }
+        linesInfo.push(computePlainLineColumnsStartingPositions(line))
+      } else {
+        stackLines.push(line)
+      }
     })
 
     return mergeColumnsStartingPositions(linesInfo)
   }
 
-  var Table = function(linesInfos) {
-      this._parts = []
-      this._linesInfos = linesInfos
-      this.addPart()
+  const Table = function (linesInfos) {
+    this._parts = []
+    this._linesInfos = linesInfos
+    this.addPart()
   }
 
   Table.prototype.lastPart = function () {
@@ -173,7 +162,7 @@ module.exports = function plugin () {
     this._parts.push(new TablePart(this._linesInfos))
   }
 
-  var TablePart = function(linesInfos) {
+  let TablePart = function (linesInfos) {
     this._rows = []
     this._linesInfos = linesInfos
     this.addRow()
@@ -193,14 +182,14 @@ module.exports = function plugin () {
 
   TablePart.prototype.updateWithMainLine = function (line, isEndLine) {
     const mergeChars = isEndLine ? '+|' : '|'
-    let newCells = [this.lastRow()._cells[0]]
+    const newCells = [this.lastRow()._cells[0]]
     for (let c = 1; c < this.lastRow()._cells.length; ++c) {
-      let cell = this.lastRow()._cells[c]
+      const cell = this.lastRow()._cells[c]
 
       // Only cells with rowspan equals can be merged
-      if (cell._rowspan === newCells[newCells.length - 1]._rowspan
-        && mergeChars.indexOf(line[cell._startPosition - 1]) === - 1) {
-          newCells[newCells.length - 1].mergeWith(cell)
+      if (cell._rowspan === newCells[newCells.length - 1]._rowspan &&
+      mergeChars.indexOf(line[cell._startPosition - 1]) === -1) {
+        newCells[newCells.length - 1].mergeWith(cell)
       } else {
         newCells.push(cell)
       }
@@ -209,44 +198,32 @@ module.exports = function plugin () {
   }
 
   TablePart.prototype.updateWithPartLine = function (line) {
-    let remainingCells = []
-    let hasTrueSep = false
+    const remainingCells = []
     for (let c = 0; c < this.lastRow()._cells.length; ++c) {
-      let cell = this.lastRow()._cells[c]
+      const cell = this.lastRow()._cells[c]
       const partLine = line.substring(cell._startPosition - 1, cell._endPosition + 1)
       if (!isSeparationLine(partLine)) {
         cell._lines.push(line.substring(cell._startPosition, cell._endPosition))
         cell._rowspan += 1
         remainingCells.push(cell)
-      } else {
-          hasTrueSep = true
       }
-    }
-    if (!hasTrueSep) {
-      for (let c = 0; c < this.lastRow()._cells.length; ++c) {
-        let cell = this.lastRow()._cells[c]
-        const partLine = line.substring(cell._startPosition - 1, cell._endPosition + 1)
-        if (!isSeparationLine(partLine)) {
-          cell._rowspan -= 1
-        }
-      }
-      return
     }
     this.addRow()
-    let newCells = []
+    const newCells = []
     for (let c = 0; c < remainingCells.length; ++c) {
-      let remainingCell = remainingCells[c]
+      const remainingCell = remainingCells[c]
       for (let cc = 0; cc < this.lastRow()._cells.length; ++cc) {
         const cell = this.lastRow()._cells[cc]
-        if (cell._endPosition < remainingCell._startPosition && newCells.indexOf(cell) === -1)
+        if (cell._endPosition < remainingCell._startPosition && newCells.indexOf(cell) === -1) {
           newCells.push(cell)
+        }
       }
-      if (newCells.indexOf(remainingCell) === -1)
       newCells.push(remainingCell)
       for (let cc = 0; cc < this.lastRow()._cells.length; ++cc) {
         const cell = this.lastRow()._cells[cc]
-        if (cell._startPosition > remainingCell._endPosition && newCells.indexOf(cell) === -1)
+        if (cell._startPosition > remainingCell._endPosition && newCells.indexOf(cell) === -1) {
           newCells.push(cell)
+        }
       }
     }
 
@@ -254,10 +231,10 @@ module.exports = function plugin () {
     for (let nc = 0; nc < newCells.length; ++nc) {
       let newCell = newCells[nc]
       for (let ncc = 0; ncc < newCells.length; ++ncc) {
-        if (nc != ncc) {
-          let other = newCells[ncc]
-          if (other._startPosition === newCell._startPosition &&
-          other._endPosition === newCell._endPosition) {
+        if (nc !== ncc) {
+          const other = newCells[ncc]
+          if (other._startPosition >= newCell._startPosition &&
+          other._endPosition <= newCell._endPosition) {
             if (other._lines.length === 0) {
               newCells.splice(ncc, 1)
               ncc -= 1
@@ -274,22 +251,22 @@ module.exports = function plugin () {
     this.lastRow()._cells = newCells
   }
 
-  var TableRow = function(linesInfos) {
+  let TableRow = function (linesInfos) {
     this._linesInfos = linesInfos
     this._cells = []
     for (let i = 0; i < linesInfos.length - 1; ++i) {
-        this._cells.push(new TableCell(linesInfos[i] + 1, linesInfos[i+1]))
+      this._cells.push(new TableCell(linesInfos[i] + 1, linesInfos[i + 1]))
     }
   }
 
   TableRow.prototype.updateContent = function (line) {
     for (let c = 0; c < this._cells.length; ++c) {
-      let cell = this._cells[c]
+      const cell = this._cells[c]
       cell._lines.push(line.substring(cell._startPosition, cell._endPosition))
     }
   }
 
-  var TableCell = function(startPosition, endPosition) {
+  let TableCell = function (startPosition, endPosition) {
     this._startPosition = startPosition
     this._endPosition = endPosition
     this._colspan = 1
@@ -300,15 +277,14 @@ module.exports = function plugin () {
   TableCell.prototype.mergeWith = function (other) {
     this._endPosition = other._endPosition
     this._colspan += other._colspan
-    let newLines = []
+    const newLines = []
     for (let l = 0; l < this._lines.length; ++l) {
-      if (!other._lines) break;
-      newLines.push(this._lines[l] + '|' + other._lines[l])
+      newLines.push(`${this._lines[l]}|${other._lines[l]}`)
     }
     this._lines = newLines
   }
 
-  function extractTableContent(lines, linesInfos, hasHeader) {
+  function extractTableContent (lines, linesInfos, hasHeader) {
     const table = new Table(linesInfos)
 
     for (let l = 0; l < lines.length; ++l) {
@@ -338,8 +314,8 @@ module.exports = function plugin () {
     return table
   }
 
-  function generateTable(tableContent, now, tokenizer) {
-    let tableWrapper = {
+  function generateTable (tableContent, now, tokenizer) {
+    const tableWrapper = {
       type: 'element',
       children: [],
       data: {
@@ -349,7 +325,7 @@ module.exports = function plugin () {
         }
       }
     }
-    let tableElt = {
+    const tableElt = {
       type: 'gridTable',
       children: [],
       data: {
@@ -357,11 +333,11 @@ module.exports = function plugin () {
       }
     }
 
-    hasHeader = tableContent._parts.length > 1
+    const hasHeader = tableContent._parts.length > 1
 
     for (let p = 0; p < tableContent._parts.length; ++p) {
       const part = tableContent._parts[p]
-      let partElt = {
+      const partElt = {
         type: 'gridTableHeader',
         children: [],
         data: {
@@ -370,7 +346,7 @@ module.exports = function plugin () {
       }
       for (let r = 0; r < part._rows.length; ++r) {
         const row = part._rows[r]
-        let rowElt = {
+        const rowElt = {
           type: 'gridTableRow',
           children: [],
           data: {
@@ -379,7 +355,7 @@ module.exports = function plugin () {
         }
         for (let c = 0; c < row._cells.length; ++c) {
           const cell = row._cells[c]
-          let cellElt = {
+          const cellElt = {
             type: 'gridTableCell',
             children: tokenizer.tokenizeBlock(cell._lines.map(function (e) {
               return e.trim()
@@ -387,24 +363,24 @@ module.exports = function plugin () {
             data: {
               hName: (hasHeader && p === 0) ? 'th' : 'td',
               hProperties: {
-                rowspan: cell._rowspan,
                 colspan: cell._colspan,
+                rowspan: cell._rowspan,
               },
             }
           }
 
-          if (cell._rowspan > 1 && r + cell._rowspan - 1 < part._rows.length) {
-            // Clean if a cell is present twice
+          const endLine = r + cell._rowspan
+          if (cell._rowspan > 1 && endLine - 1 < part._rows.length) {
             for (let rs = 1; rs < cell._rowspan; ++rs) {
               for (let cc = 0; cc < part._rows[r + rs]._cells.length; ++cc) {
                 const other = part._rows[r + rs]._cells[cc]
                 if (cell._startPosition === other._startPosition &&
-                    cell._endPosition === other._endPosition &&
-                    cell._colspan === other._colspan &&
-                    cell._rowspan === other._rowspan &&
-                    cell._lines === other._lines) {
-                      part._rows[r + rs]._cells.splice(cc, 1)
-                    }
+                cell._endPosition === other._endPosition &&
+                cell._colspan === other._colspan &&
+                cell._rowspan === other._rowspan &&
+                cell._lines === other._lines) {
+                  part._rows[r + rs]._cells.splice(cc, 1)
+                }
               }
             }
           }
@@ -426,15 +402,29 @@ module.exports = function plugin () {
     if (!keep) return
 
     const [before, gridTable, after, hasHeader] = extractTable(value, eat, this)
-    if (gridTable.length < 3) return
+    if (!gridTable || gridTable.length < 3) return
+
+    const now = eat.now()
 
     const linesInfos = computeColumnStartingPositions(gridTable)
 
     const tableContent = extractTableContent(gridTable, linesInfos, hasHeader)
-    const tableElt = generateTable(tableContent, eat.now(), this)
-
+    const tableElt = generateTable(tableContent, now, this)
     const merged = merge(before, gridTable, after)
-    return eat(merged)(tableElt)
+
+    const wrapperBlock = {
+      type: 'element',
+      tagName: 'WrapperBlock',
+      children: []
+    }
+    if (before.length > 0) {
+      wrapperBlock.children.push(this.tokenizeBlock(before.join('\n'), now)[0])
+    }
+    wrapperBlock.children.push(tableElt)
+    if (after.length > 0) {
+      wrapperBlock.children.push(this.tokenizeBlock(after.join('\n'), now)[0])
+    }
+    return eat(merged)(wrapperBlock)
   }
 
   const Parser = this.Parser
@@ -445,9 +435,38 @@ module.exports = function plugin () {
   blockTokenizers.grid_table = gridTableTokenizer
   blockMethods.splice(blockMethods.indexOf('fencedCode'), 0, 'grid_table')
 
+  function transformer (tree) {
+    visit(tree, deleteWrapperBlock())
+  }
+
+  function deleteWrapperBlock () {
+    function one (node, index, parent) {
+      if (!node.children) return
+
+      // If a text node is present in child nodes, check if an abbreviation is present
+      const newChildren = []
+      let replace = false
+      for (let c = 0; c < node.children.length; ++c) {
+        const child = node.children[c]
+        if (child.tagName === 'WrapperBlock' && child.type === 'element') {
+          replace = true
+          for (let cc = 0; cc < child.children.length; ++cc) {
+            newChildren.push(child.children[cc])
+          }
+        } else {
+          newChildren.push(child)
+        }
+      }
+      if (replace) {
+        node.children = newChildren
+      }
+    }
+    return one
+  }
+
+  return transformer
+
 // TODO
-// 1. text before/after
-// 2. table into table
-// 3. comment and readme
+// 1. comment and readme
 
 }
