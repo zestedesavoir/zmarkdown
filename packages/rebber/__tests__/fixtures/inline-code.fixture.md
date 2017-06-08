@@ -6,4 +6,4 @@ inlinecode`
 
 `a code with \\` 
 
-`a \\text in \\LaTeX \\`
+`a \text in \LaTeX \\`
