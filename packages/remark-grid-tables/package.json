@@ -2,7 +2,7 @@
   "name": "remark-grid-tables",
   "version": "0.0.1",
   "repository": {
-    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-align",
+    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-grid-tables",
     "type": "git"
   },
   "author": "Sébastien (AmarOk) Blin <contact@enconn.fr>",
