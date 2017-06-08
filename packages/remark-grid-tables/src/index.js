@@ -7,9 +7,8 @@ module.exports = function plugin () {
   const partLineRegex = new RegExp(/\+-[-+]+-\+/)
   const separationLineRegex = new RegExp(/^\+-[-+]+-\+$/)
 
-
   function extractTable (value, eat, tokenizer) {
-    // Extract lines before grid table
+    // Extract lines before the grid table
     const possibleGridTable = value.split('\n')
     let i = 0
     const before = []
@@ -34,13 +33,6 @@ module.exports = function plugin () {
         if (isHeaderLine && !hasHeader) hasHeader = true
         // A table can't have 2 headers
         else if (isHeaderLine && hasHeader) {
-          // Remove line not in table
-          for (let j = gridTable.length - 1; j >= 0; --j) {
-            const isSeparation = separationLineRegex.exec(gridTable[j])
-            if (isSeparation) break
-            gridTable.pop()
-            i--
-          }
           break
         }
         gridTable.push(line)
@@ -50,9 +42,9 @@ module.exports = function plugin () {
       }
     }
 
-    // if last line is not a plain line
+    // if the last line is not a plain line
     if (!separationLineRegex.exec(gridTable[gridTable.length - 1])) {
-      // Remove line not in table
+      // Remove lines not in the table
       for (let j = gridTable.length - 1; j >= 0; --j) {
         const isSeparation = separationLineRegex.exec(gridTable[j])
         if (isSeparation) break
@@ -73,6 +65,7 @@ module.exports = function plugin () {
   }
 
   function merge (beforeTable, gridTable, afterTable) {
+    // get the eated text
     let total = beforeTable.join('\n')
     if (beforeTable.join('\n').length > 0) {
       total += '\n'
@@ -113,6 +106,7 @@ module.exports = function plugin () {
   }
 
   function mergeColumnsStartingPositions (allPos) {
+    // Get all starting positions, allPos is an array of array of positions
     const positions = []
 
     allPos.forEach(function (posRow) {
@@ -131,23 +125,17 @@ module.exports = function plugin () {
 
   function computeColumnStartingPositions (lines) {
     const linesInfo = []
-    let stackLines = []
 
     lines.forEach(function (line) {
       if (isHeaderLine(line) || isPartLine(line)) {
-        if (stackLines.length > 0) {
-          linesInfo.push(computePlainLineColumnsStartingPositions(stackLines))
-          stackLines = []
-        }
         linesInfo.push(computePlainLineColumnsStartingPositions(line))
-      } else {
-        stackLines.push(line)
       }
     })
 
     return mergeColumnsStartingPositions(linesInfo)
   }
 
+  // A small class helping table generation
   const Table = function (linesInfos) {
     this._parts = []
     this._linesInfos = linesInfos
@@ -181,12 +169,14 @@ module.exports = function plugin () {
   }
 
   TablePart.prototype.updateWithMainLine = function (line, isEndLine) {
+    // Update last row according to a line.
     const mergeChars = isEndLine ? '+|' : '|'
     const newCells = [this.lastRow()._cells[0]]
     for (let c = 1; c < this.lastRow()._cells.length; ++c) {
       const cell = this.lastRow()._cells[c]
 
       // Only cells with rowspan equals can be merged
+      // Test if the char before the cell is a separation character
       if (cell._rowspan === newCells[newCells.length - 1]._rowspan &&
       mergeChars.indexOf(line[cell._startPosition - 1]) === -1) {
         newCells[newCells.length - 1].mergeWith(cell)
@@ -198,6 +188,7 @@ module.exports = function plugin () {
   }
 
   TablePart.prototype.updateWithPartLine = function (line) {
+    // Get cells not finished
     const remainingCells = []
     for (let c = 0; c < this.lastRow()._cells.length; ++c) {
       const cell = this.lastRow()._cells[c]
@@ -208,6 +199,7 @@ module.exports = function plugin () {
         remainingCells.push(cell)
       }
     }
+    // Generate new row
     this.addRow()
     const newCells = []
     for (let c = 0; c < remainingCells.length; ++c) {
@@ -247,7 +239,6 @@ module.exports = function plugin () {
         }
       }
     }
-
     this.lastRow()._cells = newCells
   }
 
@@ -293,8 +284,11 @@ module.exports = function plugin () {
       const isEndLine = matchHeader | isPartLine(line) !== null
 
       if (isEndLine) {
+        // It is a header, a plain line or a line with plain line part.
+        // First, update the last row
         table.lastPart().updateWithMainLine(line, isEndLine)
 
+        // Create the new raw
         if (l !== 0) {
           if (matchHeader) {
             table.addPart()
@@ -304,17 +298,21 @@ module.exports = function plugin () {
             table.lastPart().updateWithPartLine(line)
           }
         }
+        // update the last row
         table.lastPart().updateWithMainLine(line, isEndLine)
       } else {
+        // it's a plain line
         table.lastPart().updateWithMainLine(line, isEndLine)
         table.lastPart().lastRow().updateContent(line)
       }
     }
+    // Because the last line is a separation, the last row is always empty
     table.lastPart().removeLastRow()
     return table
   }
 
   function generateTable (tableContent, now, tokenizer) {
+    // Generate the gridTable node to insert in the AST
     const tableWrapper = {
       type: 'element',
       children: [],
@@ -405,13 +403,12 @@ module.exports = function plugin () {
     if (!gridTable || gridTable.length < 3) return
 
     const now = eat.now()
-
     const linesInfos = computeColumnStartingPositions(gridTable)
-
     const tableContent = extractTableContent(gridTable, linesInfos, hasHeader)
     const tableElt = generateTable(tableContent, now, this)
     const merged = merge(before, gridTable, after)
 
+    // Because we can't add multiples blocs in one eat, I use a temp block
     const wrapperBlock = {
       type: 'element',
       tagName: 'WrapperBlock',
@@ -436,6 +433,7 @@ module.exports = function plugin () {
   blockMethods.splice(blockMethods.indexOf('fencedCode'), 0, 'grid_table')
 
   function transformer (tree) {
+    // Remove the temp block previously inserted
     visit(tree, deleteWrapperBlock())
   }
 
@@ -443,7 +441,6 @@ module.exports = function plugin () {
     function one (node, index, parent) {
       if (!node.children) return
 
-      // If a text node is present in child nodes, check if an abbreviation is present
       const newChildren = []
       let replace = false
       for (let c = 0; c < node.children.length; ++c) {

@@ -12,7 +12,7 @@ module.exports = function plugin() {
   var separationLineRegex = new RegExp(/^\+-[-+]+-\+$/);
 
   function extractTable(value, eat, tokenizer) {
-    // Extract lines before grid table
+    // Extract lines before the grid table
     var possibleGridTable = value.split('\n');
     var i = 0;
     var before = [];
@@ -37,13 +37,6 @@ module.exports = function plugin() {
         if (_isHeaderLine && !hasHeader) hasHeader = true;
         // A table can't have 2 headers
         else if (_isHeaderLine && hasHeader) {
-            // Remove line not in table
-            for (var j = gridTable.length - 1; j >= 0; --j) {
-              var isSeparation = separationLineRegex.exec(gridTable[j]);
-              if (isSeparation) break;
-              gridTable.pop();
-              i--;
-            }
             break;
           }
         gridTable.push(_line);
@@ -53,12 +46,12 @@ module.exports = function plugin() {
       }
     }
 
-    // if last line is not a plain line
+    // if the last line is not a plain line
     if (!separationLineRegex.exec(gridTable[gridTable.length - 1])) {
-      // Remove line not in table
-      for (var _j = gridTable.length - 1; _j >= 0; --_j) {
-        var _isSeparation = separationLineRegex.exec(gridTable[_j]);
-        if (_isSeparation) break;
+      // Remove lines not in the table
+      for (var j = gridTable.length - 1; j >= 0; --j) {
+        var isSeparation = separationLineRegex.exec(gridTable[j]);
+        if (isSeparation) break;
         gridTable.pop();
         i -= 1;
       }
@@ -76,6 +69,7 @@ module.exports = function plugin() {
   }
 
   function merge(beforeTable, gridTable, afterTable) {
+    // get the eated text
     var total = beforeTable.join('\n');
     if (beforeTable.join('\n').length > 0) {
       total += '\n';
@@ -116,6 +110,7 @@ module.exports = function plugin() {
   }
 
   function mergeColumnsStartingPositions(allPos) {
+    // Get all starting positions, allPos is an array of array of positions
     var positions = [];
 
     allPos.forEach(function (posRow) {
@@ -134,23 +129,17 @@ module.exports = function plugin() {
 
   function computeColumnStartingPositions(lines) {
     var linesInfo = [];
-    var stackLines = [];
 
     lines.forEach(function (line) {
       if (isHeaderLine(line) || isPartLine(line)) {
-        if (stackLines.length > 0) {
-          linesInfo.push(computePlainLineColumnsStartingPositions(stackLines));
-          stackLines = [];
-        }
         linesInfo.push(computePlainLineColumnsStartingPositions(line));
-      } else {
-        stackLines.push(line);
       }
     });
 
     return mergeColumnsStartingPositions(linesInfo);
   }
 
+  // A small class helping table generation
   var Table = function Table(linesInfos) {
     this._parts = [];
     this._linesInfos = linesInfos;
@@ -184,12 +173,14 @@ module.exports = function plugin() {
   };
 
   TablePart.prototype.updateWithMainLine = function (line, isEndLine) {
+    // Update last row according to a line.
     var mergeChars = isEndLine ? '+|' : '|';
     var newCells = [this.lastRow()._cells[0]];
     for (var c = 1; c < this.lastRow()._cells.length; ++c) {
       var cell = this.lastRow()._cells[c];
 
       // Only cells with rowspan equals can be merged
+      // Test if the char before the cell is a separation character
       if (cell._rowspan === newCells[newCells.length - 1]._rowspan && mergeChars.indexOf(line[cell._startPosition - 1]) === -1) {
         newCells[newCells.length - 1].mergeWith(cell);
       } else {
@@ -200,6 +191,7 @@ module.exports = function plugin() {
   };
 
   TablePart.prototype.updateWithPartLine = function (line) {
+    // Get cells not finished
     var remainingCells = [];
     for (var c = 0; c < this.lastRow()._cells.length; ++c) {
       var cell = this.lastRow()._cells[c];
@@ -210,6 +202,7 @@ module.exports = function plugin() {
         remainingCells.push(cell);
       }
     }
+    // Generate new row
     this.addRow();
     var newCells = [];
     for (var _c = 0; _c < remainingCells.length; ++_c) {
@@ -248,7 +241,6 @@ module.exports = function plugin() {
         }
       }
     }
-
     this.lastRow()._cells = newCells;
   };
 
@@ -294,9 +286,12 @@ module.exports = function plugin() {
       var isEndLine = matchHeader | isPartLine(line) !== null;
 
       if (isEndLine) {
-        table.lastPart().updateWithMainLine(line, isEndLine);
+        // It is a header, a plain line or a line with plain line part.
+        // First, update the last row
+        table.lastPart().updateWithMainLine(line, isEndLine
 
-        if (l !== 0) {
+        // Create the new raw
+        );if (l !== 0) {
           if (matchHeader) {
             table.addPart();
           } else if (isSeparationLine(line)) {
@@ -305,12 +300,15 @@ module.exports = function plugin() {
             table.lastPart().updateWithPartLine(line);
           }
         }
+        // update the last row
         table.lastPart().updateWithMainLine(line, isEndLine);
       } else {
+        // it's a plain line
         table.lastPart().updateWithMainLine(line, isEndLine);
         table.lastPart().lastRow().updateContent(line);
       }
     }
+    // Because the last line is a separation, the last row is always empty
     table.lastPart().removeLastRow();
     return table;
   }
@@ -408,14 +406,13 @@ module.exports = function plugin() {
     if (!gridTable || gridTable.length < 3) return;
 
     var now = eat.now();
-
     var linesInfos = computeColumnStartingPositions(gridTable);
-
     var tableContent = extractTableContent(gridTable, linesInfos, hasHeader);
     var tableElt = generateTable(tableContent, now, this);
-    var merged = merge(before, gridTable, after);
+    var merged = merge(before, gridTable, after
 
-    var wrapperBlock = {
+    // Because we can't add multiples blocs in one eat, I use a temp block
+    );var wrapperBlock = {
       type: 'element',
       tagName: 'WrapperBlock',
       children: []
@@ -468,8 +465,4 @@ module.exports = function plugin() {
   }
 
   return transformer;
-
-  // TODO
-  // 1. comment and readme
-  // 2. tests
 };
