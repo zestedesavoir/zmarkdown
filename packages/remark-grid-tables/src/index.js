@@ -14,7 +14,7 @@ module.exports = function plugin () {
     for (; i < possibleGridTable.length; ++i) {
       const line = possibleGridTable[i]
       if (line.substring(0, 2) === '+-') break
-      if (line.length > 0)
+      if (line.length === 0) break
       before.push(line)
     }
 
@@ -62,7 +62,7 @@ module.exports = function plugin () {
     let after = [];
     for (; i < possibleGridTable.length; ++i) {
       const line = possibleGridTable[i]
-      if (line.length > 0)
+      if (line.length === 0) break
       after.push(line)
     }
 
@@ -117,6 +117,7 @@ module.exports = function plugin () {
     return mergeColumnsStartingPositions(allPos, false)
   }
 
+  // TODO this is not correct! https://github.com/zestedesavoir/Python-ZMarkdown/blob/master-zds/zmarkdown/extensions/grid_tables.py#L208
   function mergeColumnsStartingPositions(allPos, strict = false) {
     if (allPos.length <= 1) return allPos
     let positions = []
@@ -281,6 +282,7 @@ module.exports = function plugin () {
 
       if (isEndLine) {
         table.lastPart().updateWithMainLine(line, isEndLine)
+
         if (l !== 0) {
           if (matchHeader) {
             table.addPart()
@@ -354,6 +356,23 @@ module.exports = function plugin () {
               },
             }
           }
+
+          if (cell._rowspan > 1 && r + cell._rowspan - 1 < part._rows.length) {
+            // Clean if a cell is present twice
+            for (let rs = 1; rs < cell._rowspan; ++rs) {
+              for (let cc = 0; cc < part._rows[r + rs]._cells.length; ++cc) {
+                const other = part._rows[r + rs]._cells[cc]
+                if (cell._startPosition === other._startPosition &&
+                    cell._endPosition === other._endPosition &&
+                    cell._colspan === other._colspan &&
+                    cell._rowspan === other._rowspan &&
+                    cell._lines === other._lines) {
+                      part._rows[r + rs]._cells.splice(cc, 1)
+                    }
+              }
+            }
+          }
+
           rowElt.children.push(cellElt)
         }
         partElt.children.push(rowElt)
@@ -374,11 +393,12 @@ module.exports = function plugin () {
     if (gridTable.length < 3) return
 
     const linesInfos = computeColumnStartingPositions(gridTable)
+
     const tableContent = extractTableContent(gridTable, linesInfos, hasHeader)
     const tableElt = generateTable(tableContent, eat.now(), this)
-    console.log(gridTable)
 
-    return eat(merge(before, gridTable, after))(tableElt)
+    const merged = merge(before, gridTable, after)
+    return eat(merged)(tableElt)
   }
 
   const Parser = this.Parser
@@ -391,8 +411,8 @@ module.exports = function plugin () {
 
 // TODO
 // 1. text before/after
-// 2. bug
-// 3. cell spans row
+// 2. mergeColumnsStartingPositions
+// 3. tests
 
 
 }

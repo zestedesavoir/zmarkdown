@@ -9,22 +9,15 @@ const { renderString, parse, inspect } = require('./base.js')({ headingShift: 1 
 */
 
 const markdown = `
-a
-+-------+----------+------+
-| Table Headings   | Here |
-+-------+----------+------+
-| Sub   | Headings | Too  |
-+=======+==========+======+
-| cell  | column spanning |
-+ spans +----------+------+
-| rows  | normal   | cell |
-+-------+----------+------+
-| multi | cells can be    |
-| line  | *formatted*     |
-|       | **paragraphs**  |
-| cells |                 |
-| too   |                 |
-+-------+-----------------+
+
++---+-------+
+| A | B     |
+|   +---+---+
+|   | C | D |
+|   +---+---+
+|   | E     |
++---+-------+
+
 
 `
 
