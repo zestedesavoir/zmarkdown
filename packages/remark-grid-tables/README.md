@@ -108,7 +108,7 @@ unified()
   })
   .use(remark2rehype)
   .use(stringify)
-```.
+```
 
 
 ## License
