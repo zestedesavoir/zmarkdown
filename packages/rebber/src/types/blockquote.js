@@ -7,6 +7,6 @@ function blockquote (ctx, node) {
   const source = node.author || 'Anonymous'
   const innerText = all(ctx, node)
   return `\\begin{Quotation}{${source}}
-${innerText}
-\\end{Quotation}`
+${innerText.trim()}
+\\end{Quotation}\n\n`
 }

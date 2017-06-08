@@ -19,6 +19,8 @@ handlers.strong = require('./types/strong');
 handlers.emphasis = require('./types/emphasis');
 handlers.delete = require('./types/delete');
 handlers.inlineCode = require('./types/inlinecode');
+handlers.blockquote = require('./types/blockquote');
+handlers.thematicBreak = require('./types/thematic-break');
 
 /* Stringify `node`. */
 function one(ctx, node, index, parent) {

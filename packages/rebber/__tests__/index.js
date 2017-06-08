@@ -84,6 +84,7 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
       .use(stringify)
       .processSync(spec.fixture)
 
+    if (contents.trim() !== spec.expected.trim()) console.log(contents)
     t.deepEqual(contents.trim(), spec.expected.trim())
   })
 })
