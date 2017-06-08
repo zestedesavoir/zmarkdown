@@ -70,8 +70,6 @@ module.exports = function plugin () {
   }
 
   function merge(beforeTable, gridTable, afterTable) {
-    //TODO tokenizer.tokenizeBlock(possibleGridTable[i], now)
-
     let total = beforeTable.join('\n')
     if (beforeTable.join('\n').length > 0 ) total += '\n'
     total += gridTable.join('\n')
@@ -302,6 +300,72 @@ module.exports = function plugin () {
     return table
   }
 
+  function generateTable(tableContent, now, tokenizer) {
+    let tableWrapper = {
+      type: 'element',
+      children: [],
+      data: {
+        hName: 'div',
+        hProperties: {
+          class: 'table-wrapper'
+        }
+      }
+    }
+    let tableElt = {
+      type: 'gridTable',
+      children: [],
+      data: {
+        hName: 'table',
+      }
+    }
+
+    hasHeader = tableContent._parts.length > 1
+
+    for (let p = 0; p < tableContent._parts.length; ++p) {
+      const part = tableContent._parts[p]
+      let partElt = {
+        type: 'gridTableHeader',
+        children: [],
+        data: {
+          hName: (hasHeader && p === 0) ? 'thead' : 'tbody',
+        }
+      }
+      for (let r = 0; r < part._rows.length; ++r) {
+        const row = part._rows[r]
+        let rowElt = {
+          type: 'gridTableRow',
+          children: [],
+          data: {
+            hName: 'tr',
+          }
+        }
+        for (let c = 0; c < row._cells.length; ++c) {
+          const cell = row._cells[c]
+          let cellElt = {
+            type: 'gridTableCell',
+            children: tokenizer.tokenizeBlock(cell._lines.map(function (e) {
+              return e.trim()
+            }).join('\n'), now),
+            data: {
+              hName: (hasHeader && p === 0) ? 'th' : 'td',
+              hProperties: {
+                rowspan: cell._rowspan,
+                colspan: cell._colspan,
+              },
+            }
+          }
+          rowElt.children.push(cellElt)
+        }
+        partElt.children.push(rowElt)
+      }
+      tableElt.children.push(partElt)
+    }
+
+    tableWrapper.children.push(tableElt)
+
+    return tableWrapper
+  }
+
   function gridTableTokenizer (eat, value, silent) {
     const keep = mainLineRegex.exec(value)
     if (!keep) return
@@ -311,11 +375,10 @@ module.exports = function plugin () {
 
     const linesInfos = computeColumnStartingPositions(gridTable)
     const tableContent = extractTableContent(gridTable, linesInfos, hasHeader)
-    console.log(tableContent._parts[1]._rows[0]._cells[1])
-
+    const tableElt = generateTable(tableContent, eat.now(), this)
     console.log(gridTable)
 
-    return eat(merge(before, gridTable, after))
+    return eat(merge(before, gridTable, after))(tableElt)
   }
 
   const Parser = this.Parser
@@ -325,5 +388,11 @@ module.exports = function plugin () {
   const blockMethods = Parser.prototype.blockMethods
   blockTokenizers.grid_table = gridTableTokenizer
   blockMethods.splice(blockMethods.indexOf('fencedCode'), 0, 'grid_table')
+
+// TODO
+// 1. text before/after
+// 2. bug
+// 3. cell spans row
+
 
 }
