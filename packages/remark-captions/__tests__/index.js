@@ -17,7 +17,7 @@ const specs = directory(base).reduce((tests, contents) => {
 }, {})
 
 const entrypoints = [
-  '../dist',
+  // '../dist',
   '../src',
 ]
 
@@ -27,7 +27,7 @@ entrypoints.forEach(entrypoint => {
   Object.keys(specs).filter(Boolean).forEach(name => {
     const spec = specs[name]
 
-    ava.skip(name, t => {
+    ava(name, t => {
       const {contents} = unified()
         .use(reParse, {
           gfm: true,
@@ -41,7 +41,7 @@ entrypoints.forEach(entrypoint => {
         .use(plugin)
         .use(remark2rehype)
         .use(stringify)
-        .processSync(spec.fixture)
+        .processSync(spec.fixture.replace(/·/g, ' '))
 
       t.deepEqual(contents, spec.expected.trim())
     })

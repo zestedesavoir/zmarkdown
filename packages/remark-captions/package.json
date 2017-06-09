@@ -1,8 +1,8 @@
 {
-  "name": "remark-sourced-quotation",
-  "version": "0.0.8",
+  "name": "remark-captions",
+  "version": "0.0.1",
   "repository": {
-    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-numbered-footnotes",
+    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-captions",
     "type": "git"
   },
   "author": "François (artragis) Dambrine <perso@francoisdambrine.me>",
@@ -36,6 +36,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "clone": "^2.1.1",
     "unist-util-visit": "^1.1.1"
   }
 }
