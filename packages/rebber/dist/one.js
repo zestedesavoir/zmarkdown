@@ -1,10 +1,10 @@
 'use strict';
 
 /* Dependencies. */
-var has = require('has');
+var has = require('has'
 
 /* Expose. */
-module.exports = one;
+);module.exports = one;
 
 /* Handlers. */
 var handlers = {};
@@ -20,10 +20,10 @@ handlers.emphasis = require('./types/emphasis');
 handlers.delete = require('./types/delete');
 handlers.inlineCode = require('./types/inlinecode');
 handlers.blockquote = require('./types/blockquote');
-handlers.thematicBreak = require('./types/thematic-break');
+handlers.thematicBreak = require('./types/thematic-break'
 
 /* Stringify `node`. */
-function one(ctx, node, index, parent) {
+);function one(ctx, node, index, parent) {
   var type = node && node.type;
 
   if (!type) {

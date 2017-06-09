@@ -1,10 +1,10 @@
 'use strict';
 
 /* Dependencies. */
-var all = require('../all');
+var all = require('../all'
 
 /* Expose. */
-module.exports = deleteNode;
+);module.exports = deleteNode;
 
 /* Stringify a delete `node`. */
 function deleteNode(ctx, node, index, parent) {
