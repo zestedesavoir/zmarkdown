@@ -1,10 +1,10 @@
 'use strict';
 
 /* Dependencies. */
-var escaper = require('../escaper');
+var escaper = require('../escaper'
 
 /* Expose. */
-module.exports = text;
+);module.exports = text;
 
 /* Stringify a text `node`. */
 function text(ctx, node, index, parent) {

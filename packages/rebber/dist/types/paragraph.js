@@ -1,9 +1,9 @@
 'use strict';
 
-var all = require('../all');
+var all = require('../all'
 
 /* Expose. */
-module.exports = paragraph;
+);module.exports = paragraph;
 
 /* Stringify a paragraph `node`.
  */
