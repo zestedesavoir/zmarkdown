@@ -1,7 +1,8 @@
 'use strict';
 
 function escapeRegExp(str) {
-  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&'); // eslint-disable-line no-useless-escape
+  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&' // eslint-disable-line no-useless-escape
+  );
 }
 
 var C_NEWLINE = '\n';
@@ -30,9 +31,9 @@ module.exports = function blockPlugin() {
 
     var idx = 0;
     while ((idx = value.indexOf(C_NEWLINE)) !== -1) {
-      var next = value.indexOf(C_NEWLINE, idx + 1);
+      var next = value.indexOf(C_NEWLINE, idx + 1
       // either slice until next NEWLINE or slice until end of string
-      var lineToEat = next !== -1 ? value.slice(idx + 1, next) : value.slice(idx + 1);
+      );var lineToEat = next !== -1 ? value.slice(idx + 1, next) : value.slice(idx + 1);
       if (lineToEat[0] !== C_FENCE) break;
       // remove leading `FENCE ` or leading `FENCE`
       var line = lineToEat.slice(lineToEat.startsWith(C_FENCE + ' ') ? 2 : 1);
@@ -67,10 +68,10 @@ module.exports = function blockPlugin() {
   var blockTokenizers = Parser.prototype.blockTokenizers;
   var blockMethods = Parser.prototype.blockMethods;
   blockTokenizers.custom_blocks = blockTokenizer;
-  blockMethods.splice(blockMethods.indexOf('fencedCode') + 1, 0, 'custom_blocks');
+  blockMethods.splice(blockMethods.indexOf('fencedCode') + 1, 0, 'custom_blocks'
 
   // Inject into interrupt rules
-  var interruptParagraph = Parser.prototype.interruptParagraph;
+  );var interruptParagraph = Parser.prototype.interruptParagraph;
   var interruptList = Parser.prototype.interruptList;
   var interruptBlockquote = Parser.prototype.interruptBlockquote;
   interruptParagraph.splice(interruptParagraph.indexOf('fencedCode') + 1, 0, ['custom_blocks']);

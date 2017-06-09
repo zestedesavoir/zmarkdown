@@ -1,10 +1,10 @@
 'use strict';
 
 /* Dependencies. */
-var text = require('./text');
+var text = require('./text'
 
 /* Expose. */
-module.exports = raw;
+);module.exports = raw;
 
 /* Stringify `raw`. */
 function raw(ctx, node) {
