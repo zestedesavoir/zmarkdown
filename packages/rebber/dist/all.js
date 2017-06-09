@@ -1,10 +1,10 @@
 'use strict';
 
 /* Dependencies. */
-var one = require('./one');
+var one = require('./one'
 
 /* Expose. */
-module.exports = all;
+);module.exports = all;
 
 /* Stringify all children of `parent`. */
 function all(ctx, parent) {

@@ -1,0 +1,41 @@
+{
+  "name": "remark-sourced-quotation",
+  "version": "0.0.8",
+  "repository": {
+    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-numbered-footnotes",
+    "type": "git"
+  },
+  "author": "François (artragis) Dambrine <perso@francoisdambrine.me>",
+  "contributors": [
+    "Sébastien (AmarOk) Blin <contact@enconn.fr>",
+    "François (artragis) Dambrine <perso@francoisdambrine.me>",
+    "Victor Felder <victor@draft.li> (https://draft.li)"
+  ],
+  "nyc": {
+    "exclude": [
+      "dist",
+      "__tests__"
+    ]
+  },
+  "scripts": {
+    "pretest": "eslint src",
+    "prepublish": "del-cli dist && BABEL_ENV=production babel --out-dir dist src",
+    "test": "npm run prepublish && nyc ava __tests__",
+    "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov > coverage/coverage.lcov"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "LICENSE-MIT",
+    "dist"
+  ],
+  "engines": {
+    "node": ">=4"
+  },
+  "keywords": [
+    "remark"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "unist-util-visit": "^1.1.1"
+  }
+}
