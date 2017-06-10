@@ -1,9 +1,9 @@
 'use strict';
 
-var all = require('../all'
+var all = require('../all');
 
 /* Expose. */
-);module.exports = heading;
+module.exports = heading;
 
 var defaultHeadings = [function (val) {
   return '\\part{' + val + '}\n';

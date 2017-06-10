@@ -1,10 +1,10 @@
 'use strict';
 
 var has = require('has');
-var xtend = require('xtend'
+var xtend = require('xtend');
 
 /* Expose. */
-);module.exports = encode;
+module.exports = encode;
 
 encode.escape = escape;
 
@@ -20,9 +20,10 @@ var defaultEscapes = {
   '{': '\\{',
   '}': '\\}',
   '~': '\\textasciitilde{}'
+};
 
-  /* Encode special characters in `value`. */
-};function encode(value) {
+/* Encode special characters in `value`. */
+function encode(value) {
   var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
   var escapes = xtend(defaultEscapes, opts);
@@ -52,6 +53,5 @@ function toExpression(characters) {
 }
 
 function escapeRegExp(str) {
-  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&' // eslint-disable-line no-useless-escape
-  );
+  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&'); // eslint-disable-line no-useless-escape
 }
