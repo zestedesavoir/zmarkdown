@@ -1,6 +1,6 @@
 {
   "name": "remark-align",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-align",
     "type": "git"
