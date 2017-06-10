@@ -25,6 +25,7 @@
     "remark-custom-blocks": "^0.0.11",
     "remark-emoticons": "^0.0.12",
     "remark-escape-escaped": "^0.0.10",
+    "remark-grid-tables": "^0.0.2",
     "remark-heading-shift": "^0.0.7",
     "remark-heading-trailing-spaces": "^0.0.7",
     "remark-html-blocks": "^0.0.8",
