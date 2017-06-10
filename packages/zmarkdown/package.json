@@ -1,6 +1,6 @@
 {
   "name": "zmarkdown",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
   "contributors": [
     "Sébastien (AmarOk) Blin <contact@enconn.fr>",
@@ -25,7 +25,7 @@
     "remark-custom-blocks": "^0.0.11",
     "remark-emoticons": "^0.0.12",
     "remark-escape-escaped": "^0.0.10",
-    "remark-grid-tables": "^0.0.2",
+    "remark-grid-tables": "^0.0.3",
     "remark-heading-shift": "^0.0.7",
     "remark-heading-trailing-spaces": "^0.0.7",
     "remark-html-blocks": "^0.0.8",
