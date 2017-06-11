@@ -29,8 +29,10 @@ entrypoints.forEach(entrypoint => {
   })
 
   ava('should handle fr[-*]', t => {
-    t.deepEqual(permille(`foo %o`, fr), `foo${chars['NARROW NO-BREAK SPACE']}${chars['PER MILLE SIGN']}`)
-    t.deepEqual(permille(`foo %o`, frCH), `foo${chars['NARROW NO-BREAK SPACE']}${chars['PER MILLE SIGN']}`)
+    t.deepEqual(permille(`foo %o`, fr),
+    `foo${chars['NARROW NO-BREAK SPACE']}${chars['PER MILLE SIGN']}`)
+    t.deepEqual(permille(`foo %o`, frCH),
+    `foo${chars['NARROW NO-BREAK SPACE']}${chars['PER MILLE SIGN']}`)
     t.deepEqual(permille(`%o`, fr), `${chars['PER MILLE SIGN']}`)
   })
 })
