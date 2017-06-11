@@ -1,11 +1,18 @@
 const db = require('./db')
 
 module.exports = (input = '', { locale } = {}) => {
-  if (!Object.keys(db).includes(locale)) return input
+  const chars = {
+    'PER MILLE SIGN': '\u2030',
+  }
 
-  const handlePermille = db[locale]
+  const permillePattern = /%o/gim
+  const result = input.replace(permillePattern, chars['PER MILLE SIGN'])
 
-  const pattern = /%o/gim
+  if (Object.keys(db).includes(locale)) {
+    // If we need to replace spaces before the permille sign
+    const spaceBeforePermillePattern = /( )(\u2030)/g
+    return result.replace(spaceBeforePermillePattern, `${db[locale]}$2`)
+  }
 
-  return input.replace(pattern, handlePermille)
+  return result
 }

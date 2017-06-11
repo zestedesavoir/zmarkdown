@@ -8,11 +8,18 @@ module.exports = function () {
   var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
       locale = _ref.locale;
 
-  if (!Object.keys(db).includes(locale)) return input;
+  var chars = {
+    'PER MILLE SIGN': '\u2030'
+  };
 
-  var handlePermille = db[locale];
+  var permillePattern = /%o/gim;
+  var result = input.replace(permillePattern, chars['PER MILLE SIGN']);
 
-  var pattern = /%o/gim;
+  if (Object.keys(db).includes(locale)) {
+    // If we need to replace spaces before the permille sign
+    var spaceBeforePermillePattern = /( )(\u2030)/g;
+    return result.replace(spaceBeforePermillePattern, db[locale] + '$2');
+  }
 
-  return input.replace(pattern, handlePermille);
+  return result;
 };
