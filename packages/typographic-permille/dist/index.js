@@ -16,7 +16,7 @@ module.exports = function () {
   var result = input.replace(permillePattern, chars['PER MILLE SIGN']);
 
   if (Object.keys(db).includes(locale)) {
-    // If we need to replace spaces before the permille sign
+    // If we need to replace space before per mille signs
     var spaceBeforePermillePattern = /( )(\u2030)/g;
     return result.replace(spaceBeforePermillePattern, db[locale] + '$2');
   }
