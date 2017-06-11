@@ -7,7 +7,8 @@ const entrypoints = [
 ]
 
 const chars = {
-  'PER MILLE SIGN': '\u2030',
+  'NARROW NO-BREAK SPACE': '\u202F',
+  'PER MILLE SIGN': '\u2030'
 }
 
 const american = { locale: 'en-us' }
@@ -15,20 +16,21 @@ const fr = { locale: 'fr' }
 const frCH = { locale: 'fr-sw' }
 
 entrypoints.forEach(entrypoint => {
-  const colon = require(entrypoint)
+  const permille = require(entrypoint)
 
   ava('should do nothing with no param at all', t =>
-    t.deepEqual(colon(), ''))
+    t.deepEqual(permille(), ''))
 
-  ava('should do nothing if locale is undefined', t =>
-    t.deepEqual(colon(`foo %o`), `foo %o`))
-
-  ava('should ignore locale not in DB', t =>
-    t.deepEqual(colon(`foo %o`, american), `foo %o`))
+  ava('should handle all locales', t => {
+    t.deepEqual(permille(`foo %o`), `foo ${chars['PER MILLE SIGN']}`)
+    t.deepEqual(permille(`foo %o`, american), `foo ${chars['PER MILLE SIGN']}`)
+    t.deepEqual(permille(`foo %o`, american), `foo ${chars['PER MILLE SIGN']}`)
+    t.deepEqual(permille(`%o`, american), `${chars['PER MILLE SIGN']}`)
+  })
 
   ava('should handle fr[-*]', t => {
-    t.deepEqual(colon(`foo %o`, fr), `foo ${chars['PER MILLE SIGN']}`)
-    t.deepEqual(colon(`foo %o`, frCH), `foo ${chars['PER MILLE SIGN']}`)
-    t.deepEqual(colon(`%o`, fr), `${chars['PER MILLE SIGN']}`)
+    t.deepEqual(permille(`foo %o`, fr), `foo${chars['NARROW NO-BREAK SPACE']}${chars['PER MILLE SIGN']}`)
+    t.deepEqual(permille(`foo %o`, frCH), `foo${chars['NARROW NO-BREAK SPACE']}${chars['PER MILLE SIGN']}`)
+    t.deepEqual(permille(`%o`, fr), `${chars['PER MILLE SIGN']}`)
   })
 })
