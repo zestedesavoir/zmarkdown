@@ -34,8 +34,8 @@ const rebberStringify = require('rebber')
 const defaultConfig = require('./config')
 const rebberConfig = {
   override: {
-    // emoticon: require('rebber/src/custom-types/emoticon'),
-    // figure: require('rebber/src/custom-types/figure'),
+    emoticon: require('rebber/src/custom-types/emoticon'),
+    figure: require('rebber/src/custom-types/figure'),
   },
   emoticons: defaultConfig.emoticons,
 }
@@ -48,7 +48,7 @@ const zmdParser = (config) => {
 
   if (!config.isTest) {
     mdProcessor = mdProcessor
-    .use(remarkTextr, config.textr)
+      .use(remarkTextr, config.textr)
   }
 
   mdProcessor = mdProcessor
