@@ -34,8 +34,8 @@ const rebberStringify = require('rebber')
 const defaultConfig = require('./config')
 const rebberConfig = {
   override: {
-    emoticon: require('rebber/src/custom-types/emoticon'),
-    figure: require('rebber/src/custom-types/figure'),
+    emoticon: require('rebber/dist/custom-types/emoticon'),
+    figure: require('rebber/dist/custom-types/figure'),
   },
   emoticons: defaultConfig.emoticons,
 }
