@@ -32,6 +32,13 @@ const rehypeStringify = require('rehype-stringify')
 const rebberStringify = require('rebber')
 
 const defaultConfig = require('./config')
+const rebberConfig = {
+  override: {
+    // emoticon: require('rebber/src/custom-types/emoticon'),
+    // figure: require('rebber/src/custom-types/figure'),
+  },
+  emoticons: defaultConfig.emoticons,
+}
 
 const fromFile = (filepath) => fs.readFileSync(filepath)
 
@@ -77,7 +84,7 @@ const rehypeProcessor = (config) =>
 
 const rebberProcessor = (config) =>
   zmdParser(config)
-    .use(rebberStringify)
+    .use(rebberStringify, rebberConfig)
 
 const mdastParser = (opts) => (zmd) => zmdParser(opts).parse(zmd)
 

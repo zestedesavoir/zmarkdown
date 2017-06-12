@@ -9,6 +9,7 @@ const textrEnDashes = require('typographic-en-dashes')
 const textrRegisteredTrademark = require('typographic-registered-trademark')
 const textrSingleSpaces = require('typographic-single-spaces')
 const textrTrademark = require('typographic-trademark')
+const textrPermille = require('typographic-permille')
 
 const config = {
   reParse: {
@@ -34,6 +35,7 @@ const config = {
       textrRegisteredTrademark,
       textrSingleSpaces,
       textrTrademark,
+      textrPermille,
     ],
     options: {
       locale: 'fr',

@@ -1,5 +1,6 @@
 'use strict';
 
+/* Dependencies. */
 var has = require('has');
 var xtend = require('xtend'
 

@@ -1,3 +1,4 @@
+/* Dependencies. */
 const has = require('has')
 const xtend = require('xtend')
 

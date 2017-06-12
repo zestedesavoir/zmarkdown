@@ -35,9 +35,9 @@ module.exports = function plugin() {
     var hasHeader = false;
     for (; i < possibleGridTable.length; ++i) {
       var _line = possibleGridTable[i];
-      var isMainLine = totalMainLineRegex.exec(_line);
+      var isMainLine = totalMainLineRegex.exec(_line
       // line is in table
-      if (isMainLine && _line.length === lineLength) {
+      );if (isMainLine && _line.length === lineLength) {
         var _isHeaderLine = headerLineRegex.exec(_line);
         if (_isHeaderLine && !hasHeader) hasHeader = true;
         // A table can't have 2 headers
@@ -336,10 +336,10 @@ module.exports = function plugin() {
       if (isEndLine) {
         // It is a header, a plain line or a line with plain line part.
         // First, update the last row
-        table.lastPart().updateWithMainLine(line, isEndLine);
+        table.lastPart().updateWithMainLine(line, isEndLine
 
         // Create the new row
-        if (l !== 0) {
+        );if (l !== 0) {
           if (matchHeader) {
             table.addPart();
           } else if (isSeparationLine(line)) {
@@ -446,10 +446,10 @@ module.exports = function plugin() {
     var linesInfos = computeColumnStartingPositions(gridTable);
     var tableContent = extractTableContent(gridTable, linesInfos, hasHeader);
     var tableElt = generateTable(tableContent, now, this);
-    var merged = merge(before, gridTable, after);
+    var merged = merge(before, gridTable, after
 
     // Because we can't add multiples blocs in one eat, I use a temp block
-    var wrapperBlock = {
+    );var wrapperBlock = {
       type: 'element',
       tagName: 'WrapperBlock',
       children: []
