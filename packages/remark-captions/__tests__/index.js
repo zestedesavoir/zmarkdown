@@ -17,7 +17,7 @@ const specs = directory(base).reduce((tests, contents) => {
 }, {})
 
 const entrypoints = [
-  // '../dist',
+  '../dist',
   '../src',
 ]
 
