@@ -1,6 +1,5 @@
 /* Dependencies. */
 const xtend = require('xtend')
-
 const one = require('./one')
 
 /* Expose. */

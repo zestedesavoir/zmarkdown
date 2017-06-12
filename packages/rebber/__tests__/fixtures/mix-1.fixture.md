@@ -1,4 +1,8 @@
+(for convenience, · are replaced with simple single spaces in the tests)
 # first 1
+
+foo··
+bar
 
 Disrupt ~~asymmetrical~~ unicorn, pok pok kale chips umami selfies gastropub food truck flannel. Blue **bottle craft** beer hexagon artisan. Chia gochujang crucifix, readymade hammock _blog succulents_ sriracha raw denim scenester cray typewriter fashion axe art *party*. Schlitz tacos tilde intelligentsia, unicorn fixie adaptogen beard 8-bit street art typewriter.
 

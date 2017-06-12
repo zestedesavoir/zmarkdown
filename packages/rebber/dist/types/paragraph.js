@@ -10,5 +10,5 @@ var all = require('../all'
  */
 function paragraph(ctx, node) {
   var contents = all(ctx, node);
-  return contents + '\n\n';
+  return contents.trim() + '\n\n';
 }

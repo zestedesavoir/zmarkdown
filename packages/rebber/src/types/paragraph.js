@@ -8,5 +8,5 @@ module.exports = paragraph
  */
 function paragraph (ctx, node) {
   const contents = all(ctx, node)
-  return `${contents}\n\n`
+  return `${contents.trim()}\n\n`
 }

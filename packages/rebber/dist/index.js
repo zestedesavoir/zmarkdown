@@ -2,7 +2,6 @@
 
 /* Dependencies. */
 var xtend = require('xtend');
-
 var one = require('./one'
 
 /* Expose. */

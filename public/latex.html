@@ -109,7 +109,6 @@ Another p: _it_ *it*
       var mdast = ZMarkdown.parse(editor.value)
       var hast = ZMarkdown.transform(mdast)
       ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(mdast))
-      latex.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(hast))
     }
   </script>
 </body>

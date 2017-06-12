@@ -150,7 +150,7 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
       .use(require('../../remark-emoticons'), emoticons)
       .use(require('../../remark-captions'))
       .use(rebber, integrationConfig)
-      .processSync(spec.fixture)
+      .processSync(spec.fixture.replace(/·/g, ' '))
 
     if (contents.trim() !== spec.expected.trim()) console.log(contents)
     t.deepEqual(contents.trim(), spec.expected.trim())
