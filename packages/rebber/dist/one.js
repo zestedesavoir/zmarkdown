@@ -2,9 +2,10 @@
 
 /* Dependencies. */
 var has = require('has');
+var xtend = require('xtend'
 
 /* Expose. */
-module.exports = one;
+);module.exports = one;
 
 /* Handlers. */
 var handlers = {};
@@ -20,19 +21,22 @@ handlers.emphasis = require('./types/emphasis');
 handlers.delete = require('./types/delete');
 handlers.inlineCode = require('./types/inlinecode');
 handlers.blockquote = require('./types/blockquote');
-handlers.thematicBreak = require('./types/thematic-break');
+handlers.thematicBreak = require('./types/thematic-break'
 
 /* Stringify `node`. */
-function one(ctx, node, index, parent) {
+);function one(ctx, node, index, parent) {
+  var handlersOverride = has(ctx, 'override') ? ctx.override : {};
+  var h = xtend(handlers, handlersOverride);
+
   var type = node && node.type;
 
   if (!type) {
     throw new Error('Expected node, not `' + node + '`');
   }
 
-  if (!has(handlers, type)) {
+  if (!has(h, type)) {
     throw new Error('Cannot compile unknown node `' + type + '`');
   }
 
-  return handlers[type](ctx, node, index, parent);
+  return h[type](ctx, node, index, parent);
 }

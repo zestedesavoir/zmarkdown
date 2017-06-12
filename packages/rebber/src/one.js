@@ -1,5 +1,6 @@
 /* Dependencies. */
 const has = require('has')
+const xtend = require('xtend')
 
 /* Expose. */
 module.exports = one
@@ -22,15 +23,18 @@ handlers.thematicBreak = require('./types/thematic-break')
 
 /* Stringify `node`. */
 function one (ctx, node, index, parent) {
+  const handlersOverride = has(ctx, 'override') ? ctx.override : {}
+  const h = xtend(handlers, handlersOverride)
+
   const type = node && node.type
 
   if (!type) {
     throw new Error(`Expected node, not \`${node}\``)
   }
 
-  if (!has(handlers, type)) {
+  if (!has(h, type)) {
     throw new Error(`Cannot compile unknown node \`${type}\``)
   }
 
-  return handlers[type](ctx, node, index, parent)
+  return h[type](ctx, node, index, parent)
 }

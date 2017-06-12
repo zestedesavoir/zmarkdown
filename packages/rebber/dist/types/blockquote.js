@@ -4,15 +4,13 @@
 var all = require('../all');
 module.exports = blockquote;
 
-/* Stringify a comment `node`. */
+var defaultMacro = function defaultMacro(innerText) {
+  return '\\begin{Quotation}\n' + innerText + '\n\\end{Quotation}\n\n';
+};
+
+/* Stringify a Blockquote `node`. */
 function blockquote(ctx, node) {
-  var macro = 'Quotation';
-  var useSource = false;
-  if (ctx && ctx.blockquote) {
-    if (ctx.blockquote.macro) macro = ctx.blockquote.macro;
-    if (ctx.blockquote.useSource === true) useSource = true;
-  }
-  var source = '{' + (node.author || 'Anonymous') + '}';
+  var macro = ctx.blockquote || defaultMacro;
   var innerText = all(ctx, node);
-  return '\\begin{' + macro + '}' + (useSource ? source : '') + '\n' + innerText.trim() + '\n\\end{' + macro + '}\n\n';
+  return macro(innerText.trim());
 }

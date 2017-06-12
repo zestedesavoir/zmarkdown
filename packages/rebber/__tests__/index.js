@@ -16,6 +16,18 @@ const specs = directory(base).reduce((tests, contents) => {
   return tests
 }, {})
 
+const emoticons = {
+  ':)': 'smile',
+}
+
+const integrationConfig = {
+  override: {
+    emoticon: require('../src/custom-types/emoticon'),
+    figure: require('../src/custom-types/figure'),
+  },
+  emoticons: emoticons,
+}
+
 ava('heading', t => {
   const spec = specs['heading']
   const {contents} = unified()
@@ -66,6 +78,22 @@ ava('inline-code', t => {
   t.deepEqual(contents.trim(), spec.expected.trim())
 })
 
+ava('emoticon', t => {
+  const spec = specs['emoticon']
+  const {contents} = unified()
+    .use(reParse)
+    .use(require('../../remark-emoticons'), emoticons)
+    .use(rebber, {
+      override: {
+        emoticon: require('../src/custom-types/emoticon'),
+      },
+      emoticons: emoticons
+    })
+    .processSync(spec.fixture)
+
+  t.deepEqual(contents.trim(), spec.expected.trim())
+})
+
 ava('blockquote', t => {
   const spec = specs['blockquote']
   let compiled = unified()
@@ -78,7 +106,7 @@ ava('blockquote', t => {
   compiled = unified()
     .use(reParse)
     .use(rebber, {
-      blockquote: {}
+      blockquote: undefined
     })
     .processSync(spec.fixture)
 
@@ -90,15 +118,28 @@ ava('blockquote with custom config', t => {
   const {contents} = unified()
     .use(reParse)
     .use(rebber, {
-      blockquote: {
-        macro: 'Foo',
-        useSource: true,
-      },
+      blockquote: (val) => `\\begin{Foo}\n${val}\n\\end{Foo}\n\n`,
     })
     .processSync(fixture)
 
   t.deepEqual(contents.trim(), expected.trim())
 })
+
+ava('figure+caption', t => {
+  const spec = specs['figure']
+  const {contents} = unified()
+    .use(reParse)
+    .use(require('../../remark-captions'))
+    .use(rebber, {
+      override: {
+        figure: require('../src/custom-types/figure'),
+      },
+    })
+    .processSync(spec.fixture)
+
+  t.deepEqual(contents.trim(), spec.expected.trim())
+})
+
 
 Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEach(name => {
   const spec = specs[name]
@@ -106,12 +147,9 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
   ava(name, t => {
     const {contents} = unified()
       .use(reParse)
-      .use(rebber, {
-        blockquote: {
-          macro: 'Quotation',
-          useSource: true,
-        },
-      })
+      .use(require('../../remark-emoticons'), emoticons)
+      .use(require('../../remark-captions'))
+      .use(rebber, integrationConfig)
       .processSync(spec.fixture)
 
     if (contents.trim() !== spec.expected.trim()) console.log(contents)
