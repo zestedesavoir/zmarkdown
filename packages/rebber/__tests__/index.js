@@ -24,6 +24,8 @@ const integrationConfig = {
   override: {
     emoticon: require('../src/custom-types/emoticon'),
     figure: require('../src/custom-types/figure'),
+    sub: require('../src/custom-types/sub'),
+    sup: require('../src/custom-types/sup'),
   },
   emoticons: emoticons,
 }
@@ -149,6 +151,7 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
       .use(reParse)
       .use(require('remark-emoticons'), emoticons)
       .use(require('remark-captions'))
+      .use(require('remark-sub-super'))
       .use(rebber, integrationConfig)
       .processSync(spec.fixture.replace(/·/g, ' '))
 

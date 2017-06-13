@@ -16,11 +16,12 @@ var defaultEscapes = {
   '%': '\\%',
   '&': '\\&',
   '\\': '\\textbackslash{}',
-  '^': '\\textasciicircum{}',
+  // '^': '\\textasciicircum{}',
   '_': '\\_',
   '{': '\\{',
-  '}': '\\}',
-  '~': '\\textasciitilde{}'
+  '}': '\\}'
+  // '~': '\\textasciitilde{}',
+
 
   /* Encode special characters in `value`. */
 };function encode(value) {

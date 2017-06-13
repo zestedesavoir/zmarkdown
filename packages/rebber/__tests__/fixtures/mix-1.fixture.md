@@ -4,11 +4,11 @@
 foo··
 bar
 
-Disrupt ~~asymmetrical~~ unicorn, pok pok kale chips umami selfies gastropub food truck flannel. Blue **bottle craft** beer hexagon artisan. Chia gochujang crucifix, readymade hammock _blog succulents_ sriracha raw denim scenester cray typewriter fashion axe art *party*. Schlitz tacos tilde intelligentsia, unicorn fixie adaptogen beard 8-bit street art typewriter.
+Disrupt ~~asymmetrical~~ unicorn, pok pok kale chips umami selfies gastropub food truck flannel. Blue **bottle craft** beer hexagon artisan. Chia gochujang crucifix, ^ready^ ^made^ hammock _blog succulents_ sriracha raw denim scenester cray typewriter fashion axe ~art~ *party*. Schlitz tacos tilde intelligentsia, unicorn fixie adaptogen beard 8-bit street ~art~ typewriter.
 
 ## *second* 1
 
-**Literally selfies tbh lo-fi. Actually health goth ennui, brooklyn retro polaroid sriracha. Kogi live-edge mixtape marfa street art synth. Godard synth truffaut selfies, vape fanny ~~pack~~ subway tile. Stumptown af pabst, try-hard fam ethical actually four dollar toast. Microdosing kogi brooklyn, locavore jianbing etsy sartorial _YOLO_. Williamsburg salvia photo booth readymade listicle man braid.**
+**Literally selfies tbh lo-fi. Actually health goth ennui, brooklyn retro polaroid sriracha. Kogi live-edge mixtape marfa street ~art~ synth. Godard synth truffaut selfies, vape fanny ~~pack~~ subway tile. Stumptown af pabst, try-hard fam ethical actually four dollar toast. Microdosing kogi brooklyn, locavore jianbing etsy sartorial _YOLO_. Williamsburg salvia photo booth ^readymade^ listicle man braid.**
 
 ---
 
@@ -22,7 +22,7 @@ Asymmetrical pug scenester sustainable enamel pin distillery quinoa keffiyeh. Fl
 
 ### ~~third~~ 1
 
-Art party keytar godard iceland neutra cronut. Austin readymade semiotics, edison bulb cloud bread adaptogen blue bottle jean shorts DIY. Cliche fashion axe sartorial letterpress, food truck poke pabst kitsch woke helvetica raclette butcher beard seitan hammock.
+Art party keytar godard iceland neutra cronut. Austin ^readymade^ semiotics, edison bulb cloud bread adaptogen blue bottle jean shorts DIY. Cliche fashion axe sartorial letterpress, food truck poke pabst kitsch woke helvetica raclette butcher beard seitan hammock.
 
 `foo
 bar`
@@ -39,7 +39,7 @@ Mumblecore kombucha offal, health goth next level before they sold out gluten-fr
 
 ##### fifth 1
 
-Banjo bespoke subway tile, street art drinking vinegar offal franzen. Pour-over green juice vaporware kale chips. Meggings cronut affogato PBR&B, art party unicorn dreamcatcher schlitz yuccie mixtape 90's thundercats air plant. Cold-pressed salvia air plant, cornhole jean shorts mustache four dollar toast austin.
+Banjo bespoke subway tile, street ~a*r*~^t^ drinking vinegar offal franzen. Pour-over green juice vaporware kale chips. Meggings cronut affogato PBR&B, ~art~ party unicorn dreamcatcher schlitz yuccie mixtape 90's thundercats air plant. Cold-pressed salvia air plant, cornhole jean shorts mustache four dollar toast austin.
 
 ### third 3
 

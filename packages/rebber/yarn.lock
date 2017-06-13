@@ -3223,6 +3223,10 @@ remark-stringify@^3.0.0:
     unherit "^1.0.4"
     xtend "^4.0.1"
 
+remark-sub-super@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/remark-sub-super/-/remark-sub-super-0.0.9.tgz#1c66cccbf5a0d72b58ee8e8dcfb5cf25f2e1dc85"
+
 remark@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/remark/-/remark-7.0.1.tgz#a5de4dacfabf0f60a49826ef24c479807f904bfb"
