@@ -8,9 +8,14 @@ module.exports = figure
 const defaultMacros = {
   blockquote: (innerText, caption = 'Anonymous') =>
     `\\begin{Quotation}{${caption}}\n${innerText}\n\\end{Quotation}\n\n`,
-  code: (innerText, caption, extra) =>
-    `\\begin{codeBlock}{${caption}}{${extra.lines}}{${extra.language}}
-    \n${innerText}\n\\end{codeBlock}\n\n`
+  code: (innerText, caption, extra) => {
+    let params = `[${caption}]`
+    if (extra.lines) {
+      params += `[${extra.lines}]`
+    }
+    return `\\begin{codeBlock}${params}{${extra.language}}
+            \n${innerText}\n\\end{codeBlock}\n\n`
+  }
 }
 
 const makeExtra = {
