@@ -2,9 +2,9 @@ const clone = require('clone')
 const visit = require('unist-util-visit')
 
 const legendBlock = {
-  table: (legendText) => legendText.startsWith('Table:'),
-  gridTable: (legendText) => legendText.startsWith('Table:'),
-  code: (legendText) => legendText.startsWith('Code:'),
+  table: 'Table:',
+  gridTable: 'Table:',
+  code: 'Code:',
 }
 
 function plugin () {
@@ -13,7 +13,7 @@ function plugin () {
 
 function transformer (tree) {
   visit(tree, 'blockquote', visitor)
-  Object.keys().map(key => visit(tree, key, externLegendVisitor))
+  Object.keys(legendBlock).map(key => visit(tree, key, externLegendVisitor))
 }
 
 function visitor (node, index, parent) {
@@ -61,12 +61,13 @@ function visitor (node, index, parent) {
 function externLegendVisitor (node, index, parent) {
   if (index + 1 < parent.children.length && parent.children[index + 1].type === 'paragraph') {
     const legendNode = parent.children[index + 1]
-    if (legendBlock[node.type](legendNode.value)) {
+
+    if (legendNode.children[0].value.startsWith(legendBlock[node.type])) {
       const figcaption = {
         type: 'figcaption',
         children: [{
           type: 'text',
-          value: legendNode.value,
+          value: legendNode.children[0].value.replace(legendBlock[node.type], '').trim()
         }],
         data: {
           hName: 'figcaption',
@@ -85,7 +86,7 @@ function externLegendVisitor (node, index, parent) {
       node.type = figure.type
       node.children = figure.children
       node.data = figure.data
-      parent.childrend.splice(index + 1, 1)
+      parent.children.splice(index + 1, 1)
     }
   }
 }

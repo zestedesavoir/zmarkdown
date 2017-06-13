@@ -4,15 +4,9 @@ var clone = require('clone');
 var visit = require('unist-util-visit');
 
 var legendBlock = {
-  table: function table(legendText) {
-    return legendText.startsWith('Table:');
-  },
-  gridTable: function gridTable(legendText) {
-    return legendText.startsWith('Table:');
-  },
-  code: function code(legendText) {
-    return legendText.startsWith('Code:');
-  }
+  table: 'Table:',
+  gridTable: 'Table:',
+  code: 'Code:'
 };
 
 function plugin() {
@@ -21,7 +15,7 @@ function plugin() {
 
 function transformer(tree) {
   visit(tree, 'blockquote', visitor);
-  Object.keys().map(function (key) {
+  Object.keys(legendBlock).map(function (key) {
     return visit(tree, key, externLegendVisitor);
   });
 }
@@ -68,12 +62,13 @@ function visitor(node, index, parent) {
 function externLegendVisitor(node, index, parent) {
   if (index + 1 < parent.children.length && parent.children[index + 1].type === 'paragraph') {
     var legendNode = parent.children[index + 1];
-    if (legendBlock[node.type](legendNode.value)) {
+
+    if (legendNode.children[0].value.startsWith(legendBlock[node.type])) {
       var figcaption = {
         type: 'figcaption',
         children: [{
           type: 'text',
-          value: legendNode.value
+          value: legendNode.children[0].value.replace(legendBlock[node.type], '').trim()
         }],
         data: {
           hName: 'figcaption'
@@ -89,7 +84,7 @@ function externLegendVisitor(node, index, parent) {
       node.type = figure.type;
       node.children = figure.children;
       node.data = figure.data;
-      parent.childrend.splice(index + 1, 1);
+      parent.children.splice(index + 1, 1);
     }
   }
 }
