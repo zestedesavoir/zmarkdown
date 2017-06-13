@@ -7,7 +7,14 @@ module.exports = figure
 
 const defaultMacros = {
   blockquote: (innerText, caption = 'Anonymous') =>
-    `\\begin{Quotation}{${caption}}\n${innerText}\n\\end{Quotation}\n\n`
+    `\\begin{Quotation}{${caption}}\n${innerText}\n\\end{Quotation}\n\n`,
+  code: (innerText, caption, extra) =>
+    `\\begin{codeBlock}{${caption}}{${extra.lines}}{${extra.language}}\n${innerText}\n\\end{codeBlock}\n\n`
+}
+
+const makeExtra = {
+  blockquote: node => {},
+  code: node => {language: node.lang, lines: node.hightlighted || ''}
 }
 
 /* Stringify a Figure `node`. */
@@ -30,5 +37,5 @@ function figure (ctx, node) {
     node.children = node.children[0].children
   }
   const innerText = all(ctx, node)
-  return macro(innerText.trim(), caption)
+  return macro(innerText.trim(), caption, makeExtra[type](node))
 }
