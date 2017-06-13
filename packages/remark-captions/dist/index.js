@@ -3,12 +3,27 @@
 var clone = require('clone');
 var visit = require('unist-util-visit');
 
+var legendBlock = {
+  table: function table(legendText) {
+    return legendText.startsWith('Table:');
+  },
+  gridTable: function gridTable(legendText) {
+    return legendText.startsWith('Table:');
+  },
+  code: function code(legendText) {
+    return legendText.startsWith('Code:');
+  }
+};
+
 function plugin() {
   return transformer;
 }
 
 function transformer(tree) {
   visit(tree, 'blockquote', visitor);
+  Object.keys().map(function (key) {
+    return visit(tree, key, externLegendVisitor);
+  });
 }
 
 function visitor(node, index, parent) {
@@ -48,6 +63,35 @@ function visitor(node, index, parent) {
   node.type = figure.type;
   node.children = figure.children;
   node.data = figure.data;
+}
+
+function externLegendVisitor(node, index, parent) {
+  if (index + 1 < parent.children.length && parent.children[index + 1].type === 'paragraph') {
+    var legendNode = parent.children[index + 1];
+    if (legendBlock[node.type](legendNode.value)) {
+      var figcaption = {
+        type: 'figcaption',
+        children: [{
+          type: 'text',
+          value: legendNode.value
+        }],
+        data: {
+          hName: 'figcaption'
+        }
+      };
+      var figure = {
+        type: 'figure',
+        children: [clone(node), figcaption],
+        data: {
+          hName: 'figure'
+        }
+      };
+      node.type = figure.type;
+      node.children = figure.children;
+      node.data = figure.data;
+      parent.childrend.splice(index + 1, 1);
+    }
+  }
 }
 
 function getLast(xs) {

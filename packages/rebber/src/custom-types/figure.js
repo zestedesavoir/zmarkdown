@@ -9,12 +9,13 @@ const defaultMacros = {
   blockquote: (innerText, caption = 'Anonymous') =>
     `\\begin{Quotation}{${caption}}\n${innerText}\n\\end{Quotation}\n\n`,
   code: (innerText, caption, extra) =>
-    `\\begin{codeBlock}{${caption}}{${extra.lines}}{${extra.language}}\n${innerText}\n\\end{codeBlock}\n\n`
+    `\\begin{codeBlock}{${caption}}{${extra.lines}}{${extra.language}}
+    \n${innerText}\n\\end{codeBlock}\n\n`
 }
 
 const makeExtra = {
   blockquote: node => {},
-  code: node => {language: node.lang, lines: node.hightlighted || ''}
+  code: node => { return {language: node.lang, lines: node.hightlighted || ''} }
 }
 
 /* Stringify a Figure `node`. */
