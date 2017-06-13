@@ -1,8 +1,14 @@
 # remark-grid-tables [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
-This plugin parses custom Markdown syntax to describes tables.
+This plugin parses custom Markdown syntax to describe tables. It was inspired by [this syntax](https://github.com/smartboyathome/Markdown-GridTables/blob/b4d16d5d254bed4336713d27eb8a37dc0e5f4273/mdx_grid_tables.py).
 
-It adds the resulting table to the AST.
+It adds a new node type to the [mdast][mdast] produced by [remark][remark]: `gridTable`.
+
+A `gridTable` mdast node can contain the following mdast node types:
+
+* `tableHeader`
+* `tableRow`
+* `tableCell`
 
 If you are using [rehype][rehype], the stringified HTML result will be a `table`.
 

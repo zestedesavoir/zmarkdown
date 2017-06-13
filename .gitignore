@@ -3,8 +3,8 @@
 /packages/*/node_modules
 /packages/*/coverage
 /packages/*/.nyc_output
-/npm-debug.log
-/lerna-debug.log
 /.nyc_output/*
 /coverage/*
 /public/bundle*
+npm-debug.log
+lerna-debug.log
