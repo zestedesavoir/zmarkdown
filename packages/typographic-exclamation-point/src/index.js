@@ -5,7 +5,7 @@ module.exports = (input = '', { locale } = {}) => {
 
   const beforeSemiColon = db[locale]
 
-  const pattern = / ?(\s|$)/gim
+  const pattern = / !(\s|$)/gim
   const handleSemiColon = (withSemiColon, afterSemiColon) =>
     `${beforeSemiColon}!${afterSemiColon}`
 
