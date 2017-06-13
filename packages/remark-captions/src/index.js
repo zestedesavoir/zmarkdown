@@ -59,7 +59,7 @@ function visitor (node, index, parent) {
 }
 
 function externLegendVisitor (node, index, parent) {
-  if (index + 1 < parent.children.length && parent.children[index + 1].type === 'paragraph' ) {
+  if (index + 1 < parent.children.length && parent.children[index + 1].type === 'paragraph') {
     const legendNode = parent.children[index + 1]
     if (legendBlock[node.type](legendNode.value)) {
       const figcaption = {
