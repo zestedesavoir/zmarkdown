@@ -76,7 +76,7 @@ processor][processor] and its [**MDAST**][mdast] syntax tree, [**rehype**][rehyp
 
 * [**remark-kbd**][remark-kbd]
 
-  TODO: README
+  This plugin parses custom Markdown syntax to handle keyboard keys.
 
 * [**remark-numbered-footnotes**][remark-numbered-footnotes]
 
@@ -88,11 +88,11 @@ processor][processor] and its [**MDAST**][mdast] syntax tree, [**rehype**][rehyp
 
 * [**typographic-colon**][typographic-colon]
 
-  TODO: README
+  Micro module to fix a common typographic issue that is hard to fix with most keyboard layouts.
 
 * [**typographic-permille**][typographic-permille]
 
-  TODO: README
+  Micro module to replace `%o` with `‰` and optionally replace the preceding space.
 
 * [**zmarkdown**][zmarkdown]
 
