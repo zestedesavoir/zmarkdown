@@ -82,7 +82,7 @@ ava('emoticon', t => {
   const spec = specs['emoticon']
   const {contents} = unified()
     .use(reParse)
-    .use(require('../../remark-emoticons'), emoticons)
+    .use(require('remark-emoticons'), emoticons)
     .use(rebber, {
       override: {
         emoticon: require('../src/custom-types/emoticon'),
@@ -129,7 +129,7 @@ ava('figure+caption', t => {
   const spec = specs['figure']
   const {contents} = unified()
     .use(reParse)
-    .use(require('../../remark-captions'))
+    .use(require('remark-captions'))
     .use(rebber, {
       override: {
         figure: require('../src/custom-types/figure'),
@@ -147,8 +147,8 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
   ava(name, t => {
     const {contents} = unified()
       .use(reParse)
-      .use(require('../../remark-emoticons'), emoticons)
-      .use(require('../../remark-captions'))
+      .use(require('remark-emoticons'), emoticons)
+      .use(require('remark-captions'))
       .use(rebber, integrationConfig)
       .processSync(spec.fixture.replace(/·/g, ' '))
 

@@ -46,6 +46,8 @@
     "eslint": "^4.0.0",
     "nyc": "^11.0.2",
     "remark": "^7.0.1",
+    "remark-captions": "^0.0.3",
+    "remark-emoticons": "^0.0.13",
     "remark-parse": "^3.0.1",
     "unified": "^6.1.4"
   }
