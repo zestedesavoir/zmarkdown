@@ -32,7 +32,7 @@ entrypoints.forEach(entrypoint => {
     t.deepEqual(emDash(`-- foo`, fr), `${dashChar}${nnbs}foo`)
     t.deepEqual(emDash(` -- foo -- bar -- foo bar --`, fr),
     ` ${dashChar}${nnbs}foo${nnbs}${dashChar} bar ${dashChar}${nnbs}foo bar${nnbs}${dashChar}`)
-    t.deepEqual(emDash(` -- foo -- bar -- foo bar --`, fr),
+    t.deepEqual(emDash(` -- foo -- bar -- foo bar --`, frCH),
     ` ${dashChar}${nnbs}foo${nnbs}${dashChar} bar ${dashChar}${nnbs}foo bar${nnbs}${dashChar}`)
   })
 })
