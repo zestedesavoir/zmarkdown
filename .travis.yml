@@ -4,7 +4,6 @@ git:
 language: node_js
 
 cache:
-  yarn: true
   directories:
   - node_modules
 
@@ -14,8 +13,7 @@ node_js:
   - '6'
 
 before_install:
-  - npm i -g yarn
-  - yarn
+  - npm i -g npm@5
   - lerna bootstrap
 
 script:

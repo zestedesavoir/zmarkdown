@@ -37,5 +37,8 @@
   "license": "MIT",
   "dependencies": {
     "unist-util-visit": "^1.1.1"
+  },
+  "devDependencies": {
+    "del-cli": "^1.0.0"
   }
 }

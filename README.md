@@ -10,7 +10,7 @@ processor][processor] and its [**MDAST**][mdast] syntax tree, [**rehype**][rehyp
 ### Prerequisites
 
 * node `>=` **6**
-* [`yarn`](https://yarnpkg.com/docs/install)
+* npm `>=` **5**
 
 1. clone
 2. `yarn`

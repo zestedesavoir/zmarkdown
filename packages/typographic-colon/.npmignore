@@ -1,6 +1,5 @@
 /index.js
 /__tests__
-/yarn.lock
 /.npmignore
 /.nyc_output
 /coverage
