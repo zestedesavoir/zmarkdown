@@ -39,7 +39,9 @@ function locator(value, fromIndex) {
   }
 
   if (found.length) {
-    found.sort();
+    found.sort(function (a, b) {
+      return a - b;
+    });
     return found[0];
   }
 

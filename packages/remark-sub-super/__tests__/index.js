@@ -21,28 +21,19 @@ const entrypoints = [
   '../src',
 ]
 
-entrypoints.forEach(entrypoint => {
-  const plugin = require(entrypoint)
+Object.keys(specs).forEach(name => {
+  entrypoints.forEach(entrypoint => {
+    const plugin = require(entrypoint)
 
-  ava('subsuper', t => {
-    const {contents} = unified()
-      .use(reParse)
-      .use(remark2rehype)
-      .use(plugin)
-      .use(rehypeStringify)
-      .processSync(specs['subsuper'].fixture)
+    ava(name, t => {
+      const {contents} = unified()
+        .use(reParse)
+        .use(remark2rehype)
+        .use(plugin)
+        .use(rehypeStringify)
+        .processSync(specs[name].fixture)
 
-    t.deepEqual(contents, specs['subsuper'].expected.trim())
-  })
-
-  ava('regression-1', t => {
-    const {contents} = unified()
-      .use(reParse)
-      .use(remark2rehype)
-      .use(plugin)
-      .use(rehypeStringify)
-      .processSync(specs['regression-1'].fixture)
-
-    t.deepEqual(contents, specs['regression-1'].expected.trim())
+      t.deepEqual(contents, specs[name].expected.trim())
+    })
   })
 })
