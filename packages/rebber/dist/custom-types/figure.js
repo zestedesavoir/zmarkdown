@@ -44,6 +44,6 @@ var makeExtra = {
   if (node.children.length === 1) {
     node.children = node.children[0].children;
   }
-  var innerText = all(ctx, node);
+  var innerText = node.value || all(ctx, node);
   return macro(innerText.trim(), caption, makeExtra[type](node));
 }
