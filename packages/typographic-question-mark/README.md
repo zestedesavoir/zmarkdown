@@ -1,4 +1,4 @@
-# typographic-interrogation-point [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
+# typographic-question-mark [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
 Micro module to fix a common typographic issue that is hard to fix with most keyboard layouts.
 
@@ -11,14 +11,14 @@ Submit a PR to `src/db.js` to add support for your locale.
 [npm][npm]:
 
 ```sh
-npm install --save typographic-interrogation-point
+npm install --save typographic-question-mark
 ```
 
 
 ## Usage
 
 ```js
-var interrogation = require('typographic-interrogation-point')
+var interrogation = require('typographic-question-mark')
 
 interrogation(`Exemple ? voici.`, { locale: 'fr' })
 // this char          ^ will be replaced by a narrow no-break space
@@ -40,10 +40,10 @@ This module can also be used through [textr][textr].
 
 [coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown
 
-[license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/typographic-interrogation-point/LICENSE-MIT
+[license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/typographic-question-mark/LICENSE-MIT
 
 [zds]: https://zestedesavoir.com
 
-[npm]: https://www.npmjs.com/package/typographic-interrogation-point
+[npm]: https://www.npmjs.com/package/typographic-question-mark
 
 [textr]: https://github.com/A/textr

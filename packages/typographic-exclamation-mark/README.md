@@ -1,4 +1,4 @@
-# typographic-exclamation-point [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
+# typographic-exclamation-mark [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
 Micro module to fix a common typographic issue that is hard to fix with most keyboard layouts.
 
@@ -11,14 +11,14 @@ Submit a PR to `src/db.js` to add support for your locale.
 [npm][npm]:
 
 ```sh
-npm install --save typographic-exclamation-point
+npm install --save typographic-exclamation-mark
 ```
 
 
 ## Usage
 
 ```js
-var exclamation = require('typographic-exclamation-point')
+var exclamation = require('typographic-exclamation-mark')
 
 exclamation(`Exemple ! voici.`, { locale: 'fr' })
 // this char        ^ will be replaced by a narrow no-break space
@@ -40,10 +40,10 @@ This module can also be used through [textr][textr].
 
 [coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown
 
-[license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/typographic-exclamation-point/LICENSE-MIT
+[license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/typographic-exclamation-mark/LICENSE-MIT
 
 [zds]: https://zestedesavoir.com
 
-[npm]: https://www.npmjs.com/package/typographic-exclamation-point
+[npm]: https://www.npmjs.com/package/typographic-exclamation-mark
 
 [textr]: https://github.com/A/textr
