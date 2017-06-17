@@ -16,7 +16,7 @@ function locator (value, fromIndex) {
   }
 
   if (found.length) {
-    found.sort()
+    found.sort((a, b) => a - b)
     return found[0]
   }
 
