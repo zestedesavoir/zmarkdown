@@ -36,6 +36,8 @@ const rebberConfig = {
   override: {
     emoticon: require('rebber/dist/custom-types/emoticon'),
     figure: require('rebber/dist/custom-types/figure'),
+    sub: require('rebber/dist/custom-types/sub'),
+    sup: require('rebber/dist/custom-types/sup'),
   },
   emoticons: defaultConfig.emoticons,
 }
