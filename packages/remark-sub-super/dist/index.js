@@ -8,6 +8,7 @@ var markers = {
 
 function locator(value, fromIndex) {
   var index = -1;
+  var found = [];
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
   var _iteratorError = undefined;
@@ -17,7 +18,10 @@ function locator(value, fromIndex) {
       var marker = _step.value;
 
       index = value.indexOf(marker, fromIndex);
-      if (index !== -1) return index;
+      if (index !== -1) {
+        found.push(index);
+        continue;
+      }
     }
   } catch (err) {
     _didIteratorError = true;
@@ -34,7 +38,12 @@ function locator(value, fromIndex) {
     }
   }
 
-  return index;
+  if (found.length) {
+    found.sort();
+    return found[0];
+  }
+
+  return -1;
 }
 
 function inlinePlugin() {

@@ -6,12 +6,21 @@ const markers = {
 
 function locator (value, fromIndex) {
   let index = -1
+  const found = []
   for (const marker of Object.keys(markers)) {
     index = value.indexOf(marker, fromIndex)
-    if (index !== -1) return index
+    if (index !== -1) {
+      found.push(index)
+      continue
+    }
   }
 
-  return index
+  if (found.length) {
+    found.sort()
+    return found[0]
+  }
+
+  return -1
 }
 
 function inlinePlugin () {
