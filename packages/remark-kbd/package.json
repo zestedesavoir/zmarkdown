@@ -1,6 +1,6 @@
 {
   "name": "remark-kbd",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-kbd",
     "type": "git"
@@ -39,7 +39,7 @@
     "is-whitespace-character": "^1.0.0"
   },
   "devDependencies": {
-    "remark-custom-blocks": "^0.0.12",
+    "remark-custom-blocks": "^0.0.13",
     "remark-stringify": "^3.0.1"
   }
 }
