@@ -12,9 +12,9 @@ module.exports = function () {
 
   var beforeSemiColon = db[locale];
 
-  var pattern = / !(\s|$)/gim;
+  var pattern = / %(\s|$)/gim;
   var handleSemiColon = function handleSemiColon(withSemiColon, afterSemiColon) {
-    return beforeSemiColon + '!' + afterSemiColon;
+    return beforeSemiColon + '%' + afterSemiColon;
   };
 
   return input.replace(pattern, handleSemiColon);

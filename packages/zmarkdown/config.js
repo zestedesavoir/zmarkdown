@@ -1,4 +1,3 @@
-const textrColon = require('typographic-colon')
 const textrApostrophes = require('typographic-apostrophes')
 const textrQuotes = require('typographic-quotes')
 const textrApostrophesForPlurals = require('typographic-apostrophes-for-possessive-plurals')
@@ -9,7 +8,15 @@ const textrEnDashes = require('typographic-en-dashes')
 const textrRegisteredTrademark = require('typographic-registered-trademark')
 const textrSingleSpaces = require('typographic-single-spaces')
 const textrTrademark = require('typographic-trademark')
+
+const textrColon = require('typographic-colon')
+const textrEmDash = require('typographic-em-dash')
+const textrExclamationMark = require('typographic-exclamation-mark')
+const textrGuillemets = require('typographic-guillemets')
+const textrPercent = require('typographic-percent')
 const textrPermille = require('typographic-permille')
+const textrQuestionMark = require('typographic-question-mark')
+const textrSemicolon = require('typographic-semicolon')
 
 const config = {
   reParse: {
@@ -24,7 +31,6 @@ const config = {
 
   textr: {
     plugins: [
-      textrColon,
       textrApostrophes,
       textrQuotes,
       textrApostrophesForPlurals,
@@ -35,7 +41,15 @@ const config = {
       textrRegisteredTrademark,
       textrSingleSpaces,
       textrTrademark,
+
+      textrColon,
+      textrEmDash,
+      textrExclamationMark,
+      textrGuillemets,
+      textrPercent,
       textrPermille,
+      textrQuestionMark,
+      textrSemicolon,
     ],
     options: {
       locale: 'fr',
