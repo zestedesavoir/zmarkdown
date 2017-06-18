@@ -74,6 +74,7 @@
   "scripts": {
     "lint": "eslint .",
     "test": "mocha",
+    "watch": "mocha --watch --watch-extensions html,txt",
     "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*",
     "prepublish": "browserify index.js -g [ envify --NODE_ENV production ] -g [ babelify --presets [ es2015 ] ] -g uglifyify -d -s ZMarkdown | exorcist ../../public/bundle.js.map > ../../public/bundle.js"
   }
