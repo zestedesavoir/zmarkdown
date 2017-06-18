@@ -142,8 +142,19 @@ ava('figure+caption', t => {
   t.deepEqual(contents.trim(), spec.expected.trim())
 })
 
-ava('codeblock+caption', t => {
-  const spec = specs['figure-codeblock']
+ava('code', t => {
+  const spec = specs['code']
+  const {contents} = unified()
+    .use(reParse)
+    .use(rebber)
+    .processSync(spec.fixture)
+
+  t.deepEqual(contents.trim(), spec.expected.trim())
+})
+
+ava('code+caption', t => {
+  const spec = specs['figure-code']
+
   const {contents} = unified()
     .use(reParse)
     .use(require('remark-captions'))

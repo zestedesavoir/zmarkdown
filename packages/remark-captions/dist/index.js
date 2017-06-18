@@ -15,8 +15,8 @@ function plugin() {
 
 function transformer(tree) {
   visit(tree, 'blockquote', visitor);
-  Object.keys(legendBlock).map(function (key) {
-    return visit(tree, key, externLegendVisitor);
+  Object.keys(legendBlock).forEach(function (nodeType) {
+    return visit(tree, nodeType, externLegendVisitor);
   });
 }
 

@@ -1,6 +1,3 @@
-(for convenience, · are replaced with
-simple single spaces in the tests)
-
 ## Code
 
 Normal code
@@ -15,4 +12,3 @@ With Legend
 print('bla')
 ```
 Code: figcapt1
-

@@ -13,7 +13,7 @@ function plugin () {
 
 function transformer (tree) {
   visit(tree, 'blockquote', visitor)
-  Object.keys(legendBlock).map(key => visit(tree, key, externLegendVisitor))
+  Object.keys(legendBlock).forEach(nodeType => visit(tree, nodeType, externLegendVisitor))
 }
 
 function visitor (node, index, parent) {
