@@ -9,6 +9,7 @@
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.24.1",
     "coveralls": "^2.13.1",
+    "cross-env": "^5.0.1",
     "del-cli": "^1.0.0",
     "eslint": "^4.0.0",
     "lerna": "^2.0.0-rc.5",
