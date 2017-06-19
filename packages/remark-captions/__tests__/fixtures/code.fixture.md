@@ -12,3 +12,10 @@ With Legend
 print('bla')
 ```
 Code: figcapt1
+
+
+```python
+print('bla2')
+```
+Code: figcapt1
+Code: bis

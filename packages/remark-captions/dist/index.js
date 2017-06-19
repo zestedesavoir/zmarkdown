@@ -64,11 +64,14 @@ function externLegendVisitor(node, index, parent) {
     var legendNode = parent.children[index + 1];
 
     if (legendNode.children[0].value.startsWith(legendBlock[node.type])) {
+      var legendText = legendNode.children[0].value.split('\n')[0].replace(legendBlock[node.type], '').trim();
+      var fullLegendLine = legendBlock[node.type] + ' ' + legendText;
+      legendNode.children[0].value = legendNode.children[0].value.replace(fullLegendLine, '').trim();
       var figcaption = {
         type: 'figcaption',
         children: [{
           type: 'text',
-          value: legendNode.children[0].value.replace(legendBlock[node.type], '').trim()
+          value: legendText
         }],
         data: {
           hName: 'figcaption'
@@ -84,7 +87,9 @@ function externLegendVisitor(node, index, parent) {
       node.type = figure.type;
       node.children = figure.children;
       node.data = figure.data;
-      parent.children.splice(index + 1, 1);
+      if (!legendNode.children[0].value) {
+        parent.children.splice(index + 1, 1);
+      }
     }
   }
 }
