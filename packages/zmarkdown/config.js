@@ -1,5 +1,4 @@
 const textrApostrophes = require('typographic-apostrophes')
-const textrQuotes = require('typographic-quotes')
 const textrApostrophesForPlurals = require('typographic-apostrophes-for-possessive-plurals')
 const textrCopyright = require('typographic-copyright')
 const textrEllipses = require('typographic-ellipses')
@@ -32,7 +31,6 @@ const config = {
   textr: {
     plugins: [
       textrApostrophes,
-      textrQuotes,
       textrApostrophesForPlurals,
       textrEllipses,
       textrEmDashes,
