@@ -8,7 +8,10 @@ const legendBlock = {
 
 function plugin (opts) {
   if (opts) {
-    Object.keys(opts).map(key => legendBlock[key] = opts[key])
+    // not sure but I think I once saw a kind of "extend" function
+    Object.keys(opts).forEach(function (key) {
+      legendBlock[key] = opts[key]
+    })
   }
   return transformer
 }

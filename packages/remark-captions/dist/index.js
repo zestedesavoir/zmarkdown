@@ -5,11 +5,15 @@ var visit = require('unist-util-visit');
 
 var legendBlock = {
   table: 'Table:',
-  gridTable: 'Table:',
   code: 'Code:'
 };
 
-function plugin() {
+function plugin(opts) {
+  if (opts) {
+    Object.keys(opts).forEach(function (key) {
+      legendBlock[key] = opts[key];
+    });
+  }
   return transformer;
 }
 
