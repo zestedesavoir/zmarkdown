@@ -24,7 +24,11 @@ var defaultMacros = {
 var makeExtra = {
   blockquote: function blockquote(node) {},
   code: function code(node) {
-    return { language: node.lang, lines: node.hightlighted || '' };
+    var extra = { language: node.lang.split(' ')[0] };
+    if (node.lang.indexOf(' ') > -1) {
+      extra.lines = node.lang.split(' ')[1].replace('hl_lines=', '').trim();
+    }
+    return extra;
   }
 
   /* Stringify a Figure `node`. */

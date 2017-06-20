@@ -20,7 +20,13 @@ const defaultMacros = {
 
 const makeExtra = {
   blockquote: node => {},
-  code: node => ({ language: node.lang, lines: node.hightlighted || '' })
+  code: node => {
+    const extra = { language: node.lang.split(' ')[0]}
+    if (node.lang.indexOf(' ') > -1) {
+      extra.lines = node.lang.split(' ')[1].replace('hl_lines=', '').trim()
+    }
+    return extra
+  }
 }
 
 /* Stringify a Figure `node`. */
