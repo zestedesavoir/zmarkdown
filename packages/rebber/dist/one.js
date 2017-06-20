@@ -17,6 +17,7 @@ handlers.comment = require('./types/comment');
 
 handlers.text = require('./types/text');
 handlers.break = require('./types/break');
+handlers.code = require('./types/code');
 handlers.strong = require('./types/strong');
 handlers.emphasis = require('./types/emphasis');
 handlers.delete = require('./types/delete');

@@ -142,6 +142,31 @@ ava('figure+caption', t => {
   t.deepEqual(contents.trim(), spec.expected.trim())
 })
 
+ava('code', t => {
+  const spec = specs['code']
+  const {contents} = unified()
+    .use(reParse)
+    .use(rebber)
+    .processSync(spec.fixture)
+
+  t.deepEqual(contents.trim(), spec.expected.trim())
+})
+
+ava('code+caption', t => {
+  const spec = specs['figure-code']
+
+  const {contents} = unified()
+    .use(reParse)
+    .use(require('remark-captions'))
+    .use(rebber, {
+      override: {
+        figure: require('../src/custom-types/figure'),
+      },
+    })
+    .processSync(spec.fixture)
+
+  t.deepEqual(contents.trim(), spec.expected.trim())
+})
 
 Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEach(name => {
   const spec = specs[name]

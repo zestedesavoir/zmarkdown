@@ -8,3 +8,4 @@
 /public/bundle*
 npm-debug.log
 lerna-debug.log
+.idea
