@@ -3,11 +3,13 @@ const visit = require('unist-util-visit')
 
 const legendBlock = {
   table: 'Table:',
-  gridTable: 'Table:',
   code: 'Code:',
 }
 
-function plugin () {
+function plugin (opts) {
+  if (opts) {
+    Object.keys(opts).map(key => legendBlock[key] = opts[key])
+  }
   return transformer
 }
 

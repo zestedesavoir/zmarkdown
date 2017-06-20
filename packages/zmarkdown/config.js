@@ -225,6 +225,11 @@ const config = {
       append: 'embedded/result,js,html,css/',
       match: /https?:\/\/(www\.)?jsfiddle\.net\/([\w\d]+\/[\w\d]+\/\d+\/?|[\w\d]+\/\d+\/?|[\w\d]+\/?)$/,
     }
+  },
+  captions: {
+    table: 'Table:',
+    gridTable: 'Table:',
+    code: 'Code:',
   }
 }
 

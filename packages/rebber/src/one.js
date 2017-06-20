@@ -21,6 +21,9 @@ handlers.emphasis = require('./types/emphasis')
 handlers.delete = require('./types/delete')
 handlers.inlineCode = require('./types/inlinecode')
 handlers.blockquote = require('./types/blockquote')
+handlers.tableCell = require('./types/tableCell')
+handlers.tableRow = require('./types/tableRow')
+handlers.table = require('./types/table')
 handlers.thematicBreak = require('./types/thematic-break')
 
 /* Stringify `node`. */

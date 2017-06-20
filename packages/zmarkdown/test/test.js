@@ -963,7 +963,7 @@ describe('HTML rendering', function () {
         expect(renderFile()(filepath).trim()).to.have.html(loadFixture(filepath).trim())
       })
 
-      it.skip(`properly renders grid_tables.txt`, function () {
+      it(`properly renders grid_tables.txt`, function () {
         const filepath = `${dir}/grid_tables.txt`
         expect(renderFile()(filepath).trim()).to.have.html(loadFixture(filepath).trim())
       })
