@@ -59,18 +59,20 @@ function internLegendVisitor (node, index, parent) {
   node.children = figure.children
   node.data = figure.data
 }
+
 function externLegendVisitorCreator (blocks) {
-  return externLegendVisitor
-  function externLegendVisitor (node, index, parent) {
+  return function (node, index, parent) {
     if (index + 1 < parent.children.length && parent.children[index + 1].type === 'paragraph') {
       const legendNode = parent.children[index + 1]
+      const firstChild = legendNode.children[0]
 
-      if (legendNode.children[0].value.startsWith(blocks[node.type])) {
-        const legendText = legendNode.children[0].value
-          .split('\n')[0].replace(blocks[node.type], '').trim()
+      if (firstChild.value.startsWith(blocks[node.type])) {
+        const firstLine = firstChild.value.split('\n')[0]
+        const legendText = firstLine.replace(blocks[node.type], '').trim()
         const fullLegendLine = `${blocks[node.type]} ${legendText}`
-        legendNode.children[0].value = legendNode.children[0].value
-          .replace(fullLegendLine, '').trim()
+
+        firstChild.value = firstChild.value.replace(fullLegendLine, '').trim()
+
         const figcaption = {
           type: 'figcaption',
           children: [{
@@ -94,13 +96,14 @@ function externLegendVisitorCreator (blocks) {
         node.type = figure.type
         node.children = figure.children
         node.data = figure.data
-        if (!legendNode.children[0].value) {
+        if (!firstChild.value) {
           parent.children.splice(index + 1, 1)
         }
       }
     }
   }
 }
+
 function getLast (xs) {
   const len = xs.length
   if (!len) return
