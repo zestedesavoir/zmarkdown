@@ -26,7 +26,10 @@ entrypoints.forEach(entrypoint => {
 
   Object.keys(specs).filter(Boolean).forEach(name => {
     const spec = specs[name]
-
+    let opts = null
+    if (name.startsWith('custom')) {
+      opts = {table: 'CustomTable:'}
+    }
     ava(name, t => {
       const {contents} = unified()
         .use(reParse, {
@@ -38,7 +41,7 @@ entrypoints.forEach(entrypoint => {
           &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
           blocks: [],
         })
-        .use(plugin)
+        .use(plugin, opts)
         .use(remark2rehype)
         .use(stringify)
         .processSync(spec.fixture.replace(/·/g, ' '))

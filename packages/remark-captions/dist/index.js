@@ -2,6 +2,7 @@
 
 var clone = require('clone');
 var visit = require('unist-util-visit');
+var xtend = require('xtend');
 
 var legendBlock = {
   table: 'Table:',
@@ -9,21 +10,16 @@ var legendBlock = {
 };
 
 function plugin(opts) {
-  if (opts) {
-    Object.keys(opts).forEach(function (key) {
-      legendBlock[key] = opts[key];
+  var blocks = xtend(legendBlock, opts || {});
+  return transformer;
+
+  function transformer(tree) {
+    visit(tree, 'blockquote', visitor);
+    Object.keys(legendBlock).forEach(function (nodeType) {
+      return visit(tree, nodeType, externLegendVisitorCreator(blocks));
     });
   }
-  return transformer;
 }
-
-function transformer(tree) {
-  visit(tree, 'blockquote', visitor);
-  Object.keys(legendBlock).forEach(function (nodeType) {
-    return visit(tree, nodeType, externLegendVisitor);
-  });
-}
-
 function visitor(node, index, parent) {
   if (parent && parent.type === 'figure') return;
   var lastP = getLast(node.children);
@@ -62,42 +58,43 @@ function visitor(node, index, parent) {
   node.children = figure.children;
   node.data = figure.data;
 }
+function externLegendVisitorCreator(blocks) {
+  return externLegendVisitor;
+  function externLegendVisitor(node, index, parent) {
+    if (index + 1 < parent.children.length && parent.children[index + 1].type === 'paragraph') {
+      var legendNode = parent.children[index + 1];
 
-function externLegendVisitor(node, index, parent) {
-  if (index + 1 < parent.children.length && parent.children[index + 1].type === 'paragraph') {
-    var legendNode = parent.children[index + 1];
-
-    if (legendNode.children[0].value.startsWith(legendBlock[node.type])) {
-      var legendText = legendNode.children[0].value.split('\n')[0].replace(legendBlock[node.type], '').trim();
-      var fullLegendLine = legendBlock[node.type] + ' ' + legendText;
-      legendNode.children[0].value = legendNode.children[0].value.replace(fullLegendLine, '').trim();
-      var figcaption = {
-        type: 'figcaption',
-        children: [{
-          type: 'text',
-          value: legendText
-        }],
-        data: {
-          hName: 'figcaption'
+      if (legendNode.children[0].value.startsWith(blocks[node.type])) {
+        var legendText = legendNode.children[0].value.split('\n')[0].replace(blocks[node.type], '').trim();
+        var fullLegendLine = blocks[node.type] + ' ' + legendText;
+        legendNode.children[0].value = legendNode.children[0].value.replace(fullLegendLine, '').trim();
+        var figcaption = {
+          type: 'figcaption',
+          children: [{
+            type: 'text',
+            value: legendText
+          }],
+          data: {
+            hName: 'figcaption'
+          }
+        };
+        var figure = {
+          type: 'figure',
+          children: [clone(node), figcaption],
+          data: {
+            hName: 'figure'
+          }
+        };
+        node.type = figure.type;
+        node.children = figure.children;
+        node.data = figure.data;
+        if (!legendNode.children[0].value) {
+          parent.children.splice(index + 1, 1);
         }
-      };
-      var figure = {
-        type: 'figure',
-        children: [clone(node), figcaption],
-        data: {
-          hName: 'figure'
-        }
-      };
-      node.type = figure.type;
-      node.children = figure.children;
-      node.data = figure.data;
-      if (!legendNode.children[0].value) {
-        parent.children.splice(index + 1, 1);
       }
     }
   }
 }
-
 function getLast(xs) {
   var len = xs.length;
   if (!len) return;

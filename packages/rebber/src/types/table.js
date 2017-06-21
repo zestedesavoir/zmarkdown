@@ -3,18 +3,12 @@ const one = require('../one')
 module.exports = table
 
 const defaultMacro = (ctx, node) => {
-  let j = 0
-  const parsed = []
-  node.children.map(n => parsed.push(one(ctx, n, j++, node)))
+  const parsed = node.children.map((n, index) => one(ctx, n, index, node))
   const inner = parsed.join('')
-  const lengths = []
-  inner.split('\\hline\n').map(l => lengths.push(l.split('&').length))
+  const lengths = inner.split('\\hline\n').map(l => l.split('&').length)
   const cols = lengths.sort(cmp)[0]
   let colHeader = '|'
-  let i = 0
-  for (;i < cols; i++) {
-    colHeader += 'c|'
-  }
+  colHeader += 'c|'.repeat(cols)
   return `\\begin{longtabu}{${colHeader}} \\hline\n${inner}\\end{longtabu}\n\n`
 }
 
