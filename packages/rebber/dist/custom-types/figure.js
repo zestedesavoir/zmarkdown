@@ -25,8 +25,11 @@ var makeExtra = {
   blockquote: function blockquote(node) {},
   code: function code(node) {
     var extra = { language: node.lang.split(' ')[0] };
-    if (node.lang.indexOf(' ') > -1) {
-      extra.lines = node.lang.split(' ')[1].replace('hl_lines=', '').trim();
+    if (node.lang.includes(' ')) {
+      var tail = node.lang.split(' ')[1];
+      if (tail) {
+        extra.lines = tail.replace('hl_lines=', '').trim();
+      }
     }
     return extra;
   }
