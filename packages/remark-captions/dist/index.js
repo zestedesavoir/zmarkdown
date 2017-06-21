@@ -59,16 +59,20 @@ function internLegendVisitor(node, index, parent) {
   node.children = figure.children;
   node.data = figure.data;
 }
+
 function externLegendVisitorCreator(blocks) {
-  return externLegendVisitor;
-  function externLegendVisitor(node, index, parent) {
+  return function (node, index, parent) {
     if (index + 1 < parent.children.length && parent.children[index + 1].type === 'paragraph') {
       var legendNode = parent.children[index + 1];
+      var firstChild = legendNode.children[0];
 
-      if (legendNode.children[0].value.startsWith(blocks[node.type])) {
-        var legendText = legendNode.children[0].value.split('\n')[0].replace(blocks[node.type], '').trim();
+      if (firstChild.value.startsWith(blocks[node.type])) {
+        var firstLine = firstChild.value.split('\n')[0];
+        var legendText = firstLine.replace(blocks[node.type], '').trim();
         var fullLegendLine = blocks[node.type] + ' ' + legendText;
-        legendNode.children[0].value = legendNode.children[0].value.replace(fullLegendLine, '').trim();
+
+        firstChild.value = firstChild.value.replace(fullLegendLine, '').trim();
+
         var figcaption = {
           type: 'figcaption',
           children: [{
@@ -89,13 +93,14 @@ function externLegendVisitorCreator(blocks) {
         node.type = figure.type;
         node.children = figure.children;
         node.data = figure.data;
-        if (!legendNode.children[0].value) {
+        if (!firstChild.value) {
           parent.children.splice(index + 1, 1);
         }
       }
     }
-  }
+  };
 }
+
 function getLast(xs) {
   var len = xs.length;
   if (!len) return;
