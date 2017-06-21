@@ -1,6 +1,6 @@
 {
   "name": "typographic-em-dash",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/typographic-em-dash",
     "type": "git"
