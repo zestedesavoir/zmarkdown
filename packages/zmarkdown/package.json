@@ -19,7 +19,7 @@
     "rehype-html-blocks": "^0.0.11",
     "rehype-katex": "^1.0.1",
     "remark-align": "^0.0.15",
-    "remark-captions": "^0.0.4",
+    "remark-captions": "^0.0.5",
     "remark-comments": "^0.0.11",
     "remark-custom-blocks": "^0.0.13",
     "remark-emoticons": "^0.0.14",
