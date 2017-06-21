@@ -17,7 +17,7 @@ With Legend
 > My citation
 Source: figcapt1
 
-With Legend without Source
+With Legend without Source:
 
 > My citation
 : figcapt2
@@ -26,12 +26,12 @@ haha
 
 > > > Foo··
 > > > Foo
-> > : fc1
+> > Source: fc1
 > >
 > > Bar··
 > > Bar··
-> src: fc2
+> Source: fc2
 >
 > Baz
 > Baz
-src: fc3
+Source: fc3
