@@ -14,13 +14,14 @@ function plugin(opts) {
   return transformer;
 
   function transformer(tree) {
-    visit(tree, 'blockquote', visitor);
+    visit(tree, 'blockquote', internLegendVisitor);
+
     Object.keys(legendBlock).forEach(function (nodeType) {
       return visit(tree, nodeType, externLegendVisitorCreator(blocks));
     });
   }
 }
-function visitor(node, index, parent) {
+function internLegendVisitor(node, index, parent) {
   if (parent && parent.type === 'figure') return;
   var lastP = getLast(node.children);
   if (!lastP || lastP.type !== 'paragraph') return;
@@ -30,7 +31,7 @@ function visitor(node, index, parent) {
   var lines = lastT.value.split('\n');
   var lastLine = getLast(lines);
   if (!lastLine) return;
-  if (!lastLine.includes(':')) return;
+  if (!lastLine.startsWith('Source:')) return;
   var legend = lines.pop().slice(lastLine.indexOf(':') + 1).trim();
 
   lastT.value = lines.join('\n');

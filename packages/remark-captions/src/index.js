@@ -12,12 +12,13 @@ function plugin (opts) {
   return transformer
 
   function transformer (tree) {
-    visit(tree, 'blockquote', visitor)
-    Object.keys(legendBlock).forEach(nodeType => visit(tree, nodeType,
-      externLegendVisitorCreator(blocks)))
+    visit(tree, 'blockquote', internLegendVisitor)
+
+    Object.keys(legendBlock).forEach(nodeType =>
+      visit(tree, nodeType, externLegendVisitorCreator(blocks)))
   }
 }
-function visitor (node, index, parent) {
+function internLegendVisitor (node, index, parent) {
   if (parent && parent.type === 'figure') return
   const lastP = getLast(node.children)
   if (!lastP || lastP.type !== 'paragraph') return
@@ -27,7 +28,7 @@ function visitor (node, index, parent) {
   const lines = lastT.value.split('\n')
   const lastLine = getLast(lines)
   if (!lastLine) return
-  if (!lastLine.includes(':')) return
+  if (!lastLine.startsWith('Source:')) return
   const legend = lines.pop().slice(lastLine.indexOf(':') + 1).trim()
 
   lastT.value = lines.join('\n')
