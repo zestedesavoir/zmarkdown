@@ -62,7 +62,7 @@ const zmdParser = (config) => {
     .use(remarkHeadingShifter, config.headingShifter)
     .use(remarkIframes, config.iframes)
     .use(remarkGridTables)
-    .use(remarkCaptions)
+    .use(remarkCaptions, config.captions)
     .use(remarkKbd)
     .use(remarkMath, config.math)
     .use(remarkNumberedFootnotes)

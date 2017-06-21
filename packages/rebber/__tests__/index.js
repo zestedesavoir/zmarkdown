@@ -96,6 +96,16 @@ ava('emoticon', t => {
   t.deepEqual(contents.trim(), spec.expected.trim())
 })
 
+ava('table', t => {
+  const spec = specs['table']
+  const {contents} = unified()
+    .use(reParse)
+    .use(rebber, {})
+    .processSync(spec.fixture)
+
+  t.deepEqual(contents.trim(), spec.expected.trim())
+})
+
 ava('blockquote', t => {
   const spec = specs['blockquote']
   let compiled = unified()

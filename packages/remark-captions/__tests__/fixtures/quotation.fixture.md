@@ -3,6 +3,11 @@ simple single spaces in the tests)
 
 ## Blockquote
 
+Empty blockquote
+
+>
+
+
 Normal blockquote
 
 > My citation
