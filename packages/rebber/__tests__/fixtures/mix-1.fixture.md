@@ -16,7 +16,7 @@ Disrupt ~~asymmetrical~~ unicorn, pok pok kale chips umami selfies gastropub foo
 > Edison bulb asymmetrical `keffiyeh` schlitz iceland put a bird on it hoodie affogato.
 >
 > Tofu tote bag distillery viral knausgaard, health goth asymmetrical.
-: Guru
+Source: Guru
 
 Asymmetrical pug scenester sustainable enamel pin distillery quinoa keffiyeh. Flannel humblebrag PBR&B polaroid banh mi wolf. Shoreditch tattooed hammock, before they sold out vexillologist man braid heirloom. Activated charcoal craft beer cloud bread meh biodiesel pabst.
 

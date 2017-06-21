@@ -21,9 +21,12 @@ const defaultMacros = {
 const makeExtra = {
   blockquote: node => {},
   code: node => {
-    const extra = { language: node.lang.split(' ')[0]}
-    if (node.lang.indexOf(' ') > -1) {
-      extra.lines = node.lang.split(' ')[1].replace('hl_lines=', '').trim()
+    const extra = {language: node.lang.split(' ')[0]}
+    if (node.lang.includes(' ')) {
+      const tail = node.lang.split(' ')[1]
+      if (tail) {
+        extra.lines = tail.replace('hl_lines=', '').trim()
+      }
     }
     return extra
   }
