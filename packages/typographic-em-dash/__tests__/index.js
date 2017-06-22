@@ -2,7 +2,7 @@
 const entrypoints = [
   '../dist',
   '../src',
-];
+]
 
 const chars = {
   'NARROW NO-BREAK SPACE': '\u202F',
