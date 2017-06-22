@@ -7,9 +7,9 @@ module.exports = function alignPlugin () {
     const lines = value.match(/.*\n/g) || []
     // Check if first line is not empty,
     // here, we don't use \s because a line with a tab is not empty
-    if (/^$| +/.exec(lines[0])) return
+    if (/^$| +/.test(lines[0])) return
     // and if the second line is a heading with trailing spaces
-    if (!/^(-+|=+)\s+\n?$/.exec(lines[1])) return
+    if (!/^(-+|=+)\s+\n?$/.test(lines[1])) return
 
     const now = eat.now()
     const head = lines[0] + lines[1]
