@@ -2,7 +2,7 @@
 const entrypoints = [
   '../dist',
   '../src',
-];
+]
 
 const chars = {
   'NARROW NO-BREAK SPACE': '\u202F',
@@ -19,9 +19,11 @@ entrypoints.forEach(entrypoint => {
 
   test('should do nothing with no param at all', () => expect(semiColon()).toEqual(''))
 
-  test('should do nothing if locale is undefined', () => expect(semiColon(`<< a >>`)).toEqual(`<< a >>`))
+  test('should do nothing if locale is undefined', () =>
+    expect(semiColon(`<< a >>`)).toEqual(`<< a >>`))
 
-  test('should ignore locale not in DB', () => expect(semiColon(`<< a >>`, american)).toEqual(`<< a >>`))
+  test('should ignore locale not in DB', () =>
+    expect(semiColon(`<< a >>`, american)).toEqual(`<< a >>`))
 
   test('should handle fr[-*]', () => {
     const before = `${chars['LEFT-POINTING ANGLE QUOTATION MARK']}${chars['NARROW NO-BREAK SPACE']}`

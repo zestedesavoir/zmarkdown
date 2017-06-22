@@ -2,7 +2,7 @@
 const entrypoints = [
   '../dist',
   '../src',
-];
+]
 
 const chars = {
   'NARROW NO-BREAK SPACE': '\u202F',
@@ -26,8 +26,10 @@ entrypoints.forEach(entrypoint => {
   })
 
   test('should handle fr[-*]', () => {
-    expect(permille(`foo %o`, fr)).toEqual(`foo${chars['NARROW NO-BREAK SPACE']}${chars['PER MILLE SIGN']}`)
-    expect(permille(`foo %o`, frCH)).toEqual(`foo${chars['NARROW NO-BREAK SPACE']}${chars['PER MILLE SIGN']}`)
+    expect(permille(`foo %o`, fr))
+      .toEqual(`foo${chars['NARROW NO-BREAK SPACE']}${chars['PER MILLE SIGN']}`)
+    expect(permille(`foo %o`, frCH))
+      .toEqual(`foo${chars['NARROW NO-BREAK SPACE']}${chars['PER MILLE SIGN']}`)
     expect(permille(`%o`, fr)).toEqual(`${chars['PER MILLE SIGN']}`)
   })
 })
