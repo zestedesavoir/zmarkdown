@@ -996,6 +996,10 @@ describe('HTML rendering', function () {
         const filepath = `${dir}/smart_legend.txt`
         expect(renderFile()(filepath).trim()).to.have.html(loadFixture(filepath).trim())
       })
+      it.skip(`properly renders smart_legend_bis.txt`, function () {
+        const filepath = `${dir}/smart_legend_bis.txt`
+        expect(renderFile()(filepath).trim()).to.have.html(loadFixture(filepath).trim())
+      })
 
       it(`properly renders subsuperscript.txt`, function () {
         const filepath = `${dir}/subsuperscript.txt`

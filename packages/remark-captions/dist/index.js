@@ -9,57 +9,67 @@ var legendBlock = {
   code: 'Code:'
 };
 
+var internLegendBlock = {
+  blockquote: 'Source:',
+  img: 'Figure:'
+};
+
 function plugin(opts) {
-  var blocks = xtend(legendBlock, opts || {});
+  var externalBlocks = xtend(legendBlock, opts && opts.external || {});
+  var internalBlocks = xtend(internLegendBlock, opts && opts.internal || {});
   return transformer;
 
   function transformer(tree) {
-    visit(tree, 'blockquote', internLegendVisitor);
+    Object.keys(internalBlocks).forEach(function (nodeType) {
+      return visit(tree, nodeType, internLegendVisitor(internalBlocks));
+    });
 
-    Object.keys(blocks).forEach(function (nodeType) {
-      return visit(tree, nodeType, externLegendVisitorCreator(blocks));
+    Object.keys(externalBlocks).forEach(function (nodeType) {
+      return visit(tree, nodeType, externLegendVisitorCreator(externalBlocks));
     });
   }
 }
-function internLegendVisitor(node, index, parent) {
-  if (parent && parent.type === 'figure') return;
-  var lastP = getLast(node.children);
-  if (!lastP || lastP.type !== 'paragraph') return;
-  var lastT = getLast(lastP.children);
-  if (!lastT || lastT.type !== 'text') return;
+function internLegendVisitor(internalBlocks) {
+  return function (node, index, parent) {
 
-  var lines = lastT.value.split('\n');
-  var lastLine = getLast(lines);
-  if (!lastLine) return;
-  if (!lastLine.startsWith('Source:')) return;
-  var legend = lines.pop().slice(lastLine.indexOf(':') + 1).trim();
+    if (parent && parent.type === 'figure') return;
+    var lastP = getLast(node.children);
+    if (!lastP || lastP.type !== 'paragraph') return;
+    var lastT = getLast(lastP.children);
+    if (!lastT || lastT.type !== 'text') return;
 
-  lastT.value = lines.join('\n');
+    var lines = lastT.value.split('\n');
+    var lastLine = getLast(lines);
+    if (!lastLine) return;
+    if (!lastLine.startsWith(internalBlocks[node.type])) return;
+    var legend = lines.pop().slice(lastLine.indexOf(':') + 1).trim();
 
-  var figcaption = {
-    type: 'figcaption',
-    children: [{
-      type: 'text',
-      value: legend
-    }],
-    data: {
-      hName: 'figcaption'
-    }
+    lastT.value = lines.join('\n');
+
+    var figcaption = {
+      type: 'figcaption',
+      children: [{
+        type: 'text',
+        value: legend
+      }],
+      data: {
+        hName: 'figcaption'
+      }
+    };
+
+    var figure = {
+      type: 'figure',
+      children: [clone(node), figcaption],
+      data: {
+        hName: 'figure'
+      }
+    };
+
+    node.type = figure.type;
+    node.children = figure.children;
+    node.data = figure.data;
   };
-
-  var figure = {
-    type: 'figure',
-    children: [clone(node), figcaption],
-    data: {
-      hName: 'figure'
-    }
-  };
-
-  node.type = figure.type;
-  node.children = figure.children;
-  node.data = figure.data;
 }
-
 function externLegendVisitorCreator(blocks) {
   return function (node, index, parent) {
     if (index + 1 < parent.children.length && parent.children[index + 1].type === 'paragraph') {
