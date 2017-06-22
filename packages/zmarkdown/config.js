@@ -230,7 +230,7 @@ const config = {
       gridTable: 'Table:',
       code: 'Code:'
     },
-    inrernal: {
+    internal: {
       iframe: 'Video:',
       math: 'Equation:',
       inlineMath: 'Equation:'
