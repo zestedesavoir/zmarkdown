@@ -1,6 +1,5 @@
 import {readdirSync as directory, readFileSync as file} from 'fs'
 import {join} from 'path'
-import ava from 'ava'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import remarkStringify from 'remark-stringify'
@@ -26,7 +25,7 @@ const entrypoints = [
 entrypoints.forEach(entrypoint => {
   const plugin = require(entrypoint)
 
-  ava('kbd', t => {
+  test('kbd', () => {
     const {contents} = unified()
       .use(reParse, {
         footnotes: true
@@ -39,16 +38,16 @@ entrypoints.forEach(entrypoint => {
       .use(rehypeStringify)
       .processSync(specs['kbd'].fixture)
 
-    t.deepEqual(contents, specs['kbd'].expected.trim())
+    expect(contents).toEqual(specs['kbd'].expected.trim())
   })
 
-  ava('to markdown', t => {
+  test('to markdown', () => {
     const {contents} = unified()
       .use(reParse)
       .use(remarkStringify)
       .use(plugin)
       .processSync(specs['kbd'].fixture)
 
-    t.deepEqual(contents, specs['md'].fixture)
+    expect(contents).toEqual(specs['md'].fixture)
   })
 })

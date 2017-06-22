@@ -1,6 +1,5 @@
 import {readdirSync as directory, readFileSync as file} from 'fs'
 import {join} from 'path'
-import ava from 'ava'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
@@ -24,7 +23,7 @@ const entrypoints = [
 entrypoints.forEach(entrypoint => {
   const plugin = require(entrypoint)
 
-  ava('config', t => {
+  test('config', () => {
     const {contents} = unified()
       .use(reParse, {
         footnotes: true
@@ -34,10 +33,10 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync(specs['config'].fixture)
 
-    t.deepEqual(contents, specs['config'].expected.trim())
+    expect(contents).toEqual(specs['config'].expected.trim())
   })
 
-  ava('config2', t => {
+  test('config2', () => {
     const {contents} = unified()
       .use(reParse, {
         footnotes: true
@@ -47,10 +46,10 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync(specs['config2'].fixture)
 
-    t.deepEqual(contents, specs['config2'].expected.trim())
+    expect(contents).toEqual(specs['config2'].expected.trim())
   })
 
-  ava('noconfig', t => {
+  test('noconfig', () => {
     const {contents} = unified()
       .use(reParse, {
         footnotes: true
@@ -60,6 +59,6 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync(specs['noconfig'].fixture)
 
-    t.deepEqual(contents, specs['noconfig'].expected.trim())
+    expect(contents).toEqual(specs['noconfig'].expected.trim())
   })
 })

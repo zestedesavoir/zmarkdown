@@ -1,6 +1,5 @@
 import {readdirSync as directory, readFileSync as file} from 'fs'
 import {join} from 'path'
-import ava from 'ava'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import rehypeStringify from 'rehype-stringify'
@@ -27,7 +26,7 @@ entrypoints.forEach(entrypoint => {
   Object.keys(specs).filter(Boolean).filter(name => !name.endsWith('-without')).forEach(name => {
     const spec = specs[name]
 
-    ava(name, t => {
+    test(name, () => {
       const {contents} = unified()
         .use(reParse, {
           gfm: true,
@@ -43,7 +42,7 @@ entrypoints.forEach(entrypoint => {
         .use(rehypeStringify)
         .processSync(spec.fixture)
 
-      t.deepEqual(contents, spec.expected.trim())
+      expect(contents).toEqual(spec.expected.trim())
     })
   })
 
@@ -51,7 +50,7 @@ entrypoints.forEach(entrypoint => {
   Object.keys(specs).filter(Boolean).filter(name => !name.endsWith('-without')).forEach(name => {
     const spec = specs[name]
 
-    ava(name, t => {
+    test(name, () => {
       const {contents} = unified()
         .use(reParse, {
           gfm: true,
@@ -67,7 +66,7 @@ entrypoints.forEach(entrypoint => {
         .use(rehypeStringify)
         .processSync(spec.fixture)
 
-      t.deepEqual(contents, specs[`${name}-without`].expected.trim())
+      expect(contents).toEqual(specs[`${name}-without`].expected.trim())
     })
   })
 })

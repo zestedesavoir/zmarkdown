@@ -1,10 +1,8 @@
 /* eslint-disable no-irregular-whitespace */
-import ava from 'ava'
-
 const entrypoints = [
   '../dist',
   '../src',
-]
+];
 
 const chars = {
   'NARROW NO-BREAK SPACE': '\u202F',
@@ -18,21 +16,18 @@ const frCH = { locale: 'fr-sw' }
 entrypoints.forEach(entrypoint => {
   const permille = require(entrypoint)
 
-  ava('should do nothing with no param at all', t =>
-    t.deepEqual(permille(), ''))
+  test('should do nothing with no param at all', () => expect(permille()).toEqual(''))
 
-  ava('should handle all locales', t => {
-    t.deepEqual(permille(`foo %o`), `foo ${chars['PER MILLE SIGN']}`)
-    t.deepEqual(permille(`foo %o`, american), `foo ${chars['PER MILLE SIGN']}`)
-    t.deepEqual(permille(`foo %o`, american), `foo ${chars['PER MILLE SIGN']}`)
-    t.deepEqual(permille(`%o`, american), `${chars['PER MILLE SIGN']}`)
+  test('should handle all locales', () => {
+    expect(permille(`foo %o`)).toEqual(`foo ${chars['PER MILLE SIGN']}`)
+    expect(permille(`foo %o`, american)).toEqual(`foo ${chars['PER MILLE SIGN']}`)
+    expect(permille(`foo %o`, american)).toEqual(`foo ${chars['PER MILLE SIGN']}`)
+    expect(permille(`%o`, american)).toEqual(`${chars['PER MILLE SIGN']}`)
   })
 
-  ava('should handle fr[-*]', t => {
-    t.deepEqual(permille(`foo %o`, fr),
-    `foo${chars['NARROW NO-BREAK SPACE']}${chars['PER MILLE SIGN']}`)
-    t.deepEqual(permille(`foo %o`, frCH),
-    `foo${chars['NARROW NO-BREAK SPACE']}${chars['PER MILLE SIGN']}`)
-    t.deepEqual(permille(`%o`, fr), `${chars['PER MILLE SIGN']}`)
+  test('should handle fr[-*]', () => {
+    expect(permille(`foo %o`, fr)).toEqual(`foo${chars['NARROW NO-BREAK SPACE']}${chars['PER MILLE SIGN']}`)
+    expect(permille(`foo %o`, frCH)).toEqual(`foo${chars['NARROW NO-BREAK SPACE']}${chars['PER MILLE SIGN']}`)
+    expect(permille(`%o`, fr)).toEqual(`${chars['PER MILLE SIGN']}`)
   })
 })

@@ -1,6 +1,5 @@
 import {readdirSync as directory, readFileSync as file} from 'fs'
 import {join} from 'path'
-import ava from 'ava'
 import remark from 'remark'
 
 const base = join(__dirname, 'fixtures')
@@ -25,9 +24,9 @@ entrypoints.forEach(entrypoint => {
     const spec = specs[name]
     const shift = name.length > 8 ? Number(name.slice(8)) : undefined
 
-    ava(name, t => {
+    test(name, () => {
       const {contents} = remark().use(plugin, shift).processSync(spec.fixture)
-      t.deepEqual(contents, spec.expected)
+      expect(contents).toEqual(spec.expected)
     })
   })
 })
