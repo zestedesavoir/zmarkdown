@@ -14,7 +14,7 @@ function plugin (opts) {
   function transformer (tree) {
     visit(tree, 'blockquote', internLegendVisitor)
 
-    Object.keys(legendBlock).forEach(nodeType =>
+    Object.keys(blocks).forEach(nodeType =>
       visit(tree, nodeType, externLegendVisitorCreator(blocks)))
   }
 }
