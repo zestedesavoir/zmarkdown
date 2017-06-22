@@ -44,4 +44,15 @@ entrypoints.forEach(entrypoint => {
 
     t.deepEqual(contents, specs['without'].expected.trim())
   })
+
+  ava('regression-1', t => {
+    const {contents} = unified()
+      .use(reParse)
+      .use(remark2rehype)
+      .use(plugin)
+      .use(rehypeStringify)
+      .processSync(specs['regression-1'].fixture.replace(/·/g, ' '))
+
+    t.deepEqual(contents, specs['regression-1'].expected.trim())
+  })
 })

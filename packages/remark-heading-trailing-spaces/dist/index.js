@@ -11,7 +11,7 @@ module.exports = function alignPlugin() {
     // here, we don't use \s because a line with a tab is not empty
     if (/^$| +/.exec(lines[0])) return;
     // and if the second line is a heading with trailing spaces
-    if (!/^-+|=+\s+\n?$/.exec(lines[1])) return;
+    if (!/^(-+|=+)\s+\n?$/.exec(lines[1])) return;
 
     var now = eat.now();
     var head = lines[0] + lines[1];
