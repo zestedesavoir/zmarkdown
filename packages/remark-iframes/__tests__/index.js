@@ -1,6 +1,5 @@
 import {readdirSync as directory, readFileSync as file} from 'fs'
 import {join} from 'path'
-import ava from 'ava'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
@@ -24,7 +23,7 @@ const entrypoints = [
 entrypoints.forEach(entrypoint => {
   const plugin = require(entrypoint)
 
-  ava('video', t => {
+  test('video', () => {
     const config = {
       'www.dailymotion.com': {
         tag: 'iframe',
@@ -140,10 +139,10 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync(specs['video'].fixture)
 
-    t.deepEqual(contents, specs['video'].expected.trim())
+    expect(contents).toEqual(specs['video'].expected.trim())
   })
 
-  ava('extra', t => {
+  test('extra', () => {
     const config = {
       'www.youtube.com': {
         tag: 'iframe',
@@ -175,10 +174,10 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync(specs['extra'].fixture)
 
-    t.deepEqual(contents, specs['extra'].expected.trim())
+    expect(contents).toEqual(specs['extra'].expected.trim())
   })
 
-  ava('Errors without config', t => {
+  test('Errors without config', () => {
     const fail = () => unified()
       .use(reParse)
       .use(plugin)
@@ -186,14 +185,10 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync('')
 
-    t.throws(
-      fail,
-      Error,
-      'remark-iframes needs to be passed a configuration object as option'
-    )
+    expect(fail).toThrowError(Error)
   })
 
-  ava('Errors with empty config', t => {
+  test('Errors with empty config', () => {
     const fail = () => unified()
       .use(reParse)
       .use(plugin, {})
@@ -201,15 +196,11 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync('')
 
-    t.throws(
-      fail,
-      Error,
-      'remark-iframes needs to be passed a configuration object as option'
-    )
+    expect(fail).toThrowError(Error)
   })
 
 
-  ava('Errors with invalid config', t => {
+  test('Errors with invalid config', () => {
     const fail = () => unified()
       .use(reParse)
       .use(plugin, 'foo')
@@ -217,10 +208,6 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync('')
 
-    t.throws(
-      fail,
-      Error,
-      'remark-iframes needs to be passed a configuration object as option'
-    )
+    expect(fail).toThrowError(Error)
   })
 })

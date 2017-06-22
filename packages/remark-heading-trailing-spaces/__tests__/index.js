@@ -1,6 +1,5 @@
 import {readdirSync as directory, readFileSync as file} from 'fs'
 import {join} from 'path'
-import ava from 'ava'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import rehypeStringify from 'rehype-stringify'
@@ -24,7 +23,7 @@ const entrypoints = [
 entrypoints.forEach(entrypoint => {
   const plugin = require(entrypoint)
 
-  ava('with plugin', t => {
+  test('with plugin', () => {
     const {contents} = unified()
       .use(reParse)
       .use(remark2rehype)
@@ -32,20 +31,20 @@ entrypoints.forEach(entrypoint => {
       .use(rehypeStringify)
       .processSync(specs['headings'].fixture.replace(/·/g, ' '))
 
-    t.deepEqual(contents, specs['headings'].expected.trim())
+    expect(contents).toEqual(specs['headings'].expected.trim())
   })
 
-  ava('without', t => {
+  test('without', () => {
     const {contents} = unified()
       .use(reParse)
       .use(remark2rehype)
       .use(rehypeStringify)
       .processSync(specs['headings'].fixture.replace(/·/g, ' '))
 
-    t.deepEqual(contents, specs['without'].expected.trim())
+    expect(contents).toEqual(specs['without'].expected.trim())
   })
 
-  ava('regression-1', t => {
+  test('regression-1', () => {
     const {contents} = unified()
       .use(reParse)
       .use(remark2rehype)
@@ -53,6 +52,6 @@ entrypoints.forEach(entrypoint => {
       .use(rehypeStringify)
       .processSync(specs['regression-1'].fixture.replace(/·/g, ' '))
 
-    t.deepEqual(contents, specs['regression-1'].expected.trim())
+    expect(contents).toEqual(specs['regression-1'].expected.trim())
   })
 })

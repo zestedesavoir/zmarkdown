@@ -1,6 +1,5 @@
 import {readdirSync as directory, readFileSync as file} from 'fs'
 import {join} from 'path'
-import ava from 'ava'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
@@ -30,7 +29,7 @@ entrypoints.forEach(entrypoint => {
     if (name.startsWith('custom')) {
       opts = {external: {table: 'CustomTable:'}}
     }
-    ava(name, t => {
+    test(name, () => {
       const {contents} = unified()
         .use(reParse, {
           gfm: true,
@@ -46,7 +45,7 @@ entrypoints.forEach(entrypoint => {
         .use(stringify)
         .processSync(spec.fixture.replace(/·/g, ' '))
 
-      t.deepEqual(contents, spec.expected.trim())
+      expect(contents).toEqual(spec.expected.trim())
     })
   })
 })

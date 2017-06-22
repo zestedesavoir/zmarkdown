@@ -1,10 +1,8 @@
 /* eslint-disable no-irregular-whitespace */
-import ava from 'ava'
-
 const entrypoints = [
   '../dist',
   '../src',
-]
+];
 
 const chars = {
   'NARROW NO-BREAK SPACE': '\u202F'
@@ -17,17 +15,14 @@ const frCH = { locale: 'fr-sw' }
 entrypoints.forEach(entrypoint => {
   const semiColon = require(entrypoint)
 
-  ava('should do nothing with no param at all', t =>
-    t.deepEqual(semiColon(), ''))
+  test('should do nothing with no param at all', () => expect(semiColon()).toEqual(''))
 
-  ava('should do nothing if locale is undefined', t =>
-    t.deepEqual(semiColon(`foo % bar`), `foo % bar`))
+  test('should do nothing if locale is undefined', () => expect(semiColon(`foo % bar`)).toEqual(`foo % bar`))
 
-  ava('should ignore locale not in DB', t =>
-    t.deepEqual(semiColon(`foo % bar`, american), `foo % bar`))
+  test('should ignore locale not in DB', () => expect(semiColon(`foo % bar`, american)).toEqual(`foo % bar`))
 
-  ava('should handle fr[-*]', t => {
-    t.deepEqual(semiColon(`foo % bar`, fr), `foo${chars['NARROW NO-BREAK SPACE']}% bar`)
-    t.deepEqual(semiColon(`foo % bar`, frCH), `foo${chars['NARROW NO-BREAK SPACE']}% bar`)
+  test('should handle fr[-*]', () => {
+    expect(semiColon(`foo % bar`, fr)).toEqual(`foo${chars['NARROW NO-BREAK SPACE']}% bar`)
+    expect(semiColon(`foo % bar`, frCH)).toEqual(`foo${chars['NARROW NO-BREAK SPACE']}% bar`)
   })
 })

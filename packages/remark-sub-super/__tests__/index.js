@@ -1,6 +1,5 @@
 import {readdirSync as directory, readFileSync as file} from 'fs'
 import {join} from 'path'
-import ava from 'ava'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import rehypeStringify from 'rehype-stringify'
@@ -25,7 +24,7 @@ Object.keys(specs).forEach(name => {
   entrypoints.forEach(entrypoint => {
     const plugin = require(entrypoint)
 
-    ava(name, t => {
+    test(name, () => {
       const {contents} = unified()
         .use(reParse)
         .use(remark2rehype)
@@ -33,7 +32,7 @@ Object.keys(specs).forEach(name => {
         .use(rehypeStringify)
         .processSync(specs[name].fixture)
 
-      t.deepEqual(contents, specs[name].expected.trim())
+      expect(contents).toEqual(specs[name].expected.trim())
     })
   })
 })

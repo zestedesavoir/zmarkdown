@@ -1,6 +1,5 @@
 import {readdirSync as directory, readFileSync as file} from 'fs'
 import {join} from 'path'
-import ava from 'ava'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
@@ -24,7 +23,7 @@ const entrypoints = [
 entrypoints.forEach(entrypoint => {
   const plugin = require(entrypoint)
 
-  ava('align', t => {
+  test('align', () => {
     const spec = specs['align']
     const {contents} = unified()
       .use(reParse)
@@ -33,10 +32,10 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync(spec.fixture)
 
-    t.deepEqual(contents, spec.expected.trim())
+    expect(contents).toEqual(spec.expected.trim())
   })
 
-  ava('align-custom-config', t => {
+  test('align-custom-config', () => {
     const spec = specs['align-custom-config']
     const {contents} = unified()
       .use(reParse)
@@ -48,10 +47,10 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync(spec.fixture)
 
-    t.deepEqual(contents, spec.expected.trim())
+    expect(contents).toEqual(spec.expected.trim())
   })
 
-  ava('block-wrap', t => {
+  test('block-wrap', () => {
     const spec = specs['block-wrap']
     const {contents} = unified()
       .use(reParse)
@@ -60,10 +59,10 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync(spec.fixture)
 
-    t.deepEqual(contents, spec.expected.trim())
+    expect(contents).toEqual(spec.expected.trim())
   })
 
-  ava('center-no-start', t => {
+  test('center-no-start', () => {
     const spec = specs['center-no-start']
     const {contents} = unified()
       .use(reParse)
@@ -72,10 +71,10 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync(spec.fixture)
 
-    t.deepEqual(contents, spec.expected.trim())
+    expect(contents).toEqual(spec.expected.trim())
   })
 
-  ava('right-no-end', t => {
+  test('right-no-end', () => {
     const spec = specs['right-no-end']
     const {contents} = unified()
       .use(reParse)
@@ -84,10 +83,10 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync(spec.fixture)
 
-    t.deepEqual(contents, spec.expected.trim())
+    expect(contents).toEqual(spec.expected.trim())
   })
 
-  ava('right-no-start', t => {
+  test('right-no-start', () => {
     const spec = specs['right-no-start']
     const {contents} = unified()
       .use(reParse)
@@ -96,6 +95,6 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync(spec.fixture)
 
-    t.deepEqual(contents, spec.expected.trim())
+    expect(contents).toEqual(spec.expected.trim())
   })
 })

@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import {readdirSync as directory, readFileSync as file} from 'fs'
 import {join} from 'path'
-import ava from 'ava'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import rebber from '../src'
@@ -30,17 +29,17 @@ const integrationConfig = {
   emoticons: emoticons,
 }
 
-ava('heading', t => {
+test('heading', () => {
   const spec = specs['heading']
   const {contents} = unified()
     .use(reParse)
     .use(rebber)
     .processSync(spec.fixture)
 
-  t.deepEqual(contents, spec.expected)
+  expect(contents).toEqual(spec.expected)
 })
 
-ava('heading with custom config', t => {
+test('heading with custom config', () => {
   const [fixture, expected] = [specs['heading'].fixture, specs['heading-config'].expected]
   const {contents} = unified()
     .use(reParse)
@@ -57,30 +56,30 @@ ava('heading with custom config', t => {
     })
     .processSync(fixture)
 
-  t.deepEqual(contents, expected)
+  expect(contents).toEqual(expected)
 })
 
-ava('paragraph', t => {
+test('paragraph', () => {
   const spec = specs['paragraph']
   const {contents} = unified()
     .use(reParse)
     .use(rebber)
     .processSync(spec.fixture)
 
-  t.deepEqual(contents.trim(), spec.expected.trim())
+  expect(contents.trim()).toEqual(spec.expected.trim())
 })
 
-ava('inline-code', t => {
+test('inline-code', () => {
   const spec = specs['inline-code']
   const {contents} = unified()
     .use(reParse)
     .use(rebber)
     .processSync(spec.fixture)
 
-  t.deepEqual(contents.trim(), spec.expected.trim())
+  expect(contents.trim()).toEqual(spec.expected.trim())
 })
 
-ava('emoticon', t => {
+test('emoticon', () => {
   const spec = specs['emoticon']
   const {contents} = unified()
     .use(reParse)
@@ -93,27 +92,27 @@ ava('emoticon', t => {
     })
     .processSync(spec.fixture)
 
-  t.deepEqual(contents.trim(), spec.expected.trim())
+  expect(contents.trim()).toEqual(spec.expected.trim())
 })
 
-ava('table', t => {
+test('table', () => {
   const spec = specs['table']
   const {contents} = unified()
     .use(reParse)
     .use(rebber, {})
     .processSync(spec.fixture)
 
-  t.deepEqual(contents.trim(), spec.expected.trim())
+  expect(contents.trim()).toEqual(spec.expected.trim())
 })
 
-ava('blockquote', t => {
+test('blockquote', () => {
   const spec = specs['blockquote']
   let compiled = unified()
     .use(reParse)
     .use(rebber)
     .processSync(spec.fixture)
 
-  t.deepEqual(compiled.contents.trim(), spec.expected.trim())
+  expect(compiled.contents.trim()).toEqual(spec.expected.trim())
 
   compiled = unified()
     .use(reParse)
@@ -122,10 +121,10 @@ ava('blockquote', t => {
     })
     .processSync(spec.fixture)
 
-  t.deepEqual(compiled.contents.trim(), spec.expected.trim())
+  expect(compiled.contents.trim()).toEqual(spec.expected.trim())
 })
 
-ava('blockquote with custom config', t => {
+test('blockquote with custom config', () => {
   const [fixture, expected] = [specs['blockquote'].fixture, specs['blockquote-config'].expected]
   const {contents} = unified()
     .use(reParse)
@@ -134,10 +133,10 @@ ava('blockquote with custom config', t => {
     })
     .processSync(fixture)
 
-  t.deepEqual(contents.trim(), expected.trim())
+  expect(contents.trim()).toEqual(expected.trim())
 })
 
-ava('figure+caption', t => {
+test('figure+caption', () => {
   const spec = specs['figure']
   const {contents} = unified()
     .use(reParse)
@@ -149,20 +148,20 @@ ava('figure+caption', t => {
     })
     .processSync(spec.fixture)
 
-  t.deepEqual(contents.trim(), spec.expected.trim())
+  expect(contents.trim()).toEqual(spec.expected.trim())
 })
 
-ava('code', t => {
+test('code', () => {
   const spec = specs['code']
   const {contents} = unified()
     .use(reParse)
     .use(rebber)
     .processSync(spec.fixture)
 
-  t.deepEqual(contents.trim(), spec.expected.trim())
+  expect(contents.trim()).toEqual(spec.expected.trim())
 })
 
-ava('code+caption', t => {
+test('code+caption', () => {
   const spec = specs['figure-code']
 
   const {contents} = unified()
@@ -175,13 +174,13 @@ ava('code+caption', t => {
     })
     .processSync(spec.fixture)
 
-  t.deepEqual(contents.trim(), spec.expected.trim())
+  expect(contents.trim()).toEqual(spec.expected.trim())
 })
 
 Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEach(name => {
   const spec = specs[name]
 
-  ava(name, t => {
+  test(name, () => {
     const {contents} = unified()
       .use(reParse)
       .use(require('remark-emoticons'), emoticons)
@@ -191,6 +190,6 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
       .processSync(spec.fixture.replace(/·/g, ' '))
 
     if (contents.trim() !== spec.expected.trim()) console.log(contents)
-    t.deepEqual(contents.trim(), spec.expected.trim())
+    expect(contents.trim()).toEqual(spec.expected.trim())
   })
 })

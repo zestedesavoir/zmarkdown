@@ -1,6 +1,5 @@
 import {readdirSync as directory, readFileSync as file} from 'fs'
 import {join} from 'path'
-import ava from 'ava'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
@@ -24,7 +23,7 @@ const entrypoints = [
 entrypoints.forEach(entrypoint => {
   const plugin = require(entrypoint)
 
-  ava('with', t => {
+  test('with', () => {
     const {contents} = unified()
       .use(reParse)
       .use(remark2rehype)
@@ -32,20 +31,20 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync(specs['with'].fixture)
 
-    t.deepEqual(contents, specs['with'].expected.trim())
+    expect(contents).toEqual(specs['with'].expected.trim())
   })
 
-  ava('without', t => {
+  test('without', () => {
     const {contents} = unified()
       .use(reParse)
       .use(remark2rehype)
       .use(stringify)
       .processSync(specs['without'].fixture)
 
-    t.deepEqual(contents, specs['without'].expected.trim())
+    expect(contents).toEqual(specs['without'].expected.trim())
   })
 
-  ava('Errors with invalid config: []', t => {
+  test('Errors with invalid config: []', () => {
     const fail = () => unified()
       .use(reParse)
       .use(remark2rehype)
@@ -53,14 +52,10 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync('')
 
-    t.throws(
-      fail,
-      Error,
-      'remark-escape-escaped needs to be passed a configuration array as option'
-    )
+    expect(fail).toThrowError(Error)
   })
 
-  ava('Errors with invalid config: 1', t => {
+  test('Errors with invalid config: 1', () => {
     const fail = () => unified()
       .use(reParse)
       .use(remark2rehype)
@@ -68,10 +63,6 @@ entrypoints.forEach(entrypoint => {
       .use(stringify)
       .processSync('')
 
-    t.throws(
-      fail,
-      Error,
-      'remark-escape-escaped needs to be passed a configuration array as option'
-    )
+    expect(fail).toThrowError(Error)
   })
 })
