@@ -76,18 +76,35 @@ function externLegendVisitorCreator (blocks) {
       const firstChild = legendNode.children[0]
 
       if (firstChild.value.startsWith(blocks[node.type])) {
-        const firstLine = firstChild.value.split('\n')[0]
-        const legendText = firstLine.replace(blocks[node.type], '').trim()
-        const fullLegendLine = `${blocks[node.type]} ${legendText}`
+        const legendNodes = []
+        const followingNodes = []
+        const firstTextLine = firstChild.value.replace(blocks[node.type], '').split('\n')[0]
+        if (firstChild.value.indexOf('\n') !== -1) {
+          followingNodes.push({type: 'text',
+            value: firstChild.value.replace(blocks[node.type], '').split('\n')[1]})
+        }
+        legendNodes.push({
+          type: 'text',
+          value: firstTextLine.trimLeft() // remove the " " after the {prefix}:
+        })
 
-        firstChild.value = firstChild.value.replace(fullLegendLine, '').trim()
+        legendNode.children.forEach((node, index) => {
+          if (index === 0) return
+          if (node.type === 'text') {
+            const keepInLegend = node.value.split('\n')[0]
+            if (node.value.indexOf('\n') !== -1) {
+              node.value = node.value.split('\n')[1]
+              followingNodes.push(node)
+            }
+            legendNodes.push({type: 'text', value: keepInLegend})
+          } else {
+            legendNodes.push(clone(node))
+          }
+        })
 
         const figcaption = {
           type: 'figcaption',
-          children: [{
-            type: 'text',
-            value: legendText
-          }],
+          children: legendNodes,
           data: {
             hName: 'figcaption',
           },
@@ -105,7 +122,9 @@ function externLegendVisitorCreator (blocks) {
         node.type = figure.type
         node.children = figure.children
         node.data = figure.data
-        if (!firstChild.value) {
+        if (followingNodes.length) {
+          parent.children.splice(index + 1, 1, {type: 'paragraph', children: followingNodes})
+        } else {
           parent.children.splice(index + 1, 1)
         }
       }
