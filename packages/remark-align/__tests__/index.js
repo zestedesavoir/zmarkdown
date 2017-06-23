@@ -1,100 +1,117 @@
-import {readdirSync as directory, readFileSync as file} from 'fs'
-import {join} from 'path'
+import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
 
-const base = join(__dirname, 'fixtures')
-const specs = directory(base).reduce((tests, contents) => {
-  const parts = contents.split('.')
-  if (!tests[parts[0]]) {
-    tests[parts[0]] = {}
-  }
-  tests[parts[0]][parts[1]] = file(join(base, contents), 'utf-8')
-  return tests
-}, {})
+import remarkAlign from '../src/'
 
-const entrypoints = [
-  '../dist',
-  '../src',
-]
+const render = (text, config) => unified()
+  .use(reParse)
+  .use(remarkAlign, config)
+  .use(remark2rehype)
+  .use(stringify)
+  .processSync(text)
 
-entrypoints.forEach(entrypoint => {
-  const plugin = require(entrypoint)
+const alignFixture = dedent`
+  Test align
+  ==========
 
-  test('align', () => {
-    const spec = specs['align']
-    const {contents} = unified()
-      .use(reParse)
-      .use(plugin)
-      .use(remark2rehype)
-      .use(stringify)
-      .processSync(spec.fixture)
+  A simple paragraph
 
-    expect(contents).toEqual(spec.expected.trim())
+  ->A centered paragraph<-
+
+  a simple paragraph
+
+  ->A right aligned paragraph->
+
+  an other simple paragraph
+
+  A simple paragraph
+
+  ->A centered paragraph<-
+
+  a simple paragraph
+
+  ->A right aligned paragraph->
+
+  an other simple paragraph
+
+  ->A centered paragraph.
+
+  Containing two paragraph<-
+
+  an other simple paragraph
+
+  ->A right aligned paragraph.
+
+  Containing two paragraph<-
+
+  an other simple paragraph
+
+  ->A centered paragraph.<-
+  ->An other centered paragraph.<-
+
+  a simple paragraph
+
+  ->A started block without end.
+`
+
+test('align', () => {
+  const { contents } = render(alignFixture)
+  expect(contents).toMatchSnapshot()
+})
+
+test('align-custom-config', () => {
+  const { contents } = render(alignFixture, {
+    right: 'custom-right',
+    center: 'custom-center'
   })
+  expect(contents).toMatchSnapshot()
+})
 
-  test('align-custom-config', () => {
-    const spec = specs['align-custom-config']
-    const {contents} = unified()
-      .use(reParse)
-      .use(plugin, {
-        right: 'custom-right',
-        center: 'custom-center'
-      })
-      .use(remark2rehype)
-      .use(stringify)
-      .processSync(spec.fixture)
+test('block-wrap', () => {
+  const { contents } = render(dedent`
+    # wraps blocks e.g. title:
 
-    expect(contents).toEqual(spec.expected.trim())
-  })
+    -> foo
 
-  test('block-wrap', () => {
-    const spec = specs['block-wrap']
-    const {contents} = unified()
-      .use(reParse)
-      .use(plugin)
-      .use(remark2rehype)
-      .use(stringify)
-      .processSync(spec.fixture)
+    # title
 
-    expect(contents).toEqual(spec.expected.trim())
-  })
+    foo ->
+  `)
+  expect(contents).toMatchSnapshot()
+})
 
-  test('center-no-start', () => {
-    const spec = specs['center-no-start']
-    const {contents} = unified()
-      .use(reParse)
-      .use(plugin)
-      .use(remark2rehype)
-      .use(stringify)
-      .processSync(spec.fixture)
+test('center-no-start', () => {
+  const { contents } = render(dedent`
+    # title
 
-    expect(contents).toEqual(spec.expected.trim())
-  })
+    foo <-
 
-  test('right-no-end', () => {
-    const spec = specs['right-no-end']
-    const {contents} = unified()
-      .use(reParse)
-      .use(plugin)
-      .use(remark2rehype)
-      .use(stringify)
-      .processSync(spec.fixture)
+    # title
+  `)
+  expect(contents).toMatchSnapshot()
+})
 
-    expect(contents).toEqual(spec.expected.trim())
-  })
+test('right-no-end', () => {
+  const { contents } = render(dedent`
+    # title
 
-  test('right-no-start', () => {
-    const spec = specs['right-no-start']
-    const {contents} = unified()
-      .use(reParse)
-      .use(plugin)
-      .use(remark2rehype)
-      .use(stringify)
-      .processSync(spec.fixture)
+    -> foo
 
-    expect(contents).toEqual(spec.expected.trim())
-  })
+    # title
+  `)
+  expect(contents).toMatchSnapshot()
+})
+
+test('right-no-start', () => {
+  const { contents } = render(dedent`
+    # title
+
+    foo ->
+
+    # title
+  `)
+  expect(contents).toMatchSnapshot()
 })
