@@ -3,8 +3,13 @@
     "node": ">=6",
     "npm": ">=5"
   },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/packages/zmarkdown/"
+    ]
+  },
   "devDependencies": {
-    "ava": "^0.19.1",
     "babel-cli": "^6.24.1",
     "babel-jest": "^20.0.3",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -22,7 +27,6 @@
     "jest": "^20.0.4",
     "lerna": "^2.0.0-rc.5",
     "mocha": "^3.4.2",
-    "nyc": "^11.0.2",
     "rebber": "0.0.11",
     "rehype-abbr": "0.0.13",
     "rehype-footnotes-title": "0.0.10",
