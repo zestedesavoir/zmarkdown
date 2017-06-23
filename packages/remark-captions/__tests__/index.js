@@ -28,7 +28,7 @@ entrypoints.forEach(entrypoint => {
     const spec = specs[name]
     let opts = null
     if (name.startsWith('custom')) {
-      opts = {table: 'CustomTable:'}
+      opts = {external: {table: 'CustomTable:'}}
     }
     ava(name, t => {
       const {contents} = unified()

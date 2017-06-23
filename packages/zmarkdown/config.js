@@ -225,9 +225,16 @@ const config = {
     }
   },
   captions: {
-    table: 'Table:',
-    gridTable: 'Table:',
-    code: 'Code:',
+    external: {
+      table: 'Table:',
+      gridTable: 'Table:',
+      code: 'Code:'
+    },
+    internal: {
+      iframe: 'Video:',
+      math: 'Equation:',
+      inlineMath: 'Equation:'
+    }
   }
 }
 

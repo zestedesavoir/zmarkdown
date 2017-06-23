@@ -4,62 +4,71 @@ const xtend = require('xtend')
 
 const legendBlock = {
   table: 'Table:',
-  code: 'Code:',
+  code: 'Code:'
+}
+
+const internLegendBlock = {
+  blockquote: 'Source:',
+  img: 'Figure:'
 }
 
 function plugin (opts) {
-  const blocks = xtend(legendBlock, opts || {})
+  const externalBlocks = xtend(legendBlock, (opts && opts.external) || {})
+  const internalBlocks = xtend(internLegendBlock, (opts && opts.internal) || {})
   return transformer
 
   function transformer (tree) {
-    visit(tree, 'blockquote', internLegendVisitor)
+    Object.keys(internalBlocks).forEach((nodeType) =>
+      visit(tree, nodeType, internLegendVisitor(internalBlocks)))
 
-    Object.keys(legendBlock).forEach(nodeType =>
-      visit(tree, nodeType, externLegendVisitorCreator(blocks)))
+    Object.keys(externalBlocks).forEach(nodeType =>
+      visit(tree, nodeType, externLegendVisitorCreator(externalBlocks)))
   }
 }
-function internLegendVisitor (node, index, parent) {
-  if (parent && parent.type === 'figure') return
-  const lastP = getLast(node.children)
-  if (!lastP || lastP.type !== 'paragraph') return
-  const lastT = getLast(lastP.children)
-  if (!lastT || lastT.type !== 'text') return
+function internLegendVisitor (internalBlocks) {
+  return function (node, index, parent) {
 
-  const lines = lastT.value.split('\n')
-  const lastLine = getLast(lines)
-  if (!lastLine) return
-  if (!lastLine.startsWith('Source:')) return
-  const legend = lines.pop().slice(lastLine.indexOf(':') + 1).trim()
+    if (parent && parent.type === 'figure') return
+    const lastP = getLast(node.children)
+    if (!lastP || lastP.type !== 'paragraph') return
+    const lastT = getLast(lastP.children)
+    if (!lastT || lastT.type !== 'text') return
 
-  lastT.value = lines.join('\n')
+    const lines = lastT.value.split('\n')
+    const lastLine = getLast(lines)
+    if (!lastLine) return
+    if (!lastLine.startsWith(internalBlocks[node.type])) return
+    const legend = lines.pop().slice(lastLine.indexOf(':') + 1).trim()
 
-  const figcaption = {
-    type: 'figcaption',
-    children: [{
-      type: 'text',
-      value: legend,
-    }],
-    data: {
-      hName: 'figcaption',
-    },
+    lastT.value = lines.join('\n')
+
+    const figcaption = {
+      type: 'figcaption',
+      children: [{
+        type: 'text',
+        value: legend,
+      }],
+      data: {
+        hName: 'figcaption',
+      },
+    }
+
+    const figure = {
+      type: 'figure',
+      children: [
+        clone(node),
+        figcaption,
+      ],
+      data: {
+        hName: 'figure',
+      },
+    }
+
+    node.type = figure.type
+    node.children = figure.children
+    node.data = figure.data
   }
-
-  const figure = {
-    type: 'figure',
-    children: [
-      clone(node),
-      figcaption,
-    ],
-    data: {
-      hName: 'figure',
-    },
-  }
-
-  node.type = figure.type
-  node.children = figure.children
-  node.data = figure.data
 }
-
 function externLegendVisitorCreator (blocks) {
   return function (node, index, parent) {
     if (index + 1 < parent.children.length && parent.children[index + 1].type === 'paragraph') {
@@ -67,18 +76,35 @@ function externLegendVisitorCreator (blocks) {
       const firstChild = legendNode.children[0]
 
       if (firstChild.value.startsWith(blocks[node.type])) {
-        const firstLine = firstChild.value.split('\n')[0]
-        const legendText = firstLine.replace(blocks[node.type], '').trim()
-        const fullLegendLine = `${blocks[node.type]} ${legendText}`
+        const legendNodes = []
+        const followingNodes = []
+        const firstTextLine = firstChild.value.replace(blocks[node.type], '').split('\n')[0]
+        if (firstChild.value.includes('\n')) {
+          followingNodes.push({type: 'text',
+            value: firstChild.value.replace(blocks[node.type], '').split('\n')[1]})
+        }
+        legendNodes.push({
+          type: 'text',
+          value: firstTextLine.trimLeft() // remove the " " after the {prefix}:
+        })
 
-        firstChild.value = firstChild.value.replace(fullLegendLine, '').trim()
+        legendNode.children.forEach((node, index) => {
+          if (index === 0) return
+          if (node.type === 'text') {
+            const keepInLegend = node.value.split('\n')[0]
+            if (node.value.includes('\n')) {
+              node.value = node.value.split('\n')[1]
+              followingNodes.push(node)
+            }
+            legendNodes.push({type: 'text', value: keepInLegend})
+          } else {
+            legendNodes.push(clone(node))
+          }
+        })
 
         const figcaption = {
           type: 'figcaption',
-          children: [{
-            type: 'text',
-            value: legendText
-          }],
+          children: legendNodes,
           data: {
             hName: 'figcaption',
           },
@@ -96,7 +122,9 @@ function externLegendVisitorCreator (blocks) {
         node.type = figure.type
         node.children = figure.children
         node.data = figure.data
-        if (!firstChild.value) {
+        if (followingNodes.length) {
+          parent.children.splice(index + 1, 1, {type: 'paragraph', children: followingNodes})
+        } else {
           parent.children.splice(index + 1, 1)
         }
       }
