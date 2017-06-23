@@ -13,8 +13,13 @@ processor][processor] and its [**MDAST**][mdast] syntax tree, [**rehype**][rehyp
 * npm `>=` **5**
 
 1. clone
-2. `yarn`
-3. `lerna run test`
+2. `npm install`
+3. `npm test`
+
+This project uses [Jest][jest] for testing. It is recommended to install the Jest CLI tools, and run Jest in watch mode when developing.
+
+ - `npm install -g jest`
+ - `jest --watch --notify` (`--notify` sends desktop notifications when tests run)
 
 ## Packages
 
@@ -127,6 +132,8 @@ processor][processor] and its [**MDAST**][mdast] syntax tree, [**rehype**][rehyp
 [rehype]: https://github.com/wooorm/rehype
 
 [textr]: https://github.com/A/textr
+
+[jest]: https://facebook.github.io/jest/
 
 [rebber]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rebber#rebber--
 [rehype-abbr]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rehype-abbr#rehype-abbr--
