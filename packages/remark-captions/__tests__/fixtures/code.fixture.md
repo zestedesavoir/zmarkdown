@@ -16,6 +16,13 @@ Code: figcapt1
 ```python
 print('bla')
 ```
+Code: figcapt1  
+break
+
+
+```python
+print('bla')
+```
 Code: figcapt1 *em* **strong `code`** end
 bla
 

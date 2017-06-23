@@ -80,7 +80,7 @@ function externLegendVisitorCreator(blocks) {
         var legendNodes = [];
         var followingNodes = [];
         var firstTextLine = firstChild.value.replace(blocks[node.type], '').split('\n')[0];
-        if (firstChild.value.indexOf('\n') !== -1) {
+        if (firstChild.value.includes('\n')) {
           followingNodes.push({ type: 'text',
             value: firstChild.value.replace(blocks[node.type], '').split('\n')[1] });
         }
@@ -93,7 +93,7 @@ function externLegendVisitorCreator(blocks) {
           if (index === 0) return;
           if (node.type === 'text') {
             var keepInLegend = node.value.split('\n')[0];
-            if (node.value.indexOf('\n') !== -1) {
+            if (node.value.includes('\n')) {
               node.value = node.value.split('\n')[1];
               followingNodes.push(node);
             }
