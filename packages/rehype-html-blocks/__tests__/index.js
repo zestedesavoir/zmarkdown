@@ -1,72 +1,146 @@
-import {readdirSync as directory, readFileSync as file} from 'fs'
-import {join} from 'path'
+import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import rehypeStringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
 
-const base = join(__dirname, 'fixtures')
-const specs = directory(base).reduce((tests, contents) => {
-  const parts = contents.split('.')
-  if (!tests[parts[0]]) {
-    tests[parts[0]] = {}
-  }
-  tests[parts[0]][parts[1]] = file(join(base, contents), 'utf-8')
-  return tests
-}, {})
+import htmlBlocks from '../src/'
 
-const entrypoints = [
-  '../dist',
-  '../src',
-]
+const render = (use, text) => unified()
+  .use(reParse, {
+    gfm: true,
+    commonmark: false,
+    yaml: false,
+    footnotes: true,
+    /* sets list of known blocks to nothing, otherwise <h3>hey</h3> would become
+    &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
+    blocks: [],
+  })
+  .use(remark2rehype, { allowDangerousHTML: true })
+  .use(use ? htmlBlocks : () => {})
+  .use(rehypeStringify)
+  .processSync(text)
 
-entrypoints.forEach(entrypoint => {
-  const plugin = require(entrypoint)
+Array.from([[true, 'with'], [false, 'without']]).forEach(([use, str]) => {
+  it(`should process simple div ${str} rehype-html-blocks`, () => {
+    const { contents } = render(use, dedent`
+    <div id="sidebar">
 
-  Object.keys(specs).filter(Boolean).filter(name => !name.endsWith('-without')).forEach(name => {
-    const spec = specs[name]
+       _foo_
 
-    test(name, () => {
-      const {contents} = unified()
-        .use(reParse, {
-          gfm: true,
-          commonmark: false,
-          yaml: false,
-          footnotes: true,
-          /* sets list of known blocks to nothing, otherwise <h3>hey</h3> would become
-          &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
-          blocks: [],
-        })
-        .use(remark2rehype, { allowDangerousHTML: true })
-        .use(plugin)
-        .use(rehypeStringify)
-        .processSync(spec.fixture)
+    </div>
 
-      expect(contents).toEqual(spec.expected.trim())
-    })
+    And now in uppercase:
+
+    <DIV>
+    foo
+    </DIV>
+  `)
+
+    expect(contents).toMatchSnapshot()
   })
 
+  it(`should process inline html ${str} rehype-html-blocks`, () => {
+    const { contents } = render(use, dedent`
+      Here's a simple block:
 
-  Object.keys(specs).filter(Boolean).filter(name => !name.endsWith('-without')).forEach(name => {
-    const spec = specs[name]
+      <div>
+        foo
+      </div>
 
-    test(name, () => {
-      const {contents} = unified()
-        .use(reParse, {
-          gfm: true,
-          commonmark: false,
-          yaml: false,
-          footnotes: true,
-          /* sets list of known blocks to nothing, otherwise <h3>hey</h3> would become
-          &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
-          blocks: [],
-        })
-        .use(remark2rehype, { allowDangerousHTML: true })
-        // .use(plugin)
-        .use(rehypeStringify)
-        .processSync(spec.fixture)
+      This should be a code block, though:
 
-      expect(contents).toEqual(specs[`${name}-without`].expected.trim())
-    })
+        <div>
+          foo
+        </div>
+
+      As should this:
+
+        <div>foo</div>
+
+      Now, nested:
+
+      <div>
+        <div>
+          <div>
+            foo
+          </div>
+        </div>
+      </div>
+
+      This should just be an HTML comment:
+
+      <!-- Comment -->
+
+      Multiline:
+
+      <!--
+      Blah
+      Blah
+      -->
+
+      Code block:
+
+        <!-- Comment -->
+
+      Just plain comment, with trailing spaces on the line:
+
+      <!-- foo -->
+
+      Code:
+
+        <hr />
+
+      Hr's:
+
+      <hr>
+
+      <hr/>
+
+      <hr />
+
+      <hr>
+
+      <hr/>
+
+      <hr />
+
+      <hr class="foo" id="bar" />
+
+      <hr class="foo" id="bar"/>
+
+      <hr class="foo" id="bar" >
+
+      <some [weird](http://example.com) stuff>
+    `)
+    expect(contents).toMatchSnapshot()
+  })
+
+  it(`should process multi-line tags ${str} rehype-html-blocks`, () => {
+    const { contents } = render(use, dedent`
+
+      <div>
+
+      asdf asdfasd
+
+      </div>
+
+      <div>
+
+      foo bar
+
+      </div>
+      No blank line.
+    `)
+    expect(contents).toMatchSnapshot()
+  })
+
+  it(`should render the same ${str} rehype-html-blocks`, () => {
+    const { contents } = render(use, dedent`
+      **<DIV>
+      foo
+      </DIV>**
+    `)
+    expect(contents).toMatchSnapshot()
   })
 })

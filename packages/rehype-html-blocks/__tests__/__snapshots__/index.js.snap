@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should process inline html with rehype-html-blocks 1`] = `
+"<p>Here's a simple block:</p>
+<p>&#x3C;div>
+  foo
+&#x3C;/div></p>
+<p>This should be a code block, though:</p>
+<p>  &#x3C;div>
+    foo
+  &#x3C;/div></p>
+<p>As should this:</p>
+<p>  &#x3C;div>foo&#x3C;/div></p>
+<p>Now, nested:</p>
+<p>&#x3C;div>
+  &#x3C;div>
+    &#x3C;div>
+      foo
+    &#x3C;/div>
+  &#x3C;/div>
+&#x3C;/div></p>
+<p>This should just be an HTML comment:</p>
+<p>&#x3C;!-- Comment --></p>
+<p>Multiline:</p>
+<p>&#x3C;!--
+Blah
+Blah
+--></p>
+<p>Code block:</p>
+<p>  &#x3C;!-- Comment --></p>
+<p>Just plain comment, with trailing spaces on the line:</p>
+<p>&#x3C;!-- foo --></p>
+<p>Code:</p>
+<p>  &#x3C;hr /></p>
+<p>Hr's:</p>
+<p>&#x3C;hr></p>
+<p>&#x3C;hr/></p>
+<p>&#x3C;hr /></p>
+<p>&#x3C;hr></p>
+<p>&#x3C;hr/></p>
+<p>&#x3C;hr /></p>
+<p>&#x3C;hr class=\\"foo\\" id=\\"bar\\" /></p>
+<p>&#x3C;hr class=\\"foo\\" id=\\"bar\\"/></p>
+<p>&#x3C;hr class=\\"foo\\" id=\\"bar\\" ></p>
+<p>&#x3C;some <a href=\\"http://example.com\\">weird</a> stuff></p>"
+`;
+
+exports[`should process inline html without rehype-html-blocks 1`] = `
+"<p>Here's a simple block:</p>
+&#x3C;div>
+  foo
+&#x3C;/div>
+<p>This should be a code block, though:</p>
+  &#x3C;div>
+    foo
+  &#x3C;/div>
+<p>As should this:</p>
+<p>  &#x3C;div>foo&#x3C;/div></p>
+<p>Now, nested:</p>
+&#x3C;div>
+  &#x3C;div>
+    &#x3C;div>
+      foo
+    &#x3C;/div>
+  &#x3C;/div>
+&#x3C;/div>
+<p>This should just be an HTML comment:</p>
+&#x3C;!-- Comment -->
+<p>Multiline:</p>
+&#x3C;!--
+Blah
+Blah
+-->
+<p>Code block:</p>
+  &#x3C;!-- Comment -->
+<p>Just plain comment, with trailing spaces on the line:</p>
+&#x3C;!-- foo -->
+<p>Code:</p>
+  &#x3C;hr />
+<p>Hr's:</p>
+&#x3C;hr>
+&#x3C;hr/>
+&#x3C;hr />
+&#x3C;hr>
+&#x3C;hr/>
+&#x3C;hr />
+&#x3C;hr class=\\"foo\\" id=\\"bar\\" />
+&#x3C;hr class=\\"foo\\" id=\\"bar\\"/>
+&#x3C;hr class=\\"foo\\" id=\\"bar\\" >
+<p>&#x3C;some <a href=\\"http://example.com\\">weird</a> stuff></p>"
+`;
+
+exports[`should process multi-line tags with rehype-html-blocks 1`] = `
+"<p>&#x3C;div></p>
+<p>asdf asdfasd</p>
+<p>&#x3C;/div></p>
+<p>&#x3C;div></p>
+<p>foo bar</p>
+<p>&#x3C;/div>
+No blank line.</p>"
+`;
+
+exports[`should process multi-line tags without rehype-html-blocks 1`] = `
+"&#x3C;div>
+<p>asdf asdfasd</p>
+&#x3C;/div>
+&#x3C;div>
+<p>foo bar</p>
+&#x3C;/div>
+No blank line."
+`;
+
+exports[`should process simple div with rehype-html-blocks 1`] = `
+"<p>&#x3C;div id=\\"sidebar\\"></p>
+<p>   <em>foo</em></p>
+<p>&#x3C;/div></p>
+<p>And now in uppercase:</p>
+<p>&#x3C;DIV>
+foo
+&#x3C;/DIV></p>"
+`;
+
+exports[`should process simple div without rehype-html-blocks 1`] = `
+"&#x3C;div id=\\"sidebar\\">
+<p>   <em>foo</em></p>
+&#x3C;/div>
+<p>And now in uppercase:</p>
+&#x3C;DIV>
+foo
+&#x3C;/DIV>"
+`;
+
+exports[`should render the same with rehype-html-blocks 1`] = `
+"<p><strong>&#x3C;DIV>
+foo
+&#x3C;/DIV></strong></p>"
+`;
+
+exports[`should render the same without rehype-html-blocks 1`] = `
+"<p><strong>&#x3C;DIV>
+foo
+&#x3C;/DIV></strong></p>"
+`;
