@@ -1,64 +1,51 @@
-import {readdirSync as directory, readFileSync as file} from 'fs'
-import {join} from 'path'
+import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
+import footnotesTitle from '../src/'
 
-const base = join(__dirname, 'fixtures')
-const specs = directory(base).reduce((tests, contents) => {
-  const parts = contents.split('.')
-  if (!tests[parts[0]]) {
-    tests[parts[0]] = {}
-  }
-  tests[parts[0]][parts[1]] = file(join(base, contents), 'utf-8')
-  return tests
-}, {})
-
-const entrypoints = [
-  '../dist',
-  '../src',
-]
-
-entrypoints.forEach(entrypoint => {
-  const plugin = require(entrypoint)
-
-  test('config', () => {
-    const {contents} = unified()
-      .use(reParse, {
-        footnotes: true
-      })
-      .use(remark2rehype)
-      .use(plugin, 'Foo bar $id')
-      .use(stringify)
-      .processSync(specs['config'].fixture)
-
-    expect(contents).toEqual(specs['config'].expected.trim())
+const render = config => unified()
+  .use(reParse, {
+    footnotes: true
   })
+  .use(remark2rehype)
+  .use(footnotesTitle, config)
+  .use(stringify)
+  .processSync(dedent`
+    This is the body with a footnote[^1] or two[^2] or more[^3] [^4] [^5].
 
-  test('config2', () => {
-    const {contents} = unified()
-      .use(reParse, {
-        footnotes: true
-      })
-      .use(remark2rehype)
-      .use(plugin, 'Baz $id qux?')
-      .use(stringify)
-      .processSync(specs['config2'].fixture)
+    Also a reference that does not exist[^6].
 
-    expect(contents).toEqual(specs['config2'].expected.trim())
-  })
+    [^1]: Footnote that ends with a list:
 
-  test('noconfig', () => {
-    const {contents} = unified()
-      .use(reParse, {
-        footnotes: true
-      })
-      .use(remark2rehype)
-      .use(plugin)
-      .use(stringify)
-      .processSync(specs['noconfig'].fixture)
+        * item 1
+        * item 2
 
-    expect(contents).toEqual(specs['noconfig'].expected.trim())
-  })
+    [^2]: > This footnote is a blockquote.
+
+    [^3]: A simple oneliner.
+
+    [^4]: A footnote with multiple paragraphs.
+
+        Paragraph two.
+
+    [^5]: First line of first paragraph.
+    Second line of first paragraph is not intended.
+    Nor is third...
+  `)
+
+it('renders correctly with first config', () => {
+  const { contents } = render('Foo bar $id')
+  expect(contents).toMatchSnapshot()
+})
+
+it('renders correctly with second config', () => {
+  const { contents } = render('Baz $id qux?')
+  expect(contents).toMatchSnapshot()
+})
+
+it('renders correctly without config', () => {
+  const { contents } = render()
+  expect(contents).toMatchSnapshot()
 })
