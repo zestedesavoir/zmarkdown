@@ -42,7 +42,7 @@ function internLegendVisitor(internalBlocks) {
     // find which child contains the last legend
     var legendChildIndex = -1;
     lastP.children.forEach(function (child, index) {
-      if (child.type === 'text' && child.value.includes('Source')) {
+      if (child.type === 'text' && (child.value.startsWith(internalBlocks[node.type]) || child.value.includes('\n' + internalBlocks[node.type]))) {
         legendChildIndex = index;
       }
     });
