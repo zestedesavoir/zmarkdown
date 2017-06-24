@@ -68,8 +68,45 @@ exports[`custom-table 1`] = `
 <p>CustomTable: bis</p>"
 `;
 
+exports[`external legend: two legends 1`] = `
+"<figure><table>
+<thead>
+<tr>
+<th>head1</th>
+<th>head2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bla</td>
+<td>bla</td>
+</tr>
+</tbody>
+</table><figcaption>figcapt1</figcaption></figure>
+<p>Table: bis</p>"
+`;
+
+exports[`internal legend: two legends 1`] = `
+"<p>Should only keep the 1st</p>
+<figure><blockquote>
+<p>My citation
+Source: first capt</p>
+</blockquote><figcaption>last capt<br>
+2nd line</figcaption></figure>
+<p>noop</p>
+<figure><blockquote>
+<p>foo
+bar
+baz
+qux
+Source: <strong>first</strong>
+b<em>a</em>r</p>
+</blockquote><figcaption>This is <strong>the real</strong> <code>source</code></figcaption></figure>
+<p>noop</p>"
+`;
+
 exports[`quotation 1`] = `
-"<p>(for convenience, · are replaced with
+"<p>(for convenience,   are replaced with
 simple single spaces in the tests)</p>
 <h2>Blockquote</h2>
 <p>Empty blockquote</p>
@@ -90,14 +127,15 @@ simple single spaces in the tests)</p>
 </blockquote>
 <p>haha</p>
 <figure><blockquote>
+<blockquote>
 <figure><blockquote>
-<figure><blockquote>
-<p>Foo··
+<p>Foo<br>
 Foo</p>
 </blockquote><figcaption>fc1</figcaption></figure>
-<p>Bar··
-Bar··</p>
-</blockquote><figcaption>fc2</figcaption></figure>
+<p>Bar<br>
+Bar<br>
+Source: fc2</p>
+</blockquote>
 <p>Baz
 Baz</p>
 </blockquote><figcaption>fc3</figcaption></figure>"
@@ -134,20 +172,5 @@ exports[`table 1`] = `
 <td>bla</td>
 </tr>
 </tbody>
-</table><figcaption>figcapt1</figcaption></figure>
-<figure><table>
-<thead>
-<tr>
-<th>head1</th>
-<th>head2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>bla</td>
-<td>bla</td>
-</tr>
-</tbody>
-</table><figcaption>figcapt1</figcaption></figure>
-<p>Table: bis</p>"
+</table><figcaption>figcapt1</figcaption></figure>"
 `;
