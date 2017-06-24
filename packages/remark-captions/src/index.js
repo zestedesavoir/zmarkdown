@@ -38,7 +38,7 @@ function internLegendVisitor (internalBlocks) {
     // find which child contains the last legend
     let legendChildIndex = -1
     lastP.children.forEach((child, index) => {
-      if (child.type === 'text' && child.value.includes('\nSource')) {
+      if (child.type === 'text' && child.value.includes('Source')) {
         legendChildIndex = index
       }
     })

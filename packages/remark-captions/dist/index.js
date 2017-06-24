@@ -32,7 +32,7 @@ function plugin(opts) {
 function internLegendVisitor(internalBlocks) {
   return function (node, index, parent) {
 
-    // if already wrap in figure, skip
+    // if already wrapped in figure, skip
     if (parent && parent.type === 'figure') return;
 
     // legend can only be in a paragraph
@@ -42,7 +42,7 @@ function internLegendVisitor(internalBlocks) {
     // find which child contains the last legend
     var legendChildIndex = -1;
     lastP.children.forEach(function (child, index) {
-      if (child.type === 'text' && child.value.includes('\nSource')) {
+      if (child.type === 'text' && child.value.includes('Source')) {
         legendChildIndex = index;
       }
     });
