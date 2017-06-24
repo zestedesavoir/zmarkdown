@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`regression 1 1`] = `
+"<p>a<sup>b</sup> a<sup>b</sup> a<sup>b</sup> a<sup>b</sup> a<sup>b</sup></p>
+<p>a<sub>b</sub> a<sub>b</sub> a<sub>b</sub> a<sub>b</sub> a<sub>b</sub></p>
+<p>a<sub>b</sub> a<sup>b</sup> a<sub>b</sub> a<sup>b</sup> a<sub>b</sub> a<sup>b</sup></p>
+<p>a<sup>b</sup> a<sub>b</sub> a<sup>b</sup> a<sub>b</sub> a<sup>b</sup> a<sub>b</sub></p>"
+`;
+
+exports[`regression 2 1`] = `
+"<p>Literally s<sup>e</sup>lfies tbh lo-fi. Actually health go retro polaroidsriracha. Kogi live-edge <sup>mixtape</sup> marfa street <sub>art</sub> synth. Godardsynth truffaut selfies, vape fanny  subway tile. Stumptown af pabst,try-hard fam ethical actually four dollar toast. Microdosing <sup>kogi</sup>brooklyn, locavore jianbing etsy sartorial <em>YOLO</em>. Williamsburg salviaphoto<sup>a</sup> booth <sup>readymade</sup> listicle man braid. s<sup>e</sup>lfies</p>
+<p>Literally s<sup>e</sup>lfies tbh lo-fi. Actually health goa retro polaroid sriracha.Kogi live-edge <sup>mixtape</sup> marfa street <sub>art</sub> synth. Godard synth truffautselfies, vape fanny  subway tile. Stumptown af pabst, try-hard fam ethicalactually four dollar toast. Microdosing <sup>kogi</sup> brooklyn, locavore jianbingetsy sartorial <em>YOLO</em>. Williamsburg salvia photo<sup>a</sup> booth <sup>readymade</sup>listicle man braid. s<sup>e</sup>lfies</p>"
+`;
+
+exports[`subscript 1`] = `
+"<p>Foo <sub>sup</sub> kxcvj <sub>sup <em>string</em></sub> bar</p>
+<p>not ~ here</p>
+<p>neither ~ here ~ because it's escaped</p>
+<p>foo ^<sup>a</sup>^ bar</p>"
+`;
+
+exports[`superscript 1`] = `
+"<p>Foo <sup>sup</sup> kxcvj <sup>sup <em>string</em></sup> bar</p>
+<p>not ^ here</p>
+<p>neither ^ here ^ because it's escaped</p>"
+`;

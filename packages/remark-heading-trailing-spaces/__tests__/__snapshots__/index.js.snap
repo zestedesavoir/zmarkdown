@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`regression 1 1`] = `
+"<p>word</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c</td>
+<td>d</td>
+</tr>
+</tbody>
+</table>"
+`;
+
+exports[`with plugin 1`] = `
+"<h2>Header</h2>
+<h3>H3</h3>
+<h1>H1</h1>
+<p>H2
+--  </p>"
+`;
+
+exports[`without 1`] = `
+"<p>Header
+------··</p>
+<h3>H3···</h3>
+<h1>H1··</h1>
+<p>H2
+--··</p>"
+`;
