@@ -131,7 +131,7 @@ test('quotation', () => {
     > Baz
     > Baz
     Source: fc3
-  `)
+  `.replace(/·/g, ' '))
   expect(contents).toMatchSnapshot()
 })
 
@@ -155,13 +155,43 @@ test('table', () => {
     -----|------
     bla|bla
     Table: figcapt1
+  `)
+  expect(contents).toMatchSnapshot()
+})
 
 
+test('external legend: two legends', () => {
+  const { contents } = render(dedent`
     head1| head2
     -----|------
     bla|bla
     Table: figcapt1
     Table: bis
   `)
+  expect(contents).toMatchSnapshot()
+})
+
+
+test('internal legend: two legends', () => {
+  const { contents } = render(dedent`
+    Should only keep the 1st
+
+    > My citation
+    Source: first capt
+    Source: last capt··
+    2nd line
+
+    noop
+
+    > foo
+    > bar
+    > baz
+    > qux
+    Source: **first**
+    b*a*r
+    Source: This is **the real** \`source\`
+
+    noop
+  `.replace(/·/g, ' '))
   expect(contents).toMatchSnapshot()
 })

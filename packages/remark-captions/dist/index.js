@@ -17,9 +17,8 @@ var internLegendBlock = {
 function plugin(opts) {
   var externalBlocks = xtend(legendBlock, opts && opts.external || {});
   var internalBlocks = xtend(internLegendBlock, opts && opts.internal || {});
-  return transformer;
 
-  function transformer(tree) {
+  return function transformer(tree) {
     Object.keys(internalBlocks).forEach(function (nodeType) {
       return visit(tree, nodeType, internLegendVisitor(internalBlocks));
     });
@@ -27,31 +26,59 @@ function plugin(opts) {
     Object.keys(externalBlocks).forEach(function (nodeType) {
       return visit(tree, nodeType, externLegendVisitorCreator(externalBlocks));
     });
-  }
+  };
 }
+
 function internLegendVisitor(internalBlocks) {
   return function (node, index, parent) {
 
+    // if already wrap in figure, skip
     if (parent && parent.type === 'figure') return;
+
+    // legend can only be in a paragraph
     var lastP = getLast(node.children);
     if (!lastP || lastP.type !== 'paragraph') return;
-    var lastT = getLast(lastP.children);
-    if (!lastT || lastT.type !== 'text') return;
 
-    var lines = lastT.value.split('\n');
-    var lastLine = getLast(lines);
-    if (!lastLine) return;
-    if (!lastLine.startsWith(internalBlocks[node.type])) return;
-    var legend = lines.pop().slice(lastLine.indexOf(':') + 1).trim();
+    // find which child contains the last legend
+    var legendChildIndex = -1;
+    lastP.children.forEach(function (child, index) {
+      if (child.type === 'text' && child.value.includes('\nSource')) {
+        legendChildIndex = index;
+      }
+    });
+    if (legendChildIndex === -1) return;
 
-    lastT.value = lines.join('\n');
+    // split the text node containing the last legend and find the line containing it
+    var potentialLegendLines = lastP.children[legendChildIndex].value.split('\n');
+    var lastLegendIndex = -1;
+    potentialLegendLines.forEach(function (line, index) {
+      if (line.startsWith(internalBlocks[node.type])) {
+        lastLegendIndex = index;
+      }
+    }
+
+    // the child containing the last legend is split in two: head contains text until
+    // legend, tail contains legend text
+    );var tail = clone(lastP.children[legendChildIndex]);
+    var headText = potentialLegendLines.slice(0, lastLegendIndex).join('\n'
+    // replace existing node 'head' content with text until legend
+    );lastP.children[legendChildIndex].value = headText;
+
+    // legend text is put into the cloned node…
+    var legendText = potentialLegendLines.slice(lastLegendIndex).join('\n').slice(internalBlocks[node.type].length).trimLeft();
+
+    tail.value = legendText;
+    // … and 'tail', the cloned node is inserted after 'head'
+    lastP.children.splice(legendChildIndex + 1, 0, tail
+
+    // gather all nodes that should be inside the legend
+    );var legendNodes = lastP.children.slice(legendChildIndex + 1
+    // remove them from the parent paragraph
+    );lastP.children = lastP.children.slice(0, legendChildIndex + 1);
 
     var figcaption = {
       type: 'figcaption',
-      children: [{
-        type: 'text',
-        value: legend
-      }],
+      children: legendNodes,
       data: {
         hName: 'figcaption'
       }
@@ -70,6 +97,7 @@ function internLegendVisitor(internalBlocks) {
     node.data = figure.data;
   };
 }
+
 function externLegendVisitorCreator(blocks) {
   return function (node, index, parent) {
     if (index + 1 < parent.children.length && parent.children[index + 1].type === 'paragraph') {
