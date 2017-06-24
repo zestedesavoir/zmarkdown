@@ -127,15 +127,15 @@ simple single spaces in the tests)</p>
 </blockquote>
 <p>haha</p>
 <figure><blockquote>
-<blockquote>
+<figure><blockquote>
 <figure><blockquote>
 <p>Foo<br>
 Foo</p>
 </blockquote><figcaption>fc1</figcaption></figure>
 <p>Bar<br>
 Bar<br>
-Source: fc2</p>
-</blockquote>
+</p>
+</blockquote><figcaption>fc2</figcaption></figure>
 <p>Baz
 Baz</p>
 </blockquote><figcaption>fc3</figcaption></figure>"
