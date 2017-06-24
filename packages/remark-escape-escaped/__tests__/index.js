@@ -1,68 +1,46 @@
-import {readdirSync as directory, readFileSync as file} from 'fs'
-import {join} from 'path'
+import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
 
-const base = join(__dirname, 'fixtures')
-const specs = directory(base).reduce((tests, contents) => {
-  const parts = contents.split('.')
-  if (!tests[parts[0]]) {
-    tests[parts[0]] = {}
-  }
-  tests[parts[0]][parts[1]] = file(join(base, contents), 'utf-8')
-  return tests
-}, {})
+import plugin from '../src/'
 
-const entrypoints = [
-  '../dist',
-  '../src',
-]
+const render = (text, config) => unified()
+  .use(reParse)
+  .use(remark2rehype)
+  .use(plugin, config)
+  .use(stringify)
+  .processSync(text)
 
-entrypoints.forEach(entrypoint => {
-  const plugin = require(entrypoint)
+test('with', () => {
+  const { contents } = render(dedent`
+    this plugin does
 
-  test('with', () => {
-    const {contents} = unified()
-      .use(reParse)
-      .use(remark2rehype)
-      .use(plugin)
-      .use(stringify)
-      .processSync(specs['with'].fixture)
+    * & -> &#x26;
+    * &amp; -> &#x26;amp;
+    * &eacute; -> &#x26;eacute;
+  `)
+  expect(contents).toMatchSnapshot()
+})
 
-    expect(contents).toEqual(specs['with'].expected.trim())
-  })
+test('without', () => {
+  const { contents } = render(dedent`
+    remark does
 
-  test('without', () => {
-    const {contents} = unified()
-      .use(reParse)
-      .use(remark2rehype)
-      .use(stringify)
-      .processSync(specs['without'].fixture)
+    * & -> &#x26;
+    * &amp; -> &#x26;
+    * &eacute; -> é
+  `)
+  expect(contents).toMatchSnapshot()
+})
 
-    expect(contents).toEqual(specs['without'].expected.trim())
-  })
+test('Errors with invalid config: []', () => {
+  const fail = () => render('', [])
+  expect(fail).toThrowError(Error)
+})
 
-  test('Errors with invalid config: []', () => {
-    const fail = () => unified()
-      .use(reParse)
-      .use(remark2rehype)
-      .use(plugin, [])
-      .use(stringify)
-      .processSync('')
-
-    expect(fail).toThrowError(Error)
-  })
-
-  test('Errors with invalid config: 1', () => {
-    const fail = () => unified()
-      .use(reParse)
-      .use(remark2rehype)
-      .use(plugin, 1)
-      .use(stringify)
-      .processSync('')
-
-    expect(fail).toThrowError(Error)
-  })
+test('Errors with invalid config: 1', () => {
+  const fail = () => render('', 1)
+  expect(fail).toThrowError(Error)
 })

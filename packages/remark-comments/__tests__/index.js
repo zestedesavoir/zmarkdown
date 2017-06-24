@@ -1,40 +1,30 @@
-import {readdirSync as directory, readFileSync as file} from 'fs'
-import {join} from 'path'
+import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
 
-const base = join(__dirname, 'fixtures')
-const specs = directory(base).reduce((tests, contents) => {
-  const parts = contents.split('.')
-  if (!tests[parts[0]]) {
-    tests[parts[0]] = {}
-  }
-  tests[parts[0]][parts[1]] = file(join(base, contents), 'utf-8')
-  return tests
-}, {})
+import plugin from '../src/'
 
-const entrypoints = [
-  '../dist',
-  '../src',
-]
+const render = text => unified()
+  .use(reParse)
+  .use(plugin)
+  .use(remark2rehype)
+  .use(stringify)
+  .processSync(text)
 
-entrypoints.forEach(entrypoint => {
-  const plugin = require(entrypoint)
+test('comments', () => {
+  const { contents } = render(dedent`
+    Test comments
+    =============
 
-  Object.keys(specs).filter(Boolean).forEach(name => {
-    const spec = specs[name]
+    Foo<--COMMENTS I will be gone COMMENTS-->bar
 
-    test(name, () => {
-      const {contents} = unified()
-        .use(reParse)
-        .use(plugin)
-        .use(remark2rehype)
-        .use(stringify)
-        .processSync(spec.fixture)
+    \`\`\`
+    Foo<--COMMENTS I will not get remove because I am in a code block COMMENTS-->bar
+    \`\`\`
 
-      expect(contents).toEqual(spec.expected.trim())
-    })
-  })
+    <--COMMENTS Unfinished block won't get parsed either
+  `)
+  expect(contents).toMatchSnapshot()
 })
