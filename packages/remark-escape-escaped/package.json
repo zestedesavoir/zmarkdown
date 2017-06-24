@@ -1,6 +1,6 @@
 {
   "name": "remark-escape-escaped",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-escape-escaped",
     "type": "git"
