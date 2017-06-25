@@ -177,6 +177,42 @@ test('code+caption', () => {
   expect(contents.trim()).toEqual(spec.expected.trim())
 })
 
+test('list', () => {
+  const spec = specs['list']
+
+  const {contents} = unified()
+    .use(reParse)
+    .use(rebber)
+    .processSync(spec.fixture)
+
+  expect(contents.trim()).toEqual(spec.expected.trim())
+})
+test('link', () => {
+  const spec = specs['link']
+
+  const {contents} = unified()
+    .use(reParse)
+    .use(rebber)
+    .processSync(spec.fixture)
+
+  expect(contents.trim()).toEqual(spec.expected.trim())
+})
+
+test('link-prepend', () => {
+  const spec = specs['link-prepend']
+
+  const {contents} = unified()
+    .use(reParse)
+    .use(rebber, {
+      override: {
+        link: {prefix: 'http://zestedesavoir.com'}
+      }
+    })
+    .processSync(spec.fixture)
+
+  expect(contents.trim()).toEqual(spec.expected.trim())
+})
+
 Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEach(name => {
   const spec = specs[name]
 

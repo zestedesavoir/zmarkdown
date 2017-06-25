@@ -9,7 +9,11 @@ const defaultMacro = (ctx, node) => {
   const cols = lengths.sort(cmp)[0]
   let colHeader = '|'
   colHeader += 'c|'.repeat(cols)
-  return `\\begin{longtabu}{${colHeader}} \\hline\n${inner}\\end{longtabu}\n\n`
+  let addendum = ''
+  if (node.caption) {
+    addendum = `\n\\tablecaption{${node.caption}}\n`
+  }
+  return `\\begin{longtabu}{${colHeader}} \\hline\n${inner}${addendum}\\end{longtabu}\n\n`
 }
 
 /* Stringify a table `node`. */
