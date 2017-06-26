@@ -15,7 +15,7 @@ function plugin () {
     try {
       const result = request('HEAD',
         `https://zestedesavoir.com/api/membres/exists/?search=${username}`,
-        {timeout: 2000})
+        {timeout: 300})
       return result.statusCode === 200
     } catch (ex) {
       return false
