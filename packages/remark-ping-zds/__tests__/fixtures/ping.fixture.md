@@ -1,7 +1,7 @@
 Test ping
 =========
 
-ping @Clem
+ping @admin
 
 ping @**BALDE SOULEYMANE**
 

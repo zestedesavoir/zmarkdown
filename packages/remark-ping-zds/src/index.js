@@ -12,12 +12,14 @@ function locator (value, fromIndex) {
 
 function plugin () {
   function zdsMemberExists (username) {
-    //TODO https://github.com/zestedesavoir/zds-site/issues/4382
-    let isMember = false
-    const res = request('GET', `http://zestedesavoir.com/api/membres/?search=${username}`)
-    const data = JSON.parse(res.getBody('utf-8'))
-    isMember = data.count && data.count > 0
-    return isMember
+    try {
+      const result = request('HEAD',
+        `https://zestedesavoir.com/api/membres/exists/?search=${username}`,
+        {timeout: 2000})
+      return result.statusCode === 200
+    } catch (ex) {
+      return false
+    }
   }
 
   function inlineTokenizer (eat, value, silent) {
@@ -56,8 +58,8 @@ function plugin () {
   // Inject inlineTokenizer
   const inlineTokenizers = Parser.prototype.inlineTokenizers
   const inlineMethods = Parser.prototype.inlineMethods
-  inlineTokenizers.zping = inlineTokenizer
-  inlineMethods.splice(inlineMethods.indexOf('text'), 0, 'zping')
+  inlineTokenizers.ping = inlineTokenizer
+  inlineMethods.splice(inlineMethods.indexOf('text'), 0, 'ping')
 }
 
 module.exports = plugin
