@@ -14,11 +14,13 @@ function locator(value, fromIndex) {
 
 function plugin() {
   function zdsMemberExists(username) {
-    var isMember = false;
-    var res = request('GET', 'http://zestedesavoir.com/api/membres/?search=' + username);
-    var data = JSON.parse(res.getBody('utf-8'));
-    isMember = data.count && data.count > 0;
-    return isMember;
+    try {
+      var result = request('HEAD', 'https://zestedesavoir.com/api/membres/exists/?search=' + username, { timeout: 2000 });
+      return result.statusCode === 200;
+    } catch (ex) {
+      console.log('ex');
+      return false;
+    }
   }
 
   function inlineTokenizer(eat, value, silent) {
@@ -57,8 +59,8 @@ function plugin() {
   // Inject inlineTokenizer
   var inlineTokenizers = Parser.prototype.inlineTokenizers;
   var inlineMethods = Parser.prototype.inlineMethods;
-  inlineTokenizers.zping = inlineTokenizer;
-  inlineMethods.splice(inlineMethods.indexOf('text'), 0, 'zping');
+  inlineTokenizers.ping = inlineTokenizer;
+  inlineMethods.splice(inlineMethods.indexOf('text'), 0, 'ping');
 }
 
 module.exports = plugin;

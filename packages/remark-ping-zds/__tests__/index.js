@@ -3,7 +3,6 @@ import {join} from 'path'
 import ava from 'ava'
 import unified from 'unified'
 import reParse from 'remark-parse'
-import remarkStringify from 'remark-stringify'
 import rehypeStringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
 
