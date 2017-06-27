@@ -6,7 +6,7 @@ var C_NEWPARAGRAPH = '\n\n';
 module.exports = function plugin() {
   var classNames = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  var regex = new RegExp('->(.+)');
+  var regex = new RegExp('->');
   var endMarkers = ['->', '<-'];
 
   function alignTokenizer(eat, value, silent) {
@@ -23,18 +23,23 @@ module.exports = function plugin() {
     var finishedBlocks = [];
     var endMarker = '';
     var canEatLine = true;
+    var beginBlock = 0;
+    var content = value.substring(0, value.length);
     while (canEatLine) {
-      var next = value.indexOf(C_NEWLINE, idx + 1);
-      var lineToEat = next !== -1 ? value.slice(idx, next) : value.slice(idx);
+      var next = content.indexOf(C_NEWLINE, idx + 1);
+      var lineToEat = next !== -1 ? content.slice(idx, next) : content.slice(idx);
       linesToEat.push(lineToEat);
 
-      if (lineToEat.length > 2 && endMarkers.indexOf(lineToEat.slice(-2)) !== -1) {
+      // If next = (beginBlock + 2), it's the first marker of the block.
+      if (next > beginBlock + 2 && lineToEat.length >= 2 && endMarkers.indexOf(lineToEat.slice(-2)) !== -1) {
         if (endMarker === '') endMarker = lineToEat.slice(-2);
 
-        finishedBlocks.push(linesToEat.join(C_NEWLINE)
+        finishedBlocks.push(linesToEat.join(C_NEWLINE));
 
         // Check if another block is following
-        );if (value.indexOf('->', next) !== next + 1) break;else linesToEat = [];
+        if (content.indexOf('->', next) !== next + 1) break;
+        linesToEat = [];
+        beginBlock = next + 1;
       }
 
       idx = next + 1;
@@ -43,11 +48,16 @@ module.exports = function plugin() {
 
     if (finishedBlocks.length === 0) return;
     var stringToEat = '';
-    finishedBlocks.forEach(function (block) {
+    var marker = finishedBlocks[0].substring(finishedBlocks[0].length - 2, finishedBlocks[0].length);
+    var toEat = [];
+    for (var i = 0; i < finishedBlocks.length; ++i) {
+      var block = finishedBlocks[i];
+      if (marker !== block.substring(block.length - 2, block.length)) break;
+      toEat.push(block);
       stringToEat += block.slice(2, -2) + C_NEWPARAGRAPH;
-    });
+    }
 
-    var add = eat(finishedBlocks.join(C_NEWLINE));
+    var add = eat(toEat.join(C_NEWLINE));
     var exit = this.enterBlock();
     var contents = this.tokenizeBlock(stringToEat, now);
     exit();
