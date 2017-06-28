@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`issue-80 1`] = `"<p>«html» «html1» «html2» «html3» «html4» «<strong>bold</strong>»</p>"`;
