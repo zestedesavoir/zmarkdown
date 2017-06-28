@@ -59,12 +59,10 @@ exports[`list-block 1`] = `
 <li>a</li>
 <li>b</li>
 </ul></div>
-<p>-></p>
-<ul>
+<div class=\\"align-center\\"><ul>
 <li>c</li>
-<li>d
-&#x3C;-</li>
-</ul>"
+<li>d</li>
+</ul></div>"
 `;
 
 exports[`right-no-end 1`] = `

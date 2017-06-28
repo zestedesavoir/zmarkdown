@@ -66,6 +66,7 @@ const zmdParser = (config) => {
     .use(remarkKbd)
     .use(remarkMath, config.math)
     .use(remarkNumberedFootnotes)
+    .use(remarkSourcedQuotation)
     .use(remarkSubSuper)
     .use(remarkTrailingSpaceHeading)
 

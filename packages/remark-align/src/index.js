@@ -26,7 +26,7 @@ module.exports = function plugin (classNames = {}) {
       linesToEat.push(lineToEat)
 
       // If next = (beginBlock + 2), it's the first marker of the block.
-      if (next > (beginBlock + 2) &&
+      if ((next > (beginBlock + 2) || next === -1) &&
         lineToEat.length >= 2 &&
         endMarkers.indexOf(lineToEat.slice(-2)) !== -1) {
         if (endMarker === '') endMarker = lineToEat.slice(-2)
