@@ -9,3 +9,8 @@
 
 [[q]]
 | question `coded`
+
+[[e]]
+| **error**
+| foo bar··
+| baz

@@ -15,9 +15,11 @@ const internLegendBlock = {
 function plugin (opts) {
   const externalBlocks = xtend(legendBlock, (opts && opts.external) || {})
   const internalBlocks = xtend(internLegendBlock, (opts && opts.internal) || {})
+
   return function transformer (tree) {
     Object.keys(internalBlocks).forEach((nodeType) =>
       visit(tree, nodeType, internLegendVisitor(internalBlocks)))
+
     Object.keys(externalBlocks).forEach(nodeType =>
       visit(tree, nodeType, externLegendVisitorCreator(externalBlocks)))
   }

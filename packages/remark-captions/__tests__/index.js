@@ -89,19 +89,23 @@ test('custom-table', () => {
     bla|bla
     CustomTable: figcapt1
     CustomTable: bis
-  `, { external: { table: 'CustomTable:' } })
+    `,
+    { external: { table: 'CustomTable:' } }
+  )
   expect(contents).toMatchSnapshot()
 })
 
 
 test('gridtables', () => {
   const { contents } = render(dedent`
-  +----+----+----+
-  | a  |  b | c  |
-  +====+====+====+
-  | 1  |2   |3   |
-  +----+----+----+
-  Table: bla bla`, { external: {gridTable: 'Table:'}})
+    +----+----+----+
+    | a  |  b | c  |
+    +====+====+====+
+    | 1  |2   |3   |
+    +----+----+----+
+    Table: bla bla`,
+    { external: {gridTable: 'Table:'}}
+  )
   expect(contents).toMatchSnapshot()
 })
 

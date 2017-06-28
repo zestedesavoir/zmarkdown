@@ -224,6 +224,7 @@ const config = {
       match: /https?:\/\/(www\.)?jsfiddle\.net\/([\w\d]+\/[\w\d]+\/\d+\/?|[\w\d]+\/\d+\/?|[\w\d]+\/?)$/,
     }
   },
+
   captions: {
     external: {
       table: 'Table:',

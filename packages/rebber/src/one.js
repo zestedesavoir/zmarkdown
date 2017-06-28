@@ -43,9 +43,6 @@ function one (ctx, node, index, parent) {
   if (!has(h, type)) {
     throw new Error(`Cannot compile unknown node \`${type}\``)
   }
-  if (typeof h[type] !== 'function') {
-    return handlers[type](handlersOverride, node, index, parent)
-  } else {
-    return h[type](ctx, node, index, parent)
-  }
+
+  return h[type](ctx, node, index, parent)
 }

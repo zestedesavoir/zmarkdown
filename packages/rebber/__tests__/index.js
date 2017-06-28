@@ -28,13 +28,18 @@ const integrationConfig = {
     kbd: require('../src/custom-types/kbd'),
     CenterAligned: require('../src/custom-types/align'),
     RightAligned: require('../src/custom-types/align'),
-    informationCustomBlock: require('../src/custom-types/customBlocks'),
-    secretCustomBlock: require('../src/custom-types/customBlocks'),
     errorCustomBlock: require('../src/custom-types/customBlocks'),
-    warningCustomBlock: require('../src/custom-types/customBlocks'),
+    informationCustomBlock: require('../src/custom-types/customBlocks'),
     questionCustomBlock: require('../src/custom-types/customBlocks'),
+    secretCustomBlock: require('../src/custom-types/customBlocks'),
+    warningCustomBlock: require('../src/custom-types/customBlocks'),
   },
   emoticons: emoticons,
+}
+
+integrationConfig.override.eCustomBlock = (ctx, node) => {
+  node.type = 'errorCustomBlock'
+  return integrationConfig.override.warningCustomBlock(ctx, node)
 }
 integrationConfig.override.iCustomBlock = (ctx, node) => {
   node.type = 'informationCustomBlock'
@@ -49,10 +54,6 @@ integrationConfig.override.sCustomBlock = (ctx, node) => {
   return integrationConfig.override.secretCustomBlock(ctx, node)
 }
 integrationConfig.override.aCustomBlock = (ctx, node) => {
-  node.type = 'warningCustomBlock'
-  return integrationConfig.override.warningCustomBlock(ctx, node)
-}
-integrationConfig.override.attentionCustomBlock = (ctx, node) => {
   node.type = 'warningCustomBlock'
   return integrationConfig.override.warningCustomBlock(ctx, node)
 }
@@ -233,9 +234,9 @@ test('link-prepend', () => {
   const {contents} = unified()
     .use(reParse)
     .use(rebber, {
-      override: {
-        link: {prefix: 'http://zestedesavoir.com'}
-      }
+      link: {
+        prefix: 'http://zestedesavoir.com',
+      },
     })
     .processSync(spec.fixture)
 
@@ -282,7 +283,7 @@ test('custom-blocks', () => {
       e: 'error ico-after',
     })
     .use(rebber, integrationConfig)
-    .processSync(spec.fixture)
+    .processSync(spec.fixture.replace(/·/g, ' '))
 
   expect(contents.trim()).toEqual(spec.expected.trim())
 })

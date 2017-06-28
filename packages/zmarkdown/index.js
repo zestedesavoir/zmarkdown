@@ -4,16 +4,16 @@ const inspect = require('unist-util-inspect')
 
 const remarkParse = require('remark-parse')
 
+const remarkCaptions = require('remark-captions')
 const remarkAlign = require('remark-align')
 const remarkComments = require('remark-comments')
 const remarkCustomBlocks = require('remark-custom-blocks')
 const remarkEmoticons = require('remark-emoticons')
 const remarkEscapeEscaped = require('remark-escape-escaped')
+const remarkGridTables = require('remark-grid-tables')
 const remarkHeadingShifter = require('remark-heading-shift')
 const remarkIframes = require('remark-iframes')
 const remarkKbd = require('remark-kbd')
-const remarkGridTables = require('remark-grid-tables')
-const remarkCaptions = require('remark-captions')
 const remarkMath = require('remark-math')
 const remarkNumberedFootnotes = require('remark-numbered-footnotes')
 const remarkSubSuper = require('remark-sub-super')
@@ -31,13 +31,12 @@ const rehypeStringify = require('rehype-stringify')
 const rebberStringify = require('rebber')
 
 const defaultConfig = require('./config')
-const rebberConfig = {
+const rebberConfig = Object.assign({
   override: {
     emoticon: require('rebber/dist/custom-types/emoticon'),
     figure: require('rebber/dist/custom-types/figure'),
     sub: require('rebber/dist/custom-types/sub'),
     sup: require('rebber/dist/custom-types/sup'),
-    link: {prefix: 'http://zestedesavoir.com'},
     kbd: require('rebber/dist/custom-types/kbd'),
     CenterAligned: require('rebber/dist/custom-types/align'),
     RightAligned: require('rebber/dist/custom-types/align'),
@@ -48,7 +47,32 @@ const rebberConfig = {
     questionCustomBlock: require('rebber/dist/custom-types/customBlocks'),
   },
   emoticons: defaultConfig.emoticons,
-}
+  link: {
+    prefix: 'http://zestedesavoir.com'
+  },
+},
+{
+  eCustomBlock: (ctx, node) => {
+    node.type = 'errorCustomBlock'
+    return rebberConfig.override.warningCustomBlock(ctx, node)
+  },
+  iCustomBlock: (ctx, node) => {
+    node.type = 'informationCustomBlock'
+    return rebberConfig.override.informationCustomBlock(ctx, node)
+  },
+  qCustomBlock: (ctx, node) => {
+    node.type = 'questionCustomBlock'
+    return rebberConfig.override.questionCustomBlock(ctx, node)
+  },
+  sCustomBlock: (ctx, node) => {
+    node.type = 'secretCustomBlock'
+    return rebberConfig.override.secretCustomBlock(ctx, node)
+  },
+  aCustomBlock: (ctx, node) => {
+    node.type = 'warningCustomBlock'
+    return rebberConfig.override.warningCustomBlock(ctx, node)
+  }
+})
 
 const fromFile = (filepath) => fs.readFileSync(filepath)
 
@@ -63,15 +87,15 @@ const zmdParser = (config) => {
 
   mdProcessor = mdProcessor
     .use(remarkAlign, config.alignBlocks)
+    .use(remarkCaptions, config.captions)
     .use(remarkComments)
     .use(remarkCustomBlocks, config.customBlocks)
     .use(remarkEmoticons, config.emoticons)
     .use(remarkEscapeEscaped, config.escapeEscaped)
+    .use(remarkGridTables)
     .use(remarkHeadingShifter, config.headingShifter)
     .use(remarkIframes, config.iframes)
-    .use(remarkGridTables)
     .use(remarkMath, config.math)
-    .use(remarkCaptions, config.captions)
     .use(remarkKbd)
     .use(remarkNumberedFootnotes)
     .use(remarkSubSuper)
