@@ -22,14 +22,14 @@ const render = (text, config) => unified()
   .use(remarkFixGuillemets)
   .use(remark2rehype)
   .use(stringify)
-  .use(remarkTextr,   {
-      plugins: [
-        textrGuillemets,
-      ],
-      options: {
-        locale: 'fr',
-      },
-    })
+  .use(remarkTextr, {
+    plugins: [
+      textrGuillemets,
+    ],
+    options: {
+      locale: 'fr',
+    },
+  })
   .processSync(text)
 
 test('issue-80', () => {
