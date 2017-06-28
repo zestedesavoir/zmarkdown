@@ -14,6 +14,9 @@ handlers.paragraph = require('./types/paragraph')
 handlers.comment = require('./types/comment')
 
 handlers.text = require('./types/text')
+handlers.link = require('./types/link')
+handlers.list = require('./types/list')
+handlers.listItem = require('./types/listItem')
 handlers.break = require('./types/break')
 handlers.code = require('./types/code')
 handlers.strong = require('./types/strong')
@@ -40,6 +43,9 @@ function one (ctx, node, index, parent) {
   if (!has(h, type)) {
     throw new Error(`Cannot compile unknown node \`${type}\``)
   }
-
-  return h[type](ctx, node, index, parent)
+  if (typeof h[type] !== 'function') {
+    return handlers[type](handlersOverride, node, index, parent)
+  } else {
+    return h[type](ctx, node, index, parent)
+  }
 }

@@ -228,7 +228,8 @@ const config = {
     external: {
       table: 'Table:',
       gridTable: 'Table:',
-      code: 'Code:'
+      code: 'Code:',
+      math: 'Equation:',
     },
     internal: {
       iframe: 'Video:',

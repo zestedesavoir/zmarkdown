@@ -16,7 +16,6 @@ const remarkGridTables = require('remark-grid-tables')
 const remarkCaptions = require('remark-captions')
 const remarkMath = require('remark-math')
 const remarkNumberedFootnotes = require('remark-numbered-footnotes')
-const remarkSourcedQuotation = require('remark-captions')
 const remarkSubSuper = require('remark-sub-super')
 const remarkTextr = require('./remark-textr')
 const remarkTrailingSpaceHeading = require('remark-heading-trailing-spaces')
@@ -38,6 +37,15 @@ const rebberConfig = {
     figure: require('rebber/dist/custom-types/figure'),
     sub: require('rebber/dist/custom-types/sub'),
     sup: require('rebber/dist/custom-types/sup'),
+    link: {prefix: 'http://zestedesavoir.com'},
+    kbd: require('rebber/dist/custom-types/kbd'),
+    CenterAligned: require('rebber/dist/custom-types/align'),
+    RightAligned: require('rebber/dist/custom-types/align'),
+    informationCustomBlock: require('rebber/dist/custom-types/customBlocks'),
+    secretCustomBlock: require('rebber/dist/custom-types/customBlocks'),
+    errorCustomBlock: require('rebber/dist/custom-types/customBlocks'),
+    warningCustomBlock: require('rebber/dist/custom-types/customBlocks'),
+    questionCustomBlock: require('rebber/dist/custom-types/customBlocks'),
   },
   emoticons: defaultConfig.emoticons,
 }
@@ -62,11 +70,10 @@ const zmdParser = (config) => {
     .use(remarkHeadingShifter, config.headingShifter)
     .use(remarkIframes, config.iframes)
     .use(remarkGridTables)
+    .use(remarkMath, config.math)
     .use(remarkCaptions, config.captions)
     .use(remarkKbd)
-    .use(remarkMath, config.math)
     .use(remarkNumberedFootnotes)
-    .use(remarkSourcedQuotation)
     .use(remarkSubSuper)
     .use(remarkTrailingSpaceHeading)
 

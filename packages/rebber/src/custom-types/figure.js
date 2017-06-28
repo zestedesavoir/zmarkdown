@@ -15,7 +15,8 @@ const defaultMacros = {
     }
     return `\\begin{codeBlock}${params}{${extra.language}}` +
             `\n${code}\n\\end{codeBlock}\n\n`
-  }
+  },
+  table: (innerText) => innerText
 }
 
 const makeExtra = {
@@ -51,7 +52,7 @@ function figure (ctx, node) {
   if (node.children.length === 1) {
     node.children = node.children[0].children
   }
-
+  node.caption = caption // allows to add caption to the default processing
   const innerText = all(ctx, node) || node.value
   return macro(innerText.trim(), caption, makeExtra[type](node))
 }

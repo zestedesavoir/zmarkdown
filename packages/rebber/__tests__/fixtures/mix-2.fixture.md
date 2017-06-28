@@ -11,7 +11,7 @@ Source: Quotation Source
 ```python
 print('bla')
 ```
-Code: First
+Code: First ||CTRL||+||S||
 Code: Second
 
 ```python

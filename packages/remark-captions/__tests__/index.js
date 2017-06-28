@@ -5,6 +5,7 @@ import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
 
 import remarkCaptions from '../src/'
+import remarkGridTables from '../../remark-grid-tables/src'
 
 const render = (text, config) => unified()
   .use(reParse, {
@@ -16,6 +17,7 @@ const render = (text, config) => unified()
     &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
     blocks: [],
   })
+  .use(remarkGridTables)
   .use(remarkCaptions, config)
   .use(remark2rehype)
   .use(stringify)
@@ -91,6 +93,17 @@ test('custom-table', () => {
   expect(contents).toMatchSnapshot()
 })
 
+
+test('gridtables', () => {
+  const { contents } = render(dedent`
+  +----+----+----+
+  | a  |  b | c  |
+  +====+====+====+
+  | 1  |2   |3   |
+  +----+----+----+
+  Table: bla bla`, { external: {gridTable: 'Table:'}})
+  expect(contents).toMatchSnapshot()
+})
 
 test('quotation', () => {
   const { contents } = render(dedent`
