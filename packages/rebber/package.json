@@ -41,6 +41,7 @@
     "eslint": "^4.0.0",
     "jest": "^20.0.4",
     "remark-captions": "^0.0.7",
+    "remark-align": "^0.0.17",
     "remark-emoticons": "^0.0.16",
     "remark-parse": "^3.0.1",
     "remark-sub-super": "^0.0.14",
