@@ -53,6 +53,18 @@ exports[`center-no-start 1`] = `
 <h1>title</h1>"
 `;
 
+exports[`list-block 1`] = `
+"<h1>title</h1>
+<div class=\\"align-right\\"><ul>
+<li>a</li>
+<li>b</li>
+</ul></div>
+<div class=\\"align-center\\"><ul>
+<li>c</li>
+<li>d</li>
+</ul></div>"
+`;
+
 exports[`right-no-end 1`] = `
 "<h1>title</h1>
 <p>-> foo</p>
