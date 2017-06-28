@@ -15,7 +15,11 @@ var defaultMacro = function defaultMacro(ctx, node) {
   var cols = lengths.sort(cmp)[0];
   var colHeader = '|';
   colHeader += 'c|'.repeat(cols);
-  return '\\begin{longtabu}{' + colHeader + '} \\hline\n' + inner + '\\end{longtabu}\n\n';
+  var addendum = '';
+  if (node.caption) {
+    addendum = '\n\\tablecaption{' + node.caption + '}\n';
+  }
+  return '\\begin{longtabu}{' + colHeader + '} \\hline\n' + inner + addendum + '\\end{longtabu}\n\n';
 };
 
 /* Stringify a table `node`. */

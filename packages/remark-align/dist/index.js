@@ -24,20 +24,19 @@ module.exports = function plugin() {
     var endMarker = '';
     var canEatLine = true;
     var beginBlock = 0;
-    var content = value.substring(0, value.length);
     while (canEatLine) {
-      var next = content.indexOf(C_NEWLINE, idx + 1);
-      var lineToEat = next !== -1 ? content.slice(idx, next) : content.slice(idx);
-      linesToEat.push(lineToEat);
+      var next = value.indexOf(C_NEWLINE, idx + 1);
+      var lineToEat = next !== -1 ? value.slice(idx, next) : value.slice(idx);
+      linesToEat.push(lineToEat
 
       // If next = (beginBlock + 2), it's the first marker of the block.
-      if (next > beginBlock + 2 && lineToEat.length >= 2 && endMarkers.indexOf(lineToEat.slice(-2)) !== -1) {
+      );if ((next > beginBlock + 2 || next === -1) && lineToEat.length >= 2 && endMarkers.indexOf(lineToEat.slice(-2)) !== -1) {
         if (endMarker === '') endMarker = lineToEat.slice(-2);
 
-        finishedBlocks.push(linesToEat.join(C_NEWLINE));
+        finishedBlocks.push(linesToEat.join(C_NEWLINE)
 
         // Check if another block is following
-        if (content.indexOf('->', next) !== next + 1) break;
+        );if (value.indexOf('->', next) !== next + 1) break;
         linesToEat = [];
         beginBlock = next + 1;
       }
@@ -59,7 +58,7 @@ module.exports = function plugin() {
 
     var add = eat(toEat.join(C_NEWLINE));
     var exit = this.enterBlock();
-    var contents = this.tokenizeBlock(stringToEat, now);
+    var values = this.tokenizeBlock(stringToEat, now);
     exit();
 
     var elementType = endMarker === '->' ? 'RightAligned' : 'CenterAligned';
@@ -68,7 +67,7 @@ module.exports = function plugin() {
     var className = endMarker === '->' ? rightClassName : centerClassName;
     return add({
       type: elementType,
-      children: contents,
+      children: values,
       data: {
         hName: 'div',
         hProperties: {

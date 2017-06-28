@@ -31,7 +31,6 @@ function plugin(opts) {
 
 function internLegendVisitor(internalBlocks) {
   return function (node, index, parent) {
-
     // if already wrapped in figure, skip
     if (parent && parent.type === 'figure') return;
 

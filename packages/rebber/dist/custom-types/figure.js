@@ -18,6 +18,9 @@ var defaultMacros = {
       params += '[' + extra.lines + ']';
     }
     return '\\begin{codeBlock}' + params + '{' + extra.language + '}' + ('\n' + _code + '\n\\end{codeBlock}\n\n');
+  },
+  table: function table(innerText) {
+    return innerText;
   }
 };
 
@@ -48,6 +51,8 @@ var makeExtra = {
       return all(ctx, node);
     }).join('');
   }
+
+  node.caption = caption; // allows to add caption to the default processing
 
   node.children = node.children.filter(function (node) {
     return node.type !== 'figcaption';
