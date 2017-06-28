@@ -20,10 +20,9 @@ module.exports = function plugin (classNames = {}) {
     let endMarker = ''
     let canEatLine = true
     let beginBlock = 0
-    const content = value.substring(0, value.length)
     while (canEatLine) {
-      const next = content.indexOf(C_NEWLINE, idx + 1)
-      const lineToEat = next !== -1 ? content.slice(idx, next) : content.slice(idx)
+      const next = value.indexOf(C_NEWLINE, idx + 1)
+      const lineToEat = next !== -1 ? value.slice(idx, next) : value.slice(idx)
       linesToEat.push(lineToEat)
 
       // If next = (beginBlock + 2), it's the first marker of the block.
@@ -35,7 +34,7 @@ module.exports = function plugin (classNames = {}) {
         finishedBlocks.push(linesToEat.join(C_NEWLINE))
 
         // Check if another block is following
-        if (content.indexOf('->', next) !== (next + 1)) break
+        if (value.indexOf('->', next) !== (next + 1)) break
         linesToEat = []
         beginBlock = next + 1
       }
@@ -58,7 +57,7 @@ module.exports = function plugin (classNames = {}) {
 
     const add = eat(toEat.join(C_NEWLINE))
     const exit = this.enterBlock()
-    const contents = this.tokenizeBlock(stringToEat, now)
+    const values = this.tokenizeBlock(stringToEat, now)
     exit()
 
     const elementType = endMarker === '->' ? 'RightAligned' : 'CenterAligned'
@@ -67,7 +66,7 @@ module.exports = function plugin (classNames = {}) {
     const className = endMarker === '->' ? rightClassName : centerClassName
     return add({
       type: elementType,
-      children: contents,
+      children: values,
       data: {
         hName: 'div',
         hProperties: {

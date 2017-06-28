@@ -115,3 +115,18 @@ test('right-no-start', () => {
   `)
   expect(contents).toMatchSnapshot()
 })
+
+test('list-block', () => {
+  const { contents } = render(dedent`
+    # title
+    ->
+    - a
+    - b
+    ->
+    ->
+    - c
+    - d
+    <-
+  `)
+  expect(contents).toMatchSnapshot()
+})
