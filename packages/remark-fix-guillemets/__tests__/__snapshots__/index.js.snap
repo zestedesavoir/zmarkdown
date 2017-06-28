@@ -1,3 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`do-not-replace 1`] = `"<p>></p>"`;
+
 exports[`issue-80 1`] = `"<p>«html» «html1» «html2» «html3» «html4» «<strong>bold</strong>»</p>"`;
+
+exports[`no-html-block 1`] = `"<p>« 1 »</p>"`;

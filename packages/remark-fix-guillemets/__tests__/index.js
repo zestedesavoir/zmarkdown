@@ -38,3 +38,17 @@ test('issue-80', () => {
   `)
   expect(contents).toMatchSnapshot()
 })
+
+test('no-html-block', () => {
+  const { contents } = render(dedent`
+    << 1 >>
+  `)
+  expect(contents).toMatchSnapshot()
+})
+
+test('do-not-replace', () => {
+  const { contents } = render(dedent`
+    <a>>
+  `)
+  expect(contents).toMatchSnapshot()
+})
