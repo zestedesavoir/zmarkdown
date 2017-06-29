@@ -130,3 +130,17 @@ test('list-block', () => {
   `)
   expect(contents).toMatchSnapshot()
 })
+
+test('escapable', () => {
+  const { contents } = render(dedent`
+    # title
+    ->
+    \->escaped-in
+    <-
+
+    \->escaped-out
+
+    ->center<-
+  `)
+  expect(contents).toMatchSnapshot()
+})
