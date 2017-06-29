@@ -28,9 +28,12 @@ handlers.tableCell = require('./types/tableCell')
 handlers.tableRow = require('./types/tableRow')
 handlers.table = require('./types/table')
 handlers.thematicBreak = require('./types/thematic-break')
+handlers.footnote = require('./types/footnote')
+handlers.footnoteDefinition = require('./types/footnoteDefinition')
+handlers.footnoteReference = require('./types/footnoteReference')
 
 /* Stringify `node`. */
-function one (ctx, node, index, parent) {
+function one (ctx, node, index, parent, root) {
   const handlersOverride = has(ctx, 'override') ? ctx.override : {}
   const h = xtend(handlers, handlersOverride)
 
@@ -44,5 +47,5 @@ function one (ctx, node, index, parent) {
     throw new Error(`Cannot compile unknown node \`${type}\``)
   }
 
-  return h[type](ctx, node, index, parent)
+  return h[type](ctx, node, index, parent, root)
 }
