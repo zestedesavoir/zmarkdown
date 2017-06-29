@@ -31,6 +31,8 @@ handlers.thematicBreak = require('./types/thematic-break')
 handlers.footnote = require('./types/footnote')
 handlers.footnoteDefinition = require('./types/footnoteDefinition')
 handlers.footnoteReference = require('./types/footnoteReference')
+handlers.linkReference = require('./types/linkReference')
+handlers.definition = require('./types/definition')
 
 /* Stringify `node`. */
 function one (ctx, node, index, parent, root) {

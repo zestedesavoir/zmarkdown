@@ -16,7 +16,9 @@ const defaultMacros = {
     return `\\begin{codeBlock}${params}{${extra.language}}` +
             `\n${code}\n\\end{codeBlock}\n\n`
   },
-  table: (innerText) => innerText
+  table: (innerText) => innerText,
+  image: (latexified, caption) =>
+    `\\begin{center}\n${latexified}\n\\captionof{${caption}}`
 }
 
 const makeExtra = {
@@ -30,6 +32,10 @@ const makeExtra = {
       }
     }
     return extra
+  },
+  image: node => {
+    node.witdth = '\\linewidth'
+    return node
   }
 }
 
@@ -54,7 +60,7 @@ function figure (ctx, node) {
   if (node.children.length === 1) {
     node.children = node.children[0].children
   }
-
+  const extra = has(makeExtra, type) ? makeExtra[type](node) : undefined
   const innerText = all(ctx, node) || node.value
-  return macro(innerText.trim(), caption, makeExtra[type](node))
+  return macro(innerText.trim(), caption, extra)
 }
