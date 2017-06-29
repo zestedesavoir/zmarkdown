@@ -1,6 +1,5 @@
 'use strict';
 
-var clone = require('clone');
 var visit = require('unist-util-visit');
 
 function plugin() {
@@ -8,52 +7,24 @@ function plugin() {
 }
 
 function transformer(tree) {
-  visit(tree, 'blockquote', visitor);
+  visit(tree, 'paragraph', visitor);
 }
 
 function visitor(node, index, parent) {
-  if (parent && parent.type === 'figure') return;
-  var lastP = getLast(node.children);
-  if (!lastP || lastP.type !== 'paragraph') return;
-  var lastT = getLast(lastP.children);
-  if (!lastT || lastT.type !== 'text') return;
+  for (var c = 1; c < node.children.length - 1; c++) {
+    var child = node.children[c];
+    if (child.type === 'html') {
+      var previousNode = node.children[c - 1];
+      var nextNode = node.children[c + 1];
 
-  var lines = lastT.value.split('\n');
-  var lastLine = getLast(lines);
-  if (!lastLine) return;
-  if (!lastLine.includes(':')) return;
-  var legend = lines.pop().slice(lastLine.indexOf(':') + 1).trim();
-
-  lastT.value = lines.join('\n');
-
-  var figcaption = {
-    type: 'figcaption',
-    children: [{
-      type: 'text',
-      value: legend
-    }],
-    data: {
-      hName: 'figcaption'
+      if (previousNode.type === 'text' && previousNode.value.slice(-1) === '<' && nextNode.type === 'text' && nextNode.value[0] === '>') {
+        previousNode.value += child.value;
+        previousNode.value += nextNode.value;
+        node.children.splice(c, 2);
+        c -= 1;
+      }
     }
-  };
-
-  var figure = {
-    type: 'figure',
-    children: [clone(node), figcaption],
-    data: {
-      hName: 'figure'
-    }
-  };
-
-  node.type = figure.type;
-  node.children = figure.children;
-  node.data = figure.data;
-}
-
-function getLast(xs) {
-  var len = xs.length;
-  if (!len) return;
-  return xs[len - 1];
+  }
 }
 
 module.exports = plugin;

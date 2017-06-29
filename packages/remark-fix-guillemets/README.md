@@ -47,8 +47,8 @@ Usage:
 ```javascript
 unified()
   .use(remarkParse)
-  .use(remark2rehype)
   .use(remarkFixGuillemets)
+  .use(remark2rehype)
   .use(stringify)
 ```
 
