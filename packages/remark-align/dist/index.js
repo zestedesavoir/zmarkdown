@@ -6,7 +6,7 @@ var C_NEWPARAGRAPH = '\n\n';
 module.exports = function plugin() {
   var classNames = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  var regex = new RegExp('->');
+  var regex = new RegExp('[^\\\\]?->');
   var endMarkers = ['->', '<-'];
 
   function alignTokenizer(eat, value, silent) {
@@ -27,16 +27,19 @@ module.exports = function plugin() {
     while (canEatLine) {
       var next = value.indexOf(C_NEWLINE, idx + 1);
       var lineToEat = next !== -1 ? value.slice(idx, next) : value.slice(idx);
-      linesToEat.push(lineToEat
+      // Get if we found an escaped end marker.
+      var escaped = lineToEat.length > 2 && lineToEat[lineToEat.length - 3] === '\\';
+      linesToEat.push(lineToEat);
 
       // If next = (beginBlock + 2), it's the first marker of the block.
-      );if ((next > beginBlock + 2 || next === -1) && lineToEat.length >= 2 && endMarkers.indexOf(lineToEat.slice(-2)) !== -1) {
+      if (!escaped && (next > beginBlock + 2 || next === -1) && lineToEat.length >= 2 && endMarkers.indexOf(lineToEat.slice(-2)) !== -1) {
+
         if (endMarker === '') endMarker = lineToEat.slice(-2);
 
-        finishedBlocks.push(linesToEat.join(C_NEWLINE)
+        finishedBlocks.push(linesToEat.join(C_NEWLINE));
 
         // Check if another block is following
-        );if (value.indexOf('->', next) !== next + 1) break;
+        if (value.indexOf('->', next) !== next + 1) break;
         linesToEat = [];
         beginBlock = next + 1;
       }
