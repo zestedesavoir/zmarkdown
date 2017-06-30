@@ -1,24 +1,24 @@
-# rehype-abbr [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
+# remark-abbr [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
-This plugin parses custom Markdown syntax to produce HTML abbreviations.
+This plugin parses custom Markdown syntax to produce (HTML) abbreviations.
 
 ## Syntax
 
 An abbreviation works the same as footnotes:
 
 ```markdown
-This plugin works on HAST, an HTML AST
-implemented by [rehype](https://github.com/wooorm/rehype)
+This plugin works on MDAST, a Markdown AST
+implemented by [remark](https://github.com/wooorm/remark)
 
-*[HAST]: Hypertext Abstract Syntax Tree format.
+*[HAST]: Markdown Abstract Syntax Tree.
 *[AST]: Abstract syntax tree
 ```
 
 produces:
 
 ```html
-<p>This plugin works on <abbr title="Hypertext Abstract Syntax Tree format.">HAST</abbr>, an HTML <abbr title="Abstract syntax tree">AST</abbr>
-implemented by <a href="https://github.com/wooorm/rehype">rehype</a></p>
+<p>This plugin works on <abbr title="Markdown Abstract Syntax Tree.">MDAST</abbr>, a Markdown <abbr title="Abstract syntax tree">AST</abbr>
+implemented by <a href="https://github.com/wooorm/remark">remark</a></p>
 ```
 
 ## Installation
@@ -26,7 +26,7 @@ implemented by <a href="https://github.com/wooorm/rehype">rehype</a></p>
 [npm][npm]:
 
 ```bash
-npm install rehype-abbr
+npm install remark-abbr
 ```
 
 ## Usage
@@ -36,10 +36,10 @@ Dependencies:
 ```javascript
 const unified = require('unified')
 const remarkParse = require('remark-parse')
+const remarkAbbr = require('remark-abbr')
 const stringify = require('rehype-stringify')
 const remark2rehype = require('remark-rehype')
 
-const rehypeAbbr = require('rehype-abbr')
 ```
 
 Usage:
@@ -47,8 +47,8 @@ Usage:
 ```javascript
 unified()
   .use(remarkParse)
+  .use(remarkAbbr)
   .use(remark2rehype)
-  .use(rehypeAbbr)
   .use(stringify)
 ```
 
@@ -66,8 +66,8 @@ unified()
 
 [coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown
 
-[license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/rehype-abbr/LICENSE-MIT
+[license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/remark-abbr/LICENSE-MIT
 
 [zds]: https://zestedesavoir.com
 
-[npm]: https://www.npmjs.com/package/rehype-abbr
+[npm]: https://www.npmjs.com/package/remark-abbr

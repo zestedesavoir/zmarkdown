@@ -14,10 +14,10 @@
   },
   "dependencies": {
     "rebber": "^0.0.14",
-    "rehype-abbr": "^0.0.15",
     "rehype-footnotes-title": "^0.0.12",
     "rehype-html-blocks": "^0.0.13",
     "rehype-katex": "^1.0.1",
+    "remark-abbr": "^0.0.7",
     "remark-align": "^0.0.18",
     "remark-captions": "^0.0.8",
     "remark-comments": "^0.0.13",

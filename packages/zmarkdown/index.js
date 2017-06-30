@@ -24,7 +24,6 @@ const remarkTrailingSpaceHeading = require('remark-heading-trailing-spaces')
 const remark2rehype = require('remark-rehype')
 
 const rehypeKatex = require('rehype-katex')
-const rehypeAbbr = require('rehype-abbr')
 const rehypeFootnotesTitles = require('rehype-footnotes-title')
 const rehypeHTMLBlocks = require('rehype-html-blocks')
 const rehypeStringify = require('rehype-stringify')
@@ -112,7 +111,6 @@ const rehypeProcessor = (config) =>
 
     .use(rehypeHTMLBlocks)
     .use(rehypeFootnotesTitles, config.footnotesTitles)
-    .use(rehypeAbbr)
     .use(rehypeKatex, config.katex)
 
     .use(rehypeStringify)

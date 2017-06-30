@@ -1,6 +1,6 @@
 {
   "name": "remark-abbr",
-  "version": "0.0.1",
+  "version": "0.0.7",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-abbr",
     "type": "git"
@@ -29,7 +29,9 @@
     "remark"
   ],
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "unist-util-visit": "^1.1.3"
+  },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-jest": "^20.0.3",
@@ -39,7 +41,6 @@
     "del-cli": "^1.0.0",
     "eslint": "^4.0.0",
     "jest": "^20.0.4",
-    "rehype-abbr": "0.0.15",
     "remark-parse": "^3.0.1",
     "unified": "^6.1.5"
   }

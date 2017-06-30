@@ -28,7 +28,6 @@
     "lerna": "^2.0.0-rc.5",
     "mocha": "^3.4.2",
     "rebber": "0.0.11",
-    "rehype-abbr": "0.0.13",
     "rehype-footnotes-title": "0.0.10",
     "rehype-html-blocks": "0.0.11",
     "rehype-katex": "^1.0.1",
