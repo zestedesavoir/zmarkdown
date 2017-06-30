@@ -45,6 +45,7 @@
     "remark-emoticons": "^0.0.18",
     "remark-parse": "^3.0.1",
     "remark-sub-super": "^0.0.15",
+    "remark-grid-tables": "^0.0.8",
     "unified": "^6.1.5"
   }
 }

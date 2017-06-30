@@ -4,6 +4,7 @@ import {join} from 'path'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import rebber from '../src'
+import dedent from 'dedent'
 
 const base = join(__dirname, 'fixtures')
 const specs = directory(base).reduce((tests, contents) => {
@@ -33,6 +34,8 @@ const integrationConfig = {
     questionCustomBlock: require('../src/custom-types/customBlocks'),
     secretCustomBlock: require('../src/custom-types/customBlocks'),
     warningCustomBlock: require('../src/custom-types/customBlocks'),
+    gridTable: require('../src/custom-types/gridTable'),
+    abbr: require('../src/custom-types/abbr'),
   },
   emoticons: emoticons,
 }
@@ -248,11 +251,15 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
 
   test(name, () => {
     const {contents} = unified()
-      .use(reParse)
+      .use(reParse, {
+        footnotes: true
+      })
       .use(require('remark-emoticons'), emoticons)
-      .use(require('remark-captions'))
+      .use(require('remark-captions'), {external: {gridTable: 'Table:'}})
+      .use(require('remark-grid-tables'))
       .use(require('remark-sub-super'))
       .use(require('remark-kbd'))
+      .use(require('remark-abbr'))
       .use(require('remark-align'), {
         right: 'custom-right',
         center: 'custom-center',
@@ -260,9 +267,23 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
       .use(rebber, integrationConfig)
       .processSync(spec.fixture.replace(/·/g, ' '))
 
-    if (contents.trim() !== spec.expected.trim()) console.log(contents)
-    expect(contents.trim()).toEqual(spec.expected.trim())
+    expect(contents.trim()).toMatchSnapshot()
   })
+})
+
+test('footnotes', () => {
+  const {contents} = unified()
+    .use(reParse, {footnotes: true})
+    .use(rebber, integrationConfig)
+    .processSync(dedent`
+    # mytitle[^footnoteRef]
+    
+    [^fotnoteRef]: reference in title
+    
+    # mytitle[^footnoterawhead inner]
+    
+    a paragraph[^footnoteRawPar inner]`)
+  expect(contents).toMatchSnapshot()
 })
 
 test('custom-blocks', () => {

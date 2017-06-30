@@ -45,6 +45,8 @@ const rebberConfig = {
     erreurCustomBlock: require('rebber/dist/custom-types/customBlocks'),
     attentionCustomBlock: require('rebber/dist/custom-types/customBlocks'),
     questionCustomBlock: require('rebber/dist/custom-types/customBlocks'),
+    abbr: require('rebber/dist/custom-types/abbr'),
+    gridTable: require('rebber/dist/custom-types/gridTable'),
   },
   emoticons: defaultConfig.emoticons,
   link: {

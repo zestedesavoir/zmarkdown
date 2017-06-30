@@ -1,17 +1,21 @@
 /* Expose. */
 const one = require('../one')
 module.exports = table
-
-const defaultMacro = (ctx, node) => {
-  const parsed = node.children.map((n, index) => one(ctx, n, index, node))
-  const inner = parsed.join('')
-  const lengths = inner.split('\\hline\n').map(l => l.split('&').length)
+const defaultHeaderParse = (rows) => {
+  const lengths = rows.map(l => l.split('&').length)
   const cols = lengths.sort(cmp)[0]
   let colHeader = '|'
   colHeader += 'c|'.repeat(cols)
+  return colHeader
+}
+const defaultMacro = (ctx, node) => {
+  const headerParse = ctx.headerParse ? ctx.headerParse : defaultHeaderParse
+  const parsed = node.children.map((n, index) => one(ctx, n, index, node))
+  const inner = parsed.join('')
+  const colHeader = headerParse(parsed)
   let addendum = ''
   if (node.caption) {
-    addendum = `\n\\tablecaption{${node.caption}}\n`
+    addendum = `\n\\tableCaption{${node.caption}}\n`
   }
   return `\\begin{longtabu}{${colHeader}} \\hline\n${inner}${addendum}\\end{longtabu}\n\n`
 }

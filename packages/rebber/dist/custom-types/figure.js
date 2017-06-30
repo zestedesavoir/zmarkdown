@@ -2,6 +2,7 @@
 
 /* Dependencies. */
 var all = require('../all');
+var one = require('../one');
 var has = require('has');
 
 /* Expose. */
@@ -21,6 +22,9 @@ var defaultMacros = {
   },
   table: function table(innerText) {
     return innerText;
+  },
+  image: function image(latexified, caption) {
+    return '\\begin{center}\n' + latexified + '\n\\captionof{' + caption + '}';
   }
 };
 
@@ -35,32 +39,38 @@ var makeExtra = {
       }
     }
     return extra;
+  },
+  image: function image(node) {
+    node.witdth = '\\linewidth';
+    return node;
   }
 
   /* Stringify a Figure `node`. */
-};function figure(ctx, node) {
+};function figure(ctx, node, index, parent) {
   var type = node.children[0].type;
   var macro = has(ctx, 'figure') && has(ctx.figure, type) && ctx.figure[type] || has(defaultMacros, type) && defaultMacros[type];
-  if (!macro) return;
 
   var caption = '';
   if (node.children.length) {
-    caption = node.children.filter(function (node) {
-      return node.type === 'figcaption';
-    }).map(function (node) {
-      return all(ctx, node);
+    caption = node.children.filter(function (captionNode) {
+      return captionNode.type === 'figcaption';
+    }).map(function (captionNode) {
+      return all(ctx, captionNode);
     }).join('');
   }
 
   node.caption = caption; // allows to add caption to the default processing
-
+  if (!macro) {
+    node.children[0].caption = caption;
+    return one(ctx, node.children[0], 0, node);
+  }
   node.children = node.children.filter(function (node) {
     return node.type !== 'figcaption';
   });
   if (node.children.length === 1) {
     node.children = node.children[0].children;
   }
-
+  var extra = has(makeExtra, type) ? makeExtra[type](node) : undefined;
   var innerText = all(ctx, node) || node.value;
-  return macro(innerText.trim(), caption, makeExtra[type](node));
+  return macro(innerText.trim(), caption, extra);
 }

@@ -1,4 +1,3 @@
-const all = require('../all')
 module.exports = plugin
 const identifiers = {}
 function plugin (ctx = {}) {
@@ -11,7 +10,7 @@ function plugin (ctx = {}) {
     while (Object.keys(identifiers).includes(identifier)) {
       identifier += '-1'
     }
-    identifiers[identifier] = all(ctx, node)
+    identifiers[identifier] = node.url
     node.identifier = identifier // force to remove doubly so that latex is compilable
     if (node.referenceType === 'shortcut') { // remark for abbr
 

@@ -1,5 +1,6 @@
 /* Dependencies. */
 const all = require('../all')
+const one = require('../one')
 const has = require('has')
 
 /* Expose. */
@@ -40,22 +41,24 @@ const makeExtra = {
 }
 
 /* Stringify a Figure `node`. */
-function figure (ctx, node) {
+function figure (ctx, node, index, parent) {
   const type = node.children[0].type
   const macro = (has(ctx, 'figure') && has(ctx.figure, type) && ctx.figure[type]) ||
     (has(defaultMacros, type) && defaultMacros[type])
-  if (!macro) return
 
   let caption = ''
   if (node.children.length) {
     caption = node.children
-      .filter(node => node.type === 'figcaption')
-      .map(node => all(ctx, node))
+      .filter(captionNode => captionNode.type === 'figcaption')
+      .map(captionNode => all(ctx, captionNode))
       .join('')
   }
 
   node.caption = caption // allows to add caption to the default processing
-
+  if (!macro) {
+    node.children[0].caption = caption
+    return one(ctx, node.children[0], 0, node)
+  }
   node.children = node.children.filter(node => node.type !== 'figcaption')
   if (node.children.length === 1) {
     node.children = node.children[0].children

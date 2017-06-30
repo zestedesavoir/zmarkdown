@@ -1,16 +1,15 @@
 const xtend = require('xtend')
 const visit = require('unist-util-visit')
 const referencePlugin = require('./referenceVisitor')
-const abbrPlugin = require('./abbrVisitor')
+const codePlugin = require('./codeVisitor')
 
 module.exports = preVisit
 
 function preVisit (ctx, root) {
   const defaultVisitors = {
+    'tableCell': [codePlugin(ctx, root).codeInTableVisitor],
     'definition': [referencePlugin(ctx).definitionVisitor],
-    'abbr': [abbrPlugin(ctx).abbrVisitor],
     'imageReference': [referencePlugin(ctx).imageReferenceVisitor],
-    'text': [abbrPlugin(ctx).textVisitor]
   }
   const visitors = xtend(defaultVisitors, ctx.preprocessors || {})
   Object.keys(visitors).forEach((key) => {

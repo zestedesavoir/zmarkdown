@@ -3,18 +3,22 @@
 /* Expose. */
 var one = require('../one');
 module.exports = table;
-
-var defaultMacro = function defaultMacro(ctx, node) {
-  var parsed = node.children.map(function (n, index) {
-    return one(ctx, n, index, node);
-  });
-  var inner = parsed.join('');
-  var lengths = inner.split('\\hline\n').map(function (l) {
+var defaultHeaderParse = function defaultHeaderParse(rows) {
+  var lengths = rows.map(function (l) {
     return l.split('&').length;
   });
   var cols = lengths.sort(cmp)[0];
   var colHeader = '|';
   colHeader += 'c|'.repeat(cols);
+  return colHeader;
+};
+var defaultMacro = function defaultMacro(ctx, node) {
+  var headerParse = ctx.headerParse ? ctx.headerParse : defaultHeaderParse;
+  var parsed = node.children.map(function (n, index) {
+    return one(ctx, n, index, node);
+  });
+  var inner = parsed.join('');
+  var colHeader = headerParse(parsed);
   var addendum = '';
   if (node.caption) {
     addendum = '\n\\tablecaption{' + node.caption + '}\n';
