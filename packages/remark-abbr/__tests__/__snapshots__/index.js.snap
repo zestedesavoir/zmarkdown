@@ -2,26 +2,22 @@
 
 exports[`passes the first regression test 1`] = `
 "<p>The <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr> specification is maintained by the <abbr title=\\"World Wide Web Consortium\\">W3C</abbr>:<a href=\\"https://w3c.github.io/html/\\">link</a>, this line had an abbr before link.</p>
-<p>A line with <a href=\\"http://example.com\\">a link</a> before an abbr: <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>.</p>
-"
+<p>A line with <a href=\\"http://example.com\\">a link</a> before an abbr: <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>.</p>"
 `;
 
 exports[`passes the retro test 1`] = `
 "<p>An <abbr title=\\"Abbreviation\\">ABBR</abbr>: \\"<abbr title=\\"Reference\\">REF</abbr>\\", ref and REFERENCE should be ignored.</p>
-<p>The <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr> specification is maintained by the <abbr title=\\"World Wide Web Consortium\\">W3C</abbr>.</p>
-"
+<p>The <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr> specification is maintained by the <abbr title=\\"World Wide Web Consortium\\">W3C</abbr>.</p>"
 `;
 
 exports[`passes the second regression test 1`] = `
 "<p>The <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr> specification is maintained by the <abbr title=\\"World Wide Web Consortium\\">W3C</abbr>:<a href=\\"https://w3c.github.io/html/\\">link</a>, this line had an abbr before <strong>link</strong> <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>.</p>
-<p>A line with <a href=\\"http://example.com\\">a link</a> before an abbr: <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>.</p>
-"
+<p>A line with <a href=\\"http://example.com\\">a link</a> before an abbr: <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>.</p>"
 `;
 
 exports[`renders references 1`] = `
 "<p>This is an abbreviation: <abbr title=\\"Reference\\">REF</abbr>.
 ref and REFERENCE should be ignored.</p>
 <p>Here is another one in a link: <a href=\\"http://example.com\\"><abbr title=\\"Reference\\">FOO</abbr></a>.</p>
-<p>Here is the first one in a link: <a href=\\"http://example.com\\"><abbr title=\\"Reference\\">REF</abbr></a>.</p>
-"
+<p>Here is the first one in a link: <a href=\\"http://example.com\\"><abbr title=\\"Reference\\">REF</abbr></a>.</p>"
 `;

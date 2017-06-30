@@ -4,12 +4,12 @@ import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
 
-import abbr from '../src/'
+import remarkAbbr from '../src/'
 
 const render = text => unified()
   .use(reParse)
+  .use(remarkAbbr)
   .use(remark2rehype)
-  .use(abbr)
   .use(stringify)
   .processSync(text)
 

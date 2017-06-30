@@ -4,8 +4,9 @@ const inspect = require('unist-util-inspect')
 
 const remarkParse = require('remark-parse')
 
-const remarkCaptions = require('remark-captions')
+const remarkAbbr = require('../remark-abbr')
 const remarkAlign = require('remark-align')
+const remarkCaptions = require('remark-captions')
 const remarkComments = require('remark-comments')
 const remarkCustomBlocks = require('remark-custom-blocks')
 const remarkEmoticons = require('remark-emoticons')
@@ -23,7 +24,6 @@ const remarkTrailingSpaceHeading = require('remark-heading-trailing-spaces')
 const remark2rehype = require('remark-rehype')
 
 const rehypeKatex = require('rehype-katex')
-const rehypeAbbr = require('rehype-abbr')
 const rehypeFootnotesTitles = require('rehype-footnotes-title')
 const rehypeHTMLBlocks = require('rehype-html-blocks')
 const rehypeStringify = require('rehype-stringify')
@@ -86,6 +86,7 @@ const zmdParser = (config) => {
   }
 
   mdProcessor = mdProcessor
+    .use(remarkAbbr)
     .use(remarkAlign, config.alignBlocks)
     .use(remarkCaptions, config.captions)
     .use(remarkComments)
@@ -110,7 +111,6 @@ const rehypeProcessor = (config) =>
 
     .use(rehypeHTMLBlocks)
     .use(rehypeFootnotesTitles, config.footnotesTitles)
-    .use(rehypeAbbr)
     .use(rehypeKatex, config.katex)
 
     .use(rehypeStringify)
