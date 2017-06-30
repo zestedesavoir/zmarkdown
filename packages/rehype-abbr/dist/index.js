@@ -3,39 +3,6 @@
 var visit = require('unist-util-visit');
 
 function plugin() {
-  function locator(value, fromIndex) {
-    return value.indexOf('*[', fromIndex);
-  }
-
-  function inlineTokenizer(eat, value, silent) {
-    var regex = new RegExp(/[*]\[([^\]]*)\]:\s*(.+)\n*/);
-    var keep = regex.exec(value
-
-    /* istanbul ignore if - never used (yet) */
-    );if (silent) return silent;
-    if (!keep || keep.index !== 0) return;
-
-    return eat(keep[0])({
-      type: 'abbr',
-      data: {
-        hName: 'abbr',
-        hProperties: {
-          word: keep[1],
-          desc: keep[2]
-        }
-      }
-    });
-  }
-  inlineTokenizer.locator = locator;
-
-  var Parser = this.Parser;
-
-  // Inject inlineTokenizer
-  var inlineTokenizers = Parser.prototype.inlineTokenizers;
-  var inlineMethods = Parser.prototype.inlineMethods;
-  inlineTokenizers.abbr = inlineTokenizer;
-  inlineMethods.splice(0, 0, 'abbr');
-
   function transformer(tree) {
     var abbrs = {};
     visit(tree, 'element', find(abbrs));
@@ -47,6 +14,7 @@ function plugin() {
       if (node.tagName === 'p') {
         for (var i = 0; i < node.children.length; ++i) {
           var child = node.children[i];
+          console.log(child);
           if (child.tagName === 'abbr') {
             // Store abbreviation
             abbrs[child.properties.word] = child.properties.desc;

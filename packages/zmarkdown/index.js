@@ -4,8 +4,9 @@ const inspect = require('unist-util-inspect')
 
 const remarkParse = require('remark-parse')
 
-const remarkCaptions = require('remark-captions')
+const remarkAbbr = require('../remark-abbr')
 const remarkAlign = require('remark-align')
+const remarkCaptions = require('remark-captions')
 const remarkComments = require('remark-comments')
 const remarkCustomBlocks = require('remark-custom-blocks')
 const remarkEmoticons = require('remark-emoticons')
@@ -86,6 +87,7 @@ const zmdParser = (config) => {
   }
 
   mdProcessor = mdProcessor
+    .use(remarkAbbr)
     .use(remarkAlign, config.alignBlocks)
     .use(remarkCaptions, config.captions)
     .use(remarkComments)

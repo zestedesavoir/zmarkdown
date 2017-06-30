@@ -5,9 +5,8 @@ module.exports = plugin
 
 function plugin ({ plugins = [], options = {} } = {}) {
   let fn
-  return transformer
 
-  function transformer (tree) {
+  return function transformer (tree) {
     fn = plugins.reduce(
       (processor, p) => processor.use(typeof p === 'string' ? require(p) : p),
       textr(options)
@@ -15,6 +14,7 @@ function plugin ({ plugins = [], options = {} } = {}) {
 
     visit(tree, 'text', visitor)
   }
+
   function visitor (node) {
     node.value = fn(node.value)
   }

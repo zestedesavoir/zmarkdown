@@ -3,16 +3,16 @@ import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
-import remarkAbbr from 'remark-abbr'
+import rehypeAbbr from 'rehype-abbr'
 
-import rehypeAbbr from '../src/'
+import remarkAbbr from '../src/'
 
 const render = text => unified()
   .use(reParse)
   .use(remarkAbbr)
   .use(remark2rehype)
-  .use(rehypeAbbr)
   .use(stringify)
+  .use(rehypeAbbr)
   .processSync(text)
 
 it('renders references', () => {
