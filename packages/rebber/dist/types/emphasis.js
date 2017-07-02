@@ -1,10 +1,10 @@
 'use strict';
 
 /* Dependencies. */
-var all = require('../all'
+var all = require('../all');
 
 /* Expose. */
-);module.exports = emphasis;
+module.exports = emphasis;
 
 /* Stringify a emphasis `node`. */
 function emphasis(ctx, node, index, parent) {

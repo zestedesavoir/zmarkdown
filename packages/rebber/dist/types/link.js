@@ -2,10 +2,10 @@
 
 /* Dependencies. */
 var has = require('has');
-var all = require('../all'
+var all = require('../all');
 
 /* Expose. */
-);module.exports = link;
+module.exports = link;
 
 var defaultMacro = function defaultMacro(displayedText, link) {
   return '\\externalLink{' + displayedText + '}{' + link + '}';
