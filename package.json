@@ -75,6 +75,7 @@
   "scripts": {
     "postinstall": "lerna bootstrap --hoist",
     "test": "jest",
+    "lint": "eslint .",
     "coverage": "jest --coverage"
   }
 }

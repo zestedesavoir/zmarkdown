@@ -2,10 +2,10 @@
 
 /* Dependencies. */
 var has = require('has');
-var xtend = require('xtend'
+var xtend = require('xtend');
 
 /* Expose. */
-);module.exports = one;
+module.exports = one;
 
 /* Handlers. */
 var handlers = {};
@@ -29,10 +29,10 @@ handlers.blockquote = require('./types/blockquote');
 handlers.tableCell = require('./types/tableCell');
 handlers.tableRow = require('./types/tableRow');
 handlers.table = require('./types/table');
-handlers.thematicBreak = require('./types/thematic-break'
+handlers.thematicBreak = require('./types/thematic-break');
 
 /* Stringify `node`. */
-);function one(ctx, node, index, parent) {
+function one(ctx, node, index, parent) {
   var handlersOverride = has(ctx, 'override') ? ctx.override : {};
   var h = xtend(handlers, handlersOverride);
 
