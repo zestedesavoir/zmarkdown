@@ -1,10 +1,10 @@
 'use strict';
 
 /* Dependencies. */
-var all = require('../all'
+var all = require('../all');
 
 /* Expose. */
-);module.exports = sub;
+module.exports = sub;
 
 /* Stringify a sub `node`. */
 function sub(ctx, node, index, parent) {

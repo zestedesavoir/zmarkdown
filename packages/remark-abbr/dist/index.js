@@ -9,10 +9,10 @@ function plugin() {
 
   function inlineTokenizer(eat, value, silent) {
     var regex = new RegExp(/[*]\[([^\]]*)\]:\s*(.+)\n*/);
-    var keep = regex.exec(value
+    var keep = regex.exec(value);
 
     /* istanbul ignore if - never used (yet) */
-    );if (silent) return silent;
+    if (silent) return silent;
     if (!keep || keep.index !== 0) return;
 
     return eat(keep[0])({
@@ -51,8 +51,7 @@ function plugin() {
 
   function replace(abbrs) {
     function escapeRegExp(str) {
-      return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&' // eslint-disable-line no-useless-escape
-      );
+      return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&'); // eslint-disable-line no-useless-escape
     }
 
     var pattern = Object.keys(abbrs).map(escapeRegExp).join('|');
@@ -69,13 +68,13 @@ function plugin() {
         if (!regex.test(child.value)) continue;
 
         // Transform node
-        var newTexts = child.value.split(regex
+        var newTexts = child.value.split(regex);
 
         // Remove old text node
-        );node.children.splice(c, 1
+        node.children.splice(c, 1);
 
         // Replace abbreviations
-        );for (var i = 0; i < newTexts.length; i++) {
+        for (var i = 0; i < newTexts.length; i++) {
           var content = newTexts[i];
           if (abbrs.hasOwnProperty(content)) {
             node.children.splice(c + i, 0, abbrs[content]);

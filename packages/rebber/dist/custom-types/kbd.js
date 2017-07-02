@@ -1,9 +1,9 @@
 'use strict';
 
-var all = require('../all'
+var all = require('../all');
 
 /* Expose. */
-);module.exports = kbd;
+module.exports = kbd;
 
 /* Stringify a sub `node`. */
 function kbd(ctx, node) {

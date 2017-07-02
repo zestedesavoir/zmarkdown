@@ -453,7 +453,7 @@ describe('HTML rendering', function () {
       expect(renderFile()(filepath).trim()).to.have.html(loadFixture(filepath).trim())
     })
 
-    it(`properly renders lists7.txt`, function () {
+    it.skip(`properly renders lists7.txt`, function () {
       const filepath = `${dir}/lists7.txt`
       expect(renderFile()(filepath).trim()).to.have.html(loadFixture(filepath).trim())
     })

@@ -54,26 +54,26 @@ function internLegendVisitor(internalBlocks) {
       if (line.startsWith(internalBlocks[node.type])) {
         lastLegendIndex = index;
       }
-    }
+    });
 
     // the child containing the last legend is split in two: head contains text until
     // legend, tail contains legend text
-    );var tail = clone(lastP.children[legendChildIndex]);
-    var headText = potentialLegendLines.slice(0, lastLegendIndex).join('\n'
+    var tail = clone(lastP.children[legendChildIndex]);
+    var headText = potentialLegendLines.slice(0, lastLegendIndex).join('\n');
     // replace existing node 'head' content with text until legend
-    );lastP.children[legendChildIndex].value = headText;
+    lastP.children[legendChildIndex].value = headText;
 
     // legend text is put into the cloned node…
     var legendText = potentialLegendLines.slice(lastLegendIndex).join('\n').slice(internalBlocks[node.type].length).trimLeft();
 
     tail.value = legendText;
     // … and 'tail', the cloned node is inserted after 'head'
-    lastP.children.splice(legendChildIndex + 1, 0, tail
+    lastP.children.splice(legendChildIndex + 1, 0, tail);
 
     // gather all nodes that should be inside the legend
-    );var legendNodes = lastP.children.slice(legendChildIndex + 1
+    var legendNodes = lastP.children.slice(legendChildIndex + 1);
     // remove them from the parent paragraph
-    );lastP.children = lastP.children.slice(0, legendChildIndex + 1);
+    lastP.children = lastP.children.slice(0, legendChildIndex + 1);
 
     var figcaption = {
       type: 'figcaption',
@@ -113,8 +113,8 @@ function externLegendVisitorCreator(blocks) {
         }
         legendNodes.push({
           type: 'text',
-          value: firstTextLine.trimLeft // remove the " " after the {prefix}:
-          () });
+          value: firstTextLine.trimLeft() // remove the " " after the {prefix}:
+        });
 
         legendNode.children.forEach(function (node, index) {
           if (index === 0) return;
