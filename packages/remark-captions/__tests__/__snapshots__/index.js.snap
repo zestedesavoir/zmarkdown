@@ -107,6 +107,26 @@ b<em>a</em>r</p>
 <p>noop</p>"
 `;
 
+exports[`legend in paragraph 1`] = `
+"<p>foo</p>
+<p><figure><img src=\\"\\"><figcaption>1 this is parsed as legend</figcaption></figure></p>
+<p>baz</p>
+<p><img src=\\"\\">
+aFigure: 2 this is displayed as text</p>
+<p><img src=\\"https://zestedesavoir.com/static/images/home-clem.4a2f792744c9.png\\" alt=\\"alt 2b\\">
+this is displayed as text</p>
+<p>foo
+<figure><img src=\\"\\"><figcaption>3 this is a legend</figcaption></figure></p>
+<p><figure><img src=\\"\\"><figcaption>4 this is a legend, remainder of the paragraph goes into
+the
+legend</figcaption></figure></p>
+<p>Figure: 5 this is a text with and image
+<img src=\\"\\">
+in the middle</p>
+<p>Figure: 6 displayed as text
+<figure><img src=\\"\\"><figcaption>7 is a legend</figcaption></figure></p>"
+`;
+
 exports[`quotation 1`] = `
 "<p>(for convenience,   are replaced with
 simple single spaces in the tests)</p>

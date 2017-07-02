@@ -46,7 +46,8 @@ function internLegendVisitor (internalBlocks) {
         legendChildIndex = index
       }
     })
-    if (legendChildIndex === -1) return
+    if (legendChildIndex === -1 ||
+      (!node.children && legendChildIndex < index)) return
 
     // split the text node containing the last legend and find the line containing it
     const potentialLegendLines = lastP.children[legendChildIndex].value.split('\n')

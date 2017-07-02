@@ -11,7 +11,7 @@ var legendBlock = {
 
 var internLegendBlock = {
   blockquote: 'Source:',
-  img: 'Figure:'
+  image: 'Figure:'
 };
 
 function plugin(opts) {
@@ -35,8 +35,8 @@ function internLegendVisitor(internalBlocks) {
     if (parent && parent.type === 'figure') return;
 
     // legend can only be in a paragraph
-    var lastP = getLast(node.children);
-    if (!lastP || lastP.type !== 'paragraph') return;
+    var lastP = node.children ? getLast(node.children) : parent;
+    if (!lastP || node.children && lastP.type !== 'paragraph' || !node.children && parent.type !== 'paragraph') return;
 
     // find which child contains the last legend
     var legendChildIndex = -1;
@@ -45,7 +45,7 @@ function internLegendVisitor(internalBlocks) {
         legendChildIndex = index;
       }
     });
-    if (legendChildIndex === -1) return;
+    if (legendChildIndex === -1 || !node.children && legendChildIndex < index) return;
 
     // split the text node containing the last legend and find the line containing it
     var potentialLegendLines = lastP.children[legendChildIndex].value.split('\n');

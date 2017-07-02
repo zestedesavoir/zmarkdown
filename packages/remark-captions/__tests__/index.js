@@ -23,7 +23,7 @@ const render = (text, config) => unified()
   .use(stringify)
   .processSync(text)
 
-/* test('code', () => {
+test('code', () => {
   const { contents } = render(dedent`
     ## Code
 
@@ -211,7 +211,7 @@ test('internal legend: two legends', () => {
     noop
   `.replace(/·/g, ' '))
   expect(contents).toMatchSnapshot()
-}) */
+})
 
 test('legend in paragraph', () => {
   const { contents } = render(dedent`
@@ -236,6 +236,14 @@ test('legend in paragraph', () => {
     Figure: 4 this is a legend, remainder of the paragraph goes into
     the
     legend
+
+    Figure: 5 this is a text with and image
+    ![]()
+    in the middle
+
+    Figure: 6 displayed as text
+    ![]()
+    Figure: 7 is a legend
   `.replace(/·/g, ' '))
   expect(contents).toMatchSnapshot()
 })
