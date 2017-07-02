@@ -4,7 +4,7 @@ const inspect = require('unist-util-inspect')
 
 const remarkParse = require('remark-parse')
 
-const remarkAbbr = require('../remark-abbr')
+const remarkAbbr = require('remark-abbr')
 const remarkAlign = require('remark-align')
 const remarkCaptions = require('remark-captions')
 const remarkComments = require('remark-comments')
