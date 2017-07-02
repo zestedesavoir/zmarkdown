@@ -23,7 +23,7 @@ const render = (text, config) => unified()
   .use(stringify)
   .processSync(text)
 
-test('code', () => {
+/* test('code', () => {
   const { contents } = render(dedent`
     ## Code
 
@@ -209,6 +209,33 @@ test('internal legend: two legends', () => {
     Source: This is **the real** \`source\`
 
     noop
+  `.replace(/·/g, ' '))
+  expect(contents).toMatchSnapshot()
+}) */
+
+test('legend in paragraph', () => {
+  const { contents } = render(dedent`
+    foo
+
+    ![]()
+    Figure: 1 this is parsed as legend
+
+    baz
+
+    ![]()
+    aFigure: 2 this is displayed as text
+
+    ![alt 2b](https://zestedesavoir.com/static/images/home-clem.4a2f792744c9.png)
+    this is displayed as text
+
+    foo
+    ![]()
+    Figure: 3 this is a legend
+
+    ![]()
+    Figure: 4 this is a legend, remainder of the paragraph goes into
+    the
+    legend
   `.replace(/·/g, ' '))
   expect(contents).toMatchSnapshot()
 })
