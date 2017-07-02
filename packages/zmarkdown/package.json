@@ -78,6 +78,7 @@
     "test": "jest",
     "watch": "jest --watch",
     "test-travis": "jest --coverage",
+    "prepublish": "npm run prepare",
     "prepare": "browserify index.js -g [ envify --NODE_ENV production ] -g [ babelify --presets [ es2015 ] ] -g uglifyify -d -s ZMarkdown | exorcist ./public/bundle.js.map > ./public/bundle.js"
   }
 }
