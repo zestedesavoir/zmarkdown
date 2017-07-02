@@ -2,10 +2,10 @@
 
 /* Dependencies. */
 var xtend = require('xtend');
-var one = require('./one'
+var one = require('./one');
 
 /* Expose. */
-);module.exports = stringify;
+module.exports = stringify;
 
 /* Stringify the given MDAST node. */
 function toLaTeX(node, options) {

@@ -2,10 +2,10 @@
 
 /* Dependencies. */
 var all = require('../all');
-var has = require('has'
+var has = require('has');
 
 /* Expose. */
-);module.exports = figure;
+module.exports = figure;
 
 var defaultMacros = {
   blockquote: function blockquote(innerText) {

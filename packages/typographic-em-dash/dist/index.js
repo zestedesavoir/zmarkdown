@@ -11,11 +11,11 @@ module.exports = function () {
   // Replace -- by \u2013 for all locales
   var dashChar = '\u2014';
   var dashPattern = /--/gm;
-  var result = input.replace(dashPattern, '' + dashChar
+  var result = input.replace(dashPattern, '' + dashChar);
 
   // nbsp inside em dash pairs
   // (foo -- bar -- baz. -> foo1—2bar2—1baz. where 1 is and 2 is nbsp
-  );if (Object.keys(db).includes(locale)) {
+  if (Object.keys(db).includes(locale)) {
     var separation = new RegExp('(^|\\s)(' + dashChar + ')(\\s|$)');
     var nnbs = db[locale];
     var temp = result;

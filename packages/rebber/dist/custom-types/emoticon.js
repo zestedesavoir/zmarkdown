@@ -1,10 +1,10 @@
 'use strict';
 
 /* Dependencies. */
-var has = require('has'
+var has = require('has');
 
 /* Expose. */
-);module.exports = emoticon;
+module.exports = emoticon;
 
 /* Stringify an emoticon `node`. */
 function emoticon(ctx, node) {
