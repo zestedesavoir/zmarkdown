@@ -9,7 +9,7 @@ const legendBlock = {
 
 const internLegendBlock = {
   blockquote: 'Source:',
-  img: 'Figure:'
+  image: 'Figure:'
 }
 
 function plugin (opts) {
@@ -31,8 +31,10 @@ function internLegendVisitor (internalBlocks) {
     if (parent && parent.type === 'figure') return
 
     // legend can only be in a paragraph
-    const lastP = getLast(node.children)
-    if (!lastP || lastP.type !== 'paragraph') return
+    const lastP = node.children ? getLast(node.children) : parent
+    if (!lastP ||
+      (node.children && lastP.type !== 'paragraph') ||
+      (!node.children && parent.type !== 'paragraph')) return
 
     // find which child contains the last legend
     let legendChildIndex = -1
