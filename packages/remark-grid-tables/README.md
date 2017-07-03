@@ -81,6 +81,21 @@ too</p></td>
 </table>
 ```
 
+Note: the top of a cell must be indicated by `+-` followed by some `-` or `+` and finished by `-+`.  
+So, this is not a correct cell:
+```md
++--+
+|a |
++--+
+```
+
+But, this is a correct cell:
+```md
++---+
+| a |
++---+
+```
+
 ## Installation
 
 [npm][npm]:
