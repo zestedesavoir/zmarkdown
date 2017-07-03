@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`#101 1`] = `
+"<h2>code followed by non text par</h2>
+<pre><code>foo
+</code></pre>
+<p><a href=\\"#\\"></a></p>"
+`;
+
 exports[`code 1`] = `
 "<h2>Code</h2>
 <p>Normal code</p>
