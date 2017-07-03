@@ -13,7 +13,7 @@ node_js:
   - '6'
 
 before_install:
-  - npm i -g npm@5 lerna@^2.0.0-rc.5
+  - npm i -g npm@4 lerna@^2.0.0-rc.5
   - lerna bootstrap --hoist
 
 script:
