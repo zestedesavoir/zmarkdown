@@ -105,7 +105,8 @@ function internLegendVisitor (internalBlocks) {
 
 function externLegendVisitorCreator (blocks) {
   return function (node, index, parent) {
-    if (index > parent.children.length || parent.children[index + 1].type !== 'paragraph') return
+    if (index >= parent.children.length - 1) return
+    if (parent.children[index + 1].type !== 'paragraph') return
     const legendNode = parent.children[index + 1]
     const firstChild = legendNode.children[0]
     if (firstChild.type !== 'text' || !firstChild.value.startsWith(blocks[node.type])) return

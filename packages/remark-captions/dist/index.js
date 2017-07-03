@@ -99,60 +99,59 @@ function internLegendVisitor(internalBlocks) {
 
 function externLegendVisitorCreator(blocks) {
   return function (node, index, parent) {
-    if (index + 1 < parent.children.length && parent.children[index + 1].type === 'paragraph') {
-      var legendNode = parent.children[index + 1];
-      var firstChild = legendNode.children[0];
+    if (index >= parent.children.length - 1) return;
+    if (parent.children[index + 1].type !== 'paragraph') return;
+    var legendNode = parent.children[index + 1];
+    var firstChild = legendNode.children[0];
+    if (firstChild.type !== 'text' || !firstChild.value.startsWith(blocks[node.type])) return;
 
-      if (firstChild.value.startsWith(blocks[node.type])) {
-        var legendNodes = [];
-        var followingNodes = [];
-        var firstTextLine = firstChild.value.replace(blocks[node.type], '').split('\n')[0];
-        if (firstChild.value.includes('\n')) {
-          followingNodes.push({ type: 'text',
-            value: firstChild.value.replace(blocks[node.type], '').split('\n')[1] });
+    var legendNodes = [];
+    var followingNodes = [];
+    var firstTextLine = firstChild.value.replace(blocks[node.type], '').split('\n')[0];
+    if (firstChild.value.includes('\n')) {
+      followingNodes.push({ type: 'text',
+        value: firstChild.value.replace(blocks[node.type], '').split('\n')[1] });
+    }
+    legendNodes.push({
+      type: 'text',
+      value: firstTextLine.trimLeft() // remove the " " after the {prefix}:
+    });
+
+    legendNode.children.forEach(function (node, index) {
+      if (index === 0) return;
+      if (node.type === 'text') {
+        var keepInLegend = node.value.split('\n')[0];
+        if (node.value.includes('\n')) {
+          node.value = node.value.split('\n')[1];
+          followingNodes.push(node);
         }
-        legendNodes.push({
-          type: 'text',
-          value: firstTextLine.trimLeft() // remove the " " after the {prefix}:
-        });
-
-        legendNode.children.forEach(function (node, index) {
-          if (index === 0) return;
-          if (node.type === 'text') {
-            var keepInLegend = node.value.split('\n')[0];
-            if (node.value.includes('\n')) {
-              node.value = node.value.split('\n')[1];
-              followingNodes.push(node);
-            }
-            legendNodes.push({ type: 'text', value: keepInLegend });
-          } else {
-            legendNodes.push(clone(node));
-          }
-        });
-
-        var figcaption = {
-          type: 'figcaption',
-          children: legendNodes,
-          data: {
-            hName: 'figcaption'
-          }
-        };
-        var figure = {
-          type: 'figure',
-          children: [clone(node), figcaption],
-          data: {
-            hName: 'figure'
-          }
-        };
-        node.type = figure.type;
-        node.children = figure.children;
-        node.data = figure.data;
-        if (followingNodes.length) {
-          parent.children.splice(index + 1, 1, { type: 'paragraph', children: followingNodes });
-        } else {
-          parent.children.splice(index + 1, 1);
-        }
+        legendNodes.push({ type: 'text', value: keepInLegend });
+      } else {
+        legendNodes.push(clone(node));
       }
+    });
+
+    var figcaption = {
+      type: 'figcaption',
+      children: legendNodes,
+      data: {
+        hName: 'figcaption'
+      }
+    };
+    var figure = {
+      type: 'figure',
+      children: [clone(node), figcaption],
+      data: {
+        hName: 'figure'
+      }
+    };
+    node.type = figure.type;
+    node.children = figure.children;
+    node.data = figure.data;
+    if (followingNodes.length) {
+      parent.children.splice(index + 1, 1, { type: 'paragraph', children: followingNodes });
+    } else {
+      parent.children.splice(index + 1, 1);
     }
   };
 }
