@@ -62,6 +62,17 @@ test('code', () => {
   expect(contents).toMatchSnapshot()
 })
 
+test('#101', () => {
+  const {contents} = render(dedent`
+  ## code followed by non text par
+
+  \`\`\`
+  foo
+  \`\`\`
+  
+  [](#)`, {external: { code: 'Code:' }})
+  expect(contents).toMatchSnapshot()
+})
 
 test('custom-table', () => {
   const { contents } = render(dedent`
