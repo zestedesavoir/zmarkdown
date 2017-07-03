@@ -4,17 +4,14 @@ git:
 language: node_js
 
 cache:
+  yarn: true
   directories:
-  - node_modules
+    - node_modules
 
 node_js:
   - '8'
   - '7'
   - '6'
-
-before_install:
-  - npm i -g npm@4 lerna@^2.0.0-rc.5
-  - lerna bootstrap --hoist
 
 script:
   - npm test
