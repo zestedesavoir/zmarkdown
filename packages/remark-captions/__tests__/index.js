@@ -244,6 +244,11 @@ test('legend in paragraph', () => {
     Figure: 6 displayed as text
     ![]()
     Figure: 7 is a legend
+
+    ![]()
+    Figure: 8 is a legend.
+
+    Figure: 9 this is a text.
   `.replace(/·/g, ' '))
   expect(contents).toMatchSnapshot()
 })

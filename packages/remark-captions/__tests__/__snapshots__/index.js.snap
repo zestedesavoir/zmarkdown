@@ -124,7 +124,9 @@ legend</figcaption></figure></p>
 <img src=\\"\\">
 in the middle</p>
 <p>Figure: 6 displayed as text
-<figure><img src=\\"\\"><figcaption>7 is a legend</figcaption></figure></p>"
+<figure><img src=\\"\\"><figcaption>7 is a legend</figcaption></figure></p>
+<p><figure><img src=\\"\\"><figcaption>8 is a legend.</figcaption></figure></p>
+<p>Figure: 9 this is a text.</p>"
 `;
 
 exports[`quotation 1`] = `
