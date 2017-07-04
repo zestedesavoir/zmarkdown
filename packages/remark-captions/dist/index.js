@@ -34,8 +34,10 @@ function internLegendVisitor(internalBlocks) {
     // if already wrapped in figure, skip
     if (parent && parent.type === 'figure') return;
 
-    // legend can only be in a paragraph
+    // if the current node has some children, the legend is the last child.
+    // if not, the legend is the last child of the parent node.
     var lastP = node.children ? getLast(node.children) : parent;
+    // legend can only be in a paragraph.
     if (!lastP || node.children && lastP.type !== 'paragraph' || !node.children && parent.type !== 'paragraph') return;
 
     // find which child contains the last legend
