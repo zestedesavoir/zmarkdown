@@ -10,6 +10,7 @@ const defaultMacro = (displayedText, link) => `\\externalLink{${displayedText}}{
 /* Stringify a link `node`.
 */
 function link (ctx, node) {
+  if (!node.url) return ''
   const config = ctx.link || {}
   const macro = has(config, 'macro') ? config.macro : defaultMacro
   const prefix = has(config, 'prefix') ? config.prefix : ''

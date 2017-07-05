@@ -10,7 +10,7 @@ var defaultMacro = function defaultMacro(ctx, node) {
     return parsed.push(one(ctx, n, index, node));
   });
   var line = parsed.join(' & ');
-  return line + '\\\\ \\hline\n';
+  return line + ' \\\\ \\hline\n';
 };
 
 /* Stringify a tableRow `node`. */

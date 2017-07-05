@@ -14,6 +14,7 @@ var defaultMacro = function defaultMacro(displayedText, link) {
 /* Stringify a link `node`.
 */
 function link(ctx, node) {
+  if (!node.url) return '';
   var config = ctx.link || {};
   var macro = has(config, 'macro') ? config.macro : defaultMacro;
   var prefix = has(config, 'prefix') ? config.prefix : '';
