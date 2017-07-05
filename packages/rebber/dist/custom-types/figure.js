@@ -23,8 +23,10 @@ var defaultMacros = {
   table: function table(innerText) {
     return innerText;
   },
-  image: function image(latexified, caption) {
-    return '\\begin{center}\n' + latexified + '\n\\captionof{' + caption + '}';
+  image: function image(_, caption, extra) {
+    var width = extra.width ? '[' + extra.width + ']' : '';
+
+    return '\\begin{center}\n    \\includegraphics' + width + '{' + extra.url + '}\n\\captionof{' + caption + '}\n\\end{center}';
   }
 };
 
@@ -71,6 +73,6 @@ var makeExtra = {
     node.children = node.children[0].children;
   }
   var extra = has(makeExtra, type) ? makeExtra[type](node) : undefined;
-  var innerText = all(ctx, node) || node.value;
+  var innerText = all(ctx, node) || node.value || '';
   return macro(innerText.trim(), caption, extra);
 }

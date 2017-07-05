@@ -143,3 +143,12 @@ block & \\\\ref{annex-1} \\\\\\\\ \\\\hline
 print('bla')
 \\\\end{codeBlock}"
 `;
+
+exports[`mix-5 1`] = `
+"\\\\begin{center}
+    \\\\includegraphics{http://www.numerama.com/content/uploads/2016/07/espace.jpg}
+\\\\captionof{espace\\\\ref{node}}
+\\\\end{center}
+
+\\\\footnote{\\\\label{node}two things are note finite, universe and human dumbness but i'm not sure for the universe}"
+`;

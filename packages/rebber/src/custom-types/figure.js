@@ -18,8 +18,12 @@ const defaultMacros = {
             `\n${code}\n\\end{codeBlock}\n\n`
   },
   table: (innerText) => innerText,
-  image: (latexified, caption) =>
-    `\\begin{center}\n${latexified}\n\\captionof{${caption}}`
+  image: (_, caption, extra) => {
+    const width = extra.width ? `[${extra.width}]` : ''
+
+    return `\\begin{center}
+    \\includegraphics${width}{${extra.url}}\n\\captionof{${caption}}\n\\end{center}`
+  }
 }
 
 const makeExtra = {
@@ -64,6 +68,6 @@ function figure (ctx, node, index, parent) {
     node.children = node.children[0].children
   }
   const extra = has(makeExtra, type) ? makeExtra[type](node) : undefined
-  const innerText = all(ctx, node) || node.value
+  const innerText = all(ctx, node) || node.value || ''
   return macro(innerText.trim(), caption, extra)
 }
