@@ -36,6 +36,7 @@ handlers.footnoteReference = require('./types/footnoteReference');
 handlers.linkReference = require('./types/linkReference');
 handlers.definition = require('./types/definition');
 handlers.tableHeader = require('./types/tableHeader');
+handlers.image = require('./types/image');
 
 /* Stringify `node`. */
 function one(ctx, node, index, parent, root) {

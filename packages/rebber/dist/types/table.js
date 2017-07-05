@@ -21,7 +21,7 @@ var defaultMacro = function defaultMacro(ctx, node) {
   var colHeader = headerParse(parsed);
   var addendum = '';
   if (node.caption) {
-    addendum = '\n\\tablecaption{' + node.caption + '}\n';
+    addendum = '\n\\tableCaption{' + node.caption + '}\n';
   }
   return '\\begin{longtabu}{' + colHeader + '} \\hline\n' + inner + addendum + '\\end{longtabu}\n\n';
 };

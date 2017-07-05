@@ -1,6 +1,5 @@
 'use strict';
 
-var all = require('../all');
 module.exports = plugin;
 var identifiers = {};
 function plugin() {
@@ -15,7 +14,7 @@ function plugin() {
     while (Object.keys(identifiers).includes(identifier)) {
       identifier += '-1';
     }
-    identifiers[identifier] = all(ctx, node);
+    identifiers[identifier] = node.url;
     node.identifier = identifier; // force to remove doubly so that latex is compilable
     if (node.referenceType === 'shortcut') {
       // remark for abbr
