@@ -43,7 +43,7 @@ const rebberConfig = {
     informationCustomBlock: require('rebber/dist/custom-types/customBlocks'),
     secretCustomBlock: require('rebber/dist/custom-types/customBlocks'),
     erreurCustomBlock: require('rebber/dist/custom-types/customBlocks'),
-    attentionCustomBlock: require('rebber/dist/custom-types/customBlocks'),
+    warningCustomBlock: require('rebber/dist/custom-types/customBlocks'),
     questionCustomBlock: require('rebber/dist/custom-types/customBlocks'),
     abbr: require('rebber/dist/custom-types/abbr'),
     gridTable: require('rebber/dist/custom-types/gridTable'),
@@ -72,8 +72,12 @@ Object.assign(rebberConfig.override, {
     return rebberConfig.override.secretCustomBlock(ctx, node)
   },
   aCustomBlock: (ctx, node) => {
+    node.type = 'warningCustomBlock'
+    return rebberConfig.override.warningCustomBlock(ctx, node)
+  },
+  attentionCustomBlock: (ctx, node) => {
     node.type = 'attentionCustomBlock'
-    return rebberConfig.override.attentionCustomBlock(ctx, node)
+    return rebberConfig.override.warningCustomBlock(ctx, node)
   },
 })
 
