@@ -43,8 +43,7 @@ var makeExtra = {
     return extra;
   },
   image: function image(node) {
-    node.witdth = '\\linewidth';
-    return node;
+    return { url: node.url, width: '\\linewidth' };
   }
 
   /* Stringify a Figure `node`. */

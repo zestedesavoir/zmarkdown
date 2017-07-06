@@ -39,8 +39,7 @@ const makeExtra = {
     return extra
   },
   image: node => {
-    node.witdth = '\\linewidth'
-    return node
+    return {url: node.url, width: '\\linewidth'}
   }
 }
 

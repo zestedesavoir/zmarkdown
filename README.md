@@ -26,11 +26,16 @@ This project uses [Jest][jest] for testing. It is recommended to install the Jes
 
 * [**rebber**][rebber]
 
-  TODO: README
+  transformation of MDAST into `latex` code. This code must be included inside a custom latex to be compiled.
+  Have a look at `https://github.com/zestedesavoir/latex-template/blob/master/zmdocument.cls` to get a working example.
 
 * [**rehype-abbr**][rehype-abbr]
 
-  This plugin parses custom Markdown syntax to produce HTML abbreviations.
+  This plugin parses custom Markdown syntax to produce HTML abbreviations. This plugin is deprecated. See `remark-abbr`
+
+* [**remark-abbr**][remark-abbr]
+
+  This plugin parses `*[ABBR]: abbr definition` and then replace all ABBR instance in text with a new MDAST node so that `rehype` can parse it into `abbr` html tag.
 
 * [**rehype-footnotes-title**][rehype-footnotes-title]
 
@@ -46,7 +51,7 @@ This project uses [Jest][jest] for testing. It is recommended to install the Jes
 
 * [**remark-captions**][remark-captions]
 
-  TODO: README
+  Allow to add caption to such element as image, table or blockquote.
 
 * [**remark-comments**][remark-comments]
 
@@ -70,7 +75,7 @@ This project uses [Jest][jest] for testing. It is recommended to install the Jes
 
 * [**remark-heading-shift**][remark-heading-shift]
 
-  TODO: README
+  Allows to shift heading to custimize the way you will integrate the generated tree inside your application.
 
 * [**remark-heading-trailing-spaces**][remark-heading-trailing-spaces]
 
@@ -78,7 +83,7 @@ This project uses [Jest][jest] for testing. It is recommended to install the Jes
 
 * [**remark-iframes**][remark-iframes]
 
-  TODO: README
+  Allows to add `iframe` inclusion through `!(url)` code.
 
 * [**remark-kbd**][remark-kbd]
 
@@ -102,7 +107,7 @@ This project uses [Jest][jest] for testing. It is recommended to install the Jes
 
 * [**zmarkdown**][zmarkdown]
 
-  TODO: README
+  Fully integrated package to be used in [zeste de savoir website](https://zestedesavoir.com)
 
 
 
@@ -138,6 +143,7 @@ This project uses [Jest][jest] for testing. It is recommended to install the Jes
 
 [rebber]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rebber#rebber--
 [rehype-abbr]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rehype-abbr#rehype-abbr--
+[remark-abbr]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-abbr#remark-abbr--
 [rehype-footnotes-title]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rehype-footnotes-title#rehype-footnotes-title--
 [rehype-html-blocks]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rehype-html-blocks#rehype-html-blocks--
 [remark-align]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-align#remark-align--

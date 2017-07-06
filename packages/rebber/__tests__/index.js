@@ -270,9 +270,26 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
         footnotes: true
       })
       .use(require('remark-emoticons'), emoticons)
-      .use(require('remark-captions'), {external: {gridTable: 'Table:', math: 'Equation'}})
+      .use(require('remark-captions'), {external: {gridTable: 'Table:', math: 'Equation'},
+        internal: {iframe: 'Video:'}})
       .use(require('remark-grid-tables'))
       .use(require('remark-sub-super'))
+      .use(require('remark-iframes'), {
+        'www.youtube.com': {
+          tag: 'iframe',
+          width: 560,
+          height: 315,
+          disabled: false,
+          replace: [
+            ['watch?v=', 'embed/'],
+            ['http://', 'https://'],
+          ],
+          thumbnail: {
+            format: 'http://img.youtube.com/vi/{id}/0.jpg',
+            id: '.+/(.+)$'
+          },
+          removeAfter: '&'
+        }})
       .use(require('remark-kbd'))
       .use(require('remark-abbr'))
       .use(require('remark-align'), {

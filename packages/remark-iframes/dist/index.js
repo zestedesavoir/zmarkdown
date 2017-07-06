@@ -40,6 +40,18 @@ module.exports = function plugin(opts) {
     }
     return finalUrl;
   }
+  function computeThumbnail(provider, url) {
+    var thumbnail = 'default image';
+    if (provider.thumbnail && provider.thumbnail.format) {
+      thumbnail = provider.thumbnail.format;
+      Object.keys(provider.thumbnail).filter(function (key) {
+        return key !== 'format';
+      }).forEach(function (key) {
+        thumbnail = thumbnail.replace('{' + key + '}', new RegExp(provider.thumbnail[key]).exec(url)[1]);
+      });
+    }
+    return thumbnail;
+  }
   function locator(value, fromIndex) {
     return value.indexOf('!(http', fromIndex);
   }
@@ -68,18 +80,21 @@ module.exports = function plugin(opts) {
         return;
       }
     } else {
+      var finalUrl = computeFinalUrl(provider, url);
+      var thumbnail = computeThumbnail(provider, finalUrl);
       eat(eatenValue)({
         type: 'iframe',
         data: {
           hName: provider.tag,
           hProperties: {
-            src: computeFinalUrl(provider, url),
+            src: finalUrl,
             width: provider.width,
             height: provider.height,
             allowfullscreen: true,
             frameborder: '0'
           }
-        }
+        },
+        'thumbnail': thumbnail
       });
     }
   }

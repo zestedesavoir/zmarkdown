@@ -28,3 +28,59 @@ You need to configure all iframe providers you want to support in the option par
 - `append`: Any string you want to append to the url, for example an API key.
 - `removeFileName`: If set to `true`, removes the filename (i.e last fragment before query string) from url.
 - `match`: a regular expression passed to `String.prototype.test`, used to validate the url.
+
+# example
+
+```markdown
+!(https://www.youtube.com/watch?v=8TQIvdFl4aU)
+```
+
+will yield : 
+
+```javascript
+{
+    type: 'iframe',
+    data: {
+        hName: 'iframe',
+        hProperties: {
+          src: 'https://www.youtube.com/embed/8TQIvdFl4aU',
+          width: 560,
+          height: 315,
+          allowfullscreen: true,
+          frameborder: '0'
+        }
+        thumbnail: 'https://image.youtube.com/8TQIvdFl4aU/0.jpg'
+      }
+}
+```
+
+if you configured the plugin with : 
+
+```javascript
+{
+   'www.youtube.com': {
+      tag: 'iframe',
+      width: 560,
+      height: 315,
+      disabled: false,
+      replace: [
+        ['watch?v=', 'embed/'],
+        ['http://', 'https://'],
+      ],
+      thumbnail: {
+        format: 'http://img.youtube.com/vi/{id}/0.jpg',
+        id: '.+/(.+)$'
+      },
+      removeAfter: '&'
+    }
+}
+```
+
+otherwise it will just be a text node 
+
+```javascript
+{
+    type: 'text',
+    value: '!(https://www.youtube.com/watch?v=8TQIvdFl4aU)'
+}
+```

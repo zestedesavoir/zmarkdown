@@ -16,3 +16,5 @@ Exceptions are :
 for example, with `link.prefix = 'https://zestedesavoir.com'` every url starting with `/` will become `http://zestedesavoir.com{url}`.
 - `table` : as table is a complex one, the macro takes `(ctx, node) => str` where `ctx` are the rebber options and `node` the current mdast node
 - `list` : gets a second boolean argument wich defines if the list is ordered
+
+Before rendering, we use a bunch of preparsers --actually MDAST visitors-- to ensure a latex-complient tree.
