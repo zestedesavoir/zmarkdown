@@ -1,6 +1,6 @@
 {
   "name": "zmarkdown",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
   "contributors": [
     "Sébastien (AmarOk) Blin <contact@enconn.fr>",
@@ -13,19 +13,19 @@
     "type": "git"
   },
   "dependencies": {
-    "rebber": "^0.0.20",
+    "rebber": "^0.0.21",
     "rehype-footnotes-title": "^0.0.13",
     "rehype-html-blocks": "^0.0.14",
     "rehype-katex": "^1.0.1",
     "rehype-stringify": "^3.0.0",
     "remark-abbr": "^0.0.11",
     "remark-align": "^0.0.22",
-    "remark-captions": "^0.0.15",
+    "remark-captions": "^0.0.16",
     "remark-comments": "^0.0.14",
     "remark-custom-blocks": "^0.0.17",
     "remark-emoticons": "^0.0.18",
     "remark-escape-escaped": "^0.0.16",
-    "remark-grid-tables": "^0.0.10",
+    "remark-grid-tables": "^0.0.11",
     "remark-heading-shift": "^0.0.12",
     "remark-heading-trailing-spaces": "^0.0.12",
     "remark-iframes": "^0.0.13",
