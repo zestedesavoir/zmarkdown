@@ -255,7 +255,7 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
         footnotes: true
       })
       .use(require('remark-emoticons'), emoticons)
-      .use(require('remark-captions'), {external: {gridTable: 'Table:'}})
+      .use(require('remark-captions'), {external: {gridTable: 'Table:', math: 'Equation'}})
       .use(require('remark-grid-tables'))
       .use(require('remark-sub-super'))
       .use(require('remark-kbd'))
