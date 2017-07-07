@@ -4,8 +4,8 @@ var xtend = require('xtend');
 var visit = require('unist-util-visit');
 var referencePlugin = require('./referenceVisitor');
 var codePlugin = require('./codeVisitor');
-var headingPlugin = require('./headingVisitor');
 var iframePlugin = require('./iframes');
+var headingPlugin = require('./headingVisitor');
 
 module.exports = preVisit;
 
@@ -15,7 +15,7 @@ function preVisit(ctx, root) {
     definition: [referencePlugin(ctx).definitionVisitor],
     imageReference: [referencePlugin(ctx).imageReferenceVisitor],
     heading: [headingPlugin(ctx)],
-    iframe: [iframePlugin],
+    iframe: [iframePlugin]
   };
 
   var visitors = xtend(defaultVisitors, ctx.preprocessors || {});

@@ -7,9 +7,9 @@ module.exports = function (node, index, parent) {
   var linkNode = {
     type: 'link',
     url: node.data.hProperties.src,
-    children: [{ type: 'text', value: ' ' + node.data.hProperties.src }]
+    children: [{ type: 'text', value: node.data.hProperties.src }]
   };
-  console.error(node.thumbnail);
+  console.error(node);
   var thumbnailNode = {
     type: 'image',
     url: node.thumbnail

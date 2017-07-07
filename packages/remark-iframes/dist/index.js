@@ -82,6 +82,8 @@ module.exports = function plugin(opts) {
     } else {
       var finalUrl = computeFinalUrl(provider, url);
       var thumbnail = computeThumbnail(provider, finalUrl);
+      console.error(thumbnail);
+      console.error(thumbnail);
       eat(eatenValue)({
         type: 'iframe',
         data: {

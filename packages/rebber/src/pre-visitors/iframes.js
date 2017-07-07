@@ -6,10 +6,10 @@ module.exports = (node, index, parent) => {
     type: 'link',
     url: node.data.hProperties.src,
     children: [
-      {type: 'text', value: ` ${node.data.hProperties.src}`}
+      {type: 'text', value: node.data.hProperties.src}
     ]
   }
-  console.error(node.thumbnail)
+  console.error(node)
   const thumbnailNode = {
     type: 'image',
     url: node.thumbnail

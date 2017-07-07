@@ -37,7 +37,7 @@ module.exports = function plugin (opts) {
       thumbnail = provider.thumbnail.format
       Object.keys(provider.thumbnail).filter(key => key !== 'format')
         .forEach(function (key) {
-          thumbnail = thumbnail.replace(`{${key}}`,
+          thumbnail = thumbnail.replace(/`{${key}}`/g,
             new RegExp(provider.thumbnail[key]).exec(url)[1])
         })
     }
@@ -60,7 +60,6 @@ module.exports = function plugin (opts) {
     if (silent) return true
 
     const provider = extractProvider(url)
-
     if (
       (!provider || provider.disabled === true) ||
       (provider.match && provider.match instanceof RegExp && !provider.match.test(url))
@@ -76,6 +75,7 @@ module.exports = function plugin (opts) {
     } else {
       const finalUrl = computeFinalUrl(provider, url)
       const thumbnail = computeThumbnail(provider, finalUrl)
+      console.error(finalUrl)
       console.error(thumbnail)
       eat(eatenValue)({
         type: 'iframe',
@@ -88,8 +88,8 @@ module.exports = function plugin (opts) {
             allowfullscreen: true,
             frameborder: '0',
           },
+          thumbnail: thumbnail
         },
-        'thumbnail': thumbnail
       })
     }
   }
