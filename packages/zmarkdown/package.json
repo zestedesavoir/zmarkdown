@@ -1,6 +1,6 @@
 {
   "name": "zmarkdown",
-  "version": "0.0.39",
+  "version": "0.0.40",
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
   "contributors": [
     "Sébastien (AmarOk) Blin <contact@enconn.fr>",
@@ -13,7 +13,7 @@
     "type": "git"
   },
   "dependencies": {
-    "rebber": "^0.0.21",
+    "rebber": "^0.0.22",
     "rehype-footnotes-title": "^0.0.13",
     "rehype-html-blocks": "^0.0.14",
     "rehype-katex": "^1.0.1",
