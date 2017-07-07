@@ -13,11 +13,11 @@ const render = text => unified()
   .use(reParse, {
     footnotes: true
   })
-  .use(remark2rehype)
   .use(remarkCustomBlocks, {
     secret: 'spoiler'
   })
   .use(plugin)
+  .use(remark2rehype)
   .use(rehypeStringify)
   .processSync(text)
 
