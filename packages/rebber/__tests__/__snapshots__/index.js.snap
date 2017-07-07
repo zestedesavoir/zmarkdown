@@ -11,6 +11,16 @@ a paragraph\\\\footnote{footnoteRawPar inner}
 
 exports[`link with special characters 1`] = `"\\\\externalLink{foo}{http://example.com?a=b\\\\%c\\\\textasciicircum{}\\\\{\\\\}\\\\#foo}"`;
 
+exports[`math 1`] = `
+"A sentence ($S$) with \\\\textit{italic} and inline math ($C_L$) and $b$ another.
+
+\\\\[ L = \\\\frac{1}{2} \\\\rho v^2 S C_L \\\\]
+
+hehe
+
+"
+`;
+
 exports[`mix-1 1`] = `
 "(for convenience,   are replaced with simple single spaces in the tests)
 

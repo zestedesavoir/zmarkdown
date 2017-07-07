@@ -7,18 +7,17 @@ const {
   transform,
   renderFile,
   renderString
-} = require('./index')(config, 'html')
+} = require('./index')(config, 'latex')
 
 const input = dedent`
-  **foo**
+  A sentence ($S$) with *italic*[^italic] and inline match ($C_L$) and $$b$$ another[^bar] footnote.
 
-  <<a>>
+  $$
+  L = \frac{1}{2} \rho v^2 S C_L
+  $$
 
-  <<z>>
+  hehe
 
-  << a >>
-
-  << z >>
 `
 
 console.log(inspect(parse(input)))
