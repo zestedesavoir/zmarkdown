@@ -3,6 +3,7 @@ import {readdirSync as directory, readFileSync as file} from 'fs'
 import {join} from 'path'
 import unified from 'unified'
 import reParse from 'remark-parse'
+import remarkMath from 'remark-math'
 import rebber from '../src'
 import dedent from 'dedent'
 
@@ -36,6 +37,8 @@ const integrationConfig = {
     warningCustomBlock: require('../src/custom-types/customBlocks'),
     gridTable: require('../src/custom-types/gridTable'),
     abbr: require('../src/custom-types/abbr'),
+    math: require('../src/custom-types/math'),
+    inlineMath: require('../src/custom-types/math'),
   },
   emoticons: emoticons,
 }
@@ -287,13 +290,31 @@ test('footnotes', () => {
     .use(reParse, {footnotes: true})
     .use(rebber, integrationConfig)
     .processSync(dedent`
-    # mytitle[^footnoteRef]
+      # mytitle[^footnoteRef]
 
-    [^fotnoteRef]: reference in title
+      [^fotnoteRef]: reference in title
 
-    # mytitle[^footnoterawhead inner]
+      # mytitle[^footnoterawhead inner]
 
-    a paragraph[^footnoteRawPar inner]`)
+      a paragraph[^footnoteRawPar inner]
+    `)
+  expect(contents).toMatchSnapshot()
+})
+
+test('math', () => {
+  const {contents} = unified()
+    .use(reParse)
+    .use(remarkMath)
+    .use(rebber, integrationConfig)
+    .processSync(dedent`
+      A sentence ($S$) with *italic* and inline math ($C_L$) and $$b$$ another.
+
+      $$
+      L = \frac{1}{2} \rho v^2 S C_L
+      $$
+
+      hehe
+    `)
   expect(contents).toMatchSnapshot()
 })
 
