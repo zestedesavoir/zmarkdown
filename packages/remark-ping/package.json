@@ -1,6 +1,6 @@
 {
   "name": "remark-ping",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-ping",
     "type": "git"
@@ -29,7 +29,6 @@
     "remark"
   ],
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-jest": "^20.0.3",
