@@ -1,26 +1,16 @@
-const request = require('sync-request')
-
-const pattern = /[\s'"(,:<]?@(?:\*\*([^*]+)\*\*|(\w+))/
-
-function locator (value, fromIndex) {
-  const keep = pattern.exec(value, fromIndex)
-  if (keep) {
-    return value.indexOf('@', keep.index)
+function plugin (ctx) {
+  if (!ctx.pingUsername || typeof ctx.pingUsername !== 'function') {
+    throw new Error(`remark-ping: expected configuration to be passed: {
+  pingUsername: (username) => bool,
+  userURL: (username) => string\n}`)
   }
-  return -1
-}
-
-function plugin () {
-  function zdsMemberExists (username) {
-    try {
-      const result = request('HEAD',
-        `https://zestedesavoir.com/api/membres/exists/?search=${username}`,
-        {timeout: 300})
-      return result.statusCode === 200
-    } catch (ex) {
-      return false
-    }
+  if (!ctx.userURL || typeof ctx.userURL !== 'function') {
+    throw new Error(`remark-ping: expected configuration to be passed: {
+  pingUsername: (username) => bool,
+  userURL: (username) => string\n}`)
   }
+
+  const pattern = ctx.usernameRegex || /[\s'"(,:<]?@(?:\*\*([^*]+)\*\*|(\w+))/
 
   function inlineTokenizer (eat, value, silent) {
     const keep = pattern.exec(value)
@@ -29,7 +19,7 @@ function plugin () {
     const total = keep[0]
     const username = keep[2] ? keep[2] : keep[1]
 
-    if (zdsMemberExists(username)) {
+    if (ctx.pingUsername(username)) {
       return eat(total)({
         type: 'ping',
         children: [{
@@ -39,7 +29,7 @@ function plugin () {
         data: {
           hName: 'a',
           hProperties: {
-            href: `/membres/voir/${username}/`,
+            href: ctx.userURL(username),
             class: 'ping'
           }
         }
@@ -51,6 +41,15 @@ function plugin () {
       })
     }
   }
+
+  function locator (value, fromIndex) {
+    const keep = pattern.exec(value, fromIndex)
+    if (keep) {
+      return value.indexOf('@', keep.index)
+    }
+    return -1
+  }
+
   inlineTokenizer.locator = locator
 
   const Parser = this.Parser
@@ -60,6 +59,14 @@ function plugin () {
   const inlineMethods = Parser.prototype.inlineMethods
   inlineTokenizers.ping = inlineTokenizer
   inlineMethods.splice(inlineMethods.indexOf('text'), 0, 'ping')
+
+  const Compiler = this.Compiler
+
+  // Stringify
+  if (Compiler) {
+    const visitors = Compiler.prototype.visitors
+    visitors.ping = (node) => `@**${this.all(node).join('')}**`
+  }
 }
 
 module.exports = plugin

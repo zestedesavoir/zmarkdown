@@ -5,18 +5,5 @@ exports[`ping 1`] = `
 <p>ping @Clem</p>
 <p>ping @<strong>BALDE SOULEYMANE</strong></p>
 <p>no ping @dqsjdjsqjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd</p>
-<p>no ping @<strong>I AM CLEM</strong></p>"
-`;
-
-exports[`ping to markdown 1`] = `
-"# Test ping
-
-ping @Clem
-
-ping @**BALDE SOULEYMANE**
-
-no ping @dqsjdjsqjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd
-
-no ping @**I AM CLEM**
-"
+<p>no ping <a href=\\"/membres/voir/I AM CLEM/\\" class=\\"ping\\">I AM CLEM</a></p>"
 `;
