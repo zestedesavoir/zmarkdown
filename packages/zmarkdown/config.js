@@ -1,3 +1,4 @@
+const request = require('sync-request')
 const textrApostrophes = require('typographic-apostrophes')
 const textrApostrophesForPlurals = require('typographic-apostrophes-for-possessive-plurals')
 const textrCopyright = require('typographic-copyright')
@@ -237,11 +238,29 @@ const defaultConfig = {
       math: 'Equation:',
       inlineMath: 'Equation:'
     }
-  }
+  },
+
+  ping: {
+    pingUsername: (username) => {
+      try {
+        const result = request(
+          'HEAD',
+          `https://zestedesavoir.com/api/membres/exists/?search=${username}`,
+          {timeout: 300}
+        )
+        return result.statusCode === 200
+      } catch (ex) {
+        console.error(ex)
+        return false
+      }
+    },
+    userURL: (username) => `/membres/voir/${username}/`,
+  },
 }
 
 const rebberConfig = {
   override: {
+    ping: require('rebber/dist/types/link'),
     emoticon: require('rebber/dist/custom-types/emoticon'),
     figure: require('rebber/dist/custom-types/figure'),
     sub: require('rebber/dist/custom-types/sub'),

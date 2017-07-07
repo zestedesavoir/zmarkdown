@@ -20,8 +20,10 @@ function plugin (ctx) {
     const username = keep[2] ? keep[2] : keep[1]
 
     if (ctx.pingUsername(username)) {
+      const url = ctx.userURL(username)
       return eat(total)({
         type: 'ping',
+        url: url,
         children: [{
           type: 'text',
           value: username
@@ -29,7 +31,7 @@ function plugin (ctx) {
         data: {
           hName: 'a',
           hProperties: {
-            href: ctx.userURL(username),
+            href: url,
             class: 'ping'
           }
         }

@@ -1,4 +1,5 @@
 const fs = require('fs')
+const clone = require('clone')
 
 const chai = require('chai')
 const expect = require('chai').expect
@@ -14,7 +15,7 @@ const renderString = (config = defaultConfig) => zmarkdown(config).renderString
 const renderFile = (config = defaultConfig) => zmarkdown(config).renderFile
 
 const configOverride = (config) => {
-  const newConfig = JSON.parse(JSON.stringify(defaultConfig))
+  const newConfig = clone(defaultConfig)
   Object.assign(newConfig, config)
   return newConfig
 }
