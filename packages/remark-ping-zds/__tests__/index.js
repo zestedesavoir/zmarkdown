@@ -1,39 +1,44 @@
-import {readdirSync as directory, readFileSync as file} from 'fs'
-import {join} from 'path'
-import ava from 'ava'
+import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
+import remarkStringify from 'remark-stringify'
 import rehypeStringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
 
-const base = join(__dirname, 'fixtures')
-const specs = directory(base).reduce((tests, contents) => {
-  const parts = contents.split('.')
-  if (!tests[parts[0]]) {
-    tests[parts[0]] = {}
-  }
-  tests[parts[0]][parts[1]] = file(join(base, contents), 'utf-8')
-  return tests
-}, {})
+import plugin from '../src/'
 
-const entrypoints = [
-  '../dist',
-  '../src',
-]
 
-entrypoints.forEach(entrypoint => {
-  const plugin = require(entrypoint)
+const render = text => unified()
+  .use(reParse)
+  .use(plugin)
+  .use(remark2rehype)
+  .use(rehypeStringify)
+  .processSync(text)
 
-  ava('ping', t => {
-    const {contents} = unified()
-      .use(reParse, {
-        footnotes: true
-      })
-      .use(remark2rehype)
-      .use(plugin)
-      .use(rehypeStringify)
-      .processSync(specs['ping'].fixture)
+const fixture = dedent`
+  Test ping
+  =========
 
-    t.deepEqual(contents, specs['ping'].expected.trim())
-  })
+  ping @Clem
+
+  ping @**BALDE SOULEYMANE**
+
+  no ping @dqsjdjsqjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd
+
+  no ping @**I AM CLEM**
+`
+
+test('ping', () => {
+  const { contents } = render(fixture)
+  expect(contents).toMatchSnapshot()
+})
+
+test('ping to markdown', () => {
+  const { contents } = unified()
+    .use(reParse)
+    .use(remarkStringify)
+    .use(plugin)
+    .processSync(fixture)
+
+  expect(contents).toMatchSnapshot()
 })
