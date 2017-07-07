@@ -1,14 +1,17 @@
 const all = require('../all')
+
 module.exports = notes
 
-const defaultMacro = (text, isHeading) => {
-  if (isHeading) {
+const defaultMacro = (text, protect) => {
+  if (protect) {
     return `\\protect\\footnote{${text}}`
   }
   return `\\footnote{${text}}`
 }
 
-function notes (ctx, node, _, parent) {
+function notes (ctx, node, _index, parent) {
   const macro = ctx.footnote || defaultMacro
-  return macro(all(ctx, node), parent.type === 'heading')
+  const protect = !!node.inHeading
+
+  return macro(all(ctx, node), protect)
 }

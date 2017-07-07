@@ -1,6 +1,5 @@
 /* Dependencies. */
 const all = require('../all')
-const one = require('../one')
 const has = require('has')
 
 /* Expose. */

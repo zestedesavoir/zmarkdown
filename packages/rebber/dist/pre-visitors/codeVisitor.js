@@ -1,40 +1,49 @@
 'use strict';
 
 var visit = require('unist-util-visit');
-module.exports = plugin;
-function plugin(ctx, root) {
-  return { codeInTableVisitor: codeInTableVisitor };
 
-  function codeInTableVisitor(node) {
-    var inAnnex = [];
-    var annexIndex = 1;
+module.exports = plugin;
+
+var appendiceVisitorFactory = function appendiceVisitorFactory(_ref) {
+  var title = _ref.title,
+      root = _ref.root;
+  return function (node) {
+    var inAppendix = [];
+    var appendixIndex = 1;
+
     visit(node, 'code', function (innerNode, index, _parent) {
-      inAnnex.push({
+      inAppendix.push({
         type: 'paragraph',
         children: [{
           type: 'definition',
-          identifier: 'annex-' + annexIndex,
+          identifier: 'appendix-' + appendixIndex,
           referenceType: 'full',
           children: [{ type: 'text', value: 'code' }]
         }, { type: 'text', value: '\n' }, innerNode]
       });
       var referenceNode = {
         type: 'linkReference',
-        identifier: 'annex-' + annexIndex
+        identifier: 'appendix-' + appendixIndex
       };
       _parent.children.splice(index, 1, referenceNode);
-      annexIndex++;
+      appendixIndex++;
     });
-    if (inAnnex.length) {
+
+    if (inAppendix.length) {
       root.children.push({
         type: 'heading',
         depth: 1,
-        children: [{ type: 'text', value: 'Annexe' }]
+        children: [{ type: 'text', value: title }]
 
       });
-      inAnnex.forEach(function (element) {
+      inAppendix.forEach(function (element) {
         return root.children.push(element);
       });
     }
-  }
+  };
+};
+
+function plugin(ctx, root) {
+  var title = ctx.codeAppendiceTitle || 'Appendices';
+  return { codeInTableVisitor: appendiceVisitorFactory({ title: title, root: root }) };
 }

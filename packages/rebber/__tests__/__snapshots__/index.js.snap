@@ -4,6 +4,7 @@ exports[`footnotes 1`] = `
 "\\\\chapter{mytitle\\\\ref{footnoteref}}
 \\\\footnote{\\\\label{fotnoteref}reference in title}
 \\\\chapter{mytitle\\\\protect\\\\footnote{footnoterawhead inner}}
+\\\\chapter{myti\\\\textit{tle\\\\protect\\\\footnote{foo inner}}}
 a paragraph\\\\footnote{footnoteRawPar inner}
 
 "
@@ -146,11 +147,11 @@ space & \\\\includeGraphics{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg
 \\\\begin{longtabu}{|p{\\\\linewidth / 2}|p{\\\\linewidth / 2}|} \\\\hline
 title & code \\\\\\\\ \\\\hline
 inline & \\\\texttt{inline} br \\\\par \\\\texttt{inline} \\\\\\\\ \\\\hline
-block & \\\\ref{annex-1} \\\\\\\\ \\\\hline
+block & \\\\ref{appendix-1} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
-\\\\chapter{Annexe}
-\\\\footnote{\\\\label{annex-1}}
+\\\\chapter{Annexes}
+\\\\footnote{\\\\label{appendix-1}}
 \\\\begin{codeBlock}{python}
 print('bla')
 \\\\end{codeBlock}"

@@ -1,5 +1,7 @@
+/* Dependencies. */
 const all = require('../all')
 
+/* Expose. */
 module.exports = align
 
 const defaultMacros = {

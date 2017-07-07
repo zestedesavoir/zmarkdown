@@ -1,6 +1,9 @@
 'use strict';
 
+/* Dependencies. */
 var all = require('../all');
+
+/* Expose. */
 module.exports = customBlock;
 
 var defaultMacros = {

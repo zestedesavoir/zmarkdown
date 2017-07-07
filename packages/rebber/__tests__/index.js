@@ -41,6 +41,7 @@ const integrationConfig = {
     inlineMath: require('../src/custom-types/math'),
   },
   emoticons: emoticons,
+  codeAppendiceTitle: 'Annexes',
 }
 
 integrationConfig.override.eCustomBlock = (ctx, node) => {
@@ -295,6 +296,8 @@ test('footnotes', () => {
       [^fotnoteRef]: reference in title
 
       # mytitle[^footnoterawhead inner]
+
+      # myti*tle[^foo inner]*
 
       a paragraph[^footnoteRawPar inner]
     `)

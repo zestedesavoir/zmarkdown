@@ -1,8 +1,16 @@
 'use strict';
 
+/* Dependencies. */
 var all = require('../all');
-module.exports = function (ctx, node) {
+
+/* Expose. */
+module.exports = abbr;
+
+function abbr(ctx, node) {
   var displayedText = all(ctx, node);
   var signification = node.data.hProperties.title;
-  return ctx.abbr ? ctx.abbr(displayedText, signification) : '\\abbr{' + displayedText + '}{' + signification + '}';
-};
+  if (ctx.abbr && typeof ctx.abbr === 'function') {
+    return ctx.abbr(displayedText, signification);
+  }
+  return '\\abbr{' + displayedText + '}{' + signification + '}';
+}

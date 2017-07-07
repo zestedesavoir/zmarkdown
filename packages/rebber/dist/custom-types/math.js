@@ -2,7 +2,6 @@
 
 /* Dependencies. */
 var all = require('../all');
-var one = require('../one');
 var has = require('has');
 
 /* Expose. */
