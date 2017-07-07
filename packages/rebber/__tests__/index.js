@@ -231,6 +231,17 @@ test('link', () => {
   expect(contents.trim()).toEqual(spec.expected.trim())
 })
 
+test('link with special characters', () => {
+  const {contents} = unified()
+    .use(reParse)
+    .use(rebber)
+    .processSync(dedent`
+      [foo](http://example.com?a=b%c^{}#foo)
+    `)
+
+  expect(contents.trim()).toMatchSnapshot()
+})
+
 test('link-prepend', () => {
   const spec = specs['link-prepend']
 
@@ -277,11 +288,11 @@ test('footnotes', () => {
     .use(rebber, integrationConfig)
     .processSync(dedent`
     # mytitle[^footnoteRef]
-    
+
     [^fotnoteRef]: reference in title
-    
+
     # mytitle[^footnoterawhead inner]
-    
+
     a paragraph[^footnoteRawPar inner]`)
   expect(contents).toMatchSnapshot()
 })
