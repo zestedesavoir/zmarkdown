@@ -31,62 +31,6 @@ const rehypeStringify = require('rehype-stringify')
 const rebberStringify = require('rebber')
 
 const defaultConfig = require('./config')
-const rebberConfig = {
-  override: {
-    emoticon: require('rebber/dist/custom-types/emoticon'),
-    figure: require('rebber/dist/custom-types/figure'),
-    sub: require('rebber/dist/custom-types/sub'),
-    sup: require('rebber/dist/custom-types/sup'),
-    kbd: require('rebber/dist/custom-types/kbd'),
-    CenterAligned: require('rebber/dist/custom-types/align'),
-    RightAligned: require('rebber/dist/custom-types/align'),
-    informationCustomBlock: require('rebber/dist/custom-types/customBlocks'),
-    secretCustomBlock: require('rebber/dist/custom-types/customBlocks'),
-    errorCustomBlock: require('rebber/dist/custom-types/customBlocks'),
-    warningCustomBlock: require('rebber/dist/custom-types/customBlocks'),
-    questionCustomBlock: require('rebber/dist/custom-types/customBlocks'),
-    abbr: require('rebber/dist/custom-types/abbr'),
-    gridTable: require('rebber/dist/custom-types/gridTable'),
-    math: require('rebber/dist/custom-types/math'),
-    inlineMath: require('rebber/dist/custom-types/math'),
-  },
-  emoticons: defaultConfig.emoticons,
-  codeAppendiceTitle: 'Annexes',
-  link: {
-    prefix: 'http://zestedesavoir.com'
-  },
-}
-
-Object.assign(rebberConfig.override, {
-  eCustomBlock: (ctx, node) => {
-    node.type = 'errorCustomBlock'
-    return rebberConfig.override.errorCustomBlock(ctx, node)
-  },
-  erreurCustomBlock: (ctx, node) => {
-    node.type = 'errorCustomBlock'
-    return rebberConfig.override.errorCustomBlock(ctx, node)
-  },
-  iCustomBlock: (ctx, node) => {
-    node.type = 'informationCustomBlock'
-    return rebberConfig.override.informationCustomBlock(ctx, node)
-  },
-  qCustomBlock: (ctx, node) => {
-    node.type = 'questionCustomBlock'
-    return rebberConfig.override.questionCustomBlock(ctx, node)
-  },
-  sCustomBlock: (ctx, node) => {
-    node.type = 'secretCustomBlock'
-    return rebberConfig.override.secretCustomBlock(ctx, node)
-  },
-  aCustomBlock: (ctx, node) => {
-    node.type = 'warningCustomBlock'
-    return rebberConfig.override.warningCustomBlock(ctx, node)
-  },
-  attentionCustomBlock: (ctx, node) => {
-    node.type = 'warningCustomBlock'
-    return rebberConfig.override.warningCustomBlock(ctx, node)
-  },
-})
 
 const fromFile = (filepath) => fs.readFileSync(filepath)
 
@@ -131,7 +75,7 @@ const rehypeProcessor = (config) =>
 
 const rebberProcessor = (config) =>
   zmdParser(config)
-    .use(rebberStringify, rebberConfig)
+    .use(rebberStringify, config.rebber)
 
 const mdastParser = (opts) => (zmd) => zmdParser(opts).parse(zmd)
 
