@@ -42,7 +42,7 @@ const rebberConfig = {
     RightAligned: require('rebber/dist/custom-types/align'),
     informationCustomBlock: require('rebber/dist/custom-types/customBlocks'),
     secretCustomBlock: require('rebber/dist/custom-types/customBlocks'),
-    erreurCustomBlock: require('rebber/dist/custom-types/customBlocks'),
+    errorCustomBlock: require('rebber/dist/custom-types/customBlocks'),
     warningCustomBlock: require('rebber/dist/custom-types/customBlocks'),
     questionCustomBlock: require('rebber/dist/custom-types/customBlocks'),
     abbr: require('rebber/dist/custom-types/abbr'),
@@ -57,7 +57,11 @@ const rebberConfig = {
 Object.assign(rebberConfig.override, {
   eCustomBlock: (ctx, node) => {
     node.type = 'errorCustomBlock'
-    return rebberConfig.override.erreurCustomBlock(ctx, node)
+    return rebberConfig.override.errorCustomBlock(ctx, node)
+  },
+  erreurCustomBlock: (ctx, node) => {
+    node.type = 'errorCustomBlock'
+    return rebberConfig.override.errorCustomBlock(ctx, node)
   },
   iCustomBlock: (ctx, node) => {
     node.type = 'informationCustomBlock'
@@ -76,7 +80,7 @@ Object.assign(rebberConfig.override, {
     return rebberConfig.override.warningCustomBlock(ctx, node)
   },
   attentionCustomBlock: (ctx, node) => {
-    node.type = 'attentionCustomBlock'
+    node.type = 'warningCustomBlock'
     return rebberConfig.override.warningCustomBlock(ctx, node)
   },
 })
