@@ -1,9 +1,11 @@
 'use strict';
 
+/* Dependencies. */
 var baseCell = require('../types/tableCell');
 var baseTable = require('../types/table');
 var clone = require('clone');
 
+/* Expose. */
 module.exports = gridTable;
 
 function overridenTableCell(ctx, node) {

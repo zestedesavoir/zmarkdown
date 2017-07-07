@@ -1,3 +1,4 @@
+/* Dependencies. */
 const all = require('../all')
 
 /* Expose. */

@@ -3,7 +3,5 @@ module.exports = comment
 
 /* Stringify a comment `node`. */
 function comment (ctx, node) {
-  return `\\begin{comment}
-${node.value}
-\\end{comment}\n`
+  return `\\begin{comment}\n${node.value}\n\\end{comment}\n`
 }

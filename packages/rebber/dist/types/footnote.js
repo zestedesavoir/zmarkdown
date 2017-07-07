@@ -1,16 +1,19 @@
 'use strict';
 
 var all = require('../all');
+
 module.exports = notes;
 
-var defaultMacro = function defaultMacro(text, isHeading) {
-  if (isHeading) {
+var defaultMacro = function defaultMacro(text, protect) {
+  if (protect) {
     return '\\protect\\footnote{' + text + '}';
   }
   return '\\footnote{' + text + '}';
 };
 
-function notes(ctx, node, _, parent) {
+function notes(ctx, node, _index, parent) {
   var macro = ctx.footnote || defaultMacro;
-  return macro(all(ctx, node), parent.type === 'heading');
+  var protect = !!node.inHeading;
+
+  return macro(all(ctx, node), protect);
 }

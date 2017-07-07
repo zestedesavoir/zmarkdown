@@ -1,7 +1,9 @@
 'use strict';
 
+/* Dependencies. */
 var all = require('../all');
 
+/* Expose. */
 module.exports = align;
 
 var defaultMacros = {

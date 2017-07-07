@@ -6,13 +6,11 @@ const defaultMacro = (ctx, identifier, url, title) => {
       type: 'link',
       title: title,
       url: url,
-      children: [
-        {
-          type: 'text',
-          value: url
-        }
-      ]
-    }]
+      children: [{
+        type: 'text',
+        value: url,
+      }],
+    }],
   }
   const link = all(ctx, node)
   return `\\footnote{\\label{${identifier}}${link}}`

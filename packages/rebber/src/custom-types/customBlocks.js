@@ -1,4 +1,7 @@
+/* Dependencies. */
 const all = require('../all')
+
+/* Expose. */
 module.exports = customBlock
 
 const defaultMacros = {

@@ -1,7 +1,9 @@
+/* Dependencies. */
 const baseCell = require('../types/tableCell')
 const baseTable = require('../types/table')
 const clone = require('clone')
 
+/* Expose. */
 module.exports = gridTable
 
 function overridenTableCell (ctx, node) {

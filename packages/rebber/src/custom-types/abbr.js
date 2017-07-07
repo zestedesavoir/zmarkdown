@@ -1,7 +1,14 @@
+/* Dependencies. */
 const all = require('../all')
-module.exports = function (ctx, node) {
+
+/* Expose. */
+module.exports = abbr
+
+function abbr (ctx, node) {
   const displayedText = all(ctx, node)
   const signification = node.data.hProperties.title
-  return ctx.abbr ? ctx.abbr(displayedText, signification) :
-    `\\abbr{${displayedText}}{${signification}}`
+  if (ctx.abbr && typeof ctx.abbr === 'function') {
+    return ctx.abbr(displayedText, signification)
+  }
+  return `\\abbr{${displayedText}}{${signification}}`
 }
