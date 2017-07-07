@@ -9,6 +9,8 @@ a paragraph\\\\footnote{footnoteRawPar inner}
 "
 `;
 
+exports[`link with special characters 1`] = `"\\\\externalLink{foo}{http://example.com?a=b\\\\%c\\\\textasciicircum{}\\\\{\\\\}\\\\#foo}"`;
+
 exports[`mix-1 1`] = `
 "(for convenience,   are replaced with simple single spaces in the tests)
 
