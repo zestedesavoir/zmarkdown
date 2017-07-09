@@ -23,6 +23,7 @@ function plugin (ctx) {
       const url = ctx.userURL(username)
       return eat(total)({
         type: 'ping',
+        _metadata: username,
         url: url,
         children: [{
           type: 'text',
