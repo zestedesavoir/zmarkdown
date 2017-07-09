@@ -93,6 +93,14 @@ Another p: _it_ *it*
   <script type="text/javascript">
     var config = ZMarkdown().config
     config.headingShifter = 1
+    config.ping.pingUsername = function (username) {
+      var fake = Math.random()
+      var success = fake > 0.4
+      var msg = 'This username '
+      msg += success ? 'exists! ' + fake + ' > 0.4' : 'does not exist! ' + fake + ' <= 0.4'
+      console.warn('Faking an API call checking if ' + username + ' exists.', msg)
+      return success
+    }
     ZMarkdown = ZMarkdown(config, 'latex')
     var ansiUp = new AnsiUp()
     var render = document.getElementById('render')
@@ -105,9 +113,8 @@ Another p: _it_ *it*
 
     function update() {
       var rendered = ZMarkdown.renderString(editor.value)
-      render.innerHTML = rendered
+      render.innerHTML = rendered.content
       var mdast = ZMarkdown.parse(editor.value)
-      var hast = ZMarkdown.transform(mdast)
       ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(mdast))
     }
   </script>
