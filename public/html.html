@@ -110,6 +110,9 @@ After the quote.
   <script src="bundle.js"></script>
   <script type="text/javascript">
     var config = ZMarkdown().config
+    config.ping.pingUsername = function () {
+      return Math.random() > 0.4
+    }
     config.headingShifter = 1
     ZMarkdown = ZMarkdown(config)
     var ansiUp = new AnsiUp()
@@ -123,10 +126,10 @@ After the quote.
 
     function update() {
       var rendered = ZMarkdown.renderString(editor.value)
-      render.innerHTML = rendered
-      html.textContent = rendered
+      render.innerHTML = rendered.content
+      html.textContent = rendered.content
+      console.log(JSON.stringify({metadata: rendered.metadata}, null, 2))
       var mdast = ZMarkdown.parse(editor.value)
-      var hast = ZMarkdown.transform(mdast)
       ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(mdast))
       html.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(hast))
     }
