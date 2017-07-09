@@ -1,6 +1,7 @@
-const fs = require('fs')
+const toVFile = require('to-vfile')
 const unified = require('unified')
 const inspect = require('unist-util-inspect')
+const visit = require('unist-util-visit')
 
 const remarkParse = require('remark-parse')
 
@@ -33,18 +34,18 @@ const rebberStringify = require('rebber')
 
 const defaultConfig = require('./config')
 
-const fromFile = (filepath) => fs.readFileSync(filepath)
+const fromFile = (filepath) => toVFile.readSync(filepath)
 
 const zmdParser = (config) => {
-  let mdProcessor = unified()
+  const mdProcessor = unified()
     .use(remarkParse, config.reParse)
 
   if (!config.isTest) {
-    mdProcessor = mdProcessor
+    mdProcessor
       .use(remarkTextr, config.textr)
   }
 
-  mdProcessor = mdProcessor
+  mdProcessor
     .use(remarkAbbr)
     .use(remarkAlign, config.alignBlocks)
     .use(remarkCaptions, config.captions)
@@ -61,53 +62,68 @@ const zmdParser = (config) => {
     .use(remarkPing, config.ping)
     .use(remarkSubSuper)
     .use(remarkTrailingSpaceHeading)
-
+    .use(() => {
+      return (tree, file) => {
+        visit(tree, (node) => {
+          if (node._metadata) {
+            if (!file.data[node.type]) {
+              file.data[node.type] = []
+            }
+            file.data[node.type].push(node._metadata)
+          }
+        })
+      }
+    })
   return mdProcessor
 }
 
-const rehypeProcessor = (config) =>
-  zmdParser(config)
-    .use(remark2rehype, config.remark2rehype)
+const rendererFactory = (config, to = 'html') => (input, cb) => {
+  const mdProcessor = zmdParser(config)
 
-    .use(rehypeHTMLBlocks)
-    .use(rehypeFootnotesTitles, config.footnotesTitles)
-    .use(rehypeKatex, config.katex)
+  if (to === 'html') {
+    mdProcessor
+      .use(remark2rehype, config.remark2rehype)
 
-    .use(rehypeStringify)
+      .use(rehypeHTMLBlocks)
+      .use(rehypeFootnotesTitles, config.footnotesTitles)
+      .use(rehypeKatex, config.katex)
 
-const rebberProcessor = (config) =>
-  zmdParser(config)
-    .use(rebberStringify, config.rebber)
+      .use(rehypeStringify)
+  }
+
+  if (to === 'latex') {
+    mdProcessor
+      .use(rebberStringify, config.rebber)
+  }
+
+  if (typeof cb !== 'function') {
+    const vfile = mdProcessor.processSync(input)
+
+    const output = {
+      metadata: vfile.data,
+      content: vfile.contents
+    }
+    return output
+  }
+
+  mdProcessor.process(input, (err, vfile) => {
+    if (err) return cb(err)
+
+    const output = {
+      metadata: vfile.data,
+      content: vfile.contents
+    }
+    cb(null, output)
+  })
+}
 
 const mdastParser = (opts) => (zmd) => zmdParser(opts).parse(zmd)
-
-const rehypeParser = (opts) => (zmd) => rehypeProcessor(opts).parse(zmd)
-const rehypeCompiler = (opts) => (ast) => rehypeProcessor(opts).runSync(ast)
-const rehypeStringifier = (opts) => (ast) => rehypeProcessor(opts).stringify(ast)
-
-const rebberParser = (opts) => (zmd) => rebberProcessor(opts).parse(zmd)
-const rebberCompiler = (opts) => (ast) => rebberProcessor(opts).runSync(ast)
-const rebberStringifier = (opts) => (ast) => rebberProcessor(opts).stringify(ast)
-
-const stringToHTML = (opts) =>
-  (string) =>
-    rehypeStringifier(opts)(rehypeCompiler(opts)(rehypeParser(opts)(string)))
-const stringToLaTeX = (opts) =>
-  (string) =>
-    rebberStringifier(opts)(rebberCompiler(opts)(rebberParser(opts)(string)))
-
-const fileToHTML = (opts) =>
-  (filepath) =>
-    stringToHTML(opts)(fromFile(filepath))
-const fileToLaTeX = (opts) =>
-  (filepath) =>
-    stringToLaTeX(opts)(fromFile(filepath))
 
 module.exports = (opts = defaultConfig, to = 'html') => ({
   config: opts,
   inspect: inspect,
   parse: mdastParser(opts),
-  transform: to === 'html' ? rehypeCompiler(opts) : rebberCompiler(opts),
-  renderFile: to === 'html' ? fileToHTML(opts) : fileToLaTeX(opts),
-  renderString: to === 'html' ? stringToHTML(opts) : stringToLaTeX(opts),
+  rendererFactory: rendererFactory,
+  renderString: rendererFactory(opts, to),
+  renderFile: (path, cb) => rendererFactory(opts, to)(fromFile(path), cb),
 })

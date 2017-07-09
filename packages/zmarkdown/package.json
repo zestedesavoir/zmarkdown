@@ -38,6 +38,7 @@
     "remark-sub-super": "^0.0.15",
     "sync-request": "^4.1.0",
     "textr": "^0.3.0",
+    "to-vfile": "^2.1.1",
     "typographic-apostrophes": "^1.1.1",
     "typographic-apostrophes-for-possessive-plurals": "^1.0.5",
     "typographic-colon": "^0.0.16",

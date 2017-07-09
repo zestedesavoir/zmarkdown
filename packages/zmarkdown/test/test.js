@@ -3,16 +3,23 @@ const clone = require('clone')
 
 const chai = require('chai')
 const expect = require('chai').expect
-const defaultConfig = require('../config')
+const defaultConfig = clone(require('../config'))
 defaultConfig.isTest = true
+defaultConfig.ping.pingUsername = () => false
 
 chai.use(require('./helper'))
 
 const loadFixture = (filepath) => String(fs.readFileSync(filepath.replace('.txt', '.html')))
 
 const zmarkdown = require('../')
-const renderString = (config = defaultConfig) => zmarkdown(config).renderString
-const renderFile = (config = defaultConfig) => zmarkdown(config).renderFile
+
+const renderString = (config = defaultConfig) =>
+  (input) =>
+    zmarkdown(config).renderString(input).content
+
+const renderFile = (config = defaultConfig) =>
+  (input) =>
+    zmarkdown(config).renderFile(input).content
 
 const configOverride = (config) => {
   const newConfig = clone(defaultConfig)
