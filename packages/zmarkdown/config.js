@@ -126,7 +126,11 @@ const defaultConfig = {
       disabled: false,
       replace: [
         ['video/', 'embed/video/'],
-      ]
+      ],
+      thumbnail: {
+        format: 'http://www.dailymotion.com/thumbnail/video/{id}',
+        id: '.+/(.+)$'
+      }
     },
     'www.vimeo.com': {
       tag: 'iframe',
@@ -159,6 +163,10 @@ const defaultConfig = {
         ['watch?v=', 'embed/'],
         ['http://', 'https://'],
       ],
+      thumbnail: {
+        format: 'http://img.youtube.com/vi/{id}/0.jpg',
+        id: '.+/(.+)$'
+      },
       removeAfter: '&'
     },
     'youtube.com': {
@@ -170,6 +178,10 @@ const defaultConfig = {
         ['watch?v=', 'embed/'],
         ['http://', 'https://'],
       ],
+      thumbnail: {
+        format: 'http://img.youtube.com/vi/{id}/0.jpg',
+        id: '.+/(.+)$'
+      },
       removeAfter: '&'
     },
     'youtu.be': {
@@ -181,6 +193,10 @@ const defaultConfig = {
         ['watch?v=', 'embed/'],
         ['youtu.be', 'www.youtube.com/embed'],
       ],
+      thumbnail: {
+        format: 'http://img.youtube.com/vi/{id}/0.jpg',
+        id: '.+/(.+)$'
+      },
       removeAfter: '&'
     },
     'screen.yahoo.com': {
@@ -212,6 +228,10 @@ const defaultConfig = {
       ],
       append: 'embedded/result,js,html,css/',
       match: /https?:\/\/(www\.)?jsfiddle\.net\/([\w\d]+\/[\w\d]+\/\d+\/?|[\w\d]+\/\d+\/?|[\w\d]+\/?)$/,
+      thumbnail: {
+        format: 'http://www.unixstickers.com/image/data/stickers' +
+        '/jsfiddle/JSfiddle-blue-w-type.sh.png',
+      },
     },
     'jsfiddle.net': {
       tag: 'iframe',
@@ -223,6 +243,10 @@ const defaultConfig = {
       ],
       append: 'embedded/result,js,html,css/',
       match: /https?:\/\/(www\.)?jsfiddle\.net\/([\w\d]+\/[\w\d]+\/\d+\/?|[\w\d]+\/\d+\/?|[\w\d]+\/?)$/,
+      thumbnail: {
+        format: 'http://www.unixstickers.com/image/data/stickers' +
+        '/jsfiddle/JSfiddle-blue-w-type.sh.png',
+      },
     }
   },
 

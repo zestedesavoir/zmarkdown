@@ -36,10 +36,11 @@ module.exports = function plugin (opts) {
     if (provider.thumbnail && provider.thumbnail.format) {
       const thumbnailConfig = provider.thumbnail
       thumbnailURL = thumbnailConfig.format
-      Object.keys(provider.thumbnail).filter(key => key !== 'format')
-        .forEach(function (key) {
-          thumbnailURL = thumbnailURL.replace(new RegExp(`\\{${key}\\}`, 'g'),
-            thumbnailConfig[key])
+      Object.keys(thumbnailConfig).filter(key => key !== 'format')
+        .forEach((key) => {
+          const search = new RegExp(`{${key}}`, 'g')
+          const replace = new RegExp(thumbnailConfig[key]).exec(url)
+          if (replace.length) thumbnailURL = thumbnailURL.replace(search, replace[1])
         })
     }
     return thumbnailURL
@@ -76,7 +77,6 @@ module.exports = function plugin (opts) {
     } else {
       const finalUrl = computeFinalUrl(provider, url)
       const thumbnail = computeThumbnail(provider, finalUrl)
-      console.error(thumbnail)
       eat(eatenValue)({
         type: 'iframe',
         data: {

@@ -41,16 +41,19 @@ module.exports = function plugin(opts) {
     return finalUrl;
   }
   function computeThumbnail(provider, url) {
-    var thumbnail = 'default image';
+    var thumbnailURL = 'default image';
     if (provider.thumbnail && provider.thumbnail.format) {
-      thumbnail = provider.thumbnail.format;
-      Object.keys(provider.thumbnail).filter(function (key) {
+      var thumbnailConfig = provider.thumbnail;
+      thumbnailURL = thumbnailConfig.format;
+      Object.keys(thumbnailConfig).filter(function (key) {
         return key !== 'format';
       }).forEach(function (key) {
-        thumbnail = thumbnail.replace(/`{${key}}`/g, new RegExp(provider.thumbnail[key]).exec(url)[1]);
+        var search = new RegExp('{' + key + '}', 'g');
+        var replace = new RegExp(thumbnailConfig[key]).exec(url);
+        if (replace.length) thumbnailURL = thumbnailURL.replace(search, replace[1]);
       });
     }
-    return thumbnail;
+    return thumbnailURL;
   }
   function locator(value, fromIndex) {
     return value.indexOf('!(http', fromIndex);
@@ -81,8 +84,6 @@ module.exports = function plugin(opts) {
     } else {
       var finalUrl = computeFinalUrl(provider, url);
       var thumbnail = computeThumbnail(provider, finalUrl);
-      console.error(finalUrl);
-      console.error(thumbnail);
       eat(eatenValue)({
         type: 'iframe',
         data: {

@@ -65,13 +65,15 @@ var makeExtra = {
     node.children[0].caption = caption;
     return one(ctx, node.children[0], 0, node);
   }
+  var wrappedNode = node.children[0];
+  wrappedNode.caption = node.caption;
   node.children = node.children.filter(function (node) {
     return node.type !== 'figcaption';
   });
   if (node.children.length === 1) {
     node.children = node.children[0].children;
   }
-  var extra = has(makeExtra, type) ? makeExtra[type](node) : undefined;
+  var extra = has(makeExtra, type) ? makeExtra[type](wrappedNode) : undefined;
   var innerText = all(ctx, node) || node.value || '';
   return macro(innerText.trim(), caption, extra);
 }
