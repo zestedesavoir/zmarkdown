@@ -47,7 +47,7 @@ module.exports = function plugin(opts) {
       Object.keys(provider.thumbnail).filter(function (key) {
         return key !== 'format';
       }).forEach(function (key) {
-        thumbnail = thumbnail.replace('{' + key + '}', new RegExp(provider.thumbnail[key]).exec(url)[1]);
+        thumbnail = thumbnail.replace(/`{${key}}`/g, new RegExp(provider.thumbnail[key]).exec(url)[1]);
       });
     }
     return thumbnail;
@@ -69,7 +69,6 @@ module.exports = function plugin(opts) {
     if (silent) return true;
 
     var provider = extractProvider(url);
-
     if (!provider || provider.disabled === true || provider.match && provider.match instanceof RegExp && !provider.match.test(url)) {
       if (eatenValue.startsWith('!(http')) {
         eat(eatenValue)({
@@ -82,7 +81,7 @@ module.exports = function plugin(opts) {
     } else {
       var finalUrl = computeFinalUrl(provider, url);
       var thumbnail = computeThumbnail(provider, finalUrl);
-      console.error(thumbnail);
+      console.error(finalUrl);
       console.error(thumbnail);
       eat(eatenValue)({
         type: 'iframe',
@@ -94,9 +93,9 @@ module.exports = function plugin(opts) {
             height: provider.height,
             allowfullscreen: true,
             frameborder: '0'
-          }
-        },
-        'thumbnail': thumbnail
+          },
+          thumbnail: thumbnail
+        }
       });
     }
   }

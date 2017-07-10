@@ -12,7 +12,7 @@ module.exports = (node, index, parent) => {
   console.error(node)
   const thumbnailNode = {
     type: 'image',
-    url: node.thumbnail
+    url: node.data.thumbnail
   }
   if (parent.type !== 'figure') {
     const figureNode = {

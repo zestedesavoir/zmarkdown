@@ -8,7 +8,6 @@ module.exports = stringify
 
 /* Stringify the given MDAST node. */
 function toLaTeX (node, options, root) {
-  preprocess(options, root)
   return one(options, node, undefined, undefined, root)
 }
 
@@ -19,6 +18,7 @@ function stringify (config) {
   this.Compiler = compiler
 
   function compiler (tree) {
+    preprocess(settings, tree)
     return toLaTeX(tree, settings, tree)
   }
 }

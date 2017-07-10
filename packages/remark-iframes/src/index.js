@@ -32,16 +32,17 @@ module.exports = function plugin (opts) {
     return finalUrl
   }
   function computeThumbnail (provider, url) {
-    let thumbnail = 'default image'
+    let thumbnailURL = 'default image'
     if (provider.thumbnail && provider.thumbnail.format) {
-      thumbnail = provider.thumbnail.format
+      const thumbnailConfig = provider.thumbnail
+      thumbnailURL = thumbnailConfig.format
       Object.keys(provider.thumbnail).filter(key => key !== 'format')
         .forEach(function (key) {
-          thumbnail = thumbnail.replace(/`{${key}}`/g,
-            new RegExp(provider.thumbnail[key]).exec(url)[1])
+          thumbnailURL = thumbnailURL.replace(new RegExp(`\\{${key}\\}`, 'g'),
+            thumbnailConfig[key])
         })
     }
-    return thumbnail
+    return thumbnailURL
   }
   function locator (value, fromIndex) {
     return value.indexOf('!(http', fromIndex)
@@ -75,7 +76,6 @@ module.exports = function plugin (opts) {
     } else {
       const finalUrl = computeFinalUrl(provider, url)
       const thumbnail = computeThumbnail(provider, finalUrl)
-      console.error(finalUrl)
       console.error(thumbnail)
       eat(eatenValue)({
         type: 'iframe',
