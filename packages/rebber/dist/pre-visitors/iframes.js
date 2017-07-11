@@ -9,14 +9,10 @@ module.exports = function (node, index, parent) {
     url: node.data.hProperties.src,
     children: [{ type: 'text', value: node.data.hProperties.src }]
   };
-  console.error(node);
-  console.error(node.data);
-  console.error(node.data.thumbnail);
   var thumbnailNode = {
     type: 'image',
     url: node.data.thumbnail
   };
-  console.log(thumbnailNode);
   if (parent.type !== 'figure') {
     var figureNode = {
       type: 'figure',

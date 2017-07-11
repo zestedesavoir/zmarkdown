@@ -9,14 +9,10 @@ module.exports = (node, index, parent) => {
       {type: 'text', value: node.data.hProperties.src}
     ]
   }
-  console.error(node)
-  console.error(node.data)
-  console.error(node.data.thumbnail)
   const thumbnailNode = {
     type: 'image',
     url: node.data.thumbnail
   }
-  console.log(thumbnailNode)
   if (parent.type !== 'figure') {
     const figureNode = {
       type: 'figure',
