@@ -119,7 +119,7 @@ test('emoticon', () => {
   const spec = specs['emoticon']
   const {contents} = unified()
     .use(reParse)
-    .use(require('remark-emoticons'), emoticons)
+    .use(require('remark-emoticons/src'), emoticons)
     .use(rebber, {
       override: {
         emoticon: require('../src/custom-types/emoticon'),
@@ -176,7 +176,7 @@ test('figure+caption', () => {
   const spec = specs['figure']
   const {contents} = unified()
     .use(reParse)
-    .use(require('remark-captions'))
+    .use(require('remark-captions/src'))
     .use(rebber, {
       override: {
         figure: require('../src/custom-types/figure'),
@@ -202,7 +202,7 @@ test('code+caption', () => {
 
   const {contents} = unified()
     .use(reParse)
-    .use(require('remark-captions'))
+    .use(require('remark-captions/src'))
     .use(rebber, {
       override: {
         figure: require('../src/custom-types/figure'),
@@ -269,12 +269,12 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
       .use(reParse, {
         footnotes: true
       })
-      .use(require('remark-emoticons'), emoticons)
-      .use(require('remark-captions'), {external: {gridTable: 'Table:', math: 'Equation'},
+      .use(require('remark-emoticons/src'), emoticons)
+      .use(require('remark-captions/src'), {external: {gridTable: 'Table:', math: 'Equation'},
         internal: {iframe: 'Video:'}})
-      .use(require('remark-grid-tables'))
-      .use(require('remark-sub-super'))
-      .use(require('remark-iframes'), {
+      .use(require('remark-grid-tables/src'))
+      .use(require('remark-sub-super/src'))
+      .use(require('remark-iframes/src'), {
         'www.youtube.com': {
           tag: 'iframe',
           width: 560,
@@ -290,9 +290,9 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
           },
           removeAfter: '&'
         }})
-      .use(require('remark-kbd'))
-      .use(require('remark-abbr'))
-      .use(require('remark-align'), {
+      .use(require('remark-kbd/src'))
+      .use(require('remark-abbr/src'))
+      .use(require('remark-align/src'), {
         right: 'custom-right',
         center: 'custom-center',
       })

@@ -1,9 +1,10 @@
 const xtend = require('xtend')
 const visit = require('unist-util-visit')
-const referencePlugin = require('./referenceVisitor')
+
 const codePlugin = require('./codeVisitor')
-const iframePlugin = require('./iframes')
 const headingPlugin = require('./headingVisitor')
+const iframePlugin = require('./iframes')
+const referencePlugin = require('./referenceVisitor')
 
 module.exports = preVisit
 

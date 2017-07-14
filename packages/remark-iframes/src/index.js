@@ -10,44 +10,7 @@ module.exports = function plugin (opts) {
     const hostname = urlParse(url).hostname
     return opts[hostname]
   }
-  function computeFinalUrl (provider, url) {
-    let finalUrl = url
-    if (provider.replace && provider.replace.length) {
-      provider.replace.forEach((rule) => {
-        const [from, to] = rule
-        if (from && to) finalUrl = finalUrl.replace(from, to)
-      })
-    }
-    if (provider.removeFileName) {
-      const parsed = urlParse(finalUrl)
-      parsed.pathname = parsed.pathname.substring(0, parsed.pathname.lastIndexOf('/'))
-      finalUrl = URL.format(parsed)
-    }
-    if (provider.append) {
-      finalUrl += provider.append
-    }
-    if (provider.removeAfter && finalUrl.indexOf(provider.removeAfter) !== -1) {
-      finalUrl = finalUrl.substring(0, finalUrl.indexOf(provider.removeAfter))
-    }
-    return finalUrl
-  }
-  function computeThumbnail (provider, url) {
-    let thumbnailURL = 'default image'
-    if (provider.thumbnail && provider.thumbnail.format) {
-      const thumbnailConfig = provider.thumbnail
-      thumbnailURL = thumbnailConfig.format
-      Object.keys(thumbnailConfig).filter(key => key !== 'format')
-        .forEach((key) => {
-          const search = new RegExp(`{${key}}`, 'g')
-          const replace = new RegExp(thumbnailConfig[key]).exec(url)
-          if (replace.length) thumbnailURL = thumbnailURL.replace(search, replace[1])
-        })
-    }
-    return thumbnailURL
-  }
-  function locator (value, fromIndex) {
-    return value.indexOf('!(http', fromIndex)
-  }
+
   function inlineTokenizer (eat, value, silent) {
     let eatenValue = ''
     let url = ''
@@ -102,4 +65,52 @@ module.exports = function plugin (opts) {
   const inlineMethods = Parser.prototype.inlineMethods
   inlineTokenizers.iframes = inlineTokenizer
   inlineMethods.splice(inlineMethods.indexOf('autoLink'), 0, 'iframes')
+}
+
+function computeFinalUrl (provider, url) {
+  let finalUrl = url
+
+  if (provider.replace && provider.replace.length) {
+    provider.replace.forEach((rule) => {
+      const [from, to] = rule
+      if (from && to) finalUrl = finalUrl.replace(from, to)
+    })
+  }
+
+  if (provider.removeFileName) {
+    const parsed = urlParse(finalUrl)
+    parsed.pathname = parsed.pathname.substring(0, parsed.pathname.lastIndexOf('/'))
+    finalUrl = URL.format(parsed)
+  }
+
+  if (provider.append) {
+    finalUrl += provider.append
+  }
+
+  if (provider.removeAfter && finalUrl.includes(provider.removeAfter)) {
+    finalUrl = finalUrl.substring(0, finalUrl.indexOf(provider.removeAfter))
+  }
+
+  return finalUrl
+}
+
+function computeThumbnail (provider, url) {
+  let thumbnailURL = 'default image'
+  const thumbnailConfig = provider.thumbnail
+  if (thumbnailConfig && thumbnailConfig.format) {
+    thumbnailURL = thumbnailConfig.format
+    Object
+      .keys(thumbnailConfig)
+      .filter(key => key !== 'format')
+      .forEach((key) => {
+        const search = new RegExp(`{${key}}`, 'g')
+        const replace = new RegExp(thumbnailConfig[key]).exec(url)
+        if (replace.length) thumbnailURL = thumbnailURL.replace(search, replace[1])
+      })
+  }
+  return thumbnailURL
+}
+
+function locator (value, fromIndex) {
+  return value.indexOf('!(http', fromIndex)
 }

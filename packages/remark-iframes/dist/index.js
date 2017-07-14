@@ -16,48 +16,7 @@ module.exports = function plugin(opts) {
     var hostname = urlParse(url).hostname;
     return opts[hostname];
   }
-  function computeFinalUrl(provider, url) {
-    var finalUrl = url;
-    if (provider.replace && provider.replace.length) {
-      provider.replace.forEach(function (rule) {
-        var _rule = _slicedToArray(rule, 2),
-            from = _rule[0],
-            to = _rule[1];
 
-        if (from && to) finalUrl = finalUrl.replace(from, to);
-      });
-    }
-    if (provider.removeFileName) {
-      var parsed = urlParse(finalUrl);
-      parsed.pathname = parsed.pathname.substring(0, parsed.pathname.lastIndexOf('/'));
-      finalUrl = URL.format(parsed);
-    }
-    if (provider.append) {
-      finalUrl += provider.append;
-    }
-    if (provider.removeAfter && finalUrl.indexOf(provider.removeAfter) !== -1) {
-      finalUrl = finalUrl.substring(0, finalUrl.indexOf(provider.removeAfter));
-    }
-    return finalUrl;
-  }
-  function computeThumbnail(provider, url) {
-    var thumbnailURL = 'default image';
-    if (provider.thumbnail && provider.thumbnail.format) {
-      var thumbnailConfig = provider.thumbnail;
-      thumbnailURL = thumbnailConfig.format;
-      Object.keys(thumbnailConfig).filter(function (key) {
-        return key !== 'format';
-      }).forEach(function (key) {
-        var search = new RegExp('{' + key + '}', 'g');
-        var replace = new RegExp(thumbnailConfig[key]).exec(url);
-        if (replace.length) thumbnailURL = thumbnailURL.replace(search, replace[1]);
-      });
-    }
-    return thumbnailURL;
-  }
-  function locator(value, fromIndex) {
-    return value.indexOf('!(http', fromIndex);
-  }
   function inlineTokenizer(eat, value, silent) {
     var eatenValue = '';
     var url = '';
@@ -110,3 +69,53 @@ module.exports = function plugin(opts) {
   inlineTokenizers.iframes = inlineTokenizer;
   inlineMethods.splice(inlineMethods.indexOf('autoLink'), 0, 'iframes');
 };
+
+function computeFinalUrl(provider, url) {
+  var finalUrl = url;
+
+  if (provider.replace && provider.replace.length) {
+    provider.replace.forEach(function (rule) {
+      var _rule = _slicedToArray(rule, 2),
+          from = _rule[0],
+          to = _rule[1];
+
+      if (from && to) finalUrl = finalUrl.replace(from, to);
+    });
+  }
+
+  if (provider.removeFileName) {
+    var parsed = urlParse(finalUrl);
+    parsed.pathname = parsed.pathname.substring(0, parsed.pathname.lastIndexOf('/'));
+    finalUrl = URL.format(parsed);
+  }
+
+  if (provider.append) {
+    finalUrl += provider.append;
+  }
+
+  if (provider.removeAfter && finalUrl.includes(provider.removeAfter)) {
+    finalUrl = finalUrl.substring(0, finalUrl.indexOf(provider.removeAfter));
+  }
+
+  return finalUrl;
+}
+
+function computeThumbnail(provider, url) {
+  var thumbnailURL = 'default image';
+  var thumbnailConfig = provider.thumbnail;
+  if (thumbnailConfig && thumbnailConfig.format) {
+    thumbnailURL = thumbnailConfig.format;
+    Object.keys(thumbnailConfig).filter(function (key) {
+      return key !== 'format';
+    }).forEach(function (key) {
+      var search = new RegExp('{' + key + '}', 'g');
+      var replace = new RegExp(thumbnailConfig[key]).exec(url);
+      if (replace.length) thumbnailURL = thumbnailURL.replace(search, replace[1]);
+    });
+  }
+  return thumbnailURL;
+}
+
+function locator(value, fromIndex) {
+  return value.indexOf('!(http', fromIndex);
+}

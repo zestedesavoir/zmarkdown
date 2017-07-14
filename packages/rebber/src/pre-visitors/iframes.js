@@ -1,6 +1,3 @@
-/**
- * Created by fdambrine on 06/07/17.
- */
 module.exports = (node, index, parent) => {
   const linkNode = {
     type: 'link',
@@ -9,10 +6,12 @@ module.exports = (node, index, parent) => {
       {type: 'text', value: node.data.hProperties.src}
     ]
   }
+
   const thumbnailNode = {
     type: 'image',
     url: node.data.thumbnail
   }
+
   if (parent.type !== 'figure') {
     const figureNode = {
       type: 'figure',
@@ -21,9 +20,9 @@ module.exports = (node, index, parent) => {
         children: [linkNode]
       }]
     }
-    parent.children.splice(index, 1, figureNode)
+    parent.children[index] = figureNode
   } else {
-    parent.children.splice(index, 1, thumbnailNode)
+    parent.children[index] = thumbnailNode
     parent.children[parent.children.length - 1].children.push(linkNode)
   }
 }

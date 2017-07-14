@@ -2,10 +2,11 @@
 
 var xtend = require('xtend');
 var visit = require('unist-util-visit');
-var referencePlugin = require('./referenceVisitor');
+
 var codePlugin = require('./codeVisitor');
-var iframePlugin = require('./iframes');
 var headingPlugin = require('./headingVisitor');
+var iframePlugin = require('./iframes');
+var referencePlugin = require('./referenceVisitor');
 
 module.exports = preVisit;
 

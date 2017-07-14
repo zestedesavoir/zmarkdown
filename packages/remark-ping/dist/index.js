@@ -18,6 +18,7 @@ function plugin(ctx) {
 
     var total = keep[0];
     var username = keep[2] ? keep[2] : keep[1];
+    debugger;
 
     if (ctx.pingUsername(username)) {
       var url = ctx.userURL(username);
