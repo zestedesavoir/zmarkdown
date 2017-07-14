@@ -2,6 +2,7 @@
 /node_modules
 /packages/*/node_modules
 /packages/*/coverage
+/packages/*/dist
 /packages/*/.nyc_output
 /.nyc_output/*
 /coverage/*

@@ -74,6 +74,7 @@
   "scripts": {
     "postinstall": "lerna bootstrap --hoist",
     "test": "jest",
+    "d": "node --inspect --debug-brk ./node_modules/.bin/jest --runInBand -i",
     "coverage": "jest --coverage"
   }
 }

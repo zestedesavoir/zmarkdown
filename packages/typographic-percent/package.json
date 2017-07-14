@@ -20,7 +20,9 @@
   "main": "dist/index.js",
   "files": [
     "LICENSE-MIT",
-    "dist"
+    "dist",
+    "src",
+    "README.md"
   ],
   "engines": {
     "node": ">=4"

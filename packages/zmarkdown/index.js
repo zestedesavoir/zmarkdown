@@ -5,21 +5,22 @@ const visit = require('unist-util-visit')
 
 const remarkParse = require('remark-parse')
 
-const remarkAbbr = require('remark-abbr')
-const remarkAlign = require('remark-align')
-const remarkCaptions = require('remark-captions')
-const remarkComments = require('remark-comments')
-const remarkCustomBlocks = require('remark-custom-blocks')
-const remarkEmoticons = require('remark-emoticons')
-const remarkEscapeEscaped = require('remark-escape-escaped')
-const remarkGridTables = require('remark-grid-tables')
-const remarkHeadingShifter = require('remark-heading-shift')
-const remarkIframes = require('remark-iframes')
-const remarkKbd = require('remark-kbd')
+const remarkAbbr = require('remark-abbr/src')
+const remarkAlign = require('remark-align/src')
+const remarkCaptions = require('remark-captions/src')
+const remarkComments = require('remark-comments/src')
+const remarkCustomBlocks = require('remark-custom-blocks/src')
+const remarkDisableTokenizers = require('remark-disable-tokenizers/src')
+const remarkEmoticons = require('remark-emoticons/src')
+const remarkEscapeEscaped = require('remark-escape-escaped/src')
+const remarkGridTables = require('remark-grid-tables/src')
+const remarkHeadingShifter = require('remark-heading-shift/src')
+const remarkIframes = require('remark-iframes/src')
+const remarkKbd = require('remark-kbd/src')
 const remarkMath = require('remark-math')
-const remarkNumberedFootnotes = require('remark-numbered-footnotes')
-const remarkPing = require('remark-ping')
-const remarkSubSuper = require('remark-sub-super')
+const remarkNumberedFootnotes = require('remark-numbered-footnotes/src')
+const remarkPing = require('remark-ping/src')
+const remarkSubSuper = require('remark-sub-super/src')
 const remarkTextr = require('./remark-textr')
 const remarkTrailingSpaceHeading = require('remark-heading-trailing-spaces')
 
@@ -51,6 +52,18 @@ const zmdParser = (config) => {
     .use(remarkCaptions, config.captions)
     .use(remarkComments)
     .use(remarkCustomBlocks, config.customBlocks)
+    .use(remarkDisableTokenizers, {
+      block: [
+        'indentedCode',
+        'fencedCode',
+        'blockquote',
+        'atxHeading',
+        'setextHeading',
+        'footnote',
+        'table',
+        'custom_blocks'
+      ]
+    })
     .use(remarkEmoticons, config.emoticons)
     .use(remarkEscapeEscaped, config.escapeEscaped)
     .use(remarkGridTables)
