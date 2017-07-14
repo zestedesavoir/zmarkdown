@@ -31,6 +31,20 @@ module.exports = function plugin (opts) {
     }
     return finalUrl
   }
+  function computeThumbnail (provider, url) {
+    let thumbnailURL = 'default image'
+    if (provider.thumbnail && provider.thumbnail.format) {
+      const thumbnailConfig = provider.thumbnail
+      thumbnailURL = thumbnailConfig.format
+      Object.keys(thumbnailConfig).filter(key => key !== 'format')
+        .forEach((key) => {
+          const search = new RegExp(`{${key}}`, 'g')
+          const replace = new RegExp(thumbnailConfig[key]).exec(url)
+          if (replace.length) thumbnailURL = thumbnailURL.replace(search, replace[1])
+        })
+    }
+    return thumbnailURL
+  }
   function locator (value, fromIndex) {
     return value.indexOf('!(http', fromIndex)
   }
@@ -48,7 +62,6 @@ module.exports = function plugin (opts) {
     if (silent) return true
 
     const provider = extractProvider(url)
-
     if (
       (!provider || provider.disabled === true) ||
       (provider.match && provider.match instanceof RegExp && !provider.match.test(url))
@@ -62,18 +75,21 @@ module.exports = function plugin (opts) {
         return
       }
     } else {
+      const finalUrl = computeFinalUrl(provider, url)
+      const thumbnail = computeThumbnail(provider, finalUrl)
       eat(eatenValue)({
         type: 'iframe',
         data: {
           hName: provider.tag,
           hProperties: {
-            src: computeFinalUrl(provider, url),
+            src: finalUrl,
             width: provider.width,
             height: provider.height,
             allowfullscreen: true,
-            frameborder: '0'
-          }
-        }
+            frameborder: '0',
+          },
+          thumbnail: thumbnail
+        },
       })
     }
   }

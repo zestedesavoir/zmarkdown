@@ -57,6 +57,10 @@ test('video', () => {
         ['watch?v=', 'embed/'],
         ['http://', 'https://'],
       ],
+      thumbnail: {
+        format: 'http://img.youtube.com/vi/{id}/0.jpg',
+        id: '.+/(.+)$'
+      },
       removeAfter: '&'
     },
     'youtube.com': {
@@ -68,6 +72,10 @@ test('video', () => {
         ['watch?v=', 'embed/'],
         ['http://', 'https://'],
       ],
+      thumbnail: {
+        format: 'http://img.youtube.com/vi/{id}/0.jpg',
+        id: '.+/(.+)$'
+      },
       removeAfter: '&'
     },
     'youtu.be': {
@@ -79,6 +87,10 @@ test('video', () => {
         ['watch?v=', 'embed/'],
         ['youtu.be', 'www.youtube.com/embed'],
       ],
+      thumbnail: {
+        format: 'http://img.youtube.com/vi/{id}/0.jpg',
+        id: '.+/(.+)$'
+      },
       removeAfter: '&'
     },
     'screen.yahoo.com': {

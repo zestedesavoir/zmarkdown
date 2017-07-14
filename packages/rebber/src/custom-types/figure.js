@@ -39,8 +39,7 @@ const makeExtra = {
     return extra
   },
   image: node => {
-    node.witdth = '\\linewidth'
-    return node
+    return {url: node.url, width: '\\linewidth'}
   }
 }
 
@@ -63,11 +62,13 @@ function figure (ctx, node, index, parent) {
     node.children[0].caption = caption
     return one(ctx, node.children[0], 0, node)
   }
+  const wrappedNode = node.children[0]
+  wrappedNode.caption = node.caption
   node.children = node.children.filter(node => node.type !== 'figcaption')
   if (node.children.length === 1) {
     node.children = node.children[0].children
   }
-  const extra = has(makeExtra, type) ? makeExtra[type](node) : undefined
+  const extra = has(makeExtra, type) ? makeExtra[type](wrappedNode) : undefined
   const innerText = all(ctx, node) || node.value || ''
   return macro(innerText.trim(), caption, extra)
 }

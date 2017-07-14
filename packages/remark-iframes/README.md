@@ -1,24 +1,79 @@
-This plugin parses `!(input_url)` to an "iframe" node. When compiled to HTML, it renders as `<iframe src="output_url"></iframe>`.
+# remark-iframes [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
-You need to configure all iframe providers you want to support in the option parameter passed to the plugin :
+This plugin parses custom Markdown syntax to add embeded video or external websites.
 
-```js
-{
-  'www.jsfiddle.net': {
-    tag: 'iframe',
-    width: 560,
-    height: 560,
-    disabled: false,
-    replace: [
-      ['http://', 'https://'],
-    ],
-    append: 'embedded/result,js,html,css/',
-    match: /https?:\/\/(www\.)?jsfiddle\.net\/([\w\d]+\/[\w\d]+\/\d+\/?|[\w\d]+\/\d+\/?|[\w\d]+\/?)$/,
-  },
-}
+It adds two new node types to the [mdast][mdast] produced by [remark][remark]:
+
+* `CenterAligned`
+* `RightAligned`
+
+If you are using [rehype][rehype], the stringified HTML result will be a tag you can configure. Most of time you want `iframe`.
+
+It is up to you to have CSS rules producing the desired result for these two classes.
+
+## Syntax
+
+iframes are included thanks to a base url wrapped between these tags
+
+```markdown
+!(https://www.youtube.com/watch?v=8TQIvdFl4aU)
 ```
 
-# Configuration fields :
+produces:
+
+```html
+<div class="some-class"><p>paragraph</p></div>
+<div class="some-other-class"><p>paragraph</p></div>
+```
+
+## Installation
+
+[npm][npm]:
+
+```bash
+npm install remark-iframes
+```
+
+## Usage
+
+Dependencies:
+
+```javascript
+const unified = require('unified')
+const remarkParse = require('remark-parse')
+const stringify = require('rehype-stringify')
+const remark2rehype = require('remark-rehype')
+
+const remarkIframe = require('remark-iframes')
+```
+
+Usage:
+
+```javascript
+unified()
+  .use(remarkParse)
+  .use(remarkIframe, {
+   'www.youtube.com': {
+      tag: 'iframe',
+      width: 560,
+      height: 315,
+      disabled: false,
+      replace: [
+        ['watch?v=', 'embed/'],
+        ['http://', 'https://'],
+      ],
+      thumbnail: {
+        format: 'http://img.youtube.com/vi/{id}/0.jpg',
+        id: '.+/(.+)$'
+      },
+      removeAfter: '&'
+    }
+  })
+  .use(remark2rehype)
+  .use(stringify)
+```
+
+## Configuration fields :
 
 - `tag`: Transforms to the given html tag, you most probably want `iframe`.
 - `width` and `height`: iframe size, set as `width="" height=""` HTML attributes.
@@ -28,3 +83,87 @@ You need to configure all iframe providers you want to support in the option par
 - `append`: Any string you want to append to the url, for example an API key.
 - `removeFileName`: If set to `true`, removes the filename (i.e last fragment before query string) from url.
 - `match`: a regular expression passed to `String.prototype.test`, used to validate the url.
+- `thumbnail`: a way to retreive thumbnail. This param is an object with a `format` key of this type : `'http://url/{param1}/{param2}'` then you must provide all regexp to find the parameter in the url on the object.
+
+## example
+
+```markdown
+!(https://www.youtube.com/watch?v=8TQIvdFl4aU)
+```
+
+will yield : 
+
+```javascript
+{
+    type: 'iframe',
+    data: {
+        hName: 'iframe',
+        hProperties: {
+          src: 'https://www.youtube.com/embed/8TQIvdFl4aU',
+          width: 560,
+          height: 315,
+          allowfullscreen: true,
+          frameborder: '0'
+        }
+        thumbnail: 'https://image.youtube.com/8TQIvdFl4aU/0.jpg'
+      }
+}
+```
+
+if you configured the plugin with : 
+
+```javascript
+{
+   'www.youtube.com': {
+      tag: 'iframe',
+      width: 560,
+      height: 315,
+      disabled: false,
+      replace: [
+        ['watch?v=', 'embed/'],
+        ['http://', 'https://'],
+      ],
+      thumbnail: {
+        format: 'http://img.youtube.com/vi/{id}/0.jpg',
+        id: '.+/(.+)$'
+      },
+      removeAfter: '&'
+    }
+}
+```
+
+otherwise it will just be a text node 
+
+```javascript
+{
+    type: 'text',
+    value: '!(https://www.youtube.com/watch?v=8TQIvdFl4aU)'
+}
+```
+
+## License
+
+[MIT][license] © [Zeste de Savoir][zds]
+
+<!-- Definitions -->
+
+[build-badge]: https://img.shields.io/travis/zestedesavoir/zmarkdown.svg
+
+[build-status]: https://travis-ci.org/zestedesavoir/zmarkdown
+
+[coverage-badge]: https://img.shields.io/coveralls/zestedesavoir/zmarkdown.svg
+
+[coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown
+
+[license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/remark-iframes/LICENSE-MIT
+
+[zds]: https://zestedesavoir.com
+
+[npm]: https://www.npmjs.com/package/remark-align
+
+[mdast]: https://github.com/syntax-tree/mdast/blob/master/readme.md
+
+[remark]: https://github.com/wooorm/remark
+
+[rehype]: https://github.com/wooorm/rehype
+

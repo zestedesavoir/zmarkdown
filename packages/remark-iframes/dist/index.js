@@ -40,6 +40,21 @@ module.exports = function plugin(opts) {
     }
     return finalUrl;
   }
+  function computeThumbnail(provider, url) {
+    var thumbnailURL = 'default image';
+    if (provider.thumbnail && provider.thumbnail.format) {
+      var thumbnailConfig = provider.thumbnail;
+      thumbnailURL = thumbnailConfig.format;
+      Object.keys(thumbnailConfig).filter(function (key) {
+        return key !== 'format';
+      }).forEach(function (key) {
+        var search = new RegExp('{' + key + '}', 'g');
+        var replace = new RegExp(thumbnailConfig[key]).exec(url);
+        if (replace.length) thumbnailURL = thumbnailURL.replace(search, replace[1]);
+      });
+    }
+    return thumbnailURL;
+  }
   function locator(value, fromIndex) {
     return value.indexOf('!(http', fromIndex);
   }
@@ -57,7 +72,6 @@ module.exports = function plugin(opts) {
     if (silent) return true;
 
     var provider = extractProvider(url);
-
     if (!provider || provider.disabled === true || provider.match && provider.match instanceof RegExp && !provider.match.test(url)) {
       if (eatenValue.startsWith('!(http')) {
         eat(eatenValue)({
@@ -68,17 +82,20 @@ module.exports = function plugin(opts) {
         return;
       }
     } else {
+      var finalUrl = computeFinalUrl(provider, url);
+      var thumbnail = computeThumbnail(provider, finalUrl);
       eat(eatenValue)({
         type: 'iframe',
         data: {
           hName: provider.tag,
           hProperties: {
-            src: computeFinalUrl(provider, url),
+            src: finalUrl,
             width: provider.width,
             height: provider.height,
             allowfullscreen: true,
             frameborder: '0'
-          }
+          },
+          thumbnail: thumbnail
         }
       });
     }

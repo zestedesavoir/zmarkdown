@@ -159,9 +159,23 @@ print('bla')
 
 exports[`mix-5 1`] = `
 "\\\\begin{center}
-    \\\\includegraphics{http://www.numerama.com/content/uploads/2016/07/espace.jpg}
+    \\\\includegraphics[\\\\linewidth]{http://www.numerama.com/content/uploads/2016/07/espace.jpg}
 \\\\captionof{espace\\\\ref{node}}
 \\\\end{center}
 
 \\\\footnote{\\\\label{node}two things are note finite, universe and human dumbness but i'm not sure for the universe}"
+`;
+
+exports[`mix-6 1`] = `
+"\\\\begin{center}
+    \\\\includegraphics[\\\\linewidth]{http://img.youtube.com/vi/8TQIvdFl4aU/0.jpg}
+\\\\captionof{a caption\\\\externalLink{https://www.youtube.com/embed/8TQIvdFl4aU}{https://www.youtube.com/embed/8TQIvdFl4aU}}
+\\\\end{center}
+
+\\\\begin{center}
+    \\\\includegraphics[\\\\linewidth]{http://img.youtube.com/vi/8TQIvdFl4aU/0.jpg}
+\\\\captionof{\\\\externalLink{https://www.youtube.com/embed/8TQIvdFl4aU}{https://www.youtube.com/embed/8TQIvdFl4aU}}
+\\\\end{center}
+
+no caption"
 `;

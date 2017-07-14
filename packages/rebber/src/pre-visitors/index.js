@@ -2,6 +2,7 @@ const xtend = require('xtend')
 const visit = require('unist-util-visit')
 const referencePlugin = require('./referenceVisitor')
 const codePlugin = require('./codeVisitor')
+const iframePlugin = require('./iframes')
 const headingPlugin = require('./headingVisitor')
 
 module.exports = preVisit
@@ -12,6 +13,7 @@ function preVisit (ctx, root) {
     definition: [referencePlugin(ctx).definitionVisitor],
     imageReference: [referencePlugin(ctx).imageReferenceVisitor],
     heading: [headingPlugin(ctx)],
+    iframe: [iframePlugin],
   }
 
   const visitors = xtend(defaultVisitors, ctx.preprocessors || {})
