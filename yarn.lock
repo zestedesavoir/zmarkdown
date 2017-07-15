@@ -4290,9 +4290,9 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
-rebber@^0.0.24:
-  version "0.0.24"
-  resolved "https://registry.yarnpkg.com/rebber/-/rebber-0.0.24.tgz#6f198eef89a12cef5e8987c7c07588056d39a2c6"
+rebber@^0.0.26:
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/rebber/-/rebber-0.0.26.tgz#14fec4378b2df35057cfb3a9d05b66a22a87bc99"
   dependencies:
     has "^1.0.1"
     xtend "^4.0.1"
@@ -4399,9 +4399,9 @@ remark-align@^0.0.23:
   version "0.0.23"
   resolved "https://registry.yarnpkg.com/remark-align/-/remark-align-0.0.23.tgz#cfab936963ccabca87a54477b7c07ded7e18199f"
 
-remark-captions@^0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/remark-captions/-/remark-captions-0.0.17.tgz#f5a9937546b35c5e931cc5223bd268d73b7dff73"
+remark-captions@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/remark-captions/-/remark-captions-0.0.18.tgz#a137a1bd292ffa0402247739e6ca28fc6441dd01"
   dependencies:
     clone "^2.1.1"
     unist-util-visit "^1.1.3"
@@ -4414,9 +4414,9 @@ remark-custom-blocks@^0.0.18:
   version "0.0.18"
   resolved "https://registry.yarnpkg.com/remark-custom-blocks/-/remark-custom-blocks-0.0.18.tgz#72e32c3b0763aba88291ca90b0820d54dae6a54e"
 
-remark-emoticons@^0.0.19:
-  version "0.0.19"
-  resolved "https://registry.yarnpkg.com/remark-emoticons/-/remark-emoticons-0.0.19.tgz#e569e2c2ba8e48f17a138aae7272f377bc0c61ed"
+remark-emoticons@^0.0.20:
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/remark-emoticons/-/remark-emoticons-0.0.20.tgz#87c25bb5846f82e8a8126a528598b2daa857f49e"
 
 remark-escape-escaped@^0.0.17:
   version "0.0.17"
@@ -4438,9 +4438,9 @@ remark-heading-trailing-spaces@^0.0.13:
   version "0.0.13"
   resolved "https://registry.yarnpkg.com/remark-heading-trailing-spaces/-/remark-heading-trailing-spaces-0.0.13.tgz#f29e1fb1a5234fa2b68848c8aa20999bb150c20b"
 
-remark-iframes@^0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/remark-iframes/-/remark-iframes-0.0.14.tgz#5f5e266e0184dd5141ee3580befa19617de548da"
+remark-iframes@^0.0.15:
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/remark-iframes/-/remark-iframes-0.0.15.tgz#28b96311b565d74511d16e3a4369ca710ad49f3a"
 
 remark-kbd@^0.0.19:
   version "0.0.19"

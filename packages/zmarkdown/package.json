@@ -24,7 +24,7 @@
     "remark-comments": "^0.0.15",
     "remark-custom-blocks": "^0.0.18",
     "remark-disable-tokenizers": "^0.0.2",
-    "remark-emoticons": "^0.0.19",
+    "remark-emoticons": "0.0.20",
     "remark-escape-escaped": "^0.0.17",
     "remark-grid-tables": "^0.0.12",
     "remark-heading-shift": "^0.0.13",
