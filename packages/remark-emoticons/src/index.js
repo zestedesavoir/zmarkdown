@@ -4,7 +4,9 @@ function escapeRegExp (str) {
 
 const SPACE = ' '
 
-module.exports = function inlinePlugin (emoticons = {}) {
+module.exports = function inlinePlugin (ctx) {
+  const emoticonClasses = ctx && ctx.classes
+  const emoticons = ctx && ctx.emoticons
   const pattern = Object.keys(emoticons).map(escapeRegExp).join('|')
 
   if (!pattern) {
@@ -32,18 +34,23 @@ module.exports = function inlinePlugin (emoticons = {}) {
         toEat = toEat.substring(0, toEat.length - 1)
       }
       const emoticon = toEat.trim()
-
-      eat(toEat)({
+      const emoticonNode = {
         type: 'emoticon',
         code: emoticon,
         data: {
           hName: 'img',
           hProperties: {
             src: emoticons[emoticon],
-            alt: emoticon
+            alt: emoticon,
           }
         }
-      })
+      }
+
+      if (emoticonClasses) {
+        emoticonNode.data.hProperties.class = emoticonClasses
+      }
+
+      eat(toEat)(emoticonNode)
     }
   }
 

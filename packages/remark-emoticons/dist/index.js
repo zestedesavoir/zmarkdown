@@ -6,9 +6,9 @@ function escapeRegExp(str) {
 
 var SPACE = ' ';
 
-module.exports = function inlinePlugin() {
-  var emoticons = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
+module.exports = function inlinePlugin(ctx) {
+  var emoticonClasses = ctx && ctx.classes;
+  var emoticons = ctx && ctx.emoticons;
   var pattern = Object.keys(emoticons).map(escapeRegExp).join('|');
 
   if (!pattern) {
@@ -36,8 +36,7 @@ module.exports = function inlinePlugin() {
         toEat = toEat.substring(0, toEat.length - 1);
       }
       var emoticon = toEat.trim();
-
-      eat(toEat)({
+      var emoticonNode = {
         type: 'emoticon',
         code: emoticon,
         data: {
@@ -47,7 +46,13 @@ module.exports = function inlinePlugin() {
             alt: emoticon
           }
         }
-      });
+      };
+
+      if (emoticonClasses) {
+        emoticonNode.data.hProperties.class = emoticonClasses;
+      }
+
+      eat(toEat)(emoticonNode);
     }
   }
 
