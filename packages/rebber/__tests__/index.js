@@ -119,7 +119,7 @@ test('emoticon', () => {
   const spec = specs['emoticon']
   const {contents} = unified()
     .use(reParse)
-    .use(require('remark-emoticons/src'), emoticons)
+    .use(require('remark-emoticons/src'), {emoticons})
     .use(rebber, {
       override: {
         emoticon: require('../src/custom-types/emoticon'),
@@ -269,7 +269,7 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
       .use(reParse, {
         footnotes: true
       })
-      .use(require('remark-emoticons/src'), emoticons)
+      .use(require('remark-emoticons/src'), {emoticons})
       .use(require('remark-captions/src'), {external: {gridTable: 'Table:', math: 'Equation'},
         internal: {iframe: 'Video:'}})
       .use(require('remark-grid-tables/src'))
