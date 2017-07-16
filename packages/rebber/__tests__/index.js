@@ -190,9 +190,9 @@ test('figure+caption', () => {
 test('download-image-ok', () => {
   const spec = specs['download-image']
   const downloadDirectory = './'
-  const regex = new RegExp(`\\includeGraphics{${downloadDirectory}.+\.(jpg|jpeg|png|gif)`)
+  const regex = new RegExp(`includeGraphics{${downloadDirectory}.+.(jpg|jpeg|png|gif)`)
 
-  let {contents} = unified()
+  const {contents} = unified()
     .use(reParse)
     .use(require('remark-captions/src'))
     .use(rebber, {
@@ -207,9 +207,8 @@ test('download-image-ok', () => {
 
 test('download-image-disable', () => {
   const spec = specs['download-image']
-  const downloadDirectory = './'
 
-  let {contents} = unified()
+  const {contents} = unified()
     .use(reParse)
     .use(require('remark-captions/src'))
     .use(rebber, {
@@ -223,9 +222,9 @@ test('download-image-disable', () => {
 test('download-image-largen-than-maxsize', () => {
   const spec = specs['download-image']
   const downloadDirectory = './'
-  const regex = new RegExp(`\\includeGraphics{${downloadDirectory}.+\.(jpg|jpeg|png|gif)`)
+  const regex = new RegExp(`includeGraphics{${downloadDirectory}.+.(jpg|jpeg|png|gif)`)
 
-  let {contents} = unified()
+  const {contents} = unified()
     .use(reParse)
     .use(require('remark-captions/src'))
     .use(rebber, {
@@ -235,7 +234,7 @@ test('download-image-largen-than-maxsize', () => {
     })
     .processSync(spec.fixture)
 
-    expect(regex.exec(contents.trim())).toBeNull()
+  expect(regex.exec(contents.trim())).toBeNull()
 })
 
 test('code', () => {
