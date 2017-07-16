@@ -18,3 +18,20 @@ for example, with `link.prefix = 'https://zestedesavoir.com'` every url starting
 - `list` : gets a second boolean argument wich defines if the list is ordered
 
 Before rendering, we use a bunch of preparsers --actually MDAST visitors-- to ensure a latex-complient tree.
+
+# Configure image download
+
+LateX doesn't support remote images. But `rebber` can download images in a customizable folder to generate a pdf with downloaded images. To enable this option, you can configure `rebber` like this:
+
+```js
+const {contents} = unified()
+  .use(reParse)
+  .use(rebber, {
+    downloadImage: true,
+    destination: downloadDirectory,
+    maxlength: 1000000,
+  })
+  .processSync(yourMD)
+```
+
+where `downloadImage` is if rebber download images, `destination` is the destination path for downloaded images (`./` by default) and `maxlength` is the limit of a file (no limit by default).

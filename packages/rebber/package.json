@@ -42,6 +42,7 @@
     "del-cli": "^1.0.0",
     "eslint": "^4.0.0",
     "jest": "^20.0.4",
+    "path":"^0.12.7",
     "remark-abbr": "^0.0.12",
     "remark-align": "^0.0.23",
     "remark-captions": "^0.0.18",
@@ -49,6 +50,9 @@
     "remark-grid-tables": "^0.0.12",
     "remark-parse": "^3.0.1",
     "remark-sub-super": "^0.0.16",
-    "unified": "^6.1.5"
+    "request":"^2.81.0",
+    "shortid":"^2.2.8",
+    "unified": "^6.1.5",
+    "url":"^0.11.0"
   }
 }
