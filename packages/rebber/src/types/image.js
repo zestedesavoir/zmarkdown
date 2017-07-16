@@ -11,15 +11,15 @@ const defaultMacro = (node) => {
   return `\\includeGraphics${width}{${node.url}}`
 }
 
-function image (ctx, node, _, parent) {
-  function downloadImage (uri, destination, maxlength) {
-    request.head(uri, function (err, res, body) {
-      if (!err && (!maxlength || res.headers['content-length'] < maxlength)) {
-        request(uri).pipe(fs.createWriteStream(destination))
-      }
-    })
-  }
+function downloadImage (uri, destination, maxlength) {
+  request.head(uri, function (err, res, body) {
+    if (!err && (!maxlength || res.headers['content-length'] < maxlength)) {
+      request(uri).pipe(fs.createWriteStream(destination))
+    }
+  })
+}
 
+function image (ctx, node, _, parent) {
   let macro = ctx.image ? ctx.image : defaultMacro
   if (ctx.downloadImage) {
     const parserdUri = url.parse(node.url)
