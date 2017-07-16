@@ -194,7 +194,6 @@ test('download-image-ok', () => {
 
   const {contents} = unified()
     .use(reParse)
-    .use(require('remark-captions/src'))
     .use(rebber, {
       downloadImage: true,
       destination: downloadDirectory,
@@ -210,7 +209,6 @@ test('download-image-disable', () => {
 
   const {contents} = unified()
     .use(reParse)
-    .use(require('remark-captions/src'))
     .use(rebber, {
       downloadImage: false,
     })
@@ -226,7 +224,6 @@ test('download-image-largen-than-maxsize', () => {
 
   const {contents} = unified()
     .use(reParse)
-    .use(require('remark-captions/src'))
     .use(rebber, {
       downloadImage: false,
       destination: downloadDirectory,
