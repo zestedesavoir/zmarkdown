@@ -283,6 +283,8 @@ const defaultConfig = {
     },
     userURL: (username) => `/membres/voir/${username}/`,
   },
+
+  disableTokenizers: {},
 }
 
 const rebberConfig = {

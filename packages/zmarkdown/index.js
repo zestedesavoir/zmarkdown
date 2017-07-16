@@ -52,7 +52,7 @@ const zmdParser = (config) => {
     .use(remarkCaptions, config.captions)
     .use(remarkComments)
     .use(remarkCustomBlocks, config.customBlocks)
-    .use(remarkDisableTokenizers)
+    .use(remarkDisableTokenizers, config.disableTokenizers)
     .use(remarkEmoticons, config.emoticons)
     .use(remarkEscapeEscaped, config.escapeEscaped)
     .use(remarkGridTables)
