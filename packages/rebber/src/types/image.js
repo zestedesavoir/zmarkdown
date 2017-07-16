@@ -13,7 +13,9 @@ const defaultMacro = (node) => {
 
 function downloadImage (uri, destination, maxlength) {
   request.head(uri, function (err, res, body) {
-    if (!err && (!maxlength || res.headers['content-length'] < maxlength)) {
+    if (!err &&
+      res.headers['content-type'].substring(0, 6) === 'image/' &&
+      (!maxlength || res.headers['content-length'] < maxlength)) {
       request(uri).pipe(fs.createWriteStream(destination))
     }
   })
