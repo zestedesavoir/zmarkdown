@@ -26,7 +26,7 @@
     "jest": "^20.0.4",
     "lerna": "^2.0.0-rc.5",
     "mocha": "^3.4.2",
-    "rebber": "^0.0.27",
+    "rebber": "^0.0.28",
     "rehype-footnotes-title": "^0.0.15",
     "rehype-html-blocks": "^0.0.16",
     "rehype-katex": "^1.0.1",
