@@ -10,7 +10,6 @@ const render = (use, text) => unified()
   .use(reParse, {
     gfm: true,
     commonmark: false,
-    yaml: false,
     footnotes: true,
     /* sets list of known blocks to nothing, otherwise <h3>hey</h3> would become
     &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */

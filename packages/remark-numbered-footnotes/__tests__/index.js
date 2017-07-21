@@ -15,34 +15,30 @@ const specs = directory(base).reduce((tests, contents) => {
   return tests
 }, {})
 
-const entrypoints = [
-  '../dist',
-  '../src',
-]
+const config = {
+  gfm: true,
+  commonmark: false,
+  footnotes: true
+}
 
-entrypoints.forEach(entrypoint => {
-  const plugin = require(entrypoint)
+test('footnotes', () => {
+  const {contents} = unified()
+    .use(reParse, config)
+    .use(require('../src'))
+    .use(remark2rehype)
+    .use(stringify)
+    .processSync(specs['footnotes'])
 
-  Object.keys(specs).filter(Boolean).forEach(name => {
-    const spec = specs[name]
+  expect(contents).toMatchSnapshot()
+})
 
-    test.skip(name, () => {
-      const {contents} = unified()
-        .use(reParse, {
-          gfm: true,
-          commonmark: false,
-          yaml: false,
-          footnotes: true,
-          /* sets list of known blocks to nothing, otherwise <h3>hey</h3> would become
-          &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
-          blocks: [],
-        })
-        .use(plugin)
-        .use(remark2rehype)
-        .use(stringify)
-        .processSync(spec.fixture)
+test('regression-1', () => {
+  const {contents} = unified()
+    .use(reParse, config)
+    .use(require('../src'))
+    .use(remark2rehype)
+    .use(stringify)
+    .processSync(specs['regression-1'])
 
-      expect(contents).toEqual(spec.expected.trim())
-    })
-  })
+  expect(contents).toMatchSnapshot()
 })

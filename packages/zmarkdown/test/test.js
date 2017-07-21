@@ -196,7 +196,7 @@ describe('HTML rendering', function () {
         expect(renderFile()(filepath).trim()).to.have.html(loadFixture(filepath).trim())
       })
 
-      it.skip(`properly renders markdown-syntax.txt`, function () {
+      it(`properly renders markdown-syntax.txt`, function () {
         const filepath = `${dir}/markdown-syntax.txt`
         expect(renderFile()(filepath).trim()).to.have.html(loadFixture(filepath).trim())
       })
@@ -211,7 +211,7 @@ describe('HTML rendering', function () {
         expect(renderFile()(filepath).trim()).to.have.html(loadFixture(filepath).trim())
       })
 
-      it.skip(`properly renders tables-2.txt`, function () {
+      it(`properly renders tables-2.txt`, function () {
         const filepath = `${dir}/tables-2.txt`
         expect(renderFile()(filepath).trim()).to.have.html(loadFixture(filepath).trim())
       })

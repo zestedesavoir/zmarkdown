@@ -43,7 +43,7 @@
     "del-cli": "^1.0.0",
     "eslint": "^4.0.0",
     "jest": "^20.0.4",
-    "remark-parse": "^3.0.1",
+    "remark-parse": "^4.0.0",
     "unified": "^6.1.5"
   }
 }

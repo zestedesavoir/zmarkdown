@@ -7,13 +7,15 @@
     &lt;li&gt;&lt;a href="/projects/markdown/dingus" title="Online Markdown Web Form"&gt;Dingus&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</p>
 <ul>
-<li><a href="#overview">Overview</a><ul>
+<li><p><a href="#overview">Overview</a></p>
+<ul>
 <li><a href="#philosophy">Philosophy</a></li>
 <li><a href="#html">Inline HTML</a></li>
 <li><a href="#autoescape">Automatic Escaping for Special Characters</a></li>
 </ul>
 </li>
-<li><a href="#block">Block Elements</a><ul>
+<li><p><a href="#block">Block Elements</a></p>
+<ul>
 <li><a href="#p">Paragraphs and Line Breaks</a></li>
 <li><a href="#header">Headers</a></li>
 <li><a href="#blockquote">Blockquotes</a></li>
@@ -22,14 +24,16 @@
 <li><a href="#hr">Horizontal Rules</a></li>
 </ul>
 </li>
-<li><a href="#span">Span Elements</a><ul>
+<li><p><a href="#span">Span Elements</a></p>
+<ul>
 <li><a href="#link">Links</a></li>
 <li><a href="#em">Emphasis</a></li>
 <li><a href="#code">Code</a></li>
 <li><a href="#img">Images</a></li>
 </ul>
 </li>
-<li><a href="#misc">Miscellaneous</a><ul>
+<li><p><a href="#misc">Miscellaneous</a></p>
+<ul>
 <li><a href="#backslash">Backslash Escapes</a></li>
 <li><a href="#autolink">Automatic Links</a></li>
 </ul>
@@ -194,8 +198,7 @@ wrap the text and put a <code>&gt;</code> before every line:</p>
 <pre><code>&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
 &gt; consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
 &gt; Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
-&gt; 
-&gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
+&gt; &gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
 &gt; id sem consectetuer libero luctus adipiscing.
 </code></pre>
 <p>Markdown allows you to be lazy and only put the <code>&gt;</code> before the first
@@ -217,14 +220,9 @@ adding additional levels of <code>&gt;</code>:</p>
 </code></pre>
 <p>Blockquotes can contain other Markdown elements, including headers, lists,
 and code blocks:</p>
-<pre><code>&gt; ## This is a header.
-&gt; 
-&gt; 1.   This is the first list item.
-&gt; 2.   This is the second list item.
-&gt; 
-&gt; Here's some example code:
-&gt; 
-&gt;     return shell_exec("echo $input | $markdown_script");
+<pre><code>&gt; ## This is a header.&gt; &gt; 1.   This is the first list item.
+&gt; 2.   This is the second list item.&gt; &gt; Here's some example code:
+&gt; &gt;     return shell_exec("echo $input | $markdown_script");
 </code></pre>
 <p>Any decent text editor should make email-style quoting easy. For
 example, with BBEdit, you can make a selection and choose Increase
@@ -470,12 +468,12 @@ on a line by itself:</p>
 <p>That is:</p>
 <ul>
 <li>Square brackets containing the link identifier (optionally
-    indented from the left margin using up to three spaces);</li>
+indented from the left margin using up to three spaces);</li>
 <li>followed by a colon;</li>
 <li>followed by one or more spaces (or tabs);</li>
 <li>followed by the URL for the link;</li>
 <li>optionally followed by a title attribute for the link, enclosed
-    in double or single quotes.</li>
+in double or single quotes.</li>
 </ul>
 <p>The link URL may, optionally, be surrounded by angle brackets:</p>
 <pre><code>[id]: &lt;http://example.com/&gt;  "Optional Title Here"
@@ -645,8 +643,8 @@ for links, allowing for two styles: <em>inline</em> and <em>reference</em>.</p>
 <li>followed by a set of square brackets, containing the <code>alt</code>
     attribute text for the image;</li>
 <li>followed by a set of parentheses, containing the URL or path to
-    the image, and an optional <code>title</code> attribute enclosed in double
-    or single quotes.</li>
+the image, and an optional <code>title</code> attribute enclosed in double
+or single quotes.</li>
 </ul>
 <p>Reference-style image syntax looks like this:</p>
 <pre><code>![Alt text][id]
