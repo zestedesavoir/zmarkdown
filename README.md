@@ -1,5 +1,7 @@
 # zmarkdown [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/zestedesavoir/zmarkdown.svg)](https://greenkeeper.io/)
+
 This repository forms the basis for zmarkdown, the JavaScript project intended to replace [Python-ZMarkdown][pyzmd], the current Markdown engine powering [Zeste de Savoir][zds].
 
 It is a collection of packages extending the [**remark**
