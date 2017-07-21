@@ -20,6 +20,23 @@ Everything between `<--COMMENTS` and `COMMENTS-->` will be absent from the outpu
 npm install remark-comments
 ```
 
+## Configuration
+
+Two options can be passed, as a single argument object:
+
+    {beginMarker = 'COMMENTS', endMarker = 'COMMENTS'}
+
+Therefore, invoking this plugin this way:
+
+```js
+  .use(remarkComments, {
+    beginMarker: 'foo',
+    endMarker: 'bar'
+  })
+```
+
+will make this plugin remove what's put between `<--foo` and `bar-->`.
+
 ## Usage
 
 Dependencies:

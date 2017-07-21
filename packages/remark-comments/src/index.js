@@ -1,23 +1,26 @@
-const BEGINMARKER = '<--COMMENTS'
-const ENDMARKER = 'COMMENTS-->'
+const beginMarkerFactory = (marker = 'COMMENTS') => `<--${marker}`
+const endMarkerFactory = (marker = 'COMMENTS') => `${marker}-->`
 const SPACE = ' '
 
-function locator (value, fromIndex) {
-  return value.indexOf(BEGINMARKER, fromIndex)
-}
-
 function plugin (opts = {}) {
+  const beginMarker = beginMarkerFactory(opts.beginMarker)
+  const endMarker = endMarkerFactory(opts.endMarker)
+
+  function locator (value, fromIndex) {
+    return value.indexOf(beginMarker, fromIndex)
+  }
+
   function inlineTokenizer (eat, value, silent) {
 
-    const keepBegin = value.indexOf(BEGINMARKER)
-    const keepEnd = value.indexOf(ENDMARKER)
+    const keepBegin = value.indexOf(beginMarker)
+    const keepEnd = value.indexOf(endMarker)
     if (keepBegin !== 0 || keepEnd === -1) return
 
     /* istanbul ignore if - never used (yet) */
     if (silent) return true
 
-    const comment = value.substring(BEGINMARKER.length + 1, keepEnd - 1)
-    return eat(BEGINMARKER + SPACE + comment + SPACE + ENDMARKER)
+    const comment = value.substring(beginMarker.length + 1, keepEnd - 1)
+    return eat(beginMarker + SPACE + comment + SPACE + endMarker)
   }
   inlineTokenizer.locator = locator
 
