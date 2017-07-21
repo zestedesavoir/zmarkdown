@@ -1,0 +1,58 @@
+{
+  "name": "remark-images-download",
+  "version": "0.0.1",
+  "repository": {
+    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-images-download",
+    "type": "git"
+  },
+  "author": "Sébastien (AmarOk) Blin <contact@enconn.fr>",
+  "contributors": [
+    "Sébastien (AmarOk) Blin <contact@enconn.fr>",
+    "François (artragis) Dambrine <perso@francoisdambrine.me>",
+    "Victor Felder <victor@draft.li> (https://draft.li)"
+  ],
+  "scripts": {
+    "pretest": "eslint src",
+    "prepare": "del-cli dist && cross-env BABEL_ENV=production babel --out-dir dist src",
+    "test": "jest",
+    "coverage": "jest --coverage"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "LICENSE-MIT",
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=4"
+  },
+  "keywords": [
+    "remark"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "clone": "^2.1.1",
+    "unist-util-visit": "^1.1.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-jest": "^20.0.3",
+    "babel-preset-es2015": "^6.24.1",
+    "cross-env": "^5.0.1",
+    "dedent": "^0.7.0",
+    "del-cli": "^1.0.0",
+    "eslint": "^4.0.0",
+    "jest": "^20.0.4",
+    "rehype-stringify": "^3.0.0",
+    "remark-parse": "^3.0.1",
+    "remark-rehype": "^2.0.1",
+    "textr": "^0.3.0",
+    "typographic-guillemets": "^0.0.8",
+    "unified": "^6.1.5",
+    "request":"^2.81.0",
+    "shortid":"^2.2.8",
+    "url":"^0.11.0",
+    "path":"^0.12.7"
+  }
+}
