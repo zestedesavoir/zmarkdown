@@ -1,6 +1,6 @@
 {
   "name": "zmarkdown",
-  "version": "0.0.50",
+  "version": "0.0.51",
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
   "contributors": [
     "Sébastien (AmarOk) Blin <contact@enconn.fr>",
@@ -21,7 +21,7 @@
     "remark-abbr": "^1.0.1",
     "remark-align": "^1.0.1",
     "remark-captions": "^0.0.19",
-    "remark-comments": "^1.0.1",
+    "remark-comments": "^1.0.2",
     "remark-custom-blocks": "^1.0.1",
     "remark-disable-tokenizers": "^1.0.1",
     "remark-emoticons": "^0.0.21",
