@@ -1,6 +1,6 @@
 {
   "name": "remark-kbd",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-kbd",
     "type": "git"
