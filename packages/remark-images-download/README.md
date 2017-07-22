@@ -33,6 +33,7 @@ unified()
     downloadImage: true,
     downloadDestination: './img/',
     maxlength: 1000000,
+    dirSizeLimit: 10000000,
   })
   .use(remark2rehype)
   .use(stringify)
@@ -42,12 +43,13 @@ unified()
 
 - `downloadImage`: enable the plugin.
 - `downloadDestination`: where downloads should be stored (must exists).
-- `maxlength`: if a file is larger than this number (in bytes), the plugin will not download it.
+- `maxFileLength`: if a file is larger than this number (in bytes), the plugin will not download it.
+- `dirSizeLimit`: the directory size limit.
 
 ## example
 
 ```markdown
-Two little images:
+Two small images:
 ![](https://example.com/example.png)
 ![](https://example.com/example2.png)
 
