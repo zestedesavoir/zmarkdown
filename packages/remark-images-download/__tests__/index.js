@@ -4,9 +4,11 @@ import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
+import jest from 'jest'
+
+jest.mock('../__mocks__/request')
 
 import plugin from '../src/'
-
 
 const render = text => unified()
   .use(reParse)
