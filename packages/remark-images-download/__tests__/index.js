@@ -16,12 +16,11 @@ const render = text => unified()
   })
   .use(remark2rehype)
   .use(stringify)
-  .processSync(text)
+  .process(text)
 
 
 test('download-image', () => {
-  const { contents } = render(file(join(__dirname, 'download-image.fixture.md')))
-  console.log(contents)
+  render(file(join(__dirname, 'download-image.fixture.md')))
   // TODO tests:
   // Mock!
   // + downloadImage = false => should not download any image.
