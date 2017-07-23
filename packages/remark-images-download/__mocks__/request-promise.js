@@ -5,7 +5,13 @@ const responses = {
   'ok.png': {
     headers: {
       'content-type': 'image/png',
-      'content-length': 12345,
+      'content-length': 32345,
+    },
+  },
+  '30percent.png': {
+    headers: {
+      'content-type': 'image/png',
+      'content-length': 3000,
     },
   },
   'too-big.png': {
