@@ -1,31 +1,48 @@
-import {readFileSync as file} from 'fs'
-import {join} from 'path'
+import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
-import jest from 'jest'
 
-jest.mock('../__mocks__/request')
+jest.mock('fs')
+jest.mock('request')
 
 import plugin from '../src/'
 
 const render = text => unified()
   .use(reParse)
-  .use(plugin, {
-    downloadImage: true,
-    downloadDestination: './',
-  })
+  .use(plugin)
   .use(remark2rehype)
   .use(stringify)
   .process(text)
 
 
-test('download-image', () => {
-  render(file(join(__dirname, 'download-image.fixture.md')))
-  // TODO tests:
-  // Mock!
-  // + downloadImage = false => should not download any image.
-  // + test the downloadDestination parameter (note, the directory must exists)
-  // + test maxlength
+test('download-image ok', () => {
+  const file = dedent`
+    ![](http://example.com/ok.png)
+  `
+  debugger
+  render(file).then((e) => console.log(e)).catch((e) => console.error(e))
+})
+
+test.skip('download-image too big', () => {
+  const file = dedent`
+    ![](http://example.com/too-big.png)
+  `
+  expect(render(file)).resolves.toMatchSnapshot()
+})
+
+test.skip('download-image wrong mime', () => {
+  const file = dedent`
+    ![](http://example.com/wrong-mime.png)
+  `
+  expect(render(file)).resolves.toMatchSnapshot()
+})
+
+test.skip('download-image wrong ext', () => {
+  const file = dedent`
+    ![](http://example.com/wrong.ext)
+  `
+
+  expect(render(file)).resolves.toMatchSnapshot()
 })

@@ -1,59 +1,78 @@
 const visit = require('unist-util-visit')
 const fs = require('fs')
-const {map} = require('async')
 const path = require('path')
 const request = require('request-promise')
 const shortid = require('shortid')
 const url = require('url')
-const {promisify} = require('util')
 
-const writeFile = promisify(fs.writeFile)
+const writeFile = (file, data, options) => new Promise((resolve, reject) => {
+  fs.writeFile(file, data, options, (err) => {
+    if (err) reject()
+    resolve()
+  })
+})
+
+const mkdir = (path) => new Promise((resolve, reject) => {
+  fs.stat(path, (err, stats) => {
+    if (err) {
+      return fs.mkdir(path, (err) => {
+        if (err) reject(new Error(`Failed to create dir ${path}`))
+        resolve()
+      })
+    }
+    if (!stats.isDirectory()) {
+      reject(new Error(`${path} is not a directory!`))
+    }
+    resolve()
+  })
+})
 
 function plugin ({
   downloadImages = true,
   maxFileLength = 1000000,
   dirSizeLimit = 10000000,
-  downloadDestination = './'
+  downloadDestination = './',
+  report = console.error
 } = {}) {
-  return (tree) => {
+  debugger
+  return function transform (tree) {
     if (downloadImages !== true) return
-
-    const sizeAllFiles = {sum: 0}
+    let totalDownloadedSize = 0
 
     // images are downloaded in destinationPath
     const destinationPath = path.join(downloadDestination, shortid.generate())
-    if (!fs.existsSync(destinationPath)) {
-      fs.mkdirSync(destinationPath)
-    }
 
-    const promises = []
-    let totalDownloadedSize = 0
+    return mkdir(destinationPath)
+      .then(() => {
+        const promises = []
 
-    visit(tree, 'image', function (node) {
-      const parsedURI = url.parse(node.url)
-      if (parsedURI.hostname) {
-        const extension = path.extname(parsedURI.pathname)
-        const basename = `${shortid.generate()}.${extension}`
-        const destination = path.join(destinationPath, basename)
-        const imageURL = node.url
+        visit(tree, 'image', function (node) {
+          const parsedURI = url.parse(node.url)
 
-        promises.push(
-          downloadImage(imageURL, destination)
-            .catch((err) => console.error(err, `while downloading ${imageURL}`))
-            .then((imageSize) => {
-              totalDownloadedSize += imageSize
-              node.url = destination
-            }))
-      }
-    })
+          if (parsedURI.host) {
+            const extension = path.extname(parsedURI.pathname)
+            const basename = `${shortid.generate()}.${extension}`
+            const destination = path.join(destinationPath, basename)
+            const imageURL = node.url
 
-    return Promise.all(promises)
+            promises.push(
+              downloadImage(imageURL, destination)
+                .catch((err) => report(err, `while downloading ${imageURL}`))
+                .then((imageSize) => {
+                  totalDownloadedSize += imageSize
+                  node.url = destination
+                }))
+          }
+        })
+
+        return Promise.all(promises)
+      })
+      .catch((err) => report(err))
+      .then((vfile) => tree)
 
     function isDownloadable (uri, callback) {
-      return Promise((resolve, reject) => {
-        request.head(uri, (err, res) => {
-          if (err) reject(err)
-
+      return request.head(uri)
+        .then((res) => new Promise((resolve, reject) => {
           if (res.headers['content-type'].substring(0, 6) !== 'image/') {
             reject(new Error(`Content-Type of ${uri} is not of image/ type`))
           }
@@ -62,7 +81,7 @@ function plugin ({
 
           if (maxFileLength && fileSize > maxFileLength) {
             reject(new Error(
-              `File at ${uri} weighs ${res.headers['content-length']}` +
+              `File at ${uri} weighs ${res.headers['content-length']} ` +
               `bigger than ${maxFileLength}`))
           }
 
@@ -70,21 +89,16 @@ function plugin ({
             reject(new Error(
               `Cannot download ${uri} because destination directory reached size limit`))
           }
-
           resolve()
-        })
-      })
+        }))
     }
 
     function downloadImage (uri, destination) {
-      return Promise((resolve, reject) => {
-        isDownloadable(uri)
-          .catch(err => reject(err))
-          .then(() => request(uri))
-          .then((res, body) => writeFile(destination, body).then(() => res))
-          .then((response) => resolve(parseInt(response.headers['content-length'], 10)))
-          .catch(err => reject(err))
-      })
+      return isDownloadable(uri)
+        .catch(notDownloadable => report(notDownloadable))
+        .then(() => request(uri))
+        .then((res, body) => writeFile(destination, body).then(() => res))
+        .then((response) => parseInt(response.headers['content-length'], 10))
     }
   }
 }
