@@ -34,7 +34,6 @@ function plugin ({
   downloadDestination = './',
   report = console.error
 } = {}) {
-  debugger
   return function transform (tree) {
     if (downloadImages !== true) return
     let totalDownloadedSize = 0
@@ -44,7 +43,7 @@ function plugin ({
 
     return mkdir(destinationPath)
       .then(() => {
-        const promises = []
+        const promises = [Promise.resolve()]
 
         visit(tree, 'image', function (node) {
           const parsedURI = url.parse(node.url)
@@ -57,18 +56,18 @@ function plugin ({
 
             promises.push(
               downloadImage(imageURL, destination)
-                .catch((err) => report(err, `while downloading ${imageURL}`))
                 .then((imageSize) => {
                   totalDownloadedSize += imageSize
                   node.url = destination
-                }))
+                })
+                .catch((err) => report(err, `while downloading ${imageURL}`)))
           }
         })
 
         return Promise.all(promises)
       })
       .catch((err) => report(err))
-      .then((vfile) => tree)
+      .then(() => tree)
 
     function isDownloadable (uri, callback) {
       return request.head(uri)
@@ -95,7 +94,7 @@ function plugin ({
 
     function downloadImage (uri, destination) {
       return isDownloadable(uri)
-        .catch(notDownloadable => report(notDownloadable))
+        .catch((notDownloadable) => report(notDownloadable))
         .then(() => request(uri))
         .then((res, body) => writeFile(destination, body).then(() => res))
         .then((response) => parseInt(response.headers['content-length'], 10))
