@@ -5,7 +5,7 @@ import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
 
 jest.mock('fs')
-jest.mock('request')
+jest.mock('request-promise')
 
 import plugin from '../src/'
 

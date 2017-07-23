@@ -30,17 +30,21 @@ const responses = {
 }
 
 
-function request (uri) {
-  return new Promise((resolve, reject) =>
-    process.nextTick(() => resolve(stream.Stream())))
+function request ({uri}) {
+  const parsedURI = url.parse(uri)
+  const filename = path.basename(parsedURI.pathname)
+  const response = responses[filename] || responses['ok.png']
+  return new Promise((resolve, reject) => {
+    process.nextTick(() => resolve({response: response, body: 'foobar img content!'}))
+  })
 }
 
-request.head = (uri) => {
+request.head = ({uri}) => {
   const parsedURI = url.parse(uri)
   const filename = path.basename(parsedURI.pathname)
   const response = responses[filename] || responses['ok.png']
   return new Promise((resolve, reject) =>
-    process.nextTick(() => resolve(response)))
+    process.nextTick(() => resolve({response: response, body: 'foobar img content!'})))
 }
 
 module.exports = request
