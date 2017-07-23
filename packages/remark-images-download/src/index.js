@@ -1,51 +1,105 @@
 const visit = require('unist-util-visit')
 const fs = require('fs')
 const path = require('path')
-const request = require('request')
+const request = require('request-promise')
 const shortid = require('shortid')
 const url = require('url')
 
-function plugin (opts) {
-  return (tree) => {
-    const sizeAllFiles = {sum: 0}
-    if (opts && opts.downloadImage) {
-      return new Promise(function (resolve, reject) {
-        // images are downloaded in destinationPath
-        const destinationDir = opts.downloadDestination ? opts.downloadDestination : './'
-        const destinationPath = path.join(destinationDir, shortid.generate())
-        if (!fs.existsSync(destinationPath)) {
-          fs.mkdirSync(destinationPath)
-        }
+const writeFile = (file, data, options) => new Promise((resolve, reject) => {
+  fs.writeFile(file, data, options, (err) => {
+    if (err) reject()
+    resolve()
+  })
+})
 
-        visit(tree, 'image', function (node) {
-          const parserdUri = url.parse(node.url)
-          if (parserdUri.hostname) {
-            const extension = path.extname(parserdUri.pathname)
-            const basename = `${shortid.generate()}.${extension}`
-            const destination = path.join(destinationPath, basename)
-            downloadImage(node.url, destination, opts.maxFileLength,
-              sizeAllFiles, opts.dirSizeLimit)
-            node.url = destination
-          }
-        })
+const mkdir = (path) => new Promise((resolve, reject) => {
+  fs.stat(path, (err, stats) => {
+    if (err) {
+      return fs.mkdir(path, (err) => {
+        if (err) reject(new Error(`Failed to create dir ${path}`))
+        resolve()
       })
     }
-  }
-}
-
-function downloadImage (uri, destination, maxFileLength, sizeAllFiles, dirSizeLimit) {
-  request.head(uri, function (err, res, body) {
-    if (!err &&
-      res.headers['content-type'].substring(0, 6) === 'image/' &&
-      (!maxFileLength || res.headers['content-length'] < maxFileLength)) {
-
-      // Check if the directory size limit is reached before downloading
-      sizeAllFiles.sum += parseInt(res.headers['content-length'])
-      if (!dirSizeLimit || sizeAllFiles.sum < dirSizeLimit) {
-        request(uri).pipe(fs.createWriteStream(destination))
-      }
+    if (!stats.isDirectory()) {
+      reject(new Error(`${path} is not a directory!`))
     }
+    resolve()
   })
+})
+
+function plugin ({
+  downloadImages = true,
+  maxFileLength = 1000000,
+  dirSizeLimit = 10000000,
+  downloadDestination = './',
+  report = console.error
+} = {}) {
+  return function transform (tree) {
+    if (downloadImages !== true) return
+    let totalDownloadedSize = 0
+
+    // images are downloaded in destinationPath
+    const destinationPath = path.join(downloadDestination, shortid.generate())
+
+    return mkdir(destinationPath)
+      .then(() => {
+        const promises = [Promise.resolve()]
+
+        visit(tree, 'image', function (node) {
+          const parsedURI = url.parse(node.url)
+
+          if (parsedURI.host) {
+            const extension = path.extname(parsedURI.pathname)
+            const basename = `${shortid.generate()}.${extension}`
+            const destination = path.join(destinationPath, basename)
+            const imageURL = node.url
+
+            promises.push(
+              downloadImage(imageURL, destination)
+                .then((imageSize) => {
+                  totalDownloadedSize += imageSize
+                  node.url = destination
+                })
+                .catch((err) => report(err, `while downloading ${imageURL}`)))
+          }
+        })
+
+        return Promise.all(promises)
+      })
+      .catch((err) => report(err))
+      .then(() => tree)
+
+    function isDownloadable (uri, callback) {
+      return request.head(uri)
+        .then((res) => new Promise((resolve, reject) => {
+          if (res.headers['content-type'].substring(0, 6) !== 'image/') {
+            reject(new Error(`Content-Type of ${uri} is not of image/ type`))
+          }
+
+          const fileSize = parseInt(res.headers['content-length'], 10)
+
+          if (maxFileLength && fileSize > maxFileLength) {
+            reject(new Error(
+              `File at ${uri} weighs ${res.headers['content-length']} ` +
+              `bigger than ${maxFileLength}`))
+          }
+
+          if (dirSizeLimit && totalDownloadedSize >= dirSizeLimit) {
+            reject(new Error(
+              `Cannot download ${uri} because destination directory reached size limit`))
+          }
+          resolve()
+        }))
+    }
+
+    function downloadImage (uri, destination) {
+      return isDownloadable(uri)
+        .catch((notDownloadable) => report(notDownloadable))
+        .then(() => request(uri))
+        .then((res, body) => writeFile(destination, body).then(() => res))
+        .then((response) => parseInt(response.headers['content-length'], 10))
+    }
+  }
 }
 
 module.exports = plugin

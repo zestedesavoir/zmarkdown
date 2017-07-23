@@ -33,6 +33,8 @@
   "license": "MIT",
   "dependencies": {
     "clone": "^2.1.1",
+    "request-promise": "^4.2.1",
+    "shortid": "^2.2.8",
     "unist-util-visit": "^1.1.3"
   },
   "devDependencies": {
@@ -49,10 +51,6 @@
     "remark-rehype": "^2.0.1",
     "textr": "^0.3.0",
     "typographic-guillemets": "^0.0.8",
-    "unified": "^6.1.5",
-    "request":"^2.81.0",
-    "shortid":"^2.2.8",
-    "url":"^0.11.0",
-    "path":"^0.12.7"
+    "unified": "^6.1.5"
   }
 }
