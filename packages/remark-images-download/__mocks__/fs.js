@@ -14,4 +14,9 @@ fs.mkdir = (path, callback) => {
   process.nextTick(() => callback())
 }
 
+fs.writeFile = (file, data, options, callback) => {
+  if (!callback) callback = options
+  process.nextTick(() => callback())
+}
+
 module.exports = fs

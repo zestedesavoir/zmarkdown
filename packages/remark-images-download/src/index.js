@@ -5,11 +5,19 @@ const request = require('request-promise')
 const shortid = require('shortid')
 const url = require('url')
 
+const requestParser = (body, response, resolveWithFullResponse) =>
+  ({response: response, body: body})
+
 const writeFile = (file, data, options) => new Promise((resolve, reject) => {
-  fs.writeFile(file, data, options, (err) => {
-    if (err) reject()
+  const cb = (err) => {
+    if (err) reject(err)
     resolve()
-  })
+  }
+  if (options) {
+    fs.writeFile(file, data, options, cb)
+  } else {
+    fs.writeFile(file, data, cb)
+  }
 })
 
 const mkdir = (path) => new Promise((resolve, reject) => {
@@ -48,20 +56,25 @@ function plugin ({
         visit(tree, 'image', function (node) {
           const parsedURI = url.parse(node.url)
 
-          if (parsedURI.host) {
-            const extension = path.extname(parsedURI.pathname)
-            const basename = `${shortid.generate()}.${extension}`
-            const destination = path.join(destinationPath, basename)
-            const imageURL = node.url
+          if (!parsedURI.host) return
 
-            promises.push(
-              downloadImage(imageURL, destination)
-                .then((imageSize) => {
-                  totalDownloadedSize += imageSize
-                  node.url = destination
-                })
-                .catch((err) => report(err, `while downloading ${imageURL}`)))
-          }
+          const extension = path.extname(parsedURI.pathname)
+          const basename = `${shortid.generate()}${extension}`
+          const destination = path.join(destinationPath, basename)
+          const imageURL = node.url
+
+          promises.push(
+            isDownloadable(imageURL)
+              .catch((notDownloadable) => report(notDownloadable))
+              .then(() => request({uri: imageURL, transform: requestParser}))
+              .then(({response, body}) =>
+                writeFile(destination, body)
+                  .then(() => parseInt(response.headers['content-length'], 10)))
+              .then((imageSize) => {
+                totalDownloadedSize += imageSize
+                node.url = destination
+              })
+              .catch((err) => report(err, `while downloading ${imageURL}`)))
         })
 
         return Promise.all(promises)
@@ -69,18 +82,18 @@ function plugin ({
       .catch((err) => report(err))
       .then(() => tree)
 
-    function isDownloadable (uri, callback) {
-      return request.head(uri)
-        .then((res) => new Promise((resolve, reject) => {
-          if (res.headers['content-type'].substring(0, 6) !== 'image/') {
+    function isDownloadable (uri) {
+      return request.head({uri: uri, transform: requestParser})
+        .then(({response}) => new Promise((resolve, reject) => {
+          if (response.headers['content-type'].substring(0, 6) !== 'image/') {
             reject(new Error(`Content-Type of ${uri} is not of image/ type`))
           }
 
-          const fileSize = parseInt(res.headers['content-length'], 10)
+          const fileSize = parseInt(response.headers['content-length'], 10)
 
           if (maxFileLength && fileSize > maxFileLength) {
             reject(new Error(
-              `File at ${uri} weighs ${res.headers['content-length']} ` +
+              `File at ${uri} weighs ${response.headers['content-length']} ` +
               `bigger than ${maxFileLength}`))
           }
 
@@ -90,14 +103,6 @@ function plugin ({
           }
           resolve()
         }))
-    }
-
-    function downloadImage (uri, destination) {
-      return isDownloadable(uri)
-        .catch((notDownloadable) => report(notDownloadable))
-        .then(() => request(uri))
-        .then((res, body) => writeFile(destination, body).then(() => res))
-        .then((response) => parseInt(response.headers['content-length'], 10))
     }
   }
 }
