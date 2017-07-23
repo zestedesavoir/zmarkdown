@@ -13,6 +13,7 @@ const writeFile = (file, data, options) => new Promise((resolve, reject) => {
     if (err) reject(err)
     resolve()
   }
+
   if (options) {
     fs.writeFile(file, data, options, cb)
   } else {
@@ -28,16 +29,18 @@ const mkdir = (path) => new Promise((resolve, reject) => {
         resolve()
       })
     }
+
     if (!stats.isDirectory()) {
       reject(new Error(`${path} is not a directory!`))
     }
+
     resolve()
   })
 })
 
 function plugin ({
   downloadImages = true,
-  maxFileLength = 1000000,
+  maxFileSize = 1000000,
   dirSizeLimit = 10000000,
   downloadDestination = './',
   report = console.error
@@ -65,16 +68,10 @@ function plugin ({
 
           promises.push(
             isDownloadable(imageURL)
-              .catch((notDownloadable) => report(notDownloadable))
               .then(() => request({uri: imageURL, transform: requestParser}))
-              .then(({response, body}) =>
-                writeFile(destination, body)
-                  .then(() => parseInt(response.headers['content-length'], 10)))
-              .then((imageSize) => {
-                totalDownloadedSize += imageSize
-                node.url = destination
-              })
-              .catch((err) => report(err, `while downloading ${imageURL}`)))
+              .then(({body}) => writeFile(destination, body))
+              .then(() => { node.url = destination })
+              .catch((err) => report(err)))
         })
 
         return Promise.all(promises)
@@ -91,16 +88,17 @@ function plugin ({
 
           const fileSize = parseInt(response.headers['content-length'], 10)
 
-          if (maxFileLength && fileSize > maxFileLength) {
+          if (maxFileSize && fileSize > maxFileSize) {
             reject(new Error(
-              `File at ${uri} weighs ${response.headers['content-length']} ` +
-              `bigger than ${maxFileLength}`))
+              `File at ${uri} weighs ${response.headers['content-length']}, ` +
+              `max size is ${maxFileSize}`))
           }
 
-          if (dirSizeLimit && totalDownloadedSize >= dirSizeLimit) {
+          if (dirSizeLimit && (totalDownloadedSize + fileSize) >= dirSizeLimit) {
             reject(new Error(
               `Cannot download ${uri} because destination directory reached size limit`))
           }
+          totalDownloadedSize += fileSize
           resolve()
         }))
     }
