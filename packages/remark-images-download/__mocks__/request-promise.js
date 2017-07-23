@@ -1,4 +1,3 @@
-const stream = require('stream')
 const path = require('path')
 const url = require('url')
 
