@@ -1,27 +1,29 @@
 'use strict';
 
-function plugin(ctx) {
+var helpMsg = 'remark-ping: expected configuration to be passed: {\n  pingUsername: (username) => bool,\n  userURL: (username) => string\n}';
+
+module.exports = function plugin(_ref) {
   var _this = this;
 
-  if (!ctx.pingUsername || typeof ctx.pingUsername !== 'function') {
-    throw new Error('remark-ping: expected configuration to be passed: {\n  pingUsername: (username) => bool,\n  userURL: (username) => string\n}');
-  }
-  if (!ctx.userURL || typeof ctx.userURL !== 'function') {
-    throw new Error('remark-ping: expected configuration to be passed: {\n  pingUsername: (username) => bool,\n  userURL: (username) => string\n}');
-  }
+  var pingUsername = _ref.pingUsername,
+      userURL = _ref.userURL,
+      _ref$usernameRegex = _ref.usernameRegex,
+      usernameRegex = _ref$usernameRegex === undefined ? /[\s'"(,:<]?@(?:\*\*([^*]+)\*\*|(\w+))/ : _ref$usernameRegex;
 
-  var pattern = ctx.usernameRegex || /[\s'"(,:<]?@(?:\*\*([^*]+)\*\*|(\w+))/;
+  if (typeof pingUsername !== 'function' || typeof userURL !== 'function') {
+    throw new Error(helpMsg);
+  }
 
   function inlineTokenizer(eat, value, silent) {
-    var keep = pattern.exec(value);
+    var keep = usernameRegex.exec(value);
     if (!keep || keep.index > 0) return;
 
     var total = keep[0];
     var username = keep[2] ? keep[2] : keep[1];
-    debugger;
 
-    if (ctx.pingUsername(username)) {
-      var url = ctx.userURL(username);
+    if (pingUsername(username) === true) {
+      var url = userURL(username);
+
       return eat(total)({
         type: 'ping',
         _metadata: username,
@@ -47,7 +49,7 @@ function plugin(ctx) {
   }
 
   function locator(value, fromIndex) {
-    var keep = pattern.exec(value, fromIndex);
+    var keep = usernameRegex.exec(value, fromIndex);
     if (keep) {
       return value.indexOf('@', keep.index);
     }
@@ -73,6 +75,4 @@ function plugin(ctx) {
       return '@**' + _this.all(node).join('') + '**';
     };
   }
-}
-
-module.exports = plugin;
+};
