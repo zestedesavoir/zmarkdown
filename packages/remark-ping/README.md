@@ -1,6 +1,6 @@
 # remark-ping [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
-This plugin parses custom Markdown syntax and creates links to users on https://zestedesavoir.com.
+This plugin parses custom Markdown syntax and creates links to users thanks to their username.
 
 ## Syntax
 
@@ -9,22 +9,35 @@ This plugin parses custom Markdown syntax and creates links to users on https://
 @**a username**
 
 ```
+it yields a new type of AST element :
 
-produces:
-
-```html
-<a href="/membres/voir/username" class="ping">username</a>
-<a href="/membres/voir/a username" class="ping">a username</a>
+```javascript
+interface Ping <: Parent {
+    type: "ping";
+    url: "member profile url"
+    _metadata: 'username'
+}
 ```
 
-If `username` and `a username` is used on https://zestedesavoir.com/ or:
-
-```html
-@username
-@<strong>a username</a>
+For example, `@username` will yield 
+```javascript
+{
+        type: 'ping',
+        _metadata: username,
+        url: url,
+        children: [{
+          type: 'text',
+          value: username
+        }],
+        data: {
+          hName: 'a',
+          hProperties: {
+            href: url,
+            class: 'ping'
+          }
+        }
+      }
 ```
-
-If they aren't used.
 
 
 ## Installation
@@ -37,7 +50,8 @@ npm install remark-ping
 
 ## Usage
 
-Dependencies:
+
+### Dependencies:
 
 ```javascript
 const unified = require('unified')
@@ -45,17 +59,57 @@ const remarkParse = require('remark-parse')
 const stringify = require('rehype-stringify')
 const remark2rehype = require('remark-rehype')
 
-const remarkPingZds = require('remark-ping')
+const remarkPing = require('remark-ping')
 ```
 
-Usage:
+### Usage:
 
 ```javascript
 unified()
   .use(remarkParse)
-  .use(remarkPingZds)
+  .use(remarkPing, {
+      pingUsername: (username) => true,
+      userURL: (username) => `http://your.website.com/path/to/${username}`
+  })
   .use(remark2rehype)
   .use(stringify)
+```
+
+as you can see, `remark-ping` takes two mandatory options :
+
+- `pingUsername` is a function taking username as parameter and returns `true` if the user is pingable, `false` otherwise. If you want to transform all `@username` to ping url, like in github, just return `true`.
+- `userUrl` is a function taking username as parameter and returns the "profile" url for this username
+
+When a user is not pingable, no AST ping element is created.
+
+You can change the parsing regexp, for example if you don't want to include `@**username with space**` by setting up the `usernameRegex` option.
+
+### about the `_metadata` field
+
+This was included to add data about the element. In `zestedesavoir` application, this is the way we retrieve all the pingable users to send them notification.
+We make it usable thanks to a simple visitor : 
+
+```javascript
+unified()
+  .use(remarkParse)
+  .use(remarkPing, {
+      pingUsername: (username) => true,
+      userURL: (username) => `http://your.website.com/path/to/${username}`
+  })
+  .use(remark2rehype)
+  .use(stringify)
+  .use(() => {
+      return (tree, file) => {
+        visit(tree, (node) => {
+          if (node._metadata) {
+            if (!file.data[node.type]) {
+              file.data[node.type] = []
+            }
+            file.data[node.type].push(node._metadata)
+          }
+        })
+      }
+    })
 ```
 
 ## License
