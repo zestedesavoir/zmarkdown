@@ -2,14 +2,9 @@
 
 This plugin parses custom Markdown syntax to add embeded video or external websites.
 
-It adds two new node types to the [mdast][mdast] produced by [remark][remark]:
-
-* `CenterAligned`
-* `RightAligned`
+This creates a new MDAST element called "iframe"
 
 If you are using [rehype][rehype], the stringified HTML result will be a tag you can configure. Most of time you want `iframe`.
-
-It is up to you to have CSS rules producing the desired result for these two classes.
 
 ## Syntax
 
@@ -19,7 +14,29 @@ iframes are included thanks to a base url wrapped between these tags
 !(https://www.youtube.com/watch?v=8TQIvdFl4aU)
 ```
 
-produces:
+will yield :
+
+```javascript
+{
+  type: 'iframe',
+  data: {
+    hName: provider.tag,
+    hProperties: {
+      src: finalUrl,
+      width: provider.width,
+      height: provider.height,
+      allowfullscreen: true,
+      frameborder: '0',
+    },
+    thumbnail: thumbnail
+  },
+}
+```
+
+`provider` variable revers to the provider as configured in plugin options.
+
+If associated with rehype, it produces:
+
 
 ```html
 <div class="some-class"><p>paragraph</p></div>
@@ -73,17 +90,32 @@ unified()
   .use(stringify)
 ```
 
+
 ## Configuration fields :
 
 - `tag`: Transforms to the given html tag, you most probably want `iframe`.
 - `width` and `height`: iframe size, set as `width="" height=""` HTML attributes.
-- `disabled`: Can be used to disabled this provider.
+- `disabled`: Can be used to disabled this provider. This is useful when you want to deal with multiple configuration from a common set of plugins.
 - `replace`: Rules passed to `String.prototype.replace` with the `input_url`. It's a list `[[from, to]]`, rules are applied sequentially on the output of the previous rule.
 - `removeAfter`: Truncates the url after the first occurence of char. For example `http://dailymotion.com/video/?time=1&bla=2` will result in `http://dailymotion.com/video/?time=1` if `removeAfter` is set to `&`.
 - `append`: Any string you want to append to the url, for example an API key.
 - `removeFileName`: If set to `true`, removes the filename (i.e last fragment before query string) from url.
 - `match`: a regular expression passed to `String.prototype.test`, used to validate the url.
 - `thumbnail`: a way to retreive thumbnail. This param is an object with a `format` key of this type : `'http://url/{param1}/{param2}'` then you must provide all regexp to find the parameter in the url on the object.
+
+### thumbnail construction
+
+when you configure the `thumbnail` part of a provider, the url to thumbnail is computed following this algorithm:
+
+```text
+thumbnail_url_template = provider.thumbnail.format
+for each property of provider.thumbnail 
+  if property is not "format":
+    regexp_for_current_property = provider.thumbnail[property]
+    extracted_value = video_url.search(regexp_for_current_property)[1]
+    thumbnail_url_template = thumbnail_url_template.replace('{' + property + '}', extracted_value)
+
+```
 
 ## example
 
