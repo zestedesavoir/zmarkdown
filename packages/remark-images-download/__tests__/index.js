@@ -113,3 +113,36 @@ test('skips when directory reaches size limit', (done) => {
 
   expect(render(file).then(vfile => replace(vfile.contents))).resolves.toBe(html)
 })
+
+test('does not download when disabled', (done) => {
+  const file = dedent`
+    ![](http://example.com/ok.png)
+    ![](http://example.com/ok.png)
+    ![](http://example.com/ok.png)
+    ![](http://example.com/ok.png)
+  `
+
+  // images will not be downloaded
+
+  const html = dedent`
+    <p><img src="http://example.com/ok.png">
+    <img src="http://example.com/ok.png">
+    <img src="http://example.com/ok.png">
+    <img src="http://example.com/ok.png"></p>
+  `
+
+  const render = renderFactory({
+    downloadImages: false
+  })
+
+  expect(render(file).then(vfile => replace(vfile.contents))).resolves.toBe(html)
+})
+
+test('skips local images', (done) => {
+  const file = `![](local.png)`
+  const html = `<p><img src="local.png"></p>`
+
+  const render = renderFactory()
+
+  expect(render(file).then(vfile => vfile.contents)).resolves.toBe(html)
+})
