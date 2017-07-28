@@ -1,42 +1,42 @@
 # remark-ping [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
-This plugin parses custom Markdown syntax and creates links to users thanks to their username.
+This plugin parses custom Markdown syntax such as `@someone` or `@**first last**` to create links such as `/member/profile/someone` to the corresponding user page if this user exists in your system.
 
-## Syntax
+## Default Syntax
 
 ```markdown
 @username
-@**a username**
-
+@**first last**
 ```
+
 it yields a new type of AST element :
 
 ```javascript
 interface Ping <: Parent {
-    type: "ping";
-    url: "member profile url"
-    _metadata: 'username'
+  type: "ping";
+  url: "member profile url";
+  username: "username";
 }
 ```
 
-For example, `@username` will yield 
+For example, `@username` will yield
 ```javascript
 {
-        type: 'ping',
-        _metadata: username,
-        url: url,
-        children: [{
-          type: 'text',
-          value: username
-        }],
-        data: {
-          hName: 'a',
-          hProperties: {
-            href: url,
-            class: 'ping'
-          }
-        }
-      }
+  type: 'ping',
+  username: username,
+  url: url,
+  children: [{
+    type: 'text',
+    value: username
+  }],
+  data: {
+    hName: 'a',
+    hProperties: {
+      href: url,
+      class: 'ping'
+    }
+  }
+}
 ```
 
 
@@ -69,7 +69,7 @@ unified()
   .use(remarkParse)
   .use(remarkPing, {
       pingUsername: (username) => true,
-      userURL: (username) => `http://your.website.com/path/to/${username}`
+      userURL: (username) => `https://your.website.com/path/to/${username}`
   })
   .use(remark2rehype)
   .use(stringify)
@@ -77,39 +77,40 @@ unified()
 
 as you can see, `remark-ping` takes two mandatory options :
 
-- `pingUsername` is a function taking username as parameter and returns `true` if the user is pingable, `false` otherwise. If you want to transform all `@username` to ping url, like in github, just return `true`.
-- `userUrl` is a function taking username as parameter and returns the "profile" url for this username
+- `pingUsername` is a function taking `username` as parameter and returning `true` if the user exists or should be pinged
+    - If you want to parse any username without checking whether they exist or (like GitHub does), use a function always returning `true` (`() => true`)
+    - When `pingUsername(username)` doesn't return `true`, the ping syntax is simply ignored and no AST `Ping` node gets created for this username
+- `userUrl` is a function taking `username` as parameter and returning a path or URL to this user profile or member page
 
-When a user is not pingable, no AST ping element is created.
+You can override the default parsing regexp, for example if you don't want to include `@**username with space**` by setting up the `usernameRegex` option:
 
-You can change the parsing regexp, for example if you don't want to include `@**username with space**` by setting up the `usernameRegex` option.
-
-### about the `_metadata` field
-
-This was included to add data about the element. In `zestedesavoir` application, this is the way we retrieve all the pingable users to send them notification.
-We make it usable thanks to a simple visitor : 
-
-```javascript
-unified()
-  .use(remarkParse)
+```js
   .use(remarkPing, {
       pingUsername: (username) => true,
-      userURL: (username) => `http://your.website.com/path/to/${username}`
+      userURL: (username) => `https://your.website.com/path/to/${username}`,
+      usernameRegex: /[\s'"(,:<]?@(\w+)/,
   })
+```
+
+### Retrieving the usernames to ping
+
+Once the Markdown has been processed by this plugin, the output `vfile` contains a `ping` array in the `data` property.
+
+This array contains every username that should be ping, should you want your backend to generate notifications for these.
+
+```js
+unified()
+  .use(reParse)
+  .use(plugin, {pingUsername, userURL})
   .use(remark2rehype)
-  .use(stringify)
-  .use(() => {
-      return (tree, file) => {
-        visit(tree, (node) => {
-          if (node._metadata) {
-            if (!file.data[node.type]) {
-              file.data[node.type] = []
-            }
-            file.data[node.type].push(node._metadata)
-          }
-        })
-      }
-    })
+  .use(rehypeStringify)
+  .process('@foo @bar')
+  .then((vfile) => {
+    console.log(vfile.data.ping.length === 2) // true
+    console.log(vfile.data.ping[0] === 'foo') // true
+    console.log(vfile.data.ping[1] === 'bar') // true
+    return vfile
+  })
 ```
 
 ## License

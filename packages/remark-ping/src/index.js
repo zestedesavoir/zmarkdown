@@ -1,3 +1,5 @@
+const visit = require('unist-util-visit')
+
 const helpMsg = `remark-ping: expected configuration to be passed: {
   pingUsername: (username) => bool,\n  userURL: (username) => string\n}`
 
@@ -22,7 +24,7 @@ module.exports = function plugin ({
 
       return eat(total)({
         type: 'ping',
-        _metadata: username,
+        username: username,
         url: url,
         children: [{
           type: 'text',
@@ -69,4 +71,11 @@ module.exports = function plugin ({
     const visitors = Compiler.prototype.visitors
     visitors.ping = (node) => `@**${this.all(node).join('')}**`
   }
+
+  return (tree, file) => visit(tree, 'ping', (node) => {
+    if (!file.data[node.type]) {
+      file.data[node.type] = []
+    }
+    file.data[node.type].push(node.username)
+  })
 }

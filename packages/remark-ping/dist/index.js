@@ -1,5 +1,7 @@
 'use strict';
 
+var visit = require('unist-util-visit');
+
 var helpMsg = 'remark-ping: expected configuration to be passed: {\n  pingUsername: (username) => bool,\n  userURL: (username) => string\n}';
 
 module.exports = function plugin(_ref) {
@@ -26,7 +28,7 @@ module.exports = function plugin(_ref) {
 
       return eat(total)({
         type: 'ping',
-        _metadata: username,
+        username: username,
         url: url,
         children: [{
           type: 'text',
@@ -75,4 +77,13 @@ module.exports = function plugin(_ref) {
       return '@**' + _this.all(node).join('') + '**';
     };
   }
+
+  return function (tree, file) {
+    return visit(tree, 'ping', function (node) {
+      if (!file.data[node.type]) {
+        file.data[node.type] = [];
+      }
+      file.data[node.type].push(node.username);
+    });
+  };
 };

@@ -64,18 +64,6 @@ const zmdParser = (config) => {
     .use(remarkPing, config.ping)
     .use(remarkSubSuper)
     .use(remarkTrailingSpaceHeading)
-    .use(() => {
-      return (tree, file) => {
-        visit(tree, (node) => {
-          if (node._metadata) {
-            if (!file.data[node.type]) {
-              file.data[node.type] = []
-            }
-            file.data[node.type].push(node._metadata)
-          }
-        })
-      }
-    })
   return mdProcessor
 }
 

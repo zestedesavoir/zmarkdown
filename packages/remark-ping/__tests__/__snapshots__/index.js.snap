@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`ping 1`] = `
-"<h1>Test ping</h1>
-<p>ping @Clem</p>
-<p>ping @<strong>BALDE SOULEYMANE</strong></p>
-<p>no ping @dqsjdjsqjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd</p>
-<p>no ping <a href=\\"/membres/voir/I AM CLEM/\\" class=\\"ping\\">I AM CLEM</a></p>"
-`;
