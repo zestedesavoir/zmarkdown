@@ -1,4 +1,4 @@
-const fs = jest.genMockFromModule('fs')
+const fs = jest.genMockFromModule('fs') // eslint-disable-line no-undef
 
 fs.stat = (path, callback) => {
   const err = null
