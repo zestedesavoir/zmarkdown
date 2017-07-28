@@ -4,8 +4,8 @@ import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
 
-jest.mock('fs')
-jest.mock('request-promise')
+jest.mock('fs') // eslint-disable-line no-undef
+jest.mock('request-promise') // eslint-disable-line no-undef
 
 import plugin from '../src/'
 
