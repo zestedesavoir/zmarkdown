@@ -92,7 +92,7 @@ You can override the default parsing regexp, for example if you don't want to in
   })
 ```
 
-### Retrieving the usernames to ping
+### Retrieving the usernames to ping
 
 Once the Markdown has been processed by this plugin, the output `vfile` contains a `ping` array in the `data` property.
 
