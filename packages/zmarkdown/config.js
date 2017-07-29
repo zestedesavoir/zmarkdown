@@ -262,7 +262,8 @@ const defaultConfig = {
     internal: {
       iframe: 'Video:',
       math: 'Equation:',
-      inlineMath: 'Equation:'
+      inlineMath: 'Equation:',
+      image: 'Figure:'
     }
   },
 
