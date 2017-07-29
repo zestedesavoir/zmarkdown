@@ -1,21 +1,19 @@
 # remark-caption [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
-This plugin allows you to add caption for figurative elements and source to quotation.
+This plugin adds custom syntax to add a caption to elements which might benefit from a legend. It wraps the said element in a `figure` node with `figcaption` node as last child. It is particularly interesting for use with quotes, images, tables, code blocks.
 
-It follows a "whitelist" approach : you just have to say "for this type of MDAST element I want to enable caption."
+It follows a "whitelist" approach: for each [mdast][mdast] node type for which you want to allow captioning you'll have to add a configuration property mapping a node type to its caption "trigger".
 
-## Syntax 
+## Syntax
 
 ```markdown
 > Do it or do it not, there is no try
 Source: A little green man, with a saber larger than himself
 ```
 
-This removes the `Source` from the tree and add a `author` attribute to the blockquote element.
+This takes what follows `Source: ` until the end of the block containing `Source: ` and puts this inside a `figcaption` mdast node. What precedes it becomes children of a `figure` node, the last child of this `figure` node being `figcaption`.
 
-At the end, it wraps everything in a new MDAST element `figure` fully compatible with `rehype`.
-
-The newly created caption is encapsulated inside a `figcaption` element.
+Used with `rehype`, it generates the corresponding HTML elements.
 
 ```javascript
 interface figure <: Parent {
@@ -35,16 +33,19 @@ interface figcaption <: Parent {
 }
 ```
 
-This plugin handles two different types of caption/legend nodes : 
+This plugin handles two different types of caption/legend nodes :
 
-- `internalLegend` : this means your legend should normally be inside the captionned element or inside its wrapping paragraph :
+- `internalLegend`: when the caption, after being parsed by `remark`, is inside the captioned element or inside its wrapping paragraph:
    - blockquote
    - image
    - inlineMath
+   - iframe
    - ...
-- `externalLegend` : this means your legend should normally be outside the block AND its wrapping paragraph
+- `externalLegend`: when the caption, after being parsed by `remark`, is outside the captioned element or after its wrapping paragraph:
    - table
    - code
+   - math
+   - ...
 
 
 ## Installation
@@ -80,9 +81,9 @@ unified()
       math: 'Equation:',
     },
     internal: {
-      image: 'Figure:'
+      image: 'Figure:',
     }
-    })
+  })
   .use(remark2rehype)
   .use(stringify)
 ```
@@ -92,12 +93,12 @@ By default, it features :
 ```javascript
 external = {
   table: 'Table:',
-  code: 'Code:'
+  code: 'Code:',
 }
 
 internal = {
   blockquote: 'Source:',
-  image: 'Figure:'
+  image: 'Figure:',
 }
 ```
 
@@ -118,7 +119,7 @@ will yield
   type: 'figure',
   data: {
     hName: 'figure'
-  }
+  },
   children: [
     {
       type: 'code',
@@ -146,12 +147,11 @@ will yield
         }
       ]
     }
-    
   ]
 }
 ```
 
-Table are also supported with such a code :
+Tables are also supported, example:
 
 ```markdown
 head1| head2
@@ -160,7 +160,7 @@ bla|bla
 Table: figcapt1
 ```
 
-Associated with `remark-rehype` this generates a HTML tree encapsulated inside `<figure>` tag
+Associated with `remark-rehype` this generates a HTML tree encapsulated inside a `<figure>` tag
 
 ```html
 <figure>
@@ -181,8 +181,6 @@ Associated with `remark-rehype` this generates a HTML tree encapsulated inside `
   <figcaption>figcapt1</figcaption>
 </figure>
 ```
-
-
 
 [MIT][license] © [Zeste de Savoir][zds]
 
