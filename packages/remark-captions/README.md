@@ -1,8 +1,10 @@
+# remark-caption [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
+
 This plugin allows you to add caption for figurative elements and source to quotation.
 
 It follows a "whitelist" approach : you just have to say "for this type of MDAST element I want to enable caption."
 
-#Syntax 
+## Syntax 
 
 ```markdown
 > Do it or do it not, there is no try
@@ -179,3 +181,29 @@ Associated with `remark-rehype` this generates a HTML tree encapsulated inside `
   <figcaption>figcapt1</figcaption>
 </figure>
 ```
+
+
+
+[MIT][license] © [Zeste de Savoir][zds]
+
+<!-- Definitions -->
+
+[build-badge]: https://img.shields.io/travis/zestedesavoir/zmarkdown.svg
+
+[build-status]: https://travis-ci.org/zestedesavoir/zmarkdown
+
+[coverage-badge]: https://img.shields.io/coveralls/zestedesavoir/zmarkdown.svg
+
+[coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown
+
+[license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/remark-ping/LICENSE-MIT
+
+[zds]: https://zestedesavoir.com
+
+[npm]: https://www.npmjs.com/package/remark-ping
+
+[mdast]: https://github.com/syntax-tree/mdast/blob/master/readme.md
+
+[remark]: https://github.com/wooorm/remark
+
+[rehype]: https://github.com/wooorm/rehype
