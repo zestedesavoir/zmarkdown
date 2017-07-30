@@ -9,7 +9,9 @@ This plugin parses custom Markdown syntax such as `@someone` or `@**first last**
 @**first last**
 ```
 
-it yields a new type of AST element :
+## AST (see [mdast][mdast] specification)
+
+`Ping` ([`Parent`][parent]) represents a reference to a user.
 
 ```javascript
 interface Ping <: Parent {
@@ -19,26 +21,27 @@ interface Ping <: Parent {
 }
 ```
 
-For example, `@username` will yield
+For example, the following markdown:
+
+`@someone`
+
+Yields:
+
 ```javascript
 {
   type: 'ping',
-  username: username,
+  username: 'someone',
   url: url,
   children: [{
     type: 'text',
-    value: username
-  }],
-  data: {
-    hName: 'a',
-    hProperties: {
-      href: url,
-      class: 'ping'
-    }
-  }
+    value: 'someone'
+  }]
 }
 ```
 
+## Rehype
+
+This plugin is compatible with [rehype][rehype]. `Ping` mdast nodes will become HTML links pointing to a customizable target, usually used to access a user profile.
 
 ## Installation
 
@@ -49,7 +52,6 @@ npm install remark-ping
 ```
 
 ## Usage
-
 
 ### Dependencies:
 
@@ -138,3 +140,5 @@ unified()
 [remark]: https://github.com/wooorm/remark
 
 [rehype]: https://github.com/wooorm/rehype
+
+[parent]: https://github.com/syntax-tree/unist#parent
