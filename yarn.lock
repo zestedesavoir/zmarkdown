@@ -199,10 +199,6 @@ arrify@^1.0.0, arrify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
 
-asap@~2.0.3:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
-
 asn1.js@^4.0.0:
   version "4.9.1"
   resolved "https://registry.yarnpkg.com/asn1.js/-/asn1.js-4.9.1.tgz#48ba240b45a9280e94748990ba597d216617fd40"
@@ -1210,10 +1206,6 @@ comma-separated-tokens@^1.0.0, comma-separated-tokens@^1.0.1:
   dependencies:
     trim "0.0.1"
 
-command-exists@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/command-exists/-/command-exists-1.2.2.tgz#12819c64faf95446ec0ae07fe6cafb6eb3708b22"
-
 command-join@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/command-join/-/command-join-2.0.0.tgz#52e8b984f4872d952ff1bdc8b98397d27c7144cf"
@@ -1239,7 +1231,7 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
 
-concat-stream@^1.4.10, concat-stream@^1.4.6, concat-stream@^1.4.7, concat-stream@^1.6.0:
+concat-stream@^1.4.10, concat-stream@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/concat-stream/-/concat-stream-1.6.0.tgz#0aac662fd52be78964d5532f694784e70110acf7"
   dependencies:
@@ -2535,18 +2527,6 @@ html-void-elements@^1.0.0:
 htmlescape@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/htmlescape/-/htmlescape-1.1.1.tgz#3a03edc2214bca3b66424a3e7959349509cb0351"
-
-http-basic@^2.5.1:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/http-basic/-/http-basic-2.5.1.tgz#8ce447bdb5b6c577f8a63e3fa78056ec4bb4dbfb"
-  dependencies:
-    caseless "~0.11.0"
-    concat-stream "^1.4.6"
-    http-response-object "^1.0.0"
-
-http-response-object@^1.0.0, http-response-object@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/http-response-object/-/http-response-object-1.1.0.tgz#a7c4e75aae82f3bb4904e4f43f615673b4d518c3"
 
 http-signature@~1.1.0:
   version "1.1.1"
@@ -4150,12 +4130,6 @@ progress@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.0.tgz#8a1be366bf8fc23db2bd23f10c6fe920b4389d1f"
 
-promise@^7.1.1:
-  version "7.3.1"
-  resolved "https://registry.yarnpkg.com/promise/-/promise-7.3.1.tgz#064b72602b18f90f29192b8b1bc418ffd1ebd3bf"
-  dependencies:
-    asap "~2.0.3"
-
 property-information@^3.0.0, property-information@^3.1.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/property-information/-/property-information-3.2.0.tgz#fd1483c8fbac61808f5fe359e7693a1f48a58331"
@@ -4193,10 +4167,6 @@ q@^1.4.1:
 q@~0.9.6:
   version "0.9.7"
   resolved "https://registry.yarnpkg.com/q/-/q-0.9.7.tgz#4de2e6cb3b29088c9e4cbc03bf9d42fb96ce2f75"
-
-qs@^6.1.0:
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.0.tgz#8d04954d364def3efc55b5a0793e1e2c8b1e6e49"
 
 qs@~6.3.0:
   version "6.3.2"
@@ -4310,9 +4280,9 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
-rebber@^0.0.27:
-  version "0.0.27"
-  resolved "https://registry.yarnpkg.com/rebber/-/rebber-0.0.27.tgz#257ebf5d858b35ccd7fca841b7f0ad2266733ff1"
+rebber@^0.0.29:
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/rebber/-/rebber-0.0.29.tgz#972dd1bffe065bd97486dd8be4d3de55115e6739"
   dependencies:
     has "^1.0.1"
     xtend "^4.0.1"
@@ -4415,26 +4385,20 @@ rehype-stringify@^3.0.0:
     hast-util-to-html "^3.0.0"
     xtend "^4.0.1"
 
-remark-abbr@^0.0.13:
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/remark-abbr/-/remark-abbr-0.0.13.tgz#8d7f8ef4732dcd46be3cf8723bc53f11c05169f6"
-  dependencies:
-    unist-util-visit "^1.1.3"
-
 remark-align@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/remark-align/-/remark-align-1.0.1.tgz#3c753651d5fb75bac0e85a193414ab34f9dcf202"
 
-remark-captions@^0.0.19:
-  version "0.0.19"
-  resolved "https://registry.yarnpkg.com/remark-captions/-/remark-captions-0.0.19.tgz#7315cfe0dff002864f4e068ce13fc3c3cc2a10b2"
+remark-captions@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/remark-captions/-/remark-captions-1.0.0.tgz#94515b4815643e480058e70f813bce4d6c4fcff5"
   dependencies:
     clone "^2.1.1"
     unist-util-visit "^1.1.3"
 
-remark-comments@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/remark-comments/-/remark-comments-1.0.1.tgz#8651ac0e70d5fe860474be038fa22c742bb98301"
+remark-comments@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/remark-comments/-/remark-comments-1.0.3.tgz#5009737b8fcacb3bc08c9046da0813a1d27f6732"
 
 remark-custom-blocks@^1.0.1:
   version "1.0.1"
@@ -4464,9 +4428,9 @@ remark-heading-trailing-spaces@^0.0.14:
   version "0.0.14"
   resolved "https://registry.yarnpkg.com/remark-heading-trailing-spaces/-/remark-heading-trailing-spaces-0.0.14.tgz#2a1de08da3e52be8c0d8f8d4e6beeba70b001f5c"
 
-remark-iframes@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/remark-iframes/-/remark-iframes-1.0.1.tgz#6923ee93f47782fb319a98eb2fc26f032a4b99e1"
+remark-iframes@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/remark-iframes/-/remark-iframes-1.0.2.tgz#42c8d2c26946d7196d82a9bd09497a4357393ff5"
 
 remark-kbd@^1.0.1:
   version "1.0.1"
@@ -5039,16 +5003,6 @@ symbol-tree@^3.2.1:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
 
-sync-request@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/sync-request/-/sync-request-4.1.0.tgz#324b4e506fb994d2afd2a0021a455f800725f07a"
-  dependencies:
-    command-exists "^1.2.2"
-    concat-stream "^1.6.0"
-    get-port "^3.1.0"
-    http-response-object "^1.1.0"
-    then-request "^2.2.0"
-
 syntax-error@^1.1.1:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/syntax-error/-/syntax-error-1.3.0.tgz#1ed9266c4d40be75dc55bf9bb1cb77062bb96ca1"
@@ -5137,17 +5091,6 @@ textr@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/textr/-/textr-0.3.0.tgz#717361286962ac8df36b7a2619fb773a15b9b7f7"
 
-then-request@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/then-request/-/then-request-2.2.0.tgz#6678b32fa0ca218fe569981bbd8871b594060d81"
-  dependencies:
-    caseless "~0.11.0"
-    concat-stream "^1.4.7"
-    http-basic "^2.5.1"
-    http-response-object "^1.1.0"
-    promise "^7.1.1"
-    qs "^6.1.0"
-
 throat@^3.0.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/throat/-/throat-3.2.0.tgz#50cb0670edbc40237b9e347d7e1f88e4620af836"
@@ -5194,13 +5137,6 @@ to-arraybuffer@^1.0.0:
 to-fast-properties@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-1.0.3.tgz#b83571fa4d8c25b82e231b06e3a3055de4ca1a47"
-
-to-vfile@^2.1.1:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/to-vfile/-/to-vfile-2.1.2.tgz#63f410e3b72937be84e8198961caf74be2da4388"
-  dependencies:
-    is-buffer "^1.1.4"
-    vfile "^2.0.0"
 
 tough-cookie@^2.3.2, tough-cookie@~2.3.0:
   version "2.3.2"
@@ -5288,9 +5224,9 @@ typographic-apostrophes@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/typographic-apostrophes/-/typographic-apostrophes-1.1.1.tgz#bc6905eb949048a736fa8399f8b90aafa8894787"
 
-typographic-colon@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/typographic-colon/-/typographic-colon-1.0.1.tgz#0dd1b65e9e6bd099307c99025b81c045ff68da25"
+typographic-colon@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/typographic-colon/-/typographic-colon-1.0.2.tgz#8b6edc13fa7bb48e4bb62560f155b6f1b2a0a9ff"
 
 typographic-copyright@^1.0.1:
   version "1.0.1"
