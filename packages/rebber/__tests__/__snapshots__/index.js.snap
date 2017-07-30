@@ -125,7 +125,15 @@ exports[`mix-3 1`] = `
 \\\\item item
 \\\\end{itemize}
 
-\\\\end{center}"
+\\\\end{center}
+\\\\chapter{left list}
+
+
+\\\\begin{itemize}
+\\\\item item
+\\\\item item
+\\\\item item
+\\\\end{itemize}"
 `;
 
 exports[`mix-4 1`] = `
