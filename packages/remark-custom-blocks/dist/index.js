@@ -1,5 +1,7 @@
 'use strict';
 
+var spaceSeparated = require('space-separated-tokens');
+
 function escapeRegExp(str) {
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&'); // eslint-disable-line no-useless-escape
 }
@@ -49,13 +51,16 @@ module.exports = function blockPlugin() {
     var contents = this.tokenizeBlock(contentString, now);
     exit();
 
+    var classString = blocks[keep[1]];
+    var classList = spaceSeparated.parse(classString);
+
     return add({
       type: keep[1] + 'CustomBlock',
       children: contents,
       data: {
         hName: 'div',
         hProperties: {
-          className: blocks[keep[1]]
+          className: classList
         }
       }
     });
