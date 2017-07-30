@@ -131,7 +131,6 @@ After the quote.
       console.log(JSON.stringify({metadata: rendered.metadata}, null, 2))
       var mdast = ZMarkdown.parse(editor.value)
       ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(mdast))
-      html.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(hast))
     }
   </script>
 </body>
