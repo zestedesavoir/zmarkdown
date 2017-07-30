@@ -1,8 +1,10 @@
+const spaceSeparated = require('space-separated-tokens')
+
 const C_NEWLINE = '\n'
 const C_NEWPARAGRAPH = '\n\n'
 
 module.exports = function plugin (classNames = {}) {
-  const regex = new RegExp(`[^\\\\]?->`)
+  const regex = new RegExp(`[^\\\\]?(->|<-)`)
   const endMarkers = ['->', '<-']
 
   function alignTokenizer (eat, value, silent) {
@@ -10,6 +12,8 @@ module.exports = function plugin (classNames = {}) {
     const keep = regex.exec(value)
     if (!keep) return
     if (keep.index !== 0) return
+
+    const startMarker = keep[1]
 
     /* istanbul ignore if - never used (yet) */
     if (silent) return true
@@ -65,17 +69,26 @@ module.exports = function plugin (classNames = {}) {
     const values = this.tokenizeBlock(stringToEat, now)
     exit()
 
-    const elementType = endMarker === '->' ? 'RightAligned' : 'CenterAligned'
-    const rightClassName = classNames.right ? classNames.right : 'align-right'
-    const centerClassName = classNames.center ? classNames.center : 'align-center'
-    const className = endMarker === '->' ? rightClassName : centerClassName
+    let elementType
+    let classes
+    if (startMarker === '<-' && endMarker === '<-') {
+      elementType = 'leftAligned'
+      classes = classNames.left ? classNames.left : 'align-left'
+    } else if (startMarker === '->' && endMarker === '<-') {
+      elementType = 'centerAligned'
+      classes = classNames.center ? classNames.center : 'align-center'
+    } else if (startMarker === '->' && endMarker === '->') {
+      elementType = 'rightAligned'
+      classes = classNames.right ? classNames.right : 'align-right'
+    }
+
     return add({
       type: elementType,
       children: values,
       data: {
         hName: 'div',
         hProperties: {
-          class: className
+          class: spaceSeparated.parse(classes)
         }
       }
     })

@@ -31,6 +31,9 @@
     "remark"
   ],
   "license": "MIT",
+  "dependencies": {
+    "space-separated-tokens": "^1.1.1"
+  },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-jest": "^20.0.3",
