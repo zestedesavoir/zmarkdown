@@ -116,4 +116,5 @@ module.exports = (opts = defaultConfig, to = 'html') => ({
   rendererFactory: rendererFactory,
   renderString: rendererFactory(opts, to),
   renderFile: (path, cb) => rendererFactory(opts, to)(fromFile(path), cb),
+  latexDocumentTemplate: require('./latex-document-template'),
 })
