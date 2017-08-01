@@ -24,7 +24,7 @@ const template = ({
 
 \\usepackage{blindtext}
 \\title{${title}}
-\\author{${authors.join(',')}}
+\\author{${authors.join(', ')}}
 \\licence{${license}}
 
 \\smileysPath{${smileysDirectory}}
