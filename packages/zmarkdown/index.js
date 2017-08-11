@@ -1,6 +1,7 @@
 const toVFile = require('to-vfile')
 const unified = require('unified')
 const inspect = require('unist-util-inspect')
+const visit = require('unist-util-visit')
 
 const remarkParse = require('remark-parse')
 
@@ -63,6 +64,14 @@ const zmdParser = (config) => {
     .use(remarkPing, config.ping)
     .use(remarkSubSuper)
     .use(remarkTrailingSpaceHeading)
+    .use(() => (tree, file) => {
+      // if we don't have any head, we add a flag to disable the Table of Contents
+      // directly in the latex template
+      file.data.disableToc = true
+      visit(tree, 'heading', () => {
+        file.data.disableToc = false
+      })
+    })
   return mdProcessor
 }
 

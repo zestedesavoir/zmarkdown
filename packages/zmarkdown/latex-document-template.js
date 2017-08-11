@@ -4,7 +4,7 @@ const template = ({
   authors,
   license,
   smileysDirectory,
-  toc = true,
+  disableToc = false,
   latex
 }) => {
   if (
@@ -32,7 +32,7 @@ const template = ({
 
 \\begin{document}
 \\maketitle
-${toc ? '\\tableofcontents' : ''}
+${disableToc ? '' : '\\tableofcontents'}
 
 ${latex}
 \\end{document}`
