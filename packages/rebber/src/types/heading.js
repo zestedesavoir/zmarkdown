@@ -20,7 +20,7 @@ function heading (ctx, node) {
   const depth = node.depth
   const content = all(ctx, node)
 
-  const headings = ctx.heading || defaultHeadings
+  const headings = ctx.headings || defaultHeadings
   const fn = headings[node.depth]
 
   if (typeof fn !== 'function') {

@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`code 1`] = `
+"\\\\begin{CodeBlock}{python}
+print('bla')
+\\\\end{CodeBlock}
+
+\\\\begin{CodeBlock}[][1,2]{python}
+print('bla')
+print('bla')
+print('bla')
+\\\\end{CodeBlock}"
+`;
+
 exports[`footnotes 1`] = `
 "\\\\chapter{mytitle\\\\textsuperscript{\\\\ref{footnoteref}}}
 \\\\footnotetext[myfootnoteref]{\\\\label{myfootnoteref} reference in title}
@@ -108,9 +120,9 @@ print('bla')
 
 Code: Second
 
-\\\\begin{codeBlock}{python}
+\\\\begin{CodeBlock}{python}
 print('code without caption')
-\\\\end{codeBlock}"
+\\\\end{CodeBlock}"
 `;
 
 exports[`mix-3 1`] = `
@@ -167,9 +179,9 @@ block & \\\\ref{appendix-1} \\\\\\\\ \\\\hline
 
 \\\\chapter{Annexes}
 \\\\footnote{\\\\label{appendix-1}}
-\\\\begin{codeBlock}{python}
+\\\\begin{CodeBlock}{python}
 print('bla')
-\\\\end{codeBlock}"
+\\\\end{CodeBlock}"
 `;
 
 exports[`mix-5 1`] = `

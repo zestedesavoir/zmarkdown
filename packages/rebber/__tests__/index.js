@@ -98,7 +98,7 @@ test('heading with custom config', () => {
   const {contents} = unified()
     .use(reParse)
     .use(rebber, {
-      heading: [
+      headings: [
         (val) => `\\LevelOneTitle{${val}}\n`,
         (val) => `\\LevelTwoTitle{${val}}\n`,
         (val) => `\\LevelThreeTitle{${val}}\n`,
@@ -212,7 +212,7 @@ test('code', () => {
     .use(rebber)
     .processSync(spec.fixture)
 
-  expect(contents.trim()).toEqual(spec.expected.trim())
+  expect(contents.trim()).toMatchSnapshot()
 })
 
 test('code+caption', () => {

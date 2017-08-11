@@ -326,7 +326,16 @@ const rebberConfig = {
     inlineImage: function (node) {
       return `\\inlineImage{${node.url}}`
     },
-  }
+  },
+  headings: [
+    (val) => `\\levelOneTitle{${val}}\n`,
+    (val) => `\\levelTwoTitle{${val}}\n`,
+    (val) => `\\levelThreeTitle{${val}}\n`,
+    (val) => `\\levelFourTitle{${val}}\n`,
+    (val) => `\\levelFiveTitle{${val}}\n`,
+    (val) => `\\levelSixTitle{${val}}\n`,
+    (val) => `\\levelSevenTitle{${val}}\n`,
+  ],
 }
 
 Object.assign(rebberConfig.override, {
