@@ -76,6 +76,18 @@ test('heading', () => {
   expect(contents).toEqual(spec.expected)
 })
 
+test('html nodes', () => {
+  const {contents} = unified()
+    .use(reParse)
+    .use(rebber)
+    .processSync(dedent`
+      # foo
+      **something <a> else**
+    `)
+
+  expect(contents).toMatchSnapshot()
+})
+
 test('heading with custom config', () => {
   const [fixture, expected] = [specs['heading'].fixture, specs['heading-config'].expected]
   const {contents} = unified()
