@@ -39,7 +39,7 @@
     "remark-emoticons": "^0.0.21",
     "remark-escape-escaped": "^0.0.18",
     "remark-grid-tables": "^1.0.1",
-    "remark-heading-shift": "^0.0.15",
+    "remark-heading-shift": "^1.0.0",
     "remark-heading-trailing-spaces": "^0.0.14",
     "remark-iframes": "^1.0.2",
     "remark-kbd": "^1.0.2",
