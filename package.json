@@ -28,7 +28,7 @@
     "mocha": "^3.5.0",
     "rebber": "^0.0.31",
     "rehype-footnotes-title": "^0.0.15",
-    "rehype-html-blocks": "^0.0.16",
+    "rehype-html-blocks": "^0.0.17",
     "rehype-katex": "^1.0.1",
     "rehype-stringify": "^3.0.0",
     "remark": "^8.0.0",
