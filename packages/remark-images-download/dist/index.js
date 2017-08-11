@@ -49,8 +49,8 @@ var mkdir = function mkdir(path) {
 
 function plugin() {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      _ref$downloadImage = _ref.downloadImage,
-      downloadImage = _ref$downloadImage === undefined ? true : _ref$downloadImage,
+      _ref$disabled = _ref.disabled,
+      disabled = _ref$disabled === undefined ? false : _ref$disabled,
       _ref$maxFileSize = _ref.maxFileSize,
       maxFileSize = _ref$maxFileSize === undefined ? 1000000 : _ref$maxFileSize,
       _ref$dirSizeLimit = _ref.dirSizeLimit,
@@ -61,7 +61,7 @@ function plugin() {
       report = _ref$report === undefined ? console.error : _ref$report;
 
   return function transform(tree) {
-    if (downloadImage !== true) return noop;
+    if (disabled) return noop;
     var totalDownloadedSize = void 0;
 
     // images are downloaded in destinationPath
