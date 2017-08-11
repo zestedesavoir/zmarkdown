@@ -27,7 +27,7 @@ test('footnotes', () => {
     .use(require('../src'))
     .use(remark2rehype)
     .use(stringify)
-    .processSync(specs['footnotes'])
+    .processSync(specs['footnotes'].fixture)
 
   expect(contents).toMatchSnapshot()
 })
@@ -38,7 +38,7 @@ test('regression-1', () => {
     .use(require('../src'))
     .use(remark2rehype)
     .use(stringify)
-    .processSync(specs['regression-1'])
+    .processSync(specs['regression-1'].fixture)
 
   expect(contents).toMatchSnapshot()
 })

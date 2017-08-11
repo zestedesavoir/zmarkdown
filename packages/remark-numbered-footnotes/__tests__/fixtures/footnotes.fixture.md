@@ -1,4 +1,4 @@
-This is the body with a footnote[^foo] or two[^bar] or more [^baz] [^qux] [^fiji].
+This is the body with a footnote[^foo] or two[^bar] or more [^baz] [^qux] [^fiji]. One again: [^foo]
 
 Also a reference that does not exist[^nope].
 
