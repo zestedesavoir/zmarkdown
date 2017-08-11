@@ -25,7 +25,7 @@
     "README.md"
   ],
   "engines": {
-    "node": ">=4"
+    "node": ">=7"
   },
   "keywords": [
     "remark"
