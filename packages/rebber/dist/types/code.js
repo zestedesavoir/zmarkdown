@@ -10,7 +10,7 @@ var defaultMacro = function defaultMacro(content, lang) {
     param += '[][' + lines + ']';
   }
   lang = lang.split(' ')[0];
-  return '\\begin{codeBlock}' + param + '{' + lang + '}\n' + content + '\n\\end{codeBlock}\n\n';
+  return '\\begin{CodeBlock}' + param + '{' + lang + '}\n' + content + '\n\\end{CodeBlock}\n\n';
 };
 
 /* Stringify a Blockquote `node`. */

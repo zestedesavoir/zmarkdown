@@ -4282,9 +4282,9 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
-rebber@^0.0.31:
-  version "0.0.31"
-  resolved "https://registry.yarnpkg.com/rebber/-/rebber-0.0.31.tgz#47b8f72235b496298d46738db69a852e7a42bcfd"
+rebber@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/rebber/-/rebber-1.0.0.tgz#fb2eeee8d0f0872db29c5332ed33d43f5d2d048b"
   dependencies:
     has "^1.0.1"
     xtend "^4.0.1"
@@ -4350,15 +4350,15 @@ regjsparser@^0.1.4:
   dependencies:
     jsesc "~0.5.0"
 
-rehype-footnotes-title@^0.0.15:
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/rehype-footnotes-title/-/rehype-footnotes-title-0.0.15.tgz#9be1713ca8e09ec71ed01e788a8c149a3da1f143"
+rehype-footnotes-title@^0.0.16:
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/rehype-footnotes-title/-/rehype-footnotes-title-0.0.16.tgz#4b17e9b06e4672b9d7e3a84bf134cbd73b954c32"
   dependencies:
     unist-util-visit "^1.1.3"
 
-rehype-html-blocks@^0.0.16:
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/rehype-html-blocks/-/rehype-html-blocks-0.0.16.tgz#fcc36a755b9850c9640c6300403a3267057872b1"
+rehype-html-blocks@^0.0.17:
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/rehype-html-blocks/-/rehype-html-blocks-0.0.17.tgz#5b73bcb822f603d1bf52adb5e3a61d9a63a734c7"
   dependencies:
     unist-util-visit "^1.1.3"
 
@@ -4387,60 +4387,60 @@ rehype-stringify@^3.0.0:
     hast-util-to-html "^3.0.0"
     xtend "^4.0.1"
 
-remark-align@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/remark-align/-/remark-align-1.0.2.tgz#1cf98e23846eeea0576bf17201713f6b49656216"
+remark-align@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/remark-align/-/remark-align-1.0.3.tgz#e29596fd67874cf7f511f7121f05cd8022295081"
   dependencies:
     space-separated-tokens "^1.1.1"
 
-remark-captions@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/remark-captions/-/remark-captions-1.0.0.tgz#94515b4815643e480058e70f813bce4d6c4fcff5"
+remark-captions@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/remark-captions/-/remark-captions-1.0.1.tgz#e281325ecc037ebd9838db60a3cbbdd5596c204c"
   dependencies:
     clone "^2.1.1"
     unist-util-visit "^1.1.3"
 
-remark-comments@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/remark-comments/-/remark-comments-1.0.3.tgz#5009737b8fcacb3bc08c9046da0813a1d27f6732"
+remark-comments@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/remark-comments/-/remark-comments-1.0.4.tgz#2933a497c5cedebe4bbd69bfdb8d4df314959755"
 
-remark-custom-blocks@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/remark-custom-blocks/-/remark-custom-blocks-1.0.2.tgz#c8a4459aadfef5fc335023febd705167b105a190"
+remark-custom-blocks@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/remark-custom-blocks/-/remark-custom-blocks-1.0.3.tgz#3be456f11b0437c9572bf0ab5a80363202194c66"
   dependencies:
     space-separated-tokens "^1.1.1"
 
-remark-emoticons@^0.0.21:
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/remark-emoticons/-/remark-emoticons-0.0.21.tgz#744bb945a662446fb660d4280cd337f0636a3de3"
+remark-emoticons@^0.0.22:
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/remark-emoticons/-/remark-emoticons-0.0.22.tgz#48e322d323370a044b517700540d2367551c8ee7"
 
-remark-escape-escaped@^0.0.18:
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/remark-escape-escaped/-/remark-escape-escaped-0.0.18.tgz#c6bac5cca42374c526bdc98ee818074315b678b6"
+remark-escape-escaped@^0.0.19:
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/remark-escape-escaped/-/remark-escape-escaped-0.0.19.tgz#99e9728fc5c74834f75b1e324a850b2ca2fc86cc"
 
-remark-grid-tables@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/remark-grid-tables/-/remark-grid-tables-1.0.1.tgz#8d6c31e33359d17433fdd1882f88b39fc9ae6884"
+remark-grid-tables@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/remark-grid-tables/-/remark-grid-tables-1.0.2.tgz#4cc25e99502bcf14e1b231fd30b9ad26a98ba673"
   dependencies:
     unist-util-visit "^1.1.3"
 
-remark-heading-shift@^0.0.15:
+remark-heading-shift@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/remark-heading-shift/-/remark-heading-shift-1.0.0.tgz#9c1988c53d1ec8ea859c887f1fe0795206f4f117"
+  dependencies:
+    unist-util-visit "^1.1.3"
+
+remark-heading-trailing-spaces@^0.0.15:
   version "0.0.15"
-  resolved "https://registry.yarnpkg.com/remark-heading-shift/-/remark-heading-shift-0.0.15.tgz#c320a7a13172bbca175a98a9e36ffd7b2069a715"
-  dependencies:
-    unist-util-visit "^1.1.3"
+  resolved "https://registry.yarnpkg.com/remark-heading-trailing-spaces/-/remark-heading-trailing-spaces-0.0.15.tgz#03dffd27818f46ce345b92ab8f62bf1700d04faa"
 
-remark-heading-trailing-spaces@^0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/remark-heading-trailing-spaces/-/remark-heading-trailing-spaces-0.0.14.tgz#2a1de08da3e52be8c0d8f8d4e6beeba70b001f5c"
+remark-iframes@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/remark-iframes/-/remark-iframes-1.0.3.tgz#d875be40874bf41cd095512a4f4fe1f5190da758"
 
-remark-iframes@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/remark-iframes/-/remark-iframes-1.0.2.tgz#42c8d2c26946d7196d82a9bd09497a4357393ff5"
-
-remark-kbd@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/remark-kbd/-/remark-kbd-1.0.2.tgz#a1553d2c58acb58b9d3be3efbd906547ad203f9c"
+remark-kbd@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/remark-kbd/-/remark-kbd-1.0.3.tgz#07c9fb93c7b05c4833245149ee4cd47edcb58a7c"
   dependencies:
     is-whitespace-character "^1.0.0"
 
@@ -4450,9 +4450,9 @@ remark-math@^1.0.0:
   dependencies:
     trim-trailing-lines "^1.1.0"
 
-remark-numbered-footnotes@^0.0.15:
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/remark-numbered-footnotes/-/remark-numbered-footnotes-0.0.15.tgz#90cf00d565e8f51917b346c3452267b5bf9a3112"
+remark-numbered-footnotes@^0.0.16:
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/remark-numbered-footnotes/-/remark-numbered-footnotes-0.0.16.tgz#3a5491013536ef475b8aaf735a11cd4d71f867da"
   dependencies:
     unist-util-visit "^1.1.3"
 
@@ -4501,9 +4501,9 @@ remark-stringify@^4.0.0:
     unherit "^1.0.4"
     xtend "^4.0.1"
 
-remark-sub-super@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/remark-sub-super/-/remark-sub-super-1.0.2.tgz#a588388aa02f472cd005c39e42188f2937a6f016"
+remark-sub-super@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/remark-sub-super/-/remark-sub-super-1.0.3.tgz#db506faeaeef9b492ff099833582245abeac9e90"
 
 remark@^8.0.0:
   version "8.0.0"
@@ -5281,9 +5281,9 @@ typographic-apostrophes@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/typographic-apostrophes/-/typographic-apostrophes-1.1.1.tgz#bc6905eb949048a736fa8399f8b90aafa8894787"
 
-typographic-colon@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/typographic-colon/-/typographic-colon-1.0.2.tgz#8b6edc13fa7bb48e4bb62560f155b6f1b2a0a9ff"
+typographic-colon@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/typographic-colon/-/typographic-colon-1.0.3.tgz#3f83fff27205ae44b8103968313e99c9cdc9ca5f"
 
 typographic-copyright@^1.0.1:
   version "1.0.1"
@@ -5293,9 +5293,9 @@ typographic-ellipses@^1.0.11:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/typographic-ellipses/-/typographic-ellipses-1.0.11.tgz#a69143b4b8c5611dd3a669b7c3052603e8a69487"
 
-typographic-em-dash@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/typographic-em-dash/-/typographic-em-dash-1.0.1.tgz#f292162c581f56908f26daae5dc2df2df6b5ab58"
+typographic-em-dash@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/typographic-em-dash/-/typographic-em-dash-1.0.2.tgz#d86d9984d949d92410bb02708361a91832ddb892"
 
 typographic-em-dashes@^1.0.2:
   version "1.0.2"
@@ -5305,33 +5305,33 @@ typographic-en-dashes@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/typographic-en-dashes/-/typographic-en-dashes-1.0.1.tgz#a37739fdc43ed38c351bbf70a80c2503ccb022e0"
 
-typographic-exclamation-mark@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/typographic-exclamation-mark/-/typographic-exclamation-mark-1.0.1.tgz#108de866417e4c5f478e049d9ee9223da9b65da9"
+typographic-exclamation-mark@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/typographic-exclamation-mark/-/typographic-exclamation-mark-1.0.2.tgz#867e8ba83584d21fc9d89ef37bc496c481416990"
 
-typographic-guillemets@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/typographic-guillemets/-/typographic-guillemets-1.0.1.tgz#23cd65e649e2e66b5e9b555231ba9bf96eff328f"
+typographic-guillemets@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/typographic-guillemets/-/typographic-guillemets-1.0.2.tgz#f1d7fc4a5da25f56ce0b13c6951210fd6a93a3b6"
 
-typographic-percent@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/typographic-percent/-/typographic-percent-1.0.1.tgz#7e2db74ce475368279ee13d80c725715cda059b1"
+typographic-percent@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/typographic-percent/-/typographic-percent-1.0.2.tgz#8a4e01afaae5e353b2caa2b051f79542430a8a24"
 
-typographic-permille@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/typographic-permille/-/typographic-permille-1.0.1.tgz#f33f69c19b880f62fdf3e3810fab45c97d3bf201"
+typographic-permille@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/typographic-permille/-/typographic-permille-1.0.2.tgz#dce9efec45b45fbc931974c29362d4fc056afe74"
 
-typographic-question-mark@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/typographic-question-mark/-/typographic-question-mark-1.0.1.tgz#b986eec426fa513d7cc5f0413b7dad06e97b070c"
+typographic-question-mark@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/typographic-question-mark/-/typographic-question-mark-1.0.2.tgz#f31c23af9ccfe0731e2d55519e493f3ab781e415"
 
 typographic-registered-trademark@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/typographic-registered-trademark/-/typographic-registered-trademark-1.0.1.tgz#1830b693bf782cfc23560ec80d61a2672a98c8dd"
 
-typographic-semicolon@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/typographic-semicolon/-/typographic-semicolon-1.0.1.tgz#dc6d5ef8330e5b2174e6cb3f28bd14010de31a3d"
+typographic-semicolon@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/typographic-semicolon/-/typographic-semicolon-1.0.2.tgz#a786ffb926bad09730fc3c586f747d5c8fc9a453"
 
 typographic-single-spaces@^1.0.2:
   version "1.0.2"

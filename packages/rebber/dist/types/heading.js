@@ -28,7 +28,7 @@ function heading(ctx, node) {
   var depth = node.depth;
   var content = all(ctx, node);
 
-  var headings = ctx.heading || defaultHeadings;
+  var headings = ctx.headings || defaultHeadings;
   var fn = headings[node.depth];
 
   if (typeof fn !== 'function') {
