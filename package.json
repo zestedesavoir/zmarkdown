@@ -40,7 +40,7 @@
     "remark-escape-escaped": "^0.0.18",
     "remark-grid-tables": "^1.0.1",
     "remark-heading-shift": "^0.0.15",
-    "remark-heading-trailing-spaces": "^0.0.14",
+    "remark-heading-trailing-spaces": "^0.0.15",
     "remark-iframes": "^1.0.2",
     "remark-kbd": "^1.0.2",
     "remark-math": "^1.0.0",
