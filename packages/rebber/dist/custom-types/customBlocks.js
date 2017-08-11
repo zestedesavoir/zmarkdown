@@ -7,18 +7,24 @@ var all = require('../all');
 module.exports = customBlock;
 
 var defaultMacros = {
-  secretCustomBlock: function secretCustomBlock(innerText) {
-    return '\\addSecret{' + innerText + '}\n';
-  },
-  defaultBlock: function defaultBlock(innerText, type) {
-    var customizedType = type.replace('CustomBlock', '');
-    customizedType = customizedType[0].toUpperCase() + customizedType.substring(1);
-    return '\\begin{' + customizedType + '}\n' + innerText + '\n\\end{' + customizedType + '}\n';
+  defaultBlock: function defaultBlock(innerText, environmentName) {
+    return '\\begin{' + environmentName + '}\n' + innerText + '\n\\end{' + environmentName + '}\n';
   }
 };
 
 function customBlock(ctx, node) {
   var blockMacro = ctx[node.type] || defaultMacros[node.type] || defaultMacros.defaultBlock;
   var innerText = all(ctx, node).trim();
-  return blockMacro(innerText, node.type);
+  var options = ctx.customBlocks || {};
+
+  var environmentName = void 0;
+  var type = node.type.replace('CustomBlock', '');
+
+  if (options.map && options.map[type]) {
+    environmentName = options.map[type];
+  } else {
+    environmentName = type[0].toUpperCase() + type.substring(1);
+  }
+
+  return blockMacro(innerText, environmentName);
 }

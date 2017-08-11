@@ -289,30 +289,44 @@ const defaultConfig = {
 
 const rebberConfig = {
   override: {
-    ping: require('rebber/dist/types/link'),
+    abbr: require('rebber/dist/custom-types/abbr'),
+    centerAligned: require('rebber/dist/custom-types/align'),
     emoticon: require('rebber/dist/custom-types/emoticon'),
+    errorCustomBlock: require('rebber/dist/custom-types/customBlocks'),
     figure: require('rebber/dist/custom-types/figure'),
-    sub: require('rebber/dist/custom-types/sub'),
-    sup: require('rebber/dist/custom-types/sup'),
+    gridTable: require('rebber/dist/custom-types/gridTable'),
+    informationCustomBlock: require('rebber/dist/custom-types/customBlocks'),
+    inlineMath: require('rebber/dist/custom-types/math'),
     kbd: require('rebber/dist/custom-types/kbd'),
     leftAligned: require('rebber/dist/custom-types/align'),
-    centerAligned: require('rebber/dist/custom-types/align'),
-    rightAligned: require('rebber/dist/custom-types/align'),
-    informationCustomBlock: require('rebber/dist/custom-types/customBlocks'),
-    secretCustomBlock: require('rebber/dist/custom-types/customBlocks'),
-    errorCustomBlock: require('rebber/dist/custom-types/customBlocks'),
-    warningCustomBlock: require('rebber/dist/custom-types/customBlocks'),
-    questionCustomBlock: require('rebber/dist/custom-types/customBlocks'),
-    abbr: require('rebber/dist/custom-types/abbr'),
-    gridTable: require('rebber/dist/custom-types/gridTable'),
     math: require('rebber/dist/custom-types/math'),
-    inlineMath: require('rebber/dist/custom-types/math'),
+    ping: require('rebber/dist/types/link'),
+    questionCustomBlock: require('rebber/dist/custom-types/customBlocks'),
+    rightAligned: require('rebber/dist/custom-types/align'),
+    secretCustomBlock: require('rebber/dist/custom-types/customBlocks'),
+    sub: require('rebber/dist/custom-types/sub'),
+    sup: require('rebber/dist/custom-types/sup'),
+    warningCustomBlock: require('rebber/dist/custom-types/customBlocks'),
   },
   emoticons: defaultConfig.emoticons,
   codeAppendiceTitle: 'Annexes',
+  customBlocks: {
+    map: {
+      error: 'Error',
+      information: 'Information',
+      question: 'Question',
+      secret: 'Spoiler',
+      warning: 'Warning',
+    },
+  },
   link: {
     prefix: 'http://zestedesavoir.com'
   },
+  image: {
+    inlineImage: function (node) {
+      return `\\inlineImage{${node.url}}`
+    },
+  }
 }
 
 Object.assign(rebberConfig.override, {

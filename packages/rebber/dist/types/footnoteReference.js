@@ -3,7 +3,7 @@
 module.exports = notes;
 
 var defaultMacro = function defaultMacro(identifier) {
-  return "\\ref{" + identifier + "}";
+  return "\\textsuperscript{\\ref{" + identifier + "}}";
 };
 
 function notes(ctx, node) {

@@ -4,7 +4,7 @@ const clone = require('clone')
 const chai = require('chai')
 const expect = require('chai').expect
 const defaultConfig = clone(require('../config'))
-defaultConfig.isTest = true
+defaultConfig.noTypography = true
 defaultConfig.ping.pingUsername = () => false
 
 chai.use(require('./helper'))

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`footnotes 1`] = `
-"\\\\chapter{mytitle\\\\ref{footnoteref}}
-\\\\footnote{\\\\label{fotnoteref}reference in title}
+"\\\\chapter{mytitle\\\\textsuperscript{\\\\ref{footnoteref}}}
+\\\\footnotetext[myfootnoteref]{\\\\label{myfootnoteref} reference in title}
 \\\\chapter{mytitle\\\\protect\\\\footnote{footnoterawhead inner}}
 \\\\chapter{myti\\\\textit{tle\\\\protect\\\\footnote{foo inner}}}
 a paragraph\\\\footnote{footnoteRawPar inner}
@@ -150,13 +150,13 @@ Sub & Headings & \\\\abbr{ABBR}{abbreviation} \\\\\\\\ \\\\hline
 normal & cell \\\\\\\\ \\\\hline
 multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|c|}{cells can be \\\\par \\\\textit{formatted} \\\\par \\\\textbf{paragraphs}} \\\\\\\\ \\\\hline
 
-\\\\tableCaption{The new table \\\\abbr{ABBR}{abbreviation} \\\\ref{foot} with \\\\keys{CTRL} + \\\\keys{S}}
+\\\\tableCaption{The new table \\\\abbr{ABBR}{abbreviation} \\\\textsuperscript{\\\\ref{foot}} with \\\\keys{CTRL} + \\\\keys{S}}
 \\\\end{longtabu}
 
-\\\\footnote{\\\\label{foot}a foot}
+\\\\footnotetext[foot]{\\\\label{foot} a foot}
 \\\\begin{longtabu}{|p{\\\\linewidth / 2}|p{\\\\linewidth / 2}|} \\\\hline
 title & image \\\\\\\\ \\\\hline
-space & \\\\includeGraphics{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg} \\\\\\\\ \\\\hline
+space & \\\\includegraphics{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 2}|p{\\\\linewidth / 2}|} \\\\hline
@@ -175,21 +175,21 @@ print('bla')
 exports[`mix-5 1`] = `
 "\\\\begin{center}
     \\\\includegraphics[\\\\linewidth]{http://www.numerama.com/content/uploads/2016/07/espace.jpg}
-\\\\captionof{espace\\\\ref{node}}
+\\\\captionof{figure}{espace\\\\textsuperscript{\\\\ref{node}}}
 \\\\end{center}
 
-\\\\footnote{\\\\label{node}two things are note finite, universe and human dumbness but i'm not sure for the universe}"
+\\\\footnotetext[node]{\\\\label{node} Two things are infinite: the universe and human stupidity.}"
 `;
 
 exports[`mix-6 1`] = `
 "\\\\begin{center}
     \\\\includegraphics[\\\\linewidth]{http://img.youtube.com/vi/8TQIvdFl4aU/0.jpg}
-\\\\captionof{a caption\\\\externalLink{https://www.youtube.com/embed/8TQIvdFl4aU}{https://www.youtube.com/embed/8TQIvdFl4aU}}
+\\\\captionof{figure}{a caption\\\\externalLink{https://www.youtube.com/embed/8TQIvdFl4aU}{https://www.youtube.com/embed/8TQIvdFl4aU}}
 \\\\end{center}
 
 \\\\begin{center}
     \\\\includegraphics[\\\\linewidth]{http://img.youtube.com/vi/8TQIvdFl4aU/0.jpg}
-\\\\captionof{\\\\externalLink{https://www.youtube.com/embed/8TQIvdFl4aU}{https://www.youtube.com/embed/8TQIvdFl4aU}}
+\\\\captionof{figure}{\\\\externalLink{https://www.youtube.com/embed/8TQIvdFl4aU}{https://www.youtube.com/embed/8TQIvdFl4aU}}
 \\\\end{center}
 
 no caption"

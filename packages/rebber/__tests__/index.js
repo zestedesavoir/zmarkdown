@@ -43,6 +43,11 @@ const integrationConfig = {
   },
   emoticons: emoticons,
   codeAppendiceTitle: 'Annexes',
+  customBlocks: {
+    map: {
+      secret: 'FooBar',
+    },
+  },
 }
 
 integrationConfig.override.eCustomBlock = (ctx, node) => {
@@ -323,7 +328,7 @@ test('footnotes', () => {
     .processSync(dedent`
       # mytitle[^footnoteRef]
 
-      [^fotnoteRef]: reference in title
+      [^myFootnoteRef]: reference in title
 
       # mytitle[^footnoterawhead inner]
 

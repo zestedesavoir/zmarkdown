@@ -1,7 +1,6 @@
 const toVFile = require('to-vfile')
 const unified = require('unified')
 const inspect = require('unist-util-inspect')
-const visit = require('unist-util-visit')
 
 const remarkParse = require('remark-parse')
 
@@ -41,7 +40,7 @@ const zmdParser = (config) => {
   const mdProcessor = unified()
     .use(remarkParse, config.reParse)
 
-  if (!config.isTest) {
+  if (!config.noTypography) {
     mdProcessor
       .use(remarkTextr, config.textr)
   }
@@ -68,6 +67,9 @@ const zmdParser = (config) => {
 }
 
 const rendererFactory = (config, to = 'html') => (input, cb) => {
+  if (to === 'latex') {
+    config.noTypography = true
+  }
   const mdProcessor = zmdParser(config)
 
   if (to === 'html') {

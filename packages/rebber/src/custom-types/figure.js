@@ -22,7 +22,7 @@ const defaultMacros = {
     const width = extra.width ? `[${extra.width}]` : ''
 
     return `\\begin{center}
-    \\includegraphics${width}{${extra.url}}\n\\captionof{${caption}}\n\\end{center}`
+    \\includegraphics${width}{${extra.url}}\n\\captionof{figure}{${caption}}\n\\end{center}`
   }
 }
 
