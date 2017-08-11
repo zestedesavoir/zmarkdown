@@ -7,10 +7,13 @@ var all = require('../all');
 module.exports = align;
 
 var defaultMacros = {
-  CenterAligned: function CenterAligned(innerText) {
+  leftAligned: function leftAligned(innerText) {
+    return '\n\n' + innerText + '\n\n';
+  },
+  centerAligned: function centerAligned(innerText) {
     return '\n\\begin{center}\n' + innerText + '\n\\end{center}\n';
   },
-  RightAligned: function RightAligned(innerText) {
+  rightAligned: function rightAligned(innerText) {
     return '\n\\begin{flushright}\n' + innerText + '\n\\end{flushright}\n';
   },
   defaultType: function defaultType(innerText, type) {

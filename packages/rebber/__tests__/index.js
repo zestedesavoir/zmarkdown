@@ -28,8 +28,9 @@ const integrationConfig = {
     sub: require('../src/custom-types/sub'),
     sup: require('../src/custom-types/sup'),
     kbd: require('../src/custom-types/kbd'),
-    CenterAligned: require('../src/custom-types/align'),
-    RightAligned: require('../src/custom-types/align'),
+    leftAligned: require('../src/custom-types/align'),
+    centerAligned: require('../src/custom-types/align'),
+    rightAligned: require('../src/custom-types/align'),
     errorCustomBlock: require('../src/custom-types/customBlocks'),
     informationCustomBlock: require('../src/custom-types/customBlocks'),
     questionCustomBlock: require('../src/custom-types/customBlocks'),
@@ -73,6 +74,18 @@ test('heading', () => {
     .processSync(spec.fixture)
 
   expect(contents).toEqual(spec.expected)
+})
+
+test('html nodes', () => {
+  const {contents} = unified()
+    .use(reParse)
+    .use(rebber)
+    .processSync(dedent`
+      # foo
+      **something <a> else**
+    `)
+
+  expect(contents).toMatchSnapshot()
 })
 
 test('heading with custom config', () => {

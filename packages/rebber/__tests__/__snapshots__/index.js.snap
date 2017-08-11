@@ -10,6 +10,13 @@ a paragraph\\\\footnote{footnoteRawPar inner}
 "
 `;
 
+exports[`html nodes 1`] = `
+"\\\\chapter{foo}
+\\\\textbf{something <a> else}
+
+"
+`;
+
 exports[`link with special characters 1`] = `"\\\\externalLink{foo}{http://example.com?a=b\\\\%c\\\\textasciicircum{}\\\\{\\\\}\\\\#foo}"`;
 
 exports[`math 1`] = `
@@ -125,7 +132,15 @@ exports[`mix-3 1`] = `
 \\\\item item
 \\\\end{itemize}
 
-\\\\end{center}"
+\\\\end{center}
+\\\\chapter{left list}
+
+
+\\\\begin{itemize}
+\\\\item item
+\\\\item item
+\\\\item item
+\\\\end{itemize}"
 `;
 
 exports[`mix-4 1`] = `

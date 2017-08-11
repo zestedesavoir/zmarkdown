@@ -13,8 +13,18 @@ node_js:
   - '7'
   - '6'
 
+before_install: yarn global add greenkeeper-lockfile@1
+before_script: greenkeeper-lockfile-update
+after_script: greenkeeper-lockfile-upload
+
 script:
-  - npm test
+  - |
+    if [[ "$(node -v)" == "v6"* ]]; then
+      # ignore package with tests relying on `async/await`
+      npm test -- --testPathIgnorePatterns=remark-images-download
+    else
+      npm test
+    fi
 
 after_success:
   - npm run coverage

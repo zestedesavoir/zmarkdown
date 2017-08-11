@@ -3,7 +3,7 @@
 This plugin parses custom Markdown syntax to handle keyboard keys.
 It adds a new node type to the [mdast][mdast] produced by [remark][remark]: `kbd`
 
-If you are using [rehype][rehype], the stringified HTML result will be `kbd`.
+If you are using [rehype][rehype], the stringified HTML result will be `<kbd>`.
 
 ## Syntax
 
@@ -11,11 +11,35 @@ If you are using [rehype][rehype], the stringified HTML result will be `kbd`.
 Hit ||enter|| twice to create a new paragraph.
 ```
 
-produces:
+## AST (see [mdast][mdast] specification)
 
-```html
-<p>Hit <kbd>enter</kbd> twice to create a new paragraph.</p>
+`Kbd` ([`Parent`][parent]) represents a reference to a user.
+
+```javascript
+interface Kbd <: Parent {
+  type: "kbd";
+}
 ```
+
+For example, the following markdown:
+
+`||enter||`
+
+Yields:
+
+```javascript
+{
+  type: 'kbd',
+  children: [{
+    type: 'text',
+    value: 'enter'
+  }]
+}
+```
+
+## Rehype
+
+This plugin is compatible with [rehype][rehype]. `Kbd` mdast nodes will become `<kbd>contents</kbd>`.
 
 ## Installation
 
@@ -73,3 +97,5 @@ unified()
 [remark]: https://github.com/wooorm/remark
 
 [rehype]: https://github.com/wooorm/rehype
+
+[parent]: https://github.com/syntax-tree/unist#parent

@@ -16,12 +16,68 @@ If you are using [rehype][rehype], the stringified HTML result will be `sub` or 
 ^superscript^, e.g. e^x^
 ```
 
-produces:
+## AST (see [mdast][mdast] specification)
 
-```html
-<p><sub>subscript</sub>, e.g. a<sub>i</sub></p>
-<p><sup>superscript</sup>, e.g. e<sup>x</sup></p>
+`Sub` ([`Parent`][parent]) represents a subscript text.
+
+```javascript
+interface Sub <: Parent {
+  type: "sub";
+}
 ```
+
+`Sup` ([`Parent`][parent]) represents a superscript text.
+
+```javascript
+interface Sup <: Parent {
+  type: "sup";
+}
+```
+
+For example, the following markdown:
+
+```markdown
+a^x^
+
+x~i~
+```
+
+Yields:
+
+```javascript
+{
+  type: 'paragraph',
+  children: [{
+    type: 'text',
+    value: 'a',
+    children: [{
+      type: 'sup',
+      children: [{
+        type: 'text',
+        value: 'x'
+      }]
+    }]
+  }]
+},
+{
+  type: 'paragraph',
+  children: [{
+    type: 'text',
+    value: 'x',
+    children: [{
+      type: 'sub',
+      children: [{
+        type: 'text',
+        value: 'i'
+      }]
+    }]
+  }]
+}
+```
+
+## Rehype
+
+This plugin is compatible with [rehype][rehype]. `Sub` mdast nodes will become `<sub>contents</sub>`, `Sup` mdast nodes will become `<sup>contents</sup>`.
 
 ## Installation
 
@@ -79,3 +135,5 @@ unified()
 [remark]: https://github.com/wooorm/remark
 
 [rehype]: https://github.com/wooorm/rehype
+
+[parent]: https://github.com/syntax-tree/unist#parent

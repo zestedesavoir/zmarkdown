@@ -1,31 +1,47 @@
 # remark-ping [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
-This plugin parses custom Markdown syntax and creates links to users on https://zestedesavoir.com.
+This plugin parses custom Markdown syntax such as `@someone` or `@**first last**` to create links such as `/member/profile/someone` to the corresponding user page if this user exists in your system.
 
-## Syntax
+## Default Syntax
 
 ```markdown
 @username
-@**a username**
-
+@**first last**
 ```
 
-produces:
+## AST (see [mdast][mdast] specification)
 
-```html
-<a href="/membres/voir/username" class="ping">username</a>
-<a href="/membres/voir/a username" class="ping">a username</a>
+`Ping` ([`Parent`][parent]) represents a reference to a user.
+
+```javascript
+interface Ping <: Parent {
+  type: "ping";
+  url: "member profile url";
+  username: "username";
+}
 ```
 
-If `username` and `a username` is used on https://zestedesavoir.com/ or:
+For example, the following markdown:
 
-```html
-@username
-@<strong>a username</a>
+`@someone`
+
+Yields:
+
+```javascript
+{
+  type: 'ping',
+  username: 'someone',
+  url: url,
+  children: [{
+    type: 'text',
+    value: 'someone'
+  }]
+}
 ```
 
-If they aren't used.
+## Rehype
 
+This plugin is compatible with [rehype][rehype]. `Ping` mdast nodes will become HTML links pointing to a customizable target, usually used to access a user profile.
 
 ## Installation
 
@@ -37,7 +53,7 @@ npm install remark-ping
 
 ## Usage
 
-Dependencies:
+### Dependencies:
 
 ```javascript
 const unified = require('unified')
@@ -45,17 +61,58 @@ const remarkParse = require('remark-parse')
 const stringify = require('rehype-stringify')
 const remark2rehype = require('remark-rehype')
 
-const remarkPingZds = require('remark-ping')
+const remarkPing = require('remark-ping')
 ```
 
-Usage:
+### Usage:
 
 ```javascript
 unified()
   .use(remarkParse)
-  .use(remarkPingZds)
+  .use(remarkPing, {
+      pingUsername: (username) => true,
+      userURL: (username) => `https://your.website.com/path/to/${username}`
+  })
   .use(remark2rehype)
   .use(stringify)
+```
+
+as you can see, `remark-ping` takes two mandatory options :
+
+- `pingUsername` is a function taking `username` as parameter and returning `true` if the user exists or should be pinged
+    - If you want to parse any username without checking whether they exist or (like GitHub does), use a function always returning `true` (`() => true`)
+    - When `pingUsername(username)` doesn't return `true`, the ping syntax is simply ignored and no AST `Ping` node gets created for this username
+- `userUrl` is a function taking `username` as parameter and returning a path or URL to this user profile or member page
+
+You can override the default parsing regexp, for example if you don't want to include `@**username with space**` by setting up the `usernameRegex` option:
+
+```js
+  .use(remarkPing, {
+      pingUsername: (username) => true,
+      userURL: (username) => `https://your.website.com/path/to/${username}`,
+      usernameRegex: /[\s'"(,:<]?@(\w+)/,
+  })
+```
+
+### Retrieving the usernames to ping
+
+Once the Markdown has been processed by this plugin, the output `vfile` contains a `ping` array in the `data` property.
+
+This array contains every username that should be ping, should you want your backend to generate notifications for these.
+
+```js
+unified()
+  .use(reParse)
+  .use(plugin, {pingUsername, userURL})
+  .use(remark2rehype)
+  .use(rehypeStringify)
+  .process('@foo @bar')
+  .then((vfile) => {
+    console.log(vfile.data.ping.length === 2) // true
+    console.log(vfile.data.ping[0] === 'foo') // true
+    console.log(vfile.data.ping[1] === 'bar') // true
+    return vfile
+  })
 ```
 
 ## License
@@ -83,3 +140,5 @@ unified()
 [remark]: https://github.com/wooorm/remark
 
 [rehype]: https://github.com/wooorm/rehype
+
+[parent]: https://github.com/syntax-tree/unist#parent

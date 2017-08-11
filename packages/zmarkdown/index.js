@@ -64,18 +64,6 @@ const zmdParser = (config) => {
     .use(remarkPing, config.ping)
     .use(remarkSubSuper)
     .use(remarkTrailingSpaceHeading)
-    .use(() => {
-      return (tree, file) => {
-        visit(tree, (node) => {
-          if (node._metadata) {
-            if (!file.data[node.type]) {
-              file.data[node.type] = []
-            }
-            file.data[node.type].push(node._metadata)
-          }
-        })
-      }
-    })
   return mdProcessor
 }
 
@@ -128,4 +116,5 @@ module.exports = (opts = defaultConfig, to = 'html') => ({
   rendererFactory: rendererFactory,
   renderString: rendererFactory(opts, to),
   renderFile: (path, cb) => rendererFactory(opts, to)(fromFile(path), cb),
+  latexDocumentTemplate: require('./latex-document-template'),
 })

@@ -1,30 +1,30 @@
-function plugin (ctx) {
-  if (!ctx.pingUsername || typeof ctx.pingUsername !== 'function') {
-    throw new Error(`remark-ping: expected configuration to be passed: {
-  pingUsername: (username) => bool,
-  userURL: (username) => string\n}`)
-  }
-  if (!ctx.userURL || typeof ctx.userURL !== 'function') {
-    throw new Error(`remark-ping: expected configuration to be passed: {
-  pingUsername: (username) => bool,
-  userURL: (username) => string\n}`)
-  }
+const visit = require('unist-util-visit')
 
-  const pattern = ctx.usernameRegex || /[\s'"(,:<]?@(?:\*\*([^*]+)\*\*|(\w+))/
+const helpMsg = `remark-ping: expected configuration to be passed: {
+  pingUsername: (username) => bool,\n  userURL: (username) => string\n}`
+
+module.exports = function plugin ({
+  pingUsername,
+  userURL,
+  usernameRegex = /[\s'"(,:<]?@(?:\*\*([^*]+)\*\*|(\w+))/
+}) {
+  if (typeof pingUsername !== 'function' || typeof userURL !== 'function') {
+    throw new Error(helpMsg)
+  }
 
   function inlineTokenizer (eat, value, silent) {
-    const keep = pattern.exec(value)
+    const keep = usernameRegex.exec(value)
     if (!keep || keep.index > 0) return
 
     const total = keep[0]
     const username = keep[2] ? keep[2] : keep[1]
-    debugger
 
-    if (ctx.pingUsername(username)) {
-      const url = ctx.userURL(username)
+    if (pingUsername(username) === true) {
+      const url = userURL(username)
+
       return eat(total)({
         type: 'ping',
-        _metadata: username,
+        username: username,
         url: url,
         children: [{
           type: 'text',
@@ -47,7 +47,7 @@ function plugin (ctx) {
   }
 
   function locator (value, fromIndex) {
-    const keep = pattern.exec(value, fromIndex)
+    const keep = usernameRegex.exec(value, fromIndex)
     if (keep) {
       return value.indexOf('@', keep.index)
     }
@@ -71,6 +71,11 @@ function plugin (ctx) {
     const visitors = Compiler.prototype.visitors
     visitors.ping = (node) => `@**${this.all(node).join('')}**`
   }
-}
 
-module.exports = plugin
+  return (tree, file) => visit(tree, 'ping', (node) => {
+    if (!file.data[node.type]) {
+      file.data[node.type] = []
+    }
+    file.data[node.type].push(node.username)
+  })
+}

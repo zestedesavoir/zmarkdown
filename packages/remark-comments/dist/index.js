@@ -1,27 +1,36 @@
 'use strict';
 
-var BEGINMARKER = '<--COMMENTS';
-var ENDMARKER = 'COMMENTS-->';
+var beginMarkerFactory = function beginMarkerFactory() {
+  var marker = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'COMMENTS';
+  return '<--' + marker;
+};
+var endMarkerFactory = function endMarkerFactory() {
+  var marker = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'COMMENTS';
+  return marker + '-->';
+};
 var SPACE = ' ';
-
-function locator(value, fromIndex) {
-  return value.indexOf(BEGINMARKER, fromIndex);
-}
 
 function plugin() {
   var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
+  var beginMarker = beginMarkerFactory(opts.beginMarker);
+  var endMarker = endMarkerFactory(opts.endMarker);
+
+  function locator(value, fromIndex) {
+    return value.indexOf(beginMarker, fromIndex);
+  }
+
   function inlineTokenizer(eat, value, silent) {
 
-    var keepBegin = value.indexOf(BEGINMARKER);
-    var keepEnd = value.indexOf(ENDMARKER);
+    var keepBegin = value.indexOf(beginMarker);
+    var keepEnd = value.indexOf(endMarker);
     if (keepBegin !== 0 || keepEnd === -1) return;
 
     /* istanbul ignore if - never used (yet) */
     if (silent) return true;
 
-    var comment = value.substring(BEGINMARKER.length + 1, keepEnd - 1);
-    return eat(BEGINMARKER + SPACE + comment + SPACE + ENDMARKER);
+    var comment = value.substring(beginMarker.length + 1, keepEnd - 1);
+    return eat(beginMarker + SPACE + comment + SPACE + endMarker);
   }
   inlineTokenizer.locator = locator;
 

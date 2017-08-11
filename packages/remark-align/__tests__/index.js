@@ -144,3 +144,14 @@ test('escapable', () => {
   `)
   expect(contents).toMatchSnapshot()
 })
+
+test('left align', () => {
+  const { contents } = render(dedent`
+    # title
+
+    <- foo <-
+
+    # title
+  `)
+  expect(contents).toMatchSnapshot()
+})

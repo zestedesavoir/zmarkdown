@@ -262,7 +262,8 @@ const defaultConfig = {
     internal: {
       iframe: 'Video:',
       math: 'Equation:',
-      inlineMath: 'Equation:'
+      inlineMath: 'Equation:',
+      image: 'Figure:'
     }
   },
 
@@ -294,8 +295,9 @@ const rebberConfig = {
     sub: require('rebber/dist/custom-types/sub'),
     sup: require('rebber/dist/custom-types/sup'),
     kbd: require('rebber/dist/custom-types/kbd'),
-    CenterAligned: require('rebber/dist/custom-types/align'),
-    RightAligned: require('rebber/dist/custom-types/align'),
+    leftAligned: require('rebber/dist/custom-types/align'),
+    centerAligned: require('rebber/dist/custom-types/align'),
+    rightAligned: require('rebber/dist/custom-types/align'),
     informationCustomBlock: require('rebber/dist/custom-types/customBlocks'),
     secretCustomBlock: require('rebber/dist/custom-types/customBlocks'),
     errorCustomBlock: require('rebber/dist/custom-types/customBlocks'),

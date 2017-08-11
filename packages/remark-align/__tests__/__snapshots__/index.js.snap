@@ -60,6 +60,12 @@ exports[`escapable 1`] = `
 <div class=\\"align-center\\"><p>center</p></div>"
 `;
 
+exports[`left align 1`] = `
+"<h1>title</h1>
+<div class=\\"align-left\\"><p> foo </p></div>
+<h1>title</h1>"
+`;
+
 exports[`list-block 1`] = `
 "<h1>title</h1>
 <div class=\\"align-right\\"><ul>

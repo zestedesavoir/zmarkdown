@@ -1,6 +1,6 @@
 {
   "name": "rebber",
-  "version": "0.0.28",
+  "version": "0.0.31",
   "description": "Stringifies MDAST to LaTeX",
   "repository": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rebber",
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
@@ -38,17 +38,17 @@
     "babel-cli": "^6.24.1",
     "babel-jest": "^20.0.3",
     "babel-preset-es2015": "^6.24.1",
-    "cross-env": "^5.0.1",
+    "cross-env": "^5.0.5",
     "del-cli": "^1.0.0",
-    "eslint": "^4.0.0",
+    "eslint": "^4.4.1",
     "jest": "^20.0.4",
     "remark-abbr": "^1.0.1",
-    "remark-align": "^1.0.1",
-    "remark-captions": "^0.0.19",
+    "remark-align": "^1.0.2",
+    "remark-captions": "^1.0.0",
     "remark-emoticons": "^0.0.21",
     "remark-grid-tables": "^1.0.1",
     "remark-parse": "^4.0.0",
-    "remark-sub-super": "^1.0.1",
+    "remark-sub-super": "^1.0.2",
     "unified": "^6.1.5"
   }
 }

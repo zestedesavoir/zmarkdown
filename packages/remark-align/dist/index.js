@@ -1,12 +1,14 @@
 'use strict';
 
+var spaceSeparated = require('space-separated-tokens');
+
 var C_NEWLINE = '\n';
 var C_NEWPARAGRAPH = '\n\n';
 
 module.exports = function plugin() {
   var classNames = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  var regex = new RegExp('[^\\\\]?->');
+  var regex = new RegExp('[^\\\\]?(->|<-)');
   var endMarkers = ['->', '<-'];
 
   function alignTokenizer(eat, value, silent) {
@@ -14,6 +16,8 @@ module.exports = function plugin() {
     var keep = regex.exec(value);
     if (!keep) return;
     if (keep.index !== 0) return;
+
+    var startMarker = keep[1];
 
     /* istanbul ignore if - never used (yet) */
     if (silent) return true;
@@ -64,17 +68,26 @@ module.exports = function plugin() {
     var values = this.tokenizeBlock(stringToEat, now);
     exit();
 
-    var elementType = endMarker === '->' ? 'RightAligned' : 'CenterAligned';
-    var rightClassName = classNames.right ? classNames.right : 'align-right';
-    var centerClassName = classNames.center ? classNames.center : 'align-center';
-    var className = endMarker === '->' ? rightClassName : centerClassName;
+    var elementType = void 0;
+    var classes = void 0;
+    if (startMarker === '<-' && endMarker === '<-') {
+      elementType = 'leftAligned';
+      classes = classNames.left ? classNames.left : 'align-left';
+    } else if (startMarker === '->' && endMarker === '<-') {
+      elementType = 'centerAligned';
+      classes = classNames.center ? classNames.center : 'align-center';
+    } else if (startMarker === '->' && endMarker === '->') {
+      elementType = 'rightAligned';
+      classes = classNames.right ? classNames.right : 'align-right';
+    }
+
     return add({
       type: elementType,
       children: values,
       data: {
         hName: 'div',
         hProperties: {
-          class: className
+          class: spaceSeparated.parse(classes)
         }
       }
     });

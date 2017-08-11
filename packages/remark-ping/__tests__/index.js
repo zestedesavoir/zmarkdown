@@ -23,7 +23,7 @@ const render = text => unified()
   .use(plugin, {pingUsername, userURL})
   .use(remark2rehype)
   .use(rehypeStringify)
-  .processSync(text)
+  .process(text)
 
 const fixture = dedent`
   Test ping
@@ -38,7 +38,21 @@ const fixture = dedent`
   no ping @**I AM CLEM**
 `
 
-test('ping', () => {
-  const {contents} = render(fixture)
-  expect(contents).toMatchSnapshot()
+const html = dedent`<h1>Test ping</h1>
+  <p>ping @Clem</p>
+  <p>ping @<strong>BALDE SOULEYMANE</strong></p>
+  <p>no ping @dqsjdjsqjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd</p>
+  <p>no ping <a href="/membres/voir/I AM CLEM/" class="ping">I AM CLEM</a></p>
+`
+
+test('parses', () => {
+  expect(
+    render(fixture).then(vfile => vfile.contents)
+  ).resolves.toBe(html)
+})
+
+test('sets ping data on vfile', () => {
+  expect(
+    render(fixture).then(vfile => vfile.data.ping)
+  ).resolves.toEqual(['I AM CLEM'])
 })

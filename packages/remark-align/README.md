@@ -2,14 +2,15 @@
 
 This plugin parses custom Markdown syntax to center- or right-align elements.
 
-It adds two new node types to the [mdast][mdast] produced by [remark][remark]:
+It adds three new node types to the [mdast][mdast] produced by [remark][remark]:
 
+* `LeftAligned`
 * `CenterAligned`
 * `RightAligned`
 
 If you are using [rehype][rehype], the stringified HTML result will be `div`s with configurable CSS classes.
 
-It is up to you to have CSS rules producing the desired result for these two classes.
+It is up to you to have CSS rules producing the desired result for these three classes.
 
 ## Syntax
 
@@ -55,8 +56,9 @@ Usage:
 unified()
   .use(remarkParse)
   .use(remarkAlign, {
+    left: 'align-left',
+    center: 'align-center',
     right: 'align-right',
-    center: 'align-center'
   })
   .use(remark2rehype)
   .use(stringify)
