@@ -127,7 +127,7 @@ test('does not download when disabled', () => {
   `
 
   const render = renderFactory({
-    downloadImage: false
+    disabled: true
   })
 
   expect(render(file).then(vfile => vfile.contents)).resolves.toBe(html)

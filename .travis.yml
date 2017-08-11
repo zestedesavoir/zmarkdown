@@ -14,7 +14,13 @@ node_js:
   - '6'
 
 script:
-  - npm test
+  - |
+    if [[ "$(node -v)" == "v6"* ]]; then
+      # ignore package with tests relying on `async/await`
+      npm test -- --testPathIgnorePatterns=remark-images-download
+    else
+      npm test
+    fi
 
 after_success:
   - npm run coverage

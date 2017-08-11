@@ -30,7 +30,7 @@ unified()
   .use(remarkParse)
   .use(remarkIframe,
   .use(remarkImagesDownload, {
-    downloadImage: true,
+    disabled: true,
     downloadDestination: './img/',
     maxlength: 1000000,
     dirSizeLimit: 10000000,
@@ -41,7 +41,7 @@ unified()
 
 ## Configuration fields:
 
-- `downloadImage`: enable the plugin.
+- `disabled`: enable the plugin.
 - `downloadDestination`: where downloads should be stored (must exists).
 - `maxFileLength`: if a file is larger than this number (in bytes), the plugin will not download it.
 - `dirSizeLimit`: the directory size limit.

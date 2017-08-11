@@ -41,14 +41,14 @@ const mkdir = (path) => new Promise((resolve, reject) => {
 })
 
 function plugin ({
-  downloadImage = true,
+  disabled = false,
   maxFileSize = 1000000,
   dirSizeLimit = 10000000,
   downloadDestination = './',
   report = console.error
 } = {}) {
   return function transform (tree) {
-    if (downloadImage !== true) return noop
+    if (disabled) return noop
     let totalDownloadedSize
 
     // images are downloaded in destinationPath
