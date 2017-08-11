@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`skips bigger images 1`] = `"File at http://example.com/too-big.png weighs 99999999, max size is 1000000"`;
+exports[`skips bigger images and reports 1`] = `"File at http://example.com/too-big.png weighs 99999999, max size is 1000000"`;
 
 exports[`skips when directory reaches size limit 1`] = `"Cannot download http://example.com/30percent.png because destination directory reached size limit"`;
 
-exports[`skips wrong mimes 1`] = `"Content-Type of http://example.com/wrong-mime.png is not of image/ type"`;
+exports[`skips wrong mimes and reports 1`] = `"Content-Type of http://example.com/wrong-mime.png is not of image/ type"`;

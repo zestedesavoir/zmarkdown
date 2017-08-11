@@ -45,22 +45,20 @@ test('does not crash without images', () => {
   expect(render(file).then(vfile => vfile.contents)).resolves.toBe(html)
 })
 
-test('skips bigger images', (done) => {
+test('skips bigger images and reports', async () => {
   const file = `![](http://example.com/too-big.png)`
   const html = `<p><img src="http://example.com/too-big.png"></p>`
 
   const render = renderFactory({
     report: (err) => {
-      expect(err).toBeInstanceOf(Error)
       expect(err.message).toMatchSnapshot()
-      done()
+      expect(err).toBeInstanceOf(Error);
     },
   })
-
-  expect(render(file).then(vfile => vfile.contents)).resolves.toBe(html)
+  await expect(render(file).then(vfile => vfile.contents)).resolves.toBe(html)
 })
 
-test('skips wrong mimes', (done) => {
+test('skips wrong mimes and reports', async () => {
   const file = `![](http://example.com/wrong-mime.png)`
   const html = `<p><img src="http://example.com/wrong-mime.png"></p>`
 
@@ -68,11 +66,10 @@ test('skips wrong mimes', (done) => {
     report: (err) => {
       expect(err).toBeInstanceOf(Error)
       expect(err.message).toMatchSnapshot()
-      done()
     },
   })
 
-  expect(render(file).then(vfile => vfile.contents)).resolves.toBe(html)
+  await expect(render(file).then(vfile => vfile.contents)).resolves.toBe(html)
 })
 
 test('does not report wrong extensions', () => {
@@ -83,7 +80,7 @@ test('does not report wrong extensions', () => {
   expect(render(file).then(vfile => replace(vfile.contents))).resolves.toBe(html)
 })
 
-test('skips when directory reaches size limit', (done) => {
+test('skips when directory reaches size limit', async () => {
   const file = dedent`
     ![](http://example.com/30percent.png)
     ![](http://example.com/30percent.png)
@@ -105,16 +102,15 @@ test('skips when directory reaches size limit', (done) => {
     report: (err) => {
       expect(err).toBeInstanceOf(Error)
       expect(err.message).toMatchSnapshot()
-      done()
     },
     maxFileSize: 3500,
     dirSizeLimit: 10000
   })
 
-  expect(render(file).then(vfile => replace(vfile.contents))).resolves.toBe(html)
+  await expect(render(file).then(vfile => replace(vfile.contents))).resolves.toBe(html)
 })
 
-test('does not download when disabled', (done) => {
+test('does not download when disabled', () => {
   const file = dedent`
     ![](http://example.com/ok.png)
     ![](http://example.com/ok.png)
@@ -123,7 +119,6 @@ test('does not download when disabled', (done) => {
   `
 
   // images will not be downloaded
-
   const html = dedent`
     <p><img src="http://example.com/ok.png">
     <img src="http://example.com/ok.png">
@@ -132,13 +127,13 @@ test('does not download when disabled', (done) => {
   `
 
   const render = renderFactory({
-    downloadImages: false
+    downloadImage: false
   })
 
-  expect(render(file).then(vfile => replace(vfile.contents))).resolves.toBe(html)
+  expect(render(file).then(vfile => vfile.contents)).resolves.toBe(html)
 })
 
-test('skips local images', (done) => {
+test('skips local images', () => {
   const file = `![](local.png)`
   const html = `<p><img src="local.png"></p>`
 

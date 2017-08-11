@@ -5,6 +5,8 @@ const request = require('request-promise')
 const shortid = require('shortid')
 const url = require('url')
 
+const noop = Promise.resolve()
+
 const requestParser = (body, response, resolveWithFullResponse) =>
   ({response: response, body: body})
 
@@ -39,22 +41,23 @@ const mkdir = (path) => new Promise((resolve, reject) => {
 })
 
 function plugin ({
-  downloadImages = true,
+  downloadImage = true,
   maxFileSize = 1000000,
   dirSizeLimit = 10000000,
   downloadDestination = './',
   report = console.error
 } = {}) {
   return function transform (tree) {
-    if (downloadImages !== true) return
-    let totalDownloadedSize = 0
+    if (downloadImage !== true) return noop
+    let totalDownloadedSize
 
     // images are downloaded in destinationPath
     const destinationPath = path.join(downloadDestination, shortid.generate())
 
     return mkdir(destinationPath)
       .then(() => {
-        const promises = [Promise.resolve()]
+        totalDownloadedSize = 0
+        const promises = [noop]
 
         visit(tree, 'image', function (node) {
           const parsedURI = url.parse(node.url)
@@ -70,7 +73,9 @@ function plugin ({
             isDownloadable(imageURL)
               .then(() => request({uri: imageURL, transform: requestParser}))
               .then(({body}) => writeFile(destination, body))
-              .then(() => { node.url = destination })
+              .then(() => {
+                node.url = destination
+              })
               .catch((err) => report(err)))
         })
 
@@ -98,6 +103,7 @@ function plugin ({
             reject(new Error(
               `Cannot download ${uri} because destination directory reached size limit`))
           }
+
           totalDownloadedSize += fileSize
           resolve()
         }))

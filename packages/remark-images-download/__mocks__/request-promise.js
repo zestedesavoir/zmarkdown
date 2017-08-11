@@ -1,3 +1,5 @@
+const rp = jest.genMockFromModule('request-promise') // eslint-disable-line no-undef
+
 const path = require('path')
 const url = require('url')
 
@@ -39,15 +41,21 @@ function request ({uri}) {
   const parsedURI = url.parse(uri)
   const filename = path.basename(parsedURI.pathname)
   const response = responses[filename] || responses['ok.png']
+
   return new Promise((resolve, reject) => {
     process.nextTick(() => resolve({response: response, body: 'foobar img content!'}))
   })
 }
 
+Object.keys(rp).forEach((p) => {
+  request.p = p
+})
+
 request.head = ({uri}) => {
   const parsedURI = url.parse(uri)
   const filename = path.basename(parsedURI.pathname)
   const response = responses[filename] || responses['ok.png']
+
   return new Promise((resolve, reject) =>
     process.nextTick(() => resolve({response: response, body: 'foobar img content!'})))
 }
