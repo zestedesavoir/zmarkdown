@@ -16,10 +16,12 @@
 \RequirePackage[babel=true]{microtype}
 \RequirePackage{caption}
 \RequirePackage{ulem}
+\RequirePackage{newfloat}
 
 %% LATEX 3 PACKAGES
 \RequirePackage{etoolbox}
 \RequirePackage{xparse}
+\RequirePackage{xsavebox}
 
 \RequirePackage{multicol}
 \RequirePackage{pagecolor}
@@ -32,6 +34,13 @@
 %%% GRAPHIC PACKAGES
 \RequirePackage{graphicx}
 \RequirePackage[export]{adjustbox}
+\RequirePackage{epstopdf}
+
+\epstopdfDeclareGraphicsRule{.gif}{png}{.png}{convert gif:#1 png:\OutputFile}
+\AppendGraphicsExtensions{.gif}
+
+\epstopdfDeclareGraphicsRule{.svg}{pdf}{.pdf}{rsvg-convert -f pdf #1 -o \OutputFile}
+\AppendGraphicsExtensions{.svg}
 
 \RequirePackage[bookmarks=true,hyperindex=true,bookmarksopen=true,bookmarksnumbered=true]{hyperref}
 \RequirePackage[thmmarks,amsmath,hyperref]{ntheorem}
@@ -73,6 +82,10 @@
 \setlength{\tabcolsep}{0.2cm}
 \renewcommand{\arraystretch}{1.5}
 
+%%% FLOATS ---------------------------------------------------------------------
+
+\DeclareFloatingEnvironment[name={Équation}]{equationFloat}
+
 %%% CLASS OPTIONS --------------------------------------------------------------
 
 %%% PRINTING OPTION
@@ -96,6 +109,7 @@
    \def\thesection{\arabic{section}}
    \def\thefigure{\arabic{section}}
    \def\thetable{\arabic{section}}
+   \def\theequationFloat{\arabic{section}}
    \automark[subsection]{section}
 }
 
@@ -184,12 +198,12 @@
 \newZdSBoxEnvironment{Question}{QuestionBox}
 \newZdSBoxEnvironment{Information}{InformationBox}
 \newZdSBoxEnvironment{Error}{ErrorBox}
-\newZdSBoxEnvironment{Spoiler}{SpoilerBox}
+\newZdSBoxEnvironment{SpoilerEnv}{SpoilerBox}
 
 %%% CODE MANAGEMENT
-\setminted{breaklines, breaksymbolleft=\hspace{2em}, highlightcolor=highlightCodeColor, linenos}
+\setminted{breaklines, breaksymbolleft=\hspace{2em}, highlightcolor=highlightCodeColor, linenos, fontsize=\small,baselinestretch=1}
 
-\NewDocumentEnvironment{codeBlock}{O{}O{}O{1}m}{%
+\NewDocumentEnvironment{CodeBlock}{O{}O{}O{1}m}{%
    \def\@codeCaption{#1}
    \VerbatimEnvironment
    \FrameSep0.5em
@@ -229,13 +243,16 @@
 \newcounter{@spoilerCounter}
 \def\@spoilerList{}
 
-\newcommand{\addSpoiler}[1]{%
-   \addtocounter{@spoilerCounter}{1}
+\newenvironment{Spoiler}{%
+   \addtocounter{@spoilerCounter}{1}%
+   \begin{xlrbox}{spoilerSavebox\the@spoilerCounter}\begin{minipage}{\linewidth}\begin{NoHyper}%
+}{
+   \vspace*{1em}\end{NoHyper}\end{minipage}\end{xlrbox}%
    \hypertarget{voir:\thepart\thechapter\the@spoilerCounter}{}
-   \begin{Spoiler}
+   \begin{SpoilerEnv}
       \hyperlink{secret:\thepart\thechapter\the@spoilerCounter}{Voir le secret \the@spoilerCounter.}
-   \end{Spoiler}
-   \listadd{\@spoilerList}{\expandafter#1}
+   \end{SpoilerEnv}
+   \listgadd{\@spoilerList}{\xusebox{spoilerSavebox\the@spoilerCounter}}
 }
 
 \newcommand{\displaySpoilers}{%
@@ -243,8 +260,8 @@
    \ifdefvoid{\@spoilerList}{}{\levelSpoilerTitle{Blocs secrets}}
    \def\do{}
    \renewcommand{\do}[1]{%
+      \levelSpoiler*{Secret \the@spoilerCounter}%
       \hypertarget{secret:\thepart\thechapter\the@spoilerCounter}{}
-      \levelSpoiler*{Secret \the@spoilerCounter}
       \expandafter{##1}\\ \hfill \hyperlink{voir:\thepart\thechapter\the@spoilerCounter}{Retourner au texte.}
       \addtocounter{@spoilerCounter}{1}
    }
