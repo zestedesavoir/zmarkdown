@@ -37,7 +37,7 @@
     "remark-comments": "^1.0.3",
     "remark-custom-blocks": "^1.0.2",
     "remark-emoticons": "^0.0.21",
-    "remark-escape-escaped": "^0.0.18",
+    "remark-escape-escaped": "^0.0.19",
     "remark-grid-tables": "^1.0.1",
     "remark-heading-shift": "^0.0.15",
     "remark-heading-trailing-spaces": "^0.0.14",
