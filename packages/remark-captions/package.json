@@ -1,6 +1,6 @@
 {
   "name": "remark-captions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-captions",
     "type": "git"
