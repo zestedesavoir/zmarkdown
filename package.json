@@ -26,7 +26,7 @@
     "jest-environment-node-debug": "^2.0.0",
     "lerna": "^2.0.0-rc.5",
     "mocha": "^3.5.0",
-    "rebber": "^0.0.31",
+    "rebber": "^1.0.0",
     "rehype-footnotes-title": "^0.0.15",
     "rehype-html-blocks": "^0.0.16",
     "rehype-katex": "^1.0.1",
