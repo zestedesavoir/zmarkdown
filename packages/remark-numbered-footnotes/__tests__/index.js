@@ -42,3 +42,14 @@ test('regression-1', () => {
 
   expect(contents).toMatchSnapshot()
 })
+
+test('regression-2', () => {
+  const {contents} = unified()
+    .use(reParse, config)
+    .use(require('../src'))
+    .use(remark2rehype)
+    .use(stringify)
+    .processSync(specs['regression-2'].fixture)
+
+  expect(contents).toMatchSnapshot()
+})

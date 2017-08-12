@@ -47,6 +47,7 @@
     "remark-captions": "^1.0.1",
     "remark-emoticons": "^0.0.22",
     "remark-grid-tables": "^1.0.2",
+    "remark-numbered-footnotes": "^0.0.16",
     "remark-parse": "^4.0.0",
     "remark-sub-super": "^1.0.3",
     "unified": "^6.1.5"

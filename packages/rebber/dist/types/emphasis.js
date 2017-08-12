@@ -6,7 +6,7 @@ var all = require('../all');
 /* Expose. */
 module.exports = emphasis;
 
-/* Stringify a emphasis `node`. */
+/* Stringify an emphasis `node`. */
 function emphasis(ctx, node, index, parent) {
   var contents = all(ctx, node);
 

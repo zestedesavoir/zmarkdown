@@ -2,7 +2,7 @@ const all = require('../all')
 module.exports = notes
 
 const defaultMacro = (identifier, text) =>
-  `\\footnotetext[${identifier}]{\\label{${identifier}} ${text}}\n`
+  `\\footnotetext[${identifier}]{\\label{footnote:${identifier}} ${text}}\n`
 
 function notes (ctx, node) {
   const macro = ctx.footnoteDefinition || defaultMacro

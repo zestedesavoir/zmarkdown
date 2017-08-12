@@ -291,6 +291,7 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
       .use(require('remark-captions/src'), {external: {gridTable: 'Table:', math: 'Equation'},
         internal: {iframe: 'Video:'}})
       .use(require('remark-grid-tables/src'))
+      .use(require('remark-numbered-footnotes/src'))
       .use(require('remark-sub-super/src'))
       .use(require('remark-iframes/src'), {
         'www.youtube.com': {
@@ -324,15 +325,16 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
 test('footnotes', () => {
   const {contents} = unified()
     .use(reParse, {footnotes: true})
+    .use(require('remark-numbered-footnotes/src'))
     .use(rebber, integrationConfig)
     .processSync(dedent`
-      # mytitle[^footnoteRef]
+      # mytitle A[^footnoteRef]
 
-      [^myFootnoteRef]: reference in title
+      [^footnoteRef]: reference in title
 
-      # mytitle[^footnoterawhead inner]
+      # mytitle B[^footnoterawhead inner]
 
-      # myti*tle[^foo inner]*
+      # myti*tle C[^foo inner]*
 
       a paragraph[^footnoteRawPar inner]
     `)

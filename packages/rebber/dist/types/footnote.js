@@ -1,19 +1,23 @@
 'use strict';
 
+/* Dependencies. */
 var all = require('../all');
 
+/* Expose. */
 module.exports = notes;
 
-var defaultMacro = function defaultMacro(text, protect) {
+var defaultMacro = function defaultMacro(identifier, text, protect) {
+  var footnote = '\\footnote[' + identifier + ']{\\label{footnote:' + identifier + '} ' + text + '}\n';
   if (protect) {
-    return '\\protect\\footnote{' + text + '}';
+    return footnote + '\\protect';
   }
-  return '\\footnote{' + text + '}';
+  return footnote;
 };
 
+/* Stringify a footnote `node`. */
 function notes(ctx, node, _index, parent) {
   var macro = ctx.footnote || defaultMacro;
   var protect = !!node.inHeading;
 
-  return macro(all(ctx, node), protect);
+  return macro(node.identifier, all(ctx, node).trim(), protect);
 }

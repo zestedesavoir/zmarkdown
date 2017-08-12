@@ -13,11 +13,13 @@ print('bla')
 `;
 
 exports[`footnotes 1`] = `
-"\\\\chapter{mytitle\\\\textsuperscript{\\\\ref{footnoteref}}}
-\\\\footnotetext[myfootnoteref]{\\\\label{myfootnoteref} reference in title}
-\\\\chapter{mytitle\\\\protect\\\\footnote{footnoterawhead inner}}
-\\\\chapter{myti\\\\textit{tle\\\\protect\\\\footnote{foo inner}}}
-a paragraph\\\\footnote{footnoteRawPar inner}
+"\\\\chapter{mytitle A\\\\textsuperscript{\\\\ref{footnote:1}}}
+\\\\footnotetext[1]{\\\\label{footnote:1} reference in title}
+\\\\chapter{mytitle B\\\\footnote[2]{\\\\label{footnote:2} footnoterawhead inner}
+\\\\protect}
+\\\\chapter{myti\\\\textit{tle C\\\\footnote[3]{\\\\label{footnote:3} foo inner}
+\\\\protect}}
+a paragraph\\\\footnote[4]{\\\\label{footnote:4} footnoteRawPar inner}
 
 "
 `;
@@ -162,10 +164,10 @@ Sub & Headings & \\\\abbr{ABBR}{abbreviation} \\\\\\\\ \\\\hline
 normal & cell \\\\\\\\ \\\\hline
 multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|c|}{cells can be \\\\par \\\\textit{formatted} \\\\par \\\\textbf{paragraphs}} \\\\\\\\ \\\\hline
 
-\\\\tableCaption{The new table \\\\abbr{ABBR}{abbreviation} \\\\textsuperscript{\\\\ref{foot}} with \\\\keys{CTRL} + \\\\keys{S}}
+\\\\tableCaption{The new table \\\\abbr{ABBR}{abbreviation} \\\\textsuperscript{\\\\ref{footnote:1}} with \\\\keys{CTRL} + \\\\keys{S}}
 \\\\end{longtabu}
 
-\\\\footnotetext[foot]{\\\\label{foot} a foot}
+\\\\footnotetext[1]{\\\\label{footnote:1} a foot}
 \\\\begin{longtabu}{|p{\\\\linewidth / 2}|p{\\\\linewidth / 2}|} \\\\hline
 title & image \\\\\\\\ \\\\hline
 space & \\\\includegraphics{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg} \\\\\\\\ \\\\hline
@@ -187,10 +189,10 @@ print('bla')
 exports[`mix-5 1`] = `
 "\\\\begin{center}
     \\\\includegraphics[\\\\linewidth]{http://www.numerama.com/content/uploads/2016/07/espace.jpg}
-\\\\captionof{figure}{espace\\\\textsuperscript{\\\\ref{node}}}
+\\\\captionof{figure}{espace\\\\textsuperscript{\\\\ref{footnote:1}}}
 \\\\end{center}
 
-\\\\footnotetext[node]{\\\\label{node} Two things are infinite: the universe and human stupidity.}"
+\\\\footnotetext[1]{\\\\label{footnote:1} Two things are infinite: the universe and human stupidity.}"
 `;
 
 exports[`mix-6 1`] = `
