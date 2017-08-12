@@ -4282,9 +4282,9 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
-rebber@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/rebber/-/rebber-1.0.0.tgz#fb2eeee8d0f0872db29c5332ed33d43f5d2d048b"
+rebber@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/rebber/-/rebber-1.0.1.tgz#baa09d34affa96e55735437b12af48c0dfab608e"
   dependencies:
     has "^1.0.1"
     xtend "^4.0.1"
