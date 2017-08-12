@@ -44,7 +44,7 @@
     "remark-iframes": "^1.0.3",
     "remark-kbd": "^1.0.3",
     "remark-math": "^1.0.0",
-    "remark-numbered-footnotes": "^0.0.16",
+    "remark-numbered-footnotes": "^0.0.17",
     "remark-parse": "^4.0.0",
     "remark-rehype": "^2.0.1",
     "remark-sub-super": "^1.0.3",
