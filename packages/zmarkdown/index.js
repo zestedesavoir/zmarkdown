@@ -86,7 +86,12 @@ const rendererFactory = (config, to = 'html') => (input, cb) => {
     mdProcessor
       .use(remark2rehype, config.remark2rehype)
 
-      .use(rehypeHighlight)
+    if (!config.noTypography) {
+      mdProcessor
+        .use(rehypeHighlight)
+    }
+
+    mdProcessor
       .use(rehypeHTMLBlocks)
       .use(rehypeFootnotesTitles, config.footnotesTitles)
       .use(rehypeKatex, config.katex)
