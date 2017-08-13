@@ -2,6 +2,8 @@ const visit = require('unist-util-visit')
 
 module.exports = plugin
 
+const defaultLanguage = 'text'
+
 const appendiceVisitorFactory = ({title, root}) => (node) => {
   const inAppendix = []
   let appendixIndex = 1
@@ -39,7 +41,14 @@ const appendiceVisitorFactory = ({title, root}) => (node) => {
   }
 }
 
+const forceDefaultLanguageVisitor = (slectedDefaultLanguage) => (node) => {
+  node.lang = node.lang || selectedDefaultLanguage
+}
+
 function plugin (ctx, root) {
   const title = ctx.codeAppendiceTitle || 'Appendices'
-  return {codeInTableVisitor: appendiceVisitorFactory({title, root})}
+  return {
+    codeInTableVisitor: appendiceVisitorFactory({title, root}),
+    forceDefaultLanguageVisitor: forceDefaultLanguageVisitor(ctx.defaultLanguage || defaultLanguage)
+  }
 }

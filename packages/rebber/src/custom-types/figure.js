@@ -8,7 +8,7 @@ module.exports = figure
 
 const defaultMacros = {
   blockquote: (innerText, caption = 'Anonymous') =>
-    `\\begin{Quotation}{${caption}}\n${innerText}\n\\end{Quotation}\n\n`,
+    `\\begin{Quotation}[${caption}]\n${innerText}\n\\end{Quotation}\n\n`,
   code: (code, caption, extra) => {
     let params = `[${caption}]`
     if (extra.lines) {
