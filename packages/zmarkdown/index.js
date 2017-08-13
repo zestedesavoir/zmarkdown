@@ -28,6 +28,7 @@ const remark2rehype = require('remark-rehype')
 
 const rehypeKatex = require('rehype-katex')
 const rehypeFootnotesTitles = require('rehype-footnotes-title')
+const rehypeHighlight = require('rehype-highlight')
 const rehypeHTMLBlocks = require('rehype-html-blocks')
 const rehypeStringify = require('rehype-stringify')
 
@@ -65,8 +66,8 @@ const zmdParser = (config) => {
     .use(remarkSubSuper)
     .use(remarkTrailingSpaceHeading)
     .use(() => (tree, file) => {
-      // if we don't have any head, we add a flag to disable the Table of Contents
-      // directly in the latex template
+      // if we don't have any headings, we add a flag to disable
+      // the Table of Contents directly in the latex template
       file.data.disableToc = true
       visit(tree, 'heading', () => {
         file.data.disableToc = false
@@ -85,6 +86,7 @@ const rendererFactory = (config, to = 'html') => (input, cb) => {
     mdProcessor
       .use(remark2rehype, config.remark2rehype)
 
+      .use(rehypeHighlight)
       .use(rehypeHTMLBlocks)
       .use(rehypeFootnotesTitles, config.footnotesTitles)
       .use(rehypeKatex, config.katex)

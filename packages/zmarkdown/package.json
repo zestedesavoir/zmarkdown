@@ -15,6 +15,7 @@
   "dependencies": {
     "rebber": "^1.0.2",
     "rehype-footnotes-title": "^0.0.16",
+    "rehype-highlight": "^2.0.1",
     "rehype-html-blocks": "^0.0.17",
     "rehype-katex": "^1.0.1",
     "rehype-stringify": "^3.0.0",
