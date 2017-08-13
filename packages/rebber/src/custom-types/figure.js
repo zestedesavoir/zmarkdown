@@ -28,9 +28,10 @@ const defaultMacros = {
 
 const makeExtra = {
   blockquote: node => {},
-  code: node => {
-    const extra = {language: node.lang.split(' ')[0]}
-    if (node.lang.includes(' ')) {
+  code: (node, {defaultLanguage: 'text'}) => {
+    const language = node.lang || defaultLanguage
+    const extra = {language: language.split(' ')[0]}
+    if (language.includes(' ')) {
       const tail = node.lang.split(' ')[1]
       if (tail) {
         extra.lines = tail.replace('hl_lines=', '').trim()
@@ -69,7 +70,7 @@ function figure (ctx, node, index, parent) {
     node.children = node.children[0].children
   }
 
-  const extra = has(makeExtra, type) ? makeExtra[type](wrappedNode) : undefined
+  const extra = has(makeExtra, type) ? makeExtra[type](wrappedNode, {defaultLanguage: ctx.defaultLanguage}) : undefined
   const innerText = all(ctx, node) || node.value || ''
 
   return macro(innerText.trim(), caption, extra)

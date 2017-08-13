@@ -41,14 +41,9 @@ const appendiceVisitorFactory = ({title, root}) => (node) => {
   }
 }
 
-const forceDefaultLanguageVisitor = (selectedDefaultLanguage) => (node) => {
-  node.lang = node.lang || selectedDefaultLanguage
-}
-
 function plugin (ctx, root) {
   const title = ctx.codeAppendiceTitle || 'Appendices'
   return {
     codeInTableVisitor: appendiceVisitorFactory({title, root}),
-    forceDefaultLanguageVisitor: forceDefaultLanguageVisitor(ctx.defaultLanguage || defaultLanguage)
   }
 }

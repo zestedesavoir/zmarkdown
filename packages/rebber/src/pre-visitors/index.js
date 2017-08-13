@@ -15,7 +15,6 @@ function preVisit (ctx, root) {
     imageReference: [referencePlugin(ctx).imageReferenceVisitor],
     heading: [headingPlugin(ctx)],
     iframe: [iframePlugin],
-    code: [codePlugin(ctx, root).forceDefaultLanguageVisitor]
   }
 
   const visitors = xtend(defaultVisitors, ctx.preprocessors || {})
