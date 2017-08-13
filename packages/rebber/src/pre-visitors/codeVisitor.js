@@ -41,7 +41,7 @@ const appendiceVisitorFactory = ({title, root}) => (node) => {
   }
 }
 
-const forceDefaultLanguageVisitor = (slectedDefaultLanguage) => (node) => {
+const forceDefaultLanguageVisitor = (selectedDefaultLanguage) => (node) => {
   node.lang = node.lang || selectedDefaultLanguage
 }
 
