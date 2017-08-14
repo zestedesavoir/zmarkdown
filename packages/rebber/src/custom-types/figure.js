@@ -28,7 +28,7 @@ const defaultMacros = {
 
 const makeExtra = {
   blockquote: node => {},
-  code: (node, {defaultLanguage: 'text'}) => {
+  code: (node, defaultLanguage = 'text') => {
     const language = node.lang || defaultLanguage
     const extra = {language: language.split(' ')[0]}
     if (language.includes(' ')) {
@@ -70,7 +70,7 @@ function figure (ctx, node, index, parent) {
     node.children = node.children[0].children
   }
 
-  const extra = has(makeExtra, type) ? makeExtra[type](wrappedNode, {defaultLanguage: ctx.defaultLanguage}) : undefined
+  const extra = has(makeExtra, type) ? makeExtra[type](wrappedNode, ctx.defaultLanguage) : undefined
   const innerText = all(ctx, node) || node.value || ''
 
   return macro(innerText.trim(), caption, extra)
