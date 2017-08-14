@@ -10,7 +10,7 @@ An abbreviation works the same as footnotes:
 This plugin works on MDAST, a Markdown AST
 implemented by [remark](https://github.com/wooorm/remark)
 
-*[HAST]: Markdown Abstract Syntax Tree.
+*[MDAST]: Markdown Abstract Syntax Tree.
 *[AST]: Abstract syntax tree
 ```
 
