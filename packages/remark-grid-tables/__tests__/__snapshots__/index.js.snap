@@ -48,3 +48,25 @@ too</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p>cells can be
 <p>Bug #107</p>
 <table><thead><tr><th colspan=\\"1\\" rowspan=\\"1\\"></th><th colspan=\\"2\\" rowspan=\\"1\\"><p>case1</p></th><th colspan=\\"2\\" rowspan=\\"1\\"><p>case2</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>case3</p></th></tr><tr><th colspan=\\"1\\" rowspan=\\"1\\"></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>case4</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>case5</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>case6</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>case7</p></th><th colspan=\\"1\\" rowspan=\\"1\\"></th></tr></thead><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td></tr></tbody></table>"
 `;
+
+exports[`regression: grid table in fenced code block 1`] = `
+"<pre><code>+---+---+---+
+| A | B | C |
++===+===+===+
+| D | E     |
+|   +---+---+
+|   | F | G |
++---+---+---+
+</code></pre>"
+`;
+
+exports[`regression: grid table in non-fenced code block 1`] = `
+"<pre><code>+---+---+---+
+| A | B | C |
++===+===+===+
+| D | E     |
+|   +---+---+
+|   | F | G |
++---+---+---+
+</code></pre>"
+`;

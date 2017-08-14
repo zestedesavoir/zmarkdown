@@ -422,7 +422,7 @@ module.exports = function plugin () {
   const blockTokenizers = Parser.prototype.blockTokenizers
   const blockMethods = Parser.prototype.blockMethods
   blockTokenizers.grid_table = gridTableTokenizer
-  blockMethods.splice(blockMethods.indexOf('fencedCode'), 0, 'grid_table')
+  blockMethods.splice(blockMethods.indexOf('fencedCode') + 1, 0, 'grid_table')
 
   function transformer (tree) {
     // Remove the temp block previously inserted
