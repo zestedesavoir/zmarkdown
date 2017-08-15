@@ -68,35 +68,7 @@
 <body>
   <section>
     <div class="wrapper">
-      <textarea id="editor" placeholder="Write here…" autofocus>!(https://www.youtube.com/watch?v=dQw4w9WgXcQ)
-# title 1
-
-A [link with **bold**](http://example.com)
-
-Some ZDS and ||key|| with a~~One~~ b~two~ c^three^
-
-Some typo : a'tchou "cheers"...
-
-A sentence ($S$) with *italic*[^italic] and inline match ($C_L$) and another[^bar] footnote.
-
-$$
-L = \frac{1}{2} \rho v^2 S C_L
-$$
-
-A quote:
-> With a custom block:
->
-> [[attention]]
-> | A link: [example](http://example.com)
-> | > A nested quote!
-> | After the nested quote.
-> Outside the block.
-After the quote.
-
-*[ZDS]: Look, title!
-[^bar]: bar
-[^italic]: italic
-</textarea>
+      <textarea id="editor" placeholder="Write here…" autofocus></textarea>
       <div class="debug">
         <pre><code id="ast"></code></pre>
       </div>
@@ -111,10 +83,8 @@ After the quote.
   <script src="bundle.js"></script>
   <script type="text/javascript">
     var config = ZMarkdown().config
-    config.ping.pingUsername = function () {
-      return Math.random() > 0.4
-    }
     config.headingShifter = 1
+
     ZMarkdown = ZMarkdown(config)
     var ansiUp = new AnsiUp()
     var render = document.getElementById('render')
