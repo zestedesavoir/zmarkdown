@@ -2,6 +2,10 @@
 module.exports = image
 
 const defaultMacro = (node) => {
+  /*
+  Note that MDAST `Image` nodes don't have a `width` property.
+  You might still want to specify a width since \includegraphics handles it.
+  */
   const width = node.width ? `[width=${node.width}]` : ''
   return `\\includegraphics${width}{${node.url}}`
 }

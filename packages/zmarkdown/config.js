@@ -324,9 +324,11 @@ const rebberConfig = {
     prefix: 'http://zestedesavoir.com'
   },
   image: {
-    inlineImage: function (node) {
-      return `\\inlineImage{${node.url}}`
-    },
+    inlineImage: (node) => `\\inlineImage{${node.url}}`,
+    image: (node) => `\\image{${node.url}}`,
+  },
+  figure: {
+    image: (_, caption, extra) => `\\image{${extra.url}}${caption ? `[${caption}]` : ''}\n`
   },
   headings: [
     (val) => `\\levelOneTitle{${val}}\n`,

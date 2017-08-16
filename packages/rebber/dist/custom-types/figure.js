@@ -24,9 +24,7 @@ var defaultMacros = {
     return innerText;
   },
   image: function image(_, caption, extra) {
-    var width = extra.width ? '[' + extra.width + ']' : '';
-
-    return '\\begin{center}\n    \\includegraphics' + width + '{' + extra.url + '}\n\\captionof{figure}{' + caption + '}\n\\end{center}';
+    return '\\begin{center}\n' + ('\\includegraphics' + (extra.width ? '[' + extra.width + ']' : '') + '{' + extra.url + '}\n') + ('\\captionof{figure}{' + caption + '}\n') + '\\end{center}\n';
   }
 };
 
