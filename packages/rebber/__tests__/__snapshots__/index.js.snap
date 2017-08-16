@@ -9,6 +9,10 @@ print('bla')
 print('bla')
 print('bla')
 print('bla')
+\\\\end{CodeBlock}
+
+\\\\begin{CodeBlock}{text}
+a code without lang
 \\\\end{CodeBlock}"
 `;
 
@@ -57,7 +61,7 @@ Disrupt \\\\sout{asymmetrical} unicorn, pok pok kale chips umami selfies gastrop
 
 \\\\horizontalLine
 
-\\\\begin{Quotation}{Guru}
+\\\\begin{Quotation}[Guru]
 Marfa pickled helvetica put a bird on it hot chicken williamsburg.
 Edison bulb asymmetrical \\\\texttt{keffiyeh} schlitz iceland put a bird on it hoodie affogato.
 
@@ -108,7 +112,7 @@ exports[`mix-2 1`] = `
 "(for convenience,   are replaced with simple single spaces in the tests)
 
 \\\\chapter{first 1}
-\\\\begin{Quotation}{Quotation Source}
+\\\\begin{Quotation}[Quotation Source]
 Code inside quote
 
 \\\\begin{codeBlock}[code source]{python}

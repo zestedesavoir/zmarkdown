@@ -2,6 +2,7 @@
 module.exports = code
 
 const defaultMacro = (content, lang) => {
+  if (!lang) lang = 'text'
   let param = ''
   if (lang.indexOf('hl_lines=') > -1) {
     const lines = lang.split('hl_lines=')[1].trim()

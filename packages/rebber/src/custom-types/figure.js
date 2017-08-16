@@ -8,7 +8,7 @@ module.exports = figure
 
 const defaultMacros = {
   blockquote: (innerText, caption = 'Anonymous') =>
-    `\\begin{Quotation}{${caption}}\n${innerText}\n\\end{Quotation}\n\n`,
+    `\\begin{Quotation}[${caption}]\n${innerText}\n\\end{Quotation}\n\n`,
   code: (code, caption, extra) => {
     let params = `[${caption}]`
     if (extra.lines) {
@@ -28,9 +28,10 @@ const defaultMacros = {
 
 const makeExtra = {
   blockquote: node => {},
-  code: node => {
-    const extra = {language: node.lang.split(' ')[0]}
-    if (node.lang.includes(' ')) {
+  code: (node) => {
+    const language = node.lang || 'text'
+    const extra = {language: language.split(' ')[0]}
+    if (language.includes(' ')) {
       const tail = node.lang.split(' ')[1]
       if (tail) {
         extra.lines = tail.replace('hl_lines=', '').trim()

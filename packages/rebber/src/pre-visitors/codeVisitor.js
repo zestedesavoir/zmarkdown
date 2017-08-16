@@ -41,5 +41,7 @@ const appendiceVisitorFactory = ({title, root}) => (node) => {
 
 function plugin (ctx, root) {
   const title = ctx.codeAppendiceTitle || 'Appendices'
-  return {codeInTableVisitor: appendiceVisitorFactory({title, root})}
+  return {
+    codeInTableVisitor: appendiceVisitorFactory({title, root}),
+  }
 }
