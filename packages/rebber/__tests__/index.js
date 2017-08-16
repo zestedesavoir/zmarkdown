@@ -380,3 +380,16 @@ test('custom-blocks', () => {
 
   expect(contents.trim()).toEqual(spec.expected.trim())
 })
+
+test('regression: code block without language', () => {
+  const {contents} = unified()
+    .use(reParse)
+    .use(rebber, integrationConfig)
+    .processSync(dedent`
+      \`\`\`
+      a
+      \`\`\`
+    `)
+
+  expect(contents).toMatchSnapshot()
+})

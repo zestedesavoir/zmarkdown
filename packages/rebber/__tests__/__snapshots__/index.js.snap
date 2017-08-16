@@ -212,3 +212,11 @@ exports[`mix-6 1`] = `
 
 no caption"
 `;
+
+exports[`regression: code block without language 1`] = `
+"\\\\begin{CodeBlock}{text}
+a
+\\\\end{CodeBlock}
+
+"
+`;
