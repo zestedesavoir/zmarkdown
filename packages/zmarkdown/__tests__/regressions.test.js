@@ -64,27 +64,37 @@ expect.extend({
   },
 })
 
-it('must escape a dollar with backslash', () => {
-  const markdown = '$\\alpha\\$'
+describe('math', () => {
+  it('must escape a dollar with backslash', () => {
+    const markdown = '$\\alpha\\$'
 
-  expect(renderString(markdown)).not.toMatch('inlineMath')
+    expect(renderString(markdown)).not.toMatch('inlineMath')
+  })
+
+
+  it('must not parse a raw starting dollar', () => {
+    const markdown = '`$`\\alpha$'
+
+    expect(renderString(markdown)).not.toMatch('inlineMath')
+  })
+
+  it('must not parse a raw ending dollar', () => {
+    const markdown = '$\\alpha`$` foo'
+
+    expect(renderString(markdown)).not.toMatch('inlineMath')
+  })
+
+  it("must not parse what's inside inline maths as markdown", () => {
+    const markdown = '$`\\alpha`$'
+
+    expect(renderString(markdown)).not.toMatch('<pre')
+  })
 })
 
+describe('pedantic', () => {
+  it('must not parse * and _ surrounded by spaces', () => {
+    const markdown = 'a * b * c'
 
-it('must not parse a raw starting dollar', () => {
-  const markdown = '`$`\\alpha$'
-
-  expect(renderString(markdown)).not.toMatch('inlineMath')
-})
-
-it('must not parse a raw ending dollar', () => {
-  const markdown = '$\\alpha`$` foo'
-
-  expect(renderString(markdown)).not.toMatch('inlineMath')
-})
-
-it("must not parse what's inside inline maths as markdown", () => {
-  const markdown = '$`\\alpha`$'
-
-  expect(renderString(markdown)).not.toMatch('<pre')
+    expect(renderString(markdown)).not.toMatch('strong')
+  })
 })
