@@ -45,5 +45,7 @@ var appendiceVisitorFactory = function appendiceVisitorFactory(_ref) {
 
 function plugin(ctx, root) {
   var title = ctx.codeAppendiceTitle || 'Appendices';
-  return { codeInTableVisitor: appendiceVisitorFactory({ title: title, root: root }) };
+  return {
+    codeInTableVisitor: appendiceVisitorFactory({ title: title, root: root })
+  };
 }

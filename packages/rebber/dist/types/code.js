@@ -4,6 +4,7 @@
 module.exports = code;
 
 var defaultMacro = function defaultMacro(content, lang) {
+  if (!lang) lang = 'text';
   var param = '';
   if (lang.indexOf('hl_lines=') > -1) {
     var lines = lang.split('hl_lines=')[1].trim();

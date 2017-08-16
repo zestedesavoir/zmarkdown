@@ -11,7 +11,7 @@ module.exports = figure;
 var defaultMacros = {
   blockquote: function blockquote(innerText) {
     var caption = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Anonymous';
-    return '\\begin{Quotation}{' + caption + '}\n' + innerText + '\n\\end{Quotation}\n\n';
+    return '\\begin{Quotation}[' + caption + ']\n' + innerText + '\n\\end{Quotation}\n\n';
   },
   code: function code(_code, caption, extra) {
     var params = '[' + caption + ']';
@@ -33,8 +33,9 @@ var defaultMacros = {
 var makeExtra = {
   blockquote: function blockquote(node) {},
   code: function code(node) {
-    var extra = { language: node.lang.split(' ')[0] };
-    if (node.lang.includes(' ')) {
+    var language = node.lang || 'text';
+    var extra = { language: language.split(' ')[0] };
+    if (language.includes(' ')) {
       var tail = node.lang.split(' ')[1];
       if (tail) {
         extra.lines = tail.replace('hl_lines=', '').trim();
