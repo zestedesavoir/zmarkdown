@@ -18,12 +18,11 @@ const defaultMacros = {
             `\n${code}\n\\end{codeBlock}\n\n`
   },
   table: (innerText) => innerText,
-  image: (_, caption, extra) => {
-    const width = extra.width ? `[${extra.width}]` : ''
-
-    return `\\begin{center}
-    \\includegraphics${width}{${extra.url}}\n\\captionof{figure}{${caption}}\n\\end{center}`
-  }
+  image: (_, caption, extra) =>
+    `\\begin{center}\n` +
+    `\\includegraphics${extra.width ? `[${extra.width}]` : ''}{${extra.url}}\n` +
+    `\\captionof{figure}{${caption}}\n` +
+    `\\end{center}\n`
 }
 
 const makeExtra = {

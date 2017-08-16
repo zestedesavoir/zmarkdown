@@ -48,6 +48,13 @@ const integrationConfig = {
       secret: 'FooBar',
     },
   },
+  image: {
+    inlineImage: (node) => `\\inlineImage{${node.url}}`,
+    image: (node) => `\\image{${node.url}}`,
+  },
+  figure: {
+    image: (_, caption, extra) => `\\image{${extra.url}}${caption ? `[${caption}]` : ''}\n`
+  },
 }
 
 integrationConfig.override.eCustomBlock = (ctx, node) => {
