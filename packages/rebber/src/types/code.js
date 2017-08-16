@@ -1,7 +1,8 @@
 /* Expose. */
 module.exports = code
 
-const defaultMacro = (content, lang = 'text') => {
+const defaultMacro = (content, lang) => {
+  if (!lang) lang = 'text'
   let param = ''
   if (lang.indexOf('hl_lines=') > -1) {
     const lines = lang.split('hl_lines=')[1].trim()
@@ -14,5 +15,5 @@ const defaultMacro = (content, lang = 'text') => {
 /* Stringify a Blockquote `node`. */
 function code (ctx, node) {
   const macro = ctx.code || defaultMacro
-  return macro(node.value, node.lang || ctx.defaultLanguage)
+  return macro(node.value, node.lang)
 }

@@ -7,3 +7,7 @@ print('bla')
 print('bla')
 print('bla')
 ```
+
+```
+a code without lang
+```
