@@ -1,7 +1,7 @@
 'use strict';
 
-var all = require('../all');
 var has = require('has');
+
 module.exports = list;
 
 var defaultMacro = function defaultMacro(innerText, isOrdered) {
@@ -14,6 +14,6 @@ var defaultMacro = function defaultMacro(innerText, isOrdered) {
 
 function list(ctx, node) {
   var rebberList = has(ctx, 'list') ? ctx.list : defaultMacro;
-  var itemized = all(ctx, node);
+  var itemized = require('../all')(ctx, node);
   return rebberList(itemized, node.ordered);
 }

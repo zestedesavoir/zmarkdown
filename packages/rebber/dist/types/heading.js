@@ -1,8 +1,5 @@
 'use strict';
 
-/* Dependencies. */
-var all = require('../all');
-
 /* Expose. */
 module.exports = heading;
 
@@ -26,7 +23,7 @@ var defaultHeadings = [function (val) {
  */
 function heading(ctx, node) {
   var depth = node.depth;
-  var content = all(ctx, node);
+  var content = require('../all')(ctx, node);
 
   var headings = ctx.headings || defaultHeadings;
   var fn = headings[node.depth];

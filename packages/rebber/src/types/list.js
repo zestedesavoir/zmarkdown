@@ -1,5 +1,5 @@
-const all = require('../all')
 const has = require('has')
+
 module.exports = list
 
 const defaultMacro = (innerText, isOrdered) => {
@@ -12,6 +12,6 @@ const defaultMacro = (innerText, isOrdered) => {
 
 function list (ctx, node) {
   const rebberList = has(ctx, 'list') ? ctx.list : defaultMacro
-  const itemized = all(ctx, node)
+  const itemized = require('../all')(ctx, node)
   return rebberList(itemized, node.ordered)
 }

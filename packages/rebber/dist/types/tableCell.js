@@ -1,11 +1,10 @@
 'use strict';
 
 /* Expose. */
-var all = require('../all');
 module.exports = tableCell;
 
 var defaultMacro = function defaultMacro(ctx, node) {
-  return all(ctx, node);
+  return require('../all')(ctx, node);
 };
 
 /* Stringify a tableCell `node`. */

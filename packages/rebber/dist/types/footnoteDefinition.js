@@ -1,6 +1,5 @@
 'use strict';
 
-var all = require('../all');
 module.exports = notes;
 
 var defaultMacro = function defaultMacro(identifier, text) {
@@ -9,5 +8,5 @@ var defaultMacro = function defaultMacro(identifier, text) {
 
 function notes(ctx, node) {
   var macro = ctx.footnoteDefinition || defaultMacro;
-  return macro(node.identifier, all(ctx, node).trim());
+  return macro(node.identifier, require('../all')(ctx, node).trim());
 }

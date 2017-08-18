@@ -8,12 +8,12 @@ import rebber from '../src'
 import dedent from 'dedent'
 
 const base = join(__dirname, 'fixtures')
-const specs = directory(base).reduce((tests, contents) => {
+const fixtures = directory(base).reduce((tests, contents) => {
   const parts = contents.split('.')
   if (!tests[parts[0]]) {
     tests[parts[0]] = {}
   }
-  tests[parts[0]][parts[1]] = file(join(base, contents), 'utf-8')
+  tests[parts[0]] = file(join(base, contents), 'utf-8')
   return tests
 }, {})
 
@@ -79,13 +79,13 @@ integrationConfig.override.aCustomBlock = (ctx, node) => {
 }
 
 test('heading', () => {
-  const spec = specs['heading']
+  const fixture = fixtures['heading']
   const {contents} = unified()
     .use(reParse)
     .use(rebber)
-    .processSync(spec.fixture)
+    .processSync(fixture)
 
-  expect(contents).toEqual(spec.expected)
+  expect(contents).toMatchSnapshot()
 })
 
 test('html nodes', () => {
@@ -101,7 +101,7 @@ test('html nodes', () => {
 })
 
 test('heading with custom config', () => {
-  const [fixture, expected] = [specs['heading'].fixture, specs['heading-config'].expected]
+  const fixture = fixtures['heading']
   const {contents} = unified()
     .use(reParse)
     .use(rebber, {
@@ -117,31 +117,31 @@ test('heading with custom config', () => {
     })
     .processSync(fixture)
 
-  expect(contents).toEqual(expected)
+  expect(contents).toMatchSnapshot()
 })
 
 test('paragraph', () => {
-  const spec = specs['paragraph']
+  const fixture = fixtures['paragraph']
   const {contents} = unified()
     .use(reParse)
     .use(rebber)
-    .processSync(spec.fixture)
+    .processSync(fixture)
 
-  expect(contents.trim()).toEqual(spec.expected.trim())
+  expect(contents.trim()).toMatchSnapshot()
 })
 
 test('inline-code', () => {
-  const spec = specs['inline-code']
+  const fixture = fixtures['inline-code']
   const {contents} = unified()
     .use(reParse)
     .use(rebber)
-    .processSync(spec.fixture)
+    .processSync(fixture)
 
-  expect(contents.trim()).toEqual(spec.expected.trim())
+  expect(contents.trim()).toMatchSnapshot()
 })
 
 test('emoticon', () => {
-  const spec = specs['emoticon']
+  const fixture = fixtures['emoticon']
   const {contents} = unified()
     .use(reParse)
     .use(require('remark-emoticons/src'), {emoticons})
@@ -151,42 +151,42 @@ test('emoticon', () => {
       },
       emoticons: emoticons
     })
-    .processSync(spec.fixture)
+    .processSync(fixture)
 
-  expect(contents.trim()).toEqual(spec.expected.trim())
+  expect(contents.trim()).toMatchSnapshot()
 })
 
 test('table', () => {
-  const spec = specs['table']
+  const fixture = fixtures['table']
   const {contents} = unified()
     .use(reParse)
     .use(rebber, {})
-    .processSync(spec.fixture)
+    .processSync(fixture)
 
-  expect(contents.trim()).toEqual(spec.expected.trim())
+  expect(contents.trim()).toMatchSnapshot()
 })
 
 test('blockquote', () => {
-  const spec = specs['blockquote']
+  const fixture = fixtures['blockquote']
   let compiled = unified()
     .use(reParse)
     .use(rebber)
-    .processSync(spec.fixture)
+    .processSync(fixture)
 
-  expect(compiled.contents.trim()).toEqual(spec.expected.trim())
+  expect(compiled.contents.trim()).toMatchSnapshot()
 
   compiled = unified()
     .use(reParse)
     .use(rebber, {
       blockquote: undefined
     })
-    .processSync(spec.fixture)
+    .processSync(fixture)
 
-  expect(compiled.contents.trim()).toEqual(spec.expected.trim())
+  expect(compiled.contents.trim()).toMatchSnapshot()
 })
 
 test('blockquote with custom config', () => {
-  const [fixture, expected] = [specs['blockquote'].fixture, specs['blockquote-config'].expected]
+  const fixture = fixtures['blockquote']
   const {contents} = unified()
     .use(reParse)
     .use(rebber, {
@@ -194,11 +194,11 @@ test('blockquote with custom config', () => {
     })
     .processSync(fixture)
 
-  expect(contents.trim()).toEqual(expected.trim())
+  expect(contents.trim()).toMatchSnapshot()
 })
 
 test('figure+caption', () => {
-  const spec = specs['figure']
+  const fixture = fixtures['figure']
   const {contents} = unified()
     .use(reParse)
     .use(require('remark-captions/src'))
@@ -207,23 +207,23 @@ test('figure+caption', () => {
         figure: require('../src/custom-types/figure'),
       },
     })
-    .processSync(spec.fixture)
+    .processSync(fixture)
 
-  expect(contents.trim()).toEqual(spec.expected.trim())
+  expect(contents.trim()).toMatchSnapshot()
 })
 
 test('code', () => {
-  const spec = specs['code']
+  const fixture = fixtures['code']
   const {contents} = unified()
     .use(reParse)
     .use(rebber)
-    .processSync(spec.fixture)
+    .processSync(fixture)
 
   expect(contents.trim()).toMatchSnapshot()
 })
 
 test('code+caption', () => {
-  const spec = specs['figure-code']
+  const fixture = fixtures['figure-code']
 
   const {contents} = unified()
     .use(reParse)
@@ -233,34 +233,34 @@ test('code+caption', () => {
         figure: require('../src/custom-types/figure'),
       },
     })
-    .processSync(spec.fixture)
+    .processSync(fixture)
 
-  expect(contents.trim()).toEqual(spec.expected.trim())
+  expect(contents.trim()).toMatchSnapshot()
 })
 
 test('list', () => {
-  const spec = specs['list']
+  const fixture = fixtures['list']
 
   const {contents} = unified()
     .use(reParse)
     .use(rebber)
-    .processSync(spec.fixture)
+    .processSync(fixture)
 
-  expect(contents.trim()).toEqual(spec.expected.trim())
+  expect(contents.trim()).toMatchSnapshot()
 })
 
 test('link', () => {
-  const spec = specs['link']
+  const fixture = fixtures['link']
 
   const {contents} = unified()
     .use(reParse)
     .use(rebber)
-    .processSync(spec.fixture)
+    .processSync(fixture)
 
-  expect(contents.trim()).toEqual(spec.expected.trim())
+  expect(contents.trim()).toMatchSnapshot()
 })
 
-test('link with special characters', () => {
+test('link with fixtureial characters', () => {
   const {contents} = unified()
     .use(reParse)
     .use(rebber)
@@ -272,7 +272,7 @@ test('link with special characters', () => {
 })
 
 test('link-prepend', () => {
-  const spec = specs['link-prepend']
+  const fixture = fixtures['link-prepend']
 
   const {contents} = unified()
     .use(reParse)
@@ -281,13 +281,13 @@ test('link-prepend', () => {
         prefix: 'http://zestedesavoir.com',
       },
     })
-    .processSync(spec.fixture)
+    .processSync(fixture)
 
-  expect(contents.trim()).toEqual(spec.expected.trim())
+  expect(contents.trim()).toMatchSnapshot()
 })
 
-Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEach(name => {
-  const spec = specs[name]
+Object.keys(fixtures).filter(Boolean).filter(name => name.startsWith('mix-')).forEach(name => {
+  const fixture = fixtures[name]
 
   test(name, () => {
     const {contents} = unified()
@@ -323,7 +323,7 @@ Object.keys(specs).filter(Boolean).filter(name => name.startsWith('mix-')).forEa
         center: 'custom-center',
       })
       .use(rebber, integrationConfig)
-      .processSync(spec.fixture.replace(/·/g, ' '))
+      .processSync(fixture.replace(/·/g, ' '))
 
     expect(contents.trim()).toMatchSnapshot()
   })
@@ -366,7 +366,7 @@ test('math', () => {
 })
 
 test('custom-blocks', () => {
-  const spec = specs['blocks']
+  const fixture = fixtures['blocks']
 
   const {contents} = unified()
     .use(reParse)
@@ -383,9 +383,9 @@ test('custom-blocks', () => {
       e: 'error ico-after',
     })
     .use(rebber, integrationConfig)
-    .processSync(spec.fixture.replace(/·/g, ' '))
+    .processSync(fixture.replace(/·/g, ' '))
 
-  expect(contents.trim()).toEqual(spec.expected.trim())
+  expect(contents.trim()).toMatchSnapshot()
 })
 
 test('regression: code block without language', () => {

@@ -2,6 +2,7 @@ const toVFile = require('to-vfile')
 const unified = require('unified')
 const inspect = require('unist-util-inspect')
 const visit = require('unist-util-visit')
+const dedent = require('dedent')
 
 const remarkParse = require('remark-parse')
 
@@ -32,9 +33,10 @@ const rehypeHighlight = require('rehype-highlight')
 const rehypeHTMLBlocks = require('rehype-html-blocks')
 const rehypeStringify = require('rehype-stringify')
 
-const rebberStringify = require('rebber')
+const rebberStringify = require('rebber/src')
 
-const defaultConfig = require('./config')
+const remarkConfig = require('./remark-config')
+const rebberConfig = require('./rebber-config')
 
 const fromFile = (filepath) => toVFile.readSync(filepath)
 
@@ -76,32 +78,32 @@ const zmdParser = (config) => {
   return mdProcessor
 }
 
-const rendererFactory = (config, to = 'html') => (input, cb) => {
+const rendererFactory = ({remarkConfig, rebberConfig}, to = 'html') => (input, cb) => {
   if (to === 'latex') {
-    config.noTypography = true
+    remarkConfig.noTypography = true
   }
-  const mdProcessor = zmdParser(config)
+  const mdProcessor = zmdParser(remarkConfig)
 
   if (to === 'html') {
     mdProcessor
-      .use(remark2rehype, config.remark2rehype)
+      .use(remark2rehype, remarkConfig.remark2rehype)
 
-    if (!config.noTypography) {
+    if (!remarkConfig.noTypography) {
       mdProcessor
         .use(rehypeHighlight)
     }
 
     mdProcessor
       .use(rehypeHTMLBlocks)
-      .use(rehypeFootnotesTitles, config.footnotesTitles)
-      .use(rehypeKatex, config.katex)
+      .use(rehypeFootnotesTitles, remarkConfig.footnotesTitles)
+      .use(rehypeKatex, remarkConfig.katex)
 
       .use(rehypeStringify)
   }
 
   if (to === 'latex') {
     mdProcessor
-      .use(rebberStringify, config.rebber)
+      .use(rebberStringify, rebberConfig)
   }
 
   if (typeof cb !== 'function') {
@@ -125,14 +127,29 @@ const rendererFactory = (config, to = 'html') => (input, cb) => {
   })
 }
 
-const mdastParser = (opts) => (zmd) => zmdParser(opts).parse(zmd)
+const mdastParser = (opts) => (zmd) => zmdParser(opts.remarkConfig).parse(zmd)
 
-module.exports = (opts = defaultConfig, to = 'html') => ({
-  config: opts,
-  inspect: inspect,
-  parse: mdastParser(opts),
-  rendererFactory: rendererFactory,
-  renderString: rendererFactory(opts, to),
-  renderFile: (path, cb) => rendererFactory(opts, to)(fromFile(path), cb),
-  latexDocumentTemplate: require('./latex-document-template'),
-})
+module.exports = (
+  opts = { remarkConfig, rebberConfig },
+  to = 'html'
+) => {
+  if (!opts.remarkConfig || !Object.keys(remarkConfig).length) {
+    throw new Error(dedent`
+      This module expects to be called with ({remarkConfig, rebberConfig}, to = 'html'),
+      remarkConfig is missing!`)
+  }
+  if (!opts.rebberConfig || !Object.keys(rebberConfig).length) {
+    throw new Error(dedent`
+      This module expects to be called with ({remarkConfig, rebberConfig}, to = 'html'),
+      rebberConfig is missing!`)
+  }
+  return {
+    config: opts,
+    inspect: inspect,
+    parse: mdastParser(opts),
+    rendererFactory: rendererFactory,
+    renderString: rendererFactory(opts, to),
+    renderFile: (path, cb) => rendererFactory(opts, to)(fromFile(path), cb),
+    latexDocumentTemplate: require('./latex-document-template'),
+  }
+}

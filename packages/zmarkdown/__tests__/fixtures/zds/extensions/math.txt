@@ -1,6 +1,6 @@
 inline $simple$ math
 
-inline $$doubledisplay$$ math
+*inline* $$doubledisplay$$ math
 
 $$
 display

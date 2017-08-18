@@ -1,8 +1,6 @@
 'use strict';
 
-var all = require('../all');
-
 module.exports = function (ctx, node) {
-  var macro = ctx.tableHeader ? ctx.tableHeader : all;
+  var macro = ctx.tableHeader ? ctx.tableHeader : require('../all');
   return macro(ctx, node);
 };

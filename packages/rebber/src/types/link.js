@@ -1,6 +1,5 @@
 /* Dependencies. */
 const has = require('has')
-const all = require('../all')
 const escape = require('../escaper')
 
 /* Expose. */
@@ -16,5 +15,5 @@ function link (ctx, node) {
   const macro = has(config, 'macro') ? config.macro : defaultMacro
   const prefix = has(config, 'prefix') ? config.prefix : ''
   const url = escape(node.url.startsWith('/') ? prefix + node.url : node.url)
-  return macro(all(ctx, node), url, node.title)
+  return macro(require('../all')(ctx, node), url, node.title)
 }

@@ -2,7 +2,6 @@
 
 /* Dependencies. */
 var has = require('has');
-var all = require('../all');
 var escape = require('../escaper');
 
 /* Expose. */
@@ -20,5 +19,5 @@ function link(ctx, node) {
   var macro = has(config, 'macro') ? config.macro : defaultMacro;
   var prefix = has(config, 'prefix') ? config.prefix : '';
   var url = escape(node.url.startsWith('/') ? prefix + node.url : node.url);
-  return macro(all(ctx, node), url, node.title);
+  return macro(require('../all')(ctx, node), url, node.title);
 }

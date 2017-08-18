@@ -1,13 +1,14 @@
 /* eslint-disable no-unused-vars */
 const clone = require('clone')
 
-const defaultConfig = clone(require('../config'))
-defaultConfig.noTypography = true
-defaultConfig.ping.pingUsername = () => false
+const remarkConfig = clone(require('../remark-config'))
+const rebberConfig = clone(require('../rebber-config'))
+remarkConfig.noTypography = true
+remarkConfig.ping.pingUsername = () => false
 
 const zmarkdown = require('../')
 
-const renderString = (config = defaultConfig) => {
+const renderString = (config = {remarkConfig, rebberConfig}) => {
   let configToUse = config
 
   const renderWithConfig = (input) =>
@@ -15,21 +16,15 @@ const renderString = (config = defaultConfig) => {
 
   if (typeof config === 'string') {
     const input = config
-    configToUse = defaultConfig
+    configToUse = {remarkConfig, rebberConfig}
     return renderWithConfig(input)
   }
   return renderWithConfig
 }
 
-const renderFile = (config = defaultConfig) =>
+const renderFile = (config = {remarkConfig, rebberConfig}) =>
   (input) =>
     zmarkdown(config).renderFile(input).content
-
-const configOverride = (config) => {
-  const newConfig = clone(defaultConfig)
-  Object.assign(newConfig, config)
-  return newConfig
-}
 
 /* jest */
 const HtmlDiffer = require('html-differ').HtmlDiffer
