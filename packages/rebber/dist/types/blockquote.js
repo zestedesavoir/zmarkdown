@@ -1,7 +1,6 @@
 'use strict';
 
 /* Expose. */
-var all = require('../all');
 module.exports = blockquote;
 
 var defaultMacro = function defaultMacro(innerText) {
@@ -11,6 +10,6 @@ var defaultMacro = function defaultMacro(innerText) {
 /* Stringify a Blockquote `node`. */
 function blockquote(ctx, node) {
   var macro = ctx.blockquote || defaultMacro;
-  var innerText = all(ctx, node);
+  var innerText = require('../all')(ctx, node);
   return macro(innerText.trim());
 }

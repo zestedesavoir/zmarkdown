@@ -38,6 +38,7 @@ handlers.tableHeader = require('./types/tableHeader');
 handlers.tableRow = require('./types/tableRow');
 handlers.text = require('./types/text');
 handlers.thematicBreak = require('./types/thematic-break');
+handlers.root = require('./types/root');
 
 /* Stringify `node`. */
 function one(ctx, node, index, parent, root) {
@@ -50,7 +51,7 @@ function one(ctx, node, index, parent, root) {
     throw new Error('Expected node, not `' + node + '`');
   }
 
-  if (!has(h, type)) {
+  if (!(has(h, type) && typeof h[type] === 'function')) {
     throw new Error('Cannot compile unknown node `' + type + '`');
   }
 

@@ -1,6 +1,3 @@
-/* Dependencies. */
-const all = require('../all')
-
 /* Expose. */
 module.exports = heading
 
@@ -18,7 +15,7 @@ const defaultHeadings = [
  */
 function heading (ctx, node) {
   const depth = node.depth
-  const content = all(ctx, node)
+  const content = require('../all')(ctx, node)
 
   const headings = ctx.headings || defaultHeadings
   const fn = headings[node.depth]

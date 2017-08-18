@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-vars, no-console */
 const dedent = require('dedent')
-const config = require('./config')
-config.ping.pingUsername = () => false
+const remarkConfig = require('./remark-config')
+const rebberConfig = require('./rebber-config')
+remarkConfig.ping.pingUsername = () => false
 
-const zmdHTML = require('./index')(config, 'html')
-const zmdTex = require('./index')(config, 'latex')
+const inspector = require('./index')({remarkConfig, rebberConfig})
+const zmdHTML = require('./index')({remarkConfig, rebberConfig}, 'html')
+const zmdLatex = require('./index')({remarkConfig, rebberConfig}, 'latex')
 
-const zmd = zmdHTML
+const zmd = zmdLatex
 const input = dedent`
   hey @clem
 
@@ -16,8 +18,10 @@ const input = dedent`
 
   haha
 `
-const ast = zmd.parse(input)
-console.log(zmd.inspect(ast))
+
+const ast = inspector.parse(input)
+console.log(ast)
+console.log(inspector.inspect(ast))
 
 const output = zmd.renderString(input)
 console.log(output.content)

@@ -21,6 +21,7 @@ function stringify(config) {
 
   function compiler(tree) {
     preprocess(settings, tree);
+
     return toLaTeX(tree, settings, tree);
   }
 }

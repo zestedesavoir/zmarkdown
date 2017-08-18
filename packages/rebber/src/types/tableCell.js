@@ -1,9 +1,8 @@
 /* Expose. */
-const all = require('../all')
 module.exports = tableCell
 
 const defaultMacro = (ctx, node) => {
-  return all(ctx, node)
+  return require('../all')(ctx, node)
 }
 
 /* Stringify a tableCell `node`. */
