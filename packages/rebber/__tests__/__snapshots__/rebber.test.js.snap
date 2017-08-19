@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`abbr 1`] = `
+"\\\\abbr{FOO}{bar}
+
+"
+`;
+
+exports[`abbr with custom config 1`] = `
+"->FOO<-
+
+"
+`;
+
 exports[`blockquote 1`] = `
 "\\\\begin{Quotation}
 a quote
@@ -291,7 +303,7 @@ exports[`link 1`] = `
 \\\\externalLink{an \\\\texttt{external} link}{https://wikipedia.com}"
 `;
 
-exports[`link with fixtureial characters 1`] = `"\\\\externalLink{foo}{http://example.com?a=b\\\\%c\\\\textasciicircum{}\\\\{\\\\}\\\\#foo}"`;
+exports[`link with special characters 1`] = `"\\\\externalLink{foo}{http://example.com?a=b\\\\%c\\\\textasciicircum{}\\\\{\\\\}\\\\#foo}"`;
 
 exports[`link-prepend 1`] = `
 "\\\\externalLink{an external link}{https://wikipedia.com}
