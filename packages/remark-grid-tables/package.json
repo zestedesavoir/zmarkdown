@@ -38,7 +38,7 @@
     "cross-env": "^5.0.5",
     "dedent": "^0.7.0",
     "del-cli": "^1.0.0",
-    "eslint": "^4.4.1",
+    "eslint": "^4.5.0",
     "jest": "^20.0.4",
     "rehype-stringify": "^3.0.0",
     "remark-parse": "^4.0.0",

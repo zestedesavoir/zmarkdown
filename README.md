@@ -1,4 +1,4 @@
-# zmarkdown [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status] [![Greenkeeper badge](https://badges.greenkeeper.io/zestedesavoir/zmarkdown.svg)](https://greenkeeper.io/)
+# zmarkdown [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
 This repository forms the basis for zmarkdown, the JavaScript project intended to replace [Python-ZMarkdown][pyzmd], the current Markdown engine powering [Zeste de Savoir][zds].
 
