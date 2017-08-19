@@ -1,6 +1,6 @@
 'use strict';
 
-// just a default one while I'm not sure what to do about all linkRef types
+// TODO @artragis - just a default one while I'm not sure what to do about all linkRef types
 module.exports = linkReference;
 
 var defaultMacro = function defaultMacro(reference, inner) {

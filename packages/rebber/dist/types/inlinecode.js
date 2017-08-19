@@ -1,5 +1,6 @@
 'use strict';
 
+// TODO: make it customizable
 /* Expose. */
 module.exports = inlineCode;
 

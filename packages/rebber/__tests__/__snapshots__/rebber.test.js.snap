@@ -142,6 +142,12 @@ print('bla')
 \\\\end{codeBlock}"
 `;
 
+exports[`comments blocks 1`] = `
+"Foo<--COMMENTS I am a comment COMMENTS-->bar
+
+"
+`;
+
 exports[`custom-blocks 1`] = `
 "\\\\begin{Information}
 info

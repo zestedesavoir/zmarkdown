@@ -1,6 +1,8 @@
-/* Expose. */
 const one = require('../one')
+
+/* Expose. */
 module.exports = table
+
 const defaultHeaderParse = (rows) => {
   const lengths = rows.map(l => l.split('&').length)
   const cols = lengths.sort(cmp)[0]

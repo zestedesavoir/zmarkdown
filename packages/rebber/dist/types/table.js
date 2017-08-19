@@ -1,8 +1,10 @@
 'use strict';
 
-/* Expose. */
 var one = require('../one');
+
+/* Expose. */
 module.exports = table;
+
 var defaultHeaderParse = function defaultHeaderParse(rows) {
   var lengths = rows.map(function (l) {
     return l.split('&').length;

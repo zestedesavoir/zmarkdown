@@ -25,23 +25,24 @@ const emoticons = {
 
 const integrationConfig = {
   override: {
+    abbr: require('../src/custom-types/abbr'),
+    centerAligned: require('../src/custom-types/align'),
     emoticon: require('../src/custom-types/emoticon'),
+    errorCustomBlock: require('../src/custom-types/customBlocks'),
     figure: require('../src/custom-types/figure'),
-    sub: require('../src/custom-types/sub'),
-    sup: require('../src/custom-types/sup'),
+    gridTable: require('../src/custom-types/gridTable'),
+    informationCustomBlock: require('../src/custom-types/customBlocks'),
+    inlineMath: require('../src/custom-types/math'),
     kbd: require('../src/custom-types/kbd'),
     leftAligned: require('../src/custom-types/align'),
-    centerAligned: require('../src/custom-types/align'),
-    rightAligned: require('../src/custom-types/align'),
-    errorCustomBlock: require('../src/custom-types/customBlocks'),
-    informationCustomBlock: require('../src/custom-types/customBlocks'),
-    questionCustomBlock: require('../src/custom-types/customBlocks'),
-    secretCustomBlock: require('../src/custom-types/customBlocks'),
-    warningCustomBlock: require('../src/custom-types/customBlocks'),
-    gridTable: require('../src/custom-types/gridTable'),
-    abbr: require('../src/custom-types/abbr'),
     math: require('../src/custom-types/math'),
-    inlineMath: require('../src/custom-types/math'),
+    questionCustomBlock: require('../src/custom-types/customBlocks'),
+    rightAligned: require('../src/custom-types/align'),
+    secretCustomBlock: require('../src/custom-types/customBlocks'),
+    sub: require('../src/custom-types/sub'),
+    sup: require('../src/custom-types/sup'),
+    tableHeader: require('../src/custom-types/tableHeader'),
+    warningCustomBlock: require('../src/custom-types/customBlocks'),
   },
   emoticons: emoticons,
   codeAppendiceTitle: 'Annexes',
@@ -436,4 +437,15 @@ test('regression: code block without language', () => {
     `)
 
   expect(contents).toMatchSnapshot()
+})
+
+test.skip('comments blocks', () => {
+  const {contents} = unified()
+    .use(reParse)
+    .use(rebber, integrationConfig)
+    .processSync(dedent`
+      Foo<--COMMENTS I am a comment COMMENTS-->bar
+    `)
+
+  expect(contents).toMatch('begin{comment}')
 })
