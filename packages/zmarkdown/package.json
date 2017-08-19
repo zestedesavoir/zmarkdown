@@ -40,7 +40,7 @@
     "remark-sub-super": "^1.0.4",
     "sync-request": "^4.1.0",
     "textr": "^0.3.0",
-    "to-vfile": "^2.1.1",
+    "to-vfile": "^2.1.2",
     "typographic-apostrophes": "^1.1.1",
     "typographic-apostrophes-for-possessive-plurals": "^1.0.5",
     "typographic-colon": "^1.0.4",
@@ -68,11 +68,11 @@
     "browserify": "^14.4.0",
     "clone": "^2.1.1",
     "dedent": "^0.7.0",
-    "envify": "^4.0.0",
-    "eslint": "^4.4.1",
+    "envify": "^4.1.0",
+    "eslint": "^4.5.0",
     "exorcist": "^0.4.0",
     "html-differ": "^1.3.4",
-    "uglifyify": "^4.0.0"
+    "uglifyify": "^4.0.3"
   },
   "bin": {
     "zmarkdown": "./bin/index.js"
