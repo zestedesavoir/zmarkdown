@@ -3,9 +3,13 @@
 /* Expose. */
 module.exports = thematicBreak;
 
+var defaultMacro = function defaultMacro() {
+  return '\\horizontalLine\n\n';
+};
+
 /* Stringify a delete `node`. */
 function thematicBreak(ctx, node, index, parent) {
-  var cmd = ctx.thematicBreak || '\\horizontalLine';
+  var macro = ctx.thematicBreak || defaultMacro;
 
-  return cmd + '\n\n';
+  return macro(node);
 }

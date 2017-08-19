@@ -4,6 +4,8 @@ const rebberConfig = {
   override: {
     abbr: require('rebber/dist/custom-types/abbr'),
     centerAligned: require('rebber/dist/custom-types/align'),
+    // TODO: 'comment' nodes don't exist!
+    // comment: require('rebber/dist/custom-types/comment'),
     emoticon: require('rebber/dist/custom-types/emoticon'),
     errorCustomBlock: require('rebber/dist/custom-types/customBlocks'),
     figure: require('rebber/dist/custom-types/figure'),
@@ -13,12 +15,12 @@ const rebberConfig = {
     kbd: require('rebber/dist/custom-types/kbd'),
     leftAligned: require('rebber/dist/custom-types/align'),
     math: require('rebber/dist/custom-types/math'),
-    ping: require('rebber/dist/types/link'),
     questionCustomBlock: require('rebber/dist/custom-types/customBlocks'),
     rightAligned: require('rebber/dist/custom-types/align'),
     secretCustomBlock: require('rebber/dist/custom-types/customBlocks'),
     sub: require('rebber/dist/custom-types/sub'),
     sup: require('rebber/dist/custom-types/sup'),
+    tableHeader: require('rebber/dist/custom-types/tableHeader'),
     warningCustomBlock: require('rebber/dist/custom-types/customBlocks'),
   },
   emoticons: remarkConfig.emoticons,

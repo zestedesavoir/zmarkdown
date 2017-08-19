@@ -1,3 +1,4 @@
+// TODO: make it customizable
 /* Dependencies. */
 const text = require('./text')
 

@@ -7287,3 +7287,5760 @@ exports[`remark fixtures tricky-list 1`] = `
 \\\\item hello world
 \\\\end{itemize}"
 `;
+
+exports[`remark fixtures with custom macros amps-and-angles-encoding 1`] = `
+"AT\\\\&T has an ampersand in their name.
+
+
+
+AT\\\\&T is another way to write it.
+
+
+
+This \\\\& that.
+
+
+
+4 < 5.
+
+
+
+6 > 5.
+
+
+
+Here's a linkReference(reference=1, content=link) with an ampersand in the URL.
+
+
+
+Here's a link with an amersand in the link text: linkReference(reference=2, content=AT\\\\&T).
+
+
+
+Here's an inline \\\\externalLink{link}{/script?foo=1\\\\&bar=2}.
+
+
+
+Here's an inline \\\\externalLink{link}{/script?foo=1\\\\&bar=2}.
+
+
+
+definition(identifier=1-1-1-1-1-1, url=http://example.com/?foo=1&bar=2, title=null)
+
+definition(identifier=2-1-1-1, url=http://att.com/, title=AT&T)"
+`;
+
+exports[`remark fixtures with custom macros auto-link 1`] = `
+"Link: \\\\externalLink{http://example.com/}{http://example.com/}.
+
+
+
+Link to an email: \\\\externalLink{somename@example.com}{mailto:somename@example.com}.
+
+
+
+Link to an email: \\\\externalLink{somename@example.com}{mailto:somename@example.com}.
+
+
+
+With an ampersand: \\\\externalLink{http://example.com/?foo=1\\\\&bar=2}{http://example.com/?foo=1\\\\&bar=2}
+
+
+
+unorderedList(listItem(In a list?)listItem(\\\\externalLink{http://example.com/}{http://example.com/})listItem(It should.))
+
+blockquote(Blockquoted: \\\\externalLink{http://example.com/}{http://example.com/})
+
+Auto-links should not occur here: \\\\texttt{<http://example.com/>}
+
+
+
+code(or here: <http://example.com/>)"
+`;
+
+exports[`remark fixtures with custom macros auto-link-invalid 1`] = `
+"<http:/
+
+
+
+<https:/
+
+
+
+<mailto:foobarbaz>
+
+
+
+<http:/google
+
+
+
+<foo@"
+`;
+
+exports[`remark fixtures with custom macros auto-link-lines 1`] = `
+"hello world
+\\\\externalLink{http://example.com}{http://example.com}
+
+
+
+hello world
+\\\\externalLink{somename@example.com}{mailto:somename@example.com}"
+`;
+
+exports[`remark fixtures with custom macros auto-link-output 1`] = `
+"Link: \\\\externalLink{http://example.com/}{http://example.com/}.
+
+
+
+Link to an email: \\\\externalLink{somename@example.com}{mailto:somename@example.com}.
+
+
+
+Link without protocol, which should not render as an auto-link
+because they are easily mistaken for HTML: \\\\externalLink{google.com}{google.com}."
+`;
+
+exports[`remark fixtures with custom macros auto-link-url 1`] = `
+"This should be a link: \\\\externalLink{http://example.com/hello-world}{http://example.com/hello-world}.
+
+
+
+Also, subdomain should be a part of the link (\\\\externalLink{http://foo.example.com/(hello[world])}{http://foo.example.com/(hello[world])}).
+
+
+
+So should this: \\\\externalLink{foo@bar.com}{mailto:foo@bar.com}."
+`;
+
+exports[`remark fixtures with custom macros auto-link-url-invalid 1`] = `
+"http://<example
+
+
+
+https:// foo bar baz.
+
+
+
+mailto:.
+
+
+
+http://,
+
+
+
+https://:
+
+
+
+mailto:;
+
+
+
+http://\\"
+
+
+
+https://'
+
+
+
+mailto:)
+
+
+
+http://]"
+`;
+
+exports[`remark fixtures with custom macros backslash-escapes 1`] = `
+"These should all get escaped:
+
+
+
+Backslash: \\\\textbackslash{}
+
+
+
+Backtick: \`
+
+
+
+Asterisk: *
+
+
+
+Underscore: \\\\_
+
+
+
+Left brace: \\\\{
+
+
+
+Right brace: \\\\}
+
+
+
+Left bracket: [
+
+
+
+Right bracket: ]
+
+
+
+Left paren: (
+
+
+
+Right paren: )
+
+
+
+Greater-than: >
+
+
+
+Hash: \\\\#
+
+
+
+Period: .
+
+
+
+Bang: !
+
+
+
+Plus: +
+
+
+
+Minus: -
+
+
+
+\\\\textbf{GFM:}
+
+
+
+Pipe: |
+
+
+
+Tilde: \\\\textasciitilde{}
+
+
+
+\\\\textbf{Commonmark:}
+
+
+
+Quote: \\\\textbackslash{}\\"
+
+
+
+Dollar: \\\\textbackslash{}\\\\$
+
+
+
+Percentage: \\\\textbackslash{}\\\\%
+
+
+
+Ampersand: \\\\textbackslash{}\\\\&
+
+
+
+Single quote: \\\\textbackslash{}'
+
+
+
+Comma: \\\\textbackslash{},
+
+
+
+Forward slash: \\\\textbackslash{}/
+
+
+
+Colon: \\\\textbackslash{}:
+
+
+
+Semicolon: \\\\textbackslash{};
+
+
+
+Less-than: \\\\textbackslash{}<
+
+
+
+Equals: \\\\textbackslash{}=
+
+
+
+Question mark: \\\\textbackslash{}?
+
+
+
+At-sign: \\\\textbackslash{}@
+
+
+
+Caret: \\\\textbackslash{}\\\\textasciicircum{}
+
+
+
+New line: \\\\textbackslash{}
+only works in paragraphs.
+
+
+
+These should not, because they occur within a code block:
+
+
+
+code(Backslash: \\\\\\\\
+
+Backtick: \\\\\`
+
+Asterisk: \\\\*
+
+Underscore: \\\\_
+
+Left brace: \\\\{
+
+Right brace: \\\\}
+
+Left bracket: \\\\[
+
+Right bracket: \\\\]
+
+Left paren: \\\\(
+
+Right paren: \\\\)
+
+Greater-than: \\\\>
+
+Hash: \\\\#
+
+Period: \\\\.
+
+Bang: \\\\!
+
+Plus: \\\\+
+
+Minus: \\\\-)
+
+\\\\textbf{GFM:}
+
+
+
+code(Pipe: \\\\|
+
+Tilde: \\\\~)
+
+\\\\textbf{Commonmark:}
+
+
+
+code(Quote: \\\\\\"
+
+Dollar: \\\\$
+
+Percentage: \\\\%
+
+Ampersand: \\\\&
+
+Single quote: \\\\'
+
+Comma: \\\\,
+
+Forward slash: \\\\/
+
+Colon: \\\\:
+
+Semicolon: \\\\;
+
+Less-than: \\\\<
+
+Equals: \\\\=
+
+Question mark: \\\\?
+
+At-sign: \\\\@
+
+Caret: \\\\^
+
+New line: \\\\
+only works in paragraphs.)
+
+Nor should these, which occur in code spans:
+
+
+
+Backslash: \\\\texttt{\\\\textbackslash{}\\\\textbackslash{}}
+
+
+
+Backtick: \\\\texttt{\\\\textbackslash{}\`}
+
+
+
+Asterisk: \\\\texttt{\\\\textbackslash{}*}
+
+
+
+Underscore: \\\\texttt{\\\\textbackslash{}\\\\_}
+
+
+
+Left brace: \\\\texttt{\\\\textbackslash{}\\\\{}
+
+
+
+Right brace: \\\\texttt{\\\\textbackslash{}\\\\}}
+
+
+
+Left bracket: \\\\texttt{\\\\textbackslash{}[}
+
+
+
+Right bracket: \\\\texttt{\\\\textbackslash{}]}
+
+
+
+Left paren: \\\\texttt{\\\\textbackslash{}(}
+
+
+
+Right paren: \\\\texttt{\\\\textbackslash{})}
+
+
+
+Greater-than: \\\\texttt{\\\\textbackslash{}>}
+
+
+
+Hash: \\\\texttt{\\\\textbackslash{}\\\\#}
+
+
+
+Period: \\\\texttt{\\\\textbackslash{}.}
+
+
+
+Bang: \\\\texttt{\\\\textbackslash{}!}
+
+
+
+Plus: \\\\texttt{\\\\textbackslash{}+}
+
+
+
+Minus: \\\\texttt{\\\\textbackslash{}-}
+
+
+
+\\\\textbf{GFM:}
+
+
+
+Pipe: \\\\texttt{\\\\textbackslash{}|}
+
+
+
+Tilde: \\\\texttt{\\\\textbackslash{}\\\\textasciitilde{}}
+
+
+
+\\\\textbf{Commonmark:}
+
+
+
+Quote: \\\\texttt{\\\\textbackslash{}\\"}
+
+
+
+Dollar: \\\\texttt{\\\\textbackslash{}\\\\$}
+
+
+
+Percentage: \\\\texttt{\\\\textbackslash{}\\\\%}
+
+
+
+Ampersand: \\\\texttt{\\\\textbackslash{}\\\\&}
+
+
+
+Single quote: \\\\texttt{\\\\textbackslash{}'}
+
+
+
+Comma: \\\\texttt{\\\\textbackslash{},}
+
+
+
+Forward slash: \\\\texttt{\\\\textbackslash{}/}
+
+
+
+Colon: \\\\texttt{\\\\textbackslash{}:}
+
+
+
+Semicolon: \\\\texttt{\\\\textbackslash{};}
+
+
+
+Less-than: \\\\texttt{\\\\textbackslash{}<}
+
+
+
+Equals: \\\\texttt{\\\\textbackslash{}=}
+
+
+
+Question mark: \\\\texttt{\\\\textbackslash{}?}
+
+
+
+At-sign: \\\\texttt{\\\\textbackslash{}@}
+
+
+
+Caret: \\\\texttt{\\\\textbackslash{}\\\\textasciicircum{}}
+
+
+
+New line: \\\\texttt{\\\\textbackslash{}} only works in paragraphs.
+
+
+
+These should get escaped, even though they're matching pairs for
+other Markdown constructs:
+
+
+
+*asterisks*
+
+
+
+\\\\_underscores\\\\_
+
+
+
+\`backticks\`
+
+
+
+This is a code span with a literal backslash-backtick sequence: \\\\texttt{\\\\textbackslash{}\`}
+
+
+
+This is a tag with unescaped backticks <span attr='\`ticks\`'>bar</span>.
+
+
+
+This is a tag with backslashes <span attr='\\\\\\\\backslashes\\\\\\\\'>bar</span>."
+`;
+
+exports[`remark fixtures with custom macros block-elements 1`] = `
+"unorderedList(listItem(Different lists should receive two newline characters
+between them.))
+
+
+unorderedList(listItem(This is another list.))
+
+blockquote(unorderedList(listItem(The same goes for lists in block quotes.))unorderedList(listItem(This is another list.)))
+
+unorderedList(listItem(And for lists in lists:
+
+orderedList(listItem(First sublist.))))
+
+
+code(1.   Second sublist.)
+
+And for lists followed by indented code blocks:
+
+
+
+unorderedList(listItem(This is a paragraph in a list))
+
+
+code(And this is code();)"
+`;
+
+exports[`remark fixtures with custom macros blockquote-indented 1`] = `
+"blockquote(bar
+baz)"
+`;
+
+exports[`remark fixtures with custom macros blockquote-lazy-code 1`] = `
+"blockquote(code(foo
+bar))"
+`;
+
+exports[`remark fixtures with custom macros blockquote-lazy-fence 1`] = `
+"blockquote(code(aNormalCodeBlockInABlockqoute();))
+
+A paragraph.
+
+
+
+blockquote(code(thisIsAlsoSomeCodeInABlockquote();))
+
+A paragraph.
+
+
+
+blockquote(code(aNonTerminatedCodeBlockInABlockquote();)aNewCodeBlockFollowingTheBlockQuote();
+
+code())
+
+A paragraph.
+
+
+
+blockquote(Something in a blockquote.
+
+code(aNewCodeBlock();))"
+`;
+
+exports[`remark fixtures with custom macros blockquote-lazy-list 1`] = `
+"blockquote(This is a blockquote.
+
+unorderedList(listItem(And in normal mode this is an internal list, but in commonmark this is a top level list.)))"
+`;
+
+exports[`remark fixtures with custom macros blockquote-lazy-rule 1`] = `
+"blockquote(This is a blockquote. Followed by a rule.
+
+thematicBreak(---))"
+`;
+
+exports[`remark fixtures with custom macros blockquote-list-item 1`] = `
+"This fails in markdown.pl and upskirt:
+
+
+
+unorderedList(listItem(hello
+
+blockquote(world)))"
+`;
+
+exports[`remark fixtures with custom macros blockquotes 1`] = `
+"blockquote(This is a blockquote.
+
+This is, in commonmark mode, another blockquote.)"
+`;
+
+exports[`remark fixtures with custom macros blockquotes-empty-lines 1`] = `
+"blockquote(Note there is no space on the following line.
+
+Note there is no space on the preceding line.)"
+`;
+
+exports[`remark fixtures with custom macros blockquotes-with-code-blocks 1`] = `
+"blockquote(Example:
+
+code(sub status {
+    print \\"working\\";
+})Or:
+
+code(sub status {
+    return \\"working\\";
+}))"
+`;
+
+exports[`remark fixtures with custom macros bom 1`] = `
+"heading2(Hello from a BOM)
+
+Be careful when editing this file!"
+`;
+
+exports[`remark fixtures with custom macros breaks-hard 1`] = `
+"These are not breaks:
+
+
+
+Look at the
+pretty line
+breaks.
+
+
+
+These are breaks:
+
+
+
+Look at thebreak(---)pretty linebreak(---)breaks.
+
+
+
+In \\\\texttt{commonmark: true} mode, an escaped newline character is exposed as a \\\\texttt{break} node:
+
+
+
+Look at the\\\\textbackslash{}
+pretty line\\\\textbackslash{}
+breaks."
+`;
+
+exports[`remark fixtures with custom macros case-insensitive-refs 1`] = `
+"linkReference(reference=hi, content=hi)
+
+
+
+definition(identifier=hi-1-1, url=/url, title=null)"
+`;
+
+exports[`remark fixtures with custom macros code-block 1`] = `
+"Tildes:
+
+
+
+codeJavascript(alert('Hello World!');)"
+`;
+
+exports[`remark fixtures with custom macros code-block-indentation 1`] = `
+"Fenced code blocks are normally not exdented, however,
+when the initial fence is indented by spaces, the value of
+the code is exdented by up to that amount of spaces.
+
+
+
+code(    This is a code block...
+        
+    ...which is not exdented.)
+
+But...
+
+
+
+code(  This one...
+      
+  ...is.)
+
+And...
+
+
+
+code(So is this...
+      
+  ...one.)"
+`;
+
+exports[`remark fixtures with custom macros code-block-nesting-bug 1`] = `
+"GitHub, thus RedCarpet, has a bug where “nested” fenced code blocks,
+even with shorter fences, can exit their actual “parent” block.
+
+
+
+Note that this bug does not occur on indented code-blocks.
+
+
+
+codeFoo(\`\`\`bar
+baz
+\`\`\`)
+
+Even with a different fence marker:
+
+
+
+codeFoo(~~~bar
+baz
+~~~)
+
+And reversed:
+
+
+
+codeFoo(~~~bar
+baz
+~~~)
+
+codeFoo(\`\`\`bar
+baz
+\`\`\`)"
+`;
+
+exports[`remark fixtures with custom macros code-blocks 1`] = `
+"code(code block on the first line)
+
+Regular text.
+
+
+
+code(code block indented by spaces)
+
+Regular text.
+
+
+
+code(the lines in this block  
+all contain trailing spaces  )
+
+Regular Text.
+
+
+
+code(code block on the last line)"
+`;
+
+exports[`remark fixtures with custom macros code-spans 1`] = `
+"\\\\texttt{<test a=\\"} content of attribute \\\\texttt{\\">}
+
+
+
+Fix for backticks within HTML tag: <span attr='\`ticks\`'>like this</span>
+
+
+
+Here's how you put \\\\texttt{\`backticks\`} in a code span.
+
+
+
+Additionally, empty code spans are also supported: \\\\texttt{}.
+
+
+
+Here’s an example, \\\\texttt{foo \` bar}.
+
+
+
+And here, \\\\texttt{\`\`}.
+
+
+
+\\\\texttt{// this is also inline code}
+
+
+
+So is this \\\\texttt{foo   bar
+  baz}.
+
+
+
+And this \\\\texttt{foo \`\` bar}
+
+
+
+And \\\\texttt{this\\\\textbackslash{}}but this is text\`."
+`;
+
+exports[`remark fixtures with custom macros def-blocks 1`] = `
+"blockquote(hello
+
+linkReference(reference=1, content=1): hello)
+
+thematicBreak(---)
+
+blockquote(hello)
+
+definition(identifier=2-1-1-1-1, url=hello, title=null)
+
+unorderedList(listItem(hello)listItem(linkReference(reference=3, content=3): hello))
+
+
+unorderedList(listItem(hello))
+
+definition(identifier=4-1-1, url=hello, title=null)
+
+blockquote(foo
+bar)
+
+definition(identifier=1-1-1-1-1-1-1, url=foo, title=null)
+
+blockquote(bar)"
+`;
+
+exports[`remark fixtures with custom macros definition-newline 1`] = `
+"linkReference(reference=baz, content=baz): /url (
+)
+
+
+
+linkReference(reference=foo, content=foo): /url \\"
+\\"
+
+
+
+linkReference(reference=bar, content=bar): /url '
+'
+
+
+
+definition(identifier=baz-1-1-1-1, url=/url, title=foo
+bar)
+
+definition(identifier=baz-1-1-1-1-1, url=/url, title=foo
+bar)
+
+definition(identifier=baz-1-1-1-1-1-1, url=/url, title=foo
+bar)
+
+linkReference(reference=baz, content=baz): /url 'foo"
+`;
+
+exports[`remark fixtures with custom macros definition-unclosed 1`] = `
+"linkReference(reference=foo, content=foo):
+
+
+
+definition(identifier=bar-1-1, url=</url, title=null)
+
+linkReference(reference=foo, content=foo):"
+`;
+
+exports[`remark fixtures with custom macros definition-unclosed-attribute 1`] = `
+"linkReference(reference=baz, content=baz): /url (there
+
+
+
+linkReference(reference=foo, content=foo): /url \\"there
+
+
+
+linkReference(reference=bar, content=bar): /url 'there
+
+
+
+linkReference(reference=baz, content=baz): url (
+
+
+
+linkReference(reference=foo, content=foo): url \\"
+
+
+
+linkReference(reference=bar, content=bar): /url '
+
+
+
+linkReference(reference=baz, content=baz): <url>(
+
+
+
+linkReference(reference=foo, content=foo): <url>\\"
+
+
+
+linkReference(reference=bar, content=bar): <url>'"
+`;
+
+exports[`remark fixtures with custom macros deletion 1`] = `"hello \\\\sout{hi} world"`;
+
+exports[`remark fixtures with custom macros double-link 1`] = `
+"<p>Already linked: <a href=\\"http://example.com/\\">http://example.com/</a>.</p>
+
+Already linked: \\\\externalLink{http://example.com/}{http://example.com/}.
+
+
+
+Already linked: <a href=\\"http://example.com/\\">\\\\textbf{http://example.com/}</a>."
+`;
+
+exports[`remark fixtures with custom macros emphasis 1`] = `
+"\\\\textit{emphasis}.
+
+
+
+\\\\textbf{strong}."
+`;
+
+exports[`remark fixtures with custom macros emphasis-empty 1`] = `
+"Hello ** ** world.
+
+
+
+Hello \\\\_\\\\_	\\\\_\\\\_ world.
+
+
+
+Hello *	* world.
+
+
+
+Hello \\\\_	\\\\_ world."
+`;
+
+exports[`remark fixtures with custom macros emphasis-escaped-final-marker 1`] = `
+"*bar*
+
+
+
+**bar**
+
+
+
+\\\\_bar\\\\_
+
+
+
+\\\\_\\\\_bar\\\\_\\\\_"
+`;
+
+exports[`remark fixtures with custom macros emphasis-internal 1`] = `"These words should\\\\_not\\\\_be\\\\_emphasized."`;
+
+exports[`remark fixtures with custom macros empty 1`] = `""`;
+
+exports[`remark fixtures with custom macros entities 1`] = `
+"Lots of entities are supported in mdast:  , \\\\&, ©, Æ,
+Ď, ¾, ℋ, ⅆ,
+∲, \\\\&c.  Even some entities with a missing
+terminal semicolon are parsed correctly (as per the HTML5 spec):
+ÿ, á, ©, and \\\\&.
+
+
+
+However, \\\\&MadeUpEntities; are kept in the document.
+
+
+
+Entities even work in the language flag of fenced code blocks:
+
+
+
+codeSome—language(alert('Hello');)
+
+Or in \\\\externalLink{línks}{\\\\textasciitilde{}/some—file}
+
+
+
+Or in \\\\includegraphics{~/an–image.png}
+
+
+
+But, entities are not interpreted in \\\\texttt{inline c\\\\&ouml;de}, or in
+code blocks:
+
+
+
+code(C&Ouml;DE block.)"
+`;
+
+exports[`remark fixtures with custom macros entities-advanced 1`] = `
+"blockquote(However, \\\\&MadeUpEntities; are kept in the document.
+
+Entities even work in the language flag of fenced code blocks:
+
+codeSome©language(alert('Hello');)And in an auto-link: \\\\externalLink{http://example©xample.com}{http://example©xample.com}
+
+Foo and bar and \\\\externalLink{http://example©xample.com}{http://example©xample.com} and baz.
+
+Or in \\\\externalLink{l©nks}{\\\\textasciitilde{}/some©file}
+
+Or in \\\\externalLink{l©lnks}{\\\\textasciitilde{}/some©file}
+
+Or in \\\\includegraphics{~/some©file})
+
+thematicBreak(---)
+
+blockquote(Or in \\\\includegraphics{~/some©file}
+
+Or in \\\\includegraphics{undefined}
+
+linkReference(reference=1, content=1): \\\\externalLink{http://example©xample.com}{http://example©xample.com} \\"in some
+pl©ce\\"
+
+linkReference(reference= 1 , content=
+  1
+): \\\\externalLink{http://example©xample.com}{http://example©xample.com} \\"in some
+pl©ce\\")
+
+thematicBreak(---)
+
+blockquote(But, entities are not interpreted in \\\\texttt{inline c\\\\&oumlde}, or in
+code blocks:
+
+code(C&OumlDE block.))"
+`;
+
+exports[`remark fixtures with custom macros escaped-angles 1`] = `">"`;
+
+exports[`remark fixtures with custom macros fenced-code 1`] = `
+"codeJs(var a = 'hello';
+console.log(a + ' world');)
+
+codeBash(echo \\"hello, \${WORLD}\\")
+
+codeLongfence(Q: What do you call a tall person who sells stolen goods?)
+
+codeManyTildes(A longfence!)"
+`;
+
+exports[`remark fixtures with custom macros fenced-code-empty 1`] = `
+"Normal with language tag:
+
+
+
+codeJs()
+
+With white space:
+
+
+
+codeBash()
+
+With very long fences:
+
+
+
+code()
+
+With nothing:
+
+
+
+code()"
+`;
+
+exports[`remark fixtures with custom macros fenced-code-trailing-characters 1`] = `
+"codeJs(foo();
+\`\`\`bash)"
+`;
+
+exports[`remark fixtures with custom macros fenced-code-trailing-characters-2 1`] = `"code(\`\`\` aaa)"`;
+
+exports[`remark fixtures with custom macros fenced-code-white-space-after-flag 1`] = `
+"codeJs(foo();)
+
+codeBash(echo \\"hello, \${WORLD}\\")"
+`;
+
+exports[`remark fixtures with custom macros footnote 1`] = `
+"Here is some text containing a footnotefootnoteReference(somesamplefootnote). You can then continue your thought...
+
+
+
+footnoteDefinition(identifier=somesamplefootnote, text=Here is the text of the footnote itself.)
+
+Even go to a new linkReference(reference=paragraph, content=paragraph) and the footnotes will go to the bottom of the documentfootnoteReference(documentdetails).
+
+
+
+footnoteDefinition(identifier=documentdetails, text=Depending on the \\\\textbf{final} form of your document, of course. See the documentation and experiment.
+
+This footnote has a second linkReference(reference=paragraph, content=paragraph).)
+
+definition(identifier=paragraph-1, url=http://example.com, title=null)"
+`;
+
+exports[`remark fixtures with custom macros footnote-consecutive 1`] = `
+"heading2(International Radiotelephony Spelling AlphabetfootnoteReference(wiki))
+
+Here's the NATO phonetic alphabetfootnoteReference(wiki)footnoteReference(wiki2): Alfa, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango, Uniform, VictorfootnoteReference(name)footnoteReference(consecutive), Whiskey, X-ray, Yankee, and Zulu.
+
+
+
+And here's some more text.
+
+
+
+footnoteDefinition(identifier=wiki, text=Read more about it here.)
+
+footnoteDefinition(identifier=wiki2, text=Here's another good article on the subject.)
+
+footnoteDefinition(identifier=name, text=A great first name.)
+
+footnoteDefinition(identifier=consecutive, text=I know.)"
+`;
+
+exports[`remark fixtures with custom macros footnote-duplicate 1`] = `
+"The NATO phonetic alphabetfootnoteReference(wiki).
+
+
+
+footnoteDefinition(identifier=wiki, text=Read more about it here.)
+
+footnoteDefinition(identifier=wiki, text=And here.)"
+`;
+
+exports[`remark fixtures with custom macros footnote-empty 1`] = `"This is a document with \\\\texttt{footnotes: true}, but not actual footnote definition."`;
+
+exports[`remark fixtures with custom macros footnote-escape 1`] = `
+"The NATO phonetic alphabetfootnoteReference(wi\\\\-ki).
+
+
+
+footnoteDefinition(identifier=wi\\\\-ki, text=Read more about it somewhere else.)"
+`;
+
+exports[`remark fixtures with custom macros footnote-ids 1`] = `
+"This example checks that footnote(identifier=undefined, text=the generated, protect=false) IDs do not overwrite the user's IDsfootnoteReference(1).
+
+
+
+footnoteDefinition(identifier=1, text=Old behavior would, for \\"generated\\", generate a footnote with an ID set to \\\\texttt{1}, thus overwriting this footnote.)"
+`;
+
+exports[`remark fixtures with custom macros footnote-indent 1`] = `
+"The NATO phonetic alphabetfootnoteReference(wiki).
+
+
+
+footnoteDefinition(identifier=wiki, text=Read more about it somewhere else.)"
+`;
+
+exports[`remark fixtures with custom macros footnote-inline 1`] = `"This is an example of an inline footnote.footnote(identifier=undefined, text=This is the \\\\textit{actual} footnote., protect=false)"`;
+
+exports[`remark fixtures with custom macros footnote-like 1`] = `
+"This one isn't even linkReference(reference=^foo, content=defined).
+
+
+
+footnoteReference(both)linkReference(reference=invalid, content=invalid), footnote(identifier=undefined, text=this too, protect=false)[]."
+`;
+
+exports[`remark fixtures with custom macros footnote-matrix 1`] = `"orderedList(listItem(linkReference(reference=bar, content=foo))listItem(footnoteReference(foo)linkReference(reference=bar, content=bar))listItem(linkReference(reference=^bar, content=foo))listItem(footnoteReference(foo)footnoteReference(bar)))"`;
+
+exports[`remark fixtures with custom macros footnote-multiple 1`] = `
+"heading2(International Radiotelephony Spelling AlphabetfootnoteReference(wiki))
+
+Here's the NATO phonetic alphabetfootnoteReference(wiki): Alfa, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango, Uniform, Victor, Whiskey, X-ray, Yankee, and Zulu.
+
+
+
+And here's some more text.
+
+
+
+footnoteDefinition(identifier=wiki, text=Read more about it here.)"
+`;
+
+exports[`remark fixtures with custom macros footnote-nested 1`] = `
+"A footnotefootnoteReference(1).
+
+
+
+footnoteDefinition(identifier=1, text=Including footnote(identifier=undefined, text=another \\\\textbf{footnote}, protect=false))"
+`;
+
+exports[`remark fixtures with custom macros footnote-proto 1`] = `
+"A footnotefootnoteReference(tostring) and footnoteReference(__proto__) and footnoteReference(constructor).
+
+
+
+footnoteDefinition(identifier=tostring, text=See \\\\texttt{Object.prototype.toString()}.)
+
+footnoteDefinition(identifier=constructor, text=See \\\\texttt{Object.prototype.valueOf()}.)
+
+footnoteDefinition(identifier=__proto__, text=See \\\\texttt{Object.prototype.\\\\_\\\\_proto\\\\_\\\\_()}.)"
+`;
+
+exports[`remark fixtures with custom macros footnote-without-space 1`] = `
+"foofootnoteReference(abc) bar. foofootnoteReference(xyz) bar
+
+
+
+footnoteDefinition(identifier=abc, text=Baz baz)
+
+footnoteDefinition(identifier=xyz, text=Baz)"
+`;
+
+exports[`remark fixtures with custom macros hard-wrapped-paragraphs-with-list-like-lines 1`] = `
+"In Markdown 1.0.0 and earlier. Version
+8. This line turns into a list item.
+Because a hard-wrapped line in the
+123. middle of a paragraph looked like a
+list item.
+
+
+
+Here's one with a bullet.
+
+
+
+unorderedList(listItem(criminey.))
+
+Non-GFM does not create a list for either.
+GFM does not create a list for \\\\texttt{8.}, but does for \\\\texttt{*}.
+CommonMark creates a list for both.
+All versions create lists for the following.
+
+
+
+unorderedList(listItem(Here's one with a bullet.
+
+unorderedList(listItem(criminey.))))
+
+...and the following:
+
+
+
+orderedList(listItem(In Markdown 1.0.0 and earlier. Version
+
+orderedList(listItem(This line turns into a list item.))))"
+`;
+
+exports[`remark fixtures with custom macros heading 1`] = `
+"heading2(Heading 1)
+
+heading3(Heading 2)
+
+heading4(Heading 4)
+
+heading5(Heading 4)
+
+heading6(Heading 5)
+
+heading7(Heading 6)"
+`;
+
+exports[`remark fixtures with custom macros heading-atx-closed-trailing-white-space 1`] = `
+"heading2(Foo)
+
+heading3(Bar)"
+`;
+
+exports[`remark fixtures with custom macros heading-atx-empty 1`] = `
+"heading2()
+
+heading3()
+
+heading4()
+
+heading5()
+
+heading6()
+
+heading7()"
+`;
+
+exports[`remark fixtures with custom macros heading-in-blockquote 1`] = `
+"blockquote(A blockquote
+with some more text.)
+
+A normal paragraph.
+
+
+
+blockquote(heading3(A blockquote followed by a horizontal rule (in CommonMark).)heading3(A heading in a blockquote))"
+`;
+
+exports[`remark fixtures with custom macros heading-in-paragraph 1`] = `
+"Hello
+
+
+
+heading2(World)"
+`;
+
+exports[`remark fixtures with custom macros heading-not-atx 1`] = `
+"\\\\#This is not a heading, per CommonMark: \\\\externalLink{http://spec.commonmark.org/0.17/\\\\#example-25}{http://spec.commonmark.org/0.17/\\\\#example-25}
+
+
+
+Kramdown (GitHub) neither supports unspaced ATX-headings.
+
+
+
+\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\# h7?
+
+
+
+\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\# h8?
+
+
+
+\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\# h9?
+
+
+
+More than six \\\\# characters is not a heading: \\\\externalLink{http://spec.commonmark.org/0.26/\\\\#example-33}{http://spec.commonmark.org/0.26/\\\\#example-33}"
+`;
+
+exports[`remark fixtures with custom macros heading-setext-with-initial-spacing 1`] = `
+"heading2(Heading 1)
+
+heading3(Heading 2)
+
+Both these headings caused positional problems in on commit daa344c and before."
+`;
+
+exports[`remark fixtures with custom macros horizontal-rules 1`] = `
+"Dashes:
+
+
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+code(---)
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+code(- - -)
+
+Asterisks:
+
+
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+code(***)
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+code(* * *)
+
+Underscores:
+
+
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+code(___)
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+code(_ _ _)"
+`;
+
+exports[`remark fixtures with custom macros horizontal-rules-adjacent 1`] = `
+"thematicBreak(---)
+
+thematicBreak(---)
+
+thematicBreak(---)
+
+The three asterisks are not a Setext header.
+
+
+
+This is a paragraph.
+
+
+
+thematicBreak(---)
+
+This is another paragraph.
+
+
+
+thematicBreak(---)
+
+heading3(But this is a secondary heading.)
+
+thematicBreak(---)"
+`;
+
+exports[`remark fixtures with custom macros hr 1`] = `"thematicBreak(---)"`;
+
+exports[`remark fixtures with custom macros hr-list-break 1`] = `
+"unorderedList(listItem(hello world)listItem(how are))
+
+thematicBreak(---)
+
+you today?
+
+
+
+The above asterisks do split the list, but the below ones do not.
+
+
+
+unorderedList(listItem(hello world)listItem(how are)listItem(thematicBreak(---)you today?))
+
+
+unorderedList(listItem(Neither do these)listItem(how are)listItem(unorderedList(listItem(*
+you today?))))
+
+
+unorderedList(listItem(But these do)listItem(how are))
+
+thematicBreak(---)
+
+you today?"
+`;
+
+exports[`remark fixtures with custom macros html-advanced 1`] = `
+"Simple block on one line:
+
+
+
+<div>foo</div>
+
+And nested without indentation:
+
+
+
+<div>
+<div>
+<div>
+foo
+</div>
+<div style=\\">\\"/>
+</div>
+<div>bar</div>
+</div>"
+`;
+
+exports[`remark fixtures with custom macros html-attributes 1`] = `
+"heading2(Block-level)
+
+<article foo=\\"bar 'baz' qux\\" foo='bar \\"baz\\" qux' foo=baz>
+
+<article foo>
+
+<article>
+
+<article :foo:bar:09:=\\"baz\\">
+
+<article foo.bar_09->
+
+<article foo.bar_09-   >
+
+<article foo.bar_09-   />
+
+<div baz
+qux
+
+heading2(Inline)
+
+<span foo=\\"bar 'baz' qux\\" foo='bar \\"baz\\" qux' foo=baz>
+
+<span foo>
+
+<span>
+
+<span :foo:bar:09:=\\"baz\\">
+
+<span foo.bar_09->
+
+<span foo.bar_09-   >
+
+<span foo.bar_09-   />
+
+<span this is
+invalid"
+`;
+
+exports[`remark fixtures with custom macros html-cdata 1`] = `
+"<![CDATA[
+fooBarBaz()
+]]>
+
+foo <![CDATA[bar]]>"
+`;
+
+exports[`remark fixtures with custom macros html-comments 1`] = `
+"Paragraph one.
+
+
+
+<!-- This is a simple comment -->
+
+<!--
+	This is another comment.
+-->
+
+What follows is not an HTML comment because it contains
+two consecutive dashes:
+\\\\externalLink{https://html.spec.whatwg.org/multipage/syntax.html\\\\#comments}{https://html.spec.whatwg.org/multipage/syntax.html\\\\#comments}.
+
+
+
+<!-- one comment block -- -- with two comments -->
+
+But this is fine (in commonmark):
+
+
+
+<!-- one comment block - with a dash -->
+
+And, this is wrong (in commonmark):
+
+
+
+<!-->-->
+
+The end."
+`;
+
+exports[`remark fixtures with custom macros html-declaration 1`] = `
+"<!DOCTYPE html>
+
+foo <!BAR br BAZ>
+
+
+
+<!doctype html>
+
+<!valid >
+
+<!invalid>"
+`;
+
+exports[`remark fixtures with custom macros html-indented 1`] = `
+"<div>
+  *hello*
+   <div>
+
+ <span>
+  *hello*
+   <span>
+
+  <!doctype html>
+
+   <!-- baz -->
+
+alpha <!-- baz -->"
+`;
+
+exports[`remark fixtures with custom macros html-processing-instruction 1`] = `
+"<?php
+  echo '>';
+?>"
+`;
+
+exports[`remark fixtures with custom macros html-simple 1`] = `
+"Here's a simple block:
+
+
+
+<div>
+	foo
+</div>
+
+This should be a code block, though:
+
+
+
+code(<div>
+	foo
+</div>)
+
+As should this:
+
+
+
+code(<div>foo</div>)
+
+Now, nested:
+
+
+
+<div>
+	<div>
+		<div>
+			foo
+		</div>
+	</div>
+</div>
+
+This should just be an HTML comment:
+
+
+
+<!-- Comment -->
+
+Multiline:
+
+
+
+<!--
+Blah
+Blah
+-->
+
+Code block:
+
+
+
+code(<!-- Comment -->)
+
+Just plain comment, with trailing spaces on the line:
+
+
+
+<!-- foo -->   
+
+Code:
+
+
+
+code(<hr>)
+
+Hr's:
+
+
+
+<hr>
+
+<hr>
+
+<hr>
+
+<hr>   
+
+<hr>  
+
+<hr> 
+
+<hr class=\\"foo\\" id=\\"bar\\" />
+
+<hr class=\\"foo\\" id=\\"bar\\"/>
+
+<hr class=\\"foo\\" id=\\"bar\\" >"
+`;
+
+exports[`remark fixtures with custom macros html-tags 1`] = `
+"heading2(Block)
+
+<article>
+
+<ARTICLE>
+
+<ArTiClE>
+
+<-article>
+
+
+
+<article foo=
+
+<article foo=\\"bar
+
+<article foo='bar
+
+<article foo=bar 
+
+<article foo=bar >
+
+<article/>
+
+<-article/>
+
+
+
+</article>
+
+</ARTICLE>
+
+</aRtIcLe>
+
+</article  >
+
+</-article  >
+
+
+
+</article
+
+</article  
+
+heading2(Inline)
+
+<span>
+
+<SPAN>
+
+<SpAn>
+
+<-span>
+
+
+
+<span/>
+
+<-span/>
+
+
+
+</span>
+
+</SPAN>
+
+</SpAn>
+
+</span  >
+
+</-span>
+
+
+
+</span
+
+
+
+</span
+
+
+
+<span foo=
+
+
+
+<span foo=\\"bar
+
+
+
+<span foo='bar
+
+
+
+<span foo=bar
+
+
+
+<span foo=bar >"
+`;
+
+exports[`remark fixtures with custom macros image-empty-alt 1`] = `"\\\\includegraphics{/xyz.png}"`;
+
+exports[`remark fixtures with custom macros image-in-link 1`] = `
+"heading2(\\\\externalLink{\\\\includegraphics{https://img.shields.io/badge/unicorn-approved-ff69b4.svg}}{http://shields.io})
+
+\\\\externalLink{\\\\includegraphics{https://img.shields.io/travis/wooorm/mdast.svg?style=flat}}{https://travis-ci.org/wooorm/mdast}
+
+
+
+\\\\externalLink{\\\\includegraphics{https://img.shields.io/badge/style-flat--squared-green.svg?style=flat-square}}{http://example.com}"
+`;
+
+exports[`remark fixtures with custom macros image-with-pipe 1`] = `"f|"`;
+
+exports[`remark fixtures with custom macros images 1`] = `
+"Lorem ipsum dolor sit \\\\includegraphics{http://amet.com/amet.jpeg}, consectetur adipiscing elit. Praesent dictum purus ullamcorper ligula semper pellentesque.
+
+
+
+Nulla \\\\includegraphics{http://finibus.com/finibus.png} neque et diam rhoncus convallis. Nam dictum sapien nec sem ultrices fermentum. Nulla \\\\includegraphics{http://facilisi.com/facilisi.gif}. In et feugiat massa.
+
+
+
+Donec sed sodales metus, ut aliquet quam. Suspendisse nec ipsum risus. Interdum et malesuada fames ac ante ipsum primis in \\\\includegraphics{http://faucibus.com/faucibus.tiff}."
+`;
+
+exports[`remark fixtures with custom macros lazy-blockquotes 1`] = `
+"blockquote(hi there
+bud)"
+`;
+
+exports[`remark fixtures with custom macros link-in-link 1`] = `
+"heading2(\\\\externalLink{mailto:test@example.com}{http://shields.io})
+
+\\\\externalLink{https://travis-ci.org/wooorm/mdast}{https://travis-ci.org/wooorm/mdast}
+
+
+
+\\\\externalLink{[](http://example.com \\"An example\\")}{http://example.com}"
+`;
+
+exports[`remark fixtures with custom macros link-spaces 1`] = `
+"linkReference(reference=alpha, content=alpha) (bravo
+
+
+
+\\\\includegraphics{undefined} (delta
+.com)
+
+
+
+\\\\externalLink{echo}{http://foxtrot.golf}
+
+
+
+\\\\includegraphics{india.com/juliett}"
+`;
+
+exports[`remark fixtures with custom macros link-whitespace 1`] = `
+"linkReference(reference=alpha, content=alpha)(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo} charlie).
+
+
+
+linkReference(reference=alpha, content=alpha)(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}	charlie).
+
+
+
+linkReference(reference=alpha, content=alpha)(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}
+charlie).
+
+
+
+\\\\includegraphics{undefined}(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo} charlie).
+
+
+
+\\\\includegraphics{undefined}(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}	charlie).
+
+
+
+\\\\includegraphics{undefined}(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}
+charlie).
+
+
+
+<\\\\externalLink{https://example.com?bravo}{https://example.com?bravo} charlie>.
+
+
+
+<\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}	charlie>.
+
+
+
+<\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}
+charlie>.
+
+
+
+\\\\externalLink{https://example.com?bravo}{https://example.com?bravo} charlie.
+
+
+
+\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}	charlie.
+
+
+
+\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}
+charlie."
+`;
+
+exports[`remark fixtures with custom macros link-with-spaces 1`] = `
+"\\\\externalLink{Hello}{./world and some spaces.html}
+
+
+
+\\\\externalLink{Hello}{./world and some spaces.html}"
+`;
+
+exports[`remark fixtures with custom macros links 1`] = `
+"Lorem ipsum dolor sit \\\\externalLink{amet}{http://amet.com}, consectetur adipiscing elit. Praesent dictum purus ullamcorper ligula semper pellentesque.
+
+
+
+Nulla \\\\externalLink{finibus}{http://finibus.com} neque et diam rhoncus convallis. Nam dictum sapien nec sem ultrices fermentum. Nulla \\\\externalLink{facilisi}{http://facilisi.com}. In et feugiat massa.
+
+
+
+Donec sed sodales metus, ut aliquet quam. Suspendisse nec ipsum risus. Interdum et malesuada fames ac ante ipsum primis in \\\\externalLink{faucibus}{http://faucibus.com}."
+`;
+
+exports[`remark fixtures with custom macros links-inline-style 1`] = `
+"Just a \\\\externalLink{URL}{/url/}.
+
+
+
+\\\\externalLink{URL and title}{/url/}.
+
+
+
+\\\\externalLink{URL and title}{/url/}.
+
+
+
+\\\\externalLink{URL and title}{/url/}.
+
+
+
+\\\\externalLink{URL and title}{/url/}.
+
+
+
+linkReference(reference=url and title, content=URL and title)( /url/has space ).
+
+
+
+linkReference(reference=url and title, content=URL and title)( /url/has space/ \\"url has space and title\\").
+
+
+
+."
+`;
+
+exports[`remark fixtures with custom macros links-reference-proto 1`] = `
+"A linkReference(reference=tostring, content=primary), linkReference(reference=constructor, content=secondary), and linkReference(reference=__proto__, content=tertiary) link.
+
+
+
+definition(identifier=tostring-1, url=http://primary.com, title=null)
+
+definition(identifier=__proto__, url=http://tertiary.com, title=null)
+
+definition(identifier=constructor-1, url=http://secondary.com, title=null)"
+`;
+
+exports[`remark fixtures with custom macros links-reference-style 1`] = `
+"Foo linkReference(reference=1, content=bar).
+
+
+
+Foo linkReference(reference=1, content=bar).
+
+
+
+Foo linkReference(reference=1, content=bar).
+
+
+
+definition(identifier=1-1-1-1-1-1-1-1, url=/url/, title=Title)
+
+With linkReference(reference=b, content=embedded [brackets]).
+
+
+
+Indented linkReference(reference=once, content=once).
+
+
+
+Indented linkReference(reference=twice, content=twice).
+
+
+
+Indented linkReference(reference=thrice, content=thrice).
+
+
+
+Indented linkReference(reference=four, content=four) times.
+
+
+
+definition(identifier=once-1, url=/url, title=null)
+
+definition(identifier=twice-1, url=/url, title=null)
+
+definition(identifier=thrice-1, url=/url, title=null)
+
+code([four]: /url)
+
+definition(identifier=b-1, url=/url/, title=null)
+
+thematicBreak(---)
+
+linkReference(reference=this, content=this) should work
+
+
+
+So should linkReference(reference=this, content=this).
+
+
+
+And linkReference(reference=this, content=this).
+
+
+
+And linkReference(reference=this, content=this).
+
+
+
+And linkReference(reference=this, content=this).
+
+
+
+But not linkReference(reference=that, content=that).
+
+
+
+Nor linkReference(reference=that, content=that).
+
+
+
+Nor linkReference(reference=that, content=that).
+
+
+
+[Something in brackets like linkReference(reference=this, content=this) should work]
+
+
+
+[Same with linkReference(reference=this, content=this).]
+
+
+
+In this case, \\\\externalLink{this}{/somethingelse/} points to something else.
+
+
+
+Backslashing should suppress [this] and [this].
+
+
+
+definition(identifier=this-1-1, url=foo, title=null)
+
+thematicBreak(---)
+
+Here's one where the linkReference(reference=link breaks, content=link
+breaks) across lines.
+
+
+
+Here's another where the linkReference(reference=link breaks, content=link 
+breaks) across lines, but with a line-ending space.
+
+
+
+definition(identifier=link breaks-1, url=/url/, title=null)"
+`;
+
+exports[`remark fixtures with custom macros links-shortcut-references 1`] = `
+"This is the linkReference(reference=simple case, content=simple case).
+
+
+
+definition(identifier=simple case-1, url=/simple, title=null)
+
+This one has a linkReference(reference=line break, content=line
+break).
+
+
+
+This one has a linkReference(reference=line break, content=line 
+break) with a line-ending space.
+
+
+
+definition(identifier=line break-1, url=/foo, title=null)
+
+linkReference(reference=that, content=this) and the linkReference(reference=other, content=other)
+
+
+
+definition(identifier=this-1-1-1, url=/this, title=null)
+
+definition(identifier=that-1, url=/that, title=null)
+
+definition(identifier=other-1, url=/other, title=null)"
+`;
+
+exports[`remark fixtures with custom macros links-text-delimiters 1`] = `
+"\\\\externalLink{Hello [world]!}{./hello-world.html}.
+
+
+
+\\\\externalLink{Hello [world]!}{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-text-empty 1`] = `
+"\\\\externalLink{}{./hello-world.html}.
+
+
+
+\\\\externalLink{}{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-text-entity-delimiters 1`] = `
+"\\\\externalLink{Hello [world]!}{./hello-world.html}.
+
+
+
+\\\\externalLink{Hello [world]!}{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}.
+
+
+
+\\\\externalLink{Hello [world]!}{./hello-world.html}.
+
+
+
+\\\\externalLink{Hello [world]!}{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-text-escaped-delimiters 1`] = `
+"\\\\externalLink{Hello [world]!}{./hello-world.html}.
+
+
+
+\\\\externalLink{Hello [world]!}{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-text-mismatched-delimiters 1`] = `
+"[Hello \\\\externalLink{world!}{./hello-world.html}.
+
+
+
+[Hello \\\\externalLink{world!}{./hello-world.html}.
+
+
+
+![Hello \\\\externalLink{world!}{./hello-world.html}.
+
+
+
+![Hello \\\\externalLink{world!}{./hello-world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-title-double-quotes 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-title-double-quotes-delimiters 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-title-double-quotes-entity-delimiters 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-title-double-quotes-escaped-delimiters 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-title-double-quotes-mismatched-delimiters 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-title-empty-double-quotes 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-title-empty-parentheses 1`] = `
+"linkReference(reference=hello, content=Hello)(./world.html ()).
+
+
+
+linkReference(reference=hello, content=Hello)(<./world.html> ()).
+
+
+
+\\\\includegraphics{undefined}(./world.html ()).
+
+
+
+\\\\includegraphics{undefined}(<./world.html> ())."
+`;
+
+exports[`remark fixtures with custom macros links-title-empty-single-quotes 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-title-parentheses 1`] = `
+"linkReference(reference=hello, content=Hello)(./world.html (Hello World!)).
+
+
+
+linkReference(reference=hello, content=Hello)(<./world.html> (Hello World!)).
+
+
+
+\\\\includegraphics{undefined}(./world.html (Hello World!)).
+
+
+
+\\\\includegraphics{undefined}(<./world.html> (Hello World!))."
+`;
+
+exports[`remark fixtures with custom macros links-title-single-quotes 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-title-single-quotes-delimiters 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-title-single-quotes-entity-delimiters 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-title-single-quotes-escaped-delimiters 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-title-single-quotes-mismatched-delimiters 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures with custom macros links-title-unclosed 1`] = `
+"linkReference(reference=hello, content=Hello)(./world.html 'Hello
+
+
+
+linkReference(reference=hello, content=Hello)(<./world.html> 'Hello
+
+
+
+\\\\includegraphics{undefined}(./world.html 'Hello
+
+
+
+\\\\includegraphics{undefined}(<./world.html> 'Hello
+
+
+
+linkReference(reference=hello, content=Hello)(./world.html \\"Hello
+
+
+
+linkReference(reference=hello, content=Hello)(<./world.html> \\"Hello
+
+
+
+\\\\includegraphics{undefined}(./world.html \\"Hello
+
+
+
+\\\\includegraphics{undefined}(<./world.html> \\"Hello
+
+
+
+linkReference(reference=hello, content=Hello)(./world.html (Hello
+
+
+
+linkReference(reference=hello, content=Hello)(<./world.html> (Hello
+
+
+
+\\\\includegraphics{undefined}(./world.html (Hello
+
+
+
+\\\\includegraphics{undefined}(<./world.html> (Hello"
+`;
+
+exports[`remark fixtures with custom macros links-url-empty 1`] = `
+".
+
+
+
+.
+
+
+
+\\\\includegraphics{}.
+
+
+
+\\\\includegraphics{}."
+`;
+
+exports[`remark fixtures with custom macros links-url-empty-title-double-quotes 1`] = `
+"\\\\externalLink{Hello}{\\"World!\\"}.
+
+
+
+\\\\externalLink{Hello}{\\"World!\\"}.
+
+
+
+.
+
+
+
+\\\\includegraphics{\\"World!\\"}.
+
+
+
+\\\\includegraphics{\\"World!\\"}.
+
+
+
+\\\\includegraphics{}."
+`;
+
+exports[`remark fixtures with custom macros links-url-empty-title-parentheses 1`] = `
+"\\\\externalLink{Hello}{(World!)}.
+
+
+
+\\\\externalLink{Hello}{(World!)}.
+
+
+
+linkReference(reference=world, content=World)(<> (World!)).
+
+
+
+\\\\includegraphics{(World!)}.
+
+
+
+\\\\includegraphics{(World!)}.
+
+
+
+\\\\includegraphics{undefined}(<> (World!))."
+`;
+
+exports[`remark fixtures with custom macros links-url-empty-title-single-quotes 1`] = `
+"\\\\externalLink{Hello}{'World!'}.
+
+
+
+\\\\externalLink{Hello}{'World!'}.
+
+
+
+.
+
+
+
+\\\\includegraphics{'World!'}.
+
+
+
+\\\\includegraphics{'World!'}.
+
+
+
+\\\\includegraphics{}."
+`;
+
+exports[`remark fixtures with custom macros links-url-entity-parentheses 1`] = `
+"\\\\externalLink{Hello}{./world(and-hello(world)}.
+
+
+
+\\\\externalLink{Hello}{./world(and-hello(world)}.
+
+
+
+\\\\externalLink{Hello}{./world(and)helloworld)}.
+
+
+
+\\\\externalLink{Hello}{./world(and)helloworld)}.
+
+
+
+\\\\externalLink{Hello}{./world(and-hello(world)}.
+
+
+
+\\\\externalLink{Hello}{./world(and-hello(world)}.
+
+
+
+\\\\externalLink{Hello}{./world(and)helloworld)}.
+
+
+
+\\\\externalLink{Hello}{./world(and)helloworld)}.
+
+
+
+\\\\includegraphics{./world(and-hello(world)}.
+
+
+
+\\\\includegraphics{./world(and-hello(world)}.
+
+
+
+\\\\includegraphics{./world(and)helloworld)}.
+
+
+
+\\\\includegraphics{./world(and)helloworld)}.
+
+
+
+\\\\includegraphics{./world(and-hello(world)}.
+
+
+
+\\\\includegraphics{./world(and-hello(world)}.
+
+
+
+\\\\includegraphics{./world(and)helloworld)}.
+
+
+
+\\\\includegraphics{./world(and)helloworld)}."
+`;
+
+exports[`remark fixtures with custom macros links-url-escaped-parentheses 1`] = `
+"\\\\externalLink{Hello}{./world(and-hello(world)}.
+
+
+
+\\\\externalLink{Hello}{./world(and-hello(world)}.
+
+
+
+\\\\externalLink{Hello}{./world(and)helloworld)}.
+
+
+
+\\\\externalLink{Hello}{./world(and)helloworld)}.
+
+
+
+\\\\includegraphics{./world(and-hello(world)}.
+
+
+
+\\\\includegraphics{./world(and-hello(world)}.
+
+
+
+\\\\includegraphics{./world(and)helloworld)}.
+
+
+
+\\\\includegraphics{./world(and)helloworld)}."
+`;
+
+exports[`remark fixtures with custom macros links-url-mismatched-parentheses 1`] = `
+"linkReference(reference=hello, content=Hello)(./world(and-hello(world)).
+
+
+
+\\\\externalLink{Hello}{./world(and-hello(world)}.
+
+
+
+\\\\externalLink{Hello}{./world(and)helloworld}).
+
+
+
+\\\\externalLink{Hello}{./world(and)helloworld)}.
+
+
+
+\\\\includegraphics{undefined}(./world(and-hello(world)).
+
+
+
+\\\\includegraphics{./world(and-hello(world)}.
+
+
+
+\\\\includegraphics{./world(and)helloworld}).
+
+
+
+\\\\includegraphics{./world(and)helloworld)}."
+`;
+
+exports[`remark fixtures with custom macros links-url-nested-parentheses 1`] = `
+"\\\\externalLink{Hello}{./world(and)hello(world)}.
+
+
+
+\\\\externalLink{Hello}{./world(and)hello(world)}.
+
+
+
+\\\\includegraphics{./world(and)hello(world)}.
+
+
+
+\\\\includegraphics{./world(and)hello(world)}."
+`;
+
+exports[`remark fixtures with custom macros links-url-new-line 1`] = `
+"linkReference(reference=hello, content=Hello)(./wo
+rld.html).
+
+
+
+\\\\externalLink{Hello}{./wo
+rld.html}.
+
+
+
+\\\\includegraphics{undefined}(./wo
+rld.png).
+
+
+
+\\\\includegraphics{./wo
+rld.png}."
+`;
+
+exports[`remark fixtures with custom macros links-url-unclosed 1`] = `
+"linkReference(reference=hello, content=Hello)(
+
+
+
+linkReference(reference=world, content=World)(<
+
+
+
+\\\\includegraphics{undefined}(
+
+
+
+\\\\includegraphics{undefined}(<"
+`;
+
+exports[`remark fixtures with custom macros links-url-white-space 1`] = `
+"linkReference(reference=hello, content=Hello)(./wo rld.html).
+
+
+
+\\\\externalLink{Hello}{./wo rld.html}.
+
+
+
+\\\\includegraphics{undefined}(./wo rld.png).
+
+
+
+\\\\includegraphics{./wo rld.png}."
+`;
+
+exports[`remark fixtures with custom macros list 1`] = `
+"heading2(List bullets)
+
+unorderedList(listItem(One:
+
+unorderedList(listItem(Nested one;)listItem(Nested two:
+
+unorderedList(listItem(Nested three.)))))listItem(Two;)listItem(Three.))"
+`;
+
+exports[`remark fixtures with custom macros list-after-list 1`] = `
+"unorderedList(listItem(item)listItem(item)listItem(item))
+
+orderedList(listItem(item)listItem(item)listItem(item))
+
+thematicBreak(---)
+
+unorderedList(listItem(item)listItem(item)listItem(item))
+
+orderedList(listItem(item)listItem(item)listItem(item))"
+`;
+
+exports[`remark fixtures with custom macros list-and-code 1`] = `
+"unorderedList(listItem(This is a list item))
+
+
+code(This is code)"
+`;
+
+exports[`remark fixtures with custom macros list-continuation 1`] = `
+"orderedList(listItem(foo))
+
+thematicBreak(---)
+
+orderedList(listItem(foo))
+
+codeJs(code();)
+
+orderedList(listItem(linkReference(reference=foo, content=foo)))
+
+definition(identifier=foo-1-1-1-1, url=http://google.com, title=null)
+
+orderedList(listItem(footnoteReference(foo)))
+
+footnoteDefinition(identifier=foo, text=bar baz.)"
+`;
+
+exports[`remark fixtures with custom macros list-indentation 1`] = `
+"unorderedList(listItem(Hello 1a
+
+World 1a.)listItem(Hello 1b
+
+World 1b.)listItem(Hello 2a
+
+World 2a.)listItem(Hello 2b
+
+World 2b.)listItem(Hello 3a
+
+World 3a.)listItem(Hello 3b
+
+World 3b.)listItem(Hello 4a
+
+World 4a.)listItem(Hello 4b
+
+World 4b.)listItem(code(Hello 5a)World 5a.)listItem(code(Hello 5b
+
+World 5b.)))"
+`;
+
+exports[`remark fixtures with custom macros list-item-empty 1`] = `"unorderedList(listItem(foo)listItem()listItem(bar)listItem(foo)listItem()listItem(bar))"`;
+
+exports[`remark fixtures with custom macros list-item-empty-with-white-space 1`] = `"unorderedList(listItem())"`;
+
+exports[`remark fixtures with custom macros list-item-indent 1`] = `
+"orderedList(listItem(foo bar baz.))
+
+<!--  -->
+
+orderedList(listItem(foo bar baz.))
+
+<!--  -->
+
+orderedList(listItem(foo bar baz.))
+
+<!--  -->
+
+orderedList(listItem(foo bar baz.
+foo bar baz.))
+
+<!--  -->
+
+orderedList(listItem(foo bar baz.
+foo bar baz.))
+
+<!--  -->
+
+orderedList(listItem(foo bar baz.
+foo bar baz.))
+
+<!--  -->
+
+unorderedList(listItem(foo bar baz.))
+
+<!--  -->
+
+unorderedList(listItem(foo bar baz.
+foo bar baz.))"
+`;
+
+exports[`remark fixtures with custom macros list-item-newline 1`] = `"unorderedList(listItem(Foo)listItem(Bar))"`;
+
+exports[`remark fixtures with custom macros list-item-text 1`] = `
+"unorderedList(listItem(item1
+
+unorderedList(listItem(item2))text))"
+`;
+
+exports[`remark fixtures with custom macros list-ordered 1`] = `"orderedList(listItem(foo;)listItem(bar;)listItem(baz.))"`;
+
+exports[`remark fixtures with custom macros lists-with-code-and-rules 1`] = `
+"heading3(foo)
+
+orderedList(listItem(bar:
+
+blockquote(unorderedList(listItem(one
+
+unorderedList(listItem(two
+
+unorderedList(listItem(three)listItem(four)listItem(five))))))))listItem(foo:
+
+code(line 1
+line 2))listItem(foo:
+
+orderedList(listItem(foo \\\\texttt{bar} bar:
+
+codeErb(some code here))listItem(foo \\\\texttt{bar} bar:
+
+codeErb(foo
+---
+bar
+---
+foo
+bar))listItem(foo \\\\texttt{bar} bar:
+
+codeHtml(---
+foo
+foo
+---
+bar))listItem(foo \\\\texttt{bar} bar:
+
+code(foo
+---
+bar))listItem(foo))))"
+`;
+
+exports[`remark fixtures with custom macros loose-lists 1`] = `
+"unorderedList(listItem(hello
+world
+
+how
+are)listItem(you))
+
+better behavior:
+
+
+
+unorderedList(listItem(hello
+
+unorderedList(listItem(world
+how
+
+are
+you)listItem(today)))listItem(hi))
+
+
+unorderedList(listItem(hello)listItem(world)listItem(hi))
+
+
+unorderedList(listItem(hello)listItem(world)listItem(hi))
+
+
+unorderedList(listItem(hello)listItem(world
+
+how)listItem(hi))
+
+
+unorderedList(listItem(hello)listItem(world)listItem(how
+are))
+
+
+unorderedList(listItem(hello)listItem(world)listItem(how
+are))"
+`;
+
+exports[`remark fixtures with custom macros main 1`] = `
+"definition(identifier=test-1, url=http://google.com/, title=Google)
+
+heading2(A heading)
+
+Just a note, I've found that I can't test my markdown parser vs others.
+For example, both markdown.js and showdown code blocks in lists wrong. They're
+also completely linkReference(reference=test, content=inconsistent) with regards to paragraphs in list items.
+
+
+
+A link. Not anymore.
+
+
+
+<aside>This will make me fail the test because
+markdown.js doesnt acknowledge arbitrary html blocks =/</aside>
+
+unorderedList(listItem(List Item 1)listItem(List Item 2
+
+unorderedList(listItem(New List Item 1
+Hi, this is a list item.)listItem(New List Item 2
+Another item
+    Code goes here.
+    Lots of it...)listItem(New List Item 3
+The last item)))listItem(List Item 3
+The final item.)listItem(List Item 4
+The real final item.))
+
+Paragraph.
+
+
+
+blockquote(unorderedList(listItem(bq Item 1)listItem(bq Item 2
+
+unorderedList(listItem(New bq Item 1)listItem(New bq Item 2
+Text here)))))
+
+thematicBreak(---)
+
+blockquote(Another blockquote!
+I really need to get
+more creative with
+mockup text..
+markdown.js breaks here again)
+
+heading3(Another Heading)
+
+Hello \\\\textit{world}. Here is a \\\\externalLink{link}{//hello}.
+And an image \\\\includegraphics{src}.
+And an image with an empty alt attribute \\\\includegraphics{src}.
+
+
+
+code(Code goes here.
+Lots of it...)"
+`;
+
+exports[`remark fixtures with custom macros markdown-documentation-basics 1`] = `
+"heading2(Markdown: Basics)
+
+<ul id=\\"ProjectSubmenu\\">
+    <li><a href=\\"/projects/markdown/\\" title=\\"Markdown Project Page\\">Main</a></li>
+    <li><a class=\\"selected\\" title=\\"Markdown Basics\\">Basics</a></li>
+    <li><a href=\\"/projects/markdown/syntax\\" title=\\"Markdown Syntax Documentation\\">Syntax</a></li>
+    <li><a href=\\"/projects/markdown/license\\" title=\\"Pricing and License Information\\">License</a></li>
+    <li><a href=\\"/projects/markdown/dingus\\" title=\\"Online Markdown Web Form\\">Dingus</a></li>
+</ul>
+
+heading3(Getting the Gist of Markdown's Formatting Syntax)
+
+This page offers a brief overview of what it's like to use Markdown.
+The linkReference(reference=s, content=syntax page) provides complete, detailed documentation for
+every feature, but Markdown should be very easy to pick up simply by
+looking at a few examples of it in action. The examples on this page
+are written in a before/after style, showing example syntax and the
+HTML output produced by Markdown.
+
+
+
+It's also helpful to simply try Markdown out; the linkReference(reference=d, content=Dingus) is a
+web application that allows you type your own Markdown-formatted text
+and translate it to XHTML.
+
+
+
+\\\\textbf{Note:} This document is itself written using Markdown; you
+can linkReference(reference=src, content=see the source for it by adding '.text' to the URL).
+
+
+
+definition(identifier=s-1, url=/projects/markdown/syntax, title=Markdown Syntax)
+
+definition(identifier=d-1, url=/projects/markdown/dingus, title=Markdown Dingus)
+
+definition(identifier=src-1-1, url=/projects/markdown/basics.text, title=null)
+
+heading3(Paragraphs, Headers, Blockquotes)
+
+A paragraph is simply one or more consecutive lines of text, separated
+by one or more blank lines. (A blank line is any line that looks like a
+blank line -- a line containing nothing spaces or tabs is considered
+blank.) Normal paragraphs should not be intended with spaces or tabs.
+
+
+
+Markdown offers two styles of headers: \\\\textit{Setext} and \\\\textit{atx}.
+Setext-style headers for \\\\texttt{<h1>} and \\\\texttt{<h2>} are created by
+\\"underlining\\" with equal signs (\\\\texttt{=}) and hyphens (\\\\texttt{-}), respectively.
+To create an atx-style header, you put 1-6 hash marks (\\\\texttt{\\\\#}) at the
+beginning of the line -- the number of hashes equals the resulting
+HTML header level.
+
+
+
+Blockquotes are indicated using email-style '\\\\texttt{>}' angle brackets.
+
+
+
+Markdown:
+
+
+
+code(A First Level Header
+====================
+
+A Second Level Header
+---------------------
+
+Now is the time for all good men to come to
+the aid of their country. This is just a
+regular paragraph.
+
+The quick brown fox jumped over the lazy
+dog's back.
+
+### Header 3
+
+> This is a blockquote.
+> 
+> This is the second paragraph in the blockquote.
+>
+> ## This is an H2 in a blockquote)
+
+Output:
+
+
+
+code(<h1>A First Level Header</h1>
+
+<h2>A Second Level Header</h2>
+
+<p>Now is the time for all good men to come to
+the aid of their country. This is just a
+regular paragraph.</p>
+
+<p>The quick brown fox jumped over the lazy
+dog's back.</p>
+
+<h3>Header 3</h3>
+
+<blockquote>
+    <p>This is a blockquote.</p>
+    
+    <p>This is the second paragraph in the blockquote.</p>
+    
+    <h2>This is an H2 in a blockquote</h2>
+</blockquote>)
+
+heading4(Phrase Emphasis)
+
+Markdown uses asterisks and underscores to indicate spans of emphasis.
+
+
+
+Markdown:
+
+
+
+code(Some of these words *are emphasized*.
+Some of these words _are emphasized also_.
+
+Use two asterisks for **strong emphasis**.
+Or, if you prefer, __use two underscores instead__.)
+
+Output:
+
+
+
+code(<p>Some of these words <em>are emphasized</em>.
+Some of these words <em>are emphasized also</em>.</p>
+
+<p>Use two asterisks for <strong>strong emphasis</strong>.
+Or, if you prefer, <strong>use two underscores instead</strong>.</p>)
+
+heading3(Lists)
+
+Unordered (bulleted) lists use asterisks, pluses, and hyphens (\\\\texttt{*},
+\\\\texttt{+}, and \\\\texttt{-}) as list markers. These three markers are
+interchangable; this:
+
+
+
+code(*   Candy.
+*   Gum.
+*   Booze.)
+
+this:
+
+
+
+code(+   Candy.
++   Gum.
++   Booze.)
+
+and this:
+
+
+
+code(-   Candy.
+-   Gum.
+-   Booze.)
+
+all produce the same output:
+
+
+
+code(<ul>
+<li>Candy.</li>
+<li>Gum.</li>
+<li>Booze.</li>
+</ul>)
+
+Ordered (numbered) lists use regular numbers, followed by periods, as
+list markers:
+
+
+
+code(1.  Red
+2.  Green
+3.  Blue)
+
+Output:
+
+
+
+code(<ol>
+<li>Red</li>
+<li>Green</li>
+<li>Blue</li>
+</ol>)
+
+If you put blank lines between items, you'll get \\\\texttt{<p>} tags for the
+list item text. You can create multi-paragraph list items by indenting
+the paragraphs by 4 spaces or 1 tab:
+
+
+
+code(*   A list item.
+
+    With multiple paragraphs.
+
+*   Another item in the list.)
+
+Output:
+
+
+
+code(<ul>
+<li><p>A list item.</p>
+<p>With multiple paragraphs.</p></li>
+<li><p>Another item in the list.</p></li>
+</ul>)
+
+heading4(Links)
+
+Markdown supports two styles for creating links: \\\\textit{inline} and
+\\\\textit{reference}. With both styles, you use square brackets to delimit the
+text you want to turn into a link.
+
+
+
+Inline-style links use parentheses immediately after the link text.
+For example:
+
+
+
+code(This is an [example link](http://example.com/).)
+
+Output:
+
+
+
+code(<p>This is an <a href=\\"http://example.com/\\">
+example link</a>.</p>)
+
+Optionally, you may include a title attribute in the parentheses:
+
+
+
+code(This is an [example link](http://example.com/ \\"With a Title\\").)
+
+Output:
+
+
+
+code(<p>This is an <a href=\\"http://example.com/\\" title=\\"With a Title\\">
+example link</a>.</p>)
+
+Reference-style links allow you to refer to your links by names, which
+you define elsewhere in your document:
+
+
+
+code(I get 10 times more traffic from [Google][1] than from
+[Yahoo][2] or [MSN][3].
+
+[1]: http://google.com/        \\"Google\\"
+[2]: http://search.yahoo.com/  \\"Yahoo Search\\"
+[3]: http://search.msn.com/    \\"MSN Search\\")
+
+Output:
+
+
+
+code(<p>I get 10 times more traffic from <a href=\\"http://google.com/\\"
+title=\\"Google\\">Google</a> than from <a href=\\"http://search.yahoo.com/\\"
+title=\\"Yahoo Search\\">Yahoo</a> or <a href=\\"http://search.msn.com/\\"
+title=\\"MSN Search\\">MSN</a>.</p>)
+
+The title attribute is optional. Link names may contain letters,
+numbers and spaces, but are \\\\textit{not} case sensitive:
+
+
+
+code(I start my morning with a cup of coffee and
+[The New York Times][NY Times].
+
+[ny times]: http://www.nytimes.com/)
+
+Output:
+
+
+
+code(<p>I start my morning with a cup of coffee and
+<a href=\\"http://www.nytimes.com/\\">The New York Times</a>.</p>)
+
+heading4(Images)
+
+Image syntax is very much like link syntax.
+
+
+
+Inline (titles are optional):
+
+
+
+code(![alt text](/path/to/img.jpg \\"Title\\"))
+
+Reference-style:
+
+
+
+code(![alt text][id]
+
+[id]: /path/to/img.jpg \\"Title\\")
+
+Both of the above examples produce the same output:
+
+
+
+code(<img src=\\"/path/to/img.jpg\\" alt=\\"alt text\\" title=\\"Title\\" />)
+
+heading4(Code)
+
+In a regular paragraph, you can create code span by wrapping text in
+backtick quotes. Any ampersands (\\\\texttt{\\\\&}) and angle brackets (\\\\texttt{<} or
+\\\\texttt{>}) will automatically be translated into HTML entities. This makes
+it easy to use Markdown to write about HTML example code:
+
+
+
+code(I strongly recommend against using any \`<blink>\` tags.
+
+I wish SmartyPants used named entities like \`&mdash;\`
+instead of decimal-encoded entites like \`&#8212;\`.)
+
+Output:
+
+
+
+code(<p>I strongly recommend against using any
+<code>&lt;blink&gt;</code> tags.</p>
+
+<p>I wish SmartyPants used named entities like
+<code>&amp;mdash;</code> instead of decimal-encoded
+entites like <code>&amp;#8212;</code>.</p>)
+
+To specify an entire block of pre-formatted code, indent every line of
+the block by 4 spaces or 1 tab. Just like with code spans, \\\\texttt{\\\\&}, \\\\texttt{<},
+and \\\\texttt{>} characters will be escaped automatically.
+
+
+
+Markdown:
+
+
+
+code(If you want your page to validate under XHTML 1.0 Strict,
+you've got to put paragraph tags in your blockquotes:
+
+    <blockquote>
+        <p>For example.</p>
+    </blockquote>)
+
+Output:
+
+
+
+code(<p>If you want your page to validate under XHTML 1.0 Strict,
+you've got to put paragraph tags in your blockquotes:</p>
+
+<pre><code>&lt;blockquote&gt;
+    &lt;p&gt;For example.&lt;/p&gt;
+&lt;/blockquote&gt;
+</code></pre>)"
+`;
+
+exports[`remark fixtures with custom macros markdown-documentation-syntax 1`] = `
+"heading2(Markdown: Syntax)
+
+<ul id=\\"ProjectSubmenu\\">
+    <li><a href=\\"/projects/markdown/\\" title=\\"Markdown Project Page\\">Main</a></li>
+    <li><a href=\\"/projects/markdown/basics\\" title=\\"Markdown Basics\\">Basics</a></li>
+    <li><a class=\\"selected\\" title=\\"Markdown Syntax Documentation\\">Syntax</a></li>
+    <li><a href=\\"/projects/markdown/license\\" title=\\"Pricing and License Information\\">License</a></li>
+    <li><a href=\\"/projects/markdown/dingus\\" title=\\"Online Markdown Web Form\\">Dingus</a></li>
+</ul>
+
+unorderedList(listItem(\\\\externalLink{Overview}{\\\\#overview}
+
+unorderedList(listItem(\\\\externalLink{Philosophy}{\\\\#philosophy})listItem(\\\\externalLink{Inline HTML}{\\\\#html})listItem(\\\\externalLink{Automatic Escaping for Special Characters}{\\\\#autoescape})))listItem(\\\\externalLink{Block Elements}{\\\\#block}
+
+unorderedList(listItem(\\\\externalLink{Paragraphs and Line Breaks}{\\\\#p})listItem(\\\\externalLink{Headers}{\\\\#header})listItem(\\\\externalLink{Blockquotes}{\\\\#blockquote})listItem(\\\\externalLink{Lists}{\\\\#list})listItem(\\\\externalLink{Code Blocks}{\\\\#precode})listItem(\\\\externalLink{Horizontal Rules}{\\\\#hr})))listItem(\\\\externalLink{Span Elements}{\\\\#span}
+
+unorderedList(listItem(\\\\externalLink{Links}{\\\\#link})listItem(\\\\externalLink{Emphasis}{\\\\#em})listItem(\\\\externalLink{Code}{\\\\#code})listItem(\\\\externalLink{Images}{\\\\#img})))listItem(\\\\externalLink{Miscellaneous}{\\\\#misc}
+
+unorderedList(listItem(\\\\externalLink{Backslash Escapes}{\\\\#backslash})listItem(\\\\externalLink{Automatic Links}{\\\\#autolink}))))
+
+\\\\textbf{Note:} This document is itself written using Markdown; you
+can linkReference(reference=src, content=see the source for it by adding '.text' to the URL).
+
+
+
+definition(identifier=src-1-1-1, url=/projects/markdown/syntax.text, title=null)
+
+thematicBreak(---)
+
+<h2 id=\\"overview\\">Overview</h2>
+
+<h3 id=\\"philosophy\\">Philosophy</h3>
+
+Markdown is intended to be as easy-to-read and easy-to-write as is feasible.
+
+
+
+Readability, however, is emphasized above all else. A Markdown-formatted
+document should be publishable as-is, as plain text, without looking
+like it's been marked up with tags or formatting instructions. While
+Markdown's syntax has been influenced by several existing text-to-HTML
+filters -- including linkReference(reference=1, content=Setext), linkReference(reference=2, content=atx), linkReference(reference=3, content=Textile), linkReference(reference=4, content=reStructuredText),
+linkReference(reference=5, content=Grutatext), and linkReference(reference=6, content=EtText) -- the single biggest source of
+inspiration for Markdown's syntax is the format of plain text email.
+
+
+
+definition(identifier=1-1-1-1-1-1-1-1-1, url=http://docutils.sourceforge.net/mirror/setext.html, title=null)
+
+definition(identifier=2-1-1-1-1-1, url=http://www.aaronsw.com/2002/atx/, title=null)
+
+definition(identifier=3-1, url=http://textism.com/tools/textile/, title=null)
+
+definition(identifier=4-1-1-1, url=http://docutils.sourceforge.net/rst.html, title=null)
+
+definition(identifier=5-1, url=http://www.triptico.com/software/grutatxt.html, title=null)
+
+definition(identifier=6-1, url=http://ettext.taint.org/doc/, title=null)
+
+To this end, Markdown's syntax is comprised entirely of punctuation
+characters, which punctuation characters have been carefully chosen so
+as to look like what they mean. E.g., asterisks around a word actually
+look like *emphasis*. Markdown lists look like, well, lists. Even
+blockquotes look like quoted passages of text, assuming you've ever
+used email.
+
+
+
+<h3 id=\\"html\\">Inline HTML</h3>
+
+Markdown's syntax is intended for one purpose: to be used as a
+format for \\\\textit{writing} for the web.
+
+
+
+Markdown is not a replacement for HTML, or even close to it. Its
+syntax is very small, corresponding only to a very small subset of
+HTML tags. The idea is \\\\textit{not} to create a syntax that makes it easier
+to insert HTML tags. In my opinion, HTML tags are already easy to
+insert. The idea for Markdown is to make it easy to read, write, and
+edit prose. HTML is a \\\\textit{publishing} format; Markdown is a \\\\textit{writing}
+format. Thus, Markdown's formatting syntax only addresses issues that
+can be conveyed in plain text.
+
+
+
+For any markup that is not covered by Markdown's syntax, you simply
+use HTML itself. There's no need to preface it or delimit it to
+indicate that you're switching from Markdown to HTML; you just use
+the tags.
+
+
+
+The only restrictions are that block-level HTML elements -- e.g. \\\\texttt{<div>},
+\\\\texttt{<table>}, \\\\texttt{<pre>}, \\\\texttt{<p>}, etc. -- must be separated from surrounding
+content by blank lines, and the start and end tags of the block should
+not be indented with tabs or spaces. Markdown is smart enough not
+to add extra (unwanted) \\\\texttt{<p>} tags around HTML block-level tags.
+
+
+
+For example, to add an HTML table to a Markdown article:
+
+
+
+code(This is a regular paragraph.
+
+<table>
+    <tr>
+        <td>Foo</td>
+    </tr>
+</table>
+
+This is another regular paragraph.)
+
+Note that Markdown formatting syntax is not processed within block-level
+HTML tags. E.g., you can't use Markdown-style \\\\texttt{*emphasis*} inside an
+HTML block.
+
+
+
+Span-level HTML tags -- e.g. \\\\texttt{<span>}, \\\\texttt{<cite>}, or \\\\texttt{<del>} -- can be
+used anywhere in a Markdown paragraph, list item, or header. If you
+want, you can even use HTML tags instead of Markdown formatting; e.g. if
+you'd prefer to use HTML \\\\texttt{<a>} or \\\\texttt{<img>} tags instead of Markdown's
+link or image syntax, go right ahead.
+
+
+
+Unlike block-level HTML tags, Markdown syntax \\\\textit{is} processed within
+span-level tags.
+
+
+
+<h3 id=\\"autoescape\\">Automatic Escaping for Special Characters</h3>
+
+In HTML, there are two characters that demand special treatment: \\\\texttt{<}
+and \\\\texttt{\\\\&}. Left angle brackets are used to start tags; ampersands are
+used to denote HTML entities. If you want to use them as literal
+characters, you must escape them as entities, e.g. \\\\texttt{\\\\&lt;}, and
+\\\\texttt{\\\\&amp;}.
+
+
+
+Ampersands in particular are bedeviling for web writers. If you want to
+write about 'AT\\\\&T', you need to write '\\\\texttt{AT\\\\&amp;T}'. You even need to
+escape ampersands within URLs. Thus, if you want to link to:
+
+
+
+code(http://images.google.com/images?num=30&q=larry+bird)
+
+you need to encode the URL as:
+
+
+
+code(http://images.google.com/images?num=30&amp;q=larry+bird)
+
+in your anchor tag \\\\texttt{href} attribute. Needless to say, this is easy to
+forget, and is probably the single most common source of HTML validation
+errors in otherwise well-marked-up web sites.
+
+
+
+Markdown allows you to use these characters naturally, taking care of
+all the necessary escaping for you. If you use an ampersand as part of
+an HTML entity, it remains unchanged; otherwise it will be translated
+into \\\\texttt{\\\\&amp;}.
+
+
+
+So, if you want to include a copyright symbol in your article, you can write:
+
+
+
+code(&copy;)
+
+and Markdown will leave it alone. But if you write:
+
+
+
+code(AT&T)
+
+Markdown will translate it to:
+
+
+
+code(AT&amp;T)
+
+Similarly, because Markdown supports \\\\externalLink{inline HTML}{\\\\#html}, if you use
+angle brackets as delimiters for HTML tags, Markdown will treat them as
+such. But if you write:
+
+
+
+code(4 < 5)
+
+Markdown will translate it to:
+
+
+
+code(4 &lt; 5)
+
+However, inside Markdown code spans and blocks, angle brackets and
+ampersands are \\\\textit{always} encoded automatically. This makes it easy to use
+Markdown to write about HTML code. (As opposed to raw HTML, which is a
+terrible format for writing about HTML syntax, because every single \\\\texttt{<}
+and \\\\texttt{\\\\&} in your example code needs to be escaped.)
+
+
+
+thematicBreak(---)
+
+<h2 id=\\"block\\">Block Elements</h2>
+
+<h3 id=\\"p\\">Paragraphs and Line Breaks</h3>
+
+A paragraph is simply one or more consecutive lines of text, separated
+by one or more blank lines. (A blank line is any line that looks like a
+blank line -- a line containing nothing but spaces or tabs is considered
+blank.) Normal paragraphs should not be intended with spaces or tabs.
+
+
+
+The implication of the \\"one or more consecutive lines of text\\" rule is
+that Markdown supports \\"hard-wrapped\\" text paragraphs. This differs
+significantly from most other text-to-HTML formatters (including Movable
+Type's \\"Convert Line Breaks\\" option) which translate every line break
+character in a paragraph into a \\\\texttt{<br />} tag.
+
+
+
+When you \\\\textit{do} want to insert a \\\\texttt{<br />} break tag using Markdown, you
+end a line with two or more spaces, then type return.
+
+
+
+Yes, this takes a tad more effort to create a \\\\texttt{<br />}, but a simplistic
+\\"every line break is a \\\\texttt{<br />}\\" rule wouldn't work for Markdown.
+Markdown's email-style linkReference(reference=bq, content=blockquoting) and multi-paragraph linkReference(reference=l, content=list items)
+work best -- and look better -- when you format them with hard breaks.
+
+
+
+definition(identifier=bq-1, url=#blockquote, title=null)
+
+definition(identifier=l-1, url=#list, title=null)
+
+<h3 id=\\"header\\">Headers</h3>
+
+Markdown supports two styles of headers, linkReference(reference=1, content=Setext) and linkReference(reference=2, content=atx).
+
+
+
+Setext-style headers are \\"underlined\\" using equal signs (for first-level
+headers) and dashes (for second-level headers). For example:
+
+
+
+code(This is an H1
+=============
+
+This is an H2
+-------------)
+
+Any number of underlining \\\\texttt{=}'s or \\\\texttt{-}'s will work.
+
+
+
+Atx-style headers use 1-6 hash characters at the start of the line,
+corresponding to header levels 1-6. For example:
+
+
+
+code(# This is an H1
+
+## This is an H2
+
+###### This is an H6)
+
+Optionally, you may \\"close\\" atx-style headers. This is purely
+cosmetic -- you can use this if you think it looks better. The
+closing hashes don't even need to match the number of hashes
+used to open the header. (The number of opening hashes
+determines the header level.) :
+
+
+
+code(# This is an H1 #
+
+## This is an H2 ##
+
+### This is an H3 ######)
+
+<h3 id=\\"blockquote\\">Blockquotes</h3>
+
+Markdown uses email-style \\\\texttt{>} characters for blockquoting. If you're
+familiar with quoting passages of text in an email message, then you
+know how to create a blockquote in Markdown. It looks best if you hard
+wrap the text and put a \\\\texttt{>} before every line:
+
+
+
+code(> This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
+> consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
+> Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
+> 
+> Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
+> id sem consectetuer libero luctus adipiscing.)
+
+Markdown allows you to be lazy and only put the \\\\texttt{>} before the first
+line of a hard-wrapped paragraph:
+
+
+
+code(> This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
+consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
+Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
+
+> Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
+id sem consectetuer libero luctus adipiscing.)
+
+Blockquotes can be nested (i.e. a blockquote-in-a-blockquote) by
+adding additional levels of \\\\texttt{>}:
+
+
+
+code(> This is the first level of quoting.
+>
+> > This is nested blockquote.
+>
+> Back to the first level.)
+
+Blockquotes can contain other Markdown elements, including headers, lists,
+and code blocks:
+
+
+
+code(> ## This is a header.
+> 
+> 1.   This is the first list item.
+> 2.   This is the second list item.
+> 
+> Here's some example code:
+> 
+>     return shell_exec(\\"echo $input | $markdown_script\\");)
+
+Any decent text editor should make email-style quoting easy. For
+example, with BBEdit, you can make a selection and choose Increase
+Quote Level from the Text menu.
+
+
+
+<h3 id=\\"list\\">Lists</h3>
+
+Markdown supports ordered (numbered) and unordered (bulleted) lists.
+
+
+
+Unordered lists use asterisks, pluses, and hyphens -- interchangably
+-- as list markers:
+
+
+
+code(*   Red
+*   Green
+*   Blue)
+
+is equivalent to:
+
+
+
+code(+   Red
++   Green
++   Blue)
+
+and:
+
+
+
+code(-   Red
+-   Green
+-   Blue)
+
+Ordered lists use numbers followed by periods:
+
+
+
+code(1.  Bird
+2.  McHale
+3.  Parish)
+
+It's important to note that the actual numbers you use to mark the
+list have no effect on the HTML output Markdown produces. The HTML
+Markdown produces from the above list is:
+
+
+
+code(<ol>
+<li>Bird</li>
+<li>McHale</li>
+<li>Parish</li>
+</ol>)
+
+If you instead wrote the list in Markdown like this:
+
+
+
+code(1.  Bird
+1.  McHale
+1.  Parish)
+
+or even:
+
+
+
+code(3. Bird
+1. McHale
+8. Parish)
+
+you'd get the exact same HTML output. The point is, if you want to,
+you can use ordinal numbers in your ordered Markdown lists, so that
+the numbers in your source match the numbers in your published HTML.
+But if you want to be lazy, you don't have to.
+
+
+
+If you do use lazy list numbering, however, you should still start the
+list with the number 1. At some point in the future, Markdown may support
+starting ordered lists at an arbitrary number.
+
+
+
+List markers typically start at the left margin, but may be indented by
+up to three spaces. List markers must be followed by one or more spaces
+or a tab.
+
+
+
+To make lists look nice, you can wrap items with hanging indents:
+
+
+
+code(*   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+    Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
+    viverra nec, fringilla in, laoreet vitae, risus.
+*   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
+    Suspendisse id sem consectetuer libero luctus adipiscing.)
+
+But if you want to be lazy, you don't have to:
+
+
+
+code(*   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
+viverra nec, fringilla in, laoreet vitae, risus.
+*   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
+Suspendisse id sem consectetuer libero luctus adipiscing.)
+
+If list items are separated by blank lines, Markdown will wrap the
+items in \\\\texttt{<p>} tags in the HTML output. For example, this input:
+
+
+
+code(*   Bird
+*   Magic)
+
+will turn into:
+
+
+
+code(<ul>
+<li>Bird</li>
+<li>Magic</li>
+</ul>)
+
+But this:
+
+
+
+code(*   Bird
+
+*   Magic)
+
+will turn into:
+
+
+
+code(<ul>
+<li><p>Bird</p></li>
+<li><p>Magic</p></li>
+</ul>)
+
+List items may consist of multiple paragraphs. Each subsequent
+paragraph in a list item must be intended by either 4 spaces
+or one tab:
+
+
+
+code(1.  This is a list item with two paragraphs. Lorem ipsum dolor
+    sit amet, consectetuer adipiscing elit. Aliquam hendrerit
+    mi posuere lectus.
+
+    Vestibulum enim wisi, viverra nec, fringilla in, laoreet
+    vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
+    sit amet velit.
+
+2.  Suspendisse id sem consectetuer libero luctus adipiscing.)
+
+It looks nice if you indent every line of the subsequent
+paragraphs, but here again, Markdown will allow you to be
+lazy:
+
+
+
+code(*   This is a list item with two paragraphs.
+
+    This is the second paragraph in the list item. You're
+only required to indent the first line. Lorem ipsum dolor
+sit amet, consectetuer adipiscing elit.
+
+*   Another item in the same list.)
+
+To put a blockquote within a list item, the blockquote's \\\\texttt{>}
+delimiters need to be indented:
+
+
+
+code(*   A list item with a blockquote:
+
+    > This is a blockquote
+    > inside a list item.)
+
+To put a code block within a list item, the code block needs
+to be indented \\\\textit{twice} -- 8 spaces or two tabs:
+
+
+
+code(*   A list item with a code block:
+
+        <code goes here>)
+
+It's worth noting that it's possible to trigger an ordered list by
+accident, by writing something like this:
+
+
+
+code(1986. What a great season.)
+
+In other words, a \\\\textit{number-period-space} sequence at the beginning of a
+line. To avoid this, you can backslash-escape the period:
+
+
+
+code(1986\\\\. What a great season.)
+
+<h3 id=\\"precode\\">Code Blocks</h3>
+
+Pre-formatted code blocks are used for writing about programming or
+markup source code. Rather than forming normal paragraphs, the lines
+of a code block are interpreted literally. Markdown wraps a code block
+in both \\\\texttt{<pre>} and \\\\texttt{<code>} tags.
+
+
+
+To produce a code block in Markdown, simply indent every line of the
+block by at least 4 spaces or 1 tab. For example, given this input:
+
+
+
+code(This is a normal paragraph:
+
+    This is a code block.)
+
+Markdown will generate:
+
+
+
+code(<p>This is a normal paragraph:</p>
+
+<pre><code>This is a code block.
+</code></pre>)
+
+One level of indentation -- 4 spaces or 1 tab -- is removed from each
+line of the code block. For example, this:
+
+
+
+code(Here is an example of AppleScript:
+
+    tell application \\"Foo\\"
+        beep
+    end tell)
+
+will turn into:
+
+
+
+code(<p>Here is an example of AppleScript:</p>
+
+<pre><code>tell application \\"Foo\\"
+    beep
+end tell
+</code></pre>)
+
+A code block continues until it reaches a line that is not indented
+(or the end of the article).
+
+
+
+Within a code block, ampersands (\\\\texttt{\\\\&}) and angle brackets (\\\\texttt{<} and \\\\texttt{>})
+are automatically converted into HTML entities. This makes it very
+easy to include example HTML source code using Markdown -- just paste
+it and indent it, and Markdown will handle the hassle of encoding the
+ampersands and angle brackets. For example, this:
+
+
+
+code(    <div class=\\"footer\\">
+        &copy; 2004 Foo Corporation
+    </div>)
+
+will turn into:
+
+
+
+code(<pre><code>&lt;div class=\\"footer\\"&gt;
+    &amp;copy; 2004 Foo Corporation
+&lt;/div&gt;
+</code></pre>)
+
+Regular Markdown syntax is not processed within code blocks. E.g.,
+asterisks are just literal asterisks within a code block. This means
+it's also easy to use Markdown to write about Markdown's own syntax.
+
+
+
+<h3 id=\\"hr\\">Horizontal Rules</h3>
+
+You can produce a horizontal rule tag (\\\\texttt{<hr>}) by placing three or
+more hyphens, asterisks, or underscores on a line by themselves. If you
+wish, you may use spaces between the hyphens or asterisks. Each of the
+following lines will produce a horizontal rule:
+
+
+
+code(* * *
+
+***
+
+*****
+
+- - -
+
+---------------------------------------
+
+_ _ _)
+
+thematicBreak(---)
+
+<h2 id=\\"span\\">Span Elements</h2>
+
+<h3 id=\\"link\\">Links</h3>
+
+Markdown supports two style of links: \\\\textit{inline} and \\\\textit{reference}.
+
+
+
+In both styles, the link text is delimited by linkReference(reference=square brackets, content=square brackets).
+
+
+
+To create an inline link, use a set of regular parentheses immediately
+after the link text's closing square bracket. Inside the parentheses,
+put the URL where you want the link to point, along with an \\\\textit{optional}
+title for the link, surrounded in quotes. For example:
+
+
+
+code(This is [an example](http://example.com/ \\"Title\\") inline link.
+
+[This link](http://example.net/) has no title attribute.)
+
+Will produce:
+
+
+
+code(<p>This is <a href=\\"http://example.com/\\" title=\\"Title\\">
+an example</a> inline link.</p>
+
+<p><a href=\\"http://example.net/\\">This link</a> has no
+title attribute.</p>)
+
+If you're referring to a local resource on the same server, you can
+use relative paths:
+
+
+
+code(See my [About](/about/) page for details.)
+
+Reference-style links use a second set of square brackets, inside
+which you place a label of your choosing to identify the link:
+
+
+
+code(This is [an example][id] reference-style link.)
+
+You can optionally use a space to separate the sets of brackets:
+
+
+
+code(This is [an example] [id] reference-style link.)
+
+Then, anywhere in the document, you define your link label like this,
+on a line by itself:
+
+
+
+code([id]: http://example.com/  \\"Optional Title Here\\")
+
+That is:
+
+
+
+unorderedList(listItem(Square brackets containing the link identifier (optionally
+indented from the left margin using up to three spaces);)listItem(followed by a colon;)listItem(followed by one or more spaces (or tabs);)listItem(followed by the URL for the link;)listItem(optionally followed by a title attribute for the link, enclosed
+in double or single quotes.))
+
+The link URL may, optionally, be surrounded by angle brackets:
+
+
+
+code([id]: <http://example.com/>  \\"Optional Title Here\\")
+
+You can put the title attribute on the next line and use extra spaces
+or tabs for padding, which tends to look better with longer URLs:
+
+
+
+code([id]: http://example.com/longish/path/to/resource/here
+    \\"Optional Title Here\\")
+
+Link definitions are only used for creating links during Markdown
+processing, and are stripped from your document in the HTML output.
+
+
+
+Link definition names may constist of letters, numbers, spaces, and punctuation -- but they are \\\\textit{not} case sensitive. E.g. these two links:
+
+
+
+code([link text][a]
+[link text][A])
+
+are equivalent.
+
+
+
+The \\\\textit{implicit link name} shortcut allows you to omit the name of the
+link, in which case the link text itself is used as the name.
+Just use an empty set of square brackets -- e.g., to link the word
+\\"Google\\" to the google.com web site, you could simply write:
+
+
+
+code([Google][])
+
+And then define the link:
+
+
+
+code([Google]: http://google.com/)
+
+Because link names may contain spaces, this shortcut even works for
+multiple words in the link text:
+
+
+
+code(Visit [Daring Fireball][] for more information.)
+
+And then define the link:
+
+
+
+code([Daring Fireball]: http://daringfireball.net/)
+
+Link definitions can be placed anywhere in your Markdown document. I
+tend to put them immediately after each paragraph in which they're
+used, but if you want, you can put them all at the end of your
+document, sort of like footnotes.
+
+
+
+Here's an example of reference links in action:
+
+
+
+code(I get 10 times more traffic from [Google] [1] than from
+[Yahoo] [2] or [MSN] [3].
+
+  [1]: http://google.com/        \\"Google\\"
+  [2]: http://search.yahoo.com/  \\"Yahoo Search\\"
+  [3]: http://search.msn.com/    \\"MSN Search\\")
+
+Using the implicit link name shortcut, you could instead write:
+
+
+
+code(I get 10 times more traffic from [Google][] than from
+[Yahoo][] or [MSN][].
+
+  [google]: http://google.com/        \\"Google\\"
+  [yahoo]:  http://search.yahoo.com/  \\"Yahoo Search\\"
+  [msn]:    http://search.msn.com/    \\"MSN Search\\")
+
+Both of the above examples will produce the following HTML output:
+
+
+
+code(<p>I get 10 times more traffic from <a href=\\"http://google.com/\\"
+title=\\"Google\\">Google</a> than from
+<a href=\\"http://search.yahoo.com/\\" title=\\"Yahoo Search\\">Yahoo</a>
+or <a href=\\"http://search.msn.com/\\" title=\\"MSN Search\\">MSN</a>.</p>)
+
+For comparison, here is the same paragraph written using
+Markdown's inline link style:
+
+
+
+code(I get 10 times more traffic from [Google](http://google.com/ \\"Google\\")
+than from [Yahoo](http://search.yahoo.com/ \\"Yahoo Search\\") or
+[MSN](http://search.msn.com/ \\"MSN Search\\").)
+
+The point of reference-style links is not that they're easier to
+write. The point is that with reference-style links, your document
+source is vastly more readable. Compare the above examples: using
+reference-style links, the paragraph itself is only 81 characters
+long; with inline-style links, it's 176 characters; and as raw HTML,
+it's 234 characters. In the raw HTML, there's more markup than there
+is text.
+
+
+
+With Markdown's reference-style links, a source document much more
+closely resembles the final output, as rendered in a browser. By
+allowing you to move the markup-related metadata out of the paragraph,
+you can add links without interrupting the narrative flow of your
+prose.
+
+
+
+<h3 id=\\"em\\">Emphasis</h3>
+
+Markdown treats asterisks (\\\\texttt{*}) and underscores (\\\\texttt{\\\\_}) as indicators of
+emphasis. Text wrapped with one \\\\texttt{*} or \\\\texttt{\\\\_} will be wrapped with an
+HTML \\\\texttt{<em>} tag; double \\\\texttt{*}'s or \\\\texttt{\\\\_}'s will be wrapped with an HTML
+\\\\texttt{<strong>} tag. E.g., this input:
+
+
+
+code(*single asterisks*
+
+_single underscores_
+
+**double asterisks**
+
+__double underscores__)
+
+will produce:
+
+
+
+code(<em>single asterisks</em>
+
+<em>single underscores</em>
+
+<strong>double asterisks</strong>
+
+<strong>double underscores</strong>)
+
+You can use whichever style you prefer; the lone restriction is that
+the same character must be used to open and close an emphasis span.
+
+
+
+Emphasis can be used in the middle of a word:
+
+
+
+code(un*fucking*believable)
+
+But if you surround an \\\\texttt{*} or \\\\texttt{\\\\_} with spaces, it'll be treated as a
+literal asterisk or underscore.
+
+
+
+To produce a literal asterisk or underscore at a position where it
+would otherwise be used as an emphasis delimiter, you can backslash
+escape it:
+
+
+
+code(\\\\*this text is surrounded by literal asterisks\\\\*)
+
+<h3 id=\\"code\\">Code</h3>
+
+To indicate a span of code, wrap it with backtick quotes (\\\\texttt{\`}).
+Unlike a pre-formatted code block, a code span indicates code within a
+normal paragraph. For example:
+
+
+
+code(Use the \`printf()\` function.)
+
+will produce:
+
+
+
+code(<p>Use the <code>printf()</code> function.</p>)
+
+To include a literal backtick character within a code span, you can use
+multiple backticks as the opening and closing delimiters:
+
+
+
+code(\`\`There is a literal backtick (\`) here.\`\`)
+
+which will produce this:
+
+
+
+code(<p><code>There is a literal backtick (\`) here.</code></p>)
+
+The backtick delimiters surrounding a code span may include spaces --
+one after the opening, one before the closing. This allows you to place
+literal backtick characters at the beginning or end of a code span:
+
+
+
+code(A single backtick in a code span: \`\` \` \`\`
+
+A backtick-delimited string in a code span: \`\` \`foo\` \`\`)
+
+will produce:
+
+
+
+code(<p>A single backtick in a code span: <code>\`</code></p>
+
+<p>A backtick-delimited string in a code span: <code>\`foo\`</code></p>)
+
+With a code span, ampersands and angle brackets are encoded as HTML
+entities automatically, which makes it easy to include example HTML
+tags. Markdown will turn this:
+
+
+
+code(Please don't use any \`<blink>\` tags.)
+
+into:
+
+
+
+code(<p>Please don't use any <code>&lt;blink&gt;</code> tags.</p>)
+
+You can write this:
+
+
+
+code(\`&#8212;\` is the decimal-encoded equivalent of \`&mdash;\`.)
+
+to produce:
+
+
+
+code(<p><code>&amp;#8212;</code> is the decimal-encoded
+equivalent of <code>&amp;mdash;</code>.</p>)
+
+<h3 id=\\"img\\">Images</h3>
+
+Admittedly, it's fairly difficult to devise a \\"natural\\" syntax for
+placing images into a plain text document format.
+
+
+
+Markdown uses an image syntax that is intended to resemble the syntax
+for links, allowing for two styles: \\\\textit{inline} and \\\\textit{reference}.
+
+
+
+Inline image syntax looks like this:
+
+
+
+code(![Alt text](/path/to/img.jpg)
+
+![Alt text](/path/to/img.jpg \\"Optional title\\"))
+
+That is:
+
+
+
+unorderedList(listItem(An exclamation mark: \\\\texttt{!};)listItem(followed by a set of square brackets, containing the \\\\texttt{alt}
+attribute text for the image;)listItem(followed by a set of parentheses, containing the URL or path to
+the image, and an optional \\\\texttt{title} attribute enclosed in double
+or single quotes.))
+
+Reference-style image syntax looks like this:
+
+
+
+code(![Alt text][id])
+
+Where \\"id\\" is the name of a defined image reference. Image references
+are defined using syntax identical to link references:
+
+
+
+code([id]: url/to/image  \\"Optional title attribute\\")
+
+As of this writing, Markdown has no syntax for specifying the
+dimensions of an image; if this is important to you, you can simply
+use regular HTML \\\\texttt{<img>} tags.
+
+
+
+thematicBreak(---)
+
+<h2 id=\\"misc\\">Miscellaneous</h2>
+
+<h3 id=\\"autolink\\">Automatic Links</h3>
+
+Markdown supports a shortcut style for creating \\"automatic\\" links for URLs and email addresses: simply surround the URL or email address with angle brackets. What this means is that if you want to show the actual text of a URL or email address, and also have it be a clickable link, you can do this:
+
+
+
+code(<http://example.com/>)
+
+Markdown will turn this into:
+
+
+
+code(<a href=\\"http://example.com/\\">http://example.com/</a>)
+
+Automatic links for email addresses work similarly, except that
+Markdown will also perform a bit of randomized decimal and hex
+entity-encoding to help obscure your address from address-harvesting
+spambots. For example, Markdown will turn this:
+
+
+
+code(<address@example.com>)
+
+into something like this:
+
+
+
+code(<a href=\\"&#x6D;&#x61;i&#x6C;&#x74;&#x6F;:&#x61;&#x64;&#x64;&#x72;&#x65;
+&#115;&#115;&#64;&#101;&#120;&#x61;&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;
+&#109;\\">&#x61;&#x64;&#x64;&#x72;&#x65;&#115;&#115;&#64;&#101;&#120;&#x61;
+&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;&#109;</a>)
+
+which will render in a browser as a clickable link to \\"address@example.com\\".
+
+
+
+(This sort of entity-encoding trick will indeed fool many, if not
+most, address-harvesting bots, but it definitely won't fool all of
+them. It's better than nothing, but an address published in this way
+will probably eventually start receiving spam.)
+
+
+
+<h3 id=\\"backslash\\">Backslash Escapes</h3>
+
+Markdown allows you to use backslash escapes to generate literal
+characters which would otherwise have special meaning in Markdown's
+formatting syntax. For example, if you wanted to surround a word with
+literal asterisks (instead of an HTML \\\\texttt{<em>} tag), you can backslashes
+before the asterisks, like this:
+
+
+
+code(\\\\*literal asterisks\\\\*)
+
+Markdown provides backslash escapes for the following characters:
+
+
+
+code(\\\\   backslash
+\`   backtick
+*   asterisk
+_   underscore
+{}  curly braces
+[]  square brackets
+()  parentheses
+#   hash mark
++	plus sign
+-	minus sign (hyphen)
+.   dot
+!   exclamation mark)"
+`;
+
+exports[`remark fixtures with custom macros mixed-indentation 1`] = `
+"heading2(Mixed spaces and tabs)
+
+unorderedList(listItem(Very long
+			paragraph))
+
+orderedList(listItem(Very long
+	paragraph))
+
+unorderedList(listItem(Very long
+	paragraph))
+
+orderedList(listItem(Very long
+	paragraph))"
+`;
+
+exports[`remark fixtures with custom macros nested-blockquotes 1`] = `
+"blockquote(foo
+
+blockquote(bar)foo)"
+`;
+
+exports[`remark fixtures with custom macros nested-code 1`] = `
+"\\\\texttt{hi ther \`\` ok \`\`\`}
+
+
+
+\\\\texttt{\`hi ther\`}"
+`;
+
+exports[`remark fixtures with custom macros nested-em 1`] = `
+"\\\\textit{test \\\\textbf{test} test}
+
+
+
+\\\\textit{test \\\\textbf{test} test}"
+`;
+
+exports[`remark fixtures with custom macros nested-references 1`] = `
+"This nested image should work:
+
+
+
+linkReference(reference=baz, content=\\\\includegraphics{</url})
+
+
+
+This nested link should not work:
+
+
+
+linkReference(reference=baz, content=[Foo][bar])
+
+
+
+This nested footnote not work:
+
+
+
+linkReference(reference=baz, content=footnoteReference(foo))
+
+
+
+definition(identifier=bar-1-1-1, url=https://bar.com, title=bar)
+
+definition(identifier=baz-1-1-1-1-1-1-1, url=https://baz.com, title=baz)
+
+footnoteDefinition(identifier=foo, text=A footnote.)"
+`;
+
+exports[`remark fixtures with custom macros nested-square-link 1`] = `
+"linkReference(reference=the \`, content=the \`)\` character](/url)
+
+
+
+[the \\\\texttt{[} character](/url)
+
+
+
+[the \\\\texttt{} \\\\externalLink{ \`\\\\texttt{} character}{/url}
+
+
+
+\\\\externalLink{the \\\\texttt{\`} character}{/url}"
+`;
+
+exports[`remark fixtures with custom macros no-positionals 1`] = `
+"This document tests for the working of \\\\texttt{position: false} as a parse
+option.
+
+
+
+blockquote(Block-quotes
+
+unorderedList(listItem(With list items.)))
+
+Another block-quote:
+
+
+
+blockquote(orderedList(listItem(And another list.)))
+
+Some \\\\externalLink{deeply \\\\textbf{nested \\\\textit{elements}}}{http://example.com}
+
+
+
+An entity: ©, and an warning entity: ©."
+`;
+
+exports[`remark fixtures with custom macros not-a-link 1`] = `"[test](not a link)"`;
+
+exports[`remark fixtures with custom macros ordered-and-unordered-lists 1`] = `
+"heading3(Unordered)
+
+Asterisks tight:
+
+
+
+unorderedList(listItem(asterisk 1)listItem(asterisk 2)listItem(asterisk 3))
+
+Asterisks loose:
+
+
+
+unorderedList(listItem(asterisk 1)listItem(asterisk 2)listItem(asterisk 3))
+
+thematicBreak(---)
+
+Pluses tight:
+
+
+
+unorderedList(listItem(Plus 1)listItem(Plus 2)listItem(Plus 3))
+
+Pluses loose:
+
+
+
+unorderedList(listItem(Plus 1)listItem(Plus 2)listItem(Plus 3))
+
+thematicBreak(---)
+
+Minuses tight:
+
+
+
+unorderedList(listItem(Minus 1)listItem(Minus 2)listItem(Minus 3))
+
+Minuses loose:
+
+
+
+unorderedList(listItem(Minus 1)listItem(Minus 2)listItem(Minus 3))
+
+heading3(Ordered)
+
+Tight:
+
+
+
+orderedList(listItem(First)listItem(Second)listItem(Third))
+
+and:
+
+
+
+orderedList(listItem(One)listItem(Two)listItem(Three))
+
+Loose using tabs:
+
+
+
+orderedList(listItem(First)listItem(Second)listItem(Third))
+
+and using spaces:
+
+
+
+orderedList(listItem(One)listItem(Two)listItem(Three))
+
+Multiple paragraphs:
+
+
+
+orderedList(listItem(Item 1, graf one.
+
+Item 2. graf two. The quick brown fox jumped over the lazy dog's
+back.)listItem(Item 2.)listItem(Item 3.))
+
+heading3(Nested)
+
+unorderedList(listItem(Tab
+
+unorderedList(listItem(Tab
+
+unorderedList(listItem(Tab))))))
+
+Here's another:
+
+
+
+orderedList(listItem(First)listItem(Second:
+
+unorderedList(listItem(Fee)listItem(Fie)listItem(Foe)))listItem(Third))
+
+Same thing but with paragraphs:
+
+
+
+orderedList(listItem(First)listItem(Second:
+
+unorderedList(listItem(Fee)listItem(Fie)listItem(Foe)))listItem(Third))
+
+This was an error in Markdown 1.0.1:
+
+
+
+unorderedList(listItem(this
+
+unorderedList(listItem(sub))that))"
+`;
+
+exports[`remark fixtures with custom macros ordered-different-types 1`] = `
+"orderedList(listItem(foo)listItem(bar
+3) baz))"
+`;
+
+exports[`remark fixtures with custom macros ordered-with-parentheses 1`] = `
+"heading3(Ordered)
+
+Tight:
+
+
+
+1)	First
+2)	Second
+3)	Third
+
+
+
+and:
+
+
+
+1) One
+2) Two
+3) Three
+
+
+
+Loose using tabs:
+
+
+
+1)	First
+
+
+
+2)	Second
+
+
+
+3)	Third
+
+
+
+and using spaces:
+
+
+
+1) One
+
+
+
+2) Two
+
+
+
+3) Three
+
+
+
+Multiple paragraphs:
+
+
+
+1)	Item 1, graf one.
+
+
+
+code(Item 2. graf two. The quick brown fox jumped over the lazy dog's
+back.)
+
+2)	Item 2.
+
+
+
+3)	Item 3."
+`;
+
+exports[`remark fixtures with custom macros paragraphs-and-indentation 1`] = `
+"heading2(Without lines.)
+
+This is a paragraph
+    and this is further text
+
+
+
+This is a paragraph
+   and this is further text
+
+
+
+This is a paragraph with some asterisks
+
+
+
+code(***)
+
+This is a paragraph followed by a horizontal rule
+
+
+
+thematicBreak(---)
+
+heading2(With lines.)
+
+This is a paragraph
+
+
+
+code(and this is code)
+
+This is a paragraph
+
+
+
+and this is a new paragraph
+
+
+
+This is a paragraph with some asterisks in a code block
+
+
+
+code(***)
+
+This is a paragraph followed by a horizontal rule
+
+
+
+thematicBreak(---)"
+`;
+
+exports[`remark fixtures with custom macros paragraphs-empty 1`] = `
+"aaa
+
+
+
+heading2(aaa)
+
+bbb
+
+
+
+ccc"
+`;
+
+exports[`remark fixtures with custom macros ref-paren 1`] = `
+"linkReference(reference=hi, content=hi)
+
+
+
+definition(identifier=hi-1-1-1, url=/url, title=there)"
+`;
+
+exports[`remark fixtures with custom macros reference-image-empty-alt 1`] = `
+"\\\\includegraphics{http://example.com/?foo=1&bar=2}
+
+
+
+definition(identifier=1-1-1-1-1-1-1-1-1-1, url=/xyz.png, title=null)"
+`;
+
+exports[`remark fixtures with custom macros reference-link-escape 1`] = `
+"linkReference(reference=b\\\\-r, content=b*r*), linkReference(reference=b\\\\*r*, content=b*r*), linkReference(reference=b\\\\*r*, content=b*r*).
+
+
+
+\\\\includegraphics{http://google.com}, \\\\includegraphics{http://google.com}, \\\\includegraphics{http://google.com}.
+
+
+
+definition(identifier=b\\\\*r*-1, url=http://google.com, title=null)"
+`;
+
+exports[`remark fixtures with custom macros reference-link-not-closed 1`] = `
+"linkReference(reference=bar, content=bar)bar
+
+
+
+linkReference(reference=bar, content=bar)
+
+
+
+linkReference(reference=bar, content=bar)"
+`;
+
+exports[`remark fixtures with custom macros reference-link-with-angle-brackets 1`] = `
+"linkReference(reference=foo, content=foo)
+
+
+
+definition(identifier=foo-1-1-1-1-1, url=./url with spaces, title=null)"
+`;
+
+exports[`remark fixtures with custom macros reference-link-with-multiple-definitions 1`] = `
+"linkReference(reference=foo, content=foo)
+
+
+
+definition(identifier=foo-1-1-1-1-1-1, url=first, title=null)
+
+definition(identifier=foo-1-1-1-1-1-1-1, url=second, title=null)"
+`;
+
+exports[`remark fixtures with custom macros same-bullet 1`] = `
+"unorderedList(listItem(test))
+
+
+unorderedList(listItem(test))
+
+
+unorderedList(listItem(test))"
+`;
+
+exports[`remark fixtures with custom macros stringify-escape 1`] = `
+"Characters that should be escaped in general:
+
+
+
+\\\\textbackslash{} \` * [
+
+
+
+Characters that shouldn't:
+
+
+
+\\\\{\\\\}]()\\\\#+-.!>\\"\\\\$\\\\%',/:;=?@\\\\textasciicircum{}\\\\textasciitilde{}
+
+
+
+Underscores are \\\\_escaped\\\\_ unless they appear in\\\\_the\\\\_middle\\\\_of\\\\_a\\\\_word.
+or \\\\textbf{\\\\_here}, or here\\\\_\\\\_
+
+
+
+Ampersands are escaped only when they would otherwise start an entity:
+
+
+
+unorderedList(listItem(\\\\textbackslash{}©cat \\\\textbackslash{}\\\\& \\\\textbackslash{}\\\\&)listItem(\\\\&copycat \\\\&amp; \\\\&\\\\#x26)listItem(But: ©cat; \\\\texttt{\\\\&between;} \\\\&foo; \\\\& AT\\\\&T \\\\&c))
+
+Open parenthesis should be escaped after a shortcut reference:
+
+
+
+linkReference(reference=ref, content=ref)(text)
+
+
+
+And after a shortcut reference and a space (for GitHub):
+
+
+
+linkReference(reference=ref, content=ref) (text)
+
+
+
+Hyphen should be escaped at the beginning of a line:
+
+
+
+- not a list item
+- not a list item
+  + not a list item
+
+
+
+Same for angle brackets:
+
+
+
+> not a block quote
+
+
+
+And hash signs:
+
+
+
+\\\\# not a heading
+  \\\\#\\\\# not a subheading
+
+
+
+Text under a shortcut reference should be preserved verbatim:
+
+
+
+unorderedList(listItem(linkReference(reference=two*three, content=two*three))listItem(linkReference(reference=two\\\\*three, content=two*three))listItem(linkReference(reference=a\\\\a, content=a\\\\textbackslash{}a))listItem(linkReference(reference=a\\\\\\\\a, content=a\\\\textbackslash{}a))listItem(linkReference(reference=a\\\\\\\\\\\\a, content=a\\\\textbackslash{}\\\\textbackslash{}a))listItem(linkReference(reference=a_a\\\\_a, content=a\\\\_a\\\\_a)))
+
+\\\\textbf{GFM:}
+
+
+
+Colon should be escaped in URLs:
+
+
+
+unorderedList(listItem(http\\\\textbackslash{}://user:password@host:port/path?key=value\\\\#fragment)listItem(https\\\\textbackslash{}://user:password@host:port/path?key=value\\\\#fragment)listItem(http://user:password@host:port/path?key=value\\\\#fragment)listItem(https://user:password@host:port/path?key=value\\\\#fragment))
+
+Double tildes should be \\\\textasciitilde{}\\\\textasciitilde{}escaped\\\\textasciitilde{}\\\\textasciitilde{}.
+And here: foo\\\\textasciitilde{}\\\\textasciitilde{}.
+
+
+
+Pipes should not be escaped here: |
+
+
+
+\\\\begin{longtabu}{|c|c|} \\\\hline
+here & they \\\\\\\\ \\\\hline
+should & tho|ugh \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+And here:
+
+
+
+| here   | they   |
+| ---- | ----- |
+| should | though |
+
+
+
+And here:
+
+
+
+here   | they
+---- | ------
+should | though
+
+
+
+\\\\textbf{Commonmark:}
+
+
+
+Open angle bracket should be escaped:
+
+
+
+unorderedList(listItem(\\\\textbackslash{}<div>\\\\textbackslash{}</div>)listItem(\\\\textbackslash{}<http\\\\textbackslash{}:google.com>)listItem(<div></div>)listItem(<http:google.com>))"
+`;
+
+exports[`remark fixtures with custom macros strong-and-em-together-one 1`] = `
+"\\\\textbf{\\\\textit{This is strong and em.}}
+
+
+
+So is \\\\textbf{\\\\textit{this}} word.
+
+
+
+\\\\textbf{\\\\textit{This is strong and em.}}
+
+
+
+So is \\\\textbf{\\\\textit{this}} word."
+`;
+
+exports[`remark fixtures with custom macros strong-and-em-together-two 1`] = `
+"perform\\\\_complicated\\\\_task
+
+
+
+do\\\\_this\\\\_and\\\\_do\\\\_that\\\\_and\\\\_another\\\\_thing
+
+
+
+perform\\\\textit{complicated}task
+
+
+
+do\\\\textit{this}and\\\\textit{do}that\\\\textit{and}another*thing"
+`;
+
+exports[`remark fixtures with custom macros strong-emphasis 1`] = `
+"Foo \\\\textbf{bar} \\\\textbf{baz}.
+
+
+
+Foo \\\\textbf{bar} \\\\textbf{baz}."
+`;
+
+exports[`remark fixtures with custom macros strong-initial-white-space 1`] = `
+"\\\\textbf{ bar }.
+
+
+
+\\\\textbf{ bar }."
+`;
+
+exports[`remark fixtures with custom macros table 1`] = `
+"\\\\begin{longtabu}{|c|c|} \\\\hline
+Heading 1 & \\\\textbf{H}eading 2 \\\\\\\\ \\\\hline
+Cell 1 & Cell 2 \\\\\\\\ \\\\hline
+Cell 3 & Cell 4 \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|c|c|c|c|} \\\\hline
+Header 1 & Header 2 & Header 3 & Header 4 \\\\\\\\ \\\\hline
+Cell 1 & Cell 2 & Cell 3 & Cell 4 \\\\\\\\ \\\\hline
+Cell 5 & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+code(Test code)
+
+\\\\begin{longtabu}{|c|c|} \\\\hline
+Header 1 & Header 2 \\\\\\\\ \\\\hline
+Cell 1 & Cell 2 \\\\\\\\ \\\\hline
+Cell 3 & Cell 4 \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|c|c|c|c|} \\\\hline
+Header 1 & Header 2 & Header 3 & Header 4 \\\\\\\\ \\\\hline
+Cell 1 & Cell 2 & Cell 3 & Cell 4 \\\\\\\\ \\\\hline
+\\\\textit{Cell 5} & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures with custom macros table-empty-initial-cell 1`] = `
+"\\\\begin{longtabu}{|c|c|c|} \\\\hline
+ & a & c \\\\\\\\ \\\\hline
+a & b & c \\\\\\\\ \\\\hline
+a & b & c \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures with custom macros table-escaped-pipes 1`] = `
+"\\\\begin{longtabu}{|c|c|c|} \\\\hline
+First & Second & third \\\\\\\\ \\\\hline
+first & second & third \\\\\\\\ \\\\hline
+first & second | second & third | \\\\\\\\ \\\\hline
+first & second \\\\textbackslash{} & third \\\\textbackslash{} \\\\\\\\ \\\\hline
+first & second \\\\textbackslash{}| second & third \\\\textbackslash{}| \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures with custom macros table-in-list 1`] = `
+"unorderedList(listItem(Unordered:
+
+\\\\begin{longtabu}{|c|c|} \\\\hline
+A & B \\\\\\\\ \\\\hline
+1 & 2 \\\\\\\\ \\\\hline
+\\\\end{longtabu})listItem(Ordered:
+
+\\\\begin{longtabu}{|c|c|} \\\\hline
+A & B \\\\\\\\ \\\\hline
+1 & 2 \\\\\\\\ \\\\hline
+\\\\end{longtabu}))"
+`;
+
+exports[`remark fixtures with custom macros table-invalid-alignment 1`] = `
+"Missing alignment characters:
+
+
+
+| a | b | c |
+|   |---|---|
+| d | e | f |
+
+
+
+thematicBreak(---)
+
+| a | b | c |
+|---|---|   |
+| d | e | f |
+
+
+
+Invalid characters:
+
+
+
+| a | b | c |
+|---|-*-|---|
+| d | e | f |"
+`;
+
+exports[`remark fixtures with custom macros table-loose 1`] = `
+"\\\\begin{longtabu}{|c|c|} \\\\hline
+Header 1 & Header 2 \\\\\\\\ \\\\hline
+Cell 1 & Cell 2 \\\\\\\\ \\\\hline
+Cell 3 & Cell 4 \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures with custom macros table-no-body 1`] = `
+"heading2(Foo)
+
+\\\\begin{longtabu}{|c|c|c|} \\\\hline
+Name & GitHub & Twitter \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures with custom macros table-no-end-of-line 1`] = `
+"\\\\begin{longtabu}{|c|c|} \\\\hline
+foo & bar \\\\\\\\ \\\\hline
+1 & 2 \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures with custom macros table-one-column 1`] = `
+"This is a table:
+
+
+
+\\\\begin{longtabu}{|c|} \\\\hline
+a \\\\\\\\ \\\\hline
+b \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures with custom macros table-one-row 1`] = `
+"This is a table:
+
+
+
+\\\\begin{longtabu}{|c|c|c|} \\\\hline
+a & b & c \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures with custom macros table-padded 1`] = `
+"\\\\begin{longtabu}{|c|c|} \\\\hline
+Header 1 & Header 2 \\\\\\\\ \\\\hline
+Cell 1 & Cell 2 \\\\\\\\ \\\\hline
+Cell 3 & Cell 4 \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures with custom macros table-pipes-in-code 1`] = `
+"\\\\begin{longtabu}{|c|c|} \\\\hline
+abc & head2 \\\\\\\\ \\\\hline
+x & \\\\texttt{|||} \\\\\\\\ \\\\hline
+x & \` \\\\\\\\ \\\\hline
+x & \\\\texttt{|} \\\\\\\\ \\\\hline
+x & \\\\texttt{f} \\\\\\\\ \\\\hline
+x & \\\\texttt{} \\\\\\\\ \\\\hline
+x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|c|c|} \\\\hline
+abc & head2 \\\\\\\\ \\\\hline
+x & \` \\\\\\\\ \\\\hline
+x & \\\\texttt{|} \\\\\\\\ \\\\hline
+x & \\\\texttt{f} \\\\\\\\ \\\\hline
+x & \\\\texttt{} \\\\\\\\ \\\\hline
+x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures with custom macros table-spaced 1`] = `
+"\\\\begin{longtabu}{|c|c|} \\\\hline
+Header 1 & Header 2 \\\\\\\\ \\\\hline
+Cell 1 & Cell 2 \\\\\\\\ \\\\hline
+Cell 3 & Cell 4 \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures with custom macros tabs 1`] = `
+"unorderedList(listItem(this is a list item
+indented with tabs)listItem(this is a list item
+indented with spaces))
+
+Code:
+
+
+
+code(this code block is indented by one tab)
+
+And:
+
+
+
+code(	this code block is indented by two tabs)
+
+And:
+
+
+
+code(+	this is an example list item
+	indented with tabs
+
++   this is an example list item
+    indented with spaces)"
+`;
+
+exports[`remark fixtures with custom macros tabs-and-spaces 1`] = `
+"unorderedList(listItem(this is a list item
+indented with tabs)listItem(this is a list item
+indented with spaces))
+
+Code:
+
+
+
+code(this code block is indented by one tab)
+
+And:
+
+
+
+code(	this code block is indented by two tabs)
+
+And:
+
+
+
+code(+	this is an example list item
+	indented with tabs
+
++   this is an example list item
+    indented with spaces)"
+`;
+
+exports[`remark fixtures with custom macros task-list 1`] = `
+"heading2(Empty items)
+
+unorderedList(listItem(linkReference(reference= , content= ))listItem(linkReference(reference= , content=	)))
+
+orderedList(listItem(linkReference(reference=x, content=x))listItem(linkReference(reference=x, content=X)))
+
+heading2(Single space)
+
+unorderedList(listItem()listItem())
+
+orderedList(listItem()listItem())
+
+heading2(Tab)
+
+unorderedList(listItem()listItem())
+
+orderedList(listItem()listItem())
+
+heading2(No white space with content)
+
+unorderedList(listItem(linkReference(reference= , content= )Hello;)listItem(linkReference(reference= , content=	)World;))
+
+orderedList(listItem(linkReference(reference=x, content=x)Foo.)listItem(linkReference(reference=x, content=X)Bar))
+
+heading2(Single space with content)
+
+unorderedList(listItem(Hello;)listItem(World;))
+
+orderedList(listItem(Foo.)listItem(World :D))
+
+heading2(Single tab with content)
+
+unorderedList(listItem(Hello;)listItem(World;))
+
+orderedList(listItem(Foo.)listItem(Hello.))
+
+heading2(Multiple spaces with content)
+
+unorderedList(listItem(code(Hello;))listItem(code(World;)))
+
+orderedList(listItem(Foo.)listItem(Bar.))
+
+heading2(Multiple tabs with content)
+
+unorderedList(listItem(code(Hello;))listItem(code(World;)))
+
+orderedList(listItem(code(Foo.))listItem(code(Bar.)))
+
+heading2(Mixed tabs and spaces)
+
+unorderedList(listItem(code(    Hello;)))
+
+orderedList(listItem(code(World;)))
+
+unorderedList(listItem(code(	Hello;))listItem(World.))
+
+orderedList(listItem(Bar.))
+
+heading2(Line breaks)
+
+unorderedList(listItem(linkReference(reference= , content=
+) Hello;))
+
+orderedList(listItem(linkReference(reference= , content=
+) Hello;))
+
+heading2(Multiple unfinished characters)
+
+unorderedList(listItem(linkReference(reference= , content=  ) Hello;))
+
+orderedList(listItem(linkReference(reference= , content= 
+) World;)listItem(linkReference(reference= , content=		) Hello;)listItem(linkReference(reference= , content= 	 ) World.))"
+`;
+
+exports[`remark fixtures with custom macros task-list-ordered 1`] = `
+"orderedList(listItem(Mercury;)listItem([] Venus (this one’s invalid);)listItem(Earth:
+
+orderedList(listItem(Moon.)))listItem(Mars;)listItem([] Neptune (this one’s also invalid).))"
+`;
+
+exports[`remark fixtures with custom macros task-list-unordered-asterisk 1`] = `
+"unorderedList(listItem(Mercury;)listItem([] Venus (this one’s invalid);)listItem(Earth:
+
+unorderedList(listItem(Moon.)))listItem(Mars;)listItem([] Neptune (this one’s also invalid).))"
+`;
+
+exports[`remark fixtures with custom macros task-list-unordered-dash 1`] = `
+"unorderedList(listItem(Mercury;)listItem([] Venus (this one’s invalid);)listItem(Earth:
+
+unorderedList(listItem(Moon.)))listItem(Mars;)listItem([] Neptune (this one’s also invalid).))"
+`;
+
+exports[`remark fixtures with custom macros task-list-unordered-plus 1`] = `
+"unorderedList(listItem(Mercury;)listItem([] Venus (this one’s invalid);)listItem(Earth:
+
+unorderedList(listItem(Moon.)))listItem(Mars;)listItem([] Neptune (this one’s also invalid).))"
+`;
+
+exports[`remark fixtures with custom macros tidyness 1`] = `
+"blockquote(A list within a blockquote:
+
+unorderedList(listItem(asterisk 1)listItem(asterisk 2)listItem(asterisk 3)))"
+`;
+
+exports[`remark fixtures with custom macros title-attributes 1`] = `
+"heading2(Links)
+
+\\\\begin{longtabu}{|c|c|c|c|c|c|c|} \\\\hline
+Implementation & Characters & Nested & Mismatched & Escaped & Named Entities & Numbered Entities \\\\\\\\ \\\\hline
+Markdown.pl & \\\\texttt{\\"} & Yes & Yes & No & Yes & Yes \\\\\\\\ \\\\hline
+GitHub & \\\\texttt{\\"} & Yes & Yes & No & No & No \\\\\\\\ \\\\hline
+CommonMark & \\\\texttt{\\"} & No & No & Yes & Yes & Yes \\\\\\\\ \\\\hline
+Markdown.pl & \\\\texttt{'} & Yes & Yes & No & Yes & Yes \\\\\\\\ \\\\hline
+GitHub & \\\\texttt{'} & Yes & Yes & No & No & No \\\\\\\\ \\\\hline
+CommonMark & \\\\texttt{'} & No & No & Yes & Yes & Yes \\\\\\\\ \\\\hline
+Markdown.pl & \\\\texttt{()} & - & - & - & - & - \\\\\\\\ \\\\hline
+GitHub & \\\\texttt{()} & - & - & - & - & - \\\\\\\\ \\\\hline
+CommonMark & \\\\texttt{()} & No & Yes & Yes & Yes & Yes \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+heading3(Double quotes)
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+heading3(Single quotes)
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+heading3(Parentheses)
+
+linkReference(reference=hello, content=Hello)(./world.html (and text))
+
+
+
+linkReference(reference=hello, content=Hello)(./world.html (and (matching delimiters)))
+
+
+
+linkReference(reference=hello, content=Hello)(./world.html (and (mismatched delimiters))
+
+
+
+linkReference(reference=hello, content=Hello)(./world.html (and (escapes)))
+
+
+
+linkReference(reference=hello, content=Hello)(./world.html (and (named entities)))
+
+
+
+linkReference(reference=hello, content=Hello)(./world.html (and (numbered entities)))
+
+
+
+heading2(Images)
+
+heading3(Double quotes)
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+heading3(Single quotes)
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+heading3(Parentheses)
+
+\\\\includegraphics{undefined}(./world.png (and text))
+
+
+
+\\\\includegraphics{undefined}(./world.png (and (matching delimiters)))
+
+
+
+\\\\includegraphics{undefined}(./world.png (and (mismatched delimiters))
+
+
+
+\\\\includegraphics{undefined}(./world.png (and (escapes)))
+
+
+
+\\\\includegraphics{undefined}(./world.png (and (named entities)))
+
+
+
+\\\\includegraphics{undefined}(./world.png (and (numbered entities)))"
+`;
+
+exports[`remark fixtures with custom macros toplevel-paragraphs 1`] = `
+"hello world
+    how are you
+    how are you
+
+
+
+hello world
+
+
+
+code(how are you)
+
+hello world
+
+
+
+thematicBreak(---)
+
+hello world
+
+
+
+heading2(how are you)
+
+hello world
+
+
+
+heading2(how are you)
+
+hello world
+
+
+
+blockquote(how are you)
+
+hello world
+
+
+
+unorderedList(listItem(how are you))
+
+hello world
+
+
+
+<div>how are you</div>
+
+hello world
+<span>how are you</span>
+
+
+
+hello linkReference(reference=how, content=world)
+
+
+
+definition(identifier=how-1, url=/are/you, title=null)
+
+<div>hello</div>
+
+<span>hello</span>"
+`;
+
+exports[`remark fixtures with custom macros tricky-list 1`] = `
+"\\\\textbf{hello} \\\\textit{world}
+
+
+
+unorderedList(listItem(hello world))
+
+\\\\textbf{hello} \\\\textit{world}
+
+
+
+unorderedList(listItem(hello world))
+
+\\\\textbf{hello} \\\\textit{world}
+
+
+
+unorderedList(listItem(Hello world))
+
+\\\\textbf{hello} \\\\textit{world}
+
+
+
+unorderedList(listItem(hello world))"
+`;

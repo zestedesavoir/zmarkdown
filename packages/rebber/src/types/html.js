@@ -1,3 +1,4 @@
+// TODO: make it customizable
 /* Expose. */
 module.exports = html
 
