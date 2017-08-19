@@ -1,0 +1,7289 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`remark fixtures amps-and-angles-encoding 1`] = `
+"AT\\\\&T has an ampersand in their name.
+
+
+
+AT\\\\&T is another way to write it.
+
+
+
+This \\\\& that.
+
+
+
+4 < 5.
+
+
+
+6 > 5.
+
+
+
+Here's a link\\\\ref{1} with an ampersand in the URL.
+
+
+
+Here's a link with an amersand in the link text: AT\\\\&T\\\\ref{2}.
+
+
+
+Here's an inline \\\\externalLink{link}{/script?foo=1\\\\&bar=2}.
+
+
+
+Here's an inline \\\\externalLink{link}{/script?foo=1\\\\&bar=2}.
+
+
+
+\\\\footnote{\\\\label{1}\\\\externalLink{http://example.com/?foo=1\\\\&bar=2}{http://example.com/?foo=1\\\\&bar=2}}
+
+\\\\footnote{\\\\label{2}\\\\externalLink{http://att.com/}{http://att.com/}}"
+`;
+
+exports[`remark fixtures auto-link 1`] = `
+"Link: \\\\externalLink{http://example.com/}{http://example.com/}.
+
+
+
+Link to an email: \\\\externalLink{somename@example.com}{mailto:somename@example.com}.
+
+
+
+Link to an email: \\\\externalLink{somename@example.com}{mailto:somename@example.com}.
+
+
+
+With an ampersand: \\\\externalLink{http://example.com/?foo=1\\\\&bar=2}{http://example.com/?foo=1\\\\&bar=2}
+
+
+
+\\\\begin{itemize}
+\\\\item In a list?
+\\\\item \\\\externalLink{http://example.com/}{http://example.com/}
+\\\\item It should.
+\\\\end{itemize}
+
+
+\\\\begin{Quotation}
+Blockquoted: \\\\externalLink{http://example.com/}{http://example.com/}
+\\\\end{Quotation}
+
+
+
+Auto-links should not occur here: \\\\texttt{<http://example.com/>}
+
+
+
+\\\\begin{CodeBlock}{text}
+or here: <http://example.com/>
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures auto-link-invalid 1`] = `
+"<http:/
+
+
+
+<https:/
+
+
+
+<mailto:foobarbaz>
+
+
+
+<http:/google
+
+
+
+<foo@"
+`;
+
+exports[`remark fixtures auto-link-lines 1`] = `
+"hello world
+\\\\externalLink{http://example.com}{http://example.com}
+
+
+
+hello world
+\\\\externalLink{somename@example.com}{mailto:somename@example.com}"
+`;
+
+exports[`remark fixtures auto-link-output 1`] = `
+"Link: \\\\externalLink{http://example.com/}{http://example.com/}.
+
+
+
+Link to an email: \\\\externalLink{somename@example.com}{mailto:somename@example.com}.
+
+
+
+Link without protocol, which should not render as an auto-link
+because they are easily mistaken for HTML: \\\\externalLink{google.com}{google.com}."
+`;
+
+exports[`remark fixtures auto-link-url 1`] = `
+"This should be a link: \\\\externalLink{http://example.com/hello-world}{http://example.com/hello-world}.
+
+
+
+Also, subdomain should be a part of the link (\\\\externalLink{http://foo.example.com/(hello[world])}{http://foo.example.com/(hello[world])}).
+
+
+
+So should this: \\\\externalLink{foo@bar.com}{mailto:foo@bar.com}."
+`;
+
+exports[`remark fixtures auto-link-url-invalid 1`] = `
+"http://<example
+
+
+
+https:// foo bar baz.
+
+
+
+mailto:.
+
+
+
+http://,
+
+
+
+https://:
+
+
+
+mailto:;
+
+
+
+http://\\"
+
+
+
+https://'
+
+
+
+mailto:)
+
+
+
+http://]"
+`;
+
+exports[`remark fixtures backslash-escapes 1`] = `
+"These should all get escaped:
+
+
+
+Backslash: \\\\textbackslash{}
+
+
+
+Backtick: \`
+
+
+
+Asterisk: *
+
+
+
+Underscore: \\\\_
+
+
+
+Left brace: \\\\{
+
+
+
+Right brace: \\\\}
+
+
+
+Left bracket: [
+
+
+
+Right bracket: ]
+
+
+
+Left paren: (
+
+
+
+Right paren: )
+
+
+
+Greater-than: >
+
+
+
+Hash: \\\\#
+
+
+
+Period: .
+
+
+
+Bang: !
+
+
+
+Plus: +
+
+
+
+Minus: -
+
+
+
+\\\\textbf{GFM:}
+
+
+
+Pipe: |
+
+
+
+Tilde: \\\\textasciitilde{}
+
+
+
+\\\\textbf{Commonmark:}
+
+
+
+Quote: \\\\textbackslash{}\\"
+
+
+
+Dollar: \\\\textbackslash{}\\\\$
+
+
+
+Percentage: \\\\textbackslash{}\\\\%
+
+
+
+Ampersand: \\\\textbackslash{}\\\\&
+
+
+
+Single quote: \\\\textbackslash{}'
+
+
+
+Comma: \\\\textbackslash{},
+
+
+
+Forward slash: \\\\textbackslash{}/
+
+
+
+Colon: \\\\textbackslash{}:
+
+
+
+Semicolon: \\\\textbackslash{};
+
+
+
+Less-than: \\\\textbackslash{}<
+
+
+
+Equals: \\\\textbackslash{}=
+
+
+
+Question mark: \\\\textbackslash{}?
+
+
+
+At-sign: \\\\textbackslash{}@
+
+
+
+Caret: \\\\textbackslash{}\\\\textasciicircum{}
+
+
+
+New line: \\\\textbackslash{}
+only works in paragraphs.
+
+
+
+These should not, because they occur within a code block:
+
+
+
+\\\\begin{CodeBlock}{text}
+Backslash: \\\\\\\\
+
+Backtick: \\\\\`
+
+Asterisk: \\\\*
+
+Underscore: \\\\_
+
+Left brace: \\\\{
+
+Right brace: \\\\}
+
+Left bracket: \\\\[
+
+Right bracket: \\\\]
+
+Left paren: \\\\(
+
+Right paren: \\\\)
+
+Greater-than: \\\\>
+
+Hash: \\\\#
+
+Period: \\\\.
+
+Bang: \\\\!
+
+Plus: \\\\+
+
+Minus: \\\\-
+\\\\end{CodeBlock}
+
+
+
+\\\\textbf{GFM:}
+
+
+
+\\\\begin{CodeBlock}{text}
+Pipe: \\\\|
+
+Tilde: \\\\~
+\\\\end{CodeBlock}
+
+
+
+\\\\textbf{Commonmark:}
+
+
+
+\\\\begin{CodeBlock}{text}
+Quote: \\\\\\"
+
+Dollar: \\\\$
+
+Percentage: \\\\%
+
+Ampersand: \\\\&
+
+Single quote: \\\\'
+
+Comma: \\\\,
+
+Forward slash: \\\\/
+
+Colon: \\\\:
+
+Semicolon: \\\\;
+
+Less-than: \\\\<
+
+Equals: \\\\=
+
+Question mark: \\\\?
+
+At-sign: \\\\@
+
+Caret: \\\\^
+
+New line: \\\\
+only works in paragraphs.
+\\\\end{CodeBlock}
+
+
+
+Nor should these, which occur in code spans:
+
+
+
+Backslash: \\\\texttt{\\\\textbackslash{}\\\\textbackslash{}}
+
+
+
+Backtick: \\\\texttt{\\\\textbackslash{}\`}
+
+
+
+Asterisk: \\\\texttt{\\\\textbackslash{}*}
+
+
+
+Underscore: \\\\texttt{\\\\textbackslash{}\\\\_}
+
+
+
+Left brace: \\\\texttt{\\\\textbackslash{}\\\\{}
+
+
+
+Right brace: \\\\texttt{\\\\textbackslash{}\\\\}}
+
+
+
+Left bracket: \\\\texttt{\\\\textbackslash{}[}
+
+
+
+Right bracket: \\\\texttt{\\\\textbackslash{}]}
+
+
+
+Left paren: \\\\texttt{\\\\textbackslash{}(}
+
+
+
+Right paren: \\\\texttt{\\\\textbackslash{})}
+
+
+
+Greater-than: \\\\texttt{\\\\textbackslash{}>}
+
+
+
+Hash: \\\\texttt{\\\\textbackslash{}\\\\#}
+
+
+
+Period: \\\\texttt{\\\\textbackslash{}.}
+
+
+
+Bang: \\\\texttt{\\\\textbackslash{}!}
+
+
+
+Plus: \\\\texttt{\\\\textbackslash{}+}
+
+
+
+Minus: \\\\texttt{\\\\textbackslash{}-}
+
+
+
+\\\\textbf{GFM:}
+
+
+
+Pipe: \\\\texttt{\\\\textbackslash{}|}
+
+
+
+Tilde: \\\\texttt{\\\\textbackslash{}\\\\textasciitilde{}}
+
+
+
+\\\\textbf{Commonmark:}
+
+
+
+Quote: \\\\texttt{\\\\textbackslash{}\\"}
+
+
+
+Dollar: \\\\texttt{\\\\textbackslash{}\\\\$}
+
+
+
+Percentage: \\\\texttt{\\\\textbackslash{}\\\\%}
+
+
+
+Ampersand: \\\\texttt{\\\\textbackslash{}\\\\&}
+
+
+
+Single quote: \\\\texttt{\\\\textbackslash{}'}
+
+
+
+Comma: \\\\texttt{\\\\textbackslash{},}
+
+
+
+Forward slash: \\\\texttt{\\\\textbackslash{}/}
+
+
+
+Colon: \\\\texttt{\\\\textbackslash{}:}
+
+
+
+Semicolon: \\\\texttt{\\\\textbackslash{};}
+
+
+
+Less-than: \\\\texttt{\\\\textbackslash{}<}
+
+
+
+Equals: \\\\texttt{\\\\textbackslash{}=}
+
+
+
+Question mark: \\\\texttt{\\\\textbackslash{}?}
+
+
+
+At-sign: \\\\texttt{\\\\textbackslash{}@}
+
+
+
+Caret: \\\\texttt{\\\\textbackslash{}\\\\textasciicircum{}}
+
+
+
+New line: \\\\texttt{\\\\textbackslash{}} only works in paragraphs.
+
+
+
+These should get escaped, even though they're matching pairs for
+other Markdown constructs:
+
+
+
+*asterisks*
+
+
+
+\\\\_underscores\\\\_
+
+
+
+\`backticks\`
+
+
+
+This is a code span with a literal backslash-backtick sequence: \\\\texttt{\\\\textbackslash{}\`}
+
+
+
+This is a tag with unescaped backticks <span attr='\`ticks\`'>bar</span>.
+
+
+
+This is a tag with backslashes <span attr='\\\\\\\\backslashes\\\\\\\\'>bar</span>."
+`;
+
+exports[`remark fixtures block-elements 1`] = `
+"\\\\begin{itemize}
+\\\\item Different lists should receive two newline characters
+between them.
+\\\\end{itemize}
+
+
+
+\\\\begin{itemize}
+\\\\item This is another list.
+\\\\end{itemize}
+
+
+\\\\begin{Quotation}
+\\\\begin{itemize}
+\\\\item The same goes for lists in block quotes.
+\\\\end{itemize}
+\\\\begin{itemize}
+\\\\item This is another list.
+\\\\end{itemize}
+\\\\end{Quotation}
+
+
+
+\\\\begin{itemize}
+\\\\item And for lists in lists:
+
+\\\\begin{enumerate}
+\\\\item First sublist.
+\\\\end{enumerate}
+\\\\end{itemize}
+
+
+
+\\\\begin{CodeBlock}{text}
+1.   Second sublist.
+\\\\end{CodeBlock}
+
+
+
+And for lists followed by indented code blocks:
+
+
+
+\\\\begin{itemize}
+\\\\item This is a paragraph in a list
+\\\\end{itemize}
+
+
+
+\\\\begin{CodeBlock}{text}
+And this is code();
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures blockquote-indented 1`] = `
+"\\\\begin{Quotation}
+bar
+baz
+\\\\end{Quotation}"
+`;
+
+exports[`remark fixtures blockquote-lazy-code 1`] = `
+"\\\\begin{Quotation}
+\\\\begin{CodeBlock}{text}
+foo
+bar
+\\\\end{CodeBlock}
+\\\\end{Quotation}"
+`;
+
+exports[`remark fixtures blockquote-lazy-fence 1`] = `
+"\\\\begin{Quotation}
+\\\\begin{CodeBlock}{text}
+aNormalCodeBlockInABlockqoute();
+\\\\end{CodeBlock}
+\\\\end{Quotation}
+
+
+
+A paragraph.
+
+
+
+\\\\begin{Quotation}
+\\\\begin{CodeBlock}{text}
+thisIsAlsoSomeCodeInABlockquote();
+\\\\end{CodeBlock}
+\\\\end{Quotation}
+
+
+
+A paragraph.
+
+
+
+\\\\begin{Quotation}
+\\\\begin{CodeBlock}{text}
+aNonTerminatedCodeBlockInABlockquote();
+\\\\end{CodeBlock}
+
+aNewCodeBlockFollowingTheBlockQuote();
+
+\\\\begin{CodeBlock}{text}
+
+\\\\end{CodeBlock}
+\\\\end{Quotation}
+
+
+
+A paragraph.
+
+
+
+\\\\begin{Quotation}
+Something in a blockquote.
+
+\\\\begin{CodeBlock}{text}
+aNewCodeBlock();
+\\\\end{CodeBlock}
+\\\\end{Quotation}"
+`;
+
+exports[`remark fixtures blockquote-lazy-list 1`] = `
+"\\\\begin{Quotation}
+This is a blockquote.
+
+\\\\begin{itemize}
+\\\\item And in normal mode this is an internal list, but in commonmark this is a top level list.
+\\\\end{itemize}
+\\\\end{Quotation}"
+`;
+
+exports[`remark fixtures blockquote-lazy-rule 1`] = `
+"\\\\begin{Quotation}
+This is a blockquote. Followed by a rule.
+
+\\\\horizontalLine
+\\\\end{Quotation}"
+`;
+
+exports[`remark fixtures blockquote-list-item 1`] = `
+"This fails in markdown.pl and upskirt:
+
+
+
+\\\\begin{itemize}
+\\\\item hello
+
+\\\\begin{Quotation}
+world
+\\\\end{Quotation}
+\\\\end{itemize}"
+`;
+
+exports[`remark fixtures blockquotes 1`] = `
+"\\\\begin{Quotation}
+This is a blockquote.
+
+This is, in commonmark mode, another blockquote.
+\\\\end{Quotation}"
+`;
+
+exports[`remark fixtures blockquotes-empty-lines 1`] = `
+"\\\\begin{Quotation}
+Note there is no space on the following line.
+
+Note there is no space on the preceding line.
+\\\\end{Quotation}"
+`;
+
+exports[`remark fixtures blockquotes-with-code-blocks 1`] = `
+"\\\\begin{Quotation}
+Example:
+
+\\\\begin{CodeBlock}{text}
+sub status {
+    print \\"working\\";
+}
+\\\\end{CodeBlock}
+
+Or:
+
+\\\\begin{CodeBlock}{text}
+sub status {
+    return \\"working\\";
+}
+\\\\end{CodeBlock}
+\\\\end{Quotation}"
+`;
+
+exports[`remark fixtures bom 1`] = `
+"\\\\chapter{Hello from a BOM}
+
+
+Be careful when editing this file!"
+`;
+
+exports[`remark fixtures breaks-hard 1`] = `
+"These are not breaks:
+
+
+
+Look at the
+pretty line
+breaks.
+
+
+
+These are breaks:
+
+
+
+Look at the \\\\\\\\
+pretty line \\\\\\\\
+breaks.
+
+
+
+In \\\\texttt{commonmark: true} mode, an escaped newline character is exposed as a \\\\texttt{break} node:
+
+
+
+Look at the\\\\textbackslash{}
+pretty line\\\\textbackslash{}
+breaks."
+`;
+
+exports[`remark fixtures case-insensitive-refs 1`] = `
+"hi\\\\ref{hi}
+
+
+
+\\\\footnote{\\\\label{hi}\\\\externalLink{/url}{/url}}"
+`;
+
+exports[`remark fixtures code-block 1`] = `
+"Tildes:
+
+
+
+\\\\begin{CodeBlock}{javascript}
+alert('Hello World!');
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures code-block-indentation 1`] = `
+"Fenced code blocks are normally not exdented, however,
+when the initial fence is indented by spaces, the value of
+the code is exdented by up to that amount of spaces.
+
+
+
+\\\\begin{CodeBlock}{text}
+    This is a code block...
+        
+    ...which is not exdented.
+\\\\end{CodeBlock}
+
+
+
+But...
+
+
+
+\\\\begin{CodeBlock}{text}
+  This one...
+      
+  ...is.
+\\\\end{CodeBlock}
+
+
+
+And...
+
+
+
+\\\\begin{CodeBlock}{text}
+So is this...
+      
+  ...one.
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures code-block-nesting-bug 1`] = `
+"GitHub, thus RedCarpet, has a bug where “nested” fenced code blocks,
+even with shorter fences, can exit their actual “parent” block.
+
+
+
+Note that this bug does not occur on indented code-blocks.
+
+
+
+\\\\begin{CodeBlock}{foo}
+\`\`\`bar
+baz
+\`\`\`
+\\\\end{CodeBlock}
+
+
+
+Even with a different fence marker:
+
+
+
+\\\\begin{CodeBlock}{foo}
+~~~bar
+baz
+~~~
+\\\\end{CodeBlock}
+
+
+
+And reversed:
+
+
+
+\\\\begin{CodeBlock}{foo}
+~~~bar
+baz
+~~~
+\\\\end{CodeBlock}
+
+
+
+\\\\begin{CodeBlock}{foo}
+\`\`\`bar
+baz
+\`\`\`
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures code-blocks 1`] = `
+"\\\\begin{CodeBlock}{text}
+code block on the first line
+\\\\end{CodeBlock}
+
+
+
+Regular text.
+
+
+
+\\\\begin{CodeBlock}{text}
+code block indented by spaces
+\\\\end{CodeBlock}
+
+
+
+Regular text.
+
+
+
+\\\\begin{CodeBlock}{text}
+the lines in this block  
+all contain trailing spaces  
+\\\\end{CodeBlock}
+
+
+
+Regular Text.
+
+
+
+\\\\begin{CodeBlock}{text}
+code block on the last line
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures code-spans 1`] = `
+"\\\\texttt{<test a=\\"} content of attribute \\\\texttt{\\">}
+
+
+
+Fix for backticks within HTML tag: <span attr='\`ticks\`'>like this</span>
+
+
+
+Here's how you put \\\\texttt{\`backticks\`} in a code span.
+
+
+
+Additionally, empty code spans are also supported: \\\\texttt{}.
+
+
+
+Here’s an example, \\\\texttt{foo \` bar}.
+
+
+
+And here, \\\\texttt{\`\`}.
+
+
+
+\\\\texttt{// this is also inline code}
+
+
+
+So is this \\\\texttt{foo   bar
+  baz}.
+
+
+
+And this \\\\texttt{foo \`\` bar}
+
+
+
+And \\\\texttt{this\\\\textbackslash{}}but this is text\`."
+`;
+
+exports[`remark fixtures def-blocks 1`] = `
+"\\\\begin{Quotation}
+hello
+
+1\\\\ref{1}: hello
+\\\\end{Quotation}
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\begin{Quotation}
+hello
+\\\\end{Quotation}
+
+
+
+\\\\footnote{\\\\label{2-1}\\\\externalLink{hello}{hello}}
+
+\\\\begin{itemize}
+\\\\item hello
+\\\\item 3\\\\ref{3}: hello
+\\\\end{itemize}
+
+
+
+\\\\begin{itemize}
+\\\\item hello
+\\\\end{itemize}
+
+
+\\\\footnote{\\\\label{4}\\\\externalLink{hello}{hello}}
+
+\\\\begin{Quotation}
+foo
+bar
+\\\\end{Quotation}
+
+
+
+\\\\footnote{\\\\label{1-1}\\\\externalLink{foo}{foo}}
+
+\\\\begin{Quotation}
+bar
+\\\\end{Quotation}"
+`;
+
+exports[`remark fixtures definition-newline 1`] = `
+"baz\\\\ref{baz}: /url (
+)
+
+
+
+foo\\\\ref{foo}: /url \\"
+\\"
+
+
+
+bar\\\\ref{bar}: /url '
+'
+
+
+
+\\\\footnote{\\\\label{baz}\\\\externalLink{/url}{/url}}
+
+\\\\footnote{\\\\label{baz-1}\\\\externalLink{/url}{/url}}
+
+\\\\footnote{\\\\label{baz-1-1}\\\\externalLink{/url}{/url}}
+
+baz\\\\ref{baz}: /url 'foo"
+`;
+
+exports[`remark fixtures definition-unclosed 1`] = `
+"foo\\\\ref{foo}:
+
+
+
+\\\\footnote{\\\\label{bar}\\\\externalLink{</url}{</url}}
+
+foo\\\\ref{foo}:"
+`;
+
+exports[`remark fixtures definition-unclosed-attribute 1`] = `
+"baz\\\\ref{baz}: /url (there
+
+
+
+foo\\\\ref{foo}: /url \\"there
+
+
+
+bar\\\\ref{bar}: /url 'there
+
+
+
+baz\\\\ref{baz}: url (
+
+
+
+foo\\\\ref{foo}: url \\"
+
+
+
+bar\\\\ref{bar}: /url '
+
+
+
+baz\\\\ref{baz}: <url>(
+
+
+
+foo\\\\ref{foo}: <url>\\"
+
+
+
+bar\\\\ref{bar}: <url>'"
+`;
+
+exports[`remark fixtures deletion 1`] = `"hello \\\\sout{hi} world"`;
+
+exports[`remark fixtures double-link 1`] = `
+"<p>Already linked: <a href=\\"http://example.com/\\">http://example.com/</a>.</p>
+
+Already linked: \\\\externalLink{http://example.com/}{http://example.com/}.
+
+
+
+Already linked: <a href=\\"http://example.com/\\">\\\\textbf{http://example.com/}</a>."
+`;
+
+exports[`remark fixtures emphasis 1`] = `
+"\\\\textit{emphasis}.
+
+
+
+\\\\textbf{strong}."
+`;
+
+exports[`remark fixtures emphasis-empty 1`] = `
+"Hello ** ** world.
+
+
+
+Hello \\\\_\\\\_	\\\\_\\\\_ world.
+
+
+
+Hello *	* world.
+
+
+
+Hello \\\\_	\\\\_ world."
+`;
+
+exports[`remark fixtures emphasis-escaped-final-marker 1`] = `
+"*bar*
+
+
+
+**bar**
+
+
+
+\\\\_bar\\\\_
+
+
+
+\\\\_\\\\_bar\\\\_\\\\_"
+`;
+
+exports[`remark fixtures emphasis-internal 1`] = `"These words should\\\\_not\\\\_be\\\\_emphasized."`;
+
+exports[`remark fixtures empty 1`] = `""`;
+
+exports[`remark fixtures entities 1`] = `
+"Lots of entities are supported in mdast:  , \\\\&, ©, Æ,
+Ď, ¾, ℋ, ⅆ,
+∲, \\\\&c.  Even some entities with a missing
+terminal semicolon are parsed correctly (as per the HTML5 spec):
+ÿ, á, ©, and \\\\&.
+
+
+
+However, \\\\&MadeUpEntities; are kept in the document.
+
+
+
+Entities even work in the language flag of fenced code blocks:
+
+
+
+\\\\begin{CodeBlock}{some—language}
+alert('Hello');
+\\\\end{CodeBlock}
+
+
+
+Or in \\\\externalLink{línks}{\\\\textasciitilde{}/some—file}
+
+
+
+Or in \\\\includegraphics{~/an–image.png}
+
+
+
+But, entities are not interpreted in \\\\texttt{inline c\\\\&ouml;de}, or in
+code blocks:
+
+
+
+\\\\begin{CodeBlock}{text}
+C&Ouml;DE block.
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures entities-advanced 1`] = `
+"\\\\begin{Quotation}
+However, \\\\&MadeUpEntities; are kept in the document.
+
+Entities even work in the language flag of fenced code blocks:
+
+\\\\begin{CodeBlock}{some©language}
+alert('Hello');
+\\\\end{CodeBlock}
+
+And in an auto-link: \\\\externalLink{http://example©xample.com}{http://example©xample.com}
+
+Foo and bar and \\\\externalLink{http://example©xample.com}{http://example©xample.com} and baz.
+
+Or in \\\\externalLink{l©nks}{\\\\textasciitilde{}/some©file}
+
+Or in \\\\externalLink{l©lnks}{\\\\textasciitilde{}/some©file}
+
+Or in \\\\includegraphics{~/some©file}
+\\\\end{Quotation}
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\begin{Quotation}
+Or in \\\\includegraphics{~/some©file}
+
+Or in \\\\includegraphics{undefined}
+
+1\\\\ref{1}: \\\\externalLink{http://example©xample.com}{http://example©xample.com} \\"in some
+pl©ce\\"
+
+1
+\\\\ref{ 1 }: \\\\externalLink{http://example©xample.com}{http://example©xample.com} \\"in some
+pl©ce\\"
+\\\\end{Quotation}
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\begin{Quotation}
+But, entities are not interpreted in \\\\texttt{inline c\\\\&oumlde}, or in
+code blocks:
+
+\\\\begin{CodeBlock}{text}
+C&OumlDE block.
+\\\\end{CodeBlock}
+\\\\end{Quotation}"
+`;
+
+exports[`remark fixtures escaped-angles 1`] = `">"`;
+
+exports[`remark fixtures fenced-code 1`] = `
+"\\\\begin{CodeBlock}{js}
+var a = 'hello';
+console.log(a + ' world');
+\\\\end{CodeBlock}
+
+
+
+\\\\begin{CodeBlock}{bash}
+echo \\"hello, \${WORLD}\\"
+\\\\end{CodeBlock}
+
+
+
+\\\\begin{CodeBlock}{longfence}
+Q: What do you call a tall person who sells stolen goods?
+\\\\end{CodeBlock}
+
+
+
+\\\\begin{CodeBlock}{ManyTildes}
+A longfence!
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures fenced-code-empty 1`] = `
+"Normal with language tag:
+
+
+
+\\\\begin{CodeBlock}{js}
+
+\\\\end{CodeBlock}
+
+
+
+With white space:
+
+
+
+\\\\begin{CodeBlock}{bash}
+
+\\\\end{CodeBlock}
+
+
+
+With very long fences:
+
+
+
+\\\\begin{CodeBlock}{text}
+
+\\\\end{CodeBlock}
+
+
+
+With nothing:
+
+
+
+\\\\begin{CodeBlock}{text}
+
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures fenced-code-trailing-characters 1`] = `
+"\\\\begin{CodeBlock}{js}
+foo();
+\`\`\`bash
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures fenced-code-trailing-characters-2 1`] = `
+"\\\\begin{CodeBlock}{text}
+\`\`\` aaa
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures fenced-code-white-space-after-flag 1`] = `
+"\\\\begin{CodeBlock}{js}
+foo();
+\\\\end{CodeBlock}
+
+
+
+\\\\begin{CodeBlock}{bash}
+echo \\"hello, \${WORLD}\\"
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures footnote 1`] = `
+"Here is some text containing a footnote\\\\textsuperscript{\\\\ref{footnote:somesamplefootnote}}. You can then continue your thought...
+
+
+
+\\\\footnotetext[somesamplefootnote]{\\\\label{footnote:somesamplefootnote} Here is the text of the footnote itself.}
+
+
+Even go to a new paragraph\\\\ref{paragraph} and the footnotes will go to the bottom of the document\\\\textsuperscript{\\\\ref{footnote:documentdetails}}.
+
+
+
+\\\\footnotetext[documentdetails]{\\\\label{footnote:documentdetails} Depending on the \\\\textbf{final} form of your document, of course. See the documentation and experiment.
+
+This footnote has a second paragraph\\\\ref{paragraph}.}
+
+
+\\\\footnote{\\\\label{paragraph}\\\\externalLink{http://example.com}{http://example.com}}"
+`;
+
+exports[`remark fixtures footnote-consecutive 1`] = `
+"\\\\chapter{International Radiotelephony Spelling Alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}}
+
+
+Here's the NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}\\\\textsuperscript{\\\\ref{footnote:wiki2}}: Alfa, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango, Uniform, Victor\\\\textsuperscript{\\\\ref{footnote:name}}\\\\textsuperscript{\\\\ref{footnote:consecutive}}, Whiskey, X-ray, Yankee, and Zulu.
+
+
+
+And here's some more text.
+
+
+
+\\\\footnotetext[wiki]{\\\\label{footnote:wiki} Read more about it here.}
+
+
+\\\\footnotetext[wiki2]{\\\\label{footnote:wiki2} Here's another good article on the subject.}
+
+
+\\\\footnotetext[name]{\\\\label{footnote:name} A great first name.}
+
+
+\\\\footnotetext[consecutive]{\\\\label{footnote:consecutive} I know.}"
+`;
+
+exports[`remark fixtures footnote-duplicate 1`] = `
+"The NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}.
+
+
+
+\\\\footnotetext[wiki]{\\\\label{footnote:wiki} Read more about it here.}
+
+
+\\\\footnotetext[wiki]{\\\\label{footnote:wiki} And here.}"
+`;
+
+exports[`remark fixtures footnote-empty 1`] = `"This is a document with \\\\texttt{footnotes: true}, but not actual footnote definition."`;
+
+exports[`remark fixtures footnote-escape 1`] = `
+"The NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wi\\\\-ki}}.
+
+
+
+\\\\footnotetext[wi\\\\-ki]{\\\\label{footnote:wi\\\\-ki} Read more about it somewhere else.}"
+`;
+
+exports[`remark fixtures footnote-ids 1`] = `
+"This example checks that \\\\footnote[undefined]{\\\\label{footnote:undefined} the generated}
+ IDs do not overwrite the user's IDs\\\\textsuperscript{\\\\ref{footnote:1}}.
+
+
+
+\\\\footnotetext[1]{\\\\label{footnote:1} Old behavior would, for \\"generated\\", generate a footnote with an ID set to \\\\texttt{1}, thus overwriting this footnote.}"
+`;
+
+exports[`remark fixtures footnote-indent 1`] = `
+"The NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}.
+
+
+
+\\\\footnotetext[wiki]{\\\\label{footnote:wiki} Read more about it somewhere else.}"
+`;
+
+exports[`remark fixtures footnote-inline 1`] = `"This is an example of an inline footnote.\\\\footnote[undefined]{\\\\label{footnote:undefined} This is the \\\\textit{actual} footnote.}"`;
+
+exports[`remark fixtures footnote-like 1`] = `
+"This one isn't even defined\\\\ref{^foo}.
+
+
+
+\\\\textsuperscript{\\\\ref{footnote:both}}invalid\\\\ref{invalid}, \\\\footnote[undefined]{\\\\label{footnote:undefined} this too}
+[]."
+`;
+
+exports[`remark fixtures footnote-matrix 1`] = `
+"\\\\begin{enumerate}
+\\\\item foo\\\\ref{bar}
+\\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}bar\\\\ref{bar}
+\\\\item foo\\\\ref{^bar}
+\\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}\\\\textsuperscript{\\\\ref{footnote:bar}}
+\\\\end{enumerate}"
+`;
+
+exports[`remark fixtures footnote-multiple 1`] = `
+"\\\\chapter{International Radiotelephony Spelling Alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}}
+
+
+Here's the NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}: Alfa, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango, Uniform, Victor, Whiskey, X-ray, Yankee, and Zulu.
+
+
+
+And here's some more text.
+
+
+
+\\\\footnotetext[wiki]{\\\\label{footnote:wiki} Read more about it here.}"
+`;
+
+exports[`remark fixtures footnote-nested 1`] = `
+"A footnote\\\\textsuperscript{\\\\ref{footnote:1}}.
+
+
+
+\\\\footnotetext[1]{\\\\label{footnote:1} Including \\\\footnote[undefined]{\\\\label{footnote:undefined} another \\\\textbf{footnote}}}"
+`;
+
+exports[`remark fixtures footnote-proto 1`] = `
+"A footnote\\\\textsuperscript{\\\\ref{footnote:tostring}} and \\\\textsuperscript{\\\\ref{footnote:__proto__}} and \\\\textsuperscript{\\\\ref{footnote:constructor}}.
+
+
+
+\\\\footnotetext[tostring]{\\\\label{footnote:tostring} See \\\\texttt{Object.prototype.toString()}.}
+
+
+\\\\footnotetext[constructor]{\\\\label{footnote:constructor} See \\\\texttt{Object.prototype.valueOf()}.}
+
+
+\\\\footnotetext[__proto__]{\\\\label{footnote:__proto__} See \\\\texttt{Object.prototype.\\\\_\\\\_proto\\\\_\\\\_()}.}"
+`;
+
+exports[`remark fixtures footnote-without-space 1`] = `
+"foo\\\\textsuperscript{\\\\ref{footnote:abc}} bar. foo\\\\textsuperscript{\\\\ref{footnote:xyz}} bar
+
+
+
+\\\\footnotetext[abc]{\\\\label{footnote:abc} Baz baz}
+
+
+\\\\footnotetext[xyz]{\\\\label{footnote:xyz} Baz}"
+`;
+
+exports[`remark fixtures hard-wrapped-paragraphs-with-list-like-lines 1`] = `
+"In Markdown 1.0.0 and earlier. Version
+8. This line turns into a list item.
+Because a hard-wrapped line in the
+123. middle of a paragraph looked like a
+list item.
+
+
+
+Here's one with a bullet.
+
+
+
+\\\\begin{itemize}
+\\\\item criminey.
+\\\\end{itemize}
+
+
+Non-GFM does not create a list for either.
+GFM does not create a list for \\\\texttt{8.}, but does for \\\\texttt{*}.
+CommonMark creates a list for both.
+All versions create lists for the following.
+
+
+
+\\\\begin{itemize}
+\\\\item Here's one with a bullet.
+
+\\\\begin{itemize}
+\\\\item criminey.
+\\\\end{itemize}
+\\\\end{itemize}
+
+
+...and the following:
+
+
+
+\\\\begin{enumerate}
+\\\\item In Markdown 1.0.0 and earlier. Version
+
+\\\\begin{enumerate}
+\\\\item This line turns into a list item.
+\\\\end{enumerate}
+\\\\end{enumerate}"
+`;
+
+exports[`remark fixtures heading 1`] = `
+"\\\\chapter{Heading 1}
+
+
+\\\\section{Heading 2}
+
+
+\\\\subsection{Heading 4}
+
+
+\\\\subsubsection{Heading 4}
+
+
+\\\\paragraph{Heading 5}
+
+
+\\\\subparagaph{Heading 6}"
+`;
+
+exports[`remark fixtures heading-atx-closed-trailing-white-space 1`] = `
+"\\\\chapter{Foo}
+
+
+\\\\section{Bar}"
+`;
+
+exports[`remark fixtures heading-atx-empty 1`] = `
+"\\\\chapter{}
+
+
+\\\\section{}
+
+
+\\\\subsection{}
+
+
+\\\\subsubsection{}
+
+
+\\\\paragraph{}
+
+
+\\\\subparagaph{}"
+`;
+
+exports[`remark fixtures heading-in-blockquote 1`] = `
+"\\\\begin{Quotation}
+A blockquote
+with some more text.
+\\\\end{Quotation}
+
+
+
+A normal paragraph.
+
+
+
+\\\\begin{Quotation}
+\\\\section{A blockquote followed by a horizontal rule (in CommonMark).}
+\\\\section{A heading in a blockquote}
+\\\\end{Quotation}"
+`;
+
+exports[`remark fixtures heading-in-paragraph 1`] = `
+"Hello
+
+
+
+\\\\chapter{World}"
+`;
+
+exports[`remark fixtures heading-not-atx 1`] = `
+"\\\\#This is not a heading, per CommonMark: \\\\externalLink{http://spec.commonmark.org/0.17/\\\\#example-25}{http://spec.commonmark.org/0.17/\\\\#example-25}
+
+
+
+Kramdown (GitHub) neither supports unspaced ATX-headings.
+
+
+
+\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\# h7?
+
+
+
+\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\# h8?
+
+
+
+\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\#\\\\# h9?
+
+
+
+More than six \\\\# characters is not a heading: \\\\externalLink{http://spec.commonmark.org/0.26/\\\\#example-33}{http://spec.commonmark.org/0.26/\\\\#example-33}"
+`;
+
+exports[`remark fixtures heading-setext-with-initial-spacing 1`] = `
+"\\\\chapter{Heading 1}
+
+
+\\\\section{Heading 2}
+
+
+Both these headings caused positional problems in on commit daa344c and before."
+`;
+
+exports[`remark fixtures horizontal-rules 1`] = `
+"Dashes:
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\begin{CodeBlock}{text}
+---
+\\\\end{CodeBlock}
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\begin{CodeBlock}{text}
+- - -
+\\\\end{CodeBlock}
+
+
+
+Asterisks:
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\begin{CodeBlock}{text}
+***
+\\\\end{CodeBlock}
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\begin{CodeBlock}{text}
+* * *
+\\\\end{CodeBlock}
+
+
+
+Underscores:
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\begin{CodeBlock}{text}
+___
+\\\\end{CodeBlock}
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\begin{CodeBlock}{text}
+_ _ _
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures horizontal-rules-adjacent 1`] = `
+"\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\horizontalLine
+
+
+
+The three asterisks are not a Setext header.
+
+
+
+This is a paragraph.
+
+
+
+\\\\horizontalLine
+
+
+
+This is another paragraph.
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\section{But this is a secondary heading.}
+
+
+\\\\horizontalLine"
+`;
+
+exports[`remark fixtures hr 1`] = `"\\\\horizontalLine"`;
+
+exports[`remark fixtures hr-list-break 1`] = `
+"\\\\begin{itemize}
+\\\\item hello world
+\\\\item how are
+\\\\end{itemize}
+
+
+\\\\horizontalLine
+
+
+
+you today?
+
+
+
+The above asterisks do split the list, but the below ones do not.
+
+
+
+\\\\begin{itemize}
+\\\\item hello world
+\\\\item how are
+\\\\item \\\\horizontalLine
+
+you today?
+\\\\end{itemize}
+
+
+
+\\\\begin{itemize}
+\\\\item Neither do these
+\\\\item how are
+\\\\item \\\\begin{itemize}
+\\\\item *
+you today?
+\\\\end{itemize}
+\\\\end{itemize}
+
+
+
+\\\\begin{itemize}
+\\\\item But these do
+\\\\item how are
+\\\\end{itemize}
+
+
+\\\\horizontalLine
+
+
+
+you today?"
+`;
+
+exports[`remark fixtures html-advanced 1`] = `
+"Simple block on one line:
+
+
+
+<div>foo</div>
+
+And nested without indentation:
+
+
+
+<div>
+<div>
+<div>
+foo
+</div>
+<div style=\\">\\"/>
+</div>
+<div>bar</div>
+</div>"
+`;
+
+exports[`remark fixtures html-attributes 1`] = `
+"\\\\chapter{Block-level}
+
+
+<article foo=\\"bar 'baz' qux\\" foo='bar \\"baz\\" qux' foo=baz>
+
+<article foo>
+
+<article>
+
+<article :foo:bar:09:=\\"baz\\">
+
+<article foo.bar_09->
+
+<article foo.bar_09-   >
+
+<article foo.bar_09-   />
+
+<div baz
+qux
+
+\\\\chapter{Inline}
+
+
+<span foo=\\"bar 'baz' qux\\" foo='bar \\"baz\\" qux' foo=baz>
+
+<span foo>
+
+<span>
+
+<span :foo:bar:09:=\\"baz\\">
+
+<span foo.bar_09->
+
+<span foo.bar_09-   >
+
+<span foo.bar_09-   />
+
+<span this is
+invalid"
+`;
+
+exports[`remark fixtures html-cdata 1`] = `
+"<![CDATA[
+fooBarBaz()
+]]>
+
+foo <![CDATA[bar]]>"
+`;
+
+exports[`remark fixtures html-comments 1`] = `
+"Paragraph one.
+
+
+
+<!-- This is a simple comment -->
+
+<!--
+	This is another comment.
+-->
+
+What follows is not an HTML comment because it contains
+two consecutive dashes:
+\\\\externalLink{https://html.spec.whatwg.org/multipage/syntax.html\\\\#comments}{https://html.spec.whatwg.org/multipage/syntax.html\\\\#comments}.
+
+
+
+<!-- one comment block -- -- with two comments -->
+
+But this is fine (in commonmark):
+
+
+
+<!-- one comment block - with a dash -->
+
+And, this is wrong (in commonmark):
+
+
+
+<!-->-->
+
+The end."
+`;
+
+exports[`remark fixtures html-declaration 1`] = `
+"<!DOCTYPE html>
+
+foo <!BAR br BAZ>
+
+
+
+<!doctype html>
+
+<!valid >
+
+<!invalid>"
+`;
+
+exports[`remark fixtures html-indented 1`] = `
+"<div>
+  *hello*
+   <div>
+
+ <span>
+  *hello*
+   <span>
+
+  <!doctype html>
+
+   <!-- baz -->
+
+alpha <!-- baz -->"
+`;
+
+exports[`remark fixtures html-processing-instruction 1`] = `
+"<?php
+  echo '>';
+?>"
+`;
+
+exports[`remark fixtures html-simple 1`] = `
+"Here's a simple block:
+
+
+
+<div>
+	foo
+</div>
+
+This should be a code block, though:
+
+
+
+\\\\begin{CodeBlock}{text}
+<div>
+	foo
+</div>
+\\\\end{CodeBlock}
+
+
+
+As should this:
+
+
+
+\\\\begin{CodeBlock}{text}
+<div>foo</div>
+\\\\end{CodeBlock}
+
+
+
+Now, nested:
+
+
+
+<div>
+	<div>
+		<div>
+			foo
+		</div>
+	</div>
+</div>
+
+This should just be an HTML comment:
+
+
+
+<!-- Comment -->
+
+Multiline:
+
+
+
+<!--
+Blah
+Blah
+-->
+
+Code block:
+
+
+
+\\\\begin{CodeBlock}{text}
+<!-- Comment -->
+\\\\end{CodeBlock}
+
+
+
+Just plain comment, with trailing spaces on the line:
+
+
+
+<!-- foo -->   
+
+Code:
+
+
+
+\\\\begin{CodeBlock}{text}
+<hr>
+\\\\end{CodeBlock}
+
+
+
+Hr's:
+
+
+
+<hr>
+
+<hr>
+
+<hr>
+
+<hr>   
+
+<hr>  
+
+<hr> 
+
+<hr class=\\"foo\\" id=\\"bar\\" />
+
+<hr class=\\"foo\\" id=\\"bar\\"/>
+
+<hr class=\\"foo\\" id=\\"bar\\" >"
+`;
+
+exports[`remark fixtures html-tags 1`] = `
+"\\\\chapter{Block}
+
+
+<article>
+
+<ARTICLE>
+
+<ArTiClE>
+
+<-article>
+
+
+
+<article foo=
+
+<article foo=\\"bar
+
+<article foo='bar
+
+<article foo=bar 
+
+<article foo=bar >
+
+<article/>
+
+<-article/>
+
+
+
+</article>
+
+</ARTICLE>
+
+</aRtIcLe>
+
+</article  >
+
+</-article  >
+
+
+
+</article
+
+</article  
+
+\\\\chapter{Inline}
+
+
+<span>
+
+<SPAN>
+
+<SpAn>
+
+<-span>
+
+
+
+<span/>
+
+<-span/>
+
+
+
+</span>
+
+</SPAN>
+
+</SpAn>
+
+</span  >
+
+</-span>
+
+
+
+</span
+
+
+
+</span
+
+
+
+<span foo=
+
+
+
+<span foo=\\"bar
+
+
+
+<span foo='bar
+
+
+
+<span foo=bar
+
+
+
+<span foo=bar >"
+`;
+
+exports[`remark fixtures image-empty-alt 1`] = `"\\\\includegraphics{/xyz.png}"`;
+
+exports[`remark fixtures image-in-link 1`] = `
+"\\\\chapter{\\\\externalLink{\\\\includegraphics{https://img.shields.io/badge/unicorn-approved-ff69b4.svg}}{http://shields.io}}
+
+
+\\\\externalLink{\\\\includegraphics{https://img.shields.io/travis/wooorm/mdast.svg?style=flat}}{https://travis-ci.org/wooorm/mdast}
+
+
+
+\\\\externalLink{\\\\includegraphics{https://img.shields.io/badge/style-flat--squared-green.svg?style=flat-square}}{http://example.com}"
+`;
+
+exports[`remark fixtures image-with-pipe 1`] = `"f|"`;
+
+exports[`remark fixtures images 1`] = `
+"Lorem ipsum dolor sit \\\\includegraphics{http://amet.com/amet.jpeg}, consectetur adipiscing elit. Praesent dictum purus ullamcorper ligula semper pellentesque.
+
+
+
+Nulla \\\\includegraphics{http://finibus.com/finibus.png} neque et diam rhoncus convallis. Nam dictum sapien nec sem ultrices fermentum. Nulla \\\\includegraphics{http://facilisi.com/facilisi.gif}. In et feugiat massa.
+
+
+
+Donec sed sodales metus, ut aliquet quam. Suspendisse nec ipsum risus. Interdum et malesuada fames ac ante ipsum primis in \\\\includegraphics{http://faucibus.com/faucibus.tiff}."
+`;
+
+exports[`remark fixtures lazy-blockquotes 1`] = `
+"\\\\begin{Quotation}
+hi there
+bud
+\\\\end{Quotation}"
+`;
+
+exports[`remark fixtures link-in-link 1`] = `
+"\\\\chapter{\\\\externalLink{mailto:test@example.com}{http://shields.io}}
+
+
+\\\\externalLink{https://travis-ci.org/wooorm/mdast}{https://travis-ci.org/wooorm/mdast}
+
+
+
+\\\\externalLink{[](http://example.com \\"An example\\")}{http://example.com}"
+`;
+
+exports[`remark fixtures link-spaces 1`] = `
+"alpha\\\\ref{alpha} (bravo
+
+
+
+\\\\includegraphics{undefined} (delta
+.com)
+
+
+
+\\\\externalLink{echo}{http://foxtrot.golf}
+
+
+
+\\\\includegraphics{india.com/juliett}"
+`;
+
+exports[`remark fixtures link-whitespace 1`] = `
+"alpha\\\\ref{alpha}(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo} charlie).
+
+
+
+alpha\\\\ref{alpha}(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}	charlie).
+
+
+
+alpha\\\\ref{alpha}(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}
+charlie).
+
+
+
+\\\\includegraphics{undefined}(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo} charlie).
+
+
+
+\\\\includegraphics{undefined}(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}	charlie).
+
+
+
+\\\\includegraphics{undefined}(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}
+charlie).
+
+
+
+<\\\\externalLink{https://example.com?bravo}{https://example.com?bravo} charlie>.
+
+
+
+<\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}	charlie>.
+
+
+
+<\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}
+charlie>.
+
+
+
+\\\\externalLink{https://example.com?bravo}{https://example.com?bravo} charlie.
+
+
+
+\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}	charlie.
+
+
+
+\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}
+charlie."
+`;
+
+exports[`remark fixtures link-with-spaces 1`] = `
+"\\\\externalLink{Hello}{./world and some spaces.html}
+
+
+
+\\\\externalLink{Hello}{./world and some spaces.html}"
+`;
+
+exports[`remark fixtures links 1`] = `
+"Lorem ipsum dolor sit \\\\externalLink{amet}{http://amet.com}, consectetur adipiscing elit. Praesent dictum purus ullamcorper ligula semper pellentesque.
+
+
+
+Nulla \\\\externalLink{finibus}{http://finibus.com} neque et diam rhoncus convallis. Nam dictum sapien nec sem ultrices fermentum. Nulla \\\\externalLink{facilisi}{http://facilisi.com}. In et feugiat massa.
+
+
+
+Donec sed sodales metus, ut aliquet quam. Suspendisse nec ipsum risus. Interdum et malesuada fames ac ante ipsum primis in \\\\externalLink{faucibus}{http://faucibus.com}."
+`;
+
+exports[`remark fixtures links-inline-style 1`] = `
+"Just a \\\\externalLink{URL}{/url/}.
+
+
+
+\\\\externalLink{URL and title}{/url/}.
+
+
+
+\\\\externalLink{URL and title}{/url/}.
+
+
+
+\\\\externalLink{URL and title}{/url/}.
+
+
+
+\\\\externalLink{URL and title}{/url/}.
+
+
+
+URL and title\\\\ref{url and title}( /url/has space ).
+
+
+
+URL and title\\\\ref{url and title}( /url/has space/ \\"url has space and title\\").
+
+
+
+."
+`;
+
+exports[`remark fixtures links-reference-proto 1`] = `
+"A primary\\\\ref{tostring}, secondary\\\\ref{constructor}, and tertiary\\\\ref{__proto__} link.
+
+
+
+\\\\footnote{\\\\label{tostring}\\\\externalLink{http://primary.com}{http://primary.com}}
+
+\\\\footnote{\\\\label{__proto__}\\\\externalLink{http://tertiary.com}{http://tertiary.com}}
+
+\\\\footnote{\\\\label{constructor}\\\\externalLink{http://secondary.com}{http://secondary.com}}"
+`;
+
+exports[`remark fixtures links-reference-style 1`] = `
+"Foo bar\\\\ref{1}.
+
+
+
+Foo bar\\\\ref{1}.
+
+
+
+Foo bar\\\\ref{1}.
+
+
+
+\\\\footnote{\\\\label{1-1-1}\\\\externalLink{/url/}{/url/}}
+
+With embedded [brackets]\\\\ref{b}.
+
+
+
+Indented once\\\\ref{once}.
+
+
+
+Indented twice\\\\ref{twice}.
+
+
+
+Indented thrice\\\\ref{thrice}.
+
+
+
+Indented four\\\\ref{four} times.
+
+
+
+\\\\footnote{\\\\label{once}\\\\externalLink{/url}{/url}}
+
+\\\\footnote{\\\\label{twice}\\\\externalLink{/url}{/url}}
+
+\\\\footnote{\\\\label{thrice}\\\\externalLink{/url}{/url}}
+
+\\\\begin{CodeBlock}{text}
+[four]: /url
+\\\\end{CodeBlock}
+
+
+
+\\\\footnote{\\\\label{b}\\\\externalLink{/url/}{/url/}}
+
+\\\\horizontalLine
+
+
+
+this\\\\ref{this} should work
+
+
+
+So should this\\\\ref{this}.
+
+
+
+And this\\\\ref{this}.
+
+
+
+And this\\\\ref{this}.
+
+
+
+And this\\\\ref{this}.
+
+
+
+But not that\\\\ref{that}.
+
+
+
+Nor that\\\\ref{that}.
+
+
+
+Nor that\\\\ref{that}.
+
+
+
+[Something in brackets like this\\\\ref{this} should work]
+
+
+
+[Same with this\\\\ref{this}.]
+
+
+
+In this case, \\\\externalLink{this}{/somethingelse/} points to something else.
+
+
+
+Backslashing should suppress [this] and [this].
+
+
+
+\\\\footnote{\\\\label{this}\\\\externalLink{foo}{foo}}
+
+\\\\horizontalLine
+
+
+
+Here's one where the link
+breaks\\\\ref{link breaks} across lines.
+
+
+
+Here's another where the link 
+breaks\\\\ref{link breaks} across lines, but with a line-ending space.
+
+
+
+\\\\footnote{\\\\label{link breaks}\\\\externalLink{/url/}{/url/}}"
+`;
+
+exports[`remark fixtures links-shortcut-references 1`] = `
+"This is the simple case\\\\ref{simple case}.
+
+
+
+\\\\footnote{\\\\label{simple case}\\\\externalLink{/simple}{/simple}}
+
+This one has a line
+break\\\\ref{line break}.
+
+
+
+This one has a line 
+break\\\\ref{line break} with a line-ending space.
+
+
+
+\\\\footnote{\\\\label{line break}\\\\externalLink{/foo}{/foo}}
+
+this\\\\ref{that} and the other\\\\ref{other}
+
+
+
+\\\\footnote{\\\\label{this-1}\\\\externalLink{/this}{/this}}
+
+\\\\footnote{\\\\label{that}\\\\externalLink{/that}{/that}}
+
+\\\\footnote{\\\\label{other}\\\\externalLink{/other}{/other}}"
+`;
+
+exports[`remark fixtures links-text-delimiters 1`] = `
+"\\\\externalLink{Hello [world]!}{./hello-world.html}.
+
+
+
+\\\\externalLink{Hello [world]!}{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}."
+`;
+
+exports[`remark fixtures links-text-empty 1`] = `
+"\\\\externalLink{}{./hello-world.html}.
+
+
+
+\\\\externalLink{}{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}."
+`;
+
+exports[`remark fixtures links-text-entity-delimiters 1`] = `
+"\\\\externalLink{Hello [world]!}{./hello-world.html}.
+
+
+
+\\\\externalLink{Hello [world]!}{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}.
+
+
+
+\\\\externalLink{Hello [world]!}{./hello-world.html}.
+
+
+
+\\\\externalLink{Hello [world]!}{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}."
+`;
+
+exports[`remark fixtures links-text-escaped-delimiters 1`] = `
+"\\\\externalLink{Hello [world]!}{./hello-world.html}.
+
+
+
+\\\\externalLink{Hello [world]!}{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}.
+
+
+
+\\\\includegraphics{./hello-world.html}."
+`;
+
+exports[`remark fixtures links-text-mismatched-delimiters 1`] = `
+"[Hello \\\\externalLink{world!}{./hello-world.html}.
+
+
+
+[Hello \\\\externalLink{world!}{./hello-world.html}.
+
+
+
+![Hello \\\\externalLink{world!}{./hello-world.html}.
+
+
+
+![Hello \\\\externalLink{world!}{./hello-world.html}."
+`;
+
+exports[`remark fixtures links-title-double-quotes 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures links-title-double-quotes-delimiters 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures links-title-double-quotes-entity-delimiters 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures links-title-double-quotes-escaped-delimiters 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures links-title-double-quotes-mismatched-delimiters 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures links-title-empty-double-quotes 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures links-title-empty-parentheses 1`] = `
+"Hello\\\\ref{hello}(./world.html ()).
+
+
+
+Hello\\\\ref{hello}(<./world.html> ()).
+
+
+
+\\\\includegraphics{undefined}(./world.html ()).
+
+
+
+\\\\includegraphics{undefined}(<./world.html> ())."
+`;
+
+exports[`remark fixtures links-title-empty-single-quotes 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures links-title-parentheses 1`] = `
+"Hello\\\\ref{hello}(./world.html (Hello World!)).
+
+
+
+Hello\\\\ref{hello}(<./world.html> (Hello World!)).
+
+
+
+\\\\includegraphics{undefined}(./world.html (Hello World!)).
+
+
+
+\\\\includegraphics{undefined}(<./world.html> (Hello World!))."
+`;
+
+exports[`remark fixtures links-title-single-quotes 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures links-title-single-quotes-delimiters 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures links-title-single-quotes-entity-delimiters 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures links-title-single-quotes-escaped-delimiters 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures links-title-single-quotes-mismatched-delimiters 1`] = `
+"\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\externalLink{Hello}{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}.
+
+
+
+\\\\includegraphics{./world.html}."
+`;
+
+exports[`remark fixtures links-title-unclosed 1`] = `
+"Hello\\\\ref{hello}(./world.html 'Hello
+
+
+
+Hello\\\\ref{hello}(<./world.html> 'Hello
+
+
+
+\\\\includegraphics{undefined}(./world.html 'Hello
+
+
+
+\\\\includegraphics{undefined}(<./world.html> 'Hello
+
+
+
+Hello\\\\ref{hello}(./world.html \\"Hello
+
+
+
+Hello\\\\ref{hello}(<./world.html> \\"Hello
+
+
+
+\\\\includegraphics{undefined}(./world.html \\"Hello
+
+
+
+\\\\includegraphics{undefined}(<./world.html> \\"Hello
+
+
+
+Hello\\\\ref{hello}(./world.html (Hello
+
+
+
+Hello\\\\ref{hello}(<./world.html> (Hello
+
+
+
+\\\\includegraphics{undefined}(./world.html (Hello
+
+
+
+\\\\includegraphics{undefined}(<./world.html> (Hello"
+`;
+
+exports[`remark fixtures links-url-empty 1`] = `
+".
+
+
+
+.
+
+
+
+\\\\includegraphics{}.
+
+
+
+\\\\includegraphics{}."
+`;
+
+exports[`remark fixtures links-url-empty-title-double-quotes 1`] = `
+"\\\\externalLink{Hello}{\\"World!\\"}.
+
+
+
+\\\\externalLink{Hello}{\\"World!\\"}.
+
+
+
+.
+
+
+
+\\\\includegraphics{\\"World!\\"}.
+
+
+
+\\\\includegraphics{\\"World!\\"}.
+
+
+
+\\\\includegraphics{}."
+`;
+
+exports[`remark fixtures links-url-empty-title-parentheses 1`] = `
+"\\\\externalLink{Hello}{(World!)}.
+
+
+
+\\\\externalLink{Hello}{(World!)}.
+
+
+
+World\\\\ref{world}(<> (World!)).
+
+
+
+\\\\includegraphics{(World!)}.
+
+
+
+\\\\includegraphics{(World!)}.
+
+
+
+\\\\includegraphics{undefined}(<> (World!))."
+`;
+
+exports[`remark fixtures links-url-empty-title-single-quotes 1`] = `
+"\\\\externalLink{Hello}{'World!'}.
+
+
+
+\\\\externalLink{Hello}{'World!'}.
+
+
+
+.
+
+
+
+\\\\includegraphics{'World!'}.
+
+
+
+\\\\includegraphics{'World!'}.
+
+
+
+\\\\includegraphics{}."
+`;
+
+exports[`remark fixtures links-url-entity-parentheses 1`] = `
+"\\\\externalLink{Hello}{./world(and-hello(world)}.
+
+
+
+\\\\externalLink{Hello}{./world(and-hello(world)}.
+
+
+
+\\\\externalLink{Hello}{./world(and)helloworld)}.
+
+
+
+\\\\externalLink{Hello}{./world(and)helloworld)}.
+
+
+
+\\\\externalLink{Hello}{./world(and-hello(world)}.
+
+
+
+\\\\externalLink{Hello}{./world(and-hello(world)}.
+
+
+
+\\\\externalLink{Hello}{./world(and)helloworld)}.
+
+
+
+\\\\externalLink{Hello}{./world(and)helloworld)}.
+
+
+
+\\\\includegraphics{./world(and-hello(world)}.
+
+
+
+\\\\includegraphics{./world(and-hello(world)}.
+
+
+
+\\\\includegraphics{./world(and)helloworld)}.
+
+
+
+\\\\includegraphics{./world(and)helloworld)}.
+
+
+
+\\\\includegraphics{./world(and-hello(world)}.
+
+
+
+\\\\includegraphics{./world(and-hello(world)}.
+
+
+
+\\\\includegraphics{./world(and)helloworld)}.
+
+
+
+\\\\includegraphics{./world(and)helloworld)}."
+`;
+
+exports[`remark fixtures links-url-escaped-parentheses 1`] = `
+"\\\\externalLink{Hello}{./world(and-hello(world)}.
+
+
+
+\\\\externalLink{Hello}{./world(and-hello(world)}.
+
+
+
+\\\\externalLink{Hello}{./world(and)helloworld)}.
+
+
+
+\\\\externalLink{Hello}{./world(and)helloworld)}.
+
+
+
+\\\\includegraphics{./world(and-hello(world)}.
+
+
+
+\\\\includegraphics{./world(and-hello(world)}.
+
+
+
+\\\\includegraphics{./world(and)helloworld)}.
+
+
+
+\\\\includegraphics{./world(and)helloworld)}."
+`;
+
+exports[`remark fixtures links-url-mismatched-parentheses 1`] = `
+"Hello\\\\ref{hello}(./world(and-hello(world)).
+
+
+
+\\\\externalLink{Hello}{./world(and-hello(world)}.
+
+
+
+\\\\externalLink{Hello}{./world(and)helloworld}).
+
+
+
+\\\\externalLink{Hello}{./world(and)helloworld)}.
+
+
+
+\\\\includegraphics{undefined}(./world(and-hello(world)).
+
+
+
+\\\\includegraphics{./world(and-hello(world)}.
+
+
+
+\\\\includegraphics{./world(and)helloworld}).
+
+
+
+\\\\includegraphics{./world(and)helloworld)}."
+`;
+
+exports[`remark fixtures links-url-nested-parentheses 1`] = `
+"\\\\externalLink{Hello}{./world(and)hello(world)}.
+
+
+
+\\\\externalLink{Hello}{./world(and)hello(world)}.
+
+
+
+\\\\includegraphics{./world(and)hello(world)}.
+
+
+
+\\\\includegraphics{./world(and)hello(world)}."
+`;
+
+exports[`remark fixtures links-url-new-line 1`] = `
+"Hello\\\\ref{hello}(./wo
+rld.html).
+
+
+
+\\\\externalLink{Hello}{./wo
+rld.html}.
+
+
+
+\\\\includegraphics{undefined}(./wo
+rld.png).
+
+
+
+\\\\includegraphics{./wo
+rld.png}."
+`;
+
+exports[`remark fixtures links-url-unclosed 1`] = `
+"Hello\\\\ref{hello}(
+
+
+
+World\\\\ref{world}(<
+
+
+
+\\\\includegraphics{undefined}(
+
+
+
+\\\\includegraphics{undefined}(<"
+`;
+
+exports[`remark fixtures links-url-white-space 1`] = `
+"Hello\\\\ref{hello}(./wo rld.html).
+
+
+
+\\\\externalLink{Hello}{./wo rld.html}.
+
+
+
+\\\\includegraphics{undefined}(./wo rld.png).
+
+
+
+\\\\includegraphics{./wo rld.png}."
+`;
+
+exports[`remark fixtures list 1`] = `
+"\\\\chapter{List bullets}
+
+
+\\\\begin{itemize}
+\\\\item One:
+
+\\\\begin{itemize}
+\\\\item Nested one;
+\\\\item Nested two:
+
+\\\\begin{itemize}
+\\\\item Nested three.
+\\\\end{itemize}
+\\\\end{itemize}
+\\\\item Two;
+\\\\item Three.
+\\\\end{itemize}"
+`;
+
+exports[`remark fixtures list-after-list 1`] = `
+"\\\\begin{itemize}
+\\\\item item
+\\\\item item
+\\\\item item
+\\\\end{itemize}
+
+
+\\\\begin{enumerate}
+\\\\item item
+\\\\item item
+\\\\item item
+\\\\end{enumerate}
+
+
+\\\\horizontalLine
+
+
+
+\\\\begin{itemize}
+\\\\item item
+\\\\item item
+\\\\item item
+\\\\end{itemize}
+
+
+\\\\begin{enumerate}
+\\\\item item
+\\\\item item
+\\\\item item
+\\\\end{enumerate}"
+`;
+
+exports[`remark fixtures list-and-code 1`] = `
+"\\\\begin{itemize}
+\\\\item This is a list item
+\\\\end{itemize}
+
+
+
+\\\\begin{CodeBlock}{text}
+This is code
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures list-continuation 1`] = `
+"\\\\begin{enumerate}
+\\\\item foo
+\\\\end{enumerate}
+
+
+\\\\horizontalLine
+
+
+
+\\\\begin{enumerate}
+\\\\item foo
+\\\\end{enumerate}
+
+
+\\\\begin{CodeBlock}{js}
+code();
+\\\\end{CodeBlock}
+
+
+
+\\\\begin{enumerate}
+\\\\item foo\\\\ref{foo}
+\\\\end{enumerate}
+
+
+\\\\footnote{\\\\label{foo}\\\\externalLink{http://google.com}{http://google.com}}
+
+\\\\begin{enumerate}
+\\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}
+\\\\end{enumerate}
+
+
+\\\\footnotetext[foo]{\\\\label{footnote:foo} bar baz.}"
+`;
+
+exports[`remark fixtures list-indentation 1`] = `
+"\\\\begin{itemize}
+\\\\item Hello 1a
+
+World 1a.
+\\\\item Hello 1b
+
+World 1b.
+\\\\item Hello 2a
+
+World 2a.
+\\\\item Hello 2b
+
+World 2b.
+\\\\item Hello 3a
+
+World 3a.
+\\\\item Hello 3b
+
+World 3b.
+\\\\item Hello 4a
+
+World 4a.
+\\\\item Hello 4b
+
+World 4b.
+\\\\item \\\\begin{CodeBlock}{text}
+Hello 5a
+\\\\end{CodeBlock}
+
+World 5a.
+\\\\item \\\\begin{CodeBlock}{text}
+Hello 5b
+
+World 5b.
+\\\\end{CodeBlock}
+\\\\end{itemize}"
+`;
+
+exports[`remark fixtures list-item-empty 1`] = `
+"\\\\begin{itemize}
+\\\\item foo
+\\\\item 
+\\\\item bar
+\\\\item foo
+\\\\item 
+\\\\item bar
+\\\\end{itemize}"
+`;
+
+exports[`remark fixtures list-item-empty-with-white-space 1`] = `
+"\\\\begin{itemize}
+\\\\item 
+\\\\end{itemize}"
+`;
+
+exports[`remark fixtures list-item-indent 1`] = `
+"\\\\begin{enumerate}
+\\\\item foo bar baz.
+\\\\end{enumerate}
+
+
+<!--  -->
+
+\\\\begin{enumerate}
+\\\\item foo bar baz.
+\\\\end{enumerate}
+
+
+<!--  -->
+
+\\\\begin{enumerate}
+\\\\item foo bar baz.
+\\\\end{enumerate}
+
+
+<!--  -->
+
+\\\\begin{enumerate}
+\\\\item foo bar baz.
+foo bar baz.
+\\\\end{enumerate}
+
+
+<!--  -->
+
+\\\\begin{enumerate}
+\\\\item foo bar baz.
+foo bar baz.
+\\\\end{enumerate}
+
+
+<!--  -->
+
+\\\\begin{enumerate}
+\\\\item foo bar baz.
+foo bar baz.
+\\\\end{enumerate}
+
+
+<!--  -->
+
+\\\\begin{itemize}
+\\\\item foo bar baz.
+\\\\end{itemize}
+
+
+<!--  -->
+
+\\\\begin{itemize}
+\\\\item foo bar baz.
+foo bar baz.
+\\\\end{itemize}"
+`;
+
+exports[`remark fixtures list-item-newline 1`] = `
+"\\\\begin{itemize}
+\\\\item Foo
+\\\\item Bar
+\\\\end{itemize}"
+`;
+
+exports[`remark fixtures list-item-text 1`] = `
+"\\\\begin{itemize}
+\\\\item item1
+
+\\\\begin{itemize}
+\\\\item item2
+\\\\end{itemize}
+text
+\\\\end{itemize}"
+`;
+
+exports[`remark fixtures list-ordered 1`] = `
+"\\\\begin{enumerate}
+\\\\item foo;
+\\\\item bar;
+\\\\item baz.
+\\\\end{enumerate}"
+`;
+
+exports[`remark fixtures lists-with-code-and-rules 1`] = `
+"\\\\section{foo}
+
+
+\\\\begin{enumerate}
+\\\\item bar:
+
+\\\\begin{Quotation}
+\\\\begin{itemize}
+\\\\item one
+
+\\\\begin{itemize}
+\\\\item two
+
+\\\\begin{itemize}
+\\\\item three
+\\\\item four
+\\\\item five
+\\\\end{itemize}
+\\\\end{itemize}
+\\\\end{itemize}
+\\\\end{Quotation}
+\\\\item foo:
+
+\\\\begin{CodeBlock}{text}
+line 1
+line 2
+\\\\end{CodeBlock}
+\\\\item foo:
+
+\\\\begin{enumerate}
+\\\\item foo \\\\texttt{bar} bar:
+
+\\\\begin{CodeBlock}{erb}
+some code here
+\\\\end{CodeBlock}
+\\\\item foo \\\\texttt{bar} bar:
+
+\\\\begin{CodeBlock}{erb}
+foo
+---
+bar
+---
+foo
+bar
+\\\\end{CodeBlock}
+\\\\item foo \\\\texttt{bar} bar:
+
+\\\\begin{CodeBlock}{html}
+---
+foo
+foo
+---
+bar
+\\\\end{CodeBlock}
+\\\\item foo \\\\texttt{bar} bar:
+
+\\\\begin{CodeBlock}{text}
+foo
+---
+bar
+\\\\end{CodeBlock}
+\\\\item foo
+\\\\end{enumerate}
+\\\\end{enumerate}"
+`;
+
+exports[`remark fixtures loose-lists 1`] = `
+"\\\\begin{itemize}
+\\\\item hello
+world
+
+how
+are
+\\\\item you
+\\\\end{itemize}
+
+
+better behavior:
+
+
+
+\\\\begin{itemize}
+\\\\item hello
+
+\\\\begin{itemize}
+\\\\item world
+how
+
+are
+you
+\\\\item today
+\\\\end{itemize}
+\\\\item hi
+\\\\end{itemize}
+
+
+
+\\\\begin{itemize}
+\\\\item hello
+\\\\item world
+\\\\item hi
+\\\\end{itemize}
+
+
+
+\\\\begin{itemize}
+\\\\item hello
+\\\\item world
+\\\\item hi
+\\\\end{itemize}
+
+
+
+\\\\begin{itemize}
+\\\\item hello
+\\\\item world
+
+how
+\\\\item hi
+\\\\end{itemize}
+
+
+
+\\\\begin{itemize}
+\\\\item hello
+\\\\item world
+\\\\item how
+are
+\\\\end{itemize}
+
+
+
+\\\\begin{itemize}
+\\\\item hello
+\\\\item world
+\\\\item how
+are
+\\\\end{itemize}"
+`;
+
+exports[`remark fixtures main 1`] = `
+"\\\\footnote{\\\\label{test}\\\\externalLink{http://google.com/}{http://google.com/}}
+
+\\\\chapter{A heading}
+
+
+Just a note, I've found that I can't test my markdown parser vs others.
+For example, both markdown.js and showdown code blocks in lists wrong. They're
+also completely inconsistent\\\\ref{test} with regards to paragraphs in list items.
+
+
+
+A link. Not anymore.
+
+
+
+<aside>This will make me fail the test because
+markdown.js doesnt acknowledge arbitrary html blocks =/</aside>
+
+\\\\begin{itemize}
+\\\\item List Item 1
+\\\\item List Item 2
+
+\\\\begin{itemize}
+\\\\item New List Item 1
+Hi, this is a list item.
+\\\\item New List Item 2
+Another item
+    Code goes here.
+    Lots of it...
+\\\\item New List Item 3
+The last item
+\\\\end{itemize}
+\\\\item List Item 3
+The final item.
+\\\\item List Item 4
+The real final item.
+\\\\end{itemize}
+
+
+Paragraph.
+
+
+
+\\\\begin{Quotation}
+\\\\begin{itemize}
+\\\\item bq Item 1
+\\\\item bq Item 2
+
+\\\\begin{itemize}
+\\\\item New bq Item 1
+\\\\item New bq Item 2
+Text here
+\\\\end{itemize}
+\\\\end{itemize}
+\\\\end{Quotation}
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\begin{Quotation}
+Another blockquote!
+I really need to get
+more creative with
+mockup text..
+markdown.js breaks here again
+\\\\end{Quotation}
+
+
+
+\\\\section{Another Heading}
+
+
+Hello \\\\textit{world}. Here is a \\\\externalLink{link}{//hello}.
+And an image \\\\includegraphics{src}.
+And an image with an empty alt attribute \\\\includegraphics{src}.
+
+
+
+\\\\begin{CodeBlock}{text}
+Code goes here.
+Lots of it...
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures markdown-documentation-basics 1`] = `
+"\\\\chapter{Markdown: Basics}
+
+
+<ul id=\\"ProjectSubmenu\\">
+    <li><a href=\\"/projects/markdown/\\" title=\\"Markdown Project Page\\">Main</a></li>
+    <li><a class=\\"selected\\" title=\\"Markdown Basics\\">Basics</a></li>
+    <li><a href=\\"/projects/markdown/syntax\\" title=\\"Markdown Syntax Documentation\\">Syntax</a></li>
+    <li><a href=\\"/projects/markdown/license\\" title=\\"Pricing and License Information\\">License</a></li>
+    <li><a href=\\"/projects/markdown/dingus\\" title=\\"Online Markdown Web Form\\">Dingus</a></li>
+</ul>
+
+\\\\section{Getting the Gist of Markdown's Formatting Syntax}
+
+
+This page offers a brief overview of what it's like to use Markdown.
+The syntax page\\\\ref{s} provides complete, detailed documentation for
+every feature, but Markdown should be very easy to pick up simply by
+looking at a few examples of it in action. The examples on this page
+are written in a before/after style, showing example syntax and the
+HTML output produced by Markdown.
+
+
+
+It's also helpful to simply try Markdown out; the Dingus\\\\ref{d} is a
+web application that allows you type your own Markdown-formatted text
+and translate it to XHTML.
+
+
+
+\\\\textbf{Note:} This document is itself written using Markdown; you
+can see the source for it by adding '.text' to the URL\\\\ref{src}.
+
+
+
+\\\\footnote{\\\\label{s}\\\\externalLink{/projects/markdown/syntax}{/projects/markdown/syntax}}
+
+\\\\footnote{\\\\label{d}\\\\externalLink{/projects/markdown/dingus}{/projects/markdown/dingus}}
+
+\\\\footnote{\\\\label{src}\\\\externalLink{/projects/markdown/basics.text}{/projects/markdown/basics.text}}
+
+\\\\section{Paragraphs, Headers, Blockquotes}
+
+
+A paragraph is simply one or more consecutive lines of text, separated
+by one or more blank lines. (A blank line is any line that looks like a
+blank line -- a line containing nothing spaces or tabs is considered
+blank.) Normal paragraphs should not be intended with spaces or tabs.
+
+
+
+Markdown offers two styles of headers: \\\\textit{Setext} and \\\\textit{atx}.
+Setext-style headers for \\\\texttt{<h1>} and \\\\texttt{<h2>} are created by
+\\"underlining\\" with equal signs (\\\\texttt{=}) and hyphens (\\\\texttt{-}), respectively.
+To create an atx-style header, you put 1-6 hash marks (\\\\texttt{\\\\#}) at the
+beginning of the line -- the number of hashes equals the resulting
+HTML header level.
+
+
+
+Blockquotes are indicated using email-style '\\\\texttt{>}' angle brackets.
+
+
+
+Markdown:
+
+
+
+\\\\begin{CodeBlock}{text}
+A First Level Header
+====================
+
+A Second Level Header
+---------------------
+
+Now is the time for all good men to come to
+the aid of their country. This is just a
+regular paragraph.
+
+The quick brown fox jumped over the lazy
+dog's back.
+
+### Header 3
+
+> This is a blockquote.
+> 
+> This is the second paragraph in the blockquote.
+>
+> ## This is an H2 in a blockquote
+\\\\end{CodeBlock}
+
+
+
+Output:
+
+
+
+\\\\begin{CodeBlock}{text}
+<h1>A First Level Header</h1>
+
+<h2>A Second Level Header</h2>
+
+<p>Now is the time for all good men to come to
+the aid of their country. This is just a
+regular paragraph.</p>
+
+<p>The quick brown fox jumped over the lazy
+dog's back.</p>
+
+<h3>Header 3</h3>
+
+<blockquote>
+    <p>This is a blockquote.</p>
+    
+    <p>This is the second paragraph in the blockquote.</p>
+    
+    <h2>This is an H2 in a blockquote</h2>
+</blockquote>
+\\\\end{CodeBlock}
+
+
+
+\\\\subsection{Phrase Emphasis}
+
+
+Markdown uses asterisks and underscores to indicate spans of emphasis.
+
+
+
+Markdown:
+
+
+
+\\\\begin{CodeBlock}{text}
+Some of these words *are emphasized*.
+Some of these words _are emphasized also_.
+
+Use two asterisks for **strong emphasis**.
+Or, if you prefer, __use two underscores instead__.
+\\\\end{CodeBlock}
+
+
+
+Output:
+
+
+
+\\\\begin{CodeBlock}{text}
+<p>Some of these words <em>are emphasized</em>.
+Some of these words <em>are emphasized also</em>.</p>
+
+<p>Use two asterisks for <strong>strong emphasis</strong>.
+Or, if you prefer, <strong>use two underscores instead</strong>.</p>
+\\\\end{CodeBlock}
+
+
+
+\\\\section{Lists}
+
+
+Unordered (bulleted) lists use asterisks, pluses, and hyphens (\\\\texttt{*},
+\\\\texttt{+}, and \\\\texttt{-}) as list markers. These three markers are
+interchangable; this:
+
+
+
+\\\\begin{CodeBlock}{text}
+*   Candy.
+*   Gum.
+*   Booze.
+\\\\end{CodeBlock}
+
+
+
+this:
+
+
+
+\\\\begin{CodeBlock}{text}
++   Candy.
++   Gum.
++   Booze.
+\\\\end{CodeBlock}
+
+
+
+and this:
+
+
+
+\\\\begin{CodeBlock}{text}
+-   Candy.
+-   Gum.
+-   Booze.
+\\\\end{CodeBlock}
+
+
+
+all produce the same output:
+
+
+
+\\\\begin{CodeBlock}{text}
+<ul>
+<li>Candy.</li>
+<li>Gum.</li>
+<li>Booze.</li>
+</ul>
+\\\\end{CodeBlock}
+
+
+
+Ordered (numbered) lists use regular numbers, followed by periods, as
+list markers:
+
+
+
+\\\\begin{CodeBlock}{text}
+1.  Red
+2.  Green
+3.  Blue
+\\\\end{CodeBlock}
+
+
+
+Output:
+
+
+
+\\\\begin{CodeBlock}{text}
+<ol>
+<li>Red</li>
+<li>Green</li>
+<li>Blue</li>
+</ol>
+\\\\end{CodeBlock}
+
+
+
+If you put blank lines between items, you'll get \\\\texttt{<p>} tags for the
+list item text. You can create multi-paragraph list items by indenting
+the paragraphs by 4 spaces or 1 tab:
+
+
+
+\\\\begin{CodeBlock}{text}
+*   A list item.
+
+    With multiple paragraphs.
+
+*   Another item in the list.
+\\\\end{CodeBlock}
+
+
+
+Output:
+
+
+
+\\\\begin{CodeBlock}{text}
+<ul>
+<li><p>A list item.</p>
+<p>With multiple paragraphs.</p></li>
+<li><p>Another item in the list.</p></li>
+</ul>
+\\\\end{CodeBlock}
+
+
+
+\\\\subsection{Links}
+
+
+Markdown supports two styles for creating links: \\\\textit{inline} and
+\\\\textit{reference}. With both styles, you use square brackets to delimit the
+text you want to turn into a link.
+
+
+
+Inline-style links use parentheses immediately after the link text.
+For example:
+
+
+
+\\\\begin{CodeBlock}{text}
+This is an [example link](http://example.com/).
+\\\\end{CodeBlock}
+
+
+
+Output:
+
+
+
+\\\\begin{CodeBlock}{text}
+<p>This is an <a href=\\"http://example.com/\\">
+example link</a>.</p>
+\\\\end{CodeBlock}
+
+
+
+Optionally, you may include a title attribute in the parentheses:
+
+
+
+\\\\begin{CodeBlock}{text}
+This is an [example link](http://example.com/ \\"With a Title\\").
+\\\\end{CodeBlock}
+
+
+
+Output:
+
+
+
+\\\\begin{CodeBlock}{text}
+<p>This is an <a href=\\"http://example.com/\\" title=\\"With a Title\\">
+example link</a>.</p>
+\\\\end{CodeBlock}
+
+
+
+Reference-style links allow you to refer to your links by names, which
+you define elsewhere in your document:
+
+
+
+\\\\begin{CodeBlock}{text}
+I get 10 times more traffic from [Google][1] than from
+[Yahoo][2] or [MSN][3].
+
+[1]: http://google.com/        \\"Google\\"
+[2]: http://search.yahoo.com/  \\"Yahoo Search\\"
+[3]: http://search.msn.com/    \\"MSN Search\\"
+\\\\end{CodeBlock}
+
+
+
+Output:
+
+
+
+\\\\begin{CodeBlock}{text}
+<p>I get 10 times more traffic from <a href=\\"http://google.com/\\"
+title=\\"Google\\">Google</a> than from <a href=\\"http://search.yahoo.com/\\"
+title=\\"Yahoo Search\\">Yahoo</a> or <a href=\\"http://search.msn.com/\\"
+title=\\"MSN Search\\">MSN</a>.</p>
+\\\\end{CodeBlock}
+
+
+
+The title attribute is optional. Link names may contain letters,
+numbers and spaces, but are \\\\textit{not} case sensitive:
+
+
+
+\\\\begin{CodeBlock}{text}
+I start my morning with a cup of coffee and
+[The New York Times][NY Times].
+
+[ny times]: http://www.nytimes.com/
+\\\\end{CodeBlock}
+
+
+
+Output:
+
+
+
+\\\\begin{CodeBlock}{text}
+<p>I start my morning with a cup of coffee and
+<a href=\\"http://www.nytimes.com/\\">The New York Times</a>.</p>
+\\\\end{CodeBlock}
+
+
+
+\\\\subsection{Images}
+
+
+Image syntax is very much like link syntax.
+
+
+
+Inline (titles are optional):
+
+
+
+\\\\begin{CodeBlock}{text}
+![alt text](/path/to/img.jpg \\"Title\\")
+\\\\end{CodeBlock}
+
+
+
+Reference-style:
+
+
+
+\\\\begin{CodeBlock}{text}
+![alt text][id]
+
+[id]: /path/to/img.jpg \\"Title\\"
+\\\\end{CodeBlock}
+
+
+
+Both of the above examples produce the same output:
+
+
+
+\\\\begin{CodeBlock}{text}
+<img src=\\"/path/to/img.jpg\\" alt=\\"alt text\\" title=\\"Title\\" />
+\\\\end{CodeBlock}
+
+
+
+\\\\subsection{Code}
+
+
+In a regular paragraph, you can create code span by wrapping text in
+backtick quotes. Any ampersands (\\\\texttt{\\\\&}) and angle brackets (\\\\texttt{<} or
+\\\\texttt{>}) will automatically be translated into HTML entities. This makes
+it easy to use Markdown to write about HTML example code:
+
+
+
+\\\\begin{CodeBlock}{text}
+I strongly recommend against using any \`<blink>\` tags.
+
+I wish SmartyPants used named entities like \`&mdash;\`
+instead of decimal-encoded entites like \`&#8212;\`.
+\\\\end{CodeBlock}
+
+
+
+Output:
+
+
+
+\\\\begin{CodeBlock}{text}
+<p>I strongly recommend against using any
+<code>&lt;blink&gt;</code> tags.</p>
+
+<p>I wish SmartyPants used named entities like
+<code>&amp;mdash;</code> instead of decimal-encoded
+entites like <code>&amp;#8212;</code>.</p>
+\\\\end{CodeBlock}
+
+
+
+To specify an entire block of pre-formatted code, indent every line of
+the block by 4 spaces or 1 tab. Just like with code spans, \\\\texttt{\\\\&}, \\\\texttt{<},
+and \\\\texttt{>} characters will be escaped automatically.
+
+
+
+Markdown:
+
+
+
+\\\\begin{CodeBlock}{text}
+If you want your page to validate under XHTML 1.0 Strict,
+you've got to put paragraph tags in your blockquotes:
+
+    <blockquote>
+        <p>For example.</p>
+    </blockquote>
+\\\\end{CodeBlock}
+
+
+
+Output:
+
+
+
+\\\\begin{CodeBlock}{text}
+<p>If you want your page to validate under XHTML 1.0 Strict,
+you've got to put paragraph tags in your blockquotes:</p>
+
+<pre><code>&lt;blockquote&gt;
+    &lt;p&gt;For example.&lt;/p&gt;
+&lt;/blockquote&gt;
+</code></pre>
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures markdown-documentation-syntax 1`] = `
+"\\\\chapter{Markdown: Syntax}
+
+
+<ul id=\\"ProjectSubmenu\\">
+    <li><a href=\\"/projects/markdown/\\" title=\\"Markdown Project Page\\">Main</a></li>
+    <li><a href=\\"/projects/markdown/basics\\" title=\\"Markdown Basics\\">Basics</a></li>
+    <li><a class=\\"selected\\" title=\\"Markdown Syntax Documentation\\">Syntax</a></li>
+    <li><a href=\\"/projects/markdown/license\\" title=\\"Pricing and License Information\\">License</a></li>
+    <li><a href=\\"/projects/markdown/dingus\\" title=\\"Online Markdown Web Form\\">Dingus</a></li>
+</ul>
+
+\\\\begin{itemize}
+\\\\item \\\\externalLink{Overview}{\\\\#overview}
+
+\\\\begin{itemize}
+\\\\item \\\\externalLink{Philosophy}{\\\\#philosophy}
+\\\\item \\\\externalLink{Inline HTML}{\\\\#html}
+\\\\item \\\\externalLink{Automatic Escaping for Special Characters}{\\\\#autoescape}
+\\\\end{itemize}
+\\\\item \\\\externalLink{Block Elements}{\\\\#block}
+
+\\\\begin{itemize}
+\\\\item \\\\externalLink{Paragraphs and Line Breaks}{\\\\#p}
+\\\\item \\\\externalLink{Headers}{\\\\#header}
+\\\\item \\\\externalLink{Blockquotes}{\\\\#blockquote}
+\\\\item \\\\externalLink{Lists}{\\\\#list}
+\\\\item \\\\externalLink{Code Blocks}{\\\\#precode}
+\\\\item \\\\externalLink{Horizontal Rules}{\\\\#hr}
+\\\\end{itemize}
+\\\\item \\\\externalLink{Span Elements}{\\\\#span}
+
+\\\\begin{itemize}
+\\\\item \\\\externalLink{Links}{\\\\#link}
+\\\\item \\\\externalLink{Emphasis}{\\\\#em}
+\\\\item \\\\externalLink{Code}{\\\\#code}
+\\\\item \\\\externalLink{Images}{\\\\#img}
+\\\\end{itemize}
+\\\\item \\\\externalLink{Miscellaneous}{\\\\#misc}
+
+\\\\begin{itemize}
+\\\\item \\\\externalLink{Backslash Escapes}{\\\\#backslash}
+\\\\item \\\\externalLink{Automatic Links}{\\\\#autolink}
+\\\\end{itemize}
+\\\\end{itemize}
+
+
+\\\\textbf{Note:} This document is itself written using Markdown; you
+can see the source for it by adding '.text' to the URL\\\\ref{src}.
+
+
+
+\\\\footnote{\\\\label{src-1}\\\\externalLink{/projects/markdown/syntax.text}{/projects/markdown/syntax.text}}
+
+\\\\horizontalLine
+
+
+
+<h2 id=\\"overview\\">Overview</h2>
+
+<h3 id=\\"philosophy\\">Philosophy</h3>
+
+Markdown is intended to be as easy-to-read and easy-to-write as is feasible.
+
+
+
+Readability, however, is emphasized above all else. A Markdown-formatted
+document should be publishable as-is, as plain text, without looking
+like it's been marked up with tags or formatting instructions. While
+Markdown's syntax has been influenced by several existing text-to-HTML
+filters -- including Setext\\\\ref{1}, atx\\\\ref{2}, Textile\\\\ref{3}, reStructuredText\\\\ref{4},
+Grutatext\\\\ref{5}, and EtText\\\\ref{6} -- the single biggest source of
+inspiration for Markdown's syntax is the format of plain text email.
+
+
+
+\\\\footnote{\\\\label{1-1-1-1}\\\\externalLink{http://docutils.sourceforge.net/mirror/setext.html}{http://docutils.sourceforge.net/mirror/setext.html}}
+
+\\\\footnote{\\\\label{2-1-1}\\\\externalLink{http://www.aaronsw.com/2002/atx/}{http://www.aaronsw.com/2002/atx/}}
+
+\\\\footnote{\\\\label{3}\\\\externalLink{http://textism.com/tools/textile/}{http://textism.com/tools/textile/}}
+
+\\\\footnote{\\\\label{4-1}\\\\externalLink{http://docutils.sourceforge.net/rst.html}{http://docutils.sourceforge.net/rst.html}}
+
+\\\\footnote{\\\\label{5}\\\\externalLink{http://www.triptico.com/software/grutatxt.html}{http://www.triptico.com/software/grutatxt.html}}
+
+\\\\footnote{\\\\label{6}\\\\externalLink{http://ettext.taint.org/doc/}{http://ettext.taint.org/doc/}}
+
+To this end, Markdown's syntax is comprised entirely of punctuation
+characters, which punctuation characters have been carefully chosen so
+as to look like what they mean. E.g., asterisks around a word actually
+look like *emphasis*. Markdown lists look like, well, lists. Even
+blockquotes look like quoted passages of text, assuming you've ever
+used email.
+
+
+
+<h3 id=\\"html\\">Inline HTML</h3>
+
+Markdown's syntax is intended for one purpose: to be used as a
+format for \\\\textit{writing} for the web.
+
+
+
+Markdown is not a replacement for HTML, or even close to it. Its
+syntax is very small, corresponding only to a very small subset of
+HTML tags. The idea is \\\\textit{not} to create a syntax that makes it easier
+to insert HTML tags. In my opinion, HTML tags are already easy to
+insert. The idea for Markdown is to make it easy to read, write, and
+edit prose. HTML is a \\\\textit{publishing} format; Markdown is a \\\\textit{writing}
+format. Thus, Markdown's formatting syntax only addresses issues that
+can be conveyed in plain text.
+
+
+
+For any markup that is not covered by Markdown's syntax, you simply
+use HTML itself. There's no need to preface it or delimit it to
+indicate that you're switching from Markdown to HTML; you just use
+the tags.
+
+
+
+The only restrictions are that block-level HTML elements -- e.g. \\\\texttt{<div>},
+\\\\texttt{<table>}, \\\\texttt{<pre>}, \\\\texttt{<p>}, etc. -- must be separated from surrounding
+content by blank lines, and the start and end tags of the block should
+not be indented with tabs or spaces. Markdown is smart enough not
+to add extra (unwanted) \\\\texttt{<p>} tags around HTML block-level tags.
+
+
+
+For example, to add an HTML table to a Markdown article:
+
+
+
+\\\\begin{CodeBlock}{text}
+This is a regular paragraph.
+
+<table>
+    <tr>
+        <td>Foo</td>
+    </tr>
+</table>
+
+This is another regular paragraph.
+\\\\end{CodeBlock}
+
+
+
+Note that Markdown formatting syntax is not processed within block-level
+HTML tags. E.g., you can't use Markdown-style \\\\texttt{*emphasis*} inside an
+HTML block.
+
+
+
+Span-level HTML tags -- e.g. \\\\texttt{<span>}, \\\\texttt{<cite>}, or \\\\texttt{<del>} -- can be
+used anywhere in a Markdown paragraph, list item, or header. If you
+want, you can even use HTML tags instead of Markdown formatting; e.g. if
+you'd prefer to use HTML \\\\texttt{<a>} or \\\\texttt{<img>} tags instead of Markdown's
+link or image syntax, go right ahead.
+
+
+
+Unlike block-level HTML tags, Markdown syntax \\\\textit{is} processed within
+span-level tags.
+
+
+
+<h3 id=\\"autoescape\\">Automatic Escaping for Special Characters</h3>
+
+In HTML, there are two characters that demand special treatment: \\\\texttt{<}
+and \\\\texttt{\\\\&}. Left angle brackets are used to start tags; ampersands are
+used to denote HTML entities. If you want to use them as literal
+characters, you must escape them as entities, e.g. \\\\texttt{\\\\&lt;}, and
+\\\\texttt{\\\\&amp;}.
+
+
+
+Ampersands in particular are bedeviling for web writers. If you want to
+write about 'AT\\\\&T', you need to write '\\\\texttt{AT\\\\&amp;T}'. You even need to
+escape ampersands within URLs. Thus, if you want to link to:
+
+
+
+\\\\begin{CodeBlock}{text}
+http://images.google.com/images?num=30&q=larry+bird
+\\\\end{CodeBlock}
+
+
+
+you need to encode the URL as:
+
+
+
+\\\\begin{CodeBlock}{text}
+http://images.google.com/images?num=30&amp;q=larry+bird
+\\\\end{CodeBlock}
+
+
+
+in your anchor tag \\\\texttt{href} attribute. Needless to say, this is easy to
+forget, and is probably the single most common source of HTML validation
+errors in otherwise well-marked-up web sites.
+
+
+
+Markdown allows you to use these characters naturally, taking care of
+all the necessary escaping for you. If you use an ampersand as part of
+an HTML entity, it remains unchanged; otherwise it will be translated
+into \\\\texttt{\\\\&amp;}.
+
+
+
+So, if you want to include a copyright symbol in your article, you can write:
+
+
+
+\\\\begin{CodeBlock}{text}
+&copy;
+\\\\end{CodeBlock}
+
+
+
+and Markdown will leave it alone. But if you write:
+
+
+
+\\\\begin{CodeBlock}{text}
+AT&T
+\\\\end{CodeBlock}
+
+
+
+Markdown will translate it to:
+
+
+
+\\\\begin{CodeBlock}{text}
+AT&amp;T
+\\\\end{CodeBlock}
+
+
+
+Similarly, because Markdown supports \\\\externalLink{inline HTML}{\\\\#html}, if you use
+angle brackets as delimiters for HTML tags, Markdown will treat them as
+such. But if you write:
+
+
+
+\\\\begin{CodeBlock}{text}
+4 < 5
+\\\\end{CodeBlock}
+
+
+
+Markdown will translate it to:
+
+
+
+\\\\begin{CodeBlock}{text}
+4 &lt; 5
+\\\\end{CodeBlock}
+
+
+
+However, inside Markdown code spans and blocks, angle brackets and
+ampersands are \\\\textit{always} encoded automatically. This makes it easy to use
+Markdown to write about HTML code. (As opposed to raw HTML, which is a
+terrible format for writing about HTML syntax, because every single \\\\texttt{<}
+and \\\\texttt{\\\\&} in your example code needs to be escaped.)
+
+
+
+\\\\horizontalLine
+
+
+
+<h2 id=\\"block\\">Block Elements</h2>
+
+<h3 id=\\"p\\">Paragraphs and Line Breaks</h3>
+
+A paragraph is simply one or more consecutive lines of text, separated
+by one or more blank lines. (A blank line is any line that looks like a
+blank line -- a line containing nothing but spaces or tabs is considered
+blank.) Normal paragraphs should not be intended with spaces or tabs.
+
+
+
+The implication of the \\"one or more consecutive lines of text\\" rule is
+that Markdown supports \\"hard-wrapped\\" text paragraphs. This differs
+significantly from most other text-to-HTML formatters (including Movable
+Type's \\"Convert Line Breaks\\" option) which translate every line break
+character in a paragraph into a \\\\texttt{<br />} tag.
+
+
+
+When you \\\\textit{do} want to insert a \\\\texttt{<br />} break tag using Markdown, you
+end a line with two or more spaces, then type return.
+
+
+
+Yes, this takes a tad more effort to create a \\\\texttt{<br />}, but a simplistic
+\\"every line break is a \\\\texttt{<br />}\\" rule wouldn't work for Markdown.
+Markdown's email-style blockquoting\\\\ref{bq} and multi-paragraph list items\\\\ref{l}
+work best -- and look better -- when you format them with hard breaks.
+
+
+
+\\\\footnote{\\\\label{bq}\\\\externalLink{\\\\#blockquote}{\\\\#blockquote}}
+
+\\\\footnote{\\\\label{l}\\\\externalLink{\\\\#list}{\\\\#list}}
+
+<h3 id=\\"header\\">Headers</h3>
+
+Markdown supports two styles of headers, Setext\\\\ref{1} and atx\\\\ref{2}.
+
+
+
+Setext-style headers are \\"underlined\\" using equal signs (for first-level
+headers) and dashes (for second-level headers). For example:
+
+
+
+\\\\begin{CodeBlock}{text}
+This is an H1
+=============
+
+This is an H2
+-------------
+\\\\end{CodeBlock}
+
+
+
+Any number of underlining \\\\texttt{=}'s or \\\\texttt{-}'s will work.
+
+
+
+Atx-style headers use 1-6 hash characters at the start of the line,
+corresponding to header levels 1-6. For example:
+
+
+
+\\\\begin{CodeBlock}{text}
+# This is an H1
+
+## This is an H2
+
+###### This is an H6
+\\\\end{CodeBlock}
+
+
+
+Optionally, you may \\"close\\" atx-style headers. This is purely
+cosmetic -- you can use this if you think it looks better. The
+closing hashes don't even need to match the number of hashes
+used to open the header. (The number of opening hashes
+determines the header level.) :
+
+
+
+\\\\begin{CodeBlock}{text}
+# This is an H1 #
+
+## This is an H2 ##
+
+### This is an H3 ######
+\\\\end{CodeBlock}
+
+
+
+<h3 id=\\"blockquote\\">Blockquotes</h3>
+
+Markdown uses email-style \\\\texttt{>} characters for blockquoting. If you're
+familiar with quoting passages of text in an email message, then you
+know how to create a blockquote in Markdown. It looks best if you hard
+wrap the text and put a \\\\texttt{>} before every line:
+
+
+
+\\\\begin{CodeBlock}{text}
+> This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
+> consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
+> Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
+> 
+> Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
+> id sem consectetuer libero luctus adipiscing.
+\\\\end{CodeBlock}
+
+
+
+Markdown allows you to be lazy and only put the \\\\texttt{>} before the first
+line of a hard-wrapped paragraph:
+
+
+
+\\\\begin{CodeBlock}{text}
+> This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
+consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
+Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
+
+> Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
+id sem consectetuer libero luctus adipiscing.
+\\\\end{CodeBlock}
+
+
+
+Blockquotes can be nested (i.e. a blockquote-in-a-blockquote) by
+adding additional levels of \\\\texttt{>}:
+
+
+
+\\\\begin{CodeBlock}{text}
+> This is the first level of quoting.
+>
+> > This is nested blockquote.
+>
+> Back to the first level.
+\\\\end{CodeBlock}
+
+
+
+Blockquotes can contain other Markdown elements, including headers, lists,
+and code blocks:
+
+
+
+\\\\begin{CodeBlock}{text}
+> ## This is a header.
+> 
+> 1.   This is the first list item.
+> 2.   This is the second list item.
+> 
+> Here's some example code:
+> 
+>     return shell_exec(\\"echo $input | $markdown_script\\");
+\\\\end{CodeBlock}
+
+
+
+Any decent text editor should make email-style quoting easy. For
+example, with BBEdit, you can make a selection and choose Increase
+Quote Level from the Text menu.
+
+
+
+<h3 id=\\"list\\">Lists</h3>
+
+Markdown supports ordered (numbered) and unordered (bulleted) lists.
+
+
+
+Unordered lists use asterisks, pluses, and hyphens -- interchangably
+-- as list markers:
+
+
+
+\\\\begin{CodeBlock}{text}
+*   Red
+*   Green
+*   Blue
+\\\\end{CodeBlock}
+
+
+
+is equivalent to:
+
+
+
+\\\\begin{CodeBlock}{text}
++   Red
++   Green
++   Blue
+\\\\end{CodeBlock}
+
+
+
+and:
+
+
+
+\\\\begin{CodeBlock}{text}
+-   Red
+-   Green
+-   Blue
+\\\\end{CodeBlock}
+
+
+
+Ordered lists use numbers followed by periods:
+
+
+
+\\\\begin{CodeBlock}{text}
+1.  Bird
+2.  McHale
+3.  Parish
+\\\\end{CodeBlock}
+
+
+
+It's important to note that the actual numbers you use to mark the
+list have no effect on the HTML output Markdown produces. The HTML
+Markdown produces from the above list is:
+
+
+
+\\\\begin{CodeBlock}{text}
+<ol>
+<li>Bird</li>
+<li>McHale</li>
+<li>Parish</li>
+</ol>
+\\\\end{CodeBlock}
+
+
+
+If you instead wrote the list in Markdown like this:
+
+
+
+\\\\begin{CodeBlock}{text}
+1.  Bird
+1.  McHale
+1.  Parish
+\\\\end{CodeBlock}
+
+
+
+or even:
+
+
+
+\\\\begin{CodeBlock}{text}
+3. Bird
+1. McHale
+8. Parish
+\\\\end{CodeBlock}
+
+
+
+you'd get the exact same HTML output. The point is, if you want to,
+you can use ordinal numbers in your ordered Markdown lists, so that
+the numbers in your source match the numbers in your published HTML.
+But if you want to be lazy, you don't have to.
+
+
+
+If you do use lazy list numbering, however, you should still start the
+list with the number 1. At some point in the future, Markdown may support
+starting ordered lists at an arbitrary number.
+
+
+
+List markers typically start at the left margin, but may be indented by
+up to three spaces. List markers must be followed by one or more spaces
+or a tab.
+
+
+
+To make lists look nice, you can wrap items with hanging indents:
+
+
+
+\\\\begin{CodeBlock}{text}
+*   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+    Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
+    viverra nec, fringilla in, laoreet vitae, risus.
+*   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
+    Suspendisse id sem consectetuer libero luctus adipiscing.
+\\\\end{CodeBlock}
+
+
+
+But if you want to be lazy, you don't have to:
+
+
+
+\\\\begin{CodeBlock}{text}
+*   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
+viverra nec, fringilla in, laoreet vitae, risus.
+*   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
+Suspendisse id sem consectetuer libero luctus adipiscing.
+\\\\end{CodeBlock}
+
+
+
+If list items are separated by blank lines, Markdown will wrap the
+items in \\\\texttt{<p>} tags in the HTML output. For example, this input:
+
+
+
+\\\\begin{CodeBlock}{text}
+*   Bird
+*   Magic
+\\\\end{CodeBlock}
+
+
+
+will turn into:
+
+
+
+\\\\begin{CodeBlock}{text}
+<ul>
+<li>Bird</li>
+<li>Magic</li>
+</ul>
+\\\\end{CodeBlock}
+
+
+
+But this:
+
+
+
+\\\\begin{CodeBlock}{text}
+*   Bird
+
+*   Magic
+\\\\end{CodeBlock}
+
+
+
+will turn into:
+
+
+
+\\\\begin{CodeBlock}{text}
+<ul>
+<li><p>Bird</p></li>
+<li><p>Magic</p></li>
+</ul>
+\\\\end{CodeBlock}
+
+
+
+List items may consist of multiple paragraphs. Each subsequent
+paragraph in a list item must be intended by either 4 spaces
+or one tab:
+
+
+
+\\\\begin{CodeBlock}{text}
+1.  This is a list item with two paragraphs. Lorem ipsum dolor
+    sit amet, consectetuer adipiscing elit. Aliquam hendrerit
+    mi posuere lectus.
+
+    Vestibulum enim wisi, viverra nec, fringilla in, laoreet
+    vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
+    sit amet velit.
+
+2.  Suspendisse id sem consectetuer libero luctus adipiscing.
+\\\\end{CodeBlock}
+
+
+
+It looks nice if you indent every line of the subsequent
+paragraphs, but here again, Markdown will allow you to be
+lazy:
+
+
+
+\\\\begin{CodeBlock}{text}
+*   This is a list item with two paragraphs.
+
+    This is the second paragraph in the list item. You're
+only required to indent the first line. Lorem ipsum dolor
+sit amet, consectetuer adipiscing elit.
+
+*   Another item in the same list.
+\\\\end{CodeBlock}
+
+
+
+To put a blockquote within a list item, the blockquote's \\\\texttt{>}
+delimiters need to be indented:
+
+
+
+\\\\begin{CodeBlock}{text}
+*   A list item with a blockquote:
+
+    > This is a blockquote
+    > inside a list item.
+\\\\end{CodeBlock}
+
+
+
+To put a code block within a list item, the code block needs
+to be indented \\\\textit{twice} -- 8 spaces or two tabs:
+
+
+
+\\\\begin{CodeBlock}{text}
+*   A list item with a code block:
+
+        <code goes here>
+\\\\end{CodeBlock}
+
+
+
+It's worth noting that it's possible to trigger an ordered list by
+accident, by writing something like this:
+
+
+
+\\\\begin{CodeBlock}{text}
+1986. What a great season.
+\\\\end{CodeBlock}
+
+
+
+In other words, a \\\\textit{number-period-space} sequence at the beginning of a
+line. To avoid this, you can backslash-escape the period:
+
+
+
+\\\\begin{CodeBlock}{text}
+1986\\\\. What a great season.
+\\\\end{CodeBlock}
+
+
+
+<h3 id=\\"precode\\">Code Blocks</h3>
+
+Pre-formatted code blocks are used for writing about programming or
+markup source code. Rather than forming normal paragraphs, the lines
+of a code block are interpreted literally. Markdown wraps a code block
+in both \\\\texttt{<pre>} and \\\\texttt{<code>} tags.
+
+
+
+To produce a code block in Markdown, simply indent every line of the
+block by at least 4 spaces or 1 tab. For example, given this input:
+
+
+
+\\\\begin{CodeBlock}{text}
+This is a normal paragraph:
+
+    This is a code block.
+\\\\end{CodeBlock}
+
+
+
+Markdown will generate:
+
+
+
+\\\\begin{CodeBlock}{text}
+<p>This is a normal paragraph:</p>
+
+<pre><code>This is a code block.
+</code></pre>
+\\\\end{CodeBlock}
+
+
+
+One level of indentation -- 4 spaces or 1 tab -- is removed from each
+line of the code block. For example, this:
+
+
+
+\\\\begin{CodeBlock}{text}
+Here is an example of AppleScript:
+
+    tell application \\"Foo\\"
+        beep
+    end tell
+\\\\end{CodeBlock}
+
+
+
+will turn into:
+
+
+
+\\\\begin{CodeBlock}{text}
+<p>Here is an example of AppleScript:</p>
+
+<pre><code>tell application \\"Foo\\"
+    beep
+end tell
+</code></pre>
+\\\\end{CodeBlock}
+
+
+
+A code block continues until it reaches a line that is not indented
+(or the end of the article).
+
+
+
+Within a code block, ampersands (\\\\texttt{\\\\&}) and angle brackets (\\\\texttt{<} and \\\\texttt{>})
+are automatically converted into HTML entities. This makes it very
+easy to include example HTML source code using Markdown -- just paste
+it and indent it, and Markdown will handle the hassle of encoding the
+ampersands and angle brackets. For example, this:
+
+
+
+\\\\begin{CodeBlock}{text}
+    <div class=\\"footer\\">
+        &copy; 2004 Foo Corporation
+    </div>
+\\\\end{CodeBlock}
+
+
+
+will turn into:
+
+
+
+\\\\begin{CodeBlock}{text}
+<pre><code>&lt;div class=\\"footer\\"&gt;
+    &amp;copy; 2004 Foo Corporation
+&lt;/div&gt;
+</code></pre>
+\\\\end{CodeBlock}
+
+
+
+Regular Markdown syntax is not processed within code blocks. E.g.,
+asterisks are just literal asterisks within a code block. This means
+it's also easy to use Markdown to write about Markdown's own syntax.
+
+
+
+<h3 id=\\"hr\\">Horizontal Rules</h3>
+
+You can produce a horizontal rule tag (\\\\texttt{<hr>}) by placing three or
+more hyphens, asterisks, or underscores on a line by themselves. If you
+wish, you may use spaces between the hyphens or asterisks. Each of the
+following lines will produce a horizontal rule:
+
+
+
+\\\\begin{CodeBlock}{text}
+* * *
+
+***
+
+*****
+
+- - -
+
+---------------------------------------
+
+_ _ _
+\\\\end{CodeBlock}
+
+
+
+\\\\horizontalLine
+
+
+
+<h2 id=\\"span\\">Span Elements</h2>
+
+<h3 id=\\"link\\">Links</h3>
+
+Markdown supports two style of links: \\\\textit{inline} and \\\\textit{reference}.
+
+
+
+In both styles, the link text is delimited by square brackets\\\\ref{square brackets}.
+
+
+
+To create an inline link, use a set of regular parentheses immediately
+after the link text's closing square bracket. Inside the parentheses,
+put the URL where you want the link to point, along with an \\\\textit{optional}
+title for the link, surrounded in quotes. For example:
+
+
+
+\\\\begin{CodeBlock}{text}
+This is [an example](http://example.com/ \\"Title\\") inline link.
+
+[This link](http://example.net/) has no title attribute.
+\\\\end{CodeBlock}
+
+
+
+Will produce:
+
+
+
+\\\\begin{CodeBlock}{text}
+<p>This is <a href=\\"http://example.com/\\" title=\\"Title\\">
+an example</a> inline link.</p>
+
+<p><a href=\\"http://example.net/\\">This link</a> has no
+title attribute.</p>
+\\\\end{CodeBlock}
+
+
+
+If you're referring to a local resource on the same server, you can
+use relative paths:
+
+
+
+\\\\begin{CodeBlock}{text}
+See my [About](/about/) page for details.
+\\\\end{CodeBlock}
+
+
+
+Reference-style links use a second set of square brackets, inside
+which you place a label of your choosing to identify the link:
+
+
+
+\\\\begin{CodeBlock}{text}
+This is [an example][id] reference-style link.
+\\\\end{CodeBlock}
+
+
+
+You can optionally use a space to separate the sets of brackets:
+
+
+
+\\\\begin{CodeBlock}{text}
+This is [an example] [id] reference-style link.
+\\\\end{CodeBlock}
+
+
+
+Then, anywhere in the document, you define your link label like this,
+on a line by itself:
+
+
+
+\\\\begin{CodeBlock}{text}
+[id]: http://example.com/  \\"Optional Title Here\\"
+\\\\end{CodeBlock}
+
+
+
+That is:
+
+
+
+\\\\begin{itemize}
+\\\\item Square brackets containing the link identifier (optionally
+indented from the left margin using up to three spaces);
+\\\\item followed by a colon;
+\\\\item followed by one or more spaces (or tabs);
+\\\\item followed by the URL for the link;
+\\\\item optionally followed by a title attribute for the link, enclosed
+in double or single quotes.
+\\\\end{itemize}
+
+
+The link URL may, optionally, be surrounded by angle brackets:
+
+
+
+\\\\begin{CodeBlock}{text}
+[id]: <http://example.com/>  \\"Optional Title Here\\"
+\\\\end{CodeBlock}
+
+
+
+You can put the title attribute on the next line and use extra spaces
+or tabs for padding, which tends to look better with longer URLs:
+
+
+
+\\\\begin{CodeBlock}{text}
+[id]: http://example.com/longish/path/to/resource/here
+    \\"Optional Title Here\\"
+\\\\end{CodeBlock}
+
+
+
+Link definitions are only used for creating links during Markdown
+processing, and are stripped from your document in the HTML output.
+
+
+
+Link definition names may constist of letters, numbers, spaces, and punctuation -- but they are \\\\textit{not} case sensitive. E.g. these two links:
+
+
+
+\\\\begin{CodeBlock}{text}
+[link text][a]
+[link text][A]
+\\\\end{CodeBlock}
+
+
+
+are equivalent.
+
+
+
+The \\\\textit{implicit link name} shortcut allows you to omit the name of the
+link, in which case the link text itself is used as the name.
+Just use an empty set of square brackets -- e.g., to link the word
+\\"Google\\" to the google.com web site, you could simply write:
+
+
+
+\\\\begin{CodeBlock}{text}
+[Google][]
+\\\\end{CodeBlock}
+
+
+
+And then define the link:
+
+
+
+\\\\begin{CodeBlock}{text}
+[Google]: http://google.com/
+\\\\end{CodeBlock}
+
+
+
+Because link names may contain spaces, this shortcut even works for
+multiple words in the link text:
+
+
+
+\\\\begin{CodeBlock}{text}
+Visit [Daring Fireball][] for more information.
+\\\\end{CodeBlock}
+
+
+
+And then define the link:
+
+
+
+\\\\begin{CodeBlock}{text}
+[Daring Fireball]: http://daringfireball.net/
+\\\\end{CodeBlock}
+
+
+
+Link definitions can be placed anywhere in your Markdown document. I
+tend to put them immediately after each paragraph in which they're
+used, but if you want, you can put them all at the end of your
+document, sort of like footnotes.
+
+
+
+Here's an example of reference links in action:
+
+
+
+\\\\begin{CodeBlock}{text}
+I get 10 times more traffic from [Google] [1] than from
+[Yahoo] [2] or [MSN] [3].
+
+  [1]: http://google.com/        \\"Google\\"
+  [2]: http://search.yahoo.com/  \\"Yahoo Search\\"
+  [3]: http://search.msn.com/    \\"MSN Search\\"
+\\\\end{CodeBlock}
+
+
+
+Using the implicit link name shortcut, you could instead write:
+
+
+
+\\\\begin{CodeBlock}{text}
+I get 10 times more traffic from [Google][] than from
+[Yahoo][] or [MSN][].
+
+  [google]: http://google.com/        \\"Google\\"
+  [yahoo]:  http://search.yahoo.com/  \\"Yahoo Search\\"
+  [msn]:    http://search.msn.com/    \\"MSN Search\\"
+\\\\end{CodeBlock}
+
+
+
+Both of the above examples will produce the following HTML output:
+
+
+
+\\\\begin{CodeBlock}{text}
+<p>I get 10 times more traffic from <a href=\\"http://google.com/\\"
+title=\\"Google\\">Google</a> than from
+<a href=\\"http://search.yahoo.com/\\" title=\\"Yahoo Search\\">Yahoo</a>
+or <a href=\\"http://search.msn.com/\\" title=\\"MSN Search\\">MSN</a>.</p>
+\\\\end{CodeBlock}
+
+
+
+For comparison, here is the same paragraph written using
+Markdown's inline link style:
+
+
+
+\\\\begin{CodeBlock}{text}
+I get 10 times more traffic from [Google](http://google.com/ \\"Google\\")
+than from [Yahoo](http://search.yahoo.com/ \\"Yahoo Search\\") or
+[MSN](http://search.msn.com/ \\"MSN Search\\").
+\\\\end{CodeBlock}
+
+
+
+The point of reference-style links is not that they're easier to
+write. The point is that with reference-style links, your document
+source is vastly more readable. Compare the above examples: using
+reference-style links, the paragraph itself is only 81 characters
+long; with inline-style links, it's 176 characters; and as raw HTML,
+it's 234 characters. In the raw HTML, there's more markup than there
+is text.
+
+
+
+With Markdown's reference-style links, a source document much more
+closely resembles the final output, as rendered in a browser. By
+allowing you to move the markup-related metadata out of the paragraph,
+you can add links without interrupting the narrative flow of your
+prose.
+
+
+
+<h3 id=\\"em\\">Emphasis</h3>
+
+Markdown treats asterisks (\\\\texttt{*}) and underscores (\\\\texttt{\\\\_}) as indicators of
+emphasis. Text wrapped with one \\\\texttt{*} or \\\\texttt{\\\\_} will be wrapped with an
+HTML \\\\texttt{<em>} tag; double \\\\texttt{*}'s or \\\\texttt{\\\\_}'s will be wrapped with an HTML
+\\\\texttt{<strong>} tag. E.g., this input:
+
+
+
+\\\\begin{CodeBlock}{text}
+*single asterisks*
+
+_single underscores_
+
+**double asterisks**
+
+__double underscores__
+\\\\end{CodeBlock}
+
+
+
+will produce:
+
+
+
+\\\\begin{CodeBlock}{text}
+<em>single asterisks</em>
+
+<em>single underscores</em>
+
+<strong>double asterisks</strong>
+
+<strong>double underscores</strong>
+\\\\end{CodeBlock}
+
+
+
+You can use whichever style you prefer; the lone restriction is that
+the same character must be used to open and close an emphasis span.
+
+
+
+Emphasis can be used in the middle of a word:
+
+
+
+\\\\begin{CodeBlock}{text}
+un*fucking*believable
+\\\\end{CodeBlock}
+
+
+
+But if you surround an \\\\texttt{*} or \\\\texttt{\\\\_} with spaces, it'll be treated as a
+literal asterisk or underscore.
+
+
+
+To produce a literal asterisk or underscore at a position where it
+would otherwise be used as an emphasis delimiter, you can backslash
+escape it:
+
+
+
+\\\\begin{CodeBlock}{text}
+\\\\*this text is surrounded by literal asterisks\\\\*
+\\\\end{CodeBlock}
+
+
+
+<h3 id=\\"code\\">Code</h3>
+
+To indicate a span of code, wrap it with backtick quotes (\\\\texttt{\`}).
+Unlike a pre-formatted code block, a code span indicates code within a
+normal paragraph. For example:
+
+
+
+\\\\begin{CodeBlock}{text}
+Use the \`printf()\` function.
+\\\\end{CodeBlock}
+
+
+
+will produce:
+
+
+
+\\\\begin{CodeBlock}{text}
+<p>Use the <code>printf()</code> function.</p>
+\\\\end{CodeBlock}
+
+
+
+To include a literal backtick character within a code span, you can use
+multiple backticks as the opening and closing delimiters:
+
+
+
+\\\\begin{CodeBlock}{text}
+\`\`There is a literal backtick (\`) here.\`\`
+\\\\end{CodeBlock}
+
+
+
+which will produce this:
+
+
+
+\\\\begin{CodeBlock}{text}
+<p><code>There is a literal backtick (\`) here.</code></p>
+\\\\end{CodeBlock}
+
+
+
+The backtick delimiters surrounding a code span may include spaces --
+one after the opening, one before the closing. This allows you to place
+literal backtick characters at the beginning or end of a code span:
+
+
+
+\\\\begin{CodeBlock}{text}
+A single backtick in a code span: \`\` \` \`\`
+
+A backtick-delimited string in a code span: \`\` \`foo\` \`\`
+\\\\end{CodeBlock}
+
+
+
+will produce:
+
+
+
+\\\\begin{CodeBlock}{text}
+<p>A single backtick in a code span: <code>\`</code></p>
+
+<p>A backtick-delimited string in a code span: <code>\`foo\`</code></p>
+\\\\end{CodeBlock}
+
+
+
+With a code span, ampersands and angle brackets are encoded as HTML
+entities automatically, which makes it easy to include example HTML
+tags. Markdown will turn this:
+
+
+
+\\\\begin{CodeBlock}{text}
+Please don't use any \`<blink>\` tags.
+\\\\end{CodeBlock}
+
+
+
+into:
+
+
+
+\\\\begin{CodeBlock}{text}
+<p>Please don't use any <code>&lt;blink&gt;</code> tags.</p>
+\\\\end{CodeBlock}
+
+
+
+You can write this:
+
+
+
+\\\\begin{CodeBlock}{text}
+\`&#8212;\` is the decimal-encoded equivalent of \`&mdash;\`.
+\\\\end{CodeBlock}
+
+
+
+to produce:
+
+
+
+\\\\begin{CodeBlock}{text}
+<p><code>&amp;#8212;</code> is the decimal-encoded
+equivalent of <code>&amp;mdash;</code>.</p>
+\\\\end{CodeBlock}
+
+
+
+<h3 id=\\"img\\">Images</h3>
+
+Admittedly, it's fairly difficult to devise a \\"natural\\" syntax for
+placing images into a plain text document format.
+
+
+
+Markdown uses an image syntax that is intended to resemble the syntax
+for links, allowing for two styles: \\\\textit{inline} and \\\\textit{reference}.
+
+
+
+Inline image syntax looks like this:
+
+
+
+\\\\begin{CodeBlock}{text}
+![Alt text](/path/to/img.jpg)
+
+![Alt text](/path/to/img.jpg \\"Optional title\\")
+\\\\end{CodeBlock}
+
+
+
+That is:
+
+
+
+\\\\begin{itemize}
+\\\\item An exclamation mark: \\\\texttt{!};
+\\\\item followed by a set of square brackets, containing the \\\\texttt{alt}
+attribute text for the image;
+\\\\item followed by a set of parentheses, containing the URL or path to
+the image, and an optional \\\\texttt{title} attribute enclosed in double
+or single quotes.
+\\\\end{itemize}
+
+
+Reference-style image syntax looks like this:
+
+
+
+\\\\begin{CodeBlock}{text}
+![Alt text][id]
+\\\\end{CodeBlock}
+
+
+
+Where \\"id\\" is the name of a defined image reference. Image references
+are defined using syntax identical to link references:
+
+
+
+\\\\begin{CodeBlock}{text}
+[id]: url/to/image  \\"Optional title attribute\\"
+\\\\end{CodeBlock}
+
+
+
+As of this writing, Markdown has no syntax for specifying the
+dimensions of an image; if this is important to you, you can simply
+use regular HTML \\\\texttt{<img>} tags.
+
+
+
+\\\\horizontalLine
+
+
+
+<h2 id=\\"misc\\">Miscellaneous</h2>
+
+<h3 id=\\"autolink\\">Automatic Links</h3>
+
+Markdown supports a shortcut style for creating \\"automatic\\" links for URLs and email addresses: simply surround the URL or email address with angle brackets. What this means is that if you want to show the actual text of a URL or email address, and also have it be a clickable link, you can do this:
+
+
+
+\\\\begin{CodeBlock}{text}
+<http://example.com/>
+\\\\end{CodeBlock}
+
+
+
+Markdown will turn this into:
+
+
+
+\\\\begin{CodeBlock}{text}
+<a href=\\"http://example.com/\\">http://example.com/</a>
+\\\\end{CodeBlock}
+
+
+
+Automatic links for email addresses work similarly, except that
+Markdown will also perform a bit of randomized decimal and hex
+entity-encoding to help obscure your address from address-harvesting
+spambots. For example, Markdown will turn this:
+
+
+
+\\\\begin{CodeBlock}{text}
+<address@example.com>
+\\\\end{CodeBlock}
+
+
+
+into something like this:
+
+
+
+\\\\begin{CodeBlock}{text}
+<a href=\\"&#x6D;&#x61;i&#x6C;&#x74;&#x6F;:&#x61;&#x64;&#x64;&#x72;&#x65;
+&#115;&#115;&#64;&#101;&#120;&#x61;&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;
+&#109;\\">&#x61;&#x64;&#x64;&#x72;&#x65;&#115;&#115;&#64;&#101;&#120;&#x61;
+&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;&#109;</a>
+\\\\end{CodeBlock}
+
+
+
+which will render in a browser as a clickable link to \\"address@example.com\\".
+
+
+
+(This sort of entity-encoding trick will indeed fool many, if not
+most, address-harvesting bots, but it definitely won't fool all of
+them. It's better than nothing, but an address published in this way
+will probably eventually start receiving spam.)
+
+
+
+<h3 id=\\"backslash\\">Backslash Escapes</h3>
+
+Markdown allows you to use backslash escapes to generate literal
+characters which would otherwise have special meaning in Markdown's
+formatting syntax. For example, if you wanted to surround a word with
+literal asterisks (instead of an HTML \\\\texttt{<em>} tag), you can backslashes
+before the asterisks, like this:
+
+
+
+\\\\begin{CodeBlock}{text}
+\\\\*literal asterisks\\\\*
+\\\\end{CodeBlock}
+
+
+
+Markdown provides backslash escapes for the following characters:
+
+
+
+\\\\begin{CodeBlock}{text}
+\\\\   backslash
+\`   backtick
+*   asterisk
+_   underscore
+{}  curly braces
+[]  square brackets
+()  parentheses
+#   hash mark
++	plus sign
+-	minus sign (hyphen)
+.   dot
+!   exclamation mark
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures mixed-indentation 1`] = `
+"\\\\chapter{Mixed spaces and tabs}
+
+
+\\\\begin{itemize}
+\\\\item Very long
+			paragraph
+\\\\end{itemize}
+
+
+\\\\begin{enumerate}
+\\\\item Very long
+	paragraph
+\\\\end{enumerate}
+
+
+\\\\begin{itemize}
+\\\\item Very long
+	paragraph
+\\\\end{itemize}
+
+
+\\\\begin{enumerate}
+\\\\item Very long
+	paragraph
+\\\\end{enumerate}"
+`;
+
+exports[`remark fixtures nested-blockquotes 1`] = `
+"\\\\begin{Quotation}
+foo
+
+\\\\begin{Quotation}
+bar
+\\\\end{Quotation}
+
+foo
+\\\\end{Quotation}"
+`;
+
+exports[`remark fixtures nested-code 1`] = `
+"\\\\texttt{hi ther \`\` ok \`\`\`}
+
+
+
+\\\\texttt{\`hi ther\`}"
+`;
+
+exports[`remark fixtures nested-em 1`] = `
+"\\\\textit{test \\\\textbf{test} test}
+
+
+
+\\\\textit{test \\\\textbf{test} test}"
+`;
+
+exports[`remark fixtures nested-references 1`] = `
+"This nested image should work:
+
+
+
+\\\\includegraphics{</url}\\\\ref{baz}
+
+
+
+This nested link should not work:
+
+
+
+[Foo][bar]\\\\ref{baz}
+
+
+
+This nested footnote not work:
+
+
+
+\\\\textsuperscript{\\\\ref{footnote:foo}}\\\\ref{baz}
+
+
+
+\\\\footnote{\\\\label{bar-1}\\\\externalLink{https://bar.com}{https://bar.com}}
+
+\\\\footnote{\\\\label{baz-1-1-1}\\\\externalLink{https://baz.com}{https://baz.com}}
+
+\\\\footnotetext[foo]{\\\\label{footnote:foo} A footnote.}"
+`;
+
+exports[`remark fixtures nested-square-link 1`] = `
+"the \`\\\\ref{the \`}\` character](/url)
+
+
+
+[the \\\\texttt{[} character](/url)
+
+
+
+[the \\\\texttt{} \\\\externalLink{ \`\\\\texttt{} character}{/url}
+
+
+
+\\\\externalLink{the \\\\texttt{\`} character}{/url}"
+`;
+
+exports[`remark fixtures no-positionals 1`] = `
+"This document tests for the working of \\\\texttt{position: false} as a parse
+option.
+
+
+
+\\\\begin{Quotation}
+Block-quotes
+
+\\\\begin{itemize}
+\\\\item With list items.
+\\\\end{itemize}
+\\\\end{Quotation}
+
+
+
+Another block-quote:
+
+
+
+\\\\begin{Quotation}
+\\\\begin{enumerate}
+\\\\item And another list.
+\\\\end{enumerate}
+\\\\end{Quotation}
+
+
+
+Some \\\\externalLink{deeply \\\\textbf{nested \\\\textit{elements}}}{http://example.com}
+
+
+
+An entity: ©, and an warning entity: ©."
+`;
+
+exports[`remark fixtures not-a-link 1`] = `"[test](not a link)"`;
+
+exports[`remark fixtures ordered-and-unordered-lists 1`] = `
+"\\\\section{Unordered}
+
+
+Asterisks tight:
+
+
+
+\\\\begin{itemize}
+\\\\item asterisk 1
+\\\\item asterisk 2
+\\\\item asterisk 3
+\\\\end{itemize}
+
+
+Asterisks loose:
+
+
+
+\\\\begin{itemize}
+\\\\item asterisk 1
+\\\\item asterisk 2
+\\\\item asterisk 3
+\\\\end{itemize}
+
+
+\\\\horizontalLine
+
+
+
+Pluses tight:
+
+
+
+\\\\begin{itemize}
+\\\\item Plus 1
+\\\\item Plus 2
+\\\\item Plus 3
+\\\\end{itemize}
+
+
+Pluses loose:
+
+
+
+\\\\begin{itemize}
+\\\\item Plus 1
+\\\\item Plus 2
+\\\\item Plus 3
+\\\\end{itemize}
+
+
+\\\\horizontalLine
+
+
+
+Minuses tight:
+
+
+
+\\\\begin{itemize}
+\\\\item Minus 1
+\\\\item Minus 2
+\\\\item Minus 3
+\\\\end{itemize}
+
+
+Minuses loose:
+
+
+
+\\\\begin{itemize}
+\\\\item Minus 1
+\\\\item Minus 2
+\\\\item Minus 3
+\\\\end{itemize}
+
+
+\\\\section{Ordered}
+
+
+Tight:
+
+
+
+\\\\begin{enumerate}
+\\\\item First
+\\\\item Second
+\\\\item Third
+\\\\end{enumerate}
+
+
+and:
+
+
+
+\\\\begin{enumerate}
+\\\\item One
+\\\\item Two
+\\\\item Three
+\\\\end{enumerate}
+
+
+Loose using tabs:
+
+
+
+\\\\begin{enumerate}
+\\\\item First
+\\\\item Second
+\\\\item Third
+\\\\end{enumerate}
+
+
+and using spaces:
+
+
+
+\\\\begin{enumerate}
+\\\\item One
+\\\\item Two
+\\\\item Three
+\\\\end{enumerate}
+
+
+Multiple paragraphs:
+
+
+
+\\\\begin{enumerate}
+\\\\item Item 1, graf one.
+
+Item 2. graf two. The quick brown fox jumped over the lazy dog's
+back.
+\\\\item Item 2.
+\\\\item Item 3.
+\\\\end{enumerate}
+
+
+\\\\section{Nested}
+
+
+\\\\begin{itemize}
+\\\\item Tab
+
+\\\\begin{itemize}
+\\\\item Tab
+
+\\\\begin{itemize}
+\\\\item Tab
+\\\\end{itemize}
+\\\\end{itemize}
+\\\\end{itemize}
+
+
+Here's another:
+
+
+
+\\\\begin{enumerate}
+\\\\item First
+\\\\item Second:
+
+\\\\begin{itemize}
+\\\\item Fee
+\\\\item Fie
+\\\\item Foe
+\\\\end{itemize}
+\\\\item Third
+\\\\end{enumerate}
+
+
+Same thing but with paragraphs:
+
+
+
+\\\\begin{enumerate}
+\\\\item First
+\\\\item Second:
+
+\\\\begin{itemize}
+\\\\item Fee
+\\\\item Fie
+\\\\item Foe
+\\\\end{itemize}
+\\\\item Third
+\\\\end{enumerate}
+
+
+This was an error in Markdown 1.0.1:
+
+
+
+\\\\begin{itemize}
+\\\\item this
+
+\\\\begin{itemize}
+\\\\item sub
+\\\\end{itemize}
+that
+\\\\end{itemize}"
+`;
+
+exports[`remark fixtures ordered-different-types 1`] = `
+"\\\\begin{enumerate}
+\\\\item foo
+\\\\item bar
+3) baz
+\\\\end{enumerate}"
+`;
+
+exports[`remark fixtures ordered-with-parentheses 1`] = `
+"\\\\section{Ordered}
+
+
+Tight:
+
+
+
+1)	First
+2)	Second
+3)	Third
+
+
+
+and:
+
+
+
+1) One
+2) Two
+3) Three
+
+
+
+Loose using tabs:
+
+
+
+1)	First
+
+
+
+2)	Second
+
+
+
+3)	Third
+
+
+
+and using spaces:
+
+
+
+1) One
+
+
+
+2) Two
+
+
+
+3) Three
+
+
+
+Multiple paragraphs:
+
+
+
+1)	Item 1, graf one.
+
+
+
+\\\\begin{CodeBlock}{text}
+Item 2. graf two. The quick brown fox jumped over the lazy dog's
+back.
+\\\\end{CodeBlock}
+
+
+
+2)	Item 2.
+
+
+
+3)	Item 3."
+`;
+
+exports[`remark fixtures paragraphs-and-indentation 1`] = `
+"\\\\chapter{Without lines.}
+
+
+This is a paragraph
+    and this is further text
+
+
+
+This is a paragraph
+   and this is further text
+
+
+
+This is a paragraph with some asterisks
+
+
+
+\\\\begin{CodeBlock}{text}
+***
+\\\\end{CodeBlock}
+
+
+
+This is a paragraph followed by a horizontal rule
+
+
+
+\\\\horizontalLine
+
+
+
+\\\\chapter{With lines.}
+
+
+This is a paragraph
+
+
+
+\\\\begin{CodeBlock}{text}
+and this is code
+\\\\end{CodeBlock}
+
+
+
+This is a paragraph
+
+
+
+and this is a new paragraph
+
+
+
+This is a paragraph with some asterisks in a code block
+
+
+
+\\\\begin{CodeBlock}{text}
+***
+\\\\end{CodeBlock}
+
+
+
+This is a paragraph followed by a horizontal rule
+
+
+
+\\\\horizontalLine"
+`;
+
+exports[`remark fixtures paragraphs-empty 1`] = `
+"aaa
+
+
+
+\\\\chapter{aaa}
+
+
+bbb
+
+
+
+ccc"
+`;
+
+exports[`remark fixtures ref-paren 1`] = `
+"hi\\\\ref{hi}
+
+
+
+\\\\footnote{\\\\label{hi-1}\\\\externalLink{/url}{/url}}"
+`;
+
+exports[`remark fixtures reference-image-empty-alt 1`] = `
+"\\\\includegraphics{http://example.com/?foo=1&bar=2}
+
+
+
+\\\\footnote{\\\\label{1-1-1-1-1}\\\\externalLink{/xyz.png}{/xyz.png}}"
+`;
+
+exports[`remark fixtures reference-link-escape 1`] = `
+"b*r*\\\\ref{b\\\\-r}, b*r*\\\\ref{b\\\\*r*}, b*r*\\\\ref{b\\\\*r*}.
+
+
+
+\\\\includegraphics{http://google.com}, \\\\includegraphics{http://google.com}, \\\\includegraphics{http://google.com}.
+
+
+
+\\\\footnote{\\\\label{b\\\\*r*}\\\\externalLink{http://google.com}{http://google.com}}"
+`;
+
+exports[`remark fixtures reference-link-not-closed 1`] = `
+"bar\\\\ref{bar}bar
+
+
+
+bar\\\\ref{bar}
+
+
+
+bar\\\\ref{bar}"
+`;
+
+exports[`remark fixtures reference-link-with-angle-brackets 1`] = `
+"foo\\\\ref{foo}
+
+
+
+\\\\footnote{\\\\label{foo-1}\\\\externalLink{./url with spaces}{./url with spaces}}"
+`;
+
+exports[`remark fixtures reference-link-with-multiple-definitions 1`] = `
+"foo\\\\ref{foo}
+
+
+
+\\\\footnote{\\\\label{foo-1-1}\\\\externalLink{first}{first}}
+
+\\\\footnote{\\\\label{foo-1-1-1}\\\\externalLink{second}{second}}"
+`;
+
+exports[`remark fixtures same-bullet 1`] = `
+"\\\\begin{itemize}
+\\\\item test
+\\\\end{itemize}
+
+
+
+\\\\begin{itemize}
+\\\\item test
+\\\\end{itemize}
+
+
+
+\\\\begin{itemize}
+\\\\item test
+\\\\end{itemize}"
+`;
+
+exports[`remark fixtures stringify-escape 1`] = `
+"Characters that should be escaped in general:
+
+
+
+\\\\textbackslash{} \` * [
+
+
+
+Characters that shouldn't:
+
+
+
+\\\\{\\\\}]()\\\\#+-.!>\\"\\\\$\\\\%',/:;=?@\\\\textasciicircum{}\\\\textasciitilde{}
+
+
+
+Underscores are \\\\_escaped\\\\_ unless they appear in\\\\_the\\\\_middle\\\\_of\\\\_a\\\\_word.
+or \\\\textbf{\\\\_here}, or here\\\\_\\\\_
+
+
+
+Ampersands are escaped only when they would otherwise start an entity:
+
+
+
+\\\\begin{itemize}
+\\\\item \\\\textbackslash{}©cat \\\\textbackslash{}\\\\& \\\\textbackslash{}\\\\&
+\\\\item \\\\&copycat \\\\&amp; \\\\&\\\\#x26
+\\\\item But: ©cat; \\\\texttt{\\\\&between;} \\\\&foo; \\\\& AT\\\\&T \\\\&c
+\\\\end{itemize}
+
+
+Open parenthesis should be escaped after a shortcut reference:
+
+
+
+ref\\\\ref{ref}(text)
+
+
+
+And after a shortcut reference and a space (for GitHub):
+
+
+
+ref\\\\ref{ref} (text)
+
+
+
+Hyphen should be escaped at the beginning of a line:
+
+
+
+- not a list item
+- not a list item
+  + not a list item
+
+
+
+Same for angle brackets:
+
+
+
+> not a block quote
+
+
+
+And hash signs:
+
+
+
+\\\\# not a heading
+  \\\\#\\\\# not a subheading
+
+
+
+Text under a shortcut reference should be preserved verbatim:
+
+
+
+\\\\begin{itemize}
+\\\\item two*three\\\\ref{two*three}
+\\\\item two*three\\\\ref{two\\\\*three}
+\\\\item a\\\\textbackslash{}a\\\\ref{a\\\\a}
+\\\\item a\\\\textbackslash{}a\\\\ref{a\\\\\\\\a}
+\\\\item a\\\\textbackslash{}\\\\textbackslash{}a\\\\ref{a\\\\\\\\\\\\a}
+\\\\item a\\\\_a\\\\_a\\\\ref{a_a\\\\_a}
+\\\\end{itemize}
+
+
+\\\\textbf{GFM:}
+
+
+
+Colon should be escaped in URLs:
+
+
+
+\\\\begin{itemize}
+\\\\item http\\\\textbackslash{}://user:password@host:port/path?key=value\\\\#fragment
+\\\\item https\\\\textbackslash{}://user:password@host:port/path?key=value\\\\#fragment
+\\\\item http://user:password@host:port/path?key=value\\\\#fragment
+\\\\item https://user:password@host:port/path?key=value\\\\#fragment
+\\\\end{itemize}
+
+
+Double tildes should be \\\\textasciitilde{}\\\\textasciitilde{}escaped\\\\textasciitilde{}\\\\textasciitilde{}.
+And here: foo\\\\textasciitilde{}\\\\textasciitilde{}.
+
+
+
+Pipes should not be escaped here: |
+
+
+
+\\\\begin{longtabu}{|c|c|} \\\\hline
+here & they \\\\\\\\ \\\\hline
+should & tho|ugh \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+And here:
+
+
+
+| here   | they   |
+| ---- | ----- |
+| should | though |
+
+
+
+And here:
+
+
+
+here   | they
+---- | ------
+should | though
+
+
+
+\\\\textbf{Commonmark:}
+
+
+
+Open angle bracket should be escaped:
+
+
+
+\\\\begin{itemize}
+\\\\item \\\\textbackslash{}<div>\\\\textbackslash{}</div>
+\\\\item \\\\textbackslash{}<http\\\\textbackslash{}:google.com>
+\\\\item <div></div>
+\\\\item <http:google.com>
+\\\\end{itemize}"
+`;
+
+exports[`remark fixtures strong-and-em-together-one 1`] = `
+"\\\\textbf{\\\\textit{This is strong and em.}}
+
+
+
+So is \\\\textbf{\\\\textit{this}} word.
+
+
+
+\\\\textbf{\\\\textit{This is strong and em.}}
+
+
+
+So is \\\\textbf{\\\\textit{this}} word."
+`;
+
+exports[`remark fixtures strong-and-em-together-two 1`] = `
+"perform\\\\_complicated\\\\_task
+
+
+
+do\\\\_this\\\\_and\\\\_do\\\\_that\\\\_and\\\\_another\\\\_thing
+
+
+
+perform\\\\textit{complicated}task
+
+
+
+do\\\\textit{this}and\\\\textit{do}that\\\\textit{and}another*thing"
+`;
+
+exports[`remark fixtures strong-emphasis 1`] = `
+"Foo \\\\textbf{bar} \\\\textbf{baz}.
+
+
+
+Foo \\\\textbf{bar} \\\\textbf{baz}."
+`;
+
+exports[`remark fixtures strong-initial-white-space 1`] = `
+"\\\\textbf{ bar }.
+
+
+
+\\\\textbf{ bar }."
+`;
+
+exports[`remark fixtures table 1`] = `
+"\\\\begin{longtabu}{|c|c|} \\\\hline
+Heading 1 & \\\\textbf{H}eading 2 \\\\\\\\ \\\\hline
+Cell 1 & Cell 2 \\\\\\\\ \\\\hline
+Cell 3 & Cell 4 \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|c|c|c|c|} \\\\hline
+Header 1 & Header 2 & Header 3 & Header 4 \\\\\\\\ \\\\hline
+Cell 1 & Cell 2 & Cell 3 & Cell 4 \\\\\\\\ \\\\hline
+Cell 5 & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{CodeBlock}{text}
+Test code
+\\\\end{CodeBlock}
+
+
+
+\\\\begin{longtabu}{|c|c|} \\\\hline
+Header 1 & Header 2 \\\\\\\\ \\\\hline
+Cell 1 & Cell 2 \\\\\\\\ \\\\hline
+Cell 3 & Cell 4 \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|c|c|c|c|} \\\\hline
+Header 1 & Header 2 & Header 3 & Header 4 \\\\\\\\ \\\\hline
+Cell 1 & Cell 2 & Cell 3 & Cell 4 \\\\\\\\ \\\\hline
+\\\\textit{Cell 5} & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures table-empty-initial-cell 1`] = `
+"\\\\begin{longtabu}{|c|c|c|} \\\\hline
+ & a & c \\\\\\\\ \\\\hline
+a & b & c \\\\\\\\ \\\\hline
+a & b & c \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures table-escaped-pipes 1`] = `
+"\\\\begin{longtabu}{|c|c|c|} \\\\hline
+First & Second & third \\\\\\\\ \\\\hline
+first & second & third \\\\\\\\ \\\\hline
+first & second | second & third | \\\\\\\\ \\\\hline
+first & second \\\\textbackslash{} & third \\\\textbackslash{} \\\\\\\\ \\\\hline
+first & second \\\\textbackslash{}| second & third \\\\textbackslash{}| \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures table-in-list 1`] = `
+"\\\\begin{itemize}
+\\\\item Unordered:
+
+\\\\begin{longtabu}{|c|c|} \\\\hline
+A & B \\\\\\\\ \\\\hline
+1 & 2 \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+\\\\item Ordered:
+
+\\\\begin{longtabu}{|c|c|} \\\\hline
+A & B \\\\\\\\ \\\\hline
+1 & 2 \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+\\\\end{itemize}"
+`;
+
+exports[`remark fixtures table-invalid-alignment 1`] = `
+"Missing alignment characters:
+
+
+
+| a | b | c |
+|   |---|---|
+| d | e | f |
+
+
+
+\\\\horizontalLine
+
+
+
+| a | b | c |
+|---|---|   |
+| d | e | f |
+
+
+
+Invalid characters:
+
+
+
+| a | b | c |
+|---|-*-|---|
+| d | e | f |"
+`;
+
+exports[`remark fixtures table-loose 1`] = `
+"\\\\begin{longtabu}{|c|c|} \\\\hline
+Header 1 & Header 2 \\\\\\\\ \\\\hline
+Cell 1 & Cell 2 \\\\\\\\ \\\\hline
+Cell 3 & Cell 4 \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures table-no-body 1`] = `
+"\\\\chapter{Foo}
+
+
+\\\\begin{longtabu}{|c|c|c|} \\\\hline
+Name & GitHub & Twitter \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures table-no-end-of-line 1`] = `
+"\\\\begin{longtabu}{|c|c|} \\\\hline
+foo & bar \\\\\\\\ \\\\hline
+1 & 2 \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures table-one-column 1`] = `
+"This is a table:
+
+
+
+\\\\begin{longtabu}{|c|} \\\\hline
+a \\\\\\\\ \\\\hline
+b \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures table-one-row 1`] = `
+"This is a table:
+
+
+
+\\\\begin{longtabu}{|c|c|c|} \\\\hline
+a & b & c \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures table-padded 1`] = `
+"\\\\begin{longtabu}{|c|c|} \\\\hline
+Header 1 & Header 2 \\\\\\\\ \\\\hline
+Cell 1 & Cell 2 \\\\\\\\ \\\\hline
+Cell 3 & Cell 4 \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures table-pipes-in-code 1`] = `
+"\\\\begin{longtabu}{|c|c|} \\\\hline
+abc & head2 \\\\\\\\ \\\\hline
+x & \\\\texttt{|||} \\\\\\\\ \\\\hline
+x & \` \\\\\\\\ \\\\hline
+x & \\\\texttt{|} \\\\\\\\ \\\\hline
+x & \\\\texttt{f} \\\\\\\\ \\\\hline
+x & \\\\texttt{} \\\\\\\\ \\\\hline
+x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|c|c|} \\\\hline
+abc & head2 \\\\\\\\ \\\\hline
+x & \` \\\\\\\\ \\\\hline
+x & \\\\texttt{|} \\\\\\\\ \\\\hline
+x & \\\\texttt{f} \\\\\\\\ \\\\hline
+x & \\\\texttt{} \\\\\\\\ \\\\hline
+x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures table-spaced 1`] = `
+"\\\\begin{longtabu}{|c|c|} \\\\hline
+Header 1 & Header 2 \\\\\\\\ \\\\hline
+Cell 1 & Cell 2 \\\\\\\\ \\\\hline
+Cell 3 & Cell 4 \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`remark fixtures tabs 1`] = `
+"\\\\begin{itemize}
+\\\\item this is a list item
+indented with tabs
+\\\\item this is a list item
+indented with spaces
+\\\\end{itemize}
+
+
+Code:
+
+
+
+\\\\begin{CodeBlock}{text}
+this code block is indented by one tab
+\\\\end{CodeBlock}
+
+
+
+And:
+
+
+
+\\\\begin{CodeBlock}{text}
+	this code block is indented by two tabs
+\\\\end{CodeBlock}
+
+
+
+And:
+
+
+
+\\\\begin{CodeBlock}{text}
++	this is an example list item
+	indented with tabs
+
++   this is an example list item
+    indented with spaces
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures tabs-and-spaces 1`] = `
+"\\\\begin{itemize}
+\\\\item this is a list item
+indented with tabs
+\\\\item this is a list item
+indented with spaces
+\\\\end{itemize}
+
+
+Code:
+
+
+
+\\\\begin{CodeBlock}{text}
+this code block is indented by one tab
+\\\\end{CodeBlock}
+
+
+
+And:
+
+
+
+\\\\begin{CodeBlock}{text}
+	this code block is indented by two tabs
+\\\\end{CodeBlock}
+
+
+
+And:
+
+
+
+\\\\begin{CodeBlock}{text}
++	this is an example list item
+	indented with tabs
+
++   this is an example list item
+    indented with spaces
+\\\\end{CodeBlock}"
+`;
+
+exports[`remark fixtures task-list 1`] = `
+"\\\\chapter{Empty items}
+
+
+\\\\begin{itemize}
+\\\\item \\\\ref{ }
+\\\\item \\\\ref{ }
+\\\\end{itemize}
+
+
+\\\\begin{enumerate}
+\\\\item x\\\\ref{x}
+\\\\item X\\\\ref{x}
+\\\\end{enumerate}
+
+
+\\\\chapter{Single space}
+
+
+\\\\begin{itemize}
+\\\\item 
+\\\\item 
+\\\\end{itemize}
+
+
+\\\\begin{enumerate}
+\\\\item 
+\\\\item 
+\\\\end{enumerate}
+
+
+\\\\chapter{Tab}
+
+
+\\\\begin{itemize}
+\\\\item 
+\\\\item 
+\\\\end{itemize}
+
+
+\\\\begin{enumerate}
+\\\\item 
+\\\\item 
+\\\\end{enumerate}
+
+
+\\\\chapter{No white space with content}
+
+
+\\\\begin{itemize}
+\\\\item \\\\ref{ }Hello;
+\\\\item \\\\ref{ }World;
+\\\\end{itemize}
+
+
+\\\\begin{enumerate}
+\\\\item x\\\\ref{x}Foo.
+\\\\item X\\\\ref{x}Bar
+\\\\end{enumerate}
+
+
+\\\\chapter{Single space with content}
+
+
+\\\\begin{itemize}
+\\\\item Hello;
+\\\\item World;
+\\\\end{itemize}
+
+
+\\\\begin{enumerate}
+\\\\item Foo.
+\\\\item World :D
+\\\\end{enumerate}
+
+
+\\\\chapter{Single tab with content}
+
+
+\\\\begin{itemize}
+\\\\item Hello;
+\\\\item World;
+\\\\end{itemize}
+
+
+\\\\begin{enumerate}
+\\\\item Foo.
+\\\\item Hello.
+\\\\end{enumerate}
+
+
+\\\\chapter{Multiple spaces with content}
+
+
+\\\\begin{itemize}
+\\\\item \\\\begin{CodeBlock}{text}
+Hello;
+\\\\end{CodeBlock}
+\\\\item \\\\begin{CodeBlock}{text}
+World;
+\\\\end{CodeBlock}
+\\\\end{itemize}
+
+
+\\\\begin{enumerate}
+\\\\item Foo.
+\\\\item Bar.
+\\\\end{enumerate}
+
+
+\\\\chapter{Multiple tabs with content}
+
+
+\\\\begin{itemize}
+\\\\item \\\\begin{CodeBlock}{text}
+Hello;
+\\\\end{CodeBlock}
+\\\\item \\\\begin{CodeBlock}{text}
+World;
+\\\\end{CodeBlock}
+\\\\end{itemize}
+
+
+\\\\begin{enumerate}
+\\\\item \\\\begin{CodeBlock}{text}
+Foo.
+\\\\end{CodeBlock}
+\\\\item \\\\begin{CodeBlock}{text}
+Bar.
+\\\\end{CodeBlock}
+\\\\end{enumerate}
+
+
+\\\\chapter{Mixed tabs and spaces}
+
+
+\\\\begin{itemize}
+\\\\item \\\\begin{CodeBlock}{text}
+    Hello;
+\\\\end{CodeBlock}
+\\\\end{itemize}
+
+
+\\\\begin{enumerate}
+\\\\item \\\\begin{CodeBlock}{text}
+World;
+\\\\end{CodeBlock}
+\\\\end{enumerate}
+
+
+\\\\begin{itemize}
+\\\\item \\\\begin{CodeBlock}{text}
+	Hello;
+\\\\end{CodeBlock}
+\\\\item World.
+\\\\end{itemize}
+
+
+\\\\begin{enumerate}
+\\\\item Bar.
+\\\\end{enumerate}
+
+
+\\\\chapter{Line breaks}
+
+
+\\\\begin{itemize}
+\\\\item \\\\ref{ } Hello;
+\\\\end{itemize}
+
+
+\\\\begin{enumerate}
+\\\\item \\\\ref{ } Hello;
+\\\\end{enumerate}
+
+
+\\\\chapter{Multiple unfinished characters}
+
+
+\\\\begin{itemize}
+\\\\item \\\\ref{ } Hello;
+\\\\end{itemize}
+
+
+\\\\begin{enumerate}
+\\\\item \\\\ref{ } World;
+\\\\item \\\\ref{ } Hello;
+\\\\item \\\\ref{ } World.
+\\\\end{enumerate}"
+`;
+
+exports[`remark fixtures task-list-ordered 1`] = `
+"\\\\begin{enumerate}
+\\\\item Mercury;
+\\\\item [] Venus (this one’s invalid);
+\\\\item Earth:
+
+\\\\begin{enumerate}
+\\\\item Moon.
+\\\\end{enumerate}
+\\\\item Mars;
+\\\\item [] Neptune (this one’s also invalid).
+\\\\end{enumerate}"
+`;
+
+exports[`remark fixtures task-list-unordered-asterisk 1`] = `
+"\\\\begin{itemize}
+\\\\item Mercury;
+\\\\item [] Venus (this one’s invalid);
+\\\\item Earth:
+
+\\\\begin{itemize}
+\\\\item Moon.
+\\\\end{itemize}
+\\\\item Mars;
+\\\\item [] Neptune (this one’s also invalid).
+\\\\end{itemize}"
+`;
+
+exports[`remark fixtures task-list-unordered-dash 1`] = `
+"\\\\begin{itemize}
+\\\\item Mercury;
+\\\\item [] Venus (this one’s invalid);
+\\\\item Earth:
+
+\\\\begin{itemize}
+\\\\item Moon.
+\\\\end{itemize}
+\\\\item Mars;
+\\\\item [] Neptune (this one’s also invalid).
+\\\\end{itemize}"
+`;
+
+exports[`remark fixtures task-list-unordered-plus 1`] = `
+"\\\\begin{itemize}
+\\\\item Mercury;
+\\\\item [] Venus (this one’s invalid);
+\\\\item Earth:
+
+\\\\begin{itemize}
+\\\\item Moon.
+\\\\end{itemize}
+\\\\item Mars;
+\\\\item [] Neptune (this one’s also invalid).
+\\\\end{itemize}"
+`;
+
+exports[`remark fixtures tidyness 1`] = `
+"\\\\begin{Quotation}
+A list within a blockquote:
+
+\\\\begin{itemize}
+\\\\item asterisk 1
+\\\\item asterisk 2
+\\\\item asterisk 3
+\\\\end{itemize}
+\\\\end{Quotation}"
+`;
+
+exports[`remark fixtures title-attributes 1`] = `
+"\\\\chapter{Links}
+
+
+\\\\begin{longtabu}{|c|c|c|c|c|c|c|} \\\\hline
+Implementation & Characters & Nested & Mismatched & Escaped & Named Entities & Numbered Entities \\\\\\\\ \\\\hline
+Markdown.pl & \\\\texttt{\\"} & Yes & Yes & No & Yes & Yes \\\\\\\\ \\\\hline
+GitHub & \\\\texttt{\\"} & Yes & Yes & No & No & No \\\\\\\\ \\\\hline
+CommonMark & \\\\texttt{\\"} & No & No & Yes & Yes & Yes \\\\\\\\ \\\\hline
+Markdown.pl & \\\\texttt{'} & Yes & Yes & No & Yes & Yes \\\\\\\\ \\\\hline
+GitHub & \\\\texttt{'} & Yes & Yes & No & No & No \\\\\\\\ \\\\hline
+CommonMark & \\\\texttt{'} & No & No & Yes & Yes & Yes \\\\\\\\ \\\\hline
+Markdown.pl & \\\\texttt{()} & - & - & - & - & - \\\\\\\\ \\\\hline
+GitHub & \\\\texttt{()} & - & - & - & - & - \\\\\\\\ \\\\hline
+CommonMark & \\\\texttt{()} & No & Yes & Yes & Yes & Yes \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\section{Double quotes}
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\section{Single quotes}
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\externalLink{Hello}{./world.html}
+
+
+
+\\\\section{Parentheses}
+
+
+Hello\\\\ref{hello}(./world.html (and text))
+
+
+
+Hello\\\\ref{hello}(./world.html (and (matching delimiters)))
+
+
+
+Hello\\\\ref{hello}(./world.html (and (mismatched delimiters))
+
+
+
+Hello\\\\ref{hello}(./world.html (and (escapes)))
+
+
+
+Hello\\\\ref{hello}(./world.html (and (named entities)))
+
+
+
+Hello\\\\ref{hello}(./world.html (and (numbered entities)))
+
+
+
+\\\\chapter{Images}
+
+
+\\\\section{Double quotes}
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\section{Single quotes}
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\includegraphics{./world.png}
+
+
+
+\\\\section{Parentheses}
+
+
+\\\\includegraphics{undefined}(./world.png (and text))
+
+
+
+\\\\includegraphics{undefined}(./world.png (and (matching delimiters)))
+
+
+
+\\\\includegraphics{undefined}(./world.png (and (mismatched delimiters))
+
+
+
+\\\\includegraphics{undefined}(./world.png (and (escapes)))
+
+
+
+\\\\includegraphics{undefined}(./world.png (and (named entities)))
+
+
+
+\\\\includegraphics{undefined}(./world.png (and (numbered entities)))"
+`;
+
+exports[`remark fixtures toplevel-paragraphs 1`] = `
+"hello world
+    how are you
+    how are you
+
+
+
+hello world
+
+
+
+\\\\begin{CodeBlock}{text}
+how are you
+\\\\end{CodeBlock}
+
+
+
+hello world
+
+
+
+\\\\horizontalLine
+
+
+
+hello world
+
+
+
+\\\\chapter{how are you}
+
+
+hello world
+
+
+
+\\\\chapter{how are you}
+
+
+hello world
+
+
+
+\\\\begin{Quotation}
+how are you
+\\\\end{Quotation}
+
+
+
+hello world
+
+
+
+\\\\begin{itemize}
+\\\\item how are you
+\\\\end{itemize}
+
+
+hello world
+
+
+
+<div>how are you</div>
+
+hello world
+<span>how are you</span>
+
+
+
+hello world\\\\ref{how}
+
+
+
+\\\\footnote{\\\\label{how}\\\\externalLink{/are/you}{/are/you}}
+
+<div>hello</div>
+
+<span>hello</span>"
+`;
+
+exports[`remark fixtures tricky-list 1`] = `
+"\\\\textbf{hello} \\\\textit{world}
+
+
+
+\\\\begin{itemize}
+\\\\item hello world
+\\\\end{itemize}
+
+
+\\\\textbf{hello} \\\\textit{world}
+
+
+
+\\\\begin{itemize}
+\\\\item hello world
+\\\\end{itemize}
+
+
+\\\\textbf{hello} \\\\textit{world}
+
+
+
+\\\\begin{itemize}
+\\\\item Hello world
+\\\\end{itemize}
+
+
+\\\\textbf{hello} \\\\textit{world}
+
+
+
+\\\\begin{itemize}
+\\\\item hello world
+\\\\end{itemize}"
+`;

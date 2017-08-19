@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import {readdirSync as directory, readFileSync as file} from 'fs'
+import {readdirSync as directory, readFileSync as file, lstatSync as stat} from 'fs'
 import {join} from 'path'
 import unified from 'unified'
 import reParse from 'remark-parse'
@@ -13,7 +13,9 @@ const fixtures = directory(base).reduce((tests, contents) => {
   if (!tests[parts[0]]) {
     tests[parts[0]] = {}
   }
-  tests[parts[0]] = file(join(base, contents), 'utf-8')
+  if (stat(join(base, contents)).isFile()) {
+    tests[parts[0]] = file(join(base, contents), 'utf-8')
+  }
   return tests
 }, {})
 
@@ -260,7 +262,7 @@ test('link', () => {
   expect(contents.trim()).toMatchSnapshot()
 })
 
-test('link with fixtureial characters', () => {
+test('link with special characters', () => {
   const {contents} = unified()
     .use(reParse)
     .use(rebber)
@@ -344,6 +346,41 @@ test('footnotes', () => {
       # myti*tle C[^foo inner]*
 
       a paragraph[^footnoteRawPar inner]
+    `)
+  expect(contents).toMatchSnapshot()
+})
+
+test('abbr', () => {
+  const {contents} = unified()
+    .use(reParse)
+    .use(require('remark-abbr/src'))
+    .use(rebber, {
+      override: {
+        abbr: require('../src/custom-types/abbr')
+      }
+    })
+    .processSync(dedent`
+      FOO
+
+      *[FOO]: bar
+    `)
+  expect(contents).toMatchSnapshot()
+})
+
+test('abbr with custom config', () => {
+  const {contents} = unified()
+    .use(reParse)
+    .use(require('remark-abbr/src'))
+    .use(rebber, {
+      override: {
+        abbr: require('../src/custom-types/abbr')
+      },
+      abbr: (x) => `->${x}<-`
+    })
+    .processSync(dedent`
+      FOO
+
+      *[FOO]: bar
     `)
   expect(contents).toMatchSnapshot()
 })
