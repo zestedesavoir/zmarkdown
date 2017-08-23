@@ -77,11 +77,28 @@ module.exports = function plugin(_ref) {
   }
 
   return function (tree, file) {
-    return visit(tree, 'ping', function (node) {
-      if (!file.data[node.type]) {
-        file.data[node.type] = [];
+    visit(tree, 'blockquote', markInBlockquotes);
+    visit(tree, 'ping', function (node) {
+      if (!node.__inBlockquote) {
+        if (!file.data[node.type]) {
+          file.data[node.type] = [];
+        }
+        file.data[node.type].push(node.username);
       }
-      file.data[node.type].push(node.username);
     });
   };
 };
+
+function markInBlockquotes(node) {
+  mark(node);
+
+  if (node.children) {
+    node.children.map(function (n, i) {
+      return markInBlockquotes(n);
+    });
+  }
+}
+
+function mark(node) {
+  if (node.type === 'ping') node.__inBlockquote = true;
+}

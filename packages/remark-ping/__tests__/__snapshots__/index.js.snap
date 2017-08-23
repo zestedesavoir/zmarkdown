@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`compiles to Markdown 1`] = `
+exports[`fixture suite 0 compiles to Markdown 1`] = `
 "# Test ping
 
 ping @Clem
@@ -13,7 +13,7 @@ no ping @**I AM CLEM**
 "
 `;
 
-exports[`parses 1`] = `
+exports[`fixture suite 0 parses 1`] = `
 Object {
   "children": Array [
     Object {
@@ -266,6 +266,513 @@ Object {
       "column": 23,
       "line": 10,
       "offset": 130,
+    },
+    "start": Object {
+      "column": 1,
+      "line": 1,
+      "offset": 0,
+    },
+  },
+  "type": "root",
+}
+`;
+
+exports[`fixture suite 1 compiles to Markdown 1`] = `
+"## Test ping @**I AM CLEM**
+
+> > no metadata output @**I AM CLEM**
+>
+> no metadata output @**I AM CLEM**
+
+ping @**I AM CLEM**
+
+ping _@**I AM CLEM**_
+
+> no metadata output @**I AM CLEM**
+"
+`;
+
+exports[`fixture suite 1 parses 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 14,
+              "line": 1,
+              "offset": 13,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 4,
+              "line": 1,
+              "offset": 3,
+            },
+          },
+          "type": "text",
+          "value": "Test ping ",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "type": "text",
+              "value": "I AM CLEM",
+            },
+          ],
+          "data": Object {
+            "hName": "a",
+            "hProperties": Object {
+              "class": "ping",
+              "href": "/membres/voir/I AM CLEM/",
+            },
+          },
+          "position": Position {
+            "end": Object {
+              "column": 28,
+              "line": 1,
+              "offset": 27,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 14,
+              "line": 1,
+              "offset": 13,
+            },
+          },
+          "type": "ping",
+          "url": "/membres/voir/I AM CLEM/",
+          "username": "I AM CLEM",
+        },
+      ],
+      "depth": 2,
+      "position": Position {
+        "end": Object {
+          "column": 28,
+          "line": 1,
+          "offset": 27,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "type": "heading",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "position": Position {
+                    "end": Object {
+                      "column": 24,
+                      "line": 3,
+                      "offset": 52,
+                    },
+                    "indent": Array [],
+                    "start": Object {
+                      "column": 5,
+                      "line": 3,
+                      "offset": 33,
+                    },
+                  },
+                  "type": "text",
+                  "value": "no metadata output ",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "type": "text",
+                      "value": "I AM CLEM",
+                    },
+                  ],
+                  "data": Object {
+                    "hName": "a",
+                    "hProperties": Object {
+                      "class": "ping",
+                      "href": "/membres/voir/I AM CLEM/",
+                    },
+                  },
+                  "position": Position {
+                    "end": Object {
+                      "column": 38,
+                      "line": 3,
+                      "offset": 66,
+                    },
+                    "indent": Array [],
+                    "start": Object {
+                      "column": 24,
+                      "line": 3,
+                      "offset": 52,
+                    },
+                  },
+                  "type": "ping",
+                  "url": "/membres/voir/I AM CLEM/",
+                  "username": "I AM CLEM",
+                },
+              ],
+              "position": Position {
+                "end": Object {
+                  "column": 38,
+                  "line": 3,
+                  "offset": 66,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 5,
+                  "line": 3,
+                  "offset": 33,
+                },
+              },
+              "type": "paragraph",
+            },
+          ],
+          "position": Position {
+            "end": Object {
+              "column": 38,
+              "line": 3,
+              "offset": 66,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 3,
+              "line": 3,
+              "offset": 31,
+            },
+          },
+          "type": "blockquote",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "position": Position {
+                "end": Object {
+                  "column": 22,
+                  "line": 5,
+                  "offset": 89,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 3,
+                  "line": 5,
+                  "offset": 70,
+                },
+              },
+              "type": "text",
+              "value": "no metadata output ",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "type": "text",
+                  "value": "I AM CLEM",
+                },
+              ],
+              "data": Object {
+                "hName": "a",
+                "hProperties": Object {
+                  "class": "ping",
+                  "href": "/membres/voir/I AM CLEM/",
+                },
+              },
+              "position": Position {
+                "end": Object {
+                  "column": 36,
+                  "line": 5,
+                  "offset": 103,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 22,
+                  "line": 5,
+                  "offset": 89,
+                },
+              },
+              "type": "ping",
+              "url": "/membres/voir/I AM CLEM/",
+              "username": "I AM CLEM",
+            },
+          ],
+          "position": Position {
+            "end": Object {
+              "column": 36,
+              "line": 5,
+              "offset": 103,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 3,
+              "line": 5,
+              "offset": 70,
+            },
+          },
+          "type": "paragraph",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 36,
+          "line": 5,
+          "offset": 103,
+        },
+        "indent": Array [
+          1,
+          1,
+        ],
+        "start": Object {
+          "column": 1,
+          "line": 3,
+          "offset": 29,
+        },
+      },
+      "type": "blockquote",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 6,
+              "line": 7,
+              "offset": 110,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 7,
+              "offset": 105,
+            },
+          },
+          "type": "text",
+          "value": "ping ",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "type": "text",
+              "value": "I AM CLEM",
+            },
+          ],
+          "data": Object {
+            "hName": "a",
+            "hProperties": Object {
+              "class": "ping",
+              "href": "/membres/voir/I AM CLEM/",
+            },
+          },
+          "position": Position {
+            "end": Object {
+              "column": 20,
+              "line": 7,
+              "offset": 124,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 6,
+              "line": 7,
+              "offset": 110,
+            },
+          },
+          "type": "ping",
+          "url": "/membres/voir/I AM CLEM/",
+          "username": "I AM CLEM",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 20,
+          "line": 7,
+          "offset": 124,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 7,
+          "offset": 105,
+        },
+      },
+      "type": "paragraph",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 6,
+              "line": 9,
+              "offset": 131,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 9,
+              "offset": 126,
+            },
+          },
+          "type": "text",
+          "value": "ping ",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "type": "text",
+                  "value": "I AM CLEM",
+                },
+              ],
+              "data": Object {
+                "hName": "a",
+                "hProperties": Object {
+                  "class": "ping",
+                  "href": "/membres/voir/I AM CLEM/",
+                },
+              },
+              "position": Position {
+                "end": Object {
+                  "column": 21,
+                  "line": 9,
+                  "offset": 146,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 7,
+                  "line": 9,
+                  "offset": 132,
+                },
+              },
+              "type": "ping",
+              "url": "/membres/voir/I AM CLEM/",
+              "username": "I AM CLEM",
+            },
+          ],
+          "position": Position {
+            "end": Object {
+              "column": 22,
+              "line": 9,
+              "offset": 147,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 6,
+              "line": 9,
+              "offset": 131,
+            },
+          },
+          "type": "emphasis",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 22,
+          "line": 9,
+          "offset": 147,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 9,
+          "offset": 126,
+        },
+      },
+      "type": "paragraph",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "position": Position {
+                "end": Object {
+                  "column": 22,
+                  "line": 11,
+                  "offset": 170,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 3,
+                  "line": 11,
+                  "offset": 151,
+                },
+              },
+              "type": "text",
+              "value": "no metadata output ",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "type": "text",
+                  "value": "I AM CLEM",
+                },
+              ],
+              "data": Object {
+                "hName": "a",
+                "hProperties": Object {
+                  "class": "ping",
+                  "href": "/membres/voir/I AM CLEM/",
+                },
+              },
+              "position": Position {
+                "end": Object {
+                  "column": 36,
+                  "line": 11,
+                  "offset": 184,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 22,
+                  "line": 11,
+                  "offset": 170,
+                },
+              },
+              "type": "ping",
+              "url": "/membres/voir/I AM CLEM/",
+              "username": "I AM CLEM",
+            },
+          ],
+          "position": Position {
+            "end": Object {
+              "column": 36,
+              "line": 11,
+              "offset": 184,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 3,
+              "line": 11,
+              "offset": 151,
+            },
+          },
+          "type": "paragraph",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 36,
+          "line": 11,
+          "offset": 184,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 11,
+          "offset": 149,
+        },
+      },
+      "type": "blockquote",
+    },
+  ],
+  "position": Object {
+    "end": Object {
+      "column": 36,
+      "line": 11,
+      "offset": 184,
     },
     "start": Object {
       "column": 1,

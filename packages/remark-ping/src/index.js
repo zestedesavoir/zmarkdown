@@ -72,10 +72,28 @@ module.exports = function plugin ({
     visitors.ping = (node) => `@**${node.username}**`
   }
 
-  return (tree, file) => visit(tree, 'ping', (node) => {
-    if (!file.data[node.type]) {
-      file.data[node.type] = []
-    }
-    file.data[node.type].push(node.username)
-  })
+  return (tree, file) => {
+    visit(tree, 'blockquote', markInBlockquotes)
+    visit(tree, 'ping', (node) => {
+      if (!node.__inBlockquote) {
+        if (!file.data[node.type]) {
+          file.data[node.type] = []
+        }
+        file.data[node.type].push(node.username)
+      }
+    })
+  }
+}
+
+
+function markInBlockquotes (node) {
+  mark(node)
+
+  if (node.children) {
+    node.children.map((n, i) => markInBlockquotes(n))
+  }
+}
+
+function mark (node) {
+  if (node.type === 'ping') node.__inBlockquote = true
 }
