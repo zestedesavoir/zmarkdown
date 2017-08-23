@@ -5,8 +5,6 @@ var visit = require('unist-util-visit');
 var helpMsg = 'remark-ping: expected configuration to be passed: {\n  pingUsername: (username) => bool,\n  userURL: (username) => string\n}';
 
 module.exports = function plugin(_ref) {
-  var _this = this;
-
   var pingUsername = _ref.pingUsername,
       userURL = _ref.userURL,
       _ref$usernameRegex = _ref.usernameRegex,
@@ -74,7 +72,7 @@ module.exports = function plugin(_ref) {
   if (Compiler) {
     var visitors = Compiler.prototype.visitors;
     visitors.ping = function (node) {
-      return '@**' + _this.all(node).join('') + '**';
+      return '@**' + node.username + '**';
     };
   }
 

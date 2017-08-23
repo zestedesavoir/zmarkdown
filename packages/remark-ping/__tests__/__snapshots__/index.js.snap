@@ -1,0 +1,278 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`compiles to Markdown 1`] = `
+"# Test ping
+
+ping @Clem
+
+ping @**FOO BAR**
+
+no ping @dqsjdjsqjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd
+
+no ping @**I AM CLEM**
+"
+`;
+
+exports[`parses 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 10,
+              "line": 1,
+              "offset": 9,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "type": "text",
+          "value": "Test ping",
+        },
+      ],
+      "depth": 1,
+      "position": Position {
+        "end": Object {
+          "column": 10,
+          "line": 2,
+          "offset": 19,
+        },
+        "indent": Array [
+          1,
+        ],
+        "start": Object {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "type": "heading",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 11,
+              "line": 4,
+              "offset": 31,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 4,
+              "offset": 21,
+            },
+          },
+          "type": "text",
+          "value": "ping @Clem",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 11,
+          "line": 4,
+          "offset": 31,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 4,
+          "offset": 21,
+        },
+      },
+      "type": "paragraph",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 7,
+              "line": 6,
+              "offset": 39,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 6,
+              "offset": 33,
+            },
+          },
+          "type": "text",
+          "value": "ping @",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "position": Position {
+                "end": Object {
+                  "column": 16,
+                  "line": 6,
+                  "offset": 48,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 9,
+                  "line": 6,
+                  "offset": 41,
+                },
+              },
+              "type": "text",
+              "value": "FOO BAR",
+            },
+          ],
+          "position": Position {
+            "end": Object {
+              "column": 18,
+              "line": 6,
+              "offset": 50,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 7,
+              "line": 6,
+              "offset": 39,
+            },
+          },
+          "type": "strong",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 18,
+          "line": 6,
+          "offset": 50,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 6,
+          "offset": 33,
+        },
+      },
+      "type": "paragraph",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 55,
+              "line": 8,
+              "offset": 106,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 8,
+              "offset": 52,
+            },
+          },
+          "type": "text",
+          "value": "no ping @dqsjdjsqjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 55,
+          "line": 8,
+          "offset": 106,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 8,
+          "offset": 52,
+        },
+      },
+      "type": "paragraph",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 9,
+              "line": 10,
+              "offset": 116,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 10,
+              "offset": 108,
+            },
+          },
+          "type": "text",
+          "value": "no ping ",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "type": "text",
+              "value": "I AM CLEM",
+            },
+          ],
+          "data": Object {
+            "hName": "a",
+            "hProperties": Object {
+              "class": "ping",
+              "href": "/membres/voir/I AM CLEM/",
+            },
+          },
+          "position": Position {
+            "end": Object {
+              "column": 23,
+              "line": 10,
+              "offset": 130,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 9,
+              "line": 10,
+              "offset": 116,
+            },
+          },
+          "type": "ping",
+          "url": "/membres/voir/I AM CLEM/",
+          "username": "I AM CLEM",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 23,
+          "line": 10,
+          "offset": 130,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 10,
+          "offset": 108,
+        },
+      },
+      "type": "paragraph",
+    },
+  ],
+  "position": Object {
+    "end": Object {
+      "column": 23,
+      "line": 10,
+      "offset": 130,
+    },
+    "start": Object {
+      "column": 1,
+      "line": 1,
+      "offset": 0,
+    },
+  },
+  "type": "root",
+}
+`;

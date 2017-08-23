@@ -1,8 +1,9 @@
 import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
-import rehypeStringify from 'rehype-stringify'
+import remarkStringify from 'remark-stringify'
 import remark2rehype from 'remark-rehype'
+import rehypeStringify from 'rehype-stringify'
 
 import plugin from '../src/'
 
@@ -18,12 +19,25 @@ function userURL (username) {
   return `/membres/voir/${username}/`
 }
 
-const render = text => unified()
+
+const remark = text => unified()
+  .use(reParse)
+  .use(plugin, {pingUsername, userURL})
+  .parse(text)
+
+const toHTML = text => unified()
   .use(reParse)
   .use(plugin, {pingUsername, userURL})
   .use(remark2rehype)
   .use(rehypeStringify)
   .process(text)
+
+const toMarkdown = text => unified()
+  .use(reParse)
+  .use(remarkStringify)
+  .use(plugin, {pingUsername, userURL})
+  .processSync(text)
+  .toString()
 
 const fixture = dedent`
   Test ping
@@ -31,7 +45,7 @@ const fixture = dedent`
 
   ping @Clem
 
-  ping @**BALDE SOULEYMANE**
+  ping @**FOO BAR**
 
   no ping @dqsjdjsqjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd
 
@@ -40,19 +54,28 @@ const fixture = dedent`
 
 const html = dedent`<h1>Test ping</h1>
   <p>ping @Clem</p>
-  <p>ping @<strong>BALDE SOULEYMANE</strong></p>
+  <p>ping @<strong>FOO BAR</strong></p>
   <p>no ping @dqsjdjsqjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd</p>
   <p>no ping <a href="/membres/voir/I AM CLEM/" class="ping">I AM CLEM</a></p>
 `
 
 test('parses', () => {
-  expect(
-    render(fixture).then(vfile => vfile.contents)
-  ).resolves.toBe(html)
+  expect(remark(fixture)).toMatchSnapshot()
 })
 
 test('sets ping data on vfile', () => {
   expect(
-    render(fixture).then(vfile => vfile.data.ping)
+    toHTML(fixture).then(vfile => vfile.data.ping)
   ).resolves.toEqual(['I AM CLEM'])
+})
+
+test('compiles to HTML', () => {
+  expect(
+    toHTML(fixture).then(vfile => vfile.contents)
+  ).resolves.toBe(html)
+})
+
+
+test('compiles to Markdown', () => {
+  expect(toMarkdown(fixture)).toMatchSnapshot()
 })
