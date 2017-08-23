@@ -69,7 +69,7 @@ module.exports = function plugin ({
   // Stringify
   if (Compiler) {
     const visitors = Compiler.prototype.visitors
-    visitors.ping = (node) => `@**${this.all(node).join('')}**`
+    visitors.ping = (node) => `@**${node.username}**`
   }
 
   return (tree, file) => visit(tree, 'ping', (node) => {
