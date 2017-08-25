@@ -5,26 +5,24 @@ var visit = require('unist-util-visit');
 
 var codePlugin = require('./codeVisitor');
 var headingPlugin = require('./headingVisitor');
-var iframePlugin = require('./iframes');
 var referencePlugin = require('./referenceVisitor');
 
 module.exports = preVisit;
 
-function preVisit(ctx, root) {
+function preVisit(ctx, tree) {
   var defaultVisitors = {
-    tableCell: [codePlugin(ctx, root).codeInTableVisitor],
+    tableCell: [codePlugin(ctx, tree).codeInTableVisitor],
     definition: [referencePlugin(ctx).definitionVisitor],
     imageReference: [referencePlugin(ctx).imageReferenceVisitor],
-    heading: [headingPlugin(ctx)],
-    iframe: [iframePlugin]
+    heading: [headingPlugin(ctx)]
   };
 
   var visitors = xtend(defaultVisitors, ctx.preprocessors || {});
 
-  Object.keys(visitors).forEach(function (key) {
-    if (Array.isArray(visitors[key])) {
-      visitors[key].forEach(function (visitor) {
-        return visit(root, key, visitor);
+  Object.keys(visitors).forEach(function (nodeType) {
+    if (Array.isArray(visitors[nodeType])) {
+      visitors[nodeType].forEach(function (visitor) {
+        return visit(tree, nodeType, visitor);
       });
     }
   });

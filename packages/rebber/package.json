@@ -43,14 +43,7 @@
     "del-cli": "^1.0.0",
     "eslint": "^4.5.0",
     "jest": "^20.0.4",
-    "remark-abbr": "^1.0.4",
-    "remark-align": "^1.0.4",
-    "remark-captions": "^1.0.2",
-    "remark-emoticons": "^0.0.23",
-    "remark-grid-tables": "^1.0.4",
-    "remark-numbered-footnotes": "^0.0.18",
     "remark-parse": "^4.0.0",
-    "remark-sub-super": "^1.0.4",
     "unified": "^6.1.5"
   }
 }

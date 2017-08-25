@@ -1,8 +1,13 @@
 module.exports = plugin
 
-function plugin (ctx = {}) {
+/*
+LaTeX requires special handlings of footnotes placed in headings such as \section{}
+We therefore mark each footnote placed in handing for later handling.
+*/
+
+function plugin () {
   return function headingVisitor (node, index, parent) {
-    if (node.type === 'footnote' && node.inHeading !== true) annotate(node)
+    if (node.type === 'footnote' && node.inHeading !== true) mark(node)
 
     if (node.children) {
       node.children.map((n, i) => headingVisitor(n, i, node))
@@ -10,6 +15,6 @@ function plugin (ctx = {}) {
   }
 }
 
-function annotate (node) {
+function mark (node) {
   node.inHeading = true
 }

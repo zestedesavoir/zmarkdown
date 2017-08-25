@@ -37,7 +37,7 @@ handlers.text = require('./types/text');
 handlers.thematicBreak = require('./types/thematic-break');
 
 /* Stringify `node`. */
-function one(ctx, node, index, parent, root) {
+function one(ctx, node, index, parent) {
   var handlersOverride = has(ctx, 'override') ? ctx.override : {};
   var h = xtend(handlers, handlersOverride);
 
@@ -51,5 +51,5 @@ function one(ctx, node, index, parent, root) {
     throw new Error('Cannot compile unknown node `' + type + '`');
   }
 
-  return h[type](ctx, node, index, parent, root);
+  return h[type](ctx, node, index, parent);
 }

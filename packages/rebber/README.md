@@ -1,20 +1,152 @@
-# Presentation
+# rebber [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
 
-TODO
+**rebber** is a LaTeX stringifier for [remark][]
 
-# Type configuration
+## Installation
 
-Every node type transformation to LaTeX can be customized thanks to the plugin configuration.
+[npm][]:
 
-Basically you have to give your custom function to translate the node and its content.
+```bash
+npm install rebber
+```
 
-Most of *macro* functions have this prototype : `(innerText) => str`
+## Usage
 
-Exceptions are :
+```javascript
+const unified = require('unified')
+const remarkParser = require('remark-parse')
+const rebber = require('rebber')
 
-- `link.macro` : its prototype is `(displayedText, url, title) => str`, another parameter exists to autoprepend a customized domain to the url
-for example, with `link.prefix = 'https://zestedesavoir.com'` every url starting with `/` will become `http://zestedesavoir.com{url}`.
-- `table` : as table is a complex one, the macro takes `(ctx, node) => str` where `ctx` are the rebber options and `node` the current mdast node
-- `list` : gets a second boolean argument wich defines if the list is ordered
+const {contents} = unified()
+  .use(remarkParser)
+  .use(rebber)
+  .processSync('### foo')
 
-Before rendering, we use a bunch of preparsers --actually MDAST visitors-- to ensure a latex-complient tree.
+console.log(contents);
+```
+
+Yields:
+
+```latex
+\section{foo}
+```
+
+## API
+
+### `toLaTeX(node[, options])`
+
+Stringify the given [MDAST node][mdast].
+
+##### `options`
+
+[MDAST nodes][mdast] are stringified to LaTeX using sensible default LaTeX commands. However, you can customize most of the LaTeX command corresponding to MDAST nodes. Here are documented the function signatures of these customizable commands. Note that the keys of the `options` object are named after the corresponding MDAST node type.
+
+For example, by default, `![](/foo.png)` will get compiled to `\includegraphics{/foo.png}`.
+
+Setting
+```js
+options.image = (node) => `[inserted image located at "${node.url}"]`
+```
+
+will stringify our example Markdown to `[inserted image located at "/foo.png"]` instead of `\includegraphics{/foo.png}`.
+
+###### `options.blockquote`
+
+    (text) => ``,
+
+###### `options.break`
+
+    () => ``,
+
+###### `options.code`
+
+    (textCode, lang) => ``,
+
+###### `options.definition`
+
+    (options, identifier, url, title) => ``,
+
+###### `options.footnote`
+
+    (identifier, text, protect) => ``,
+
+###### `options.footnoteDefinition`
+
+    (identifier, text) => ``,
+
+###### `options.footnoteReference`
+
+    (identifier) => ``,
+
+###### `options.headings`
+
+    [
+      (text) => ``, // level 1 heading
+      (text) => ``, // level 2 heading
+      (text) => ``, // level 3 heading
+      (text) => ``, // level 4 heading
+      (text) => ``, // level 5 heading
+      (text) => ``, // level 6 heading
+      (text) => ``, // level 7 heading
+    ],
+
+###### `options.image`
+
+    (node) => ``,
+
+###### `options.link`
+
+    (displayText, url, title) => ``,
+
+###### `options.linkReference`
+
+    (reference, content) => ``,
+
+###### `options.list`
+
+    (content, isOrdered) => ``,
+
+###### `options.listItem`
+
+    (content) => ``,
+
+###### `options.text`
+
+    (text) => ``,
+
+###### `options.thematicBreak`
+
+    () => ``,
+
+## Related
+
+*   [`rebber-plugins`][rebber-plugins]
+    — A collection of rebber plugins able to stringify custom Remark node types.
+
+## License
+
+[MIT][license] © [Zeste de Savoir][zds]
+
+<!-- Definitions -->
+
+[build-badge]: https://img.shields.io/travis/zestedesavoir/zmarkdown.svg
+
+[build-status]: https://travis-ci.org/zestedesavoir/zmarkdown
+
+[coverage-badge]: https://img.shields.io/coveralls/zestedesavoir/zmarkdown.svg
+
+[coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown
+
+[license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/rebber/LICENSE-MIT
+
+[rebber-plugins]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/rebber-plugins
+
+[zds]: https://zestedesavoir.com
+
+[npm]: https://www.npmjs.com/package/rebber
+
+[mdast]: https://github.com/syntax-tree/mdast/blob/master/readme.md
+
+[remark]: https://github.com/wooorm/remark
+
+[rehype]: https://github.com/wooorm/rehype

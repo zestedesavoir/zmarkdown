@@ -18,7 +18,7 @@ function heading (ctx, node) {
   const content = require('../all')(ctx, node)
 
   const headings = ctx.headings || defaultHeadings
-  const fn = headings[node.depth]
+  const fn = headings[node.depth - 1]
 
   if (typeof fn !== 'function') {
     throw new Error(`Cannot compile heading of depth ${depth}: not a function`)
