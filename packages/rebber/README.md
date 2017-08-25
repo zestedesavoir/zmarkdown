@@ -1,4 +1,5 @@
-# rebber [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
+# rebber [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
+
 
 **rebber** is a LaTeX stringifier for [remark][]
 

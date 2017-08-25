@@ -20,6 +20,8 @@ function preVisit (ctx, tree) {
   Object.keys(visitors).forEach((nodeType) => {
     if (Array.isArray(visitors[nodeType])) {
       visitors[nodeType].forEach(visitor => visit(tree, nodeType, visitor))
+    } else {
+      visit(tree, nodeType, visitors[nodeType])
     }
   })
 }

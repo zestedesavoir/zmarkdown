@@ -13,6 +13,7 @@
     "type": "git"
   },
   "dependencies": {
+    "rebber-plugins": "^1.0.0",
     "rebber": "^1.0.4",
     "rehype-footnotes-title": "^0.0.17",
     "rehype-highlight": "^2.0.1",
