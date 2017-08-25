@@ -1,6 +1,6 @@
 {
   "name": "remark-fix-guillemets",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-fix-guillemets",
     "type": "git"
@@ -48,7 +48,7 @@
     "remark-parse": "^4.0.0",
     "remark-rehype": "^2.0.1",
     "textr": "^0.3.0",
-    "typographic-guillemets": "^1.0.3",
+    "typographic-guillemets": "^1.0.4",
     "unified": "^6.1.5"
   }
 }
