@@ -27,7 +27,7 @@ const integrationConfig = {
   preprocessors: {
     iframe: require('../src/preprocessors/iframe')
   },
-  override: {
+  overrides: {
     abbr: require('../src/type/abbr'),
     centerAligned: require('../src/type/align'),
     emoticon: require('../src/type/emoticon'),
@@ -63,25 +63,25 @@ const integrationConfig = {
   },
 }
 
-integrationConfig.override.eCustomBlock = (ctx, node) => {
+integrationConfig.overrides.eCustomBlock = (ctx, node) => {
   node.type = 'errorCustomBlock'
-  return integrationConfig.override.warningCustomBlock(ctx, node)
+  return integrationConfig.overrides.warningCustomBlock(ctx, node)
 }
-integrationConfig.override.iCustomBlock = (ctx, node) => {
+integrationConfig.overrides.iCustomBlock = (ctx, node) => {
   node.type = 'informationCustomBlock'
-  return integrationConfig.override.informationCustomBlock(ctx, node)
+  return integrationConfig.overrides.informationCustomBlock(ctx, node)
 }
-integrationConfig.override.qCustomBlock = (ctx, node) => {
+integrationConfig.overrides.qCustomBlock = (ctx, node) => {
   node.type = 'questionCustomBlock'
-  return integrationConfig.override.questionCustomBlock(ctx, node)
+  return integrationConfig.overrides.questionCustomBlock(ctx, node)
 }
-integrationConfig.override.sCustomBlock = (ctx, node) => {
+integrationConfig.overrides.sCustomBlock = (ctx, node) => {
   node.type = 'secretCustomBlock'
-  return integrationConfig.override.secretCustomBlock(ctx, node)
+  return integrationConfig.overrides.secretCustomBlock(ctx, node)
 }
-integrationConfig.override.aCustomBlock = (ctx, node) => {
+integrationConfig.overrides.aCustomBlock = (ctx, node) => {
   node.type = 'warningCustomBlock'
-  return integrationConfig.override.warningCustomBlock(ctx, node)
+  return integrationConfig.overrides.warningCustomBlock(ctx, node)
 }
 
 test('heading', () => {
@@ -152,7 +152,7 @@ test('emoticon', () => {
     .use(reParse)
     .use(require('remark-emoticons/src'), {emoticons})
     .use(rebber, {
-      override: {
+      overrides: {
         emoticon: require('../src/type/emoticon'),
       },
       emoticons: emoticons
@@ -209,7 +209,7 @@ test('figure+caption', () => {
     .use(reParse)
     .use(require('remark-captions/src'))
     .use(rebber, {
-      override: {
+      overrides: {
         figure: require('../src/type/figure'),
       },
     })
@@ -235,7 +235,7 @@ test('code+caption', () => {
     .use(reParse)
     .use(require('remark-captions/src'))
     .use(rebber, {
-      override: {
+      overrides: {
         figure: require('../src/type/figure'),
       },
     })
@@ -359,7 +359,7 @@ test('abbr', () => {
     .use(reParse)
     .use(require('remark-abbr/src'))
     .use(rebber, {
-      override: {
+      overrides: {
         abbr: require('../src/type/abbr')
       }
     })
@@ -376,7 +376,7 @@ test('abbr with custom config', () => {
     .use(reParse)
     .use(require('remark-abbr/src'))
     .use(rebber, {
-      override: {
+      overrides: {
         abbr: require('../src/type/abbr')
       },
       abbr: (x) => `->${x}<-`

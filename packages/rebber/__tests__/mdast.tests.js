@@ -55,8 +55,8 @@ const rebberConfig = {
     `image(${node.url})`,
   // inlinecode: (text) =>
   //   `inlinecode(${text})`,
-  link: (displayedText, url, title) =>
-    `link(displayedText=${displayedText}, url=${url}, title=${title})`,
+  link: (displayText, url, title) =>
+    `link(displayText=${displayText}, url=${url}, title=${title})`,
   linkReference: (reference, content) =>
     `linkReference(reference=${reference}, content=${content})`,
   list: (content, isOrdered) =>

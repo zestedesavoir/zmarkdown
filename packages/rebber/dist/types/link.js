@@ -7,8 +7,8 @@ var escape = require('../escaper');
 /* Expose. */
 module.exports = link;
 
-var defaultMacro = function defaultMacro(displayedText, url, title) {
-  return '\\externalLink{' + displayedText + '}{' + url + '}';
+var defaultMacro = function defaultMacro(displayText, url, title) {
+  return '\\externalLink{' + displayText + '}{' + url + '}';
 };
 
 /* Stringify a link `node`.

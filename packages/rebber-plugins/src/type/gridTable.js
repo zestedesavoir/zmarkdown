@@ -6,10 +6,10 @@ const clone = require('clone')
 /* Expose. */
 module.exports = gridTable
 
-function overridenTableCell (ctx, node) {
-  const overridenCtx = clone(ctx)
-  overridenCtx.tableCell = undefined
-  let baseText = baseCell(overridenCtx, node).trim().replace(/\n/g, ' \\par ')
+function overriddenTableCell (ctx, node) {
+  const overriddenCtx = clone(ctx)
+  overriddenCtx.tableCell = undefined
+  let baseText = baseCell(overriddenCtx, node).trim().replace(/\n/g, ' \\par ')
   if (node.data.hProperties.rowspan > 1) {
     baseText = `\\multirow{${node.data.hProperties.rowspan}}{*}{${baseText}}`
   } else if (node.data.hProperties.colspan > 1) {
@@ -18,7 +18,7 @@ function overridenTableCell (ctx, node) {
   return baseText
 }
 
-function overridenHeaderParse (rows) {
+function overriddenHeaderParse (rows) {
   const lengths = rows.map(l => l.split('&').length)
   const cols = lengths.sort()[0]
   const headers = `|p{\\linewidth / ${cols}}`.repeat(cols)
@@ -26,9 +26,9 @@ function overridenHeaderParse (rows) {
 }
 
 function gridTable (ctx, node) {
-  const overridenCtx = clone(ctx)
-  overridenCtx.break = () => ' \\par' // in gridtables '\\\\' won't work
-  overridenCtx.tableCell = overridenTableCell
-  overridenCtx.headerParse = overridenHeaderParse
-  return baseTable(overridenCtx, node)
+  const overriddenCtx = clone(ctx)
+  overriddenCtx.break = () => ' \\par' // in gridtables '\\\\' won't work
+  overriddenCtx.tableCell = overriddenTableCell
+  overriddenCtx.headerParse = overriddenHeaderParse
+  return baseTable(overriddenCtx, node)
 }

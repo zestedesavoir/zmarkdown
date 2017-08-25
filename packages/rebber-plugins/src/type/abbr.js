@@ -5,10 +5,10 @@ const all = require('rebber/dist/all')
 module.exports = abbr
 
 function abbr (ctx, node) {
-  const displayedText = all(ctx, node)
-  const signification = node.data.hProperties.title
+  const displayText = all(ctx, node)
+  const meaning = node.data.hProperties.title
   if (ctx.abbr && typeof ctx.abbr === 'function') {
-    return ctx.abbr(displayedText, signification)
+    return ctx.abbr(displayText, meaning)
   }
-  return `\\abbr{${displayedText}}{${signification}}`
+  return `\\abbr{${displayText}}{${meaning}}`
 }
