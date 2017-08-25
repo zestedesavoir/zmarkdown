@@ -4049,10 +4049,10 @@ module.exports=[
 "use strict";function emphasis(e,t,s,i){return"\\textit{"+require("../all")(e,t)+"}"}module.exports=emphasis;
 
 },{"../all":433}],442:[function(require,module,exports){
-"use strict";function notes(t,e,o,r){var n=t.footnote||defaultMacro,a=!!e.inHeading;return n(e.identifier,require("../all")(t,e).trim(),a)}module.exports=notes;var defaultMacro=function(t,e,o){var r="\\footnote["+t+"]{\\label{footnote:"+t+"} "+e+"}\n";return o?r+"\\protect":r};
+"use strict";function notes(t,e,o,r){var n=t.footnote||defaultMacro,a=!!e.inHeading;return n(e.identifier,require("../all")(t,e).trim(),a)}module.exports=notes;var defaultMacro=function(t,e,o){var r="\\footnote["+t+"]{\\label{footnote:"+t+"} "+e+"}";return o?r+"\\protect":r};
 
 },{"../all":433}],443:[function(require,module,exports){
-"use strict";function notes(t,e){return(t.footnoteDefinition||defaultMacro)(e.identifier,require("../all")(t,e).trim())}module.exports=notes;var defaultMacro=function(t,e){return"\\footnotetext["+t+"]{\\label{footnote:"+t+"} "+e+"}\n"};
+"use strict";function notes(t,e){var o=t.footnoteDefinition||defaultMacro,n=!!e.inHeading;return o(e.identifier,require("../all")(t,e,n).trim())}module.exports=notes;var defaultMacro=function(t,e,o){var n="\\footnotetext["+t+"]{\\label{footnote:"+t+"} "+e+"}";return o?n+"\\protect":n};
 
 },{"../all":433}],444:[function(require,module,exports){
 "use strict";function notes(e,t){return(e.footnoteReference||defaultMacro)(t.identifier)}module.exports=notes;var defaultMacro=function(e){return"\\textsuperscript{\\ref{footnote:"+e+"}}"};
@@ -4118,7 +4118,7 @@ module.exports=[
 "use strict";function one(e,r,t,n){var s=has(e,"overrides")?e.overrides:{},i=xtend(handlers,s),a=r&&r.type;if(!a)throw new Error("Expected node, not `"+r+"`");if(!has(i,a)||"function"!=typeof i[a])throw new Error("Cannot compile unknown node `"+a+"`");return i[a](e,r,t,n)}var has=require("has"),xtend=require("xtend");module.exports=one;var handlers={};handlers.blockquote=require("./types/blockquote"),handlers.break=require("./types/break"),handlers.code=require("./types/code"),handlers.definition=require("./types/definition"),handlers.delete=require("./types/delete"),handlers.emphasis=require("./types/emphasis"),handlers.footnote=require("./types/footnote"),handlers.footnoteDefinition=require("./types/footnoteDefinition"),handlers.footnoteReference=require("./types/footnoteReference"),handlers.heading=require("./types/heading"),handlers.html=require("./types/html"),handlers.image=require("./types/image"),handlers.inlineCode=require("./types/inlinecode"),handlers.link=require("./types/link"),handlers.linkReference=require("./types/linkReference"),handlers.list=require("./types/list"),handlers.listItem=require("./types/listItem"),handlers.paragraph=require("./types/paragraph"),handlers.root=require("./types/root"),handlers.strong=require("./types/strong"),handlers.table=require("./types/table"),handlers.tableCell=require("./types/tableCell"),handlers.tableRow=require("./types/tableRow"),handlers.text=require("./types/text"),handlers.thematicBreak=require("./types/thematic-break");
 
 },{"./types/blockquote":468,"./types/break":469,"./types/code":470,"./types/definition":471,"./types/delete":472,"./types/emphasis":473,"./types/footnote":474,"./types/footnoteDefinition":475,"./types/footnoteReference":476,"./types/heading":477,"./types/html":478,"./types/image":479,"./types/inlinecode":480,"./types/link":481,"./types/linkReference":482,"./types/list":483,"./types/listItem":484,"./types/paragraph":485,"./types/root":486,"./types/strong":487,"./types/table":488,"./types/tableCell":489,"./types/tableRow":490,"./types/text":491,"./types/thematic-break":492,"has":18,"xtend":419}],465:[function(require,module,exports){
-"use strict";function plugin(){return function n(i,t,e){"footnote"===i.type&&!0!==i.inHeading&&mark(i),i.children&&i.children.map(function(t,e){return n(t,e,i)})}}function mark(n){n.inHeading=!0}module.exports=plugin;
+"use strict";function plugin(){return function n(e,i,o){nodeTypes.includes(e.type)&&!0!==e.inHeading&&(e.inHeading=!0),e.children&&e.children.forEach(function(i,o){return n(i,o,e)})}}module.exports=plugin;var nodeTypes=["footnote","footnoteDefinition"];
 
 },{}],466:[function(require,module,exports){
 "use strict";function preprocess(e,i){var r=referenceVisitors(),n=r.definitionVisitor,s=r.imageReferenceVisitor,t=xtend({definition:[n],imageReference:[s],heading:[headingPlugin]},e.preprocessors||{});Object.keys(t).forEach(function(r){Array.isArray(t[r])?t[r].forEach(function(n){return visit(i,r,n(e,i))}):visit(i,r,t[r](e,i))})}var xtend=require("xtend"),visit=require("unist-util-visit"),headingPlugin=require("./headingVisitor"),referenceVisitors=require("./referenceVisitors");module.exports=preprocess;
@@ -4145,10 +4145,10 @@ module.exports=[
 "use strict";function emphasis(e,t,s,i){return"\\textit{"+require("../all")(e,t)+"}"}module.exports=emphasis;
 
 },{"../all":461}],474:[function(require,module,exports){
-"use strict";function notes(t,e,o,r){var n=t.footnote||defaultMacro,a=!!e.inHeading;return n(e.identifier,require("../all")(t,e).trim(),a)}module.exports=notes;var defaultMacro=function(t,e,o){var r="\\footnote["+t+"]{\\label{footnote:"+t+"} "+e+"}\n";return o?r+"\\protect":r};
+"use strict";function notes(t,e,o,r){var n=t.footnote||defaultMacro,a=!!e.inHeading;return n(e.identifier,require("../all")(t,e).trim(),a)}module.exports=notes;var defaultMacro=function(t,e,o){var r="\\footnote["+t+"]{\\label{footnote:"+t+"} "+e+"}";return o?r+"\\protect":r};
 
 },{"../all":461}],475:[function(require,module,exports){
-"use strict";function notes(t,e){return(t.footnoteDefinition||defaultMacro)(e.identifier,require("../all")(t,e).trim())}module.exports=notes;var defaultMacro=function(t,e){return"\\footnotetext["+t+"]{\\label{footnote:"+t+"} "+e+"}\n"};
+"use strict";function notes(t,e){var o=t.footnoteDefinition||defaultMacro,n=!!e.inHeading;return o(e.identifier,require("../all")(t,e,n).trim())}module.exports=notes;var defaultMacro=function(t,e,o){var n="\\footnotetext["+t+"]{\\label{footnote:"+t+"} "+e+"}";return o?n+"\\protect":n};
 
 },{"../all":461}],476:[function(require,module,exports){
 "use strict";function notes(e,t){return(e.footnoteReference||defaultMacro)(t.identifier)}module.exports=notes;var defaultMacro=function(e){return"\\textsuperscript{\\ref{footnote:"+e+"}}"};
