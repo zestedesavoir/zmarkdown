@@ -8,10 +8,10 @@ var clone = require('clone');
 /* Expose. */
 module.exports = gridTable;
 
-function overridenTableCell(ctx, node) {
-  var overridenCtx = clone(ctx);
-  overridenCtx.tableCell = undefined;
-  var baseText = baseCell(overridenCtx, node).trim().replace(/\n/g, ' \\par ');
+function overriddenTableCell(ctx, node) {
+  var overriddenCtx = clone(ctx);
+  overriddenCtx.tableCell = undefined;
+  var baseText = baseCell(overriddenCtx, node).trim().replace(/\n/g, ' \\par ');
   if (node.data.hProperties.rowspan > 1) {
     baseText = '\\multirow{' + node.data.hProperties.rowspan + '}{*}{' + baseText + '}';
   } else if (node.data.hProperties.colspan > 1) {
@@ -20,7 +20,7 @@ function overridenTableCell(ctx, node) {
   return baseText;
 }
 
-function overridenHeaderParse(rows) {
+function overriddenHeaderParse(rows) {
   var lengths = rows.map(function (l) {
     return l.split('&').length;
   });
@@ -30,11 +30,11 @@ function overridenHeaderParse(rows) {
 }
 
 function gridTable(ctx, node) {
-  var overridenCtx = clone(ctx);
-  overridenCtx.break = function () {
+  var overriddenCtx = clone(ctx);
+  overriddenCtx.break = function () {
     return ' \\par';
   }; // in gridtables '\\\\' won't work
-  overridenCtx.tableCell = overridenTableCell;
-  overridenCtx.headerParse = overridenHeaderParse;
-  return baseTable(overridenCtx, node);
+  overriddenCtx.tableCell = overriddenTableCell;
+  overriddenCtx.headerParse = overriddenHeaderParse;
+  return baseTable(overriddenCtx, node);
 }

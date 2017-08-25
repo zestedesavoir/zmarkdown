@@ -38,7 +38,29 @@ Yields:
 
 Stringify the given [MDAST node][mdast].
 
-##### `options`
+
+#### `options.overrides`
+
+Overrides are named that way because they can override any MDAST node type to latex stringifier. Their other use is to use custom latex stringifier for custom MDAST node type.
+
+Examples:
+
+```js
+const {contents} = unified()
+  .use(remarkParser)
+  .use(remarkFoobarElementsParser) // creates MDAST nodes of type 'foobar'
+  .use(rebber, {
+    overrides: {
+      // override rebber's method to turn MDAST link nodes into latex
+      link: require('./your-own-link-latexifier')
+      // tell rebber what to use to turn MDAST foobar nodes into latex
+      foobar: require('./your-foobar-latexifier')
+    }
+  })
+
+```
+
+#### `options.<mdastNodeType>`
 
 [MDAST nodes][mdast] are stringified to LaTeX using sensible default LaTeX commands. However, you can customize most of the LaTeX command corresponding to MDAST nodes. Here are documented the function signatures of these customizable commands. Note that the keys of the `options` object are named after the corresponding MDAST node type.
 

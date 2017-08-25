@@ -5,7 +5,7 @@ const escape = require('../escaper')
 /* Expose. */
 module.exports = link
 
-const defaultMacro = (displayedText, url, title) => `\\externalLink{${displayedText}}{${url}}`
+const defaultMacro = (displayText, url, title) => `\\externalLink{${displayText}}{${url}}`
 
 /* Stringify a link `node`.
 */

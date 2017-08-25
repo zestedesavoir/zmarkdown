@@ -4,26 +4,28 @@ const rebberConfig = {
   preprocessors: {
     iframe: require('rebber-plugins/dist/preprocessors/iframe')
   },
-  override: {
+  overrides: {
     abbr: require('rebber-plugins/dist/type/abbr'),
-    centerAligned: require('rebber-plugins/dist/type/align'),
     // TODO: 'comment' nodes don't exist!
     // comment: require('rebber-plugins/dist/type/comment'),
     emoticon: require('rebber-plugins/dist/type/emoticon'),
-    errorCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     figure: require('rebber-plugins/dist/type/figure'),
     gridTable: require('rebber-plugins/dist/type/gridTable'),
-    informationCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     inlineMath: require('rebber-plugins/dist/type/math'),
     kbd: require('rebber-plugins/dist/type/kbd'),
-    leftAligned: require('rebber-plugins/dist/type/align'),
     math: require('rebber-plugins/dist/type/math'),
-    questionCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
-    rightAligned: require('rebber-plugins/dist/type/align'),
-    secretCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     sub: require('rebber-plugins/dist/type/sub'),
     sup: require('rebber-plugins/dist/type/sup'),
     tableHeader: require('rebber-plugins/dist/type/tableHeader'),
+
+    centerAligned: require('rebber-plugins/dist/type/align'),
+    leftAligned: require('rebber-plugins/dist/type/align'),
+    rightAligned: require('rebber-plugins/dist/type/align'),
+
+    errorCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
+    informationCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
+    questionCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
+    secretCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     warningCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
   },
   emoticons: remarkConfig.emoticons,
@@ -58,34 +60,34 @@ const rebberConfig = {
   ],
 }
 
-Object.assign(rebberConfig.override, {
+Object.assign(rebberConfig.overrides, {
   eCustomBlock: (ctx, node) => {
     node.type = 'errorCustomBlock'
-    return rebberConfig.override.errorCustomBlock(ctx, node)
+    return rebberConfig.overrides.errorCustomBlock(ctx, node)
   },
   erreurCustomBlock: (ctx, node) => {
     node.type = 'errorCustomBlock'
-    return rebberConfig.override.errorCustomBlock(ctx, node)
+    return rebberConfig.overrides.errorCustomBlock(ctx, node)
   },
   iCustomBlock: (ctx, node) => {
     node.type = 'informationCustomBlock'
-    return rebberConfig.override.informationCustomBlock(ctx, node)
+    return rebberConfig.overrides.informationCustomBlock(ctx, node)
   },
   qCustomBlock: (ctx, node) => {
     node.type = 'questionCustomBlock'
-    return rebberConfig.override.questionCustomBlock(ctx, node)
+    return rebberConfig.overrides.questionCustomBlock(ctx, node)
   },
   sCustomBlock: (ctx, node) => {
     node.type = 'secretCustomBlock'
-    return rebberConfig.override.secretCustomBlock(ctx, node)
+    return rebberConfig.overrides.secretCustomBlock(ctx, node)
   },
   aCustomBlock: (ctx, node) => {
     node.type = 'warningCustomBlock'
-    return rebberConfig.override.warningCustomBlock(ctx, node)
+    return rebberConfig.overrides.warningCustomBlock(ctx, node)
   },
   attentionCustomBlock: (ctx, node) => {
     node.type = 'warningCustomBlock'
-    return rebberConfig.override.warningCustomBlock(ctx, node)
+    return rebberConfig.overrides.warningCustomBlock(ctx, node)
   },
 })
 

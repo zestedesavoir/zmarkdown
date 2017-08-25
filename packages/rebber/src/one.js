@@ -36,8 +36,8 @@ handlers.thematicBreak = require('./types/thematic-break')
 
 /* Stringify `node`. */
 function one (ctx, node, index, parent) {
-  const handlersOverride = has(ctx, 'override') ? ctx.override : {}
-  const h = xtend(handlers, handlersOverride)
+  const handlersOverrides = has(ctx, 'overrides') ? ctx.overrides : {}
+  const h = xtend(handlers, handlersOverrides)
 
   const type = node && node.type
 

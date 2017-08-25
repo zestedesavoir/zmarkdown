@@ -7,10 +7,10 @@ var all = require('rebber/dist/all');
 module.exports = abbr;
 
 function abbr(ctx, node) {
-  var displayedText = all(ctx, node);
-  var signification = node.data.hProperties.title;
+  var displayText = all(ctx, node);
+  var meaning = node.data.hProperties.title;
   if (ctx.abbr && typeof ctx.abbr === 'function') {
-    return ctx.abbr(displayedText, signification);
+    return ctx.abbr(displayText, meaning);
   }
-  return '\\abbr{' + displayedText + '}{' + signification + '}';
+  return '\\abbr{' + displayText + '}{' + meaning + '}';
 }
