@@ -142,6 +142,7 @@ This project uses [Jest][jest] for testing. It is recommended to install the Jes
 [jest]: https://facebook.github.io/jest/
 
 [rebber]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rebber#rebber--
+[rebber-plugins]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rebber-plugins#rebber-plugins--
 [rehype-abbr]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rehype-abbr#rehype-abbr--
 [remark-abbr]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-abbr#remark-abbr--
 [rehype-footnotes-title]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rehype-footnotes-title#rehype-footnotes-title--

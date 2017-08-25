@@ -24,6 +24,8 @@ function preVisit(ctx, tree) {
       visitors[nodeType].forEach(function (visitor) {
         return visit(tree, nodeType, visitor);
       });
+    } else {
+      visit(tree, nodeType, visitors[nodeType]);
     }
   });
 }
