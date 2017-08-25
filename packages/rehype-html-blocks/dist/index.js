@@ -13,8 +13,10 @@ function transformer(tree) {
 }
 
 function visitor(node, index, parent) {
-  var replacement = void 0;
-  if (!parent) return;
+  var replacement = {
+    type: 'text',
+    value: node.value
+  };
 
   if (!inline.includes(parent.tagName)) {
     replacement = {
@@ -25,11 +27,6 @@ function visitor(node, index, parent) {
         type: 'text',
         value: node.value
       }]
-    };
-  } else {
-    replacement = {
-      type: 'text',
-      value: node.value
     };
   }
 

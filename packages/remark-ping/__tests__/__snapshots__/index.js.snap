@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`compiles to Markdown 1`] = `
+"remark-ping: expected configuration to be passed: {
+  pingUsername: (username) => bool,
+  userURL: (username) => string
+}"
+`;
+
 exports[`fixture suite 0 compiles to Markdown 1`] = `
 "# Test ping
 

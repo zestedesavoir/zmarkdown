@@ -73,3 +73,11 @@ it('passes the retro test', () => {
 
   expect(contents).toMatchSnapshot()
 })
+
+it('no reference', () => {
+  const { contents } = render(dedent`
+    No reference!
+  `)
+
+  expect(contents).toMatchSnapshot()
+})

@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`no reference 1`] = `"<p>No reference!</p>"`;
+
 exports[`passes the first regression test 1`] = `
 "<p>The <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr> specification is maintained by the <abbr title=\\"World Wide Web Consortium\\">W3C</abbr>:<a href=\\"https://w3c.github.io/html/\\">link</a>, this line had an abbr before link.</p>
 <p>A line with <a href=\\"http://example.com\\">a link</a> before an abbr: <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>.</p>"

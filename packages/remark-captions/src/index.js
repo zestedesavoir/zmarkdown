@@ -170,7 +170,7 @@ function externLegendVisitorCreator (blocks) {
   }
 }
 
-function getLast (xs = []) {
+function getLast (xs) {
   const len = xs.length
   if (!len) return
   return xs[len - 1]

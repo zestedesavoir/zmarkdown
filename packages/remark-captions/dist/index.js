@@ -158,9 +158,7 @@ function externLegendVisitorCreator(blocks) {
   };
 }
 
-function getLast() {
-  var xs = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-
+function getLast(xs) {
   var len = xs.length;
   if (!len) return;
   return xs[len - 1];

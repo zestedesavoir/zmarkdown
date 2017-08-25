@@ -74,12 +74,16 @@ module.exports = function plugin (classNames = {}) {
     if (startMarker === '<-' && endMarker === '<-') {
       elementType = 'leftAligned'
       classes = classNames.left ? classNames.left : 'align-left'
-    } else if (startMarker === '->' && endMarker === '<-') {
-      elementType = 'centerAligned'
-      classes = classNames.center ? classNames.center : 'align-center'
-    } else if (startMarker === '->' && endMarker === '->') {
-      elementType = 'rightAligned'
-      classes = classNames.right ? classNames.right : 'align-right'
+    }
+    if (startMarker === '->') {
+      if (endMarker === '<-') {
+        elementType = 'centerAligned'
+        classes = classNames.center ? classNames.center : 'align-center'
+      }
+      if (endMarker === '->') {
+        elementType = 'rightAligned'
+        classes = classNames.right ? classNames.right : 'align-right'
+      }
     }
 
     return add({

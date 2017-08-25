@@ -45,8 +45,10 @@ function transformer (tree) {
 }
 
 function visitor (node, index, parent) {
-  let replacement
-  if (!parent) return
+  let replacement = {
+    type: 'text',
+    value: node.value
+  }
 
   if (!inline.includes(parent.tagName)) {
     replacement = {
@@ -57,11 +59,6 @@ function visitor (node, index, parent) {
         type: 'text',
         value: node.value
       }]
-    }
-  } else {
-    replacement = {
-      type: 'text',
-      value: node.value
     }
   }
 

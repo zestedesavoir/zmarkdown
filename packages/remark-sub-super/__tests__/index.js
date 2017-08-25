@@ -69,3 +69,10 @@ test('regression 2', () => {
   `)
   expect(contents).toMatchSnapshot()
 })
+
+test('disallow empty tags', () => {
+  const { contents } = render(dedent`
+    ^^foo^^
+  `)
+  expect(contents).toMatchSnapshot()
+})

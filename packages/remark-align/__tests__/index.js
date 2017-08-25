@@ -52,6 +52,8 @@ const alignFixture = dedent`
   ->A centered paragraph.<-
   ->An other centered paragraph.<-
 
+  <-left aligned<-
+
   a simple paragraph
 
   ->A started block without end.
@@ -64,6 +66,15 @@ test('align', () => {
 
 test('align-custom-config', () => {
   const { contents } = render(alignFixture, {
+    right: 'custom-right',
+    center: 'custom-center'
+  })
+  expect(contents).toMatchSnapshot()
+})
+
+test('align-custom-config', () => {
+  const { contents } = render(alignFixture, {
+    left: 'custom-left',
     right: 'custom-right',
     center: 'custom-center'
   })

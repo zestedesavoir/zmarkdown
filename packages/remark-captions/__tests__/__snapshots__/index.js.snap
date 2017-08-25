@@ -7,6 +7,17 @@ exports[`#101 1`] = `
 <p><a href=\\"#\\"></a></p>"
 `;
 
+exports[`caption without block 1`] = `
+"<pre><code class=\\"language-python\\">print('bla')
+</code></pre>
+<pre><code class=\\"language-python\\">print('bla')
+print('bla')
+print('bla')
+</code></pre>
+<pre><code>a code without lang
+</code></pre>"
+`;
+
 exports[`code 1`] = `
 "<h2>Code</h2>
 <p>Normal code</p>

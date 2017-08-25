@@ -115,9 +115,25 @@ fixtures.forEach((fixture, i) => {
       ).resolves.toBe(outputs[i])
     })
 
-
     test('compiles to Markdown', () => {
       expect(toMarkdown(fixture)).toMatchSnapshot()
     })
   })
+})
+
+test('compiles to Markdown', () => {
+  const toMarkdown = text => unified()
+    .use(reParse)
+    .use(remarkStringify)
+    .use(plugin, {
+      pingUsername: 12,
+      userURL
+    })
+    .processSync(text)
+    .toString()
+
+  expect(() => toMarkdown(dedent`
+    # foo
+    @**I AM CLEM**
+  `)).toThrowErrorMatchingSnapshot()
 })

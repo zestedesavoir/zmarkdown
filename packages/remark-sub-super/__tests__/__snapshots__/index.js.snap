@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`disallow empty tags 1`] = `"<p>^<sup>foo</sup>^</p>"`;
+
 exports[`regression 1 1`] = `
 "<p>a<sup>b</sup> a<sup>b</sup> a<sup>b</sup> a<sup>b</sup> a<sup>b</sup></p>
 <p>a<sub>b</sub> a<sub>b</sub> a<sub>b</sub> a<sub>b</sub> a<sub>b</sub></p>

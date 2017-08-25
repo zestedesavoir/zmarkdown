@@ -105,7 +105,6 @@ test('custom-table', () => {
   expect(contents).toMatchSnapshot()
 })
 
-
 test('gridtables', () => {
   const { contents } = render(dedent`
     +----+----+----+
@@ -115,6 +114,26 @@ test('gridtables', () => {
     +----+----+----+
     Table: bla bla`,
     { external: {gridTable: 'Table:'}}
+  )
+  expect(contents).toMatchSnapshot()
+})
+
+test('caption without block', () => {
+  const { contents } = render(dedent`
+      \`\`\`python
+      print('bla')
+      \`\`\`
+
+      \`\`\`python hl_lines=1,2
+      print('bla')
+      print('bla')
+      print('bla')
+      \`\`\`
+
+      \`\`\`
+      a code without lang
+      \`\`\`
+    `, { external: {gridTable: 'Table:'}}
   )
   expect(contents).toMatchSnapshot()
 })
