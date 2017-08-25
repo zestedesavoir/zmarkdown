@@ -2,11 +2,8 @@
 
 var visit = require('unist-util-visit');
 
-module.exports = plugin;
-
-var appendiceVisitorFactory = function appendiceVisitorFactory(_ref) {
-  var title = _ref.title,
-      root = _ref.root;
+module.exports = function (ctx, tree) {
+  var title = ctx.codeAppendiceTitle || 'Appendices';
   return function (node) {
     var inAppendix = [];
     var appendixIndex = 1;
@@ -30,22 +27,15 @@ var appendiceVisitorFactory = function appendiceVisitorFactory(_ref) {
     });
 
     if (inAppendix.length) {
-      root.children.push({
+      tree.children.push({
         type: 'heading',
         depth: 1,
         children: [{ type: 'text', value: title }]
 
       });
       inAppendix.forEach(function (element) {
-        return root.children.push(element);
+        return tree.children.push(element);
       });
     }
   };
 };
-
-function plugin(ctx, root) {
-  var title = ctx.codeAppendiceTitle || 'Appendices';
-  return {
-    codeInTableVisitor: appendiceVisitorFactory({ title: title, root: root })
-  };
-}

@@ -1,4 +1,4 @@
-module.exports = (node, index, parent) => {
+module.exports = () => (node, index, parent) => {
   const linkNode = {
     type: 'link',
     url: node.data.hProperties.src,

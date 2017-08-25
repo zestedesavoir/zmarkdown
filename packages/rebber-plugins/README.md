@@ -77,6 +77,16 @@ console.log(contents);
 * `remarkConfig` needs to be configured for `remark-grid-tables`
 * `rebberConfig.overrides.gridTable = require('rebber-plugins/dist/type/gridTable')`
 
+Proper handling of fenced code blocks in grid tables being hard to achieve in LaTeX, you can use the following preprocessor to automatically move the code blocks to an appendix section and replace the original location with a reference to the appendix section:
+
+```js
+  .use(rebber, {
+    preprocessors: {
+      iframe: require('rebber-plugins/dist/preprocessors/iframe')
+    }
+  })
+```
+
 
 ###### [remark-iframes][]
 

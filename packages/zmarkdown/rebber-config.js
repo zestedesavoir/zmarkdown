@@ -2,6 +2,7 @@ const remarkConfig = require('./remark-config')
 
 const rebberConfig = {
   preprocessors: {
+    tableCell: require('rebber-plugins/dist/preprocessors/codeVisitor'),
     iframe: require('rebber-plugins/dist/preprocessors/iframe')
   },
   overrides: {

@@ -25,6 +25,7 @@ const emoticons = {
 
 const integrationConfig = {
   preprocessors: {
+    tableCell: require('../src/preprocessors/codeVisitor'),
     iframe: require('../src/preprocessors/iframe')
   },
   overrides: {

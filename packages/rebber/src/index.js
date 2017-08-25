@@ -1,7 +1,7 @@
 /* Dependencies. */
 const xtend = require('xtend')
 const one = require('./one')
-const preprocess = require('./pre-visitors')
+const preprocess = require('./preprocessors')
 
 /* Expose. */
 module.exports = stringify

@@ -3,7 +3,7 @@
 /* Dependencies. */
 var xtend = require('xtend');
 var one = require('./one');
-var preprocess = require('./pre-visitors');
+var preprocess = require('./preprocessors');
 
 /* Expose. */
 module.exports = stringify;
