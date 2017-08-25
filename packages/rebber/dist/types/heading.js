@@ -26,7 +26,7 @@ function heading(ctx, node) {
   var content = require('../all')(ctx, node);
 
   var headings = ctx.headings || defaultHeadings;
-  var fn = headings[node.depth];
+  var fn = headings[node.depth - 1];
 
   if (typeof fn !== 'function') {
     throw new Error('Cannot compile heading of depth ' + depth + ': not a function');

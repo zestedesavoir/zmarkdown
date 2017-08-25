@@ -5,10 +5,12 @@ const preprocess = require('./pre-visitors')
 
 /* Expose. */
 module.exports = stringify
+module.exports.toLaTeX = toLaTeX
 
 /* Stringify the given MDAST node. */
-function toLaTeX (node, options, root) {
-  return one(options, node, undefined, undefined, root)
+function toLaTeX (tree, options = {}) {
+  preprocess(options, tree)
+  return one(options, tree, undefined, undefined)
 }
 
 /* Compile MDAST tree using toLaTeX */
@@ -18,8 +20,6 @@ function stringify (config) {
   this.Compiler = compiler
 
   function compiler (tree) {
-    preprocess(settings, tree)
-
     return toLaTeX(tree, settings, tree)
   }
 }
