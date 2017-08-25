@@ -7,18 +7,18 @@ LaTeX requires special handlings of footnotes placed in headings such as \sectio
 We therefore mark each footnote placed in handing for later handling.
 */
 
+var nodeTypes = ['footnote', 'footnoteDefinition'];
+
 function plugin() {
   return function headingVisitor(node, index, parent) {
-    if (node.type === 'footnote' && node.inHeading !== true) mark(node);
+    if (nodeTypes.includes(node.type) && node.inHeading !== true) {
+      node.inHeading = true;
+    }
 
     if (node.children) {
-      node.children.map(function (n, i) {
+      node.children.forEach(function (n, i) {
         return headingVisitor(n, i, node);
       });
     }
   };
-}
-
-function mark(node) {
-  node.inHeading = true;
 }

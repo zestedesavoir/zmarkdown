@@ -2,7 +2,7 @@
 module.exports = notes
 
 const defaultMacro = (identifier, text, protect) => {
-  const footnote = `\\footnote[${identifier}]{\\label{footnote:${identifier}} ${text}}\n`
+  const footnote = `\\footnote[${identifier}]{\\label{footnote:${identifier}} ${text}}`
   if (protect) {
     return `${footnote}\\protect`
   }

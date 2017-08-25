@@ -1,45 +1,37 @@
 /* eslint-disable no-console */
 import {readdirSync as directory, readFileSync as file, lstatSync as stat} from 'fs'
 import {join} from 'path'
+import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import rebber from '../src'
 
-const {toLaTeX} = rebber
+const fixtures = {}
 
-const base = join(__dirname, 'fixtures/remark/')
-const fixtures = directory(base).reduce((tests, contents) => {
-  const parts = contents.split('.')
-  if (!tests[parts[0]]) {
-    tests[parts[0]] = {}
-  }
-  if (stat(join(base, contents)).isFile()) {
-    tests[parts[0]] = file(join(base, contents), 'utf-8')
-  }
-  return tests
-}, {})
+hydrateFixturesFrom('remark')
+hydrateFixturesFrom('rebber')
 
 const rebberConfig = {
   blockquote: (text) =>
-    `blockquote(${text})`,
+    `[blockquote(${text})]`,
   break: () =>
-    `break(---)`,
+    `[break(---)]`,
   code: (text, lang) =>
-    `code${lang ? lang[0].toUpperCase() + lang.slice(1) : ''}(${text})`,
+    `[code${lang ? lang[0].toUpperCase() + lang.slice(1) : ''}(${text})]`,
   // comment: () =>
   //   `break(`,
   definition: (ctx, identifier, url, title) =>
-    `definition(identifier=${identifier}, url=${url}, title=${title})`,
+    `[definition(identifier=${identifier}, url=${url}, title=${title})]`,
   // delete: (text) =>
   //   `delete(${text})`,
   // emphasis: (text) =>
   //   `emphasis(${text})`,
   footnote: (identifier, text, protect) =>
-    `footnote(identifier=${identifier}, text=${text}, protect=${protect})`,
+    `[footnote(identifier=${identifier}, text=${text}, protect=${protect})]`,
   footnoteDefinition: (identifier, text) =>
-    `footnoteDefinition(identifier=${identifier}, text=${text})`,
+    `[footnoteDefinition(identifier=${identifier}, text=${text})]`,
   footnoteReference: (identifier) =>
-    `footnoteReference(${identifier})`,
+    `[footnoteReference(${identifier})]`,
   headings: [
     (text) => `heading1(${text})`,
     (text) => `heading2(${text})`,
@@ -52,17 +44,17 @@ const rebberConfig = {
   // html: (text) =>
   //   `html(${text})`,
   image: (node) =>
-    `image(${node.url})`,
+    `[image(${node.url})]`,
   // inlinecode: (text) =>
   //   `inlinecode(${text})`,
   link: (displayText, url, title) =>
-    `link(displayText=${displayText}, url=${url}, title=${title})`,
+    `[link(displayText=${displayText}, url=${url}, title=${title})]`,
   linkReference: (reference, content) =>
-    `linkReference(reference=${reference}, content=${content})`,
+    `[linkReference(reference=${reference}, content=${content})]`,
   list: (content, isOrdered) =>
-    `${isOrdered ? '' : 'un'}orderedList(${content})`,
+    `[${isOrdered ? '' : 'un'}orderedList(${content})]`,
   listItem: (content) =>
-    `listItem(${content})`,
+    `[listItem(${content})]`,
   // paragraph: (text) =>
   //   `paragraph(${text})`,
   // raw: (text) =>
@@ -77,9 +69,9 @@ const rebberConfig = {
   // tableRow: (ctx, node) =>
   //   `tableRow(${one(node)})`,
   text: (text) =>
-    `text(${text})`,
+    `[text(${text})]`,
   thematicBreak: () =>
-    `thematicBreak(---)`,
+    `[thematicBreak(---)]`,
 }
 
 describe('rebber: remark fixtures', () => {
@@ -121,7 +113,7 @@ describe('toLaTeX: remark fixtures', () => {
         .use(reParse, {footnotes: true})
         .parse(fixture)
 
-      const latex = toLaTeX(mdast, rebberConfig)
+      const latex = rebber.toLaTeX(mdast, rebberConfig)
       expect(latex).toMatchSnapshot()
     })
   })
@@ -136,8 +128,40 @@ describe('toLaTeX: remark fixtures with custom macros', () => {
         .use(reParse, {footnotes: true})
         .parse(fixture)
 
-      const latex = toLaTeX(mdast, rebberConfig)
+      const latex = rebber.toLaTeX(mdast, rebberConfig)
       expect(latex).toMatchSnapshot()
     })
   })
 })
+
+test('preprocessor', () => {
+  const mdast = unified()
+    .use(reParse, {footnotes: true})
+    .parse(dedent`
+      # foo[^ref]
+
+      [^ref]: def
+    `)
+
+  rebberConfig.preprocessors = {
+    heading: require('../src/preprocessors/headingVisitor')
+  }
+
+  const latex = rebber.toLaTeX(mdast, rebberConfig)
+  expect(latex).toMatchSnapshot()
+})
+
+/* helpers */
+function hydrateFixturesFrom (folder) {
+  const base = join(__dirname, `fixtures/${folder}/`)
+  directory(base).reduce((tests, contents) => {
+    const parts = contents.split('.')
+    if (!tests[parts[0]]) {
+      tests[parts[0]] = {}
+    }
+    if (stat(join(base, contents)).isFile()) {
+      tests[parts[0]] = file(join(base, contents), 'utf-8')
+    }
+    return tests
+  }, fixtures)
+}

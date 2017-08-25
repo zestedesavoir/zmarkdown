@@ -157,13 +157,10 @@ exports[`footnotes 1`] = `
 
 \\\\footnotetext[1]{\\\\label{footnote:1} reference in title}
 
-
-\\\\levelOneTitle{mytitle B\\\\footnote[2]{\\\\label{footnote:2} footnoterawhead inner}
-\\\\protect}
+\\\\levelOneTitle{mytitle B\\\\footnote[2]{\\\\label{footnote:2} footnoterawhead inner}\\\\protect}
 
 
-\\\\levelOneTitle{myti\\\\textit{tle C\\\\footnote[3]{\\\\label{footnote:3} foo inner}
-\\\\protect}}
+\\\\levelOneTitle{myti\\\\textit{tle C\\\\footnote[3]{\\\\label{footnote:3} foo inner}\\\\protect}}
 
 
 a paragraph\\\\footnote[4]{\\\\label{footnote:4} footnoteRawPar inner}
@@ -543,7 +540,6 @@ multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|c|}{
 
 \\\\footnotetext[1]{\\\\label{footnote:1} a foot}
 
-
 \\\\begin{longtabu}{|p{\\\\linewidth / 2}|p{\\\\linewidth / 2}|} \\\\hline
 title & image \\\\\\\\ \\\\hline
 space & \\\\image{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg} \\\\\\\\ \\\\hline
@@ -575,8 +571,7 @@ exports[`mix-5 1`] = `
 
 
 
-\\\\footnotetext[1]{\\\\label{footnote:1} Two things are infinite: the universe and human stupidity.}
-"
+\\\\footnotetext[1]{\\\\label{footnote:1} Two things are infinite: the universe and human stupidity.}"
 `;
 
 exports[`mix-6 1`] = `

@@ -1,0 +1,7 @@
+# my heading[^ref def]
+
+or
+
+# my heading[^ref]
+
+[^ref]: def

@@ -4,7 +4,7 @@
 module.exports = notes;
 
 var defaultMacro = function defaultMacro(identifier, text, protect) {
-  var footnote = '\\footnote[' + identifier + ']{\\label{footnote:' + identifier + '} ' + text + '}\n';
+  var footnote = '\\footnote[' + identifier + ']{\\label{footnote:' + identifier + '} ' + text + '}';
   if (protect) {
     return footnote + '\\protect';
   }

@@ -1512,22 +1512,17 @@ Also a reference that does not exist\\\\textsuperscript{\\\\ref{footnote:6}}.
 \\\\item item 2
 \\\\end{itemize}}
 
-
 \\\\footnotetext[2]{\\\\label{footnote:2} \\\\begin{Quotation}
 This footnote is a blockquote.
 \\\\end{Quotation}}
 
-
 \\\\footnotetext[3]{\\\\label{footnote:3} A simple oneliner.}
-
 
 \\\\footnotetext[4]{\\\\label{footnote:4} A footnote with multiple paragraphs.
 
 Paragraph two.}
 
-
 \\\\footnotetext[5]{\\\\label{footnote:5} First line of first paragraph.}
-
 
 Second line of first paragraph is not intended.
 Nor is third..."
@@ -2136,450 +2131,301 @@ Something\\\\textsuperscript{\\\\ref{footnote:150}}
 
 \\\\footnotetext[1]{\\\\label{footnote:1} Another thing}
 
-
 \\\\footnotetext[2]{\\\\label{footnote:2} Another thing}
-
 
 \\\\footnotetext[3]{\\\\label{footnote:3} Another thing}
 
-
 \\\\footnotetext[4]{\\\\label{footnote:4} Another thing}
-
 
 \\\\footnotetext[5]{\\\\label{footnote:5} Another thing}
 
-
 \\\\footnotetext[6]{\\\\label{footnote:6} Another thing}
-
 
 \\\\footnotetext[7]{\\\\label{footnote:7} Another thing}
 
-
 \\\\footnotetext[8]{\\\\label{footnote:8} Another thing}
-
 
 \\\\footnotetext[9]{\\\\label{footnote:9} Another thing}
 
-
 \\\\footnotetext[10]{\\\\label{footnote:10} Another thing}
-
 
 \\\\footnotetext[11]{\\\\label{footnote:11} Another thing}
 
-
 \\\\footnotetext[12]{\\\\label{footnote:12} Another thing}
-
 
 \\\\footnotetext[13]{\\\\label{footnote:13} Another thing}
 
-
 \\\\footnotetext[14]{\\\\label{footnote:14} Another thing}
-
 
 \\\\footnotetext[15]{\\\\label{footnote:15} Another thing}
 
-
 \\\\footnotetext[16]{\\\\label{footnote:16} Another thing}
-
 
 \\\\footnotetext[17]{\\\\label{footnote:17} Another thing}
 
-
 \\\\footnotetext[18]{\\\\label{footnote:18} Another thing}
-
 
 \\\\footnotetext[19]{\\\\label{footnote:19} Another thing}
 
-
 \\\\footnotetext[20]{\\\\label{footnote:20} Another thing}
-
 
 \\\\footnotetext[21]{\\\\label{footnote:21} Another thing}
 
-
 \\\\footnotetext[22]{\\\\label{footnote:22} Another thing}
-
 
 \\\\footnotetext[23]{\\\\label{footnote:23} Another thing}
 
-
 \\\\footnotetext[24]{\\\\label{footnote:24} Another thing}
-
 
 \\\\footnotetext[25]{\\\\label{footnote:25} Another thing}
 
-
 \\\\footnotetext[26]{\\\\label{footnote:26} Another thing}
-
 
 \\\\footnotetext[27]{\\\\label{footnote:27} Another thing}
 
-
 \\\\footnotetext[28]{\\\\label{footnote:28} Another thing}
-
 
 \\\\footnotetext[29]{\\\\label{footnote:29} Another thing}
 
-
 \\\\footnotetext[30]{\\\\label{footnote:30} Another thing}
-
 
 \\\\footnotetext[31]{\\\\label{footnote:31} Another thing}
 
-
 \\\\footnotetext[32]{\\\\label{footnote:32} Another thing}
-
 
 \\\\footnotetext[33]{\\\\label{footnote:33} Another thing}
 
-
 \\\\footnotetext[34]{\\\\label{footnote:34} Another thing}
-
 
 \\\\footnotetext[35]{\\\\label{footnote:35} Another thing}
 
-
 \\\\footnotetext[36]{\\\\label{footnote:36} Another thing}
-
 
 \\\\footnotetext[37]{\\\\label{footnote:37} Another thing}
 
-
 \\\\footnotetext[38]{\\\\label{footnote:38} Another thing}
-
 
 \\\\footnotetext[39]{\\\\label{footnote:39} Another thing}
 
-
 \\\\footnotetext[40]{\\\\label{footnote:40} Another thing}
-
 
 \\\\footnotetext[41]{\\\\label{footnote:41} Another thing}
 
-
 \\\\footnotetext[42]{\\\\label{footnote:42} Another thing}
-
 
 \\\\footnotetext[43]{\\\\label{footnote:43} Another thing}
 
-
 \\\\footnotetext[44]{\\\\label{footnote:44} Another thing}
-
 
 \\\\footnotetext[45]{\\\\label{footnote:45} Another thing}
 
-
 \\\\footnotetext[46]{\\\\label{footnote:46} Another thing}
-
 
 \\\\footnotetext[47]{\\\\label{footnote:47} Another thing}
 
-
 \\\\footnotetext[48]{\\\\label{footnote:48} Another thing}
-
 
 \\\\footnotetext[49]{\\\\label{footnote:49} Another thing}
 
-
 \\\\footnotetext[50]{\\\\label{footnote:50} Another thing}
-
 
 \\\\footnotetext[51]{\\\\label{footnote:51} Another thing}
 
-
 \\\\footnotetext[52]{\\\\label{footnote:52} Another thing}
-
 
 \\\\footnotetext[53]{\\\\label{footnote:53} Another thing}
 
-
 \\\\footnotetext[54]{\\\\label{footnote:54} Another thing}
-
 
 \\\\footnotetext[55]{\\\\label{footnote:55} Another thing}
 
-
 \\\\footnotetext[56]{\\\\label{footnote:56} Another thing}
-
 
 \\\\footnotetext[57]{\\\\label{footnote:57} Another thing}
 
-
 \\\\footnotetext[58]{\\\\label{footnote:58} Another thing}
-
 
 \\\\footnotetext[59]{\\\\label{footnote:59} Another thing}
 
-
 \\\\footnotetext[60]{\\\\label{footnote:60} Another thing}
-
 
 \\\\footnotetext[61]{\\\\label{footnote:61} Another thing}
 
-
 \\\\footnotetext[62]{\\\\label{footnote:62} Another thing}
-
 
 \\\\footnotetext[63]{\\\\label{footnote:63} Another thing}
 
-
 \\\\footnotetext[64]{\\\\label{footnote:64} Another thing}
-
 
 \\\\footnotetext[65]{\\\\label{footnote:65} Another thing}
 
-
 \\\\footnotetext[66]{\\\\label{footnote:66} Another thing}
-
 
 \\\\footnotetext[67]{\\\\label{footnote:67} Another thing}
 
-
 \\\\footnotetext[68]{\\\\label{footnote:68} Another thing}
-
 
 \\\\footnotetext[69]{\\\\label{footnote:69} Another thing}
 
-
 \\\\footnotetext[70]{\\\\label{footnote:70} Another thing}
-
 
 \\\\footnotetext[71]{\\\\label{footnote:71} Another thing}
 
-
 \\\\footnotetext[72]{\\\\label{footnote:72} Another thing}
-
 
 \\\\footnotetext[73]{\\\\label{footnote:73} Another thing}
 
-
 \\\\footnotetext[74]{\\\\label{footnote:74} Another thing}
-
 
 \\\\footnotetext[75]{\\\\label{footnote:75} Another thing}
 
-
 \\\\footnotetext[76]{\\\\label{footnote:76} Another thing}
-
 
 \\\\footnotetext[77]{\\\\label{footnote:77} Another thing}
 
-
 \\\\footnotetext[78]{\\\\label{footnote:78} Another thing}
-
 
 \\\\footnotetext[79]{\\\\label{footnote:79} Another thing}
 
-
 \\\\footnotetext[80]{\\\\label{footnote:80} Another thing}
-
 
 \\\\footnotetext[81]{\\\\label{footnote:81} Another thing}
 
-
 \\\\footnotetext[82]{\\\\label{footnote:82} Another thing}
-
 
 \\\\footnotetext[83]{\\\\label{footnote:83} Another thing}
 
-
 \\\\footnotetext[84]{\\\\label{footnote:84} Another thing}
-
 
 \\\\footnotetext[85]{\\\\label{footnote:85} Another thing}
 
-
 \\\\footnotetext[86]{\\\\label{footnote:86} Another thing}
-
 
 \\\\footnotetext[87]{\\\\label{footnote:87} Another thing}
 
-
 \\\\footnotetext[88]{\\\\label{footnote:88} Another thing}
-
 
 \\\\footnotetext[89]{\\\\label{footnote:89} Another thing}
 
-
 \\\\footnotetext[90]{\\\\label{footnote:90} Another thing}
-
 
 \\\\footnotetext[91]{\\\\label{footnote:91} Another thing}
 
-
 \\\\footnotetext[92]{\\\\label{footnote:92} Another thing}
-
 
 \\\\footnotetext[93]{\\\\label{footnote:93} Another thing}
 
-
 \\\\footnotetext[94]{\\\\label{footnote:94} Another thing}
-
 
 \\\\footnotetext[95]{\\\\label{footnote:95} Another thing}
 
-
 \\\\footnotetext[96]{\\\\label{footnote:96} Another thing}
-
 
 \\\\footnotetext[97]{\\\\label{footnote:97} Another thing}
 
-
 \\\\footnotetext[98]{\\\\label{footnote:98} Another thing}
-
 
 \\\\footnotetext[99]{\\\\label{footnote:99} Another thing}
 
-
 \\\\footnotetext[100]{\\\\label{footnote:100} Another thing}
-
 
 \\\\footnotetext[101]{\\\\label{footnote:101} Another thing}
 
-
 \\\\footnotetext[102]{\\\\label{footnote:102} Another thing}
-
 
 \\\\footnotetext[103]{\\\\label{footnote:103} Another thing}
 
-
 \\\\footnotetext[104]{\\\\label{footnote:104} Another thing}
-
 
 \\\\footnotetext[105]{\\\\label{footnote:105} Another thing}
 
-
 \\\\footnotetext[106]{\\\\label{footnote:106} Another thing}
-
 
 \\\\footnotetext[107]{\\\\label{footnote:107} Another thing}
 
-
 \\\\footnotetext[108]{\\\\label{footnote:108} Another thing}
-
 
 \\\\footnotetext[109]{\\\\label{footnote:109} Another thing}
 
-
 \\\\footnotetext[110]{\\\\label{footnote:110} Another thing}
-
 
 \\\\footnotetext[111]{\\\\label{footnote:111} Another thing}
 
-
 \\\\footnotetext[112]{\\\\label{footnote:112} Another thing}
-
 
 \\\\footnotetext[113]{\\\\label{footnote:113} Another thing}
 
-
 \\\\footnotetext[114]{\\\\label{footnote:114} Another thing}
-
 
 \\\\footnotetext[115]{\\\\label{footnote:115} Another thing}
 
-
 \\\\footnotetext[116]{\\\\label{footnote:116} Another thing}
-
 
 \\\\footnotetext[117]{\\\\label{footnote:117} Another thing}
 
-
 \\\\footnotetext[118]{\\\\label{footnote:118} Another thing}
-
 
 \\\\footnotetext[119]{\\\\label{footnote:119} Another thing}
 
-
 \\\\footnotetext[120]{\\\\label{footnote:120} Another thing}
-
 
 \\\\footnotetext[121]{\\\\label{footnote:121} Another thing}
 
-
 \\\\footnotetext[122]{\\\\label{footnote:122} Another thing}
-
 
 \\\\footnotetext[123]{\\\\label{footnote:123} Another thing}
 
-
 \\\\footnotetext[124]{\\\\label{footnote:124} Another thing}
-
 
 \\\\footnotetext[125]{\\\\label{footnote:125} Another thing}
 
-
 \\\\footnotetext[126]{\\\\label{footnote:126} Another thing}
-
 
 \\\\footnotetext[127]{\\\\label{footnote:127} Another thing}
 
-
 \\\\footnotetext[128]{\\\\label{footnote:128} Another thing}
-
 
 \\\\footnotetext[129]{\\\\label{footnote:129} Another thing}
 
-
 \\\\footnotetext[130]{\\\\label{footnote:130} Another thing}
-
 
 \\\\footnotetext[131]{\\\\label{footnote:131} Another thing}
 
-
 \\\\footnotetext[132]{\\\\label{footnote:132} Another thing}
-
 
 \\\\footnotetext[133]{\\\\label{footnote:133} Another thing}
 
-
 \\\\footnotetext[134]{\\\\label{footnote:134} Another thing}
-
 
 \\\\footnotetext[135]{\\\\label{footnote:135} Another thing}
 
-
 \\\\footnotetext[136]{\\\\label{footnote:136} Another thing}
-
 
 \\\\footnotetext[137]{\\\\label{footnote:137} Another thing}
 
-
 \\\\footnotetext[138]{\\\\label{footnote:138} Another thing}
-
 
 \\\\footnotetext[139]{\\\\label{footnote:139} Another thing}
 
-
 \\\\footnotetext[140]{\\\\label{footnote:140} Another thing}
-
 
 \\\\footnotetext[141]{\\\\label{footnote:141} Another thing}
 
-
 \\\\footnotetext[142]{\\\\label{footnote:142} Another thing}
-
 
 \\\\footnotetext[143]{\\\\label{footnote:143} Another thing}
 
-
 \\\\footnotetext[144]{\\\\label{footnote:144} Another thing}
-
 
 \\\\footnotetext[145]{\\\\label{footnote:145} Another thing}
 
-
 \\\\footnotetext[146]{\\\\label{footnote:146} Another thing}
-
 
 \\\\footnotetext[147]{\\\\label{footnote:147} Another thing}
 
-
 \\\\footnotetext[148]{\\\\label{footnote:148} Another thing}
 
-
 \\\\footnotetext[149]{\\\\label{footnote:149} Another thing}
-
 
 \\\\footnotetext[150]{\\\\label{footnote:150} Another thing}"
 `;
