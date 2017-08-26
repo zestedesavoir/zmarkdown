@@ -24,7 +24,7 @@ function convert (node, index, parent) {
     type: 'footnoteReference',
     identifier: id
   }
-  parent.children.splice(index, 2, footnoteReference, footnoteDefinition)
+  parent.children.splice(index, 1, footnoteReference, footnoteDefinition)
 }
 
 function createIds (footnotes) {
