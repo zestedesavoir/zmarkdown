@@ -2,7 +2,7 @@ module.exports = plugin
 
 /*
 LaTeX requires special handlings of footnotes placed in headings such as \section{}
-We therefore mark each footnote placed in handing for later handling.
+We therefore mark each footnote placed in heading for later handling.
 */
 
 const nodeTypes = ['footnote', 'footnoteDefinition']

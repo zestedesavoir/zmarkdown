@@ -9,10 +9,17 @@ const defaultMacro = (identifier, text, protect) => {
   return footnote
 }
 
+function autoId (node) {
+  const {line, column, offset} = node.position.start
+  return `l${line}c${column}o${offset}`
+}
+
 /* Stringify a footnote `node`. */
 function notes (ctx, node, _index, parent) {
   const macro = ctx.footnote || defaultMacro
   const protect = !!node.inHeading
 
-  return macro(node.identifier, require('../all')(ctx, node).trim(), protect)
+  const identifier = autoId(node)
+
+  return macro(identifier, require('../all')(ctx, node).trim(), protect)
 }

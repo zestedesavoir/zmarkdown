@@ -192,13 +192,13 @@ exports[`footnotes 1`] = `
 
 \\\\footnotetext[1]{\\\\label{footnote:1} reference in title}
 
-\\\\part{mytitle B\\\\footnote[2]{\\\\label{footnote:2} footnoterawhead inner}\\\\protect}
+\\\\part{mytitle B\\\\footnote[l5c12o74]{\\\\label{footnote:l5c12o74} footnoterawhead inner}\\\\protect}
 
 
-\\\\part{myti\\\\textit{tle C\\\\footnote[3]{\\\\label{footnote:3} foo inner}\\\\protect}}
+\\\\part{myti\\\\textit{tle C\\\\footnote[l7c13o112]{\\\\label{footnote:l7c13o112} foo inner}\\\\protect}}
 
 
-a paragraph\\\\footnote[4]{\\\\label{footnote:4} footnoteRawPar inner}
+a paragraph\\\\footnote[l9c12o138]{\\\\label{footnote:l9c12o138} footnoteRawPar inner}
 
 "
 `;

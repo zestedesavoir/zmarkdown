@@ -15,41 +15,63 @@ const specs = directory(base).reduce((tests, contents) => {
   return tests
 }, {})
 
-const config = {
-  gfm: true,
-  commonmark: false,
-  footnotes: true
-}
 
-test('footnotes', () => {
-  const {contents} = unified()
-    .use(reParse, config)
-    .use(require('../src'))
-    .use(remark2rehype)
-    .use(stringify)
-    .processSync(specs['footnotes'].fixture)
+const configs = [
+  {
+    gfm: true,
+    commonmark: false,
+    footnotes: true
+  },
+  {
+    gfm: false,
+    commonmark: false,
+    footnotes: true
+  },
+  {
+    gfm: false,
+    commonmark: true,
+    footnotes: true
+  },
+  {
+    gfm: true,
+    commonmark: true,
+    footnotes: true
+  },
+]
 
-  expect(contents).toMatchSnapshot()
-})
+configs.forEach(config => {
+  describe(JSON.stringify(config), () => {
+    test('footnotes', () => {
+      const {contents} = unified()
+        .use(reParse, config)
+        .use(require('../src'))
+        .use(remark2rehype)
+        .use(stringify)
+        .processSync(specs['footnotes'].fixture)
 
-test('regression-1', () => {
-  const {contents} = unified()
-    .use(reParse, config)
-    .use(require('../src'))
-    .use(remark2rehype)
-    .use(stringify)
-    .processSync(specs['regression-1'].fixture)
+      expect(contents).toMatchSnapshot()
+    })
 
-  expect(contents).toMatchSnapshot()
-})
+    test('regression-1', () => {
+      const {contents} = unified()
+        .use(reParse, config)
+        .use(require('../src'))
+        .use(remark2rehype)
+        .use(stringify)
+        .processSync(specs['regression-1'].fixture)
 
-test('regression-2', () => {
-  const {contents} = unified()
-    .use(reParse, config)
-    .use(require('../src'))
-    .use(remark2rehype)
-    .use(stringify)
-    .processSync(specs['regression-2'].fixture)
+      expect(contents).toMatchSnapshot()
+    })
 
-  expect(contents).toMatchSnapshot()
+    test('regression-2', () => {
+      const {contents} = unified()
+        .use(reParse, config)
+        .use(require('../src'))
+        .use(remark2rehype)
+        .use(stringify)
+        .processSync(specs['regression-2'].fixture)
+
+      expect(contents).toMatchSnapshot()
+    })
+  })
 })

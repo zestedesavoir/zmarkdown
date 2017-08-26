@@ -2,22 +2,20 @@
 
 var visit = require('unist-util-visit');
 
-var footnotes = {};
-
 function plugin() {
   return transformer;
 }
 
 function transformer(tree) {
-  footnotes = {};
+  var footnotes = {};
   visit(tree, 'footnote', normalize);
   visit(tree, 'footnoteDefinition', normalize);
 
-  visit(tree, 'normalizedfootnote', visitor);
+  visit(tree, 'normalizedfootnote', createIds(footnotes));
 
   visit(tree, 'normalizedfootnote', denormalize);
 
-  visit(tree, 'footnoteReference', visitor);
+  visit(tree, 'footnoteReference', replaceIds(footnotes));
 }
 
 function normalize(node, index, parent) {
@@ -30,12 +28,34 @@ function denormalize(node, index, parent) {
   node.originalType = null;
 }
 
-function visitor(node, index, parent) {
-  var identifier = node.identifier || JSON.stringify(node.position.start);
-  if (!footnotes.hasOwnProperty(identifier)) {
-    footnotes[identifier] = Object.keys(footnotes).length + 1;
-  }
-  node.identifier = footnotes[identifier];
+function createIds(footnotes) {
+  return function (node, index, parent) {
+    var identifier = typeof node.identifier === 'undefined' ? autoId(node.position.start) : node.identifier;
+
+    if (!footnotes.hasOwnProperty(identifier)) {
+      footnotes[identifier] = Object.keys(footnotes).length + 1;
+    }
+    node.identifier = footnotes[identifier];
+  };
+}
+
+function replaceIds(footnotes) {
+  return function (node, index, parent) {
+    var identifier = typeof node.identifier === 'undefined' ? autoId(node.position.start) : node.identifier;
+
+    if (!footnotes.hasOwnProperty(identifier)) {
+      footnotes[identifier] = Object.keys(footnotes).length + 1;
+    }
+    node.identifier = footnotes[identifier];
+  };
+}
+
+function autoId(node) {
+  var line = node.line,
+      column = node.column,
+      offset = node.offset;
+
+  return 'l' + line + 'c' + column + 'o' + offset;
 }
 
 module.exports = plugin;

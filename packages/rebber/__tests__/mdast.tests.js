@@ -1,15 +1,9 @@
-/* eslint-disable no-console */
 import {readdirSync as directory, readFileSync as file, lstatSync as stat} from 'fs'
 import {join} from 'path'
 import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import rebber from '../src'
-
-const fixtures = {}
-
-hydrateFixturesFrom('remark')
-hydrateFixturesFrom('rebber')
 
 const rebberConfig = {
   blockquote: (text) =>
@@ -74,62 +68,84 @@ const rebberConfig = {
     `[thematicBreak(---)]`,
 }
 
-describe('rebber: remark fixtures', () => {
-  Object.keys(fixtures).filter(Boolean).forEach(name => {
-    const fixture = fixtures[name]
+const specs = hydrateFixturesFrom('remark')
+
+describe('rebber: remark specs', () => {
+  Object.keys(specs).filter(Boolean).forEach(name => {
+    const spec = specs[name]
 
     test(name, () => {
       const {contents} = unified()
         .use(reParse, {footnotes: true})
         .use(rebber)
-        .processSync(fixture)
+        .processSync(spec)
 
-      expect(contents.trim()).toMatchSnapshot()
+      expect(contents.trim()).toMatchSnapshot(name)
     })
   })
 })
 
-describe('rebber: remark fixtures with custom macros', () => {
-  Object.keys(fixtures).filter(Boolean).forEach(name => {
-    const fixture = fixtures[name]
+describe('rebber: remark specs with config: custom macros', () => {
+  Object.keys(specs).filter(Boolean).forEach(name => {
+    const spec = specs[name]
 
     test(name, () => {
       const {contents} = unified()
         .use(reParse, {footnotes: true})
         .use(rebber, rebberConfig)
-        .processSync(fixture)
+        .processSync(spec)
 
       expect(contents.trim()).toMatchSnapshot()
     })
   })
 })
 
-describe('toLaTeX: remark fixtures', () => {
-  Object.keys(fixtures).filter(Boolean).forEach(name => {
-    const fixture = fixtures[name]
+describe('toLaTeX: remark specs', () => {
+  Object.keys(specs).filter(Boolean).forEach(name => {
+    const spec = specs[name]
 
     test(name, () => {
       const mdast = unified()
         .use(reParse, {footnotes: true})
-        .parse(fixture)
+        .parse(spec)
 
-      const latex = rebber.toLaTeX(mdast, rebberConfig)
-      expect(latex).toMatchSnapshot()
+      const latex = rebber.toLaTeX(mdast)
+
+      expect(latex).toMatchSnapshot(name)
     })
   })
 })
 
-describe('toLaTeX: remark fixtures with custom macros', () => {
-  Object.keys(fixtures).filter(Boolean).forEach(name => {
-    const fixture = fixtures[name]
+describe('rebber', () => {
+  const specs = hydrateFixturesFrom('rebber')
+
+  Object.keys(specs).filter(Boolean).forEach(name => {
+    const spec = specs[name]
 
     test(name, () => {
-      const mdast = unified()
+      const {contents} = unified()
         .use(reParse, {footnotes: true})
-        .parse(fixture)
+        .use(rebber)
+        .processSync(spec)
 
-      const latex = rebber.toLaTeX(mdast, rebberConfig)
-      expect(latex).toMatchSnapshot()
+      expect(contents.trim()).toMatchSnapshot(name)
+    })
+  })
+})
+
+describe('rebber with config: custom macros', () => {
+  const specs = hydrateFixturesFrom('rebber')
+
+  Object.keys(specs).filter(Boolean).forEach(name => {
+    const spec = specs[name]
+
+    test(name, () => {
+      const {contents} = unified()
+        .use(reParse, {footnotes: true})
+        .use(rebber, rebberConfig)
+        .processSync(spec)
+
+      expect(contents.trim()).toMatchSnapshot(name)
     })
   })
 })
@@ -154,14 +170,12 @@ test('preprocessor', () => {
 /* helpers */
 function hydrateFixturesFrom (folder) {
   const base = join(__dirname, `fixtures/${folder}/`)
-  directory(base).reduce((tests, contents) => {
-    const parts = contents.split('.')
-    if (!tests[parts[0]]) {
-      tests[parts[0]] = {}
-    }
-    if (stat(join(base, contents)).isFile()) {
-      tests[parts[0]] = file(join(base, contents), 'utf-8')
-    }
-    return tests
-  }, fixtures)
+  return directory(base)
+    .reduce((tests, filename) => {
+      const parts = filename.split('.')
+      if (stat(join(base, filename)).isFile()) {
+        tests[parts[0]] = file(join(base, filename), 'utf-8').trim()
+      }
+      return tests
+    }, {})
 }
