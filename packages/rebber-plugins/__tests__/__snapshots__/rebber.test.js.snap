@@ -192,13 +192,10 @@ exports[`footnotes 1`] = `
 
 \\\\footnotetext[1]{\\\\label{footnote:1} reference in title}
 
-
-\\\\part{mytitle B\\\\footnote[2]{\\\\label{footnote:2} footnoterawhead inner}
-\\\\protect}
+\\\\part{mytitle B\\\\footnote[2]{\\\\label{footnote:2} footnoterawhead inner}\\\\protect}
 
 
-\\\\part{myti\\\\textit{tle C\\\\footnote[3]{\\\\label{footnote:3} foo inner}
-\\\\protect}}
+\\\\part{myti\\\\textit{tle C\\\\footnote[3]{\\\\label{footnote:3} foo inner}\\\\protect}}
 
 
 a paragraph\\\\footnote[4]{\\\\label{footnote:4} footnoteRawPar inner}
@@ -559,7 +556,6 @@ multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|c|}{
 
 
 \\\\footnotetext[1]{\\\\label{footnote:1} a foot}
-
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 2}|p{\\\\linewidth / 2}|} \\\\hline
 title & image \\\\\\\\ \\\\hline
