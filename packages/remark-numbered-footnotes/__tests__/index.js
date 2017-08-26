@@ -73,5 +73,16 @@ configs.forEach(config => {
 
       expect(contents).toMatchSnapshot()
     })
+
+    test('footnote-split', () => {
+      const {contents} = unified()
+        .use(reParse, config)
+        .use(require('../src'))
+        .use(remark2rehype)
+        .use(stringify)
+        .processSync(specs['footnote-split'].fixture)
+
+      expect(contents).toMatchSnapshot()
+    })
   })
 })

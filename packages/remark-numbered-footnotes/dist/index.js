@@ -8,29 +8,30 @@ function plugin() {
 
 function transformer(tree) {
   var footnotes = {};
-  visit(tree, 'footnote', normalize);
-  visit(tree, 'footnoteDefinition', normalize);
+  visit(tree, 'footnote', convert);
 
-  visit(tree, 'normalizedfootnote', createIds(footnotes));
-
-  visit(tree, 'normalizedfootnote', denormalize);
+  visit(tree, 'footnoteDefinition', createIds(footnotes));
 
   visit(tree, 'footnoteReference', replaceIds(footnotes));
 }
 
-function normalize(node, index, parent) {
-  node.originalType = node.type;
-  node.type = 'normalizedfootnote';
-}
-
-function denormalize(node, index, parent) {
-  node.type = node.originalType;
-  node.originalType = null;
+function convert(node, index, parent) {
+  var id = autoId(node.position.start);
+  var footnoteDefinition = {
+    type: 'footnoteDefinition',
+    identifier: id,
+    children: node.children
+  };
+  var footnoteReference = {
+    type: 'footnoteReference',
+    identifier: id
+  };
+  parent.children.splice(index, 2, footnoteReference, footnoteDefinition);
 }
 
 function createIds(footnotes) {
   return function (node, index, parent) {
-    var identifier = typeof node.identifier === 'undefined' ? autoId(node.position.start) : node.identifier;
+    var identifier = node.identifier;
 
     if (!footnotes.hasOwnProperty(identifier)) {
       footnotes[identifier] = Object.keys(footnotes).length + 1;
@@ -41,7 +42,7 @@ function createIds(footnotes) {
 
 function replaceIds(footnotes) {
   return function (node, index, parent) {
-    var identifier = typeof node.identifier === 'undefined' ? autoId(node.position.start) : node.identifier;
+    var identifier = node.identifier;
 
     if (!footnotes.hasOwnProperty(identifier)) {
       footnotes[identifier] = Object.keys(footnotes).length + 1;
