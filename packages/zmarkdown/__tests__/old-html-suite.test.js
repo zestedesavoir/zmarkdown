@@ -64,17 +64,21 @@ describe('#heading-shift', () => {
 
   it(`shifts in range`, () => {
     const config = remarkConfigOverride({ headingShifter: 1 })
-    expect(renderString(config)('### should be h4')).toHTML('<h4> should be h4</h4>')
+    expect(renderString(config)('### should be h4')).toHTML('<h4 id="should-be-h4">' +
+      'should be h4<a aria-hidden="true" href="#should-be-h4"><span class="icon ' +
+      'icon-link"></span></a></h4>')
   })
 
   it(`shifts past range`, () => {
     const config = remarkConfigOverride({ headingShifter: 10 })
-    expect(renderString(config)('### should be h6')).toHTML('<h6> should be h6</h6>')
+    expect(renderString(config)('### should be h6')).toHTML('<h6 id="should-be-h6">should be h6<a' +
+      ' aria-hidden="true" href="#should-be-h6"><span class="icon icon-link"></span></a></h6>')
   })
 
   it(`shifts before range`, () => {
     const config = remarkConfigOverride({ headingShifter: -10 })
-    expect(renderString(config)('### should be h1')).toHTML('<h1> should be h1</h1>')
+    expect(renderString(config)('### should be h1')).toHTML('<h1 id="should-be-h1">should be' +
+      ' h1<a aria-hidden="true" href="#should-be-h1"><span class="icon icon-link"></span></a></h1>')
   })
 })
 
@@ -151,16 +155,6 @@ describe('#basic', () => {
     expect(renderFile()(filepath).trim()).toHTML(loadFixture(filepath).trim())
   })
 
-  it(`properly renders markdown-documentation-basics.txt`, () => {
-    const filepath = `${dir}/markdown-documentation-basics.txt`
-    expect(renderFile()(filepath).trim()).toHTML(loadFixture(filepath).trim())
-  })
-
-  it.skip(`properly renders markdown-syntax.txt`, function () {
-    const filepath = `${dir}/markdown-syntax.txt`
-    expect(renderFile()(filepath).trim()).toHTML(loadFixture(filepath).trim())
-  })
-
   it(`properly renders nested-blockquotes.txt`, () => {
     const filepath = `${dir}/nested-blockquotes.txt`
     expect(renderFile()(filepath).trim()).toHTML(loadFixture(filepath).trim())
@@ -225,11 +219,6 @@ describe('#extensions', () => {
 
     it(`properly renders footnote.txt`, () => {
       const filepath = `${dir}/footnote.txt`
-      expect(renderFile()(filepath).trim()).toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders markdown-syntax.txt`, () => {
-      const filepath = `${dir}/markdown-syntax.txt`
       expect(renderFile()(filepath).trim()).toHTML(loadFixture(filepath).trim())
     })
 
@@ -445,11 +434,6 @@ describe('#misc', () => {
 
   it(`properly renders inside_html.txt`, () => {
     const filepath = `${dir}/inside_html.txt`
-    expect(renderFile()(filepath).trim()).toHTML(loadFixture(filepath).trim())
-  })
-
-  it(`properly renders japanese.txt`, () => {
-    const filepath = `${dir}/japanese.txt`
     expect(renderFile()(filepath).trim()).toHTML(loadFixture(filepath).trim())
   })
 
@@ -772,16 +756,6 @@ describe('#pl', () => {
       expect(renderFile()(filepath).trim()).toHTML(loadFixture(filepath).trim())
     })
 
-    it(`properly renders Markdown Documentation - Basics.txt`, () => {
-      const filepath = `${dir}/Markdown Documentation - Basics.txt`
-      expect(renderFile()(filepath).trim()).toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Markdown Documentation - Syntax.txt`, () => {
-      const filepath = `${dir}/Markdown Documentation - Syntax.txt`
-      expect(renderFile()(filepath).trim()).toHTML(loadFixture(filepath).trim())
-    })
-
     it(`properly renders Nested blockquotes.txt`, () => {
       const filepath = `${dir}/Nested blockquotes.txt`
       expect(renderFile()(filepath).trim()).toHTML(loadFixture(filepath).trim())
@@ -878,16 +852,6 @@ describe('#pl', () => {
 
     it.skip(`properly renders Literal quotes in titles.txt`, function () {
       const filepath = `${dir}/Literal quotes in titles.txt`
-      expect(renderFile()(filepath).trim()).toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Markdown Documentation - Basics.txt`, () => {
-      const filepath = `${dir}/Markdown Documentation - Basics.txt`
-      expect(renderFile()(filepath).trim()).toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Markdown Documentation - Syntax.txt`, () => {
-      const filepath = `${dir}/Markdown Documentation - Syntax.txt`
       expect(renderFile()(filepath).trim()).toHTML(loadFixture(filepath).trim())
     })
 

@@ -187,10 +187,10 @@ quote
 `;
 
 exports[`footnotes 1`] = `
-"\\\\part{mytitle A\\\\textsuperscript{\\\\ref{footnote:1}}}
+"\\\\part{mytitle A\\\\textsuperscript{\\\\ref{footnote:footnoteref}}}
 
 
-\\\\footnotetext[1]{\\\\label{footnote:1} reference in title}
+\\\\footnotetext[footnoteref]{\\\\label{footnote:footnoteref} reference in title}
 
 \\\\part{mytitle B\\\\footnote[l5c12o74]{\\\\label{footnote:l5c12o74} footnoterawhead inner}\\\\protect}
 
@@ -550,12 +550,12 @@ Sub & Headings & \\\\abbr{ABBR}{abbreviation} \\\\\\\\ \\\\hline
 normal & cell \\\\\\\\ \\\\hline
 multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|c|}{cells can be \\\\par \\\\textit{formatted} \\\\par \\\\textbf{paragraphs}} \\\\\\\\ \\\\hline
 
-\\\\tableCaption{The new table \\\\abbr{ABBR}{abbreviation} \\\\textsuperscript{\\\\ref{footnote:1}} with \\\\keys{CTRL} + \\\\keys{S}}
+\\\\tableCaption{The new table \\\\abbr{ABBR}{abbreviation} \\\\textsuperscript{\\\\ref{footnote:foot}} with \\\\keys{CTRL} + \\\\keys{S}}
 \\\\end{longtabu}
 
 
 
-\\\\footnotetext[1]{\\\\label{footnote:1} a foot}
+\\\\footnotetext[foot]{\\\\label{footnote:foot} a foot}
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 2}|p{\\\\linewidth / 2}|} \\\\hline
 title & image \\\\\\\\ \\\\hline
@@ -582,11 +582,11 @@ print('bla')
 `;
 
 exports[`mix-5 1`] = `
-"\\\\image{http://www.numerama.com/content/uploads/2016/07/espace.jpg}[espace\\\\textsuperscript{\\\\ref{footnote:1}}]
+"\\\\image{http://www.numerama.com/content/uploads/2016/07/espace.jpg}[espace\\\\textsuperscript{\\\\ref{footnote:node}}]
 
 
 
-\\\\footnotetext[1]{\\\\label{footnote:1} Two things are infinite: the universe and human stupidity.}"
+\\\\footnotetext[node]{\\\\label{footnote:node} Two things are infinite: the universe and human stupidity.}"
 `;
 
 exports[`mix-6 1`] = `

@@ -1,11 +1,11 @@
-# Lists with blockquotes
 1. > Four-score and seven years ago...
 
 2. > We have nothing to fear...
 
 3. > This is it...
 
-# Multi-line blockquotes
+---
+
 * > Four-score and sever years ago
   > our fathers brought forth
 

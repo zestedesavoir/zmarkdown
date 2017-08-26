@@ -305,7 +305,6 @@ Object.keys(fixtures).filter(Boolean).filter(name => name.startsWith('mix-')).fo
       .use(require('remark-captions/src'), {external: {gridTable: 'Table:', math: 'Equation'},
         internal: {iframe: 'Video:'}})
       .use(require('remark-grid-tables/src'))
-      .use(require('remark-numbered-footnotes/src'))
       .use(require('remark-sub-super/src'))
       .use(require('remark-iframes/src'), {
         'www.youtube.com': {
@@ -339,7 +338,6 @@ Object.keys(fixtures).filter(Boolean).filter(name => name.startsWith('mix-')).fo
 test('footnotes', () => {
   const {contents} = unified()
     .use(reParse, {footnotes: true})
-    .use(require('remark-numbered-footnotes/src'))
     .use(rebber, integrationConfig)
     .processSync(dedent`
       # mytitle A[^footnoteRef]

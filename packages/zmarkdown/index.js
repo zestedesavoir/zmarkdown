@@ -31,6 +31,9 @@ const rehypeKatex = require('rehype-katex')
 const rehypeFootnotesTitles = require('rehype-footnotes-title')
 const rehypeHighlight = require('rehype-highlight')
 const rehypeHTMLBlocks = require('rehype-html-blocks')
+const rehypeAutolinkHeadings = require('rehype-autolink-headings')
+const rehypeSlug = require('rehype-slug')
+
 const rehypeStringify = require('rehype-stringify')
 
 const rebberStringify = require('rebber/src')
@@ -94,6 +97,8 @@ const rendererFactory = ({remarkConfig, rebberConfig}, to = 'html') => (input, c
     }
 
     mdProcessor
+      .use(rehypeSlug)
+      .use(rehypeAutolinkHeadings, remarkConfig.autolinkHeadings)
       .use(rehypeHTMLBlocks)
       .use(rehypeFootnotesTitles, remarkConfig.footnotesTitles)
       .use(rehypeKatex, remarkConfig.katex)

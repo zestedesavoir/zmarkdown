@@ -1,5 +1,3 @@
-## Unordered
-
 Asterisks tight:
 
 *	asterisk 1
@@ -51,8 +49,6 @@ Minuses loose:
 -	Minus 3
 
 
-## Ordered
-
 Tight:
 
 1.	First
@@ -88,14 +84,12 @@ Multiple paragraphs:
 
 	Item 2. graf two. The quick brown fox jumped over the lazy dog's
 	back.
-	
+
 2.	Item 2.
 
 3.	Item 3.
 
 
-
-## Nested
 
 *	Tab
 	*	Tab

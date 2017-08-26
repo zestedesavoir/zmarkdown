@@ -1,6 +1,3 @@
-Test align
-==========
-
 A simple paragraph
 
 ->A centered paragraph<-

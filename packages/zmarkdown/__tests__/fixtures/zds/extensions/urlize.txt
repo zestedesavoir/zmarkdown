@@ -1,6 +1,3 @@
-Test urlize
-===========
-
 http://www.google.fr
 
 https://www.google.fr

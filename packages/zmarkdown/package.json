@@ -15,10 +15,12 @@
   "dependencies": {
     "rebber": "^2.0.0",
     "rebber-plugins": "^1.0.1",
+    "rehype-autolink-headings": "^2.0.1",
     "rehype-footnotes-title": "^0.0.18",
     "rehype-highlight": "^2.0.1",
     "rehype-html-blocks": "^0.0.19",
     "rehype-katex": "^1.0.2",
+    "rehype-slug": "^2.0.1",
     "rehype-stringify": "^3.0.0",
     "remark-abbr": "^1.0.5",
     "remark-align": "^1.0.5",

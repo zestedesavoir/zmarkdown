@@ -1,5 +1,3 @@
-# Custom block
-
 [[s]]
 | Secret Block
 

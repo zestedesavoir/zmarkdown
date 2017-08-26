@@ -55,6 +55,10 @@ const remarkConfig = {
     },
   },
 
+  autolinkHeadings: {
+    behaviour: 'append',
+  },
+
   headingShifter: 0,
 
   remark2rehype: {

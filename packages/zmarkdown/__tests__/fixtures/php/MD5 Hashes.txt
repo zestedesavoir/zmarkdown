@@ -1,8 +1,4 @@
-# Character Escapes
-
 The MD5 value for `+` is "26b17225b626fb9238849fd60eabdf60".
-
-# HTML Blocks
 
 <p>test</p>
 

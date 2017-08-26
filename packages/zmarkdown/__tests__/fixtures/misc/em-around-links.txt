@@ -1,5 +1,3 @@
-# Title
-
   - *[Python in Markdown](https://pythonhosted.org/Markdown/) by some
     great folks* - This *does* work as expected.
   - _[Python in Markdown](https://pythonhosted.org/Markdown/) by some
@@ -11,4 +9,3 @@
 
 _[Python in Markdown](https://pythonhosted.org/Markdown/) by some
 great folks_ - This *does* work as expected.
-

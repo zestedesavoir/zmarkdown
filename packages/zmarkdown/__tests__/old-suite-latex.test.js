@@ -115,15 +115,6 @@ describe('#basic', () => {
     expect(renderFile()(filepath).trim()).toMatchSnapshot()
   })
 
-  it(`properly renders markdown-documentation-basics.txt`, () => {
-    const filepath = `${dir}/markdown-documentation-basics.txt`
-    expect(renderFile()(filepath).trim()).toMatchSnapshot()
-  })
-
-  it.skip(`properly renders markdown-syntax.txt`, function () {
-    const filepath = `${dir}/markdown-syntax.txt`
-    expect(renderFile()(filepath).trim()).toMatchSnapshot()
-  })
 
   it(`properly renders nested-blockquotes.txt`, () => {
     const filepath = `${dir}/nested-blockquotes.txt`
@@ -189,11 +180,6 @@ describe('#extensions', () => {
 
     it(`properly renders footnote.txt`, () => {
       const filepath = `${dir}/footnote.txt`
-      expect(renderFile()(filepath).trim()).toMatchSnapshot()
-    })
-
-    it(`properly renders markdown-syntax.txt`, () => {
-      const filepath = `${dir}/markdown-syntax.txt`
       expect(renderFile()(filepath).trim()).toMatchSnapshot()
     })
 
@@ -409,11 +395,6 @@ describe('#misc', () => {
 
   it(`properly renders inside_html.txt`, () => {
     const filepath = `${dir}/inside_html.txt`
-    expect(renderFile()(filepath).trim()).toMatchSnapshot()
-  })
-
-  it(`properly renders japanese.txt`, () => {
-    const filepath = `${dir}/japanese.txt`
     expect(renderFile()(filepath).trim()).toMatchSnapshot()
   })
 
@@ -736,16 +717,6 @@ describe('#pl', () => {
       expect(renderFile()(filepath).trim()).toMatchSnapshot()
     })
 
-    it(`properly renders Markdown Documentation - Basics.txt`, () => {
-      const filepath = `${dir}/Markdown Documentation - Basics.txt`
-      expect(renderFile()(filepath).trim()).toMatchSnapshot()
-    })
-
-    it(`properly renders Markdown Documentation - Syntax.txt`, () => {
-      const filepath = `${dir}/Markdown Documentation - Syntax.txt`
-      expect(renderFile()(filepath).trim()).toMatchSnapshot()
-    })
-
     it(`properly renders Nested blockquotes.txt`, () => {
       const filepath = `${dir}/Nested blockquotes.txt`
       expect(renderFile()(filepath).trim()).toMatchSnapshot()
@@ -842,16 +813,6 @@ describe('#pl', () => {
 
     it.skip(`properly renders Literal quotes in titles.txt`, function () {
       const filepath = `${dir}/Literal quotes in titles.txt`
-      expect(renderFile()(filepath).trim()).toMatchSnapshot()
-    })
-
-    it(`properly renders Markdown Documentation - Basics.txt`, () => {
-      const filepath = `${dir}/Markdown Documentation - Basics.txt`
-      expect(renderFile()(filepath).trim()).toMatchSnapshot()
-    })
-
-    it(`properly renders Markdown Documentation - Syntax.txt`, () => {
-      const filepath = `${dir}/Markdown Documentation - Syntax.txt`
       expect(renderFile()(filepath).trim()).toMatchSnapshot()
     })
 
