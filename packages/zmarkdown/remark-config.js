@@ -276,7 +276,7 @@ const remarkConfig = {
     pingUsername: (username) => {
       try {
         const result = request(
-          'HEAD',
+          'GET',
           `https://zestedesavoir.com/api/membres/exists/?search=${username}`,
           {timeout: 300}
         )
