@@ -52,9 +52,11 @@ function plugin() {
         tokenizerName = key;
         replacer = clone(noop);
       }
-      Object.keys(_this.Parser.prototype.inlineTokenizers[tokenizerName]).forEach(function (prop) {
-        replacer[prop] = _this.Parser.prototype.inlineTokenizers[tokenizerName][prop];
-      });
+      if (_this.Parser.prototype.inlineTokenizers[tokenizerName]) {
+        Object.keys(_this.Parser.prototype.inlineTokenizers[tokenizerName]).forEach(function (prop) {
+          replacer[prop] = _this.Parser.prototype.inlineTokenizers[tokenizerName][prop];
+        });
+      }
       _this.Parser.prototype.inlineTokenizers[tokenizerName] = replacer;
     });
   }

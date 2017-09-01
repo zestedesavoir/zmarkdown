@@ -35,3 +35,11 @@ exports[`inline 1`] = `
 `;
 
 exports[`inline throws 1`] = `"nope"`;
+
+exports[`unknown tokenizer 1`] = `
+"<p><em>a</em></p>
+<blockquote>
+<p><em>a</em></p>
+</blockquote>
+<p>foo <code>bar</code> baz</p>"
+`;

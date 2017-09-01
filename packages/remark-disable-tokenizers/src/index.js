@@ -39,11 +39,13 @@ function plugin ({block = [], inline = []} = {}) {
           tokenizerName = key
           replacer = clone(noop)
         }
-        Object
-          .keys(this.Parser.prototype.inlineTokenizers[tokenizerName])
-          .forEach((prop) => {
-            replacer[prop] = this.Parser.prototype.inlineTokenizers[tokenizerName][prop]
-          })
+        if (this.Parser.prototype.inlineTokenizers[tokenizerName]) {
+          Object
+            .keys(this.Parser.prototype.inlineTokenizers[tokenizerName])
+            .forEach((prop) => {
+              replacer[prop] = this.Parser.prototype.inlineTokenizers[tokenizerName][prop]
+            })
+        }
         this.Parser.prototype.inlineTokenizers[tokenizerName] = replacer
       })
   }

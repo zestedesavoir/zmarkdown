@@ -186,3 +186,25 @@ test('does nothing', () => {
 
   expect(contents).toMatchSnapshot()
 })
+
+
+test('unknown tokenizer', () => {
+  const { contents } = unified()
+    .use(reParse)
+    .use(plugin, {
+      inline: [
+        'foo bar'
+      ]
+    })
+    .use(remark2rehype)
+    .use(stringify)
+    .processSync(dedent`
+      *a*
+
+      > *a*
+
+      foo \`bar\` baz
+    `)
+
+  expect(contents).toMatchSnapshot()
+})
