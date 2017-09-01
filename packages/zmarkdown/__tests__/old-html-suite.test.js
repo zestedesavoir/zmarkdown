@@ -12,11 +12,11 @@ const zmarkdown = require('../')
 
 const renderString = (config = {remarkConfig, rebberConfig}) =>
   (input) =>
-    zmarkdown(config).renderString(input).content
+    zmarkdown(config).renderString(input).contents
 
 const renderFile = (config = {remarkConfig, rebberConfig}) =>
   (input) =>
-    zmarkdown(config).renderFile(input).content
+    zmarkdown(config).renderFile(input).contents
 
 const remarkConfigOverride = (config) => {
   const newConfig = clone(remarkConfig)

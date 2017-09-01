@@ -112,23 +112,13 @@ const rendererFactory = ({remarkConfig, rebberConfig}, to = 'html') => (input, c
   }
 
   if (typeof cb !== 'function') {
-    const vfile = mdProcessor.processSync(input)
-
-    const output = {
-      metadata: vfile.data,
-      content: vfile.contents
-    }
-    return output
+    return mdProcessor.processSync(input)
   }
 
   mdProcessor.process(input, (err, vfile) => {
     if (err) return cb(err)
 
-    const output = {
-      metadata: vfile.data,
-      content: vfile.contents
-    }
-    cb(null, output)
+    cb(null, vfile)
   })
 }
 

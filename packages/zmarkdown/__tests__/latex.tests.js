@@ -23,131 +23,131 @@ const fixtures = directory(base).reduce((tests, contents) => {
 
 test('heading', () => {
   const fixture = fixtures['heading']
-  const {content} = renderString()(fixture)
+  const {contents} = renderString()(fixture)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('html nodes', () => {
-  const {content} = renderString()(dedent`
+  const {contents} = renderString()(dedent`
     # foo
     **something <a> else**
   `)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('heading with custom config', () => {
   const fixture = fixtures['heading']
-  const {content} = renderString()(fixture)
+  const {contents} = renderString()(fixture)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('paragraph', () => {
   const fixture = fixtures['paragraph']
-  const {content} = renderString()(fixture)
+  const {contents} = renderString()(fixture)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('inline-code', () => {
   const fixture = fixtures['inline-code']
-  const {content} = renderString()(fixture)
+  const {contents} = renderString()(fixture)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('emoticon', () => {
   const fixture = fixtures['emoticon']
-  const {content} = renderString()(fixture)
+  const {contents} = renderString()(fixture)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('table', () => {
   const fixture = fixtures['table']
-  const {content} = renderString()(fixture)
+  const {contents} = renderString()(fixture)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('blockquote', () => {
   const fixture = fixtures['blockquote']
-  const {content} = renderString()(fixture)
+  const {contents} = renderString()(fixture)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('blockquote with custom config', () => {
   const fixture = fixtures['blockquote']
-  const {content} = renderString()(fixture)
+  const {contents} = renderString()(fixture)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('figure+caption', () => {
   const fixture = fixtures['figure']
-  const {content} = renderString()(fixture)
+  const {contents} = renderString()(fixture)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('code', () => {
   const fixture = fixtures['code']
-  const {content} = renderString()(fixture)
+  const {contents} = renderString()(fixture)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('code+caption', () => {
   const fixture = fixtures['figure-code']
-  const {content} = renderString()(fixture)
+  const {contents} = renderString()(fixture)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('list', () => {
   const fixture = fixtures['list']
-  const {content} = renderString()(fixture)
+  const {contents} = renderString()(fixture)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('link', () => {
   const fixture = fixtures['link']
-  const {content} = renderString()(fixture)
+  const {contents} = renderString()(fixture)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('link with special characters', () => {
-  const {content} = renderString()(dedent`
+  const {contents} = renderString()(dedent`
     [foo](http://example.com?a=b%c^{}#foo)
   `)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('link-prepend', () => {
   const fixture = fixtures['link-prepend']
-  const {content} = renderString()(fixture)
+  const {contents} = renderString()(fixture)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 Object.keys(fixtures).filter(Boolean).filter(name => name.startsWith('mix-')).forEach(name => {
   const fixture = fixtures[name]
 
   test(name, () => {
-    const {content} = renderString()(fixture.replace(/·/g, ' '))
+    const {contents} = renderString()(fixture.replace(/·/g, ' '))
 
-    expect(content).toMatchSnapshot()
+    expect(contents).toMatchSnapshot()
   })
 })
 
 test('footnotes', () => {
-  const {content} = renderString()(dedent`
+  const {contents} = renderString()(dedent`
     # mytitle A[^footnoteRef]
 
     [^footnoteRef]: reference in title
@@ -158,11 +158,11 @@ test('footnotes', () => {
 
     a paragraph[^footnoteRawPar inner]
   `)
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('math', () => {
-  const {content} = renderString()(dedent`
+  const {contents} = renderString()(dedent`
     A sentence ($S$) with *italic* and inline math ($C_L$) and $$b$$ another.
 
     $$
@@ -171,22 +171,22 @@ test('math', () => {
 
     hehe
   `)
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('custom-blocks', () => {
   const fixture = fixtures['blocks']
-  const {content} = renderString()(fixture.replace(/·/g, ' '))
+  const {contents} = renderString()(fixture.replace(/·/g, ' '))
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })
 
 test('regression: code block without language', () => {
-  const {content} = renderString()(dedent`
+  const {contents} = renderString()(dedent`
     \`\`\`
     a
     \`\`\`
   `)
 
-  expect(content).toMatchSnapshot()
+  expect(contents).toMatchSnapshot()
 })

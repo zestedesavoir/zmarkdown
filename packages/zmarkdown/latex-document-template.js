@@ -1,3 +1,5 @@
+const assert = require('assert')
+
 const template = ({
   contentType,
   title,
@@ -7,18 +9,12 @@ const template = ({
   disableToc = false,
   latex
 }) => {
-  if (
-    !contentType ||
-    !title ||
-    !Array.isArray(authors) ||
-    !license ||
-    !smileysDirectory ||
-    !latex
-  ) {
-    throw new Error(
-      `Missing arguments, here's what I got: ` +
-      `${JSON.stringify({contentType, title, authors, license, smileysDirectory, latex}, null, 2)}`)
-  }
+  assert(contentType, 'Error with argument: "contentType"')
+  assert(title, 'Error with argument: "title"')
+  assert(Array.isArray(authors), 'Error with argument: "authors"')
+  assert(license, 'Error with argument: "license"')
+  assert(smileysDirectory, 'Error with argument: "smileysDirectory"')
+  assert(latex, 'Error with argument: "latex"')
 
   return `\\documentclass[${contentType}]{zmdocument}
 

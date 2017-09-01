@@ -9,11 +9,11 @@ const zmarkdown = require('../')
 
 const renderString = (config = {remarkConfig, rebberConfig}) =>
   (input) =>
-    zmarkdown(config, 'latex').renderString(input).content
+    zmarkdown(config, 'latex').renderString(input).contents
 
 const renderFile = (config = {remarkConfig, rebberConfig}) =>
   (input) =>
-    zmarkdown(config, 'latex').renderFile(input).content
+    zmarkdown(config, 'latex').renderFile(input).contents
 
 const remarkConfigOverride = (config) => {
   const newConfig = clone(remarkConfig)

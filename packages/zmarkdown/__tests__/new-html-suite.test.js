@@ -12,7 +12,7 @@ const renderString = (config = {remarkConfig, rebberConfig}) => {
   let configToUse = config
 
   const renderWithConfig = (input) =>
-    zmarkdown(configToUse).renderString(input).content
+    zmarkdown(configToUse).renderString(input).contents
 
   if (typeof config === 'string') {
     const input = config
@@ -24,7 +24,7 @@ const renderString = (config = {remarkConfig, rebberConfig}) => {
 
 const renderFile = (config = {remarkConfig, rebberConfig}) =>
   (input) =>
-    zmarkdown(config).renderFile(input).content
+    zmarkdown(config).renderFile(input).contents
 
 /* jest */
 const HtmlDiffer = require('html-differ').HtmlDiffer
