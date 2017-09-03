@@ -106,7 +106,7 @@ Another p: _it_ *it*
 
     function update() {
       var rendered = ZMarkdown.renderString(editor.value)
-      render.textContent = rendered.content
+      render.textContent = rendered.contents
       var mdast = ZMarkdown.parse(editor.value)
       ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(mdast))
     }

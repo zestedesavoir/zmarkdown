@@ -97,8 +97,8 @@
 
     function update() {
       var rendered = ZMarkdown.renderString(editor.value)
-      render.innerHTML = rendered.content
-      html.textContent = rendered.content
+      render.innerHTML = rendered.contents
+      html.textContent = rendered.contents
       console.log(JSON.stringify({metadata: rendered.metadata}, null, 2))
       var mdast = ZMarkdown.parse(editor.value)
       ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(mdast))
