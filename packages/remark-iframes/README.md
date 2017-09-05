@@ -17,19 +17,20 @@ iframes are included thanks to a base url wrapped between these tags
 will yield :
 
 ```javascript
-{
-  type: 'iframe',
+interface iframe <: Node {
+  type: "iframe";
+  provider: string:
   data: {
-    hName: provider.tag,
+    hName: "iframe",
     hProperties: {
-      src: finalUrl,
-      width: provider.width,
-      height: provider.height,
-      allowfullscreen: true,
-      frameborder: '0',
-    },
-    thumbnail: thumbnail
-  },
+      src: string;
+      width: 0 <= uint32;
+      height: 0 <= uint32;
+      allowfullscreen: true|false;
+      frameborder: string
+    }
+    thumbnail: string
+  }
 }
 ```
 
