@@ -2,8 +2,10 @@ const toVFile = require('to-vfile')
 const unified = require('unified')
 const inspect = require('unist-util-inspect')
 const visit = require('unist-util-visit')
+
 const dedent = require('dedent')
 
+const createWrapper = require('./wrappers')
 const remarkParse = require('remark-parse')
 
 const remarkAbbr = require('remark-abbr/src')
@@ -42,6 +44,21 @@ const remarkConfig = require('./remark-config')
 const rebberConfig = require('./rebber-config')
 
 const fromFile = (filepath) => toVFile.readSync(filepath)
+const jsFiddleAndIrnaFilter = node =>
+  node.provider.includes('jsfiddle') || node.provider.includes('ina')
+const wrappers = {
+  iframe: [
+    createWrapper('div', ['video-container'], node => !jsFiddleAndIrnaFilter(node),
+      createWrapper('div', ['video-wrapper'])),
+    createWrapper('div', ['jsfiddle-wrapper'], jsFiddleAndIrnaFilter)
+  ],
+  table: [
+    createWrapper('div', ['table-wrapper'])
+  ],
+  gridTable: [
+    createWrapper('div', ['table-wrapper'])
+  ]
+}
 
 const zmdParser = (config) => {
   const mdProcessor = unified()
@@ -78,6 +95,7 @@ const zmdParser = (config) => {
         file.data.disableToc = false
       })
     })
+
   return mdProcessor
 }
 
@@ -102,6 +120,11 @@ const rendererFactory = ({remarkConfig, rebberConfig}, to = 'html') => (input, c
       .use(rehypeHTMLBlocks)
       .use(rehypeFootnotesTitles, remarkConfig.footnotesTitles)
       .use(rehypeKatex, remarkConfig.katex)
+      .use(() => (tree) => {
+        Object.keys(wrappers).forEach(
+          nodeName => wrappers[nodeName].forEach(
+            wrapper => visit(tree, nodeName, wrapper)))
+      })
 
       .use(rehypeStringify)
   }

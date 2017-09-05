@@ -42,6 +42,7 @@ module.exports = function plugin (opts) {
       const thumbnail = computeThumbnail(provider, finalUrl)
       eat(eatenValue)({
         type: 'iframe',
+        provider: provider,
         data: {
           hName: provider.tag,
           hProperties: {
@@ -51,7 +52,7 @@ module.exports = function plugin (opts) {
             allowfullscreen: true,
             frameborder: '0',
           },
-          thumbnail: thumbnail
+          thumbnail: thumbnail,
         },
       })
     }
