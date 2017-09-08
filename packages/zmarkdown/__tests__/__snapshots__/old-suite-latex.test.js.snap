@@ -4494,7 +4494,7 @@ exports[`#zds #extensions properly renders video.txt 1`] = `
 
 
 
-\\\\image{default image}[\\\\externalLink{https://screen.yahoo.com/weatherman-gives-forecast-using-taylor-191821481.html?format=embed\\\\&player\\\\_autoplay=false}{https://screen.yahoo.com/weatherman-gives-forecast-using-taylor-191821481.html?format=embed\\\\&player\\\\_autoplay=false}]
+!(https://screen.yahoo.com/weatherman-gives-forecast-using-taylor-191821481.html)
 
 
 
