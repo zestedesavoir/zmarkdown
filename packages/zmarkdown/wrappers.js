@@ -1,55 +1,38 @@
+const assert = require('assert')
+
 module.exports = createWrapper
 
-function createWrapper (tag, classes = [], filter = node => true, subWrapper = null) {
-  if (!subWrapper) {
-    return new Wrapper(tag, classes, filter, defaultWrapperFunction).wrapAround
-  }
-  return new Wrapper(tag, classes, filter, recursiveWrapperFunctionFactory(subWrapper)).wrapAround
-}
+function createWrapper (tagToWrap, wrapInTags, classes, filter, subWrapper) {
+  if (!Array.isArray(wrapInTags)) wrapInTags = [wrapInTags]
+  if (!Array.isArray(classes)) classes = [classes]
+  assert(
+    wrapInTags.length === classes.length,
+    'You should provide the same number of wrapInTags and classes'
+  )
 
-function defaultWrapperFunction (parent, index, node) {
-  const wrapperNode = {
-    type: this.tag,
-    properties: {
-      class: this.classes.join(' ')
-    },
-    children: [node]
-  }
-  parent.children.splice(index, 1, wrapperNode)
-  return wrapperNode
-}
-
-function recursiveWrapperFunctionFactory (wrapper) {
-  return (parent, index, node) => {
-    const subWrapperNode = wrapper.wrapArround(parent, index, node)
-    if (!subWrapperNode) {
-      return undefined
+  const visitor = (node, index, parent) => {
+    if (node.type === 'element' && node.tagName === tagToWrap) {
+      if ((filter && filter(node)) && !node.__wrapped) {
+        wrap({wrapInTags, classes}, {node, index, parent})
+      }
     }
-    const wrapperNode = {
-      type: this.tag,
+  }
+
+  return visitor
+}
+
+function wrap ({wrapInTags, classes}, {node, index, parent}) {
+  let wrapped = node
+  for (let i = 0; i < wrapInTags.length; i++) {
+    node.__wrapped = true
+    wrapped = {
+      type: 'element',
+      tagName: wrapInTags[i] || 'div',
       properties: {
-        class: this.classes.join(' ')
+        class: classes[i] || [],
       },
-      children: [subWrapperNode]
+      children: [wrapped]
     }
-    parent.children.splice(index, 1, wrapperNode)
-    return wrapperNode
   }
-}
-
-
-function Wrapper (tag, classes = [], filter = node => true, wrap = defaultWrapperFunction) {
-  this.tag = tag
-  this.classes = classes
-  this.filter = filter
-  this.wrapperFunction = wrap.bind(this)
-}
-
-Wrapper.prototype.wrapAround = function (parent, index, node) {
-  if (this.filter(node) && !node.wrapped) {
-    const wrappedNode = this.wrapperFunction(parent, index, node)
-    node.wrapped = !!wrappedNode
-    return wrappedNode
-  }
-  return undefined
+  parent.children.splice(index, 1, wrapped)
 }
