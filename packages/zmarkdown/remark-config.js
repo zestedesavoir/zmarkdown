@@ -206,13 +206,6 @@ const remarkConfig = {
       },
       removeAfter: '&'
     },
-    'screen.yahoo.com': {
-      tag: 'iframe',
-      width: 624,
-      height: 351,
-      disabled: false,
-      append: '?format=embed&player_autoplay=false'
-    },
     'www.ina.fr': {
       tag: 'iframe',
       width: 620,

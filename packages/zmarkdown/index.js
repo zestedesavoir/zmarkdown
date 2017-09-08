@@ -46,7 +46,7 @@ const rebberConfig = require('./rebber-config')
 const fromFile = (filepath) => toVFile.readSync(filepath)
 const jsFiddleAndInaFilter = node => {
   if (node.properties.src) {
-    return node.properties.src.includes('.jsfiddle.') || node.properties.src.includes('.ina.')
+    return node.properties.src.includes('jsfiddle.') || node.properties.src.includes('ina.')
   }
   return false
 }
@@ -59,7 +59,7 @@ const wrappers = {
       [['video-wrapper'], ['video-container']],
       node => !jsFiddleAndInaFilter(node)
     ),
-    createWrapper('iframe', 'div', ['jsfiddle-wrapper'], jsFiddleAndInaFilter)
+    createWrapper('iframe', 'div', ['iframe-wrapper'], jsFiddleAndInaFilter)
   ],
   table: [
     createWrapper('table', 'div', ['table-wrapper'])
