@@ -1,7 +1,4 @@
 {
-  "engines": {
-    "node": ">=8"
-  },
   "jest": {
     "testPathIgnorePatterns": [
       "/node_modules/"
