@@ -42,7 +42,6 @@ module.exports = function plugin (opts) {
       const thumbnail = computeThumbnail(provider, finalUrl)
       eat(eatenValue)({
         type: 'iframe',
-        provider: provider,
         data: {
           hName: provider.tag,
           hProperties: {
