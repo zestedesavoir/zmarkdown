@@ -44,19 +44,28 @@ const remarkConfig = require('./remark-config')
 const rebberConfig = require('./rebber-config')
 
 const fromFile = (filepath) => toVFile.readSync(filepath)
-const jsFiddleAndIrnaFilter = node =>
-  node.provider.includes('jsfiddle') || node.provider.includes('ina')
+const jsFiddleAndInaFilter = node => {
+  if (node.properties.src) {
+    return node.properties.src.includes('.jsfiddle.') || node.properties.src.includes('.ina.')
+  }
+  return false
+}
+
 const wrappers = {
   iframe: [
-    createWrapper('div', ['video-container'], node => !jsFiddleAndIrnaFilter(node),
-      createWrapper('div', ['video-wrapper'])),
-    createWrapper('div', ['jsfiddle-wrapper'], jsFiddleAndIrnaFilter)
+    createWrapper(
+      'iframe',
+      ['div', 'div'],
+      [['video-wrapper'], ['video-container']],
+      node => !jsFiddleAndInaFilter(node)
+    ),
+    createWrapper('iframe', 'div', ['jsfiddle-wrapper'], jsFiddleAndInaFilter)
   ],
   table: [
-    createWrapper('div', ['table-wrapper'])
+    createWrapper('table', 'div', ['table-wrapper'])
   ],
   gridTable: [
-    createWrapper('div', ['table-wrapper'])
+    createWrapper('table', 'div', ['table-wrapper'])
   ]
 }
 
@@ -121,9 +130,12 @@ const rendererFactory = ({remarkConfig, rebberConfig}, to = 'html') => (input, c
       .use(rehypeFootnotesTitles, remarkConfig.footnotesTitles)
       .use(rehypeKatex, remarkConfig.katex)
       .use(() => (tree) => {
-        Object.keys(wrappers).forEach(
-          nodeName => wrappers[nodeName].forEach(
-            wrapper => visit(tree, nodeName, wrapper)))
+        Object.keys(wrappers).forEach(nodeName =>
+          wrappers[nodeName].forEach(wrapper => {
+            // console.error(String(wrapper))
+            // console.error(JSON.stringify(tree, null, 2))
+            visit(tree, wrapper)
+          }))
       })
 
       .use(rehypeStringify)
