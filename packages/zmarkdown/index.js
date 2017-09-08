@@ -64,9 +64,6 @@ const wrappers = {
   table: [
     createWrapper('table', 'div', ['table-wrapper'])
   ],
-  gridTable: [
-    createWrapper('table', 'div', ['table-wrapper'])
-  ]
 }
 
 const zmdParser = (config) => {
@@ -132,8 +129,6 @@ const rendererFactory = ({remarkConfig, rebberConfig}, to = 'html') => (input, c
       .use(() => (tree) => {
         Object.keys(wrappers).forEach(nodeName =>
           wrappers[nodeName].forEach(wrapper => {
-            // console.error(String(wrapper))
-            // console.error(JSON.stringify(tree, null, 2))
             visit(tree, wrapper)
           }))
       })

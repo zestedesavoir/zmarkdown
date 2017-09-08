@@ -2,7 +2,9 @@ const assert = require('assert')
 
 module.exports = createWrapper
 
-function createWrapper (tagToWrap, wrapInTags, classes, filter, subWrapper) {
+const allowAll = () => true
+
+function createWrapper (tagToWrap, wrapInTags, classes, filter = allowAll) {
   if (!Array.isArray(wrapInTags)) wrapInTags = [wrapInTags]
   if (!Array.isArray(classes)) classes = [classes]
   assert(
