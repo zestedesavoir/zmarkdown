@@ -17,7 +17,7 @@ module.exports = function plugin(opts) {
     return opts[hostname];
   }
 
-  function inlineTokenizer(eat, value, silent) {
+  function blockTokenizer(eat, value, silent) {
     var eatenValue = '';
     var url = '';
     for (var i = 0; i < value.length && value[i - 1] !== ')'; i++) {
@@ -59,15 +59,23 @@ module.exports = function plugin(opts) {
       });
     }
   }
-  inlineTokenizer.locator = locator;
+  blockTokenizer.locator = locator;
 
   var Parser = this.Parser;
 
-  // Inject inlineTokenizer
-  var inlineTokenizers = Parser.prototype.inlineTokenizers;
-  var inlineMethods = Parser.prototype.inlineMethods;
-  inlineTokenizers.iframes = inlineTokenizer;
-  inlineMethods.splice(inlineMethods.indexOf('autoLink'), 0, 'iframes');
+  // Inject blockTokenizer
+  var blockTokenizers = Parser.prototype.blockTokenizers;
+  var blockMethods = Parser.prototype.blockMethods;
+  blockTokenizers.iframes = blockTokenizer;
+  blockMethods.splice(blockMethods.indexOf('blockquote') + 1, 0, 'iframes');
+
+  // Inject into interrupt rules
+  var interruptParagraph = Parser.prototype.interruptParagraph;
+  var interruptList = Parser.prototype.interruptList;
+  var interruptBlockquote = Parser.prototype.interruptBlockquote;
+  interruptParagraph.splice(interruptParagraph.indexOf('blockquote') + 1, 0, ['iframes']);
+  interruptList.splice(interruptList.indexOf('blockquote') + 1, 0, ['iframes']);
+  interruptBlockquote.splice(interruptBlockquote.indexOf('blockquote') + 1, 0, ['iframes']);
 };
 
 function computeFinalUrl(provider, url) {
