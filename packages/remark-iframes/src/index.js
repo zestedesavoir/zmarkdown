@@ -31,8 +31,11 @@ module.exports = function plugin (opts) {
     ) {
       if (eatenValue.startsWith('!(http')) {
         eat(eatenValue)({
-          type: 'text',
-          value: eatenValue
+          type: 'paragraph',
+          children: [{
+            type: 'text',
+            value: eatenValue,
+          }],
         })
       } else {
         return
@@ -65,14 +68,6 @@ module.exports = function plugin (opts) {
   const blockMethods = Parser.prototype.blockMethods
   blockTokenizers.iframes = blockTokenizer
   blockMethods.splice(blockMethods.indexOf('blockquote') + 1, 0, 'iframes')
-
-  // Inject into interrupt rules
-  const interruptParagraph = Parser.prototype.interruptParagraph
-  const interruptList = Parser.prototype.interruptList
-  const interruptBlockquote = Parser.prototype.interruptBlockquote
-  interruptParagraph.splice(interruptParagraph.indexOf('blockquote') + 1, 0, ['iframes'])
-  interruptList.splice(interruptList.indexOf('blockquote') + 1, 0, ['iframes'])
-  interruptBlockquote.splice(interruptBlockquote.indexOf('blockquote') + 1, 0, ['iframes'])
 }
 
 function computeFinalUrl (provider, url) {

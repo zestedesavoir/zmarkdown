@@ -14,27 +14,27 @@ iframes are included thanks to a base url wrapped between these tags
 !(https://www.youtube.com/watch?v=8TQIvdFl4aU)
 ```
 
-will yield :
+will yield:
 
 ```javascript
 interface iframe <: Node {
   type: "iframe";
-  provider: string:
+  provider: string;
   data: {
     hName: "iframe",
     hProperties: {
       src: string;
       width: 0 <= uint32;
       height: 0 <= uint32;
-      allowfullscreen: true|false;
-      frameborder: string
+      allowfullscreen: boolean;
+      frameborder: string;
     }
-    thumbnail: string
+    thumbnail: string?;
   }
 }
 ```
 
-`provider` variable revers to the provider as configured in plugin options.
+`provider` variable refers to the provider as configured in plugin options.
 
 If associated with rehype, it produces:
 
@@ -92,7 +92,7 @@ unified()
 ```
 
 
-## Configuration fields :
+## Configuration fields:
 
 - `tag`: Transforms to the given html tag, you most probably want `iframe`.
 - `width` and `height`: iframe size, set as `width="" height=""` HTML attributes.
@@ -102,15 +102,15 @@ unified()
 - `append`: Any string you want to append to the url, for example an API key.
 - `removeFileName`: If set to `true`, removes the filename (i.e last fragment before query string) from url.
 - `match`: a regular expression passed to `String.prototype.test`, used to validate the url.
-- `thumbnail`: a way to retreive thumbnail. This param is an object with a `format` key of this type : `'http://url/{param1}/{param2}'` then you must provide all regexp to find the parameter in the url on the object.
+- `thumbnail`: a way to retrieve a thumbnail. This param is an object with a `format` key of this type: `'http://url/{param1}/{param2}'` then you must provide all regexp to find the parameter in the url on the object.
 
 ### thumbnail construction
 
-when you configure the `thumbnail` part of a provider, the url to thumbnail is computed following this algorithm:
+when you configure the `thumbnail` part of a provider, the url of the thumbnail is computed following this algorithm:
 
 ```text
 thumbnail_url_template = provider.thumbnail.format
-for each property of provider.thumbnail 
+for each property of provider.thumbnail
   if property is not "format":
     regexp_for_current_property = provider.thumbnail[property]
     extracted_value = video_url.search(regexp_for_current_property)[1]
@@ -124,7 +124,7 @@ for each property of provider.thumbnail
 !(https://www.youtube.com/watch?v=8TQIvdFl4aU)
 ```
 
-will yield : 
+will yield:
 
 ```javascript
 {
@@ -144,7 +144,7 @@ will yield :
 }
 ```
 
-if you configured the plugin with : 
+if you configured the plugin with:
 
 ```javascript
 {
@@ -166,12 +166,15 @@ if you configured the plugin with :
 }
 ```
 
-otherwise it will just be a text node 
+otherwise it will just be a paragraph node
 
 ```javascript
 {
-    type: 'text',
-    value: '!(https://www.youtube.com/watch?v=8TQIvdFl4aU)'
+    type: 'paragraph',
+    children: [{
+      type: 'text',
+      value: '!(https://www.youtube.com/watch?v=8TQIvdFl4aU)'
+    }]
 }
 ```
 
@@ -200,4 +203,3 @@ otherwise it will just be a text node
 [remark]: https://github.com/wooorm/remark
 
 [rehype]: https://github.com/wooorm/rehype
-
