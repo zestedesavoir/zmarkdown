@@ -34,8 +34,11 @@ module.exports = function plugin(opts) {
     if (!provider || provider.disabled === true || provider.match && provider.match instanceof RegExp && !provider.match.test(url)) {
       if (eatenValue.startsWith('!(http')) {
         eat(eatenValue)({
-          type: 'text',
-          value: eatenValue
+          type: 'paragraph',
+          children: [{
+            type: 'text',
+            value: eatenValue
+          }]
         });
       } else {
         return;
@@ -68,14 +71,6 @@ module.exports = function plugin(opts) {
   var blockMethods = Parser.prototype.blockMethods;
   blockTokenizers.iframes = blockTokenizer;
   blockMethods.splice(blockMethods.indexOf('blockquote') + 1, 0, 'iframes');
-
-  // Inject into interrupt rules
-  var interruptParagraph = Parser.prototype.interruptParagraph;
-  var interruptList = Parser.prototype.interruptList;
-  var interruptBlockquote = Parser.prototype.interruptBlockquote;
-  interruptParagraph.splice(interruptParagraph.indexOf('blockquote') + 1, 0, ['iframes']);
-  interruptList.splice(interruptList.indexOf('blockquote') + 1, 0, ['iframes']);
-  interruptBlockquote.splice(interruptBlockquote.indexOf('blockquote') + 1, 0, ['iframes']);
 };
 
 function computeFinalUrl(provider, url) {
