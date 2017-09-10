@@ -256,12 +256,12 @@ const remarkConfig = {
       gridTable: 'Table:',
       code: 'Code:',
       math: 'Equation:',
+      iframe: 'Video:',
     },
     internal: {
-      iframe: 'Video:',
       math: 'Equation:',
       inlineMath: 'Equation:',
-      image: 'Figure:'
+      image: 'Figure:',
     }
   },
 
