@@ -1,4 +1,3 @@
-const request = require('sync-request')
 const textrApostrophes = require('typographic-apostrophes')
 const textrApostrophesForPlurals = require('typographic-apostrophes-for-possessive-plurals')
 const textrCopyright = require('typographic-copyright')
@@ -266,19 +265,7 @@ const remarkConfig = {
   },
 
   ping: {
-    pingUsername: (username) => {
-      try {
-        const result = request(
-          'GET',
-          `https://zestedesavoir.com/api/membres/exists/?search=${username}`,
-          {timeout: 300}
-        )
-        return result.statusCode === 200
-      } catch (ex) {
-        console.error(ex)
-        return false
-      }
-    },
+    pingUsername: (_username) => true,
     userURL: (username) => `/membres/voir/${username}/`,
   },
 
