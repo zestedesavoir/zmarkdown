@@ -232,6 +232,7 @@ Object {
             "hProperties": Object {
               "class": "ping",
               "href": "/membres/voir/I AM CLEM/",
+              "rel": "nofollow",
             },
           },
           "position": Position {
@@ -333,6 +334,7 @@ Object {
             "hProperties": Object {
               "class": "ping",
               "href": "/membres/voir/I AM CLEM/",
+              "rel": "nofollow",
             },
           },
           "position": Position {
@@ -404,6 +406,7 @@ Object {
                     "hProperties": Object {
                       "class": "ping",
                       "href": "/membres/voir/I AM CLEM/",
+                      "rel": "nofollow",
                     },
                   },
                   "position": Position {
@@ -486,6 +489,7 @@ Object {
                 "hProperties": Object {
                   "class": "ping",
                   "href": "/membres/voir/I AM CLEM/",
+                  "rel": "nofollow",
                 },
               },
               "position": Position {
@@ -571,6 +575,7 @@ Object {
             "hProperties": Object {
               "class": "ping",
               "href": "/membres/voir/I AM CLEM/",
+              "rel": "nofollow",
             },
           },
           "position": Position {
@@ -639,6 +644,7 @@ Object {
                 "hProperties": Object {
                   "class": "ping",
                   "href": "/membres/voir/I AM CLEM/",
+                  "rel": "nofollow",
                 },
               },
               "position": Position {
@@ -723,6 +729,7 @@ Object {
                 "hProperties": Object {
                   "class": "ping",
                   "href": "/membres/voir/I AM CLEM/",
+                  "rel": "nofollow",
                 },
               },
               "position": Position {

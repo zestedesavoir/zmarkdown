@@ -73,20 +73,40 @@ const outputs = [
     <p>ping @Clem</p>
     <p>ping @<strong>FOO BAR</strong></p>
     <p>no ping @dqsjdjsqjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd</p>
-    <p>no ping <a href="/membres/voir/I AM CLEM/" class="ping">I AM CLEM</a></p>
+    <p>no ping <a href="/membres/voir/I AM CLEM/" class="ping" rel="nofollow">I AM CLEM</a></p>
   `,
   dedent`
-    <h2>Test ping <a href="/membres/voir/I AM CLEM/" class="ping">I AM CLEM</a></h2>
+    <h2>\
+    Test ping \
+    <a href="/membres/voir/I AM CLEM/" class="ping" rel="nofollow">I AM CLEM</a>\
+    </h2>
     <blockquote>
     <blockquote>
-    <p>no metadata output <a href="/membres/voir/I AM CLEM/" class="ping">I AM CLEM</a></p>
+    <p>\
+    no metadata output \
+    <a href="/membres/voir/I AM CLEM/" class="ping" rel="nofollow">\
+    I AM CLEM\
+    </a>\
+    </p>
     </blockquote>
-    <p>no metadata output <a href="/membres/voir/I AM CLEM/" class="ping">I AM CLEM</a></p>
+    <p>\
+    no metadata output \
+    <a href="/membres/voir/I AM CLEM/" class="ping" rel="nofollow">I AM CLEM</a>\
+    </p>
     </blockquote>
-    <p>ping <a href="/membres/voir/I AM CLEM/" class="ping">I AM CLEM</a></p>
-    <p>ping <em><a href="/membres/voir/I AM CLEM/" class="ping">I AM CLEM</a></em></p>
+    <p>\
+    ping \
+    <a href="/membres/voir/I AM CLEM/" class="ping" rel="nofollow">I AM CLEM</a>\
+    </p>
+    <p>\
+    ping \
+    <em><a href="/membres/voir/I AM CLEM/" class="ping" rel="nofollow">I AM CLEM</a></em>\
+    </p>
     <blockquote>
-    <p>no metadata output <a href="/membres/voir/I AM CLEM/" class="ping">I AM CLEM</a></p>
+    <p>\
+    no metadata output \
+    <a href="/membres/voir/I AM CLEM/" class="ping" rel="nofollow">I AM CLEM</a>\
+    </p>
     </blockquote>
   `,
 ]

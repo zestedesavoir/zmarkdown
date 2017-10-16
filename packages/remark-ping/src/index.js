@@ -34,7 +34,8 @@ module.exports = function plugin ({
           hName: 'a',
           hProperties: {
             href: url,
-            class: 'ping'
+            class: 'ping',
+            rel: 'nofollow'
           }
         }
       })

@@ -42,7 +42,6 @@
     "remark-ping": "^1.0.8",
     "remark-rehype": "^2.0.1",
     "remark-sub-super": "^1.0.7",
-    "sync-request": "^4.1.0",
     "textr": "^0.3.0",
     "to-vfile": "^2.1.2",
     "typographic-apostrophes": "^1.1.1",
