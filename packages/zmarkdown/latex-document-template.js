@@ -5,6 +5,7 @@ const template = ({
   title,
   authors,
   license,
+  licenseDirectory,
   smileysDirectory,
   disableToc = false,
   latex
@@ -15,13 +16,15 @@ const template = ({
   assert(license, 'Error with argument: "license"')
   assert(smileysDirectory, 'Error with argument: "smileysDirectory"')
   assert(latex, 'Error with argument: "latex"')
+  const shortLicenseName = license.toLowerCase().replace('cc-', '')
 
   return `\\documentclass[${contentType}]{zmdocument}
 
 \\usepackage{blindtext}
 \\title{${title}}
 \\author{${authors.join(', ')}}
-\\licence{${license}}
+\\licence[${licenseDirectory}/${shortLicenseName}.svg]{${license}}\
+{https://creativecommons.org/licenses/${shortLicenseName}/4.0/legalcode}
 
 \\smileysPath{${smileysDirectory}}
 \\makeglossaries
