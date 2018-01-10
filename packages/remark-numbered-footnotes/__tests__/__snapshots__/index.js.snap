@@ -105,7 +105,7 @@ alpha bravo third
 <a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a>
 </li>
 <li id=\\"fn-1\\">
-alpha bravo fourth
+<p>alpha bravo fourth</p>
 <a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
 </li>
 </ol>
@@ -217,7 +217,7 @@ alpha bravo third
 <a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a>
 </li>
 <li id=\\"fn-1\\">
-alpha bravo fourth
+<p>alpha bravo fourth</p>
 <a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
 </li>
 </ol>
@@ -329,7 +329,7 @@ alpha bravo third
 <a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a>
 </li>
 <li id=\\"fn-1\\">
-alpha bravo fourth
+<p>alpha bravo fourth</p>
 <a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
 </li>
 </ol>
@@ -441,7 +441,7 @@ alpha bravo third
 <a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a>
 </li>
 <li id=\\"fn-1\\">
-alpha bravo fourth
+<p>alpha bravo fourth</p>
 <a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
 </li>
 </ol>

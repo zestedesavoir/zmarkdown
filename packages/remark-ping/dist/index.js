@@ -36,7 +36,8 @@ module.exports = function plugin(_ref) {
           hName: 'a',
           hProperties: {
             href: url,
-            class: 'ping'
+            class: 'ping',
+            rel: 'nofollow'
           }
         }
       });
