@@ -33,16 +33,16 @@
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-jest": "^20.0.3",
+    "babel-jest": "^22.0.4",
     "babel-preset-es2015": "^6.24.1",
     "cross-env": "^5.0.5",
     "dedent": "^0.7.0",
     "del-cli": "^1.0.0",
     "eslint": "^4.5.0",
-    "jest": "^20.0.4",
+    "jest": "^22.0.5",
     "rehype-stringify": "^3.0.0",
     "remark-parse": "^4.0.0",
-    "remark-rehype": "^2.0.1",
+    "remark-rehype": "^3.0.0",
     "unified": "^6.1.5"
   }
 }
