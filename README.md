@@ -9,7 +9,7 @@ processor][processor] and its [**MDAST**][mdast] syntax tree, [**rehype**][rehyp
 
 ### Prerequisites
 
-* node `>=` **6**
+* node 8
 * [yarn](https://yarnpkg.com)
 
 ### Installation

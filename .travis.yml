@@ -10,20 +10,9 @@ cache:
 
 node_js:
   - '8'
-  - '7'
-  - '6'
 
 before_install:
   - npm install -g yarn
-
-script:
-  - |
-    if [[ "$(node -v)" == "v6"* ]]; then
-      # ignore package with tests relying on `async/await`
-      npm test -- --testPathIgnorePatterns=remark-images-download
-    else
-      npm test
-    fi
 
 after_success:
   - npm run coverage
