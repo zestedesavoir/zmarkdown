@@ -2,8 +2,8 @@
 import {readdirSync as directory, readFileSync as file} from 'fs'
 import {join} from 'path'
 import dedent from 'dedent'
-import remarkConfig from '../remark-config'
-import rebberConfig from '../rebber-config'
+import remarkConfig from '../config/remark'
+import rebberConfig from '../config/rebber'
 
 remarkConfig.noTypography = true
 remarkConfig.ping.pingUsername = () => false

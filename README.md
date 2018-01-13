@@ -117,11 +117,11 @@ This project uses [Jest][jest] for testing. It is recommended to install the Jes
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/zestedesavoir/zmarkdown.svg
+[build-badge]: https://img.shields.io/travis/zestedesavoir/zmarkdown/master.svg
 
 [build-status]: https://travis-ci.org/zestedesavoir/zmarkdown
 
-[coverage-badge]: https://img.shields.io/coveralls/zestedesavoir/zmarkdown.svg
+[coverage-badge]: https://img.shields.io/coveralls/zestedesavoir/zmarkdown/master.svg
 
 [coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown
 

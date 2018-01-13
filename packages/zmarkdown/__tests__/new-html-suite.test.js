@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 const clone = require('clone')
 
-const remarkConfig = clone(require('../remark-config'))
-const rebberConfig = clone(require('../rebber-config'))
+const remarkConfig = clone(require('../config/remark'))
+const rebberConfig = clone(require('../config/rebber'))
 remarkConfig.noTypography = true
 remarkConfig.ping.pingUsername = () => false
 

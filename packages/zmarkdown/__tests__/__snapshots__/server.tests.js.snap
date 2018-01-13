@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HTML endpoint It should accept POSTed markdown 1`] = `"<h3 id=\\"foo\\">foo<a aria-hidden=\\"true\\" href=\\"#foo\\"><span class=\\"icon icon-link\\"></span></a></h3>"`;

@@ -1,4 +1,4 @@
-const remarkConfig = require('./remark-config')
+const remarkConfig = require('./remark')
 
 const rebberConfig = {
   preprocessors: {
