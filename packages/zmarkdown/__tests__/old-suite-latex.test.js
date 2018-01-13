@@ -1,7 +1,7 @@
 const clone = require('clone')
 
-const remarkConfig = require('../remark-config')
-const rebberConfig = require('../rebber-config')
+const remarkConfig = require('../config/remark')
+const rebberConfig = require('../config/rebber')
 remarkConfig.noTypography = true
 remarkConfig.ping.pingUsername = () => false
 

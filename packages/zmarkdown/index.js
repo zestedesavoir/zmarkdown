@@ -5,7 +5,7 @@ const visit = require('unist-util-visit')
 
 const dedent = require('dedent')
 
-const createWrapper = require('./wrappers')
+const createWrapper = require('./utils/wrappers')
 const remarkParse = require('remark-parse')
 
 const remarkAbbr = require('remark-abbr/src')
@@ -24,7 +24,7 @@ const remarkMath = require('remark-math')
 const remarkNumberedFootnotes = require('remark-numbered-footnotes/src')
 const remarkPing = require('remark-ping/src')
 const remarkSubSuper = require('remark-sub-super/src')
-const remarkTextr = require('./remark-textr')
+const remarkTextr = require('./plugins/remark-textr')
 const remarkTrailingSpaceHeading = require('remark-heading-trailing-spaces')
 
 const remark2rehype = require('remark-rehype')
@@ -40,8 +40,8 @@ const rehypeStringify = require('rehype-stringify')
 
 const rebberStringify = require('rebber/src')
 
-const remarkConfig = require('./remark-config')
-const rebberConfig = require('./rebber-config')
+const remarkConfig = require('./config/remark')
+const rebberConfig = require('./config/rebber')
 
 const fromFile = (filepath) => toVFile.readSync(filepath)
 const jsFiddleAndInaFilter = node => {
@@ -175,6 +175,6 @@ module.exports = (
     rendererFactory: rendererFactory,
     renderString: rendererFactory(opts, to),
     renderFile: (path, cb) => rendererFactory(opts, to)(fromFile(path), cb),
-    latexDocumentTemplate: require('./latex-document-template'),
+    latexDocumentTemplate: require('./templates/latex-document'),
   }
 }

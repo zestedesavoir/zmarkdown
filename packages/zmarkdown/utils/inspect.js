@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars, no-console */
 const dedent = require('dedent')
-const config = require('./index')().config
+const config = require('../index')().config
 config.remarkConfig.ping.pingUsername = () => false
 
-const inspector = require('./index')(config)
-const zmdHTML = require('./index')(config)
-const zmdLatex = require('./index')(config, 'latex')
+const inspector = require('../index')(config)
+const zmdHTML = require('../index')(config)
+const zmdLatex = require('../index')(config, 'latex')
 
 const zmd = zmdHTML
 
