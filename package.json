@@ -13,8 +13,7 @@
     "pretest": "lerna run pretest --scope zmarkdown",
     "test": "jest",
     "d": "node --inspect --debug-brk ./node_modules/.bin/jest --runInBand -i",
-    "coverage": "jest --coverage",
-    "prepare": "npm run prepublish"
+    "coverage": "jest --coverage"
   },
   "engines": {
     "node": "8"
