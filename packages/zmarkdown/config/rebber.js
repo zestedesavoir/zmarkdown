@@ -29,13 +29,10 @@ const rebberConfig = {
     secretCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     warningCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
 
-    // inlineCode: require('rebber-plugins/dist/type/inlinecode')
-
     inlineCode: (ctx, node) => {
       const escaped = node.value.replace('{', '\\{').replace('}', '\\}')
       return `\\CodeInline{${escaped}}`
     }
-    // inlineCode: 'inlinecode'
   },
   emoticons: remarkConfig.emoticons,
   codeAppendiceTitle: 'Annexes',
@@ -97,7 +94,7 @@ Object.assign(rebberConfig.overrides, {
   attentionCustomBlock: (ctx, node) => {
     node.type = 'warningCustomBlock'
     return rebberConfig.overrides.warningCustomBlock(ctx, node)
-  }
+  },
 })
 
 module.exports = rebberConfig
