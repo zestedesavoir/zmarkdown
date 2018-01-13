@@ -28,6 +28,8 @@ const rebberConfig = {
     questionCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     secretCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     warningCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
+
+    // inlineCode: require('rebber-plugins/dist/type/inlinecode')
   },
   emoticons: remarkConfig.emoticons,
   codeAppendiceTitle: 'Annexes',
@@ -89,6 +91,10 @@ Object.assign(rebberConfig.overrides, {
   attentionCustomBlock: (ctx, node) => {
     node.type = 'warningCustomBlock'
     return rebberConfig.overrides.warningCustomBlock(ctx, node)
+  },
+  sInlineCode: (ctx, node) => {
+    const escaped = node.value.replace('{', '\\{').replace('}', '\\}')
+    return `\\CodeInline{${escaped}}`
   },
 })
 

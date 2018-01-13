@@ -123,7 +123,7 @@ secret
 
 
 \\\\begin{Question}
-question \\\\texttt{coded}
+question \\\\CodeInline{coded}
 \\\\end{Question}
 
 
@@ -242,21 +242,21 @@ exports[`html nodes 1`] = `
 `;
 
 exports[`inline-code 1`] = `
-"a paragraph \\\\texttt{with inline code}.
+"a paragraph \\\\CodeInline{with inline code}.
 
 
 
-\\\\texttt{a
+\\\\CodeInline{a
 multiline
 inlinecode}
 
 
 
-\\\\texttt{a code with \\\\textbackslash{}}
+\\\\CodeInline{a code with \\\\}
 
 
 
-\\\\texttt{a \\\\textbackslash{}text in \\\\textbackslash{}LaTeX \\\\textbackslash{}\\\\textbackslash{}}
+\\\\CodeInline{a \\\\text in \\\\LaTeX \\\\\\\\}
 
 "
 `;
@@ -270,7 +270,7 @@ exports[`link 1`] = `
 
 
 
-\\\\externalLink{an \\\\texttt{external} link}{https://wikipedia.com}
+\\\\externalLink{an \\\\CodeInline{external} link}{https://wikipedia.com}
 
 "
 `;
@@ -290,7 +290,7 @@ exports[`link-prepend 1`] = `
 
 
 
-\\\\externalLink{an \\\\texttt{external} link}{https://wikipedia.com}
+\\\\externalLink{an \\\\CodeInline{external} link}{https://wikipedia.com}
 
 "
 `;
@@ -305,7 +305,7 @@ exports[`list 1`] = `
 
 \\\\begin{enumerate}
 \\\\item an
-\\\\item \\\\texttt{ordered}
+\\\\item \\\\CodeInline{ordered}
 \\\\item list
 \\\\end{enumerate}
 "
@@ -355,7 +355,7 @@ Disrupt \\\\sout{asymmetrical} unicorn, pok pok kale chips umami selfies gastrop
 
 \\\\begin{Quotation}[Guru]
 Marfa pickled helvetica put a bird on it hot chicken williamsburg.
-Edison bulb asymmetrical \\\\texttt{keffiyeh} schlitz iceland put a bird on it hoodie affogato.
+Edison bulb asymmetrical \\\\CodeInline{keffiyeh} schlitz iceland put a bird on it hoodie affogato.
 
 Tofu tote bag distillery viral knausgaard, health goth asymmetrical.
 \\\\end{Quotation}
@@ -373,13 +373,13 @@ Art party keytar godard iceland neutra cronut. Austin \\\\textsuperscript{readym
 
 
 
-\\\\texttt{foo
+\\\\CodeInline{foo
 bar}
 
 
 
 \\\\begin{Quotation}
-\\\\texttt{fo\\\\textbackslash{}o
+\\\\CodeInline{fo\\\\o
 bar}
 \\\\end{Quotation}
 
@@ -549,7 +549,7 @@ space & \\\\image{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg} \\\\\\\\
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 2}|p{\\\\linewidth / 2}|} \\\\hline
 title & code \\\\\\\\ \\\\hline
-inline & \\\\texttt{inline} br \\\\par \\\\texttt{inline} \\\\\\\\ \\\\hline
+inline & \\\\CodeInline{inline} br \\\\par \\\\CodeInline{inline} \\\\\\\\ \\\\hline
 block & \\\\ref{appendix-1} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
