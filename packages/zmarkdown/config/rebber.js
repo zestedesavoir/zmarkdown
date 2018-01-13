@@ -28,6 +28,11 @@ const rebberConfig = {
     questionCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     secretCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     warningCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
+
+    inlineCode: (ctx, node) => {
+      const escaped = node.value.replace('{', '\\{').replace('}', '\\}')
+      return `\\CodeInline{${escaped}}`
+    }
   },
   emoticons: remarkConfig.emoticons,
   codeAppendiceTitle: 'Annexes',

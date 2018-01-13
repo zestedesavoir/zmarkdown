@@ -79,7 +79,7 @@ Blockquoted: \\\\externalLink{http://example.com/}{http://example.com/}
 
 
 
-Auto-links should not occur here: \\\\texttt{<http://example.com/>}
+Auto-links should not occur here: \\\\CodeInline{<http://example.com/>}
 
 
 
@@ -201,67 +201,67 @@ Nor should these, which occur in code spans:
 
 
 
-Backslash: \\\\texttt{\\\\textbackslash{}\\\\textbackslash{}}
+Backslash: \\\\CodeInline{\\\\\\\\}
 
 
 
-Backtick: \\\\texttt{\\\\textbackslash{}\`}
+Backtick: \\\\CodeInline{\\\\\`}
 
 
 
-Asterisk: \\\\texttt{\\\\textbackslash{}*}
+Asterisk: \\\\CodeInline{\\\\*}
 
 
 
-Underscore: \\\\texttt{\\\\textbackslash{}\\\\_}
+Underscore: \\\\CodeInline{\\\\_}
 
 
 
-Left brace: \\\\texttt{\\\\textbackslash{}\\\\{}
+Left brace: \\\\CodeInline{\\\\\\\\{}
 
 
 
-Right brace: \\\\texttt{\\\\textbackslash{}\\\\}}
+Right brace: \\\\CodeInline{\\\\\\\\}}
 
 
 
-Left bracket: \\\\texttt{\\\\textbackslash{}[}
+Left bracket: \\\\CodeInline{\\\\[}
 
 
 
-Right bracket: \\\\texttt{\\\\textbackslash{}]}
+Right bracket: \\\\CodeInline{\\\\]}
 
 
 
-Left paren: \\\\texttt{\\\\textbackslash{}(}
+Left paren: \\\\CodeInline{\\\\(}
 
 
 
-Right paren: \\\\texttt{\\\\textbackslash{})}
+Right paren: \\\\CodeInline{\\\\)}
 
 
 
-Greater-than: \\\\texttt{\\\\textbackslash{}>}
+Greater-than: \\\\CodeInline{\\\\>}
 
 
 
-Hash: \\\\texttt{\\\\textbackslash{}\\\\#}
+Hash: \\\\CodeInline{\\\\#}
 
 
 
-Period: \\\\texttt{\\\\textbackslash{}.}
+Period: \\\\CodeInline{\\\\.}
 
 
 
-Bang: \\\\texttt{\\\\textbackslash{}!}
+Bang: \\\\CodeInline{\\\\!}
 
 
 
-Plus: \\\\texttt{\\\\textbackslash{}+}
+Plus: \\\\CodeInline{\\\\+}
 
 
 
-Minus: \\\\texttt{\\\\textbackslash{}-}"
+Minus: \\\\CodeInline{\\\\-}"
 `;
 
 exports[`#basic properly renders blockquotes-with-code-blocks.txt 1`] = `
@@ -1985,8 +1985,8 @@ Pipe & \\\\$1 \\\\\\\\ \\\\hline
 
 \\\\begin{longtabu}{|c|c|} \\\\hline
 Function name & Description \\\\\\\\ \\\\hline
-\\\\texttt{help()} & Display the help window. \\\\\\\\ \\\\hline
-\\\\texttt{destroy()} & \\\\textbf{Destroy your computer!} \\\\\\\\ \\\\hline
+\\\\CodeInline{help()} & Display the help window. \\\\\\\\ \\\\hline
+\\\\CodeInline{destroy()} & \\\\textbf{Destroy your computer!} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
@@ -2325,7 +2325,7 @@ else:
 
 exports[`#misc properly renders backtick-escape.txt 1`] = `
 "\`This also should not be in code.\`
-\\\\textbackslash{}\\\\texttt{This should be in code.\\\\textbackslash{}\\\\textbackslash{}}
+\\\\textbackslash{}\\\\CodeInline{This should be in code.\\\\\\\\}
 \`And finally this should not be in code.\`"
 `;
 
@@ -2479,7 +2479,7 @@ exports[`#misc properly renders block_html5.txt 1`] = `
 
 exports[`#misc properly renders blockquote.txt 1`] = `
 "\\\\begin{Quotation}
-blockquote with no whitespace before \\\\texttt{>}.
+blockquote with no whitespace before \\\\CodeInline{>}.
 \\\\end{Quotation}
 
 
@@ -2489,7 +2489,7 @@ foo
 
 
 \\\\begin{Quotation}
-blockquote with one space before the \\\\texttt{>}.
+blockquote with one space before the \\\\CodeInline{>}.
 \\\\end{Quotation}
 
 
@@ -2526,7 +2526,7 @@ blah
 
 \\\\begin{Quotation}
 \\\\begin{Quotation}
-this nested blockquote has 0 on level one and 3 (one after the first \\\\texttt{>} + 2 more) on level 2.
+this nested blockquote has 0 on level one and 3 (one after the first \\\\CodeInline{>} + 2 more) on level 2.
 \\\\end{Quotation}
 
 \\\\begin{Quotation}
@@ -2585,8 +2585,8 @@ Or, if you prefer, <strong>use two underscores instead</strong>.</p>
 
 
 
-Unordered (bulleted) lists use asterisks, pluses, and hyphens (\\\\texttt{*},
-\\\\texttt{+}, and \\\\texttt{-}) as list markers. These three markers are
+Unordered (bulleted) lists use asterisks, pluses, and hyphens (\\\\CodeInline{*},
+\\\\CodeInline{+}, and \\\\CodeInline{-}) as list markers. These three markers are
 interchangable; this:"
 `;
 
@@ -3036,7 +3036,7 @@ exports[`#misc properly renders nested-patterns.txt 1`] = `
 
 
 
-\\\\textbf{\\\\textit{I am \\\\textbf{\\\\textit{italic} and} bold} I am \\\\texttt{just} bold}
+\\\\textbf{\\\\textit{I am \\\\textbf{\\\\textit{italic} and} bold} I am \\\\CodeInline{just} bold}
 
 
 
@@ -3187,13 +3187,13 @@ It's run with enable\\\\_attributes=False so this \\\\{@id=explanation\\\\} shou
 `;
 
 exports[`#php properly renders Code Spans.txt 1`] = `
-"From \\\\texttt{<!--} to \\\\texttt{-->}
+"From \\\\CodeInline{<!--} to \\\\CodeInline{-->}
 on two lines.
 
 
 
-From \\\\texttt{<!--}
-to \\\\texttt{-->}
+From \\\\CodeInline{<!--}
+to \\\\CodeInline{-->}
 on three lines."
 `;
 
@@ -3280,7 +3280,7 @@ The end."
 `;
 
 exports[`#php properly renders MD5 Hashes.txt 1`] = `
-"The MD5 value for \\\\texttt{+} is \\"26b17225b626fb9238849fd60eabdf60\\".
+"The MD5 value for \\\\CodeInline{+} is \\"26b17225b626fb9238849fd60eabdf60\\".
 
 
 
@@ -3288,7 +3288,7 @@ exports[`#php properly renders MD5 Hashes.txt 1`] = `
 
 
 
-The MD5 value for \\\\texttt{<p>test</p>} is:
+The MD5 value for \\\\CodeInline{<p>test</p>} is:
 
 
 
@@ -3359,7 +3359,7 @@ Blockquoted: \\\\externalLink{http://example.com/}{http://example.com/}
 
 
 
-Auto-links should not occur here: \\\\texttt{<http://example.com/>}
+Auto-links should not occur here: \\\\CodeInline{<http://example.com/>}
 
 
 
