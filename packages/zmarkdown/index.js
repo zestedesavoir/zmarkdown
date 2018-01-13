@@ -7,6 +7,7 @@ const dedent = require('dedent')
 
 const createWrapper = require('./utils/wrappers')
 const remarkParse = require('remark-parse')
+const remarkMermaid = require('remark-mermaid')
 
 const remarkAbbr = require('remark-abbr/src')
 const remarkAlign = require('remark-align/src')
@@ -69,6 +70,7 @@ const wrappers = {
 const zmdParser = (config) => {
   const mdProcessor = unified()
     .use(remarkParse, config.reParse)
+    .use(remarkMermaid)
 
   if (!config.noTypography) {
     mdProcessor
