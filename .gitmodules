@@ -1,3 +1,0 @@
-[submodule "latex-template"]
-    path = packages/zmarkdown/latex-template
-    url = https://github.com/zestedesavoir/latex-template.git

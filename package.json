@@ -10,14 +10,10 @@
     "lerna": "^2.7.0"
   },
   "scripts": {
-    "preinstall": "git submodule update --init --recursive",
     "pretest": "lerna run pretest --scope zmarkdown",
     "test": "jest",
     "d": "node --inspect --debug-brk ./node_modules/.bin/jest --runInBand -i",
     "coverage": "jest --coverage",
-    "submoduleupdate": "git submodule foreach git pull origin master",
-    "latextemplatecopy": "cp -f packages/zmarkdown/latex-template/zmdocument.cls packages/zmarkdown",
-    "prepublish": "npm run submoduleupdate && npm run latextemplatecopy",
     "prepare": "npm run prepublish"
   },
   "engines": {
