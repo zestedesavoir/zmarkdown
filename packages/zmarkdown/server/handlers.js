@@ -1,4 +1,5 @@
 const clone = require('clone')
+const VFile = require('vfile')
 const zmarkdown = require('../')
 const remarkConfig = require('../config/remark')
 const rebberConfig = require('../config/rebber')
@@ -25,16 +26,16 @@ module.exports = function markdownHandlers (Raven) {
       config.remarkConfig.headingShifter = 2
 
       /* presets */
-      if (opts.disable_ping && opts.disable_ping === true) {
+      if (opts.disable_ping === true) {
         config.remarkConfig.ping.pingUsername = () => false
       }
 
-      if (opts.disable_jsfiddle && opts.disable_jsfiddle === true) {
+      if (opts.disable_jsfiddle === true) {
         config.remarkConfig.iframes['jsfiddle.net'].disabled = true
         config.remarkConfig.iframes['www.jsfiddle.net'].disabled = true
       }
 
-      if (opts.inline && opts.inline === true) {
+      if (opts.inline === true) {
         config.remarkConfig.disableTokenizers = {
           block: [
             'indentedCode',
@@ -52,7 +53,7 @@ module.exports = function markdownHandlers (Raven) {
       processors[key] = zmarkdown(config, 'html')
     }
 
-    processors[key].renderString(String(markdown), (err, vfile = {}) => {
+    processors[key].renderString(markdown, (err, vfile = {}) => {
       if (err) {
         Raven.mergeContext({
           extra: {
@@ -81,7 +82,7 @@ module.exports = function markdownHandlers (Raven) {
 
       config.remarkConfig.headingShifter = 0
 
-      if (opts.disable_jsfiddle && opts.disable_jsfiddle === true) {
+      if (opts.disable_jsfiddle === true) {
         config.remarkConfig.iframes['jsfiddle.net'].disabled = true
         config.remarkConfig.iframes['www.jsfiddle.net'].disabled = true
       }
@@ -89,7 +90,15 @@ module.exports = function markdownHandlers (Raven) {
       processors[key] = zmarkdown(config, 'latex')
     }
 
-    processors[key].renderString(String(markdown), (err, contents) => {
+    const vfile = VFile({contents: markdown})
+
+    if (opts.toLatexDocument && opts.svg_dest) {
+      Object.assign(vfile.data, {
+        destinationDir: opts.svg_dest
+      })
+    }
+
+    processors[key].renderString(vfile, (err, contents) => {
       if (err) {
         Raven.mergeContext({
           extra: {
@@ -108,6 +117,7 @@ module.exports = function markdownHandlers (Raven) {
   }
 
   function toLatexDocument (markdown, opts = {}, callback) {
+    opts.toLatexDocument = true
     toLatex(markdown, opts, (err, [contents, metadata] = []) => {
       if (err) {
         Raven.mergeContext({
