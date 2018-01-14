@@ -201,67 +201,67 @@ Nor should these, which occur in code spans:
 
 
 
-Backslash: \\\\CodeInline{\\\\\\\\}
+Backslash: \\\\CodeInline{\\\\textbackslash{}\\\\textbackslash{}}
 
 
 
-Backtick: \\\\CodeInline{\\\\\`}
+Backtick: \\\\CodeInline{\\\\textbackslash{}\`}
 
 
 
-Asterisk: \\\\CodeInline{\\\\*}
+Asterisk: \\\\CodeInline{\\\\textbackslash{}*}
 
 
 
-Underscore: \\\\CodeInline{\\\\_}
+Underscore: \\\\CodeInline{\\\\textbackslash{}\\\\_}
 
 
 
-Left brace: \\\\CodeInline{\\\\\\\\{}
+Left brace: \\\\CodeInline{\\\\textbackslash{}\\\\{}
 
 
 
-Right brace: \\\\CodeInline{\\\\\\\\}}
+Right brace: \\\\CodeInline{\\\\textbackslash{}\\\\}}
 
 
 
-Left bracket: \\\\CodeInline{\\\\[}
+Left bracket: \\\\CodeInline{\\\\textbackslash{}[}
 
 
 
-Right bracket: \\\\CodeInline{\\\\]}
+Right bracket: \\\\CodeInline{\\\\textbackslash{}]}
 
 
 
-Left paren: \\\\CodeInline{\\\\(}
+Left paren: \\\\CodeInline{\\\\textbackslash{}(}
 
 
 
-Right paren: \\\\CodeInline{\\\\)}
+Right paren: \\\\CodeInline{\\\\textbackslash{})}
 
 
 
-Greater-than: \\\\CodeInline{\\\\>}
+Greater-than: \\\\CodeInline{\\\\textbackslash{}>}
 
 
 
-Hash: \\\\CodeInline{\\\\#}
+Hash: \\\\CodeInline{\\\\textbackslash{}\\\\#}
 
 
 
-Period: \\\\CodeInline{\\\\.}
+Period: \\\\CodeInline{\\\\textbackslash{}.}
 
 
 
-Bang: \\\\CodeInline{\\\\!}
+Bang: \\\\CodeInline{\\\\textbackslash{}!}
 
 
 
-Plus: \\\\CodeInline{\\\\+}
+Plus: \\\\CodeInline{\\\\textbackslash{}+}
 
 
 
-Minus: \\\\CodeInline{\\\\-}"
+Minus: \\\\CodeInline{\\\\textbackslash{}-}"
 `;
 
 exports[`#basic properly renders blockquotes-with-code-blocks.txt 1`] = `
@@ -2325,7 +2325,7 @@ else:
 
 exports[`#misc properly renders backtick-escape.txt 1`] = `
 "\`This also should not be in code.\`
-\\\\textbackslash{}\\\\CodeInline{This should be in code.\\\\\\\\}
+\\\\textbackslash{}\\\\CodeInline{This should be in code.\\\\textbackslash{}\\\\textbackslash{}}
 \`And finally this should not be in code.\`"
 `;
 
