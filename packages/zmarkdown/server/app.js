@@ -5,7 +5,6 @@ const cors = require('cors')
 
 const zmdVersion = require('../package.json').version
 
-
 function controllerFactory (handler) {
   return (req, res) => {
     handler(req.body.md, req.body.opts, (err, result) => {

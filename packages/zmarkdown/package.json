@@ -83,12 +83,9 @@
     "pm2": "^2.6.1",
     "uglifyify": "^4.0.3"
   },
-  "bin": {
-    "render": "./bin/render.js"
-  },
   "scripts": {
     "lint": "eslint .",
-    "pretest": "npm run server && sleep 2",
+    "pretest": "npm run server && sleep 1",
     "test": "jest",
     "posttest": "npm run stop",
     "watch": "jest --watch",

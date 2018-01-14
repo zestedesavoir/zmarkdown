@@ -52,22 +52,25 @@ module.exports = function markdownHandlers (Raven) {
       processors[key] = zmarkdown(config, 'html')
     }
 
-    processors[key].renderString(String(markdown), (err, vfile = {}) => {
+    processors[key].renderString(String(markdown), (err, {contents, data, messages} = {}) => {
+      const metadata = data
+
       if (err) {
         Raven.mergeContext({
           extra: {
             zmdConfig: makeSerializable(processors[key].config),
             markdown: markdown,
             zmdOutput: {
-              contents: vfile.contents,
-              metadata: vfile.data,
+              contents: contents,
+              metadata: metadata,
+              messages: messages,
             }
           }
         })
         return callback(err, markdown)
       }
 
-      callback(null, [vfile.contents, vfile.data])
+      callback(null, [contents, metadata, messages])
     })
   }
 
@@ -80,6 +83,7 @@ module.exports = function markdownHandlers (Raven) {
       const config = clone(defaultConfig)
 
       config.remarkConfig.headingShifter = 0
+      config.remarkConfig.ping.pingUsername = () => false
 
       if (opts.disable_jsfiddle && opts.disable_jsfiddle === true) {
         config.remarkConfig.iframes['jsfiddle.net'].disabled = true
@@ -89,34 +93,39 @@ module.exports = function markdownHandlers (Raven) {
       processors[key] = zmarkdown(config, 'latex')
     }
 
-    processors[key].renderString(String(markdown), (err, contents) => {
+    processors[key].renderString(String(markdown), (err, {contents, data, messages} = {}) => {
+      const metadata = data
+
       if (err) {
         Raven.mergeContext({
           extra: {
             zmdConfig: makeSerializable(processors[key].config),
             markdown: markdown,
             zmdOutput: {
-              contents,
+              contents: contents,
+              metadata: metadata,
+              messages: messages,
             }
           }
         })
         return callback(err, markdown)
       }
 
-      callback(null, [contents, {}])
+      callback(null, [contents, metadata, messages])
     })
   }
 
   function toLatexDocument (markdown, opts = {}, callback) {
-    toLatex(markdown, opts, (err, [contents, metadata] = []) => {
+    toLatex(markdown, opts, (err, [contents, metadata, messages] = []) => {
       if (err) {
         Raven.mergeContext({
           extra: {
             zmdConfig: makeSerializable(opts),
             markdown: markdown,
             zmdOutput: {
-              contents,
-              metadata,
+              contents: contents,
+              metadata: metadata,
+              messages: messages,
             }
           }
         })
