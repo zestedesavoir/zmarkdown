@@ -252,11 +252,11 @@ inlinecode}
 
 
 
-\\\\CodeInline{a code with \\\\}
+\\\\CodeInline{a code with \\\\textbackslash{}}
 
 
 
-\\\\CodeInline{a \\\\text in \\\\LaTeX \\\\\\\\}
+\\\\CodeInline{a \\\\textbackslash{}text in \\\\textbackslash{}LaTeX \\\\textbackslash{}\\\\textbackslash{}}
 
 "
 `;
@@ -379,7 +379,7 @@ bar}
 
 
 \\\\begin{Quotation}
-\\\\CodeInline{fo\\\\o
+\\\\CodeInline{fo\\\\textbackslash{}o
 bar}
 \\\\end{Quotation}
 

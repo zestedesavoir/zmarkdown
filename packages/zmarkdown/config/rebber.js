@@ -1,4 +1,5 @@
 const remarkConfig = require('./remark')
+const escape = require('rebber/dist/escaper')
 
 const rebberConfig = {
   preprocessors: {
@@ -30,7 +31,7 @@ const rebberConfig = {
     warningCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
 
     inlineCode: (ctx, node) => {
-      const escaped = node.value.replace('{', '\\{').replace('}', '\\}')
+      const escaped = escape(node.value)
       return `\\CodeInline{${escaped}}`
     }
   },
