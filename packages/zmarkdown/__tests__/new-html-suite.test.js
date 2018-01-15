@@ -12,7 +12,8 @@ const renderString = (config = {remarkConfig, rebberConfig}) => {
   let configToUse = config
 
   const renderWithConfig = (input) =>
-    zmarkdown(configToUse).renderString(input).contents
+    zmarkdown(configToUse).renderString(input).then((vfile) =>
+      vfile.toString().trim())
 
   if (typeof config === 'string') {
     const input = config
@@ -24,7 +25,7 @@ const renderString = (config = {remarkConfig, rebberConfig}) => {
 
 const renderFile = (config = {remarkConfig, rebberConfig}) =>
   (input) =>
-    zmarkdown(config).renderFile(input).contents
+    zmarkdown(config).renderFile(input).then((vfile) => vfile.toString())
 
 /* jest */
 const HtmlDiffer = require('html-differ').HtmlDiffer
@@ -63,26 +64,26 @@ describe('math', () => {
   it('must escape a dollar with backslash', () => {
     const markdown = '$\\alpha\\$'
 
-    expect(renderString(markdown)).not.toMatch('inlineMath')
+    expect(renderString(markdown)).resolves.not.toMatch('inlineMath')
   })
 
 
   it('must not parse a raw starting dollar', () => {
     const markdown = '`$`\\alpha$'
 
-    expect(renderString(markdown)).not.toMatch('inlineMath')
+    expect(renderString(markdown)).resolves.not.toMatch('inlineMath')
   })
 
   it('must not parse a raw ending dollar', () => {
     const markdown = '$\\alpha`$` foo'
 
-    expect(renderString(markdown)).not.toMatch('inlineMath')
+    expect(renderString(markdown)).resolves.not.toMatch('inlineMath')
   })
 
   it("must not parse what's inside inline maths as markdown", () => {
     const markdown = '$`\\alpha`$'
 
-    expect(renderString(markdown)).not.toMatch('<pre')
+    expect(renderString(markdown)).resolves.not.toMatch('<pre')
   })
 })
 
@@ -90,6 +91,6 @@ describe('pedantic', () => {
   it('must not parse * and _ surrounded by spaces', () => {
     const markdown = 'a * b * c'
 
-    expect(renderString(markdown)).not.toMatch('strong')
+    expect(renderString(markdown)).resolves.not.toMatch('strong')
   })
 })

@@ -4,6 +4,7 @@ const inspect = require('unist-util-inspect')
 const visit = require('unist-util-visit')
 
 const dedent = require('dedent')
+const clone = require('clone')
 
 const createWrapper = require('./utils/wrappers')
 const remarkParse = require('remark-parse')
@@ -19,6 +20,7 @@ const remarkEscapeEscaped = require('remark-escape-escaped/src')
 const remarkGridTables = require('remark-grid-tables/src')
 const remarkHeadingShifter = require('remark-heading-shift/src')
 const remarkIframes = require('remark-iframes/src')
+const remarkImagesDownload = require('remark-images-download/src')
 const remarkKbd = require('remark-kbd/src')
 const remarkMath = require('remark-math')
 const remarkNumberedFootnotes = require('remark-numbered-footnotes/src')
@@ -87,6 +89,7 @@ const zmdParser = (config) => {
     .use(remarkGridTables)
     .use(remarkHeadingShifter, config.headingShifter)
     .use(remarkIframes, config.iframes)
+    .use(remarkImagesDownload, config.imagesDownload)
     .use(remarkMath, config.math)
     .use(remarkKbd)
     .use(remarkNumberedFootnotes)
@@ -105,44 +108,54 @@ const zmdParser = (config) => {
   return mdProcessor
 }
 
-const rendererFactory = ({remarkConfig, rebberConfig}, to = 'html') => (input, cb) => {
-  if (to === 'latex') {
-    remarkConfig.noTypography = true
-  }
+function getLatexProcessor (remarkConfig, rebberConfig) {
+  remarkConfig.noTypography = true
+
+  return zmdParser(remarkConfig)
+    .use(rebberStringify, rebberConfig)
+}
+
+function getHTMLProcessor (remarkConfig, rebberConfig) {
   const mdProcessor = zmdParser(remarkConfig)
 
-  if (to === 'html') {
+  mdProcessor
+    .use(remark2rehype, remarkConfig.remark2rehype)
+
+  if (!remarkConfig.noTypography) {
     mdProcessor
-      .use(remark2rehype, remarkConfig.remark2rehype)
-
-    if (!remarkConfig.noTypography) {
-      mdProcessor
-        .use(rehypeHighlight)
-    }
-
-    mdProcessor
-      .use(rehypeSlug)
-      .use(rehypeAutolinkHeadings, remarkConfig.autolinkHeadings)
-      .use(rehypeHTMLBlocks)
-      .use(rehypeFootnotesTitles, remarkConfig.footnotesTitles)
-      .use(rehypeKatex, remarkConfig.katex)
-      .use(() => (tree) => {
-        Object.keys(wrappers).forEach(nodeName =>
-          wrappers[nodeName].forEach(wrapper => {
-            visit(tree, wrapper)
-          }))
-      })
-
-      .use(rehypeStringify)
+      .use(rehypeHighlight)
   }
 
-  if (to === 'latex') {
-    mdProcessor
-      .use(rebberStringify, rebberConfig)
-  }
+  return mdProcessor
+    .use(rehypeSlug)
+    .use(rehypeAutolinkHeadings, remarkConfig.autolinkHeadings)
+    .use(rehypeHTMLBlocks)
+    .use(rehypeFootnotesTitles, remarkConfig.footnotesTitles)
+    .use(rehypeKatex, remarkConfig.katex)
+    .use(() => (tree) => {
+      Object.keys(wrappers).forEach(nodeName =>
+        wrappers[nodeName].forEach(wrapper => {
+          visit(tree, wrapper)
+        }))
+    })
+    .use(rehypeStringify)
+}
+
+const rendererFactory = ({remarkConfig, rebberConfig}, to = 'html') => (input, cb) => {
+  [remarkConfig, rebberConfig] = [clone(remarkConfig), clone(rebberConfig)]
+
+  const mdProcessor = to !== 'html'
+    ? getLatexProcessor(remarkConfig, rebberConfig)
+    : getHTMLProcessor(remarkConfig, rebberConfig)
+
 
   if (typeof cb !== 'function') {
-    return mdProcessor.processSync(input)
+    return new Promise((resolve, reject) =>
+      mdProcessor.process(input, (err, vfile) => {
+        if (err) return reject(err)
+
+        resolve(vfile)
+      }))
   }
 
   mdProcessor.process(input, (err, vfile) => {

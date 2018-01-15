@@ -25,16 +25,16 @@ module.exports = function markdownHandlers (Raven) {
       config.remarkConfig.headingShifter = 2
 
       /* presets */
-      if (opts.disable_ping && opts.disable_ping === true) {
+      if (opts.disable_ping === true) {
         config.remarkConfig.ping.pingUsername = () => false
       }
 
-      if (opts.disable_jsfiddle && opts.disable_jsfiddle === true) {
+      if (opts.disable_jsfiddle === true) {
         config.remarkConfig.iframes['jsfiddle.net'].disabled = true
         config.remarkConfig.iframes['www.jsfiddle.net'].disabled = true
       }
 
-      if (opts.inline && opts.inline === true) {
+      if (opts.inline === true) {
         config.remarkConfig.disableTokenizers = {
           block: [
             'indentedCode',
@@ -85,9 +85,14 @@ module.exports = function markdownHandlers (Raven) {
       config.remarkConfig.headingShifter = 0
       config.remarkConfig.ping.pingUsername = () => false
 
-      if (opts.disable_jsfiddle && opts.disable_jsfiddle === true) {
+      if (opts.disable_jsfiddle === true) {
         config.remarkConfig.iframes['jsfiddle.net'].disabled = true
         config.remarkConfig.iframes['www.jsfiddle.net'].disabled = true
+      }
+
+      config.remarkConfig.imagesDownload.disabled = opts.disable_images_download === true
+      if (opts.images_download_dir) {
+        config.remarkConfig.imagesDownload.downloadDestination = opts.images_download_dir
       }
 
       processors[key] = zmarkdown(config, 'latex')

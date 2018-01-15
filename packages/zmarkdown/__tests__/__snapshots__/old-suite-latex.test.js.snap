@@ -2221,20 +2221,11 @@ with end
 \\\\end{CodeBlock}"
 `;
 
-exports[`#heading-shift shifts before range 1`] = `
-"\\\\levelOneTitle{should be h1}
-"
-`;
+exports[`#heading-shift shifts before range 1`] = `"\\\\levelOneTitle{should be h1}"`;
 
-exports[`#heading-shift shifts in range 1`] = `
-"\\\\levelFourTitle{should be h4}
-"
-`;
+exports[`#heading-shift shifts in range 1`] = `"\\\\levelFourTitle{should be h4}"`;
 
-exports[`#heading-shift shifts past range 1`] = `
-"\\\\levelSixTitle{should be h6}
-"
-`;
+exports[`#heading-shift shifts past range 1`] = `"\\\\levelSixTitle{should be h6}"`;
 
 exports[`#misc properly renders CRLF_line_ends.txt 1`] = `
 "foo

@@ -2,6 +2,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const path = require('path')
 
 const zmdVersion = require('../package.json').version
 
@@ -37,6 +38,8 @@ app.use(cors())
 
 app.use(Raven.requestHandler())
 app.use(Raven.errorHandler())
+
+app.use('/static', express.static(path.join(__dirname, 'static')))
 
 app.use(bodyParser.json({limit: '5mb'}))
 app.post('/latex', controllerFactory(toLatex))

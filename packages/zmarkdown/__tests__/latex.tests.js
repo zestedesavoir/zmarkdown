@@ -12,7 +12,8 @@ const zmarkdown = require('../')
 
 const renderString = (config = {remarkConfig, rebberConfig}) =>
   (input) =>
-    zmarkdown(config, 'latex').renderString(input)
+    zmarkdown(config, 'latex').renderString(input).then((vfile) =>
+      vfile.toString().trim())
 
 const base = join(__dirname, 'fixtures/latex')
 const fixtures = directory(base).reduce((tests, contents) => {
@@ -23,131 +24,131 @@ const fixtures = directory(base).reduce((tests, contents) => {
 
 test('heading', () => {
   const fixture = fixtures['heading']
-  const {contents} = renderString()(fixture)
+  const p = renderString()(fixture)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('html nodes', () => {
-  const {contents} = renderString()(dedent`
+  const p = renderString()(dedent`
     # foo
     **something <a> else**
   `)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('heading with custom config', () => {
   const fixture = fixtures['heading']
-  const {contents} = renderString()(fixture)
+  const p = renderString()(fixture)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('paragraph', () => {
   const fixture = fixtures['paragraph']
-  const {contents} = renderString()(fixture)
+  const p = renderString()(fixture)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('inline-code', () => {
   const fixture = fixtures['inline-code']
-  const {contents} = renderString()(fixture)
+  const p = renderString()(fixture)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('emoticon', () => {
   const fixture = fixtures['emoticon']
-  const {contents} = renderString()(fixture)
+  const p = renderString()(fixture)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('table', () => {
   const fixture = fixtures['table']
-  const {contents} = renderString()(fixture)
+  const p = renderString()(fixture)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('blockquote', () => {
   const fixture = fixtures['blockquote']
-  const {contents} = renderString()(fixture)
+  const p = renderString()(fixture)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('blockquote with custom config', () => {
   const fixture = fixtures['blockquote']
-  const {contents} = renderString()(fixture)
+  const p = renderString()(fixture)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('figure+caption', () => {
   const fixture = fixtures['figure']
-  const {contents} = renderString()(fixture)
+  const p = renderString()(fixture)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('code', () => {
   const fixture = fixtures['code']
-  const {contents} = renderString()(fixture)
+  const p = renderString()(fixture)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('code+caption', () => {
   const fixture = fixtures['figure-code']
-  const {contents} = renderString()(fixture)
+  const p = renderString()(fixture)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('list', () => {
   const fixture = fixtures['list']
-  const {contents} = renderString()(fixture)
+  const p = renderString()(fixture)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('link', () => {
   const fixture = fixtures['link']
-  const {contents} = renderString()(fixture)
+  const p = renderString()(fixture)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('link with special characters', () => {
-  const {contents} = renderString()(dedent`
+  const p = renderString()(dedent`
     [foo](http://example.com?a=b%c^{}#foo)
   `)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('link-prepend', () => {
   const fixture = fixtures['link-prepend']
-  const {contents} = renderString()(fixture)
+  const p = renderString()(fixture)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 Object.keys(fixtures).filter(Boolean).filter(name => name.startsWith('mix-')).forEach(name => {
   const fixture = fixtures[name]
 
   test(name, () => {
-    const {contents} = renderString()(fixture.replace(/·/g, ' '))
+    const p = renderString()(fixture.replace(/·/g, ' '))
 
-    expect(contents).toMatchSnapshot()
+    return expect(p).resolves.toMatchSnapshot()
   })
 })
 
 test('footnotes', () => {
-  const {contents} = renderString()(dedent`
+  const p = renderString()(dedent`
     # mytitle A[^footnoteRef]
 
     [^footnoteRef]: reference in title
@@ -158,11 +159,11 @@ test('footnotes', () => {
 
     a paragraph[^footnoteRawPar inner]
   `)
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('math', () => {
-  const {contents} = renderString()(dedent`
+  const p = renderString()(dedent`
     A sentence ($S$) with *italic* and inline math ($C_L$) and $$b$$ another.
 
     $$
@@ -171,22 +172,22 @@ test('math', () => {
 
     hehe
   `)
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('custom-blocks', () => {
   const fixture = fixtures['blocks']
-  const {contents} = renderString()(fixture.replace(/·/g, ' '))
+  const p = renderString()(fixture.replace(/·/g, ' '))
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })
 
 test('regression: code block without language', () => {
-  const {contents} = renderString()(dedent`
+  const p = renderString()(dedent`
     \`\`\`
     a
     \`\`\`
   `)
 
-  expect(contents).toMatchSnapshot()
+  return expect(p).resolves.toMatchSnapshot()
 })

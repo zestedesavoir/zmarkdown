@@ -270,6 +270,13 @@ const remarkConfig = {
   },
 
   disableTokenizers: {},
+
+  imagesDownload: {
+    disabled: true,
+    downloadDestination: './img/',
+    maxlength: 1000000,
+    dirSizeLimit: 10000000,
+  }
 }
 
 module.exports = remarkConfig

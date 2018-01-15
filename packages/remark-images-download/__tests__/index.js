@@ -17,7 +17,7 @@ const renderFactory = (opts) =>
     .use(stringify)
     .process(text)
 
-const replace = (html) => html.replace(/"([a-zA-Z0-9-_]{9,10})\/([a-zA-Z0-9-_]{9,10})/g, '"foo/bar')
+const r = (html) => html.replace(/"([a-zA-Z0-9_-]{7,14})\/([a-zA-Z0-9_-]{7,14})/g, '"foo/bar')
 
 test('downloads image ok', () => {
   const file = dedent`
@@ -34,7 +34,10 @@ test('downloads image ok', () => {
   `
 
   const render = renderFactory()
-  expect(render(file).then(vfile => replace(vfile.contents))).resolves.toBe(html)
+
+  return render(file).then(vfile => {
+    expect(r(vfile.contents)).toBe(html)
+  })
 })
 
 test('does not crash without images', () => {
@@ -42,42 +45,53 @@ test('does not crash without images', () => {
   const html = `<p>foo</p>`
 
   const render = renderFactory()
-  expect(render(file).then(vfile => vfile.contents)).resolves.toBe(html)
+
+  return render(file).then(vfile => {
+    expect(vfile.contents).toBe(html)
+  })
 })
 
 test('skips bigger images and reports', async () => {
   const file = `![](http://example.com/too-big.png)`
   const html = `<p><img src="http://example.com/too-big.png"></p>`
 
-  const render = renderFactory({
-    report: (err) => {
-      expect(err.message).toMatchSnapshot()
-      expect(err).toBeInstanceOf(Error);
-    },
-  })
-  await expect(render(file).then(vfile => vfile.contents)).resolves.toBe(html)
+  const error = 'File at http://example.com/too-big.png weighs 99999999, max size is 1000000'
+
+  const render = renderFactory()
+
+  return render(file)
+    .then(vfile => {
+      expect(vfile.messages[0].reason).toBe(error)
+      expect(vfile.contents).toBe(html)
+    })
 })
 
 test('skips wrong mimes and reports', async () => {
   const file = `![](http://example.com/wrong-mime.png)`
   const html = `<p><img src="http://example.com/wrong-mime.png"></p>`
 
-  const render = renderFactory({
-    report: (err) => {
-      expect(err).toBeInstanceOf(Error)
-      expect(err.message).toMatchSnapshot()
-    },
-  })
+  const error = 'Content-Type of http://example.com/wrong-mime.png is not of image/ type'
 
-  await expect(render(file).then(vfile => vfile.contents)).resolves.toBe(html)
+  const render = renderFactory()
+
+  return render(file)
+    .then(vfile => {
+      expect(vfile.messages[0].reason).toBe(error)
+      expect(vfile.contents).toBe(html)
+    })
 })
 
 test('does not report wrong extensions', () => {
   const file = `![](http://example.com/wrong.ext)`
-  const html = `<p><img src="foo/bar.ext"></p>`
+  const html = '<p><img src="foo/bar.ext"></p>'
 
   const render = renderFactory()
-  expect(render(file).then(vfile => replace(vfile.contents))).resolves.toBe(html)
+
+  return render(file)
+    .then(vfile => {
+      expect(vfile.messages).toEqual([])
+      expect(r(vfile.contents)).toMatch(html)
+    })
 })
 
 test('skips when directory reaches size limit', async () => {
@@ -98,16 +112,19 @@ test('skips when directory reaches size limit', async () => {
     <img src="http://example.com/30percent.png"></p>
   `
 
+  const error = 'Cannot download http://example.com/30percent.png because ' +
+    'destination directory reached size limit'
+
   const render = renderFactory({
-    report: (err) => {
-      expect(err).toBeInstanceOf(Error)
-      expect(err.message).toMatchSnapshot()
-    },
     maxFileSize: 3500,
-    dirSizeLimit: 10000
+    dirSizeLimit: (3500 * 3) - 1000
   })
 
-  await expect(render(file).then(vfile => replace(vfile.contents))).resolves.toBe(html)
+  return render(file)
+    .then(vfile => {
+      expect(vfile.messages[0].reason).toBe(error)
+      expect(r(vfile.contents)).toBe(html)
+    })
 })
 
 test('does not download when disabled', () => {

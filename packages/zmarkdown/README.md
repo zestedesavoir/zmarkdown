@@ -45,18 +45,26 @@ Only `metadata` is described in the **Response** sections below.
 
 * `metadata.disableToc`, bool
 
-  Whether or not the input Markdown did **not** contain headings (`#`, `##`, …). This property is named that way because we use it to disable Table of Contents generation when no headings were found.  
-  `disableToc: true` means *no headings*  
-  `disableToc: false` means at least on *heading*  
+  Whether or not the input Markdown did **not** contain headings (`#`, `##`, …). This property is named that way because we use it to disable Table of Contents generation when no headings were found.
+  `disableToc: true` means *no headings*
+  `disableToc: false` means at least one *heading*
 
 * `metadata.ping`, string[], undefined if `opts.disable_ping: true`
 
-  The list of nicknames returned by `remark-ping`. Can be used to send "ping" notifications to the corresponding users.  
+  The list of nicknames returned by `remark-ping`. Can be used to send "ping" notifications to the corresponding users.
   Note: this is fully customizable, `remark-ping` can validate potential *ping*s by any means, including sending an HTTP request (we recommend `HEAD`) to a REST API to make sure this username actually exists.
 
 ## `/latex` - Markdown to LaTeX
 
 ### Request
+
+* `opts.disable_images_download`, bool, default: `false`
+
+  Does not download the images.
+
+* `opts.images_download_dir`, bool, default: `false`
+
+  Where to download the images to.
 
 * `opts.disable_jsfiddle`, bool, default: `false`
 
@@ -69,6 +77,10 @@ Only `metadata` is described in the **Response** sections below.
 ## `/latex-document` - Markdown to tex file
 
 ### Request
+
+* `opts.disable_images_download`, bool, default: `false`
+
+  Does not download the images.
 
 * `opts.disable_jsfiddle`, bool, default: `false`
 

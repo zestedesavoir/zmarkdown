@@ -1,8 +1,18 @@
 const a = require('axios')
+const fs = require('fs')
 
 const u = (path) => `http://localhost:27272${path}`
 const html = u('/html')
 const latex = u('/latex')
+
+const rm = (dir, file) => new Promise((resolve, reject) =>
+  fs.unlink(`${dir}/${file}`, (err) => {
+    if (err) reject(err)
+    fs.rmdir(dir, (err) => {
+      if (err) reject(err)
+      resolve('ok')
+    })
+  }))
 
 describe('HTML endpoint', () => {
   test('It should accept POSTed markdown', async () => {
@@ -104,5 +114,18 @@ describe('LaTeX endpoint', () => {
 
     const [rendered] = response.data
     expect(rendered).not.toContain('<h')
+  })
+
+  test('It downloads images', async () => {
+    const response = await a.post(latex, {
+      md: `![](${u('/static/img.png')})`,
+      opts: { inline: true, images_download_dir: `${__dirname}/../public/` }
+    })
+
+    const [rendered] = response.data
+    const regex = /\/([a-zA-Z0-9_-]{7,14})\/([a-zA-Z0-9_-]{7,14})\.(.*)}/
+    expect(rendered).toMatch(regex)
+    const [, dir, file, ext] = rendered.match(regex)
+    return expect(rm(`${__dirname}/../public/${dir}`, `${file}.${ext}`)).resolves.toBe('ok')
   })
 })

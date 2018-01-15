@@ -29,9 +29,7 @@ a quote
 a
 multiline
 quote
-\\\\end{Quotation}
-
-"
+\\\\end{Quotation}"
 `;
 
 exports[`blockquote with custom config 1`] = `
@@ -63,9 +61,7 @@ a quote
 a
 multiline
 quote
-\\\\end{Quotation}
-
-"
+\\\\end{Quotation}"
 `;
 
 exports[`code 1`] = `
@@ -85,9 +81,7 @@ print('bla')
 
 \\\\begin{CodeBlock}{text}
 a code without lang
-\\\\end{CodeBlock}
-
-"
+\\\\end{CodeBlock}"
 `;
 
 exports[`code+caption 1`] = `
@@ -101,9 +95,7 @@ print('bla')
 print('bla')
 print('bla')
 print('bla')
-\\\\end{codeBlock}
-
-"
+\\\\end{codeBlock}"
 `;
 
 exports[`custom-blocks 1`] = `
@@ -131,24 +123,17 @@ question \\\\CodeInline{coded}
 \\\\textbf{error}
 foo bar \\\\\\\\
 baz
-\\\\end{Error}
-"
+\\\\end{Error}"
 `;
 
-exports[`emoticon 1`] = `
-"foo  bar
-
-"
-`;
+exports[`emoticon 1`] = `"foo  bar"`;
 
 exports[`figure+caption 1`] = `
 "\\\\begin{Quotation}[With Source]
 a
 multiline
 quote
-\\\\end{Quotation}
-
-"
+\\\\end{Quotation}"
 `;
 
 exports[`footnotes 1`] = `
@@ -163,9 +148,7 @@ exports[`footnotes 1`] = `
 \\\\levelOneTitle{myti\\\\textit{tle C\\\\textsuperscript{\\\\ref{footnote:3}}\\\\footnotetext[3]{\\\\label{footnote:3} foo inner}}}
 
 
-a paragraph\\\\textsuperscript{\\\\ref{footnote:4}}\\\\footnotetext[4]{\\\\label{footnote:4} footnoteRawPar inner}
-
-"
+a paragraph\\\\textsuperscript{\\\\ref{footnote:4}}\\\\footnotetext[4]{\\\\label{footnote:4} footnoteRawPar inner}"
 `;
 
 exports[`heading 1`] = `
@@ -196,8 +179,7 @@ exports[`heading 1`] = `
 \\\\levelOneTitle{a \\\\} \\\\textbackslash{} b}
 
 
-\\\\levelOneTitle{a \\\\} b}
-"
+\\\\levelOneTitle{a \\\\} b}"
 `;
 
 exports[`heading with custom config 1`] = `
@@ -228,17 +210,14 @@ exports[`heading with custom config 1`] = `
 \\\\levelOneTitle{a \\\\} \\\\textbackslash{} b}
 
 
-\\\\levelOneTitle{a \\\\} b}
-"
+\\\\levelOneTitle{a \\\\} b}"
 `;
 
 exports[`html nodes 1`] = `
 "\\\\levelOneTitle{foo}
 
 
-\\\\textbf{something <a> else}
-
-"
+\\\\textbf{something <a> else}"
 `;
 
 exports[`inline-code 1`] = `
@@ -256,9 +235,7 @@ inlinecode}
 
 
 
-\\\\CodeInline{a \\\\textbackslash{}text in \\\\textbackslash{}LaTeX \\\\textbackslash{}\\\\textbackslash{}}
-
-"
+\\\\CodeInline{a \\\\textbackslash{}text in \\\\textbackslash{}LaTeX \\\\textbackslash{}\\\\textbackslash{}}"
 `;
 
 exports[`link 1`] = `
@@ -270,16 +247,10 @@ exports[`link 1`] = `
 
 
 
-\\\\externalLink{an \\\\CodeInline{external} link}{https://wikipedia.com}
-
-"
+\\\\externalLink{an \\\\CodeInline{external} link}{https://wikipedia.com}"
 `;
 
-exports[`link with special characters 1`] = `
-"\\\\externalLink{foo}{http://example.com?a=b\\\\%c\\\\textasciicircum{}\\\\{\\\\}\\\\#foo}
-
-"
-`;
+exports[`link with special characters 1`] = `"\\\\externalLink{foo}{http://example.com?a=b\\\\%c\\\\textasciicircum{}\\\\{\\\\}\\\\#foo}"`;
 
 exports[`link-prepend 1`] = `
 "\\\\externalLink{an external link}{https://wikipedia.com}
@@ -290,9 +261,7 @@ exports[`link-prepend 1`] = `
 
 
 
-\\\\externalLink{an \\\\CodeInline{external} link}{https://wikipedia.com}
-
-"
+\\\\externalLink{an \\\\CodeInline{external} link}{https://wikipedia.com}"
 `;
 
 exports[`list 1`] = `
@@ -307,8 +276,7 @@ exports[`list 1`] = `
 \\\\item an
 \\\\item \\\\CodeInline{ordered}
 \\\\item list
-\\\\end{enumerate}
-"
+\\\\end{enumerate}"
 `;
 
 exports[`math 1`] = `
@@ -320,9 +288,7 @@ exports[`math 1`] = `
 
 
 
-hehe
-
-"
+hehe"
 `;
 
 exports[`mix-1 1`] = `
@@ -443,9 +409,7 @@ Asymmetrical normcore portland, vaporware viral tote bag DIY slow-carb kogi fann
 \\\\levelFiveTitle{fifth 3}
 
 
-Messenger bag locavore swag raclette brunch whatever, portland food truck. PBR\\\\&B cred mlkshk, poke letterpress waistcoat celiac. La croix letterpress forage keffiyeh.
-
-"
+Messenger bag locavore swag raclette brunch whatever, portland food truck. PBR\\\\&B cred mlkshk, poke letterpress waistcoat celiac. La croix letterpress forage keffiyeh."
 `;
 
 exports[`mix-2 1`] = `
@@ -478,9 +442,7 @@ Code: Second
 
 \\\\begin{CodeBlock}{python}
 print('code without caption')
-\\\\end{CodeBlock}
-
-"
+\\\\end{CodeBlock}"
 `;
 
 exports[`mix-3 1`] = `
@@ -520,10 +482,7 @@ exports[`mix-3 1`] = `
 \\\\item item
 \\\\item item
 \\\\item item
-\\\\end{itemize}
-
-
-"
+\\\\end{itemize}"
 `;
 
 exports[`mix-4 1`] = `
@@ -561,9 +520,7 @@ block & \\\\ref{appendix-1} \\\\\\\\ \\\\hline
 \\\\footnote{\\\\label{appendix-1}}
 \\\\begin{CodeBlock}{python}
 print('bla')
-\\\\end{CodeBlock}
-
-"
+\\\\end{CodeBlock}"
 `;
 
 exports[`mix-5 1`] = `
@@ -581,9 +538,7 @@ exports[`mix-6 1`] = `
 \\\\image{http://img.youtube.com/vi/8TQIvdFl4aU/0.jpg}[\\\\externalLink{https://www.youtube.com/embed/8TQIvdFl4aU}{https://www.youtube.com/embed/8TQIvdFl4aU}]
 
 
-no caption
-
-"
+no caption"
 `;
 
 exports[`paragraph 1`] = `
@@ -674,17 +629,13 @@ Asymmetrical normcore portland, vaporware viral tote bag DIY slow-carb kogi fann
 \\\\levelFiveTitle{fifth 3}
 
 
-Messenger bag locavore swag raclette brunch whatever, portland food truck. PBR\\\\&B cred mlkshk, poke letterpress waistcoat celiac. La croix letterpress forage keffiyeh.
-
-"
+Messenger bag locavore swag raclette brunch whatever, portland food truck. PBR\\\\&B cred mlkshk, poke letterpress waistcoat celiac. La croix letterpress forage keffiyeh."
 `;
 
 exports[`regression: code block without language 1`] = `
 "\\\\begin{CodeBlock}{text}
 a
-\\\\end{CodeBlock}
-
-"
+\\\\end{CodeBlock}"
 `;
 
 exports[`table 1`] = `
@@ -702,7 +653,5 @@ exports[`table 1`] = `
 1 & 2 \\\\\\\\ \\\\hline
 1 & 2  & 3 \\\\\\\\ \\\\hline
 1 & 2  & 3 \\\\\\\\ \\\\hline
-\\\\end{longtabu}
-
-"
+\\\\end{longtabu}"
 `;

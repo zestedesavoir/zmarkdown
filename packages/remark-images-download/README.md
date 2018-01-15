@@ -1,6 +1,6 @@
 # remark-images-download [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
-This plugin download images in a custom directory (and change the image url to the downloaded file).
+This plugin downloads images to a custom directory, replacing images URLs with the path to the downloaded file.
 
 ## Installation
 
@@ -41,7 +41,7 @@ unified()
 
 ## Configuration fields:
 
-- `disabled`: enable the plugin.
+- `disabled`: disables the plugin.
 - `downloadDestination`: where downloads should be stored (must exists).
 - `maxFileLength`: if a file is larger than this number (in bytes), the plugin will not download it.
 - `dirSizeLimit`: the directory size limit.
@@ -58,6 +58,8 @@ And a image of 1Tb!
 ```
 
 with the previous configuration `remark-images-download` will download the two first images in `img/UUID/otherUUID.png` and `img/UUID/yetAnotherUUID.png` where `UUID` is a random string and it does not download `example_1Tb.png` because the file is too large.
+
+`vfile.data.imageDir` will be set to the path to the folder where images were downloaded.
 
 
 ## License

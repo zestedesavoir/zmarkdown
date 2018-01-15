@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "body-parser": "^1.18.2",
+    "clone": "^2.1.1",
     "cors": "^2.8.4",
     "dedent": "^0.7.0",
     "express": "^4.16.2",
@@ -39,6 +40,7 @@
     "remark-heading-shift": "^1.0.4",
     "remark-heading-trailing-spaces": "^0.0.19",
     "remark-iframes": "^2.0.1",
+    "remark-images-download": "^0.0.7",
     "remark-kbd": "^1.0.7",
     "remark-math": "^1.0.1",
     "remark-numbered-footnotes": "^1.0.2",
@@ -90,8 +92,8 @@
     "posttest": "npm run stop",
     "watch": "jest --watch",
     "test-travis": "jest --coverage",
-    "prepublish": "npm run prepare",
-    "prepare": "browserify index.js -g [ envify --NODE_ENV production ] -g [ babelify --presets [ es2015 ] ] -g uglifyify -d -s ZMarkdown | exorcist ./public/bundle.js.map > ./public/bundle.js",
+    "_prepublish": "npm run prepare",
+    "_prepare": "browserify index.js -g [ envify --NODE_ENV production ] -g [ babelify --presets [ es2015 ] ] -g uglifyify -d -s ZMarkdown | exorcist ./public/bundle.js.map > ./public/bundle.js",
     "server": "pm2 start -f server/index.js -i 3 --max-memory-restart 150M",
     "stop": "pm2 kill"
   },

@@ -3,7 +3,7 @@ const fs = require('fs')
 const path = require('path')
 const request = require('request-promise')
 const shortid = require('shortid')
-const url = require('url')
+const URL = require('url')
 
 const noop = Promise.resolve()
 
@@ -44,48 +44,60 @@ function plugin ({
   disabled = false,
   maxFileSize = 1000000,
   dirSizeLimit = 10000000,
-  downloadDestination = './',
-  report = console.error
+  downloadDestination = './'
 } = {}) {
-  return function transform (tree) {
+  return function transform (tree, vfile) {
     if (disabled) return noop
     let totalDownloadedSize
 
-    // images are downloaded in destinationPath
+    // images are downloaded to destinationPath
     const destinationPath = path.join(downloadDestination, shortid.generate())
+
+    vfile.data.imageDir = destinationPath
 
     return mkdir(destinationPath)
       .then(() => {
         totalDownloadedSize = 0
         const promises = [noop]
 
-        visit(tree, 'image', function (node) {
-          const parsedURI = url.parse(node.url)
+        visit(tree, 'image', (node) => {
+          const { url, position } = node
+          const parsedURI = URL.parse(url)
 
           if (!parsedURI.host) return
 
           const extension = path.extname(parsedURI.pathname)
-          const basename = `${shortid.generate()}${extension}`
-          const destination = path.join(destinationPath, basename)
-          const imageURL = node.url
+          const filename = `${shortid.generate()}${extension}`
+          const destination = path.join(destinationPath, filename)
+          const imageURL = url
 
-          promises.push(
-            isDownloadable(imageURL)
-              .then(() => request({uri: imageURL, transform: requestParser}))
-              .then(({body}) => writeFile(destination, body))
-              .then(() => {
-                node.url = destination
-              })
-              .catch((err) => report(err)))
+          const promise = isDownloadable(imageURL)
+            .then(() => request({uri: imageURL, transform: requestParser}))
+            .then(({body}) => writeFile(destination, body))
+            .then(() => {
+              node.url = destination
+            })
+            .catch((err) => {
+              vfile.message(err, position, url)
+            })
+
+          promises.push(promise)
         })
 
-        return Promise.all(promises)
+        return promises.reduce((chain, currentTask) =>
+          chain.then(chainResults =>
+            currentTask.then(currentResult =>
+              [...chainResults, currentResult])),
+        Promise.resolve([]))
       })
-      .catch((err) => report(err))
+      .catch((err) => {
+        vfile.message(err)
+      })
       .then(() => tree)
 
     function isDownloadable (uri) {
-      return request.head({uri: uri, transform: requestParser})
+      return request
+        .head({uri: uri, transform: requestParser})
         .then(({response}) => new Promise((resolve, reject) => {
           if (response.headers['content-type'].substring(0, 6) !== 'image/') {
             reject(new Error(`Content-Type of ${uri} is not of image/ type`))
