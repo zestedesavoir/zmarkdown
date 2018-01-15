@@ -117,9 +117,10 @@ describe('LaTeX endpoint', () => {
   })
 
   test('It downloads images', async () => {
+    const destination = process.env.DEST || `${__dirname}/../public/`
     const response = await a.post(latex, {
       md: `![](${u('/static/img.png')})`,
-      opts: { inline: true, images_download_dir: `${__dirname}/../public/` }
+      opts: { inline: true, images_download_dir: destination }
     })
 
 
@@ -129,6 +130,6 @@ describe('LaTeX endpoint', () => {
     const regex = /\/([a-zA-Z0-9_-]{7,14})\/([a-zA-Z0-9_-]{7,14})\.(.*)}/
     expect(rendered).toMatch(regex)
     const [, dir, file, ext] = rendered.match(regex)
-    return expect(rm(`${__dirname}/../public/${dir}`, `${file}.${ext}`)).resolves.toBe('ok')
+    return expect(rm(`${destination}/${dir}`, `${file}.${ext}`)).resolves.toBe('ok')
   })
 })
