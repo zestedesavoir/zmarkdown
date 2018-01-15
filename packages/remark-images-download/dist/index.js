@@ -1,11 +1,13 @@
 'use strict';
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var visit = require('unist-util-visit');
 var fs = require('fs');
 var path = require('path');
 var request = require('request-promise');
 var shortid = require('shortid');
-var url = require('url');
+var URL = require('url');
 
 var noop = Promise.resolve();
 
@@ -56,32 +58,35 @@ function plugin() {
       _ref$dirSizeLimit = _ref.dirSizeLimit,
       dirSizeLimit = _ref$dirSizeLimit === undefined ? 10000000 : _ref$dirSizeLimit,
       _ref$downloadDestinat = _ref.downloadDestination,
-      downloadDestination = _ref$downloadDestinat === undefined ? './' : _ref$downloadDestinat,
-      _ref$report = _ref.report,
-      report = _ref$report === undefined ? console.error : _ref$report;
+      downloadDestination = _ref$downloadDestinat === undefined ? './' : _ref$downloadDestinat;
 
-  return function transform(tree) {
+  return function transform(tree, vfile) {
     if (disabled) return noop;
     var totalDownloadedSize = void 0;
 
-    // images are downloaded in destinationPath
+    // images are downloaded to destinationPath
     var destinationPath = path.join(downloadDestination, shortid.generate());
+
+    vfile.data.imageDir = destinationPath;
 
     return mkdir(destinationPath).then(function () {
       totalDownloadedSize = 0;
       var promises = [noop];
 
       visit(tree, 'image', function (node) {
-        var parsedURI = url.parse(node.url);
+        var url = node.url,
+            position = node.position;
+
+        var parsedURI = URL.parse(url);
 
         if (!parsedURI.host) return;
 
         var extension = path.extname(parsedURI.pathname);
-        var basename = '' + shortid.generate() + extension;
-        var destination = path.join(destinationPath, basename);
-        var imageURL = node.url;
+        var filename = '' + shortid.generate() + extension;
+        var destination = path.join(destinationPath, filename);
+        var imageURL = url;
 
-        promises.push(isDownloadable(imageURL).then(function () {
+        var promise = isDownloadable(imageURL).then(function () {
           return request({ uri: imageURL, transform: requestParser });
         }).then(function (_ref2) {
           var body = _ref2.body;
@@ -89,13 +94,21 @@ function plugin() {
         }).then(function () {
           node.url = destination;
         }).catch(function (err) {
-          return report(err);
-        }));
+          vfile.message(err, position, url);
+        });
+
+        promises.push(promise);
       });
 
-      return Promise.all(promises);
+      return promises.reduce(function (chain, currentTask) {
+        return chain.then(function (chainResults) {
+          return currentTask.then(function (currentResult) {
+            return [].concat(_toConsumableArray(chainResults), [currentResult]);
+          });
+        });
+      }, Promise.resolve([]));
     }).catch(function (err) {
-      return report(err);
+      vfile.message(err);
     }).then(function () {
       return tree;
     });

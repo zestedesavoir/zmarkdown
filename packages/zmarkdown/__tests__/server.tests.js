@@ -122,7 +122,10 @@ describe('LaTeX endpoint', () => {
       opts: { inline: true, images_download_dir: `${__dirname}/../public/` }
     })
 
-    const [rendered] = response.data
+
+    const [rendered, , messages] = response.data
+    expect(messages).toEqual([])
+
     const regex = /\/([a-zA-Z0-9_-]{7,14})\/([a-zA-Z0-9_-]{7,14})\.(.*)}/
     expect(rendered).toMatch(regex)
     const [, dir, file, ext] = rendered.match(regex)
