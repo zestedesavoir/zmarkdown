@@ -12,6 +12,7 @@
   "scripts": {
     "pretest": "lerna run pretest --scope zmarkdown",
     "test": "jest",
+    "posttest": "lerna run posttest --scope zmarkdown",
     "d": "node --inspect --debug-brk ./node_modules/.bin/jest --runInBand -i",
     "coverage": "jest --coverage"
   },

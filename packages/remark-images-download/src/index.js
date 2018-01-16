@@ -1,27 +1,18 @@
 const visit = require('unist-util-visit')
 const fs = require('fs')
 const path = require('path')
-const request = require('request-promise')
+const request = require('request')
 const shortid = require('shortid')
+const fileType = require('file-type')
 const URL = require('url')
 
 const noop = Promise.resolve()
 
-const requestParser = (body, response, resolveWithFullResponse) =>
-  ({response: response, body: body})
+const isImage = (headers = {}) =>
+  (headers['content-type'].substring(0, 6) === 'image/')
 
-const writeFile = (file, data, options) => new Promise((resolve, reject) => {
-  const cb = (err) => {
-    if (err) reject(err)
-    resolve()
-  }
-
-  if (options) {
-    fs.writeFile(file, data, options, cb)
-  } else {
-    fs.writeFile(file, data, cb)
-  }
-})
+const getSize = (headers = {}) =>
+  parseInt(headers['content-length'], 10)
 
 const mkdir = (path) => new Promise((resolve, reject) => {
   fs.stat(path, (err, stats) => {
@@ -44,7 +35,7 @@ function plugin ({
   disabled = false,
   maxFileSize = 1000000,
   dirSizeLimit = 10000000,
-  downloadDestination = './'
+  downloadDestination = '/tmp'
 } = {}) {
   return function transform (tree, vfile) {
     if (disabled) return noop
@@ -58,7 +49,7 @@ function plugin ({
     return mkdir(destinationPath)
       .then(() => {
         totalDownloadedSize = 0
-        const promises = [noop]
+        const promises = [{offset: -1, promise: noop}]
 
         visit(tree, 'image', (node) => {
           const { url, position } = node
@@ -69,57 +60,81 @@ function plugin ({
           const extension = path.extname(parsedURI.pathname)
           const filename = `${shortid.generate()}${extension}`
           const destination = path.join(destinationPath, filename)
-          const imageURL = url
 
-          const promise = isDownloadable(imageURL)
-            .then(() => request({uri: imageURL, transform: requestParser}))
-            .then(({body}) => writeFile(destination, body))
-            .then(() => {
-              node.url = destination
-            })
-            .catch((err) => {
-              vfile.message(err, position, url)
-            })
+          const promise = new Promise((resolve, reject) => {
 
-          promises.push(promise)
+            const writeStream = (destination) => {
+              return fs
+                .createWriteStream(destination)
+                .on('close', () => {
+                  node.url = destination
+                  resolve()
+                })
+            }
+
+            request
+              .get(url)
+              .on('response', ({headers, statusCode} = {}) => {
+                if (statusCode !== 200) {
+                  reject(new Error(`Received HTTP${statusCode} for: ${url}`))
+                }
+                if (!isImage(headers)) {
+                  reject(new Error(`Content-Type of ${url} is not an image/ type`))
+                }
+
+                const fileSize = getSize(headers)
+                if (maxFileSize && fileSize > maxFileSize) {
+                  reject(new Error(
+                    `File at ${url} weighs ${headers['content-length']}, ` +
+                    `max size is ${maxFileSize}`))
+                }
+
+                if (dirSizeLimit && (totalDownloadedSize + fileSize) >= dirSizeLimit) {
+                  reject(new Error(
+                    `Cannot download ${url} because destination directory reached size limit`))
+                }
+
+                totalDownloadedSize += fileSize
+              })
+              .on('response', (res) => {
+                res.once('data', chunk => {
+                  res.destroy()
+                  const type = fileType(chunk) || {mime: ''}
+                  if (type.mime.slice(0, 6) !== 'image/') {
+                    reject(new Error(
+                      `Detected mime of ${url} is not an image/ type`))
+                  }
+                })
+              })
+              .on('error', (err) => {
+                reject(err)
+              })
+              .pipe(writeStream(destination))
+          }).catch((err) => {
+            vfile.message(err, position, url)
+          })
+
+          promises.push({offset: position.offset, promise: promise})
         })
 
-        return promises.reduce((chain, currentTask) =>
-          chain.then(chainResults =>
-            currentTask.then(currentResult =>
-              [...chainResults, currentResult])),
-        Promise.resolve([]))
+        // Use offsets to ensure execution order
+        // we don't want to download them in (possibly) random order.
+        // More importantly: this makes tests stable.
+        promises.sort((a, b) => b.offset - a.offset)
+
+        return promises
+          .map(a => a.promise)
+          .reduce(
+            (chain, currentTask) =>
+              chain.then(chainResults =>
+                currentTask.then(currentResult =>
+                  [...chainResults, currentResult])),
+            Promise.resolve([]))
       })
       .catch((err) => {
         vfile.message(err)
       })
       .then(() => tree)
-
-    function isDownloadable (uri) {
-      return request
-        .head({uri: uri, transform: requestParser})
-        .then(({response}) => new Promise((resolve, reject) => {
-          if (response.headers['content-type'].substring(0, 6) !== 'image/') {
-            reject(new Error(`Content-Type of ${uri} is not of image/ type`))
-          }
-
-          const fileSize = parseInt(response.headers['content-length'], 10)
-
-          if (maxFileSize && fileSize > maxFileSize) {
-            reject(new Error(
-              `File at ${uri} weighs ${response.headers['content-length']}, ` +
-              `max size is ${maxFileSize}`))
-          }
-
-          if (dirSizeLimit && (totalDownloadedSize + fileSize) >= dirSizeLimit) {
-            reject(new Error(
-              `Cannot download ${uri} because destination directory reached size limit`))
-          }
-
-          totalDownloadedSize += fileSize
-          resolve()
-        }))
-    }
   }
 }
 
