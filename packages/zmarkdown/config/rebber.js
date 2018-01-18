@@ -4,7 +4,6 @@ const escape = require('rebber/dist/escaper')
 const rebberConfig = {
   preprocessors: {
     tableCell: require('rebber-plugins/dist/preprocessors/codeVisitor'),
-    iframe: require('rebber-plugins/dist/preprocessors/iframe')
   },
   overrides: {
     abbr: require('rebber-plugins/dist/type/abbr'),
@@ -33,6 +32,11 @@ const rebberConfig = {
     inlineCode: (ctx, node) => {
       const escaped = escape(node.value)
       return `\\CodeInline{${escaped}}`
+    },
+    iframe: (ctx, node) => {
+      const alternative = node.data.hProperties.src.includes('jsfiddle') ? 'Code' : 'Video'
+      const caption = node.caption || ''
+      return `\\iframe(${node.data.hProperties.src})[${alternative}][${caption}]`
     }
   },
   emoticons: remarkConfig.emoticons,
@@ -54,7 +58,7 @@ const rebberConfig = {
     image: (node) => `\\image{${node.url}}`,
   },
   figure: {
-    image: (_, caption, extra) => `\\image{${extra.url}}${caption ? `[${caption}]` : ''}\n`
+    image: (_, caption, extra) => `\\image{${extra.url}}${caption ? `[${caption}]` : ''}\n`,
   },
   headings: [
     (val) => `\\levelOneTitle{${val}}\n`,

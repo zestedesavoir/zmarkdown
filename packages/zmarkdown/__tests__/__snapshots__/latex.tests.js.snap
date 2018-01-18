@@ -532,11 +532,9 @@ exports[`mix-5 1`] = `
 `;
 
 exports[`mix-6 1`] = `
-"\\\\image{http://img.youtube.com/vi/8TQIvdFl4aU/0.jpg}[a caption\\\\externalLink{https://www.youtube.com/embed/8TQIvdFl4aU}{https://www.youtube.com/embed/8TQIvdFl4aU}]
+"\\\\iframe(https://www.youtube.com/embed/8TQIvdFl4aU)[Video][a caption]
 
-
-\\\\image{http://img.youtube.com/vi/8TQIvdFl4aU/0.jpg}[\\\\externalLink{https://www.youtube.com/embed/8TQIvdFl4aU}{https://www.youtube.com/embed/8TQIvdFl4aU}]
-
+\\\\iframe(https://www.youtube.com/embed/8TQIvdFl4aU)[Video][]
 
 no caption"
 `;

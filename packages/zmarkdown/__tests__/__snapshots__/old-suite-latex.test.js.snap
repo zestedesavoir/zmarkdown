@@ -4473,39 +4473,29 @@ javascript:alert\\\\%29'XSS'\\\\%29
 `;
 
 exports[`#zds #extensions properly renders video.txt 1`] = `
-"\\\\image{http://img.youtube.com/vi/BpJKvrjLUp0/0.jpg}[\\\\externalLink{https://www.youtube.com/embed/BpJKvrjLUp0}{https://www.youtube.com/embed/BpJKvrjLUp0}]
+"\\\\iframe(https://www.youtube.com/embed/BpJKvrjLUp0)[Video][]
 
+\\\\iframe(https://www.dailymotion.com/embed/video/x2y6lhm)[Video][]
 
-\\\\image{http://www.dailymotion.com/thumbnail/video/x2y6lhm}[\\\\externalLink{https://www.dailymotion.com/embed/video/x2y6lhm}{https://www.dailymotion.com/embed/video/x2y6lhm}]
-
-
-\\\\image{default image}[\\\\externalLink{https://player.vimeo.com/video/133693532}{https://player.vimeo.com/video/133693532}]
-
+\\\\iframe(https://player.vimeo.com/video/133693532)[Video][]
 
 !(https://screen.yahoo.com/weatherman-gives-forecast-using-taylor-191821481.html)
 
 
 
-\\\\image{http://img.youtube.com/vi/BpJKvrjLUp0/0.jpg}[\\\\externalLink{https://www.youtube.com/embed/BpJKvrjLUp0}{https://www.youtube.com/embed/BpJKvrjLUp0}]
+\\\\iframe(https://www.youtube.com/embed/BpJKvrjLUp0)[Video][]
 
+\\\\iframe(https://youtube.com/embed/BpJKvrjLUp0)[Video][]
 
-\\\\image{http://img.youtube.com/vi/BpJKvrjLUp0/0.jpg}[\\\\externalLink{https://youtube.com/embed/BpJKvrjLUp0}{https://youtube.com/embed/BpJKvrjLUp0}]
+\\\\iframe(https://jsfiddle.net/Sandhose/BcKhe/1/embedded/result,js,html,css/)[Code][]
 
+\\\\iframe(https://jsfiddle.net/zgjhjv9j/embedded/result,js,html,css/)[Code][]
 
-\\\\image{http://www.unixstickers.com/image/data/stickers/jsfiddle/JSfiddle-blue-w-type.sh.png}[\\\\externalLink{https://jsfiddle.net/Sandhose/BcKhe/1/embedded/result,js,html,css/}{https://jsfiddle.net/Sandhose/BcKhe/1/embedded/result,js,html,css/}]
+\\\\iframe(https://jsfiddle.net/zgjhjv9j/1/embedded/result,js,html,css/)[Code][]
 
+\\\\iframe(https://www.youtube.com/embed/1Bh4DZ2xGmw)[Video][]
 
-\\\\image{http://www.unixstickers.com/image/data/stickers/jsfiddle/JSfiddle-blue-w-type.sh.png}[\\\\externalLink{https://jsfiddle.net/zgjhjv9j/embedded/result,js,html,css/}{https://jsfiddle.net/zgjhjv9j/embedded/result,js,html,css/}]
-
-
-\\\\image{http://www.unixstickers.com/image/data/stickers/jsfiddle/JSfiddle-blue-w-type.sh.png}[\\\\externalLink{https://jsfiddle.net/zgjhjv9j/1/embedded/result,js,html,css/}{https://jsfiddle.net/zgjhjv9j/1/embedded/result,js,html,css/}]
-
-
-\\\\image{http://img.youtube.com/vi/1Bh4DZ2xGmw/0.jpg}[\\\\externalLink{https://www.youtube.com/embed/1Bh4DZ2xGmw}{https://www.youtube.com/embed/1Bh4DZ2xGmw}]
-
-
-\\\\image{default image}[\\\\externalLink{http://player.ina.fr/player/embed/MAN9062216517/1/1b0bd203fbcd702f9bc9b10ac3d0fc21/560/315/1/148db8}{http://player.ina.fr/player/embed/MAN9062216517/1/1b0bd203fbcd702f9bc9b10ac3d0fc21/560/315/1/148db8}]
-
+\\\\iframe(http://player.ina.fr/player/embed/MAN9062216517/1/1b0bd203fbcd702f9bc9b10ac3d0fc21/560/315/1/148db8)[Video][]
 
 This one should not be allowed:
 
@@ -4515,15 +4505,13 @@ This one should not be allowed:
 
 
 
-\\\\image{http://img.youtube.com/vi/BpJKvrjLUp0/0.jpg}[\\\\externalLink{https://www.youtube.com/embed/BpJKvrjLUp0}{https://www.youtube.com/embed/BpJKvrjLUp0}]
-
+\\\\iframe(https://www.youtube.com/embed/BpJKvrjLUp0)[Video][]
 
 with text after"
 `;
 
 exports[`#zds #extensions properly renders video_extra.txt 1`] = `
-"\\\\image{default image}[\\\\externalLink{https://www.youtube.com/embed/BpJKvrjLUp0}{https://www.youtube.com/embed/BpJKvrjLUp0}]
-
+"\\\\iframe(https://www.youtube.com/embed/BpJKvrjLUp0)[Video][]
 
 These ones should not be allowed by config:
 
