@@ -1,9 +1,20 @@
+const clone = require('clone')
 const a = require('axios')
 const fs = require('fs')
 
 const u = (path) => `http://localhost:27272${path}`
 const html = u('/html')
 const latex = u('/latex')
+const texfile = u('/latex-document')
+
+const texfileOpts = {
+  contentType: 'contentType',
+  title: 'The Title',
+  authors: ['FØØ', 'Bär'],
+  license: 'CC-BY-NC-SA',
+  licenseDirectory: '/tmp/l',
+  smileysDirectory: '/tmp/s',
+}
 
 const rm = (dir, file) => new Promise((resolve, reject) =>
   fs.unlink(`${dir}/${file}`, (err) => {
@@ -123,6 +134,60 @@ describe('LaTeX endpoint', () => {
       opts: { inline: true, images_download_dir: destination }
     })
 
+
+    const [rendered, , messages] = response.data
+    expect(messages).toEqual([])
+
+    const regex = /\/([a-zA-Z0-9_-]{7,14})\/([a-zA-Z0-9_-]{7,14})\.(.*)}/
+    expect(rendered).toMatch(regex)
+    const [, dir, file, ext] = rendered.match(regex)
+    return expect(rm(`${destination}/${dir}`, `${file}.${ext}`)).resolves.toBe('ok')
+  })
+})
+
+describe('Texfile endpoint', () => {
+  test('It should accept POSTed markdown', async () => {
+    const response = await a.post(texfile, { md: '# foo', opts: texfileOpts })
+    expect(response.status).toBe(200)
+
+    const [string, metadata] = response.data
+    expect(string).toMatchSnapshot()
+    expect(metadata).toEqual({})
+  })
+
+  test('It should not return metadata', async () => {
+    const response = await a.post(texfile, { md: '# foo', opts: texfileOpts })
+
+    const [, metadata] = response.data
+    expect(metadata).toEqual({})
+  })
+
+  test('It should not have pings', async () => {
+    const response = await a.post(texfile, { md: 'waddup @Clem', opts: texfileOpts })
+
+    const [rendered, metadata] = response.data
+    expect(rendered).toContain('waddup @Clem\n\n')
+    expect(metadata.ping).toBe(undefined)
+  })
+
+  test('It only parses inline things', async () => {
+    const response = await a.post(texfile, {
+      md: '# foo\n```js\nwindow\n```',
+      opts: texfileOpts
+    })
+
+    const [rendered] = response.data
+    expect(rendered).not.toContain('<h')
+  })
+
+  test('It downloads images', async () => {
+    const destination = process.env.DEST || `${__dirname}/../public/`
+    const opts = clone(texfileOpts)
+    opts.images_download_dir = destination
+    const response = await a.post(texfile, {
+      md: `![](${u('/static/img.png')})`,
+      opts: opts
+    })
 
     const [rendered, , messages] = response.data
     expect(messages).toEqual([])
