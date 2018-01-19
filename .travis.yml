@@ -23,6 +23,4 @@ before_script:
   - pm2 start packages/zmarkdown/server/index.js -i 3
 
 after_success:
-  - pm2 start packages/zmarkdown/server/index.js -i 3
-  - npm run coverage
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js

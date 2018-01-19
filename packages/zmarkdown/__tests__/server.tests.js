@@ -152,6 +152,9 @@ describe('Texfile endpoint', () => {
 
     const [string, metadata] = response.data
     expect(string).toMatchSnapshot()
+    expect(string).toContain(
+      '\\licence[/tmp/l/by-nc-sa.svg]{CC-BY-NC-SA}' +
+      '{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}')
     expect(metadata).toEqual({})
   })
 

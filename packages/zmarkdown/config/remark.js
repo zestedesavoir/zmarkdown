@@ -8,14 +8,14 @@ const textrRegisteredTrademark = require('typographic-registered-trademark')
 const textrSingleSpaces = require('typographic-single-spaces')
 const textrTrademark = require('typographic-trademark')
 
-const textrColon = require('typographic-colon')
-const textrEmDash = require('typographic-em-dash')
-const textrExclamationMark = require('typographic-exclamation-mark')
-const textrGuillemets = require('typographic-guillemets')
-const textrPercent = require('typographic-percent')
-const textrPermille = require('typographic-permille')
-const textrQuestionMark = require('typographic-question-mark')
-const textrSemicolon = require('typographic-semicolon')
+const textrColon = require('typographic-colon/src')
+const textrEmDash = require('typographic-em-dash/src')
+const textrExclamationMark = require('typographic-exclamation-mark/src')
+const textrGuillemets = require('typographic-guillemets/src')
+const textrPercent = require('typographic-percent/src')
+const textrPermille = require('typographic-permille/src')
+const textrQuestionMark = require('typographic-question-mark/src')
+const textrSemicolon = require('typographic-semicolon/src')
 
 const remarkConfig = {
   reParse: {

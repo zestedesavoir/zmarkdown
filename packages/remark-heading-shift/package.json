@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "pretest": "eslint src",
-    "prepare": "del-cli dist && cross-env BABEL_ENV=production babel --out-dir dist src",
+    "prepare": "del-cli dist && cross-env BABEL_ENV=production babel src --out-dir dist",
     "test": "jest",
     "coverage": "jest --coverage"
   },

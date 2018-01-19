@@ -2,7 +2,8 @@
   "jest": {
     "testPathIgnorePatterns": [
       "/node_modules/"
-    ]
+    ],
+    "collectCoverage": true
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
@@ -14,8 +15,7 @@
     "pretest": "lerna run pretest --scope zmarkdown",
     "test": "jest",
     "posttest": "lerna run posttest --scope zmarkdown",
-    "d": "node --inspect --debug-brk ./node_modules/.bin/jest --runInBand -i",
-    "coverage": "npm run pretest && jest --coverage && npm run posttest"
+    "d": "node --inspect --debug-brk ./node_modules/.bin/jest --runInBand -i"
   },
   "engines": {
     "node": "8"
