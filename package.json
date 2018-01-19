@@ -5,6 +5,7 @@
     ]
   },
   "devDependencies": {
+    "coveralls": "^3.0.0",
     "jest": "^22.0.5",
     "jest-environment-node-debug": "^2.0.0",
     "lerna": "^2.7.0"
@@ -14,7 +15,7 @@
     "test": "jest",
     "posttest": "lerna run posttest --scope zmarkdown",
     "d": "node --inspect --debug-brk ./node_modules/.bin/jest --runInBand -i",
-    "coverage": "jest --coverage"
+    "coverage": "npm run pretest && jest --coverage && npm run posttest"
   },
   "engines": {
     "node": "8"
