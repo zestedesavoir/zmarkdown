@@ -72,27 +72,57 @@ Only `metadata` is described in the **Response** sections below.
 
 ### Response
 
-*
+
+* `[contents, metadata, messages]`
+
+  This endpoint only returns `{}` as metadata, i.e. an empty object.
 
 ## `/latex-document` - Markdown to tex file
 
 ### Request
 
+
 * `opts.disable_images_download`, bool, default: `false`
 
-  Does not download the images.
+  see `/latex`
+
+* `opts.images_download_dir`, bool, default: `false`
+
+  see `/latex`
 
 * `opts.disable_jsfiddle`, bool, default: `false`
 
   see `/html`
 
-* `opts.svg_dest`, string, default: <none> (SVGs won't get saved to file)
+* `opts.contentType`, string
 
-  Absolute path to the directory where Mairmaid's SVGs will be stored.
+  Will be interpolated in `\documentclass[${contentType}]{zmdocument}`
+
+* `opts.title`, string
+
+  Will be interpolated in `\title{${title}}`
+
+* `opts.authors`, string[]
+
+  Will be interpolated in `\author{${authors.join(', ')}}`
+
+* `opts.license`, string
+
+  E.g. `CC-BY-SA` will be displayed as-is, using `${licenseDirectory}/by-sa.svg` as license icon with a link to `https://creativecommons.org/licenses/by-sa/4.0/legalcode`
+
+* `opts.licenseDirectory`, string
+
+  Path to the directory where CC license SVG icons are stored, see `license` above.
+
+* `opts.smileysDirectory`, string
+
+  Path to the directory where smileys are stored.
 
 ### Response
 
-*
+* `[contents, metadata, messages]`
+
+  This endpoint only returns `{}` as metadata, i.e. an empty object.
 
 
 

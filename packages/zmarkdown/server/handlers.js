@@ -158,7 +158,7 @@ module.exports = function markdownHandlers (Raven) {
           disableToc,
           latex,
         })
-        return callback(null, [latexDocument, {}])
+        return callback(null, [latexDocument, {}, messages])
       } catch (e) {
         Raven.captureException(e)
         return callback(e)
