@@ -1,6 +1,6 @@
 {
   "name": "remark-heading-trailing-spaces",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-heading-trailing-spaces",
     "type": "git"
