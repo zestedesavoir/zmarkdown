@@ -160,7 +160,7 @@ test('preprocessor', () => {
     `)
 
   rebberConfig.preprocessors = {
-    heading: require('../src/preprocessors/headingVisitor')
+    heading: require('../src/preprocessors/headingVisitor'),
   }
 
   const latex = rebber.toLaTeX(mdast, rebberConfig)

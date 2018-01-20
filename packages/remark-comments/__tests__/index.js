@@ -14,7 +14,7 @@ test('comments', () => {
     .use(stringify)
     .processSync(text)
 
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     Test comments
     =============
 
@@ -40,7 +40,7 @@ test('comments custom different markers', () => {
     .use(stringify)
     .processSync(text)
 
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     Test comments
     =============
 
@@ -66,7 +66,7 @@ test('comments custom same markers', () => {
     .use(stringify)
     .processSync(text)
 
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     Test comments
     =============
 

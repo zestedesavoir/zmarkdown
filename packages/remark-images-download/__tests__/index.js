@@ -79,7 +79,7 @@ describe('mock server tests', () => {
     const error = 'File at http://localhost:27273/ok.png weighs 516, max size is 400'
 
     const render = renderFactory({
-      maxFileSize: 400
+      maxFileSize: 400,
     })
 
     return render(file).then(vfile => {
@@ -146,7 +146,7 @@ describe('mock server tests', () => {
 
     const render = renderFactory({
       maxFileSize: 516,
-      dirSizeLimit: (516 * 3) + 50
+      dirSizeLimit: (516 * 3) + 50,
     })
 
     return render(file)
@@ -173,7 +173,7 @@ describe('mock server tests', () => {
     `
 
     const render = renderFactory({
-      disabled: true
+      disabled: true,
     })
 
     expect(render(file).then(vfile => vfile.contents)).resolves.toBe(html)

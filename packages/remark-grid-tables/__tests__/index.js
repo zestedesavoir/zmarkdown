@@ -17,12 +17,12 @@ const render = text => unified()
 
 
 test('grid-table', () => {
-  const { contents } = render(file(join(__dirname, 'grid-tables.md')))
+  const {contents} = render(file(join(__dirname, 'grid-tables.md')))
   expect(contents).toMatchSnapshot()
 })
 
 test('regression: grid table in fenced code block', () => {
-  const { contents } = render(`
+  const {contents} = render(`
 \`\`\`
 +---+---+---+
 | A | B | C |
@@ -38,7 +38,7 @@ test('regression: grid table in fenced code block', () => {
 })
 
 test('regression: grid table in non-fenced code block', () => {
-  const { contents } = render(`
+  const {contents} = render(`
     +---+---+---+
     | A | B | C |
     +===+===+===+

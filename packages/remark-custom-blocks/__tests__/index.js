@@ -19,13 +19,13 @@ const render = text => unified()
     attention: 'warning ico-after',
     a: 'warning ico-after',
     erreur: 'error ico-after',
-    e: 'error ico-after'
+    e: 'error ico-after',
   })
   .use(stringify)
   .processSync(text)
 
 test('blocks', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     [[s]]
     | Secret Block
 
@@ -83,7 +83,7 @@ test('blocks', () => {
 })
 
 test('regression 1', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     content before
     [[s]]
     |Block

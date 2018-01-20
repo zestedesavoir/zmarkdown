@@ -21,11 +21,12 @@
 
   "rules": {
     "accessor-pairs": 2,
+    "array-bracket-spacing": [1, "never"],
     "arrow-spacing": [2, {"before": true, "after": true}],
     "block-spacing": [2, "always"],
     "brace-style": [2, "1tbs", {"allowSingleLine": true}],
     "camelcase": [2, {"properties": "never"}],
-    "comma-dangle": [0, "always"],
+    "comma-dangle": [1, "always-multiline"],
     "comma-spacing": [2, {"before": false, "after": true}],
     "comma-style": [2, "last"],
     "computed-property-spacing": [2, "never"],
@@ -155,7 +156,7 @@
     "no-var": 2,
     "no-whitespace-before-property": 2,
     "no-with": 2,
-    "object-curly-spacing": [0, "always"],
+    "object-curly-spacing": [1, "never"],
     "object-property-newline": [2, {"allowMultiplePropertiesPerLine": true}],
     "one-var": [2, {"initialized": "never"}],
     "operator-linebreak": [2, "after", {"overrides": {"?": "before", ":": "before"}}],

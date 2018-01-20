@@ -26,7 +26,7 @@ const emoticons = {
 const integrationConfig = {
   preprocessors: {
     tableCell: require('../src/preprocessors/codeVisitor'),
-    iframe: require('../src/preprocessors/iframe')
+    iframe: require('../src/preprocessors/iframe'),
   },
   overrides: {
     abbr: require('../src/type/abbr'),
@@ -60,7 +60,7 @@ const integrationConfig = {
     image: (node) => `\\image{${node.url}}`,
   },
   figure: {
-    image: (_, caption, extra) => `\\image{${extra.url}}${caption ? `[${caption}]` : ''}\n`
+    image: (_, caption, extra) => `\\image{${extra.url}}${caption ? `[${caption}]` : ''}\n`,
   },
 }
 
@@ -120,7 +120,7 @@ test('heading with custom config', () => {
         (val) => `\\LevelFiveTitle{${val}}\n`,
         (val) => `\\LevelSixTitle{${val}}\n`,
         (val) => `\\LevelSevenTitle{${val}}\n`,
-      ]
+      ],
     })
     .processSync(fixture)
 
@@ -156,7 +156,7 @@ test('emoticon', () => {
       overrides: {
         emoticon: require('../src/type/emoticon'),
       },
-      emoticons: emoticons
+      emoticons: emoticons,
     })
     .processSync(fixture)
 
@@ -185,7 +185,7 @@ test('blockquote', () => {
   compiled = unified()
     .use(reParse)
     .use(rebber, {
-      blockquote: undefined
+      blockquote: undefined,
     })
     .processSync(fixture)
 
@@ -299,7 +299,7 @@ Object.keys(fixtures).filter(Boolean).filter(name => name.startsWith('mix-')).fo
   test(name, () => {
     const {contents} = unified()
       .use(reParse, {
-        footnotes: true
+        footnotes: true,
       })
       .use(require('remark-emoticons/src'), {emoticons})
       .use(require('remark-captions/src'), {external: {gridTable: 'Table:', math: 'Equation'},
@@ -318,9 +318,9 @@ Object.keys(fixtures).filter(Boolean).filter(name => name.startsWith('mix-')).fo
           ],
           thumbnail: {
             format: 'http://img.youtube.com/vi/{id}/0.jpg',
-            id: '.+/(.+)$'
+            id: '.+/(.+)$',
           },
-          removeAfter: '&'
+          removeAfter: '&',
         }})
       .use(require('remark-kbd/src'))
       .use(require('remark-abbr/src'))
@@ -359,8 +359,8 @@ test('abbr', () => {
     .use(require('remark-abbr/src'))
     .use(rebber, {
       overrides: {
-        abbr: require('../src/type/abbr')
-      }
+        abbr: require('../src/type/abbr'),
+      },
     })
     .processSync(dedent`
       FOO
@@ -376,9 +376,9 @@ test('abbr with custom config', () => {
     .use(require('remark-abbr/src'))
     .use(rebber, {
       overrides: {
-        abbr: require('../src/type/abbr')
+        abbr: require('../src/type/abbr'),
       },
-      abbr: (x) => `->${x}<-`
+      abbr: (x) => `->${x}<-`,
     })
     .processSync(dedent`
       FOO

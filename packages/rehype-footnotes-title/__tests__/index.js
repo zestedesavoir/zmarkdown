@@ -7,7 +7,7 @@ import footnotesTitle from '../src/'
 
 const render = config => unified()
   .use(reParse, {
-    footnotes: true
+    footnotes: true,
   })
   .use(remark2rehype)
   .use(footnotesTitle, config)
@@ -36,16 +36,16 @@ const render = config => unified()
   `)
 
 it('renders correctly with first config', () => {
-  const { contents } = render('Foo bar $id')
+  const {contents} = render('Foo bar $id')
   expect(contents).toMatchSnapshot()
 })
 
 it('renders correctly with second config', () => {
-  const { contents } = render('Baz $id qux?')
+  const {contents} = render('Baz $id qux?')
   expect(contents).toMatchSnapshot()
 })
 
 it('renders correctly without config', () => {
-  const { contents } = render()
+  const {contents} = render()
   expect(contents).toMatchSnapshot()
 })

@@ -61,23 +61,23 @@ const wrappers = {
       [['video-wrapper'], ['video-container']],
       node => !jsFiddleAndInaFilter(node)
     ),
-    createWrapper('iframe', 'div', ['iframe-wrapper'], jsFiddleAndInaFilter)
+    createWrapper('iframe', 'div', ['iframe-wrapper'], jsFiddleAndInaFilter),
   ],
   table: [
-    createWrapper('table', 'div', ['table-wrapper'])
+    createWrapper('table', 'div', ['table-wrapper']),
   ],
 }
 
-const zmdParser = (config) => {
+const zmdParser = (config, to) => {
   const mdProcessor = unified()
     .use(remarkParse, config.reParse)
 
-  if (!config.noTypography) {
+  if (to !== 'latex' && !config.noTypography) {
     mdProcessor
       .use(remarkTextr, config.textr)
   }
 
-  mdProcessor
+  return mdProcessor
     .use(remarkAbbr)
     .use(remarkAlign, config.alignBlocks)
     .use(remarkCaptions, config.captions)
@@ -104,29 +104,25 @@ const zmdParser = (config) => {
         file.data.disableToc = false
       })
     })
-
-  return mdProcessor
 }
 
-function getLatexProcessor (remarkConfig, rebberConfig) {
+function getLatexProcessor (remarkConfig, rebberConfig, to) {
   remarkConfig.noTypography = true
 
-  return zmdParser(remarkConfig)
+  return zmdParser(remarkConfig, to)
     .use(rebberStringify, rebberConfig)
 }
 
-function getHTMLProcessor (remarkConfig, rebberConfig) {
-  const mdProcessor = zmdParser(remarkConfig)
-
-  mdProcessor
+function getHTMLProcessor (remarkConfig, rebberConfig, to) {
+  const parser = zmdParser(remarkConfig, to)
     .use(remark2rehype, remarkConfig.remark2rehype)
 
-  if (!remarkConfig.noTypography) {
-    mdProcessor
-      .use(rehypeHighlight)
+  if (!remarkConfig._test) {
+    parser
+      .use(rehypeHighlight, remarkConfig.rehypeHighlight)
   }
 
-  return mdProcessor
+  return parser
     .use(rehypeSlug)
     .use(rehypeAutolinkHeadings, remarkConfig.autolinkHeadings)
     .use(rehypeHTMLBlocks)
@@ -145,8 +141,8 @@ const rendererFactory = ({remarkConfig, rebberConfig}, to = 'html') => (input, c
   [remarkConfig, rebberConfig] = [clone(remarkConfig), clone(rebberConfig)]
 
   const mdProcessor = to !== 'html'
-    ? getLatexProcessor(remarkConfig, rebberConfig)
-    : getHTMLProcessor(remarkConfig, rebberConfig)
+    ? getLatexProcessor(remarkConfig, rebberConfig, to)
+    : getHTMLProcessor(remarkConfig, rebberConfig, to)
 
 
   if (typeof cb !== 'function') {
@@ -168,7 +164,7 @@ const rendererFactory = ({remarkConfig, rebberConfig}, to = 'html') => (input, c
 const mdastParser = (opts) => (zmd) => zmdParser(opts.remarkConfig).parse(zmd)
 
 module.exports = (
-  opts = { remarkConfig, rebberConfig },
+  opts = {remarkConfig, rebberConfig},
   to = 'html'
 ) => {
   if (!opts.remarkConfig || !Object.keys(remarkConfig).length) {

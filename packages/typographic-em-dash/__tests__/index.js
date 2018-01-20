@@ -5,9 +5,9 @@ const chars = {
   'EM DASH': '\u2014',
 }
 
-const american = { locale: 'en-us' }
-const fr = { locale: 'fr' }
-const frCH = { locale: 'fr-sw' }
+const american = {locale: 'en-us'}
+const fr = {locale: 'fr'}
+const frCH = {locale: 'fr-sw'}
 
 const nnbs = chars['NARROW NO-BREAK SPACE']
 const dashChar = chars['EM DASH']

@@ -35,7 +35,7 @@ function plugin ({
   disabled = false,
   maxFileSize = 1000000,
   dirSizeLimit = 10000000,
-  downloadDestination = '/tmp'
+  downloadDestination = '/tmp',
 } = {}) {
   return function transform (tree, vfile) {
     if (disabled) return noop
@@ -52,7 +52,7 @@ function plugin ({
         const promises = [{offset: -1, promise: noop}]
 
         visit(tree, 'image', (node) => {
-          const { url, position } = node
+          const {url, position} = node
           const parsedURI = URL.parse(url)
 
           if (!parsedURI.host) return

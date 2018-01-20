@@ -12,7 +12,7 @@
     "Victor Felder <victor@draft.li> (https://draft.li)"
   ],
   "scripts": {
-    "pretest": "eslint src",
+    "pretest": "eslint .",
     "prepare": "del-cli dist && cross-env BABEL_ENV=production babel src --out-dir dist",
     "test": "jest",
     "coverage": "jest --coverage"
@@ -41,7 +41,7 @@
     "eslint": "^4.5.0",
     "jest": "^22.0.5",
     "rehype-stringify": "^3.0.0",
-    "remark-parse": "^4.0.0",
+    "remark-parse": "^5.0.0",
     "remark-rehype": "^3.0.0",
     "unified": "^6.1.5"
   }

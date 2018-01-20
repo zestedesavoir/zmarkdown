@@ -11,10 +11,10 @@ import plugin from '../src/'
 
 const render = text => unified()
   .use(reParse, {
-    footnotes: true
+    footnotes: true,
   })
   .use(remarkCustomBlocks, {
-    secret: 'spoiler'
+    secret: 'spoiler',
   })
   .use(plugin)
   .use(remark2rehype)
@@ -41,12 +41,12 @@ const fixture = dedent`
 
 
 test('kbd', () => {
-  const { contents } = render(fixture)
+  const {contents} = render(fixture)
   expect(contents).toMatchSnapshot()
 })
 
 test('to markdown', () => {
-  const { contents } = unified()
+  const {contents} = unified()
     .use(reParse)
     .use(remarkStringify)
     .use(plugin)

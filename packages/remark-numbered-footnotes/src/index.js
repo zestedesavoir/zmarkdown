@@ -18,11 +18,11 @@ function convert (node, index, parent) {
   const footnoteDefinition = {
     type: 'footnoteDefinition',
     identifier: id,
-    children: node.children
+    children: node.children,
   }
   const footnoteReference = {
     type: 'footnoteReference',
-    identifier: id
+    identifier: id,
   }
   parent.children.splice(index, 1, footnoteReference, footnoteDefinition)
 }

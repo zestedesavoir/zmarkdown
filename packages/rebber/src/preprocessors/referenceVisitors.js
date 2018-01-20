@@ -24,6 +24,6 @@ module.exports = () => {
         node.title = ''
         node.url = state[node.identifier]
       }
-    }
+    },
   }
 }

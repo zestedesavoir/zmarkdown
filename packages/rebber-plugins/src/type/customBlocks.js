@@ -7,7 +7,7 @@ module.exports = customBlock
 const defaultMacros = {
   defaultBlock: (innerText, environmentName) => {
     return `\\begin{${environmentName}}\n${innerText}\n\\end{${environmentName}}\n`
-  }
+  },
 }
 
 function customBlock (ctx, node) {

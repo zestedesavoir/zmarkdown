@@ -14,7 +14,7 @@ const render = text => unified()
   .processSync(text)
 
 it('renders references', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     This is an abbreviation: REF.
     ref and REFERENCE should be ignored.
 
@@ -31,7 +31,7 @@ it('renders references', () => {
 
 
 it('passes the first regression test', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     The HTML specification is maintained by the W3C:\
     [link](https://w3c.github.io/html/), this line had an abbr before link.
 
@@ -45,7 +45,7 @@ it('passes the first regression test', () => {
 })
 
 it('passes the second regression test', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     The HTML specification is maintained by the W3C:\
     [link](https://w3c.github.io/html/), this line had an abbr before **link** HTML.
 
@@ -59,7 +59,7 @@ it('passes the second regression test', () => {
 })
 
 it('passes the retro test', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     An ABBR: "REF", ref and REFERENCE should be ignored.
 
     The HTML specification is maintained by the W3C.
@@ -75,7 +75,7 @@ it('passes the retro test', () => {
 })
 
 it('no reference', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     No reference!
   `)
 

@@ -8,7 +8,7 @@ const template = ({
   licenseDirectory,
   smileysDirectory,
   disableToc = false,
-  latex
+  latex,
 }) => {
   assert(contentType, 'Error with argument: "contentType"')
   assert(title, 'Error with argument: "title"')

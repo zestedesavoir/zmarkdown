@@ -44,7 +44,7 @@
     "remark-kbd": "^1.0.8",
     "remark-math": "^1.0.1",
     "remark-numbered-footnotes": "^1.0.3",
-    "remark-parse": "^4.0.0",
+    "remark-parse": "^5.0.0",
     "remark-ping": "^1.0.12",
     "remark-rehype": "^3.0.0",
     "remark-sub-super": "^1.0.9",
@@ -87,7 +87,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "pretest": "npm run server && sleep 1",
+    "pretest": "npm run server && eslint .",
     "test": "jest",
     "posttest": "npm run stop",
     "watch": "jest --watch",

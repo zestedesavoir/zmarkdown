@@ -37,7 +37,7 @@ const rebberConfig = {
       const alternative = node.data.hProperties.src.includes('jsfiddle') ? 'Code' : 'Video'
       const caption = node.caption || ''
       return `\\iframe(${node.data.hProperties.src})[${alternative}][${caption}]`
-    }
+    },
   },
   emoticons: remarkConfig.emoticons,
   codeAppendiceTitle: 'Annexes',
@@ -51,7 +51,7 @@ const rebberConfig = {
     },
   },
   link: {
-    prefix: 'http://zestedesavoir.com'
+    prefix: 'http://zestedesavoir.com',
   },
   image: {
     inlineImage: (node) => `\\inlineImage{${node.url}}`,

@@ -3,6 +3,7 @@ const clone = require('clone')
 const remarkConfig = require('../config/remark')
 const rebberConfig = require('../config/rebber')
 remarkConfig.noTypography = true
+remarkConfig._test = true
 remarkConfig.ping.pingUsername = () => false
 
 const zmarkdown = require('../')
@@ -22,24 +23,24 @@ const remarkConfigOverride = (config) => {
   Object.assign(newConfig, config)
   return {
     remarkConfig: newConfig,
-    rebberConfig: rebberConfig
+    rebberConfig: rebberConfig,
   }
 }
 
 describe('#heading-shift', () => {
 
   it(`shifts in range`, () => {
-    const config = remarkConfigOverride({ headingShifter: 1 })
+    const config = remarkConfigOverride({headingShifter: 1})
     return expect(renderString(config)('### should be h4')).resolves.toMatchSnapshot()
   })
 
   it(`shifts past range`, () => {
-    const config = remarkConfigOverride({ headingShifter: 10 })
+    const config = remarkConfigOverride({headingShifter: 10})
     return expect(renderString(config)('### should be h6')).resolves.toMatchSnapshot()
   })
 
   it(`shifts before range`, () => {
-    const config = remarkConfigOverride({ headingShifter: -10 })
+    const config = remarkConfigOverride({headingShifter: -10})
     return expect(renderString(config)('### should be h1')).resolves.toMatchSnapshot()
   })
 })
@@ -943,7 +944,7 @@ describe('#zds', () => {
 
     it(`properly renders math.txt without custom config`, () => {
       const filepath = `${dir}/math.txt`
-      const config = remarkConfigOverride({ katex: {}, math: {} })
+      const config = remarkConfigOverride({katex: {}, math: {}})
       return renderFile(config)(filepath).then((tex) => {
         expect((tex.match(/\$\$/g) || []).length).toBe(0)
         expect((tex.match(/\\\[/g) || []).length).toBe(1)
@@ -981,7 +982,7 @@ describe('#zds', () => {
 
     it(`properly renders video_extra.txt`, () => {
       const filepath = `${dir}/video_extra.txt`
-      const config = remarkConfigOverride({ iframes: {
+      const config = remarkConfigOverride({iframes: {
         'www.youtube.com': {
           tag: 'iframe',
           width: 560,
@@ -991,7 +992,7 @@ describe('#zds', () => {
             ['watch?v=', 'embed/'],
             ['http://', 'https://'],
           ],
-          removeAfter: '&'
+          removeAfter: '&',
         },
         'jsfiddle.net': {
           tag: 'iframe',
@@ -1001,8 +1002,8 @@ describe('#zds', () => {
           replace: [
             ['http://', 'https://'],
           ],
-          append: 'embedded/result,js,html,css/'
-        }
+          append: 'embedded/result,js,html,css/',
+        },
       }})
       return expect(renderFile(config)(filepath)).resolves.toMatchSnapshot()
     })

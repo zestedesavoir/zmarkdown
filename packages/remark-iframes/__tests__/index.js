@@ -24,7 +24,7 @@ test('video', () => {
       disabled: false,
       replace: [
         ['video/', 'embed/video/'],
-      ]
+      ],
     },
     'www.vimeo.com': {
       tag: 'iframe',
@@ -35,7 +35,7 @@ test('video', () => {
         ['http://', 'https://'],
         ['www.', ''],
         ['vimeo.com/', 'player.vimeo.com/video/'],
-      ]
+      ],
     },
     'vimeo.com': {
       tag: 'iframe',
@@ -46,7 +46,7 @@ test('video', () => {
         ['http://', 'https://'],
         ['www.', ''],
         ['vimeo.com/', 'player.vimeo.com/video/'],
-      ]
+      ],
     },
     'www.youtube.com': {
       tag: 'iframe',
@@ -59,9 +59,9 @@ test('video', () => {
       ],
       thumbnail: {
         format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/(.+)$'
+        id: '.+/(.+)$',
       },
-      removeAfter: '&'
+      removeAfter: '&',
     },
     'youtube.com': {
       tag: 'iframe',
@@ -74,9 +74,9 @@ test('video', () => {
       ],
       thumbnail: {
         format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/(.+)$'
+        id: '.+/(.+)$',
       },
-      removeAfter: '&'
+      removeAfter: '&',
     },
     'youtu.be': {
       tag: 'iframe',
@@ -89,16 +89,16 @@ test('video', () => {
       ],
       thumbnail: {
         format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/(.+)$'
+        id: '.+/(.+)$',
       },
-      removeAfter: '&'
+      removeAfter: '&',
     },
     'screen.yahoo.com': {
       tag: 'iframe',
       width: 624,
       height: 351,
       disabled: false,
-      append: '?format=embed&player_autoplay=false'
+      append: '?format=embed&player_autoplay=false',
     },
     'www.ina.fr': {
       tag: 'iframe',
@@ -110,7 +110,7 @@ test('video', () => {
         ['/video/', '/player/embed/'],
       ],
       append: '/1/1b0bd203fbcd702f9bc9b10ac3d0fc21/560/315/1/148db8',
-      removeFileName: true
+      removeFileName: true,
     },
     'www.jsfiddle.net': {
       tag: 'iframe',
@@ -136,7 +136,7 @@ test('video', () => {
     },
   }
 
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     Test video
     ==========
 
@@ -186,7 +186,7 @@ test('extra', () => {
         ['watch?v=', 'embed/'],
         ['http://', 'https://'],
       ],
-      removeAfter: '&'
+      removeAfter: '&',
     },
     'jsfiddle.net': {
       tag: 'iframe',
@@ -200,7 +200,7 @@ test('extra', () => {
     },
   }
 
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     Test video extra
     ================
 

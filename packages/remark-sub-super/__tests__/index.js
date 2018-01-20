@@ -15,7 +15,7 @@ const render = text => unified()
 
 
 test('superscript', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     Foo ^sup^ kxcvj ^sup *string*^ bar
 
     not ^ here
@@ -26,7 +26,7 @@ test('superscript', () => {
 })
 
 test('subscript', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     Foo ~sup~ kxcvj ~sup *string*~ bar
 
     not ~ here
@@ -39,7 +39,7 @@ test('subscript', () => {
 })
 
 test('regression 1', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     a^b^ a^b^ a^b^ a^b^ a^b^
 
     a~b~ a~b~ a~b~ a~b~ a~b~
@@ -52,7 +52,7 @@ test('regression 1', () => {
 })
 
 test('regression 2', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     Literally s^e^lfies tbh lo-fi. Actually health go retro polaroid\
     sriracha. Kogi live-edge ^mixtape^ marfa street ~art~ synth. Godard\
     synth truffaut selfies, vape fanny  subway tile. Stumptown af pabst,\
@@ -71,7 +71,7 @@ test('regression 2', () => {
 })
 
 test('disallow empty tags', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     ^^foo^^
   `)
   expect(contents).toMatchSnapshot()

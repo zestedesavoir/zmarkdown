@@ -23,7 +23,7 @@ const render = (text, config) => unified()
   .processSync(text)
 
 test('code', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     ## Code
 
     Normal code
@@ -69,12 +69,12 @@ test('#101', () => {
   foo
   \`\`\`
 
-  [](#)`, {external: { code: 'Code:' }})
+  [](#)`, {external: {code: 'Code:'}})
   expect(contents).toMatchSnapshot()
 })
 
 test('custom-table', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     ## Table
 
     Normal table
@@ -100,26 +100,26 @@ test('custom-table', () => {
     CustomTable: figcapt1
     CustomTable: bis
     `,
-    { external: { table: 'CustomTable:' } }
+  {external: {table: 'CustomTable:'}}
   )
   expect(contents).toMatchSnapshot()
 })
 
 test('gridtables', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     +----+----+----+
     | a  |  b | c  |
     +====+====+====+
     | 1  |2   |3   |
     +----+----+----+
     Table: bla bla`,
-    { external: {gridTable: 'Table:'}}
+  {external: {gridTable: 'Table:'}}
   )
   expect(contents).toMatchSnapshot()
 })
 
 test('caption without block', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
       \`\`\`python
       print('bla')
       \`\`\`
@@ -133,13 +133,13 @@ test('caption without block', () => {
       \`\`\`
       a code without lang
       \`\`\`
-    `, { external: {gridTable: 'Table:'}}
+    `, {external: {gridTable: 'Table:'}}
   )
   expect(contents).toMatchSnapshot()
 })
 
 test('quotation', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     (for convenience, · are replaced with
     simple single spaces in the tests)
 
@@ -183,7 +183,7 @@ test('quotation', () => {
 
 
 test('table', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     ## Table
 
     Normal table
@@ -207,7 +207,7 @@ test('table', () => {
 
 
 test('external legend: two legends', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     head1| head2
     -----|------
     bla|bla
@@ -219,7 +219,7 @@ test('external legend: two legends', () => {
 
 
 test('internal legend: two legends', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     Should only keep the 1st
 
     > My citation
@@ -243,7 +243,7 @@ test('internal legend: two legends', () => {
 })
 
 test('legend in paragraph', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     foo
 
     ![]()

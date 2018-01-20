@@ -61,7 +61,11 @@ const remarkConfig = {
   headingShifter: 0,
 
   remark2rehype: {
-    allowDangerousHTML: true
+    allowDangerousHTML: true,
+  },
+
+  rehypeHighlight: {
+    ignoreMissing: true,
   },
 
   footnotesTitles: 'Retourner au texte de la note $id',
@@ -113,15 +117,15 @@ const remarkConfig = {
       ':waw:': '/static/smileys/waw.png',
       ':zorro:': '/static/smileys/zorro.png',
     },
-    classes: 'smiley'
+    classes: 'smiley',
   },
 
   math: {
-    inlineMathDouble: true
+    inlineMathDouble: true,
   },
 
   katex: {
-    inlineMathDoubleDisplay: true
+    inlineMathDoubleDisplay: true,
   },
 
   iframes: {
@@ -135,8 +139,8 @@ const remarkConfig = {
       ],
       thumbnail: {
         format: 'http://www.dailymotion.com/thumbnail/video/{id}',
-        id: '.+/(.+)$'
-      }
+        id: '.+/(.+)$',
+      },
     },
     'www.vimeo.com': {
       tag: 'iframe',
@@ -147,7 +151,7 @@ const remarkConfig = {
         ['http://', 'https://'],
         ['www.', ''],
         ['vimeo.com/', 'player.vimeo.com/video/'],
-      ]
+      ],
     },
     'vimeo.com': {
       tag: 'iframe',
@@ -158,7 +162,7 @@ const remarkConfig = {
         ['http://', 'https://'],
         ['www.', ''],
         ['vimeo.com/', 'player.vimeo.com/video/'],
-      ]
+      ],
     },
     'www.youtube.com': {
       tag: 'iframe',
@@ -171,9 +175,9 @@ const remarkConfig = {
       ],
       thumbnail: {
         format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/(.+)$'
+        id: '.+/(.+)$',
       },
-      removeAfter: '&'
+      removeAfter: '&',
     },
     'youtube.com': {
       tag: 'iframe',
@@ -186,9 +190,9 @@ const remarkConfig = {
       ],
       thumbnail: {
         format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/(.+)$'
+        id: '.+/(.+)$',
       },
-      removeAfter: '&'
+      removeAfter: '&',
     },
     'youtu.be': {
       tag: 'iframe',
@@ -201,9 +205,9 @@ const remarkConfig = {
       ],
       thumbnail: {
         format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/(.+)$'
+        id: '.+/(.+)$',
       },
-      removeAfter: '&'
+      removeAfter: '&',
     },
     'www.ina.fr': {
       tag: 'iframe',
@@ -215,7 +219,7 @@ const remarkConfig = {
         ['/video/', '/player/embed/'],
       ],
       append: '/1/1b0bd203fbcd702f9bc9b10ac3d0fc21/560/315/1/148db8',
-      removeFileName: true
+      removeFileName: true,
     },
     'www.jsfiddle.net': {
       tag: 'iframe',
@@ -246,7 +250,7 @@ const remarkConfig = {
         format: 'http://www.unixstickers.com/image/data/stickers' +
         '/jsfiddle/JSfiddle-blue-w-type.sh.png',
       },
-    }
+    },
   },
 
   captions: {
@@ -261,7 +265,7 @@ const remarkConfig = {
       math: 'Equation:',
       inlineMath: 'Equation:',
       image: 'Figure:',
-    }
+    },
   },
 
   ping: {
@@ -276,7 +280,7 @@ const remarkConfig = {
     downloadDestination: './img/',
     maxlength: 1000000,
     dirSizeLimit: 10000000,
-  }
+  },
 }
 
 module.exports = remarkConfig

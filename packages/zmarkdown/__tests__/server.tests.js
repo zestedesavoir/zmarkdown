@@ -27,7 +27,7 @@ const rm = (dir, file) => new Promise((resolve, reject) =>
 
 describe('HTML endpoint', () => {
   test('It should accept POSTed markdown', async () => {
-    const response = await a.post(html, { md: '# foo', opts: {} })
+    const response = await a.post(html, {md: '# foo', opts: {}})
 
     expect(response.status).toBe(200)
     const [string, metadata] = response.data
@@ -36,21 +36,21 @@ describe('HTML endpoint', () => {
   })
 
   test('It should not disable TOC', async () => {
-    const response = await a.post(html, { md: '# foo', opts: {} })
+    const response = await a.post(html, {md: '# foo', opts: {}})
 
     const [, {disableToc}] = response.data
     expect(disableToc).toBe(false)
   })
 
   test('It should disable TOC', async () => {
-    const response = await a.post(html, { md: '*foo*', opts: {} })
+    const response = await a.post(html, {md: '*foo*', opts: {}})
 
     const [, {disableToc}] = response.data
     expect(disableToc).toBe(true)
   })
 
   test('It should get ping as metadata', async () => {
-    const response = await a.post(html, { md: 'waddup @Clem', opts: {} })
+    const response = await a.post(html, {md: 'waddup @Clem', opts: {}})
 
     const [rendered, metadata] = response.data
     expect(rendered).toContain('class="ping"')
@@ -59,7 +59,7 @@ describe('HTML endpoint', () => {
   })
 
   test('It should disable ping', async () => {
-    const response = await a.post(html, { md: 'waddup @Clem', opts: { disable_ping: true } })
+    const response = await a.post(html, {md: 'waddup @Clem', opts: {disable_ping: true}})
 
     const [rendered, metadata] = response.data
     expect(rendered).not.toContain('class="ping"')
@@ -69,7 +69,7 @@ describe('HTML endpoint', () => {
   test('It only parses inline things', async () => {
     const response = await a.post(html, {
       md: '# foo\n```js\nwindow\n```',
-      opts: { inline: true }
+      opts: {inline: true},
     })
 
     const [rendered] = response.data
@@ -79,7 +79,7 @@ describe('HTML endpoint', () => {
 
 describe('LaTeX endpoint', () => {
   test('It should accept POSTed markdown', async () => {
-    const response = await a.post(latex, { md: '# foo', opts: {} })
+    const response = await a.post(latex, {md: '# foo', opts: {}})
     expect(response.status).toBe(200)
 
     const [string, metadata] = response.data
@@ -88,21 +88,21 @@ describe('LaTeX endpoint', () => {
   })
 
   test('It should not disable TOC', async () => {
-    const response = await a.post(latex, { md: '# foo', opts: {} })
+    const response = await a.post(latex, {md: '# foo', opts: {}})
 
     const [, {disableToc}] = response.data
     expect(disableToc).toBe(false)
   })
 
   test('It should disable TOC', async () => {
-    const response = await a.post(latex, { md: '*foo*', opts: {} })
+    const response = await a.post(latex, {md: '*foo*', opts: {}})
 
     const [, {disableToc}] = response.data
     expect(disableToc).toBe(true)
   })
 
   test('It should not have pings', async () => {
-    const response = await a.post(latex, { md: 'waddup @Clem', opts: {} })
+    const response = await a.post(latex, {md: 'waddup @Clem', opts: {}})
 
     const [rendered, metadata] = response.data
     expect(rendered).toEqual('waddup @Clem\n\n')
@@ -110,7 +110,7 @@ describe('LaTeX endpoint', () => {
   })
 
   test('It should disable ping', async () => {
-    const response = await a.post(latex, { md: 'waddup @Clem', opts: { disable_ping: true } })
+    const response = await a.post(latex, {md: 'waddup @Clem', opts: {disable_ping: true}})
 
     const [rendered, metadata] = response.data
     expect(rendered).not.toContain('class="ping"')
@@ -120,7 +120,7 @@ describe('LaTeX endpoint', () => {
   test('It only parses inline things', async () => {
     const response = await a.post(latex, {
       md: '# foo\n```js\nwindow\n```',
-      opts: { inline: true }
+      opts: {inline: true},
     })
 
     const [rendered] = response.data
@@ -131,7 +131,7 @@ describe('LaTeX endpoint', () => {
     const destination = process.env.DEST || `${__dirname}/../public/`
     const response = await a.post(latex, {
       md: `![](${u('/static/img.png')})`,
-      opts: { inline: true, images_download_dir: destination }
+      opts: {inline: true, images_download_dir: destination},
     })
 
 
@@ -147,7 +147,7 @@ describe('LaTeX endpoint', () => {
 
 describe('Texfile endpoint', () => {
   test('It should accept POSTed markdown', async () => {
-    const response = await a.post(texfile, { md: '# foo', opts: texfileOpts })
+    const response = await a.post(texfile, {md: '# foo', opts: texfileOpts})
     expect(response.status).toBe(200)
 
     const [string, metadata] = response.data
@@ -159,14 +159,14 @@ describe('Texfile endpoint', () => {
   })
 
   test('It should not return metadata', async () => {
-    const response = await a.post(texfile, { md: '# foo', opts: texfileOpts })
+    const response = await a.post(texfile, {md: '# foo', opts: texfileOpts})
 
     const [, metadata] = response.data
     expect(metadata).toEqual({})
   })
 
   test('It should not have pings', async () => {
-    const response = await a.post(texfile, { md: 'waddup @Clem', opts: texfileOpts })
+    const response = await a.post(texfile, {md: 'waddup @Clem', opts: texfileOpts})
 
     const [rendered, metadata] = response.data
     expect(rendered).toContain('waddup @Clem\n\n')
@@ -176,7 +176,7 @@ describe('Texfile endpoint', () => {
   test('It only parses inline things', async () => {
     const response = await a.post(texfile, {
       md: '# foo\n```js\nwindow\n```',
-      opts: texfileOpts
+      opts: texfileOpts,
     })
 
     const [rendered] = response.data
@@ -189,7 +189,7 @@ describe('Texfile endpoint', () => {
     opts.images_download_dir = destination
     const response = await a.post(texfile, {
       md: `![](${u('/static/img.png')})`,
-      opts: opts
+      opts: opts,
     })
 
     const [rendered, , messages] = response.data

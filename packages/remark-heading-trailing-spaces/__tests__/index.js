@@ -33,12 +33,12 @@ const fixture = dedent`
 `
 
 test('with plugin', () => {
-  const { contents } = render(fixture)
+  const {contents} = render(fixture)
   expect(contents).toMatchSnapshot()
 })
 
 test('without', () => {
-  const { contents } = unified()
+  const {contents} = unified()
     .use(reParse)
     .use(remark2rehype)
     .use(rehypeStringify)
@@ -48,7 +48,7 @@ test('without', () => {
 })
 
 test('regression 1', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     word
     -·item·1
     -·item·2

@@ -4,6 +4,7 @@ const clone = require('clone')
 const remarkConfig = clone(require('../config/remark'))
 const rebberConfig = clone(require('../config/rebber'))
 remarkConfig.noTypography = true
+remarkConfig._test = true
 remarkConfig.ping.pingUsername = () => false
 
 const loadFixture = (filepath) => String(fs.readFileSync(filepath.replace('.txt', '.html')))
@@ -25,14 +26,14 @@ const remarkConfigOverride = (config) => {
   Object.assign(newConfig, config)
   return {
     remarkConfig: newConfig,
-    rebberConfig: rebberConfig
+    rebberConfig: rebberConfig,
   }
 }
 
 /* jest */
 const HtmlDiffer = require('html-differ').HtmlDiffer
 const htmlDiffer = new HtmlDiffer({
-  ignoreWhitespaces: true
+  ignoreWhitespaces: true,
 })
 const logger = require('html-differ/lib/logger')
 
@@ -65,7 +66,7 @@ expect.extend({
 describe('#heading-shift', () => {
 
   it(`shifts in range`, () => {
-    const config = remarkConfigOverride({ headingShifter: 1 })
+    const config = remarkConfigOverride({headingShifter: 1})
     return expect(renderString(config)('### should be h4')).resolves.toHTML(
       '<h4 id="should-be-h4">' +
       'should be h4<a aria-hidden="true" href="#should-be-h4"><span class="icon ' +
@@ -73,14 +74,14 @@ describe('#heading-shift', () => {
   })
 
   it(`shifts past range`, () => {
-    const config = remarkConfigOverride({ headingShifter: 10 })
+    const config = remarkConfigOverride({headingShifter: 10})
     return expect(renderString(config)('### should be h6')).resolves.toHTML(
       '<h6 id="should-be-h6">should be h6<a' +
       ' aria-hidden="true" href="#should-be-h6"><span class="icon icon-link"></span></a></h6>')
   })
 
   it(`shifts before range`, () => {
-    const config = remarkConfigOverride({ headingShifter: -10 })
+    const config = remarkConfigOverride({headingShifter: -10})
     return expect(renderString(config)('### should be h1')).resolves.toHTML(
       '<h1 id="should-be-h1">should be' +
       ' h1<a aria-hidden="true" href="#should-be-h1"><span class="icon icon-link"></span></a></h1>')
@@ -985,7 +986,7 @@ describe('#zds', () => {
 
     it(`properly renders math.txt without custom config`, () => {
       const filepath = `${dir}/math.txt`
-      const config = remarkConfigOverride({ katex: {}, math: {} })
+      const config = remarkConfigOverride({katex: {}, math: {}})
       return renderFile(config)(filepath).then((html) => {
         expect((html.match(/katex-mathml/g) || []).length).toBe(4)
         expect((html.match(/span class="katex-display"/g) || []).length).toBe(1)
@@ -1025,7 +1026,7 @@ describe('#zds', () => {
 
     it(`properly renders video_extra.txt`, () => {
       const filepath = `${dir}/video_extra.txt`
-      const config = remarkConfigOverride({ iframes: {
+      const config = remarkConfigOverride({iframes: {
         'www.youtube.com': {
           tag: 'iframe',
           width: 560,
@@ -1035,7 +1036,7 @@ describe('#zds', () => {
             ['watch?v=', 'embed/'],
             ['http://', 'https://'],
           ],
-          removeAfter: '&'
+          removeAfter: '&',
         },
         'jsfiddle.net': {
           tag: 'iframe',
@@ -1045,8 +1046,8 @@ describe('#zds', () => {
           replace: [
             ['http://', 'https://'],
           ],
-          append: 'embedded/result,js,html,css/'
-        }
+          append: 'embedded/result,js,html,css/',
+        },
       }})
 
       return expect(renderFile(config)(filepath)).resolves.toHTML(loadFixture(filepath).trim())

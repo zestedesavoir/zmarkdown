@@ -2,12 +2,12 @@ import permille from '../src/'
 
 const chars = {
   'NARROW NO-BREAK SPACE': '\u202F',
-  'PER MILLE SIGN': '\u2030'
+  'PER MILLE SIGN': '\u2030',
 }
 
-const american = { locale: 'en-us' }
-const fr = { locale: 'fr' }
-const frCH = { locale: 'fr-sw' }
+const american = {locale: 'en-us'}
+const fr = {locale: 'fr'}
+const frCH = {locale: 'fr-sw'}
 
 test('should do nothing with no param at all', () => expect(permille()).toEqual(''))
 

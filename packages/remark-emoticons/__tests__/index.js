@@ -44,7 +44,7 @@ const render = text => unified()
   .processSync(text)
 
 test('emoticons', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     Hello :) Hey :D
 
     :)
@@ -81,7 +81,7 @@ test('emoticons without class', () => {
 
   delete config.classes
 
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     Hello :) Hey :D
 
     :)

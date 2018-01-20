@@ -4,6 +4,7 @@ const clone = require('clone')
 const remarkConfig = clone(require('../config/remark'))
 const rebberConfig = clone(require('../config/rebber'))
 remarkConfig.noTypography = true
+remarkConfig._test = true
 remarkConfig.ping.pingUsername = () => false
 
 const zmarkdown = require('../')
@@ -30,7 +31,7 @@ const renderFile = (config = {remarkConfig, rebberConfig}) =>
 /* jest */
 const HtmlDiffer = require('html-differ').HtmlDiffer
 const htmlDiffer = new HtmlDiffer({
-  ignoreWhitespaces: true
+  ignoreWhitespaces: true,
 })
 const logger = require('html-differ/lib/logger')
 

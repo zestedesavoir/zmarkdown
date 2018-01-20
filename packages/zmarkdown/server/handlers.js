@@ -44,8 +44,8 @@ module.exports = function markdownHandlers (Raven) {
             'setextHeading',
             'footnote',
             'table',
-            'custom_blocks'
-          ]
+            'custom_blocks',
+          ],
         }
       }
 
@@ -64,8 +64,8 @@ module.exports = function markdownHandlers (Raven) {
               contents: contents,
               metadata: metadata,
               messages: messages,
-            }
-          }
+            },
+          },
         })
         return callback(err, markdown)
       }
@@ -110,8 +110,8 @@ module.exports = function markdownHandlers (Raven) {
               contents: contents,
               metadata: metadata,
               messages: messages,
-            }
-          }
+            },
+          },
         })
         return callback(err, markdown)
       }
@@ -131,8 +131,8 @@ module.exports = function markdownHandlers (Raven) {
               contents: contents,
               metadata: metadata,
               messages: messages,
-            }
-          }
+            },
+          },
         })
         return callback(err, markdown)
       }

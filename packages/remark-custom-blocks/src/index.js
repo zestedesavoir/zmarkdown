@@ -59,9 +59,9 @@ module.exports = function blockPlugin (blocks = {}) {
       data: {
         hName: 'div',
         hProperties: {
-          className: classList
-        }
-      }
+          className: classList,
+        },
+      },
     })
   }
 

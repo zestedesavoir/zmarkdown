@@ -92,9 +92,9 @@ module.exports = function plugin (classNames = {}) {
       data: {
         hName: 'div',
         hProperties: {
-          class: spaceSeparated.parse(classes)
-        }
-      }
+          class: spaceSeparated.parse(classes),
+        },
+      },
     })
   }
 

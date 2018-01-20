@@ -147,7 +147,7 @@ test('compiles to Markdown', () => {
     .use(remarkStringify)
     .use(plugin, {
       pingUsername: 12,
-      userURL
+      userURL,
     })
     .processSync(text)
     .toString()

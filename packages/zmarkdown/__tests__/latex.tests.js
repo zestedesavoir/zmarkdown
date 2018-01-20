@@ -6,6 +6,7 @@ import remarkConfig from '../config/remark'
 import rebberConfig from '../config/rebber'
 
 remarkConfig.noTypography = true
+remarkConfig._test = true
 remarkConfig.ping.pingUsername = () => false
 
 const zmarkdown = require('../')

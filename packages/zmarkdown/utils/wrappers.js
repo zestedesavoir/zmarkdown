@@ -33,7 +33,7 @@ function wrap ({wrapInTags, classes}, {node, index, parent}) {
       properties: {
         class: classes[i] || [],
       },
-      children: [wrapped]
+      children: [wrapped],
     }
   }
   parent.children.splice(index, 1, wrapped)

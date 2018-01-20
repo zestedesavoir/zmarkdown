@@ -14,7 +14,7 @@ const render = (text, config) => unified()
   .processSync(text)
 
 test('with', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     this plugin does
 
     * & -> &#x26;
@@ -25,7 +25,7 @@ test('with', () => {
 })
 
 test('without', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     remark does
 
     * & -> &#x26;

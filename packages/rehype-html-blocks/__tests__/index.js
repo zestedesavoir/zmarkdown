@@ -15,14 +15,14 @@ const render = (use, text) => unified()
     &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
     blocks: [],
   })
-  .use(remark2rehype, { allowDangerousHTML: true })
+  .use(remark2rehype, {allowDangerousHTML: true})
   .use(use ? htmlBlocks : () => {})
   .use(rehypeStringify)
   .processSync(text)
 
 Array.from([[true, 'with'], [false, 'without']]).forEach(([use, str]) => {
   it(`should process simple div ${str} rehype-html-blocks`, () => {
-    const { contents } = render(use, dedent`
+    const {contents} = render(use, dedent`
     <div id="sidebar">
 
        _foo_
@@ -40,7 +40,7 @@ Array.from([[true, 'with'], [false, 'without']]).forEach(([use, str]) => {
   })
 
   it(`should process inline html ${str} rehype-html-blocks`, () => {
-    const { contents } = render(use, dedent`
+    const {contents} = render(use, dedent`
       Here's a simple block:
 
       <div>
@@ -116,7 +116,7 @@ Array.from([[true, 'with'], [false, 'without']]).forEach(([use, str]) => {
   })
 
   it(`should process multi-line tags ${str} rehype-html-blocks`, () => {
-    const { contents } = render(use, dedent`
+    const {contents} = render(use, dedent`
 
       <div>
 
@@ -135,7 +135,7 @@ Array.from([[true, 'with'], [false, 'without']]).forEach(([use, str]) => {
   })
 
   it(`should render the same ${str} rehype-html-blocks`, () => {
-    const { contents } = render(use, dedent`
+    const {contents} = render(use, dedent`
       **<DIV>
       foo
       </DIV>**

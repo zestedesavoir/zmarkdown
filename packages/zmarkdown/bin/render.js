@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const dedent = require('dedent')
-const { renderFile } = require('../index.js')
+const {renderFile} = require('../index.js')
 
 if (process.argv.length > 2) {
   const files = process.argv.slice(2)

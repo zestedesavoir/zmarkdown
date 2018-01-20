@@ -42,8 +42,8 @@ module.exports = function inlinePlugin (ctx) {
           hProperties: {
             src: emoticons[emoticon],
             alt: emoticon,
-          }
-        }
+          },
+        },
       }
 
       if (emoticonClasses) {

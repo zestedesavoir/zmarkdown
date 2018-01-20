@@ -9,7 +9,7 @@ import visit from 'unist-util-visit'
 
 import remarkFixGuillemets from '../src/'
 
-function remarkTextr ({ plugins = [], options = {} } = {}) {
+function remarkTextr ({plugins = [], options = {}} = {}) {
   let fn
 
   return function transformer (tree) {
@@ -50,7 +50,7 @@ const render = (text, config) => unified()
   .processSync(text)
 
 test('issue-80', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     <<html>> <<html1>> <<html2>> <<html3>> <<html4>> <<**bold**>>
 
     <<html>> <<html1>> <foo<html2>bar> <<html3>> <<html4>> <<**bold**>>
@@ -59,14 +59,14 @@ test('issue-80', () => {
 })
 
 test('no-html-block', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     << 1 >>
   `)
   expect(contents).toMatchSnapshot()
 })
 
 test('do-not-replace', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     <a>>
   `)
   expect(contents).toMatchSnapshot()

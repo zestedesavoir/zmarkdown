@@ -1291,15 +1291,15 @@ Entities even work in the language flag of fenced code blocks:
 alert('Hello');
 \\\\end{CodeBlock}
 
-And in an auto-link: \\\\externalLink{http://example©xample.com}{http://example©xample.com}
+And in an auto-link: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com}
 
-Foo and bar and \\\\externalLink{http://example©xample.com}{http://example©xample.com} and baz.
+Foo and bar and \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} and baz.
 
-Or in \\\\externalLink{l©nks}{\\\\textasciitilde{}/some©file}
+Or in \\\\externalLink{l©nks}{\\\\textasciitilde{}/some\\\\&copyfile}
 
-Or in \\\\externalLink{l©lnks}{\\\\textasciitilde{}/some©file}
+Or in \\\\externalLink{l©lnks}{\\\\textasciitilde{}/some\\\\&copyfile}
 
-Or in \\\\includegraphics{~/some©file}
+Or in \\\\includegraphics{~/some&copyfile}
 \\\\end{Quotation}
 
 
@@ -1309,15 +1309,15 @@ Or in \\\\includegraphics{~/some©file}
 
 
 \\\\begin{Quotation}
-Or in \\\\includegraphics{~/some©file}
+Or in \\\\includegraphics{~/some&copyfile}
 
 Or in \\\\includegraphics{undefined}
 
-1\\\\ref{1}: \\\\externalLink{http://example©xample.com}{http://example©xample.com} \\"in some
+1\\\\ref{1}: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
 pl©ce\\"
 
 1
-\\\\ref{ 1 }: \\\\externalLink{http://example©xample.com}{http://example©xample.com} \\"in some
+\\\\ref{ 1 }: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
 pl©ce\\"
 \\\\end{Quotation}
 
@@ -8386,28 +8386,28 @@ exports[`rebber: remark specs with config: custom macros entities-advanced 1`] =
 
 Entities even work in the language flag of fenced code blocks:
 
-[codeSome©language(alert('Hello');)]And in an auto-link: \\\\externalLink{http://example©xample.com}{http://example©xample.com}
+[codeSome©language(alert('Hello');)]And in an auto-link: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com}
 
-Foo and bar and \\\\externalLink{http://example©xample.com}{http://example©xample.com} and baz.
+Foo and bar and \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} and baz.
 
-Or in \\\\externalLink{l©nks}{\\\\textasciitilde{}/some©file}
+Or in \\\\externalLink{l©nks}{\\\\textasciitilde{}/some\\\\&copyfile}
 
-Or in \\\\externalLink{l©lnks}{\\\\textasciitilde{}/some©file}
+Or in \\\\externalLink{l©lnks}{\\\\textasciitilde{}/some\\\\&copyfile}
 
-Or in \\\\includegraphics{~/some©file})]
+Or in \\\\includegraphics{~/some&copyfile})]
 
 [thematicBreak(---)]
 
-[blockquote(Or in \\\\includegraphics{~/some©file}
+[blockquote(Or in \\\\includegraphics{~/some&copyfile}
 
 Or in \\\\includegraphics{undefined}
 
-[linkReference(reference=1, content=1)]: \\\\externalLink{http://example©xample.com}{http://example©xample.com} \\"in some
+[linkReference(reference=1, content=1)]: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
 pl©ce\\"
 
 [linkReference(reference= 1 , content=
   1
-)]: \\\\externalLink{http://example©xample.com}{http://example©xample.com} \\"in some
+)]: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
 pl©ce\\")]
 
 [thematicBreak(---)]
@@ -14394,15 +14394,15 @@ Entities even work in the language flag of fenced code blocks:
 alert('Hello');
 \\\\end{CodeBlock}
 
-And in an auto-link: \\\\externalLink{http://example©xample.com}{http://example©xample.com}
+And in an auto-link: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com}
 
-Foo and bar and \\\\externalLink{http://example©xample.com}{http://example©xample.com} and baz.
+Foo and bar and \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} and baz.
 
-Or in \\\\externalLink{l©nks}{\\\\textasciitilde{}/some©file}
+Or in \\\\externalLink{l©nks}{\\\\textasciitilde{}/some\\\\&copyfile}
 
-Or in \\\\externalLink{l©lnks}{\\\\textasciitilde{}/some©file}
+Or in \\\\externalLink{l©lnks}{\\\\textasciitilde{}/some\\\\&copyfile}
 
-Or in \\\\includegraphics{~/some©file}
+Or in \\\\includegraphics{~/some&copyfile}
 \\\\end{Quotation}
 
 
@@ -14412,15 +14412,15 @@ Or in \\\\includegraphics{~/some©file}
 
 
 \\\\begin{Quotation}
-Or in \\\\includegraphics{~/some©file}
+Or in \\\\includegraphics{~/some&copyfile}
 
 Or in \\\\includegraphics{undefined}
 
-1\\\\ref{1}: \\\\externalLink{http://example©xample.com}{http://example©xample.com} \\"in some
+1\\\\ref{1}: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
 pl©ce\\"
 
 1
-\\\\ref{ 1 }: \\\\externalLink{http://example©xample.com}{http://example©xample.com} \\"in some
+\\\\ref{ 1 }: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
 pl©ce\\"
 \\\\end{Quotation}
 

@@ -60,29 +60,29 @@ const alignFixture = dedent`
 `
 
 test('align', () => {
-  const { contents } = render(alignFixture)
+  const {contents} = render(alignFixture)
   expect(contents).toMatchSnapshot()
 })
 
 test('align-custom-config', () => {
-  const { contents } = render(alignFixture, {
+  const {contents} = render(alignFixture, {
     right: 'custom-right',
-    center: 'custom-center'
+    center: 'custom-center',
   })
   expect(contents).toMatchSnapshot()
 })
 
 test('align-custom-config', () => {
-  const { contents } = render(alignFixture, {
+  const {contents} = render(alignFixture, {
     left: 'custom-left',
     right: 'custom-right',
-    center: 'custom-center'
+    center: 'custom-center',
   })
   expect(contents).toMatchSnapshot()
 })
 
 test('block-wrap', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     # wraps blocks e.g. title:
 
     -> foo
@@ -95,7 +95,7 @@ test('block-wrap', () => {
 })
 
 test('center-no-start', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     # title
 
     foo <-
@@ -106,7 +106,7 @@ test('center-no-start', () => {
 })
 
 test('right-no-end', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     # title
 
     -> foo
@@ -117,7 +117,7 @@ test('right-no-end', () => {
 })
 
 test('right-no-start', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     # title
 
     foo ->
@@ -128,7 +128,7 @@ test('right-no-start', () => {
 })
 
 test('list-block', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     # title
     ->
     - a
@@ -143,7 +143,7 @@ test('list-block', () => {
 })
 
 test('escapable', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     # title
     ->
     \->escaped-in
@@ -157,7 +157,7 @@ test('escapable', () => {
 })
 
 test('left align', () => {
-  const { contents } = render(dedent`
+  const {contents} = render(dedent`
     # title
 
     <- foo <-

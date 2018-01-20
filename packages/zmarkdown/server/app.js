@@ -24,7 +24,7 @@ function controllerFactory (handler) {
 const Raven = require('raven')
 Raven.config(process.env.SENTRY_DSN, {
   release: process.env.SENTRY_RELEASE || zmdVersion,
-  environment: process.env.SENTRY_ENVIRONMENT || process.env.ZDS_ENVIRONMENT
+  environment: process.env.SENTRY_ENVIRONMENT || process.env.ZDS_ENVIRONMENT,
 }).install()
 
 const {

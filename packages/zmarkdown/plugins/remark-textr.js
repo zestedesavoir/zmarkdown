@@ -3,7 +3,7 @@ const textr = require('textr')
 
 module.exports = plugin
 
-function plugin ({ plugins = [], options = {} } = {}) {
+function plugin ({plugins = [], options = {}} = {}) {
   let fn
 
   return function transformer (tree) {

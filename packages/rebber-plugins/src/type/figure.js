@@ -22,7 +22,7 @@ const defaultMacros = {
     `\\begin{center}\n` +
     `\\includegraphics${extra.width ? `[${extra.width}]` : ''}{${extra.url}}\n` +
     `\\captionof{figure}{${caption}}\n` +
-    `\\end{center}\n`
+    `\\end{center}\n`,
 }
 
 const makeExtra = {
@@ -38,7 +38,7 @@ const makeExtra = {
     }
     return extra
   },
-  image: node => ({url: node.url, width: '\\linewidth'})
+  image: node => ({url: node.url, width: '\\linewidth'}),
 }
 
 /* Stringify a Figure `node`. */

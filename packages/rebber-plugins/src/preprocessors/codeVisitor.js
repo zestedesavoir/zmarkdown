@@ -14,15 +14,15 @@ module.exports = (ctx, tree) => {
             type: 'definition',
             identifier: `appendix-${appendixIndex}`,
             referenceType: 'full',
-            children: [{type: 'text', value: 'code'}]
+            children: [{type: 'text', value: 'code'}],
           },
           {type: 'text', value: '\n'},
-          innerNode
-        ]
+          innerNode,
+        ],
       })
       const referenceNode = {
         type: 'linkReference',
-        identifier: `appendix-${appendixIndex}`
+        identifier: `appendix-${appendixIndex}`,
       }
       _parent.children.splice(index, 1, referenceNode)
       appendixIndex++
@@ -32,7 +32,7 @@ module.exports = (ctx, tree) => {
       tree.children.push({
         type: 'heading',
         depth: 1,
-        children: [{type: 'text', value: title}]
+        children: [{type: 'text', value: title}],
 
       })
       inAppendix.forEach((element) => tree.children.push(element))

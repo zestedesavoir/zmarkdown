@@ -4,12 +4,12 @@ const xtend = require('xtend')
 
 const legendBlock = {
   table: 'Table:',
-  code: 'Code:'
+  code: 'Code:',
 }
 
 const internLegendBlock = {
   blockquote: 'Source:',
-  image: 'Figure:'
+  image: 'Figure:',
 }
 
 function plugin (opts) {
@@ -125,7 +125,7 @@ function externLegendVisitorCreator (blocks) {
     }
     legendNodes.push({
       type: 'text',
-      value: firstTextLine.trimLeft() // remove the " " after the {prefix}:
+      value: firstTextLine.trimLeft(), // remove the " " after the {prefix}:
     })
 
     legendNode.children.forEach((node, index) => {

@@ -20,22 +20,22 @@ const configs = [
   {
     gfm: true,
     commonmark: false,
-    footnotes: true
+    footnotes: true,
   },
   {
     gfm: false,
     commonmark: false,
-    footnotes: true
+    footnotes: true,
   },
   {
     gfm: false,
     commonmark: true,
-    footnotes: true
+    footnotes: true,
   },
   {
     gfm: true,
     commonmark: true,
-    footnotes: true
+    footnotes: true,
   },
 ]
 

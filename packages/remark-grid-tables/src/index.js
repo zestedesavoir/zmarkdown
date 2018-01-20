@@ -326,7 +326,7 @@ function generateTable (tableContent, now, tokenizer) {
     children: [],
     data: {
       hName: 'table',
-    }
+    },
   }
 
   const hasHeader = tableContent._parts.length > 1
@@ -338,7 +338,7 @@ function generateTable (tableContent, now, tokenizer) {
       children: [],
       data: {
         hName: (hasHeader && p === 0) ? 'thead' : 'tbody',
-      }
+      },
     }
     for (let r = 0; r < part._rows.length; ++r) {
       const row = part._rows[r]
@@ -347,7 +347,7 @@ function generateTable (tableContent, now, tokenizer) {
         children: [],
         data: {
           hName: 'tr',
-        }
+        },
       }
       for (let c = 0; c < row._cells.length; ++c) {
         const cell = row._cells[c]
@@ -360,7 +360,7 @@ function generateTable (tableContent, now, tokenizer) {
               colspan: cell._colspan,
               rowspan: cell._rowspan,
             },
-          }
+          },
         }
 
         const endLine = r + cell._rowspan
@@ -407,7 +407,7 @@ function gridTableTokenizer (eat, value, silent) {
   const wrapperBlock = {
     type: 'element',
     tagName: 'WrapperBlock',
-    children: []
+    children: [],
   }
   if (before.length) {
     wrapperBlock.children.push(this.tokenizeBlock(before.join('\n'), now)[0])

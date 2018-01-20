@@ -15,8 +15,8 @@ test('block throws + inline', () => {
           ['blockquote', 'Blockquote are not allowed!'],
         ],
         inline: [
-          'emphasis'
-        ]
+          'emphasis',
+        ],
       })
       .use(remark2rehype)
       .use(stringify)
@@ -33,15 +33,15 @@ test('block throws + inline', () => {
 })
 
 test('block + inline', () => {
-  const { contents } = unified()
+  const {contents} = unified()
     .use(reParse)
     .use(plugin, {
       block: [
-        'blockquote'
+        'blockquote',
       ],
       inline: [
-        'emphasis'
-      ]
+        'emphasis',
+      ],
     })
     .use(remark2rehype)
     .use(stringify)
@@ -57,12 +57,12 @@ test('block + inline', () => {
 })
 
 test('block', () => {
-  const { contents } = unified()
+  const {contents} = unified()
     .use(reParse)
     .use(plugin, {
       block: [
-        'blockquote'
-      ]
+        'blockquote',
+      ],
     })
     .use(remark2rehype)
     .use(stringify)
@@ -78,12 +78,12 @@ test('block', () => {
 })
 
 test('inline', () => {
-  const { contents } = unified()
+  const {contents} = unified()
     .use(reParse)
     .use(plugin, {
       inline: [
-        'emphasis'
-      ]
+        'emphasis',
+      ],
     })
     .use(remark2rehype)
     .use(stringify)
@@ -104,8 +104,8 @@ test('inline throws', () => {
       .use(reParse)
       .use(plugin, {
         inline: [
-          ['emphasis', 'nope']
-        ]
+          ['emphasis', 'nope'],
+        ],
       })
       .use(remark2rehype)
       .use(stringify)
@@ -128,7 +128,7 @@ test('block throws', () => {
       .use(plugin, {
         block: [
           ['blockquote', 'Blockquote are not allowed!'],
-        ]
+        ],
       })
       .use(remark2rehype)
       .use(stringify)
@@ -154,7 +154,7 @@ test('block throws + inline throws', () => {
         ],
         inline: [
           ['emphasis', 'Nope.'],
-        ]
+        ],
       })
       .use(remark2rehype)
       .use(stringify)
@@ -171,7 +171,7 @@ test('block throws + inline throws', () => {
 })
 
 test('does nothing', () => {
-  const { contents } = unified()
+  const {contents} = unified()
     .use(reParse)
     .use(plugin)
     .use(remark2rehype)
@@ -189,12 +189,12 @@ test('does nothing', () => {
 
 
 test('unknown tokenizer', () => {
-  const { contents } = unified()
+  const {contents} = unified()
     .use(reParse)
     .use(plugin, {
       inline: [
-        'foo bar'
-      ]
+        'foo bar',
+      ],
     })
     .use(remark2rehype)
     .use(stringify)
