@@ -47,4 +47,8 @@ app.post('/latex', controllerFactory(toLatex))
 app.post('/latex-document', controllerFactory(toLatexDocument))
 app.post('/html', controllerFactory(toHTML))
 
+app.get('/', (req, res) => {
+  res.send('zmd is running\n')
+})
+
 module.exports = app
