@@ -25,6 +25,20 @@ Only `metadata` is described in the **Response** sections below.
 
 # Endpoints
 
+## `/epub` - Markdown to HTML
+
+### Request
+
+* (no options)
+
+### Response
+
+* `metadata.disableToc`, bool
+
+  Whether or not the input Markdown did **not** contain headings (`#`, `##`, …). This property is named that way because we use it to disable Table of Contents generation when no headings were found.  
+  `disableToc: true` means *no headings*  
+  `disableToc: false` means at least one *heading*
+
 ## `/html` - Markdown to HTML
 
 ### Request
@@ -60,15 +74,13 @@ Only `metadata` is described in the **Response** sections below.
 
 * `opts.disable_images_download`, bool, default: `false`
 
-  Does not download the images.
+  Do not download images.
 
-* `opts.images_download_dir`, bool, default: `false`
+* `opts.images_download_dir`, string
 
   Where to download the images to.
 
-* `opts.disable_jsfiddle`, bool, default: `false`
-
-  see `/html`
+* `opts.disable_jsfiddle`: see `/html`
 
 ### Response
 
@@ -82,18 +94,9 @@ Only `metadata` is described in the **Response** sections below.
 ### Request
 
 
-* `opts.disable_images_download`, bool, default: `false`
-
-  see `/latex`
-
-* `opts.images_download_dir`, bool, default: `false`
-
-  see `/latex`
-
-* `opts.disable_jsfiddle`, bool, default: `false`
-
-  see `/html`
-
+* `opts.disable_images_download`: see `/latex`
+* `opts.images_download_dir`: see `/latex`
+* `opts.disable_jsfiddle`: see `/html`
 * `opts.contentType`, string
 
   Will be interpolated in `\documentclass[${contentType}]{zmdocument}`

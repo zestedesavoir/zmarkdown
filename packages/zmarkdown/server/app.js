@@ -28,6 +28,7 @@ Raven.config(process.env.SENTRY_DSN, {
 }).install()
 
 const {
+  toEPUB,
   toHTML,
   toLatex,
   toLatexDocument,
@@ -43,9 +44,11 @@ app.use(Raven.errorHandler())
 app.use('/static', express.static(path.join(__dirname, 'static')))
 
 app.use(bodyParser.json({limit: '5mb'}))
+
+app.post('/epub', controllerFactory(toEPUB))
+app.post('/html', controllerFactory(toHTML))
 app.post('/latex', controllerFactory(toLatex))
 app.post('/latex-document', controllerFactory(toLatexDocument))
-app.post('/html', controllerFactory(toHTML))
 
 app.get('/', (req, res) => {
   res.send('zmd is running\n')

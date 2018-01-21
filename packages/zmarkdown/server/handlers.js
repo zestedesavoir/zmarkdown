@@ -9,9 +9,18 @@ const processors = {}
 
 module.exports = function markdownHandlers (Raven) {
   return {
+    toEPUB,
     toHTML,
     toLatex,
     toLatexDocument,
+  }
+
+  function toEPUB (markdown, opts = {}, callback) {
+    opts.disable_images_download = false
+    opts.disable_ping = true
+    opts.disable_jsfiddle = true
+    opts.inline = false
+    return toHTML(markdown, opts, callback)
   }
 
   function toHTML (markdown, opts = {}, callback) {
@@ -32,6 +41,11 @@ module.exports = function markdownHandlers (Raven) {
       if (opts.disable_jsfiddle === true) {
         config.remarkConfig.iframes['jsfiddle.net'].disabled = true
         config.remarkConfig.iframes['www.jsfiddle.net'].disabled = true
+      }
+
+      config.remarkConfig.imagesDownload.disabled = opts.disable_images_download !== false
+      if (opts.images_download_dir) {
+        config.remarkConfig.imagesDownload.downloadDestination = opts.images_download_dir
       }
 
       if (opts.inline === true) {
@@ -122,20 +136,7 @@ module.exports = function markdownHandlers (Raven) {
 
   function toLatexDocument (markdown, opts = {}, callback) {
     toLatex(markdown, opts, (err, [contents, metadata, messages] = []) => {
-      if (err) {
-        Raven.mergeContext({
-          extra: {
-            zmdConfig: makeSerializable(opts),
-            markdown: markdown,
-            zmdOutput: {
-              contents: contents,
-              metadata: metadata,
-              messages: messages,
-            },
-          },
-        })
-        return callback(err, markdown)
-      }
+      if (err) return callback(err, markdown)
 
       const {
         contentType,

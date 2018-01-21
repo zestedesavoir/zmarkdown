@@ -3,6 +3,7 @@ const a = require('axios')
 const fs = require('fs')
 
 const u = (path) => `http://localhost:27272${path}`
+const epub = u('/epub')
 const html = u('/html')
 const latex = u('/latex')
 const texfile = u('/latex-document')
@@ -138,7 +139,7 @@ describe('LaTeX endpoint', () => {
     const [rendered, , messages] = response.data
     expect(messages).toEqual([])
 
-    const regex = /\/([a-zA-Z0-9_-]{7,14})\/([a-zA-Z0-9_-]{7,14})\.(.*)}/
+    const regex = /\/([a-zA-Z0-9_-]{7,14})\/([a-zA-Z0-9_-]{7,14})\.(.{1,4})}/
     expect(rendered).toMatch(regex)
     const [, dir, file, ext] = rendered.match(regex)
     return expect(rm(`${destination}/${dir}`, `${file}.${ext}`)).resolves.toBe('ok')
@@ -195,7 +196,28 @@ describe('Texfile endpoint', () => {
     const [rendered, , messages] = response.data
     expect(messages).toEqual([])
 
-    const regex = /\/([a-zA-Z0-9_-]{7,14})\/([a-zA-Z0-9_-]{7,14})\.(.*)}/
+    const regex = /\/([a-zA-Z0-9_-]{7,14})\/([a-zA-Z0-9_-]{7,14})\.(.{1,4})}/
+    expect(rendered).toMatch(regex)
+    const [, dir, file, ext] = rendered.match(regex)
+    return expect(rm(`${destination}/${dir}`, `${file}.${ext}`)).resolves.toBe('ok')
+  })
+})
+
+
+describe('EPUB endpoint', () => {
+  test('It downloads images', async () => {
+    const destination = process.env.DEST || `${__dirname}/../public/`
+    const opts = clone(texfileOpts)
+    opts.images_download_dir = destination
+    const response = await a.post(epub, {
+      md: `![](${u('/static/img.png')})`,
+      opts: opts,
+    })
+
+    const [rendered, , messages] = response.data
+    expect(messages).toEqual([])
+
+    const regex = /\/([a-zA-Z0-9_-]{7,14})\/([a-zA-Z0-9_-]{7,14})\.(.{1,4})"/
     expect(rendered).toMatch(regex)
     const [, dir, file, ext] = rendered.match(regex)
     return expect(rm(`${destination}/${dir}`, `${file}.${ext}`)).resolves.toBe('ok')
