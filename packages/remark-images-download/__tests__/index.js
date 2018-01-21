@@ -188,6 +188,39 @@ describe('mock server tests', () => {
     expect(render(file).then(vfile => vfile.contents)).resolves.toBe(html)
   })
 
+  test('copies local images', () => {
+    const file = `![](/foobar/ok.png)`
+    const html = `<p><img src="foo/bar.png"></p>`
+
+    const render = renderFactory({
+      localUrlToLocalPath: (localUrl) => {
+        const localPath = __dirname.replace('__tests__', '__mock__')
+        return `${localPath}/files${localUrl.slice(7)}`
+      },
+    })
+
+    return render(file).then(vfile => {
+      expect(r(vfile.contents)).toBe(html)
+      expect(vfile.messages).toEqual([])
+    })
+  })
+
+  test('does not copy dangerous local absolute URLs', () => {
+    const file = `![](/../../../etc/shadow)`
+    const html = `<p><img src="/../../../etc/shadow"></p>`
+    const render = renderFactory({
+      localUrlToLocalPath: (localUrl) => {
+        const localPath = __dirname.replace('__tests__', '__mock__')
+        return `${localPath}/files${localUrl.slice(7)}`
+      },
+    })
+
+    return render(file).then(vfile => {
+      expect(vfile.messages[0].message).toMatch('Dangerous absolute image URL detected')
+      expect(r(vfile.contents)).toBe(html)
+    })
+  })
+
   test('reports 404', () => {
     const file = `![](http://example.com/foo.png)`
     const html = `<p><img src="http://example.com/foo.png"></p>`

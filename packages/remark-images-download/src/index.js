@@ -31,11 +31,20 @@ const mkdir = (path) => new Promise((resolve, reject) => {
   })
 })
 
+const copy = (from, to) => new Promise((resolve, reject) => {
+  fs.copyFile(from, to, (err) => {
+    if (err) reject(new Error(`Failed to copy ${from} to ${to}`))
+
+    resolve()
+  })
+})
+
 function plugin ({
   disabled = false,
   maxFileSize = 1000000,
   dirSizeLimit = 10000000,
   downloadDestination = '/tmp',
+  localUrlToLocalPath,
 } = {}) {
   return function transform (tree, vfile) {
     if (disabled) return noop
@@ -55,11 +64,31 @@ function plugin ({
           const {url, position} = node
           const parsedURI = URL.parse(url)
 
-          if (!parsedURI.host) return
-
           const extension = path.extname(parsedURI.pathname)
           const filename = `${shortid.generate()}${extension}`
           const destination = path.join(destinationPath, filename)
+
+          if (!parsedURI.host) {
+            if (typeof localUrlToLocalPath !== 'function') {
+              return
+            }
+            const localPath = localUrlToLocalPath(url)
+
+            if (localPath.includes('../')) {
+              vfile.message(`Dangerous absolute image URL detected: ${localPath}`, position, url)
+              return
+            }
+
+            const promise = copy(localPath, destination)
+              .catch((err) => {
+                vfile.message(err, position, url)
+              })
+              .then(() => {
+                node.url = destination
+              })
+            promises.push({offset: position.offset, promise: promise})
+            return
+          }
 
           const promise = new Promise((resolve, reject) => {
 

@@ -41,6 +41,16 @@ var mkdir = function mkdir(path) {
   });
 };
 
+var copy = function copy(from, to) {
+  return new Promise(function (resolve, reject) {
+    fs.copyFile(from, to, function (err) {
+      if (err) reject(new Error('Failed to copy ' + from + ' to ' + to));
+
+      resolve();
+    });
+  });
+};
+
 function plugin() {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       _ref$disabled = _ref.disabled,
@@ -50,7 +60,8 @@ function plugin() {
       _ref$dirSizeLimit = _ref.dirSizeLimit,
       dirSizeLimit = _ref$dirSizeLimit === undefined ? 10000000 : _ref$dirSizeLimit,
       _ref$downloadDestinat = _ref.downloadDestination,
-      downloadDestination = _ref$downloadDestinat === undefined ? '/tmp' : _ref$downloadDestinat;
+      downloadDestination = _ref$downloadDestinat === undefined ? '/tmp' : _ref$downloadDestinat,
+      localUrlToLocalPath = _ref.localUrlToLocalPath;
 
   return function transform(tree, vfile) {
     if (disabled) return noop;
@@ -71,11 +82,29 @@ function plugin() {
 
         var parsedURI = URL.parse(url);
 
-        if (!parsedURI.host) return;
-
         var extension = path.extname(parsedURI.pathname);
         var filename = '' + shortid.generate() + extension;
         var destination = path.join(destinationPath, filename);
+
+        if (!parsedURI.host) {
+          if (typeof localUrlToLocalPath !== 'function') {
+            return;
+          }
+          var localPath = localUrlToLocalPath(url);
+
+          if (localPath.includes('../')) {
+            vfile.message('Dangerous absolute image URL detected: ' + localPath, position, url);
+            return;
+          }
+
+          var _promise = copy(localPath, destination).catch(function (err) {
+            vfile.message(err, position, url);
+          }).then(function () {
+            node.url = destination;
+          });
+          promises.push({ offset: position.offset, promise: _promise });
+          return;
+        }
 
         var promise = new Promise(function (resolve, reject) {
 

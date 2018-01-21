@@ -34,17 +34,37 @@ unified()
     downloadDestination: './img/',
     maxlength: 1000000,
     dirSizeLimit: 10000000,
+    localUrlToLocalPath: (localUrl) => localPath
   })
   .use(remark2rehype)
   .use(stringify)
 ```
 
-## Configuration fields:
+## Configuration options:
 
-- `disabled`: disables the plugin.
-- `downloadDestination`: where downloads should be stored (must exists).
-- `maxFileLength`: if a file is larger than this number (in bytes), the plugin will not download it.
-- `dirSizeLimit`: the directory size limit.
+All options are optional.
+
+- `disabled`: bool, default: `false`
+
+  If `true`, disables the plugin.
+
+- `downloadDestination`: string, default: `/tmp`
+
+  Parent destination folder for downloads.
+
+- `maxFileLength`: number, default: `1000000`
+
+  Any file with a bigger size than this number (in bytes) will be skipped.
+
+- `dirSizeLimit`: number, default: `10000000`
+
+  Download directory size limit (in bytes). When reached, subsequent images are skipped.
+
+- `localUrlToLocalPath`: `(localUrl: string): string => localPath`, default: `<none>` (skip local images)
+
+  If provided, local images referenced in Markdown source (such as `![](/img/example.png)`) will be copied to `downloadDestination` after applying this function to the path to obtain the local location of `example.png`, e.g. `localUrlToLocalPath('/img/example.com') === '/opt/assets/example.com'`. It will get renamed to a shortId just like any downloaded image.
+
+  If not provided, local images will not end up in `downloadDestination`.
 
 ## example
 
