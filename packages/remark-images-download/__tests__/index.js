@@ -188,7 +188,7 @@ describe('mock server tests', () => {
     expect(render(file).then(vfile => vfile.contents)).resolves.toBe(html)
   })
 
-  test('copies local images', () => {
+  test('copies local images with function', () => {
     const file = `![](/foobar/ok.png)`
     const html = `<p><img src="foo/bar.png"></p>`
 
@@ -197,6 +197,23 @@ describe('mock server tests', () => {
         const localPath = __dirname.replace('__tests__', '__mock__')
         return `${localPath}/files${localUrl.slice(7)}`
       },
+    })
+
+    return render(file).then(vfile => {
+      expect(r(vfile.contents)).toBe(html)
+      expect(vfile.messages).toEqual([])
+    })
+  })
+
+  test('copies local images with replacement array', () => {
+    const file = `![](/foobar/ok.png)`
+    const html = `<p><img src="foo/bar.png"></p>`
+
+    const render = renderFactory({
+      localUrlToLocalPath: [
+        '/foobar',
+        `${__dirname.replace('__tests__', '__mock__')}/files`,
+      ],
     })
 
     return render(file).then(vfile => {

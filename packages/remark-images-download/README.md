@@ -1,6 +1,7 @@
 # remark-images-download [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
-This plugin downloads images to a custom directory, replacing images URLs with the path to the downloaded file.
+This plugin downloads images to a custom directory, replacing images URLs
+with the path to the downloaded file.
 
 ## Installation
 
@@ -58,11 +59,24 @@ All options are optional.
 
 - `dirSizeLimit`: number, default: `10000000`
 
-  Download directory size limit (in bytes). When reached, subsequent images are skipped.
+  Download directory size limit (in bytes). When reached, subsequent
+  images are skipped.
 
-- `localUrlToLocalPath`: `(localUrl: string): string => localPath`, default: `<none>` (skip local images)
+- `localUrlToLocalPath`: `(localUrl: string): string => localPath` or `[from: string, to: string]`, default: `<none>` (skip local images)
 
-  If provided, local images referenced in Markdown source (such as `![](/img/example.png)`) will be copied to `downloadDestination` after applying this function to the path to obtain the local location of `example.png`, e.g. `localUrlToLocalPath('/img/example.png') === '/opt/assets/example.png'`. It will get renamed to a shortId just like any downloaded image.
+  If provided, local images referenced in Markdown source (such
+  as `![](/img/example.png)`) will be copied to `downloadDestination`
+  after applying this function to the path to obtain the local location
+  of `example.png`, e.g.
+  `localUrlToLocalPath('/img/example.png') === '/opt/assets/example.png'`.
+  It will get renamed to a shortId just like any downloaded image.
+
+  In case a two-element array is provided, the string `from` will get
+  replaced by `to` using the following RegExp:
+
+  ```js
+  '/img/example.png'.replace(new RegExp(`^${from}`), to)
+  ```
 
   If not provided, local images will not end up in `downloadDestination`.
 

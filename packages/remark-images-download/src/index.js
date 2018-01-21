@@ -69,10 +69,15 @@ function plugin ({
           const destination = path.join(destinationPath, filename)
 
           if (!parsedURI.host) {
-            if (typeof localUrlToLocalPath !== 'function') {
+            let localPath
+            if (typeof localUrlToLocalPath === 'function') {
+              localPath = localUrlToLocalPath(url)
+            } else if (Array.isArray(localUrlToLocalPath) && localUrlToLocalPath.length === 2) {
+              const [from, to] = localUrlToLocalPath
+              localPath = url.replace(new RegExp(`^${from}`), to)
+            } else {
               return
             }
-            const localPath = localUrlToLocalPath(url)
 
             if (localPath.includes('../')) {
               vfile.message(`Dangerous absolute image URL detected: ${localPath}`, position, url)

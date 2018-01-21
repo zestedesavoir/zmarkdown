@@ -222,4 +222,26 @@ describe('EPUB endpoint', () => {
     const [, dir, file, ext] = rendered.match(regex)
     return expect(rm(`${destination}/${dir}`, `${file}.${ext}`)).resolves.toBe('ok')
   })
+
+  test('It copies local images', async () => {
+    const destination = process.env.DEST || `${__dirname}/../public/`
+    const opts = clone(texfileOpts)
+    opts.images_download_dir = destination
+    opts.local_url_to_local_path = [
+      '/foobar',
+      `${__dirname.replace('__tests__', 'server/static')}`,
+    ]
+    const response = await a.post(epub, {
+      md: `![](/foobar/img.png)`,
+      opts: opts,
+    })
+
+    const [rendered, , messages] = response.data
+    expect(messages).toEqual([])
+
+    const regex = /\/([a-zA-Z0-9_-]{7,14})\/([a-zA-Z0-9_-]{7,14})\.(.{1,4})"/
+    expect(rendered).toMatch(regex)
+    const [, dir, file, ext] = rendered.match(regex)
+    return expect(rm(`${destination}/${dir}`, `${file}.${ext}`)).resolves.toBe('ok')
+  })
 })

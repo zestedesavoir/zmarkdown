@@ -47,6 +47,12 @@ module.exports = function markdownHandlers (Raven) {
       if (opts.images_download_dir) {
         config.remarkConfig.imagesDownload.downloadDestination = opts.images_download_dir
       }
+      if (
+        Array.isArray(opts.local_url_to_local_path) &&
+        opts.local_url_to_local_path.length === 2
+      ) {
+        config.remarkConfig.imagesDownload.localUrlToLocalPath = opts.local_url_to_local_path
+      }
 
       if (opts.inline === true) {
         config.remarkConfig.disableTokenizers = {
@@ -107,6 +113,12 @@ module.exports = function markdownHandlers (Raven) {
       config.remarkConfig.imagesDownload.disabled = opts.disable_images_download === true
       if (opts.images_download_dir) {
         config.remarkConfig.imagesDownload.downloadDestination = opts.images_download_dir
+      }
+      if (
+        Array.isArray(opts.local_url_to_local_path) &&
+        opts.local_url_to_local_path.length === 2
+      ) {
+        config.remarkConfig.imagesDownload.localUrlToLocalPath = opts.local_url_to_local_path
       }
 
       processors[key] = zmarkdown(config, 'latex')

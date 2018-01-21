@@ -29,7 +29,8 @@ Only `metadata` is described in the **Response** sections below.
 
 ### Request
 
-* (no options)
+* `opts.images_download_dir`: see `/latex`
+* `opts.local_url_to_local_path`: see `/latex`
 
 ### Response
 
@@ -80,6 +81,16 @@ Only `metadata` is described in the **Response** sections below.
 
   Where to download the images to.
 
+* `opts.local_url_to_local_path`, [from: string, to: string], default: `<none>`
+
+  If provided, local images referenced in Markdown source (such
+  as `![](/img/example.png)`) will be copied to `images_download_dir`
+  after replacing the string `from` with `to` using the following RegExp:
+
+  ```js
+  '/img/example.png'.replace(new RegExp(`^${from}`), to)
+  ```
+
 * `opts.disable_jsfiddle`: see `/html`
 
 ### Response
@@ -96,6 +107,7 @@ Only `metadata` is described in the **Response** sections below.
 
 * `opts.disable_images_download`: see `/latex`
 * `opts.images_download_dir`: see `/latex`
+* `opts.local_url_to_local_path`: see `/latex`
 * `opts.disable_jsfiddle`: see `/html`
 * `opts.contentType`, string
 
