@@ -68,11 +68,11 @@ const wrappers = {
   ],
 }
 
-const zmdParser = (config, to) => {
+const zmdParser = (config, target) => {
   const mdProcessor = unified()
     .use(remarkParse, config.reParse)
 
-  if (to !== 'latex' && !config.noTypography) {
+  if (target !== 'latex' && !config.noTypography) {
     mdProcessor
       .use(remarkTextr, config.textr)
   }
@@ -106,15 +106,15 @@ const zmdParser = (config, to) => {
     })
 }
 
-function getLatexProcessor (remarkConfig, rebberConfig, to) {
+function getLatexProcessor (remarkConfig, rebberConfig, target) {
   remarkConfig.noTypography = true
 
-  return zmdParser(remarkConfig, to)
+  return zmdParser(remarkConfig, target)
     .use(rebberStringify, rebberConfig)
 }
 
-function getHTMLProcessor (remarkConfig, rebberConfig, to) {
-  const parser = zmdParser(remarkConfig, to)
+function getHTMLProcessor (remarkConfig, rebberConfig, target) {
+  const parser = zmdParser(remarkConfig, target)
     .use(remark2rehype, remarkConfig.remark2rehype)
 
   if (!remarkConfig._test) {
@@ -137,12 +137,12 @@ function getHTMLProcessor (remarkConfig, rebberConfig, to) {
     .use(rehypeStringify)
 }
 
-const rendererFactory = ({remarkConfig, rebberConfig}, to = 'html') => (input, cb) => {
+const rendererFactory = ({remarkConfig, rebberConfig}, target = 'html') => (input, cb) => {
   [remarkConfig, rebberConfig] = [clone(remarkConfig), clone(rebberConfig)]
 
-  const mdProcessor = to !== 'html'
-    ? getLatexProcessor(remarkConfig, rebberConfig, to)
-    : getHTMLProcessor(remarkConfig, rebberConfig, to)
+  const mdProcessor = target !== 'html'
+    ? getLatexProcessor(remarkConfig, rebberConfig, target)
+    : getHTMLProcessor(remarkConfig, rebberConfig, target)
 
 
   if (typeof cb !== 'function') {
@@ -165,16 +165,16 @@ const mdastParser = (opts) => (zmd) => zmdParser(opts.remarkConfig).parse(zmd)
 
 module.exports = (
   opts = {remarkConfig, rebberConfig},
-  to = 'html'
+  target = 'html'
 ) => {
   if (!opts.remarkConfig || !Object.keys(remarkConfig).length) {
     throw new Error(dedent`
-      This module expects to be called with ({remarkConfig, rebberConfig}, to = 'html'),
+      This module expects to be called with ({remarkConfig, rebberConfig}, target = 'html'),
       remarkConfig is missing!`)
   }
   if (!opts.rebberConfig || !Object.keys(rebberConfig).length) {
     throw new Error(dedent`
-      This module expects to be called with ({remarkConfig, rebberConfig}, to = 'html'),
+      This module expects to be called with ({remarkConfig, rebberConfig}, target = 'html'),
       rebberConfig is missing!`)
   }
   return {
@@ -182,8 +182,8 @@ module.exports = (
     inspect: inspect,
     parse: mdastParser(opts),
     rendererFactory: rendererFactory,
-    renderString: rendererFactory(opts, to),
-    renderFile: (path, cb) => rendererFactory(opts, to)(fromFile(path), cb),
+    renderString: rendererFactory(opts, target),
+    renderFile: (path, cb) => rendererFactory(opts, target)(fromFile(path), cb),
     latexDocumentTemplate: require('./templates/latex-document'),
   }
 }

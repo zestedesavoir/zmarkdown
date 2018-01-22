@@ -2280,8 +2280,8 @@ file-entry-cache@^2.0.0:
     object-assign "^4.0.1"
 
 file-type@^7.4.0:
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/file-type/-/file-type-7.4.0.tgz#2a7c94f62a0030150bb7d9b6c70cfa1d3e759c86"
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/file-type/-/file-type-7.5.0.tgz#573219a45b9cf06ac904443e805bc0217b5a3516"
 
 filename-regex@^2.0.0:
   version "2.0.1"
