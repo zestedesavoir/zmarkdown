@@ -1,6 +1,6 @@
+const inspect = require('unist-util-inspect')
 const toVFile = require('to-vfile')
 const unified = require('unified')
-const inspect = require('unist-util-inspect')
 const visit = require('unist-util-visit')
 
 const dedent = require('dedent')
@@ -33,6 +33,7 @@ const remark2rehype = require('remark-rehype')
 
 const rehypeKatex = require('rehype-katex')
 const rehypeFootnotesTitles = require('rehype-footnotes-title')
+const rehypeLineNumbers = require('./utils/rehype-line-numbers')
 const rehypeHighlight = require('rehype-highlight')
 const rehypeHTMLBlocks = require('rehype-html-blocks')
 const rehypeAutolinkHeadings = require('rehype-autolink-headings')
@@ -119,6 +120,7 @@ function getHTMLProcessor (remarkConfig, rebberConfig, target) {
 
   if (!remarkConfig._test) {
     parser
+      .use(rehypeLineNumbers)
       .use(rehypeHighlight, remarkConfig.rehypeHighlight)
   }
 
