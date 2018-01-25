@@ -1,24 +1,29 @@
 const assert = require('assert')
 
-const template = ({
-  contentType,
-  title,
-  authors,
-  license,
-  licenseDirectory,
-  smileysDirectory,
-  disableToc = false,
-  latex,
-}) => {
-  assert(contentType, 'Error with argument: "contentType"')
-  assert(title, 'Error with argument: "title"')
-  assert(Array.isArray(authors), 'Error with argument: "authors"')
-  assert(license, 'Error with argument: "license"')
-  assert(smileysDirectory, 'Error with argument: "smileysDirectory"')
-  assert(latex, 'Error with argument: "latex"')
+const template = (opts, callback) => {
+  const {
+    disableToc = false,
+    content_type: contentType,
+    license_directory: licenseDirectory,
+    smileys_directory: smileysDirectory,
+    title,
+    authors,
+    license,
+    latex,
+  } = opts
+  try {
+    assert(contentType, 'Error with argument: "contentType"')
+    assert(title, 'Error with argument: "title"')
+    assert(Array.isArray(authors), 'Error with argument: "authors"')
+    assert(license, 'Error with argument: "license"')
+    assert(smileysDirectory, 'Error with argument: "smileysDirectory"')
+    assert(latex, 'Error with argument: "latex"')
+  } catch (err) {
+    return callback(err)
+  }
   const shortLicenseName = license.toLowerCase().replace('cc-', '')
 
-  return `\\documentclass[${contentType}]{zmdocument}
+  return callback(null, `\\documentclass[${contentType}]{zmdocument}
 
 \\usepackage{blindtext}
 \\title{${title}}
@@ -34,7 +39,7 @@ const template = ({
 ${disableToc ? '' : '\\tableofcontents'}
 
 ${latex}
-\\end{document}`
+\\end{document}`)
 }
 
 module.exports = template

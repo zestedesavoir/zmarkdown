@@ -123,6 +123,18 @@ describe('mock server tests', () => {
     })
   })
 
+  test('reports protocol not whitelisted', () => {
+    const file = `![](file://localhost:27273/wrong-mime.png)`
+
+    const error = "Protocol 'file:' not allowed."
+
+    const render = renderFactory()
+
+    return render(file).then(vfile => {
+      expect(vfile.messages[0].reason).toBe(error)
+    })
+  })
+
   test('skips when directory reaches size limit', () => {
     const file = dedent`
       ![](http://localhost:27273/ok.png)
@@ -188,6 +200,21 @@ describe('mock server tests', () => {
     expect(render(file).then(vfile => vfile.contents)).resolves.toBe(html)
   })
 
+  test('reports local magic number errors', () => {
+    const file = `![](/foobar/wrong-mime.txt)`
+
+    const render = renderFactory({
+      localUrlToLocalPath: (localUrl) => {
+        const localPath = __dirname.replace('__tests__', '__mock__')
+        return `${localPath}/files${localUrl.slice(7)}`
+      },
+    })
+
+    return render(file).then(vfile => {
+      expect(vfile.messages[0].message).toMatch("wrong-mime.txt' is not an image/ type")
+    })
+  })
+
   test('copies local images with function', () => {
     const file = `![](/foobar/ok.png)`
     const html = `<p><img src="foo/bar.png"></p>`
@@ -200,8 +227,8 @@ describe('mock server tests', () => {
     })
 
     return render(file).then(vfile => {
-      expect(r(vfile.contents)).toBe(html)
       expect(vfile.messages).toEqual([])
+      expect(r(vfile.contents)).toBe(html)
     })
   })
 
@@ -217,8 +244,8 @@ describe('mock server tests', () => {
     })
 
     return render(file).then(vfile => {
-      expect(r(vfile.contents)).toBe(html)
       expect(vfile.messages).toEqual([])
+      expect(r(vfile.contents)).toBe(html)
     })
   })
 

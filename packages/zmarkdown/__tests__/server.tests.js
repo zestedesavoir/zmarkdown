@@ -9,12 +9,12 @@ const latex = u('/latex')
 const texfile = u('/latex-document')
 
 const texfileOpts = {
-  contentType: 'contentType',
+  content_type: 'contentType',
   title: 'The Title',
   authors: ['FØØ', 'Bär'],
   license: 'CC-BY-NC-SA',
-  licenseDirectory: '/tmp/l',
-  smileysDirectory: '/tmp/s',
+  license_directory: '/tmp/l',
+  smileys_directory: '/tmp/s',
 }
 
 const rm = (dir, file) => new Promise((resolve, reject) =>
@@ -232,16 +232,13 @@ describe('EPUB endpoint', () => {
       `${__dirname.replace('__tests__', 'server/static')}`,
     ]
     const response = await a.post(epub, {
-      md: `![](/foobar/img.png)`,
+      md: `![](file://tmp/passwd)`,
       opts: opts,
     })
 
     const [rendered, , messages] = response.data
-    expect(messages).toEqual([])
+    expect(messages[0].message).toMatch("Protocol 'file:' not allowed.")
 
-    const regex = /\/([a-zA-Z0-9_-]{7,14})\/([a-zA-Z0-9_-]{7,14})\.(.{1,4})"/
-    expect(rendered).toMatch(regex)
-    const [, dir, file, ext] = rendered.match(regex)
-    return expect(rm(`${destination}/${dir}`, `${file}.${ext}`)).resolves.toBe('ok')
+    expect(rendered).toBe('<p><img src="file://tmp/passwd"></p>')
   })
 })

@@ -1,3 +1,4 @@
+const readChunk = require('read-chunk')
 const visit = require('unist-util-visit')
 const fs = require('fs')
 const path = require('path')
@@ -31,13 +32,20 @@ const mkdir = (path) => new Promise((resolve, reject) => {
   })
 })
 
-const copy = (from, to) => new Promise((resolve, reject) => {
-  fs.copyFile(from, to, (err) => {
-    if (err) reject(new Error(`Failed to copy ${from} to ${to}`))
+const checkAndCopy = (from, to) =>
+  readChunk(from, 0, 4100)
+    .then((chunk) => new Promise((resolve, reject) => {
+      const type = fileType(chunk) || {mime: ''}
+      if (type.mime.slice(0, 6) !== 'image/') {
+        reject(new Error(
+          `Detected mime of local file '${from}' is not an image/ type`))
+      }
+      fs.copyFile(from, to, (err) => {
+        if (err) reject(new Error(`Failed to copy ${from} to ${to}`))
 
-    resolve()
-  })
-})
+        resolve()
+      })
+    }))
 
 function plugin ({
   disabled = false,
@@ -84,18 +92,22 @@ function plugin ({
               return
             }
 
-            const promise = copy(localPath, destination)
+            const promise = checkAndCopy(localPath, destination)
               .catch((err) => {
                 vfile.message(err, position, url)
               })
               .then(() => {
                 node.url = destination
               })
+
             promises.push({offset: position.offset, promise: promise})
             return
           }
 
           const promise = new Promise((resolve, reject) => {
+            if (!['http:', 'https:'].includes(parsedURI.protocol)) {
+              reject(`Protocol '${parsedURI.protocol}' not allowed.`)
+            }
 
             const writeStream = (destination) => {
               return fs

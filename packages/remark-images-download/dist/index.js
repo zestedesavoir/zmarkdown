@@ -4,6 +4,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+var readChunk = require('read-chunk');
 var visit = require('unist-util-visit');
 var fs = require('fs');
 var path = require('path');
@@ -43,12 +44,18 @@ var mkdir = function mkdir(path) {
   });
 };
 
-var copy = function copy(from, to) {
-  return new Promise(function (resolve, reject) {
-    fs.copyFile(from, to, function (err) {
-      if (err) reject(new Error('Failed to copy ' + from + ' to ' + to));
+var checkAndCopy = function checkAndCopy(from, to) {
+  return readChunk(from, 0, 4100).then(function (chunk) {
+    return new Promise(function (resolve, reject) {
+      var type = fileType(chunk) || { mime: '' };
+      if (type.mime.slice(0, 6) !== 'image/') {
+        reject(new Error('Detected mime of local file \'' + from + '\' is not an image/ type'));
+      }
+      fs.copyFile(from, to, function (err) {
+        if (err) reject(new Error('Failed to copy ' + from + ' to ' + to));
 
-      resolve();
+        resolve();
+      });
     });
   });
 };
@@ -107,16 +114,20 @@ function plugin() {
             return;
           }
 
-          var _promise = copy(localPath, destination).catch(function (err) {
+          var _promise = checkAndCopy(localPath, destination).catch(function (err) {
             vfile.message(err, position, url);
           }).then(function () {
             node.url = destination;
           });
+
           promises.push({ offset: position.offset, promise: _promise });
           return;
         }
 
         var promise = new Promise(function (resolve, reject) {
+          if (!['http:', 'https:'].includes(parsedURI.protocol)) {
+            reject('Protocol \'' + parsedURI.protocol + '\' not allowed.');
+          }
 
           var writeStream = function writeStream(destination) {
             return fs.createWriteStream(destination).on('close', function () {

@@ -39,6 +39,7 @@ module.exports = function markdownHandlers (Raven) {
 
     opts.heading_shift = 0
     opts.disable_ping = true
+    opts.disable_jsfiddle = true
 
     render(target, markdown, opts, callback)
   }
@@ -49,17 +50,15 @@ module.exports = function markdownHandlers (Raven) {
 
     opts.heading_shift = 0
     opts.disable_ping = true
+    opts.disable_jsfiddle = true
 
     render(target, markdown, opts, (err, [latex, metadata, messages] = []) => {
       if (err) return callback(err, markdown)
 
-      try {
-        const latexDocument = template(Object.assign(opts, {latex}))
-        return callback(null, [latexDocument, {}, messages])
-      } catch (e) {
-        Raven.captureException(e)
-        return callback(e)
-      }
+      template(Object.assign(opts, {latex}), (err, latexDocument) => {
+        if (err) return callback(err)
+        callback(null, [latexDocument, {}, messages])
+      })
     })
   }
 
