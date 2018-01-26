@@ -34,6 +34,7 @@
   "dependencies": {
     "clone": "^2.1.1",
     "file-type": "^7.4.0",
+    "is-svg": "^2.1.0",
     "read-chunk": "^2.1.0",
     "request": "^2.81.0",
     "shortid": "^2.2.8",

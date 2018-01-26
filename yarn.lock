@@ -2812,6 +2812,10 @@ hosted-git-info@^2.1.4, hosted-git-info@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.5.0.tgz#6d60e34b3abbc8313062c3b798ef8d901a07af3c"
 
+html-comment-regex@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/html-comment-regex/-/html-comment-regex-1.1.1.tgz#668b93776eaae55ebde8f3ad464b307a4963625e"
+
 html-differ@^1.3.4:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/html-differ/-/html-differ-1.3.4.tgz#9f47bae9757d2513d1edad8273cc5e43fc006cc6"
@@ -3178,6 +3182,12 @@ is-stream@^1.0.0, is-stream@^1.1.0, is-stream@~1.1.0:
 is-subset@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/is-subset/-/is-subset-0.1.1.tgz#8a59117d932de1de00f245fcdd39ce43f1e939a6"
+
+is-svg@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/is-svg/-/is-svg-2.1.0.tgz#cf61090da0d9efbcab8722deba6f032208dbb0e9"
+  dependencies:
+    html-comment-regex "^1.1.0"
 
 is-symbol@^1.0.1:
   version "1.0.1"

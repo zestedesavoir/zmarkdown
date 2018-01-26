@@ -4,14 +4,14 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var readChunk = require('read-chunk');
-var visit = require('unist-util-visit');
+var fileType = require('file-type');
 var fs = require('fs');
+var isSvg = require('is-svg');
 var path = require('path');
 var request = require('request');
 var shortid = require('shortid');
-var fileType = require('file-type');
 var URL = require('url');
+var visit = require('unist-util-visit');
 
 var noop = Promise.resolve();
 
@@ -45,10 +45,15 @@ var mkdir = function mkdir(path) {
 };
 
 var checkAndCopy = function checkAndCopy(from, to) {
-  return readChunk(from, 0, 4100).then(function (chunk) {
-    return new Promise(function (resolve, reject) {
-      var type = fileType(chunk) || { mime: '' };
-      if (type.mime.slice(0, 6) !== 'image/') {
+  return new Promise(function (resolve, reject) {
+    fs.readFile(from, function (err, data) {
+      if (err) reject(err);
+      var type = fileType(data) || { mime: '' };
+      if (!type.mime || type.mime === 'application/xml') {
+        if (!isSvg(data)) {
+          reject(new Error('Could not detect ' + from + ' mime type, not SVG either'));
+        }
+      } else if (type.mime.slice(0, 6) !== 'image/') {
         reject(new Error('Detected mime of local file \'' + from + '\' is not an image/ type'));
       }
       fs.copyFile(from, to, function (err) {
@@ -114,10 +119,10 @@ function plugin() {
             return;
           }
 
-          var _promise = checkAndCopy(localPath, destination).catch(function (err) {
-            vfile.message(err, position, url);
-          }).then(function () {
+          var _promise = checkAndCopy(localPath, destination).then(function () {
             node.url = destination;
+          }, function (err) {
+            vfile.message(err, position, url);
           });
 
           promises.push({ offset: position.offset, promise: _promise });
@@ -162,8 +167,12 @@ function plugin() {
             res.once('data', function (chunk) {
               res.destroy();
               var type = fileType(chunk) || { mime: '' };
-              if (type.mime.slice(0, 6) !== 'image/') {
-                reject(new Error('Detected mime of ' + url + ' is not an image/ type'));
+              if (type.mime.slice(0, 6) !== 'image/' && !isSvg(chunk.toString())) {
+                if (type.mime) {
+                  reject(new Error('Mime of ' + url + ' not allowed: \'' + type.mime + '\''));
+                } else {
+                  reject(new Error('Could not detect ' + url + ' mime type, not SVG either'));
+                }
               }
             });
           }).on('error', function (err) {

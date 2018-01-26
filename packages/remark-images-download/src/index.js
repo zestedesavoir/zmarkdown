@@ -1,11 +1,11 @@
-const readChunk = require('read-chunk')
-const visit = require('unist-util-visit')
+const fileType = require('file-type')
 const fs = require('fs')
+const isSvg = require('is-svg')
 const path = require('path')
 const request = require('request')
 const shortid = require('shortid')
-const fileType = require('file-type')
 const URL = require('url')
+const visit = require('unist-util-visit')
 
 const noop = Promise.resolve()
 
@@ -33,10 +33,15 @@ const mkdir = (path) => new Promise((resolve, reject) => {
 })
 
 const checkAndCopy = (from, to) =>
-  readChunk(from, 0, 4100)
-    .then((chunk) => new Promise((resolve, reject) => {
-      const type = fileType(chunk) || {mime: ''}
-      if (type.mime.slice(0, 6) !== 'image/') {
+  new Promise((resolve, reject) => {
+    fs.readFile(from, (err, data) => {
+      if (err) reject(err)
+      const type = fileType(data) || {mime: ''}
+      if (!type.mime || type.mime === 'application/xml') {
+        if (!isSvg(data)) {
+          reject(new Error(`Could not detect ${from} mime type, not SVG either`))
+        }
+      } else if (type.mime.slice(0, 6) !== 'image/') {
         reject(new Error(
           `Detected mime of local file '${from}' is not an image/ type`))
       }
@@ -45,7 +50,8 @@ const checkAndCopy = (from, to) =>
 
         resolve()
       })
-    }))
+    })
+  })
 
 function plugin ({
   disabled = false,
@@ -93,11 +99,10 @@ function plugin ({
             }
 
             const promise = checkAndCopy(localPath, destination)
-              .catch((err) => {
-                vfile.message(err, position, url)
-              })
               .then(() => {
                 node.url = destination
+              }, (err) => {
+                vfile.message(err, position, url)
               })
 
             promises.push({offset: position.offset, promise: promise})
@@ -146,9 +151,12 @@ function plugin ({
                 res.once('data', chunk => {
                   res.destroy()
                   const type = fileType(chunk) || {mime: ''}
-                  if (type.mime.slice(0, 6) !== 'image/') {
-                    reject(new Error(
-                      `Detected mime of ${url} is not an image/ type`))
+                  if (type.mime.slice(0, 6) !== 'image/' && !isSvg(chunk.toString())) {
+                    if (type.mime) {
+                      reject(new Error(`Mime of ${url} not allowed: '${type.mime}'`))
+                    } else {
+                      reject(new Error(`Could not detect ${url} mime type, not SVG either`))
+                    }
                   }
                 })
               })

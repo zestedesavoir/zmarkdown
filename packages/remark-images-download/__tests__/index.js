@@ -16,6 +16,8 @@ import server from '../__mock__/server'
 const DOWNLOAD_DESTINATION = '/tmp'
 const downloadDestination = path.join(DOWNLOAD_DESTINATION, 'remark-image-download-tests')
 
+const firstMsg = (vfile) => vfile.messages[0].message
+
 const renderFactory = (opts = {}) =>
   (text) => unified()
     .use(reParse)
@@ -42,14 +44,14 @@ const r = (html) => html.replace(
 describe('mock server tests', () => {
   test('downloads image ok', () => {
     const file = dedent`
-      ![](http://localhost:27273/ok.png)
+      ![](http://localhost:27273/test.svg)
 
       ![](http://localhost:27273/ok.png)
 
       ![](http://localhost:27273/ok.png)
     `
     const html = dedent`
-      <p><img src="foo/bar.png"></p>
+      <p><img src="foo/bar.svg"></p>
       <p><img src="foo/bar.png"></p>
       <p><img src="foo/bar.png"></p>
     `
@@ -83,7 +85,20 @@ describe('mock server tests', () => {
     })
 
     return render(file).then(vfile => {
-      expect(vfile.messages[0].reason).toBe(error)
+      expect(firstMsg(vfile)).toBe(error)
+      expect(vfile.contents).toBe(html)
+    })
+  })
+
+  test('reports bad SVG', () => {
+    const file = `![](http://localhost:27273/bad.svg)`
+    const html = `<p><img src="http://localhost:27273/bad.svg"></p>`
+
+    const render = renderFactory()
+
+    return render(file).then(vfile => {
+      expect(firstMsg(vfile)).toBe(
+        'Could not detect http://localhost:27273/bad.svg mime type, not SVG either')
       expect(vfile.contents).toBe(html)
     })
   })
@@ -95,6 +110,8 @@ describe('mock server tests', () => {
     const render = renderFactory()
 
     return render(file).then(vfile => {
+      expect(firstMsg(vfile)).toBe(
+        'Content-Type of http://localhost:27273/wrong-mime.txt is not an image/ type')
       expect(vfile.contents).toBe(html)
     })
   })
@@ -102,24 +119,22 @@ describe('mock server tests', () => {
   test('reports bad mime headers', () => {
     const file = `![](http://localhost:27273/wrong-mime.txt)`
 
-    const error = 'Content-Type of http://localhost:27273/wrong-mime.txt is not an image/ type'
-
     const render = renderFactory()
 
     return render(file).then(vfile => {
-      expect(vfile.messages[0].reason).toBe(error)
+      expect(firstMsg(vfile)).toBe(
+        'Content-Type of http://localhost:27273/wrong-mime.txt is not an image/ type')
     })
   })
 
-  test('reports bad detected mime content', () => {
+  test('reports bad mime content', () => {
     const file = `![](http://localhost:27273/wrong-mime.png)`
-
-    const error = 'Detected mime of http://localhost:27273/wrong-mime.png is not an image/ type'
 
     const render = renderFactory()
 
     return render(file).then(vfile => {
-      expect(vfile.messages[0].reason).toBe(error)
+      expect(firstMsg(vfile)).toBe(
+        'Could not detect http://localhost:27273/wrong-mime.png mime type, not SVG either')
     })
   })
 
@@ -131,7 +146,7 @@ describe('mock server tests', () => {
     const render = renderFactory()
 
     return render(file).then(vfile => {
-      expect(vfile.messages[0].reason).toBe(error)
+      expect(firstMsg(vfile)).toBe(error)
     })
   })
 
@@ -163,7 +178,7 @@ describe('mock server tests', () => {
 
     return render(file)
       .then(vfile => {
-        expect(vfile.messages[0].reason).toBe(error)
+        expect(firstMsg(vfile)).toBe(error)
         expect(r(vfile.contents)).toBe(html)
       })
   })
@@ -211,7 +226,7 @@ describe('mock server tests', () => {
     })
 
     return render(file).then(vfile => {
-      expect(vfile.messages[0].message).toMatch("wrong-mime.txt' is not an image/ type")
+      expect(firstMsg(vfile)).toMatch('mime type, not SVG either')
     })
   })
 
@@ -249,6 +264,57 @@ describe('mock server tests', () => {
     })
   })
 
+  test('copies local SVG with replacement array', () => {
+    const file = `![](/foobar/test.svg)`
+    const html = `<p><img src="foo/bar.svg"></p>`
+
+    const render = renderFactory({
+      localUrlToLocalPath: [
+        '/foobar',
+        `${__dirname.replace('__tests__', '__mock__')}/files`,
+      ],
+    })
+
+    return render(file).then(vfile => {
+      expect(vfile.messages).toEqual([])
+      expect(r(vfile.contents)).toBe(html)
+    })
+  })
+
+  test('copies local images with replacement array', () => {
+    const file = `![](/foobar/ok.png)`
+    const html = `<p><img src="foo/bar.png"></p>`
+
+    const render = renderFactory({
+      localUrlToLocalPath: [
+        '/foobar',
+        `${__dirname.replace('__tests__', '__mock__')}/files`,
+      ],
+    })
+
+    return render(file).then(vfile => {
+      expect(vfile.messages).toEqual([])
+      expect(r(vfile.contents)).toBe(html)
+    })
+  })
+
+  test('does not copy bad local SVG', () => {
+    const file = `![](/foobar/bad.svg)`
+    const html = `<p><img src="/foobar/bad.svg"></p>`
+
+    const render = renderFactory({
+      localUrlToLocalPath: [
+        '/foobar',
+        `${__dirname.replace('__tests__', '__mock__')}/files`,
+      ],
+    })
+
+    return render(file).then(vfile => {
+      expect(firstMsg(vfile)).toMatch('mime type, not SVG either')
+      expect(r(vfile.contents)).toBe(html)
+    })
+  })
+
   test('does not copy dangerous local absolute URLs', () => {
     const file = `![](/../../../etc/shadow)`
     const html = `<p><img src="/../../../etc/shadow"></p>`
@@ -260,19 +326,20 @@ describe('mock server tests', () => {
     })
 
     return render(file).then(vfile => {
-      expect(vfile.messages[0].message).toMatch('Dangerous absolute image URL detected')
+      expect(firstMsg(vfile)).toMatch('Dangerous absolute image URL detected')
       expect(r(vfile.contents)).toBe(html)
     })
   })
 
   test('reports 404', () => {
-    const file = `![](http://example.com/foo.png)`
-    const html = `<p><img src="http://example.com/foo.png"></p>`
+    const file = `![](http://localhost:27273/404/notfound)`
+    const html = `<p><img src="http://localhost:27273/404/notfound"></p>`
 
     const render = renderFactory()
 
     return render(file).then(vfile => {
-      expect(vfile.messages[0].reason).toBe('Received HTTP404 for: http://example.com/foo.png')
+      expect(firstMsg(vfile)).toBe(
+        'Received HTTP404 for: http://localhost:27273/404/notfound')
       expect(vfile.contents).toBe(html)
     })
   })
