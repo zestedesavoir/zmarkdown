@@ -37,19 +37,19 @@ const checkAndCopy = (from, to) =>
     fs.readFile(from, (err, data) => {
       if (err) reject(err)
       if (!data) {
-        reject(new Error(`Empty file: ${from}`))
+        return reject(new Error(`Empty file: ${from}`))
       }
       const type = fileType(data) || {mime: ''}
       if (!type.mime || type.mime === 'application/xml') {
         if (!isSvg(data)) {
-          reject(new Error(`Could not detect ${from} mime type, not SVG either`))
+          return reject(new Error(`Could not detect ${from} mime type, not SVG either`))
         }
       } else if (type.mime.slice(0, 6) !== 'image/') {
-        reject(new Error(
+        return reject(new Error(
           `Detected mime of local file '${from}' is not an image/ type`))
       }
       fs.copyFile(from, to, (err) => {
-        if (err) reject(new Error(`Failed to copy ${from} to ${to}`))
+        if (err) return reject(new Error(`Failed to copy ${from} to ${to}`))
 
         resolve()
       })
