@@ -36,6 +36,9 @@ const checkAndCopy = (from, to) =>
   new Promise((resolve, reject) => {
     fs.readFile(from, (err, data) => {
       if (err) reject(err)
+      if (!data) {
+        reject(new Error(`Empty file: ${from}`))
+      }
       const type = fileType(data) || {mime: ''}
       if (!type.mime || type.mime === 'application/xml') {
         if (!isSvg(data)) {

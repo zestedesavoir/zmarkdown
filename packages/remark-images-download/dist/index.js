@@ -48,6 +48,9 @@ var checkAndCopy = function checkAndCopy(from, to) {
   return new Promise(function (resolve, reject) {
     fs.readFile(from, function (err, data) {
       if (err) reject(err);
+      if (!data) {
+        reject(new Error('Empty file: ' + from));
+      }
       var type = fileType(data) || { mime: '' };
       if (!type.mime || type.mime === 'application/xml') {
         if (!isSvg(data)) {
