@@ -36,8 +36,8 @@ Only `metadata` is described in the **Response** sections below.
 
 * `metadata.disableToc`, bool
 
-  Whether or not the input Markdown did **not** contain headings (`#`, `##`, …). This property is named that way because we use it to disable Table of Contents generation when no headings were found.  
-  `disableToc: true` means *no headings*  
+  Whether or not the input Markdown did **not** contain headings (`#`, `##`, …). This property is named that way because we use it to disable Table of Contents generation when no headings were found.
+  `disableToc: true` means *no headings*
   `disableToc: false` means at least one *heading*
 
 ## `/html` - Markdown to HTML
@@ -109,9 +109,9 @@ Only `metadata` is described in the **Response** sections below.
 * `opts.images_download_dir`: see `/latex`
 * `opts.local_url_to_local_path`: see `/latex`
 * `opts.disable_jsfiddle`: see `/html`
-* `opts.contentType`, string
+* `opts.content_type`, string
 
-  Will be interpolated in `\documentclass[${contentType}]{zmdocument}`
+  Will be interpolated in `\documentclass[${content_type}]{zmdocument}`
 
 * `opts.title`, string
 
@@ -123,13 +123,13 @@ Only `metadata` is described in the **Response** sections below.
 
 * `opts.license`, string
 
-  E.g. `CC-BY-SA` will be displayed as-is, using `${licenseDirectory}/by-sa.svg` as license icon with a link to `https://creativecommons.org/licenses/by-sa/4.0/legalcode`
+  E.g. `CC-BY-SA` will be displayed as-is, using `${license_directory}/by-sa.svg` as license icon with a link to `https://creativecommons.org/licenses/by-sa/4.0/legalcode`
 
-* `opts.licenseDirectory`, string
+* `opts.license_directory`, string
 
   Path to the directory where CC license SVG icons are stored, see `license` above.
 
-* `opts.smileysDirectory`, string
+* `opts.smileys_directory`, string
 
   Path to the directory where smileys are stored.
 
