@@ -19,3 +19,36 @@ table, th, td {
     border: 1px solid black;
 }
 
+.hljs-code-div {
+  font-family: monospace;
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 0.5em;
+  border-radius: 0.25em;
+  display: flex;
+  line-height: 18px;
+  font-family: monospace;
+  font-style: normal;
+  font-size: 14px;
+}
+.hljs-code-div .hljs-line-numbers {
+  counter-reset: line;
+  border-right: 1px solid #ddd;
+  margin: 0;
+  padding: 0.5em;
+  color: #888;
+  text-align: right;
+}
+.hljs-code-div .hljs-line-numbers span::before {
+  counter-increment: line;
+  content: counter(line);
+  display: block;
+}
+.hljs-code-div pre {
+  width: 100%;
+  margin: 0;
+}
+
+span.icon.icon-link::before {
+  content: '[link]'
+}
