@@ -14,6 +14,11 @@ var defaultMacros = {
 
 function customBlock(ctx, node) {
   var blockMacro = ctx[node.type] || defaultMacros[node.type] || defaultMacros.defaultBlock;
+  node.children.forEach(function (child) {
+    if (child.type.startsWith('heading') || child.type.startsWith('body')) {
+      child.type = 'paragraph';
+    }
+  });
   var innerText = all(ctx, node).trim();
   var options = ctx.customBlocks || {};
 

@@ -421,7 +421,7 @@ test('custom-blocks', () => {
       a: 'warning ico-after',
       erreur: 'error ico-after',
       e: 'error ico-after',
-    })
+    }, true)
     .use(rebber, integrationConfig)
     .processSync(fixture.replace(/·/g, ' '))
 
