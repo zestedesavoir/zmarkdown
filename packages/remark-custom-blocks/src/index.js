@@ -7,7 +7,7 @@ function escapeRegExp (str) {
 const C_NEWLINE = '\n'
 const C_FENCE = '|'
 
-module.exports = function blockPlugin (blocks = {}) {
+module.exports = function blockPlugin (blocks = {}, allowTitle = false) {
   const pattern = Object
     .keys(blocks)
     .map(escapeRegExp)
@@ -15,8 +15,10 @@ module.exports = function blockPlugin (blocks = {}) {
   if (!pattern) {
     throw new Error('remark-custom-blocks needs to be passed a configuration object as option')
   }
-  const regex = new RegExp(`\\[\\[(${pattern})\\]\\]`)
-
+  let regex = new RegExp(`\\[\\[(${pattern})\\]\\]`)
+  if (allowTitle) {
+    regex = new RegExp(`\\[\\[(${pattern})( ?\\| ?((\\w| |'|-|")+))?\\]\\]`)
+  }
   function blockTokenizer (eat, value, silent) {
     const now = eat.now()
     const keep = regex.exec(value)
@@ -47,19 +49,47 @@ module.exports = function blockPlugin (blocks = {}) {
 
     const add = eat(stringToEat)
     const exit = this.enterBlock()
-    const contents = this.tokenizeBlock(contentString, now)
+    const contents = {
+      type: `body${keep[1]}CustomBlock`,
+      data: {
+        hName: 'div',
+        hProperties: {
+          className: 'custom-block-body',
+        },
+      },
+      children: this.tokenizeBlock(contentString, now),
+    }
+
     exit()
 
     const classString = blocks[keep[1]]
     const classList = spaceSeparated.parse(classString)
+    const blockChildren = [contents]
+    if (allowTitle && keep[3]) {
+      const titleNode = {
+        type: `heading${keep[1]}CustomBlock`,
+        data: {
+          hName: 'div',
+          hProperties: {
+            className: 'custom-block-heading',
+          },
+        },
+        children: [
+          {
+            value: keep[3],
+            type: 'text',
+          }],
+      }
+      blockChildren.splice(0, 0, titleNode)
+    }
 
     return add({
       type: `${keep[1]}CustomBlock`,
-      children: contents,
+      children: blockChildren,
       data: {
         hName: 'div',
         hProperties: {
-          className: classList,
+          className: `custom-block ${classList}`,
         },
       },
     })

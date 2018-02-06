@@ -86,6 +86,7 @@ const remarkConfig = {
     a: 'warning ico-after',
     erreur: 'error ico-after',
     e: 'error ico-after',
+    neutre: 'neutral',
   },
 
   escapeEscaped: ['&'],
