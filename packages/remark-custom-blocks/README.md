@@ -64,7 +64,7 @@ unified()
   .use(remarkCustomBlocks, {
     someType: 'a-css-class another-class',
     anotherType: 'foo',
-  })
+  }, true)
   .use(remark2rehype)
   .use(stringify)
 ```
@@ -80,6 +80,8 @@ The sample configuration provided above would have the following effect:
     | content
     [[anotherType]]
     | content
+    [[anotherType | title ]]
+    | content
     ```
 
 1. This Remark plugin would create [mdast][mdast] nodes for these two blocks, these nodes would be of type:
@@ -91,6 +93,7 @@ The sample configuration provided above would have the following effect:
 
     * `<div class="a-css-class another-class">…`
     * `<div class="foo">…`
+    * `<div class="foo"><p>title</p>…`
 
 ## License
 
