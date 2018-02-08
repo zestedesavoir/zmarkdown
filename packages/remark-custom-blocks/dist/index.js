@@ -11,13 +11,16 @@ var C_FENCE = '|';
 
 module.exports = function blockPlugin() {
   var blocks = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var allowTitle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
   var pattern = Object.keys(blocks).map(escapeRegExp).join('|');
   if (!pattern) {
     throw new Error('remark-custom-blocks needs to be passed a configuration object as option');
   }
   var regex = new RegExp('\\[\\[(' + pattern + ')\\]\\]');
-
+  if (allowTitle) {
+    regex = new RegExp('\\[\\[(' + pattern + ')( ?\\| ?((\\w| |\'|-|")+))?\\]\\]');
+  }
   function blockTokenizer(eat, value, silent) {
     var now = eat.now();
     var keep = regex.exec(value);
@@ -48,19 +51,46 @@ module.exports = function blockPlugin() {
 
     var add = eat(stringToEat);
     var exit = this.enterBlock();
-    var contents = this.tokenizeBlock(contentString, now);
+    var contents = {
+      type: 'body' + keep[1] + 'CustomBlock',
+      data: {
+        hName: 'div',
+        hProperties: {
+          className: 'custom-block-body'
+        }
+      },
+      children: this.tokenizeBlock(contentString, now)
+    };
+
     exit();
 
     var classString = blocks[keep[1]];
     var classList = spaceSeparated.parse(classString);
+    var blockChildren = [contents];
+    if (allowTitle && keep[3]) {
+      var titleNode = {
+        type: 'heading' + keep[1] + 'CustomBlock',
+        data: {
+          hName: 'div',
+          hProperties: {
+            className: 'custom-block-heading'
+          }
+        },
+        children: [{
+          value: keep[3],
+          type: 'text'
+        }]
+      };
+      blockChildren.splice(0, 0, titleNode);
+    }
 
     return add({
       type: keep[1] + 'CustomBlock',
-      children: contents,
+      children: blockChildren,
       data: {
         hName: 'div',
         hProperties: {
-          className: classList
+          className: 'custom-block ' + classList
         }
       }
     });

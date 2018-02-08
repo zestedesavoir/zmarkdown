@@ -16,15 +16,12 @@ module.exports = function blockPlugin (blocks = {}, allowTitle = false) {
     throw new Error('remark-custom-blocks needs to be passed a configuration object as option')
   }
   let regex = new RegExp(`\\[\\[(${pattern})\\]\\]`)
-  console.log(pattern)
   if (allowTitle) {
-    regex = new RegExp(`\\[\\[(${pattern})( ?\\| ?((\\w| )+))?\\]\\]`)
+    regex = new RegExp(`\\[\\[(${pattern})( ?\\| ?((\\w| |'|-|")+))?\\]\\]`)
   }
   function blockTokenizer (eat, value, silent) {
     const now = eat.now()
     const keep = regex.exec(value)
-    if (allowTitle)
-      console.log(keep)
     if (!keep) return
     if (keep.index !== 0) return
 
@@ -52,30 +49,47 @@ module.exports = function blockPlugin (blocks = {}, allowTitle = false) {
 
     const add = eat(stringToEat)
     const exit = this.enterBlock()
-    const contents = this.tokenizeBlock(contentString, now)
+    const contents = {
+      type: `body${keep[1]}CustomBlock`,
+      data: {
+        hName: 'div',
+        hProperties: {
+          className: 'custom-block-body',
+        },
+      },
+      children: this.tokenizeBlock(contentString, now),
+    }
+
     exit()
 
     const classString = blocks[keep[1]]
     const classList = spaceSeparated.parse(classString)
+    const blockChildren = [contents]
     if (allowTitle && keep[3]) {
       const titleNode = {
-        type: 'paragraph',
-        children:[
+        type: `heading${keep[1]}CustomBlock`,
+        data: {
+          hName: 'div',
+          hProperties: {
+            className: 'custom-block-heading',
+          },
+        },
+        children: [
           {
             value: keep[3],
             type: 'text',
-          }]
+          }],
       }
-      contents.splice(0, 0, titleNode)
+      blockChildren.splice(0, 0, titleNode)
     }
 
     return add({
       type: `${keep[1]}CustomBlock`,
-      children: contents,
+      children: blockChildren,
       data: {
         hName: 'div',
         hProperties: {
-          className: classList,
+          className: `custom-block ${classList}`,
         },
       },
     })

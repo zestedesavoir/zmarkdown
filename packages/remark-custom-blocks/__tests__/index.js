@@ -6,7 +6,7 @@ import remark2rehype from 'remark-rehype'
 
 import plugin from '../src/'
 
-const render = (text, activateTitle) => unified()
+const render = (text, allowTitle) => unified()
   .use(reParse)
   .use(remark2rehype)
   .use(plugin, {
@@ -20,15 +20,15 @@ const render = (text, activateTitle) => unified()
     a: 'warning ico-after',
     erreur: 'error ico-after',
     e: 'error ico-after',
-  }, activateTitle)
+  }, allowTitle)
   .use(stringify)
   .processSync(text)
 
 const nameMap = {
-  false: 'blocks',
-  true: 'blocks with allowTitle'
+  'blocks': false,
+  'blocks with allowTitle': true,
 }
-Object.keys(nameMap).forEach(t => test(nameMap[t], () => {
+Object.keys(nameMap).forEach(t => test(t, () => {
   const {contents} = render(dedent`
     [[s]]
     | Secret Block
@@ -85,7 +85,22 @@ Object.keys(nameMap).forEach(t => test(nameMap[t], () => {
     
     [[attention | title]]
     | only parsed if allowTitles is true
-  `, t === 'true')
+    
+    [[attention |title]]
+    | only parsed if allowTitles is true
+    
+    [[attention| title]]
+    | only parsed if allowTitles is true
+    
+    [[attention|title]]
+    | only parsed if allowTitles is true
+    
+    [[attention||title]]
+    | not parsed at all
+    
+    [[attention|title with many words I'm happy]]
+    | only parsed if allowTitles is true
+  `, nameMap[t])
   expect(contents).toMatchSnapshot()
 }))
 

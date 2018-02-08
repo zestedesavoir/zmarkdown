@@ -1,67 +1,84 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`blocks 1`] = `
-"<div class=\\"spoiler\\"><p>Secret Block</p></div>
-<div class=\\"spoiler\\"><p>Secret Block</p></div>
-<div class=\\"spoiler\\"><p>another</p></div>
+"<div class=\\"custom-block spoiler\\"><div class=\\"custom-block-body\\"><p>Secret Block</p></div></div>
+<div class=\\"custom-block spoiler\\"><div class=\\"custom-block-body\\"><p>Secret Block</p></div></div>
+<div class=\\"custom-block spoiler\\"><div class=\\"custom-block-body\\"><p>another</p></div></div>
 <blockquote>
-<div class=\\"spoiler\\"><blockquote>
+<div class=\\"custom-block spoiler\\"><div class=\\"custom-block-body\\"><blockquote>
 <p>Blockquote in secret block in blockquote</p>
-</blockquote></div>
+</blockquote></div></div>
 </blockquote>
-<div class=\\"information ico-after\\"><p>Information Block</p></div>
-<div class=\\"information ico-after\\"><p>an other</p></div>
-<div class=\\"question ico-after\\"><p>Question Block</p></div>
-<div class=\\"question ico-after\\"><p>an other</p></div>
-<div class=\\"warning ico-after\\"><p>Attention Block</p></div>
-<div class=\\"warning ico-after\\"><p>an other</p></div>
-<div class=\\"error ico-after\\"><p>Erreur Block</p></div>
-<div class=\\"error ico-after\\"><p>an other</p></div>
+<div class=\\"custom-block information,ico-after\\"><div class=\\"custom-block-body\\"><p>Information Block</p></div></div>
+<div class=\\"custom-block information,ico-after\\"><div class=\\"custom-block-body\\"><p>an other</p></div></div>
+<div class=\\"custom-block question,ico-after\\"><div class=\\"custom-block-body\\"><p>Question Block</p></div></div>
+<div class=\\"custom-block question,ico-after\\"><div class=\\"custom-block-body\\"><p>an other</p></div></div>
+<div class=\\"custom-block warning,ico-after\\"><div class=\\"custom-block-body\\"><p>Attention Block</p></div></div>
+<div class=\\"custom-block warning,ico-after\\"><div class=\\"custom-block-body\\"><p>an other</p></div></div>
+<div class=\\"custom-block error,ico-after\\"><div class=\\"custom-block-body\\"><p>Erreur Block</p></div></div>
+<div class=\\"custom-block error,ico-after\\"><div class=\\"custom-block-body\\"><p>an other</p></div></div>
 <p>[[se]]
 | not a block</p>
 <p>[[secretsecret]]
 | not a block</p>
 <p>[[SECRET]]
 | not a block</p>
-<div class=\\"spoiler\\"><p>Multiline block</p><blockquote>
+<div class=\\"custom-block spoiler\\"><div class=\\"custom-block-body\\"><p>Multiline block</p><blockquote>
 <p>with blockquote !</p>
-</blockquote></div>
+</blockquote></div></div>
 <p>| Not a block</p>
-<p>[[attention | title]]\n| only parsed if allowTitles is true</p>"
+<p>[[attention | title]]
+| only parsed if allowTitles is true</p>
+<p>[[attention |title]]
+| only parsed if allowTitles is true</p>
+<p>[[attention| title]]
+| only parsed if allowTitles is true</p>
+<p>[[attention|title]]
+| only parsed if allowTitles is true</p>
+<p>[[attention||title]]
+| not parsed at all</p>
+<p>[[attention|title with many words I'm happy]]
+| only parsed if allowTitles is true</p>"
 `;
 
 exports[`blocks with allowTitle 1`] = `
-"<div class=\\"spoiler\\"><p>Secret Block</p></div>
-<div class=\\"spoiler\\"><p>Secret Block</p></div>
-<div class=\\"spoiler\\"><p>another</p></div>
+"<div class=\\"custom-block spoiler\\"><div class=\\"custom-block-body\\"><p>Secret Block</p></div></div>
+<div class=\\"custom-block spoiler\\"><div class=\\"custom-block-body\\"><p>Secret Block</p></div></div>
+<div class=\\"custom-block spoiler\\"><div class=\\"custom-block-body\\"><p>another</p></div></div>
 <blockquote>
-<div class=\\"spoiler\\"><blockquote>
+<div class=\\"custom-block spoiler\\"><div class=\\"custom-block-body\\"><blockquote>
 <p>Blockquote in secret block in blockquote</p>
-</blockquote></div>
+</blockquote></div></div>
 </blockquote>
-<div class=\\"information ico-after\\"><p>Information Block</p></div>
-<div class=\\"information ico-after\\"><p>an other</p></div>
-<div class=\\"question ico-after\\"><p>Question Block</p></div>
-<div class=\\"question ico-after\\"><p>an other</p></div>
-<div class=\\"warning ico-after\\"><p>Attention Block</p></div>
-<div class=\\"warning ico-after\\"><p>an other</p></div>
-<div class=\\"error ico-after\\"><p>Erreur Block</p></div>
-<div class=\\"error ico-after\\"><p>an other</p></div>
+<div class=\\"custom-block information,ico-after\\"><div class=\\"custom-block-body\\"><p>Information Block</p></div></div>
+<div class=\\"custom-block information,ico-after\\"><div class=\\"custom-block-body\\"><p>an other</p></div></div>
+<div class=\\"custom-block question,ico-after\\"><div class=\\"custom-block-body\\"><p>Question Block</p></div></div>
+<div class=\\"custom-block question,ico-after\\"><div class=\\"custom-block-body\\"><p>an other</p></div></div>
+<div class=\\"custom-block warning,ico-after\\"><div class=\\"custom-block-body\\"><p>Attention Block</p></div></div>
+<div class=\\"custom-block warning,ico-after\\"><div class=\\"custom-block-body\\"><p>an other</p></div></div>
+<div class=\\"custom-block error,ico-after\\"><div class=\\"custom-block-body\\"><p>Erreur Block</p></div></div>
+<div class=\\"custom-block error,ico-after\\"><div class=\\"custom-block-body\\"><p>an other</p></div></div>
 <p>[[se]]
 | not a block</p>
 <p>[[secretsecret]]
 | not a block</p>
 <p>[[SECRET]]
 | not a block</p>
-<div class=\\"spoiler\\"><p>Multiline block</p><blockquote>
+<div class=\\"custom-block spoiler\\"><div class=\\"custom-block-body\\"><p>Multiline block</p><blockquote>
 <p>with blockquote !</p>
-</blockquote></div>
+</blockquote></div></div>
 <p>| Not a block</p>
-<div class=\\"warning ico-after\\"><p>title</p><p>only parsed if allowTitles is true</p></div>"
+<div class=\\"custom-block warning,ico-after\\"><div class=\\"custom-block-heading\\">title</div><div class=\\"custom-block-body\\"><p>only parsed if allowTitles is true</p></div></div>
+<div class=\\"custom-block warning,ico-after\\"><div class=\\"custom-block-heading\\">title</div><div class=\\"custom-block-body\\"><p>only parsed if allowTitles is true</p></div></div>
+<div class=\\"custom-block warning,ico-after\\"><div class=\\"custom-block-heading\\">title</div><div class=\\"custom-block-body\\"><p>only parsed if allowTitles is true</p></div></div>
+<div class=\\"custom-block warning,ico-after\\"><div class=\\"custom-block-heading\\">title</div><div class=\\"custom-block-body\\"><p>only parsed if allowTitles is true</p></div></div>
+<p>[[attention||title]]
+| not parsed at all</p>
+<div class=\\"custom-block warning,ico-after\\"><div class=\\"custom-block-heading\\">title with many words I'm happy</div><div class=\\"custom-block-body\\"><p>only parsed if allowTitles is true</p></div></div>"
 `;
 
 exports[`regression 1 1`] = `
 "<p>content before</p>
-<div class=\\"spoiler\\"><p>Block</p></div>
+<div class=\\"custom-block spoiler\\"><div class=\\"custom-block-body\\"><p>Block</p></div></div>
 <p>with content after</p>"
 `;

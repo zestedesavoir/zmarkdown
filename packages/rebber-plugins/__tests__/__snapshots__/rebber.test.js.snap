@@ -173,6 +173,15 @@ question \\\\texttt{coded}
 \\\\textbf{error}
 foo bar \\\\\\\\
 baz
+\\\\end{Error}
+
+
+\\\\begin{Error}
+a bad error
+
+\\\\textbf{error}
+foo bar \\\\\\\\
+baz
 \\\\end{Error}"
 `;
 

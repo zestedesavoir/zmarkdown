@@ -93,7 +93,7 @@ The sample configuration provided above would have the following effect:
 
     * `<div class="a-css-class another-class">…`
     * `<div class="foo">…`
-    * `<div class="foo"><p>title</p>…`
+    * `<div class="foo"><div class="heading">title</div>…`
 
 ## License
 
