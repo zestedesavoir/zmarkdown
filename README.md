@@ -29,10 +29,6 @@ This project uses [Jest][jest] for testing. It is recommended to install the Jes
   transformation of MDAST into `latex` code. This code must be included inside a custom latex to be compiled.
   Have a look at `https://github.com/zestedesavoir/latex-template/blob/master/zmdocument.cls` to get a working example.
 
-* [**rehype-abbr**][rehype-abbr]
-
-  This plugin parses custom Markdown syntax to produce HTML abbreviations. This plugin is deprecated. See `remark-abbr`
-
 * [**remark-abbr**][remark-abbr]
 
   This plugin parses `*[ABBR]: abbr definition` and then replace all ABBR instance in text with a new MDAST node so that `rehype` can parse it into `abbr` html tag.
@@ -143,7 +139,6 @@ This project uses [Jest][jest] for testing. It is recommended to install the Jes
 
 [rebber]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rebber#rebber--
 [rebber-plugins]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rebber-plugins#rebber-plugins--
-[rehype-abbr]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rehype-abbr#rehype-abbr--
 [remark-abbr]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-abbr#remark-abbr--
 [rehype-footnotes-title]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rehype-footnotes-title#rehype-footnotes-title--
 [rehype-html-blocks]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rehype-html-blocks#rehype-html-blocks--
