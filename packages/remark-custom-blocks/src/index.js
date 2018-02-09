@@ -1,29 +1,30 @@
 const spaceSeparated = require('space-separated-tokens')
 
 function escapeRegExp (str) {
-  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&') // eslint-disable-line no-useless-escape
+  return str.replace(/[-[]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
 }
 
 const C_NEWLINE = '\n'
 const C_FENCE = '|'
 
-module.exports = function blockPlugin (blocks = {}, allowTitle = false) {
+module.exports = function blockPlugin (availableBlocks = {}) {
   const pattern = Object
-    .keys(blocks)
+    .keys(availableBlocks)
     .map(escapeRegExp)
     .join('|')
+
   if (!pattern) {
     throw new Error('remark-custom-blocks needs to be passed a configuration object as option')
   }
-  let regex = new RegExp(`\\[\\[(${pattern})\\]\\]`)
-  if (allowTitle) {
-    regex = new RegExp(`\\[\\[(${pattern})( ?\\| ?((\\w| |'|-|")+))?\\]\\]`)
-  }
+
+  const regex = new RegExp(`\\[\\[(${pattern})(?: *\\| *(.*))?\\]\\]`)
+
   function blockTokenizer (eat, value, silent) {
     const now = eat.now()
     const keep = regex.exec(value)
     if (!keep) return
     if (keep.index !== 0) return
+    const [eaten, blockType, blockTitle] = keep
 
     /* istanbul ignore if - never used (yet) */
     if (silent) return true
@@ -45,12 +46,20 @@ module.exports = function blockPlugin (blocks = {}, allowTitle = false) {
     }
 
     const contentString = content.join(C_NEWLINE)
-    const stringToEat = `${keep[0]}${C_NEWLINE}${linesToEat.join(C_NEWLINE)}`
+    const stringToEat = eaten + C_NEWLINE + linesToEat.join(C_NEWLINE)
 
+    const potentialBlock = availableBlocks[blockType]
+    const titleAllowed = potentialBlock.title &&
+      ['optional', 'required'].includes(potentialBlock.title)
+    const titleRequired = potentialBlock.title && potentialBlock.title === 'required'
+
+    if (titleRequired && !blockTitle) return
+    if (!titleAllowed && blockTitle) return
     const add = eat(stringToEat)
+
     const exit = this.enterBlock()
     const contents = {
-      type: `body${keep[1]}CustomBlock`,
+      type: `${blockType}CustomBlockBody`,
       data: {
         hName: 'div',
         hProperties: {
@@ -59,37 +68,32 @@ module.exports = function blockPlugin (blocks = {}, allowTitle = false) {
       },
       children: this.tokenizeBlock(contentString, now),
     }
-
     exit()
 
-    const classString = blocks[keep[1]]
-    const classList = spaceSeparated.parse(classString)
     const blockChildren = [contents]
-    if (allowTitle && keep[3]) {
+    if (titleAllowed && blockTitle) {
       const titleNode = {
-        type: `heading${keep[1]}CustomBlock`,
+        type: `${blockType}CustomBlockHeading`,
         data: {
           hName: 'div',
           hProperties: {
             className: 'custom-block-heading',
           },
         },
-        children: [
-          {
-            value: keep[3],
-            type: 'text',
-          }],
+        children: this.tokenizeInline(blockTitle, now),
       }
-      blockChildren.splice(0, 0, titleNode)
+      blockChildren.unshift(titleNode)
     }
 
+    const classList = spaceSeparated.parse(potentialBlock.classes || '')
+
     return add({
-      type: `${keep[1]}CustomBlock`,
+      type: `${blockType}CustomBlock`,
       children: blockChildren,
       data: {
         hName: 'div',
         hProperties: {
-          className: `custom-block ${classList}`,
+          className: ['custom-block', ...classList],
         },
       },
     })
@@ -100,14 +104,14 @@ module.exports = function blockPlugin (blocks = {}, allowTitle = false) {
   // Inject blockTokenizer
   const blockTokenizers = Parser.prototype.blockTokenizers
   const blockMethods = Parser.prototype.blockMethods
-  blockTokenizers.custom_blocks = blockTokenizer
-  blockMethods.splice(blockMethods.indexOf('fencedCode') + 1, 0, 'custom_blocks')
+  blockTokenizers.customBlocks = blockTokenizer
+  blockMethods.splice(blockMethods.indexOf('fencedCode') + 1, 0, 'customBlocks')
 
   // Inject into interrupt rules
   const interruptParagraph = Parser.prototype.interruptParagraph
   const interruptList = Parser.prototype.interruptList
   const interruptBlockquote = Parser.prototype.interruptBlockquote
-  interruptParagraph.splice(interruptParagraph.indexOf('fencedCode') + 1, 0, ['custom_blocks'])
-  interruptList.splice(interruptList.indexOf('fencedCode') + 1, 0, ['custom_blocks'])
-  interruptBlockquote.splice(interruptBlockquote.indexOf('fencedCode') + 1, 0, ['custom_blocks'])
+  interruptParagraph.splice(interruptParagraph.indexOf('fencedCode') + 1, 0, ['customBlocks'])
+  interruptList.splice(interruptList.indexOf('fencedCode') + 1, 0, ['customBlocks'])
+  interruptBlockquote.splice(interruptBlockquote.indexOf('fencedCode') + 1, 0, ['customBlocks'])
 }

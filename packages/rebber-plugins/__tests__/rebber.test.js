@@ -411,16 +411,37 @@ test('custom-blocks', () => {
   const {contents} = unified()
     .use(reParse)
     .use(require('remark-custom-blocks'), {
-      secret: 'spoiler',
-      s: 'spoiler',
-      information: 'information ico-after',
-      i: 'information ico-after',
-      question: 'question ico-after',
-      q: 'question ico-after',
-      attention: 'warning ico-after',
-      a: 'warning ico-after',
-      erreur: 'error ico-after',
-      e: 'error ico-after',
+      secret: {
+        classes: 'spoiler',
+      },
+      s: {
+        classes: 'spoiler',
+      },
+      information: {
+        classes: 'information ico-after',
+      },
+      i: {
+        classes: 'information ico-after',
+      },
+      question: {
+        classes: 'question ico-after',
+      },
+      q: {
+        classes: 'question ico-after',
+      },
+      attention: {
+        classes: 'warning ico-after',
+      },
+      a: {
+        classes: 'warning ico-after',
+      },
+      erreur: {
+        classes: 'error ico-after',
+      },
+      e: {
+        classes: 'error ico-after',
+        title: 'optional',
+      },
     }, true)
     .use(rebber, integrationConfig)
     .processSync(fixture.replace(/·/g, ' '))

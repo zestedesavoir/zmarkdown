@@ -15,7 +15,7 @@ var defaultMacros = {
 function customBlock(ctx, node) {
   var blockMacro = ctx[node.type] || defaultMacros[node.type] || defaultMacros.defaultBlock;
   node.children.forEach(function (child) {
-    if (child.type.startsWith('heading') || child.type.startsWith('body')) {
+    if (child.type.endsWith('CustomBlockHeading') || child.type.endsWith('CustomBlockBody')) {
       child.type = 'paragraph';
     }
   });
