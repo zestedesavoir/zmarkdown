@@ -115,13 +115,13 @@ secret
 
 
 \\\\begin{Question}
-question \\\\textbackslash{}CodeInline\\\\{coded\\\\}
+question \\\\CodeInline{coded}
 \\\\end{Question}
 
 
 \\\\begin{Error}
-\\\\textbackslash{}textbf\\\\{error\\\\}
-foo bar \\\\textbackslash{}\\\\textbackslash{}
+\\\\textbf{error}
+foo bar \\\\\\\\
 baz
 \\\\end{Error}"
 `;

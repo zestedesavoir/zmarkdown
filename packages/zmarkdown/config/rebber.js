@@ -48,6 +48,7 @@ const rebberConfig = {
       question: 'Question',
       secret: 'Spoiler',
       warning: 'Warning',
+      neutral: 'Neutral',
     },
   },
   link: {

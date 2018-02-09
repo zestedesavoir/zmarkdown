@@ -9,31 +9,11 @@ If you are using [rehype][rehype], the stringified HTML result will be `div`s wi
 
 It is up to you to have CSS rules producing the desired result for these classes.
 
-## Syntax
+The goal is to let you create blocks or panels somewhat similar to [these](http://docdock.netlify.com/shortcodes/panel/).
 
-```markdown
-[[yourType]]
-| Here goes the content. Content gets parsed,
-| so you could use quotes or anything inside of them:
-| > Hello **World**!
-```
+Each custom block can specify CSS classes and whether users are allowed or required to add a custom title to the block.
 
-produces:
-
-```html
-<div class="some-class some-other-class"><p>Here goes the content. Content gets parsed,
-so you could use quotes or anything inside of them:
-</p>
-<blockquote><p>Hello <strong>World</strong>!</blockquote></div>
-```
-
-with the following configuration object:
-
-```js
-{
-  yourType: 'some-class some-other-class',
-}
-```
+Only inline Markdown will be parsed in titles.
 
 ## Installation
 
@@ -43,9 +23,20 @@ with the following configuration object:
 npm install remark-custom-blocks
 ```
 
-## Usage
+## Usage, Configuration, Syntax
 
-Dependencies:
+#### Configuration:
+
+The configuration object follows this pattern:
+
+```
+trigger: {
+  classes: String, space-separated classes, optional, default: ''
+  title: String, 'optional' | 'required', optional, default: custom titles not allowed
+}
+```
+
+#### Dependencies:
 
 ```javascript
 const unified = require('unified')
@@ -56,44 +47,77 @@ const remark2rehype = require('remark-rehype')
 const remarkCustomBlocks = require('remark-custom-blocks')
 ```
 
-Usage:
+#### Usage:
 
 ```javascript
 unified()
   .use(remarkParse)
   .use(remarkCustomBlocks, {
-    someType: 'a-css-class another-class',
-    anotherType: 'foo',
-  }, true)
+    foo: {
+      classes: 'a-class another-class'
+    },
+    bar: {
+      classes: 'something',
+      title: 'optional'
+    },
+    qux: {
+      classes: 'qux-block',
+      title: 'required'
+    },
+  })
   .use(remark2rehype)
   .use(stringify)
 ```
-
-As you can see, configuration is an object `Type: 'space separated classes'`.
 
 The sample configuration provided above would have the following effect:
 
 1. Allows you to use the following Markdown syntax to create blocks:
 
     ```markdown
-    [[someType]]
+    [[foo]]
     | content
-    [[anotherType]]
+
+    [[bar]]
     | content
-    [[anotherType | title ]]
+
+    [[bar | my **title**]]
+    | content
+
+    [[qux | my title]]
     | content
     ```
 
+    * Block `foo` cannot have a title, `[[foo | title]]` will not result in a block.
+    * Block `bar` can have a title but does not need to.
+    * Block `qux` requires a title, `[[qux]]` will not result in a block.
+
 1. This Remark plugin would create [mdast][mdast] nodes for these two blocks, these nodes would be of type:
 
-    * `someTypeCustomBlock`
-    * `anotherTypeCustomBlock`
+    * `fooCustomBlock`, content will be in `fooCustomBlockBlody`
+    * `barCustomBlock`, content in `barCustomBlockBody`, optional title in `barCustomBlockHeading`
+    * `quxCustomBlock`, content in `quxCustomBlockBody`, required title in `quxCustomBlockHeading`
 
-1. If you're using [rehype][rehype], you will end up with `div`s like these:
+1. If you're using [rehype][rehype], you will end up with these 4 `div`s:
 
-    * `<div class="a-css-class another-class">…`
-    * `<div class="foo">…`
-    * `<div class="foo"><div class="heading">title</div>…`
+    ```html
+    <div class="custom-block a-class another-class">
+      <div class="custom-block-body"><p>content</p></div>
+    </div>
+
+    <div class="custom-block something">
+      <div class="custom-block-body"><p>content</p></div>
+    </div>
+
+    <div class="custom-block something">
+      <div class="custom-block-heading">my <strong>title</strong></div>
+      <div class="custom-block-body"><p>content</p></div>
+    </div>
+
+    <div class="custom-block qux-block">
+      <div class="custom-block-heading">my title</div>
+      <div class="custom-block-body"><p>content</p></div>
+    </div>
+    ```
 
 ## License
 

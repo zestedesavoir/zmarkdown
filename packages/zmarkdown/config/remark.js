@@ -76,17 +76,50 @@ const remarkConfig = {
   },
 
   customBlocks: {
-    secret: 'spoiler',
-    s: 'spoiler',
-    information: 'information ico-after',
-    i: 'information ico-after',
-    question: 'question ico-after',
-    q: 'question ico-after',
-    attention: 'warning ico-after',
-    a: 'warning ico-after',
-    erreur: 'error ico-after',
-    e: 'error ico-after',
-    neutre: 'neutral',
+    secret: {
+      classes: 'spoiler',
+      title: 'optional',
+    },
+    s: {
+      classes: 'spoiler',
+      title: 'optional',
+    },
+    information: {
+      classes: 'information ico-after',
+      title: 'optional',
+    },
+    i: {
+      classes: 'information ico-after',
+      title: 'optional',
+    },
+    question: {
+      classes: 'question ico-after',
+      title: 'optional',
+    },
+    q: {
+      classes: 'question ico-after',
+      title: 'optional',
+    },
+    attention: {
+      classes: 'warning ico-after',
+      title: 'optional',
+    },
+    a: {
+      classes: 'warning ico-after',
+      title: 'optional',
+    },
+    erreur: {
+      classes: 'error ico-after',
+      title: 'optional',
+    },
+    e: {
+      classes: 'error ico-after',
+      title: 'optional',
+    },
+    neutre: {
+      classes: 'neutral',
+      title: 'required',
+    },
   },
 
   escapeEscaped: ['&'],

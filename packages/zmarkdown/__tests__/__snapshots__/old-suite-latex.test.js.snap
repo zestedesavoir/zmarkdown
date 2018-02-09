@@ -3983,9 +3983,9 @@ another
 
 \\\\begin{Quotation}
 \\\\begin{Spoiler}
-\\\\textbackslash{}begin\\\\{Quotation\\\\}
+\\\\begin{Quotation}
 Blockquote in secret block in blockquote
-\\\\textbackslash{}end\\\\{Quotation\\\\}
+\\\\end{Quotation}
 \\\\end{Spoiler}
 \\\\end{Quotation}
 
@@ -4049,9 +4049,9 @@ an other
 \\\\begin{Spoiler}
 Multiline block
 
-\\\\textbackslash{}begin\\\\{Quotation\\\\}
+\\\\begin{Quotation}
 with blockquote !
-\\\\textbackslash{}end\\\\{Quotation\\\\}
+\\\\end{Quotation}
 \\\\end{Spoiler}
 
 
