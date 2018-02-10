@@ -1,6 +1,6 @@
 {
   "name": "zmarkdown",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
   "contributors": [
     "Sébastien (AmarOk) Blin <contact@enconn.fr>",
@@ -32,7 +32,7 @@
     "remark-align": "^1.0.10",
     "remark-captions": "^1.0.8",
     "remark-comments": "^1.0.10",
-    "remark-custom-blocks": "^1.0.9",
+    "remark-custom-blocks": "^2.0.0",
     "remark-disable-tokenizers": "^1.0.12",
     "remark-emoticons": "^0.0.28",
     "remark-escape-escaped": "^0.0.25",
@@ -73,17 +73,10 @@
   },
   "devDependencies": {
     "axios": "^0.17.1",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babelify": "^8.0.0",
-    "browserify": "^15.0.0",
     "clone": "^2.1.1",
-    "envify": "^4.1.0",
     "eslint": "^4.5.0",
-    "exorcist": "^1.0.0",
     "html-differ": "^1.3.4",
-    "pm2": "^2.6.1",
-    "uglifyify": "^4.0.3"
+    "pm2": "^2.6.1"
   },
   "scripts": {
     "lint": "eslint .",
@@ -92,8 +85,6 @@
     "posttest": "npm run stop",
     "watch": "jest --watch",
     "test-travis": "jest --coverage",
-    "_prepublish": "npm run prepare",
-    "_prepare": "browserify index.js -g [ envify --NODE_ENV production ] -g [ babelify --presets [ es2015 ] ] -g uglifyify -d -s ZMarkdown | exorcist ./public/bundle.js.map > ./public/bundle.js",
     "server": "pm2 start -f server/index.js -i 3 --max-memory-restart 150M",
     "stop": "pm2 kill"
   },
