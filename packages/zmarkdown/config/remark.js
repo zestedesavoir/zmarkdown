@@ -77,47 +77,47 @@ const remarkConfig = {
 
   customBlocks: {
     secret: {
-      classes: 'spoiler',
+      classes: 'custom-block-spoiler',
       title: 'optional',
     },
     s: {
-      classes: 'spoiler',
+      classes: 'custom-block-spoiler',
       title: 'optional',
     },
     information: {
-      classes: 'information ico-after',
+      classes: 'custom-block-information',
       title: 'optional',
     },
     i: {
-      classes: 'information ico-after',
+      classes: 'custom-block-information',
       title: 'optional',
     },
     question: {
-      classes: 'question ico-after',
+      classes: 'custom-block-question',
       title: 'optional',
     },
     q: {
-      classes: 'question ico-after',
+      classes: 'custom-block-question',
       title: 'optional',
     },
     attention: {
-      classes: 'warning ico-after',
+      classes: 'custom-block-warning',
       title: 'optional',
     },
     a: {
-      classes: 'warning ico-after',
+      classes: 'custom-block-warning',
       title: 'optional',
     },
     erreur: {
-      classes: 'error ico-after',
+      classes: 'custom-block-error',
       title: 'optional',
     },
     e: {
-      classes: 'error ico-after',
+      classes: 'custom-block-error',
       title: 'optional',
     },
     neutre: {
-      classes: 'neutral',
+      classes: 'custom-block-neutral',
       title: 'required',
     },
   },
