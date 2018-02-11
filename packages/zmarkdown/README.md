@@ -109,27 +109,27 @@ Only `metadata` is described in the **Response** sections below.
 * `opts.images_download_dir`: see `/latex`
 * `opts.local_url_to_local_path`: see `/latex`
 * `opts.disable_jsfiddle`: see `/html`
-* `opts.content_type`, string
+* `opts.content_type`, string, **required**
 
   Will be interpolated in `\documentclass[${content_type}]{zmdocument}`
 
-* `opts.title`, string
+* `opts.title`, string, **required**
 
   Will be interpolated in `\title{${title}}`
 
-* `opts.authors`, string[]
+* `opts.authors`, string[], **required**
 
   Will be interpolated in `\author{${authors.join(', ')}}`
 
-* `opts.license`, string
+* `opts.license`, string, **required**
 
   E.g. `CC-BY-SA` will be displayed as-is, using `${license_directory}/by-sa.svg` as license icon with a link to `https://creativecommons.org/licenses/by-sa/4.0/legalcode`
 
-* `opts.license_directory`, string
+* `opts.license_directory`, string, **required**
 
   Path to the directory where CC license SVG icons are stored, see `license` above.
 
-* `opts.smileys_directory`, string
+* `opts.smileys_directory`, string, **required**
 
   Path to the directory where smileys are stored.
 
