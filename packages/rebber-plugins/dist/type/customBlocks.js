@@ -7,19 +7,25 @@ var all = require('rebber/dist/all');
 module.exports = customBlock;
 
 var defaultMacros = {
-  defaultBlock: function defaultBlock(innerText, environmentName) {
-    return '\\begin{' + environmentName + '}\n' + innerText + '\n\\end{' + environmentName + '}\n';
+  defaultBlock: function defaultBlock(environmentName, blockTitle, blockContent) {
+    return '\\begin{' + environmentName + '}' + (blockTitle ? '[' + blockTitle + ']' : '') + ('\n' + blockContent) + ('\n\\end{' + environmentName + '}\n');
   }
 };
 
 function customBlock(ctx, node) {
   var blockMacro = ctx[node.type] || defaultMacros[node.type] || defaultMacros.defaultBlock;
-  node.children.forEach(function (child) {
-    if (child.type.endsWith('CustomBlockHeading') || child.type.endsWith('CustomBlockBody')) {
-      child.type = 'paragraph';
+
+  var blockTitle = '';
+  if (node.children && node.children.length) {
+    if (node.children[0].type.endsWith('CustomBlockHeading')) {
+      var titleNode = node.children.splice(0, 1)[0];
+      blockTitle = all(ctx, titleNode).trim();
     }
-  });
-  var innerText = all(ctx, node).trim();
+  }
+
+  node.children[0].type = 'paragraph';
+
+  var blockContent = all(ctx, node).trim();
   var options = ctx.customBlocks || {};
 
   var environmentName = void 0;
@@ -31,5 +37,5 @@ function customBlock(ctx, node) {
     environmentName = type[0].toUpperCase() + type.substring(1);
   }
 
-  return blockMacro(innerText, environmentName);
+  return blockMacro(environmentName, blockTitle, blockContent);
 }

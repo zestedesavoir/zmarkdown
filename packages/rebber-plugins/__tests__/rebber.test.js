@@ -40,6 +40,7 @@ const integrationConfig = {
     kbd: require('../src/type/kbd'),
     leftAligned: require('../src/type/align'),
     math: require('../src/type/math'),
+    neutreCustomBlock: require('../src/type/customBlocks'),
     questionCustomBlock: require('../src/type/customBlocks'),
     rightAligned: require('../src/type/align'),
     secretCustomBlock: require('../src/type/customBlocks'),
@@ -441,6 +442,10 @@ test('custom-blocks', () => {
       e: {
         classes: 'error ico-after',
         title: 'optional',
+      },
+      neutre: {
+        classes: 'custom-block-neutre',
+        title: 'required',
       },
     }, true)
     .use(rebber, integrationConfig)

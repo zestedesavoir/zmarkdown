@@ -19,3 +19,6 @@
 | **error**
 | foo bar··
 | baz
+
+[[neutre | **title**]]
+| foo
