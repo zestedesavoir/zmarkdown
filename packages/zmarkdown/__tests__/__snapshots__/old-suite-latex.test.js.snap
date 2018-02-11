@@ -4068,7 +4068,18 @@ A Block
 \\\\end{Spoiler}
 
 
-with content after"
+with content after
+
+
+
+\\\\begin{Error}[a \\\\textbf{title}]
+content
+\\\\end{Error}
+
+
+\\\\begin{Neutral}[a \\\\textbf{title}]
+content
+\\\\end{Neutral}"
 `;
 
 exports[`#zds #extensions properly renders delext.txt 1`] = `

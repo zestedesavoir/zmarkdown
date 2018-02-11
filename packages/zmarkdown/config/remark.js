@@ -120,6 +120,10 @@ const remarkConfig = {
       classes: 'custom-block-neutral',
       title: 'required',
     },
+    n: {
+      classes: 'custom-block-neutral',
+      title: 'required',
+    },
   },
 
   escapeEscaped: ['&'],

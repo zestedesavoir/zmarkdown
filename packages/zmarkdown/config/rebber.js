@@ -25,6 +25,7 @@ const rebberConfig = {
 
     errorCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     informationCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
+    neutralCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     questionCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     secretCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     warningCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
@@ -48,7 +49,7 @@ const rebberConfig = {
       question: 'Question',
       secret: 'Spoiler',
       warning: 'Warning',
-      neutral: 'Neutral',
+      neutre: 'Neutral',
     },
   },
   link: {
@@ -100,6 +101,14 @@ Object.assign(rebberConfig.overrides, {
   attentionCustomBlock: (ctx, node) => {
     node.type = 'warningCustomBlock'
     return rebberConfig.overrides.warningCustomBlock(ctx, node)
+  },
+  nCustomBlock: (ctx, node) => {
+    node.type = 'neutralCustomBlock'
+    return rebberConfig.overrides.neutralCustomBlock(ctx, node)
+  },
+  neutreCustomBlock: (ctx, node) => {
+    node.type = 'neutralCustomBlock'
+    return rebberConfig.overrides.neutralCustomBlock(ctx, node)
   },
 })
 

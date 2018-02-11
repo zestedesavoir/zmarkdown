@@ -55,3 +55,9 @@ content before
 [[s]]
 |A Block
 with content after
+
+[[erreur  | a **title**]]
+| content
+
+[[neutre  | a **title**]]
+| content
