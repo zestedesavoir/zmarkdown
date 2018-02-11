@@ -2311,6 +2311,22 @@ exports[`rebber: remark specs html-tags: html-tags 1`] = `
 <span foo=bar >"
 `;
 
+exports[`rebber: remark specs image-basename-dots: image-basename-dots 1`] = `
+"\\\\includegraphics{{x.yz}.png}
+
+
+
+\\\\includegraphics{/a/{w.x.y.z}.png}
+
+
+
+\\\\includegraphics{/{w.x.y.z}.png}
+
+
+
+\\\\includegraphics{/foo.bar/{x.yz}.png}"
+`;
+
 exports[`rebber: remark specs image-empty-alt: image-empty-alt 1`] = `"\\\\includegraphics{/xyz.png}"`;
 
 exports[`rebber: remark specs image-in-link: image-in-link 1`] = `
@@ -9184,6 +9200,22 @@ heading1(Inline)
 <span foo=bar >"
 `;
 
+exports[`rebber: remark specs with config: custom macros image-basename-dots 1`] = `
+"\\\\includegraphics{{x.yz}.png}
+
+
+
+\\\\includegraphics{/a/{w.x.y.z}.png}
+
+
+
+\\\\includegraphics{/{w.x.y.z}.png}
+
+
+
+\\\\includegraphics{/foo.bar/{x.yz}.png}"
+`;
+
 exports[`rebber: remark specs with config: custom macros image-empty-alt 1`] = `"\\\\includegraphics{/xyz.png}"`;
 
 exports[`rebber: remark specs with config: custom macros image-in-link 1`] = `
@@ -15468,6 +15500,24 @@ exports[`toLaTeX: remark specs html-tags: html-tags 1`] = `
 
 
 <span foo=bar >"
+`;
+
+exports[`toLaTeX: remark specs image-basename-dots: image-basename-dots 1`] = `
+"\\\\includegraphics{{x.yz}.png}
+
+
+
+\\\\includegraphics{/a/{w.x.y.z}.png}
+
+
+
+\\\\includegraphics{/{w.x.y.z}.png}
+
+
+
+\\\\includegraphics{/foo.bar/{x.yz}.png}
+
+"
 `;
 
 exports[`toLaTeX: remark specs image-empty-alt: image-empty-alt 1`] = `

@@ -7,3 +7,21 @@ exports[`Regression tests HTML endpoint #188 It does not crash on unsupported la
 <div class=\\"hljs-code-div\\"><div class=\\"hljs-line-numbers\\"><span></span></div><pre><code class=\\"hljs language-js\\"><span class=\\"hljs-built_in\\">console</span>.error(<span class=\\"hljs-string\\">\\"foo\\"</span>, <span class=\\"hljs-literal\\">true</span>)
 </code></pre></div>"
 `;
+
+exports[`Regression tests Latex endpoint It wraps image basenames containing dots 1`] = `
+"\\\\image{{x.yz}.png}
+
+
+
+\\\\externalLink{\\\\image{/a/{w.x.y.z}.png}}{http://example.com}
+
+
+
+\\\\image{/{w.x.y.z}.png}
+
+
+
+\\\\image{/foo.bar/{x.yz}.png}
+
+"
+`;
