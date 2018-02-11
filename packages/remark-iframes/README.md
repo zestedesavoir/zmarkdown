@@ -104,7 +104,7 @@ unified()
 - `match`: a regular expression passed to `String.prototype.test`, used to validate the url.
 - `thumbnail`: a way to retrieve a thumbnail. This param is an object with a `format` key of this type: `'http://url/{param1}/{param2}'` then you must provide all regexp to find the parameter in the url on the object.
 
-### thumbnail construction
+### Thumbnail construction
 
 when you configure the `thumbnail` part of a provider, the url of the thumbnail is computed following this algorithm:
 
@@ -118,7 +118,7 @@ for each property of provider.thumbnail
 
 ```
 
-## example
+## Example
 
 ```markdown
 !(https://www.youtube.com/watch?v=8TQIvdFl4aU)

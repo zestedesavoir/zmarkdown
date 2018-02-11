@@ -6,7 +6,7 @@
 * `pm2 monit` etc
 
 ### Requests
-All endpoints respond to `HTTP POST` requests with these keys in their body:
+All endpoints respond to `HTTP POST` requests sending a JSON body with these keys:
 
 * `md` - required, markdown source string
 * `opts` - optional, JSON options
