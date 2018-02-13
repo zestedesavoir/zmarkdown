@@ -104,4 +104,31 @@ module.exports = function plugin() {
   var blockMethods = Parser.prototype.blockMethods;
   blockTokenizers.align_blocks = alignTokenizer;
   blockMethods.splice(blockMethods.indexOf('fencedCode') + 1, 0, 'align_blocks');
+
+  var Compiler = this.Compiler;
+
+  // Stringify
+  if (Compiler) {
+    var visitors = Compiler.prototype.visitors;
+    var alignCompiler = function alignCompiler(node) {
+      var startMarkersMap = {
+        'left': '<-',
+        'right': '->',
+        'center': '->'
+      };
+      var endMarkersMap = {
+        'left': '<-',
+        'right': '->',
+        'center': '<-'
+      };
+      var innerString = this.all(node).join('');
+      var nodeAlignType = node.type.replace(/Aligned/, '');
+      var startMarker = nodeAlignType in startMarkersMap ? startMarkersMap[nodeAlignType] : '';
+      var endMarker = nodeAlignType in endMarkersMap ? endMarkersMap[nodeAlignType] : '';
+      return startMarker + '\n' + innerString + '\n' + endMarker;
+    };
+    visitors.leftAligned = alignCompiler;
+    visitors.rightAligned = alignCompiler;
+    visitors.centerAligned = alignCompiler;
+  }
 };
