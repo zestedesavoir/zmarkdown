@@ -95,3 +95,35 @@ describe('pedantic', () => {
     expect(renderString(markdown)).resolves.not.toMatch('strong')
   })
 })
+
+const maxNesting = remarkConfig.maxNesting
+describe('depth checks', () => {
+  it(`is fast enough with ${maxNesting} nested quotes`, () => {
+    const fs = require('fs')
+    const base = ['foo', '\n']
+    const input = Array.from({length: maxNesting}).reduce((acc, _, i) => {
+      return acc + base.map((x, j) => ('>'.repeat(i) + ((i && !j && ' ') || '') + x)).join('\n')
+    }, '')
+
+    const a = Date.now()
+    const render = renderString(input).then((ok, fail) => {
+      const b = Date.now()
+      if ((b - a) < 1500) return Promise.resolve('ok')
+      return Promise.reject(`Rendering ${maxNesting} nest blockquotes took too long: ${b - a}ms.`)
+    })
+
+    return expect(render).resolves.toBe('ok')
+  })
+
+  it(`fails with > ${maxNesting} nested quotes`, () => {
+    const fs = require('fs')
+    const base = ['foo', '\n']
+    const input = Array.from({length: maxNesting + 1}).reduce((acc, _, i) => {
+      return acc + base.map((x, j) => ('>'.repeat(i) + ((i && !j && ' ') || '') + x)).join('\n')
+    }, '')
+
+    return expect(
+      renderString(input).catch((err) => Promise.reject(err.message))
+    ).rejects.toContain(`Markdown AST too complex: tree depth > ${maxNesting}`)
+  })
+})
