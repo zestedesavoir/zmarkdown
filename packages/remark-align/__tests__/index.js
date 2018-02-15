@@ -3,6 +3,7 @@ import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
+const remarkStringify = require('remark-stringify')
 
 import remarkAlign from '../src/'
 
@@ -12,6 +13,13 @@ const render = (text, config) => unified()
   .use(remark2rehype)
   .use(stringify)
   .processSync(text)
+
+const renderToMarkdown = (initialMarkdwon, config) => unified()
+  .use(reParse)
+  .use(remarkStringify)
+  .use(remarkAlign, config)
+  .processSync(initialMarkdwon)
+
 
 const alignFixture = dedent`
   Test align
@@ -163,6 +171,23 @@ test('left align', () => {
     <- foo <-
 
     # title
+  `)
+  expect(contents).toMatchSnapshot()
+})
+
+test('render md', () => {
+  const {contents} = renderToMarkdown(dedent`
+    # title
+
+    <- foo <-
+
+    # title
+    
+    -> **foo** <-
+    
+    ->  
+    ![img](src)
+    ->
   `)
   expect(contents).toMatchSnapshot()
 })
