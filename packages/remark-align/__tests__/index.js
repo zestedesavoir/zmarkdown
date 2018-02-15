@@ -14,11 +14,11 @@ const render = (text, config) => unified()
   .use(stringify)
   .processSync(text)
 
-const renderToMarkdown = (initialMarkdwon, config) => unified()
+const renderToMarkdown = (text, config) => unified()
   .use(reParse)
   .use(remarkStringify)
   .use(remarkAlign, config)
-  .processSync(initialMarkdwon)
+  .processSync(text)
 
 
 const alignFixture = dedent`
@@ -175,19 +175,70 @@ test('left align', () => {
   expect(contents).toMatchSnapshot()
 })
 
-test('render md', () => {
-  const {contents} = renderToMarkdown(dedent`
+test('no content', () => {
+  const md = dedent`
+    <- <-
+
+    <-
+
+    <-
+
+    -> <-
+
+    -><-
+
+    ->
+
+    <-
+
+    ->->
+
+    ->  ->
+
+    ->
+    ->
+
+    ->
+
+    ->
+  `
+
+  const {contents} = render(md)
+  expect(contents).toMatchSnapshot()
+
+  const contents1 = renderToMarkdown(md).contents
+  const contents2 = renderToMarkdown(contents1).contents
+
+  expect(contents1).toBe(contents2)
+})
+
+test('compiles to markdown', () => {
+  const md = dedent`
     # title
 
     <- foo <-
 
     # title
-    
+
     -> **foo** <-
-    
-    ->  
+
+    ->
     ![img](src)
     ->
-  `)
+
+    # wraps blocks e.g. title:
+
+    -> foo
+
+    # title
+
+    foo ->
+  `
+  const {contents} = renderToMarkdown(md)
   expect(contents).toMatchSnapshot()
+
+  const contents1 = renderToMarkdown(md).contents
+  const contents2 = renderToMarkdown(contents1).contents
+
+  expect(contents1).toBe(contents2)
 })

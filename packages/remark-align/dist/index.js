@@ -1,5 +1,7 @@
 'use strict';
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var spaceSeparated = require('space-separated-tokens');
 
 var C_NEWLINE = '\n';
@@ -111,21 +113,24 @@ module.exports = function plugin() {
   if (Compiler) {
     var visitors = Compiler.prototype.visitors;
     var alignCompiler = function alignCompiler(node) {
-      var startMarkersMap = {
-        'left': '<-',
-        'right': '->',
-        'center': '->'
+      var innerContent = this.all(node);
+
+      var markers = {
+        left: ['<-', '<-'],
+        right: ['->', '->'],
+        center: ['->', '<-']
       };
-      var endMarkersMap = {
-        'left': '<-',
-        'right': '->',
-        'center': '<-'
-      };
-      var innerString = this.all(node).join('');
-      var nodeAlignType = node.type.replace(/Aligned/, '');
-      var startMarker = nodeAlignType in startMarkersMap ? startMarkersMap[nodeAlignType] : '';
-      var endMarker = nodeAlignType in endMarkersMap ? endMarkersMap[nodeAlignType] : '';
-      return startMarker + '\n' + innerString + '\n' + endMarker;
+      var alignType = node.type.slice(0, -7);
+
+      if (!markers[alignType]) return innerContent.join('\n\n');
+
+      var _markers$alignType = _slicedToArray(markers[alignType], 2),
+          start = _markers$alignType[0],
+          end = _markers$alignType[1];
+
+      if (innerContent.length < 2) return start + ' ' + innerContent.join('\n').trim() + ' ' + end;
+
+      return start + '\n' + innerContent.join('\n\n').trim() + '\n' + end;
     };
     visitors.leftAligned = alignCompiler;
     visitors.rightAligned = alignCompiler;
