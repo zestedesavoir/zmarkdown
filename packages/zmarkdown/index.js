@@ -97,13 +97,21 @@ const zmdParser = (config, target) => {
     .use(remarkPing, config.ping)
     .use(remarkSubSuper)
     .use(remarkTrailingSpaceHeading)
-    .use(() => (tree, file) => {
+    .use(() => (tree, vfile) => {
       // if we don't have any headings, we add a flag to disable
       // the Table of Contents directly in the latex template
-      file.data.disableToc = true
+      vfile.data.disableToc = true
       visit(tree, 'heading', () => {
-        file.data.disableToc = false
+        vfile.data.disableToc = false
       })
+    })
+    .use(() => (tree, vfile) => {
+      visit(tree, 'root', (node) => {
+        vfile.data.depth = getDepth(node) - 2
+      })
+      if (vfile.data.depth > config.maxNesting) {
+        vfile.fail(`Markdown AST too complex: tree depth > ${config.maxNesting}`)
+      }
     })
 }
 
@@ -164,6 +172,19 @@ const rendererFactory = ({remarkConfig, rebberConfig}, target = 'html') => (inpu
 }
 
 const mdastParser = (opts) => (zmd) => zmdParser(opts.remarkConfig).parse(zmd)
+
+function getDepth (node) {
+  let maxDepth = 0
+  if (node.children) {
+    node.children.forEach((child) => {
+      const depth = getDepth(child)
+      if (depth > maxDepth) {
+        maxDepth = depth
+      }
+    })
+  }
+  return 1 + maxDepth
+}
 
 module.exports = (
   opts = {remarkConfig, rebberConfig},

@@ -18,6 +18,7 @@ const textrQuestionMark = require('typographic-question-mark/src')
 const textrSemicolon = require('typographic-semicolon/src')
 
 const remarkConfig = {
+  maxNesting: 100,
   reParse: {
     gfm: true,
     commonmark: false,
