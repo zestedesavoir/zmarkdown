@@ -112,21 +112,22 @@ module.exports = function plugin (classNames = {}) {
   if (Compiler) {
     const visitors = Compiler.prototype.visitors
     const alignCompiler = function (node) {
-      const startMarkersMap = {
-        'left': '<-',
-        'right': '->',
-        'center': '->',
+      const innerContent = this.all(node)
+
+      const markers = {
+        left: ['<-', '<-'],
+        right: ['->', '->'],
+        center: ['->', '<-'],
       }
-      const endMarkersMap = {
-        'left': '<-',
-        'right': '->',
-        'center': '<-',
-      }
-      const innerString = this.all(node).join('')
-      const nodeAlignType = node.type.replace(/Aligned/, '')
-      const startMarker = nodeAlignType in startMarkersMap ? startMarkersMap[nodeAlignType] : ''
-      const endMarker = nodeAlignType in endMarkersMap ? endMarkersMap[nodeAlignType] : ''
-      return `${startMarker}\n${innerString}\n${endMarker}`
+      const alignType = node.type.slice(0, -7)
+
+      if (!markers[alignType]) return innerContent.join('\n\n')
+
+      const [start, end] = markers[alignType]
+
+      if (innerContent.length < 2) return `${start} ${innerContent.join('\n').trim()} ${end}`
+
+      return `${start}\n${innerContent.join('\n\n').trim()}\n${end}`
     }
     visitors.leftAligned = alignCompiler
     visitors.rightAligned = alignCompiler
