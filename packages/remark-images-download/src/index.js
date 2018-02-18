@@ -127,7 +127,9 @@ function plugin ({
             }
 
             request
-              .get(url)
+              .get(url, (err) => {
+                if (err) reject(err)
+              })
               .on('response', ({headers, statusCode} = {}) => {
                 if (statusCode !== 200) {
                   reject(new Error(`Received HTTP${statusCode} for: ${url}`))

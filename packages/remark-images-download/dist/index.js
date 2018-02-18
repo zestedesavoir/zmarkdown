@@ -144,7 +144,9 @@ function plugin() {
             });
           };
 
-          request.get(url).on('response', function () {
+          request.get(url, function (err) {
+            if (err) reject(err);
+          }).on('response', function () {
             var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
                 headers = _ref2.headers,
                 statusCode = _ref2.statusCode;
