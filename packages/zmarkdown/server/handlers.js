@@ -1,7 +1,31 @@
 const clone = require('clone')
+const pmx = require('pmx')
 const zmarkdown = require('../')
 const remarkConfig = require('../config/remark')
 const rebberConfig = require('../config/rebber')
+
+const probe = pmx.probe()
+
+const endpoints = ['toEPUB', 'toHTML', 'toLatex', 'toLatexDocument']
+
+const meters = endpoints.reduce((acc, endpoint) => {
+  const meter = probe.meter({
+    name: 'req/min',
+    samples: 1,
+    timeframe: 60,
+  })
+
+  const counter = probe.counter({
+    name: 'counter',
+    agg_type: 'sum',
+  })
+
+  acc[endpoint] = () => {
+    meter.mark()
+    counter.inc()
+  }
+  return acc
+}, {})
 
 // this object is used to memoize configured processors
 const processors = {}
@@ -15,6 +39,7 @@ module.exports = function markdownHandlers (Raven) {
   }
 
   function toEPUB (markdown, opts = {}, callback) {
+    meters.toEPUB()
     const target = 'html'
 
     opts.heading_shift = 2
@@ -26,6 +51,7 @@ module.exports = function markdownHandlers (Raven) {
   }
 
   function toHTML (markdown, opts = {}, callback) {
+    meters.toHTML()
     const target = 'html'
 
     opts.heading_shift = 2
@@ -35,6 +61,7 @@ module.exports = function markdownHandlers (Raven) {
   }
 
   function toLatex (markdown, opts = {}, callback) {
+    meters.toLatex()
     const target = 'latex'
 
     opts.heading_shift = 0
@@ -45,6 +72,7 @@ module.exports = function markdownHandlers (Raven) {
   }
 
   function toLatexDocument (markdown, opts = {}, callback) {
+    meters.toLatexDocument()
     const target = 'latex'
     const template = zmarkdown().latexDocumentTemplate
 

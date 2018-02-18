@@ -4091,7 +4091,7 @@ pm2@^2.6.1:
   optionalDependencies:
     gkt "https://tgz.pm2.io/gkt-1.0.0.tgz"
 
-pmx@~1.5.*:
+pmx@^1.5.6, pmx@~1.5.*:
   version "1.5.6"
   resolved "https://registry.yarnpkg.com/pmx/-/pmx-1.5.6.tgz#ee877e7b9baa7930efe1e4c0c8ff62e9e22fc40a"
   dependencies:

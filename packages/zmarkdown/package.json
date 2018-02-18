@@ -18,6 +18,7 @@
     "cors": "^2.8.4",
     "dedent": "^0.7.0",
     "express": "^4.16.2",
+    "pmx": "^1.5.6",
     "raven": "^2.1.2",
     "rebber": "^2.1.0",
     "rebber-plugins": "^1.1.1",
