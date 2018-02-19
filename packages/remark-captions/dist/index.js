@@ -18,6 +18,30 @@ function plugin(opts) {
   var externalBlocks = xtend(legendBlock, opts && opts.external || {});
   var internalBlocks = xtend(internLegendBlock, opts && opts.internal || {});
 
+  var Compiler = this.Compiler;
+  if (Compiler) {
+    var visitors = Compiler.prototype.visitors;
+    if (!visitors) {
+      return;
+    }
+    visitors.figure = function (node) {
+      var captionedNode = node.children[0];
+      var captionNode = node.children[1];
+      var captionedMarkdown = this.visit(captionedNode);
+      // compile without taking care of the "figcaption" wrapper node
+      var captionMarkdown = this.all(captionNode).join('');
+      if (!(captionedNode.type in externalBlocks || captionedNode.type in internalBlocks)) {
+        return captionedMarkdown;
+      }
+      var prefix = '';
+      if (captionedNode.type in externalBlocks) {
+        prefix = externalBlocks[captionNode.type];
+      } else if (captionedNode.type in internalBlocks) {
+        prefix = internalBlocks[captionedNode.type];
+      }
+      return captionedMarkdown + '\n' + prefix + ' ' + captionMarkdown;
+    };
+  }
   return function transformer(tree) {
     Object.keys(internalBlocks).forEach(function (nodeType) {
       return visit(tree, nodeType, internLegendVisitor(internalBlocks));

@@ -16,6 +16,30 @@ function plugin (opts) {
   const externalBlocks = xtend(legendBlock, (opts && opts.external) || {})
   const internalBlocks = xtend(internLegendBlock, (opts && opts.internal) || {})
 
+  const Compiler = this.Compiler
+  if (Compiler) {
+    const visitors = Compiler.prototype.visitors
+    if (!visitors) {
+      return
+    }
+    visitors.figure = function (node) {
+      const captionedNode = node.children[0]
+      const captionNode = node.children[1]
+      const captionedMarkdown = this.visit(captionedNode)
+      // compile without taking care of the "figcaption" wrapper node
+      const captionMarkdown = this.all(captionNode).join('')
+      if (!(captionedNode.type in externalBlocks || captionedNode.type in internalBlocks)) {
+        return captionedMarkdown
+      }
+      let prefix = ''
+      if (captionedNode.type in externalBlocks) {
+        prefix = externalBlocks[captionedNode.type]
+      } else if (captionedNode.type in internalBlocks) {
+        prefix = internalBlocks[captionedNode.type]
+      }
+      return `${captionedMarkdown}\n${prefix} ${captionMarkdown}`
+    }
+  }
   return function transformer (tree) {
     Object.keys(internalBlocks).forEach((nodeType) =>
       visit(tree, nodeType, internLegendVisitor(internalBlocks)))
