@@ -10,18 +10,83 @@ ln -s /path/to/this/folder/plugin.js /etc/munin/plugins/zmd_memory
 ln -s /path/to/this/folder/plugin.js /etc/munin/plugins/zmd_cpu
 ln -s /path/to/this/folder/plugin.js /etc/munin/plugins/zmd_event_loop_lag
 ln -s /path/to/this/folder/plugin.js /etc/munin/plugins/zmd_req_per_process
-ln -s /path/to/this/folder/plugin.js /etc/munin/plugins/zmd_req_avg
+ln -s /path/to/this/folder/plugin.js /etc/munin/plugins/zmd_avg_per_process
+ln -s /path/to/this/folder/plugin.js /etc/munin/plugins/zmd_req_per_endpoint
+ln -s /path/to/this/folder/plugin.js /etc/munin/plugins/zmd_avg_per_endpoint
+
 */
 
 const pm2 = require('pm2')
 
+const endpoints = ['toEPUB', 'toHTML', 'toLatex', 'toLatexDocument']
+
 const supportedStats = {
-  status: 'Process Status',
-  memory: 'RAM Consumption',
-  cpu: '%CPU Consumption',
-  event_loop_lag: 'Event Loop Lag (ms)',
-  req_per_process: 'Request Per Process',
-  req_avg: 'Avg Request Per Minute',
+  status: {
+    graph: [
+      'graph_title Process Status',
+      'graph_vlabel',
+    ],
+    fields: (name) => [
+      `${name}.label ${name}`,
+      `${name}.critical 1`,
+    ],
+  },
+  memory: {
+    graph: [
+      'graph_title RAM Usage',
+      'graph_vlabel Bytes',
+    ],
+    fields: (name) => `${name}.label ${name}`,
+  },
+  cpu: {
+    graph: [
+      'graph_title CPU Usage',
+      'graph_vlabel percent',
+      'graph_args --base 1000 --lower-limit 0 --upper-limit 100 --rigid',
+      'graph_scale no',
+    ],
+    fields: (name) => `${name}.label ${name}`,
+  },
+  event_loop_lag: {
+    graph: [
+      'graph_title Event Loop Lag',
+      'graph_vlabel ms',
+    ],
+    fields: (name) => `${name}.label ${name}`,
+  },
+  req_per_process: {
+    graph: [
+      'graph_title Request Per Process',
+      'graph_vlabel requests',
+    ],
+    fields: (name) => [
+      `${name}.label ${name}`,
+      `${name}.type COUNTER`,
+    ],
+  },
+  avg_per_process: {
+    graph: [
+      'graph_title Requests Per Minute Per Process',
+      'graph_vlabel requests per minute',
+    ],
+    fields: (name) => `${name}.label ${name}`,
+  },
+  req_per_endpoint: {
+    graph: [
+      'graph_title Request Per Endpoint',
+      'graph_vlabel requests',
+    ],
+    fields: () => endpoints.map(endpoint =>
+      `${endpoint}.label ${endpoint}\n${endpoint}.type GAUGE\n${endpoint}.draw STACK`),
+  },
+  avg_per_endpoint: {
+    graph: [
+      'graph_title Requests Per Minute Per Endpoint',
+      'graph_vlabel requests per minute',
+    ],
+    fields: () => endpoints.map(endpoint =>
+      `${endpoint}.label ${endpoint}\n${endpoint}.type GAUGE\n${endpoint}.draw STACK`),
+  },
 }
 
 const status = {
@@ -50,76 +115,114 @@ if (process.argv.slice(-1)[0] === 'config') {
   run(printStats)
 }
 
-function gatherData (plist) {
-  return plist.reduce((acc, job, i) => {
-    let reqPerMinute = 0
-    let reqSum = 0
-    let loopLag = 0
+function gatherData (procList) {
+  let maxMem = 0
 
-    if (job.pm2_env.axm_monitor) {
-      if (job.pm2_env.axm_monitor['req/min']) {
-        reqPerMinute = job.pm2_env.axm_monitor['req/min'].value
-      }
-      if (job.pm2_env.axm_monitor['counter']) {
-        reqSum = job.pm2_env.axm_monitor['counter'].value
-      }
-      if (job.pm2_env.axm_monitor['Loop delay']) {
-        loopLag = parseFloat(job.pm2_env.axm_monitor['Loop delay'].value)
-      }
+  const procs = procList.reduce((acc, proc, i) => {
+    let avgPerProcess
+    let reqPerProcess
+    let loopLag
+
+    if (proc.pm2_env.axm_monitor) {
+      reqPerProcess = endpoints.map(endpoint =>
+        parseInt(proc.pm2_env.axm_monitor[`${endpoint} counter`].value)
+      ).reduce((sum, val) => sum + val, 0)
+      avgPerProcess = endpoints.map(endpoint =>
+        proc.pm2_env.axm_monitor[`${endpoint} req/5min`].value / 60
+      ).reduce((sum, val) => sum + val, 0)
+
+      loopLag = proc.pm2_env.axm_monitor['Loop delay'].value
     }
 
     const data = {
-      status: job.pm2_env.status in status ? status[job.pm2_env.status] : 3,
-      memory: job.monit.memory,
-      cpu: job.monit.cpu,
+      status: proc.pm2_env.status in status ? status[proc.pm2_env.status] : 3,
+      memory: proc.monit.memory,
+      cpu: proc.monit.cpu,
       event_loop_lag: loopLag,
-      req_per_process: reqSum,
-      req_avg: reqPerMinute,
+      req_per_process: reqPerProcess,
+      avg_per_process: avgPerProcess,
     }
 
-    let maxMem = 0
-    if (job.pm2_env.max_memory_restart) {
-      maxMem = job.pm2_env.max_memory_restart
+    if (!maxMem && proc.pm2_env.max_memory_restart) {
+      maxMem = proc.pm2_env.max_memory_restart
     }
     if (maxMem) data.maxMem = maxMem
 
-    acc[`${job.name}-${job.pm_id}`] = data
+    acc[`${proc.name}-${proc.pm_id}`] = data
 
     return acc
   }, {})
+
+  const _endpoints = {
+    req_per_endpoint: endpoints.reduce((acc, endpoint) => {
+      acc[endpoint] = procList.reduce((sum, proc) =>
+        sum + parseInt(proc.pm2_env.axm_monitor[`${endpoint} counter`].value), 0)
+      return acc
+    }, {}),
+
+    avg_per_endpoint: endpoints.reduce((acc, endpoint) => {
+      acc[endpoint] = procList.reduce((sum, proc) =>
+        sum + (proc.pm2_env.axm_monitor[`${endpoint} req/5min`].value / 60), 0)
+      return acc
+    }, {}),
+  }
+
+  return {procs, endpoints: _endpoints}
 }
 
 
 // prints a munin readable config
-function printConfig (jobs) {
-  console.log('graph_title zmd', supportedStats[stat]) // eslint-disable-line no-console
-  console.log('graph_category zmd') // eslint-disable-line no-console
+function printConfig (stats) {
+  if (!supportedStats[stat]) throw new Error(`"${stat}" not configured`)
 
-  Object.keys(jobs).forEach((jobname) => {
-    console.log('%s.label %s', jobname, jobname) // eslint-disable-line no-console
-    if (stat === 'status') {
-      console.log('%s.critical 1', jobname) // eslint-disable-line no-console
-    }
+  l(supportedStats[stat].graph.join('\n'))
+  l('graph_category zmd')
+
+  if (['req_per_endpoint', 'avg_per_endpoint'].includes(stat)) {
+    l('graph_args --lower-limit 0')
+    l(supportedStats[stat].fields().join('\n'))
+    l([
+      'total.label Total',
+      'total.type GAUGE',
+      'total.graph no',
+    ].join('\n'))
+  } else {
+    const procs = stats.procs
+    const names = Object.keys(procs || {})
+    const samplejob = names.length && names[0]
     if (stat === 'memory') {
-      console.log('%s.warning %s', jobname, jobs[jobname].maxMem) // eslint-disable-line no-console
+      l(`graph_args --base 1024 --lower-limit 0 --upper-limit ${procs[samplejob].maxMem}`)
     }
-  })
+
+    l(Object.keys(procs).map(job => {
+      const tmp = supportedStats[stat].fields(job)
+      return Array.isArray(tmp)
+        ? tmp.join('\n')
+        : tmp
+    }).join('\n'))
+  }
 
   pm2.disconnect()
   process.exit(0)
 }
 
 // prints a munin readable output
-function printStats (jobs) {
-  Object.keys(jobs).forEach((jobname) => {
-    const value = jobs[jobname][stat]
-    console.log('%s.value %s', jobname, value) // eslint-disable-line no-console
-  })
+function printStats (stats) {
+  if (['req_per_endpoint', 'avg_per_endpoint'].includes(stat)) {
+    endpoints.forEach(endpoint => {
+      l('%s.value %s', endpoint, stats.endpoints[stat][endpoint])
+    })
+  } else {
+    const procs = stats.procs
+    Object.keys(procs).forEach((procName) => {
+      const value = procs[procName][stat]
+      l('%s.value %s', procName, value)
+    })
+  }
 
   pm2.disconnect()
   process.exit(0)
 }
-
 
 function run (callback) {
   pm2.connect((err) => {
@@ -128,7 +231,11 @@ function run (callback) {
     pm2.list((err, plist) => {
       if (err) throw err
 
+      plist = plist.filter(process => !process.name.startsWith('pm2'))
+
       callback(gatherData(plist))
     })
   })
 }
+
+const l = console.log // eslint-disable-line no-console

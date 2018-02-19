@@ -10,13 +10,13 @@ const endpoints = ['toEPUB', 'toHTML', 'toLatex', 'toLatexDocument']
 
 const meters = endpoints.reduce((acc, endpoint) => {
   const meter = probe.meter({
-    name: 'req/min',
+    name: `${endpoint} req/5min`,
     samples: 1,
-    timeframe: 60,
+    timeframe: 5 * 60,
   })
 
   const counter = probe.counter({
-    name: 'counter',
+    name: `${endpoint} counter`,
     agg_type: 'sum',
   })
 
