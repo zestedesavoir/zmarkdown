@@ -37,6 +37,111 @@ exports[`code 1`] = `
 <p>Code: bis</p>"
 `;
 
+exports[`compiles to markdown when at least 1 block caption 1`] = `
+"foo
+![](img)
+Figure: 3 this is a legend
+
+![](img)
+Figure: 4 this is a legend, remainder of the paragraph goes into
+the
+legend
+
+Figure: 5 this is a text with and image
+!\\\\[](<title> img)
+in the middle
+
+Figure: 6 displayed as text
+![](img)
+Figure: 7 is a legend
+
+![](img)
+Figure: 8 is a legend.
+
+Figure: 9 this is a text.
+
+> My citation
+> Source: first capt
+Source: last capt··
+2nd line
+
+noop
+
+> foo
+> bar
+> baz
+> qux
+> Source: **first**
+> b_a_r
+Source: This is **the real** \`source\`
+
+noop
+
+> foo
+> bar
+> baz
+> qux
+> Source: **first**
+> b_a_r
+Source: This is **the real** \`source\`
+"
+`;
+
+exports[`compiles to markdown when at least 1 innerLegend caption 1`] = `
+"## Code
+
+Normal code
+
+\`\`\`python
+print('bla')
+\`\`\`
+
+With Legend
+
+\`\`\`python
+print('bla')
+\`\`\`
+Code: figcapt1
+
+\`\`\`python
+print('bla')
+\`\`\`
+Code: figcapt1
+
+break
+
+\`\`\`python
+print('bla')
+\`\`\`
+Code: figcapt1 _em_ **strong \`code\`** end
+
+bla
+
+\`\`\`python
+print('bla2')
+\`\`\`
+Code: figcapt1
+
+Code: bis
+"
+`;
+
+exports[`compiles to markdown when no caption 1`] = `
+"foo
+
+![](img)
+Figure: 1 this is parsed as legend
+
+baz
+
+![](img)
+aFigure: 2 this is displayed as text
+
+![alt 2b](https://zestedesavoir.com/static/images/home-clem.4a2f792744c9.png)
+this is displayed as text
+"
+`;
+
 exports[`custom-table 1`] = `
 "<h2>Table</h2>
 <p>Normal table</p>
