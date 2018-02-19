@@ -10,48 +10,53 @@ var C_NEWPARAGRAPH = '\n\n';
 module.exports = function plugin() {
   var classNames = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  var regex = new RegExp('[^\\\\]?(->|<-)');
+  var locateMarker = new RegExp('[^\\\\]?(->|<-)');
   var endMarkers = ['->', '<-'];
 
   function alignTokenizer(eat, value, silent) {
-    var now = eat.now();
-    var keep = regex.exec(value);
-    if (!keep) return;
-    if (keep.index !== 0) return;
+    var keep = value.match(locateMarker);
+    if (!keep || keep.index !== 0) return;
 
-    var startMarker = keep[1];
+    var now = eat.now();
+
+    var _keep = _slicedToArray(keep, 2),
+        startMarker = _keep[1];
 
     /* istanbul ignore if - never used (yet) */
+
+
     if (silent) return true;
 
-    var idx = 0;
+    var index = 0;
     var linesToEat = [];
     var finishedBlocks = [];
     var endMarker = '';
     var canEatLine = true;
-    var beginBlock = 0;
+    var blockStartIndex = 0;
+
     while (canEatLine) {
-      var next = value.indexOf(C_NEWLINE, idx + 1);
-      var lineToEat = next !== -1 ? value.slice(idx, next) : value.slice(idx);
-      // Get if we found an escaped end marker.
-      var escaped = lineToEat.length > 2 && lineToEat[lineToEat.length - 3] === '\\';
+      var nextIndex = value.indexOf(C_NEWLINE, index + 1);
+      var lineToEat = nextIndex !== -1 ? value.slice(index, nextIndex) : value.slice(index);
+
       linesToEat.push(lineToEat);
 
-      // If next = (beginBlock + 2), it's the first marker of the block.
-      if (!escaped && (next > beginBlock + 2 || next === -1) && lineToEat.length >= 2 && endMarkers.indexOf(lineToEat.slice(-2)) !== -1) {
+      var endIndex = endMarkers.indexOf(lineToEat.slice(-2));
+
+      // If nextIndex = (blockStartIndex + 2), it's the first marker of the block.
+      if ((nextIndex > blockStartIndex + 2 || nextIndex === -1) && lineToEat.length >= 2 && endIndex !== -1) {
 
         if (endMarker === '') endMarker = lineToEat.slice(-2);
 
         finishedBlocks.push(linesToEat.join(C_NEWLINE));
 
         // Check if another block is following
-        if (value.indexOf('->', next) !== next + 1) break;
+        if (value.indexOf('->', nextIndex) !== nextIndex + 1) break;
         linesToEat = [];
-        beginBlock = next + 1;
+        blockStartIndex = nextIndex + 1;
       }
 
-      idx = next + 1;
-      canEatLine = next !== -1;
+      index = nextIndex + 1;
+      canEatLine = nextIndex !== -1;
     }
 
     if (finishedBlocks.length === 0) return;
@@ -70,8 +75,8 @@ module.exports = function plugin() {
     var values = this.tokenizeBlock(stringToEat, now);
     exit();
 
-    var elementType = void 0;
-    var classes = void 0;
+    var elementType = '';
+    var classes = '';
     if (startMarker === '<-' && endMarker === '<-') {
       elementType = 'leftAligned';
       classes = classNames.left ? classNames.left : 'align-left';
@@ -104,14 +109,16 @@ module.exports = function plugin() {
   // Inject blockTokenizer
   var blockTokenizers = Parser.prototype.blockTokenizers;
   var blockMethods = Parser.prototype.blockMethods;
-  blockTokenizers.align_blocks = alignTokenizer;
-  blockMethods.splice(blockMethods.indexOf('fencedCode') + 1, 0, 'align_blocks');
+  blockTokenizers.alignBlocks = alignTokenizer;
+  blockMethods.splice(blockMethods.indexOf('list') + 1, 0, 'alignBlocks');
 
   var Compiler = this.Compiler;
 
   // Stringify
   if (Compiler) {
     var visitors = Compiler.prototype.visitors;
+    if (!visitors) return;
+
     var alignCompiler = function alignCompiler(node) {
       var innerContent = this.all(node);
 

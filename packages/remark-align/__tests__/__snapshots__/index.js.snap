@@ -102,7 +102,8 @@ foo
 
 exports[`escapable 1`] = `
 "<h1>title</h1>
-<div class=\\"align-center\\"><p>->escaped-in</p></div>
+<div class=\\"align-center\\"><p>foo
+->escaped-in</p></div>
 <p>->escaped-out</p>
 <div class=\\"align-center\\"><p>center</p></div>"
 `;

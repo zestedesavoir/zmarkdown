@@ -3,7 +3,7 @@ import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
-const remarkStringify = require('remark-stringify')
+import remarkStringify from 'remark-stringify'
 
 import remarkAlign from '../src/'
 
@@ -150,10 +150,36 @@ test('list-block', () => {
   expect(contents).toMatchSnapshot()
 })
 
+test.skip('should not break blocks such as lists', () => {
+  const {contents} = render(dedent`
+    # title
+    ->
+    - list item
+    - list -> item
+    - sublist
+    - ->
+    - c
+    - d
+    <-
+  `)
+  expect(contents).toBe(dedent`
+    <h1>title</h1>
+    <div class="align-center"><ul>
+    <li>list item</li>
+    <li>list -> item</li>
+    <li>sublist</li>
+    <li>-></li>
+    <li>c</li>
+    <li>d</li>
+    </ul></div>
+  `)
+})
+
 test('escapable', () => {
   const {contents} = render(dedent`
     # title
     ->
+    foo
     \->escaped-in
     <-
 
