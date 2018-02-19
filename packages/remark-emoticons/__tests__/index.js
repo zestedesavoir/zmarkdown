@@ -3,6 +3,8 @@ import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
+import remarkStringify from 'remark-stringify'
+import remarkCaption from '../../remark-captions/src'
 
 import plugin from '../src/'
 
@@ -41,6 +43,13 @@ const render = text => unified()
   .use(plugin, config)
   .use(remark2rehype)
   .use(stringify)
+  .processSync(text)
+
+const renderToMarkdown = text => unified()
+  .use(reParse)
+  .use(remarkStringify)
+  .use(plugin, config)
+  .use(remarkCaption)
   .processSync(text)
 
 test('emoticons', () => {
@@ -116,4 +125,35 @@ test('Errors without config', () => {
     .processSync('')
 
   expect(fail).toThrowError(Error)
+})
+
+test('renders to markdown', () => {
+
+
+  const {contents} = renderToMarkdown(dedent`
+    Hello :) Hey :D
+
+    :)
+
+    > Citation
+
+    :D This is not a caption
+
+    ![toto](https://zestedesavoir.com/media/galleries/3014/bee33fae-2216-463a-8b85-d1d9efe2c374.png)
+
+    :D This is not a caption
+
+    This is not a smiley:)
+
+    Not :)a smiley either.
+
+    Smiley after another node: [link](#foo) :)
+
+    Smiley after another node w/2 spaces: [link](#foo)  :)
+
+    Smiley after another node w/3 spaces: [link](#foo)   :)
+  `)
+  expect(contents).toMatchSnapshot()
+  const recompiled = renderToMarkdown(contents).contents
+  expect(recompiled).toBe(contents)
 })
