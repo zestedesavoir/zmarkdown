@@ -65,4 +65,15 @@ module.exports = function inlinePlugin(ctx) {
   var inlineMethods = Parser.prototype.inlineMethods;
   inlineTokenizers.emoticons = inlineTokenizer;
   inlineMethods.splice(inlineMethods.indexOf('text'), 0, 'emoticons');
+
+  var Compiler = this.Compiler;
+  if (Compiler) {
+    var visitors = Compiler.prototype.visitors;
+    if (!visitors) {
+      return;
+    }
+    visitors.emoticon = function (node) {
+      return node.code;
+    };
+  }
 };

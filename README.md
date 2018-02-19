@@ -59,7 +59,7 @@ This project uses [Jest][jest] for testing. It is recommended to install the Jes
 
 * [**remark-emoticons**][remark-emoticons]
 
-  TODO: README
+  This plugins replaces ascii emoticons with associated image. Compatible with [rehype][rehype]
 
 * [**remark-escape-escaped**][remark-escape-escaped]
 
