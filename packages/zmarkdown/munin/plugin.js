@@ -32,17 +32,22 @@ const supportedStats = {
     ],
   },
   memory: {
+    stack: true,
     graph: [
       'graph_title RAM Usage',
       'graph_vlabel Bytes',
+      'graph_args --base 1024 --lower-limit 0',
     ],
-    fields: (name) => `${name}.label ${name}`,
+    fields: (name) => [
+      `${name}.label ${name}`,
+      `${name}.draw STACK`,
+    ],
   },
   cpu: {
     graph: [
       'graph_title CPU Usage',
       'graph_vlabel percent',
-      'graph_args --base 1000 --lower-limit 0 --upper-limit 100 --rigid',
+      'graph_args --base 1000 --lower-limit 0 --rigid',
       'graph_scale no',
     ],
     fields: (name) => `${name}.label ${name}`,
@@ -51,41 +56,53 @@ const supportedStats = {
     graph: [
       'graph_title Event Loop Lag',
       'graph_vlabel ms',
+      'graph_args --lower-limit 0',
     ],
     fields: (name) => `${name}.label ${name}`,
   },
   req_per_process: {
+    stack: true,
     graph: [
       'graph_title Request Per Process',
       'graph_vlabel requests',
+      'graph_args --lower-limit 0',
     ],
     fields: (name) => [
       `${name}.label ${name}`,
-      `${name}.type COUNTER`,
+      `${name}.draw STACK`,
     ],
   },
   avg_per_process: {
+    stack: true,
     graph: [
-      'graph_title Requests Per Minute Per Process',
-      'graph_vlabel requests per minute',
+      'graph_title Requests Per Second Per Process',
+      'graph_vlabel requests per second',
+      'graph_args --lower-limit 0',
     ],
-    fields: (name) => `${name}.label ${name}`,
+    fields: (name) => [
+      `${name}.label ${name}`,
+      `${name}.draw STACK`,
+    ],
   },
   req_per_endpoint: {
+    stack: true,
     graph: [
       'graph_title Request Per Endpoint',
       'graph_vlabel requests',
+      'graph_args --lower-limit 0',
     ],
     fields: () => endpoints.map(endpoint =>
-      `${endpoint}.label ${endpoint}\n${endpoint}.type GAUGE\n${endpoint}.draw STACK`),
+      `${endpoint}.label ${endpoint}\n${endpoint}.draw STACK`),
   },
   avg_per_endpoint: {
+    stack: true,
     graph: [
-      'graph_title Requests Per Minute Per Endpoint',
-      'graph_vlabel requests per minute',
+      'graph_title Requests Per Second Per Endpoint',
+      'graph_vlabel requests per second',
+      'graph_args --lower-limit 0',
     ],
     fields: () => endpoints.map(endpoint =>
-      `${endpoint}.label ${endpoint}\n${endpoint}.type GAUGE\n${endpoint}.draw STACK`),
+      `${endpoint}.label ${endpoint}\n${endpoint}.draw STACK`),
   },
 }
 
@@ -128,10 +145,10 @@ function gatherData (procList) {
         parseInt(proc.pm2_env.axm_monitor[`${endpoint} counter`].value)
       ).reduce((sum, val) => sum + val, 0)
       avgPerProcess = endpoints.map(endpoint =>
-        proc.pm2_env.axm_monitor[`${endpoint} req/5min`].value / 60
+        proc.pm2_env.axm_monitor[`${endpoint} rpm`].value
       ).reduce((sum, val) => sum + val, 0)
 
-      loopLag = proc.pm2_env.axm_monitor['Loop delay'].value
+      loopLag = parseFloat(proc.pm2_env.axm_monitor['Loop delay'].value)
     }
 
     const data = {
@@ -162,7 +179,7 @@ function gatherData (procList) {
 
     avg_per_endpoint: endpoints.reduce((acc, endpoint) => {
       acc[endpoint] = procList.reduce((sum, proc) =>
-        sum + (proc.pm2_env.axm_monitor[`${endpoint} req/5min`].value / 60), 0)
+        sum + parseFloat(proc.pm2_env.axm_monitor[`${endpoint} rpm`].value), 0)
       return acc
     }, {}),
   }
@@ -174,33 +191,26 @@ function gatherData (procList) {
 // prints a munin readable config
 function printConfig (stats) {
   if (!supportedStats[stat]) throw new Error(`"${stat}" not configured`)
+  const procs = stats.procs
 
   l(supportedStats[stat].graph.join('\n'))
   l('graph_category zmd')
 
+  let output = ''
   if (['req_per_endpoint', 'avg_per_endpoint'].includes(stat)) {
-    l('graph_args --lower-limit 0')
-    l(supportedStats[stat].fields().join('\n'))
-    l([
-      'total.label Total',
-      'total.type GAUGE',
-      'total.graph no',
-    ].join('\n'))
+    output = supportedStats[stat].fields().join('\n')
   } else {
-    const procs = stats.procs
-    const names = Object.keys(procs || {})
-    const samplejob = names.length && names[0]
-    if (stat === 'memory') {
-      l(`graph_args --base 1024 --lower-limit 0 --upper-limit ${procs[samplejob].maxMem}`)
-    }
-
-    l(Object.keys(procs).map(job => {
+    output = Object.keys(procs).map(job => {
       const tmp = supportedStats[stat].fields(job)
       return Array.isArray(tmp)
         ? tmp.join('\n')
         : tmp
-    }).join('\n'))
+    }).join('\n')
   }
+  if (supportedStats[stat].stack) {
+    output = output.replace(' STACK', ' AREA')
+  }
+  l(output)
 
   pm2.disconnect()
   process.exit(0)
@@ -208,12 +218,13 @@ function printConfig (stats) {
 
 // prints a munin readable output
 function printStats (stats) {
+  const procs = stats.procs
+
   if (['req_per_endpoint', 'avg_per_endpoint'].includes(stat)) {
     endpoints.forEach(endpoint => {
       l('%s.value %s', endpoint, stats.endpoints[stat][endpoint])
     })
   } else {
-    const procs = stats.procs
     Object.keys(procs).forEach((procName) => {
       const value = procs[procName][stat]
       l('%s.value %s', procName, value)
