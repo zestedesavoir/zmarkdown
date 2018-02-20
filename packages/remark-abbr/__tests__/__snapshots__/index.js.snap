@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`compiles to markdown 1`] = `
+"_abbr_ HTML
+
+> HTML inside quote
+
+*[abbr]: abbreviation
+*[HTML]: HyperText Markup Language"
+`;
+
 exports[`no reference 1`] = `"<p>No reference!</p>"`;
 
 exports[`passes the first regression test 1`] = `

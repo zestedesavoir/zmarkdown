@@ -108,6 +108,25 @@ function plugin() {
   inlineTokenizers.abbr = inlineTokenizer;
   inlineMethods.splice(0, 0, 'abbr');
 
+  var Compiler = this.Compiler;
+  if (Compiler) {
+    var compiledMap = {};
+    var visitors = Compiler.prototype.visitors;
+    if (!visitors) {
+      return;
+    }
+    visitors.abbr = function (node) {
+      var explanation = node.reference;
+      if (!compiledMap[node.abbr]) {
+        compiledMap[node.abbr] = '*[' + node.abbr + ']: ' + explanation;
+      }
+      return '' + node.abbr;
+    };
+    var oldRoot = visitors.root;
+    visitors.root = function (node) {
+      return oldRoot.apply(this, arguments) + '\n' + Object.values(compiledMap).join('\n');
+    };
+  }
   return transformer;
 }
 
