@@ -3,6 +3,7 @@ import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
+import remarkStringify from 'remark-stringify'
 
 import remarkAbbr from '../src/'
 
@@ -12,6 +13,13 @@ const render = text => unified()
   .use(remark2rehype)
   .use(stringify)
   .processSync(text)
+
+const renderToMarkdown = (text, config) => unified()
+  .use(reParse)
+  .use(remarkStringify)
+  .use(remarkAbbr, config)
+  .processSync(text)
+
 
 it('renders references', () => {
   const {contents} = render(dedent`
@@ -59,7 +67,7 @@ it('passes the second regression test', () => {
 })
 
 it('passes the retro test', () => {
-  const {contents} = render(dedent`
+  const input = dedent`
     An ABBR: "REF", ref and REFERENCE should be ignored.
 
     The HTML specification is maintained by the W3C.
@@ -69,9 +77,13 @@ it('passes the retro test', () => {
     *[ABBR]: Abbreviation
     *[HTML]: Hyper Text Markup Language
     *[W3C]:  World Wide Web Consortium
-  `)
+  `
 
-  expect(contents).toMatchSnapshot()
+  const {contents: html} = render(input)
+  expect(html).toMatchSnapshot()
+
+  const {contents: markdown} = renderToMarkdown(input)
+  expect(markdown).toMatchSnapshot()
 })
 
 it('no reference', () => {
@@ -80,4 +92,23 @@ it('no reference', () => {
   `)
 
   expect(contents).toMatchSnapshot()
+})
+
+test('compiles to markdown', () => {
+  const md = dedent`
+    *abbr* HTML
+
+    > HTML inside quote
+
+    *[abbr]: abbreviation
+    *[noabbr]: explanation that does not match
+    *[HTML]: HyperText Markup Language
+  `
+  const {contents} = renderToMarkdown(md)
+  expect(contents).toMatchSnapshot()
+
+  const contents1 = renderToMarkdown(md).contents
+  const contents2 = renderToMarkdown(contents1).contents
+
+  expect(contents1).toBe(contents2)
 })

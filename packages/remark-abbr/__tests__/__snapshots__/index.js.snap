@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`compiles to markdown 1`] = `
+"_abbr_ HTML
+
+> HTML inside quote
+
+*[abbr]: abbreviation
+*[HTML]: HyperText Markup Language"
+`;
+
 exports[`no reference 1`] = `"<p>No reference!</p>"`;
 
 exports[`passes the first regression test 1`] = `
@@ -10,6 +19,17 @@ exports[`passes the first regression test 1`] = `
 exports[`passes the retro test 1`] = `
 "<p>An <abbr title=\\"Abbreviation\\">ABBR</abbr>: \\"<abbr title=\\"Reference\\">REF</abbr>\\", ref and REFERENCE should be ignored.</p>
 <p>The <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr> specification is maintained by the <abbr title=\\"World Wide Web Consortium\\">W3C</abbr>.</p>"
+`;
+
+exports[`passes the retro test 2`] = `
+"An ABBR: \\"REF\\", ref and REFERENCE should be ignored.
+
+The HTML specification is maintained by the W3C.
+
+*[ABBR]: Abbreviation
+*[REF]: Reference
+*[HTML]: Hyper Text Markup Language
+*[W3C]: World Wide Web Consortium"
 `;
 
 exports[`passes the second regression test 1`] = `
