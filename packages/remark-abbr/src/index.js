@@ -103,6 +103,24 @@ function plugin () {
   inlineTokenizers.abbr = inlineTokenizer
   inlineMethods.splice(0, 0, 'abbr')
 
+  const Compiler = this.Compiler
+  if (Compiler) {
+    const visitors = Compiler.prototype.visitors
+    if (!visitors) return
+
+    const abbrMap = {}
+    visitors.abbr = (node) => {
+      if (!abbrMap[node.abbr]) {
+        abbrMap[node.abbr] = `*[${node.abbr}]: ${node.reference}`
+      }
+      return `${node.abbr}`
+    }
+
+    const originalRootCompiler = visitors.root
+    visitors.root = function (node) {
+      return `${originalRootCompiler.apply(this, arguments)}\n${Object.values(abbrMap).join('\n')}`
+    }
+  }
   return transformer
 }
 
