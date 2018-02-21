@@ -156,47 +156,28 @@ console.log(contents);
 
 [coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown
 
-[license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/rebber/LICENSE-MIT
+[license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/rebber-plugins/LICENSE-MIT
 
 [rebber]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/rebber
 
-[rebber-plugins]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/rebber-plugins
-
 [zds]: https://zestedesavoir.com
 
-[npm]: https://www.npmjs.com/package/rebber
+[npm]: https://www.npmjs.com/package/rebber-plugins
 
 [mdast]: https://github.com/syntax-tree/mdast/blob/master/readme.md
-
-[remark]: https://github.com/wooorm/remark
-
-[rehype]: https://github.com/wooorm/rehype
-
 
 [remark-abbr]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-abbr#remark-abbr--
 
 [remark-align]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-align#remark-align--
 
-[remark-captions]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-captions#remark-captions--
-
-[remark-comments]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-comments#remark-comments--
-
 [remark-custom-blocks]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-custom-blocks#remark-custom-blocks--
 
 [remark-emoticons]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-emoticons#remark-emoticons--
 
-[remark-escape-escaped]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-escape-escaped#remark-escape-escaped--
-
 [remark-grid-tables]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-grid-tables#remark-grid-tables--
-
-[remark-heading-shift]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-heading-shift#remark-heading-shift--
-
-[remark-heading-trailing-spaces]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-heading-trailing-spaces#remark-heading-trailing-spaces--
 
 [remark-iframes]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-iframes#remark-iframes--
 
 [remark-kbd]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-kbd#remark-kbd--
-
-[remark-numbered-footnotes]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-numbered-footnotes#remark-numbered-footnotes--
 
 [remark-sub-super]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-sub-super#remark-sub-super--

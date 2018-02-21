@@ -3,7 +3,7 @@
 This repository forms the basis for zmarkdown, the JavaScript project intended to replace [Python-ZMarkdown][pyzmd], the current Markdown engine powering [Zeste de Savoir][zds].
 
 It is a collection of packages extending the [**remark**
-processor][processor] and its [**MDAST**][mdast] syntax tree, [**rehype**][rehype] (for HTML processing) and [**textr**][textr] (text transformation framework). It also provides [**MDAST**][mdast] to LaTeX compilation via [**rebber**][rebber].
+processor][processor] and its [**MDAST**][mdast] syntax tree, [**rehype**][rehype] (for HTML processing) and [**textr**][textr] (text transformation framework). It also provides [**MDAST**][mdast] to LaTeX compilation via [**rebber**][rebber] (and its [plugins][rebber-plugins]).
 
 ## Install
 
@@ -19,8 +19,8 @@ processor][processor] and its [**MDAST**][mdast] syntax tree, [**rehype**][rehyp
 
 This project uses [Jest][jest] for testing. It is recommended to install the Jest CLI tools globally, and run Jest in watch mode when developing.
 
- - `npm install -g jest`
- - `jest --watch --notify` (`--notify` sends desktop notifications when tests run)
+* `npm install -g jest`
+* `jest --watch --notify` (`--notify` sends desktop notifications when tests run)
 
 ## Packages
 
@@ -59,7 +59,7 @@ This project uses [Jest][jest] for testing. It is recommended to install the Jes
 
 * [**remark-emoticons**][remark-emoticons]
 
-  This plugins replaces ascii emoticons with associated image. Compatible with [rehype][rehype]
+  This plugins replaces ASCII emoticons with associated image. Compatible with [rehype][rehype]
 
 * [**remark-escape-escaped**][remark-escape-escaped]
 

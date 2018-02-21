@@ -81,7 +81,7 @@ Only `metadata` is described in the **Response** sections below.
 
   Where to download the images to.
 
-* `opts.local_url_to_local_path`, [from: string, to: string], default: `<none>`
+* `opts.local_url_to_local_path`, \[from: string, to: string\], default: `<none>`
 
   If provided, local images referenced in Markdown source (such
   as `![](/img/example.png)`) will be copied to `images_download_dir`

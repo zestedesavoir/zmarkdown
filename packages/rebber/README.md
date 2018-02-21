@@ -171,5 +171,3 @@ will stringify our example Markdown to `[inserted image located at "/foo.png"]` 
 [mdast]: https://github.com/syntax-tree/mdast/blob/master/readme.md
 
 [remark]: https://github.com/wooorm/remark
-
-[rehype]: https://github.com/wooorm/rehype

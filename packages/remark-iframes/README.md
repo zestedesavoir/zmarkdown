@@ -21,7 +21,7 @@ interface iframe <: Node {
   type: "iframe";
   provider: string;
   data: {
-    hName: "iframe",
+    hName: "iframe";
     hProperties: {
       src: string;
       width: 0 <= uint32;
@@ -196,10 +196,6 @@ otherwise it will just be a paragraph node
 
 [zds]: https://zestedesavoir.com
 
-[npm]: https://www.npmjs.com/package/remark-align
-
-[mdast]: https://github.com/syntax-tree/mdast/blob/master/readme.md
-
-[remark]: https://github.com/wooorm/remark
+[npm]: https://www.npmjs.com/package/remark-iframes
 
 [rehype]: https://github.com/wooorm/rehype

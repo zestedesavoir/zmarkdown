@@ -137,8 +137,6 @@ unified()
 
 [mdast]: https://github.com/syntax-tree/mdast/blob/master/readme.md
 
-[remark]: https://github.com/wooorm/remark
-
 [rehype]: https://github.com/wooorm/rehype
 
 [parent]: https://github.com/syntax-tree/unist#parent

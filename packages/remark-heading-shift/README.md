@@ -43,16 +43,6 @@ Yields:
 
 [coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown
 
-[license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/remark-ping/LICENSE-MIT
+[license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/remark-heading-shift/LICENSE-MIT
 
 [zds]: https://zestedesavoir.com
-
-[npm]: https://www.npmjs.com/package/remark-ping
-
-[mdast]: https://github.com/syntax-tree/mdast/blob/master/readme.md
-
-[remark]: https://github.com/wooorm/remark
-
-[rehype]: https://github.com/wooorm/rehype
-
-[parent]: https://github.com/syntax-tree/unist#parent

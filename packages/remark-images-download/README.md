@@ -87,7 +87,7 @@ Two small images:
 ![](https://example.com/example.png)
 ![](https://example.com/example2.png)
 
-And a image of 1Tb!
+And an image of 1Tb!
 ![](https://example.com/example_1Tb.png)
 ```
 
@@ -114,10 +114,4 @@ with the previous configuration `remark-images-download` will download the two f
 
 [zds]: https://zestedesavoir.com
 
-[npm]: https://www.npmjs.com/package/remark-align
-
-[mdast]: https://github.com/syntax-tree/mdast/blob/master/readme.md
-
-[remark]: https://github.com/wooorm/remark
-
-[rehype]: https://github.com/wooorm/rehype
+[npm]: https://www.npmjs.com/package/remark-images-download

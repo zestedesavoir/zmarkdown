@@ -79,9 +79,3 @@ unified()
 [zds]: https://zestedesavoir.com
 
 [npm]: https://www.npmjs.com/package/remark-comments
-
-[mdast]: https://github.com/syntax-tree/mdast/blob/master/readme.md
-
-[remark]: https://github.com/wooorm/remark
-
-[rehype]: https://github.com/wooorm/rehype

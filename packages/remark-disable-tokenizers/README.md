@@ -1,6 +1,6 @@
 # remark-disable-tokenizers [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
-This plugin can disable any or all remark `blockTokenizers` and `inlineTokenizers`. It can not only disable the ones provided by remark core, but also any other tokenizer that has been added to the remark parser whether through plugins or not.
+This [remark][remark] plugin can disable any or all remark `blockTokenizers` and `inlineTokenizers`. It can not only disable the ones provided by remark core, but also any other tokenizer that has been added to the remark parser whether through plugins or not.
 
 Remark default tokenizers that can be disabled are listed [here][remark-doc]:
 
@@ -89,11 +89,7 @@ unified()
 
 [npm]: https://www.npmjs.com/package/remark-disable-tokenizers
 
-[mdast]: https://github.com/syntax-tree/mdast/blob/master/readme.md
-
 [remark]: https://github.com/wooorm/remark
-
-[rehype]: https://github.com/wooorm/rehype
 
 [remark-doc]: https://github.com/wooorm/remark/tree/master/packages/remark-parse#parserblocktokenizers
 

@@ -72,5 +72,3 @@ unified()
 [zds]: https://zestedesavoir.com
 
 [npm]: https://www.npmjs.com/package/remark-fix-guillemets
-
-[textr]: https://github.com/A/textr
