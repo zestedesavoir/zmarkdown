@@ -1,6 +1,6 @@
 {
   "name": "remark-heading-shift",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-heading-shift",
     "type": "git"
