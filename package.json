@@ -12,8 +12,10 @@
     "lerna": "^2.7.0"
   },
   "scripts": {
-    "pretest": "lerna run pretest --scope zmarkdown",
+    "prepare": "lerna run prepare",
+    "pretest": "npm run lint && lerna run pretest --scope zmarkdown",
     "test": "jest",
+    "lint": "eslint .",
     "posttest": "lerna run posttest --scope zmarkdown",
     "d": "node --inspect --debug-brk ./node_modules/.bin/jest --runInBand -i"
   },

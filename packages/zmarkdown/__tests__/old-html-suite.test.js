@@ -268,7 +268,7 @@ describe('#misc', () => {
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
 
-  it.skip(`properly renders autolinks_with_asterisks.txt`, function () {
+  it(`properly renders autolinks_with_asterisks.txt`, function () {
     const filepath = `${dir}/autolinks_with_asterisks.txt`
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
@@ -308,7 +308,7 @@ describe('#misc', () => {
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
 
-  it.skip(`properly renders blockquote-hr.txt`, function () {
+  it(`properly renders blockquote-hr.txt`, function () {
     const filepath = `${dir}/blockquote-hr.txt`
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
@@ -333,7 +333,7 @@ describe('#misc', () => {
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
 
-  it.skip(`properly renders brackets-in-img-title.txt`, function () {
+  it(`properly renders brackets-in-img-title.txt`, function () {
     const filepath = `${dir}/brackets-in-img-title.txt`
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
@@ -378,7 +378,7 @@ describe('#misc', () => {
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
 
-  it.skip(`properly renders funky-list.txt`, function () {
+  it(`properly renders funky-list.txt`, function () {
     const filepath = `${dir}/funky-list.txt`
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
@@ -478,7 +478,7 @@ describe('#misc', () => {
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
 
-  it.skip(`properly renders lists6.txt`, function () {
+  it(`properly renders lists6.txt`, function () {
     const filepath = `${dir}/lists6.txt`
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
@@ -533,7 +533,7 @@ describe('#misc', () => {
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
 
-  it.skip(`properly renders nested-lists.txt`, function () {
+  it(`properly renders nested-lists.txt`, function () {
     const filepath = `${dir}/nested-lists.txt`
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
@@ -672,7 +672,7 @@ describe('#php', () => {
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
 
-  it.skip(`properly renders Links, inline style.txt`, function () {
+  it(`properly renders Links, inline style.txt`, function () {
     const filepath = `${dir}/Links, inline style.txt`
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
@@ -699,110 +699,6 @@ describe('#php', () => {
 })
 
 describe('#pl', () => {
-  describe.skip('#Tests_2004', function () {
-    const dir = `${__dirname}/fixtures/pl/Tests_2004/`
-
-    it(`properly renders Amps and angle encoding.txt`, () => {
-      const filepath = `${dir}/Amps and angle encoding.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Auto links.txt`, () => {
-      const filepath = `${dir}/Auto links.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Backslash escapes.txt`, () => {
-      const filepath = `${dir}/Backslash escapes.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Blockquotes with code blocks.txt`, () => {
-      const filepath = `${dir}/Blockquotes with code blocks.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Hard-wrapped paragraphs with list-like lines.txt`, () => {
-      const filepath = `${dir}/Hard-wrapped paragraphs with list-like lines.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Horizontal rules.txt`, () => {
-      const filepath = `${dir}/Horizontal rules.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Inline HTML (Advanced).txt`, () => {
-      const filepath = `${dir}/Inline HTML (Advanced).txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Inline HTML (Simple).txt`, () => {
-      const filepath = `${dir}/Inline HTML (Simple).txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Inline HTML comments.txt`, () => {
-      const filepath = `${dir}/Inline HTML comments.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Links, inline style.txt`, () => {
-      const filepath = `${dir}/Links, inline style.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Links, reference style.txt`, () => {
-      const filepath = `${dir}/Links, reference style.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Literal quotes in titles.txt`, () => {
-      const filepath = `${dir}/Literal quotes in titles.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Nested blockquotes.txt`, () => {
-      const filepath = `${dir}/Nested blockquotes.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Ordered and unordered lists.txt`, () => {
-      const filepath = `${dir}/Ordered and unordered lists.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Strong and em together.txt`, () => {
-      const filepath = `${dir}/Strong and em together.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Tabs.txt`, () => {
-      const filepath = `${dir}/Tabs.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Tidyness.txt`, () => {
-      const filepath = `${dir}/Tidyness.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Yuri-Attributes.txt`, () => {
-      const filepath = `${dir}/Yuri-Attributes.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Yuri-Email.txt`, () => {
-      const filepath = `${dir}/Yuri-Email.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-
-    it(`properly renders Yuri-Links-in-Headers.txt`, () => {
-      const filepath = `${dir}/Yuri-Links-in-Headers.txt`
-      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-    })
-  })
-
   describe('#Tests_2007', () => {
     const dir = `${__dirname}/fixtures/pl/Tests_2007/`
 

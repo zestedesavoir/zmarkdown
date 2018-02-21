@@ -80,7 +80,6 @@ test('emoticons', () => {
 })
 
 test('emoticons without class', () => {
-
   const render = text => unified()
     .use(reParse)
     .use(plugin, config)
@@ -128,8 +127,6 @@ test('Errors without config', () => {
 })
 
 test('renders to markdown', () => {
-
-
   const {contents} = renderToMarkdown(dedent`
     Hello :) Hey :D
 
@@ -154,6 +151,7 @@ test('renders to markdown', () => {
     Smiley after another node w/3 spaces: [link](#foo)   :)
   `)
   expect(contents).toMatchSnapshot()
+
   const recompiled = renderToMarkdown(contents).contents
   expect(recompiled).toBe(contents)
 })

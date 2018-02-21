@@ -108,7 +108,7 @@ describe('depth checks', () => {
     const a = Date.now()
     const render = renderString(input).then((ok, fail) => {
       const b = Date.now()
-      if ((b - a) < 1500) return Promise.resolve('ok')
+      if ((b - a) < 2000) return Promise.resolve('ok')
       return Promise.reject(`Rendering ${maxNesting} nest blockquotes took too long: ${b - a}ms.`)
     })
 

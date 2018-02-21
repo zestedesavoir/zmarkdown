@@ -1,12 +1,12 @@
 import semiColon from '../src/'
 
 const chars = {
-  'NARROW NO-BREAK SPACE': '\u202F'
+  'NARROW NO-BREAK SPACE': '\u202F',
 }
 
-const american = { locale: 'en-us' }
-const fr = { locale: 'fr' }
-const frCH = { locale: 'fr-sw' }
+const american = {locale: 'en-us'}
+const fr = {locale: 'fr'}
+const frCH = {locale: 'fr-sw'}
 
 test('should do nothing with no param at all', () => expect(semiColon()).toEqual(''))
 

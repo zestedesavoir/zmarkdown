@@ -69,9 +69,7 @@ module.exports = function inlinePlugin(ctx) {
   var Compiler = this.Compiler;
   if (Compiler) {
     var visitors = Compiler.prototype.visitors;
-    if (!visitors) {
-      return;
-    }
+    if (!visitors) return;
     visitors.emoticon = function (node) {
       return node.code;
     };
