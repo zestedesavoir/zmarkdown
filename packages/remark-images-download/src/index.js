@@ -153,8 +153,7 @@ function plugin ({
                 totalDownloadedSize += fileSize
               })
               .on('response', (res) => {
-                res.once('data', chunk => {
-                  res.destroy()
+                res.once('data', (chunk) => {
                   const type = fileType(chunk) || {mime: ''}
                   if (type.mime.slice(0, 6) !== 'image/' && !isSvg(chunk.toString())) {
                     if (type.mime) {
@@ -182,7 +181,7 @@ function plugin ({
         promises.sort((a, b) => b.offset - a.offset)
 
         return promises
-          .map(a => a.promise)
+          .map((a) => a.promise)
           .reduce(
             (chain, currentTask) =>
               chain.then(chainResults =>

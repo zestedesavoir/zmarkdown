@@ -170,7 +170,6 @@ function plugin() {
             totalDownloadedSize += fileSize;
           }).on('response', function (res) {
             res.once('data', function (chunk) {
-              res.destroy();
               var type = fileType(chunk) || { mime: '' };
               if (type.mime.slice(0, 6) !== 'image/' && !isSvg(chunk.toString())) {
                 if (type.mime) {
