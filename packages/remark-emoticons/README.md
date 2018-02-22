@@ -17,7 +17,7 @@ will yield an element of type:
 ```javascript
 interface emoticon <: Node {
   type: "emoticon";
-  code: string;
+  value: string;
   data: {
     hName: "img";
     hProperties: {
@@ -45,7 +45,7 @@ the produced AST node will contain :
 ```javascript
 {
   type: "emoticon",
-  code: ":D",
+  value: ":D",
   data: {
     hName: "img";
     hProperties: {

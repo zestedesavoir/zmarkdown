@@ -9,13 +9,10 @@ module.exports = all;
 /* Stringify all children of `parent`. */
 function all(ctx, parent) {
   var children = parent && parent.children;
-  var length = children && children.length;
-  var index = -1;
-  var results = [];
 
-  while (++index < length) {
-    results[index] = one(ctx, children[index], index, parent);
-  }
+  if (!children) return '';
 
-  return results.join('');
+  return children.map(function (child, index) {
+    return one(ctx, child, index, parent);
+  }).join('');
 }

@@ -42,10 +42,10 @@ function one (ctx, node, index, parent) {
   const type = node && node.type
 
   if (!type) {
-    throw new Error(`Expected node, not \`${node}\``)
+    throw new Error(`Received node '${node}' does not have a type.`)
   }
 
-  if (!(has(h, type) && typeof h[type] === 'function')) {
+  if (!has(h, type) || typeof h[type] !== 'function') {
     throw new Error(`Cannot compile unknown node \`${type}\``)
   }
 

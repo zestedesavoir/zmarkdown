@@ -1,32 +1,56 @@
 import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
-import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
+import remarkStringify from 'remark-stringify'
+import rehypeStringify from 'rehype-stringify'
 
 import plugin from '../src/'
+
+const renderToMarkdown = text => unified()
+  .use(reParse)
+  .use(remarkStringify)
+  .use(plugin)
+  .processSync(text)
 
 test('comments', () => {
   const render = text => unified()
     .use(reParse)
     .use(plugin)
     .use(remark2rehype)
-    .use(stringify)
+    .use(rehypeStringify)
     .processSync(text)
 
   const {contents} = render(dedent`
     Test comments
     =============
 
-    Foo<--COMMENTS I will be gone COMMENTS-->bar
+    Foo<--COMMENTS I will be gone ABC COMMENTS-->bar
 
     \`\`\`
-    Foo<--COMMENTS I will not get remove because I am in a code block COMMENTS-->bar
+    Foo<--COMMENTS I will not get removed because I am in a code block DEF COMMENTS-->bar
     \`\`\`
 
-    <--COMMENTS Unfinished block won't get parsed either
+    <--COMMENTS Unfinished block won't get parsed either GHI
   `)
   expect(contents).toMatchSnapshot()
+  expect(contents).not.toContain('ABC')
+  expect(contents).toContain('DEF')
+  expect(contents).toContain('GHI')
+})
+
+test('compiles to markdown', () => {
+  const {contents} = renderToMarkdown(dedent`
+    Foo<--COMMENTS I will be gone ABC COMMENTS-->bar
+
+    \`\`\`
+    Foo<--COMMENTS I will not get removed because I am in a code block DEF COMMENTS-->bar
+    \`\`\`
+
+    <--COMMENTS Unfinished block won't get parsed either GHI
+  `)
+  expect(contents).toMatchSnapshot()
+  expect(contents).toContain('Foo<--COMMENTS I will be gone ABC COMMENTS-->bar')
 })
 
 test('comments custom different markers', () => {
@@ -37,7 +61,7 @@ test('comments custom different markers', () => {
       endMarker: 'bAR',
     })
     .use(remark2rehype)
-    .use(stringify)
+    .use(rehypeStringify)
     .processSync(text)
 
   const {contents} = render(dedent`
@@ -47,7 +71,7 @@ test('comments custom different markers', () => {
     Foo<--foo I will be gone bAR-->bar
 
     \`\`\`
-    Foo<--foo I will not get remove because I am in a code block bAR-->bar
+    Foo<--foo I will not get removed because I am in a code block bAR-->bar
     \`\`\`
 
     <--foo Unfinished block won't get parsed either
@@ -63,7 +87,7 @@ test('comments custom same markers', () => {
       endMarker: 'foo',
     })
     .use(remark2rehype)
-    .use(stringify)
+    .use(rehypeStringify)
     .processSync(text)
 
   const {contents} = render(dedent`
@@ -73,7 +97,7 @@ test('comments custom same markers', () => {
     Foo<--foo I will be gone foo-->bar
 
     \`\`\`
-    Foo<--foo I will not get remove because I am in a code block foo-->bar
+    Foo<--foo I will not get removed because I am in a code block foo-->bar
     \`\`\`
 
     <--foo Unfinished block won't get parsed either

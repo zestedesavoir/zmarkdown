@@ -2,13 +2,13 @@
 const all = require('rebber/dist/all')
 
 /* Expose. */
-module.exports = abbr
+module.exports = abbrPlugin
 
-function abbr (ctx, node) {
-  const displayText = all(ctx, node)
-  const meaning = node.data.hProperties.title
+function abbrPlugin (ctx, node) {
+  const abbr = all(ctx, node)
+  const reference = node.reference
   if (ctx.abbr && typeof ctx.abbr === 'function') {
-    return ctx.abbr(displayText, meaning)
+    return ctx.abbr(abbr, reference)
   }
-  return `\\abbr{${displayText}}{${meaning}}`
+  return `\\abbr{${abbr}}{${reference}}`
 }

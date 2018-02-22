@@ -3952,7 +3952,10 @@ a simple paragraph
 `;
 
 exports[`#zds #extensions properly renders comments.txt 1`] = `
-"BlablaBalbla
+"Blabla\\\\begin{comment}
+hahaha
+\\\\end{comment}
+Balbla
 
 
 

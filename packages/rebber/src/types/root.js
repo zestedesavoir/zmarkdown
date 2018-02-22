@@ -6,30 +6,24 @@ module.exports = root
 
 /* Stringify a text `node`. */
 function root (ctx, node, _, parent) {
-  const values = []
   const children = node.children
-  const length = children.length
-  let index = -1
-  let child
-  let prev
+  if (!children) return ''
 
-  while (++index < length) {
-    child = children[index]
+  let previous
 
-    if (prev) {
-      if (child.type === prev.type && prev.type === 'list') {
-        values.push(prev.ordered === child.ordered ? '\n\n\n' : '\n\n')
-      } else if (prev.type === 'list' && child.type === 'code' && !child.lang) {
-        values.push('\n\n\n')
+  return children.reduce((output, child, index) => {
+    if (previous) {
+      if (child.type === previous.type && previous.type === 'list') {
+        output += previous.ordered === child.ordered ? '\n\n\n' : '\n\n'
+      } else if (previous.type === 'list' && child.type === 'code' && !child.lang) {
+        output += '\n\n\n'
       } else {
-        values.push('\n\n')
+        output += '\n\n'
       }
     }
 
-    values.push(one(ctx, child, index, node, node))
-
-    prev = child
-  }
-
-  return values.join('')
+    output += one(ctx, child, index, node, node)
+    previous = child
+    return output
+  }, '')
 }

@@ -13,16 +13,19 @@ function plugin () {
     if (silent) return silent
     if (!keep || keep.index !== 0) return
 
-    return eat(keep[0])({
+    const [matched, abbr, reference] = keep
+
+    return eat(matched)({
       type: 'abbr',
-      abbr: keep[1],
+      abbr: abbr,
+      reference: reference,
       children: [
-        {type: 'text', value: keep[1]},
+        {type: 'text', value: abbr},
       ],
       data: {
         hName: 'abbr',
         hProperties: {
-          title: keep[2],
+          title: reference,
         },
       },
     })

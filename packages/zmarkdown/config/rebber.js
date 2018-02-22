@@ -7,8 +7,7 @@ const rebberConfig = {
   },
   overrides: {
     abbr: require('rebber-plugins/dist/type/abbr'),
-    // TODO: 'comment' nodes don't exist!
-    // comment: require('rebber-plugins/dist/type/comment'),
+    comments: require('rebber-plugins/dist/type/comments'),
     emoticon: require('rebber-plugins/dist/type/emoticon'),
     figure: require('rebber-plugins/dist/type/figure'),
     gridTable: require('rebber-plugins/dist/type/gridTable'),

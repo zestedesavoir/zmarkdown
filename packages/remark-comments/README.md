@@ -4,13 +4,13 @@ This plugin parses custom Markdown syntax for Markdown source comments.
 
 ## Syntax
 
-You can write comments in the Markdown source this way:
+You can insert comments in the Markdown source this way:
 
 ```markdown
 Foo<--COMMENTS I am a comment COMMENTS-->bar
 ```
 
-Everything between `<--COMMENTS` and `COMMENTS-->` will be absent from the output.
+Everything between `<--COMMENTS` and `COMMENTS-->` will be absent from the HTML output. Compiling to Markdown will preserve all comments.
 
 ## Installation
 

@@ -38,7 +38,7 @@ module.exports = function inlinePlugin(ctx) {
       var emoticon = toEat.trim();
       var emoticonNode = {
         type: 'emoticon',
-        code: emoticon,
+        value: emoticon,
         data: {
           hName: 'img',
           hProperties: {
@@ -71,7 +71,7 @@ module.exports = function inlinePlugin(ctx) {
     var visitors = Compiler.prototype.visitors;
     if (!visitors) return;
     visitors.emoticon = function (node) {
-      return node.code;
+      return node.value;
     };
   }
 };

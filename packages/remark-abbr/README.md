@@ -1,10 +1,26 @@
 # remark-abbr [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
-This plugin parses custom Markdown syntax to produce (HTML) abbreviations.
+This [remark][remark] plugin parses custom Markdown syntax to produce (HTML) abbreviations.
+
+It introduces a new [MDAST][mdast] node type: "abbr".
+
+```javascript
+interface abbr <: Node {
+  type: "abbr";
+  abbr: string;
+  reference: string;
+  data: {
+    hName: "abbr";
+    hProperties: {
+      title: string;
+    }
+  }
+}
+```
 
 ## Syntax
 
-An abbreviation works the same as footnotes:
+Abbreviations are defined a bit like footnotes:
 
 ```markdown
 This plugin works on MDAST, a Markdown AST
@@ -14,7 +30,7 @@ implemented by [remark](https://github.com/wooorm/remark)
 *[AST]: Abstract syntax tree
 ```
 
-produces:
+This would compile to the following HTML:
 
 ```html
 <p>This plugin works on <abbr title="Markdown Abstract Syntax Tree.">MDAST</abbr>, a Markdown <abbr title="Abstract syntax tree">AST</abbr>
@@ -71,3 +87,7 @@ unified()
 [zds]: https://zestedesavoir.com
 
 [npm]: https://www.npmjs.com/package/remark-abbr
+
+[mdast]: https://github.com/syntax-tree/mdast/blob/master/readme.md
+
+[remark]: https://github.com/wooorm/remark

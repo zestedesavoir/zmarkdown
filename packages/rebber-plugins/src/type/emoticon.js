@@ -6,7 +6,7 @@ module.exports = emoticon
 
 /* Stringify an emoticon `node`. */
 function emoticon (ctx, node) {
-  const code = node.code
+  const code = node.value
   if (!ctx.emoticons || !has(ctx.emoticons, code)) return
 
   return `\\smiley{${ctx.emoticons[code]}}`
