@@ -1,6 +1,6 @@
 {
   "name": "remark-emoticons",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-emoticons",
     "type": "git"

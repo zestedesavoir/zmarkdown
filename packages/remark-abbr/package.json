@@ -1,6 +1,6 @@
 {
   "name": "remark-abbr",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-abbr",
     "type": "git"
