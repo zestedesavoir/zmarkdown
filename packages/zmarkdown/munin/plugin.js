@@ -145,7 +145,7 @@ function gatherData (procList) {
         parseInt(proc.pm2_env.axm_monitor[`${endpoint} counter`].value)
       ).reduce((sum, val) => sum + val, 0)
       avgPerProcess = endpoints.map(endpoint =>
-        proc.pm2_env.axm_monitor[`${endpoint} rpm`].value
+        parseFloat(proc.pm2_env.axm_monitor[`${endpoint} rpm`].value)
       ).reduce((sum, val) => sum + val, 0)
 
       loopLag = parseFloat(proc.pm2_env.axm_monitor['Loop delay'].value)
