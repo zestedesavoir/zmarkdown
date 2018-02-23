@@ -45,6 +45,7 @@ module.exports = function plugin (opts) {
       const thumbnail = computeThumbnail(provider, finalUrl)
       eat(eatenValue)({
         type: 'iframe',
+        src: url,
         data: {
           hName: provider.tag,
           hProperties: {
@@ -68,6 +69,13 @@ module.exports = function plugin (opts) {
   const blockMethods = Parser.prototype.blockMethods
   blockTokenizers.iframes = blockTokenizer
   blockMethods.splice(blockMethods.indexOf('blockquote') + 1, 0, 'iframes')
+
+  const Compiler = this.Compiler
+  if (Compiler) {
+    const visitors = Compiler.prototype.visitors
+    if (!visitors) return
+    visitors.iframe = (node) => `!(${node.src})`
+  }
 }
 
 function computeFinalUrl (provider, url) {
@@ -104,7 +112,7 @@ function computeThumbnail (provider, url) {
     thumbnailURL = thumbnailConfig.format
     Object
       .keys(thumbnailConfig)
-      .filter(key => key !== 'format')
+      .filter((key) => key !== 'format')
       .forEach((key) => {
         const search = new RegExp(`{${key}}`, 'g')
         const replace = new RegExp(thumbnailConfig[key]).exec(url)

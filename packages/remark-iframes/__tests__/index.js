@@ -3,6 +3,7 @@ import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
+import remarkStringify from 'remark-stringify'
 
 import plugin from '../src/'
 
@@ -14,6 +15,11 @@ const render = (text, config) => unified()
   .use(stringify)
   .processSync(text)
 
+const renderMarkdown = (text, config) => unified()
+  .use(reParse)
+  .use(remarkStringify)
+  .use(plugin, config)
+  .processSync(text)
 
 test('video', () => {
   const config = {
@@ -236,4 +242,68 @@ test('Errors with empty config', () => {
 test('Errors with invalid config', () => {
   const fail = () => render('', '')
   expect(fail).toThrowError(Error)
+})
+
+
+test('Compiles to Markdown', () => {
+  const config = {
+    'www.youtube.com': {
+      tag: 'iframe',
+      width: 560,
+      height: 315,
+      disabled: false,
+      replace: [
+        ['watch?v=', 'embed/'],
+        ['http://', 'https://'],
+      ],
+      removeAfter: '&',
+    },
+    'jsfiddle.net': {
+      tag: 'iframe',
+      width: 560,
+      height: 560,
+      disabled: true,
+      replace: [
+        ['http://', 'https://'],
+      ],
+      append: 'embedded/result,js,html,css/',
+      match: /https?:\/\/(www\.)?jsfiddle\.net\/([\w\d]+\/[\w\d]+\/\d+\/?|[\w\d]+\/\d+\/?|[\w\d]+\/?)$/,
+      thumbnail: {
+        format: 'http://www.unixstickers.com/image/data/stickers' +
+        '/jsfiddle/JSfiddle-blue-w-type.sh.png',
+      },
+    },
+  }
+  const txt = dedent`
+    Test compiles remark iframes
+    ============================
+
+    A [link with **bold**](http://example.com)
+
+    !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
+
+    These ones should not be allowed by config:
+
+    !(http://jsfiddle.net/Sandhose/BcKhe/1/)
+
+    !(http://jsfiddle.net/zgjhjv9j/)
+
+    !(http://jsfiddle.net/zgjhjv9j/1/)
+
+    !(http://jsfiddle.net/Sandhose/BcKhe/)
+
+    Hello !(this is a parenthesis) guys
+  `
+  const {contents} = renderMarkdown(txt, config)
+  expect(contents).toMatchSnapshot()
+
+  const recompiled = renderMarkdown(contents.replace(/&#x3A;/g, ':'), config).contents
+  expect(recompiled).toBe(contents)
+
+  config['jsfiddle.net'].disabled = false
+  const withJsFiddleActivated = renderMarkdown(txt, config).contents
+  expect(withJsFiddleActivated).toMatchSnapshot()
+
+  const recompiledWithJsFiddleActivated = renderMarkdown(withJsFiddleActivated.replace(/&#x3A;/g, ':'), config).contents
+  expect(recompiledWithJsFiddleActivated).toBe(withJsFiddleActivated)
 })

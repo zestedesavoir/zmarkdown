@@ -48,6 +48,7 @@ module.exports = function plugin(opts) {
       var thumbnail = computeThumbnail(provider, finalUrl);
       eat(eatenValue)({
         type: 'iframe',
+        src: url,
         data: {
           hName: provider.tag,
           hProperties: {
@@ -71,6 +72,15 @@ module.exports = function plugin(opts) {
   var blockMethods = Parser.prototype.blockMethods;
   blockTokenizers.iframes = blockTokenizer;
   blockMethods.splice(blockMethods.indexOf('blockquote') + 1, 0, 'iframes');
+
+  var Compiler = this.Compiler;
+  if (Compiler) {
+    var visitors = Compiler.prototype.visitors;
+    if (!visitors) return;
+    visitors.iframe = function (node) {
+      return '!(' + node.src + ')';
+    };
+  }
 };
 
 function computeFinalUrl(provider, url) {
