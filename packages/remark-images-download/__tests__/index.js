@@ -74,6 +74,16 @@ describe('mock server tests', () => {
     })
   })
 
+  test('does not create empty dest folder', () => {
+    const file = `foo`
+
+    const render = renderFactory()
+
+    return render(file).then(vfile => {
+      expect(vfile.data.imageDir).toBe(undefined)
+    })
+  })
+
   test('skips bigger images and reports', () => {
     const file = `![](http://localhost:27273/ok.png)`
     const html = `<p><img src="http://localhost:27273/ok.png"></p>`

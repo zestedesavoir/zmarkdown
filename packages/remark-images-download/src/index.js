@@ -6,6 +6,7 @@ const request = require('request')
 const shortid = require('shortid')
 const URL = require('url')
 const visit = require('unist-util-visit')
+const rimraf = require('rimraf')
 
 const noop = Promise.resolve()
 
@@ -70,12 +71,10 @@ function plugin ({
     // images are downloaded to destinationPath
     const destinationPath = path.join(downloadDestination, shortid.generate())
 
-    vfile.data.imageDir = destinationPath
-
     return mkdir(destinationPath)
       .then(() => {
         totalDownloadedSize = 0
-        const promises = [{offset: -1, promise: noop}]
+        const promises = []
 
         visit(tree, 'image', (node) => {
           const {url, position} = node
@@ -174,6 +173,16 @@ function plugin ({
 
           promises.push({offset: position.offset, promise: promise})
         })
+
+        if (!promises.length) {
+          return new Promise((resolve, reject) =>
+            rimraf(destinationPath, (err) => {
+              if (err) reject(err)
+              resolve()
+            }))
+        }
+
+        vfile.data.imageDir = destinationPath
 
         // Use offsets to ensure execution order
         // we don't want to download them in (possibly) random order.
