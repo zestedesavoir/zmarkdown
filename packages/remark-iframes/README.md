@@ -19,6 +19,7 @@ will yield:
 ```javascript
 interface iframe <: Node {
   type: "iframe";
+  url: string;
   provider: string;
   data: {
     hName: "iframe";
@@ -35,14 +36,6 @@ interface iframe <: Node {
 ```
 
 `provider` variable refers to the provider as configured in plugin options.
-
-If associated with rehype, it produces:
-
-
-```html
-<div class="some-class"><p>paragraph</p></div>
-<div class="some-other-class"><p>paragraph</p></div>
-```
 
 ## Installation
 
@@ -90,7 +83,6 @@ unified()
   .use(remark2rehype)
   .use(stringify)
 ```
-
 
 ## Configuration fields:
 
@@ -165,6 +157,14 @@ if you configured the plugin with:
     }
 }
 ```
+
+If associated with rehype, it produces:
+
+
+```html
+<iframe src="https://www.youtube.com/embed/8TQIvdFl4aU" width="560" height="315"></iframe>
+```
+
 
 otherwise it will just be a paragraph node
 
