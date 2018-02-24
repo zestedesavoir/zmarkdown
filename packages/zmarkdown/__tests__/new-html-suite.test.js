@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 const clone = require('clone')
+const dedent = require('dedent')
 
 const remarkConfig = clone(require('../config/remark'))
 const rebberConfig = clone(require('../config/rebber'))
@@ -125,5 +126,27 @@ describe('depth checks', () => {
     return expect(
       renderString(input).catch((err) => Promise.reject(err.message))
     ).rejects.toContain(`Markdown AST too complex: tree depth > ${maxNesting}`)
+  })
+})
+
+describe('tables', () => {
+  it(`with pipes in code in cells`, () => {
+    const input = dedent`
+      Titre 1 | Titre 2
+      --------|--------
+      \`ici ok\`| \`gauche | droite\`
+    `
+
+    return expect(renderString(input)).resolves.toContain('<td><code>gauche | droite</code></td>')
+  })
+
+  it(`with escaped pipes in code in cells`, () => {
+    const input = dedent`
+      Titre 1 | Titre 2
+      --------|--------
+      \`ici ok\`| \`gauche \| droite\`
+    `
+
+    return expect(renderString(input)).resolves.toContain('<td><code>gauche \\| droite</code></td>')
   })
 })
