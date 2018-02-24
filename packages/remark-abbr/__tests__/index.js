@@ -5,6 +5,7 @@ import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
 
 import remarkAbbr from '../src/'
+const remarkStringify = require('remark-stringify')
 
 const render = text => unified()
   .use(reParse)
@@ -12,6 +13,13 @@ const render = text => unified()
   .use(remark2rehype)
   .use(stringify)
   .processSync(text)
+
+const renderToMarkdown = (text, config) => unified()
+  .use(reParse)
+  .use(remarkStringify)
+  .use(remarkAbbr, config)
+  .processSync(text)
+
 
 it('renders references', () => {
   const {contents} = render(dedent`
@@ -80,4 +88,23 @@ it('no reference', () => {
   `)
 
   expect(contents).toMatchSnapshot()
+})
+
+test('compiles to markdown', () => {
+  const md = dedent`
+    *abbr* HTML
+    
+    > HTML inside quote
+    
+    *[abbr]: abbreviation
+    *[noabbr]: explanation that does not match
+    *[HTML]: HyperText Markup Language
+  `
+  const {contents} = renderToMarkdown(md)
+  expect(contents).toMatchSnapshot()
+
+  const contents1 = renderToMarkdown(md).contents
+  const contents2 = renderToMarkdown(contents1).contents
+
+  expect(contents1).toBe(contents2)
 })
