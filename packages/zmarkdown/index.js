@@ -98,14 +98,24 @@ const zmdParser = (config, target) => {
     .use(remarkSubSuper)
     .use(remarkTrailingSpaceHeading)
     .use(() => (tree, vfile) => {
+      /* extract some metadata for frontends */
+
       // if we don't have any headings, we add a flag to disable
       // the Table of Contents directly in the latex template
       vfile.data.disableToc = true
       visit(tree, 'heading', () => {
         vfile.data.disableToc = false
       })
+
+      // get a unique list of languages used in input
+      const languages = new Set()
+      visit(tree, 'code', (node) => {
+        if (node.lang) languages.add(node.lang)
+      })
+      vfile.data.languages = [...languages]
     })
     .use(() => (tree, vfile) => {
+      // limit AST depth to config.maxNesting
       visit(tree, 'root', (node) => {
         vfile.data.depth = getDepth(node) - 2
       })

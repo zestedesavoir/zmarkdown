@@ -1,4 +1,5 @@
 const clone = require('clone')
+const dedent = require('dedent')
 const a = require('axios')
 const fs = require('fs')
 
@@ -27,7 +28,7 @@ const rm = (dir, file) => new Promise((resolve, reject) =>
   }))
 
 describe('HTML endpoint', () => {
-  test('It should accept POSTed markdown', async () => {
+  it('accepts POSTed markdown', async () => {
     const response = await a.post(html, {md: '# foo', opts: {}})
 
     expect(response.status).toBe(200)
@@ -36,21 +37,21 @@ describe('HTML endpoint', () => {
     expect(metadata.disableToc).toBe(false)
   })
 
-  test('It should not disable TOC', async () => {
+  it('does not disable TOC', async () => {
     const response = await a.post(html, {md: '# foo', opts: {}})
 
     const [, {disableToc}] = response.data
     expect(disableToc).toBe(false)
   })
 
-  test('It should disable TOC', async () => {
+  it('disables TOC', async () => {
     const response = await a.post(html, {md: '*foo*', opts: {}})
 
     const [, {disableToc}] = response.data
     expect(disableToc).toBe(true)
   })
 
-  test('It should get ping as metadata', async () => {
+  it('gets ping as metadata', async () => {
     const response = await a.post(html, {md: 'waddup @Clem', opts: {}})
 
     const [rendered, metadata] = response.data
@@ -59,27 +60,46 @@ describe('HTML endpoint', () => {
     expect(metadata.ping).toEqual(['Clem'])
   })
 
-  test('It should disable ping', async () => {
+  it('disables ping', async () => {
     const response = await a.post(html, {md: 'waddup @Clem', opts: {disable_ping: true}})
 
     const [rendered, metadata] = response.data
     expect(rendered).not.toContain('class="ping"')
     expect(metadata.ping).toBe(undefined)
+    expect(metadata.languages).toEqual([])
   })
 
-  test('It only parses inline things', async () => {
+  it('only parses inline things', async () => {
     const response = await a.post(html, {
       md: '# foo\n```js\nwindow\n```',
       opts: {inline: true},
     })
 
-    const [rendered] = response.data
+    const [rendered, {languages}] = response.data
     expect(rendered).not.toContain('<h')
+    expect(languages).toEqual([])
+  })
+
+  it('extracts languages', async () => {
+    const response = await a.post(html, {
+      md: dedent`
+        \`\`\`js
+        \`\`\`
+        \`\`\`python
+        \`\`\`
+        \`\`\`java
+        \`\`\`
+      `,
+      opts: {},
+    })
+
+    const [, {languages}] = response.data
+    expect(languages).toEqual(['js', 'python', 'java'])
   })
 })
 
 describe('LaTeX endpoint', () => {
-  test('It should accept POSTed markdown', async () => {
+  it('accepts POSTed markdown', async () => {
     const response = await a.post(latex, {md: '# foo', opts: {}})
     expect(response.status).toBe(200)
 
@@ -88,21 +108,21 @@ describe('LaTeX endpoint', () => {
     expect(metadata.disableToc).toBe(false)
   })
 
-  test('It should not disable TOC', async () => {
+  it('does not disable TOC', async () => {
     const response = await a.post(latex, {md: '# foo', opts: {}})
 
     const [, {disableToc}] = response.data
     expect(disableToc).toBe(false)
   })
 
-  test('It should disable TOC', async () => {
+  it('disables TOC', async () => {
     const response = await a.post(latex, {md: '*foo*', opts: {}})
 
     const [, {disableToc}] = response.data
     expect(disableToc).toBe(true)
   })
 
-  test('It should not have pings', async () => {
+  it('does not have pings', async () => {
     const response = await a.post(latex, {md: 'waddup @Clem', opts: {}})
 
     const [rendered, metadata] = response.data
@@ -110,7 +130,7 @@ describe('LaTeX endpoint', () => {
     expect(metadata.ping).toBe(undefined)
   })
 
-  test('It should disable ping', async () => {
+  it('disables ping', async () => {
     const response = await a.post(latex, {md: 'waddup @Clem', opts: {disable_ping: true}})
 
     const [rendered, metadata] = response.data
@@ -118,7 +138,7 @@ describe('LaTeX endpoint', () => {
     expect(metadata.ping).toBe(undefined)
   })
 
-  test('It only parses inline things', async () => {
+  it('only parses inline things', async () => {
     const response = await a.post(latex, {
       md: '# foo\n```js\nwindow\n```',
       opts: {inline: true},
@@ -128,7 +148,7 @@ describe('LaTeX endpoint', () => {
     expect(rendered).not.toContain('<h')
   })
 
-  test('It downloads images', async () => {
+  it('downloads images', async () => {
     const destination = process.env.DEST || `${__dirname}/../public/`
     const response = await a.post(latex, {
       md: `![](${u('/static/img.png')})`,
@@ -147,7 +167,7 @@ describe('LaTeX endpoint', () => {
 })
 
 describe('Texfile endpoint', () => {
-  test('It should accept POSTed markdown', async () => {
+  it('accepts POSTed markdown', async () => {
     const response = await a.post(texfile, {md: '# foo', opts: texfileOpts})
     expect(response.status).toBe(200)
 
@@ -159,14 +179,14 @@ describe('Texfile endpoint', () => {
     expect(metadata).toEqual({})
   })
 
-  test('It should not return metadata', async () => {
+  it('does not return metadata', async () => {
     const response = await a.post(texfile, {md: '# foo', opts: texfileOpts})
 
     const [, metadata] = response.data
     expect(metadata).toEqual({})
   })
 
-  test('It should not have pings', async () => {
+  it('does not have pings', async () => {
     const response = await a.post(texfile, {md: 'waddup @Clem', opts: texfileOpts})
 
     const [rendered, metadata] = response.data
@@ -174,7 +194,7 @@ describe('Texfile endpoint', () => {
     expect(metadata.ping).toBe(undefined)
   })
 
-  test('It only parses inline things', async () => {
+  it('only parses inline things', async () => {
     const response = await a.post(texfile, {
       md: '# foo\n```js\nwindow\n```',
       opts: texfileOpts,
@@ -184,7 +204,7 @@ describe('Texfile endpoint', () => {
     expect(rendered).not.toContain('<h')
   })
 
-  test('It downloads images', async () => {
+  it('downloads images', async () => {
     const destination = process.env.DEST || `${__dirname}/../public/`
     const opts = clone(texfileOpts)
     opts.images_download_dir = destination
@@ -205,7 +225,7 @@ describe('Texfile endpoint', () => {
 
 
 describe('EPUB endpoint', () => {
-  test('It downloads images', async () => {
+  it('downloads images', async () => {
     const destination = process.env.DEST || `${__dirname}/../public/`
     const opts = clone(texfileOpts)
     opts.images_download_dir = destination
@@ -223,7 +243,7 @@ describe('EPUB endpoint', () => {
     return expect(rm(`${destination}/${dir}`, `${file}.${ext}`)).resolves.toBe('ok')
   })
 
-  test('It copies local images', async () => {
+  it('copies local images', async () => {
     const destination = process.env.DEST || `${__dirname}/../public/`
     const opts = clone(texfileOpts)
     opts.images_download_dir = destination
