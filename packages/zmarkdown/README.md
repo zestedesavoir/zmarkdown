@@ -69,6 +69,10 @@ Only `metadata` is described in the **Response** sections below.
   The list of nicknames returned by `remark-ping`. Can be used to send "ping" notifications to the corresponding users.
   Note: this is fully customizable, `remark-ping` can validate potential *ping*s by any means, including sending an HTTP request (we recommend `HEAD`) to a REST API to make sure this username actually exists.
 
+* `metadata.languages`, string[]
+
+  A list of unique languages used in GitHub Flavoured Markdown fences with a flag.
+
 ## `/latex` - Markdown to LaTeX
 
 ### Request
