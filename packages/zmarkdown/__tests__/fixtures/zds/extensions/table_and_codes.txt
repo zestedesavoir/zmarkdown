@@ -1,0 +1,8 @@
+Titre 1 | Titre 2
+--------|--------
+`ici ok`| `gauche | droite`
+
+
+Titre 1 | Titre 2
+--------|--------
+`ici ok`| `gauche \| droite`

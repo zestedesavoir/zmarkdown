@@ -844,7 +844,10 @@ describe('#zds', () => {
       const filepath = `${dir}/align.txt`
       return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
     })
-
+    it(`properly renders table_and_codes.txt`, () => {
+      const filepath = `${dir}/table_and_codes.txt`
+      return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
+    })
     it.skip(`properly renders comments_config.txt`, function () {
       const filepath = `${dir}/comments_config.txt`
       return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
