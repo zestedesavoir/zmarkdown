@@ -18,6 +18,19 @@ print('bla')
 </code></pre>"
 `;
 
+exports[`captions should break lists 1`] = `
+"<figure><blockquote>
+<ul>
+<li>Bar
+Source: fc2</li>
+</ul>
+<ul>
+<li>Baz
+* Baz</li>
+</ul>
+</blockquote><figcaption>fc3</figcaption></figure>"
+`;
+
 exports[`code 1`] = `
 "<h2>Code</h2>
 <p>Normal code</p>
