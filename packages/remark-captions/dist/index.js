@@ -21,27 +21,30 @@ function plugin(opts) {
   var Compiler = this.Compiler;
   if (Compiler) {
     var visitors = Compiler.prototype.visitors;
-    if (!visitors) {
-      return;
-    }
+    if (!visitors) return;
+
     visitors.figure = function (node) {
       var captionedNode = node.children[0];
       var captionNode = node.children[1];
       var captionedMarkdown = this.visit(captionedNode);
+
       // compile without taking care of the "figcaption" wrapper node
       var captionMarkdown = this.all(captionNode).join('');
       if (!(captionedNode.type in externalBlocks || captionedNode.type in internalBlocks)) {
         return captionedMarkdown;
       }
+
       var prefix = '';
       if (captionedNode.type in externalBlocks) {
-        prefix = externalBlocks[captionNode.type];
+        prefix = externalBlocks[captionedNode.type];
       } else if (captionedNode.type in internalBlocks) {
         prefix = internalBlocks[captionedNode.type];
       }
+
       return captionedMarkdown + '\n' + prefix + ' ' + captionMarkdown;
     };
   }
+
   return function transformer(tree) {
     Object.keys(internalBlocks).forEach(function (nodeType) {
       return visit(tree, nodeType, internLegendVisitor(internalBlocks));
@@ -60,9 +63,11 @@ function internLegendVisitor(internalBlocks) {
 
     // if the current node has some children, the legend is the last child.
     // if not, the legend is the last child of the parent node.
-    var lastP = node.children ? getLast(node.children) : parent;
+    var lastP = node.children ? getLastParagraph(node.children) : parent;
     // legend can only be in a paragraph.
-    if (!lastP || node.children && lastP.type !== 'paragraph' || !node.children && parent.type !== 'paragraph') return;
+    if (!lastP || node.children && lastP.type !== 'paragraph' || !node.children && parent.type !== 'paragraph') {
+      return;
+    }
 
     // find which child contains the last legend
     var legendChildIndex = -1;
@@ -71,7 +76,9 @@ function internLegendVisitor(internalBlocks) {
         legendChildIndex = index;
       }
     });
-    if (legendChildIndex === -1 || !node.children && legendChildIndex < index) return;
+    if (legendChildIndex === -1 || !node.children && legendChildIndex < index) {
+      return;
+    }
 
     // split the text node containing the last legend and find the line containing it
     var potentialLegendLines = lastP.children[legendChildIndex].value.split('\n');
@@ -127,6 +134,7 @@ function externLegendVisitorCreator(blocks) {
   return function (node, index, parent) {
     if (index >= parent.children.length - 1) return;
     if (parent.children[index + 1].type !== 'paragraph') return;
+
     var legendNode = parent.children[index + 1];
     var firstChild = legendNode.children[0];
     if (firstChild.type !== 'text' || !firstChild.value.startsWith(blocks[node.type])) return;
@@ -134,6 +142,7 @@ function externLegendVisitorCreator(blocks) {
     var legendNodes = [];
     var followingNodes = [];
     var firstTextLine = firstChild.value.replace(blocks[node.type], '').split('\n')[0];
+
     if (firstChild.value.includes('\n')) {
       followingNodes.push({ type: 'text',
         value: firstChild.value.replace(blocks[node.type], '').split('\n')[1] });
@@ -145,6 +154,7 @@ function externLegendVisitorCreator(blocks) {
 
     legendNode.children.forEach(function (node, index) {
       if (index === 0) return;
+
       if (node.type === 'text') {
         var keepInLegend = node.value.split('\n')[0];
         if (node.value.includes('\n')) {
@@ -171,9 +181,11 @@ function externLegendVisitorCreator(blocks) {
         hName: 'figure'
       }
     };
+
     node.type = figure.type;
     node.children = figure.children;
     node.data = figure.data;
+
     if (followingNodes.length) {
       parent.children.splice(index + 1, 1, { type: 'paragraph', children: followingNodes });
     } else {
@@ -182,10 +194,16 @@ function externLegendVisitorCreator(blocks) {
   };
 }
 
-function getLast(xs) {
+function getLastParagraph(xs, lastParagraph) {
   var len = xs.length;
   if (!len) return;
-  return xs[len - 1];
+
+  var last = xs[len - 1];
+  if (last.type === 'text') return lastParagraph;
+  if (!last.children || !last.children.length) return lastParagraph;
+
+  if (last.type === 'paragraph') return getLastParagraph(last.children, last);
+  return getLastParagraph(last.children, lastParagraph);
 }
 
 module.exports = plugin;

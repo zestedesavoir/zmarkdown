@@ -4,6 +4,7 @@ import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
 import remarkStringify from 'remark-stringify'
+
 import remarkCaptions from '../src/'
 import remarkGridTables from '../../remark-grid-tables/src'
 
@@ -190,6 +191,17 @@ test('quotation', () => {
   expect(contents).toMatchSnapshot()
 })
 
+test('captions should break lists', () => {
+  const {contents} = render(dedent`
+    > * Bar
+    Source: fc2
+
+    > * Baz
+    >     * Baz
+    Source: fc3
+  `.replace(/·/g, ' '))
+  expect(contents).toMatchSnapshot()
+})
 
 test('table', () => {
   const {contents} = render(dedent`
@@ -214,7 +226,6 @@ test('table', () => {
   expect(contents).toMatchSnapshot()
 })
 
-
 test('external legend: two legends', () => {
   const {contents} = render(dedent`
     head1| head2
@@ -225,7 +236,6 @@ test('external legend: two legends', () => {
   `)
   expect(contents).toMatchSnapshot()
 })
-
 
 test('internal legend: two legends', () => {
   const {contents} = render(dedent`
@@ -291,19 +301,18 @@ test('legend in paragraph', () => {
   expect(contents).toMatchSnapshot()
 })
 
-
 test('compiles to markdown when no caption', () => {
   const md = dedent`
     foo
-    
+
     ![](img)
     Figure: 1 this is parsed as legend
-    
+
     baz
-    
+
     ![](img)
     aFigure: 2 this is displayed as text
-    
+
     ![alt 2b](https://zestedesavoir.com/static/images/home-clem.4a2f792744c9.png)
     this is displayed as text
   `
@@ -320,32 +329,32 @@ test('compiles to markdown when at least 1 block caption', () => {
     foo
     ![](img)
     Figure: 3 this is a legend
-    
+
     ![](img)
     Figure: 4 this is a legend, remainder of the paragraph goes into
     the
     legend
-    
+
     Figure: 5 this is a text with and image
     ![](<title> img)
     in the middle
-    
+
     Figure: 6 displayed as text
     ![](img)
     Figure: 7 is a legend
-    
+
     ![](img)
     Figure: 8 is a legend.
-    
+
     Figure: 9 this is a text.
-    
+
     > My citation
     Source: first capt
     Source: last capt··
     2nd line
 
     noop
-    
+
     > foo
     > bar
     > baz
@@ -353,9 +362,9 @@ test('compiles to markdown when at least 1 block caption', () => {
     Source: **first**
     b*a*r
     Source: This is **the real** \`source\`
-    
+
     noop
-    
+
     > foo
     > bar
     > baz
@@ -363,7 +372,7 @@ test('compiles to markdown when at least 1 block caption', () => {
     Source: **first**
     b*a*r
     Source: This is **the real** \`source\`
-    
+
   `
   const {contents} = renderToMarkdown(md)
   expect(contents).toMatchSnapshot()
@@ -377,32 +386,32 @@ test('compiles to markdown when at least 1 block caption', () => {
 test('compiles to markdown when at least 1 innerLegend caption', () => {
   const md = dedent`
     ## Code
-    
+
     Normal code
-    
+
     \`\`\`python
     print('bla')
     \`\`\`
-    
+
     With Legend
-    
+
     \`\`\`python
     print('bla')
     \`\`\`
     Code: figcapt1
-    
+
     \`\`\`python
     print('bla')
     \`\`\`
     Code: figcapt1
     break
-    
+
     \`\`\`python
     print('bla')
     \`\`\`
     Code: figcapt1 *em* **strong \`code\`** end
     bla
-    
+
     \`\`\`python
     print('bla2')
     \`\`\`
