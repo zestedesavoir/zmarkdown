@@ -50,6 +50,10 @@ app.post('/html', controllerFactory(toHTML))
 app.post('/latex', controllerFactory(toLatex))
 app.post('/latex-document', controllerFactory(toLatexDocument))
 
+const munin = require('./munin')
+app.get('/munin/config/:plugin', munin('config'))
+app.get('/munin/:plugin', munin())
+
 app.get('/', (req, res) => {
   res.send('zmd is running\n')
 })
