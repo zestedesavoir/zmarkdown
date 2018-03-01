@@ -10,9 +10,8 @@ function controllerFactory (handler) {
   return (req, res) => {
     handler(req.body.md, req.body.opts, (err, result) => {
       if (err) {
-        Raven.captureException(err, {req})
-        console.error(err)
-        res.status(500).json(null)
+        Raven.captureException(err, {req, result})
+        res.status(500).json(result)
         return
       }
 
@@ -43,12 +42,10 @@ app.use(Raven.errorHandler())
 
 app.use('/static', express.static(path.join(__dirname, 'static')))
 
-app.use(bodyParser.json({limit: '5mb'}))
-
-app.post('/epub', controllerFactory(toEPUB))
-app.post('/html', controllerFactory(toHTML))
-app.post('/latex', controllerFactory(toLatex))
-app.post('/latex-document', controllerFactory(toLatexDocument))
+app.post('/epub', bodyParser.json({limit: '5mb'}), controllerFactory(toEPUB))
+app.post('/html', bodyParser.json({limit: '300kb'}), controllerFactory(toHTML))
+app.post('/latex', bodyParser.json({limit: '5mb'}), controllerFactory(toLatex))
+app.post('/latex-document', bodyParser.json({limit: '5mb'}), controllerFactory(toLatexDocument))
 
 const munin = require('./munin')
 app.get('/munin/config/:plugin', munin('config'))
