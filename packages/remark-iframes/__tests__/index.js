@@ -192,6 +192,7 @@ test('extra', () => {
         ['watch?v=', 'embed/'],
         ['http://', 'https://'],
       ],
+      ignoredQueryStrings: ['feature'],
       removeAfter: '&',
     },
     'jsfiddle.net': {
@@ -213,6 +214,8 @@ test('extra', () => {
     A [link with **bold**](http://example.com)
 
     !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
+    
+    !(https://www.youtube.com/watch?feature=embedded&v=BpJKvrjLUp0)
 
     These ones should not be allowed by config:
 

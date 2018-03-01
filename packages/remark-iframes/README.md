@@ -95,6 +95,7 @@ unified()
 - `removeFileName`: If set to `true`, removes the filename (i.e last fragment before query string) from url.
 - `match`: a regular expression passed to `String.prototype.test`, used to validate the url.
 - `thumbnail`: a way to retrieve a thumbnail. This param is an object with a `format` key of this type: `'http://url/{param1}/{param2}'` then you must provide all regexp to find the parameter in the url on the object.
+- `ignoredQueryStrings`: a way to remove some useless querystrings of the iframe src URL.
 
 ### Thumbnail construction
 

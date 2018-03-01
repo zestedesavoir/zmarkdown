@@ -216,6 +216,7 @@ const remarkConfig = {
         format: 'http://img.youtube.com/vi/{id}/0.jpg',
         id: '.+/(.+)$',
       },
+      ignoredQueryStrings: ['feature'],
       removeAfter: '&',
     },
     'youtube.com': {
@@ -231,6 +232,7 @@ const remarkConfig = {
         format: 'http://img.youtube.com/vi/{id}/0.jpg',
         id: '.+/(.+)$',
       },
+      ignoredQueryStrings: ['feature'],
       removeAfter: '&',
     },
     'youtu.be': {
@@ -246,6 +248,7 @@ const remarkConfig = {
         format: 'http://img.youtube.com/vi/{id}/0.jpg',
         id: '.+/(.+)$',
       },
+      ignoredQueryStrings: ['feature'],
       removeAfter: '&',
     },
     'www.ina.fr': {
