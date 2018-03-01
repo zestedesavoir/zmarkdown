@@ -1,5 +1,6 @@
 const URL = require('url')
 const urlParse = URL.parse
+const URLSearchParams = URL.URLSearchParams
 
 module.exports = function plugin (opts) {
   if (typeof opts !== 'object' || !Object.keys(opts).length) {
@@ -80,20 +81,26 @@ module.exports = function plugin (opts) {
 
 function computeFinalUrl (provider, url) {
   let finalUrl = url
-
+  let parsed = urlParse(finalUrl)
+  finalUrl = URL.format(parsed)
+  if (provider.ignoredQueryStrings && parsed.search) {
+    const search = new URLSearchParams(parsed.search)
+    provider.ignoredQueryStrings.forEach(ignored => search.delete(ignored))
+    parsed.search = search.toString()
+  }
+  finalUrl = URL.format(parsed)
   if (provider.replace && provider.replace.length) {
     provider.replace.forEach((rule) => {
       const [from, to] = rule
       if (from && to) finalUrl = finalUrl.replace(from, to)
+      parsed = urlParse(finalUrl)
     })
   }
 
   if (provider.removeFileName) {
-    const parsed = urlParse(finalUrl)
     parsed.pathname = parsed.pathname.substring(0, parsed.pathname.lastIndexOf('/'))
-    finalUrl = URL.format(parsed)
   }
-
+  finalUrl = URL.format(parsed)
   if (provider.append) {
     finalUrl += provider.append
   }

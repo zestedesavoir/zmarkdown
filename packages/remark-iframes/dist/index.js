@@ -6,6 +6,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var URL = require('url');
 var urlParse = URL.parse;
+var URLSearchParams = URL.URLSearchParams;
 
 module.exports = function plugin(opts) {
   if ((typeof opts === 'undefined' ? 'undefined' : _typeof(opts)) !== 'object' || !Object.keys(opts).length) {
@@ -85,7 +86,16 @@ module.exports = function plugin(opts) {
 
 function computeFinalUrl(provider, url) {
   var finalUrl = url;
-
+  var parsed = urlParse(finalUrl);
+  finalUrl = URL.format(parsed);
+  if (provider.ignoredQueryStrings && parsed.search) {
+    var search = new URLSearchParams(parsed.search);
+    provider.ignoredQueryStrings.forEach(function (ignored) {
+      return search.delete(ignored);
+    });
+    parsed.search = search.toString();
+  }
+  finalUrl = URL.format(parsed);
   if (provider.replace && provider.replace.length) {
     provider.replace.forEach(function (rule) {
       var _rule = _slicedToArray(rule, 2),
@@ -93,15 +103,14 @@ function computeFinalUrl(provider, url) {
           to = _rule[1];
 
       if (from && to) finalUrl = finalUrl.replace(from, to);
+      parsed = urlParse(finalUrl);
     });
   }
 
   if (provider.removeFileName) {
-    var parsed = urlParse(finalUrl);
     parsed.pathname = parsed.pathname.substring(0, parsed.pathname.lastIndexOf('/'));
-    finalUrl = URL.format(parsed);
   }
-
+  finalUrl = URL.format(parsed);
   if (provider.append) {
     finalUrl += provider.append;
   }
