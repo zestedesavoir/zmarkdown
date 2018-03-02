@@ -78,25 +78,27 @@ module.exports = function plugin (opts) {
 function computeFinalUrl (provider, url) {
   let finalUrl = url
   let parsed = parse(finalUrl)
-  finalUrl = format(parsed)
+
   if (provider.droppedQueryParameters && parsed.search) {
     const search = new URLSearchParams(parsed.search)
     provider.droppedQueryParameters.forEach(ignored => search.delete(ignored))
     parsed.search = search.toString()
+    finalUrl = format(parsed)
   }
-  finalUrl = format(parsed)
+
   if (provider.replace && provider.replace.length) {
     provider.replace.forEach((rule) => {
       const [from, to] = rule
       if (from && to) finalUrl = finalUrl.replace(from, to)
       parsed = parse(finalUrl)
     })
+    finalUrl = format(parsed)
   }
 
   if (provider.removeFileName) {
     parsed.pathname = parsed.pathname.substring(0, parsed.pathname.lastIndexOf('/'))
+    finalUrl = format(parsed)
   }
-  finalUrl = format(parsed)
 
   if (provider.removeAfter && finalUrl.includes(provider.removeAfter)) {
     finalUrl = finalUrl.substring(0, finalUrl.indexOf(provider.removeAfter))
@@ -110,7 +112,7 @@ function computeFinalUrl (provider, url) {
 }
 
 function computeThumbnail (provider, url) {
-  let thumbnailURL = 'default image'
+  let thumbnailURL = ''
   const thumbnailConfig = provider.thumbnail
   if (thumbnailConfig && thumbnailConfig.format) {
     thumbnailURL = thumbnailConfig.format
@@ -120,7 +122,7 @@ function computeThumbnail (provider, url) {
       .forEach((key) => {
         const search = new RegExp(`{${key}}`, 'g')
         const replace = new RegExp(thumbnailConfig[key]).exec(url)
-        if (replace.length) thumbnailURL = thumbnailURL.replace(search, replace[1])
+        if (replace) thumbnailURL = thumbnailURL.replace(search, replace[1])
       })
   }
   return thumbnailURL

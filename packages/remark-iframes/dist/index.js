@@ -86,15 +86,16 @@ module.exports = function plugin(opts) {
 function computeFinalUrl(provider, url) {
   var finalUrl = url;
   var parsed = parse(finalUrl);
-  finalUrl = format(parsed);
+
   if (provider.droppedQueryParameters && parsed.search) {
     var search = new URLSearchParams(parsed.search);
     provider.droppedQueryParameters.forEach(function (ignored) {
       return search.delete(ignored);
     });
     parsed.search = search.toString();
+    finalUrl = format(parsed);
   }
-  finalUrl = format(parsed);
+
   if (provider.replace && provider.replace.length) {
     provider.replace.forEach(function (rule) {
       var _rule = _slicedToArray(rule, 2),
@@ -104,12 +105,13 @@ function computeFinalUrl(provider, url) {
       if (from && to) finalUrl = finalUrl.replace(from, to);
       parsed = parse(finalUrl);
     });
+    finalUrl = format(parsed);
   }
 
   if (provider.removeFileName) {
     parsed.pathname = parsed.pathname.substring(0, parsed.pathname.lastIndexOf('/'));
+    finalUrl = format(parsed);
   }
-  finalUrl = format(parsed);
 
   if (provider.removeAfter && finalUrl.includes(provider.removeAfter)) {
     finalUrl = finalUrl.substring(0, finalUrl.indexOf(provider.removeAfter));
@@ -123,7 +125,7 @@ function computeFinalUrl(provider, url) {
 }
 
 function computeThumbnail(provider, url) {
-  var thumbnailURL = 'default image';
+  var thumbnailURL = '';
   var thumbnailConfig = provider.thumbnail;
   if (thumbnailConfig && thumbnailConfig.format) {
     thumbnailURL = thumbnailConfig.format;
@@ -132,7 +134,7 @@ function computeThumbnail(provider, url) {
     }).forEach(function (key) {
       var search = new RegExp('{' + key + '}', 'g');
       var replace = new RegExp(thumbnailConfig[key]).exec(url);
-      if (replace.length) thumbnailURL = thumbnailURL.replace(search, replace[1]);
+      if (replace) thumbnailURL = thumbnailURL.replace(search, replace[1]);
     });
   }
   return thumbnailURL;
