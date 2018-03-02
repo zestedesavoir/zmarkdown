@@ -30,17 +30,14 @@ module.exports = function plugin (opts) {
       (!provider || provider.disabled === true) ||
       (provider.match && provider.match instanceof RegExp && !provider.match.test(url))
     ) {
-      if (eatenValue.startsWith('!(http')) {
-        eat(eatenValue)({
-          type: 'paragraph',
-          children: [{
-            type: 'text',
-            value: eatenValue,
-          }],
-        })
-      } else {
-        return
-      }
+      if (!eatenValue.startsWith('!(http')) return
+      eat(eatenValue)({
+        type: 'paragraph',
+        children: [{
+          type: 'text',
+          value: eatenValue,
+        }],
+      })
     } else {
       const finalUrl = computeFinalUrl(provider, url)
       const thumbnail = computeThumbnail(provider, finalUrl)

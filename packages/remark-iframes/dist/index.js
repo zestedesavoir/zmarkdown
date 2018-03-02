@@ -33,17 +33,14 @@ module.exports = function plugin(opts) {
 
     var provider = extractProvider(url);
     if (!provider || provider.disabled === true || provider.match && provider.match instanceof RegExp && !provider.match.test(url)) {
-      if (eatenValue.startsWith('!(http')) {
-        eat(eatenValue)({
-          type: 'paragraph',
-          children: [{
-            type: 'text',
-            value: eatenValue
-          }]
-        });
-      } else {
-        return;
-      }
+      if (!eatenValue.startsWith('!(http')) return;
+      eat(eatenValue)({
+        type: 'paragraph',
+        children: [{
+          type: 'text',
+          value: eatenValue
+        }]
+      });
     } else {
       var finalUrl = computeFinalUrl(provider, url);
       var thumbnail = computeThumbnail(provider, finalUrl);
