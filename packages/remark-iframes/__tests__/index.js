@@ -95,7 +95,7 @@ test('video', () => {
       ],
       thumbnail: {
         format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/(.+)$',
+        id: '.+/x(.+)$',
       },
       removeAfter: '&',
     },
