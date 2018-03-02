@@ -56,6 +56,8 @@ exports[`extra 1`] = `
 
 exports[`video 1`] = `
 "<h1>Test video</h1>
+<p><a href=\\"https://www.youtube.com/watch?v=BpJKvrjLUp0\\">https://www.youtube.com/watch?v=BpJKvrjLUp0</a></p>
+<p>!<a href=\\"https://www.youtube.com/watch?v=BpJKvrjLUp0\\">https://www.youtube.com/watch?v=BpJKvrjLUp0</a></p>
 <iframe src=\\"https://www.youtube.com/embed/BpJKvrjLUp0\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>
 <iframe src=\\"https://www.dailymotion.com/embed/video/x2y6lhm\\" width=\\"480\\" height=\\"270\\" allowfullscreen frameborder=\\"0\\"></iframe>
 <iframe src=\\"https://player.vimeo.com/video/133693532\\" width=\\"500\\" height=\\"281\\" allowfullscreen frameborder=\\"0\\"></iframe>

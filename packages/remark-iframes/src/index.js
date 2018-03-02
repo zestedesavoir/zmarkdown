@@ -15,6 +15,9 @@ module.exports = function plugin (opts) {
   function blockTokenizer (eat, value, silent) {
     let eatenValue = ''
     let url = ''
+    if (!value.startsWith('!(')) {
+      return false
+    }
     for (let i = 0; i < value.length && value[i - 1] !== ')'; i++) {
       eatenValue += value[i]
       if (value[i] !== '!' && value[i] !== '(' && value[i] !== ')') {
