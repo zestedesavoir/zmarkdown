@@ -78,51 +78,51 @@ const remarkConfig = {
 
   customBlocks: {
     secret: {
-      classes: 'custom-block-spoiler',
+      classes: 'custom-block-spoiler ico-after',
       title: 'optional',
     },
     s: {
-      classes: 'custom-block-spoiler',
+      classes: 'custom-block-spoiler ico-after',
       title: 'optional',
     },
     information: {
-      classes: 'custom-block-information',
+      classes: 'custom-block-information ico-after',
       title: 'optional',
     },
     i: {
-      classes: 'custom-block-information',
+      classes: 'custom-block-information ico-after',
       title: 'optional',
     },
     question: {
-      classes: 'custom-block-question',
+      classes: 'custom-block-question ico-after',
       title: 'optional',
     },
     q: {
-      classes: 'custom-block-question',
+      classes: 'custom-block-question ico-after',
       title: 'optional',
     },
     attention: {
-      classes: 'custom-block-warning',
+      classes: 'custom-block-warning ico-after',
       title: 'optional',
     },
     a: {
-      classes: 'custom-block-warning',
+      classes: 'custom-block-warning ico-after',
       title: 'optional',
     },
     erreur: {
-      classes: 'custom-block-error',
+      classes: 'custom-block-error ico-after',
       title: 'optional',
     },
     e: {
-      classes: 'custom-block-error',
+      classes: 'custom-block-error ico-after',
       title: 'optional',
     },
     neutre: {
-      classes: 'custom-block-neutral',
+      classes: 'custom-block-neutral ico-after',
       title: 'required',
     },
     n: {
-      classes: 'custom-block-neutral',
+      classes: 'custom-block-neutral ico-after',
       title: 'required',
     },
   },
