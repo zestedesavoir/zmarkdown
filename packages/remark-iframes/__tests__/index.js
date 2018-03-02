@@ -145,7 +145,11 @@ test('video', () => {
   const {contents} = render(dedent`
     Test video
     ==========
-
+    
+    https://www.youtube.com/watch?v=BpJKvrjLUp0
+    
+    !https://www.youtube.com/watch?v=BpJKvrjLUp0
+    
     !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
 
     !(https://www.dailymotion.com/video/x2y6lhm)
