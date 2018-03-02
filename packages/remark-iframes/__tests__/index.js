@@ -143,9 +143,6 @@ test('video', () => {
   }
 
   const {contents} = render(dedent`
-    Test video
-    ==========
-
     !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
 
     !(https://www.dailymotion.com/video/x2y6lhm)
@@ -170,7 +167,7 @@ test('video', () => {
 
     !(http://www.ina.fr/video/MAN9062216517/)
 
-    This one should not be allowed:
+    Not parsed:
 
     !(http://jsfiddle.net/Sandhose/BcKhe/)
 
@@ -192,7 +189,7 @@ test('extra', () => {
         ['watch?v=', 'embed/'],
         ['http://', 'https://'],
       ],
-      ignoredQueryStrings: ['feature'],
+      droppedQueryParameters: ['feature'],
       removeAfter: '&',
     },
     'jsfiddle.net': {
@@ -207,18 +204,14 @@ test('extra', () => {
     },
   }
 
-  const {contents} = render(dedent`
-    Test video extra
-    ================
-
-    A [link with **bold**](http://example.com)
-
+  const {contents: parsed} = render(dedent`
     !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
-    
+
     !(https://www.youtube.com/watch?feature=embedded&v=BpJKvrjLUp0)
+  `, config)
+  expect(parsed).toMatch(/iframe.*iframe/)
 
-    These ones should not be allowed by config:
-
+  const {contents: notParsed} = render(dedent`
     !(http://jsfiddle.net/Sandhose/BcKhe/1/)
 
     !(http://jsfiddle.net/zgjhjv9j/)
@@ -226,6 +219,30 @@ test('extra', () => {
     !(http://jsfiddle.net/zgjhjv9j/1/)
 
     !(http://jsfiddle.net/Sandhose/BcKhe/)
+  `, config)
+  expect(notParsed).not.toMatch('iframe')
+})
+
+test('does not parse without markers', () => {
+  const config = {
+    'www.youtube.com': {
+      tag: 'iframe',
+      width: 560,
+      height: 315,
+      disabled: false,
+      replace: [
+        ['watch?v=', 'embed/'],
+        ['http://', 'https://'],
+      ],
+      droppedQueryParameters: ['feature'],
+      removeAfter: '&',
+    },
+  }
+
+  const {contents} = render(dedent`
+    !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
+
+    https://www.youtube.com/watch?v=BpJKvrjLUp0
   `, config)
 
   expect(contents).toMatchSnapshot()
@@ -278,9 +295,6 @@ test('Compiles to Markdown', () => {
     },
   }
   const txt = dedent`
-    Test compiles remark iframes
-    ============================
-
     A [link with **bold**](http://example.com)
 
     !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
@@ -295,7 +309,7 @@ test('Compiles to Markdown', () => {
 
     !(http://jsfiddle.net/Sandhose/BcKhe/)
 
-    Hello !(this is a parenthesis) guys
+    Foo !(this is a parenthesis) bar
   `
   const {contents} = renderMarkdown(txt, config)
   expect(contents).toMatchSnapshot()
