@@ -9,7 +9,10 @@ import plugin from '../src/'
 
 const mockUsernames = [
   'I AM CLEM',
-  'dqsjdjsq',
+  'qux',
+  'foo',
+  'bar',
+  'baz baz',
 ]
 
 function pingUsername (username) {
@@ -41,16 +44,15 @@ const toMarkdown = text => unified()
 
 const fixtures = [
   dedent`
-    Test ping
-    =========
-
     ping @Clem
 
     ping @**FOO BAR**
 
-    no ping @dqsjdjsqjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd
+    no ping @quxjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd
 
     no ping @**I AM CLEM**
+
+    @**baz baz**
   `,
   dedent`
     ## Test ping @**I AM CLEM**
@@ -65,15 +67,22 @@ const fixtures = [
 
     > no metadata output @**I AM CLEM**
   `,
+  dedent`
+    @foo @bar
+
+    @baz baz
+
+    > @**baz baz**
+  `,
 ]
 
 const outputs = [
   dedent`
-    <h1>Test ping</h1>
     <p>ping @Clem</p>
     <p>ping @<strong>FOO BAR</strong></p>
-    <p>no ping @dqsjdjsqjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd</p>
+    <p>no ping @quxjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd</p>
     <p>no ping <a href="/membres/voir/I AM CLEM/" class="ping" rel="nofollow">I AM CLEM</a></p>
+    <p><a href="/membres/voir/baz baz/" class="ping" rel="nofollow">baz baz</a></p>
   `,
   dedent`
     <h2>\
@@ -109,18 +118,25 @@ const outputs = [
     </p>
     </blockquote>
   `,
+  '<p><a href="/membres/voir/foo/" class="ping" rel="nofollow">foo</a> ' +
+  '<a href="/membres/voir/bar/" class="ping" rel="nofollow">bar</a></p>\n' +
+  '<p>@baz baz</p>\n' +
+  '<blockquote>\n' +
+  '<p><a href="/membres/voir/baz baz/" class="ping" rel="nofollow">baz baz</a></p>\n' +
+  '</blockquote>',
 ]
 
 const pings = [
-  ['I AM CLEM'],
+  ['I AM CLEM', 'baz baz'],
   ['I AM CLEM', 'I AM CLEM', 'I AM CLEM'],
+  ['foo', 'bar'],
 ]
 
 
 fixtures.forEach((fixture, i) => {
   describe(`fixture suite ${i}`, () => {
     test('parses', () => {
-      expect(remark(fixture)).toMatchSnapshot()
+      expect(remark(fixture)).toMatchSnapshot(`f${i}`)
     })
 
     test('sets ping data on vfile', () => {
@@ -136,7 +152,7 @@ fixtures.forEach((fixture, i) => {
     })
 
     test('compiles to Markdown', () => {
-      expect(toMarkdown(fixture)).toMatchSnapshot()
+      expect(toMarkdown(fixture)).toMatchSnapshot(`m${i}`)
     })
   })
 })

@@ -8,7 +8,7 @@ module.exports = function plugin(_ref) {
   var pingUsername = _ref.pingUsername,
       userURL = _ref.userURL,
       _ref$usernameRegex = _ref.usernameRegex,
-      usernameRegex = _ref$usernameRegex === undefined ? /[\s'"(,:<]?@(?:\*\*([^*]+)\*\*|(\w+))/ : _ref$usernameRegex;
+      usernameRegex = _ref$usernameRegex === undefined ? /@(?:\*\*([^*]+)\*\*|(\w+))/ : _ref$usernameRegex;
 
   if (typeof pingUsername !== 'function' || typeof userURL !== 'function') {
     throw new Error(helpMsg);
@@ -73,6 +73,9 @@ module.exports = function plugin(_ref) {
   if (Compiler) {
     var visitors = Compiler.prototype.visitors;
     visitors.ping = function (node) {
+      if (!node.username.includes(' ')) {
+        return '@' + node.username;
+      }
       return '@**' + node.username + '**';
     };
   }

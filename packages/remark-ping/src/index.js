@@ -6,7 +6,7 @@ const helpMsg = `remark-ping: expected configuration to be passed: {
 module.exports = function plugin ({
   pingUsername,
   userURL,
-  usernameRegex = /[\s'"(,:<]?@(?:\*\*([^*]+)\*\*|(\w+))/,
+  usernameRegex = /@(?:\*\*([^*]+)\*\*|(\w+))/,
 }) {
   if (typeof pingUsername !== 'function' || typeof userURL !== 'function') {
     throw new Error(helpMsg)
@@ -70,7 +70,12 @@ module.exports = function plugin ({
   // Stringify
   if (Compiler) {
     const visitors = Compiler.prototype.visitors
-    visitors.ping = (node) => `@**${node.username}**`
+    visitors.ping = (node) => {
+      if (!node.username.includes(' ')) {
+        return `@${node.username}`
+      }
+      return `@**${node.username}**`
+    }
   }
 
   return (tree, file) => {
