@@ -20,7 +20,7 @@ before_install:
   - npm install -g pm2
 
 before_script:
-  - pm2 start packages/zmarkdown/server/index.js -i 3
+  - pm2 ping
 
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
