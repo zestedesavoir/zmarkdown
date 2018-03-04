@@ -77,8 +77,7 @@
     "axios": "^0.18.0",
     "clone": "^2.1.1",
     "eslint": "^4.5.0",
-    "html-differ": "^1.3.4",
-    "pm2": "^2.6.1"
+    "html-differ": "^1.3.4"
   },
   "scripts": {
     "lint": "eslint .",
@@ -86,7 +85,6 @@
     "test": "jest",
     "posttest": "npm run stop",
     "watch": "jest --watch",
-    "test-travis": "jest --coverage",
     "server": "pm2 start -f server/index.js -i 3 --max-memory-restart 150M",
     "stop": "pm2 kill"
   },
