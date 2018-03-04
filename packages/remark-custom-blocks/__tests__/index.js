@@ -139,6 +139,17 @@ test('title is optional', () => {
   expect(contents).toMatchSnapshot()
 })
 
+test('Errors without config', () => {
+  const fail = () => unified()
+    .use(reParse)
+    .use(remark2rehype)
+    .use(plugin)
+    .use(stringify)
+    .processSync('')
+
+  expect(fail).toThrowError(Error)
+})
+
 test('regression 1', () => {
   const {contents} = render(dedent`
     content before
@@ -149,13 +160,10 @@ test('regression 1', () => {
   expect(contents).toMatchSnapshot()
 })
 
-test('Errors without config', () => {
-  const fail = () => unified()
-    .use(reParse)
-    .use(remark2rehype)
-    .use(plugin)
-    .use(stringify)
-    .processSync('')
-
-  expect(fail).toThrowError(Error)
+test('regression 2', () => {
+  const {contents} = render(dedent`
+    [[information]][titre]
+    | test
+  `)
+  expect(contents).toMatchSnapshot()
 })

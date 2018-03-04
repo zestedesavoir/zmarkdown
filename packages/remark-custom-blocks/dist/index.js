@@ -22,7 +22,7 @@ module.exports = function blockPlugin() {
     throw new Error('remark-custom-blocks needs to be passed a configuration object as option');
   }
 
-  var regex = new RegExp('\\[\\[(' + pattern + ')(?: *\\| *(.*))?\\]\\]');
+  var regex = new RegExp('\\[\\[(' + pattern + ')(?: *\\| *(.*))?\\]\\]\n');
 
   function blockTokenizer(eat, value, silent) {
     var now = eat.now();
@@ -57,7 +57,8 @@ module.exports = function blockPlugin() {
     }
 
     var contentString = content.join(C_NEWLINE);
-    var stringToEat = eaten + C_NEWLINE + linesToEat.join(C_NEWLINE);
+
+    var stringToEat = eaten + linesToEat.join(C_NEWLINE);
 
     var potentialBlock = availableBlocks[blockType];
     var titleAllowed = potentialBlock.title && ['optional', 'required'].includes(potentialBlock.title);
@@ -65,6 +66,7 @@ module.exports = function blockPlugin() {
 
     if (titleRequired && !blockTitle) return;
     if (!titleAllowed && blockTitle) return;
+
     var add = eat(stringToEat);
 
     var exit = this.enterBlock();

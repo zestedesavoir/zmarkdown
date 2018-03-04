@@ -37,6 +37,11 @@ exports[`regression 1 1`] = `
 <p>with content after</p>"
 `;
 
+exports[`regression 2 1`] = `
+"<p><a href=\\"\\">[information]</a>
+| test</p>"
+`;
+
 exports[`title is optional 1`] = `
 "<div class=\\"custom-block neutral foo\\"><div class=\\"custom-block-body\\"><p>yes</p></div></div>
 <div class=\\"custom-block neutral foo\\"><div class=\\"custom-block-heading\\">my tïtle</div><div class=\\"custom-block-body\\"><p>yes</p></div></div>"

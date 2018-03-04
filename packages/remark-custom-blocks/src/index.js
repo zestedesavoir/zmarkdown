@@ -17,7 +17,7 @@ module.exports = function blockPlugin (availableBlocks = {}) {
     throw new Error('remark-custom-blocks needs to be passed a configuration object as option')
   }
 
-  const regex = new RegExp(`\\[\\[(${pattern})(?: *\\| *(.*))?\\]\\]`)
+  const regex = new RegExp(`\\[\\[(${pattern})(?: *\\| *(.*))?\\]\\]\n`)
 
   function blockTokenizer (eat, value, silent) {
     const now = eat.now()
@@ -46,7 +46,8 @@ module.exports = function blockPlugin (availableBlocks = {}) {
     }
 
     const contentString = content.join(C_NEWLINE)
-    const stringToEat = eaten + C_NEWLINE + linesToEat.join(C_NEWLINE)
+
+    const stringToEat = eaten + linesToEat.join(C_NEWLINE)
 
     const potentialBlock = availableBlocks[blockType]
     const titleAllowed = potentialBlock.title &&
@@ -55,6 +56,7 @@ module.exports = function blockPlugin (availableBlocks = {}) {
 
     if (titleRequired && !blockTitle) return
     if (!titleAllowed && blockTitle) return
+
     const add = eat(stringToEat)
 
     const exit = this.enterBlock()
