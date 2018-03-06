@@ -96,6 +96,16 @@ describe('HTML endpoint', () => {
     const [, {languages}] = response.data
     expect(languages).toEqual(['js', 'python', 'java'])
   })
+
+  it('does not crash with an invalid align that looks like a comment', async () => {
+    const response = await a.post(html, {
+      md: '<-- x -->',
+      opts: {},
+    })
+
+    const rendered = response.data[0]
+    expect(rendered).toBe('<p>&#x3C;— x —></p>')
+  })
 })
 
 describe('LaTeX endpoint', () => {

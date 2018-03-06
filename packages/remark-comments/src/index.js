@@ -1,6 +1,5 @@
-const beginMarkerFactory = (marker = 'COMMENTS') => `<--${marker}`
-const endMarkerFactory = (marker = 'COMMENTS') => `${marker}-->`
-const SPACE = ' '
+const beginMarkerFactory = (marker = 'COMMENTS') => `<--${marker} `
+const endMarkerFactory = (marker = 'COMMENTS') => ` ${marker}-->`
 
 function plugin ({beginMarker = 'COMMENTS', endMarker = 'COMMENTS'} = {}) {
   beginMarker = beginMarkerFactory(beginMarker)
@@ -18,11 +17,11 @@ function plugin ({beginMarker = 'COMMENTS', endMarker = 'COMMENTS'} = {}) {
     /* istanbul ignore if - never used (yet) */
     if (silent) return true
 
-    const comment = value.substring(beginMarker.length + 1, keepEnd - 1)
-    return eat(beginMarker + SPACE + comment + SPACE + endMarker)({
+    const comment = value.substring(beginMarker.length, keepEnd)
+    return eat(beginMarker + comment + endMarker)({
       type: 'comments',
-      data: {comment},
       value: '',
+      data: {comment},
     })
   }
   inlineTokenizer.locator = locator
@@ -40,7 +39,7 @@ function plugin ({beginMarker = 'COMMENTS', endMarker = 'COMMENTS'} = {}) {
     const visitors = Compiler.prototype.visitors
     if (!visitors) return
     visitors.comments = (node) => {
-      return beginMarker + SPACE + node.data.comment + SPACE + endMarker
+      return beginMarker + node.data.comment + endMarker
     }
   }
 }

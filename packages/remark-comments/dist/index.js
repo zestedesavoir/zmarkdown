@@ -2,13 +2,12 @@
 
 var beginMarkerFactory = function beginMarkerFactory() {
   var marker = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'COMMENTS';
-  return '<--' + marker;
+  return '<--' + marker + ' ';
 };
 var endMarkerFactory = function endMarkerFactory() {
   var marker = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'COMMENTS';
-  return marker + '-->';
+  return ' ' + marker + '-->';
 };
-var SPACE = ' ';
 
 function plugin() {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -32,11 +31,11 @@ function plugin() {
     /* istanbul ignore if - never used (yet) */
     if (silent) return true;
 
-    var comment = value.substring(beginMarker.length + 1, keepEnd - 1);
-    return eat(beginMarker + SPACE + comment + SPACE + endMarker)({
+    var comment = value.substring(beginMarker.length, keepEnd);
+    return eat(beginMarker + comment + endMarker)({
       type: 'comments',
-      data: { comment: comment },
-      value: ''
+      value: '',
+      data: { comment: comment }
     });
   }
   inlineTokenizer.locator = locator;
@@ -54,7 +53,7 @@ function plugin() {
     var visitors = Compiler.prototype.visitors;
     if (!visitors) return;
     visitors.comments = function (node) {
-      return beginMarker + SPACE + node.data.comment + SPACE + endMarker;
+      return beginMarker + node.data.comment + endMarker;
     };
   }
 }

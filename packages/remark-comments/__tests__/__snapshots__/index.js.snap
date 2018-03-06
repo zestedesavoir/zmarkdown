@@ -1,24 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`comments 1`] = `
-"<h1>Test comments</h1>
-<p>Foobar</p>
+"<p>Foobar</p>
 <pre><code>Foo&#x3C;--COMMENTS I will not get removed because I am in a code block DEF COMMENTS-->bar
 </code></pre>
 <p>&#x3C;--COMMENTS Unfinished block won't get parsed either GHI</p>"
 `;
 
 exports[`comments custom different markers 1`] = `
-"<h1>Test comments</h1>
-<p>Foobar</p>
+"<p>Foobar</p>
 <pre><code>Foo&#x3C;--foo I will not get removed because I am in a code block bAR-->bar
 </code></pre>
 <p>&#x3C;--foo Unfinished block won't get parsed either</p>"
 `;
 
 exports[`comments custom same markers 1`] = `
-"<h1>Test comments</h1>
-<p>Foobar</p>
+"<p>Foobar</p>
 <pre><code>Foo&#x3C;--foo I will not get removed because I am in a code block foo-->bar
 </code></pre>
 <p>&#x3C;--foo Unfinished block won't get parsed either</p>"

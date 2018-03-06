@@ -22,9 +22,6 @@ test('comments', () => {
     .processSync(text)
 
   const {contents} = render(dedent`
-    Test comments
-    =============
-
     Foo<--COMMENTS I will be gone ABC COMMENTS-->bar
 
     \`\`\`
@@ -65,9 +62,6 @@ test('comments custom different markers', () => {
     .processSync(text)
 
   const {contents} = render(dedent`
-    Test comments
-    =============
-
     Foo<--foo I will be gone bAR-->bar
 
     \`\`\`
@@ -91,9 +85,6 @@ test('comments custom same markers', () => {
     .processSync(text)
 
   const {contents} = render(dedent`
-    Test comments
-    =============
-
     Foo<--foo I will be gone foo-->bar
 
     \`\`\`
