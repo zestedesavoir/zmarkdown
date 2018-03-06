@@ -1,6 +1,6 @@
 {
   "name": "remark-sub-super",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/sub-super",
     "type": "git"

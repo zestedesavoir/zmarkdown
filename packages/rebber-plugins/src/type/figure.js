@@ -17,7 +17,6 @@ const defaultMacros = {
     return `\\begin{codeBlock}${params}{${extra.language}}` +
             `\n${code}\n\\end{codeBlock}\n\n`
   },
-  table: (innerText) => innerText,
   image: (_, caption, extra) =>
     `\\begin{center}\n` +
     `\\includegraphics${extra.width ? `[${extra.width}]` : ''}{${extra.url}}\n` +
