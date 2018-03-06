@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`align 1`] = `
-"<h1>Test align</h1>
-<p>A simple paragraph</p>
+"<p>A simple paragraph</p>
 <div class=\\"align-center\\"><p>A centered paragraph</p></div>
 <p>a simple paragraph</p>
 <div class=\\"align-right\\"><p>A right aligned paragraph</p></div>
@@ -23,8 +22,7 @@ exports[`align 1`] = `
 `;
 
 exports[`align-custom-config 1`] = `
-"<h1>Test align</h1>
-<p>A simple paragraph</p>
+"<p>A simple paragraph</p>
 <div class=\\"custom-center\\"><p>A centered paragraph</p></div>
 <p>a simple paragraph</p>
 <div class=\\"custom-right\\"><p>A right aligned paragraph</p></div>
@@ -45,8 +43,7 @@ exports[`align-custom-config 1`] = `
 `;
 
 exports[`align-custom-config 2`] = `
-"<h1>Test align</h1>
-<p>A simple paragraph</p>
+"<p>A simple paragraph</p>
 <div class=\\"custom-center\\"><p>A centered paragraph</p></div>
 <p>a simple paragraph</p>
 <div class=\\"custom-right\\"><p>A right aligned paragraph</p></div>
@@ -148,4 +145,9 @@ exports[`right-no-start 1`] = `
 "<h1>title</h1>
 <p>foo -></p>
 <h1>title</h1>"
+`;
+
+exports[`should not crash on invalid align 1`] = `
+"&lt;- foo ->
+"
 `;

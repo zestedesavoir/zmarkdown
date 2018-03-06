@@ -22,9 +22,6 @@ const renderToMarkdown = (text, config) => unified()
 
 
 const alignFixture = dedent`
-  Test align
-  ==========
-
   A simple paragraph
 
   ->A centered paragraph<-
@@ -259,6 +256,20 @@ test('compiles to markdown', () => {
     # title
 
     foo ->
+  `
+  const {contents} = renderToMarkdown(md)
+  expect(contents).toMatchSnapshot()
+
+  const contents1 = renderToMarkdown(md).contents
+  const contents2 = renderToMarkdown(contents1).contents
+
+  expect(contents1).toBe(contents2)
+})
+
+
+test('should not crash on invalid align', () => {
+  const md = dedent`
+    <- foo ->
   `
   const {contents} = renderToMarkdown(md)
   expect(contents).toMatchSnapshot()

@@ -54,7 +54,26 @@ module.exports = function plugin (classNames = {}) {
       canEatLine = nextIndex !== -1
     }
 
+    let elementType = ''
+    let classes = ''
+    if (startMarker === '<-' && endMarker === '<-') {
+      elementType = 'leftAligned'
+      classes = classNames.left ? classNames.left : 'align-left'
+    }
+    if (startMarker === '->') {
+      if (endMarker === '<-') {
+        elementType = 'centerAligned'
+        classes = classNames.center ? classNames.center : 'align-center'
+      }
+      if (endMarker === '->') {
+        elementType = 'rightAligned'
+        classes = classNames.right ? classNames.right : 'align-right'
+      }
+    }
+
+    if (!elementType) return
     if (finishedBlocks.length === 0) return
+
     let stringToEat = ''
     const marker = finishedBlocks[0].substring(
       finishedBlocks[0].length - 2,
@@ -72,23 +91,6 @@ module.exports = function plugin (classNames = {}) {
     const exit = this.enterBlock()
     const values = this.tokenizeBlock(stringToEat, now)
     exit()
-
-    let elementType = ''
-    let classes = ''
-    if (startMarker === '<-' && endMarker === '<-') {
-      elementType = 'leftAligned'
-      classes = classNames.left ? classNames.left : 'align-left'
-    }
-    if (startMarker === '->') {
-      if (endMarker === '<-') {
-        elementType = 'centerAligned'
-        classes = classNames.center ? classNames.center : 'align-center'
-      }
-      if (endMarker === '->') {
-        elementType = 'rightAligned'
-        classes = classNames.right ? classNames.right : 'align-right'
-      }
-    }
 
     return add({
       type: elementType,

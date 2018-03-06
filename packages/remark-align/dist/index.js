@@ -59,22 +59,6 @@ module.exports = function plugin() {
       canEatLine = nextIndex !== -1;
     }
 
-    if (finishedBlocks.length === 0) return;
-    var stringToEat = '';
-    var marker = finishedBlocks[0].substring(finishedBlocks[0].length - 2, finishedBlocks[0].length);
-    var toEat = [];
-    for (var i = 0; i < finishedBlocks.length; ++i) {
-      var block = finishedBlocks[i];
-      if (marker !== block.substring(block.length - 2, block.length)) break;
-      toEat.push(block);
-      stringToEat += block.slice(2, -2) + C_NEWPARAGRAPH;
-    }
-
-    var add = eat(toEat.join(C_NEWLINE));
-    var exit = this.enterBlock();
-    var values = this.tokenizeBlock(stringToEat, now);
-    exit();
-
     var elementType = '';
     var classes = '';
     if (startMarker === '<-' && endMarker === '<-') {
@@ -91,6 +75,24 @@ module.exports = function plugin() {
         classes = classNames.right ? classNames.right : 'align-right';
       }
     }
+
+    if (!elementType) return;
+    if (finishedBlocks.length === 0) return;
+
+    var stringToEat = '';
+    var marker = finishedBlocks[0].substring(finishedBlocks[0].length - 2, finishedBlocks[0].length);
+    var toEat = [];
+    for (var i = 0; i < finishedBlocks.length; ++i) {
+      var block = finishedBlocks[i];
+      if (marker !== block.substring(block.length - 2, block.length)) break;
+      toEat.push(block);
+      stringToEat += block.slice(2, -2) + C_NEWPARAGRAPH;
+    }
+
+    var add = eat(toEat.join(C_NEWLINE));
+    var exit = this.enterBlock();
+    var values = this.tokenizeBlock(stringToEat, now);
+    exit();
 
     return add({
       type: elementType,
