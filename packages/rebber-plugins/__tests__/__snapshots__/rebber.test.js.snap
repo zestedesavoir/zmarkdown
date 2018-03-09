@@ -195,7 +195,29 @@ exports[`figure+caption 1`] = `
 a
 multiline
 quote
-\\\\end{Quotation}"
+\\\\end{Quotation}
+
+
+
+\\\\begin{longtabu}{|c|c|} \\\\hline
+Nom & Age \\\\\\\\ \\\\hline
+Fred & 39 \\\\\\\\ \\\\hline
+Sam & 38 \\\\\\\\ \\\\hline
+Alice & 35 \\\\\\\\ \\\\hline
+Mathilde & 35 \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|c|c|} \\\\hline
+Nom & Age \\\\\\\\ \\\\hline
+Fred & 39 \\\\\\\\ \\\\hline
+Sam & 38 \\\\\\\\ \\\\hline
+Alice & 35 \\\\\\\\ \\\\hline
+Mathilde & 35 \\\\\\\\ \\\\hline
+
+\\\\tableCaption{Coucou}
+\\\\end{longtabu}"
 `;
 
 exports[`footnotes 1`] = `
