@@ -20,9 +20,6 @@ var defaultMacros = {
     }
     return '\\begin{codeBlock}' + params + '{' + extra.language + '}' + ('\n' + _code + '\n\\end{codeBlock}\n\n');
   },
-  table: function table(innerText) {
-    return innerText;
-  },
   image: function image(_, caption, extra) {
     return '\\begin{center}\n' + ('\\includegraphics' + (extra.width ? '[' + extra.width + ']' : '') + '{' + extra.url + '}\n') + ('\\captionof{figure}{' + caption + '}\n') + '\\end{center}\n';
   }
