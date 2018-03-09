@@ -28,18 +28,30 @@ module.exports = function plugin(_ref) {
         type: 'ping',
         username: username,
         url: url,
-        children: [{
-          type: 'text',
-          value: username
-        }],
         data: {
           hName: 'a',
           hProperties: {
             href: url,
-            class: 'ping',
-            rel: 'nofollow'
+            rel: 'nofollow',
+            class: 'ping'
           }
-        }
+        },
+        children: [{
+          type: 'text',
+          value: '@'
+        }, {
+          type: 'emphasis',
+          data: {
+            hName: 'span',
+            hProperties: {
+              class: 'ping-username'
+            }
+          },
+          children: [{
+            type: 'text',
+            value: username
+          }]
+        }]
       });
     } else {
       return eat(total[0])({

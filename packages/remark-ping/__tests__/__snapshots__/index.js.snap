@@ -186,7 +186,22 @@ Object {
           "children": Array [
             Object {
               "type": "text",
-              "value": "I AM CLEM",
+              "value": "@",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "type": "text",
+                  "value": "I AM CLEM",
+                },
+              ],
+              "data": Object {
+                "hName": "span",
+                "hProperties": Object {
+                  "class": "ping-username",
+                },
+              },
+              "type": "emphasis",
             },
           ],
           "data": Object {
@@ -236,7 +251,22 @@ Object {
           "children": Array [
             Object {
               "type": "text",
-              "value": "baz baz",
+              "value": "@",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "type": "text",
+                  "value": "baz baz",
+                },
+              ],
+              "data": Object {
+                "hName": "span",
+                "hProperties": Object {
+                  "class": "ping-username",
+                },
+              },
+              "type": "emphasis",
             },
           ],
           "data": Object {
@@ -338,7 +368,22 @@ Object {
           "children": Array [
             Object {
               "type": "text",
-              "value": "I AM CLEM",
+              "value": "@",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "type": "text",
+                  "value": "I AM CLEM",
+                },
+              ],
+              "data": Object {
+                "hName": "span",
+                "hProperties": Object {
+                  "class": "ping-username",
+                },
+              },
+              "type": "emphasis",
             },
           ],
           "data": Object {
@@ -410,7 +455,22 @@ Object {
                   "children": Array [
                     Object {
                       "type": "text",
-                      "value": "I AM CLEM",
+                      "value": "@",
+                    },
+                    Object {
+                      "children": Array [
+                        Object {
+                          "type": "text",
+                          "value": "I AM CLEM",
+                        },
+                      ],
+                      "data": Object {
+                        "hName": "span",
+                        "hProperties": Object {
+                          "class": "ping-username",
+                        },
+                      },
+                      "type": "emphasis",
                     },
                   ],
                   "data": Object {
@@ -493,7 +553,22 @@ Object {
               "children": Array [
                 Object {
                   "type": "text",
-                  "value": "I AM CLEM",
+                  "value": "@",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "type": "text",
+                      "value": "I AM CLEM",
+                    },
+                  ],
+                  "data": Object {
+                    "hName": "span",
+                    "hProperties": Object {
+                      "class": "ping-username",
+                    },
+                  },
+                  "type": "emphasis",
                 },
               ],
               "data": Object {
@@ -579,7 +654,22 @@ Object {
           "children": Array [
             Object {
               "type": "text",
-              "value": "I AM CLEM",
+              "value": "@",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "type": "text",
+                  "value": "I AM CLEM",
+                },
+              ],
+              "data": Object {
+                "hName": "span",
+                "hProperties": Object {
+                  "class": "ping-username",
+                },
+              },
+              "type": "emphasis",
             },
           ],
           "data": Object {
@@ -648,7 +738,22 @@ Object {
               "children": Array [
                 Object {
                   "type": "text",
-                  "value": "I AM CLEM",
+                  "value": "@",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "type": "text",
+                      "value": "I AM CLEM",
+                    },
+                  ],
+                  "data": Object {
+                    "hName": "span",
+                    "hProperties": Object {
+                      "class": "ping-username",
+                    },
+                  },
+                  "type": "emphasis",
                 },
               ],
               "data": Object {
@@ -733,7 +838,22 @@ Object {
               "children": Array [
                 Object {
                   "type": "text",
-                  "value": "I AM CLEM",
+                  "value": "@",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "type": "text",
+                      "value": "I AM CLEM",
+                    },
+                  ],
+                  "data": Object {
+                    "hName": "span",
+                    "hProperties": Object {
+                      "class": "ping-username",
+                    },
+                  },
+                  "type": "emphasis",
                 },
               ],
               "data": Object {
@@ -828,7 +948,22 @@ Object {
           "children": Array [
             Object {
               "type": "text",
-              "value": "foo",
+              "value": "@",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "type": "text",
+                  "value": "foo",
+                },
+              ],
+              "data": Object {
+                "hName": "span",
+                "hProperties": Object {
+                  "class": "ping-username",
+                },
+              },
+              "type": "emphasis",
             },
           ],
           "data": Object {
@@ -877,7 +1012,22 @@ Object {
           "children": Array [
             Object {
               "type": "text",
-              "value": "bar",
+              "value": "@",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "type": "text",
+                  "value": "bar",
+                },
+              ],
+              "data": Object {
+                "hName": "span",
+                "hProperties": Object {
+                  "class": "ping-username",
+                },
+              },
+              "type": "emphasis",
             },
           ],
           "data": Object {
@@ -964,7 +1114,22 @@ Object {
               "children": Array [
                 Object {
                   "type": "text",
-                  "value": "baz baz",
+                  "value": "@",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "type": "text",
+                      "value": "baz baz",
+                    },
+                  ],
+                  "data": Object {
+                    "hName": "span",
+                    "hProperties": Object {
+                      "class": "ping-username",
+                    },
+                  },
+                  "type": "emphasis",
                 },
               ],
               "data": Object {
