@@ -1,12 +1,12 @@
 # remark-ping [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
-This plugin parses custom Markdown syntax such as `@someone` or `@**first last**` to create links such as `/member/profile/someone` to the corresponding user page if this user exists in your system.
+This plugin parses custom Markdown syntax such as `@someone` or `@**nick with spaces**` to create links such as `/member/profile/someone` to the corresponding user page if this user exists in your system.
 
 ## Default Syntax
 
 ```markdown
 @username
-@**first last**
+@**nick with spaces**
 ```
 
 ## AST (see [mdast][mdast] specification)
@@ -21,27 +21,20 @@ interface Ping <: Parent {
 }
 ```
 
-For example, the following markdown:
-
-`@someone`
-
-Yields:
-
-```javascript
-{
-  type: 'ping',
-  username: 'someone',
-  url: url,
-  children: [{
-    type: 'text',
-    value: 'someone'
-  }]
-}
-```
-
-## Rehype
+## rehype
 
 This plugin is compatible with [rehype][rehype]. `Ping` mdast nodes will become HTML links pointing to a customizable target, usually used to access a user profile.
+
+```md
+@foo
+```
+
+gives:
+
+```html
+<a href="/custom/link/foo/" rel="nofollow" class="ping">@<span class="ping-username">foo</a></span>
+```
+
 
 ## Installation
 

@@ -81,49 +81,42 @@ const outputs = [
     <p>ping @Clem</p>
     <p>ping @<strong>FOO BAR</strong></p>
     <p>no ping @quxjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd</p>
-    <p>no ping <a href="/membres/voir/I AM CLEM/" class="ping" rel="nofollow">I AM CLEM</a></p>
-    <p><a href="/membres/voir/baz baz/" class="ping" rel="nofollow">baz baz</a></p>
+    <p>no ping <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping">\
+    @<span class="ping-username">I AM CLEM</span></a></p>
+    <p><a href="/membres/voir/baz baz/" rel="nofollow" class="ping">\
+    @<span class="ping-username">baz baz</span></a></p>
   `,
   dedent`
-    <h2>\
-    Test ping \
-    <a href="/membres/voir/I AM CLEM/" class="ping" rel="nofollow">I AM CLEM</a>\
-    </h2>
+    <h2>Test ping <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping">\
+    @<span class="ping-username">I AM CLEM</span></a></h2>
     <blockquote>
     <blockquote>
-    <p>\
-    no metadata output \
-    <a href="/membres/voir/I AM CLEM/" class="ping" rel="nofollow">\
-    I AM CLEM\
-    </a>\
-    </p>
+    <p>no metadata output <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping">\
+    @<span class="ping-username">I AM CLEM</span></a></p>
     </blockquote>
-    <p>\
-    no metadata output \
-    <a href="/membres/voir/I AM CLEM/" class="ping" rel="nofollow">I AM CLEM</a>\
-    </p>
+    <p>no metadata output <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping">\
+    @<span class="ping-username">I AM CLEM</span></a></p>
     </blockquote>
-    <p>\
-    ping \
-    <a href="/membres/voir/I AM CLEM/" class="ping" rel="nofollow">I AM CLEM</a>\
-    </p>
-    <p>\
-    ping \
-    <em><a href="/membres/voir/I AM CLEM/" class="ping" rel="nofollow">I AM CLEM</a></em>\
-    </p>
+    <p>ping <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping">\
+    @<span class="ping-username">I AM CLEM</span></a></p>
+    <p>ping <em><a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping">\
+    @<span class="ping-username">I AM CLEM</span></a></em></p>
     <blockquote>
-    <p>\
-    no metadata output \
-    <a href="/membres/voir/I AM CLEM/" class="ping" rel="nofollow">I AM CLEM</a>\
-    </p>
+    <p>no metadata output <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping">\
+    @<span class="ping-username">I AM CLEM</span></a></p>
     </blockquote>
   `,
-  '<p><a href="/membres/voir/foo/" class="ping" rel="nofollow">foo</a> ' +
-  '<a href="/membres/voir/bar/" class="ping" rel="nofollow">bar</a></p>\n' +
-  '<p>@baz baz</p>\n' +
-  '<blockquote>\n' +
-  '<p><a href="/membres/voir/baz baz/" class="ping" rel="nofollow">baz baz</a></p>\n' +
-  '</blockquote>',
+  dedent `
+    <p><a href="/membres/voir/foo/" rel="nofollow" class="ping">\
+    @<span class="ping-username">foo</span></a> \
+    <a href="/membres/voir/bar/" rel="nofollow" class="ping">\
+    @<span class="ping-username">bar</span></a></p>
+    <p>@baz baz</p>
+    <blockquote>
+    <p><a href="/membres/voir/baz baz/" rel="nofollow" class="ping">\
+    @<span class="ping-username">baz baz</span></a></p>
+    </blockquote>
+  `,
 ]
 
 const pings = [
@@ -140,13 +133,13 @@ fixtures.forEach((fixture, i) => {
     })
 
     test('sets ping data on vfile', () => {
-      expect(
+      return expect(
         toHTML(fixture).then(vfile => vfile.data.ping)
       ).resolves.toEqual(pings[i])
     })
 
     test('compiles to HTML', () => {
-      expect(
+      return expect(
         toHTML(fixture).then(vfile => vfile.contents)
       ).resolves.toBe(outputs[i])
     })
