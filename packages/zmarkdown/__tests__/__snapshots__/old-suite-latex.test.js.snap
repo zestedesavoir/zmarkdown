@@ -4130,11 +4130,11 @@ exports[`#zds #extensions properly renders grid_tables.txt 1`] = `
 \\\\levelTwoTitle{Basic example}
 
 
-\\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
+\\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
 \\\\multicolumn{2}{|c|}{Table Headings} & Here \\\\\\\\ \\\\hline
 Sub & Headings & Too \\\\\\\\ \\\\hline
-\\\\multirow{2}{*}{cell \\\\par spans \\\\par rows} & \\\\multicolumn{2}{|c|}{column spanning} \\\\\\\\ \\\\hline
-normal & cell \\\\\\\\ \\\\hline
+\\\\multirow{2}{*}{cell \\\\par spans \\\\par rows} & \\\\multicolumn{2}{|c|}{column spanning} \\\\\\\\ \\\\cline{2-3}
+ & normal & cell \\\\\\\\ \\\\hline
 multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|c|}{cells can be \\\\par \\\\textit{formatted} \\\\par \\\\textbf{paragraphs}} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
@@ -4142,47 +4142,47 @@ multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|c|}{
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
 A & B & C \\\\\\\\ \\\\hline
-\\\\multirow{2}{*}{D} & \\\\multicolumn{2}{|c|}{E} \\\\\\\\ \\\\hline
-F & G \\\\\\\\ \\\\hline
+\\\\multirow{2}{*}{D} & \\\\multicolumn{2}{|c|}{E} \\\\\\\\ \\\\cline{2-3}
+ & F & G \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
-\\\\multirow{3}{*}{A} & \\\\multicolumn{2}{|c|}{B} \\\\\\\\ \\\\hline
-C & D \\\\\\\\ \\\\hline
-\\\\multicolumn{2}{|c|}{E} \\\\\\\\ \\\\hline
+\\\\multirow{3}{*}{A} & \\\\multicolumn{2}{|c|}{B} \\\\\\\\ \\\\cline{2-3}
+ & C & D \\\\\\\\ \\\\cline{2-3}
+ & \\\\multicolumn{2}{|c|}{E} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
 \\\\multicolumn{3}{|c|}{A} \\\\\\\\ \\\\hline
-\\\\multirow{2}{*}{B} & C & \\\\multirow{2}{*}{D} \\\\\\\\ \\\\hline
-E \\\\\\\\ \\\\hline
+\\\\multirow{2}{*}{B} & C & \\\\multirow{2}{*}{D} \\\\\\\\ \\\\cline{1-2}
+E &  \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
+\\\\multirow{4}{*}{C} & \\\\multirow{2}{*}{D} & E \\\\\\\\ \\\\cline{1-1}
+F &  \\\\\\\\ \\\\hline
+\\\\multirow{2}{*}{G} & H \\\\\\\\ \\\\cline{2-2}
+ & I \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
+A & \\\\multirow{2}{*}{B} & \\\\multirow{4}{*}{C} \\\\\\\\ \\\\cline{1-2}
+D &  \\\\\\\\ \\\\cline{1-2}
+E & \\\\multirow{2}{*}{F} &  \\\\\\\\ \\\\cline{1-2}
+G &  \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
-\\\\multirow{4}{*}{C} & \\\\multirow{2}{*}{D} & E \\\\\\\\ \\\\hline
-F \\\\\\\\ \\\\hline
-\\\\multirow{2}{*}{G} & H \\\\\\\\ \\\\hline
-I \\\\\\\\ \\\\hline
-\\\\end{longtabu}
-
-
-
-\\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
-A & \\\\multirow{2}{*}{B} & \\\\multirow{4}{*}{C} \\\\\\\\ \\\\hline
-D \\\\\\\\ \\\\hline
-E & \\\\multirow{2}{*}{F} \\\\\\\\ \\\\hline
-G \\\\\\\\ \\\\hline
-\\\\end{longtabu}
-
-
-
-\\\\begin{longtabu}{|p{\\\\linewidth / 5}|p{\\\\linewidth / 5}|p{\\\\linewidth / 5}|p{\\\\linewidth / 5}|p{\\\\linewidth / 5}|} \\\\hline
 A & B & C & D \\\\\\\\ \\\\hline
 \\\\multicolumn{2}{|c|}{E} & \\\\multicolumn{2}{|c|}{F} \\\\\\\\ \\\\hline
 \\\\multicolumn{4}{|c|}{G} \\\\\\\\ \\\\hline
@@ -4190,7 +4190,7 @@ A & B & C & D \\\\\\\\ \\\\hline
 
 
 
-\\\\begin{longtabu}{|p{\\\\linewidth / 5}|p{\\\\linewidth / 5}|p{\\\\linewidth / 5}|p{\\\\linewidth / 5}|p{\\\\linewidth / 5}|} \\\\hline
+\\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
 \\\\multicolumn{4}{|c|}{A} \\\\\\\\ \\\\hline
 \\\\multicolumn{2}{|c|}{B} & \\\\multicolumn{2}{|c|}{C} \\\\\\\\ \\\\hline
 D & E & F & G \\\\\\\\ \\\\hline
@@ -4199,28 +4199,28 @@ D & E & F & G \\\\\\\\ \\\\hline
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|} \\\\hline
-\\\\multirow{3}{*}{A} & \\\\multirow{2}{*}{B} & C & D & \\\\multirow{2}{*}{E} & \\\\multirow{3}{*}{F} \\\\\\\\ \\\\hline
-\\\\multicolumn{2}{|c|}{G} \\\\\\\\ \\\\hline
-\\\\multicolumn{4}{|c|}{H} \\\\\\\\ \\\\hline
+\\\\multirow{3}{*}{A} & \\\\multirow{2}{*}{B} & C & D & \\\\multirow{2}{*}{E} & \\\\multirow{3}{*}{F} \\\\\\\\ \\\\cline{1-5}
+\\\\multicolumn{2}{|c|}{G} &  \\\\\\\\ \\\\cline{1-5}
+\\\\multicolumn{4}{|c|}{H} &  \\\\\\\\ \\\\hline
 \\\\multicolumn{6}{|c|}{I} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
 
-\\\\begin{longtabu}{|p{\\\\linewidth / 2}|p{\\\\linewidth / 2}|} \\\\hline
+\\\\begin{longtabu}{|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|} \\\\hline
 A & \\\\multicolumn{6}{|c|}{B} \\\\\\\\ \\\\hline
-\\\\multirow{4}{*}{C} & \\\\multirow{4}{*}{\\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline \\\\par D & E & F & G \\\\\\\\ \\\\hline \\\\par \\\\multicolumn{4}{|c|}{H} \\\\\\\\ \\\\hline \\\\par \\\\end{longtabu}} \\\\\\\\ \\\\hline
- \\\\\\\\ \\\\hline
- \\\\\\\\ \\\\hline
- \\\\\\\\ \\\\hline
+\\\\multirow{4}{*}{C} & \\\\multirow{4}{*}{\\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\cline{1-1} \\\\par D & E & F & G \\\\\\\\ \\\\hline \\\\par \\\\multicolumn{4}{|c|}{H} \\\\\\\\ \\\\hline \\\\par \\\\end{longtabu}} \\\\\\\\ \\\\hline
+ &  &  &  &  &  \\\\\\\\ \\\\cline{1-1}
+ &  &  &  &  &  \\\\\\\\ \\\\cline{1-1}
+ &  &  &  &  &  \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
 
-\\\\begin{longtabu}{|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|p{\\\\linewidth / 102}|} \\\\hline
+\\\\begin{longtabu}{|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|} \\\\hline
 H & \\\\multicolumn{16}{|c|}{} & He \\\\\\\\ \\\\hline
-Li & Be & \\\\multirow{2}{*}{} & B & C & N & O & F & Ne \\\\\\\\ \\\\hline
-Na & Mg & Al & Si & P & S & Cl & Ar \\\\\\\\ \\\\hline
+Li & Be & \\\\multirow{2}{*}{} & B & C & N & O & F & Ne \\\\\\\\ \\\\cline{1-2} \\\\cline{13-18}
+Na & Mg &  &  &  &  &  &  &  &  &  &  & Al & Si & P & S & Cl & Ar \\\\\\\\ \\\\hline
 K & Ca & Sc & Ti & V & Cr & Mn & Fe & Co & Ni & Cu & Zn & Ga & Ge & As & Se & Br & Kr \\\\\\\\ \\\\hline
 Rb & Sr & Y & Zr & Nb & Mo & Tc & Ru & Rh & Pd & Ag & Cd & In & Sn & Sb & Te & I & Xe \\\\\\\\ \\\\hline
 Cs & Ba & LAN & Hf & Ta & W & Re & Os & Ir & Pt & Au & Hg & Tl & Pb & Bi & Po & At & Rn \\\\\\\\ \\\\hline
@@ -4275,7 +4275,7 @@ A & \\\\multicolumn{3}{|c|}{} \\\\\\\\ \\\\hline
 
 
 
-\\\\begin{longtabu}{|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|} \\\\hline
+\\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
 A & B & C & D \\\\\\\\ \\\\hline
 \\\\multicolumn{4}{|c|}{B | C} \\\\\\\\ \\\\hline
 D & E & F & G \\\\\\\\ \\\\hline
@@ -4283,7 +4283,7 @@ D & E & F & G \\\\\\\\ \\\\hline
 
 
 
-\\\\begin{longtabu}{|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|} \\\\hline
+\\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
 A & B & C & D \\\\\\\\ \\\\hline
 \\\\multicolumn{4}{|c|}{B  | C} \\\\\\\\ \\\\hline
 D & E & F & G \\\\\\\\ \\\\hline

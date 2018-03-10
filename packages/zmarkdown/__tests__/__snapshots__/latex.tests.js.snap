@@ -488,8 +488,8 @@ exports[`mix-3 1`] = `
 exports[`mix-4 1`] = `
 "\\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
 Sub & Headings & \\\\abbr{ABBR}{abbreviation} \\\\\\\\ \\\\hline
-\\\\multirow{2}{*}{cell \\\\par spans \\\\par rows} & \\\\multicolumn{2}{|c|}{column spanning} \\\\\\\\ \\\\hline
-normal & cell \\\\\\\\ \\\\hline
+\\\\multirow{2}{*}{cell \\\\par spans \\\\par rows} & \\\\multicolumn{2}{|c|}{column spanning} \\\\\\\\ \\\\cline{2-3}
+ & normal & cell \\\\\\\\ \\\\hline
 multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|c|}{cells can be \\\\par \\\\textit{formatted} \\\\par \\\\textbf{paragraphs}} \\\\\\\\ \\\\hline
 
 \\\\tableCaption{The new table \\\\abbr{ABBR}{abbreviation} \\\\textsuperscript{\\\\ref{footnote:1}} with \\\\keys{CTRL} + \\\\keys{S}}
