@@ -580,8 +580,8 @@ exports[`mix-3 1`] = `
 exports[`mix-4 1`] = `
 "\\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
 Sub & Headings & \\\\abbr{ABBR}{abbreviation} \\\\\\\\ \\\\hline
-\\\\multirow{2}{*}{cell \\\\par spans \\\\par rows} & \\\\multicolumn{2}{|c|}{column spanning} \\\\\\\\ \\\\hline
-normal & cell \\\\\\\\ \\\\hline
+\\\\multirow{2}{*}{cell \\\\par spans \\\\par rows} & \\\\multicolumn{2}{|c|}{column spanning} \\\\\\\\ \\\\cline{2-3}
+ & normal & cell \\\\\\\\ \\\\hline
 multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|c|}{cells can be \\\\par \\\\textit{formatted} \\\\par \\\\textbf{paragraphs}} \\\\\\\\ \\\\hline
 
 \\\\tableCaption{The new table \\\\abbr{ABBR}{abbreviation} \\\\textsuperscript{\\\\ref{footnote:foot}} with \\\\keys{CTRL} + \\\\keys{S}}
@@ -602,6 +602,110 @@ space & \\\\image{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg} \\\\\\\\
 title & code \\\\\\\\ \\\\hline
 inline & \\\\texttt{inline} br \\\\par \\\\texttt{inline} \\\\\\\\ \\\\hline
 block & \\\\ref{appendix-1} \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
+A & B & C \\\\\\\\ \\\\hline
+\\\\multirow{2}{*}{D} & \\\\multicolumn{2}{|c|}{E} \\\\\\\\ \\\\cline{2-3}
+ & F & G \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
+A & B & C & D \\\\\\\\ \\\\hline
+\\\\multirow{2}{*}{D} & \\\\multicolumn{2}{|c|}{E} &  \\\\\\\\ \\\\cline{2-4}
+ & F & \\\\multicolumn{2}{|c|}{G} \\\\\\\\ \\\\hline
+a & b & \\\\multirow{2}{*}{c   d \\\\par  \\\\par g} \\\\\\\\ \\\\cline{1-2}
+e & f &  &  \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
+\\\\multicolumn{2}{|c|}{Table Headings} & Here \\\\\\\\ \\\\hline
+Sub & Headings & Too \\\\\\\\ \\\\hline
+\\\\multirow{2}{*}{cell \\\\par spans \\\\par rows} & \\\\multicolumn{2}{|c|}{column spanning} \\\\\\\\ \\\\cline{2-3}
+ & normal & cell \\\\\\\\ \\\\hline
+multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|c|}{cells can be \\\\par \\\\textit{formatted} \\\\par \\\\textbf{paragraphs}} \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
+A & B & C \\\\\\\\ \\\\hline
+\\\\multirow{2}{*}{D} & \\\\multicolumn{2}{|c|}{E} \\\\\\\\ \\\\cline{2-3}
+ & F & G \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
+\\\\multirow{3}{*}{A} & \\\\multicolumn{2}{|c|}{B} \\\\\\\\ \\\\cline{2-3}
+ & C & D \\\\\\\\ \\\\cline{2-3}
+ & \\\\multicolumn{2}{|c|}{E} \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
+A & B & C & D \\\\\\\\ \\\\hline
+\\\\multicolumn{2}{|c|}{E} & \\\\multicolumn{2}{|c|}{F} \\\\\\\\ \\\\hline
+\\\\multicolumn{4}{|c|}{G} \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
+\\\\multicolumn{4}{|c|}{A} \\\\\\\\ \\\\hline
+\\\\multicolumn{2}{|c|}{B} & \\\\multicolumn{2}{|c|}{C} \\\\\\\\ \\\\hline
+D & E & F & G \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|} \\\\hline
+H & \\\\multicolumn{16}{|c|}{} & He \\\\\\\\ \\\\hline
+Li & Be & \\\\multirow{2}{*}{} & B & C & N & O & F & Ne \\\\\\\\ \\\\cline{1-2} \\\\cline{13-18}
+Na & Mg &  &  &  &  &  &  &  &  &  &  & Al & Si & P & S & Cl & Ar \\\\\\\\ \\\\hline
+K & Ca & Sc & Ti & V & Cr & Mn & Fe & Co & Ni & Cu & Zn & Ga & Ge & As & Se & Br & Kr \\\\\\\\ \\\\hline
+Rb & Sr & Y & Zr & Nb & Mo & Tc & Ru & Rh & Pd & Ag & Cd & In & Sn & Sb & Te & I & Xe \\\\\\\\ \\\\hline
+Cs & Ba & LAN & Hf & Ta & W & Re & Os & Ir & Pt & Au & Hg & Tl & Pb & Bi & Po & At & Rn \\\\\\\\ \\\\hline
+Fr & Ra & ACT & \\\\multicolumn{15}{|c|}{} \\\\\\\\ \\\\hline
+\\\\multicolumn{18}{|c|}{} \\\\\\\\ \\\\hline
+\\\\multicolumn{3}{|c|}{Lanthanide} & La & Ce & Pr & Nd & Pm & Sm & Eu & Gd & Tb & Dy & Ho & Er & Tm & Yb & Lu \\\\\\\\ \\\\hline
+\\\\multicolumn{3}{|c|}{Actinide} & Ac & Th & Pa & U & Np & Pu & Am & Cm & Bk & Cf & Es & Fm & Md & No & Lw \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+\\\\begin{longtabu}{|p{\\\\linewidth / 1}|} \\\\hline
+A \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+Text at the end
+
+
+
+\\\\begin{longtabu}{|p{\\\\linewidth / 1}|} \\\\hline
+A \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+
+Text at the
+
+
+
+\\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
+a & \\\\multirow{2}{*}{} &  \\\\\\\\ \\\\cline{1-1}
+b &  &  & c \\\\\\\\ \\\\hline
+
+\\\\tableCaption{multirow}
 \\\\end{longtabu}
 
 
