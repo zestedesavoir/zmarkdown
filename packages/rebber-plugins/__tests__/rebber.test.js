@@ -174,6 +174,18 @@ test('table', () => {
   expect(contents.trim()).toMatchSnapshot()
 })
 
+test('gridTable', () => {
+  const fixture = fixtures['gridTable']
+  const {contents} = unified()
+    .use(reParse)
+    .use(require('remark-captions/src'), {external: {gridTable: 'Table:', math: 'Equation'}})
+    .use(require('remark-grid-tables/src'))
+    .use(rebber, integrationConfig)
+    .processSync(fixture)
+
+  expect(contents.trim()).toMatchSnapshot()
+})
+
 test('blockquote', () => {
   const fixture = fixtures['blockquote']
   let compiled = unified()

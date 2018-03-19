@@ -1,8 +1,9 @@
 /* Dependencies. */
-const baseCell = require('rebber/dist/types/tableCell')
-const baseRow = require('rebber/dist/types/tableRow')
-const baseTable = require('rebber/dist/types/table')
 const clone = require('clone')
+
+const tableCell = require('rebber/dist/types/tableCell')
+const tableRow = require('rebber/dist/types/tableRow')
+const table = require('rebber/dist/types/table')
 
 /* Expose. */
 module.exports = gridTable
@@ -15,15 +16,16 @@ class MultiRowLine {
     this.colspan = colspan
     this.endOfLine = endOfLine
   }
+
   getCLine () {
     let startCLine = 1
     let endCLine = this.startCell - 1
-    // case were the multi row line is at the start of the table
+    // case where the multi row line is at the start of the table
     if (this.startCell === 1) {
       startCLine = this.startCell + this.colspan
       endCLine = this.endOfLine
-    } else if (this.startCell > 1 && this.startCell + this.colspan < this.endOfLine) {
-      // case were the multi row line is at the middle of the table
+    } else if (this.startCell > 1 && (this.startCell + this.colspan) < this.endOfLine) {
+      // case where the multi row line is in the middle of the table
       const clineBefore = `\\cline{1-${this.startCell - 1}}`
       const clineAfter = `\\cline{${this.startCell + this.colspan}-${this.endOfLine}}`
       return `${clineBefore} ${clineAfter}`
@@ -43,11 +45,12 @@ class GridTableStringifier {
     this.nbOfColumns = 0
   }
 
-  overriddenTableCell (ctx, node) {
+  gridTableCell (ctx, node) {
     const overriddenCtx = clone(ctx)
     this.colIndex++
     overriddenCtx.tableCell = undefined
-    let baseText = baseCell(overriddenCtx, node).trim().replace(/\n/g, ' \\par ')
+    let baseText = tableCell(overriddenCtx, node).trim().replace(/\n/g, ' \\par ')
+
     if (node.data && node.data.hProperties.rowspan > 1) {
       this.currentSpan = node.data.hProperties.rowspan
       this.multiLineCellIndex = this.colIndex
@@ -56,58 +59,62 @@ class GridTableStringifier {
     } else if (node.data && node.data.hProperties.colspan > 1) {
       baseText = `\\multicolumn{${node.data.hProperties.colspan}}{|c|}{${baseText}}`
     }
+
     if (node.data && node.data.hProperties.colspan > 1) {
       this.colIndex -= 1
       this.colIndex += node.data.hProperties.colspan
     }
+
     return baseText
   }
-  overrideRowParse (ctx, node) {
+
+  gridTableRow (ctx, node) {
     const overriddenCtx = clone(ctx)
     this.rowIndex++
     overriddenCtx.tableRow = undefined
     if (this.previousRowWasMulti()) {
       const lastMultiRowline = this.flushMultiRowLineIfNeeded()
-      const newNode = clone(node)
       for (let i = 0; i < lastMultiRowline.colspan; i++) {
-        newNode.children.splice(lastMultiRowline.startCell - 1, 0, {
+        node.children.splice(lastMultiRowline.startCell - 1, 0, {
           type: 'tableCell',
-          children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'text',
-                  value: ' ',
-                },
-              ],
-            },
-          ],
+          children: [{
+            type: 'paragraph',
+            children: [{
+              type: 'text',
+              value: ' ',
+            }],
+          }],
         })
       }
       this.colIndex = 0
-      let rowStr = baseRow(overriddenCtx, newNode)
+      let rowStr = tableRow(overriddenCtx, node)
       if (lastMultiRowline.multilineCounter > 0) {
         rowStr = rowStr.replace(/\\hline/, lastMultiRowline.getCLine())
       }
       this.colIndex = 0
       return rowStr
-    } else {
-      let rowText = baseRow(overriddenCtx, node)
-      if (this.currentSpan !== 0) {
-        this.lastMultiRowLine = new MultiRowLine(this.rowIndex,
-          this.rowIndex + this.currentSpan + (-1),
-          this.multiLineCellIndex, this.colIndex + this.colspan, this.colspan, this.colIndex)
-        rowText = rowText.replace(/\\hline/, this.lastMultiRowLine.getCLine())
-      }
-      this.currentSpan = 0
-      if (this.colIndex >= this.nbOfColumns) {
-        this.nbOfColumns = this.colIndex
-      }
-      this.colIndex = 0
-      return rowText
     }
+
+    let rowText = tableRow(overriddenCtx, node)
+    if (this.currentSpan !== 0) {
+      this.lastMultiRowLine = new MultiRowLine(
+        this.rowIndex,
+        this.rowIndex + this.currentSpan + (-1),
+        this.multiLineCellIndex,
+        this.colIndex + this.colspan,
+        this.colspan,
+        this.colIndex
+      )
+      rowText = rowText.replace(/\\hline/, this.lastMultiRowLine.getCLine())
+    }
+    this.currentSpan = 0
+    if (this.colIndex >= this.nbOfColumns) {
+      this.nbOfColumns = this.colIndex
+    }
+    this.colIndex = 0
+    return rowText
   }
+
   flushMultiRowLineIfNeeded () {
     if (!this.lastMultiRowLine) {
       return null
@@ -122,20 +129,22 @@ class GridTableStringifier {
     return row
   }
 
-  overriddenHeaderParse () {
+  gridTableHeaderParse () {
     const headers = `|p{\\linewidth / ${this.nbOfColumns}}`.repeat(this.nbOfColumns)
     return `${headers}|`
   }
+
   previousRowWasMulti () {
-    return this.lastMultiRowLine != null
+    return this.lastMultiRowLine !== null
   }
 }
+
 function gridTable (ctx, node) {
   const overriddenCtx = clone(ctx)
   const stringifier = new GridTableStringifier()
   overriddenCtx.break = () => ' \\par' // in gridtables '\\\\' won't work
-  overriddenCtx.tableCell = stringifier.overriddenTableCell.bind(stringifier)
-  overriddenCtx.tableRow = stringifier.overrideRowParse.bind(stringifier)
-  overriddenCtx.headerParse = stringifier.overriddenHeaderParse.bind(stringifier)
-  return baseTable(overriddenCtx, node)
+  overriddenCtx.tableCell = stringifier.gridTableCell.bind(stringifier)
+  overriddenCtx.tableRow = stringifier.gridTableRow.bind(stringifier)
+  overriddenCtx.headerParse = stringifier.gridTableHeaderParse.bind(stringifier)
+  return table(overriddenCtx, node)
 }
