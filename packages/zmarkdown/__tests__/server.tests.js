@@ -8,12 +8,13 @@ const epub = u('/epub')
 const html = u('/html')
 const latex = u('/latex')
 const texfile = u('/latex-document')
-
 const texfileOpts = {
   content_type: 'contentType',
   title: 'The Title',
   authors: ['FØØ', 'Bär'],
   license: 'CC-BY-NC-SA',
+  license_logo: 'by-nc-sa.svg',
+  license_url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode',
   license_directory: '/tmp/l',
   smileys_directory: '/tmp/s',
 }

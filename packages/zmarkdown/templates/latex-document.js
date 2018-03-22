@@ -5,6 +5,8 @@ const template = (opts, callback) => {
     disableToc = false,
     content_type: contentType,
     license_directory: licenseDirectory,
+    license_url: licenseUrl,
+    license_logo: licenseLogo,
     smileys_directory: smileysDirectory,
     title,
     authors,
@@ -16,20 +18,21 @@ const template = (opts, callback) => {
     assert(title, 'Error with argument: "title"')
     assert(Array.isArray(authors), 'Error with argument: "authors"')
     assert(license, 'Error with argument: "license"')
+    assert(licenseDirectory, 'Error with argument: "licenseDirectory"')
     assert(smileysDirectory, 'Error with argument: "smileysDirectory"')
     assert(latex, 'Error with argument: "latex"')
   } catch (err) {
     return callback(err)
   }
-  const shortLicenseName = license.toLowerCase().replace('cc-', '')
+  const logoPath = licenseLogo ? `${licenseDirectory}/${licenseLogo}` : ''
+  const licenseLine = `\\licence[${logoPath}]{${license}}{${licenseUrl || ''}}`
 
   return callback(null, `\\documentclass[${contentType}]{zmdocument}
 
 \\usepackage{blindtext}
 \\title{${title}}
 \\author{${authors.join(', ')}}
-\\licence[${licenseDirectory}/${shortLicenseName}.svg]{${license}}\
-{https://creativecommons.org/licenses/${shortLicenseName}/4.0/legalcode}
+${licenseLine}
 
 \\smileysPath{${smileysDirectory}}
 \\makeglossaries
