@@ -125,7 +125,8 @@ module.exports = function markdownHandlers (Raven) {
           remark.imagesDownload.downloadDestination = opts.images_download_dir
         }
         if (
-          Array.isArray(opts.local_url_to_local_path) && opts.local_url_to_local_path.length === 2
+          Array.isArray(opts.local_url_to_local_path) &&
+          opts.local_url_to_local_path.length === 2
         ) {
           remark.imagesDownload.localUrlToLocalPath = opts.local_url_to_local_path
         }
