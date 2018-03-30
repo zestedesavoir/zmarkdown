@@ -6,7 +6,7 @@ const visit = require('unist-util-visit')
 const dedent = require('dedent')
 const clone = require('clone')
 
-const fixSVGContent = require('./utils/svg-hack')
+const fixSVG = require('./utils/svg-hack')
 const createWrapper = require('./utils/wrappers')
 const remarkParse = require('remark-parse')
 
@@ -162,8 +162,7 @@ const postProcess = {
   html (vfile) {
     // SVG hack
     if (vfile.contents && vfile.contents.includes('<svg')) {
-      vfile.contents = vfile.contents
-        .replace(/<svg(.*)<\/svg>/g, fixSVGContent)
+      vfile.contents = fixSVG(vfile.contents)
     }
     return vfile
   },
