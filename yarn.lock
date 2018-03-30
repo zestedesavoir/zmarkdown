@@ -4921,7 +4921,7 @@ rehype-highlight@^2.0.1:
     lowlight "^1.2.0"
     unist-util-visit "^1.1.0"
 
-rehype-katex@^1.0.2:
+rehype-katex@^1.0.2, rehype-katex@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/rehype-katex/-/rehype-katex-1.1.0.tgz#37dc72be68d8b20cc130db4cbbb60c38321ae4cf"
   dependencies:
@@ -4956,7 +4956,7 @@ rehype-stringify@^3.0.0:
     hast-util-to-html "^3.0.0"
     xtend "^4.0.1"
 
-remark-math@^1.0.1:
+remark-math@^1.0.1, remark-math@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/remark-math/-/remark-math-1.0.3.tgz#e8cda5af8cd8a85fc7782ccbecf0261943c29b9a"
   dependencies:
@@ -5957,7 +5957,7 @@ unist-util-generated@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/unist-util-generated/-/unist-util-generated-1.1.1.tgz#99f16c78959ac854dee7c615c291924c8bf4de7f"
 
-unist-util-inspect@^4.1.1:
+unist-util-inspect@^4.1.1, unist-util-inspect@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/unist-util-inspect/-/unist-util-inspect-4.1.2.tgz#440520d0c7911f1a41eb5f568ef9b2efc3c29363"
   dependencies:

@@ -107,6 +107,17 @@ describe('HTML endpoint', () => {
     const rendered = response.data[0]
     expect(rendered).toBe('<p>&#x3C;— x —></p>')
   })
+
+  it('works with camelCase attributes', async () => {
+    const response = await a.post(html, {
+      md: '$$\\hat \\theta_{MC} = \\frac{\\sum_{i = 1}^n P(Y_i | X = 1)}{\\pi^3}$$',
+      opts: {},
+    })
+
+    const rendered = response.data[0]
+    expect(rendered).toContain('viewBox')
+    expect(rendered).toContain('preserveAspectRatio')
+  })
 })
 
 describe('LaTeX endpoint', () => {
