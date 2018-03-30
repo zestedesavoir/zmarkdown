@@ -31,8 +31,13 @@ const fixSVGAttribute = (match, kebabMatch) => {
   return kebabMatch
 }
 
-const fixSVGContent = (match, svgContent) => {
-  return svgContent.replace(kebabRegExp, fixSVGAttribute)
+const fixSVGContent = (match, svgContent, a, b, c, d) => {
+  const newContent = svgContent.replace(kebabRegExp, fixSVGAttribute)
+  return match.replace(svgContent, newContent)
 }
 
-module.exports = fixSVGContent
+const fixSVG = (content) => {
+  return content.replace(/<svg(.*)<\/svg>/, fixSVGContent)
+}
+
+module.exports = fixSVG
