@@ -1,6 +1,6 @@
-const camelToKebab = (match, l) => `-${l.toLowerCase()}`
-
-const svgTags = [ // complete list of camelCase attributes
+// complete list of camelCase attributes
+// https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute
+const camelAttributes = [
   'allowReorder', 'attributeName', 'attributeType', 'autoReverse',
   'baseFrequency', 'baseProfile', 'calcMode', 'clipPathUnits', 'contentScriptType',
   'contentStyleType', 'diffuseConstant', 'edgeMode', 'externalResourcesRequired',
@@ -14,17 +14,21 @@ const svgTags = [ // complete list of camelCase attributes
   'spreadMethod', 'startOffset', 'stdDeviation', 'stitchTiles', 'surfaceScale',
   'systemLanguage', 'tableValues', 'targetX', 'targetY', 'textLength', 'viewBox',
   'viewTarget', 'xChannelSelector', 'yChannelSelector', 'zoomAndPan',
-].reduce((map, tag) => {
-  const kebab = tag.replace(/([A-Z])/g, camelToKebab)
-  map[kebab] = tag
+]
+
+const camelToKebab = (match, l) => `-${l.toLowerCase()}`
+// build a hashmap of {'foo-bar': 'fooBar'}
+const kebabToCamel = camelAttributes.reduce((map, camelAttribute) => {
+  const kebabAttribute = camelAttribute.replace(/([A-Z])/g, camelToKebab)
+  map[kebabAttribute] = camelAttribute
   return map
 }, {})
 
-const kebabRegExp = new RegExp(`( ${Object.keys(svgTags).join('=| ')}=)`, 'g')
+const kebabRegExp = new RegExp(`( ${Object.keys(kebabToCamel).join('=| ')}=)`, 'g')
 
 const fixSVGAttribute = (match, kebabMatch) => {
-  const kebab = kebabMatch.slice(1, -1)
-  const camel = svgTags[kebab]
+  const kebabAttribute = kebabMatch.slice(1, -1)
+  const camel = kebabToCamel[kebabAttribute]
   if (camel) {
     return ` ${camel}=`
   }
