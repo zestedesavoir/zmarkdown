@@ -168,31 +168,34 @@ const postProcess = {
   },
 }
 
-const rendererFactory = ({remarkConfig, rebberConfig}, target = 'html') => (input, cb) => {
-  [remarkConfig, rebberConfig] = [clone(remarkConfig), clone(rebberConfig)]
-
-  const mdProcessor = target !== 'html'
-    ? getLatexProcessor(remarkConfig, rebberConfig, target)
-    : getHTMLProcessor(remarkConfig, rebberConfig, target)
+const rendererFactory = ({remarkConfig, rebberConfig}, target = 'html') => {
 
   const postProcessFn = postProcess.hasOwnProperty(target) ? postProcess[target] : undefined
 
-  if (typeof cb !== 'function') {
-    return new Promise((resolve, reject) =>
-      mdProcessor.process(input, (err, vfile) => {
-        if (err) return reject(err)
+  return (input, cb) => {
+    [remarkConfig, rebberConfig] = [clone(remarkConfig), clone(rebberConfig)]
 
-        if (postProcessFn) vfile = postProcessFn(vfile)
-        resolve(vfile)
-      }))
+    const mdProcessor = target !== 'html'
+      ? getLatexProcessor(remarkConfig, rebberConfig, target)
+      : getHTMLProcessor(remarkConfig, rebberConfig, target)
+
+    if (typeof cb !== 'function') {
+      return new Promise((resolve, reject) =>
+        mdProcessor.process(input, (err, vfile) => {
+          if (err) return reject(err)
+
+          if (postProcessFn) vfile = postProcessFn(vfile)
+          resolve(vfile)
+        }))
+    }
+
+    mdProcessor.process(input, (err, vfile) => {
+      if (err) return cb(err)
+
+      if (postProcessFn) vfile = postProcessFn(vfile)
+      cb(null, vfile)
+    })
   }
-
-  mdProcessor.process(input, (err, vfile) => {
-    if (err) return cb(err)
-
-    if (postProcessFn) vfile = postProcessFn(vfile)
-    cb(null, vfile)
-  })
 }
 
 const mdastParser = (opts) => (zmd) => zmdParser(opts.remarkConfig).parse(zmd)

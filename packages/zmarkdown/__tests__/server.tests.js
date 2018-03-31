@@ -117,6 +117,8 @@ describe('HTML endpoint', () => {
     const rendered = response.data[0]
     expect(rendered).toContain('viewBox')
     expect(rendered).toContain('preserveAspectRatio')
+    expect(rendered).not.toContain('view-box')
+    expect(rendered).not.toContain('preserve-aspect-ratio')
   })
 })
 

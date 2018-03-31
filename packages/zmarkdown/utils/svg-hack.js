@@ -40,8 +40,9 @@ const fixSVGContent = (match, svgContent) => {
   return match.replace(svgContent, newContent)
 }
 
+const matchSVG = new RegExp('<svg(.*)</svg>', 's')
 const fixSVG = (content) => {
-  return content.replace(/<svg(.*)<\/svg>/g, fixSVGContent)
+  return content.replace(matchSVG, fixSVGContent)
 }
 
 module.exports = fixSVG
