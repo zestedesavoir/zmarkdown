@@ -1,6 +1,6 @@
 {
   "name": "zmarkdown",
-  "version": "5.4.4",
+  "version": "5.4.5",
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
   "contributors": [
     "Sébastien (AmarOk) Blin <contact@enconn.fr>",
@@ -47,7 +47,7 @@
     "remark-math": "^1.0.1",
     "remark-numbered-footnotes": "^1.0.5",
     "remark-parse": "^5.0.0",
-    "remark-ping": "^2.0.0",
+    "remark-ping": "^2.1.0",
     "remark-rehype": "^3.0.0",
     "remark-sub-super": "^1.0.11",
     "textr": "^0.3.0",
