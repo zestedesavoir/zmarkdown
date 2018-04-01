@@ -89,6 +89,6 @@
     "stop": "pm2 kill"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=8.11.0"
   }
 }
