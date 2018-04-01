@@ -33,7 +33,7 @@ module.exports = function plugin(_ref) {
           hProperties: {
             href: url,
             rel: 'nofollow',
-            class: 'ping'
+            class: 'ping ping-link'
           }
         },
         children: [{
@@ -93,12 +93,22 @@ module.exports = function plugin(_ref) {
   }
 
   return function (tree, file) {
+    // mark pings in blockquotes, later on we'll need that info to avoid pinging from quotes
     visit(tree, 'blockquote', markInBlockquotes);
+    // remove ping links from pings already in links
+    visit(tree, 'link', function (node) {
+      visit(node, 'ping', function (ping, index) {
+        ping.data.hName = 'span';
+        ping.data.hProperties = { class: 'ping ping-in-link' };
+      });
+    });
     visit(tree, 'ping', function (node) {
       if (!node.__inBlockquote) {
         if (!file.data[node.type]) {
           file.data[node.type] = [];
         }
+        // collect usernames to ping, they will be made available on the vfile
+        // for some backend to act on
         file.data[node.type].push(node.username);
       }
     });

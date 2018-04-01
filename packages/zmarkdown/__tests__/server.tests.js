@@ -56,7 +56,7 @@ describe('HTML endpoint', () => {
     const response = await a.post(html, {md: 'waddup @Clem', opts: {}})
 
     const [rendered, metadata] = response.data
-    expect(rendered).toContain('class="ping"')
+    expect(rendered).toContain('class="ping ping-link"')
     expect(rendered).toContain('href="/membres/voir/Clem/"')
     expect(metadata.ping).toEqual(['Clem'])
   })

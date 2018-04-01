@@ -23,7 +23,7 @@ interface Ping <: Parent {
 
 ## rehype
 
-This plugin is compatible with [rehype][rehype]. `Ping` mdast nodes will become HTML links pointing to a customizable target, usually used to access a user profile.
+This plugin is compatible with [rehype][rehype]. `Ping` mdast nodes will become HTML links pointing to a customizable target, usually used to link to a user profile.
 
 ```md
 @foo
@@ -32,7 +32,25 @@ This plugin is compatible with [rehype][rehype]. `Ping` mdast nodes will become 
 gives:
 
 ```html
-<a href="/custom/link/foo/" rel="nofollow" class="ping">@<span class="ping-username">foo</a></span>
+<a href="/custom/link/foo/" rel="nofollow" class="ping ping-link">
+  @<span class="ping-username">foo</span>
+</a>
+```
+
+Pings are handled a bit differently if they are already inside of a link:
+
+```md
+[@foo](http://example.com)
+```
+
+gives:
+
+```html
+<a href="http://example.com">
+  <span class="ping ping-in-link">
+    @<span class="ping-username">foo</span>
+  </span>
+</a>
 ```
 
 
