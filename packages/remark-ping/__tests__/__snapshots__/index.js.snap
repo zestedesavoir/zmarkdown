@@ -14,7 +14,7 @@ ping @**FOO BAR**
 
 no ping @quxjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd
 
-no ping @**I AM CLEM**
+ping [@**I AM CLEM**](http://example.com)
 
 @**baz baz**
 "
@@ -168,9 +168,9 @@ Object {
         Object {
           "position": Position {
             "end": Object {
-              "column": 9,
+              "column": 6,
               "line": 7,
-              "offset": 90,
+              "offset": 87,
             },
             "indent": Array [],
             "start": Object {
@@ -180,61 +180,81 @@ Object {
             },
           },
           "type": "text",
-          "value": "no ping ",
+          "value": "ping ",
         },
         Object {
           "children": Array [
             Object {
-              "type": "text",
-              "value": "@",
-            },
-            Object {
               "children": Array [
                 Object {
                   "type": "text",
-                  "value": "I AM CLEM",
+                  "value": "@",
+                },
+                Object {
+                  "children": Array [
+                    Object {
+                      "type": "text",
+                      "value": "I AM CLEM",
+                    },
+                  ],
+                  "data": Object {
+                    "hName": "span",
+                    "hProperties": Object {
+                      "class": "ping-username",
+                    },
+                  },
+                  "type": "emphasis",
                 },
               ],
               "data": Object {
-                "hName": "span",
+                "hName": "a",
                 "hProperties": Object {
-                  "class": "ping-username",
+                  "class": "ping ping-link",
+                  "href": "/membres/voir/I AM CLEM/",
+                  "rel": "nofollow",
                 },
               },
-              "type": "emphasis",
+              "position": Position {
+                "end": Object {
+                  "column": 21,
+                  "line": 7,
+                  "offset": 102,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 7,
+                  "line": 7,
+                  "offset": 88,
+                },
+              },
+              "type": "ping",
+              "url": "/membres/voir/I AM CLEM/",
+              "username": "I AM CLEM",
             },
           ],
-          "data": Object {
-            "hName": "a",
-            "hProperties": Object {
-              "class": "ping",
-              "href": "/membres/voir/I AM CLEM/",
-              "rel": "nofollow",
-            },
-          },
           "position": Position {
             "end": Object {
-              "column": 23,
+              "column": 42,
               "line": 7,
-              "offset": 104,
+              "offset": 123,
             },
             "indent": Array [],
             "start": Object {
-              "column": 9,
+              "column": 6,
               "line": 7,
-              "offset": 90,
+              "offset": 87,
             },
           },
-          "type": "ping",
-          "url": "/membres/voir/I AM CLEM/",
-          "username": "I AM CLEM",
+          "title": null,
+          "type": "link",
+          "url": "http://example.com",
         },
       ],
       "position": Position {
         "end": Object {
-          "column": 23,
+          "column": 42,
           "line": 7,
-          "offset": 104,
+          "offset": 123,
         },
         "indent": Array [],
         "start": Object {
@@ -272,7 +292,7 @@ Object {
           "data": Object {
             "hName": "a",
             "hProperties": Object {
-              "class": "ping",
+              "class": "ping ping-link",
               "href": "/membres/voir/baz baz/",
               "rel": "nofollow",
             },
@@ -281,13 +301,13 @@ Object {
             "end": Object {
               "column": 13,
               "line": 9,
-              "offset": 118,
+              "offset": 137,
             },
             "indent": Array [],
             "start": Object {
               "column": 1,
               "line": 9,
-              "offset": 106,
+              "offset": 125,
             },
           },
           "type": "ping",
@@ -299,13 +319,13 @@ Object {
         "end": Object {
           "column": 13,
           "line": 9,
-          "offset": 118,
+          "offset": 137,
         },
         "indent": Array [],
         "start": Object {
           "column": 1,
           "line": 9,
-          "offset": 106,
+          "offset": 125,
         },
       },
       "type": "paragraph",
@@ -315,7 +335,7 @@ Object {
     "end": Object {
       "column": 13,
       "line": 9,
-      "offset": 118,
+      "offset": 137,
     },
     "start": Object {
       "column": 1,
@@ -389,7 +409,7 @@ Object {
           "data": Object {
             "hName": "a",
             "hProperties": Object {
-              "class": "ping",
+              "class": "ping ping-link",
               "href": "/membres/voir/I AM CLEM/",
               "rel": "nofollow",
             },
@@ -476,7 +496,7 @@ Object {
                   "data": Object {
                     "hName": "a",
                     "hProperties": Object {
-                      "class": "ping",
+                      "class": "ping ping-link",
                       "href": "/membres/voir/I AM CLEM/",
                       "rel": "nofollow",
                     },
@@ -574,7 +594,7 @@ Object {
               "data": Object {
                 "hName": "a",
                 "hProperties": Object {
-                  "class": "ping",
+                  "class": "ping ping-link",
                   "href": "/membres/voir/I AM CLEM/",
                   "rel": "nofollow",
                 },
@@ -675,7 +695,7 @@ Object {
           "data": Object {
             "hName": "a",
             "hProperties": Object {
-              "class": "ping",
+              "class": "ping ping-link",
               "href": "/membres/voir/I AM CLEM/",
               "rel": "nofollow",
             },
@@ -759,7 +779,7 @@ Object {
               "data": Object {
                 "hName": "a",
                 "hProperties": Object {
-                  "class": "ping",
+                  "class": "ping ping-link",
                   "href": "/membres/voir/I AM CLEM/",
                   "rel": "nofollow",
                 },
@@ -859,7 +879,7 @@ Object {
               "data": Object {
                 "hName": "a",
                 "hProperties": Object {
-                  "class": "ping",
+                  "class": "ping ping-link",
                   "href": "/membres/voir/I AM CLEM/",
                   "rel": "nofollow",
                 },
@@ -969,7 +989,7 @@ Object {
           "data": Object {
             "hName": "a",
             "hProperties": Object {
-              "class": "ping",
+              "class": "ping ping-link",
               "href": "/membres/voir/foo/",
               "rel": "nofollow",
             },
@@ -1033,7 +1053,7 @@ Object {
           "data": Object {
             "hName": "a",
             "hProperties": Object {
-              "class": "ping",
+              "class": "ping ping-link",
               "href": "/membres/voir/bar/",
               "rel": "nofollow",
             },
@@ -1135,7 +1155,7 @@ Object {
               "data": Object {
                 "hName": "a",
                 "hProperties": Object {
-                  "class": "ping",
+                  "class": "ping ping-link",
                   "href": "/membres/voir/baz baz/",
                   "rel": "nofollow",
                 },
