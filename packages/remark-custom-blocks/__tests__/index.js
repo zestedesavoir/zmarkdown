@@ -48,6 +48,11 @@ const render = (text, allowTitle) => unified()
       classes: 'neutral foo',
       title: 'optional',
     },
+    details: {
+      classes: 'spoiler',
+      title: 'optional',
+      details: true,
+    },
   }, allowTitle)
   .use(stringify)
   .processSync(text)
@@ -137,6 +142,19 @@ test('title is optional', () => {
     | yes
   `)
   expect(contents).toMatchSnapshot()
+})
+
+test('details', () => {
+  const {contents} = render(dedent`
+    [[details| my title]]
+    | content
+  `)
+
+  expect(contents).toBe(dedent`
+    <details class="custom-block spoiler">\
+    <summary class="custom-block-heading">my title</summary>\
+    <div class="custom-block-body"><p>content</p></div>\
+    </details>`)
 })
 
 test('Errors without config', () => {

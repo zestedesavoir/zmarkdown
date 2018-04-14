@@ -64,6 +64,11 @@ unified()
       classes: 'qux-block',
       title: 'required'
     },
+    spoiler: {
+      classes: 'spoiler-block',
+      title: 'optional',
+      details: true
+    },
   })
   .use(remark2rehype)
   .use(stringify)
@@ -85,6 +90,9 @@ The sample configuration provided above would have the following effect:
 
     [[qux | my title]]
     | content
+
+    [[spoiler | my title]]
+    | content
     ```
 
     * Block `foo` cannot have a title, `[[foo | title]]` will not result in a block.
@@ -97,7 +105,7 @@ The sample configuration provided above would have the following effect:
     * `barCustomBlock`, content in `barCustomBlockBody`, optional title in `barCustomBlockHeading`
     * `quxCustomBlock`, content in `quxCustomBlockBody`, required title in `quxCustomBlockHeading`
 
-1. If you're using [rehype][rehype], you will end up with these 4 `div`s:
+1. If you're using [rehype][rehype], you will end up with these 4 `div`s and 1 `details`:
 
     ```html
     <div class="custom-block a-class another-class">
@@ -117,7 +125,12 @@ The sample configuration provided above would have the following effect:
       <div class="custom-block-heading">my title</div>
       <div class="custom-block-body"><p>content</p></div>
     </div>
-    ```
+
+     <details class="custom-block spoiler-block">
+      <summary class="custom-block-heading">my title</summary>
+      <div class="custom-block-body"><p>content</p></div>
+    </details>
+   ```
 
 ## License
 

@@ -77,7 +77,7 @@ module.exports = function blockPlugin (availableBlocks = {}) {
       const titleNode = {
         type: `${blockType}CustomBlockHeading`,
         data: {
-          hName: 'div',
+          hName: potentialBlock.details ? 'summary' : 'div',
           hProperties: {
             className: 'custom-block-heading',
           },
@@ -93,7 +93,7 @@ module.exports = function blockPlugin (availableBlocks = {}) {
       type: `${blockType}CustomBlock`,
       children: blockChildren,
       data: {
-        hName: 'div',
+        hName: potentialBlock.details ? 'details' : 'div',
         hProperties: {
           className: ['custom-block', ...classList],
         },
