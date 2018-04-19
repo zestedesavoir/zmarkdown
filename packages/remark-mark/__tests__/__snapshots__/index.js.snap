@@ -2,9 +2,13 @@
 
 exports[`mark 1`] = `
 "<p>Blabla <mark>ok</mark> kxcvj <mark>ok foo</mark> sdff</p>
+<p>Look <mark>ok foo!</mark> straight <mark>ok foo!!!</mark> ahead</p>
+<p>This <mark>should
+work</mark> ok.</p>
+<p>not!! marked!! text!!!</p>
 <p>sdf !!!! df</p>
 <p>sfdgs ! ! dfg !! dgsg ! qs</p>
-<p>With two pipes: !!key!! you'll get <mark>key</mark>.</p>
+<p>With two exclamation marks: !!marked text!! you'll get <mark>marked text</mark>.</p>
 <p>It parses inline elements inside:</p>
 <ul>
 <li><mark>hell<a href=\\"#he\\"><del>o</del></a>?</mark></li>
@@ -18,11 +22,18 @@ exports[`mark 1`] = `
 exports[`to markdown 1`] = `
 "Blabla !!ok!! kxcvj !!ok foo!! sdff
 
+Look !!ok foo!!! straight !!ok foo!!!!! ahead
+
+This !!should 
+work!! ok.
+
+not!! marked!! text!!!
+
 sdf !!!! df
 
 sfdgs ! ! dfg !! dgsg ! qs
 
-With two pipes: !!key!! you'll get !!key!!.
+With two exclamation marks: !!marked text!! you'll get !!marked text!!.
 
 It parses inline elements inside:
 

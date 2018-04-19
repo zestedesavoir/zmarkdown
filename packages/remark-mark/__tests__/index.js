@@ -24,11 +24,18 @@ const render = text => unified()
 const fixture = dedent`
   Blabla !!ok!! kxcvj !!ok foo!! sdff
 
+  Look !!ok foo!!! straight !!ok foo!!!!! ahead
+
+  This !!should 
+  work!! ok.
+
+  not!! marked!! text!!!
+
   sdf !!!! df
 
   sfdgs ! ! dfg !! dgsg ! qs
 
-  With two pipes: \!!key!! you'll get !!key!!.
+  With two exclamation marks: \!!marked text!! you'll get !!marked text!!.
 
   It parses inline elements inside:
 
