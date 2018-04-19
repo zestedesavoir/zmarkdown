@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mark 1`] = `
+"<p>Blabla <mark>ok</mark> kxcvj <mark>ok foo</mark> sdff</p>
+<p>sdf !!!! df</p>
+<p>sfdgs ! ! dfg !! dgsg ! qs</p>
+<p>With two pipes: !!key!! you'll get <mark>key</mark>.</p>
+<p>It parses inline elements inside:</p>
+<ul>
+<li><mark>hell<a href=\\"#he\\"><del>o</del></a>?</mark></li>
+</ul>
+<p>but not block elements inside:</p>
+<ul>
+<li><mark>hello: [[secret]]?</mark></li>
+</ul>"
+`;
+
+exports[`to markdown 1`] = `
+"Blabla !!ok!! kxcvj !!ok foo!! sdff
+
+sdf !!!! df
+
+sfdgs ! ! dfg !! dgsg ! qs
+
+With two pipes: !!key!! you'll get !!key!!.
+
+It parses inline elements inside:
+
+-   !!hell[~~o~~](#he)?!!
+
+but not block elements inside:
+
+-   !!hello: \\\\[[secret]]?!!
+"
+`;

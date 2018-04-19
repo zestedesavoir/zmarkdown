@@ -1,0 +1,6 @@
+/index.js
+/__tests__
+/.npmignore
+/coverage
+*.log
+/src
