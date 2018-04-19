@@ -34,13 +34,17 @@ function plugin() {
         /* istanbul ignore if - never used (yet) */
         if (silent) return true;
 
-        return eat(DOUBLE + subvalue + DOUBLE)({
-          type: 'mark',
-          children: this.tokenizeInline(subvalue, now),
-          data: {
-            hName: 'mark'
-          }
-        });
+        var next = value.charAt(index + 1);
+        if (next !== C_MARK) {
+
+          return eat(DOUBLE + subvalue + DOUBLE)({
+            type: 'mark',
+            children: this.tokenizeInline(subvalue, now),
+            data: {
+              hName: 'mark'
+            }
+          });
+        }
       }
 
       subvalue += previous;
