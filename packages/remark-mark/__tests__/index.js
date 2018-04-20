@@ -26,7 +26,7 @@ const fixture = dedent`
 
   Look !!ok foo!!! straight !!ok foo!!!!! ahead
 
-  This !!should 
+  This !!should
   work!! ok.
 
   not!! marked!! text!!!
@@ -46,10 +46,19 @@ const fixture = dedent`
   * !!hello: [[secret]]?!!
 `
 
+describe('mark', () => {
+  it('parses a big fixture', () => {
+    const {contents} = render(fixture)
+    expect(contents).toMatchSnapshot()
+  })
 
-test('mark', () => {
-  const {contents} = render(fixture)
-  expect(contents).toMatchSnapshot()
+  it('escapes the start marker', () => {
+    const {contents} = render(dedent`
+      !!one!! \!!escaped!! !!three!! \!!!four!! !!five!!
+    `)
+    expect(contents).toContain('!!escaped!!')
+    expect(contents).toContain('!<mark>four</mark>')
+  })
 })
 
 test('to markdown', () => {

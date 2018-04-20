@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mark 1`] = `
+exports[`mark parses a big fixture 1`] = `
 "<p>Blabla <mark>ok</mark> kxcvj <mark>ok foo</mark> sdff</p>
 <p>Look <mark>ok foo!</mark> straight <mark>ok foo!!!</mark> ahead</p>
 <p>This <mark>should
@@ -24,7 +24,7 @@ exports[`to markdown 1`] = `
 
 Look !!ok foo!!! straight !!ok foo!!!!! ahead
 
-This !!should 
+This !!should
 work!! ok.
 
 not!! marked!! text!!!

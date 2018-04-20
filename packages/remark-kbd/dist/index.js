@@ -12,7 +12,7 @@ function locator(value, fromIndex) {
 
 function plugin() {
   function inlineTokenizer(eat, value, silent) {
-    if (!this.options.gfm || value.charAt(0) !== C_PIPE || value.charAt(1) !== C_PIPE || value.startsWith(C_PIPE.repeat(4)) || whitespace(value.charAt(2))) {
+    if (!this.options.gfm || !value.startsWith(DOUBLE) || value.startsWith(C_PIPE.repeat(4)) || whitespace(value.charAt(2))) {
       return;
     }
 

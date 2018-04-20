@@ -12,7 +12,7 @@ function locator(value, fromIndex) {
 
 function plugin() {
   function inlineTokenizer(eat, value, silent) {
-    if (!this.options.gfm || value.charAt(0) !== C_MARK || value.charAt(1) !== C_MARK || value.startsWith(C_MARK.repeat(4)) || whitespace(value.charAt(2))) {
+    if (!this.options.gfm || !value.startsWith(DOUBLE) || value.startsWith(C_MARK.repeat(4)) || whitespace(value.charAt(2))) {
       return;
     }
 
@@ -29,7 +29,7 @@ function plugin() {
     while (++index < length) {
       character = value.charAt(index);
 
-      if (character === C_MARK && previous === C_MARK && (!preceding || !whitespace(preceding))) {
+      if (previous === C_MARK && character === C_MARK && (!preceding || !whitespace(preceding))) {
 
         /* istanbul ignore if - never used (yet) */
         if (silent) return true;

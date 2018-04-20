@@ -12,8 +12,7 @@ function plugin () {
   function inlineTokenizer (eat, value, silent) {
     if (
       !this.options.gfm ||
-      value.charAt(0) !== C_MARK ||
-      value.charAt(1) !== C_MARK ||
+      !value.startsWith(DOUBLE) ||
       value.startsWith(C_MARK.repeat(4)) ||
       whitespace(value.charAt(2))
     ) {
@@ -34,8 +33,8 @@ function plugin () {
       character = value.charAt(index)
 
       if (
-        character === C_MARK &&
         previous === C_MARK &&
+        character === C_MARK &&
         (!preceding || !whitespace(preceding))
       ) {
 

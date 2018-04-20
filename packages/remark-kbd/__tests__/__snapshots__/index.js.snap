@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`kbd 1`] = `
+exports[`parses kbd parses a big fixture 1`] = `
 "<p>Blabla <kbd>ok</kbd> kxcvj <kbd>ok foo</kbd> sdff</p>
 <p>sdf |||| df</p>
 <p>sfdgs | | dfg || dgsg | qs</p>
 <p>With two pipes: ||key|| you'll get <kbd>key</kbd>.</p>
-<p>It parses inline elements inside:</p>
+<p>It can contain inline markdown:</p>
 <ul>
 <li><kbd>hell<a href=\\"#he\\"><del>o</del></a>?</kbd></li>
 </ul>
-<p>but not block elements inside:</p>
+<p>It cannot contain blocks:</p>
 <ul>
 <li><kbd>hello: [[secret]]?</kbd></li>
 </ul>"
@@ -24,11 +24,11 @@ sfdgs | | dfg || dgsg | qs
 
 With two pipes: \\\\||key|| you'll get ||key||.
 
-It parses inline elements inside:
+It can contain inline markdown:
 
 -   ||hell[~~o~~](#he)?||
 
-but not block elements inside:
+It cannot contain blocks:
 
 -   ||hello: \\\\[[secret]]?||
 "

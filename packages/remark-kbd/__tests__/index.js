@@ -30,19 +30,29 @@ const fixture = dedent`
 
   With two pipes: \||key|| you'll get ||key||.
 
-  It parses inline elements inside:
+  It can contain inline markdown:
 
   * ||hell[~~o~~](#he)?||
 
-  but not block elements inside:
+  It cannot contain blocks:
 
   * ||hello: [[secret]]?||
 `
 
 
-test('kbd', () => {
-  const {contents} = render(fixture)
-  expect(contents).toMatchSnapshot()
+describe('parses kbd', () => {
+  it('parses a big fixture', () => {
+    const {contents} = render(fixture)
+    expect(contents).toMatchSnapshot()
+  })
+
+  it('escapes the start marker', () => {
+    const {contents} = render(dedent`
+      ||one|| \||escaped|| ||three|| \|||four|| ||five||
+    `)
+    expect(contents).toContain('||escaped||')
+    expect(contents).toContain('|<kbd>four</kbd>')
+  })
 })
 
 test('to markdown', () => {
