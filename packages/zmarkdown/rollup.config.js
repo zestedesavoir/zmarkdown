@@ -29,12 +29,12 @@ export default {
       config: {
         exclude: 'node_modules/**',
         presets: [
-          ['env', {'modules': false}],
+          ['env', {modules: false, targets: {browsers: ['ie 6']}}],
         ],
         plugins: ['external-helpers'],
       },
     })),
     globals(),
-    uglify(),
+    // uglify(),
   ],
 }

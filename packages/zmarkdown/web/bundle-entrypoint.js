@@ -1,3 +1,4 @@
+require("babel-polyfill")
 const unified = require('unified')
 const visit = require('unist-util-visit')
 
