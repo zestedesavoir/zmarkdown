@@ -12,8 +12,8 @@ function plugin () {
   function inlineTokenizer (eat, value, silent) {
     if (
       !this.options.gfm ||
-      !value.startsWith(DOUBLE) ||
-      value.startsWith(C_PIPE.repeat(4)) ||
+      (value.substr(0, 2) !== DOUBLE) ||
+      (value.substr(0, 4) === (DOUBLE + DOUBLE)) ||
       whitespace(value.charAt(2))
     ) {
       return
