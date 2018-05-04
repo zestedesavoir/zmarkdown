@@ -13,6 +13,32 @@ function escapeRegExp(str) {
 var C_NEWLINE = '\n';
 var C_FENCE = '|';
 
+function compilerFactory(nodeType) {
+  var text = null;
+  var title = null;
+
+  return {
+    compileTitle: function compileTitle(node) {
+      title = this.all(node).join('');
+      return '';
+    },
+    compileText: function compileText(node) {
+      text = this.all(node).join('\n').replace(/\n/, '\n| ');
+      return text;
+    },
+    compileFullNode: function compileFullNode(node) {
+      text = null;
+      title = null;
+      this.all(node);
+      if (title) {
+        return '[[' + nodeType + '|' + title + ']]\n| ' + text;
+      } else {
+        return '[[' + nodeType + ']]\n| ' + text;
+      }
+    }
+  };
+}
+
 module.exports = function blockPlugin() {
   var availableBlocks = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
@@ -118,7 +144,17 @@ module.exports = function blockPlugin() {
   var blockMethods = Parser.prototype.blockMethods;
   blockTokenizers.customBlocks = blockTokenizer;
   blockMethods.splice(blockMethods.indexOf('fencedCode') + 1, 0, 'customBlocks');
-
+  var Compiler = this.Compiler;
+  if (Compiler) {
+    var visitors = Compiler.prototype.visitors;
+    if (!visitors) return;
+    Object.keys(availableBlocks).forEach(function (key) {
+      var compiler = compilerFactory(key);
+      visitors[key + 'CustomBlock'] = compiler.compileFullNode;
+      visitors[key + 'CustomBlockHeading'] = compiler.compileTitle;
+      visitors[key + 'CustomBlockBody'] = compiler.compileText;
+    });
+  }
   // Inject into interrupt rules
   var interruptParagraph = Parser.prototype.interruptParagraph;
   var interruptList = Parser.prototype.interruptList;

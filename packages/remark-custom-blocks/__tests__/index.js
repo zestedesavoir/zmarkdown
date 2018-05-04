@@ -2,6 +2,7 @@ import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
+import remarkStringify from 'remark-stringify'
 import remark2rehype from 'remark-rehype'
 
 import plugin from '../src/'
@@ -56,6 +57,58 @@ const render = (text, allowTitle) => unified()
   }, allowTitle)
   .use(stringify)
   .processSync(text)
+
+
+const renderToMarkdown = (text) => unified()
+  .use(reParse)
+  .use(remarkStringify)
+  .use(plugin, {
+    secret: {
+      classes: 'spoiler',
+    },
+    s: {
+      classes: 'spoiler',
+    },
+    information: {
+      classes: 'information ico-after',
+    },
+    i: {
+      classes: 'information ico-after',
+    },
+    question: {
+      classes: 'question ico-after',
+    },
+    q: {
+      classes: 'question ico-after',
+    },
+    attention: {
+      classes: 'warning ico-after',
+    },
+    a: {
+      classes: 'warning ico-after',
+    },
+    erreur: {
+      classes: 'error ico-after',
+    },
+    e: {
+      classes: 'error ico-after',
+    },
+    neutre: {
+      classes: 'neutral foo',
+      title: 'required',
+    },
+    customizableBlock: {
+      classes: 'neutral foo',
+      title: 'optional',
+    },
+    details: {
+      classes: 'spoiler',
+      title: 'optional',
+      details: true,
+    },
+  })
+  .processSync(text)
+
 
 const fixture = dedent`
   [[s]]
@@ -184,4 +237,34 @@ test('regression 2', () => {
     | test
   `)
   expect(contents).toMatchSnapshot()
+})
+
+test('compile fixture to markdown', () => {
+  const {contents} = renderToMarkdown(fixture)
+  expect(contents).toMatchSnapshot()
+  const result = renderToMarkdown(contents)
+  expect(result.contents).toBe(contents)
+})
+
+test('compile regression1 to markdown', () => {
+  const {contents} = renderToMarkdown(dedent`
+    content before
+    [[s]]
+    |Block
+    with content after
+  `)
+  expect(contents).toMatchSnapshot()
+  const result = renderToMarkdown(contents)
+  expect(result.contents).toBe(contents)
+})
+
+test('compile titled block to markdown', () => {
+  const {contents} = renderToMarkdown(dedent`
+    [[details| my title]]
+    | content
+  `)
+
+  expect(contents).toMatchSnapshot()
+  const result = renderToMarkdown(contents)
+  expect(result.contents).toBe(contents)
 })

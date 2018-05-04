@@ -7,6 +7,32 @@ function escapeRegExp (str) {
 const C_NEWLINE = '\n'
 const C_FENCE = '|'
 
+function compilerFactory (nodeType) {
+  let text = null
+  let title = null
+
+  return {
+    compileTitle: function (node) {
+      title = this.all(node).join('')
+      return ''
+    },
+    compileText: function (node) {
+      text = this.all(node).join('\n').replace(/\n/, '\n| ')
+      return text
+    },
+    compileFullNode: function (node) {
+      text = null
+      title = null
+      this.all(node)
+      if (title) {
+        return `[[${nodeType}|${title}]]\n| ${text}`
+      } else {
+        return `[[${nodeType}]]\n| ${text}`
+      }
+    },
+  }
+}
+
 module.exports = function blockPlugin (availableBlocks = {}) {
   const pattern = Object
     .keys(availableBlocks)
@@ -108,7 +134,17 @@ module.exports = function blockPlugin (availableBlocks = {}) {
   const blockMethods = Parser.prototype.blockMethods
   blockTokenizers.customBlocks = blockTokenizer
   blockMethods.splice(blockMethods.indexOf('fencedCode') + 1, 0, 'customBlocks')
-
+  const Compiler = this.Compiler
+  if (Compiler) {
+    const visitors = Compiler.prototype.visitors
+    if (!visitors) return
+    Object.keys(availableBlocks).forEach(key => {
+      const compiler = compilerFactory(key)
+      visitors[`${key}CustomBlock`] = compiler.compileFullNode
+      visitors[`${key}CustomBlockHeading`] = compiler.compileTitle
+      visitors[`${key}CustomBlockBody`] = compiler.compileText
+    })
+  }
   // Inject into interrupt rules
   const interruptParagraph = Parser.prototype.interruptParagraph
   const interruptList = Parser.prototype.interruptList
