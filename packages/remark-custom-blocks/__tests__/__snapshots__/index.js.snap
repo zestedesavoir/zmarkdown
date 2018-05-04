@@ -31,6 +31,79 @@ exports[`Common 1`] = `
 | not parsed</p>"
 `;
 
+exports[`compile fixture to markdown 1`] = `
+"[[s]]
+| Secret Block
+
+[[s]]
+| Secret Block
+
+[[secret]]
+| another
+
+> [[s]]
+> | > Blockquote in secret block in blockquote
+
+[[i]]
+| Information Block
+
+[[information]]
+| another
+
+[[q]]
+| Question Block
+
+[[question]]
+| another
+
+[[a]]
+| Attention Block
+
+[[attention]]
+| another
+
+[[e]]
+| Erreur Block
+
+[[erreur]]
+| another
+
+\\\\[[se]]
+| not a block
+
+\\\\[[secretsecret]]
+| not a block
+
+\\\\[[SECRET]]
+| not a block
+
+[[s]]
+| Multiline block
+| > with blockquote !
+
+| Not a block
+
+\\\\[[attention | title]]
+| not parsed
+"
+`;
+
+exports[`compile regression1 to markdown 1`] = `
+"content before
+
+[[s]]
+| Block
+
+with content after
+"
+`;
+
+exports[`compile titled block to markdown 1`] = `
+"[[details|my title]]
+| content
+"
+`;
+
 exports[`regression 1 1`] = `
 "<p>content before</p>
 <div class=\\"custom-block spoiler\\"><div class=\\"custom-block-body\\"><p>Block</p></div></div>
