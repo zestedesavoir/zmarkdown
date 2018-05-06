@@ -448,6 +448,228 @@ function transformer (tree) {
   visit(tree, deleteWrapperBlock())
 }
 
+function createGrid (nbRows, nbCols) {
+  const grid = []
+
+  for (let i = 0; i < nbRows; i++) {
+    grid.push([])
+    for (let j = 0; j < nbCols; j++) {
+      grid[i].push({h: -1, w: -1, b: true, r: true})
+    }
+  }
+
+  return grid
+}
+
+function setWeight (grid, i, j, cols) {
+  /* To do it, we put enougth space to write the text.
+   * For multi-cell, we divid it among the cells. */
+  let W = Math.max(...Array.from(grid[i][j].value).map(x => x.length)) + 2
+
+  grid[i].forEach((_, c) => {
+    if (c < cols) { // To divid
+      const w = Math.ceil(W / (cols - c)) // cols - c will be 1 for the last cell
+      W -= w
+      grid[i][j + c].w = w
+    }
+  })
+}
+
+function setHeigth (grid, i, j, values) {
+  // To do it, we count the line. Extra length to cell with a pipe
+  // in the value of the last line, to not be confuse with a border.
+  grid[i][j].h = values.length
+  // Extra line
+  if (values[values.length - 1].indexOf('|') > 0) {
+    grid[i][j].h += 1
+  }
+}
+
+function extractAST (gridNode, grid, nbRows, nbCols, getMD) {
+  let i = 0
+  /* Fill the grid with value, heigth and weight from the ast */
+  gridNode.children.forEach(th => {
+    th.children.forEach(row => {
+      row.children.forEach((cell, j) => {
+        let X = 0
+
+        while (grid[i][j + X].v) X++
+        grid[i][j + X].value = this.all(cell).join('\n\n').split('\n')
+
+        setHeigth(grid, i, j + X, grid[i][j + X].value)
+        setWeight(grid, i, j + X, cell.data.hProperties.colspan)
+
+        // If we have an empty 1x1 grid, we fill it up with a useless space
+        // Otherwise, it will not be parsed.
+        if (nbCols === nbRows && nbCols === 1 && !grid[0][0].value.join('\n')) {
+          grid[0][0].value = ' '
+          grid[0][0].w = 3
+        }
+
+        // Define the border of each cell
+        for (let x = 0; x < cell.data.hProperties.rowspan; x++) {
+          for (let y = 0; y < cell.data.hProperties.colspan; y++) {
+            // b attribute is for bottom
+            grid[i + x][j + X + y].b = x + 1 === cell.data.hProperties.rowspan
+            // r attribute is for right
+            grid[i + x][j + X + y].r = y + 1 === cell.data.hProperties.colspan
+
+            // set v if a cell has ever been define
+            grid[i + x][j + X + y].v = true
+          }
+        }
+      })
+      i++
+    })
+  })
+
+  // If they is 2 differents tableHeader, so the first one is a header and
+  // should be underlined
+  if (gridNode.children.length > 1) {
+    grid[gridNode.children[0].children.length - 1][0].H = true
+  }
+}
+
+function setSize (grid) {
+  // The idea is the max win
+
+  // Set the height of each column
+  grid.forEach(row => {
+    // Find the max
+    const mH = Math.max(...row.map(cell => cell.h))
+
+    // Set it to each cell
+    row.forEach(cell => { cell.h = mH })
+  })
+
+  // Set the weight of each row
+  grid[0].forEach((_, j) => {
+    // Find the max
+    const mW = Math.max(...grid.map(row => row[j].w))
+
+    // Set it to each cell
+    grid.forEach(row => { row[j].w = mW })
+  })
+}
+function generateBorders (grid, nbRows, nbCols, gridString) {
+  /** **** Create the borders *******/
+
+  // Create the first line
+  /*
+   * We have to create the first line manually because
+   * we process the borders from the attributes bottom
+   * and right of each cell. For the first line, their
+   * is no bottom nor right cell.
+   *
+   * We only need the right attribute of the first row's
+   * cells
+   */
+  let first = '+'
+  grid[0].forEach((cell, i) => {
+    first += '-'.repeat(cell.w)
+    first += cell.r || i === nbCols - 1 ? '+' : '-'
+  })
+
+  gridString.push(first)
+
+  grid.forEach((row, i) => {
+    let line = ''
+
+    // Cells lines
+    // The inner of the cell
+    line = '|'
+    row.forEach(cell => {
+      cell.y = gridString.length
+      cell.x = line.length + 1
+      line += ' '.repeat(cell.w)
+      line += cell.r ? '|' : ' '
+    })
+
+    // Add it until the text can fit
+    for (let t = 0; t < row[0].h; t++) {
+      gridString.push(line)
+    }
+
+    // "End" line
+    // It's the last line of the cell. Actually the border.
+    line = row[0].b ? '+' : '|'
+
+    row.forEach((cell, j) => {
+      let c = ' '
+
+      if (cell.b) {
+        if (row[0].H) {
+          c = '='
+        } else {
+          c = '-'
+        }
+      }
+
+      line += c.repeat(cell.w)
+
+      if (cell.b || (j + 1 < nbCols && grid[i][j + 1].b)) {
+        if (cell.r || (i + 1 < nbRows && grid[i + 1][j].r)) {
+          line += '+'
+        } else {
+          line += (row[0].H ? '=' : '-')
+        }
+      } else if (cell.r || (i + 1 < nbRows && grid[i + 1][j].r)) {
+        line += '|'
+      } else {
+        line += ' '
+      }
+    })
+
+    gridString.push(line)
+  })
+}
+
+function writeText (grid, gridString) {
+  grid.forEach(row => {
+    row.forEach(cell => {
+      if (cell.value && cell.value[0]) {
+        for (let t = 0; t < cell.value.length; t++) {
+          const h = cell.y + t
+          const line = cell.value[t]
+          const lineEdit = gridString[h]
+
+          gridString[h] = lineEdit.substr(0, cell.x)
+          gridString[h] += line
+          gridString[h] += lineEdit.substr(cell.x + line.length)
+        }
+      }
+    })
+  })
+}
+
+function stringifyGridTables (gridNode) {
+  const gridString = []
+
+  const nbRows = gridNode.children.map(th => th.children.length).reduce((a, b) => a + b)
+  const nbCols = gridNode.children[0]
+    .children[0]
+    .children.map(c => c.data.hProperties.colspan)
+    .reduce((a, b) => a + b)
+
+  const grid = createGrid(nbRows, nbCols)
+
+  /* First, we extract the information
+   * then, we set the size(2) of the border
+   * and create it(3).
+   * Finaly we fill it up.
+   */
+
+  extractAST.bind(this)(gridNode, grid, nbRows, nbCols)
+
+  setSize(grid)
+
+  generateBorders(grid, nbRows, nbCols, gridString)
+
+  writeText(grid, gridString)
+
+  return gridString.join('\n')
+}
+
 function plugin () {
   const Parser = this.Parser
 
@@ -456,6 +678,16 @@ function plugin () {
   const blockMethods = Parser.prototype.blockMethods
   blockTokenizers.grid_table = gridTableTokenizer
   blockMethods.splice(blockMethods.indexOf('fencedCode') + 1, 0, 'grid_table')
+
+  const Compiler = this.Compiler
+
+  // Stringify
+  if (Compiler) {
+    const visitors = Compiler.prototype.visitors
+    if (!visitors) return
+
+    visitors.gridTable = stringifyGridTables
+  }
 
   return transformer
 }
