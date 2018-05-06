@@ -4,6 +4,8 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var visit = require('unist-util-visit');
@@ -493,6 +495,247 @@ function transformer(tree) {
   visit(tree, deleteWrapperBlock());
 }
 
+function createGrid(nbRows, nbCols) {
+  var grid = [];
+
+  for (var i = 0; i < nbRows; i++) {
+    grid.push([]);
+    for (var j = 0; j < nbCols; j++) {
+      grid[i].push({ h: -1, w: -1, b: true, r: true });
+    }
+  }
+
+  return grid;
+}
+
+function setWeight(grid, i, j, cols) {
+  /* To do it, we put enougth space to write the text.
+   * For multi-cell, we divid it among the cells. */
+  var W = Math.max.apply(Math, _toConsumableArray(Array.from(grid[i][j].value).map(function (x) {
+    return x.length;
+  }))) + 2;
+
+  grid[i].forEach(function (_, c) {
+    if (c < cols) {
+      // To divid
+      var w = Math.ceil(W / (cols - c)); // cols - c will be 1 for the last cell
+      W -= w;
+      grid[i][j + c].w = w;
+    }
+  });
+}
+
+function setHeigth(grid, i, j, values) {
+  // To do it, we count the line. Extra length to cell with a pipe
+  // in the value of the last line, to not be confuse with a border.
+  grid[i][j].h = values.length;
+  // Extra line
+  if (values[values.length - 1].indexOf('|') > 0) {
+    grid[i][j].h += 1;
+  }
+}
+
+function extractAST(gridNode, grid, nbRows, nbCols, getMD) {
+  var _this = this;
+
+  var i = 0;
+  /* Fill the grid with value, heigth and weight from the ast */
+  gridNode.children.forEach(function (th) {
+    th.children.forEach(function (row) {
+      row.children.forEach(function (cell, j) {
+        var X = 0;
+
+        while (grid[i][j + X].v) {
+          X++;
+        }grid[i][j + X].value = _this.all(cell).join('\n\n').split('\n');
+
+        setHeigth(grid, i, j + X, grid[i][j + X].value);
+        setWeight(grid, i, j + X, cell.data.hProperties.colspan);
+
+        // If we have an empty 1x1 grid, we fill it up with a useless space
+        // Otherwise, it will not be parsed.
+        if (nbCols === nbRows && nbCols === 1 && !grid[0][0].value.join('\n')) {
+          grid[0][0].value = ' ';
+          grid[0][0].w = 3;
+        }
+
+        // Define the border of each cell
+        for (var x = 0; x < cell.data.hProperties.rowspan; x++) {
+          for (var y = 0; y < cell.data.hProperties.colspan; y++) {
+            // b attribute is for bottom
+            grid[i + x][j + X + y].b = x + 1 === cell.data.hProperties.rowspan;
+            // r attribute is for right
+            grid[i + x][j + X + y].r = y + 1 === cell.data.hProperties.colspan;
+
+            // set v if a cell has ever been define
+            grid[i + x][j + X + y].v = true;
+          }
+        }
+      });
+      i++;
+    });
+  });
+
+  // If they is 2 differents tableHeader, so the first one is a header and
+  // should be underlined
+  if (gridNode.children.length > 1) {
+    grid[gridNode.children[0].children.length - 1][0].H = true;
+  }
+}
+
+function setSize(grid) {
+  // The idea is the max win
+
+  // Set the height of each column
+  grid.forEach(function (row) {
+    // Find the max
+    var mH = Math.max.apply(Math, _toConsumableArray(row.map(function (cell) {
+      return cell.h;
+    })));
+
+    // Set it to each cell
+    row.forEach(function (cell) {
+      cell.h = mH;
+    });
+  });
+
+  // Set the weight of each row
+  grid[0].forEach(function (_, j) {
+    // Find the max
+    var mW = Math.max.apply(Math, _toConsumableArray(grid.map(function (row) {
+      return row[j].w;
+    })));
+
+    // Set it to each cell
+    grid.forEach(function (row) {
+      row[j].w = mW;
+    });
+  });
+}
+function generateBorders(grid, nbRows, nbCols, gridString) {
+  /** **** Create the borders *******/
+
+  // Create the first line
+  /*
+   * We have to create the first line manually because
+   * we process the borders from the attributes bottom
+   * and right of each cell. For the first line, their
+   * is no bottom nor right cell.
+   *
+   * We only need the right attribute of the first row's
+   * cells
+   */
+  var first = '+';
+  grid[0].forEach(function (cell, i) {
+    first += '-'.repeat(cell.w);
+    first += cell.r || i === nbCols - 1 ? '+' : '-';
+  });
+
+  gridString.push(first);
+
+  grid.forEach(function (row, i) {
+    var line = '';
+
+    // Cells lines
+    // The inner of the cell
+    line = '|';
+    row.forEach(function (cell) {
+      cell.y = gridString.length;
+      cell.x = line.length + 1;
+      line += ' '.repeat(cell.w);
+      line += cell.r ? '|' : ' ';
+    });
+
+    // Add it until the text can fit
+    for (var t = 0; t < row[0].h; t++) {
+      gridString.push(line);
+    }
+
+    // "End" line
+    // It's the last line of the cell. Actually the border.
+    line = row[0].b ? '+' : '|';
+
+    row.forEach(function (cell, j) {
+      var c = ' ';
+
+      if (cell.b) {
+        if (row[0].H) {
+          c = '=';
+        } else {
+          c = '-';
+        }
+      }
+
+      line += c.repeat(cell.w);
+
+      if (cell.b || j + 1 < nbCols && grid[i][j + 1].b) {
+        if (cell.r || i + 1 < nbRows && grid[i + 1][j].r) {
+          line += '+';
+        } else {
+          line += row[0].H ? '=' : '-';
+        }
+      } else if (cell.r || i + 1 < nbRows && grid[i + 1][j].r) {
+        line += '|';
+      } else {
+        line += ' ';
+      }
+    });
+
+    gridString.push(line);
+  });
+}
+
+function writeText(grid, gridString) {
+  grid.forEach(function (row) {
+    row.forEach(function (cell) {
+      if (cell.value && cell.value[0]) {
+        for (var t = 0; t < cell.value.length; t++) {
+          var h = cell.y + t;
+          var line = cell.value[t];
+          var lineEdit = gridString[h];
+
+          gridString[h] = lineEdit.substr(0, cell.x);
+          gridString[h] += line;
+          gridString[h] += lineEdit.substr(cell.x + line.length);
+        }
+      }
+    });
+  });
+}
+
+function stringifyGridTables(gridNode) {
+  var gridString = [];
+
+  var nbRows = gridNode.children.map(function (th) {
+    return th.children.length;
+  }).reduce(function (a, b) {
+    return a + b;
+  });
+  var nbCols = gridNode.children[0].children[0].children.map(function (c) {
+    return c.data.hProperties.colspan;
+  }).reduce(function (a, b) {
+    return a + b;
+  });
+
+  var grid = createGrid(nbRows, nbCols);
+
+  /* First, we extract the information
+   * then, we set the size(2) of the border
+   * and create it(3).
+   * Finaly we fill it up.
+   */
+
+  extractAST.bind(this)(gridNode, grid, nbRows, nbCols);
+
+  setSize(grid);
+
+  generateBorders(grid, nbRows, nbCols, gridString);
+
+  writeText(grid, gridString);
+
+  return gridString.join('\n');
+}
+
 function plugin() {
   var Parser = this.Parser;
 
@@ -501,6 +744,16 @@ function plugin() {
   var blockMethods = Parser.prototype.blockMethods;
   blockTokenizers.grid_table = gridTableTokenizer;
   blockMethods.splice(blockMethods.indexOf('fencedCode') + 1, 0, 'grid_table');
+
+  var Compiler = this.Compiler;
+
+  // Stringify
+  if (Compiler) {
+    var visitors = Compiler.prototype.visitors;
+    if (!visitors) return;
+
+    visitors.gridTable = stringifyGridTables;
+  }
 
   return transformer;
 }
