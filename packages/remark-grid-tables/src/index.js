@@ -499,10 +499,10 @@ function extractAST (gridNode, grid, nbRows, nbCols, getMD) {
         setHeight(grid, i, j + X, grid[i][j + X].value)
         setWidth(grid, i, j + X, cell.data.hProperties.colspan)
 
-        // If we have an empty 1x1 grid, we fill it up with a useless space
+        // If it's empty, we fill it up with a useless space
         // Otherwise, it will not be parsed.
-        if (nbCols === nbRows && nbCols === 1 && !grid[0][0].value.join('\n')) {
-          grid[0][0].value = ' '
+        if (!grid[0][0].value.join('\n')) {
+          grid[0][0].value = [' ']
           grid[0][0].width = 3
         }
 
