@@ -501,7 +501,7 @@ function createGrid(nbRows, nbCols) {
   for (var i = 0; i < nbRows; i++) {
     grid.push([]);
     for (var j = 0; j < nbCols; j++) {
-      grid[i].push({ h: -1, w: -1, b: true, r: true });
+      grid[i].push({ height: -1, weight: -1, hasBottom: true, hasRigth: true });
     }
   }
 
@@ -511,27 +511,27 @@ function createGrid(nbRows, nbCols) {
 function setWeight(grid, i, j, cols) {
   /* To do it, we put enougth space to write the text.
    * For multi-cell, we divid it among the cells. */
-  var W = Math.max.apply(Math, _toConsumableArray(Array.from(grid[i][j].value).map(function (x) {
+  var tmpWeight = Math.max.apply(Math, _toConsumableArray(Array.from(grid[i][j].value).map(function (x) {
     return x.length;
   }))) + 2;
 
   grid[i].forEach(function (_, c) {
     if (c < cols) {
       // To divid
-      var w = Math.ceil(W / (cols - c)); // cols - c will be 1 for the last cell
-      W -= w;
-      grid[i][j + c].w = w;
+      var localWeight = Math.ceil(tmpWeight / (cols - c)); // cols - c will be 1 for the last cell
+      tmpWeight -= localWeight;
+      grid[i][j + c].weight = localWeight;
     }
   });
 }
 
-function setHeigth(grid, i, j, values) {
+function setHeight(grid, i, j, values) {
   // To do it, we count the line. Extra length to cell with a pipe
   // in the value of the last line, to not be confuse with a border.
-  grid[i][j].h = values.length;
+  grid[i][j].height = values.length;
   // Extra line
   if (values[values.length - 1].indexOf('|') > 0) {
-    grid[i][j].h += 1;
+    grid[i][j].height += 1;
   }
 }
 
@@ -539,36 +539,36 @@ function extractAST(gridNode, grid, nbRows, nbCols, getMD) {
   var _this = this;
 
   var i = 0;
-  /* Fill the grid with value, heigth and weight from the ast */
+  /* Fill the grid with value, height and weight from the ast */
   gridNode.children.forEach(function (th) {
     th.children.forEach(function (row) {
       row.children.forEach(function (cell, j) {
-        var X = 0;
+        var X = 0; // x taking colspan and rowspan into account
 
-        while (grid[i][j + X].v) {
+        while (grid[i][j + X].evaluated) {
           X++;
         }grid[i][j + X].value = _this.all(cell).join('\n\n').split('\n');
 
-        setHeigth(grid, i, j + X, grid[i][j + X].value);
+        setHeight(grid, i, j + X, grid[i][j + X].value);
         setWeight(grid, i, j + X, cell.data.hProperties.colspan);
 
         // If we have an empty 1x1 grid, we fill it up with a useless space
         // Otherwise, it will not be parsed.
         if (nbCols === nbRows && nbCols === 1 && !grid[0][0].value.join('\n')) {
           grid[0][0].value = ' ';
-          grid[0][0].w = 3;
+          grid[0][0].weight = 3;
         }
 
         // Define the border of each cell
         for (var x = 0; x < cell.data.hProperties.rowspan; x++) {
           for (var y = 0; y < cell.data.hProperties.colspan; y++) {
             // b attribute is for bottom
-            grid[i + x][j + X + y].b = x + 1 === cell.data.hProperties.rowspan;
+            grid[i + x][j + X + y].hasBottom = x + 1 === cell.data.hProperties.rowspan;
             // r attribute is for right
-            grid[i + x][j + X + y].r = y + 1 === cell.data.hProperties.colspan;
+            grid[i + x][j + X + y].hasRigth = y + 1 === cell.data.hProperties.colspan;
 
             // set v if a cell has ever been define
-            grid[i + x][j + X + y].v = true;
+            grid[i + x][j + X + y].evaluated = ' ';
           }
         }
       });
@@ -579,7 +579,7 @@ function extractAST(gridNode, grid, nbRows, nbCols, getMD) {
   // If they is 2 differents tableHeader, so the first one is a header and
   // should be underlined
   if (gridNode.children.length > 1) {
-    grid[gridNode.children[0].children.length - 1][0].H = true;
+    grid[gridNode.children[0].children.length - 1][0].isHeader = true;
   }
 }
 
@@ -589,26 +589,26 @@ function setSize(grid) {
   // Set the height of each column
   grid.forEach(function (row) {
     // Find the max
-    var mH = Math.max.apply(Math, _toConsumableArray(row.map(function (cell) {
-      return cell.h;
+    var maxHeight = Math.max.apply(Math, _toConsumableArray(row.map(function (cell) {
+      return cell.height;
     })));
 
     // Set it to each cell
     row.forEach(function (cell) {
-      cell.h = mH;
+      cell.height = maxHeight;
     });
   });
 
   // Set the weight of each row
   grid[0].forEach(function (_, j) {
     // Find the max
-    var mW = Math.max.apply(Math, _toConsumableArray(grid.map(function (row) {
-      return row[j].w;
+    var maxWeight = Math.max.apply(Math, _toConsumableArray(grid.map(function (row) {
+      return row[j].weight;
     })));
 
     // Set it to each cell
     grid.forEach(function (row) {
-      row[j].w = mW;
+      row[j].weight = maxWeight;
     });
   });
 }
@@ -627,8 +627,8 @@ function generateBorders(grid, nbRows, nbCols, gridString) {
    */
   var first = '+';
   grid[0].forEach(function (cell, i) {
-    first += '-'.repeat(cell.w);
-    first += cell.r || i === nbCols - 1 ? '+' : '-';
+    first += '-'.repeat(cell.weight);
+    first += cell.hasRigth || i === nbCols - 1 ? '+' : '-';
   });
 
   gridString.push(first);
@@ -642,39 +642,39 @@ function generateBorders(grid, nbRows, nbCols, gridString) {
     row.forEach(function (cell) {
       cell.y = gridString.length;
       cell.x = line.length + 1;
-      line += ' '.repeat(cell.w);
-      line += cell.r ? '|' : ' ';
+      line += ' '.repeat(cell.weight);
+      line += cell.hasRigth ? '|' : ' ';
     });
 
     // Add it until the text can fit
-    for (var t = 0; t < row[0].h; t++) {
+    for (var t = 0; t < row[0].height; t++) {
       gridString.push(line);
     }
 
     // "End" line
     // It's the last line of the cell. Actually the border.
-    line = row[0].b ? '+' : '|';
+    line = row[0].hasBottom ? '+' : '|';
 
     row.forEach(function (cell, j) {
-      var c = ' ';
+      var char = ' ';
 
-      if (cell.b) {
-        if (row[0].H) {
-          c = '=';
+      if (cell.hasBottom) {
+        if (row[0].isHeader) {
+          char = '=';
         } else {
-          c = '-';
+          char = '-';
         }
       }
 
-      line += c.repeat(cell.w);
+      line += char.repeat(cell.weight);
 
-      if (cell.b || j + 1 < nbCols && grid[i][j + 1].b) {
-        if (cell.r || i + 1 < nbRows && grid[i + 1][j].r) {
+      if (cell.hasBottom || j + 1 < nbCols && grid[i][j + 1].hasBottom) {
+        if (cell.hasRigth || i + 1 < nbRows && grid[i + 1][j].hasRigth) {
           line += '+';
         } else {
-          line += row[0].H ? '=' : '-';
+          line += row[0].isHeader ? '=' : '-';
         }
-      } else if (cell.r || i + 1 < nbRows && grid[i + 1][j].r) {
+      } else if (cell.hasRigth || i + 1 < nbRows && grid[i + 1][j].hasRigth) {
         line += '|';
       } else {
         line += ' ';
@@ -689,14 +689,14 @@ function writeText(grid, gridString) {
   grid.forEach(function (row) {
     row.forEach(function (cell) {
       if (cell.value && cell.value[0]) {
-        for (var t = 0; t < cell.value.length; t++) {
-          var h = cell.y + t;
-          var line = cell.value[t];
-          var lineEdit = gridString[h];
+        for (var tmpCount = 0; tmpCount < cell.value.length; tmpCount++) {
+          var tmpLine = cell.y + tmpCount;
+          var line = cell.value[tmpCount];
+          var lineEdit = gridString[tmpLine];
 
-          gridString[h] = lineEdit.substr(0, cell.x);
-          gridString[h] += line;
-          gridString[h] += lineEdit.substr(cell.x + line.length);
+          gridString[tmpLine] = lineEdit.substr(0, cell.x);
+          gridString[tmpLine] += line;
+          gridString[tmpLine] += lineEdit.substr(cell.x + line.length);
         }
       }
     });

@@ -454,68 +454,68 @@ function createGrid (nbRows, nbCols) {
   for (let i = 0; i < nbRows; i++) {
     grid.push([])
     for (let j = 0; j < nbCols; j++) {
-      grid[i].push({h: -1, w: -1, b: true, r: true})
+      grid[i].push({height: -1, width: -1, hasBottom: true, hasRigth: true})
     }
   }
 
   return grid
 }
 
-function setWeight (grid, i, j, cols) {
+function setWidth (grid, i, j, cols) {
   /* To do it, we put enougth space to write the text.
    * For multi-cell, we divid it among the cells. */
-  let W = Math.max(...Array.from(grid[i][j].value).map(x => x.length)) + 2
+  let tmpWidth = Math.max(...Array.from(grid[i][j].value).map(x => x.length)) + 2
 
   grid[i].forEach((_, c) => {
     if (c < cols) { // To divid
-      const w = Math.ceil(W / (cols - c)) // cols - c will be 1 for the last cell
-      W -= w
-      grid[i][j + c].w = w
+      const localWidth = Math.ceil(tmpWidth / (cols - c)) // cols - c will be 1 for the last cell
+      tmpWidth -= localWidth
+      grid[i][j + c].width = localWidth
     }
   })
 }
 
-function setHeigth (grid, i, j, values) {
+function setHeight (grid, i, j, values) {
   // To do it, we count the line. Extra length to cell with a pipe
   // in the value of the last line, to not be confuse with a border.
-  grid[i][j].h = values.length
+  grid[i][j].height = values.length
   // Extra line
   if (values[values.length - 1].indexOf('|') > 0) {
-    grid[i][j].h += 1
+    grid[i][j].height += 1
   }
 }
 
 function extractAST (gridNode, grid, nbRows, nbCols, getMD) {
   let i = 0
-  /* Fill the grid with value, heigth and weight from the ast */
+  /* Fill the grid with value, height and width from the ast */
   gridNode.children.forEach(th => {
     th.children.forEach(row => {
       row.children.forEach((cell, j) => {
-        let X = 0
+        let X = 0 // x taking colspan and rowspan into account
 
-        while (grid[i][j + X].v) X++
+        while (grid[i][j + X].evaluated) X++
         grid[i][j + X].value = this.all(cell).join('\n\n').split('\n')
 
-        setHeigth(grid, i, j + X, grid[i][j + X].value)
-        setWeight(grid, i, j + X, cell.data.hProperties.colspan)
+        setHeight(grid, i, j + X, grid[i][j + X].value)
+        setWidth(grid, i, j + X, cell.data.hProperties.colspan)
 
         // If we have an empty 1x1 grid, we fill it up with a useless space
         // Otherwise, it will not be parsed.
         if (nbCols === nbRows && nbCols === 1 && !grid[0][0].value.join('\n')) {
           grid[0][0].value = ' '
-          grid[0][0].w = 3
+          grid[0][0].width = 3
         }
 
         // Define the border of each cell
         for (let x = 0; x < cell.data.hProperties.rowspan; x++) {
           for (let y = 0; y < cell.data.hProperties.colspan; y++) {
             // b attribute is for bottom
-            grid[i + x][j + X + y].b = x + 1 === cell.data.hProperties.rowspan
+            grid[i + x][j + X + y].hasBottom = x + 1 === cell.data.hProperties.rowspan
             // r attribute is for right
-            grid[i + x][j + X + y].r = y + 1 === cell.data.hProperties.colspan
+            grid[i + x][j + X + y].hasRigth = y + 1 === cell.data.hProperties.colspan
 
             // set v if a cell has ever been define
-            grid[i + x][j + X + y].v = true
+            grid[i + x][j + X + y].evaluated = ' '
           }
         }
       })
@@ -526,7 +526,7 @@ function extractAST (gridNode, grid, nbRows, nbCols, getMD) {
   // If they is 2 differents tableHeader, so the first one is a header and
   // should be underlined
   if (gridNode.children.length > 1) {
-    grid[gridNode.children[0].children.length - 1][0].H = true
+    grid[gridNode.children[0].children.length - 1][0].isHeader = true
   }
 }
 
@@ -536,19 +536,19 @@ function setSize (grid) {
   // Set the height of each column
   grid.forEach(row => {
     // Find the max
-    const mH = Math.max(...row.map(cell => cell.h))
+    const maxHeight = Math.max(...row.map(cell => cell.height))
 
     // Set it to each cell
-    row.forEach(cell => { cell.h = mH })
+    row.forEach(cell => { cell.height = maxHeight })
   })
 
-  // Set the weight of each row
+  // Set the width of each row
   grid[0].forEach((_, j) => {
     // Find the max
-    const mW = Math.max(...grid.map(row => row[j].w))
+    const maxWidth = Math.max(...grid.map(row => row[j].width))
 
     // Set it to each cell
-    grid.forEach(row => { row[j].w = mW })
+    grid.forEach(row => { row[j].width = maxWidth })
   })
 }
 function generateBorders (grid, nbRows, nbCols, gridString) {
@@ -566,8 +566,8 @@ function generateBorders (grid, nbRows, nbCols, gridString) {
    */
   let first = '+'
   grid[0].forEach((cell, i) => {
-    first += '-'.repeat(cell.w)
-    first += cell.r || i === nbCols - 1 ? '+' : '-'
+    first += '-'.repeat(cell.width)
+    first += cell.hasRigth || i === nbCols - 1 ? '+' : '-'
   })
 
   gridString.push(first)
@@ -581,39 +581,39 @@ function generateBorders (grid, nbRows, nbCols, gridString) {
     row.forEach(cell => {
       cell.y = gridString.length
       cell.x = line.length + 1
-      line += ' '.repeat(cell.w)
-      line += cell.r ? '|' : ' '
+      line += ' '.repeat(cell.width)
+      line += cell.hasRigth ? '|' : ' '
     })
 
     // Add it until the text can fit
-    for (let t = 0; t < row[0].h; t++) {
+    for (let t = 0; t < row[0].height; t++) {
       gridString.push(line)
     }
 
     // "End" line
     // It's the last line of the cell. Actually the border.
-    line = row[0].b ? '+' : '|'
+    line = row[0].hasBottom ? '+' : '|'
 
     row.forEach((cell, j) => {
-      let c = ' '
+      let char = ' '
 
-      if (cell.b) {
-        if (row[0].H) {
-          c = '='
+      if (cell.hasBottom) {
+        if (row[0].isHeader) {
+          char = '='
         } else {
-          c = '-'
+          char = '-'
         }
       }
 
-      line += c.repeat(cell.w)
+      line += char.repeat(cell.width)
 
-      if (cell.b || (j + 1 < nbCols && grid[i][j + 1].b)) {
-        if (cell.r || (i + 1 < nbRows && grid[i + 1][j].r)) {
+      if (cell.hasBottom || (j + 1 < nbCols && grid[i][j + 1].hasBottom)) {
+        if (cell.hasRigth || (i + 1 < nbRows && grid[i + 1][j].hasRigth)) {
           line += '+'
         } else {
-          line += (row[0].H ? '=' : '-')
+          line += (row[0].isHeader ? '=' : '-')
         }
-      } else if (cell.r || (i + 1 < nbRows && grid[i + 1][j].r)) {
+      } else if (cell.hasRigth || (i + 1 < nbRows && grid[i + 1][j].hasRigth)) {
         line += '|'
       } else {
         line += ' '
@@ -628,14 +628,14 @@ function writeText (grid, gridString) {
   grid.forEach(row => {
     row.forEach(cell => {
       if (cell.value && cell.value[0]) {
-        for (let t = 0; t < cell.value.length; t++) {
-          const h = cell.y + t
-          const line = cell.value[t]
-          const lineEdit = gridString[h]
+        for (let tmpCount = 0; tmpCount < cell.value.length; tmpCount++) {
+          const tmpLine = cell.y + tmpCount
+          const line = cell.value[tmpCount]
+          const lineEdit = gridString[tmpLine]
 
-          gridString[h] = lineEdit.substr(0, cell.x)
-          gridString[h] += line
-          gridString[h] += lineEdit.substr(cell.x + line.length)
+          gridString[tmpLine] = lineEdit.substr(0, cell.x)
+          gridString[tmpLine] += line
+          gridString[tmpLine] += lineEdit.substr(cell.x + line.length)
         }
       }
     })
