@@ -8,24 +8,24 @@ const C_NEWLINE = '\n'
 const C_FENCE = '|'
 
 function compilerFactory (nodeType) {
-  let text = null
-  let title = null
+  let text
+  let title
 
   return {
-    compileTitle: function (node) {
+    blockHeading (node) {
       title = this.all(node).join('')
       return ''
     },
-    compileText: function (node) {
-      text = this.all(node).join('\n').replace(/\n/, '\n| ')
+    blockBody (node) {
+      text = this.all(node).join('\n| ')
       return text
     },
-    compileFullNode: function (node) {
-      text = null
-      title = null
+    block (node) {
+      text = ''
+      title = ''
       this.all(node)
       if (title) {
-        return `[[${nodeType}|${title}]]\n| ${text}`
+        return `[[${nodeType} | ${title}]]\n| ${text}`
       } else {
         return `[[${nodeType}]]\n| ${text}`
       }
@@ -110,6 +110,7 @@ module.exports = function blockPlugin (availableBlocks = {}) {
         },
         children: this.tokenizeInline(blockTitle, now),
       }
+
       blockChildren.unshift(titleNode)
     }
 
@@ -140,9 +141,9 @@ module.exports = function blockPlugin (availableBlocks = {}) {
     if (!visitors) return
     Object.keys(availableBlocks).forEach(key => {
       const compiler = compilerFactory(key)
-      visitors[`${key}CustomBlock`] = compiler.compileFullNode
-      visitors[`${key}CustomBlockHeading`] = compiler.compileTitle
-      visitors[`${key}CustomBlockBody`] = compiler.compileText
+      visitors[`${key}CustomBlock`] = compiler.block
+      visitors[`${key}CustomBlockHeading`] = compiler.blockHeading
+      visitors[`${key}CustomBlockBody`] = compiler.blockBody
     })
   }
   // Inject into interrupt rules
