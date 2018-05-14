@@ -284,3 +284,20 @@ test('compile multiline block to markdown', () => {
   expect(result.contents).toBe(contents)
   expect(renderToMarkdown(result.contents).contents).toBe(result.contents)
 })
+
+test('compile multiline block to markdown, with multiline paragraph', () => {
+  const fixture = dedent`
+    [[information]]
+    | content
+    |
+    | > blockquote
+    |
+    | a long
+    | multiline
+    | paragraph
+  `
+  let {contents} = renderToMarkdown(fixture)
+  contents = renderToMarkdown(contents).contents
+  contents = renderToMarkdown(contents).contents.trim()
+  expect(contents).toBe(fixture)
+})
