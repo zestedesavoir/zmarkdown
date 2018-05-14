@@ -282,5 +282,5 @@ test('compile multiline block to markdown', () => {
   expect(contents).toMatchSnapshot()
   const result = renderToMarkdown(contents)
   expect(result.contents).toBe(contents)
-  expect(render(result.contents)).toBe(fixture)
+  expect(renderToMarkdown(result.contents).contents).toBe(result.contents)
 })
