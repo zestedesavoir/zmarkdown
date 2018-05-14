@@ -14,24 +14,24 @@ var C_NEWLINE = '\n';
 var C_FENCE = '|';
 
 function compilerFactory(nodeType) {
-  var text = null;
-  var title = null;
+  var text = void 0;
+  var title = void 0;
 
   return {
-    compileTitle: function compileTitle(node) {
+    blockHeading: function blockHeading(node) {
       title = this.all(node).join('');
       return '';
     },
-    compileText: function compileText(node) {
-      text = this.all(node).join('\n').replace(/\n/, '\n| ');
+    blockBody: function blockBody(node) {
+      text = this.all(node).join('\n| ');
       return text;
     },
-    compileFullNode: function compileFullNode(node) {
-      text = null;
-      title = null;
+    block: function block(node) {
+      text = '';
+      title = '';
       this.all(node);
       if (title) {
-        return '[[' + nodeType + '|' + title + ']]\n| ' + text;
+        return '[[' + nodeType + ' | ' + title + ']]\n| ' + text;
       } else {
         return '[[' + nodeType + ']]\n| ' + text;
       }
@@ -120,6 +120,7 @@ module.exports = function blockPlugin() {
         },
         children: this.tokenizeInline(blockTitle, now)
       };
+
       blockChildren.unshift(titleNode);
     }
 
@@ -150,9 +151,9 @@ module.exports = function blockPlugin() {
     if (!visitors) return;
     Object.keys(availableBlocks).forEach(function (key) {
       var compiler = compilerFactory(key);
-      visitors[key + 'CustomBlock'] = compiler.compileFullNode;
-      visitors[key + 'CustomBlockHeading'] = compiler.compileTitle;
-      visitors[key + 'CustomBlockBody'] = compiler.compileText;
+      visitors[key + 'CustomBlock'] = compiler.block;
+      visitors[key + 'CustomBlockHeading'] = compiler.blockHeading;
+      visitors[key + 'CustomBlockBody'] = compiler.blockBody;
     });
   }
   // Inject into interrupt rules

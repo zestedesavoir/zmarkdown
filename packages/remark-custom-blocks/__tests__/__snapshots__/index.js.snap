@@ -88,6 +88,14 @@ exports[`compile fixture to markdown 1`] = `
 "
 `;
 
+exports[`compile multiline block to markdown 1`] = `
+"[[information]]
+| content
+| > blockquote
+| simple paragraph
+"
+`;
+
 exports[`compile regression1 to markdown 1`] = `
 "content before
 
@@ -99,7 +107,7 @@ with content after
 `;
 
 exports[`compile titled block to markdown 1`] = `
-"[[details|my title]]
+"[[details | **my** title]]
 | content
 "
 `;

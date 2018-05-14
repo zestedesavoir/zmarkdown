@@ -260,11 +260,27 @@ test('compile regression1 to markdown', () => {
 
 test('compile titled block to markdown', () => {
   const {contents} = renderToMarkdown(dedent`
-    [[details| my title]]
+    [[details| **my** title]]
     | content
   `)
 
   expect(contents).toMatchSnapshot()
   const result = renderToMarkdown(contents)
   expect(result.contents).toBe(contents)
+})
+
+test('compile multiline block to markdown', () => {
+  const fixture = dedent`
+    [[information]]
+    | content
+    | > blockquote
+    |
+    | simple paragraph
+  `
+  const {contents} = renderToMarkdown(fixture)
+
+  expect(contents).toMatchSnapshot()
+  const result = renderToMarkdown(contents)
+  expect(result.contents).toBe(contents)
+  expect(render(result.contents)).toBe(fixture)
 })
