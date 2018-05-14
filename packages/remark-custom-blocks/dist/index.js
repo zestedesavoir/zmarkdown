@@ -24,7 +24,7 @@ function compilerFactory(nodeType) {
     },
     blockBody: function blockBody(node) {
       text = this.all(node).map(function (s) {
-        return s.replace(/\n/, '\n| ');
+        return s.replace(/\n/g, '\n| ');
       }).join('\n|\n| ');
       return text;
     },
