@@ -79,6 +79,7 @@ exports[`compile fixture to markdown 1`] = `
 
 [[s]]
 | Multiline block
+|
 | > with blockquote !
 
 | Not a block
@@ -91,7 +92,9 @@ exports[`compile fixture to markdown 1`] = `
 exports[`compile multiline block to markdown 1`] = `
 "[[information]]
 | content
+|
 | > blockquote
+|
 | simple paragraph
 "
 `;

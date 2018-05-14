@@ -17,7 +17,7 @@ function compilerFactory (nodeType) {
       return ''
     },
     blockBody (node) {
-      text = this.all(node).join('\n| ')
+      text = this.all(node).map(s => s.replace(/\n/, '\n| ')).join('\n|\n| ')
       return text
     },
     block (node) {
