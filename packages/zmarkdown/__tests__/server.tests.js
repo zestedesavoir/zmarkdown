@@ -2,7 +2,7 @@ const clone = require('clone')
 const dedent = require('dedent')
 const a = require('axios')
 const fs = require('fs')
-
+const xtend = require('xtend')
 const u = (path) => `http://localhost:27272${path}`
 const epub = u('/epub')
 const html = u('/html')
@@ -201,6 +201,16 @@ describe('Texfile endpoint', () => {
       '\\licence[/tmp/l/by-nc-sa.svg]{CC-BY-NC-SA}' +
       '{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}')
     expect(metadata).toEqual({})
+  })
+
+  it('escapes title and author', async () => {
+    const titleOpts = {authors: ['titi_alone'], title: 'recap #1'}
+    const response = await a.post(texfile,
+      {md: '# foo', opts: xtend(texfileOpts, titleOpts)})
+    expect(response.status).toBe(200)
+
+    const result = response.data
+    expect(result[0]).toMatchSnapshot()
   })
 
   it('does not return metadata', async () => {
