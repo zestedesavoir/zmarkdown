@@ -26,3 +26,23 @@ exports[`Texfile endpoint accepts POSTed markdown 1`] = `
 
 \\\\end{document}"
 `;
+
+exports[`Texfile endpoint escapes title and author 1`] = `
+"\\\\documentclass[contentType]{zmdocument}
+
+\\\\usepackage{blindtext}
+\\\\title{recap \\\\#1}
+\\\\author{titi\\\\_alone}
+\\\\licence[/tmp/l/by-nc-sa.svg]{CC-BY-NC-SA}{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}
+
+\\\\smileysPath{/tmp/s}
+\\\\makeglossaries
+
+\\\\begin{document}
+\\\\maketitle
+\\\\tableofcontents
+
+\\\\levelOneTitle{foo}
+
+\\\\end{document}"
+`;

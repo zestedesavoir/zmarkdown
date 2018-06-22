@@ -1,4 +1,5 @@
 const assert = require('assert')
+const escape = require('rebber/dist/escaper')
 
 const template = (opts, callback) => {
   const {
@@ -30,8 +31,8 @@ const template = (opts, callback) => {
   return callback(null, `\\documentclass[${contentType}]{zmdocument}
 
 \\usepackage{blindtext}
-\\title{${title}}
-\\author{${authors.join(', ')}}
+\\title{${escape(title)}}
+\\author{${escape(authors.join(', '))}}
 ${licenseLine}
 
 \\smileysPath{${smileysDirectory}}
