@@ -20,7 +20,7 @@
     "d": "node --inspect --debug-brk ./node_modules/.bin/jest --runInBand -i"
   },
   "engines": {
-    "node": "8"
+    "node": ">=8"
   },
   "private": true,
   "workspaces": [
