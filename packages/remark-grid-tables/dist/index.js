@@ -501,26 +501,26 @@ function createGrid(nbRows, nbCols) {
   for (var i = 0; i < nbRows; i++) {
     grid.push([]);
     for (var j = 0; j < nbCols; j++) {
-      grid[i].push({ height: -1, weight: -1, hasBottom: true, hasRigth: true });
+      grid[i].push({ height: -1, width: -1, hasBottom: true, hasRigth: true });
     }
   }
 
   return grid;
 }
 
-function setWeight(grid, i, j, cols) {
+function setWidth(grid, i, j, cols) {
   /* To do it, we put enougth space to write the text.
    * For multi-cell, we divid it among the cells. */
-  var tmpWeight = Math.max.apply(Math, _toConsumableArray(Array.from(grid[i][j].value).map(function (x) {
+  var tmpWidth = Math.max.apply(Math, _toConsumableArray(Array.from(grid[i][j].value).map(function (x) {
     return x.length;
   }))) + 2;
 
   grid[i].forEach(function (_, c) {
     if (c < cols) {
       // To divid
-      var localWeight = Math.ceil(tmpWeight / (cols - c)); // cols - c will be 1 for the last cell
-      tmpWeight -= localWeight;
-      grid[i][j + c].weight = localWeight;
+      var localWidth = Math.ceil(tmpWidth / (cols - c)); // cols - c will be 1 for the last cell
+      tmpWidth -= localWidth;
+      grid[i][j + c].width = localWidth;
     }
   });
 }
@@ -539,7 +539,7 @@ function extractAST(gridNode, grid, nbRows, nbCols, getMD) {
   var _this = this;
 
   var i = 0;
-  /* Fill the grid with value, height and weight from the ast */
+  /* Fill the grid with value, height and width from the ast */
   gridNode.children.forEach(function (th) {
     th.children.forEach(function (row) {
       row.children.forEach(function (cell, j) {
@@ -550,13 +550,13 @@ function extractAST(gridNode, grid, nbRows, nbCols, getMD) {
         }grid[i][j + X].value = _this.all(cell).join('\n\n').split('\n');
 
         setHeight(grid, i, j + X, grid[i][j + X].value);
-        setWeight(grid, i, j + X, cell.data.hProperties.colspan);
+        setWidth(grid, i, j + X, cell.data.hProperties.colspan);
 
-        // If we have an empty 1x1 grid, we fill it up with a useless space
+        // If it's empty, we fill it up with a useless space
         // Otherwise, it will not be parsed.
-        if (nbCols === nbRows && nbCols === 1 && !grid[0][0].value.join('\n')) {
-          grid[0][0].value = ' ';
-          grid[0][0].weight = 3;
+        if (!grid[0][0].value.join('\n')) {
+          grid[0][0].value = [' '];
+          grid[0][0].width = 3;
         }
 
         // Define the border of each cell
@@ -599,16 +599,16 @@ function setSize(grid) {
     });
   });
 
-  // Set the weight of each row
+  // Set the width of each row
   grid[0].forEach(function (_, j) {
     // Find the max
-    var maxWeight = Math.max.apply(Math, _toConsumableArray(grid.map(function (row) {
-      return row[j].weight;
+    var maxWidth = Math.max.apply(Math, _toConsumableArray(grid.map(function (row) {
+      return row[j].width;
     })));
 
     // Set it to each cell
     grid.forEach(function (row) {
-      row[j].weight = maxWeight;
+      row[j].width = maxWidth;
     });
   });
 }
@@ -627,7 +627,7 @@ function generateBorders(grid, nbRows, nbCols, gridString) {
    */
   var first = '+';
   grid[0].forEach(function (cell, i) {
-    first += '-'.repeat(cell.weight);
+    first += '-'.repeat(cell.width);
     first += cell.hasRigth || i === nbCols - 1 ? '+' : '-';
   });
 
@@ -642,7 +642,7 @@ function generateBorders(grid, nbRows, nbCols, gridString) {
     row.forEach(function (cell) {
       cell.y = gridString.length;
       cell.x = line.length + 1;
-      line += ' '.repeat(cell.weight);
+      line += ' '.repeat(cell.width);
       line += cell.hasRigth ? '|' : ' ';
     });
 
@@ -666,7 +666,7 @@ function generateBorders(grid, nbRows, nbCols, gridString) {
         }
       }
 
-      line += char.repeat(cell.weight);
+      line += char.repeat(cell.width);
 
       if (cell.hasBottom || j + 1 < nbCols && grid[i][j + 1].hasBottom) {
         if (cell.hasRigth || i + 1 < nbRows && grid[i + 1][j].hasRigth) {
