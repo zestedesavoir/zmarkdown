@@ -501,7 +501,7 @@ multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|c|}{
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 2}|p{\\\\linewidth / 2}|} \\\\hline
 title & image \\\\\\\\ \\\\hline
-space & \\\\image{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg} \\\\\\\\ \\\\hline
+space & \\\\image{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg}[space] \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
