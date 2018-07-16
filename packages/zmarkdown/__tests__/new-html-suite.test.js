@@ -150,3 +150,20 @@ describe('tables', () => {
     return expect(renderString(input)).resolves.toContain('<td><code>gauche \\| droite</code></td>')
   })
 })
+
+describe('images', () => {
+  it('transform block images into figures', () => {
+    const input = dedent`
+    one image
+    
+    ![wrapped into figure](http://blabla.fr)
+    `
+    return expect(renderString(input)).resolves.toMatchSnapshot()
+  })
+  it('does transform inline images into figures', () => {
+    const input = dedent`
+    one image ![not wrapped into figure because inline](http://blabla.fr) car inline
+    `
+    return expect(renderString(input)).resolves.toMatchSnapshot()
+  })
+})
