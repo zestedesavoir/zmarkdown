@@ -155,3 +155,25 @@ test('renders to markdown', () => {
   const recompiled = renderToMarkdown(contents).contents
   expect(recompiled).toBe(contents)
 })
+
+test('renders case insensitive', () => {
+  const render = text => unified()
+    .use(reParse)
+    .use(plugin, config)
+    .use(remark2rehype)
+    .use(stringify)
+    .processSync(text)
+
+  delete config.classes
+
+  const {contents} = render(dedent`
+    :p is same as :P
+    
+    :d is same as :D
+    
+    o_O is same as o_o and O_O
+    
+    :magicien: is same as :MAGICIEN: and as :mAgIcIeN:
+  `)
+  expect(contents).toMatchSnapshot()
+})
