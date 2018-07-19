@@ -6,7 +6,6 @@ const visit = require('unist-util-visit')
 const dedent = require('dedent')
 const clone = require('clone')
 
-const fixSVG = require('./utils/svg-hack')
 const createWrapper = require('./utils/wrappers')
 const remarkParse = require('remark-parse')
 
@@ -158,19 +157,7 @@ function getHTMLProcessor (remarkConfig, rebberConfig, target) {
     .use(rehypeStringify)
 }
 
-const postProcess = {
-  html (vfile) {
-    // SVG hack
-    if (vfile.contents && vfile.contents.includes('<svg')) {
-      vfile.contents = fixSVG(vfile.contents)
-    }
-    return vfile
-  },
-}
-
 const rendererFactory = ({remarkConfig, rebberConfig}, target = 'html') => {
-
-  const postProcessFn = postProcess.hasOwnProperty(target) ? postProcess[target] : undefined
 
   return (input, cb) => {
     [remarkConfig, rebberConfig] = [clone(remarkConfig), clone(rebberConfig)]
@@ -184,7 +171,6 @@ const rendererFactory = ({remarkConfig, rebberConfig}, target = 'html') => {
         mdProcessor.process(input, (err, vfile) => {
           if (err) return reject(err)
 
-          if (postProcessFn) vfile = postProcessFn(vfile)
           resolve(vfile)
         }))
     }
@@ -192,7 +178,6 @@ const rendererFactory = ({remarkConfig, rebberConfig}, target = 'html') => {
     mdProcessor.process(input, (err, vfile) => {
       if (err) return cb(err)
 
-      if (postProcessFn) vfile = postProcessFn(vfile)
       cb(null, vfile)
     })
   }

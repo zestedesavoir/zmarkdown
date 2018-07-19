@@ -44,6 +44,6 @@
     "eslint": "^5.1.0",
     "jest": "^23.4.1",
     "remark-parse": "^5.0.0",
-    "unified": "^6.1.5"
+    "unified": "^7.0.0"
   }
 }
