@@ -2,6 +2,7 @@ import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
+import visit from 'unist-util-visit'
 import remark2rehype from 'remark-rehype'
 import remarkStringify from 'remark-stringify'
 import remarkCaption from '../../remark-captions/src'
@@ -19,7 +20,7 @@ const config = {
     '^^': '/static/smileys/hihi.png',
     ':o': '/static/smileys/huh.png',
     ':p': '/static/smileys/langue.png',
-    ':magicien:': '/static/smileys/magicien.png',
+    ':magICIen:': '/static/smileys/magicien.png',
     ':colere2:': '/static/smileys/mechant.png',
     ':ninja:': '/static/smileys/ninja.png',
     'x(': '/static/smileys/pinch.png',
@@ -115,7 +116,7 @@ test('emoticons without class', () => {
   expect(contents).toMatchSnapshot()
 })
 
-test('Errors without config', () => {
+test('errors without config', () => {
   const fail = () => unified()
     .use(reParse)
     .use(remark2rehype)
@@ -156,24 +157,22 @@ test('renders to markdown', () => {
   expect(recompiled).toBe(contents)
 })
 
-test('renders case insensitive', () => {
+test('emoticons are case insensitive', () => {
   const render = text => unified()
     .use(reParse)
     .use(plugin, config)
+    .use(() => (tree) => {
+      visit(tree, 'emoticon', (node) => {
+        node.data.hProperties.alt = ''
+      })
+    })
     .use(remark2rehype)
     .use(stringify)
     .processSync(text)
 
-  delete config.classes
-
-  const {contents} = render(dedent`
-    :p is same as :P
-    
-    :d is same as :D
-    
-    o_O is same as o_o and O_O
-    
-    :magicien: is same as :MAGICIEN: and as :mAgIcIeN:
-  `)
-  expect(contents).toMatchSnapshot()
+  expect(render(`:p`).contents).toBe(render(`:P`).contents)
+  expect(render(`:d`).contents).toBe(render(`:D`).contents)
+  expect(render(`:magicien:`).contents).toBe(render(`:MAGICIEN:`).contents)
+  expect(render(`:magicien:`).contents).toBe(render(`:MagICIEn:`).contents)
+  expect(render(`:magICIen:`).contents).toBe(render(`:MagICIEn:`).contents)
 })
