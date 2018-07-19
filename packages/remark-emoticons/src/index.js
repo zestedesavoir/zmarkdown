@@ -7,11 +7,16 @@ const SPACE = ' '
 module.exports = function inlinePlugin (ctx) {
   const emoticonClasses = ctx && ctx.classes
   const emoticons = ctx && ctx.emoticons
-  const pattern = Object.keys(emoticons).map(escapeRegExp).join('|')
 
-  if (!pattern) {
+  if (!emoticons) {
     throw new Error('remark-emoticons needs to be passed a configuration object as option')
   }
+
+  for (const [key, val] of Object.entries(emoticons)) {
+    emoticons[key.toLowerCase()] = val
+  }
+
+  const pattern = Object.keys(emoticons).map(escapeRegExp).join('|')
 
   const regex = new RegExp(`(\\s|^)(${pattern})(\\s|$)`, 'i')
 
@@ -34,8 +39,8 @@ module.exports = function inlinePlugin (ctx) {
         toEat = toEat.substring(0, toEat.length - 1)
       }
       const emoticon = toEat.trim()
-      const src = (emoticons[emoticon] || emoticons[emoticon.toLowerCase()] ||
-        emoticons[emoticon.toUpperCase()])
+      const src = emoticons[emoticon.toLowerCase()]
+
       const emoticonNode = {
         type: 'emoticon',
         value: emoticon,
