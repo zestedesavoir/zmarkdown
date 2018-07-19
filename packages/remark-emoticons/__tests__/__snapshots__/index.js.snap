@@ -32,13 +32,6 @@ exports[`emoticons without class 1`] = `
 <p>Smiley after another node w/3 spaces: <a href=\\"#foo\\">link</a>   <img src=\\"/static/smileys/smile.png\\" alt=\\":)\\"></p>"
 `;
 
-exports[`renders case insensitive 1`] = `
-"<p><img src=\\"/static/smileys/langue.png\\" alt=\\":p\\"> is same as <img src=\\"/static/smileys/langue.png\\" alt=\\":P\\"></p>
-<p><img src=\\"/static/smileys/heureux.png\\" alt=\\":d\\"> is same as <img src=\\"/static/smileys/heureux.png\\" alt=\\":D\\"></p>
-<p><img src=\\"/static/smileys/blink.gif\\" alt=\\"o_O\\"> is same as <img alt=\\"o_o\\"> and <img alt=\\"O_O\\"></p>
-<p><img src=\\"/static/smileys/magicien.png\\" alt=\\":magicien:\\"> is same as <img src=\\"/static/smileys/magicien.png\\" alt=\\":MAGICIEN:\\"> and as <img src=\\"/static/smileys/magicien.png\\" alt=\\":mAgIcIeN:\\"></p>"
-`;
-
 exports[`renders to markdown 1`] = `
 "Hello :) Hey :D
 
