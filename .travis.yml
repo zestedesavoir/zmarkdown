@@ -16,6 +16,8 @@ env:
 
 before_install:
   - npm install -g pm2
+
+install:
   - npm install
   - npm run bootstrap
 
