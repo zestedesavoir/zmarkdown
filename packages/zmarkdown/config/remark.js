@@ -294,7 +294,6 @@ const remarkConfig = {
       },
     },
   },
-
   captions: {
     external: {
       table: 'Table:',

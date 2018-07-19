@@ -69,6 +69,32 @@ const wrappers = {
   ],
 }
 
+const imageToFigure = (img, index, parent) => {
+  if (parent.children.length === 1 && parent.type === 'paragraph') {
+    if (!img.alt) {
+      return
+    }
+    const figureCaptionNode = {
+      type: 'figcaption',
+      children: [
+        {
+          type: 'text',
+          value: img.alt,
+        },
+      ],
+      data: {
+        hName: 'figcaption',
+      },
+    }
+    parent.type = 'figure'
+    parent.children = [clone(img), figureCaptionNode]
+    parent.data = {
+      hName: 'figure',
+    }
+  }
+}
+
+
 const zmdParser = (config, target) => {
   const mdProcessor = unified()
     .use(remarkParse, config.reParse)
@@ -82,7 +108,7 @@ const zmdParser = (config, target) => {
     .use(remarkAbbr)
     .use(remarkAlign, config.alignBlocks)
     .use(remarkCaptions, config.captions)
-    .use(remarkComments)
+    .use(remarkComments, config.comments)
     .use(remarkCustomBlocks, config.customBlocks)
     .use(remarkDisableTokenizers, config.disableTokenizers)
     .use(remarkEmoticons, config.emoticons)
@@ -98,6 +124,8 @@ const zmdParser = (config, target) => {
     .use(remarkSubSuper)
     .use(remarkTrailingSpaceHeading)
     .use(() => (tree, vfile) => {
+      // implement old functionality that transforms block images into figure
+      visit(tree, 'image', imageToFigure)
       /* extract some metadata for frontends */
 
       // if we don't have any headings, we add a flag to disable

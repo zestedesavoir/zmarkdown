@@ -15,7 +15,7 @@ module.exports = function inlinePlugin(ctx) {
     throw new Error('remark-emoticons needs to be passed a configuration object as option');
   }
 
-  var regex = new RegExp('(\\s|^)(' + pattern + ')(\\s|$)');
+  var regex = new RegExp('(\\s|^)(' + pattern + ')(\\s|$)', 'i');
 
   function locator(value, fromIndex) {
     var keep = regex.exec(value);
@@ -36,13 +36,14 @@ module.exports = function inlinePlugin(ctx) {
         toEat = toEat.substring(0, toEat.length - 1);
       }
       var emoticon = toEat.trim();
+      var src = emoticons[emoticon] || emoticons[emoticon.toLowerCase()] || emoticons[emoticon.toUpperCase()];
       var emoticonNode = {
         type: 'emoticon',
         value: emoticon,
         data: {
           hName: 'img',
           hProperties: {
-            src: emoticons[emoticon],
+            src: src,
             alt: emoticon
           }
         }
