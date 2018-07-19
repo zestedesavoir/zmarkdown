@@ -9,18 +9,29 @@ processor][processor] and its [**MDAST**][mdast] syntax tree, [**rehype**][rehyp
 
 ### Prerequisites
 
-* node 8
-* [yarn](https://yarnpkg.com)
+* node >= 8
+* npm >= 6
 
 ### Installation
 
 1. clone
-2. `yarn`
+1. `npm install`
+1. `npm run bootstrap`
 
 This project uses [Jest][jest] for testing. It is recommended to install the Jest CLI tools globally, and run Jest in watch mode when developing.
 
 * `npm install -g jest`
 * `jest --watch --notify` (`--notify` sends desktop notifications when tests run)
+
+### Running the Tests
+
+* `npm run test`
+
+    This script tests all packages.
+
+* `npm run clean`
+
+    This script clears local dependencies, reinstalls the project and runs all tests.
 
 ## Packages
 
