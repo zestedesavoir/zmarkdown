@@ -871,7 +871,6 @@ exports[`mix-5 1`] = `
 "\\\\image{http://www.numerama.com/content/uploads/2016/07/espace.jpg}[espace\\\\textsuperscript{\\\\ref{footnote:node}}]
 
 
-
 \\\\footnotetext[node]{\\\\label{footnote:node} Two things are infinite: the universe and human stupidity.}"
 `;
 
