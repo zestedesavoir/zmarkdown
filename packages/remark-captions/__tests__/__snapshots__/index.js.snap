@@ -245,23 +245,23 @@ b<em>a</em>r</p>
 
 exports[`legend in paragraph 1`] = `
 "<p>foo</p>
-<p><figure><img src=\\"\\"><figcaption>1 this is parsed as legend</figcaption></figure></p>
+<figure><img src=\\"\\"><figcaption>1 this is parsed as legend</figcaption></figure>
 <p>baz</p>
 <p><img src=\\"\\">
 aFigure: 2 this is displayed as text</p>
 <p><img src=\\"https://zestedesavoir.com/static/images/home-clem.4a2f792744c9.png\\" alt=\\"alt 2b\\">
 this is displayed as text</p>
-<p>foo
-<figure><img src=\\"\\"><figcaption>3 this is a legend</figcaption></figure></p>
-<p><figure><img src=\\"\\"><figcaption>4 this is a legend, remainder of the paragraph goes into
+<p>foo</p>
+<figure><img src=\\"\\"><figcaption>3 this is a legend</figcaption></figure>
+<figure><img src=\\"\\"><figcaption>4 this is a legend, remainder of the paragraph goes into
 the
-legend</figcaption></figure></p>
+legend</figcaption></figure>
 <p>Figure: 5 this is a text with and image
 <img src=\\"\\">
 in the middle</p>
-<p>Figure: 6 displayed as text
-<figure><img src=\\"\\"><figcaption>7 is a legend</figcaption></figure></p>
-<p><figure><img src=\\"\\"><figcaption>8 is a legend.</figcaption></figure></p>
+<p>Figure: 6 displayed as text</p>
+<figure><img src=\\"\\"><figcaption>7 is a legend</figcaption></figure>
+<figure><img src=\\"\\"><figcaption>8 is a legend.</figcaption></figure>
 <p>Figure: 9 this is a text.</p>"
 `;
 
