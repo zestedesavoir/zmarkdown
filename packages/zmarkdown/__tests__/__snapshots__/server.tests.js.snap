@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HTML endpoint accepts POSTed markdown 1`] = `"<h3 id=\\"foo\\">foo<a aria-hidden href=\\"#foo\\"><span class=\\"icon icon-link\\"></span></a></h3>"`;
+exports[`HTML endpoint accepts POSTed markdown 1`] = `"<h3 id=\\"foo\\">foo<a aria-hidden=\\"true\\" href=\\"#foo\\"><span class=\\"icon icon-link\\"></span></a></h3>"`;
 
 exports[`LaTeX endpoint accepts POSTed markdown 1`] = `
 "\\\\levelOneTitle{foo}

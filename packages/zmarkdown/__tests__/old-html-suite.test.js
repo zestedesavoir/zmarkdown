@@ -69,7 +69,7 @@ describe('#heading-shift', () => {
     const config = remarkConfigOverride({headingShifter: 1})
     return expect(renderString(config)('### should be h4')).resolves.toHTML(
       '<h4 id="should-be-h4">' +
-      'should be h4<a aria-hidden href="#should-be-h4"><span class="icon ' +
+      'should be h4<a aria-hidden="true" href="#should-be-h4"><span class="icon ' +
       'icon-link"></span></a></h4>')
   })
 
@@ -77,14 +77,14 @@ describe('#heading-shift', () => {
     const config = remarkConfigOverride({headingShifter: 10})
     return expect(renderString(config)('### should be h6')).resolves.toHTML(
       '<h6 id="should-be-h6">should be h6<a' +
-      ' aria-hidden href="#should-be-h6"><span class="icon icon-link"></span></a></h6>')
+      ' aria-hidden="true" href="#should-be-h6"><span class="icon icon-link"></span></a></h6>')
   })
 
   it(`shifts before range`, () => {
     const config = remarkConfigOverride({headingShifter: -10})
     return expect(renderString(config)('### should be h1')).resolves.toHTML(
       '<h1 id="should-be-h1">should be' +
-      ' h1<a aria-hidden href="#should-be-h1"><span class="icon icon-link"></span></a></h1>')
+      ' h1<a aria-hidden="true" href="#should-be-h1"><span class="icon icon-link"></span></a></h1>')
   })
 })
 

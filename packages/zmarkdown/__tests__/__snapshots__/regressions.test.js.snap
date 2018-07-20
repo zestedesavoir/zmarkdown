@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Regression tests HTML endpoint #188 It does not crash on unsupported languages fenced code blocks 1`] = `
-"<h3 id=\\"foo\\">foo<a aria-hidden href=\\"#foo\\"><span class=\\"icon icon-link\\"></span></a></h3>
+"<h3 id=\\"foo\\">foo<a aria-hidden=\\"true\\" href=\\"#foo\\"><span class=\\"icon icon-link\\"></span></a></h3>
 <div class=\\"hljs-code-div\\"><div class=\\"hljs-line-numbers\\"><span></span></div><pre><code class=\\"hljs language-foobar\\">console.error(\\"foo\\", true)
 </code></pre></div>
 <div class=\\"hljs-code-div\\"><div class=\\"hljs-line-numbers\\"><span></span></div><pre><code class=\\"hljs language-js\\"><span class=\\"hljs-built_in\\">console</span>.error(<span class=\\"hljs-string\\">\\"foo\\"</span>, <span class=\\"hljs-literal\\">true</span>)

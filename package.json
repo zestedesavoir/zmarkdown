@@ -7,6 +7,7 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
+    "cross-env": "^5.2.0",
     "eslint": "^5.1.0",
     "jest": "^23.4.1",
     "jest-environment-node-debug": "^2.0.0",
@@ -15,7 +16,7 @@
   "scripts": {
     "pretest": "npm run lint && lerna run pretest --scope zmarkdown",
     "bootstrap": "lerna bootstrap --hoist",
-    "test": "jest",
+    "test": "cross-env DEST=/tmp jest",
     "lint": "eslint .",
     "posttest": "lerna run posttest --scope zmarkdown",
     "d": "node --inspect --debug-brk ./node_modules/.bin/jest --runInBand -i",
