@@ -151,19 +151,56 @@ describe('tables', () => {
   })
 })
 
-describe('images', () => {
-  it('transform block images into figures', () => {
+describe('images become figures:', () => {
+  it('works with only an image', () => {
     const input = dedent`
-    one image
-    
-    ![wrapped into figure](http://blabla.fr)
-    `
+      ![wrapped into _figure_](http://blabla.fr)`
     return expect(renderString(input)).resolves.toMatchSnapshot()
   })
-  it('does transform inline images into figures', () => {
+
+  it('does not apply to images not alone in a block', async () => {
     const input = dedent`
-    one image ![not wrapped into figure because inline](http://blabla.fr) car inline
+      ![wrapped into figure](http://blabla.fr)
+      one image`
+
+    expect(await renderString(input)).not.toContain('<figure')
+
+    const input2 = dedent`
+      one image
+      ![wrapped into figure](http://blabla.fr)`
+
+    expect(await renderString(input2)).not.toContain('<figure')
+  })
+
+  it('does not apply to images without [alt]', async () => {
+    const input = dedent`![](http://example.com)`
+
+    expect(await renderString(input)).not.toContain('<figure')
+  })
+
+  it('does not transform inline images', async () => {
+    const input = dedent`
+      one image ![not wrapped into figure because inline](http://blabla.fr)
     `
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    expect(await renderString(input)).not.toContain('<figure')
+  })
+
+  it('does not apply when a caption is present', async () => {
+    const input = dedent`
+      ![foo](http://example.com)
+
+      ![](http://example.com)
+      Figure: Caption
+
+      ![foo](http://example.com)
+      Figure: Caption
+
+      ![](http://example.com)
+      Figure:
+    `
+    const result = await renderString(input)
+
+    expect(result).not.toContain('<p><figure')
+    expect(result).toMatchSnapshot()
   })
 })

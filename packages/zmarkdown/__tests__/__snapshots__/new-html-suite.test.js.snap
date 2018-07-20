@@ -1,8 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`images does transform inline images into figures 1`] = `"<p>one image <img src=\\"http://blabla.fr\\" alt=\\"not wrapped into figure because inline\\"> car inline</p>"`;
-
-exports[`images transform block images into figures 1`] = `
-"<p>one image</p>
-<figure><img src=\\"http://blabla.fr\\" alt=\\"wrapped into figure\\"><figcaption>wrapped into figure</figcaption></figure>"
+exports[`images become figures: does not apply when a caption is present 1`] = `
+"<figure><img src=\\"http://example.com\\" alt=\\"foo\\"><figcaption>foo</figcaption></figure>
+<figure><img src=\\"http://example.com\\"><figcaption>Caption</figcaption></figure>
+<figure><img src=\\"http://example.com\\" alt=\\"foo\\"><figcaption>Caption</figcaption></figure>
+<figure><img src=\\"http://example.com\\"><figcaption></figcaption></figure>"
 `;
+
+exports[`images become figures: works with only an image 1`] = `"<figure><img src=\\"http://blabla.fr\\" alt=\\"wrapped into _figure_\\"><figcaption>wrapped into _figure_</figcaption></figure>"`;
