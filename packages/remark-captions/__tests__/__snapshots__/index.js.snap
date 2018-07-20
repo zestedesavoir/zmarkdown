@@ -52,6 +52,7 @@ exports[`code 1`] = `
 
 exports[`compiles to markdown when at least 1 block caption 1`] = `
 "foo
+
 ![](img)
 Figure: 3 this is a legend
 
@@ -65,6 +66,7 @@ Figure: 5 this is a text with and image
 in the middle
 
 Figure: 6 displayed as text
+
 ![](img)
 Figure: 7 is a legend
 

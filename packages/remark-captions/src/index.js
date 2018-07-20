@@ -49,6 +49,36 @@ function plugin (opts) {
 
     Object.keys(externalBlocks).forEach(nodeType =>
       visit(tree, nodeType, externLegendVisitorCreator(externalBlocks)))
+    visit(tree, 'figure', (figure, index, parent) => {
+      if (parent.type === 'paragraph') {
+        if (index === 0) {
+          parent.type = figure.type
+          parent.data = figure.data
+          parent.children = figure.children
+          return
+        }
+        parent.type = 'tempWrapper'
+      }
+    })
+    visit(tree, 'tempWrapper', (wrapper, index, parent) => {
+      const newChildren = []
+      wrapper.children.forEach((node, i) => {
+        const child = clone(node)
+        if (child.type === 'figure') {
+          newChildren.push(child)
+          return
+        }
+        if (child.type === 'text' && !child.value.trim()) {
+          return
+        } else if (child.type === 'text') {
+          child.value = child.value.trim()
+        }
+        wrapper.children[i].type = 'paragraph'
+        wrapper.children[i].children = [child]
+        newChildren.push(wrapper.children[i])
+      })
+      parent.children.splice(index, 1, ...newChildren)
+    })
   }
 }
 
