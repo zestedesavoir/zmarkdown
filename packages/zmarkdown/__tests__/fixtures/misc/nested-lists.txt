@@ -28,6 +28,6 @@ plain text
     * item 4-2
     * item 4-3
 
-        Paragraph under item 4-3
+        Code under item 4-3
 
     Paragraph under item 4
