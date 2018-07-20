@@ -23,7 +23,7 @@ const remarkConfig = {
     gfm: true,
     commonmark: false,
     footnotes: true,
-    pedantic: true,
+    pedantic: false,
     /* sets list of known blocks to nothing, otherwise <h3>hey</h3> would become
     &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
     blocks: [],

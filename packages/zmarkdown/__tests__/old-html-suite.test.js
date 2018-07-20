@@ -598,8 +598,8 @@ describe('#misc', () => {
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
 
-  it.skip(`properly renders stronintags.txt`, function () {
-    const filepath = `${dir}/stronintags.txt`
+  it.skip(`properly renders strongintags.txt`, function () {
+    const filepath = `${dir}/strongintags.txt`
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
 

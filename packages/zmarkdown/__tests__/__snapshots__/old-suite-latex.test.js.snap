@@ -289,14 +289,14 @@ exports[`#basic properly renders codeblock-in-list.txt 1`] = `
 \\\\item A list item with a code block
 
 \\\\begin{CodeBlock}{text}
-Some *code*
+  Some *code*
 \\\\end{CodeBlock}
 \\\\item Another list item
 
 \\\\begin{CodeBlock}{text}
-More code
+  More code
 
-And more code
+  And more code
 \\\\end{CodeBlock}
 \\\\end{itemize}"
 `;
@@ -2892,8 +2892,8 @@ asda asdf asdfasd
 exports[`#misc properly renders lists3.txt 1`] = `
 "\\\\begin{itemize}
 \\\\item blah blah blah
-sdf asdf asdf asdf asdf
-asda asdf asdfasd
+  sdf asdf asdf asdf asdf
+  asda asdf asdfasd
 \\\\end{itemize}"
 `;
 
@@ -3111,7 +3111,7 @@ exports[`#misc properly renders smart_em.txt 1`] = `
 
 
 
-this\\\\textit{is}not\\\\_emphasis
+this\\\\_is\\\\_not\\\\_emphasis
 
 
 
@@ -3119,11 +3119,11 @@ this\\\\textit{is}not\\\\_emphasis
 
 
 
-\\\\textit{punctuation}with\\\\textit{emphasis}\\\\ref{_punctuation_with_emphasis_}
+\\\\textit{punctuation\\\\_with\\\\_emphasis}\\\\ref{_punctuation_with_emphasis_}
 
 
 
-punctuation\\\\textit{without}emphasis\\\\ref{punctuation_without_emphasis}"
+punctuation\\\\_without\\\\_emphasis\\\\ref{punctuation_without_emphasis}"
 `;
 
 exports[`#misc properly renders span.txt 1`] = `
@@ -3142,10 +3142,10 @@ exports[`#misc properly renders span.txt 1`] = `
 <baza id=\\"someId\\"> Foo \\\\textit{bar} Baz </baza>"
 `;
 
-exports[`#misc properly renders strong-with-underscores.txt 1`] = `"\\\\textbf{this\\\\textit{is}strong}"`;
+exports[`#misc properly renders strong-with-underscores.txt 1`] = `"\\\\textbf{this\\\\_is\\\\_strong}"`;
 
 exports[`#misc properly renders underscores.txt 1`] = `
-"THIS\\\\textit{SHOULD}STAY\\\\textit{AS}IS
+"THIS\\\\_SHOULD\\\\_STAY\\\\_AS\\\\_IS
 
 
 
