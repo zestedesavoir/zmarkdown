@@ -1,6 +1,6 @@
 {
   "name": "rehype-html-blocks",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rehype-html-blocks",
     "type": "git"
