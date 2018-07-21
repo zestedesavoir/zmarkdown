@@ -76,13 +76,14 @@
   "devDependencies": {
     "axios": "^0.18.0",
     "clone": "^2.1.1",
+    "cross-env": "^5.2.0",
     "eslint": "^5.1.0",
     "html-differ": "^1.3.4"
   },
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run server && eslint .",
-    "test": "jest",
+    "test": "cross-env DEST=/tmp jest",
     "posttest": "npm run stop",
     "watch": "jest --watch",
     "server": "pm2 start -f server/index.js -i 3 --max-memory-restart 150M",
