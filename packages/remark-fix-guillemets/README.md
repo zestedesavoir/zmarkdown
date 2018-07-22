@@ -1,7 +1,10 @@
 # remark-fix-guillemets [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
-This plugin is used to fix `typographic-plugin` when this plugin is used with `remark-parse`.
-Indeed, when `<<a>>` is parsed by `remark-parse`, the resulting tree is:
+This plugin fixes `typographic-plugin` when used together with `remark-parse`.
+
+## Motivation
+
+When `<<a>>` is parsed by `remark-parse` the resulting tree is:
 
 ```
 root[1] (1:1-1:6, 0-5)
@@ -11,9 +14,10 @@ root[1] (1:1-1:6, 0-5)
    └─ text: ">" (1:5-1:6, 0-1)
 ```
 
-Because remark-textr is used to correct text nodes, here, `<<` is not replaced by `«`.
+As you see here `<<` got split into a text node `<` and an HTML node.
+Since [remark-textr][remark-textr] only gets applied to 'text' nodes, `<<` is not replaced by `«`.
 
-This plugin replaces the previous tree by:
+This plugin replaces the previous tree with:
 ```
 root[1] (1:1-1:6, 0-5)
 └─ paragraph[1] (1:1-1:6, 0-5)
@@ -72,3 +76,5 @@ unified()
 [zds]: https://zestedesavoir.com
 
 [npm]: https://www.npmjs.com/package/remark-fix-guillemets
+
+[remark-textr]: https://github.com/remarkjs/remark-textr
