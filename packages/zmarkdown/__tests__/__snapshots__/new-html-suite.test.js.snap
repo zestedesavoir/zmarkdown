@@ -8,3 +8,9 @@ exports[`images become figures: does not apply when a caption is present 1`] = `
 `;
 
 exports[`images become figures: works with only an image 1`] = `"<figure><img src=\\"http://blabla.fr\\" alt=\\"wrapped into _figure_\\"><figcaption>wrapped into _figure_</figcaption></figure>"`;
+
+exports[`ping does not ping when email adress 1`] = `
+"<p><a href=\\"/membres/voir/test/\\" rel=\\"nofollow\\" class=\\"ping ping-link\\">@<span class=\\"ping-username\\">test</span></a></p>
+<p>I summon <a href=\\"/membres/voir/test/\\" rel=\\"nofollow\\" class=\\"ping ping-link\\">@<span class=\\"ping-username\\">test</span></a>!</p>
+<p>My email address is test@test.com.</p>"
+`;

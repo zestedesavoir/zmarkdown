@@ -204,3 +204,19 @@ describe('images become figures:', () => {
     expect(result).toMatchSnapshot()
   })
 })
+
+describe('ping', () => {
+  it(`does not ping when email adress`, () => {
+    remarkConfig.ping.pingUsername = (_username) => true
+
+    const input = dedent`
+      @test
+      
+      I summon @test!
+      
+      My email address is test@test.com.
+    `
+
+    return expect(renderString(input)).resolves.toMatchSnapshot()
+  })
+})
