@@ -3,6 +3,7 @@ const toVFile = require('to-vfile')
 const unified = require('unified')
 const visit = require('unist-util-visit')
 
+const shortid = require('shortid')
 const dedent = require('dedent')
 const clone = require('clone')
 
@@ -21,6 +22,7 @@ const remarkGridTables = require('remark-grid-tables/src')
 const remarkHeadingShifter = require('remark-heading-shift/src')
 const remarkIframes = require('remark-iframes/src')
 const remarkImagesDownload = require('remark-images-download/src')
+const remarkImageToFigure = require('./plugins/remark-image-to-figure')
 const remarkKbd = require('remark-kbd/src')
 const remarkMath = require('remark-math')
 const remarkNumberedFootnotes = require('remark-numbered-footnotes/src')
@@ -28,16 +30,16 @@ const remarkPing = require('remark-ping/src')
 const remarkSubSuper = require('remark-sub-super/src')
 const remarkTextr = require('./plugins/remark-textr')
 const remarkTrailingSpaceHeading = require('remark-heading-trailing-spaces')
-const remarkImageToFigure = require('./plugins/remark-image-to-figure')
 
 const remark2rehype = require('remark-rehype')
 
-const rehypeKatex = require('rehype-katex')
+const rehypeAutolinkHeadings = require('rehype-autolink-headings')
 const rehypeFootnotesTitles = require('rehype-footnotes-title')
-const rehypeLineNumbers = require('./utils/rehype-line-numbers')
 const rehypeHighlight = require('rehype-highlight')
 const rehypeHTMLBlocks = require('rehype-html-blocks')
-const rehypeAutolinkHeadings = require('rehype-autolink-headings')
+const rehypeKatex = require('rehype-katex')
+const rehypeLineNumbers = require('./utils/rehype-line-numbers')
+const rehypePostfixFootnotes = require('rehype-postfix-footnote-anchors')
 const rehypeSlug = require('rehype-slug')
 
 const rehypeStringify = require('rehype-stringify')
@@ -138,7 +140,9 @@ function getHTMLProcessor (remarkConfig, rebberConfig, target) {
   const parser = zmdParser(remarkConfig, target)
     .use(remark2rehype, remarkConfig.remark2rehype)
 
-  if (!remarkConfig._test) {
+  if (remarkConfig._test) {
+    shortid.generate = () => 'shortId'
+  } else {
     parser
       .use(rehypeLineNumbers)
       .use(rehypeHighlight, remarkConfig.rehypeHighlight)
@@ -149,6 +153,7 @@ function getHTMLProcessor (remarkConfig, rebberConfig, target) {
     .use(rehypeAutolinkHeadings, remarkConfig.autolinkHeadings)
     .use(rehypeHTMLBlocks)
     .use(rehypeFootnotesTitles, remarkConfig.footnotesTitles)
+    .use(rehypePostfixFootnotes, `-${shortid.generate()}`)
     .use(rehypeKatex, remarkConfig.katex)
     .use(() => (tree) => {
       Object.keys(wrappers).forEach(nodeName =>
