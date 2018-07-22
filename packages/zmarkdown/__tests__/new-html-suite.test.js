@@ -204,3 +204,19 @@ describe('images become figures:', () => {
     expect(result).toMatchSnapshot()
   })
 })
+
+describe('ping', () => {
+  beforeEach(() => {
+    remarkConfig.ping.pingUsername = () => true
+  })
+
+  it(`does not ping parts of email addresses`, () => {
+    const input = 'My email address is test@test.com.'
+
+    return expect(renderString(input)).resolves.not.toContain('ping')
+  })
+
+  afterEach(() => {
+    remarkConfig.ping.pingUsername = () => false
+  })
+})
