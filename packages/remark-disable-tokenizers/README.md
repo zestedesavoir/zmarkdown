@@ -89,10 +89,10 @@ unified()
 
 [npm]: https://www.npmjs.com/package/remark-disable-tokenizers
 
-[remark]: https://github.com/wooorm/remark
+[remark]: https://github.com/remarkjs/remark
 
-[remark-doc]: https://github.com/wooorm/remark/tree/master/packages/remark-parse#parserblocktokenizers
+[remark-doc]: https://github.com/remarkjs/remark/tree/master/packages/remark-parse#parserblocktokenizers
 
-[blockTokenizers]: https://github.com/wooorm/remark/tree/master/packages/remark-parse#parserblockmethods
+[blockTokenizers]: https://github.com/remarkjs/remark/tree/master/packages/remark-parse#parserblockmethods
 
-[inlineTokenizers]: https://github.com/wooorm/remark/tree/master/packages/remark-parse#parserinlinemethods
+[inlineTokenizers]: https://github.com/remarkjs/remark/tree/master/packages/remark-parse#parserinlinemethods

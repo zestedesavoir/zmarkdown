@@ -148,8 +148,8 @@ unified()
 
 [npm]: https://www.npmjs.com/package/remark-grid-tables
 
-[remark]: https://github.com/wooorm/remark
+[remark]: https://github.com/remarkjs/remark
 
 [mdast]: https://github.com/wooorm/mdast
 
-[rehype]: https://github.com/wooorm/rehype
+[rehype]: https://github.com/rehypejs/rehype

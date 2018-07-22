@@ -18,4 +18,4 @@ Usage:
 
 * `.use(footnotesTitles, 'Jump to reference')`
 * `.use(footnotesTitles, 'Going back to footnote with id $id')`
-* If `$id` is found in the string, it gets replaced with the footnote id.
+* If `$id` is found in the string, it gets replaced with the footnote identifier.

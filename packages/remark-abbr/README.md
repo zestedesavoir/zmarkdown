@@ -24,7 +24,7 @@ Abbreviations are defined a bit like footnotes:
 
 ```markdown
 This plugin works on MDAST, a Markdown AST
-implemented by [remark](https://github.com/wooorm/remark)
+implemented by [remark](https://github.com/remarkjs/remark)
 
 *[MDAST]: Markdown Abstract Syntax Tree.
 *[AST]: Abstract syntax tree
@@ -34,7 +34,7 @@ This would compile to the following HTML:
 
 ```html
 <p>This plugin works on <abbr title="Markdown Abstract Syntax Tree.">MDAST</abbr>, a Markdown <abbr title="Abstract syntax tree">AST</abbr>
-implemented by <a href="https://github.com/wooorm/remark">remark</a></p>
+implemented by <a href="https://github.com/remarkjs/remark">remark</a></p>
 ```
 
 ## Installation
@@ -90,4 +90,4 @@ unified()
 
 [mdast]: https://github.com/syntax-tree/mdast/blob/master/readme.md
 
-[remark]: https://github.com/wooorm/remark
+[remark]: https://github.com/remarkjs/remark

@@ -94,8 +94,8 @@ unified()
 
 [mdast]: https://github.com/syntax-tree/mdast/blob/master/readme.md
 
-[remark]: https://github.com/wooorm/remark
+[remark]: https://github.com/remarkjs/remark
 
-[rehype]: https://github.com/wooorm/rehype
+[rehype]: https://github.com/rehypejs/rehype
 
 [parent]: https://github.com/syntax-tree/unist#parent
