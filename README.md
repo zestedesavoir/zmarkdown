@@ -134,7 +134,7 @@ This project uses [Jest][jest] for testing. It is recommended to install the Jes
 
 [license]: https://github.com/zestedesavoir/zmarkdown/blob/master/LICENSE-MIT
 
-[processor]: https://github.com/wooorm/remark/blob/master/packages/remark
+[processor]: https://github.com/remarkjs/remark/blob/master/packages/remark
 
 [mdast]: https://github.com/wooorm/mdast
 
@@ -142,7 +142,7 @@ This project uses [Jest][jest] for testing. It is recommended to install the Jes
 
 [zds]: https://zestedesavoir.com
 
-[rehype]: https://github.com/wooorm/rehype
+[rehype]: https://github.com/rehypejs/rehype
 
 [textr]: https://github.com/A/textr
 

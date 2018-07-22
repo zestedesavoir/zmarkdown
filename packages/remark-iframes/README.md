@@ -187,4 +187,4 @@ for each property of provider.thumbnail
 
 [npm]: https://www.npmjs.com/package/remark-iframes
 
-[rehype]: https://github.com/wooorm/rehype
+[rehype]: https://github.com/rehypejs/rehype

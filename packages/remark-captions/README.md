@@ -202,4 +202,4 @@ Associated with `remark-rehype` this generates a HTML tree encapsulated inside a
 
 [mdast]: https://github.com/syntax-tree/mdast/blob/master/readme.md
 
-[remark]: https://github.com/wooorm/remark
+[remark]: https://github.com/remarkjs/remark
