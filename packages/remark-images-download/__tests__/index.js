@@ -42,6 +42,16 @@ const r = (html) => html.replace(
   'foo/bar')
 
 describe('mock server tests', () => {
+  test('rejects invalid URLs', () => {
+    const file = '![foo](http://%99:%99@example.com)'
+
+    const render = renderFactory()
+
+    return render(file).then(vfile => {
+      expect(firstMsg(vfile)).toBe('Invalid URL: http://%99:%99@example.com')
+    })
+  })
+
   test('downloads image ok', () => {
     const file = dedent`
       ![](http://localhost:27273/test.svg)

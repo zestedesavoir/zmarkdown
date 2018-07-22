@@ -78,7 +78,13 @@ function plugin ({
 
         visit(tree, 'image', (node) => {
           const {url, position} = node
-          const parsedURI = URL.parse(url)
+          let parsedURI
+          try {
+            parsedURI = URL.parse(url)
+          } catch (error) {
+            vfile.message(`Invalid URL: ${url}`, position, url)
+            return
+          }
 
           const extension = path.extname(parsedURI.pathname)
           const filename = `${shortid.generate()}${extension}`

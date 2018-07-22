@@ -96,7 +96,13 @@ function plugin() {
         var url = node.url,
             position = node.position;
 
-        var parsedURI = URL.parse(url);
+        var parsedURI = void 0;
+        try {
+          parsedURI = URL.parse(url);
+        } catch (error) {
+          vfile.message('Invalid URL: ' + url, position, url);
+          return;
+        }
 
         var extension = path.extname(parsedURI.pathname);
         var filename = '' + shortid.generate() + extension;
