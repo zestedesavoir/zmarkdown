@@ -1,6 +1,6 @@
 {
   "name": "remark-images-download",
-  "version": "2.7.3",
+  "version": "2.8.0",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-images-download",
     "type": "git"
