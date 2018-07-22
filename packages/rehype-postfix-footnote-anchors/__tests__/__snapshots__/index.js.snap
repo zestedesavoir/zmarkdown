@@ -1,0 +1,917 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`{"gfm":false,"commonmark":false,"footnotes":true} footnote-split 1`] = `
+"<p>a<sup id=\\"fnref-first-postfix\\"><a href=\\"#fn-first-postfix\\" class=\\"footnote-ref\\">first</a></sup>b<sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup>c<sup id=\\"fnref-third-postfix\\"><a href=\\"#fn-third-postfix\\" class=\\"footnote-ref\\">third</a></sup></p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-first-postfix\\">
+<p>first def</p>
+<a href=\\"#fnref-first-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-third-postfix\\">
+<p>third def</p>
+<a href=\\"#fnref-third-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-1-postfix\\">
+<p>second def</p>
+<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":false,"commonmark":false,"footnotes":true} footnotes 1`] = `
+"<p>This is the body with a footnote<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup> or two<sup id=\\"fnref-bar-postfix\\"><a href=\\"#fn-bar-postfix\\" class=\\"footnote-ref\\">bar</a></sup> or more <sup id=\\"fnref-baz-postfix\\"><a href=\\"#fn-baz-postfix\\" class=\\"footnote-ref\\">baz</a></sup> <sup id=\\"fnref-qux-postfix\\"><a href=\\"#fn-qux-postfix\\" class=\\"footnote-ref\\">qux</a></sup> <sup id=\\"fnref-fiji-postfix\\"><a href=\\"#fn-fiji-postfix\\" class=\\"footnote-ref\\">fiji</a></sup>. One again: <sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>Also a reference that does not exist<sup id=\\"fnref-nope-postfix\\"><a href=\\"#fn-nope-postfix\\" class=\\"footnote-ref\\">nope</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-foo-postfix\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-bar-postfix\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<a href=\\"#fnref-bar-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-baz-postfix\\">
+<p>A simple oneliner.</p>
+<a href=\\"#fnref-baz-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-qux-postfix\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.</p>
+<a href=\\"#fnref-qux-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-fiji-postfix\\">
+<p>First line of first paragraph.</p>
+<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":false,"commonmark":false,"footnotes":true} given postfix 1`] = `
+"<p>This is the body with a footnote<sup id=\\"fnref-1-bar\\"><a href=\\"#fn-1-bar\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-bar\\"><a href=\\"#fn-2-bar\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"fnref-3-bar\\"><a href=\\"#fn-3-bar\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-bar\\"><a href=\\"#fn-4-bar\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-bar\\"><a href=\\"#fn-5-bar\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"fnref-1-bar\\"><a href=\\"#fn-1-bar\\" class=\\"footnote-ref\\">1</a></sup></p>
+<p>Also a reference that does not exist<sup id=\\"fnref-6-bar\\"><a href=\\"#fn-6-bar\\" class=\\"footnote-ref\\">6</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-1-bar\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<a href=\\"#fnref-1-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-2-bar\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<a href=\\"#fnref-2-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-3-bar\\">
+<p>A simple oneliner.</p>
+<a href=\\"#fnref-3-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-4-bar\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.</p>
+<a href=\\"#fnref-4-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-5-bar\\">
+<p>First line of first paragraph.</p>
+<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":false,"commonmark":false,"footnotes":true} numbered footnotes 1`] = `
+"<p>This is the body with a footnote<sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-postfix\\"><a href=\\"#fn-2-postfix\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"fnref-3-postfix\\"><a href=\\"#fn-3-postfix\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-postfix\\"><a href=\\"#fn-4-postfix\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-postfix\\"><a href=\\"#fn-5-postfix\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup></p>
+<p>Also a reference that does not exist<sup id=\\"fnref-6-postfix\\"><a href=\\"#fn-6-postfix\\" class=\\"footnote-ref\\">6</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-1-postfix\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-2-postfix\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-3-postfix\\">
+<p>A simple oneliner.</p>
+<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-4-postfix\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.</p>
+<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-5-postfix\\">
+<p>First line of first paragraph.</p>
+<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":false,"commonmark":false,"footnotes":true} postfixing function 1`] = `
+"<p>This is the body with a footnote<sup id=\\"foo--fnref-1--bar\\"><a href=\\"#foo--fn-1--bar\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"foo--fnref-2--bar\\"><a href=\\"#foo--fn-2--bar\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"foo--fnref-3--bar\\"><a href=\\"#foo--fn-3--bar\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"foo--fnref-4--bar\\"><a href=\\"#foo--fn-4--bar\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"foo--fnref-5--bar\\"><a href=\\"#foo--fn-5--bar\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"foo--fnref-1--bar\\"><a href=\\"#foo--fn-1--bar\\" class=\\"footnote-ref\\">1</a></sup></p>
+<p>Also a reference that does not exist<sup id=\\"foo--fnref-6--bar\\"><a href=\\"#foo--fn-6--bar\\" class=\\"footnote-ref\\">6</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"foo--fn-1--bar\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<a href=\\"#foo--fnref-1--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"foo--fn-2--bar\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<a href=\\"#foo--fnref-2--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"foo--fn-3--bar\\">
+<p>A simple oneliner.</p>
+<a href=\\"#foo--fnref-3--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"foo--fn-4--bar\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.</p>
+<a href=\\"#foo--fnref-4--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"foo--fn-5--bar\\">
+<p>First line of first paragraph.</p>
+<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":false,"commonmark":false,"footnotes":true} regression-1 1`] = `
+"<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-foo-postfix\\">
+<p>MyNote</p>
+<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":false,"commonmark":false,"footnotes":true} regression-2 1`] = `
+"<p>1 <sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup>
+2 <sup id=\\"fnref-2-postfix\\"><a href=\\"#fn-2-postfix\\" class=\\"footnote-ref\\">2</a></sup>
+3 <sup id=\\"fnref-3-postfix\\"><a href=\\"#fn-3-postfix\\" class=\\"footnote-ref\\">3</a></sup>
+4 <sup id=\\"fnref-w-postfix\\"><a href=\\"#fn-w-postfix\\" class=\\"footnote-ref\\">w</a></sup>
+4 <sup id=\\"fnref-w-postfix\\"><a href=\\"#fn-w-postfix\\" class=\\"footnote-ref\\">w</a></sup>
+5 <sup id=\\"fnref-4-postfix\\"><a href=\\"#fn-4-postfix\\" class=\\"footnote-ref\\">4</a></sup></p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-w-postfix\\">
+<p>foo</p>
+<a href=\\"#fnref-w-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-1-postfix\\">
+<p>alpha bravo one</p>
+<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-2-postfix\\">
+<p>alpha bravo two</p>
+<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-3-postfix\\">
+<p>alpha bravo third</p>
+<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-4-postfix\\">
+<p>alpha bravo fourth</p>
+<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":false,"commonmark":true,"footnotes":true} footnote-split 1`] = `
+"<p>a<sup id=\\"fnref-first-postfix\\"><a href=\\"#fn-first-postfix\\" class=\\"footnote-ref\\">first</a></sup>b<sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup>c<sup id=\\"fnref-third-postfix\\"><a href=\\"#fn-third-postfix\\" class=\\"footnote-ref\\">third</a></sup></p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-first-postfix\\">
+<p>first def</p>
+<a href=\\"#fnref-first-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-third-postfix\\">
+<p>third def</p>
+<a href=\\"#fnref-third-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-1-postfix\\">
+<p>second def</p>
+<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":false,"commonmark":true,"footnotes":true} footnotes 1`] = `
+"<p>This is the body with a footnote<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup> or two<sup id=\\"fnref-bar-postfix\\"><a href=\\"#fn-bar-postfix\\" class=\\"footnote-ref\\">bar</a></sup> or more <sup id=\\"fnref-baz-postfix\\"><a href=\\"#fn-baz-postfix\\" class=\\"footnote-ref\\">baz</a></sup> <sup id=\\"fnref-qux-postfix\\"><a href=\\"#fn-qux-postfix\\" class=\\"footnote-ref\\">qux</a></sup> <sup id=\\"fnref-fiji-postfix\\"><a href=\\"#fn-fiji-postfix\\" class=\\"footnote-ref\\">fiji</a></sup>. One again: <sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>Also a reference that does not exist<sup id=\\"fnref-nope-postfix\\"><a href=\\"#fn-nope-postfix\\" class=\\"footnote-ref\\">nope</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-foo-postfix\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-bar-postfix\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<a href=\\"#fnref-bar-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-baz-postfix\\">
+<p>A simple oneliner.</p>
+<a href=\\"#fnref-baz-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-qux-postfix\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.</p>
+<a href=\\"#fnref-qux-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-fiji-postfix\\">
+<p>First line of first paragraph.</p>
+<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":false,"commonmark":true,"footnotes":true} given postfix 1`] = `
+"<p>This is the body with a footnote<sup id=\\"fnref-1-bar\\"><a href=\\"#fn-1-bar\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-bar\\"><a href=\\"#fn-2-bar\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"fnref-3-bar\\"><a href=\\"#fn-3-bar\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-bar\\"><a href=\\"#fn-4-bar\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-bar\\"><a href=\\"#fn-5-bar\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"fnref-1-bar\\"><a href=\\"#fn-1-bar\\" class=\\"footnote-ref\\">1</a></sup></p>
+<p>Also a reference that does not exist<sup id=\\"fnref-6-bar\\"><a href=\\"#fn-6-bar\\" class=\\"footnote-ref\\">6</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-1-bar\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<a href=\\"#fnref-1-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-2-bar\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<a href=\\"#fnref-2-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-3-bar\\">
+<p>A simple oneliner.</p>
+<a href=\\"#fnref-3-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-4-bar\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.</p>
+<a href=\\"#fnref-4-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-5-bar\\">
+<p>First line of first paragraph.</p>
+<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":false,"commonmark":true,"footnotes":true} numbered footnotes 1`] = `
+"<p>This is the body with a footnote<sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-postfix\\"><a href=\\"#fn-2-postfix\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"fnref-3-postfix\\"><a href=\\"#fn-3-postfix\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-postfix\\"><a href=\\"#fn-4-postfix\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-postfix\\"><a href=\\"#fn-5-postfix\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup></p>
+<p>Also a reference that does not exist<sup id=\\"fnref-6-postfix\\"><a href=\\"#fn-6-postfix\\" class=\\"footnote-ref\\">6</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-1-postfix\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-2-postfix\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-3-postfix\\">
+<p>A simple oneliner.</p>
+<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-4-postfix\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.</p>
+<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-5-postfix\\">
+<p>First line of first paragraph.</p>
+<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":false,"commonmark":true,"footnotes":true} postfixing function 1`] = `
+"<p>This is the body with a footnote<sup id=\\"foo--fnref-1--bar\\"><a href=\\"#foo--fn-1--bar\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"foo--fnref-2--bar\\"><a href=\\"#foo--fn-2--bar\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"foo--fnref-3--bar\\"><a href=\\"#foo--fn-3--bar\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"foo--fnref-4--bar\\"><a href=\\"#foo--fn-4--bar\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"foo--fnref-5--bar\\"><a href=\\"#foo--fn-5--bar\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"foo--fnref-1--bar\\"><a href=\\"#foo--fn-1--bar\\" class=\\"footnote-ref\\">1</a></sup></p>
+<p>Also a reference that does not exist<sup id=\\"foo--fnref-6--bar\\"><a href=\\"#foo--fn-6--bar\\" class=\\"footnote-ref\\">6</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"foo--fn-1--bar\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<a href=\\"#foo--fnref-1--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"foo--fn-2--bar\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<a href=\\"#foo--fnref-2--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"foo--fn-3--bar\\">
+<p>A simple oneliner.</p>
+<a href=\\"#foo--fnref-3--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"foo--fn-4--bar\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.</p>
+<a href=\\"#foo--fnref-4--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"foo--fn-5--bar\\">
+<p>First line of first paragraph.</p>
+<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":false,"commonmark":true,"footnotes":true} regression-1 1`] = `
+"<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-foo-postfix\\">
+<p>MyNote</p>
+<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":false,"commonmark":true,"footnotes":true} regression-2 1`] = `
+"<p>1 <sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup>
+2 <sup id=\\"fnref-2-postfix\\"><a href=\\"#fn-2-postfix\\" class=\\"footnote-ref\\">2</a></sup>
+3 <sup id=\\"fnref-3-postfix\\"><a href=\\"#fn-3-postfix\\" class=\\"footnote-ref\\">3</a></sup>
+4 <sup id=\\"fnref-w-postfix\\"><a href=\\"#fn-w-postfix\\" class=\\"footnote-ref\\">w</a></sup>
+4 <sup id=\\"fnref-w-postfix\\"><a href=\\"#fn-w-postfix\\" class=\\"footnote-ref\\">w</a></sup>
+5 <sup id=\\"fnref-4-postfix\\"><a href=\\"#fn-4-postfix\\" class=\\"footnote-ref\\">4</a></sup></p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-w-postfix\\">
+<p>foo</p>
+<a href=\\"#fnref-w-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-1-postfix\\">
+<p>alpha bravo one</p>
+<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-2-postfix\\">
+<p>alpha bravo two</p>
+<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-3-postfix\\">
+<p>alpha bravo third</p>
+<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-4-postfix\\">
+<p>alpha bravo fourth</p>
+<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":true,"commonmark":false,"footnotes":true} footnote-split 1`] = `
+"<p>a<sup id=\\"fnref-first-postfix\\"><a href=\\"#fn-first-postfix\\" class=\\"footnote-ref\\">first</a></sup>b<sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup>c<sup id=\\"fnref-third-postfix\\"><a href=\\"#fn-third-postfix\\" class=\\"footnote-ref\\">third</a></sup></p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-first-postfix\\">
+<p>first def</p>
+<a href=\\"#fnref-first-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-third-postfix\\">
+<p>third def</p>
+<a href=\\"#fnref-third-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-1-postfix\\">
+<p>second def</p>
+<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":true,"commonmark":false,"footnotes":true} footnotes 1`] = `
+"<p>This is the body with a footnote<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup> or two<sup id=\\"fnref-bar-postfix\\"><a href=\\"#fn-bar-postfix\\" class=\\"footnote-ref\\">bar</a></sup> or more <sup id=\\"fnref-baz-postfix\\"><a href=\\"#fn-baz-postfix\\" class=\\"footnote-ref\\">baz</a></sup> <sup id=\\"fnref-qux-postfix\\"><a href=\\"#fn-qux-postfix\\" class=\\"footnote-ref\\">qux</a></sup> <sup id=\\"fnref-fiji-postfix\\"><a href=\\"#fn-fiji-postfix\\" class=\\"footnote-ref\\">fiji</a></sup>. One again: <sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>Also a reference that does not exist<sup id=\\"fnref-nope-postfix\\"><a href=\\"#fn-nope-postfix\\" class=\\"footnote-ref\\">nope</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-foo-postfix\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-bar-postfix\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<a href=\\"#fnref-bar-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-baz-postfix\\">
+<p>A simple oneliner.</p>
+<a href=\\"#fnref-baz-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-qux-postfix\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.</p>
+<a href=\\"#fnref-qux-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-fiji-postfix\\">
+<p>First line of first paragraph.</p>
+<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":true,"commonmark":false,"footnotes":true} given postfix 1`] = `
+"<p>This is the body with a footnote<sup id=\\"fnref-1-bar\\"><a href=\\"#fn-1-bar\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-bar\\"><a href=\\"#fn-2-bar\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"fnref-3-bar\\"><a href=\\"#fn-3-bar\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-bar\\"><a href=\\"#fn-4-bar\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-bar\\"><a href=\\"#fn-5-bar\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"fnref-1-bar\\"><a href=\\"#fn-1-bar\\" class=\\"footnote-ref\\">1</a></sup></p>
+<p>Also a reference that does not exist<sup id=\\"fnref-6-bar\\"><a href=\\"#fn-6-bar\\" class=\\"footnote-ref\\">6</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-1-bar\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<a href=\\"#fnref-1-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-2-bar\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<a href=\\"#fnref-2-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-3-bar\\">
+<p>A simple oneliner.</p>
+<a href=\\"#fnref-3-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-4-bar\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.</p>
+<a href=\\"#fnref-4-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-5-bar\\">
+<p>First line of first paragraph.</p>
+<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":true,"commonmark":false,"footnotes":true} numbered footnotes 1`] = `
+"<p>This is the body with a footnote<sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-postfix\\"><a href=\\"#fn-2-postfix\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"fnref-3-postfix\\"><a href=\\"#fn-3-postfix\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-postfix\\"><a href=\\"#fn-4-postfix\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-postfix\\"><a href=\\"#fn-5-postfix\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup></p>
+<p>Also a reference that does not exist<sup id=\\"fnref-6-postfix\\"><a href=\\"#fn-6-postfix\\" class=\\"footnote-ref\\">6</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-1-postfix\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-2-postfix\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-3-postfix\\">
+<p>A simple oneliner.</p>
+<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-4-postfix\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.</p>
+<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-5-postfix\\">
+<p>First line of first paragraph.</p>
+<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":true,"commonmark":false,"footnotes":true} postfixing function 1`] = `
+"<p>This is the body with a footnote<sup id=\\"foo--fnref-1--bar\\"><a href=\\"#foo--fn-1--bar\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"foo--fnref-2--bar\\"><a href=\\"#foo--fn-2--bar\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"foo--fnref-3--bar\\"><a href=\\"#foo--fn-3--bar\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"foo--fnref-4--bar\\"><a href=\\"#foo--fn-4--bar\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"foo--fnref-5--bar\\"><a href=\\"#foo--fn-5--bar\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"foo--fnref-1--bar\\"><a href=\\"#foo--fn-1--bar\\" class=\\"footnote-ref\\">1</a></sup></p>
+<p>Also a reference that does not exist<sup id=\\"foo--fnref-6--bar\\"><a href=\\"#foo--fn-6--bar\\" class=\\"footnote-ref\\">6</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"foo--fn-1--bar\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<a href=\\"#foo--fnref-1--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"foo--fn-2--bar\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<a href=\\"#foo--fnref-2--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"foo--fn-3--bar\\">
+<p>A simple oneliner.</p>
+<a href=\\"#foo--fnref-3--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"foo--fn-4--bar\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.</p>
+<a href=\\"#foo--fnref-4--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"foo--fn-5--bar\\">
+<p>First line of first paragraph.</p>
+<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":true,"commonmark":false,"footnotes":true} regression-1 1`] = `
+"<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-foo-postfix\\">
+<p>MyNote</p>
+<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":true,"commonmark":false,"footnotes":true} regression-2 1`] = `
+"<p>1 <sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup>
+2 <sup id=\\"fnref-2-postfix\\"><a href=\\"#fn-2-postfix\\" class=\\"footnote-ref\\">2</a></sup>
+3 <sup id=\\"fnref-3-postfix\\"><a href=\\"#fn-3-postfix\\" class=\\"footnote-ref\\">3</a></sup>
+4 <sup id=\\"fnref-w-postfix\\"><a href=\\"#fn-w-postfix\\" class=\\"footnote-ref\\">w</a></sup>
+4 <sup id=\\"fnref-w-postfix\\"><a href=\\"#fn-w-postfix\\" class=\\"footnote-ref\\">w</a></sup>
+5 <sup id=\\"fnref-4-postfix\\"><a href=\\"#fn-4-postfix\\" class=\\"footnote-ref\\">4</a></sup></p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-w-postfix\\">
+<p>foo</p>
+<a href=\\"#fnref-w-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-1-postfix\\">
+<p>alpha bravo one</p>
+<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-2-postfix\\">
+<p>alpha bravo two</p>
+<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-3-postfix\\">
+<p>alpha bravo third</p>
+<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-4-postfix\\">
+<p>alpha bravo fourth</p>
+<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":true,"commonmark":true,"footnotes":true} footnote-split 1`] = `
+"<p>a<sup id=\\"fnref-first-postfix\\"><a href=\\"#fn-first-postfix\\" class=\\"footnote-ref\\">first</a></sup>b<sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup>c<sup id=\\"fnref-third-postfix\\"><a href=\\"#fn-third-postfix\\" class=\\"footnote-ref\\">third</a></sup></p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-first-postfix\\">
+<p>first def</p>
+<a href=\\"#fnref-first-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-third-postfix\\">
+<p>third def</p>
+<a href=\\"#fnref-third-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-1-postfix\\">
+<p>second def</p>
+<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":true,"commonmark":true,"footnotes":true} footnotes 1`] = `
+"<p>This is the body with a footnote<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup> or two<sup id=\\"fnref-bar-postfix\\"><a href=\\"#fn-bar-postfix\\" class=\\"footnote-ref\\">bar</a></sup> or more <sup id=\\"fnref-baz-postfix\\"><a href=\\"#fn-baz-postfix\\" class=\\"footnote-ref\\">baz</a></sup> <sup id=\\"fnref-qux-postfix\\"><a href=\\"#fn-qux-postfix\\" class=\\"footnote-ref\\">qux</a></sup> <sup id=\\"fnref-fiji-postfix\\"><a href=\\"#fn-fiji-postfix\\" class=\\"footnote-ref\\">fiji</a></sup>. One again: <sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>Also a reference that does not exist<sup id=\\"fnref-nope-postfix\\"><a href=\\"#fn-nope-postfix\\" class=\\"footnote-ref\\">nope</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-foo-postfix\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-bar-postfix\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<a href=\\"#fnref-bar-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-baz-postfix\\">
+<p>A simple oneliner.</p>
+<a href=\\"#fnref-baz-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-qux-postfix\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.</p>
+<a href=\\"#fnref-qux-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-fiji-postfix\\">
+<p>First line of first paragraph.</p>
+<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":true,"commonmark":true,"footnotes":true} given postfix 1`] = `
+"<p>This is the body with a footnote<sup id=\\"fnref-1-bar\\"><a href=\\"#fn-1-bar\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-bar\\"><a href=\\"#fn-2-bar\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"fnref-3-bar\\"><a href=\\"#fn-3-bar\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-bar\\"><a href=\\"#fn-4-bar\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-bar\\"><a href=\\"#fn-5-bar\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"fnref-1-bar\\"><a href=\\"#fn-1-bar\\" class=\\"footnote-ref\\">1</a></sup></p>
+<p>Also a reference that does not exist<sup id=\\"fnref-6-bar\\"><a href=\\"#fn-6-bar\\" class=\\"footnote-ref\\">6</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-1-bar\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<a href=\\"#fnref-1-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-2-bar\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<a href=\\"#fnref-2-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-3-bar\\">
+<p>A simple oneliner.</p>
+<a href=\\"#fnref-3-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-4-bar\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.</p>
+<a href=\\"#fnref-4-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-5-bar\\">
+<p>First line of first paragraph.</p>
+<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":true,"commonmark":true,"footnotes":true} numbered footnotes 1`] = `
+"<p>This is the body with a footnote<sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-postfix\\"><a href=\\"#fn-2-postfix\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"fnref-3-postfix\\"><a href=\\"#fn-3-postfix\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-postfix\\"><a href=\\"#fn-4-postfix\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-postfix\\"><a href=\\"#fn-5-postfix\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup></p>
+<p>Also a reference that does not exist<sup id=\\"fnref-6-postfix\\"><a href=\\"#fn-6-postfix\\" class=\\"footnote-ref\\">6</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-1-postfix\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-2-postfix\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-3-postfix\\">
+<p>A simple oneliner.</p>
+<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-4-postfix\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.</p>
+<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-5-postfix\\">
+<p>First line of first paragraph.</p>
+<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":true,"commonmark":true,"footnotes":true} postfixing function 1`] = `
+"<p>This is the body with a footnote<sup id=\\"foo--fnref-1--bar\\"><a href=\\"#foo--fn-1--bar\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"foo--fnref-2--bar\\"><a href=\\"#foo--fn-2--bar\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"foo--fnref-3--bar\\"><a href=\\"#foo--fn-3--bar\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"foo--fnref-4--bar\\"><a href=\\"#foo--fn-4--bar\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"foo--fnref-5--bar\\"><a href=\\"#foo--fn-5--bar\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"foo--fnref-1--bar\\"><a href=\\"#foo--fn-1--bar\\" class=\\"footnote-ref\\">1</a></sup></p>
+<p>Also a reference that does not exist<sup id=\\"foo--fnref-6--bar\\"><a href=\\"#foo--fn-6--bar\\" class=\\"footnote-ref\\">6</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"foo--fn-1--bar\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<a href=\\"#foo--fnref-1--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"foo--fn-2--bar\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<a href=\\"#foo--fnref-2--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"foo--fn-3--bar\\">
+<p>A simple oneliner.</p>
+<a href=\\"#foo--fnref-3--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"foo--fn-4--bar\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.</p>
+<a href=\\"#foo--fnref-4--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"foo--fn-5--bar\\">
+<p>First line of first paragraph.</p>
+<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":true,"commonmark":true,"footnotes":true} regression-1 1`] = `
+"<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-foo-postfix\\">
+<p>MyNote</p>
+<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`{"gfm":true,"commonmark":true,"footnotes":true} regression-2 1`] = `
+"<p>1 <sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup>
+2 <sup id=\\"fnref-2-postfix\\"><a href=\\"#fn-2-postfix\\" class=\\"footnote-ref\\">2</a></sup>
+3 <sup id=\\"fnref-3-postfix\\"><a href=\\"#fn-3-postfix\\" class=\\"footnote-ref\\">3</a></sup>
+4 <sup id=\\"fnref-w-postfix\\"><a href=\\"#fn-w-postfix\\" class=\\"footnote-ref\\">w</a></sup>
+4 <sup id=\\"fnref-w-postfix\\"><a href=\\"#fn-w-postfix\\" class=\\"footnote-ref\\">w</a></sup>
+5 <sup id=\\"fnref-4-postfix\\"><a href=\\"#fn-4-postfix\\" class=\\"footnote-ref\\">4</a></sup></p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-w-postfix\\">
+<p>foo</p>
+<a href=\\"#fnref-w-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-1-postfix\\">
+<p>alpha bravo one</p>
+<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-2-postfix\\">
+<p>alpha bravo two</p>
+<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-3-postfix\\">
+<p>alpha bravo third</p>
+<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+<li id=\\"fn-4-postfix\\">
+<p>alpha bravo fourth</p>
+<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a>
+</li>
+</ol>
+</div>"
+`;
