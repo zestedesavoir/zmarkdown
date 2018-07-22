@@ -313,6 +313,7 @@ const remarkConfig = {
   ping: {
     pingUsername: (_username) => true,
     userURL: (username) => `/membres/voir/${username}/`,
+    usernameRegex: /\B@(?:\*\*([^*]+)\*\*|(\w+))/,
   },
 
   disableTokenizers: {},
