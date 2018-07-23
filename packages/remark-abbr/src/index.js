@@ -58,7 +58,7 @@ function plugin () {
     }
 
     const pattern = Object.keys(abbrs).map(escapeRegExp).join('|')
-    const regex = new RegExp(`\\b(${pattern})\\b`)
+    const regex = new RegExp(`(\\b|\\W)(${pattern})(\\b|\\W)`)
 
     function one (node, index, parent) {
       if (Object.keys(abbrs).length === 0) return

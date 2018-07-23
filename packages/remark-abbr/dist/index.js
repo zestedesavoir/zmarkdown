@@ -63,7 +63,7 @@ function plugin() {
     }
 
     var pattern = Object.keys(abbrs).map(escapeRegExp).join('|');
-    var regex = new RegExp('\\b(' + pattern + ')\\b');
+    var regex = new RegExp('(\\b|\\W)(' + pattern + ')(\\b|\\W)');
 
     function one(node, index, parent) {
       if (Object.keys(abbrs).length === 0) return;
