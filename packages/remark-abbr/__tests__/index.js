@@ -112,3 +112,46 @@ test('compiles to markdown', () => {
 
   expect(contents1).toBe(contents2)
 })
+
+it('handles abbreviations ending with a period', () => {
+  const {contents} = render(dedent`
+    A.B.C. and C-D%F. foo
+
+    *[A.B.C.]: ref1
+    *[C-D%F.]: ref2
+  `)
+
+  expect(contents).toBe(
+    `<p><abbr title="ref1">A.B.C.</abbr> and ` +
+    `<abbr title="ref2">C-D%F.</abbr> foo</p>`)
+})
+
+it('does not parse words starting with abbr', () => {
+  const {contents} = render(dedent`
+    ABC ABC ABC
+
+    *[AB]: ref1
+  `)
+
+  expect(contents).not.toContain('<abbr')
+})
+
+it('does not parse words ending with abbr', () => {
+  const {contents} = render(dedent`
+    ABC ABC ABC
+
+    *[BC]: ref1
+  `)
+
+  expect(contents).not.toContain('<abbr')
+})
+
+it('does not parse words containing abbr', () => {
+  const {contents} = render(dedent`
+    ABC ABC ABC
+
+    *[B]: ref1
+  `)
+
+  expect(contents).not.toContain('<abbr')
+})
