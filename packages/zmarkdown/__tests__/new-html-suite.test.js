@@ -220,3 +220,17 @@ describe('ping', () => {
     remarkConfig.ping.pingUsername = () => false
   })
 })
+
+describe('smileys', () => {
+  it(`translates >_<`, () => {
+    const input = 'This is funny >_<'
+
+    return expect(await renderString(input)).toMatchSnapshot()
+  })
+
+  it(`translates cthulhu`, () => {
+    const input = '^{;,;}^'
+
+    return expect(await renderString(input)).toMatchSnapshot()
+  })
+})
