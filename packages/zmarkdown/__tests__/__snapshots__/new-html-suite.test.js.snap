@@ -9,6 +9,6 @@ exports[`images become figures: does not apply when a caption is present 1`] = `
 
 exports[`images become figures: works with only an image 1`] = `"<figure><img src=\\"http://blabla.fr\\" alt=\\"wrapped into _figure_\\"><figcaption>wrapped into _figure_</figcaption></figure>"`;
 
-exports[`smileys translates >_< 1`] = `"<p>This is funny <img alt=\\">_<\\" src=\\"/static/smileys/pinch.png\\" class=\\"smiley\\"></p>"`
+exports[`smileys translates >_< 1`] = `"<p>This is funny <img src=\\"/static/smileys/pinch.png\\" alt=\\">_<\\" class=\\"smiley\\"></p>"`
 
-exports[`smileys translates cthulhu 1`] = `"<p><img alt=\\"^{;,;}^\\" src=\\"/static/smileys/cthulhu.png\\" class=\\"smiley\\"></p>"`
+exports[`smileys translates cthulhu 1`] = `"<p><img src=\\"/static/smileys/cthulhu.png\\" alt=\\"^{;,;}^\\" class=\\"smiley\\"></p>"`
