@@ -229,7 +229,7 @@ describe('smileys', () => {
   })
 
   it(`translates cthulhu`, () => {
-    const input = '^{;,;}^'
+    const input = '^(;,;)^'
 
     return expect(renderString(input)).resolves.toMatchSnapshot()
   })
