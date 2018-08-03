@@ -228,6 +228,12 @@ describe('smileys', () => {
     return expect(renderString(input)).resolves.toMatchSnapshot()
   })
 
+  it(`translates X/`, () => {
+    const input = 'This is funny X/'
+
+    return expect(renderString(input)).resolves.toMatchSnapshot()
+  })
+
   it(`translates cthulhu`, () => {
     const input = '^(;,;)^'
 
