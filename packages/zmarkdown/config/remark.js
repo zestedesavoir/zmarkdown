@@ -135,6 +135,7 @@ const remarkConfig = {
       ':colere:': '/static/smileys/angry.gif',
       'o_O': '/static/smileys/blink.gif',
       ';)': '/static/smileys/clin.png',
+      ':B': '/static/smileys/b.png',
       ':diable:': '/static/smileys/diable.png',
       ':D': '/static/smileys/heureux.png',
       '^^': '/static/smileys/hihi.png',
