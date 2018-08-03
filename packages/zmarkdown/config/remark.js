@@ -146,6 +146,7 @@ const remarkConfig = {
       'x(': '/static/smileys/pinch.png',
       '>_<': '/static/smileys/pinch.png',
       '&lt;_&gt;': '/static/smileys/pinch.png',
+      'X/': '/static/smileys/pinch.png',
       ':pirate:': '/static/smileys/pirate.png',
       ":'(": '/static/smileys/pleure.png',
       ':lol:': '/static/smileys/rire.gif',
