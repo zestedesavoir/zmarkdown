@@ -2156,7 +2156,7 @@ Test support for foo+bar lexer names with hightlight.
 
 
 
-\\\\begin{CodeBlock}[][\\"2-4\\"]{html+jinja}
+\\\\begin{CodeBlock}[][2-4]{html+jinja}
 <title>{% block title %}{% endblock %}</title>
 <ul>
 

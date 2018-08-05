@@ -123,6 +123,22 @@ print('bla')
 
 
 
+\\\\begin{CodeBlock}[][2]{css}
+.tmp {
+  font-weight: bold;
+}
+\\\\end{CodeBlock}
+
+
+
+\\\\begin{CodeBlock}[][1,3]{css}
+.tmp {
+  font-weight: bold;
+}
+\\\\end{CodeBlock}
+
+
+
 \\\\begin{CodeBlock}{text}
 a code without lang
 \\\\end{CodeBlock}"
