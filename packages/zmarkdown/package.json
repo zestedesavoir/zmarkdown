@@ -1,6 +1,6 @@
 {
   "name": "zmarkdown",
-  "version": "5.8.1",
+  "version": "5.8.2",
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
   "contributors": [
     "Sébastien (AmarOk) Blin <contact@enconn.fr>",
@@ -21,8 +21,8 @@
     "pm2": "^3.0.0",
     "pmx": "^1.5.6",
     "raven": "^2.1.2",
-    "rebber": "^2.2.4",
-    "rebber-plugins": "^1.4.4",
+    "rebber": "^2.2.5",
+    "rebber-plugins": "^1.4.5",
     "rehype-autolink-headings": "^2.0.1",
     "rehype-footnotes-title": "^0.0.25",
     "rehype-highlight": "^2.0.1",
@@ -43,7 +43,7 @@
     "remark-heading-shift": "^1.0.9",
     "remark-heading-trailing-spaces": "^0.0.23",
     "remark-iframes": "^3.0.3",
-    "remark-images-download": "^2.8.0",
+    "remark-images-download": "^2.8.1",
     "remark-kbd": "^1.0.14",
     "remark-math": "^1.0.1",
     "remark-numbered-footnotes": "^1.0.6",
