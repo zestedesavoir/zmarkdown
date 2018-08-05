@@ -5,7 +5,13 @@ const defaultMacro = (content, lang) => {
   if (!lang) lang = 'text'
   let param = ''
   if (lang.indexOf('hl_lines=') > -1) {
-    const lines = lang.split('hl_lines=')[1].trim()
+    let lines = lang.split('hl_lines=')[1].trim()
+    if (
+      (lines.startsWith('"') && lines.endsWith('"')) ||
+      (lines.startsWith("'") && lines.endsWith("'"))
+    ) {
+      lines = lines.slice(1, -1).trim()
+    }
     param += `[][${lines}]`
   }
   lang = lang.split(' ')[0]

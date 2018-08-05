@@ -8,6 +8,9 @@ var defaultMacro = function defaultMacro(content, lang) {
   var param = '';
   if (lang.indexOf('hl_lines=') > -1) {
     var lines = lang.split('hl_lines=')[1].trim();
+    if (lines.startsWith('"') && lines.endsWith('"') || lines.startsWith("'") && lines.endsWith("'")) {
+      lines = lines.slice(1, -1).trim();
+    }
     param += '[][' + lines + ']';
   }
   lang = lang.split(' ')[0];
