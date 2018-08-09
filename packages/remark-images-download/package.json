@@ -52,6 +52,7 @@
     "eslint": "^5.1.0",
     "express": "^4.16.2",
     "jest": "^23.4.1",
+    "mdast-util-to-hast": "3.0.1",
     "rehype-stringify": "^4.0.0",
     "remark-parse": "^5.0.0",
     "remark-rehype": "^3.0.0",
