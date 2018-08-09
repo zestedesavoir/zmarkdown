@@ -378,11 +378,6 @@ describe('#misc', () => {
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
 
-  it(`properly renders funky-list.txt`, function () {
-    const filepath = `${dir}/funky-list.txt`
-    return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
-  })
-
   it(`properly renders h1.txt`, () => {
     const filepath = `${dir}/h1.txt`
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
