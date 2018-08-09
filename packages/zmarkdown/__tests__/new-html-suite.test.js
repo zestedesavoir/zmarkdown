@@ -240,3 +240,42 @@ describe('smileys', () => {
     return expect(renderString(input)).resolves.toMatchSnapshot()
   })
 })
+
+describe('pedantic mode disabled', () => {
+  it(`unordered lists markers`, () => {
+    const input = dedent`
+      * a
+      - b
+      * c
+    `
+
+    return expect(renderString(input)).resolves.toMatchSnapshot()
+  })
+
+  it(`leading spaces in list item`, async () => {
+    const three = dedent`
+      *    a
+    `
+    expect(await renderString(three)).not.toContain('<pre>')
+
+    const four = dedent`
+      *     a
+    `
+    expect(await renderString(four)).toContain('<pre>')
+
+    const five = dedent`
+      *      a
+    `
+    expect(await renderString(five)).toContain('<pre>')
+  })
+
+  it(`em`, () => {
+    const input = dedent`
+      no_em_here
+
+      http://localhost/foo_bar_baz
+    `
+
+    return expect(renderString(input)).resolves.not.toContain('<em>')
+  })
+})
