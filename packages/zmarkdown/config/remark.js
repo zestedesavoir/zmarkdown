@@ -67,6 +67,8 @@ const remarkConfig = {
 
   rehypeHighlight: {
     ignoreMissing: true,
+    plainText: ['console'],
+    aliases: {tex: ['latex']},
   },
 
   footnotesTitles: 'Retourner au texte de la note $id',

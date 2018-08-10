@@ -221,6 +221,30 @@ describe('ping', () => {
   })
 })
 
+describe('code highlight special cases', () => {
+  beforeEach(() => {
+    remarkConfig._test = false
+  })
+  it('does not highlight console', () => {
+    const input = dedent `\`\`\`console
+    echo "Hello world"
+    \`\`\``
+    expect(renderString(input)).resolves.toMatchSnapshot()
+  })
+  it('highlights latex as tex', () => {
+    const input = ['````latex',
+      '\\usepackage{inputenc}[utf8]',
+      '\\begin{document}',
+      '\\texttt{code}',
+      '\\end{document}',
+      '```'].join('\n')
+    expect(renderString(input)).resolves.toMatchSnapshot()
+  })
+  afterEach(() => {
+    remarkConfig._test = true
+  })
+})
+
 describe('smileys', () => {
   it(`translates >_<`, () => {
     const input = 'This is funny >_<'
