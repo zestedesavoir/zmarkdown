@@ -221,30 +221,6 @@ describe('ping', () => {
   })
 })
 
-describe('code highlight special cases', () => {
-  beforeEach(() => {
-    remarkConfig._test = false
-  })
-  it('does not highlight console', () => {
-    const input = dedent `\`\`\`console
-    echo "Hello world"
-    \`\`\``
-    expect(renderString(input)).resolves.toMatchSnapshot()
-  })
-  it('highlights latex as tex', () => {
-    const input = ['````latex',
-      '\\usepackage{inputenc}[utf8]',
-      '\\begin{document}',
-      '\\texttt{code}',
-      '\\end{document}',
-      '```'].join('\n')
-    expect(renderString(input)).resolves.toMatchSnapshot()
-  })
-  afterEach(() => {
-    remarkConfig._test = true
-  })
-})
-
 describe('smileys', () => {
   it(`translates >_<`, () => {
     const input = 'This is funny >_<'
@@ -301,5 +277,57 @@ describe('pedantic mode disabled', () => {
     `
 
     return expect(renderString(input)).resolves.not.toContain('<em>')
+  })
+})
+
+
+describe('code highlight special cases', () => {
+  beforeEach(() => {
+    remarkConfig._test = false
+  })
+
+  it('does not highlight console', () => {
+    const input = dedent `
+      \`\`\`console
+      echo "Hello world"
+      \`\`\`
+    `
+    expect(renderString(input)).resolves.toMatchSnapshot()
+  })
+
+  it('highlights latex', async () => {
+    const input = [
+      '```latex',
+      '\\usepackage{inputenc}[utf8]',
+      '\\begin{document}',
+      '\\texttt{code}',
+      '\\end{document}',
+      '```',
+    ]
+
+    const result1 = await renderString(input.join('\n'))
+    expect(result1).toMatchSnapshot()
+  })
+
+  it('highlights latex as tex', async () => {
+    const input = [
+      '```latex',
+      '\\usepackage{inputenc}[utf8]',
+      '\\begin{document}',
+      '\\texttt{code}',
+      '\\end{document}',
+      '```',
+    ]
+
+    const result1 = (await renderString(input.join('\n'))).replace('language-latex', '')
+
+    input[0] = '```tex'
+    const result2 = (await renderString(input.join('\n'))).replace('language-tex', '')
+
+    expect(result2).toBe(result1)
+  })
+
+  afterEach(() => {
+    remarkConfig._test = true
   })
 })
