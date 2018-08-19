@@ -1,0 +1,65 @@
+/* Global style */
+html, body {
+  height: 100%;
+}
+
+body {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Editor style */
+
+.editor {
+  border: 0;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #333;
+  height: 100%;
+  margin: 0;
+  min-width: 0;
+  outline-width: 0;
+  overflow-y: auto;
+  padding: 30px;
+  resize: none;
+  width: 100%;
+}
+
+#right {
+  overflow-y: auto;
+}
+
+.result {
+  padding: 30px;
+  position: relative;
+}
+
+/* Resizer style */
+
+.gutter {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: 50%;
+
+  box-shadow: inset 0 1px 2px #CCC;
+  background-color: #EEE;
+}
+
+.gutter.gutter-horizontal {
+  cursor: col-resize;
+}
+
+.gutter.gutter-vertical {
+  cursor: row-resize;
+}
+
+.split.split-horizontal, .gutter.gutter-horizontal {
+  height: 100%;
+  float: left;
+}
