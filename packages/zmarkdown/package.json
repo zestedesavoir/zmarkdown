@@ -78,10 +78,16 @@
   },
   "devDependencies": {
     "axios": "^0.18.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "clone": "^2.1.1",
     "cross-env": "^5.2.0",
     "eslint": "^5.1.0",
-    "html-differ": "^1.3.4"
+    "html-differ": "^1.3.4",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0"
   },
   "scripts": {
     "lint": "eslint .",
@@ -90,7 +96,8 @@
     "posttest": "npm run stop",
     "watch": "jest --watch",
     "server": "pm2 start -f server/index.js -i 3 --max-memory-restart 150M",
-    "stop": "pm2 kill"
+    "stop": "pm2 kill",
+    "watch:client": "webpack --watch --info-verbosity verbose --mode development --config default.webpack.config.js"
   },
   "engines": {
     "node": ">=8.0.0"
