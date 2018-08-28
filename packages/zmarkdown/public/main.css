@@ -51,6 +51,10 @@ body {
   background-color: #EEE;
 }
 
+.gutter:hover {
+  background-color: #ddd;
+}
+
 .gutter.gutter-horizontal {
   cursor: col-resize;
 }
@@ -62,4 +66,26 @@ body {
 .split.split-horizontal, .gutter.gutter-horizontal {
   height: 100%;
   float: left;
+}
+
+.zmarkdown > p > .inlineMathDouble {
+  display: block;
+  text-align: center;
+  background-color: red;
+}
+
+.zmarkdown > .align-right {
+  text-align: right;
+}
+
+.zmarkdown > .align-center {
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
 }

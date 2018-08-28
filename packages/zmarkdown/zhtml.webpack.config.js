@@ -1,11 +1,11 @@
 const path = require('path')
 
 module.exports = {
-  entry: ['babel-polyfill', './client/index'],
+  entry: ['./plugins/client/zhtml'],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'zmarkdown.js',
-    library: 'ZMarkdown',
+    filename: 'zmarkdown-zhtml.js',
+    library: 'ZMarkdownZHTML',
   },
   module: {
     rules: [
