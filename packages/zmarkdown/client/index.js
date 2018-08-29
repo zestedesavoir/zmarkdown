@@ -2,7 +2,7 @@ export const plugins = {}
 export let defaultType
 
 export function use (obj) {
-  if (!obj) {
+  if (!obj || (typeof obj !== 'object')) {
     throw new Error('This is not an object')
   }
 
@@ -39,11 +39,31 @@ export function resetDefaultType () {
 export function render (str, type = null, cb = null) {
   if (plugins.length === 0) {
     throw new Error('No plugins available.')
-  } else if (!type && !defaultType) {
-    throw new Error('This function expects to be called with (str, type = null), ' +
-      'type is missing. To omit type parameter you should set the default type.')
-  } else if (type && !plugins.hasOwnProperty(type)) {
-    throw new Error(`Unknown type: ${type}`)
+  }
+
+  switch (typeof type) {
+    case 'string':
+      if (type && !plugins.hasOwnProperty(type)) {
+        throw new Error(`Unknown type: ${type}`)
+      }
+      break
+    case 'function':
+      if (!cb) {
+        cb = type
+      } else if (typeof cb === 'function') {
+        throw new Error("Non deterministic use of cb due to type of 'type' and type of " +
+          "'cb' are function.")
+      }
+      break
+    default:
+      if (!type && !defaultType) {
+        if (type === null) {
+          throw new Error(`Bad type for parameter 'type'. Expected 'string'
+          or 'function' but was: ${typeof type}`)
+        }
+        throw new Error('This function expects to be called with (str, type = null, cb = null), ' +
+          'type is missing. To omit type parameter you should set the default type.')
+      }
   }
 
   if (!type) {
