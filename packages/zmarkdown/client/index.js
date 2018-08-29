@@ -7,14 +7,17 @@ export function use (obj) {
   }
 
   // Check the object structure
-  if (!('name' in obj)) {
+
+  if (!obj.hasOwnProperty('name')) {
     throw new Error("missing 'name' in plugin")
-  } else if (typeof obj.name !== 'string') {
+  }
+  if (typeof obj.name !== 'string') {
     throw new Error('Plugin name should be a string')
   }
-  if (!('render' in obj)) {
+  if (!obj.hasOwnProperty('render')) {
     throw new Error("missing 'render' function in plugin")
-  } else if (typeof obj.render !== 'function') {
+  }
+  if (typeof obj.render !== 'function') {
     throw new Error('render is not a function')
   }
 
@@ -22,7 +25,7 @@ export function use (obj) {
 }
 
 export function setDefaultType (type) {
-  if (type in plugins) {
+  if (plugins.hasOwnProperty(type)) {
     defaultType = type
   } else {
     throw new Error(`Unknown type: ${type}`)
@@ -39,7 +42,7 @@ export function render (str, type = null, cb = null) {
   } else if (!type && !defaultType) {
     throw new Error('This function expects to be called with (str, type = null), ' +
       'type is missing. To omit type parameter you should set the default type.')
-  } else if (type && !(type in plugins)) {
+  } else if (type && !plugins.hasOwnProperty(type)) {
     throw new Error(`Unknown type: ${type}`)
   }
 
