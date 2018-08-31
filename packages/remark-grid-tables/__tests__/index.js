@@ -69,6 +69,26 @@ test('regression: should not crash with two spaces on the next line', () => {
   expect(contents).toMatchSnapshot()
 })
 
+test('regression: should be parsed with two spaces on last line', () => {
+  const {contents: base} = render(dedent`
+    +----+----+
+    + :) | :) +
+    +----+----+
+
+    hello
+    `)
+
+  const {contents} = render(dedent`
+    +----+----+
+    + :) | :) +
+    +----+----+··
+
+    hello
+    `.replace(/·/g, ' '))
+
+  expect(contents).toBe(base)
+})
+
 test('stringify', () => {
   const fileExample = file(join(__dirname, 'grid-tables.md'))
   const {contents} = render(fileExample)

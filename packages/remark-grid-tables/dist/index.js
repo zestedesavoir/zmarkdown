@@ -8,6 +8,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var trimEnd = require('lodash.trimend');
 var visit = require('unist-util-visit');
 
 var mainLineRegex = new RegExp(/((\+)|(\|)).+((\|)|(\+))/);
@@ -270,7 +271,10 @@ function computeColumnStartingPositions(lines) {
 
 function extractTable(value, eat, tokenizer) {
   // Extract lines before the grid table
-  var possibleGridTable = value.split('\n');
+  var possibleGridTable = value.split('\n').map(function (line) {
+    return trimEnd(line);
+  });
+
   var i = 0;
   var before = [];
   for (; i < possibleGridTable.length; i++) {

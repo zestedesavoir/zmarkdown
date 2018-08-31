@@ -1,3 +1,4 @@
+const trimEnd = require('lodash.trimend')
 const visit = require('unist-util-visit')
 
 const mainLineRegex = new RegExp(/((\+)|(\|)).+((\|)|(\+))/)
@@ -226,7 +227,10 @@ function computeColumnStartingPositions (lines) {
 
 function extractTable (value, eat, tokenizer) {
   // Extract lines before the grid table
-  const possibleGridTable = value.split('\n')
+  const possibleGridTable = value
+    .split('\n')
+    .map(line => trimEnd(line))
+
   let i = 0
   const before = []
   for (; i < possibleGridTable.length; i++) {
