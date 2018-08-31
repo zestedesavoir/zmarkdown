@@ -1,6 +1,7 @@
 import {readFileSync as file} from 'fs'
 import {join} from 'path'
 import unified from 'unified'
+import dedent from 'dedent'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
@@ -53,6 +54,17 @@ test('regression: grid table in non-fenced code block', () => {
     |   | F | G |
     +---+---+---+
 `)
+
+  expect(contents).toMatchSnapshot()
+})
+
+test('regression: should not crash with two spaces on the next line', () => {
+  const {contents} = render(dedent`
+    +----+----+
+    + :) | :) +
+    +----+----+
+    ··
+    `.replace(/·/g, ' '))
 
   expect(contents).toMatchSnapshot()
 })
