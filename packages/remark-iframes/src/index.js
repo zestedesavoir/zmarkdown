@@ -11,7 +11,7 @@ module.exports = function plugin (opts) {
   }
 
   function blockTokenizer (eat, value, silent) {
-    if (!value.startsWith('!(http')) return
+    if (value.indexOf('!(http') !== 0) return
 
     let eatenValue = ''
     let url = ''

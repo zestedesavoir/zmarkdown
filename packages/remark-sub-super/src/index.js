@@ -36,8 +36,8 @@ function inlinePlugin () {
     now.offset += 1
 
     if (markers.hasOwnProperty(marker) &&
-      !value.startsWith(marker + SPACE) &&
-      !value.startsWith(marker + marker)
+      value.indexOf(marker + SPACE) !== 0 &&
+      value.indexOf(marker + marker) !== 0
     ) {
       let endMarkerIndex = 1
       for (; value[endMarkerIndex] !== marker && endMarkerIndex < value.length; endMarkerIndex++);

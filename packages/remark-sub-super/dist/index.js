@@ -81,7 +81,7 @@ function inlinePlugin() {
     now.column += 1;
     now.offset += 1;
 
-    if (markers.hasOwnProperty(marker) && !value.startsWith(marker + SPACE) && !value.startsWith(marker + marker)) {
+    if (markers.hasOwnProperty(marker) && value.indexOf(marker + SPACE) !== 0 && value.indexOf(marker + marker) !== 0) {
       var endMarkerIndex = 1;
       for (; value[endMarkerIndex] !== marker && endMarkerIndex < value.length; endMarkerIndex++) {}
 

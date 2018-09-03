@@ -101,8 +101,8 @@ function internLegendVisitor (internalBlocks) {
     let legendChildIndex = -1
     lastP.children.forEach((child, index) => {
       if (child.type === 'text' &&
-           (child.value.startsWith(internalBlocks[node.type]) ||
-            child.value.includes(`\n${internalBlocks[node.type]}`))
+           (child.value.indexOf(internalBlocks[node.type]) === 0 ||
+            child.value.indexOf(`\n${internalBlocks[node.type]}`) >= 0)
       ) {
         legendChildIndex = index
       }
@@ -117,7 +117,7 @@ function internLegendVisitor (internalBlocks) {
     const potentialLegendLines = lastP.children[legendChildIndex].value.split('\n')
     let lastLegendIndex = -1
     potentialLegendLines.forEach((line, index) => {
-      if (line.startsWith(internalBlocks[node.type])) {
+      if (line.indexOf(internalBlocks[node.type]) === 0) {
         lastLegendIndex = index
       }
     })
@@ -177,7 +177,7 @@ function externLegendVisitorCreator (blocks) {
 
     const legendNode = parent.children[index + 1]
     const firstChild = legendNode.children[0]
-    if (firstChild.type !== 'text' || !firstChild.value.startsWith(blocks[node.type])) return
+    if (firstChild.type !== 'text' || firstChild.value.indexOf(blocks[node.type]) !== 0) return
 
     const legendNodes = []
     const followingNodes = []

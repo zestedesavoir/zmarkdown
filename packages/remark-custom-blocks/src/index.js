@@ -65,7 +65,7 @@ module.exports = function blockPlugin (availableBlocks = {}) {
       const lineToEat = next !== -1 ? value.slice(idx + 1, next) : value.slice(idx + 1)
       if (lineToEat[0] !== C_FENCE) break
       // remove leading `FENCE ` or leading `FENCE`
-      const line = lineToEat.slice(lineToEat.startsWith(`${C_FENCE} `) ? 2 : 1)
+      const line = lineToEat.slice(lineToEat.indexOf(`${C_FENCE} `) === 0 ? 2 : 1)
       linesToEat.push(lineToEat)
       content.push(line)
       value = value.slice(idx + 1)
