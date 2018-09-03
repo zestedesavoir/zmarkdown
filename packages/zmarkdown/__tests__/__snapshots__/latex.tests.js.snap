@@ -531,9 +531,9 @@ exports[`mix-5 1`] = `
 `;
 
 exports[`mix-6 1`] = `
-"\\\\iframe(https://www.youtube.com/embed/8TQIvdFl4aU)[Video][a caption]
+"\\\\iframe{https://www.youtube.com/embed/8TQIvdFl4aU}[Video][a caption]
 
-\\\\iframe(https://www.youtube.com/embed/8TQIvdFl4aU)[Video][]
+\\\\iframe{https://www.youtube.com/embed/8TQIvdFl4aU}[Video][]
 
 no caption"
 `;
