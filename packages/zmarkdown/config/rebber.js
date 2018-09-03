@@ -36,7 +36,7 @@ const rebberConfig = {
     iframe: (ctx, node) => {
       const alternative = node.data.hProperties.src.includes('jsfiddle') ? 'Code' : 'Video'
       const caption = node.caption || ''
-      return `\\iframe(${node.data.hProperties.src})[${alternative}][${caption}]`
+      return `\\iframe{${node.data.hProperties.src}}[${alternative}][${caption}]`
     },
   },
   emoticons: remarkConfig.emoticons,
