@@ -1,6 +1,5 @@
 'use strict';
 
-// TODO @artragis - just a default one while I'm not sure what to do about all linkRef types
 module.exports = linkReference;
 
 var defaultMacro = function defaultMacro(reference, inner) {
@@ -10,5 +9,7 @@ var defaultMacro = function defaultMacro(reference, inner) {
 function linkReference(ctx, node) {
   var macro = ctx.linkReference ? ctx.linkReference : defaultMacro;
   var innerText = require('../all')(ctx, node);
+
+  if (!ctx.definitions(node.identifier)) return '[' + innerText + ']';
   return macro(node.identifier, innerText);
 }

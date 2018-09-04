@@ -1087,7 +1087,7 @@ hello
 
 \\\\begin{itemize}
 \\\\item hello
-\\\\item 3\\\\ref{3}: hello
+\\\\item [3]: hello
 \\\\end{itemize}
 
 
@@ -1119,12 +1119,12 @@ exports[`rebber: remark specs definition-newline: definition-newline 1`] = `
 
 
 
-foo\\\\ref{foo}: /url \\"
+[foo]: /url \\"
 \\"
 
 
 
-bar\\\\ref{bar}: /url '
+[bar]: /url '
 '
 
 
@@ -1139,49 +1139,49 @@ baz\\\\ref{baz}: /url 'foo"
 `;
 
 exports[`rebber: remark specs definition-unclosed: definition-unclosed 1`] = `
-"foo\\\\ref{foo}:
+"[foo]:
 
 
 
 \\\\footnote{\\\\label{bar}\\\\externalLink{</url}{</url}}
 
-foo\\\\ref{foo}:"
+[foo]:"
 `;
 
 exports[`rebber: remark specs definition-unclosed-attribute: definition-unclosed-attribute 1`] = `
-"baz\\\\ref{baz}: /url (there
+"[baz]: /url (there
 
 
 
-foo\\\\ref{foo}: /url \\"there
+[foo]: /url \\"there
 
 
 
-bar\\\\ref{bar}: /url 'there
+[bar]: /url 'there
 
 
 
-baz\\\\ref{baz}: url (
+[baz]: url (
 
 
 
-foo\\\\ref{foo}: url \\"
+[foo]: url \\"
 
 
 
-bar\\\\ref{bar}: /url '
+[bar]: /url '
 
 
 
-baz\\\\ref{baz}: <url>(
+[baz]: <url>(
 
 
 
-foo\\\\ref{foo}: <url>\\"
+[foo]: <url>\\"
 
 
 
-bar\\\\ref{bar}: <url>'"
+[bar]: <url>'"
 `;
 
 exports[`rebber: remark specs deletion: deletion 1`] = `"hello \\\\sout{hi} world"`;
@@ -1313,11 +1313,12 @@ Or in \\\\includegraphics{~/some&copyfile}
 
 Or in \\\\includegraphics{undefined}
 
-1\\\\ref{1}: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
+[1]: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
 pl©ce\\"
 
-1
-\\\\ref{ 1 }: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
+[
+  1
+]: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
 pl©ce\\"
 \\\\end{Quotation}
 
@@ -1507,18 +1508,18 @@ exports[`rebber: remark specs footnote-indent: footnote-indent 1`] = `
 exports[`rebber: remark specs footnote-inline: footnote-inline 1`] = `"This is an example of an inline footnote.\\\\footnote[l1c42o41]{\\\\label{footnote:l1c42o41} This is the \\\\textit{actual} footnote.}"`;
 
 exports[`rebber: remark specs footnote-like: footnote-like 1`] = `
-"This one isn't even defined\\\\ref{^foo}.
+"This one isn't even [defined].
 
 
 
-\\\\textsuperscript{\\\\ref{footnote:both}}invalid\\\\ref{invalid}, \\\\footnote[l3c19o56]{\\\\label{footnote:l3c19o56} this too}[]."
+\\\\textsuperscript{\\\\ref{footnote:both}}[invalid], \\\\footnote[l3c19o56]{\\\\label{footnote:l3c19o56} this too}[]."
 `;
 
 exports[`rebber: remark specs footnote-matrix: footnote-matrix 1`] = `
 "\\\\begin{enumerate}
-\\\\item foo\\\\ref{bar}
-\\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}bar\\\\ref{bar}
-\\\\item foo\\\\ref{^bar}
+\\\\item [foo]
+\\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}[bar]
+\\\\item [foo]
 \\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}\\\\textsuperscript{\\\\ref{footnote:bar}}
 \\\\end{enumerate}"
 `;
@@ -2354,6 +2355,8 @@ Nulla \\\\includegraphics{http://finibus.com/finibus.png} neque et diam rhoncus 
 Donec sed sodales metus, ut aliquet quam. Suspendisse nec ipsum risus. Interdum et malesuada fames ac ante ipsum primis in \\\\includegraphics{http://faucibus.com/faucibus.tiff}."
 `;
 
+exports[`rebber: remark specs invalid-link-definition: invalid-link-definition 1`] = `"Something[2-3]"`;
+
 exports[`rebber: remark specs lazy-blockquotes: lazy-blockquotes 1`] = `
 "\\\\begin{Quotation}
 hi there
@@ -2373,7 +2376,7 @@ exports[`rebber: remark specs link-in-link: link-in-link 1`] = `
 `;
 
 exports[`rebber: remark specs link-spaces: link-spaces 1`] = `
-"alpha\\\\ref{alpha} (bravo
+"[alpha] (bravo
 
 
 
@@ -2390,15 +2393,15 @@ exports[`rebber: remark specs link-spaces: link-spaces 1`] = `
 `;
 
 exports[`rebber: remark specs link-whitespace: link-whitespace 1`] = `
-"alpha\\\\ref{alpha}(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo} charlie).
+"[alpha](\\\\externalLink{https://example.com?bravo}{https://example.com?bravo} charlie).
 
 
 
-alpha\\\\ref{alpha}(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}	charlie).
+[alpha](\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}	charlie).
 
 
 
-alpha\\\\ref{alpha}(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}
+[alpha](\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}
 charlie).
 
 
@@ -2482,11 +2485,11 @@ exports[`rebber: remark specs links-inline-style: links-inline-style 1`] = `
 
 
 
-URL and title\\\\ref{url and title}( /url/has space ).
+[URL and title]( /url/has space ).
 
 
 
-URL and title\\\\ref{url and title}( /url/has space/ \\"url has space and title\\").
+[URL and title]( /url/has space/ \\"url has space and title\\").
 
 
 
@@ -2536,7 +2539,7 @@ Indented thrice\\\\ref{thrice}.
 
 
 
-Indented four\\\\ref{four} times.
+Indented [four] times.
 
 
 
@@ -2578,15 +2581,15 @@ And this\\\\ref{this}.
 
 
 
-But not that\\\\ref{that}.
+But not [that].
 
 
 
-Nor that\\\\ref{that}.
+Nor [that].
 
 
 
-Nor that\\\\ref{that}.
+Nor [that].
 
 
 
@@ -2848,11 +2851,11 @@ exports[`rebber: remark specs links-title-empty-double-quotes: links-title-empty
 `;
 
 exports[`rebber: remark specs links-title-empty-parentheses: links-title-empty-parentheses 1`] = `
-"Hello\\\\ref{hello}(./world.html ()).
+"[Hello](./world.html ()).
 
 
 
-Hello\\\\ref{hello}(<./world.html> ()).
+[Hello](<./world.html> ()).
 
 
 
@@ -2880,11 +2883,11 @@ exports[`rebber: remark specs links-title-empty-single-quotes: links-title-empty
 `;
 
 exports[`rebber: remark specs links-title-parentheses: links-title-parentheses 1`] = `
-"Hello\\\\ref{hello}(./world.html (Hello World!)).
+"[Hello](./world.html (Hello World!)).
 
 
 
-Hello\\\\ref{hello}(<./world.html> (Hello World!)).
+[Hello](<./world.html> (Hello World!)).
 
 
 
@@ -2976,11 +2979,11 @@ exports[`rebber: remark specs links-title-single-quotes-mismatched-delimiters: l
 `;
 
 exports[`rebber: remark specs links-title-unclosed: links-title-unclosed 1`] = `
-"Hello\\\\ref{hello}(./world.html 'Hello
+"[Hello](./world.html 'Hello
 
 
 
-Hello\\\\ref{hello}(<./world.html> 'Hello
+[Hello](<./world.html> 'Hello
 
 
 
@@ -2992,11 +2995,11 @@ Hello\\\\ref{hello}(<./world.html> 'Hello
 
 
 
-Hello\\\\ref{hello}(./world.html \\"Hello
+[Hello](./world.html \\"Hello
 
 
 
-Hello\\\\ref{hello}(<./world.html> \\"Hello
+[Hello](<./world.html> \\"Hello
 
 
 
@@ -3008,11 +3011,11 @@ Hello\\\\ref{hello}(<./world.html> \\"Hello
 
 
 
-Hello\\\\ref{hello}(./world.html (Hello
+[Hello](./world.html (Hello
 
 
 
-Hello\\\\ref{hello}(<./world.html> (Hello
+[Hello](<./world.html> (Hello
 
 
 
@@ -3072,7 +3075,7 @@ exports[`rebber: remark specs links-url-empty-title-parentheses: links-url-empty
 
 
 
-World\\\\ref{world}(<> (World!)).
+[World](<> (World!)).
 
 
 
@@ -3208,7 +3211,7 @@ exports[`rebber: remark specs links-url-escaped-parentheses: links-url-escaped-p
 `;
 
 exports[`rebber: remark specs links-url-mismatched-parentheses: links-url-mismatched-parentheses 1`] = `
-"Hello\\\\ref{hello}(./world(and-hello(world)).
+"[Hello](./world(and-hello(world)).
 
 
 
@@ -3256,7 +3259,7 @@ exports[`rebber: remark specs links-url-nested-parentheses: links-url-nested-par
 `;
 
 exports[`rebber: remark specs links-url-new-line: links-url-new-line 1`] = `
-"Hello\\\\ref{hello}(./wo
+"[Hello](./wo
 rld.html).
 
 
@@ -3276,11 +3279,11 @@ rld.png}."
 `;
 
 exports[`rebber: remark specs links-url-unclosed: links-url-unclosed 1`] = `
-"Hello\\\\ref{hello}(
+"[Hello](
 
 
 
-World\\\\ref{world}(<
+[World](<
 
 
 
@@ -3292,7 +3295,7 @@ World\\\\ref{world}(<
 `;
 
 exports[`rebber: remark specs links-url-white-space: links-url-white-space 1`] = `
-"Hello\\\\ref{hello}(./wo rld.html).
+"[Hello](./wo rld.html).
 
 
 
@@ -5123,7 +5126,7 @@ Markdown supports two style of links: \\\\textit{inline} and \\\\textit{referenc
 
 
 
-In both styles, the link text is delimited by square brackets\\\\ref{square brackets}.
+In both styles, the link text is delimited by [square brackets].
 
 
 
@@ -5819,7 +5822,7 @@ This nested footnote not work:
 `;
 
 exports[`rebber: remark specs nested-square-link: nested-square-link 1`] = `
-"the \`\\\\ref{the \`}\` character](/url)
+"[the \`]\` character](/url)
 
 
 
@@ -6262,7 +6265,7 @@ exports[`rebber: remark specs reference-image-empty-alt: reference-image-empty-a
 `;
 
 exports[`rebber: remark specs reference-link-escape: reference-link-escape 1`] = `
-"b*r*\\\\ref{b\\\\-r}, b*r*\\\\ref{b\\\\*r*}, b*r*\\\\ref{b\\\\*r*}.
+"[b*r*], b*r*\\\\ref{b\\\\*r*}, b*r*\\\\ref{b\\\\*r*}.
 
 
 
@@ -6274,15 +6277,15 @@ exports[`rebber: remark specs reference-link-escape: reference-link-escape 1`] =
 `;
 
 exports[`rebber: remark specs reference-link-not-closed: reference-link-not-closed 1`] = `
-"bar\\\\ref{bar}bar
+"[bar]bar
 
 
 
-bar\\\\ref{bar}
+[bar]
 
 
 
-bar\\\\ref{bar}"
+[bar]"
 `;
 
 exports[`rebber: remark specs reference-link-with-angle-brackets: reference-link-with-angle-brackets 1`] = `
@@ -6358,7 +6361,7 @@ Open parenthesis should be escaped after a shortcut reference:
 
 
 
-ref\\\\ref{ref}(text)
+[ref](text)
 
 
 
@@ -6366,7 +6369,7 @@ And after a shortcut reference and a space (for GitHub):
 
 
 
-ref\\\\ref{ref} (text)
+[ref] (text)
 
 
 
@@ -6402,12 +6405,12 @@ Text under a shortcut reference should be preserved verbatim:
 
 
 \\\\begin{itemize}
-\\\\item two*three\\\\ref{two*three}
-\\\\item two*three\\\\ref{two\\\\*three}
-\\\\item a\\\\textbackslash{}a\\\\ref{a\\\\a}
-\\\\item a\\\\textbackslash{}a\\\\ref{a\\\\\\\\a}
-\\\\item a\\\\textbackslash{}\\\\textbackslash{}a\\\\ref{a\\\\\\\\\\\\a}
-\\\\item a\\\\_a\\\\_a\\\\ref{a_a\\\\_a}
+\\\\item [two*three]
+\\\\item [two*three]
+\\\\item [a\\\\textbackslash{}a]
+\\\\item [a\\\\textbackslash{}a]
+\\\\item [a\\\\textbackslash{}\\\\textbackslash{}a]
+\\\\item [a\\\\_a\\\\_a]
 \\\\end{itemize}
 
 
@@ -6798,14 +6801,14 @@ exports[`rebber: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item \\\\ref{ }
-\\\\item \\\\ref{ }
+\\\\item [ ]
+\\\\item [	]
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item x\\\\ref{x}
-\\\\item X\\\\ref{x}
+\\\\item [x]
+\\\\item [X]
 \\\\end{enumerate}
 
 
@@ -6843,14 +6846,14 @@ exports[`rebber: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item \\\\ref{ }Hello;
-\\\\item \\\\ref{ }World;
+\\\\item [ ]Hello;
+\\\\item [	]World;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item x\\\\ref{x}Foo.
-\\\\item X\\\\ref{x}Bar
+\\\\item [x]Foo.
+\\\\item [X]Bar
 \\\\end{enumerate}
 
 
@@ -6960,12 +6963,14 @@ World;
 
 
 \\\\begin{itemize}
-\\\\item \\\\ref{ } Hello;
+\\\\item [
+] Hello;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item \\\\ref{ } Hello;
+\\\\item [
+] Hello;
 \\\\end{enumerate}
 
 
@@ -6973,14 +6978,15 @@ World;
 
 
 \\\\begin{itemize}
-\\\\item \\\\ref{ } Hello;
+\\\\item [  ] Hello;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item \\\\ref{ } World;
-\\\\item \\\\ref{ } Hello;
-\\\\item \\\\ref{ } World.
+\\\\item [ 
+] World;
+\\\\item [		] Hello;
+\\\\item [ 	 ] World.
 \\\\end{enumerate}"
 `;
 
@@ -7124,33 +7130,6 @@ CommonMark & \\\\texttt{()} & No & Yes & Yes & Yes & Yes \\\\\\\\ \\\\hline
 
 
 
-\\\\chapter{Parentheses}
-
-
-Hello\\\\ref{hello}(./world.html (and text))
-
-
-
-Hello\\\\ref{hello}(./world.html (and (matching delimiters)))
-
-
-
-Hello\\\\ref{hello}(./world.html (and (mismatched delimiters))
-
-
-
-Hello\\\\ref{hello}(./world.html (and (escapes)))
-
-
-
-Hello\\\\ref{hello}(./world.html (and (named entities)))
-
-
-
-Hello\\\\ref{hello}(./world.html (and (numbered entities)))
-
-
-
 \\\\part{Images}
 
 
@@ -7204,34 +7183,7 @@ Hello\\\\ref{hello}(./world.html (and (numbered entities)))
 
 
 
-\\\\includegraphics{./world.png}
-
-
-
-\\\\chapter{Parentheses}
-
-
-\\\\includegraphics{undefined}(./world.png (and text))
-
-
-
-\\\\includegraphics{undefined}(./world.png (and (matching delimiters)))
-
-
-
-\\\\includegraphics{undefined}(./world.png (and (mismatched delimiters))
-
-
-
-\\\\includegraphics{undefined}(./world.png (and (escapes)))
-
-
-
-\\\\includegraphics{undefined}(./world.png (and (named entities)))
-
-
-
-\\\\includegraphics{undefined}(./world.png (and (numbered entities)))"
+\\\\includegraphics{./world.png}"
 `;
 
 exports[`rebber: remark specs toplevel-paragraphs: toplevel-paragraphs 1`] = `
@@ -8211,7 +8163,7 @@ exports[`rebber: remark specs with config: custom macros def-blocks 1`] = `
 
 [definition(identifier=2, url=hello, title=null)]
 
-[unorderedList([listItem(hello)][listItem([linkReference(reference=3, content=3)]: hello)])]
+[unorderedList([listItem(hello)][listItem([3]: hello)])]
 
 
 [unorderedList([listItem(hello)])]
@@ -8232,12 +8184,12 @@ exports[`rebber: remark specs with config: custom macros definition-newline 1`] 
 
 
 
-[linkReference(reference=foo, content=foo)]: /url \\"
+[foo]: /url \\"
 \\"
 
 
 
-[linkReference(reference=bar, content=bar)]: /url '
+[bar]: /url '
 '
 
 
@@ -8255,49 +8207,49 @@ bar)]
 `;
 
 exports[`rebber: remark specs with config: custom macros definition-unclosed 1`] = `
-"[linkReference(reference=foo, content=foo)]:
+"[foo]:
 
 
 
 [definition(identifier=bar, url=</url, title=null)]
 
-[linkReference(reference=foo, content=foo)]:"
+[foo]:"
 `;
 
 exports[`rebber: remark specs with config: custom macros definition-unclosed-attribute 1`] = `
-"[linkReference(reference=baz, content=baz)]: /url (there
+"[baz]: /url (there
 
 
 
-[linkReference(reference=foo, content=foo)]: /url \\"there
+[foo]: /url \\"there
 
 
 
-[linkReference(reference=bar, content=bar)]: /url 'there
+[bar]: /url 'there
 
 
 
-[linkReference(reference=baz, content=baz)]: url (
+[baz]: url (
 
 
 
-[linkReference(reference=foo, content=foo)]: url \\"
+[foo]: url \\"
 
 
 
-[linkReference(reference=bar, content=bar)]: /url '
+[bar]: /url '
 
 
 
-[linkReference(reference=baz, content=baz)]: <url>(
+[baz]: <url>(
 
 
 
-[linkReference(reference=foo, content=foo)]: <url>\\"
+[foo]: <url>\\"
 
 
 
-[linkReference(reference=bar, content=bar)]: <url>'"
+[bar]: <url>'"
 `;
 
 exports[`rebber: remark specs with config: custom macros deletion 1`] = `"hello \\\\sout{hi} world"`;
@@ -8412,12 +8364,12 @@ Or in \\\\includegraphics{~/some&copyfile})]
 
 Or in \\\\includegraphics{undefined}
 
-[linkReference(reference=1, content=1)]: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
+[1]: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
 pl©ce\\"
 
-[linkReference(reference= 1 , content=
+[
   1
-)]: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
+]: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
 pl©ce\\")]
 
 [thematicBreak(---)]
@@ -8557,14 +8509,14 @@ exports[`rebber: remark specs with config: custom macros footnote-indent 1`] = `
 exports[`rebber: remark specs with config: custom macros footnote-inline 1`] = `"This is an example of an inline footnote.[footnote(identifier=l1c42o41, text=This is the \\\\textit{actual} footnote., protect=false)]"`;
 
 exports[`rebber: remark specs with config: custom macros footnote-like 1`] = `
-"This one isn't even [linkReference(reference=^foo, content=defined)].
+"This one isn't even [defined].
 
 
 
-[footnoteReference(both)][linkReference(reference=invalid, content=invalid)], [footnote(identifier=l3c19o56, text=this too, protect=false)][]."
+[footnoteReference(both)][invalid], [footnote(identifier=l3c19o56, text=this too, protect=false)][]."
 `;
 
-exports[`rebber: remark specs with config: custom macros footnote-matrix 1`] = `"[orderedList([listItem([linkReference(reference=bar, content=foo)])][listItem([footnoteReference(foo)][linkReference(reference=bar, content=bar)])][listItem([linkReference(reference=^bar, content=foo)])][listItem([footnoteReference(foo)][footnoteReference(bar)])])]"`;
+exports[`rebber: remark specs with config: custom macros footnote-matrix 1`] = `"[orderedList([listItem([foo])][listItem([footnoteReference(foo)][bar])][listItem([foo])][listItem([footnoteReference(foo)][footnoteReference(bar)])])]"`;
 
 exports[`rebber: remark specs with config: custom macros footnote-multiple 1`] = `
 "heading1(International Radiotelephony Spelling Alphabet[footnoteReference(wiki)])
@@ -9236,6 +9188,8 @@ Nulla \\\\includegraphics{http://finibus.com/finibus.png} neque et diam rhoncus 
 Donec sed sodales metus, ut aliquet quam. Suspendisse nec ipsum risus. Interdum et malesuada fames ac ante ipsum primis in \\\\includegraphics{http://faucibus.com/faucibus.tiff}."
 `;
 
+exports[`rebber: remark specs with config: custom macros invalid-link-definition 1`] = `"Something[2-3]"`;
+
 exports[`rebber: remark specs with config: custom macros lazy-blockquotes 1`] = `
 "[blockquote(hi there
 bud)]"
@@ -9252,7 +9206,7 @@ exports[`rebber: remark specs with config: custom macros link-in-link 1`] = `
 `;
 
 exports[`rebber: remark specs with config: custom macros link-spaces 1`] = `
-"[linkReference(reference=alpha, content=alpha)] (bravo
+"[alpha] (bravo
 
 
 
@@ -9269,15 +9223,15 @@ exports[`rebber: remark specs with config: custom macros link-spaces 1`] = `
 `;
 
 exports[`rebber: remark specs with config: custom macros link-whitespace 1`] = `
-"[linkReference(reference=alpha, content=alpha)](\\\\externalLink{https://example.com?bravo}{https://example.com?bravo} charlie).
+"[alpha](\\\\externalLink{https://example.com?bravo}{https://example.com?bravo} charlie).
 
 
 
-[linkReference(reference=alpha, content=alpha)](\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}	charlie).
+[alpha](\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}	charlie).
 
 
 
-[linkReference(reference=alpha, content=alpha)](\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}
+[alpha](\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}
 charlie).
 
 
@@ -9361,11 +9315,11 @@ exports[`rebber: remark specs with config: custom macros links-inline-style 1`] 
 
 
 
-[linkReference(reference=url and title, content=URL and title)]( /url/has space ).
+[URL and title]( /url/has space ).
 
 
 
-[linkReference(reference=url and title, content=URL and title)]( /url/has space/ \\"url has space and title\\").
+[URL and title]( /url/has space/ \\"url has space and title\\").
 
 
 
@@ -9415,7 +9369,7 @@ Indented [linkReference(reference=thrice, content=thrice)].
 
 
 
-Indented [linkReference(reference=four, content=four)] times.
+Indented [four] times.
 
 
 
@@ -9451,15 +9405,15 @@ And [linkReference(reference=this, content=this)].
 
 
 
-But not [linkReference(reference=that, content=that)].
+But not [that].
 
 
 
-Nor [linkReference(reference=that, content=that)].
+Nor [that].
 
 
 
-Nor [linkReference(reference=that, content=that)].
+Nor [that].
 
 
 
@@ -9719,11 +9673,11 @@ exports[`rebber: remark specs with config: custom macros links-title-empty-doubl
 `;
 
 exports[`rebber: remark specs with config: custom macros links-title-empty-parentheses 1`] = `
-"[linkReference(reference=hello, content=Hello)](./world.html ()).
+"[Hello](./world.html ()).
 
 
 
-[linkReference(reference=hello, content=Hello)](<./world.html> ()).
+[Hello](<./world.html> ()).
 
 
 
@@ -9751,11 +9705,11 @@ exports[`rebber: remark specs with config: custom macros links-title-empty-singl
 `;
 
 exports[`rebber: remark specs with config: custom macros links-title-parentheses 1`] = `
-"[linkReference(reference=hello, content=Hello)](./world.html (Hello World!)).
+"[Hello](./world.html (Hello World!)).
 
 
 
-[linkReference(reference=hello, content=Hello)](<./world.html> (Hello World!)).
+[Hello](<./world.html> (Hello World!)).
 
 
 
@@ -9847,11 +9801,11 @@ exports[`rebber: remark specs with config: custom macros links-title-single-quot
 `;
 
 exports[`rebber: remark specs with config: custom macros links-title-unclosed 1`] = `
-"[linkReference(reference=hello, content=Hello)](./world.html 'Hello
+"[Hello](./world.html 'Hello
 
 
 
-[linkReference(reference=hello, content=Hello)](<./world.html> 'Hello
+[Hello](<./world.html> 'Hello
 
 
 
@@ -9863,11 +9817,11 @@ exports[`rebber: remark specs with config: custom macros links-title-unclosed 1`
 
 
 
-[linkReference(reference=hello, content=Hello)](./world.html \\"Hello
+[Hello](./world.html \\"Hello
 
 
 
-[linkReference(reference=hello, content=Hello)](<./world.html> \\"Hello
+[Hello](<./world.html> \\"Hello
 
 
 
@@ -9879,11 +9833,11 @@ exports[`rebber: remark specs with config: custom macros links-title-unclosed 1`
 
 
 
-[linkReference(reference=hello, content=Hello)](./world.html (Hello
+[Hello](./world.html (Hello
 
 
 
-[linkReference(reference=hello, content=Hello)](<./world.html> (Hello
+[Hello](<./world.html> (Hello
 
 
 
@@ -9943,7 +9897,7 @@ exports[`rebber: remark specs with config: custom macros links-url-empty-title-p
 
 
 
-[linkReference(reference=world, content=World)](<> (World!)).
+[World](<> (World!)).
 
 
 
@@ -10079,7 +10033,7 @@ exports[`rebber: remark specs with config: custom macros links-url-escaped-paren
 `;
 
 exports[`rebber: remark specs with config: custom macros links-url-mismatched-parentheses 1`] = `
-"[linkReference(reference=hello, content=Hello)](./world(and-hello(world)).
+"[Hello](./world(and-hello(world)).
 
 
 
@@ -10127,7 +10081,7 @@ exports[`rebber: remark specs with config: custom macros links-url-nested-parent
 `;
 
 exports[`rebber: remark specs with config: custom macros links-url-new-line 1`] = `
-"[linkReference(reference=hello, content=Hello)](./wo
+"[Hello](./wo
 rld.html).
 
 
@@ -10147,11 +10101,11 @@ rld.png}."
 `;
 
 exports[`rebber: remark specs with config: custom macros links-url-unclosed 1`] = `
-"[linkReference(reference=hello, content=Hello)](
+"[Hello](
 
 
 
-[linkReference(reference=world, content=World)](<
+[World](<
 
 
 
@@ -10163,7 +10117,7 @@ exports[`rebber: remark specs with config: custom macros links-url-unclosed 1`] 
 `;
 
 exports[`rebber: remark specs with config: custom macros links-url-white-space 1`] = `
-"[linkReference(reference=hello, content=Hello)](./wo rld.html).
+"[Hello](./wo rld.html).
 
 
 
@@ -11469,7 +11423,7 @@ Markdown supports two style of links: \\\\textit{inline} and \\\\textit{referenc
 
 
 
-In both styles, the link text is delimited by [linkReference(reference=square brackets, content=square brackets)].
+In both styles, the link text is delimited by [square brackets].
 
 
 
@@ -11975,7 +11929,7 @@ This nested footnote not work:
 `;
 
 exports[`rebber: remark specs with config: custom macros nested-square-link 1`] = `
-"[linkReference(reference=the \`, content=the \`)]\` character](/url)
+"[the \`]\` character](/url)
 
 
 
@@ -12289,7 +12243,7 @@ exports[`rebber: remark specs with config: custom macros reference-image-empty-a
 `;
 
 exports[`rebber: remark specs with config: custom macros reference-link-escape 1`] = `
-"[linkReference(reference=b\\\\-r, content=b*r*)], [linkReference(reference=b\\\\*r*, content=b*r*)], [linkReference(reference=b\\\\*r*, content=b*r*)].
+"[b*r*], [linkReference(reference=b\\\\*r*, content=b*r*)], [linkReference(reference=b\\\\*r*, content=b*r*)].
 
 
 
@@ -12301,15 +12255,15 @@ exports[`rebber: remark specs with config: custom macros reference-link-escape 1
 `;
 
 exports[`rebber: remark specs with config: custom macros reference-link-not-closed 1`] = `
-"[linkReference(reference=bar, content=bar)]bar
+"[bar]bar
 
 
 
-[linkReference(reference=bar, content=bar)]
+[bar]
 
 
 
-[linkReference(reference=bar, content=bar)]"
+[bar]"
 `;
 
 exports[`rebber: remark specs with config: custom macros reference-link-with-angle-brackets 1`] = `
@@ -12372,7 +12326,7 @@ Open parenthesis should be escaped after a shortcut reference:
 
 
 
-[linkReference(reference=ref, content=ref)](text)
+[ref](text)
 
 
 
@@ -12380,7 +12334,7 @@ And after a shortcut reference and a space (for GitHub):
 
 
 
-[linkReference(reference=ref, content=ref)] (text)
+[ref] (text)
 
 
 
@@ -12415,7 +12369,7 @@ Text under a shortcut reference should be preserved verbatim:
 
 
 
-[unorderedList([listItem([linkReference(reference=two*three, content=two*three)])][listItem([linkReference(reference=two\\\\*three, content=two*three)])][listItem([linkReference(reference=a\\\\a, content=a\\\\textbackslash{}a)])][listItem([linkReference(reference=a\\\\\\\\a, content=a\\\\textbackslash{}a)])][listItem([linkReference(reference=a\\\\\\\\\\\\a, content=a\\\\textbackslash{}\\\\textbackslash{}a)])][listItem([linkReference(reference=a_a\\\\_a, content=a\\\\_a\\\\_a)])])]
+[unorderedList([listItem([two*three])][listItem([two*three])][listItem([a\\\\textbackslash{}a])][listItem([a\\\\textbackslash{}a])][listItem([a\\\\textbackslash{}\\\\textbackslash{}a])][listItem([a\\\\_a\\\\_a])])]
 
 \\\\textbf{GFM:}
 
@@ -12753,9 +12707,9 @@ And:
 exports[`rebber: remark specs with config: custom macros task-list 1`] = `
 "heading1(Empty items)
 
-[unorderedList([listItem([linkReference(reference= , content= )])][listItem([linkReference(reference= , content=	)])])]
+[unorderedList([listItem([ ])][listItem([	])])]
 
-[orderedList([listItem([linkReference(reference=x, content=x)])][listItem([linkReference(reference=x, content=X)])])]
+[orderedList([listItem([x])][listItem([X])])]
 
 heading1(Single space)
 
@@ -12771,9 +12725,9 @@ heading1(Tab)
 
 heading1(No white space with content)
 
-[unorderedList([listItem([linkReference(reference= , content= )]Hello;)][listItem([linkReference(reference= , content=	)]World;)])]
+[unorderedList([listItem([ ]Hello;)][listItem([	]World;)])]
 
-[orderedList([listItem([linkReference(reference=x, content=x)]Foo.)][listItem([linkReference(reference=x, content=X)]Bar)])]
+[orderedList([listItem([x]Foo.)][listItem([X]Bar)])]
 
 heading1(Single space with content)
 
@@ -12811,18 +12765,18 @@ heading1(Mixed tabs and spaces)
 
 heading1(Line breaks)
 
-[unorderedList([listItem([linkReference(reference= , content=
-)] Hello;)])]
+[unorderedList([listItem([
+] Hello;)])]
 
-[orderedList([listItem([linkReference(reference= , content=
-)] Hello;)])]
+[orderedList([listItem([
+] Hello;)])]
 
 heading1(Multiple unfinished characters)
 
-[unorderedList([listItem([linkReference(reference= , content=  )] Hello;)])]
+[unorderedList([listItem([  ] Hello;)])]
 
-[orderedList([listItem([linkReference(reference= , content= 
-)] World;)][listItem([linkReference(reference= , content=		)] Hello;)][listItem([linkReference(reference= , content= 	 )] World.)])]"
+[orderedList([listItem([ 
+] World;)][listItem([		] Hello;)][listItem([ 	 ] World.)])]"
 `;
 
 exports[`rebber: remark specs with config: custom macros task-list-ordered 1`] = `
@@ -12924,32 +12878,6 @@ heading2(Single quotes)
 
 
 
-heading2(Parentheses)
-
-[linkReference(reference=hello, content=Hello)](./world.html (and text))
-
-
-
-[linkReference(reference=hello, content=Hello)](./world.html (and (matching delimiters)))
-
-
-
-[linkReference(reference=hello, content=Hello)](./world.html (and (mismatched delimiters))
-
-
-
-[linkReference(reference=hello, content=Hello)](./world.html (and (escapes)))
-
-
-
-[linkReference(reference=hello, content=Hello)](./world.html (and (named entities)))
-
-
-
-[linkReference(reference=hello, content=Hello)](./world.html (and (numbered entities)))
-
-
-
 heading1(Images)
 
 heading2(Double quotes)
@@ -13000,33 +12928,7 @@ heading2(Single quotes)
 
 
 
-\\\\includegraphics{./world.png}
-
-
-
-heading2(Parentheses)
-
-\\\\includegraphics{undefined}(./world.png (and text))
-
-
-
-\\\\includegraphics{undefined}(./world.png (and (matching delimiters)))
-
-
-
-\\\\includegraphics{undefined}(./world.png (and (mismatched delimiters))
-
-
-
-\\\\includegraphics{undefined}(./world.png (and (escapes)))
-
-
-
-\\\\includegraphics{undefined}(./world.png (and (named entities)))
-
-
-
-\\\\includegraphics{undefined}(./world.png (and (numbered entities)))"
+\\\\includegraphics{./world.png}"
 `;
 
 exports[`rebber: remark specs with config: custom macros toplevel-paragraphs 1`] = `
@@ -14184,7 +14086,7 @@ hello
 
 \\\\begin{itemize}
 \\\\item hello
-\\\\item 3\\\\ref{3}: hello
+\\\\item [3]: hello
 \\\\end{itemize}
 
 
@@ -14218,12 +14120,12 @@ exports[`toLaTeX: remark specs definition-newline: definition-newline 1`] = `
 
 
 
-foo\\\\ref{foo}: /url \\"
+[foo]: /url \\"
 \\"
 
 
 
-bar\\\\ref{bar}: /url '
+[bar]: /url '
 '
 
 
@@ -14240,51 +14142,51 @@ baz\\\\ref{baz}: /url 'foo
 `;
 
 exports[`toLaTeX: remark specs definition-unclosed: definition-unclosed 1`] = `
-"foo\\\\ref{foo}:
+"[foo]:
 
 
 
 \\\\footnote{\\\\label{bar}\\\\externalLink{</url}{</url}}
 
-foo\\\\ref{foo}:
+[foo]:
 
 "
 `;
 
 exports[`toLaTeX: remark specs definition-unclosed-attribute: definition-unclosed-attribute 1`] = `
-"baz\\\\ref{baz}: /url (there
+"[baz]: /url (there
 
 
 
-foo\\\\ref{foo}: /url \\"there
+[foo]: /url \\"there
 
 
 
-bar\\\\ref{bar}: /url 'there
+[bar]: /url 'there
 
 
 
-baz\\\\ref{baz}: url (
+[baz]: url (
 
 
 
-foo\\\\ref{foo}: url \\"
+[foo]: url \\"
 
 
 
-bar\\\\ref{bar}: /url '
+[bar]: /url '
 
 
 
-baz\\\\ref{baz}: <url>(
+[baz]: <url>(
 
 
 
-foo\\\\ref{foo}: <url>\\"
+[foo]: <url>\\"
 
 
 
-bar\\\\ref{bar}: <url>'
+[bar]: <url>'
 
 "
 `;
@@ -14436,11 +14338,12 @@ Or in \\\\includegraphics{~/some&copyfile}
 
 Or in \\\\includegraphics{undefined}
 
-1\\\\ref{1}: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
+[1]: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
 pl©ce\\"
 
-1
-\\\\ref{ 1 }: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
+[
+  1
+]: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
 pl©ce\\"
 \\\\end{Quotation}
 
@@ -14654,20 +14557,20 @@ exports[`toLaTeX: remark specs footnote-inline: footnote-inline 1`] = `
 `;
 
 exports[`toLaTeX: remark specs footnote-like: footnote-like 1`] = `
-"This one isn't even defined\\\\ref{^foo}.
+"This one isn't even [defined].
 
 
 
-\\\\textsuperscript{\\\\ref{footnote:both}}invalid\\\\ref{invalid}, \\\\footnote[l3c19o56]{\\\\label{footnote:l3c19o56} this too}[].
+\\\\textsuperscript{\\\\ref{footnote:both}}[invalid], \\\\footnote[l3c19o56]{\\\\label{footnote:l3c19o56} this too}[].
 
 "
 `;
 
 exports[`toLaTeX: remark specs footnote-matrix: footnote-matrix 1`] = `
 "\\\\begin{enumerate}
-\\\\item foo\\\\ref{bar}
-\\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}bar\\\\ref{bar}
-\\\\item foo\\\\ref{^bar}
+\\\\item [foo]
+\\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}[bar]
+\\\\item [foo]
 \\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}\\\\textsuperscript{\\\\ref{footnote:bar}}
 \\\\end{enumerate}
 "
@@ -15547,6 +15450,12 @@ Donec sed sodales metus, ut aliquet quam. Suspendisse nec ipsum risus. Interdum 
 "
 `;
 
+exports[`toLaTeX: remark specs invalid-link-definition: invalid-link-definition 1`] = `
+"Something[2-3]
+
+"
+`;
+
 exports[`toLaTeX: remark specs lazy-blockquotes: lazy-blockquotes 1`] = `
 "\\\\begin{Quotation}
 hi there
@@ -15570,7 +15479,7 @@ exports[`toLaTeX: remark specs link-in-link: link-in-link 1`] = `
 `;
 
 exports[`toLaTeX: remark specs link-spaces: link-spaces 1`] = `
-"alpha\\\\ref{alpha} (bravo
+"[alpha] (bravo
 
 
 
@@ -15589,15 +15498,15 @@ exports[`toLaTeX: remark specs link-spaces: link-spaces 1`] = `
 `;
 
 exports[`toLaTeX: remark specs link-whitespace: link-whitespace 1`] = `
-"alpha\\\\ref{alpha}(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo} charlie).
+"[alpha](\\\\externalLink{https://example.com?bravo}{https://example.com?bravo} charlie).
 
 
 
-alpha\\\\ref{alpha}(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}	charlie).
+[alpha](\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}	charlie).
 
 
 
-alpha\\\\ref{alpha}(\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}
+[alpha](\\\\externalLink{https://example.com?bravo}{https://example.com?bravo}
 charlie).
 
 
@@ -15687,11 +15596,11 @@ exports[`toLaTeX: remark specs links-inline-style: links-inline-style 1`] = `
 
 
 
-URL and title\\\\ref{url and title}( /url/has space ).
+[URL and title]( /url/has space ).
 
 
 
-URL and title\\\\ref{url and title}( /url/has space/ \\"url has space and title\\").
+[URL and title]( /url/has space/ \\"url has space and title\\").
 
 
 
@@ -15743,7 +15652,7 @@ Indented thrice\\\\ref{thrice}.
 
 
 
-Indented four\\\\ref{four} times.
+Indented [four] times.
 
 
 
@@ -15785,15 +15694,15 @@ And this\\\\ref{this}.
 
 
 
-But not that\\\\ref{that}.
+But not [that].
 
 
 
-Nor that\\\\ref{that}.
+Nor [that].
 
 
 
-Nor that\\\\ref{that}.
+Nor [that].
 
 
 
@@ -16077,11 +15986,11 @@ exports[`toLaTeX: remark specs links-title-empty-double-quotes: links-title-empt
 `;
 
 exports[`toLaTeX: remark specs links-title-empty-parentheses: links-title-empty-parentheses 1`] = `
-"Hello\\\\ref{hello}(./world.html ()).
+"[Hello](./world.html ()).
 
 
 
-Hello\\\\ref{hello}(<./world.html> ()).
+[Hello](<./world.html> ()).
 
 
 
@@ -16113,11 +16022,11 @@ exports[`toLaTeX: remark specs links-title-empty-single-quotes: links-title-empt
 `;
 
 exports[`toLaTeX: remark specs links-title-parentheses: links-title-parentheses 1`] = `
-"Hello\\\\ref{hello}(./world.html (Hello World!)).
+"[Hello](./world.html (Hello World!)).
 
 
 
-Hello\\\\ref{hello}(<./world.html> (Hello World!)).
+[Hello](<./world.html> (Hello World!)).
 
 
 
@@ -16221,11 +16130,11 @@ exports[`toLaTeX: remark specs links-title-single-quotes-mismatched-delimiters: 
 `;
 
 exports[`toLaTeX: remark specs links-title-unclosed: links-title-unclosed 1`] = `
-"Hello\\\\ref{hello}(./world.html 'Hello
+"[Hello](./world.html 'Hello
 
 
 
-Hello\\\\ref{hello}(<./world.html> 'Hello
+[Hello](<./world.html> 'Hello
 
 
 
@@ -16237,11 +16146,11 @@ Hello\\\\ref{hello}(<./world.html> 'Hello
 
 
 
-Hello\\\\ref{hello}(./world.html \\"Hello
+[Hello](./world.html \\"Hello
 
 
 
-Hello\\\\ref{hello}(<./world.html> \\"Hello
+[Hello](<./world.html> \\"Hello
 
 
 
@@ -16253,11 +16162,11 @@ Hello\\\\ref{hello}(<./world.html> \\"Hello
 
 
 
-Hello\\\\ref{hello}(./world.html (Hello
+[Hello](./world.html (Hello
 
 
 
-Hello\\\\ref{hello}(<./world.html> (Hello
+[Hello](<./world.html> (Hello
 
 
 
@@ -16323,7 +16232,7 @@ exports[`toLaTeX: remark specs links-url-empty-title-parentheses: links-url-empt
 
 
 
-World\\\\ref{world}(<> (World!)).
+[World](<> (World!)).
 
 
 
@@ -16467,7 +16376,7 @@ exports[`toLaTeX: remark specs links-url-escaped-parentheses: links-url-escaped-
 `;
 
 exports[`toLaTeX: remark specs links-url-mismatched-parentheses: links-url-mismatched-parentheses 1`] = `
-"Hello\\\\ref{hello}(./world(and-hello(world)).
+"[Hello](./world(and-hello(world)).
 
 
 
@@ -16519,7 +16428,7 @@ exports[`toLaTeX: remark specs links-url-nested-parentheses: links-url-nested-pa
 `;
 
 exports[`toLaTeX: remark specs links-url-new-line: links-url-new-line 1`] = `
-"Hello\\\\ref{hello}(./wo
+"[Hello](./wo
 rld.html).
 
 
@@ -16541,11 +16450,11 @@ rld.png}.
 `;
 
 exports[`toLaTeX: remark specs links-url-unclosed: links-url-unclosed 1`] = `
-"Hello\\\\ref{hello}(
+"[Hello](
 
 
 
-World\\\\ref{world}(<
+[World](<
 
 
 
@@ -16559,7 +16468,7 @@ World\\\\ref{world}(<
 `;
 
 exports[`toLaTeX: remark specs links-url-white-space: links-url-white-space 1`] = `
-"Hello\\\\ref{hello}(./wo rld.html).
+"[Hello](./wo rld.html).
 
 
 
@@ -18412,7 +18321,7 @@ Markdown supports two style of links: \\\\textit{inline} and \\\\textit{referenc
 
 
 
-In both styles, the link text is delimited by square brackets\\\\ref{square brackets}.
+In both styles, the link text is delimited by [square brackets].
 
 
 
@@ -19117,7 +19026,7 @@ This nested footnote not work:
 `;
 
 exports[`toLaTeX: remark specs nested-square-link: nested-square-link 1`] = `
-"the \`\\\\ref{the \`}\` character](/url)
+"[the \`]\` character](/url)
 
 
 
@@ -19576,7 +19485,7 @@ exports[`toLaTeX: remark specs reference-image-empty-alt: reference-image-empty-
 `;
 
 exports[`toLaTeX: remark specs reference-link-escape: reference-link-escape 1`] = `
-"b*r*\\\\ref{b\\\\-r}, b*r*\\\\ref{b\\\\*r*}, b*r*\\\\ref{b\\\\*r*}.
+"[b*r*], b*r*\\\\ref{b\\\\*r*}, b*r*\\\\ref{b\\\\*r*}.
 
 
 
@@ -19588,15 +19497,15 @@ exports[`toLaTeX: remark specs reference-link-escape: reference-link-escape 1`] 
 `;
 
 exports[`toLaTeX: remark specs reference-link-not-closed: reference-link-not-closed 1`] = `
-"bar\\\\ref{bar}bar
+"[bar]bar
 
 
 
-bar\\\\ref{bar}
+[bar]
 
 
 
-bar\\\\ref{bar}
+[bar]
 
 "
 `;
@@ -19675,7 +19584,7 @@ Open parenthesis should be escaped after a shortcut reference:
 
 
 
-ref\\\\ref{ref}(text)
+[ref](text)
 
 
 
@@ -19683,7 +19592,7 @@ And after a shortcut reference and a space (for GitHub):
 
 
 
-ref\\\\ref{ref} (text)
+[ref] (text)
 
 
 
@@ -19719,12 +19628,12 @@ Text under a shortcut reference should be preserved verbatim:
 
 
 \\\\begin{itemize}
-\\\\item two*three\\\\ref{two*three}
-\\\\item two*three\\\\ref{two\\\\*three}
-\\\\item a\\\\textbackslash{}a\\\\ref{a\\\\a}
-\\\\item a\\\\textbackslash{}a\\\\ref{a\\\\\\\\a}
-\\\\item a\\\\textbackslash{}\\\\textbackslash{}a\\\\ref{a\\\\\\\\\\\\a}
-\\\\item a\\\\_a\\\\_a\\\\ref{a_a\\\\_a}
+\\\\item [two*three]
+\\\\item [two*three]
+\\\\item [a\\\\textbackslash{}a]
+\\\\item [a\\\\textbackslash{}a]
+\\\\item [a\\\\textbackslash{}\\\\textbackslash{}a]
+\\\\item [a\\\\_a\\\\_a]
 \\\\end{itemize}
 
 
@@ -20142,14 +20051,14 @@ exports[`toLaTeX: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item \\\\ref{ }
-\\\\item \\\\ref{ }
+\\\\item [ ]
+\\\\item [	]
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item x\\\\ref{x}
-\\\\item X\\\\ref{x}
+\\\\item [x]
+\\\\item [X]
 \\\\end{enumerate}
 
 
@@ -20187,14 +20096,14 @@ exports[`toLaTeX: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item \\\\ref{ }Hello;
-\\\\item \\\\ref{ }World;
+\\\\item [ ]Hello;
+\\\\item [	]World;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item x\\\\ref{x}Foo.
-\\\\item X\\\\ref{x}Bar
+\\\\item [x]Foo.
+\\\\item [X]Bar
 \\\\end{enumerate}
 
 
@@ -20304,12 +20213,14 @@ World;
 
 
 \\\\begin{itemize}
-\\\\item \\\\ref{ } Hello;
+\\\\item [
+] Hello;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item \\\\ref{ } Hello;
+\\\\item [
+] Hello;
 \\\\end{enumerate}
 
 
@@ -20317,14 +20228,15 @@ World;
 
 
 \\\\begin{itemize}
-\\\\item \\\\ref{ } Hello;
+\\\\item [  ] Hello;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item \\\\ref{ } World;
-\\\\item \\\\ref{ } Hello;
-\\\\item \\\\ref{ } World.
+\\\\item [ 
+] World;
+\\\\item [		] Hello;
+\\\\item [ 	 ] World.
 \\\\end{enumerate}
 "
 `;
@@ -20475,33 +20387,6 @@ CommonMark & \\\\texttt{()} & No & Yes & Yes & Yes & Yes \\\\\\\\ \\\\hline
 
 
 
-\\\\chapter{Parentheses}
-
-
-Hello\\\\ref{hello}(./world.html (and text))
-
-
-
-Hello\\\\ref{hello}(./world.html (and (matching delimiters)))
-
-
-
-Hello\\\\ref{hello}(./world.html (and (mismatched delimiters))
-
-
-
-Hello\\\\ref{hello}(./world.html (and (escapes)))
-
-
-
-Hello\\\\ref{hello}(./world.html (and (named entities)))
-
-
-
-Hello\\\\ref{hello}(./world.html (and (numbered entities)))
-
-
-
 \\\\part{Images}
 
 
@@ -20556,33 +20441,6 @@ Hello\\\\ref{hello}(./world.html (and (numbered entities)))
 
 
 \\\\includegraphics{./world.png}
-
-
-
-\\\\chapter{Parentheses}
-
-
-\\\\includegraphics{undefined}(./world.png (and text))
-
-
-
-\\\\includegraphics{undefined}(./world.png (and (matching delimiters)))
-
-
-
-\\\\includegraphics{undefined}(./world.png (and (mismatched delimiters))
-
-
-
-\\\\includegraphics{undefined}(./world.png (and (escapes)))
-
-
-
-\\\\includegraphics{undefined}(./world.png (and (named entities)))
-
-
-
-\\\\includegraphics{undefined}(./world.png (and (numbered entities)))
 
 "
 `;
