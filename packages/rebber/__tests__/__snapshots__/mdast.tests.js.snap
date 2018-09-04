@@ -6442,7 +6442,6 @@ should & tho|ugh \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 And here:
 
 
@@ -6535,13 +6534,11 @@ Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|c|c|c|c|} \\\\hline
 Header 1 & Header 2 & Header 3 & Header 4 \\\\\\\\ \\\\hline
 Cell 1 & Cell 2 & Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 Cell 5 & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\begin{CodeBlock}{text}
@@ -6555,7 +6552,6 @@ Header 1 & Header 2 \\\\\\\\ \\\\hline
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\begin{longtabu}{|c|c|c|c|} \\\\hline
@@ -6693,7 +6689,6 @@ x & \\\\texttt{f} \\\\\\\\ \\\\hline
 x & \\\\texttt{} \\\\\\\\ \\\\hline
 x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\begin{longtabu}{|c|c|} \\\\hline
@@ -7073,7 +7068,6 @@ Markdown.pl & \\\\texttt{()} & - & - & - & - & - \\\\\\\\ \\\\hline
 GitHub & \\\\texttt{()} & - & - & - & - & - \\\\\\\\ \\\\hline
 CommonMark & \\\\texttt{()} & No & Yes & Yes & Yes & Yes \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\chapter{Double quotes}
@@ -12448,7 +12442,6 @@ should & tho|ugh \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 And here:
 
 
@@ -12536,13 +12529,11 @@ Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|c|c|c|c|} \\\\hline
 Header 1 & Header 2 & Header 3 & Header 4 \\\\\\\\ \\\\hline
 Cell 1 & Cell 2 & Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 Cell 5 & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 [code(Test code)]
@@ -12552,7 +12543,6 @@ Header 1 & Header 2 \\\\\\\\ \\\\hline
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\begin{longtabu}{|c|c|c|c|} \\\\hline
@@ -12684,7 +12674,6 @@ x & \\\\texttt{f} \\\\\\\\ \\\\hline
 x & \\\\texttt{} \\\\\\\\ \\\\hline
 x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\begin{longtabu}{|c|c|} \\\\hline
@@ -12881,7 +12870,6 @@ Markdown.pl & \\\\texttt{()} & - & - & - & - & - \\\\\\\\ \\\\hline
 GitHub & \\\\texttt{()} & - & - & - & - & - \\\\\\\\ \\\\hline
 CommonMark & \\\\texttt{()} & No & Yes & Yes & Yes & Yes \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 heading2(Double quotes)
@@ -19771,7 +19759,6 @@ should & tho|ugh \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 And here:
 
 
@@ -19873,13 +19860,11 @@ Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|c|c|c|c|} \\\\hline
 Header 1 & Header 2 & Header 3 & Header 4 \\\\\\\\ \\\\hline
 Cell 1 & Cell 2 & Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 Cell 5 & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\begin{CodeBlock}{text}
@@ -19895,13 +19880,11 @@ Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|c|c|c|c|} \\\\hline
 Header 1 & Header 2 & Header 3 & Header 4 \\\\\\\\ \\\\hline
 Cell 1 & Cell 2 & Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\textit{Cell 5} & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 "
 `;
 
@@ -19911,7 +19894,6 @@ exports[`toLaTeX: remark specs table-empty-initial-cell: table-empty-initial-cel
 a & b & c \\\\\\\\ \\\\hline
 a & b & c \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 "
 `;
 
@@ -19923,7 +19905,6 @@ first & second | second & third | \\\\\\\\ \\\\hline
 first & second \\\\textbackslash{} & third \\\\textbackslash{} \\\\\\\\ \\\\hline
 first & second \\\\textbackslash{}| second & third \\\\textbackslash{}| \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 "
 `;
 
@@ -19983,7 +19964,6 @@ Header 1 & Header 2 \\\\\\\\ \\\\hline
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 "
 `;
 
@@ -19994,7 +19974,6 @@ exports[`toLaTeX: remark specs table-no-body: table-no-body 1`] = `
 \\\\begin{longtabu}{|c|c|c|} \\\\hline
 Name & GitHub & Twitter \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 "
 `;
 
@@ -20003,7 +19982,6 @@ exports[`toLaTeX: remark specs table-no-end-of-line: table-no-end-of-line 1`] = 
 foo & bar \\\\\\\\ \\\\hline
 1 & 2 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 "
 `;
 
@@ -20016,7 +19994,6 @@ exports[`toLaTeX: remark specs table-one-column: table-one-column 1`] = `
 a \\\\\\\\ \\\\hline
 b \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 "
 `;
 
@@ -20028,7 +20005,6 @@ exports[`toLaTeX: remark specs table-one-row: table-one-row 1`] = `
 \\\\begin{longtabu}{|c|c|c|} \\\\hline
 a & b & c \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 "
 `;
 
@@ -20038,7 +20014,6 @@ Header 1 & Header 2 \\\\\\\\ \\\\hline
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 "
 `;
 
@@ -20054,7 +20029,6 @@ x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|c|c|} \\\\hline
 abc & head2 \\\\\\\\ \\\\hline
 x & \` \\\\\\\\ \\\\hline
@@ -20063,7 +20037,6 @@ x & \\\\texttt{f} \\\\\\\\ \\\\hline
 x & \\\\texttt{} \\\\\\\\ \\\\hline
 x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 "
 `;
 
@@ -20073,7 +20046,6 @@ Header 1 & Header 2 \\\\\\\\ \\\\hline
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 "
 `;
 
@@ -20447,7 +20419,6 @@ Markdown.pl & \\\\texttt{()} & - & - & - & - & - \\\\\\\\ \\\\hline
 GitHub & \\\\texttt{()} & - & - & - & - & - \\\\\\\\ \\\\hline
 CommonMark & \\\\texttt{()} & No & Yes & Yes & Yes & Yes \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\chapter{Double quotes}
