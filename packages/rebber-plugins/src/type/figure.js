@@ -3,6 +3,7 @@ const all = require('rebber/dist/all')
 const one = require('rebber/dist/one')
 const has = require('has')
 
+
 /* Expose. */
 module.exports = figure
 
@@ -10,12 +11,14 @@ const defaultMacros = {
   blockquote: (innerText, caption = 'Anonymous') =>
     `\\begin{Quotation}[${caption}]\n${innerText}\n\\end{Quotation}\n\n`,
   code: (code, caption, extra) => {
-    let params = `[${caption}]`
+    let params = ''
     if (extra.lines) {
-      params += `[${extra.lines}]`
+      params += `[][${extra.lines}]`
     }
-    return `\\begin{codeBlock}${params}{${extra.language}}` +
-            `\n${code}\n\\end{codeBlock}\n\n`
+    return `\\begin{CodeBlock}${params}{${extra.language}}\n` +
+            `${code}\n` +
+            `\\end{CodeBlock}\n` +
+            `\\captionof{listing}{${caption}}\n\n`
   },
   image: (_, caption, extra) =>
     `\\begin{center}\n` +
