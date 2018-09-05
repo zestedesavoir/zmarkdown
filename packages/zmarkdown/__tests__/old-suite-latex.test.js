@@ -6,7 +6,7 @@ remarkConfig.noTypography = true
 remarkConfig._test = true
 remarkConfig.ping.pingUsername = () => false
 
-const zmarkdown = require('../')
+const zmarkdown = require('../common')
 
 const renderString = (config = {remarkConfig, rebberConfig}) =>
   (input) =>
