@@ -1,3 +1,5 @@
+/* global Promise, Set */
+
 const inspect = require('unist-util-inspect')
 const unified = require('unified')
 const visit = require('unist-util-visit')
