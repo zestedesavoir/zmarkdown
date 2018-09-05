@@ -50,9 +50,6 @@ export function render (str, type = null, cb = null) {
     case 'function':
       if (!cb) {
         cb = type
-      } else if (typeof cb === 'function') {
-        throw new Error("Non deterministic use of cb due to type of 'type' and type of " +
-          "'cb' are function.")
       }
       break
     default:
