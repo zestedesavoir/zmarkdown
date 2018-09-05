@@ -195,12 +195,13 @@ module.exports = (
   if (!opts.remarkConfig || !Object.keys(remarkConfig).length) {
     opts.remarkConfig = clone(remarkConfig)
   }
+
   return {
     config: opts,
     inspect,
     parse: mdastParser(opts),
     zmdParser,
     render: rendererFactory(opts.remarkConfig),
-    renderString: rendererFactory(opts, opts.extraPlugins),
+    renderString: rendererFactory(opts.remarkConfig, opts.extraPlugins),
   }
 }
