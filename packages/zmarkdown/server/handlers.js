@@ -1,6 +1,6 @@
 const clone = require('clone')
 const pmx = require('pmx')
-const zmarkdown = require('../common')
+const zmarkdown = require('../server')
 const remarkConfig = require('../config/remark')
 const rebberConfig = require('../config/rebber')
 
@@ -175,7 +175,7 @@ module.exports = function markdownHandlers (Raven) {
       }
 
       callback(null, [contents, metadata, messages])
-    })
+    }, target)
   }
 }
 

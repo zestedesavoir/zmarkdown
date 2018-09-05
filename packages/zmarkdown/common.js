@@ -1,6 +1,6 @@
 /* global Promise, Set */
 
-const inspect = require('unist-util-inspect')
+// const inspect = require('unist-util-inspect')
 const unified = require('unified')
 const visit = require('unist-util-visit')
 
@@ -153,9 +153,10 @@ function getHTMLProcessor (remarkConfig, extraPlugins) {
     .use(rehypeStringify)
 }
 
-const rendererFactory = (remarkConfig, extraPlugins) => {
+const rendererFactory = (remarkConfig, extraPlugins, processor) => {
   return (input, cb) => {
-    const mdProcessor = getHTMLProcessor(remarkConfig, extraPlugins)
+    const mdProcessor = processor
+      ? processor(remarkConfig, extraPlugins) : getHTMLProcessor(remarkConfig, extraPlugins)
 
     if (typeof cb !== 'function') {
       return new Promise((resolve, reject) =>
@@ -191,6 +192,7 @@ function getDepth (node) {
 
 module.exports = (
   opts = {remarkConfig},
+  processor = null
 ) => {
   if (!opts.remarkConfig || !Object.keys(remarkConfig).length) {
     opts.remarkConfig = clone(remarkConfig)
@@ -198,10 +200,11 @@ module.exports = (
 
   return {
     config: opts,
-    inspect,
+    // inspect: inspect,
     parse: mdastParser(opts),
-    zmdParser,
+    zmdParser: zmdParser,
     render: rendererFactory(opts.remarkConfig),
-    renderString: rendererFactory(opts.remarkConfig, opts.extraPlugins),
+    renderString: rendererFactory(opts.remarkConfig, opts.extraPlugins, processor),
+    rendererFactory: rendererFactory,
   }
 }
