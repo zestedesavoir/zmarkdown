@@ -1,8 +1,10 @@
 const clone = require('clone')
 const pmx = require('pmx')
-const zmarkdown = require('../')
+const zmarkdown = require('../common')
 const remarkConfig = require('../config/remark')
 const rebberConfig = require('../config/rebber')
+
+const remarkImagesDownload = require('remark-images-download/src')
 
 const probe = pmx.probe()
 
@@ -27,7 +29,7 @@ const meters = endpoints.reduce((acc, endpoint) => {
   return acc
 }, {})
 
-// this object is used to memoize configured processors
+// this object is used to memoize confirenderFilegured processors
 const processors = {}
 
 module.exports = function markdownHandlers (Raven) {
@@ -147,7 +149,11 @@ module.exports = function markdownHandlers (Raven) {
         }
       }
 
-      processors[key] = zmarkdown({remarkConfig: remark, rebberConfig: rebber}, target)
+      processors[key] = zmarkdown({remarkConfig: remark,
+        rebberConfig: rebber,
+        extraPlugins: [
+          {obj: remarkImagesDownload, option: remark.imagesDownload},
+        ]}, target)
     }
 
     processors[key].renderString(markdown, (err, {contents, data, messages} = {}) => {
