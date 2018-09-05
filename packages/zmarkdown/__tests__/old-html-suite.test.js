@@ -9,7 +9,7 @@ remarkConfig.ping.pingUsername = () => false
 
 const loadFixture = (filepath) => String(fs.readFileSync(filepath.replace('.txt', '.html')))
 
-const zmarkdown = require('../common')
+const zmarkdown = require('../server')
 
 const renderString = (config = {remarkConfig, rebberConfig}) =>
   (input) =>
