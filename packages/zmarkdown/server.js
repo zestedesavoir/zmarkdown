@@ -2,7 +2,6 @@ const toVFile = require('to-vfile')
 const clone = require('clone')
 
 const remarkImagesDownload = require('remark-images-download/src')
-const remarkTextr = require('./plugins/remark-textr')
 
 const rebberStringify = require('rebber/src')
 const rebberConfig = require('./config/rebber')
@@ -43,16 +42,12 @@ module.exports = (
 
   if (!opts.extraPlugins) {
     opts.extraPlugins = [
-      {obj: remarkImagesDownload, option: remarkConfig.imagesDownload},
+      {obj: remarkImagesDownload, option: opts.remarkConfig.imagesDownload},
     ]
   }
 
-  if (target !== 'latex') {
-    opts.extraPlugins.push({
-      obj: remarkTextr,
-      option: opts.remarkConfig.textr,
-      check: (config) => !config.noTypography,
-    })
+  if (target === 'latex') {
+    opts.remarkConfig.canUseTextr = false
   }
 
   zmd = zmarkdown(opts)

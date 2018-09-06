@@ -27,6 +27,7 @@ const remarkMath = require('remark-math')
 const remarkNumberedFootnotes = require('remark-numbered-footnotes/src')
 const remarkPing = require('remark-ping/src')
 const remarkSubSuper = require('remark-sub-super/src')
+const remarkTextr = require('./plugins/remark-textr')
 const remarkTrailingSpaceHeading = require('remark-heading-trailing-spaces')
 
 const remark2rehype = require('remark-rehype')
@@ -70,19 +71,11 @@ const zmdParser = (config, extraPlugins) => {
   const mdProcessor = unified()
     .use(remarkParse, config.reParse)
 
-  if (extraPlugins && extraPlugins.length > 0) {
-    for (const record of extraPlugins) {
-      if (!record.check || record.check(config)) {
-        if (record.option) {
-          mdProcessor.use(record.obj, record.option)
-        } else {
-          mdProcessor.use(record.obj)
-        }
-      }
-    }
+  if (config.canUseTextr && !config.noTypography) {
+    mdProcessor.use(remarkTextr, config.textr)
   }
 
-  return mdProcessor
+  mdProcessor
     .use(remarkAbbr)
     .use(remarkAlign, config.alignBlocks)
     .use(remarkCaptions, config.captions)
@@ -127,6 +120,20 @@ const zmdParser = (config, extraPlugins) => {
         vfile.fail(`Markdown AST too complex: tree depth > ${config.maxNesting}`)
       }
     })
+
+  if (extraPlugins && extraPlugins.length > 0) {
+    for (const record of extraPlugins) {
+      if (!record.check || record.check(config)) {
+        if (record.option) {
+          mdProcessor.use(record.obj, record.option)
+        } else {
+          mdProcessor.use(record.obj)
+        }
+      }
+    }
+  }
+
+  return mdProcessor
 }
 
 function getHTMLProcessor (config) {
