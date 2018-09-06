@@ -1,4 +1,4 @@
-# remark-caption [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
+# remark-captions [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
 This [remark][remark] plugin adds custom syntax to add a caption to elements which might benefit from a legend. It wraps the said element in a `figure` node with `figcaption` node as last child. It is particularly interesting for use with quotes, images, tables, code blocks.
 
@@ -53,7 +53,7 @@ This plugin handles two different types of caption/legend nodes :
 [npm][npm]:
 
 ```bash
-npm install remark-caption
+npm install remark-captions
 ```
 
 ## Usage

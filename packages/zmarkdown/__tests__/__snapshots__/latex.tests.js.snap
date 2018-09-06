@@ -85,17 +85,19 @@ a code without lang
 `;
 
 exports[`code+caption 1`] = `
-"\\\\begin{codeBlock}[With Source]{python}
+"\\\\begin{CodeBlock}{python}
 print('bla')
-\\\\end{codeBlock}
+\\\\end{CodeBlock}
+\\\\captionof{listing}{With Source}
 
 
 
-\\\\begin{codeBlock}[With Source][1,2]{python}
+\\\\begin{CodeBlock}[][1,2]{python}
 print('bla')
 print('bla')
 print('bla')
-\\\\end{codeBlock}"
+\\\\end{CodeBlock}
+\\\\captionof{listing}{With Source}"
 `;
 
 exports[`custom-blocks 1`] = `
@@ -423,16 +425,18 @@ exports[`mix-2 1`] = `
 \\\\begin{Quotation}[Quotation Source]
 Code inside quote
 
-\\\\begin{codeBlock}[code source]{python}
+\\\\begin{CodeBlock}{python}
 print('bla')
-\\\\end{codeBlock}
+\\\\end{CodeBlock}
+\\\\captionof{listing}{code source}
 \\\\end{Quotation}
 
 
 
-\\\\begin{codeBlock}[First \\\\keys{CTRL}+\\\\keys{S}]{python}
+\\\\begin{CodeBlock}{python}
 print('bla')
-\\\\end{codeBlock}
+\\\\end{CodeBlock}
+\\\\captionof{listing}{First \\\\keys{CTRL}+\\\\keys{S}}
 
 
 
@@ -491,9 +495,8 @@ Sub & Headings & \\\\abbr{ABBR}{abbreviation} \\\\\\\\ \\\\hline
 \\\\multirow{2}{*}{cell \\\\par spans \\\\par rows} & \\\\multicolumn{2}{|c|}{column spanning} \\\\\\\\ \\\\cline{2-3}
  & normal & cell \\\\\\\\ \\\\hline
 multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|c|}{cells can be \\\\par \\\\textit{formatted} \\\\par \\\\textbf{paragraphs}} \\\\\\\\ \\\\hline
-
-\\\\tableCaption{The new table \\\\abbr{ABBR}{abbreviation} \\\\textsuperscript{\\\\ref{footnote:1}} with \\\\keys{CTRL} + \\\\keys{S}}
 \\\\end{longtabu}
+\\\\captionof{table}{The new table \\\\abbr{ABBR}{abbreviation} \\\\textsuperscript{\\\\ref{footnote:1}} with \\\\keys{CTRL} + \\\\keys{S}}
 
 
 
@@ -505,13 +508,11 @@ space & \\\\image{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg}[space] \
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|p{\\\\linewidth / 2}|p{\\\\linewidth / 2}|} \\\\hline
 title & code \\\\\\\\ \\\\hline
 inline & \\\\CodeInline{inline} br \\\\par \\\\CodeInline{inline} \\\\\\\\ \\\\hline
-block & \\\\ref{appendix-1} \\\\\\\\ \\\\hline
+block & [] \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\levelOneTitle{Annexes}
@@ -531,9 +532,9 @@ exports[`mix-5 1`] = `
 `;
 
 exports[`mix-6 1`] = `
-"\\\\iframe(https://www.youtube.com/embed/8TQIvdFl4aU)[Video][a caption]
+"\\\\iframe{https://www.youtube.com/embed/8TQIvdFl4aU}[Video][a caption]
 
-\\\\iframe(https://www.youtube.com/embed/8TQIvdFl4aU)[Video][]
+\\\\iframe{https://www.youtube.com/embed/8TQIvdFl4aU}[Video][]
 
 no caption"
 `;
@@ -642,7 +643,6 @@ exports[`table 1`] = `
 1 & 2 \\\\\\\\ \\\\hline
 1 & 2 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\begin{longtabu}{|c|c|c|} \\\\hline

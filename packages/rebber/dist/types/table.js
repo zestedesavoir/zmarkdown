@@ -22,8 +22,8 @@ var defaultMacro = function defaultMacro(ctx, node) {
   });
   var inner = parsed.join('');
   var colHeader = headerParse(parsed);
-  var addendum = node.caption ? '\n\\tableCaption{' + node.caption + '}\n' : '';
-  return '\\begin{longtabu}{' + colHeader + '} \\hline\n' + inner + addendum + '\\end{longtabu}\n\n';
+  var caption = node.caption ? '\n\\captionof{table}{' + node.caption + '}\n' : '';
+  return '\\begin{longtabu}{' + colHeader + '} \\hline\n' + inner + '\\end{longtabu}' + caption + '\n';
 };
 
 /* Stringify a table `node`. */

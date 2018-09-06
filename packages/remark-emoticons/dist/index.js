@@ -6,8 +6,6 @@ function escapeRegExp(str) {
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&'); // eslint-disable-line no-useless-escape
 }
 
-var SPACE = ' ';
-
 module.exports = function inlinePlugin(ctx) {
   var emoticonClasses = ctx && ctx.classes;
   var emoticons = ctx && ctx.emoticons;
@@ -48,11 +46,17 @@ module.exports = function inlinePlugin(ctx) {
 
   var pattern = Object.keys(emoticons).map(escapeRegExp).join('|');
 
-  var regex = new RegExp('(\\s|^)(' + pattern + ')(\\s|$)', 'i');
+  var regex = new RegExp('(?:\\s|^)(' + pattern + ')(?:\\s|$)', 'i');
 
   function locator(value, fromIndex) {
     var keep = regex.exec(value);
-    if (keep && value[keep.index] === SPACE) return keep.index + 1;
+    if (keep) {
+      var index = keep.index;
+      while (/^\s/.test(value.charAt(index))) {
+        index++;
+      }
+      return index;
+    }
     return -1;
   }
 
@@ -60,14 +64,12 @@ module.exports = function inlinePlugin(ctx) {
     var keep = regex.exec(value);
     if (keep) {
       if (keep.index !== 0) return true;
+      if (!keep[0].startsWith(keep[1])) return true;
 
       /* istanbul ignore if - never used (yet) */
       if (silent) return true;
 
-      var toEat = keep[0];
-      if (toEat.charAt(toEat.length - 1) === SPACE) {
-        toEat = toEat.substring(0, toEat.length - 1);
-      }
+      var toEat = keep[1];
       var emoticon = toEat.trim();
       var src = emoticons[emoticon.toLowerCase()];
 
