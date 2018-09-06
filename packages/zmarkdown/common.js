@@ -1,6 +1,6 @@
 /* global Promise, Set */
 
-// const inspect = require('unist-util-inspect')
+const inspect = require('unist-util-inspect')
 const unified = require('unified')
 const visit = require('unist-util-visit')
 
@@ -27,6 +27,7 @@ const remarkMath = require('remark-math')
 const remarkNumberedFootnotes = require('remark-numbered-footnotes/src')
 const remarkPing = require('remark-ping/src')
 const remarkSubSuper = require('remark-sub-super/src')
+const remarkTextr = require('./plugins/remark-textr')
 const remarkTrailingSpaceHeading = require('remark-heading-trailing-spaces')
 
 const remark2rehype = require('remark-rehype')
@@ -66,11 +67,15 @@ const wrappers = {
   ],
 }
 
-const zmdParser = (config) => {
+const zmdParser = (config, extraPlugins) => {
   const mdProcessor = unified()
     .use(remarkParse, config.reParse)
 
-  return mdProcessor
+  if (config.canUseTextr && !config.noTypography) {
+    mdProcessor.use(remarkTextr, config.textr)
+  }
+
+  mdProcessor
     .use(remarkAbbr)
     .use(remarkAlign, config.alignBlocks)
     .use(remarkCaptions, config.captions)
@@ -115,35 +120,41 @@ const zmdParser = (config) => {
         vfile.fail(`Markdown AST too complex: tree depth > ${config.maxNesting}`)
       }
     })
-}
 
-function getHTMLProcessor (remarkConfig, extraPlugins) {
-  const parser = zmdParser(remarkConfig).use(remark2rehype, remarkConfig.remark2rehype)
   if (extraPlugins && extraPlugins.length > 0) {
     for (const record of extraPlugins) {
-      if (record.option) {
-        parser.use(record.obj, record.option)
-      } else {
-        parser.use(record.obj)
+      if (!record.check || record.check(config)) {
+        if (record.option) {
+          mdProcessor.use(record.obj, record.option)
+        } else {
+          mdProcessor.use(record.obj)
+        }
       }
     }
   }
 
-  if (remarkConfig._test) {
+  return mdProcessor
+}
+
+function getHTMLProcessor (config) {
+  const parser = zmdParser(config.remarkConfig, config.extraPlugins)
+    .use(remark2rehype, config.remarkConfig.remark2rehype)
+
+  if (config.remarkConfig._test) {
     shortid.generate = () => 'shortId'
   } else {
     parser
       .use(rehypeLineNumbers)
-      .use(rehypeHighlight, remarkConfig.rehypeHighlight)
+      .use(rehypeHighlight, config.remarkConfig.rehypeHighlight)
   }
 
   return parser
     .use(rehypeSlug)
-    .use(rehypeAutolinkHeadings, remarkConfig.autolinkHeadings)
+    .use(rehypeAutolinkHeadings, config.remarkConfig.autolinkHeadings)
     .use(rehypeHTMLBlocks)
-    .use(rehypeFootnotesTitles, remarkConfig.footnotesTitles)
+    .use(rehypeFootnotesTitles, config.remarkConfig.footnotesTitles)
     .use(rehypePostfixFootnotes, `-${shortid.generate()}`)
-    .use(rehypeKatex, remarkConfig.katex)
+    .use(rehypeKatex, config.remarkConfig.katex)
     .use(() => (tree) => {
       Object.keys(wrappers).forEach(nodeName =>
         wrappers[nodeName].forEach(wrapper => {
@@ -153,10 +164,12 @@ function getHTMLProcessor (remarkConfig, extraPlugins) {
     .use(rehypeStringify)
 }
 
-const rendererFactory = (remarkConfig, extraPlugins, processor) => {
+const rendererFactory = (config, processor) => {
   return (input, cb) => {
+    const allConfig = clone(config)
     const mdProcessor = processor
-      ? processor(remarkConfig, extraPlugins) : getHTMLProcessor(remarkConfig, extraPlugins)
+      ? processor(allConfig)
+      : getHTMLProcessor(allConfig)
 
     if (typeof cb !== 'function') {
       return new Promise((resolve, reject) =>
@@ -175,7 +188,7 @@ const rendererFactory = (remarkConfig, extraPlugins, processor) => {
   }
 }
 
-const mdastParser = (opts) => (zmd) => zmdParser(opts.remarkConfig).parse(zmd)
+const mdastParser = (opts) => (zmd) => zmdParser(opts.remarkConfig, opts.extraPlugins).parse(zmd)
 
 function getDepth (node) {
   let maxDepth = 0
@@ -200,11 +213,11 @@ module.exports = (
 
   return {
     config: opts,
-    // inspect: inspect,
+    inspect: inspect,
     parse: mdastParser(opts),
     zmdParser: zmdParser,
-    render: rendererFactory(opts.remarkConfig),
-    renderString: rendererFactory(opts.remarkConfig, opts.extraPlugins, processor),
+    render: rendererFactory(opts),
+    renderString: rendererFactory(opts, processor),
     rendererFactory: rendererFactory,
   }
 }
