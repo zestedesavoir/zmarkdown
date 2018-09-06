@@ -3,8 +3,7 @@ const pmx = require('pmx')
 const zmarkdown = require('../server')
 const remarkConfig = require('../config/remark')
 const rebberConfig = require('../config/rebber')
-
-const remarkImagesDownload = require('remark-images-download/src')
+const latexDocumentTemplate = require('../templates/latex-document')
 
 const probe = pmx.probe()
 
@@ -76,7 +75,7 @@ module.exports = function markdownHandlers (Raven) {
   function toLatexDocument (markdown, opts = {}, callback) {
     meters.toLatexDocument()
     const target = 'latex'
-    const template = zmarkdown().latexDocumentTemplate
+    const template = latexDocumentTemplate
 
     opts.heading_shift = 0
     opts.disable_ping = true
@@ -152,9 +151,7 @@ module.exports = function markdownHandlers (Raven) {
       processors[key] = zmarkdown({
         remarkConfig: remark,
         rebberConfig: rebber,
-        extraPlugins: [
-          {obj: remarkImagesDownload, option: remark.imagesDownload},
-        ]}, target)
+      }, target)
     }
 
     processors[key].renderString(markdown, (err, {contents, data, messages} = {}) => {
