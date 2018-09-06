@@ -14,10 +14,10 @@ const defaultMacro = (ctx, node) => {
   const parsed = node.children.map((n, index) => one(ctx, n, index, node))
   const inner = parsed.join('')
   const colHeader = headerParse(parsed)
-  const addendum = node.caption
-    ? `\n\\tableCaption{${node.caption}}\n`
+  const caption = node.caption
+    ? `\n\\captionof{table}{${node.caption}}\n`
     : ''
-  return `\\begin{longtabu}{${colHeader}} \\hline\n${inner}${addendum}\\end{longtabu}\n\n`
+  return `\\begin{longtabu}{${colHeader}} \\hline\n${inner}\\end{longtabu}${caption}\n`
 }
 
 /* Stringify a table `node`. */

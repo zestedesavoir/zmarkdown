@@ -2,8 +2,6 @@ function escapeRegExp (str) {
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&') // eslint-disable-line no-useless-escape
 }
 
-const SPACE = ' '
-
 module.exports = function inlinePlugin (ctx) {
   const emoticonClasses = ctx && ctx.classes
   const emoticons = ctx && ctx.emoticons
@@ -18,11 +16,17 @@ module.exports = function inlinePlugin (ctx) {
 
   const pattern = Object.keys(emoticons).map(escapeRegExp).join('|')
 
-  const regex = new RegExp(`(\\s|^)(${pattern})(\\s|$)`, 'i')
+  const regex = new RegExp(`(?:\\s|^)(${pattern})(?:\\s|$)`, 'i')
 
   function locator (value, fromIndex) {
     const keep = regex.exec(value)
-    if (keep && value[keep.index] === SPACE) return keep.index + 1
+    if (keep) {
+      let index = keep.index
+      while (/^\s/.test(value.charAt(index))) {
+        index++
+      }
+      return index
+    }
     return -1
   }
 
@@ -30,14 +34,12 @@ module.exports = function inlinePlugin (ctx) {
     const keep = regex.exec(value)
     if (keep) {
       if (keep.index !== 0) return true
+      if (!keep[0].startsWith(keep[1])) return true
 
       /* istanbul ignore if - never used (yet) */
       if (silent) return true
 
-      let toEat = keep[0]
-      if (toEat.charAt(toEat.length - 1) === SPACE) {
-        toEat = toEat.substring(0, toEat.length - 1)
-      }
+      const toEat = keep[1]
       const emoticon = toEat.trim()
       const src = emoticons[emoticon.toLowerCase()]
 

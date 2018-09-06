@@ -14,11 +14,11 @@ var defaultMacros = {
     return '\\begin{Quotation}[' + caption + ']\n' + innerText + '\n\\end{Quotation}\n\n';
   },
   code: function code(_code, caption, extra) {
-    var params = '[' + caption + ']';
+    var params = '';
     if (extra.lines) {
-      params += '[' + extra.lines + ']';
+      params += '[][' + extra.lines + ']';
     }
-    return '\\begin{codeBlock}' + params + '{' + extra.language + '}' + ('\n' + _code + '\n\\end{codeBlock}\n\n');
+    return '\\begin{CodeBlock}' + params + '{' + extra.language + '}\n' + (_code + '\n') + '\\end{CodeBlock}\n' + ('\\captionof{listing}{' + caption + '}\n\n');
   },
   image: function image(_, caption, extra) {
     return '\\begin{center}\n' + ('\\includegraphics' + (extra.width ? '[' + extra.width + ']' : '') + '{' + extra.url + '}\n') + ('\\captionof{figure}{' + caption + '}\n') + '\\end{center}\n';

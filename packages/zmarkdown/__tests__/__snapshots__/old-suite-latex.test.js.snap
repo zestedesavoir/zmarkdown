@@ -666,7 +666,7 @@ Indented thrice\\\\ref{thrice}.
 
 
 
-Indented four\\\\ref{four} times.
+Indented [four] times.
 
 
 
@@ -1965,13 +1965,11 @@ Content Cell & Content Cell \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|c|c|} \\\\hline
 First Header & Second Header \\\\\\\\ \\\\hline
 Content Cell & Content Cell \\\\\\\\ \\\\hline
 Content Cell & Content Cell \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\begin{longtabu}{|c|c|} \\\\hline
@@ -1982,7 +1980,6 @@ Pipe & \\\\$1 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|c|c|} \\\\hline
 Function name & Description \\\\\\\\ \\\\hline
 \\\\CodeInline{help()} & Display the help window. \\\\\\\\ \\\\hline
@@ -1990,13 +1987,11 @@ Function name & Description \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|c|c|c|} \\\\hline
 foo & bar & baz \\\\\\\\ \\\\hline
  & Q &  \\\\\\\\ \\\\hline
 W &  & W \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 Three spaces in front of a table:
@@ -2010,13 +2005,11 @@ Content Cell & Content Cell \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|c|c|} \\\\hline
 First Header & Second Header \\\\\\\\ \\\\hline
 Content Cell & Content Cell \\\\\\\\ \\\\hline
 Content Cell & Content Cell \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 Four spaces is a code block:
@@ -2759,7 +2752,7 @@ instead \\\\externalLink{yuri@freewisdom.org}{mailto:yuri@freewisdom.org}
 `;
 
 exports[`#misc properly renders escaped_chars_in_js.txt 1`] = `
-"<span id=\\"e116142240\\">javascript protected email address\\\\ref{javascript protected email address}</span>
+"<span id=\\"e116142240\\">[javascript protected email address]</span>
 
 
 
@@ -3088,7 +3081,7 @@ exports[`#misc properly renders russian.txt 1`] = `
 "\\\\levelOneTitle{Недвард «Нед» Фландерс}
 
 
-\\\\textbf{Недвард «Нед» Фландерс} (Nedward «Ned» Flanders) — вымышленный персонаж мультсериала «Симпсоны\\\\ref{симпсоны}», озвученный Гарри Ширером. Он и его семья живут по соседству от семьи Симпсонов. Набожный христианин, Нед является одним из столпов морали Спрингфилда. В эпизоде «Alone Again, Natura-Diddily»  он овдовел, его жена Мод погибла в результате несчастного случая.
+\\\\textbf{Недвард «Нед» Фландерс} (Nedward «Ned» Flanders) — вымышленный персонаж мультсериала «[Симпсоны]», озвученный Гарри Ширером. Он и его семья живут по соседству от семьи Симпсонов. Набожный христианин, Нед является одним из столпов морали Спрингфилда. В эпизоде «Alone Again, Natura-Diddily»  он овдовел, его жена Мод погибла в результате несчастного случая.
 
 
 
@@ -3115,15 +3108,15 @@ this\\\\_is\\\\_not\\\\_emphasis
 
 
 
-\\\\textit{punctuation with emphasis}\\\\ref{_punctuation with emphasis_}
+[\\\\textit{punctuation with emphasis}]
 
 
 
-\\\\textit{punctuation\\\\_with\\\\_emphasis}\\\\ref{_punctuation_with_emphasis_}
+[\\\\textit{punctuation\\\\_with\\\\_emphasis}]
 
 
 
-punctuation\\\\_without\\\\_emphasis\\\\ref{punctuation_without_emphasis}"
+[punctuation\\\\_without\\\\_emphasis]"
 `;
 
 exports[`#misc properly renders span.txt 1`] = `
@@ -4033,17 +4026,17 @@ an other
 \\\\end{Error}
 
 
-[se\\\\ref{se}]
+[[se]]
 | not a block
 
 
 
-[secretsecret\\\\ref{secretsecret}]
+[[secretsecret]]
 | not a block
 
 
 
-[SECRET\\\\ref{secret}]
+[[SECRET]]
 | not a block
 
 
@@ -4137,13 +4130,11 @@ multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|c|}{
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
 A & B & C \\\\\\\\ \\\\hline
 \\\\multirow{2}{*}{D} & \\\\multicolumn{2}{|c|}{E} \\\\\\\\ \\\\cline{2-3}
  & F & G \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
@@ -4153,13 +4144,11 @@ A & B & C \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
 \\\\multicolumn{3}{|c|}{A} \\\\\\\\ \\\\hline
 \\\\multirow{2}{*}{B} & C & \\\\multirow{2}{*}{D} \\\\\\\\ \\\\cline{1-2}
 E &  \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
@@ -4170,14 +4159,12 @@ F &  \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
 A & \\\\multirow{2}{*}{B} & \\\\multirow{4}{*}{C} \\\\\\\\ \\\\cline{1-2}
 D &  \\\\\\\\ \\\\cline{1-2}
 E & \\\\multirow{2}{*}{F} &  \\\\\\\\ \\\\cline{1-2}
 G &  \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
@@ -4187,13 +4174,11 @@ A & B & C & D \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
 \\\\multicolumn{4}{|c|}{A} \\\\\\\\ \\\\hline
 \\\\multicolumn{2}{|c|}{B} & \\\\multicolumn{2}{|c|}{C} \\\\\\\\ \\\\hline
 D & E & F & G \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|} \\\\hline
@@ -4204,7 +4189,6 @@ D & E & F & G \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|} \\\\hline
 A & \\\\multicolumn{6}{|c|}{B} \\\\\\\\ \\\\hline
 \\\\multirow{4}{*}{C} & \\\\multirow{4}{*}{\\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\cline{1-1} \\\\par D & E & F & G \\\\\\\\ \\\\hline \\\\par \\\\multicolumn{4}{|c|}{H} \\\\\\\\ \\\\hline \\\\par \\\\end{longtabu}} \\\\\\\\ \\\\hline
@@ -4212,7 +4196,6 @@ A & \\\\multicolumn{6}{|c|}{B} \\\\\\\\ \\\\hline
  &  &  &  &  &  \\\\\\\\ \\\\cline{1-1}
  &  &  &  &  &  \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|} \\\\hline
@@ -4229,11 +4212,9 @@ Fr & Ra & ACT & \\\\multicolumn{15}{|c|}{} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|p{\\\\linewidth / 1}|} \\\\hline
 A \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 Text at the end
@@ -4243,7 +4224,6 @@ Text at the end
 \\\\begin{longtabu}{|p{\\\\linewidth / 1}|} \\\\hline
 A \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 Text at the
@@ -4264,7 +4244,6 @@ D & E & F & G \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
 A & \\\\multicolumn{3}{|c|}{} \\\\\\\\ \\\\hline
 \\\\multicolumn{4}{|c|}{B | C} \\\\\\\\ \\\\hline
@@ -4272,7 +4251,6 @@ A & \\\\multicolumn{3}{|c|}{} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
 A & B & C & D \\\\\\\\ \\\\hline
 \\\\multicolumn{4}{|c|}{B | C} \\\\\\\\ \\\\hline
@@ -4280,13 +4258,11 @@ D & E & F & G \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-
 \\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
 A & B & C & D \\\\\\\\ \\\\hline
 \\\\multicolumn{4}{|c|}{B  | C} \\\\\\\\ \\\\hline
 D & E & F & G \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 \\\\levelTwoTitle{Failing example}
@@ -4323,7 +4299,6 @@ D & E & F & G \\\\\\\\ \\\\hline
 \\\\begin{longtabu}{|p{\\\\linewidth / 1}|} \\\\hline
  \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-
 
 
 Bug \\\\#107
@@ -4368,7 +4343,7 @@ but not block elements inside:
 
 
 \\\\begin{itemize}
-\\\\item \\\\keys{hello: [secret\\\\ref{secret}]?}
+\\\\item \\\\keys{hello: [[secret]]?}
 \\\\end{itemize}"
 `;
 
@@ -4445,7 +4420,7 @@ livescript:alert\\\\%28'Hello\\\\%20world!'\\\\%29
 
 
 
-mocha:code\\\\ref{code})
+mocha:[code])
 
 
 
@@ -4485,29 +4460,29 @@ javascript:alert\\\\%29'XSS'\\\\%29
 `;
 
 exports[`#zds #extensions properly renders video.txt 1`] = `
-"\\\\iframe(https://www.youtube.com/embed/BpJKvrjLUp0)[Video][]
+"\\\\iframe{https://www.youtube.com/embed/BpJKvrjLUp0}[Video][]
 
-\\\\iframe(https://www.dailymotion.com/embed/video/x2y6lhm)[Video][]
+\\\\iframe{https://www.dailymotion.com/embed/video/x2y6lhm}[Video][]
 
-\\\\iframe(https://player.vimeo.com/video/133693532)[Video][]
+\\\\iframe{https://player.vimeo.com/video/133693532}[Video][]
 
 !(https://screen.yahoo.com/weatherman-gives-forecast-using-taylor-191821481.html)
 
 
 
-\\\\iframe(https://www.youtube.com/embed/BpJKvrjLUp0)[Video][]
+\\\\iframe{https://www.youtube.com/embed/BpJKvrjLUp0}[Video][]
 
-\\\\iframe(https://youtube.com/embed/BpJKvrjLUp0)[Video][]
+\\\\iframe{https://youtube.com/embed/BpJKvrjLUp0}[Video][]
 
-\\\\iframe(https://jsfiddle.net/Sandhose/BcKhe/1/embedded/result,js,html,css/)[Code][]
+\\\\iframe{https://jsfiddle.net/Sandhose/BcKhe/1/embedded/result,js,html,css/}[Code][]
 
-\\\\iframe(https://jsfiddle.net/zgjhjv9j/embedded/result,js,html,css/)[Code][]
+\\\\iframe{https://jsfiddle.net/zgjhjv9j/embedded/result,js,html,css/}[Code][]
 
-\\\\iframe(https://jsfiddle.net/zgjhjv9j/1/embedded/result,js,html,css/)[Code][]
+\\\\iframe{https://jsfiddle.net/zgjhjv9j/1/embedded/result,js,html,css/}[Code][]
 
-\\\\iframe(https://www.youtube.com/embed/1Bh4DZ2xGmw)[Video][]
+\\\\iframe{https://www.youtube.com/embed/1Bh4DZ2xGmw}[Video][]
 
-\\\\iframe(http://player.ina.fr/player/embed/MAN9062216517/1/1b0bd203fbcd702f9bc9b10ac3d0fc21/560/315/1/148db8)[Video][]
+\\\\iframe{http://player.ina.fr/player/embed/MAN9062216517/1/1b0bd203fbcd702f9bc9b10ac3d0fc21/560/315/1/148db8}[Video][]
 
 This one should not be allowed:
 
@@ -4517,13 +4492,13 @@ This one should not be allowed:
 
 
 
-\\\\iframe(https://www.youtube.com/embed/BpJKvrjLUp0)[Video][]
+\\\\iframe{https://www.youtube.com/embed/BpJKvrjLUp0}[Video][]
 
 with text after"
 `;
 
 exports[`#zds #extensions properly renders video_extra.txt 1`] = `
-"\\\\iframe(https://www.youtube.com/embed/BpJKvrjLUp0)[Video][]
+"\\\\iframe{https://www.youtube.com/embed/BpJKvrjLUp0}[Video][]
 
 These ones should not be allowed by config:
 

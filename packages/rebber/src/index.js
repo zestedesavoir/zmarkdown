@@ -1,5 +1,6 @@
 /* Dependencies. */
 const xtend = require('xtend')
+const definitions = require('mdast-util-definitions')
 const one = require('./one')
 const preprocess = require('./preprocessors')
 
@@ -9,6 +10,8 @@ module.exports.toLaTeX = toLaTeX
 
 /* Stringify the given MDAST node. */
 function toLaTeX (tree, options = {}) {
+  options.definitions = definitions(tree, options)
+
   preprocess(options, tree)
   return one(options, tree, undefined, undefined)
 }

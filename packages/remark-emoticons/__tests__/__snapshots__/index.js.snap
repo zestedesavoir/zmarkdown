@@ -11,7 +11,7 @@ exports[`emoticons 1`] = `
 <p><img src=\\"/static/smileys/heureux.png\\" alt=\\":D\\" class=\\"foo bar\\"> This is not a caption</p>
 <p>This is not a smiley:)</p>
 <p>Not :)a smiley either.</p>
-<p>Smiley after another node: <a href=\\"#foo\\">link</a><img src=\\"/static/smileys/smile.png\\" alt=\\":)\\" class=\\"foo bar\\"></p>
+<p>Smiley after another node: <a href=\\"#foo\\">link</a> <img src=\\"/static/smileys/smile.png\\" alt=\\":)\\" class=\\"foo bar\\"></p>
 <p>Smiley after another node w/2 spaces: <a href=\\"#foo\\">link</a>  <img src=\\"/static/smileys/smile.png\\" alt=\\":)\\" class=\\"foo bar\\"></p>
 <p>Smiley after another node w/3 spaces: <a href=\\"#foo\\">link</a>   <img src=\\"/static/smileys/smile.png\\" alt=\\":)\\" class=\\"foo bar\\"></p>"
 `;
@@ -27,7 +27,7 @@ exports[`emoticons without class 1`] = `
 <p><img src=\\"/static/smileys/heureux.png\\" alt=\\":D\\"> This is not a caption</p>
 <p>This is not a smiley:)</p>
 <p>Not :)a smiley either.</p>
-<p>Smiley after another node: <a href=\\"#foo\\">link</a><img src=\\"/static/smileys/smile.png\\" alt=\\":)\\"></p>
+<p>Smiley after another node: <a href=\\"#foo\\">link</a> <img src=\\"/static/smileys/smile.png\\" alt=\\":)\\"></p>
 <p>Smiley after another node w/2 spaces: <a href=\\"#foo\\">link</a>  <img src=\\"/static/smileys/smile.png\\" alt=\\":)\\"></p>
 <p>Smiley after another node w/3 spaces: <a href=\\"#foo\\">link</a>   <img src=\\"/static/smileys/smile.png\\" alt=\\":)\\"></p>"
 `;
@@ -49,7 +49,7 @@ This is not a smiley:)
 
 Not :)a smiley either.
 
-Smiley after another node: [link](#foo):)
+Smiley after another node: [link](#foo) :)
 
 Smiley after another node w/2 spaces: [link](#foo)  :)
 

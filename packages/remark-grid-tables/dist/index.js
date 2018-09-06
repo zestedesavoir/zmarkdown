@@ -8,6 +8,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var trimEnd = require('lodash.trimend');
 var visit = require('unist-util-visit');
 
 var mainLineRegex = new RegExp(/((\+)|(\|)).+((\|)|(\+))/);
@@ -74,7 +75,7 @@ var TablePart = function () {
       // Update last row according to a line.
       var mergeChars = isEndLine ? '+|' : '|';
       var newCells = [this.lastRow()._cells[0]];
-      for (var c = 1; c < this.lastRow()._cells.length; ++c) {
+      for (var c = 1; c < this.lastRow()._cells.length; c++) {
         var cell = this.lastRow()._cells[c];
 
         // Only cells with rowspan equals can be merged
@@ -92,7 +93,7 @@ var TablePart = function () {
     value: function updateWithPartLine(line) {
       // Get cells not finished
       var remainingCells = [];
-      for (var c = 0; c < this.lastRow()._cells.length; ++c) {
+      for (var c = 0; c < this.lastRow()._cells.length; c++) {
         var cell = this.lastRow()._cells[c];
         var partLine = line.substring(cell._startPosition - 1, cell._endPosition + 1);
         if (!isSeparationLine(partLine)) {
@@ -104,16 +105,16 @@ var TablePart = function () {
       // Generate new row
       this.addRow();
       var newCells = [];
-      for (var _c = 0; _c < remainingCells.length; ++_c) {
+      for (var _c = 0; _c < remainingCells.length; _c++) {
         var remainingCell = remainingCells[_c];
-        for (var cc = 0; cc < this.lastRow()._cells.length; ++cc) {
+        for (var cc = 0; cc < this.lastRow()._cells.length; cc++) {
           var _cell = this.lastRow()._cells[cc];
           if (_cell._endPosition < remainingCell._startPosition && !newCells.includes(_cell)) {
             newCells.push(_cell);
           }
         }
         newCells.push(remainingCell);
-        for (var _cc = 0; _cc < this.lastRow()._cells.length; ++_cc) {
+        for (var _cc = 0; _cc < this.lastRow()._cells.length; _cc++) {
           var _cell2 = this.lastRow()._cells[_cc];
           if (_cell2._startPosition > remainingCell._endPosition && !newCells.includes(_cell2)) {
             newCells.push(_cell2);
@@ -122,9 +123,9 @@ var TablePart = function () {
       }
 
       // Remove duplicates
-      for (var nc = 0; nc < newCells.length; ++nc) {
+      for (var nc = 0; nc < newCells.length; nc++) {
         var newCell = newCells[nc];
-        for (var ncc = 0; ncc < newCells.length; ++ncc) {
+        for (var ncc = 0; ncc < newCells.length; ncc++) {
           if (nc !== ncc) {
             var other = newCells[ncc];
             if (other._startPosition >= newCell._startPosition && other._endPosition <= newCell._endPosition) {
@@ -153,7 +154,7 @@ var TableRow = function () {
 
     this._linesInfos = linesInfos;
     this._cells = [];
-    for (var i = 0; i < linesInfos.length - 1; ++i) {
+    for (var i = 0; i < linesInfos.length - 1; i++) {
       this._cells.push(new TableCell(linesInfos[i] + 1, linesInfos[i + 1]));
     }
   }
@@ -161,7 +162,7 @@ var TableRow = function () {
   _createClass(TableRow, [{
     key: 'updateContent',
     value: function updateContent(line) {
-      for (var c = 0; c < this._cells.length; ++c) {
+      for (var c = 0; c < this._cells.length; c++) {
         var cell = this._cells[c];
         cell._lines.push(line.substring(cell._startPosition, cell._endPosition));
       }
@@ -188,7 +189,7 @@ var TableCell = function () {
       this._endPosition = other._endPosition;
       this._colspan += other._colspan;
       var newLines = [];
-      for (var l = 0; l < this._lines.length; ++l) {
+      for (var l = 0; l < this._lines.length; l++) {
         newLines.push(this._lines[l] + '|' + other._lines[l]);
       }
       this._lines = newLines;
@@ -226,7 +227,7 @@ function isPartLine(line) {
 
 function findAll(content, characters) {
   var pos = [];
-  for (var i = 0; i < content.length; ++i) {
+  for (var i = 0; i < content.length; i++) {
     var char = content[i];
     if (characters.includes(char)) {
       pos.push(i);
@@ -270,10 +271,13 @@ function computeColumnStartingPositions(lines) {
 
 function extractTable(value, eat, tokenizer) {
   // Extract lines before the grid table
-  var possibleGridTable = value.split('\n');
+  var possibleGridTable = value.split('\n').map(function (line) {
+    return trimEnd(line);
+  });
+
   var i = 0;
   var before = [];
-  for (; i < possibleGridTable.length; ++i) {
+  for (; i < possibleGridTable.length; i++) {
     var line = possibleGridTable[i];
     if (isSeparationLine(line)) break;
     if (line.length === 0) break;
@@ -285,7 +289,7 @@ function extractTable(value, eat, tokenizer) {
   var lineLength = possibleGridTable[i + 1].length;
   var gridTable = [];
   var hasHeader = false;
-  for (; i < possibleGridTable.length; ++i) {
+  for (; i < possibleGridTable.length; i++) {
     var _line = possibleGridTable[i];
     var isMainLine = totalMainLineRegex.exec(_line);
     // line is in table
@@ -306,7 +310,7 @@ function extractTable(value, eat, tokenizer) {
   // if the last line is not a plain line
   if (!separationLineRegex.exec(gridTable[gridTable.length - 1])) {
     // Remove lines not in the table
-    for (var j = gridTable.length - 1; j >= 0; --j) {
+    for (var j = gridTable.length - 1; j >= 0; j--) {
       var isSeparation = separationLineRegex.exec(gridTable[j]);
       if (isSeparation) break;
       gridTable.pop();
@@ -316,7 +320,7 @@ function extractTable(value, eat, tokenizer) {
 
   // Extract lines after table
   var after = [];
-  for (; i < possibleGridTable.length; ++i) {
+  for (; i < possibleGridTable.length; i++) {
     var _line2 = possibleGridTable[i];
     if (_line2.length === 0) break;
     after.push(_line2);
@@ -328,7 +332,7 @@ function extractTable(value, eat, tokenizer) {
 function extractTableContent(lines, linesInfos, hasHeader) {
   var table = new Table(linesInfos);
 
-  for (var l = 0; l < lines.length; ++l) {
+  for (var l = 0; l < lines.length; l++) {
     var line = lines[l];
     // Get if the line separate the head of the table from the body
     var matchHeader = hasHeader & isHeaderLine(line) !== null;
@@ -375,7 +379,7 @@ function generateTable(tableContent, now, tokenizer) {
 
   var hasHeader = tableContent._parts.length > 1;
 
-  for (var p = 0; p < tableContent._parts.length; ++p) {
+  for (var p = 0; p < tableContent._parts.length; p++) {
     var part = tableContent._parts[p];
     var partElt = {
       type: 'tableHeader',
@@ -384,7 +388,7 @@ function generateTable(tableContent, now, tokenizer) {
         hName: hasHeader && p === 0 ? 'thead' : 'tbody'
       }
     };
-    for (var r = 0; r < part._rows.length; ++r) {
+    for (var r = 0; r < part._rows.length; r++) {
       var row = part._rows[r];
       var rowElt = {
         type: 'tableRow',
@@ -393,13 +397,14 @@ function generateTable(tableContent, now, tokenizer) {
           hName: 'tr'
         }
       };
-      for (var c = 0; c < row._cells.length; ++c) {
+      for (var c = 0; c < row._cells.length; c++) {
         var cell = row._cells[c];
+        var tokenizedContent = tokenizer.tokenizeBlock(cell._lines.map(function (e) {
+          return e.trim();
+        }).join('\n'), now);
         var cellElt = {
           type: 'tableCell',
-          children: tokenizer.tokenizeBlock(cell._lines.map(function (e) {
-            return e.trim();
-          }).join('\n'), now),
+          children: tokenizedContent,
           data: {
             hName: hasHeader && p === 0 ? 'th' : 'td',
             hProperties: {
@@ -411,8 +416,8 @@ function generateTable(tableContent, now, tokenizer) {
 
         var endLine = r + cell._rowspan;
         if (cell._rowspan > 1 && endLine - 1 < part._rows.length) {
-          for (var rs = 1; rs < cell._rowspan; ++rs) {
-            for (var cc = 0; cc < part._rows[r + rs]._cells.length; ++cc) {
+          for (var rs = 1; rs < cell._rowspan; rs++) {
+            for (var cc = 0; cc < part._rows[r + rs]._cells.length; cc++) {
               var other = part._rows[r + rs]._cells[cc];
               if (cell._startPosition === other._startPosition && cell._endPosition === other._endPosition && cell._colspan === other._colspan && cell._rowspan === other._rowspan && cell._lines === other._lines) {
                 part._rows[r + rs]._cells.splice(cc, 1);
@@ -456,13 +461,21 @@ function gridTableTokenizer(eat, value, silent) {
     tagName: 'WrapperBlock',
     children: []
   };
+
   if (before.length) {
-    wrapperBlock.children.push(this.tokenizeBlock(before.join('\n'), now)[0]);
+    var tokensBefore = this.tokenizeBlock(before.join('\n'), now)[0];
+    wrapperBlock.children.push(tokensBefore);
   }
+
   wrapperBlock.children.push(tableElt);
+
   if (after.length) {
-    wrapperBlock.children.push(this.tokenizeBlock(after.join('\n'), now)[0]);
+    var tokensAfter = this.tokenizeBlock(after.join('\n'), now);
+    if (tokensAfter.length) {
+      wrapperBlock.children.push(tokensAfter[0]);
+    }
   }
+
   return eat(merged)(wrapperBlock);
 }
 
@@ -472,11 +485,11 @@ function deleteWrapperBlock() {
 
     var newChildren = [];
     var replace = false;
-    for (var c = 0; c < node.children.length; ++c) {
+    for (var c = 0; c < node.children.length; c++) {
       var child = node.children[c];
       if (child.tagName === 'WrapperBlock' && child.type === 'element') {
         replace = true;
-        for (var cc = 0; cc < child.children.length; ++cc) {
+        for (var cc = 0; cc < child.children.length; cc++) {
           newChildren.push(child.children[cc]);
         }
       } else {

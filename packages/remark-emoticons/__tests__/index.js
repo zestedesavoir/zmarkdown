@@ -80,6 +80,16 @@ test('emoticons', () => {
   expect(contents).toMatchSnapshot()
 })
 
+test('does not eat spaces leading to a smiley', () => {
+  const {contents} = render(dedent`
+    *hey* :)
+
+    [ho](#) :D let's go
+  `)
+  expect(contents).not.toContain('</em><img')
+  expect(contents).not.toContain('</a><img')
+})
+
 test('emoticons without class', () => {
   const render = text => unified()
     .use(reParse)
