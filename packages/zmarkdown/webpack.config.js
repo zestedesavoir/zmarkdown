@@ -44,5 +44,5 @@ module.exports = [
       filename: 'zmarkdown-zlatex.js',
       library: 'ZMarkdownZLatex',
     },
-  })
+  }),
 ]
