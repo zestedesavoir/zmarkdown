@@ -18,8 +18,7 @@ const defaultConf = {
 }
 
 module.exports = [
-  {
-    ...defaultConf,
+  Object.assign({}, defaultConf, {
     name: 'ZMarkdown',
     entry: ['babel-polyfill', './client/index'],
     output: {
@@ -27,9 +26,8 @@ module.exports = [
       filename: 'zmarkdown.js',
       library: 'ZMarkdown',
     },
-  },
-  {
-    ...defaultConf,
+  }),
+  Object.assign({}, defaultConf, {
     name: 'ZMarkdownZHTML',
     entry: ['./plugins/client/zhtml'],
     output: {
@@ -37,4 +35,14 @@ module.exports = [
       filename: 'zmarkdown-zhtml.js',
       library: 'ZMarkdownZHTML',
     },
-  }]
+  }),
+  Object.assign({}, defaultConf, {
+    name: 'ZMarkdownZLatex',
+    entry: ['./plugins/client/zlatex'],
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'zmarkdown-zlatex.js',
+      library: 'ZMarkdownZLatex',
+    },
+  })
+]

@@ -207,7 +207,11 @@ module.exports = (
   opts = {remarkConfig},
   processor = null
 ) => {
-  if (!opts.remarkConfig || !Object.keys(remarkConfig).length) {
+  if (!opts) {
+    opts = {}
+  }
+
+  if (!opts.remarkConfig || (opts.remarkConfig === null) || !Object.keys(remarkConfig).length) {
     opts.remarkConfig = clone(remarkConfig)
   }
 
