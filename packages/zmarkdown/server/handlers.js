@@ -29,7 +29,7 @@ const meters = endpoints.reduce((acc, endpoint) => {
   return acc
 }, {})
 
-// this object is used to memoize confirenderFilegured processors
+// this object is used to memoize configured processors
 const processors = {}
 
 module.exports = function markdownHandlers (Raven) {
@@ -149,7 +149,8 @@ module.exports = function markdownHandlers (Raven) {
         }
       }
 
-      processors[key] = zmarkdown({remarkConfig: remark,
+      processors[key] = zmarkdown({
+        remarkConfig: remark,
         rebberConfig: rebber,
         extraPlugins: [
           {obj: remarkImagesDownload, option: remark.imagesDownload},

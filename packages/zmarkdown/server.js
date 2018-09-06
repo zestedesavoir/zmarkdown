@@ -31,7 +31,7 @@ module.exports = (
     opts.remarkConfig = clone(remarkConfig)
   }
 
-  const zmd = zmarkdown(opts)
+  zmd = zmarkdown(opts)
   zmd.renderString = rendererFactory(zmd, opts.remarkConfig, opts.extraPlugins, target)
   zmd.renderFile = (path, cb) => {
     return rendererFactory(zmd, opts.remarkConfig, opts.extraPlugins, target)(fromFile(path), cb)
