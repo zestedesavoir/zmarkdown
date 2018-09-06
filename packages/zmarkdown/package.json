@@ -1,6 +1,6 @@
 {
   "name": "zmarkdown",
-  "version": "5.9.4",
+  "version": "5.10.0",
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
   "contributors": [
     "Sébastien (AmarOk) Blin <contact@enconn.fr>",
@@ -22,8 +22,8 @@
     "pm2": "^3.0.0",
     "pmx": "^1.5.6",
     "raven": "^2.1.2",
-    "rebber": "^2.2.5",
-    "rebber-plugins": "^1.4.8",
+    "rebber": "^3.0.0",
+    "rebber-plugins": "^1.5.0",
     "rehype-autolink-headings": "^2.0.1",
     "rehype-footnotes-title": "^0.0.26",
     "rehype-highlight": "^2.2.0",
