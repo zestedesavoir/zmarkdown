@@ -16,13 +16,7 @@ let zmd
 function getLatexProcessor (config) {
   config.remarkConfig.noTypography = true
 
-  const parser = zmd.zmdParser(config.remarkConfig, config.extraPlugins)
-
-  if (!config.remarkConfig.noTypography) {
-    parser.use(remarkTextr, config.remarkConfig.textr)
-  }
-
-  return parser
+  return zmd.zmdParser(config.remarkConfig, config.extraPlugins)
     .use(rebberStringify, config.rebberConfig)
 }
 
@@ -51,6 +45,14 @@ module.exports = (
     opts.extraPlugins = [
       {obj: remarkImagesDownload, option: remarkConfig.imagesDownload},
     ]
+  }
+
+  if (target !== 'latex') {
+    opts.extraPlugins.push({
+      obj: remarkTextr,
+      option: opts.remarkConfig.textr,
+      check: (config) => !config.noTypography,
+    })
   }
 
   zmd = zmarkdown(opts)

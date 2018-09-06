@@ -72,10 +72,12 @@ const zmdParser = (config, extraPlugins) => {
 
   if (extraPlugins && extraPlugins.length > 0) {
     for (const record of extraPlugins) {
-      if (record.option) {
-        mdProcessor.use(record.obj, record.option)
-      } else {
-        mdProcessor.use(record.obj)
+      if (!record.check || record.check(config)) {
+        if (record.option) {
+          mdProcessor.use(record.obj, record.option)
+        } else {
+          mdProcessor.use(record.obj)
+        }
       }
     }
   }
@@ -157,9 +159,10 @@ function getHTMLProcessor (config) {
 
 const rendererFactory = (config, processor) => {
   return (input, cb) => {
+    const allConfig = clone(config)
     const mdProcessor = processor
-      ? processor(config)
-      : getHTMLProcessor(config)
+      ? processor(allConfig)
+      : getHTMLProcessor(allConfig)
 
     if (typeof cb !== 'function') {
       return new Promise((resolve, reject) =>
