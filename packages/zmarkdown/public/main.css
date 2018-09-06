@@ -31,7 +31,7 @@ body {
   width: 100%;
 }
 
-#right {
+#center, #right {
   overflow-y: auto;
 }
 
