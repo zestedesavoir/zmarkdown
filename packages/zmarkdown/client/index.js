@@ -24,48 +24,48 @@ export function use (obj) {
   plugins[obj.name] = obj
 }
 
-export function setDefaultType (type) {
+export function setDefaultProcessor (type) {
   if (plugins.hasOwnProperty(type)) {
     defaultType = type
   } else {
-    throw new Error(`Unknown type: ${type}`)
+    throw new Error(`Unknown processor (plugin name): ${type}`)
   }
 }
 
-export function resetDefaultType () {
+export function resetDefaultProcessor () {
   defaultType = null
 }
 
-export function render (str, type = null, cb = null) {
+export function render (str, name = null, cb = null) {
   if (plugins.length === 0) {
     throw new Error('No plugins available.')
   }
 
-  switch (typeof type) {
+  switch (typeof name) {
     case 'string':
-      if (type && !plugins.hasOwnProperty(type)) {
-        throw new Error(`Unknown type: ${type}`)
+      if (name && !plugins.hasOwnProperty(name)) {
+        throw new Error(`Unknown processor (plugin name): ${name}`)
       }
       break
     case 'function':
       if (!cb) {
-        cb = type
+        cb = name
       }
       break
     default:
-      if (!type && !defaultType) {
-        if (type === null) {
-          throw new Error(`Bad type for parameter 'type'. Expected 'string'
-          or 'function' but was: ${typeof type}`)
+      if (!name && !defaultType) {
+        if (name === null) {
+          throw new Error(`Bad type for parameter 'name'. Expected 'string'
+          or 'function' but was: ${typeof name}`)
         }
-        throw new Error('This function expects to be called with (str, type = null, cb = null), ' +
-          'type is missing. To omit type parameter you should set the default type.')
+        throw new Error('This function expects to be called with (str, name = null, cb = null), ' +
+          'name is missing. To omit name parameter you should set the default name.')
       }
   }
 
-  if (!type) {
-    type = defaultType
+  if (!name) {
+    name = defaultType
   }
 
-  return plugins[type].render(str, cb)
+  return plugins[name].render(str, cb)
 }
