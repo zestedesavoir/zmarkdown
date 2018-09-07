@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ZMarkdown test</title>
+  <title>ZMarkdown test (HTML)</title>
   <script src="./ansi_up.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="css/md.css">
   <link rel="stylesheet" href="css/new.css">
   <style>
@@ -80,28 +80,33 @@
       </div>
     </div>
   </section>
-  <script src="bundle.js"></script>
+  <script src="zmarkdown.js"></script>
+  <script src="zmarkdown-zhtml.js"></script>
   <script type="text/javascript">
-    var config = ZMarkdown().config
-    config.headingShifter = 1
+    let config = ZMarkdownZHTML.getParser().config;
+    config.remarkConfig.headingShifter = 1
+    ZMarkdownZHTML.initialize(config)
 
-    ZMarkdown = ZMarkdown(config)
-    var ansiUp = new AnsiUp()
-    var render = document.getElementById('render')
-    var editor = document.getElementById('editor')
-    var ast = document.getElementById('ast')
-    var html = document.getElementById('html')
+    ZMarkdown.use(ZMarkdownZHTML)
+    ZMarkdown.setDefaultModule("zhtml")
+
+    const ansiUp = new AnsiUp()
+    const render = document.getElementById('render')
+    const editor = document.getElementById('editor')
+    const ast = document.getElementById('ast')
+    const html = document.getElementById('html')
     editor.addEventListener('input', update)
 
     document.addEventListener('DOMContentLoaded', update)
 
     function update() {
-      var rendered = ZMarkdown.renderString(editor.value)
-      render.innerHTML = rendered.contents
-      html.textContent = rendered.contents
-      console.log(JSON.stringify({metadata: rendered.metadata}, null, 2))
-      var mdast = ZMarkdown.parse(editor.value)
-      ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(mdast))
+      ZMarkdown.render(editor.value).then((vFile) => {
+        let result = vFile.toString().trim()
+        render.innerHTML = result
+        html.textContent = result
+      })
+      const mdast = ZMarkdown.parse(editor.value)
+      ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.getParser().inspect.color(mdast))
     }
   </script>
 </body>

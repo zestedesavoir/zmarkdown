@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ZMarkdown test</title>
+  <title>ZMarkdown test (LaTeX)</title>
   <script src="./ansi_up.js"></script>
   <style>
     html, body {
@@ -89,26 +89,31 @@ Another p: _it_ *it*
       <pre id="render" class="zmarkdown"></pre>
     </div>
   </section>
-  <script src="bundle.js"></script>
+  <script src="zmarkdown.js"></script>
+  <script src="zmarkdown-zlatex.js"></script>
   <script type="text/javascript">
-    var config = ZMarkdown().config
-    config.headingShifter = 1
+    let config = ZMarkdownZLatex.getParser().config;
+    config.remarkConfig.headingShifter = 1
+    ZMarkdownZLatex.initialize(config)
 
-    ZMarkdown = ZMarkdown(config, 'latex')
-    var ansiUp = new AnsiUp()
-    var render = document.getElementById('render')
-    var editor = document.getElementById('editor')
-    var ast = document.getElementById('ast')
-    var latex = document.getElementById('latex')
+    ZMarkdown.use(ZMarkdownZLatex)
+    ZMarkdown.setDefaultModule("zlatex")
+    const ansiUp = new AnsiUp()
+    const render = document.getElementById('render')
+    const editor = document.getElementById('editor')
+    const ast = document.getElementById('ast')
     editor.addEventListener('input', update)
 
     document.addEventListener('DOMContentLoaded', update)
 
     function update() {
-      var rendered = ZMarkdown.renderString(editor.value)
-      render.textContent = rendered.contents
-      var mdast = ZMarkdown.parse(editor.value)
-      ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.inspect.color(mdast))
+      ZMarkdown.render(editor.value).then((vFile) => {
+        let result = vFile.toString().trim()
+        render.textContent = result
+      })
+
+      const mdast = ZMarkdown.parse(editor.value)
+      ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.getParser().inspect.color(mdast))
     }
   </script>
 </body>
