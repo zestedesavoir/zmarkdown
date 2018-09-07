@@ -5,7 +5,7 @@ Split(['#left', '#center', '#right'], {
 ZMarkdown.use(ZMarkdownZHTML);
 ZMarkdown.use(ZMarkdownZLatex);
 
-ZMarkdown.setDefaultProcessor("zhtml");
+ZMarkdown.setDefaultModule("zhtml");
 
 const render = document.querySelector('#center > div')
 const latex = document.querySelector('#right > div')

@@ -17,5 +17,5 @@ const ast = inspector.parse(input)
 console.log(inspector.inspect(ast))
 console.log()
 
-const output = zmd.renderString(input)
+const output = zmd.render(input)
 console.log(output.contents)

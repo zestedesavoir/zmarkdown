@@ -8,14 +8,14 @@ let parser
 function getLatexProcessor (config) {
   config.remarkConfig.noTypography = true
 
-  return parser.zmdParser(config.remarkConfig, config.extraPlugins)
+  return parser.zmdParser(config.remarkConfig, config.extraRemarkPlugins)
     .use(rebberStringify, rebberConfig)
 }
 
 parser = common(null, getLatexProcessor)
 
 export function render (input, cb) {
-  return parser.renderString(input, cb)
+  return parser.render(input, cb)
 }
 
 export const name = 'zlatex'
