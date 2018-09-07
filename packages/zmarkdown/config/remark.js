@@ -160,6 +160,7 @@ const remarkConfig = {
       ':waw:': '/static/smileys/waw.png',
       ':zorro:': '/static/smileys/zorro.png',
       '^(;,;)^': '/static/smileys/cthulhu.png',
+      ':popcorn:': '/static/smileys/popcorn.png',
     },
     classes: 'smiley',
   },
