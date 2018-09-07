@@ -8,7 +8,7 @@ ZMarkdown.use(ZMarkdownZLatex);
 ZMarkdown.setDefaultModule("zhtml");
 
 const render = document.querySelector('#center > div')
-const latex = document.querySelector('#right > div')
+const latex = document.querySelector('#right > pre')
 const editor = document.querySelector('#left > textarea')
 editor.addEventListener('input', update)
 
@@ -19,6 +19,6 @@ function update () {
     render.innerHTML = vFile.toString().trim()
   })
   ZMarkdown.render(editor.value, 'zlatex').then((vFile) => {
-    latex.innerHTML = vFile.toString().trim()
+    latex.textContent = vFile.toString().trim()
   })
 }
