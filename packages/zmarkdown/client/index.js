@@ -1,4 +1,4 @@
-export const plugins = {}
+export const modules = {}
 export let defaultType
 
 export function use (obj) {
@@ -9,63 +9,64 @@ export function use (obj) {
   // Check the object structure
 
   if (!obj.hasOwnProperty('name')) {
-    throw new Error("missing 'name' in plugin")
+    throw new Error("missing 'name' in module")
   }
   if (typeof obj.name !== 'string') {
-    throw new Error('Plugin name should be a string')
+    throw new Error('module name should be a string')
   }
   if (!obj.hasOwnProperty('render')) {
-    throw new Error("missing 'render' function in plugin")
+    throw new Error("missing 'render' function in module")
   }
   if (typeof obj.render !== 'function') {
     throw new Error('render is not a function')
   }
 
-  plugins[obj.name] = obj
+  modules[obj.name] = obj
 }
 
-export function setDefaultProcessor (type) {
-  if (plugins.hasOwnProperty(type)) {
+export function setDefaultModule (type) {
+  if (modules.hasOwnProperty(type)) {
     defaultType = type
   } else {
-    throw new Error(`Unknown processor (plugin name): ${type}`)
+    throw new Error(`Unknown module name: ${type}`)
   }
 }
 
-export function resetDefaultProcessor () {
+export function resetDefaultModule () {
   defaultType = null
 }
 
-export function render (str, name = null, cb = null) {
-  if (plugins.length === 0) {
-    throw new Error('No plugins available.')
+export function render (str, moduleName = null, cb = null) {
+  if (modules.length === 0) {
+    throw new Error('No module available.')
   }
 
-  switch (typeof name) {
+  switch (typeof moduleName) {
     case 'string':
-      if (name && !plugins.hasOwnProperty(name)) {
-        throw new Error(`Unknown processor (plugin name): ${name}`)
+      if (moduleName && !modules.hasOwnProperty(moduleName)) {
+        throw new Error(`Unknown module name: ${moduleName}`)
       }
       break
     case 'function':
       if (!cb) {
-        cb = name
+        cb = moduleName
       }
       break
     default:
-      if (!name && !defaultType) {
-        if (name === null) {
-          throw new Error(`Bad type for parameter 'name'. Expected 'string'
-          or 'function' but was: ${typeof name}`)
+      if (!moduleName && !defaultType) {
+        if (moduleName === null) {
+          throw new Error(`Bad type for parameter 'moduleName'. Expected 'string'
+          or 'function' but was: ${typeof moduleName}`)
         }
-        throw new Error('This function expects to be called with (str, name = null, cb = null), ' +
-          'name is missing. To omit name parameter you should set the default name.')
+        throw new Error('This function expects to be called with ' +
+          '(str, moduleName = null, cb = null), moduleName is missing. ' +
+          'To omit moduleName parameter you should set the default moduleName.')
       }
   }
 
-  if (!name) {
-    name = defaultType
+  if (!moduleName) {
+    moduleName = defaultType
   }
 
-  return plugins[name].render(str, cb)
+  return modules[moduleName].render(str, cb)
 }

@@ -15,7 +15,7 @@ let zmd
 function getLatexProcessor (config) {
   config.remarkConfig.noTypography = true
 
-  return zmd.zmdParser(config.remarkConfig, config.extraPlugins)
+  return zmd.zmdParser(config.remarkConfig, config.extraRemarkPlugins)
     .use(rebberStringify, config.rebberConfig)
 }
 
@@ -40,8 +40,8 @@ module.exports = (
     opts.rebberConfig = clone(rebberConfig)
   }
 
-  if (!opts.extraPlugins) {
-    opts.extraPlugins = [
+  if (!opts.extraRemarkPlugins) {
+    opts.extraRemarkPlugins = [
       {obj: remarkImagesDownload, option: opts.remarkConfig.imagesDownload},
     ]
   }

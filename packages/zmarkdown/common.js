@@ -67,7 +67,7 @@ const wrappers = {
   ],
 }
 
-const zmdParser = (config, extraPlugins) => {
+const zmdParser = (config, extraRemarkPlugins) => {
   const mdProcessor = unified()
     .use(remarkParse, config.reParse)
 
@@ -121,8 +121,8 @@ const zmdParser = (config, extraPlugins) => {
       }
     })
 
-  if (extraPlugins && extraPlugins.length > 0) {
-    for (const record of extraPlugins) {
+  if (extraRemarkPlugins && extraRemarkPlugins.length > 0) {
+    for (const record of extraRemarkPlugins) {
       if (!record.check || record.check(config)) {
         if (record.option) {
           mdProcessor.use(record.obj, record.option)
@@ -137,7 +137,7 @@ const zmdParser = (config, extraPlugins) => {
 }
 
 function getHTMLProcessor (config) {
-  const parser = zmdParser(config.remarkConfig, config.extraPlugins)
+  const parser = zmdParser(config.remarkConfig, config.extraRemarkPlugins)
     .use(remark2rehype, config.remarkConfig.remark2rehype)
 
   if (config.remarkConfig._test) {
@@ -188,7 +188,9 @@ const rendererFactory = (config, processor) => {
   }
 }
 
-const mdastParser = (opts) => (zmd) => zmdParser(opts.remarkConfig, opts.extraPlugins).parse(zmd)
+const mdastParser = (opts) =>
+  (zmd) =>
+    zmdParser(opts.remarkConfig, opts.extraRemarkPlugins).parse(zmd)
 
 function getDepth (node) {
   let maxDepth = 0
@@ -215,13 +217,16 @@ module.exports = (
     opts.remarkConfig = clone(remarkConfig)
   }
 
+  if (!processor) {
+    processor = getHTMLProcessor
+  }
+
   return {
     config: opts,
     inspect: inspect,
     parse: mdastParser(opts),
     zmdParser: zmdParser,
-    render: rendererFactory(opts),
-    renderString: rendererFactory(opts, processor),
+    render: rendererFactory(opts, processor),
     rendererFactory: rendererFactory,
   }
 }
