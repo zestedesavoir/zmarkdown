@@ -10,13 +10,14 @@
   <script src="./ansi_up.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/md.css">
-  <link rel="stylesheet" href="css/new.css">
+  <link rel="stylesheet" href="css/zmd.css">
+  <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="main.css" media="screen">
 </head>
 <body>
 <div id="left" class="split split-horizontal">
-  <textarea class="editor" spellcheck="false" contenteditable="true">
+  <div id="left-top" class="split split-vertical">
+    <textarea class="editor" spellcheck="false" contenteditable="true" placeholder="Write here…" autofocus>
 Ceci est mon premier paragraphe.
 
 Ceci est mon second paragraphe.
@@ -164,9 +165,6 @@ Source: Citez vos sources !
 
 Bienvenue sur ZdS !
 
-<!--
-Not working…
-
 *[ZdS]: Zeste de Savoir
 
 Markdown[^mdown] est une syntaxe légère d'écriture de documents. Pandoc[^pandoc] est un convertisseur de documents.
@@ -174,12 +172,15 @@ Markdown[^mdown] est une syntaxe légère d'écriture de documents. Pandoc[^pand
 [^mdown]: Plus d'informations sur [Markdown](http://daringfireball.net/projects/markdown/).
 
 [^pandoc]: Plus d'informations sur [Pandoc](http://johnmacfarlane.net/pandoc/).
--->
-  </textarea>
+</textarea>
+  </div>
+  <div id="left-bottom" class="split split-vertical"><pre><code></code></pre></div>
 </div>
 <div id="center" class="split split-horizontal">
-  <div class="result render zmarkdown">
+  <div id="center-top" class="split split-vertical">
+    <div class="result render zmarkdown"></div>
   </div>
+  <div id="center-bottom" class="split split-vertical"><pre><code></code></pre></div>
 </div>
 <div id="right" class="split split-horizontal">
   <pre class="result render">

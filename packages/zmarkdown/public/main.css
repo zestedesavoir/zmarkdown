@@ -31,7 +31,7 @@ body {
   width: 100%;
 }
 
-#center, #right {
+#left-bottom, #center, #center-bottom, #center-top, #right {
   overflow-y: auto;
 }
 
@@ -68,10 +68,17 @@ body {
   float: left;
 }
 
+.gutter.gutter-vertical {
+  background-image:  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=')
+}
+
+.gutter.gutter-horizontal {
+  background-image:  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==')
+}
+
 .zmarkdown > p > .inlineMathDouble {
   display: block;
   text-align: center;
-  background-color: red;
 }
 
 .zmarkdown > .align-right {
