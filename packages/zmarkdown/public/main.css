@@ -40,6 +40,12 @@ body {
   position: relative;
 }
 
+.bottom-style {
+  height: 100%;
+  margin: auto;
+  padding: 0;
+}
+
 /* Resizer style */
 
 .gutter {
