@@ -491,8 +491,11 @@ exports[`mix-3 1`] = `
 
 exports[`mix-4 1`] = `
 "\\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Sub & Headings & \\\\abbr{ABBR}{abbreviation} \\\\\\\\ \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 \\\\multirow{2}{*}{cell \\\\par spans \\\\par rows} & \\\\multicolumn{2}{|c|}{column spanning} \\\\\\\\ \\\\cline{2-3}
+\\\\rowfont[l]{}
  & normal & cell \\\\\\\\ \\\\hline
 multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|c|}{cells can be \\\\par \\\\textit{formatted} \\\\par \\\\textbf{paragraphs}} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -503,14 +506,19 @@ multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|c|}{
 \\\\footnotetext[1]{\\\\label{footnote:1} a foot}
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 2}|p{\\\\linewidth / 2}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 title & image \\\\\\\\ \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 space & \\\\image{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg}[space] \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 2}|p{\\\\linewidth / 2}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 title & code \\\\\\\\ \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 inline & \\\\CodeInline{inline} br \\\\par \\\\CodeInline{inline} \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 block & [] \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
@@ -637,16 +645,20 @@ a
 `;
 
 exports[`table 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 1 & 2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 1 & 2 \\\\\\\\ \\\\hline
 1 & 2 \\\\\\\\ \\\\hline
 1 & 2 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu}{|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 1 & 2 & 3 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 1 & 2 \\\\\\\\ \\\\hline
 1 & 2  & 3 \\\\\\\\ \\\\hline
 1 & 2  & 3 \\\\\\\\ \\\\hline

@@ -1958,37 +1958,47 @@ Something\\\\textsuperscript{\\\\ref{footnote:150}}
 `;
 
 exports[`#extensions #extra properly renders tables.txt 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 First Header & Second Header \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Content Cell & Content Cell \\\\\\\\ \\\\hline
 Content Cell & Content Cell \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 First Header & Second Header \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Content Cell & Content Cell \\\\\\\\ \\\\hline
 Content Cell & Content Cell \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Item & Value \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Computer & \\\\$1600 \\\\\\\\ \\\\hline
 Phone & \\\\$12 \\\\\\\\ \\\\hline
 Pipe & \\\\$1 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Function name & Description \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 \\\\CodeInline{help()} & Display the help window. \\\\\\\\ \\\\hline
 \\\\CodeInline{destroy()} & \\\\textbf{Destroy your computer!} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu}{|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 foo & bar & baz \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
  & Q &  \\\\\\\\ \\\\hline
 W &  & W \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -1998,15 +2008,19 @@ Three spaces in front of a table:
 
 
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 First Header & Second Header \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Content Cell & Content Cell \\\\\\\\ \\\\hline
 Content Cell & Content Cell \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 First Header & Second Header \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Content Cell & Content Cell \\\\\\\\ \\\\hline
 Content Cell & Content Cell \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -2025,8 +2039,10 @@ Content Cell | Content Cell
 `;
 
 exports[`#extensions #extra properly renders tables-2.txt 1`] = `
-"\\\\begin{longtabu}{|c|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 foo & bar & baz \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Q \\\\\\\\ \\\\hline
 W &  & W \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
@@ -4122,37 +4138,50 @@ exports[`#zds #extensions properly renders grid_tables.txt 1`] = `
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 \\\\multicolumn{2}{|c|}{Table Headings} & Here \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Sub & Headings & Too \\\\\\\\ \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 \\\\multirow{2}{*}{cell \\\\par spans \\\\par rows} & \\\\multicolumn{2}{|c|}{column spanning} \\\\\\\\ \\\\cline{2-3}
+\\\\rowfont[l]{}
  & normal & cell \\\\\\\\ \\\\hline
 multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|c|}{cells can be \\\\par \\\\textit{formatted} \\\\par \\\\textbf{paragraphs}} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 A & B & C \\\\\\\\ \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 \\\\multirow{2}{*}{D} & \\\\multicolumn{2}{|c|}{E} \\\\\\\\ \\\\cline{2-3}
+\\\\rowfont[l]{}
  & F & G \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 \\\\multirow{3}{*}{A} & \\\\multicolumn{2}{|c|}{B} \\\\\\\\ \\\\cline{2-3}
+\\\\rowfont[l]{}
  & C & D \\\\\\\\ \\\\cline{2-3}
  & \\\\multicolumn{2}{|c|}{E} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 \\\\multicolumn{3}{|c|}{A} \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 \\\\multirow{2}{*}{B} & C & \\\\multirow{2}{*}{D} \\\\\\\\ \\\\cline{1-2}
 E &  \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 \\\\multirow{4}{*}{C} & \\\\multirow{2}{*}{D} & E \\\\\\\\ \\\\cline{1-1}
+\\\\rowfont[l]{}
 F &  \\\\\\\\ \\\\hline
 \\\\multirow{2}{*}{G} & H \\\\\\\\ \\\\cline{2-2}
  & I \\\\\\\\ \\\\hline
@@ -4160,7 +4189,9 @@ F &  \\\\\\\\ \\\\hline
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|p{\\\\linewidth / 3}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 A & \\\\multirow{2}{*}{B} & \\\\multirow{4}{*}{C} \\\\\\\\ \\\\cline{1-2}
+\\\\rowfont[l]{}
 D &  \\\\\\\\ \\\\cline{1-2}
 E & \\\\multirow{2}{*}{F} &  \\\\\\\\ \\\\cline{1-2}
 G &  \\\\\\\\ \\\\hline
@@ -4168,21 +4199,27 @@ G &  \\\\\\\\ \\\\hline
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 A & B & C & D \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 \\\\multicolumn{2}{|c|}{E} & \\\\multicolumn{2}{|c|}{F} \\\\\\\\ \\\\hline
 \\\\multicolumn{4}{|c|}{G} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 \\\\multicolumn{4}{|c|}{A} \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 \\\\multicolumn{2}{|c|}{B} & \\\\multicolumn{2}{|c|}{C} \\\\\\\\ \\\\hline
 D & E & F & G \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 \\\\multirow{3}{*}{A} & \\\\multirow{2}{*}{B} & C & D & \\\\multirow{2}{*}{E} & \\\\multirow{3}{*}{F} \\\\\\\\ \\\\cline{1-5}
+\\\\rowfont[l]{}
 \\\\multicolumn{2}{|c|}{G} &  \\\\\\\\ \\\\cline{1-5}
 \\\\multicolumn{4}{|c|}{H} &  \\\\\\\\ \\\\hline
 \\\\multicolumn{6}{|c|}{I} \\\\\\\\ \\\\hline
@@ -4190,8 +4227,11 @@ D & E & F & G \\\\\\\\ \\\\hline
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|p{\\\\linewidth / 7}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 A & \\\\multicolumn{6}{|c|}{B} \\\\\\\\ \\\\hline
-\\\\multirow{4}{*}{C} & \\\\multirow{4}{*}{\\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\cline{1-1} \\\\par D & E & F & G \\\\\\\\ \\\\hline \\\\par \\\\multicolumn{4}{|c|}{H} \\\\\\\\ \\\\hline \\\\par \\\\end{longtabu}} \\\\\\\\ \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
+\\\\multirow{4}{*}{C} & \\\\multirow{4}{*}{\\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\cline{1-1} \\\\par \\\\rowfont[c]{\\\\bfseries} \\\\par D & E & F & G \\\\\\\\ \\\\hline \\\\par \\\\rowfont[l]{} \\\\par \\\\multicolumn{4}{|c|}{H} \\\\\\\\ \\\\hline \\\\par \\\\end{longtabu}} \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
  &  &  &  &  &  \\\\\\\\ \\\\cline{1-1}
  &  &  &  &  &  \\\\\\\\ \\\\cline{1-1}
  &  &  &  &  &  \\\\\\\\ \\\\hline
@@ -4199,7 +4239,9 @@ A & \\\\multicolumn{6}{|c|}{B} \\\\\\\\ \\\\hline
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|p{\\\\linewidth / 18}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 H & \\\\multicolumn{16}{|c|}{} & He \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Li & Be & \\\\multirow{2}{*}{} & B & C & N & O & F & Ne \\\\\\\\ \\\\cline{1-2} \\\\cline{13-18}
 Na & Mg &  &  &  &  &  &  &  &  &  &  & Al & Si & P & S & Cl & Ar \\\\\\\\ \\\\hline
 K & Ca & Sc & Ti & V & Cr & Mn & Fe & Co & Ni & Cu & Zn & Ga & Ge & As & Se & Br & Kr \\\\\\\\ \\\\hline
@@ -4213,6 +4255,7 @@ Fr & Ra & ACT & \\\\multicolumn{15}{|c|}{} \\\\\\\\ \\\\hline
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 1}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 A \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
@@ -4222,6 +4265,7 @@ Text at the end
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 1}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 A \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
@@ -4238,28 +4282,36 @@ In this examples, the second row should always be a full-cell
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 \\\\multicolumn{4}{|c|}{A} \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 \\\\multicolumn{4}{|c|}{B | C} \\\\\\\\ \\\\hline
 D & E & F & G \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 A & \\\\multicolumn{3}{|c|}{} \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 \\\\multicolumn{4}{|c|}{B | C} \\\\\\\\ \\\\hline
 \\\\multicolumn{2}{|c|}{D   E} & F & G \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 A & B & C & D \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 \\\\multicolumn{4}{|c|}{B | C} \\\\\\\\ \\\\hline
 D & E & F & G \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|p{\\\\linewidth / 4}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 A & B & C & D \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 \\\\multicolumn{4}{|c|}{B  | C} \\\\\\\\ \\\\hline
 D & E & F & G \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -4297,6 +4349,7 @@ D & E & F & G \\\\\\\\ \\\\hline
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 1}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
  \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
@@ -4306,8 +4359,11 @@ Bug \\\\#107
 
 
 \\\\begin{longtabu}{|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|p{\\\\linewidth / 6}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
  & \\\\multicolumn{2}{|c|}{case1} & \\\\multicolumn{2}{|c|}{case2} & case3 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
  & case4 & case5 & case6 & case7 &  \\\\\\\\ \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 X & X & X & X & X & X \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
