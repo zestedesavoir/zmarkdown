@@ -141,6 +141,7 @@ class GridTableStringifier {
 
 function gridTable (ctx, node) {
   const overriddenCtx = clone(ctx)
+  overriddenCtx.spreadCell = ''
   const stringifier = new GridTableStringifier()
   overriddenCtx.break = () => ' \\par' // in gridtables '\\\\' won't work
   overriddenCtx.tableCell = stringifier.gridTableCell.bind(stringifier)

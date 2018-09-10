@@ -158,6 +158,7 @@ var GridTableStringifier = function () {
 
 function gridTable(ctx, node) {
   var overriddenCtx = clone(ctx);
+  overriddenCtx.spreadCell = '';
   var stringifier = new GridTableStringifier();
   overriddenCtx.break = function () {
     return ' \\par';
