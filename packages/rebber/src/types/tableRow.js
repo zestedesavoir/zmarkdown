@@ -9,8 +9,18 @@ const defaultMacro = (ctx, node) => {
   return `${line} \\\\ \\hline\n`
 }
 
+const defaultFirstLineRowFont = `\\rowfont[c]{\\bfseries}`
+const defaultOtherLineRowFont = `\\rowfont[l]{}`
+
 /* Stringify a tableRow `node`. */
-function tableRow (ctx, node) {
+function tableRow (ctx, node, index) {
   const macro = ctx.tableRow || defaultMacro
-  return macro(ctx, node)
+  const firstLineRowFont = ctx.firstLineRowFont || defaultFirstLineRowFont
+  const otherLineRowFont = ctx.otherLineRowFont || defaultOtherLineRowFont
+  if (index < 2) {
+    return `${index === 0 ? firstLineRowFont : otherLineRowFont}\n${macro(ctx, node)}`
+  } else {
+    return macro(ctx, node)
+  }
+
 }

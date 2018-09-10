@@ -11,7 +11,7 @@ var defaultHeaderParse = function defaultHeaderParse(rows) {
   var columns = Math.max.apply(Math, _toConsumableArray(rows.map(function (l) {
     return l.split('&').length;
   })));
-  var colHeader = '|' + 'c|'.repeat(columns);
+  var colHeader = '|' + 'X[-1]|'.repeat(columns);
   return colHeader;
 };
 
@@ -22,8 +22,9 @@ var defaultMacro = function defaultMacro(ctx, node) {
   });
   var inner = parsed.join('');
   var colHeader = headerParse(parsed);
+  var spreadCell = typeof ctx.spreadCell === 'string' ? ctx.spreadCell : ' spread 0pt ';
   var caption = node.caption ? '\n\\captionof{table}{' + node.caption + '}\n' : '';
-  return '\\begin{longtabu}{' + colHeader + '} \\hline\n' + inner + '\\end{longtabu}' + caption + '\n';
+  return '\\begin{longtabu}' + spreadCell + '{' + colHeader + '} \\hline\n' + inner + '\\end{longtabu}' + caption + '\n';
 };
 
 /* Stringify a table `node`. */

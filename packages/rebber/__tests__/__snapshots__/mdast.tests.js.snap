@@ -6439,8 +6439,10 @@ Pipes should not be escaped here: |
 
 
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 here & they \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 should & tho|ugh \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
@@ -6530,15 +6532,19 @@ exports[`rebber: remark specs strong-initial-white-space: strong-initial-white-s
 `;
 
 exports[`rebber: remark specs table: table 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Heading 1 & \\\\textbf{H}eading 2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu}{|c|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 & Header 3 & Header 4 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 & Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 Cell 5 & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -6550,31 +6556,39 @@ Test code
 
 
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu}{|c|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 & Header 3 & Header 4 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 & Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\textit{Cell 5} & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
 
 exports[`rebber: remark specs table-empty-initial-cell: table-empty-initial-cell 1`] = `
-"\\\\begin{longtabu}{|c|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
  & a & c \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 a & b & c \\\\\\\\ \\\\hline
 a & b & c \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
 
 exports[`rebber: remark specs table-escaped-pipes: table-escaped-pipes 1`] = `
-"\\\\begin{longtabu}{|c|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 First & Second & third \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 first & second & third \\\\\\\\ \\\\hline
 first & second | second & third | \\\\\\\\ \\\\hline
 first & second \\\\textbackslash{} & third \\\\textbackslash{} \\\\\\\\ \\\\hline
@@ -6586,14 +6600,18 @@ exports[`rebber: remark specs table-in-list: table-in-list 1`] = `
 "\\\\begin{itemize}
 \\\\item Unordered:
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 A & B \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 1 & 2 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 \\\\item Ordered:
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 A & B \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 1 & 2 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 \\\\end{itemize}"
@@ -6630,8 +6648,10 @@ Invalid characters:
 `;
 
 exports[`rebber: remark specs table-loose: table-loose 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
@@ -6641,14 +6661,17 @@ exports[`rebber: remark specs table-no-body: table-no-body 1`] = `
 "\\\\part{Foo}
 
 
-\\\\begin{longtabu}{|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Name & GitHub & Twitter \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
 
 exports[`rebber: remark specs table-no-end-of-line: table-no-end-of-line 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 foo & bar \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 1 & 2 \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
@@ -6658,8 +6681,10 @@ exports[`rebber: remark specs table-one-column: table-one-column 1`] = `
 
 
 
-\\\\begin{longtabu}{|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 a \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 b \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
@@ -6669,22 +6694,27 @@ exports[`rebber: remark specs table-one-row: table-one-row 1`] = `
 
 
 
-\\\\begin{longtabu}{|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 a & b & c \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
 
 exports[`rebber: remark specs table-padded: table-padded 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
 
 exports[`rebber: remark specs table-pipes-in-code: table-pipes-in-code 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 abc & head2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 x & \\\\texttt{|||} \\\\\\\\ \\\\hline
 x & \` \\\\\\\\ \\\\hline
 x & \\\\texttt{|} \\\\\\\\ \\\\hline
@@ -6694,8 +6724,10 @@ x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 abc & head2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 x & \` \\\\\\\\ \\\\hline
 x & \\\\texttt{|} \\\\\\\\ \\\\hline
 x & \\\\texttt{f} \\\\\\\\ \\\\hline
@@ -6705,8 +6737,10 @@ x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
 `;
 
 exports[`rebber: remark specs table-spaced: table-spaced 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
@@ -7062,8 +7096,10 @@ exports[`rebber: remark specs title-attributes: title-attributes 1`] = `
 "\\\\part{Links}
 
 
-\\\\begin{longtabu}{|c|c|c|c|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|X[-1]|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Implementation & Characters & Nested & Mismatched & Escaped & Named Entities & Numbered Entities \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Markdown.pl & \\\\texttt{\\"} & Yes & Yes & No & Yes & Yes \\\\\\\\ \\\\hline
 GitHub & \\\\texttt{\\"} & Yes & Yes & No & No & No \\\\\\\\ \\\\hline
 CommonMark & \\\\texttt{\\"} & No & No & Yes & Yes & Yes \\\\\\\\ \\\\hline
@@ -12390,8 +12426,10 @@ Pipes should not be escaped here: |
 
 
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 here & they \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 should & tho|ugh \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
@@ -12476,15 +12514,19 @@ exports[`rebber: remark specs with config: custom macros strong-initial-white-sp
 `;
 
 exports[`rebber: remark specs with config: custom macros table 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Heading 1 & \\\\textbf{H}eading 2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu}{|c|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 & Header 3 & Header 4 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 & Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 Cell 5 & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -12492,31 +12534,39 @@ Cell 5 & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
 
 [code(Test code)]
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu}{|c|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 & Header 3 & Header 4 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 & Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\textit{Cell 5} & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
 
 exports[`rebber: remark specs with config: custom macros table-empty-initial-cell 1`] = `
-"\\\\begin{longtabu}{|c|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
  & a & c \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 a & b & c \\\\\\\\ \\\\hline
 a & b & c \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
 
 exports[`rebber: remark specs with config: custom macros table-escaped-pipes 1`] = `
-"\\\\begin{longtabu}{|c|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 First & Second & third \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 first & second & third \\\\\\\\ \\\\hline
 first & second | second & third | \\\\\\\\ \\\\hline
 first & second \\\\textbackslash{} & third \\\\textbackslash{} \\\\\\\\ \\\\hline
@@ -12527,13 +12577,17 @@ first & second \\\\textbackslash{}| second & third \\\\textbackslash{}| \\\\\\\\
 exports[`rebber: remark specs with config: custom macros table-in-list 1`] = `
 "[unorderedList([listItem(Unordered:
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 A & B \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 1 & 2 \\\\\\\\ \\\\hline
 \\\\end{longtabu})][listItem(Ordered:
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 A & B \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 1 & 2 \\\\\\\\ \\\\hline
 \\\\end{longtabu})])]"
 `;
@@ -12567,8 +12621,10 @@ Invalid characters:
 `;
 
 exports[`rebber: remark specs with config: custom macros table-loose 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
@@ -12577,14 +12633,17 @@ Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 exports[`rebber: remark specs with config: custom macros table-no-body 1`] = `
 "heading1(Foo)
 
-\\\\begin{longtabu}{|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Name & GitHub & Twitter \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
 
 exports[`rebber: remark specs with config: custom macros table-no-end-of-line 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 foo & bar \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 1 & 2 \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
@@ -12594,8 +12653,10 @@ exports[`rebber: remark specs with config: custom macros table-one-column 1`] = 
 
 
 
-\\\\begin{longtabu}{|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 a \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 b \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
@@ -12605,22 +12666,27 @@ exports[`rebber: remark specs with config: custom macros table-one-row 1`] = `
 
 
 
-\\\\begin{longtabu}{|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 a & b & c \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
 
 exports[`rebber: remark specs with config: custom macros table-padded 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
 
 exports[`rebber: remark specs with config: custom macros table-pipes-in-code 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 abc & head2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 x & \\\\texttt{|||} \\\\\\\\ \\\\hline
 x & \` \\\\\\\\ \\\\hline
 x & \\\\texttt{|} \\\\\\\\ \\\\hline
@@ -12630,8 +12696,10 @@ x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 abc & head2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 x & \` \\\\\\\\ \\\\hline
 x & \\\\texttt{|} \\\\\\\\ \\\\hline
 x & \\\\texttt{f} \\\\\\\\ \\\\hline
@@ -12641,8 +12709,10 @@ x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
 `;
 
 exports[`rebber: remark specs with config: custom macros table-spaced 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
@@ -12812,8 +12882,10 @@ exports[`rebber: remark specs with config: custom macros tidyness 1`] = `
 exports[`rebber: remark specs with config: custom macros title-attributes 1`] = `
 "heading1(Links)
 
-\\\\begin{longtabu}{|c|c|c|c|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|X[-1]|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Implementation & Characters & Nested & Mismatched & Escaped & Named Entities & Numbered Entities \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Markdown.pl & \\\\texttt{\\"} & Yes & Yes & No & Yes & Yes \\\\\\\\ \\\\hline
 GitHub & \\\\texttt{\\"} & Yes & Yes & No & No & No \\\\\\\\ \\\\hline
 CommonMark & \\\\texttt{\\"} & No & No & Yes & Yes & Yes \\\\\\\\ \\\\hline
@@ -19662,8 +19734,10 @@ Pipes should not be escaped here: |
 
 
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 here & they \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 should & tho|ugh \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
@@ -19762,15 +19836,19 @@ exports[`toLaTeX: remark specs strong-initial-white-space: strong-initial-white-
 `;
 
 exports[`toLaTeX: remark specs table: table 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Heading 1 & \\\\textbf{H}eading 2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu}{|c|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 & Header 3 & Header 4 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 & Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 Cell 5 & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -19782,15 +19860,19 @@ Test code
 
 
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu}{|c|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 & Header 3 & Header 4 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 & Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\textit{Cell 5} & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -19798,8 +19880,10 @@ Cell 1 & Cell 2 & Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 `;
 
 exports[`toLaTeX: remark specs table-empty-initial-cell: table-empty-initial-cell 1`] = `
-"\\\\begin{longtabu}{|c|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
  & a & c \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 a & b & c \\\\\\\\ \\\\hline
 a & b & c \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -19807,8 +19891,10 @@ a & b & c \\\\\\\\ \\\\hline
 `;
 
 exports[`toLaTeX: remark specs table-escaped-pipes: table-escaped-pipes 1`] = `
-"\\\\begin{longtabu}{|c|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 First & Second & third \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 first & second & third \\\\\\\\ \\\\hline
 first & second | second & third | \\\\\\\\ \\\\hline
 first & second \\\\textbackslash{} & third \\\\textbackslash{} \\\\\\\\ \\\\hline
@@ -19821,14 +19907,18 @@ exports[`toLaTeX: remark specs table-in-list: table-in-list 1`] = `
 "\\\\begin{itemize}
 \\\\item Unordered:
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 A & B \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 1 & 2 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 \\\\item Ordered:
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 A & B \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 1 & 2 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 \\\\end{itemize}
@@ -19868,8 +19958,10 @@ Invalid characters:
 `;
 
 exports[`toLaTeX: remark specs table-loose: table-loose 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -19880,15 +19972,18 @@ exports[`toLaTeX: remark specs table-no-body: table-no-body 1`] = `
 "\\\\part{Foo}
 
 
-\\\\begin{longtabu}{|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Name & GitHub & Twitter \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 "
 `;
 
 exports[`toLaTeX: remark specs table-no-end-of-line: table-no-end-of-line 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 foo & bar \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 1 & 2 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 "
@@ -19899,8 +19994,10 @@ exports[`toLaTeX: remark specs table-one-column: table-one-column 1`] = `
 
 
 
-\\\\begin{longtabu}{|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 a \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 b \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 "
@@ -19911,15 +20008,18 @@ exports[`toLaTeX: remark specs table-one-row: table-one-row 1`] = `
 
 
 
-\\\\begin{longtabu}{|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 a & b & c \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 "
 `;
 
 exports[`toLaTeX: remark specs table-padded: table-padded 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -19927,8 +20027,10 @@ Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 `;
 
 exports[`toLaTeX: remark specs table-pipes-in-code: table-pipes-in-code 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 abc & head2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 x & \\\\texttt{|||} \\\\\\\\ \\\\hline
 x & \` \\\\\\\\ \\\\hline
 x & \\\\texttt{|} \\\\\\\\ \\\\hline
@@ -19938,8 +20040,10 @@ x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu}{|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 abc & head2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 x & \` \\\\\\\\ \\\\hline
 x & \\\\texttt{|} \\\\\\\\ \\\\hline
 x & \\\\texttt{f} \\\\\\\\ \\\\hline
@@ -19950,8 +20054,10 @@ x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
 `;
 
 exports[`toLaTeX: remark specs table-spaced: table-spaced 1`] = `
-"\\\\begin{longtabu}{|c|c|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Header 1 & Header 2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -20319,8 +20425,10 @@ exports[`toLaTeX: remark specs title-attributes: title-attributes 1`] = `
 "\\\\part{Links}
 
 
-\\\\begin{longtabu}{|c|c|c|c|c|c|c|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|X[-1]|X[-1]|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
 Implementation & Characters & Nested & Mismatched & Escaped & Named Entities & Numbered Entities \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
 Markdown.pl & \\\\texttt{\\"} & Yes & Yes & No & Yes & Yes \\\\\\\\ \\\\hline
 GitHub & \\\\texttt{\\"} & Yes & Yes & No & No & No \\\\\\\\ \\\\hline
 CommonMark & \\\\texttt{\\"} & No & No & Yes & Yes & Yes \\\\\\\\ \\\\hline
