@@ -41,6 +41,7 @@ function buildSpoilers (elems) {
         e.preventDefault()
       }
       elem.parentNode.insertBefore(a, elem)
+      elem.classList.add('spoiler-build')
     }
   })
 }
