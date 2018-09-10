@@ -27,10 +27,29 @@ editor.addEventListener('input', update)
 
 document.addEventListener('DOMContentLoaded', update)
 
+function buildSpoilers (elems) {
+  elems.forEach(elem => {
+    if (!elem.classList.contains('spoiler-build')) {
+      let a = document.createElement('a');
+      a.textContent = 'Afficher/Masquer le contenu masqué'
+      a.classList.add('spoiler-title')
+      a.classList.add('ico-after')
+      a.classList.add('view')
+      a.href = '#'
+      a.onclick = (e) => {
+        elem.style.display = !elem.style.display || elem.style.display === 'none' ? 'block' : 'none'
+        e.preventDefault()
+      }
+      elem.parentNode.insertBefore(a, elem)
+    }
+  })
+}
+
 function update () {
   ZMarkdown.render(editor.value).then((vFile) => {
     render.innerHTML = vFile.toString().trim()
     html.textContent = vFile.toString().trim()
+    buildSpoilers(render.querySelectorAll(".custom-block-spoiler"))
   })
   ZMarkdown.render(editor.value, 'zlatex').then((vFile) => {
     latex.textContent = vFile.toString().trim()
