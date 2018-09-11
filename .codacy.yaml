@@ -1,2 +1,2 @@
 exclude_paths:
-  - 'packages/zmarkdown/public/css'
+  - 'packages/zmarkdown/public/css/**'
