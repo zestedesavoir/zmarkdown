@@ -141,6 +141,26 @@ will stringify our example Markdown to `[inserted image located at "/foo.png"]` 
 
     () => ``,
 
+###### `options.table` 
+
+    (ctx, node) => ``,
+
+To ensure a flexible rendering, we use `longtabu` environment by default.
+Table stringification can be configured with some advanced options :
+
+- `options.spreadCell` : allows to customize spacing of cells (usually thanks to the `spread` command),
+   usual syntaxes are ` spread <dimension> ` (add `<dimension>` as spacing ) or ` to <dimension> ` (fix the overall width of table)
+   default value is ` spread 0pt ` (natural spacing)
+- `options.firstLineRowFont` : allows to customize the first line front (this is usefull when your tables have always first line as headers).
+   default value is `'\\rowfont[c]{\\bfseries}'` (a bolder policy, with a center align)
+- `options.defaultOtherLineRowFont` : allows to customize table front for all lines appart from the first.
+   default value is `'\\rowfont[l]{}'` (normal font, align left)
+- `headerParse` : a function that compute the "latex header" part of the table environment, this generate strings such as `|c|c|r|`
+  as an imput your receive an array of all the `tableRow` mdAST nodes for the table.
+  The default function extract the number of columns of each row and uses the `X[-1]` handler ("find the best available width").
+  The result for a 3 column-table is `|X[-1]|X[-1]|X[-1]|`
+
+
 ## Related
 
 *   [`rebber-plugins`][rebber-plugins]
