@@ -141,30 +141,49 @@ will stringify our example Markdown to `[inserted image located at "/foo.png"]` 
 
     () => ``,
 
-###### `options.table` 
+###### `options.table`
 
     (ctx, node) => ``,
 
-To ensure a flexible rendering, we use `longtabu` environment by default.
-Table stringification can be configured with some advanced options :
+To ensure a flexible rendering, `longtabu` environment is used by default.
+Table stringification can be configured with some advanced options:
 
-- `options.spreadCell` : allows to customize spacing of cells (usually thanks to the `spread` command),
-   usual syntaxes are ` spread <dimension> ` (add `<dimension>` as spacing ) or ` to <dimension> ` (fix the overall width of table)
-   default value is ` spread 0pt ` (natural spacing)
-- `options.firstLineRowFont` : allows to customize the first line front (this is usefull when your tables have always first line as headers).
-   default value is `'\\rowfont[c]{\\bfseries}'` (a bolder policy, with a center align)
-- `options.defaultOtherLineRowFont` : allows to customize table front for all lines appart from the first.
-   default value is `'\\rowfont[l]{}'` (normal font, align left)
-- `headerParse` : a function that compute the "latex header" part of the table environment, this generate strings such as `|c|c|r|`
-  as an imput your receive an array of all the `tableRow` mdAST nodes for the table.
-  The default function extract the number of columns of each row and uses the `X[-1]` handler ("find the best available width").
-  The result for a 3 column-table is `|X[-1]|X[-1]|X[-1]|`
+###### `options.spreadCell`
+
+` spread 0pt `
+
+Customize cells spacing (usually done using the `spread` command).
+Common commands are ` spread <dimension> ` (add `<dimension>` as spacing ) or ` to <dimension> ` (fix the overall width of table).
+Default value is ` spread 0pt ` (natural spacing).
+
+###### `options.firstLineRowFont`
+
+`'\\rowfont[c]{\\bfseries}'`
+
+Customize the first line font (this is useful when your tables always have a header as first line).
+Default value is `'\\rowfont[c]{\\bfseries}'` (bold, center aligned).
+
+###### `options.defaultOtherLineRowFont`
+
+`'\\rowfont[l]{}'`
+
+Customize table font for all lines except the first.
+Default value is `'\\rowfont[l]{}'` (normal font, left aligned).
+
+###### `options.headerParse: (tableRows) => ''`
+
+    (tableRows) => ''
+
+Cunction that computes the "latex header" part of the table environment, this generates strings such as `|c|c|r|`.
+It gets an array of all the `tableRow` [mdast] nodes for the table as argument.
+Default function extracts the number of columns for each row and uses the `X[-1]` handler ("find the best available width").
+The result for a 3 column-table is `|X[-1]|X[-1]|X[-1]|`.
 
 
 ## Related
 
 *   [`rebber-plugins`][rebber-plugins]
-    — A collection of rebber plugins able to stringify custom Remark node types.
+    - A collection of rebber plugins able to stringify custom Remark node types.
 
 ## License
 
