@@ -202,7 +202,7 @@ const opts = {
   extraRemarkPlugins: [
     {
       obj: remarkToc,
-      option: null /* remark plugin option. Null or omit to not configure it */,
+      option: undefined /* remark plugin option. undefined or omit to not configure it */,
       check: (config) => {
         /* 
          * This function allow to use this plugin only on certain cases. 
@@ -277,3 +277,17 @@ module.exports = {
     },
 }
 ```
+
+
+
+### Dev mode
+
+If you want a file watcher when you working zmarkdown, you can use `npm run watch:client`. You can run the client by openning `./public/index.html`.
+
+*Note: the current implementation (parallel-webpack) doesn't support hot-reload, so after each change, you should refresh your internet tab*.
+
+
+
+### Build for production
+
+To build for production, just run `npm run release`. Generated files are located in `./dist`.
