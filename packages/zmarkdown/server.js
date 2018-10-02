@@ -22,9 +22,12 @@ function getLatexProcessor (config) {
 function rendererFactory (config, target) {
   if (target === 'html') {
     return zmd.rendererFactory(config)
-  } else if (target === 'latex') {
+  }
+
+  if (target === 'latex') {
     return zmd.rendererFactory(config, getLatexProcessor)
   }
+
   throw new Error(`Unknown target: ${target}`)
 }
 
@@ -47,7 +50,7 @@ module.exports = (
   }
 
   if (target === 'latex') {
-    opts.remarkConfig.canUseTextr = false
+    opts.remarkConfig.enableTextr = false
   }
 
   zmd = zmarkdown(opts)

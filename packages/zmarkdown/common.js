@@ -67,11 +67,11 @@ const wrappers = {
   ],
 }
 
-const zmdParser = (config, extraRemarkPlugins) => {
+const zmdParser = (config, extraRemarkPlugins = []) => {
   const mdProcessor = unified()
     .use(remarkParse, config.reParse)
 
-  if (config.canUseTextr && !config.noTypography) {
+  if (config.enableTextr && !config.noTypography) {
     mdProcessor.use(remarkTextr, config.textr)
   }
 
@@ -121,14 +121,12 @@ const zmdParser = (config, extraRemarkPlugins) => {
       }
     })
 
-  if (extraRemarkPlugins && extraRemarkPlugins.length > 0) {
-    for (const record of extraRemarkPlugins) {
-      if (!record.check || record.check(config)) {
-        if (record.option) {
-          mdProcessor.use(record.obj, record.option)
-        } else {
-          mdProcessor.use(record.obj)
-        }
+  for (const record of extraRemarkPlugins) {
+    if (!record.check || record.check(config)) {
+      if (record.option) {
+        mdProcessor.use(record.obj, record.option)
+      } else {
+        mdProcessor.use(record.obj)
       }
     }
   }
@@ -213,7 +211,7 @@ module.exports = (
     opts = {}
   }
 
-  if (!opts.remarkConfig || (opts.remarkConfig === null) || !Object.keys(remarkConfig).length) {
+  if ((opts.remarkConfig === null) || !opts.remarkConfig || !Object.keys(remarkConfig).length) {
     opts.remarkConfig = clone(remarkConfig)
   }
 

@@ -29,7 +29,7 @@ const remarkConfig = {
     blocks: [],
   },
 
-  canUseTextr: true,
+  enableTextr: true,
   textr: {
     plugins: [
       textrApostrophes,
