@@ -1,4 +1,4 @@
-const common = require('../../common')
+const common = require('../common')
 
 let parser = common()
 

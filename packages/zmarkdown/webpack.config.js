@@ -29,7 +29,7 @@ module.exports = [
   }),
   Object.assign({}, defaultConf, {
     name: 'ZMarkdownZHTML',
-    entry: ['./plugins/client/zhtml'],
+    entry: ['./modules/zhtml'],
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'zmarkdown-zhtml.js',
@@ -38,7 +38,7 @@ module.exports = [
   }),
   Object.assign({}, defaultConf, {
     name: 'ZMarkdownZLatex',
-    entry: ['./plugins/client/zlatex'],
+    entry: ['./modules/zlatex'],
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'zmarkdown-zlatex.js',
