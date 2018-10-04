@@ -1,7 +1,7 @@
 const rebberStringify = require('rebber/src')
-const rebberConfig = require('../../config/rebber')
+const rebberConfig = require('../config/rebber')
 
-const common = require('../../common')
+const common = require('../common')
 
 let parser
 
