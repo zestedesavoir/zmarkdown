@@ -15,7 +15,7 @@ Split(['#center-top', '#center-bottom'], {
 ZMarkdown.use(ZMarkdownZHTML);
 ZMarkdown.use(ZMarkdownZLatex);
 
-ZMarkdown.setDefaultModule("zhtml");
+ZMarkdown.setDefaultModule('zhtml');
 
 const ansiUp = new AnsiUp()
 const editor = document.querySelector('#left-top > textarea')
@@ -50,7 +50,7 @@ function update () {
   ZMarkdown.render(editor.value).then((vFile) => {
     render.innerHTML = vFile.toString().trim()
     html.textContent = vFile.toString().trim()
-    buildSpoilers(render.querySelectorAll(".custom-block-spoiler"))
+    buildSpoilers(render.querySelectorAll('.custom-block-spoiler'))
   })
   ZMarkdown.render(editor.value, 'zlatex').then((vFile) => {
     latex.textContent = vFile.toString().trim()
