@@ -1,6 +1,6 @@
 {
   "name": "rebber-plugins",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Stringifies custom MDAST nodes to LaTeX",
   "repository": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rebber-plugins",
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
@@ -42,15 +42,15 @@
     "del-cli": "^1.0.0",
     "eslint": "^5.6.1",
     "jest": "^23.6.0",
-    "rebber": "^3.0.0",
-    "remark-abbr": "^1.2.0",
-    "remark-align": "^1.2.3",
-    "remark-captions": "^2.1.3",
-    "remark-emoticons": "^2.1.0",
-    "remark-grid-tables": "^1.1.0",
-    "remark-numbered-footnotes": "^1.0.7",
+    "rebber": "^3.1.0",
+    "remark-abbr": "^1.2.1",
+    "remark-align": "^1.2.4",
+    "remark-captions": "^2.1.4",
+    "remark-emoticons": "^2.1.1",
+    "remark-grid-tables": "^1.1.1",
+    "remark-numbered-footnotes": "^1.0.8",
     "remark-parse": "^5.0.0",
-    "remark-sub-super": "^1.0.14",
+    "remark-sub-super": "^1.0.15",
     "unified": "^7.0.0"
   }
 }

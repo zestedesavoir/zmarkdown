@@ -1,6 +1,6 @@
 {
   "name": "remark-custom-blocks",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-custom-blocks",
     "type": "git"
