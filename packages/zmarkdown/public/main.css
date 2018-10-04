@@ -17,6 +17,8 @@ body {
 /* Editor style */
 
 .editor {
+  font-family: monospace;
+  font-size: 14px;
   border: 0;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
