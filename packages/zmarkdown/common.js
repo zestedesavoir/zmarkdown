@@ -123,7 +123,7 @@ const zmdParser = (config, extraRemarkPlugins = []) => {
 
   for (const record of extraRemarkPlugins) {
     if (!record.check || record.check(config)) {
-      if (record.option) {
+      if (typeof record.option !== 'undefined') {
         mdProcessor.use(record.obj, record.option)
       } else {
         mdProcessor.use(record.obj)
@@ -211,7 +211,7 @@ module.exports = (
     opts = {}
   }
 
-  if ((opts.remarkConfig === null) || !opts.remarkConfig || !Object.keys(remarkConfig).length) {
+  if (!opts.remarkConfig || !Object.keys(opts.remarkConfig).length) {
     opts.remarkConfig = clone(remarkConfig)
   }
 

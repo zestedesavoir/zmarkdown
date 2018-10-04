@@ -202,7 +202,7 @@ const opts = {
   extraRemarkPlugins: [
     {
       obj: remarkToc,
-      option: null /* remark plugin option. Null or omit to not configure it */,
+      option: undefined /* remark plugin option. undefined or omit to not configure it */,
       check: (config) => {
         /* 
          * This function allow to use this plugin only on certain cases. 
