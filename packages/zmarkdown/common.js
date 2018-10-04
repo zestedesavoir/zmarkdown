@@ -122,9 +122,7 @@ const zmdParser = (config, extraRemarkPlugins = []) => {
     })
 
   for (const record of extraRemarkPlugins) {
-    if (!record.check || record.check(config)) {
-      mdProcessor.use(record.obj, record.option)
-    }
+    mdProcessor.use(record.obj, record.option)
   }
 
   return mdProcessor

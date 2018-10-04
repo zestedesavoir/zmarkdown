@@ -178,7 +178,6 @@ You can start a module with a base parser using `./common.js` (see `./modules/zh
   - **extraRemarkPlugins**: `Array<objects>`, remark plugins you want to add to the default parser (remark pipeline). The object should contain:
     - **obj**: `remark plugin`.
     - **option**: optional, plugin config.
-    - **check**: `function(config)` optional, a function that receives your `remarkConfig` (or the default one) and returns whether to enable this plugin or not. If omitted, the default is not to disable.
 - **processor**: `function(config)` (defaults to `getHTMLProcessor` of `./common.js`), processor function used to configure the remark pipeline for your output
 
 ### Module Example
@@ -193,15 +192,7 @@ const opts = {
   extraRemarkPlugins: [
     {
       obj: remarkToc,
-      option: undefined /* remark plugin option, undefined or omit to not configure it */,
-      check: (config) => {
-        /*
-         * This function receives this object's `opts.remarkConfig`,
-         * returning `false` will disable this extra remark plugin.
-         * If `check` is not defined, the default is not to disable.
-         */
-        return true
-      },
+      option: undefined /* remark plugin option, undefined or omit to not configure it */
     },
     …
   ],
