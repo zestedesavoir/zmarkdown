@@ -143,80 +143,67 @@ Only `metadata` is described in the **Response** sections below.
 
   This endpoint only returns `{}` as metadata, i.e. an empty object.
 
-
-
-[ping]: https://www.npmjs.com/package/remark-ping
-[iframes]: https://www.npmjs.com/package/remark-iframes
-
-
-
 ## Client Architecture
 
-The architecture of the client is similar to `remark` or `Vue`. The *manager*, here `client/client.js`, exposes the variable `ZMarkdown`. This *manager* doesn't work alone because it does not know how to convert the input to the desired output. Example, if you want to convert markdown to html, the *manager* doesn't know how to do this. It need modules to know how to do this.
+The architecture of the client is similar to `remark` or `Vue`. The *manager*, here `client/client.js`, exposes a global variable `ZMarkdown`. This *manager* doesn't work alone because it does not know how to convert the input to the desired output. Example, if you want to convert markdown to html, the *manager* doesn't know how to do this. It need modules to know how to do this.
 
 ### Manager
 
 You need to add modules with `ZMarkdown.use(obj)` to manage rendering.
 
-To convert a markdown string you should use `ZMarkdown.render(str, moduleName = null, cb = null)`:
+To convert a markdown string you should use `ZMarkdown.render(str, moduleName = defaultModule, cb = undefined)`:
 - **str**: `string`, string to convert
-- **moduleName**: `string`, name of the module you want to use. This parameter can be **omitted only** if you define a default module with `ZMarkdown.setDefaultModule` (you can reset default type with `ZMarkdown.resetDefaultModule`)
+- **moduleName**: `string`, name of the module you want to use. This parameter can be **omitted only** if you define a default module with `ZMarkdown.setDefaultModule` (you can reset default module with `ZMarkdown.resetDefaultModule`)
 - **cb**: `function(err, vfile)`, called when process is done
 
-This function return a `Promise` if no callback specified.
+This function returns a `Promise` if no callback specified.
 
-`ZMarkdown` have also a `parse(moduleName)` function to get the MDAST tree and `getParser(moduleName)` to get the whole parser. This parameter can be **omitted only** if you define a default module with `ZMarkdown.setDefaultModule`.
+`ZMarkdown` also has a `parse(moduleName)` function to get the MDAST tree and `getParser(moduleName)` to get the whole parser. This parameter can be **omitted only** if you define a default module with `ZMarkdown.setDefaultModule`.
 
 ### Module
 
-The module is an object that should have the following properties:
+A module is an object with the following properties:
 
-- **name**: `string`, a string that define the name of the plugin. This is used to identify each plugins
-- **render**: `function(input, cb): void`, a function called in `ZMarkdown.render`. It returns a `Promise` if no callback specified
-- **parse**: `function(input): object`, get MDAST tree
-- **getParser**: `function(): object`, get the whole of parser
-- **initialize**: `function(config)`, configure the module with a custom configuration. You do not have to call this function if you want to use the default configuration 
+- **name**: `string`, module name used to identify each module.
+- **render**: `function(input, cb): void`, a function called by `ZMarkdown.render`. It returns a `Promise` if no callback specified.
+- **parse**: `function(input): object`, gets MDAST tree.
+- **getParser**: `function(): object`, gets the whole of parser.
+- **initialize**: `function(config)`, configure the module with a custom configuration. You do not have to call this function if you want to use the default configuration.
 
 ### Tips
 
-You can start a module with a base parser using `./common.js`. The module exports a function that can take two optionals parameters:
-- **opts**: an object that can have: 
-  - **remarkConfig**: `object` , your remark config (defaults to the configuration from `config/remark`)
-  - **extraRemarkPlugins**: `array of objects`, remark plugins you want to add to the default parser (remark pipeline). The object should contain:
-    - **obj**: `remark plugin`
-    - **option**: optional, option of the plugin
-    - **check**: `function(config)` optional, a function that returns a boolean to use this plugin depending to remark config passing in argument of `common`
-- **processor**: `function(config)` (default `getHTMLProcessor` of `./common.js`), processor function used to configure the remark pipeline for you output
+You can start a module with a base parser using `./common.js` (see `./modules/zhtml.js` for instance). The module exports a function that can take two optionals parameters:
+- **opts**: an object that can have:
+  - **remarkConfig**: `object`, your remark config (defaults to the configuration from `config/remark.js`).
+  - **extraRemarkPlugins**: `Array<objects>`, remark plugins you want to add to the default parser (remark pipeline). The object should contain:
+    - **obj**: `remark plugin`.
+    - **option**: optional, plugin config.
+    - **check**: `function(config)` optional, a function that receives your `remarkConfig` (or the default one) and returns whether to enable this plugin or not. If omitted, the default is not to disable.
+- **processor**: `function(config)` (defaults to `getHTMLProcessor` of `./common.js`), processor function used to configure the remark pipeline for your output
 
-
-
-Module example:
+### Module Example
 
 ```js
-const common = require('../../common') /* zmarkdown common file */
+const common = require('zmarkdown/modules/common') /* zmarkdown common file */
 const remarkToc = require('remark-toc')
 const remark2rehype = require('remark-rehype')
 
 const opts = {
-  remarkConfig: null /* custom remark config. Null or omit to use default conf */,
+  remarkConfig: undefined /* custom remark config, defaults to ./config/remark.js */,
   extraRemarkPlugins: [
     {
       obj: remarkToc,
-      option: undefined /* remark plugin option. undefined or omit to not configure it */,
+      option: undefined /* remark plugin option, undefined or omit to not configure it */,
       check: (config) => {
-        /* 
-         * This function allow to use this plugin only on certain cases. 
-         * The config passed in argument are remark config.
-         *
-         * Note: This config are the config passed in opts when 
-         * instancing common. Common make a clone of this conf, thereby
-         * any update make after instancing common will not apear.
-         * For example, the "noTypography" define in processor function
-         * below not appear in this conf.
+        /*
+         * This function receives this object's `opts.remarkConfig`,
+         * returning `false` will disable this extra remark plugin.
+         * If `check` is not defined, the default is not to disable.
          */
         return true
       },
     },
+    …
   ],
 }
 
@@ -244,11 +231,7 @@ export function getParser () {
 export const name = 'custom-html'
 ```
 
-
-
-Modules need to be bundled for used on the client.
-
-Here is a webpack conf of the previous example:
+Modules need to be bundled, here is a webpack config for the previous example:
 
 ```js
 const path = require('path')
@@ -258,11 +241,11 @@ const mode = process.env.NODE_ENV ? process.env.NODE_ENV : 'production'
 module.exports = {
     mode,
     name: 'ZMarkdownCustomHTML', // name of process if you use parallel-webpack
-    entry: ['./plugins/client/custom-html'], // path to your module
+    entry: ['./modules/custom-html'], // path to your module
     output: {
       path: path.resolve(__dirname, 'dist'), // destination folder
       filename: 'custom-html.js', // file name
-      library: 'ZMarkdownCustomHTML', // Name of the global constant for dom access
+      library: 'ZMarkdownCustomHTML', // Name of the object that will be available on the `window` global object
     },
     module: {
         rules: [
@@ -278,16 +261,15 @@ module.exports = {
 }
 ```
 
+### Dev build
 
+If you want to watch the local files while working zmarkdown, you can use `npm run watch:client`. Run the client by opening `./public/index.html`.
 
-### Dev mode
+*Note: the current implementation (parallel-webpack) doesn't support hot-reload, you will have to manually refresh the webpage after each change*.
 
-If you want a file watcher when you working zmarkdown, you can use `npm run watch:client`. You can run the client by openning `./public/index.html`.
-
-*Note: the current implementation (parallel-webpack) doesn't support hot-reload, so after each change, you should refresh your internet tab*.
-
-
-
-### Build for production
+### Production build
 
 To build for production, just run `npm run release`. Generated files are located in `./dist`.
+
+[ping]: https://www.npmjs.com/package/remark-ping
+[iframes]: https://www.npmjs.com/package/remark-iframes
