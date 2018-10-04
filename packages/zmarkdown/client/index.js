@@ -3,14 +3,14 @@ import dedent from 'dedent'
 export const modules = {}
 export let defaultType
 
-function checkValidModule (moduleName) {
+function validateModule (moduleName) {
   if (modules.length === 0) {
     throw new Error('No module available.')
   }
 
   if (!moduleName && !defaultType) {
     if (!moduleName || typeof moduleName !== 'string') {
-      throw new Error(dedent`Bad type for parameter 'moduleName'. 
+      throw new Error(dedent`Bad type for parameter 'moduleName'.
       Expected 'string' but was: ${typeof moduleName}`)
     }
     throw new Error('This function expects to be called with ' +
@@ -90,7 +90,7 @@ export function render (str, moduleName = null, cb = null) {
 }
 
 export function parse (str, moduleName = null) {
-  checkValidModule(moduleName)
+  validateModule(moduleName)
 
   if (!moduleName) {
     moduleName = defaultType
@@ -100,7 +100,7 @@ export function parse (str, moduleName = null) {
 }
 
 export function getParser (moduleName = null) {
-  checkValidModule(moduleName)
+  validateModule(moduleName)
 
   if (!moduleName) {
     moduleName = defaultType
