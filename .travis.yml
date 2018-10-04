@@ -12,10 +12,10 @@ node_js:
   - '10'
 
 env:
-  - DEST=/tmp
-  global: 
-    secure: V3Wlrzc7mpyVxNxeBPMkfyowycurM2OmkTTc3aeUkRjrdltRNfknudhC2OELSpsfMvUTLLSPW/oMfv+jxgVHOydVIsBbN+lB0jKnm/T+ABfUeDw+tpEEvKvKLtD/uxDB3rC83uD9ociE82PqdGYtBOJX4Sug5bdoq8n02DlsGd1dnsr1dIdIIX0LHp4OkfRF6jv0EyXwSHK7Kk6s/miPtuChHrhJQwsjJBu5YPdSEu+f0mzilEO5NUiv4hT1IWjfBravP6uTyWIUcwtfY1rgmjZy3d+MaCRKbLi4hrzrIa/VL/rX9fg8vN6Jgnt1+kJtPB7Y0yH2tcl0tpeRWW2ppBZOUU2rJ5OWA8TKltZZW7zjQgrdrwNns0+8ifZ7AI/Jdfvfj0NjW/SqsxchLQL2uN0FsBkoUV6Ly4cwZ/B5EIFTdi0qnjcYBdHoXE21j81clk0rKdgiof/lGOL4+bA59O7V88AEOmgGshRF1AUbe1SwBQ6l8+w44ZDg7I9OQfNSf/W07NbT4cwSF+xp4nc0Rw0EzHnfHLxdYv0Dj+1GxAQdtJ22wmN5JFKlENsfslC6bHT2ZN2V5U0K2VqCBdh0iNdV/uV9tdy3GCSnO3W2XuBKtDbo+wrLf8rjIubWwupej8JxR+pPJ10KNJN5rhe/pqIRujr5FxUZJG7mll9w9Ws=
-
+  matrix:
+    - DEST=/tmp
+  global:
+    secure: NA4sxCBxsNmOmnZG4HVPKJxeFpcsurt9l0EF6z2Vf6pInCTvaXJ+EdC5m1BdmWAp2ta6A4PSZh0NO1X5bdWfIGYHYD13fu77V6ZglkZ1LNsaTxhWLuXJ7BJta/hZWdT9u8zYGihCBo7Q2MXi3dbdhHbyrb/C2/1nBnTy68wPdtx73yXTHd+n7MGe9N8/4crwOZlVIiGZt2RwlCThcQxl3L6atNWg0UHFTZbOsuGeeMEF/F+nILLDo4gv85jeQ8TRb5AYn/DyggZAOkMcwCnp8gcQBrZxFpY5SIfsKTG1h3Tw3Kr9w537MWgXf9bwZeB+PfEhWKVG11ARwcryJc4Oat4tqsiBfBACIaNQFjbc+h68XM91N0FK4CAnautubU9TjUdkMV2mqbSUh8CB+epDS/1B8G/1f22QvcWLxtdDp/oSGUm2byBvqIdMxRImjzUyzHi6rJ6DDqIMMaa6ztjJS2KG+VLXY2ncSXOOSzdZPOkhD0ggM2Mz3yGePAqe0LNosRRvb/PNRFkeW+wtZbLSDuIOFuPOzORVAmjlaCKM1320zuY6qOhVbrdX6CzXCC/4Wfeyuy/9iRVhDm/m6iSqgyBQv/Nd/utIMk2mQAKhzR25Bi9e9UBGCA/ydViFLT0jrspS/R2ImrC2sS50OujEwcNwQGFW8rY9GJj4FKKK8ks=
 
 before_install:
   - npm install -g pm2
@@ -29,8 +29,9 @@ before_script:
 
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-  - rm ./packages/zmarkdown/public/js
-  - cp ./packages/zmarkdown/dist/* ./packages/zmarkdown/public/js/
+  - cd ./packages/zmarkdown && npm run release
+  - rm ./public/js
+  - cp -r ./dist ./public/js
 
 deploy:
   provider: pages
