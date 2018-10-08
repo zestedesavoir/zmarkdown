@@ -34,7 +34,17 @@ exports[`pedantic mode disabled unordered lists markers 1`] = `
 </ul>"
 `;
 
+exports[`smileys translates :>_<: 1`] = `"<p>This is funny <img src=\\"/static/smileys/pinch.png\\" alt=\\":>_<:\\" class=\\"smiley\\"></p>"`;
+
+exports[`smileys translates :>_<: at the beginning of the paragraph 1`] = `"<p><img src=\\"/static/smileys/pinch.png\\" alt=\\":>_<:\\" class=\\"smiley\\"></p>"`;
+
 exports[`smileys translates >_< 1`] = `"<p>This is funny <img src=\\"/static/smileys/pinch.png\\" alt=\\">_<\\" class=\\"smiley\\"></p>"`;
+
+exports[`smileys translates >_< at the beginning of the paragraph 1`] = `
+"<blockquote>
+<p>_&#x3C;</p>
+</blockquote>"
+`;
 
 exports[`smileys translates X/ 1`] = `"<p>This is funny <img src=\\"/static/smileys/pinch.png\\" alt=\\"X/\\" class=\\"smiley\\"></p>"`;
 

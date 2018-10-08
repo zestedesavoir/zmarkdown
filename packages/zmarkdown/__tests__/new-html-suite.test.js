@@ -228,6 +228,24 @@ describe('smileys', () => {
     return expect(renderString(input)).resolves.toMatchSnapshot()
   })
 
+  it(`translates :>_<:`, () => {
+    const input = 'This is funny :>_<:'
+
+    return expect(renderString(input)).resolves.toMatchSnapshot()
+  })
+
+  it(`translates >_< at the beginning of the paragraph`, () => {
+    const input = '>_<'
+
+    return expect(renderString(input)).resolves.toMatchSnapshot()
+  })
+
+  it(`translates :>_<: at the beginning of the paragraph`, () => {
+    const input = ':>_<:'
+
+    return expect(renderString(input)).resolves.toMatchSnapshot()
+  })
+
   it(`translates X/`, () => {
     const input = 'This is funny X/'
 
