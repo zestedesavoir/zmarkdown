@@ -271,18 +271,20 @@ function computeColumnStartingPositions(lines) {
 
 function extractTable(value, eat, tokenizer) {
   // Extract lines before the grid table
-  var possibleGridTable = value.split('\n').map(function (line) {
-    return trimEnd(line);
-  });
+  var markdownLines = value.split('\n');
 
   var i = 0;
   var before = [];
-  for (; i < possibleGridTable.length; i++) {
-    var line = possibleGridTable[i];
+  for (; i < markdownLines.length; i++) {
+    var line = markdownLines[i];
     if (isSeparationLine(line)) break;
     if (line.length === 0) break;
     before.push(line);
   }
+
+  var possibleGridTable = markdownLines.map(function (line) {
+    return trimEnd(line);
+  });
 
   // Extract table
   if (!possibleGridTable[i + 1]) return [null, null, null, null];
