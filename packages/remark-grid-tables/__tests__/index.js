@@ -89,6 +89,29 @@ test('regression: should be parsed with two spaces on last line', () => {
   expect(contents).toBe(base)
 })
 
+test('regression: should not crash with leading space', () => {
+  const {contents: base} = render(dedent`
+    ax
+    +---+
+    | b |
+    +---+
+
+    hello
+    `)
+
+  const {contents} = render(dedent`
+    a·
+    +---+
+    | b |
+    +---+
+
+    hello
+    `.replace(/·/g, ' '))
+
+  expect(contents).toBe(base.replace('x', ' '))
+})
+
+
 test('stringify', () => {
   const fileExample = file(join(__dirname, 'grid-tables.md'))
   const {contents} = render(fileExample)
