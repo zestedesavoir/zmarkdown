@@ -28,7 +28,7 @@
     "rehype-footnotes-title": "file:../rehype-footnotes-title",
     "rehype-highlight": "^2.2.0",
     "rehype-html-blocks": "file:../rehype-html-blocks",
-    "rehype-katex": "1.1.0",
+    "rehype-katex": "^1.2.0",
     "rehype-postfix-footnote-anchors": "file:../rehype-postfix-footnote-anchors",
     "rehype-slug": "^2.0.1",
     "rehype-stringify": "^4.0.0",
