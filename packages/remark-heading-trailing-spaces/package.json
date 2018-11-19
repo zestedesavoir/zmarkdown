@@ -30,20 +30,5 @@
   "keywords": [
     "remark"
   ],
-  "license": "MIT",
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-jest": "^23.4.0",
-    "babel-preset-env": "^1.7.0",
-    "cross-env": "^5.2.0",
-    "dedent": "^0.7.0",
-    "del-cli": "^1.0.0",
-    "eslint": "^5.9.0",
-    "jest": "^23.6.0",
-    "mdast-util-to-hast": "3.0.2",
-    "rehype-stringify": "^4.0.0",
-    "remark-parse": "^5.0.0",
-    "remark-rehype": "^3.0.0",
-    "unified": "^7.0.0"
-  }
+  "license": "MIT"
 }

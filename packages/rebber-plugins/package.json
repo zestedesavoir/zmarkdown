@@ -34,23 +34,13 @@
     "xtend": "^4.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-jest": "^23.4.0",
-    "babel-preset-env": "^1.7.0",
-    "cross-env": "^5.2.0",
-    "dedent": "^0.7.0",
-    "del-cli": "^1.0.0",
-    "eslint": "^5.9.0",
-    "jest": "^23.6.0",
-    "rebber": "^3.1.0",
-    "remark-abbr": "^1.2.1",
-    "remark-align": "^1.2.4",
-    "remark-captions": "^2.1.4",
-    "remark-emoticons": "^2.1.1",
-    "remark-grid-tables": "^1.1.1",
-    "remark-numbered-footnotes": "^1.0.8",
-    "remark-parse": "^5.0.0",
-    "remark-sub-super": "^1.0.15",
-    "unified": "^7.0.0"
+    "rebber": "file:../rebber",
+    "remark-abbr": "file:../remark-abbr",
+    "remark-align": "file:../remark-align",
+    "remark-captions": "file:../remark-captions",
+    "remark-emoticons": "file:../remark-emoticons",
+    "remark-grid-tables": "file:../remark-grid-tables",
+    "remark-numbered-footnotes": "file:../remark-numbered-footnotes",
+    "remark-sub-super": "file:../remark-sub-super"
   }
 }
