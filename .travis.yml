@@ -21,7 +21,6 @@ before_install:
   - npm install -g pm2
 
 install:
-  - npm install
   - npm run bootstrap
 
 before_script:
@@ -29,8 +28,8 @@ before_script:
 
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-  - cd ./packages/zmarkdown && npm run release
-  - rm ./public/js
+  - lerna run release --scope zmarkdown
+  - cd ./packages/zmarkdown && rm ./public/js
   - cp -r ./dist ./public/js
 
 deploy:
