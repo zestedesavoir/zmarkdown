@@ -1,6 +1,6 @@
 {
   "name": "remark-ping",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-ping",
     "type": "git"

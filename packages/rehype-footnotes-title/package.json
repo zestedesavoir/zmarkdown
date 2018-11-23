@@ -1,6 +1,6 @@
 {
   "name": "rehype-footnotes-title",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rehype-footnotes-title",
     "type": "git"
