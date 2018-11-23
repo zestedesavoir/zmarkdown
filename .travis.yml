@@ -28,9 +28,7 @@ before_script:
 
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-  - lerna run release --scope zmarkdown
-  - cd ./packages/zmarkdown && rm ./public/js
-  - cp -r ./dist ./public/js
+  - npm run build-demo
 
 deploy:
   provider: pages
