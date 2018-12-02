@@ -155,3 +155,15 @@ it('does not parse words containing abbr', () => {
 
   expect(contents).not.toContain('<abbr')
 })
+
+it('does not break with references in their own paragraphs', () => {
+  const {contents} = render(dedent`
+    Here is a test featuring abc and def
+
+    *[abc]: A B C
+
+    *[def]: D E F
+  `)
+
+  expect(contents).toMatchSnapshot()
+})
