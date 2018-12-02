@@ -33,11 +33,20 @@ function plugin () {
 
   function transformer (tree) {
     const abbrs = {}
-    visit(tree, 'paragraph', find(abbrs))
+    const emptyParagraphsToRemove = new Map()
+
+    visit(tree, 'paragraph', find(abbrs, emptyParagraphsToRemove))
+    emptyParagraphsToRemove.forEach((indices, key) => {
+      indices.reverse()
+      indices.forEach((index) => {
+        key.children.splice(index, 1)
+      })
+    })
+
     visit(tree, replace(abbrs))
   }
 
-  function find (abbrs) {
+  function find (abbrs, emptyParagraphsToRemove) {
     return function one (node, index, parent) {
       for (let i = 0; i < node.children.length; i++) {
         const child = node.children[i]
@@ -47,8 +56,12 @@ function plugin () {
         node.children.splice(i, 1)
         i -= 1
       }
-      // Remove paragraph if there is no child
-      if (node.children.length === 0) parent.children.splice(index, 1)
+      // Keep track of empty paragraphs to remove
+      if (node.children.length === 0) {
+        const indices = emptyParagraphsToRemove.get(parent) || []
+        indices.push(index)
+        emptyParagraphsToRemove.set(parent, indices)
+      }
     }
   }
 

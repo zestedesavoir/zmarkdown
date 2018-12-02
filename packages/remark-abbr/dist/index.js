@@ -38,11 +38,20 @@ function plugin() {
 
   function transformer(tree) {
     var abbrs = {};
-    visit(tree, 'paragraph', find(abbrs));
+    var emptyParagraphsToRemove = new Map();
+
+    visit(tree, 'paragraph', find(abbrs, emptyParagraphsToRemove));
+    emptyParagraphsToRemove.forEach(function (indices, key) {
+      indices.reverse();
+      indices.forEach(function (index) {
+        key.children.splice(index, 1);
+      });
+    });
+
     visit(tree, replace(abbrs));
   }
 
-  function find(abbrs) {
+  function find(abbrs, emptyParagraphsToRemove) {
     return function one(node, index, parent) {
       for (var i = 0; i < node.children.length; i++) {
         var child = node.children[i];
@@ -52,8 +61,12 @@ function plugin() {
         node.children.splice(i, 1);
         i -= 1;
       }
-      // Remove paragraph if there is no child
-      if (node.children.length === 0) parent.children.splice(index, 1);
+      // Keep track of empty paragraphs to remove
+      if (node.children.length === 0) {
+        var indices = emptyParagraphsToRemove.get(parent) || [];
+        indices.push(index);
+        emptyParagraphsToRemove.set(parent, indices);
+      }
     };
   }
 
