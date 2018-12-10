@@ -2,60 +2,93 @@ const fileType = require('file-type')
 const fs = require('fs')
 const isSvg = require('is-svg')
 const path = require('path')
-const request = require('request')
+const {promisify} = require('util')
+const http = require('http')
+const https = require('https')
 const shortid = require('shortid')
 const URL = require('url')
 const visit = require('unist-util-visit')
 const rimraf = require('rimraf')
+const {Transform} = require('stream')
 
-const noop = Promise.resolve()
-
-const isImage = (headers = {}) =>
-  (headers['content-type'].substring(0, 6) === 'image/')
+const isImage = (headers) => {
+  return (headers['content-type'].substring(0, 6) === 'image/')
+}
 
 const getSize = (headers = {}) =>
   parseInt(headers['content-length'], 10)
 
 const mkdir = (path) => new Promise((resolve, reject) => {
-  fs.stat(path, (err, stats) => {
-    if (err) {
-      return fs.mkdir(path, (err) => {
-        if (err) reject(new Error(`Failed to create dir ${path}`))
-        resolve()
-      })
-    }
-
-    if (!stats.isDirectory()) {
-      reject(new Error(`${path} is not a directory!`))
-    }
-
+  fs.mkdir(path, (err) => {
+    if (err) reject(new Error(`Failed to create dir ${path}`))
     resolve()
   })
 })
 
-const checkAndCopy = (from, to) =>
-  new Promise((resolve, reject) => {
-    fs.readFile(from, (err, data) => {
-      if (err) reject(err)
-      if (!data) {
-        return reject(new Error(`Empty file: ${from}`))
-      }
-      const type = fileType(data) || {mime: ''}
-      if (!type.mime || type.mime === 'application/xml') {
-        if (!isSvg(data)) {
-          return reject(new Error(`Could not detect ${from} mime type, not SVG either`))
-        }
-      } else if (type.mime.slice(0, 6) !== 'image/') {
-        return reject(new Error(
-          `Detected mime of local file '${from}' is not an image/ type`))
-      }
-      fs.copyFile(from, to, (err) => {
-        if (err) return reject(new Error(`Failed to copy ${from} to ${to}`))
+const checkFileType = (name, data) => {
+  if (!data.length) {
+    throw new Error(`Empty file: ${name}`)
+  }
 
-        resolve()
-      })
-    })
+  const type = fileType(data) || {mime: ''}
+  if (!type.mime || type.mime === 'application/xml') {
+    if (!isSvg(data.toString())) {
+      throw new Error(`Could not detect ${name} mime type, not SVG either`)
+    }
+  } else if (type.mime.slice(0, 6) !== 'image/') {
+    throw new Error(
+      `Detected mime of local file '${name}' is not an image/ type`)
+  }
+}
+
+// Creates a Transform stream which raises an error if the file type
+// is wrong or if the file is not a image.
+const makeValidatorStream = (fileName, maxSize) => {
+  let firstChunk = true
+  let totalSize = 0
+
+  return new Transform({
+    flush (cb) {
+      if (totalSize === 0) {
+        cb(new Error(`File at ${fileName} is empty`))
+        return
+      }
+      cb(null)
+    },
+
+    transform (chunk, encoding, cb) {
+      totalSize += chunk.length
+
+      if (maxSize && maxSize < totalSize) {
+        cb(new Error(`File at ${fileName} weighs more than ${maxSize}`))
+        return
+      }
+
+      if (firstChunk) {
+        try {
+          checkFileType(fileName, chunk)
+        } catch (error) {
+          cb(error)
+          return
+        }
+      }
+
+      firstChunk = false
+
+      cb(null, chunk)
+    },
   })
+}
+
+const checkAndCopy = async (from, to) => {
+  const data = await promisify(fs.readFile)(from)
+  checkFileType(from, data)
+  try {
+    await promisify(fs.copyFile)(from, to)
+  } catch (err) {
+    throw new Error(`Failed to copy ${from} to ${to}`)
+  }
+}
 
 function plugin ({
   disabled = false,
@@ -63,151 +96,236 @@ function plugin ({
   dirSizeLimit = 10000000,
   downloadDestination = '/tmp',
   localUrlToLocalPath,
+  httpRequestTimeout = 2000, // in milliseconds
 } = {}) {
-  return function transform (tree, vfile) {
-    if (disabled) return noop
-    let totalDownloadedSize
+
+  // Sends an HTTP request, checks headers and resolves a readable stream
+  // if headers are valid.
+  // Rejects with an error if headers are invalid.
+  const initDownload = url =>
+    new Promise((resolve, reject) => {
+      const parsedUrl = URL.parse(url)
+      const proto = parsedUrl.protocol === 'https:' ? https : http
+
+      const options = Object.assign(
+        {},
+        parsedUrl,
+        {timeout: httpRequestTimeout}
+      )
+
+      const req = proto.get(options, res => {
+        const {headers, statusCode} = res
+        let error
+
+        const fileSize = getSize(headers)
+
+        if (statusCode !== 200) {
+          error = new Error(`Received HTTP${statusCode} for: ${url}`)
+        } else if (!isImage(headers)) {
+          error = new Error(`Content-Type of ${url} is not an image/ type`)
+        } else if (maxFileSize && fileSize > maxFileSize) {
+          error = new Error(
+            `File at ${url} weighs ${headers['content-length']}, ` +
+            `max size is ${maxFileSize}`
+          )
+        }
+
+        if (error) {
+          req.abort()
+          res.resume()
+          reject(error)
+          return
+        }
+
+        resolve(res)
+      })
+
+      req.on('timeout', () => {
+        req.abort()
+        reject(new Error(`Request for ${url} timed out`))
+      })
+
+      req.on('error', err => reject(err))
+    })
+
+
+  const downloadAndSave = (node, sourceUrl, httpResponse, destinationPath) =>
+    new Promise((resolve, reject) =>
+      httpResponse
+        .on('error', function (error) {
+          reject(error)
+          httpResponse.destroy(error)
+        })
+        .pipe(makeValidatorStream(sourceUrl, maxFileSize))
+        .on('error', function (error) {
+          reject(error)
+          httpResponse.destroy(error)
+        })
+        .pipe(fs.createWriteStream(destinationPath))
+        .on('error', function (error) {
+          reject(error)
+          httpResponse.destroy(error)
+        })
+        .on('close', e => {
+          resolve()
+        })
+    )
+
+  const doDownloadTasks = async tasks => {
+    await Promise.all(tasks.map(task =>
+      initDownload(task.url).then(
+        res => { task.res = res },
+        error => { task.error = error }
+      )
+    ))
+
+    if (dirSizeLimit) {
+      let totalSize = 0
+      for (const task of tasks) {
+        if (task.error) {
+          continue
+        }
+
+        const fileSize = getSize(task.res.headers)
+        if ((totalSize + fileSize) >= dirSizeLimit) {
+          const e = new Error(`Cannot download ${task.url} because destination ` +
+            'directory reached size limit')
+          task.error = e
+          task.res.destroy(e)
+        } else {
+          totalSize += fileSize
+        }
+      }
+    }
+
+    await Promise.all(tasks.map(task => {
+      if (!task.error) {
+        return downloadAndSave(task.node, task.url, task.res, task.destination)
+          .catch(error => { task.error = error })
+      }
+    }))
+  }
+
+  const doLocalCopyTasks = tasks =>
+    Promise.all(tasks.map(task => {
+      if (task.localSourcePath.includes('../')) {
+        task.error = new Error(`Dangerous absolute image URL detected: ${task.localSourcePath}`)
+        return
+      }
+
+      return checkAndCopy(task.localSourcePath, task.destination)
+        .catch(error => { task.error = error })
+    }))
+
+  return async function transform (tree, vfile) {
+    if (disabled) return
 
     // images are downloaded to destinationPath
     const destinationPath = path.join(downloadDestination, shortid.generate())
 
-    return mkdir(destinationPath)
-      .then(() => {
-        totalDownloadedSize = 0
-        const promises = []
+    let downloadTasks = []
+    let localCopyTasks = []
 
-        visit(tree, 'image', (node) => {
-          const {url, position} = node
-          let parsedURI
-          try {
-            parsedURI = URL.parse(url)
-          } catch (error) {
-            vfile.message(`Invalid URL: ${url}`, position, url)
-            return
-          }
+    visit(tree, 'image', async node => {
+      const {url, position} = node
+      let parsedURI
+      try {
+        parsedURI = URL.parse(url)
+      } catch (error) {
+        vfile.message(`Invalid URL: ${url}`, position, url)
+        return
+      }
 
-          const extension = path.extname(parsedURI.pathname)
-          const filename = `${shortid.generate()}${extension}`
-          const destination = path.join(destinationPath, filename)
+      const extension = path.extname(parsedURI.pathname)
+      const filename = `${shortid.generate()}${extension}`
+      const destination = path.join(destinationPath, filename)
 
-          if (!parsedURI.host) {
-            let localPath
-            if (typeof localUrlToLocalPath === 'function') {
-              localPath = localUrlToLocalPath(url)
-            } else if (Array.isArray(localUrlToLocalPath) && localUrlToLocalPath.length === 2) {
-              const [from, to] = localUrlToLocalPath
-              localPath = url.replace(new RegExp(`^${from}`), to)
-            } else {
-              return
-            }
-
-            if (localPath.includes('../')) {
-              vfile.message(`Dangerous absolute image URL detected: ${localPath}`, position, url)
-              return
-            }
-
-            const promise = checkAndCopy(localPath, destination)
-              .then(() => {
-                node.url = destination
-              }, (err) => {
-                vfile.message(err, position, url)
-              })
-
-            promises.push({offset: position.offset, promise: promise})
-            return
-          }
-
-          const promise = new Promise((resolve, reject) => {
-            if (!['http:', 'https:'].includes(parsedURI.protocol)) {
-              reject(`Protocol '${parsedURI.protocol}' not allowed.`)
-            }
-
-            const writeStream = (destination) => {
-              return fs
-                .createWriteStream(destination)
-                .on('close', () => {
-                  node.url = destination
-                  resolve()
-                })
-            }
-
-            request
-              .get(url, (err) => {
-                if (err) reject(err)
-              })
-              .on('response', ({headers, statusCode} = {}) => {
-                if (statusCode !== 200) {
-                  reject(new Error(`Received HTTP${statusCode} for: ${url}`))
-                }
-                if (!isImage(headers)) {
-                  reject(new Error(`Content-Type of ${url} is not an image/ type`))
-                }
-
-                const fileSize = getSize(headers)
-                if (maxFileSize && fileSize > maxFileSize) {
-                  reject(new Error(
-                    `File at ${url} weighs ${headers['content-length']}, ` +
-                    `max size is ${maxFileSize}`))
-                }
-
-                if (dirSizeLimit && (totalDownloadedSize + fileSize) >= dirSizeLimit) {
-                  reject(new Error(
-                    `Cannot download ${url} because destination directory reached size limit`))
-                }
-
-                totalDownloadedSize += fileSize
-              })
-              .on('response', (res) => {
-                res.once('data', (chunk) => {
-                  const type = fileType(chunk) || {mime: ''}
-                  if (type.mime.slice(0, 6) !== 'image/' && !isSvg(chunk.toString())) {
-                    if (type.mime) {
-                      reject(new Error(`Mime of ${url} not allowed: '${type.mime}'`))
-                    } else {
-                      reject(new Error(`Could not detect ${url} mime type, not SVG either`))
-                    }
-                  }
-                })
-              })
-              .on('error', (err) => {
-                reject(err)
-              })
-              .pipe(writeStream(destination))
-          }).catch((err) => {
-            vfile.message(err, position, url)
-          })
-
-          promises.push({offset: position.offset, promise: promise})
-        })
-
-        if (!promises.length) {
-          return new Promise((resolve, reject) =>
-            rimraf(destinationPath, (err) => {
-              if (err) reject(err)
-              resolve()
-            }))
+      if (!parsedURI.host) {
+        let localPath
+        if (typeof localUrlToLocalPath === 'function') {
+          localPath = localUrlToLocalPath(url)
+        } else if (Array.isArray(localUrlToLocalPath) && localUrlToLocalPath.length === 2) {
+          const [from, to] = localUrlToLocalPath
+          localPath = url.replace(new RegExp(`^${from}`), to)
+        } else {
+          return
         }
 
-        vfile.data.imageDir = destinationPath
+        localCopyTasks.push({node, url, destination, localSourcePath: localPath})
 
-        // Use offsets to ensure execution order
-        // we don't want to download them in (possibly) random order.
-        // More importantly: this makes tests stable.
-        promises.sort((a, b) => b.offset - a.offset)
+        return
+      }
 
-        return promises
-          .map((a) => a.promise)
-          .reduce(
-            (chain, currentTask) =>
-              chain.then(chainResults =>
-                currentTask.then(currentResult =>
-                  [...chainResults, currentResult])),
-            Promise.resolve([]))
-      })
-      .catch((err) => {
-        vfile.message(err)
-      })
-      .then(() => tree)
+      if (!['http:', 'https:'].includes(parsedURI.protocol)) {
+        vfile.message(`Protocol '${parsedURI.protocol}' not allowed.`, position, url)
+        return
+      }
+
+      downloadTasks.push({node, url, destination})
+    })
+
+    // Group by URL in order to download each file only once
+    const groupTasksByUrl = tasks => {
+      const map = new Map()
+      for (const task of tasks) {
+        const otherTasks = map.get(task.url) || []
+        map.set(task.url, otherTasks.concat([task]))
+      }
+
+      return Array.from(map.values())
+        .map(taskGroup =>
+          Object.assign(
+            {},
+            taskGroup[0],
+            {nodes: taskGroup.map(t => t.node)}
+          )
+        )
+    }
+
+    downloadTasks = groupTasksByUrl(downloadTasks)
+    localCopyTasks = groupTasksByUrl(localCopyTasks)
+
+    const tasks = downloadTasks.concat(localCopyTasks)
+    if (!tasks.length) {
+      return tree
+    }
+
+    let successfulTasks = []
+
+    await mkdir(destinationPath)
+
+    try {
+      await Promise.all([
+        doDownloadTasks(downloadTasks),
+        doLocalCopyTasks(localCopyTasks),
+      ])
+
+      const failedTasks = tasks.filter(t => t.error)
+      successfulTasks = tasks.filter(t => !t.error)
+
+      for (const task of failedTasks) {
+        for (const node of task.nodes) {
+          vfile.message(task.error, node.position, task.url)
+        }
+      }
+      for (const task of successfulTasks) {
+        for (const node of task.nodes) {
+          // mutates the AST!
+          node.url = task.destination
+        }
+      }
+    } catch (err) {
+      vfile.message(err)
+      await promisify(rimraf)(destinationPath)
+    }
+
+    if (successfulTasks.length) {
+      vfile.data.imageDir = destinationPath
+    } else {
+      await promisify(rimraf)(destinationPath)
+    }
+
+    return tree
   }
 }
 
