@@ -198,7 +198,7 @@ describe('mock server tests', () => {
     `
 
     // query strings are required in order to make URLs unique (one single
-    // file is downloaded otherwise.
+    // file is downloaded otherwise).
     // each file being roughly 30% of directory size limit, the 4th one would exceed this
     // limit. It shouldn't get downloaded & replaced:
 
