@@ -96,7 +96,7 @@ function plugin ({
   dirSizeLimit = 10000000,
   downloadDestination = '/tmp',
   localUrlToLocalPath,
-  httpRequestTimeout = 2000, // in milliseconds
+  httpRequestTimeout = 5000, // in milliseconds
 } = {}) {
 
   // Sends an HTTP request, checks headers and resolves a readable stream
