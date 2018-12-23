@@ -111,6 +111,30 @@ test('regression: should not crash with leading space', () => {
   expect(contents).toBe(base.replace('x', ' '))
 })
 
+test('regression: should not crash when followed by "sth<space>"', () => {
+  const {contents: base} = render(dedent`
+    +---+
+    | A |
+    +===+
+    | B |
+    +---+
+    <-
+    bug
+    `)
+
+  const {contents} = render(dedent`
+    +---+
+    | A |
+    +===+
+    | B |
+    +---+
+    <-·
+    bug
+    `.replace(/·/g, ' '))
+
+  expect(contents).toBe(base)
+})
+
 
 test('stringify', () => {
   const fileExample = file(join(__dirname, 'grid-tables.md'))
