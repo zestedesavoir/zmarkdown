@@ -325,7 +325,7 @@ function extractTable(value, eat, tokenizer) {
   for (; i < possibleGridTable.length; i++) {
     var _line2 = possibleGridTable[i];
     if (_line2.length === 0) break;
-    after.push(_line2);
+    after.push(markdownLines[i]);
   }
 
   return [before, gridTable, after, hasHeader];
@@ -757,8 +757,8 @@ function plugin() {
   // Inject blockTokenizer
   var blockTokenizers = Parser.prototype.blockTokenizers;
   var blockMethods = Parser.prototype.blockMethods;
-  blockTokenizers.grid_table = gridTableTokenizer;
-  blockMethods.splice(blockMethods.indexOf('fencedCode') + 1, 0, 'grid_table');
+  blockTokenizers.gridTable = gridTableTokenizer;
+  blockMethods.splice(blockMethods.indexOf('fencedCode') + 1, 0, 'gridTable');
 
   var Compiler = this.Compiler;
 
