@@ -131,6 +131,9 @@ module.exports = function markdownHandlers (Raven) {
         ) {
           remark.imagesDownload.localUrlToLocalPath = opts.local_url_to_local_path
         }
+        if (opts.images_download_timeout) {
+          remark.imagesDownload.httpRequestTimeout = opts.images_download_timeout
+        }
       }
 
       if (opts.inline === true) {
