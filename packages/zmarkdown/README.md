@@ -95,6 +95,10 @@ Only `metadata` is described in the **Response** sections below.
   '/img/example.png'.replace(new RegExp(`^${from}`), to)
   ```
 
+* `opts.images_download_timeout`
+
+  HTTP request timeout for each image, in milliseconds. Defaults to 5000 ms.
+
 * `opts.disable_jsfiddle`: see `/html`
 
 ### Response
