@@ -1,6 +1,9 @@
 const visit = require('unist-util-visit')
 
-function plugin () {
+function plugin (options) {
+  const opts = options || {}
+  const expandFirst = opts.expandFirst
+
   function locator (value, fromIndex) {
     return value.indexOf('*[', fromIndex)
   }
@@ -72,6 +75,7 @@ function plugin () {
 
     const pattern = Object.keys(abbrs).map(escapeRegExp).join('|')
     const regex = new RegExp(`(\\b|\\W)(${pattern})(\\b|\\W)`)
+    const expanded = {}
 
     function one (node, index, parent) {
       if (Object.keys(abbrs).length === 0) return
@@ -93,7 +97,16 @@ function plugin () {
         for (let i = 0; i < newTexts.length; i++) {
           const content = newTexts[i]
           if (abbrs.hasOwnProperty(content)) {
-            node.children.splice(c + i, 0, abbrs[content])
+            const abbr = abbrs[content]
+            if (expandFirst && !expanded[content]) {
+              node.children.splice(c + i, 0, {
+                type: 'text',
+                value: `${abbr.reference} (${abbr.abbr})`,
+              })
+              expanded[content] = true
+            } else {
+              node.children.splice(c + i, 0, abbr)
+            }
           } else {
             node.children.splice(c + i, 0, {
               type: 'text',
