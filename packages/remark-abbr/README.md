@@ -68,6 +68,35 @@ unified()
   .use(stringify)
 ```
 
+## Options
+
+### options.expandFirst
+
+Expand the first occurrence of each abbreviation in place to introduce the definition and it's definition. Further occurrences are parsed into "abbr" [MDAST][mdast] nodes as the plugin would normally do.
+
+**example**
+
+```javascript
+.use(remarkAbbr, { expandFirst: true })
+```
+
+**given**
+
+```markdown
+This plugin works on MDAST.
+
+More stuff about MDAST.
+
+*[MDAST]: Markdown Abstract Syntax Tree
+```
+
+**produces**
+
+```html
+<p>This plugin works on Markdown Abstract Syntax Tree (<abbr title="Markdown Abstract Syntax Tree">MDAST</abbr>).</p>
+<p>More stuff about <abbr title="Markdown Abstract Syntax Tree">MDAST</abbr>.</p>"
+```
+
 ## License
 
 [MIT][license] © [Zeste de Savoir][zds]

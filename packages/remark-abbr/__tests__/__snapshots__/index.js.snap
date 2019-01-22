@@ -11,6 +11,11 @@ exports[`compiles to markdown 1`] = `
 
 exports[`does not break with references in their own paragraphs 1`] = `"<p>Here is a test featuring <abbr title=\\"A B C\\">abc</abbr> and <abbr title=\\"D E F\\">def</abbr></p>"`;
 
+exports[`expands first abbreviation 1`] = `
+"<p>This plugin works on Markdown Abstract Syntax Tree (<abbr title=\\"Markdown Abstract Syntax Tree\\">MDAST</abbr>).</p>
+<p>More stuff about <abbr title=\\"Markdown Abstract Syntax Tree\\">MDAST</abbr>.</p>"
+`;
+
 exports[`no reference 1`] = `"<p>No reference!</p>"`;
 
 exports[`passes the first regression test 1`] = `

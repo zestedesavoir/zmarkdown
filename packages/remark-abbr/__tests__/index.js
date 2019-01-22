@@ -7,9 +7,9 @@ import remarkStringify from 'remark-stringify'
 
 import remarkAbbr from '../src/'
 
-const render = text => unified()
+const render = (text, config) => unified()
   .use(reParse)
-  .use(remarkAbbr)
+  .use(remarkAbbr, config)
   .use(remark2rehype)
   .use(stringify)
   .processSync(text)
@@ -164,6 +164,19 @@ it('does not break with references in their own paragraphs', () => {
 
     *[def]: D E F
   `)
+
+  expect(contents).toMatchSnapshot()
+})
+
+it('expands first abbreviation', () => {
+
+  const {contents} = render(dedent`
+    This plugin works on MDAST.
+
+    More stuff about MDAST.
+
+    *[MDAST]: Markdown Abstract Syntax Tree
+  `, {expandFirst: true})
 
   expect(contents).toMatchSnapshot()
 })
