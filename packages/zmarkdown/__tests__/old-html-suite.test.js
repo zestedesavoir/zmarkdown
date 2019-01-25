@@ -568,7 +568,7 @@ describe('#misc', () => {
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
 
-  it(`properly renders russian.txt`, () => {
+  it.skip(`properly renders russian.txt`, () => {
     const filepath = `${dir}/russian.txt`
     return expect(renderFile()(filepath)).resolves.toHTML(loadFixture(filepath).trim())
   })
