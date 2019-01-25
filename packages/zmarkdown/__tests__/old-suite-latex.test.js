@@ -526,7 +526,7 @@ describe('#misc', () => {
     return expect(renderFile()(filepath)).resolves.toMatchSnapshot()
   })
 
-  it(`properly renders russian.txt`, () => {
+  it.skip(`properly renders russian.txt`, () => {
     const filepath = `${dir}/russian.txt`
     return expect(renderFile()(filepath)).resolves.toMatchSnapshot()
   })
