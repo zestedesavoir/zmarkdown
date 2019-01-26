@@ -28,6 +28,11 @@ test('grid-table', () => {
   expect(contents).toMatchSnapshot()
 })
 
+test('grid-table double', () => {
+  const {contents} = render(file(join(__dirname, 'grid-tables.double.md')))
+  expect(contents).toMatchSnapshot()
+})
+
 test('regression: grid table in fenced code block', () => {
   const {contents} = render(`
 \`\`\`

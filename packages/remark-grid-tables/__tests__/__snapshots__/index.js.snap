@@ -49,6 +49,56 @@ too</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p>cells can be
 <table><thead><tr><th colspan=\\"1\\" rowspan=\\"1\\"></th><th colspan=\\"2\\" rowspan=\\"1\\"><p>case1</p></th><th colspan=\\"2\\" rowspan=\\"1\\"><p>case2</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>case3</p></th></tr><tr><th colspan=\\"1\\" rowspan=\\"1\\"></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>case4</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>case5</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>case6</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>case7</p></th><th colspan=\\"1\\" rowspan=\\"1\\"></th></tr></thead><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td></tr></tbody></table>"
 `;
 
+exports[`grid-table double 1`] = `
+"<h1>Grid table</h1>
+<h2>Basic example</h2>
+<table><thead><tr><th colspan=\\"2\\" rowspan=\\"1\\"><p>テーブル表題</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>表題</p></th></tr><tr><th colspan=\\"1\\" rowspan=\\"1\\"><p>副題</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>見出し</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>セル</p></th></tr></thead><tbody><tr><td colspan=\\"1\\" rowspan=\\"2\\"><p>行の
+結合
+列</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p>列の結合行</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>標準</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>セル</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>複数
+行の</p><p>セル
+結合</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p><em>書式つきの</em>
+<strong>段落</strong>
+セル</p></td></tr></tbody></table>
+<table><thead><tr><th colspan=\\"1\\" rowspan=\\"1\\"><p>あ</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>い</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>う</p></th></tr></thead><tbody><tr><td colspan=\\"1\\" rowspan=\\"2\\"><p>え</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p>お</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>か</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>き</p></td></tr></tbody></table>
+<table><tbody><tr><td colspan=\\"1\\" rowspan=\\"3\\"><p>あ</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p>い</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>う</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>え</p></td></tr><tr><td colspan=\\"2\\" rowspan=\\"1\\"><p>お</p></td></tr></tbody></table>
+<table><tbody><tr><td colspan=\\"3\\" rowspan=\\"1\\"><p>あ</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"2\\"><p>い</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>う</p></td><td colspan=\\"1\\" rowspan=\\"2\\"><p>え</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>お</p></td></tr></tbody></table>
+<table><tbody><tr><td colspan=\\"1\\" rowspan=\\"4\\"><p>う</p></td><td colspan=\\"1\\" rowspan=\\"2\\"><p>え</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>お</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>か</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"2\\"><p>き</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>く</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>け</p></td></tr></tbody></table>
+<table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>あ</p></td><td colspan=\\"1\\" rowspan=\\"2\\"><p>い</p></td><td colspan=\\"1\\" rowspan=\\"4\\"><p>う</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>え</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>お</p></td><td colspan=\\"1\\" rowspan=\\"2\\"><p>か</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>き</p></td></tr></tbody></table>
+<table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>あ</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>い</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>う</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>え</p></td></tr><tr><td colspan=\\"2\\" rowspan=\\"1\\"><p>お</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p>か</p></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>き</p></td></tr></tbody></table>
+<table><tbody><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>あ</p></td></tr><tr><td colspan=\\"2\\" rowspan=\\"1\\"><p>い</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p>う</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>え</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>お</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>か</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>き</p></td></tr></tbody></table>
+<table><tbody><tr><td colspan=\\"1\\" rowspan=\\"3\\"><p>あ</p></td><td colspan=\\"1\\" rowspan=\\"2\\"><p>い</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>う</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>え</p></td><td colspan=\\"1\\" rowspan=\\"2\\"><p>お</p></td><td colspan=\\"1\\" rowspan=\\"3\\"><p>か</p></td></tr><tr><td colspan=\\"2\\" rowspan=\\"1\\"><p>き</p></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>く</p></td></tr><tr><td colspan=\\"6\\" rowspan=\\"1\\"><p>け</p></td></tr></tbody></table>
+<table><thead><tr><th colspan=\\"1\\" rowspan=\\"1\\"><p>あ</p></th><th colspan=\\"6\\" rowspan=\\"1\\"><p>い</p></th></tr></thead><tbody><tr><td colspan=\\"1\\" rowspan=\\"4\\"><p>う</p></td><td colspan=\\"6\\" rowspan=\\"4\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>え</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>お</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>か</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>き</p></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>く</p></td></tr></tbody></table></td></tr><tr></tr><tr></tr><tr></tr></tbody></table>
+<table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>あ</p></td></tr></tbody></table>
+<p>Text at the end</p>
+<table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>あ</p></td></tr></tbody></table>
+<p>Text at the</p>
+<h2>specific tests</h2>
+<p>In this examples, the second row should always be a full-cell</p>
+<table><tbody><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>あ</p></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>い | う</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>え</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>お</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>か</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>き</p></td></tr></tbody></table>
+<table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>あ</p></td><td colspan=\\"3\\" rowspan=\\"1\\"></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>い | う</p></td></tr><tr><td colspan=\\"2\\" rowspan=\\"1\\"><p>え   お</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>か</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>き</p></td></tr></tbody></table>
+<table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>あ</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>い</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>う</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>え</p></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>い | う</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>え</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>お</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>か</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>き</p></td></tr></tbody></table>
+<table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>あ</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>い</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>う</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>え</p></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>い  | う</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>え</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>お</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>か</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>き</p></td></tr></tbody></table>
+<h2>Failing example</h2>
+<p>+--- あ ---+</p>
+<p>+---------+
++---------+</p>
+<p>+---------+
+| あ      |
+|         |</p>
+<p>+---------+
+| あ      |
++=========+
+| い      |
++=========+</p>
+<p>+--- あ ---+
+|          |</p>
+<table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"></td></tr></tbody></table>
+<p>Bug #107</p>
+<table><thead><tr><th colspan=\\"1\\" rowspan=\\"1\\"></th><th colspan=\\"2\\" rowspan=\\"1\\"><p>例1</p></th><th colspan=\\"2\\" rowspan=\\"1\\"><p>例2</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>例3</p></th></tr><tr><th colspan=\\"1\\" rowspan=\\"1\\"></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>例4</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>例5</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>例6</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>例7</p></th><th colspan=\\"1\\" rowspan=\\"1\\"></th></tr></thead><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>あ</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>い</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>う</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>え</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>お</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>か</p></td></tr></tbody></table>
+<h2>Emoji</h2>
+<table><thead><tr><th colspan=\\"1\\" rowspan=\\"1\\"><p>⚠</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>🐶</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>🍣</p></th></tr></thead><tbody><tr><td colspan=\\"1\\" rowspan=\\"2\\"><p>✌</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p>👏 🌵</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>🦄</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>🐙</p></td></tr></tbody></table>"
+`;
+
 exports[`regression: grid table in fenced code block 1`] = `
 "<pre><code>+---+---+---+
 | A | B | C |
