@@ -1,6 +1,7 @@
 const trimEnd = require('lodash.trimend')
 const visit = require('unist-util-visit')
 const isFullwidth = require('@nxmix/is-full-width').default
+const splitter = new (require('grapheme-splitter'))
 
 const mainLineRegex = new RegExp(/((\+)|(\|)).+((\|)|(\+))/)
 const totalMainLineRegex = new RegExp(/^((\+)|(\|)).+((\|)|(\+))$/)
@@ -191,7 +192,7 @@ function isPartLine (line) {
 function findAll (str, characters) {
   let current = 0
   const pos = []
-  const content = Array.from(str)
+  const content = splitter.splitGraphemes(str)
   for (let i = 0; i < content.length; i++) {
     const char = content[i]
     if (characters.includes(char)) {
@@ -232,7 +233,7 @@ function computeColumnStartingPositions (lines) {
 }
 
 function isCodePointPosition (line, pos) {
-  const content = Array.from(line)
+  const content = splitter.splitGraphemes(line)
   let offset = 0
 
   for (let i = 0; i < content.length; i++) {
@@ -254,7 +255,7 @@ function isCodePointPosition (line, pos) {
 function substringLine (line, start, end) {
   end = end || start + 1
 
-  const content = Array.from(line)
+  const content = splitter.splitGraphemes(line)
   let offset = 0
   let str = ''
 
@@ -276,10 +277,10 @@ function substringLine (line, start, end) {
 function computeLineLength (line) {
   let length = 0
 
-  for (const str of line) {
+  splitter.splitGraphemes(line).forEach(str => {
     length += 1
     length += isFullwidth(str.codePointAt())
-  }
+  })
 
   return length
 }
