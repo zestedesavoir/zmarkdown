@@ -1,7 +1,7 @@
 const trimEnd = require('lodash.trimend')
 const visit = require('unist-util-visit')
 const isFullwidth = require('@nxmix/is-full-width').default
-const splitter = new (require('grapheme-splitter'))
+const splitter = new (require('grapheme-splitter'))()
 
 const mainLineRegex = new RegExp(/((\+)|(\|)).+((\|)|(\+))/)
 const totalMainLineRegex = new RegExp(/^((\+)|(\|)).+((\|)|(\+))$/)
