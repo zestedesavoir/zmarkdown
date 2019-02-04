@@ -1,6 +1,6 @@
 {
   "name": "remark-numbered-footnotes",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-numbered-footnotes",
     "type": "git"
