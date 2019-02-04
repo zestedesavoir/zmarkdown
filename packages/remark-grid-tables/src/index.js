@@ -1,5 +1,7 @@
 const trimEnd = require('lodash.trimend')
 const visit = require('unist-util-visit')
+const isFullwidth = require('@nxmix/is-full-width').default
+const splitter = new (require('grapheme-splitter'))()
 
 const mainLineRegex = new RegExp(/((\+)|(\|)).+((\|)|(\+))/)
 const totalMainLineRegex = new RegExp(/^((\+)|(\|)).+((\|)|(\+))$/)
@@ -53,9 +55,12 @@ class TablePart {
       const cell = this.lastRow()._cells[c]
 
       // Only cells with rowspan equals can be merged
-      // Test if the char before the cell is a separation character
-      if (cell._rowspan === newCells[newCells.length - 1]._rowspan &&
-      !mergeChars.includes(line[cell._startPosition - 1])) {
+      // Test if the char does not compose a character
+      // or the char before the cell is a separation character
+      if (cell._rowspan === newCells[newCells.length - 1]._rowspan && (
+        !isCodePointPosition(line, cell._startPosition - 1) ||
+        !mergeChars.includes(substringLine(line, cell._startPosition - 1))
+      )) {
         newCells[newCells.length - 1].mergeWith(cell)
       } else {
         newCells.push(cell)
@@ -69,9 +74,9 @@ class TablePart {
     const remainingCells = []
     for (let c = 0; c < this.lastRow()._cells.length; c++) {
       const cell = this.lastRow()._cells[c]
-      const partLine = line.substring(cell._startPosition - 1, cell._endPosition + 1)
+      const partLine = substringLine(line, cell._startPosition - 1, cell._endPosition + 1)
       if (!isSeparationLine(partLine)) {
-        cell._lines.push(line.substring(cell._startPosition, cell._endPosition))
+        cell._lines.push(substringLine(line, cell._startPosition, cell._endPosition))
         cell._rowspan += 1
         remainingCells.push(cell)
       }
@@ -132,7 +137,7 @@ class TableRow {
   updateContent (line) {
     for (let c = 0; c < this._cells.length; c++) {
       const cell = this._cells[c]
-      cell._lines.push(line.substring(cell._startPosition, cell._endPosition))
+      cell._lines.push(substringLine(line, cell._startPosition, cell._endPosition))
     }
   }
 }
@@ -184,13 +189,16 @@ function isPartLine (line) {
   return partLineRegex.exec(line)
 }
 
-function findAll (content, characters) {
+function findAll (str, characters) {
+  let current = 0
   const pos = []
+  const content = splitter.splitGraphemes(str)
   for (let i = 0; i < content.length; i++) {
     const char = content[i]
     if (characters.includes(char)) {
-      pos.push(i)
+      pos.push(current)
     }
+    current += computeLineLength(char)
   }
   return pos
 }
@@ -224,6 +232,58 @@ function computeColumnStartingPositions (lines) {
   return mergeColumnsStartingPositions(linesInfo)
 }
 
+function isCodePointPosition (line, pos) {
+  const content = splitter.splitGraphemes(line)
+  let offset = 0
+
+  for (let i = 0; i < content.length; i++) {
+    // The pos points character position
+    if (pos === offset) {
+      return true
+    }
+    // The pos points non-character position
+    if (pos < offset) {
+      return false
+    }
+    offset += computeLineLength(content[i])
+  }
+
+  // Reaching end means character position
+  return true
+}
+
+function substringLine (line, start, end) {
+  end = end || start + 1
+
+  const content = splitter.splitGraphemes(line)
+  let offset = 0
+  let str = ''
+
+  for (let i = 0; i < content.length; i++) {
+    if (offset >= start) {
+      str += content[i]
+    }
+
+    offset += computeLineLength(content[i])
+
+    if (offset >= end) {
+      break
+    }
+  }
+
+  return str
+}
+
+function computeLineLength (line) {
+  let length = 0
+
+  splitter.splitGraphemes(line).forEach(str => {
+    length += 1
+    length += isFullwidth(str.codePointAt())
+  })
+
+  return length
+}
 
 function extractTable (value, eat, tokenizer) {
   // Extract lines before the grid table
@@ -235,7 +295,7 @@ function extractTable (value, eat, tokenizer) {
   for (; i < markdownLines.length; i++) {
     const line = markdownLines[i]
     if (isSeparationLine(line)) break
-    if (line.length === 0) break
+    if (computeLineLength(line) === 0) break
     before.push(line)
   }
 
@@ -244,14 +304,14 @@ function extractTable (value, eat, tokenizer) {
 
   // Extract table
   if (!possibleGridTable[i + 1]) return [null, null, null, null]
-  const lineLength = possibleGridTable[i + 1].length
+  const lineLength = computeLineLength(possibleGridTable[i + 1])
   const gridTable = []
   let hasHeader = false
   for (; i < possibleGridTable.length; i++) {
     const line = possibleGridTable[i]
     const isMainLine = totalMainLineRegex.exec(line)
     // line is in table
-    if (isMainLine && line.length === lineLength) {
+    if (isMainLine && computeLineLength(line) === lineLength) {
       const isHeaderLine = headerLineRegex.exec(line)
       if (isHeaderLine && !hasHeader) hasHeader = true
       // A table can't have 2 headers
@@ -280,7 +340,7 @@ function extractTable (value, eat, tokenizer) {
   const after = []
   for (; i < possibleGridTable.length; i++) {
     const line = possibleGridTable[i]
-    if (line.length === 0) break
+    if (computeLineLength(line) === 0) break
     after.push(markdownLines[i])
   }
 
