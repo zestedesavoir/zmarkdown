@@ -147,7 +147,7 @@ function plugin() {
       downloadDestination = _ref2$downloadDestina === undefined ? '/tmp' : _ref2$downloadDestina,
       localUrlToLocalPath = _ref2.localUrlToLocalPath,
       _ref2$httpRequestTime = _ref2.httpRequestTimeout,
-      httpRequestTimeout = _ref2$httpRequestTime === undefined ? 2000 : _ref2$httpRequestTime;
+      httpRequestTimeout = _ref2$httpRequestTime === undefined ? 5000 : _ref2$httpRequestTime;
 
   // Sends an HTTP request, checks headers and resolves a readable stream
   // if headers are valid.

@@ -4,7 +4,10 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var visit = require('unist-util-visit');
 
-function plugin() {
+function plugin(options) {
+  var opts = options || {};
+  var expandFirst = opts.expandFirst;
+
   function locator(value, fromIndex) {
     return value.indexOf('*[', fromIndex);
   }
@@ -77,6 +80,7 @@ function plugin() {
 
     var pattern = Object.keys(abbrs).map(escapeRegExp).join('|');
     var regex = new RegExp('(\\b|\\W)(' + pattern + ')(\\b|\\W)');
+    var expanded = {};
 
     function one(node, index, parent) {
       if (Object.keys(abbrs).length === 0) return;
@@ -98,7 +102,16 @@ function plugin() {
         for (var i = 0; i < newTexts.length; i++) {
           var content = newTexts[i];
           if (abbrs.hasOwnProperty(content)) {
-            node.children.splice(c + i, 0, abbrs[content]);
+            var abbr = abbrs[content];
+            if (expandFirst && !expanded[content]) {
+              node.children.splice(c + i, 0, {
+                type: 'text',
+                value: abbr.reference + ' (' + abbr.abbr + ')'
+              });
+              expanded[content] = true;
+            } else {
+              node.children.splice(c + i, 0, abbr);
+            }
           } else {
             node.children.splice(c + i, 0, {
               type: 'text',
