@@ -1,0 +1,9 @@
+{
+  "presets": ["env"],
+  "plugins": [],
+  "env": {
+    "development": {
+      "sourceMaps": "inline"
+    }
+  }
+}
