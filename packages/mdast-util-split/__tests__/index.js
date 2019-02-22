@@ -110,6 +110,20 @@ test('default parameter with canonical text', () => {
       },
     ],
   })
+  expect(result.trees[1].children).toMatchObject({
+    type: 'root',
+    children: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            value: 'paragraph',
+          },
+        ],
+      },
+    ],
+  })
 })
 
 test('do not split introduction with canonical text', () => {
@@ -178,6 +192,32 @@ test('do not split introduction with canonical text', () => {
           },
         ],
       },
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            value: 'other paragraph',
+          },
+        ],
+      },
+    ],
+  })
+})
+
+test('no heading', () => {
+  const noHeadingText = text.replace(/#/g, '')
+  expect(() => doSplit(noHeadingText, {})).toThrowError('No heading')
+})
+
+test('split level 2 titles', () => {
+  const result = doSplit(text, {splitDepth: 2})
+  expect(result.trees.length).toBe(2)
+  // first part has a sub part, so result.trees[0].children.trees.length == 1
+  expect(result.trees[0].children.trees.length).toBe(1)
+  expect(result.trees[0].children.trees[0].children).toMatchObject({
+    type: 'root',
+    children: [
       {
         type: 'paragraph',
         children: [
