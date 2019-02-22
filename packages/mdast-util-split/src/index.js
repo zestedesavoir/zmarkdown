@@ -41,10 +41,7 @@ function splitAtDepth (tree, currentDepth, config) {
   }
   if (currentDepth < splitDepth) {
     for (let i = 0; i < splitter.subTrees.length; i++) {
-      const newTree = {
-        type: 'root',
-        children: splitter.subTrees[i].children.children,
-      }
+      const newTree = newRootTree(splitter.subTrees[i].children.children)
       const result = splitAtDepth(newTree, currentDepth + 1, config)
       splitter.subTrees[i].children = result
     }
@@ -64,18 +61,22 @@ function find (tree, {type = 'heading', depth = ROOT_HEADING_DEPTH}) {
   return null
 }
 
+function newRootTree (children = []) {
+  return {
+    type: 'root',
+    children,
+  }
+}
+
 class Splitter {
   constructor (depth = 1) {
     this.lastIndex = -1
     this.subTrees = []
     this.depth = depth
-    this._introduction = {
-      type: 'root',
-      children: [],
-    }
+    this._introduction = newRootTree()
   }
   set introduction (nodes) {
-    this._introduction = {type: 'root', children: nodes}
+    this._introduction = newRootTree(nodes)
   }
   get introduction () {
     return this._introduction
@@ -99,10 +100,10 @@ class Splitter {
       if (!lastHeading || lastHeading === firstHeading) {
         return
       }
-      splittedPart.conclusion = {
-        type: 'root',
-        children: splittedPart.children.splice(lastIndex, splittedPart.children.length - lastIndex),
-      }
+      const rootContent = splittedPart.children.splice(
+        lastIndex,
+        splittedPart.children.length - lastIndex)
+      splittedPart.conclusion = newRootTree(rootContent)
     })
   }
   extractIntroductions () {
@@ -113,11 +114,10 @@ class Splitter {
           depth: this.depth + 1,
         })
         if (firstHeading) {
-          subTree.introduction = {
-            type: 'root',
-            children: subTree.children.children.splice(0,
-              subTree.children.children.indexOf(firstHeading)),
-          }
+          const rootContent = subTree.children.children.splice(
+            0,
+            subTree.children.children.indexOf(firstHeading))
+          subTree.introduction = newRootTree(rootContent)
         }
       }
     )
@@ -135,14 +135,8 @@ class Splitter {
     if (node.type === 'heading' && node.depth === this.depth) {
       this.lastIndex = index
       const subtree = {
-        title: {
-          type: 'root',
-          children: [node],
-        },
-        children: {
-          type: 'root',
-          children: [],
-        },
+        title: newRootTree(node),
+        children: newRootTree(),
       }
       this.subTrees.push(subtree)
     } else if (parent.type === 'root') {
