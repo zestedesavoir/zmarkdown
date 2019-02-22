@@ -1,23 +1,42 @@
 module.exports = split
 import visit from 'unist-util-visit'
 
-function split (tree, {splitDepth = 1,
+const ROOT_HEADING_DEPTH = 1
+function split (tree, {splitDepth = ROOT_HEADING_DEPTH,
   introductionAsProperty = true, conclusionAsProperty = false}) {
-  if (splitDepth < 1) {
-    throw new Error('splitDepth must be greater than 1')
-  }
-  const firstHeading = find(tree, {type: 'heading', depth: 1})
+  const firstHeading = find(tree, {type: 'heading', depth: ROOT_HEADING_DEPTH})
   if (!firstHeading) {
     throw new Error('No heading')
   }
+  return splitInDepth(tree, ROOT_HEADING_DEPTH, splitDepth, introductionAsProperty,
+    conclusionAsProperty)
+}
+
+function splitInDepth (tree, depth, splitDepth = ROOT_HEADING_DEPTH,
+  introductionAsProperty = true, conclusionAsProperty = false) {
   const splitter = new Splitter()
+  splitter.depth = depth
+  const hasHeading = !!find(tree, {type: 'heading', depth: depth})
+  if (!hasHeading) {
+    return tree
+  }
   visit(tree, null, (node, index, parent) => splitter.visit(node, index, parent))
-  splitter.introduction = splitter.treeBefore.children
   if (conclusionAsProperty) {
     splitter.extractConclusions()
   }
   if (introductionAsProperty) {
     splitter.extractIntroductions()
+  }
+  if (depth < splitDepth) {
+    for (let i = 0; i < splitter.subTrees.length; i++) {
+      const newTree = {
+        type: 'root',
+        children: splitter.subTrees[i].children.children,
+      }
+      const result = splitInDepth(newTree, depth + 1, splitDepth,
+        introductionAsProperty, conclusionAsProperty)
+      splitter.subTrees[i].children = result
+    }
   }
   return {
     introduction: splitter.introduction,
@@ -25,7 +44,7 @@ function split (tree, {splitDepth = 1,
   }
 }
 
-function find (tree, {type = 'heading', depth = 1}) {
+function find (tree, {type = 'heading', depth = ROOT_HEADING_DEPTH}) {
   for (let i = 0; i < tree.children.length; ++i) {
     if (tree.children[i].type === type && tree.children[i].depth === depth) {
       return tree.children[i]
@@ -37,13 +56,12 @@ function find (tree, {type = 'heading', depth = 1}) {
 class Splitter {
   constructor (depth = 1) {
     this.lastIndex = -1
-    this.treeBefore = {
+    this.subTrees = []
+    this.depth = depth
+    this._introduction = {
       type: 'root',
       children: [],
     }
-    this.subTrees = []
-    this.depth = depth
-    this._introduction = {}
   }
   set introduction (nodes) {
     this._introduction = {type: 'root', children: nodes}
@@ -101,7 +119,7 @@ class Splitter {
       return
     }
     if (node.type !== 'heading' && parent.type === 'root' && this.lastIndex === -1) {
-      this.treeBefore.children.push(node)
+      this.introduction.children.push(node)
       return
     }
     if (node.type === 'heading' && node.depth === this.depth) {
