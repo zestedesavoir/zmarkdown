@@ -29,18 +29,16 @@ console.log(split(tree))
 
 ### `split(node[, options])`
 
-Split the tree into many trees relying on header hierarchy.
+Splits a MDAST tree into separate trees by [heading depth](https://github.com/syntax-tree/mdast#heading).
 
-#### `options.splitDepth`
+#### `options.splitDepth = 1`
 
-An integer greater or equal to 1 (if not valid, raise an exception) determining if we must only split first level headers
-or creating sub trees relying on subheaders.
-Defaults to 1;
+An integer greater or equal to 1 determining the max heading depth at which the tree is split.
 
-#### `options.introductionAsProperty`
+#### `options.introductionAsProperty = true`
 
-A boolean driving the way we want to process introduction : 
-- if `true`(default), all MDAST elements between the splitted header and the first sub header will be extracted and put in the `introduction` property of the result
+A boolean driving the way we want to process introduction :
+- if `true`, all MDAST elements between the split header and the first sub header will be extracted and put in the `introduction` property of the result
 property of the returned object
 - if `false` they will just be added as MDAST elements of the `children` property.
 
@@ -58,29 +56,37 @@ import unified from 'unified'
 import reParse from 'remark-parse'
 import split from 'mdast-util-split'
 
-const doSplit = (text, {splitDepth = 1,
-  introductionAsProperty = true, conclusionAsProperty = false}) => {
-  return split(unified().use(reParse).parse(text),{
-    splitDepth: splitDepth,
-    introductionAsProperty: introductionAsProperty,
-    conclusionAsProperty: conclusionAsProperty})
+const doSplit = (text, options) => {
+  const {
+    splitDepth = 1,
+    introductionAsProperty = true,
+    conclusionAsProperty = false
+  } = options
+  return split(
+    unified().use(reParse).parse(text),
+    {
+      splitDepth: splitDepth,
+      introductionAsProperty: introductionAsProperty,
+      conclusionAsProperty: conclusionAsProperty
+    }
+  )
 }
 
 const text = dedent `
   a global introduction
-  
+
   # hello
-  
+
   a paragraph
-  
+
   > a quote to *ensure this is parsed*
-  
+
   ## a sub title
-  
+
   other paragraph
-  
+
   # conclusion title
-  
+
   paragraph
   `
 
