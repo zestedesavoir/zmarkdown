@@ -1,22 +1,34 @@
-module.exports = split
 import visit from 'unist-util-visit'
 
 const ROOT_HEADING_DEPTH = 1
-function split (tree, {splitDepth = ROOT_HEADING_DEPTH,
-  introductionAsProperty = true, conclusionAsProperty = false}) {
+
+module.exports = function split (tree, config) {
+  const {
+    splitDepth = ROOT_HEADING_DEPTH,
+    introductionAsProperty = true,
+    conclusionAsProperty = false,
+  } = config
+
   const firstHeading = find(tree, {type: 'heading', depth: ROOT_HEADING_DEPTH})
   if (!firstHeading) {
     throw new Error('No heading')
   }
-  return splitInDepth(tree, ROOT_HEADING_DEPTH, splitDepth, introductionAsProperty,
-    conclusionAsProperty)
+  return splitAtDepth(
+    tree,
+    ROOT_HEADING_DEPTH,
+    {splitDepth, introductionAsProperty, conclusionAsProperty}
+  )
 }
 
-function splitInDepth (tree, depth, splitDepth = ROOT_HEADING_DEPTH,
-  introductionAsProperty = true, conclusionAsProperty = false) {
-  const splitter = new Splitter()
-  splitter.depth = depth
-  const hasHeading = !!find(tree, {type: 'heading', depth: depth})
+function splitAtDepth (tree, currentDepth, config) {
+  const {
+    splitDepth = ROOT_HEADING_DEPTH,
+    introductionAsProperty = true,
+    conclusionAsProperty = false,
+  } = config
+
+  const splitter = new Splitter(currentDepth)
+  const hasHeading = !!find(tree, {type: 'heading', depth: currentDepth})
   if (!hasHeading) {
     return tree
   }
@@ -27,14 +39,13 @@ function splitInDepth (tree, depth, splitDepth = ROOT_HEADING_DEPTH,
   if (introductionAsProperty) {
     splitter.extractIntroductions()
   }
-  if (depth < splitDepth) {
+  if (currentDepth < splitDepth) {
     for (let i = 0; i < splitter.subTrees.length; i++) {
       const newTree = {
         type: 'root',
         children: splitter.subTrees[i].children.children,
       }
-      const result = splitInDepth(newTree, depth + 1, splitDepth,
-        introductionAsProperty, conclusionAsProperty)
+      const result = splitAtDepth(newTree, currentDepth + 1, config)
       splitter.subTrees[i].children = result
     }
   }
@@ -45,7 +56,7 @@ function splitInDepth (tree, depth, splitDepth = ROOT_HEADING_DEPTH,
 }
 
 function find (tree, {type = 'heading', depth = ROOT_HEADING_DEPTH}) {
-  for (let i = 0; i < tree.children.length; ++i) {
+  for (let i = 0; i < tree.children.length; i++) {
     if (tree.children[i].type === type && tree.children[i].depth === depth) {
       return tree.children[i]
     }
@@ -77,7 +88,7 @@ class Splitter {
       })
       let lastHeading = null
       let lastIndex = 0
-      for (let i = splittedPart.children.length - 1; i > 0; --i) {
+      for (let i = splittedPart.children.length - 1; i > 0; i--) {
         if (splittedPart.children[i] === 'heading' &&
           splittedPart.children[i].depth === this.depth - 1) {
           lastHeading = splittedPart.children[i]
@@ -95,12 +106,11 @@ class Splitter {
     })
   }
   extractIntroductions () {
-    const self = this
     this.subTrees.forEach(
       (subTree) => {
         const firstHeading = find(subTree.children, {
           type: 'heading',
-          depth: self.depth + 1,
+          depth: this.depth + 1,
         })
         if (firstHeading) {
           subTree.introduction = {
