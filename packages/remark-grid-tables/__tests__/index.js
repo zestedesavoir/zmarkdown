@@ -140,6 +140,21 @@ test('regression: should not crash when followed by "sth<space>"', () => {
   expect(contents).toBe(base)
 })
 
+test('regression: handles east asian ambiguous width', () => {
+  const {contents: base} = render(dedent`
+      +---+
+      | ï |
+      +---+
+    `)
+
+  const {contents} = render(dedent`
+      +---+
+      | é |
+      +---+
+    `)
+
+  expect(contents).toBe(base.replace('ï', 'é'))
+})
 
 test('stringify', () => {
   const fileExample = file(join(__dirname, 'grid-tables.md'))
