@@ -274,12 +274,19 @@ function substringLine (line, start, end) {
   return str
 }
 
+function isNormalWidth (unicode) {
+  return (unicode <= 0xff && unicode !== 0x00d7) || (unicode >= 0xff61 && unicode <= 0xffdf)
+}
+
 function computeLineLength (line) {
   let length = 0
 
-  splitter.splitGraphemes(line).forEach(str => {
+  splitter.splitGraphemes(line).forEach(char => {
     length += 1
-    length += isFullwidth(str.codePointAt())
+    const codepoint = char.codePointAt()
+    if (!isNormalWidth(codepoint)) {
+      length += isFullwidth(codepoint)
+    }
   })
 
   return length
