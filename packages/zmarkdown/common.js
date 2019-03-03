@@ -29,6 +29,7 @@ const remarkPing = require('remark-ping/src')
 const remarkSubSuper = require('remark-sub-super/src')
 const remarkTextr = require('./plugins/remark-textr')
 const remarkTrailingSpaceHeading = require('remark-heading-trailing-spaces')
+const remarkSeclink = require('remark-seclink')
 
 const remark2rehype = require('remark-rehype')
 
@@ -94,6 +95,7 @@ const zmdParser = (config, extraRemarkPlugins = []) => {
     .use(remarkSubSuper)
     .use(remarkTrailingSpaceHeading)
     .use(remarkImageToFigure)
+    .use(remarkSeclink)
     .use(() => (tree, vfile) => {
       /* extract some metadata for frontends */
 
