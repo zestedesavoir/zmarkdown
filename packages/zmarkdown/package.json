@@ -51,6 +51,7 @@
     "remark-parse": "^5.0.0",
     "remark-ping": "file:../remark-ping",
     "remark-rehype": "^3.0.0",
+    "remark-seclink": "^1.0.0",
     "remark-sub-super": "file:../remark-sub-super",
     "shortid": "^2.2.12",
     "textr": "^0.3.0",
