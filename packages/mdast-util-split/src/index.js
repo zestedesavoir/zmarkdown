@@ -5,7 +5,6 @@ const ROOT_HEADING_DEPTH = 1
 module.exports = function split (tree, config) {
   const {
     splitDepth = ROOT_HEADING_DEPTH,
-    introductionAsProperty = true,
     conclusionAsProperty = false,
   } = config
 
@@ -15,40 +14,22 @@ module.exports = function split (tree, config) {
   }
   return splitAtDepth(
     tree,
-    ROOT_HEADING_DEPTH,
-    {splitDepth, introductionAsProperty, conclusionAsProperty}
+    splitDepth, conclusionAsProperty
   )
 }
 
-function splitAtDepth (tree, currentDepth, config) {
-  const {
-    splitDepth = ROOT_HEADING_DEPTH,
-    introductionAsProperty = true,
-    conclusionAsProperty = false,
-  } = config
+function splitAtDepth (tree, currentDepth, conclusionAsProperty) {
 
   const splitter = new Splitter(currentDepth)
-  const hasHeading = !!find(tree, {type: 'heading', depth: currentDepth})
-  if (!hasHeading) {
-    return tree
-  }
   visit(tree, null, (node, index, parent) => splitter.visit(node, index, parent))
-  if (conclusionAsProperty) {
-    splitter.extractConclusions()
-  }
-  if (introductionAsProperty) {
-    splitter.extractIntroductions()
-  }
-  if (currentDepth < splitDepth) {
-    for (let i = 0; i < splitter.subTrees.length; i++) {
-      const newTree = newRootTree(splitter.subTrees[i].children.children)
-      const result = splitAtDepth(newTree, currentDepth + 1, config)
-      splitter.subTrees[i].children = result
-    }
+  let conclusion = null
+  if (conclusionAsProperty && splitter.subTrees.length > 1) {
+    conclusion = splitter.subTrees.pop().children
   }
   return {
     introduction: splitter.introduction,
     trees: splitter.subTrees,
+    conclusion: conclusion,
   }
 }
 
@@ -73,54 +54,7 @@ class Splitter {
     this.lastIndex = -1
     this.subTrees = []
     this.depth = depth
-    this._introduction = newRootTree()
-  }
-  set introduction (nodes) {
-    this._introduction = newRootTree(nodes)
-  }
-  get introduction () {
-    return this._introduction
-  }
-  extractConclusions () {
-    this.subTrees.forEach(splittedPart => {
-      const firstHeading = find(splittedPart.children, {
-        type: 'heading',
-        depth: this.depth + 1,
-      })
-      let lastHeading = null
-      let lastIndex = 0
-      for (let i = splittedPart.children.length - 1; i > 0; i--) {
-        if (splittedPart.children[i] === 'heading' &&
-          splittedPart.children[i].depth === this.depth - 1) {
-          lastHeading = splittedPart.children[i]
-          lastIndex = i
-          break
-        }
-      }
-      if (!lastHeading || lastHeading === firstHeading) {
-        return
-      }
-      const rootContent = splittedPart.children.splice(
-        lastIndex,
-        splittedPart.children.length - lastIndex)
-      splittedPart.conclusion = newRootTree(rootContent)
-    })
-  }
-  extractIntroductions () {
-    this.subTrees.forEach(
-      (subTree) => {
-        const firstHeading = find(subTree.children, {
-          type: 'heading',
-          depth: this.depth + 1,
-        })
-        if (firstHeading) {
-          const rootContent = subTree.children.children.splice(
-            0,
-            subTree.children.children.indexOf(firstHeading))
-          subTree.introduction = newRootTree(rootContent)
-        }
-      }
-    )
+    this.introduction = newRootTree()
   }
 
   visit (node, index, parent) {
