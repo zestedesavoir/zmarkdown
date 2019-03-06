@@ -214,10 +214,8 @@ test('no heading', () => {
 
 test('split level 2 titles', () => {
   const result = doSplit(text, {splitDepth: 2})
-  expect(result.trees.length).toBe(2)
-  // first part has a sub part, so result.trees[0].children.trees.length == 1
-  expect(result.trees[0].children.trees.length).toBe(1)
-  expect(result.trees[0].children.trees[0].children).toMatchObject({
+  expect(result.trees.length).toBe(1)
+  expect(result.trees[0].children).toMatchObject({
     type: 'root',
     children: [
       {
@@ -226,6 +224,25 @@ test('split level 2 titles', () => {
           {
             type: 'text',
             value: 'other paragraph',
+          },
+        ],
+      },
+      {
+        type: 'heading',
+        depth: 1,
+        children: [
+          {
+            type: 'text',
+            value: 'conclusion title',
+          },
+        ],
+      },
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            value: 'paragraph',
           },
         ],
       },

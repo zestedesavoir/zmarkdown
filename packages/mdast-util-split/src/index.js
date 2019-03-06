@@ -62,7 +62,8 @@ class Splitter {
     if (!parent) {
       return
     }
-    if (node.type !== 'heading' && parent.type === 'root' && this.lastIndex === -1) {
+    if ((node.type !== 'heading' || node.depth !== this.depth) &&
+      parent.type === 'root' && this.lastIndex === -1) {
       this.introduction.children.push(node)
       return
     }
