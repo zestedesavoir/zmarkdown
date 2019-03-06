@@ -7,7 +7,6 @@ const doSplit = (text, {splitDepth = 1,
   introductionAsProperty = true, conclusionAsProperty = false}) => {
   return split(unified().use(reParse).parse(text), {
     splitDepth: splitDepth,
-    introductionAsProperty: introductionAsProperty,
     conclusionAsProperty: conclusionAsProperty})
 }
 
@@ -46,7 +45,8 @@ test('default parameter with canonical text', () => {
     ],
   })
   expect(result.trees.length).toBe(2)
-  expect(result.trees[0].introduction).toMatchObject({
+  expect(result.conclusion).toBeFalsy()
+  expect(result.trees[0].children).toMatchObject({
     type: 'root',
     children: [
       {
@@ -81,14 +81,6 @@ test('default parameter with canonical text', () => {
           },
         ],
       },
-    ],
-  })
-  expect(result.trees[1].introduction).toBeFalsy()
-  expect(result.trees[0].conclusion).toBeFalsy()
-  expect(result.trees[1].conclusion).toBeFalsy()
-  expect(result.trees[0].children).toMatchObject({
-    type: 'root',
-    children: [
       {
         type: 'heading',
         depth: 2,
@@ -126,8 +118,8 @@ test('default parameter with canonical text', () => {
   })
 })
 
-test('do not split introduction with canonical text', () => {
-  const result = doSplit(text, {introductionAsProperty: false})
+test('extract conclusion', () => {
+  const result = doSplit(text, {conclusionAsProperty: true})
   expect(result.introduction).toMatchObject({
     type: 'root',
     children: [
@@ -142,11 +134,7 @@ test('do not split introduction with canonical text', () => {
       },
     ],
   })
-  expect(result.trees.length).toBe(2)
-  expect(result.trees[0].introduction).toBeFalsy()
-  expect(result.trees[1].introduction).toBeFalsy()
-  expect(result.trees[0].conclusion).toBeFalsy()
-  expect(result.trees[1].conclusion).toBeFalsy()
+  expect(result.trees.length).toBe(1)
   expect(result.trees[0].children).toMatchObject({
     type: 'root',
     children: [
@@ -198,6 +186,20 @@ test('do not split introduction with canonical text', () => {
           {
             type: 'text',
             value: 'other paragraph',
+          },
+        ],
+      },
+    ],
+  })
+  expect(result.conclusion).toMatchObject({
+    type: 'root',
+    children: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            value: 'paragraph',
           },
         ],
       },
