@@ -10,7 +10,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var trimEnd = require('lodash.trimend');
 var visit = require('unist-util-visit');
-var isFullwidth = require('@nxmix/is-full-width').default;
+var stringWidth = require('string-width');
 var splitter = new (require('grapheme-splitter'))();
 
 var mainLineRegex = new RegExp(/((\+)|(\|)).+((\|)|(\+))/);
@@ -237,7 +237,7 @@ function findAll(str, characters) {
     if (characters.includes(char)) {
       pos.push(current);
     }
-    current += computeLineLength(char);
+    current += stringWidth(char);
   }
   return pos;
 }
@@ -288,7 +288,7 @@ function isCodePointPosition(line, pos) {
     if (pos < offset) {
       return false;
     }
-    offset += computeLineLength(content[i]);
+    offset += stringWidth(content[i]);
   }
 
   // Reaching end means character position
@@ -307,7 +307,7 @@ function substringLine(line, start, end) {
       str += content[i];
     }
 
-    offset += computeLineLength(content[i]);
+    offset += stringWidth(content[i]);
 
     if (offset >= end) {
       break;
@@ -315,24 +315,6 @@ function substringLine(line, start, end) {
   }
 
   return str;
-}
-
-function isNormalWidth(unicode) {
-  return unicode <= 0xff && unicode !== 0x00d7 || unicode >= 0xff61 && unicode <= 0xffdf;
-}
-
-function computeLineLength(line) {
-  var length = 0;
-
-  splitter.splitGraphemes(line).forEach(function (char) {
-    length += 1;
-    var codepoint = char.codePointAt();
-    if (!isNormalWidth(codepoint)) {
-      length += isFullwidth(codepoint);
-    }
-  });
-
-  return length;
 }
 
 function extractTable(value, eat, tokenizer) {
@@ -344,7 +326,7 @@ function extractTable(value, eat, tokenizer) {
   for (; i < markdownLines.length; i++) {
     var line = markdownLines[i];
     if (isSeparationLine(line)) break;
-    if (computeLineLength(line) === 0) break;
+    if (stringWidth(line) === 0) break;
     before.push(line);
   }
 
@@ -354,14 +336,14 @@ function extractTable(value, eat, tokenizer) {
 
   // Extract table
   if (!possibleGridTable[i + 1]) return [null, null, null, null];
-  var lineLength = computeLineLength(possibleGridTable[i + 1]);
+  var lineLength = stringWidth(possibleGridTable[i + 1]);
   var gridTable = [];
   var hasHeader = false;
   for (; i < possibleGridTable.length; i++) {
     var _line = possibleGridTable[i];
     var isMainLine = totalMainLineRegex.exec(_line);
     // line is in table
-    if (isMainLine && computeLineLength(_line) === lineLength) {
+    if (isMainLine && stringWidth(_line) === lineLength) {
       var _isHeaderLine = headerLineRegex.exec(_line);
       if (_isHeaderLine && !hasHeader) hasHeader = true;
       // A table can't have 2 headers
@@ -390,7 +372,7 @@ function extractTable(value, eat, tokenizer) {
   var after = [];
   for (; i < possibleGridTable.length; i++) {
     var _line2 = possibleGridTable[i];
-    if (computeLineLength(_line2) === 0) break;
+    if (stringWidth(_line2) === 0) break;
     after.push(markdownLines[i]);
   }
 
