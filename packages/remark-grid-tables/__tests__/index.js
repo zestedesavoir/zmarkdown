@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {readFileSync as file} from 'fs'
 import {join} from 'path'
 import unified from 'unified'
@@ -142,18 +143,114 @@ test('regression: should not crash when followed by "sth<space>"', () => {
 
 test('regression: handles east asian ambiguous width', () => {
   const {contents: base} = render(dedent`
-      +---+
-      | ï |
-      +---+
-    `)
+    +---+
+    | ï |
+    +---+
+  `)
 
-  const {contents} = render(dedent`
-      +---+
-      | é |
-      +---+
-    `)
+  const {contents: test1} = render(dedent`
+    +---+
+    | é |
+    +---+
+  `)
 
-  expect(contents).toBe(base.replace('ï', 'é'))
+  const {contents: test2} = render(dedent`
+    +---+
+    | Ê |
+    +---+
+  `)
+
+  const {contents: test3} = render(dedent`
+    +---+
+    | ﬂ |
+    +---+
+  `)
+
+  const {contents: test4} = render(dedent`
+    +---+
+    | ¯ |
+    +---+
+  `)
+
+  expect(test1).toBe(base.replace('ï', 'é'))
+  expect(test2).toBe(base.replace('ï', 'Ê'))
+  expect(test3).toBe(base.replace('ï', 'ﬂ'))
+  expect(test4).toBe(base.replace('ï', '¯'))
+})
+
+test('handles various character widths', () => {
+  // these should "look ok" in monospace fonts
+  const {contents: test1a} = render(dedent`
+    +----+
+    | 👨‍👨‍👧‍👦 |
+    +----+
+  `)
+
+  const {contents: test2a} = render(dedent`
+    +----+
+    | 🌵 |
+    +----+
+  `)
+
+  // these should not look ok in monospace fonts, it should be
+  // visible that the top and bottom lines (`+---+`) are 1 dash too short
+  const {contents: test1b} = render(dedent`
+    +---+
+    | 👨‍👨‍👧‍👦 |
+    +---+
+  `)
+
+  const {contents: test2b} = render(dedent`
+    +---+
+    | 🌵 |
+    +---+
+  `)
+
+  expect(test1a).toContain('<table>')
+  expect(test1b).not.toContain('<table>')
+  expect(test2a).toContain('<table>')
+  expect(test2b).not.toContain('<table>')
+})
+
+test('handles Cyrillic script', () => {
+  const {contents: test1} = render(dedent`
+    +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+    | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z | z |
+    +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+    | А | Б | В | Г | Д | Е | Ё | Ж | З | И | Й | К | Л | М | Н | О | П | Р | С | Т | У | Ф | Х | Ц | Ч | Ш | Щ | Ъ | Ы | Ь | Э | Ю | Я |
+    +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+    | а | б | в | г | д | е | ё | ж | з | и | й | к | л | м | н | о | п | р | с | т | у | ф | х | ц | ч | ш | щ | ъ | ы | ь | э | ю | я |
+    +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+  `)
+
+  const {contents: test2} = render(dedent`
+    +-----+
+    | abc |
+    +-----+
+    | ѥръ |
+    +-----+
+  `)
+
+  const {contents: test3} = render(dedent`
+    +---+
+    | Ӂ |
+    +---+
+  `)
+
+  const {contents: test4} = render(dedent`
+    +---+---+
+    | z | z |
+    +---+---+
+    | Ӽ | ӽ |
+    +---+---+
+    | Ў | ў |
+    +---+---+
+  `)
+
+  expect(test1).toMatchSnapshot()
+  expect(test2).toMatchSnapshot()
+  expect(test3).toMatchSnapshot()
+  expect(test4).toMatchSnapshot()
 })
 
 test('stringify', () => {

@@ -1,6 +1,6 @@
 const trimEnd = require('lodash.trimend')
 const visit = require('unist-util-visit')
-const isFullwidth = require('@nxmix/is-full-width').default
+const stringWidth = require('string-width')
 const splitter = new (require('grapheme-splitter'))()
 
 const mainLineRegex = new RegExp(/((\+)|(\|)).+((\|)|(\+))/)
@@ -198,7 +198,7 @@ function findAll (str, characters) {
     if (characters.includes(char)) {
       pos.push(current)
     }
-    current += computeLineLength(char)
+    current += stringWidth(char)
   }
   return pos
 }
@@ -245,7 +245,7 @@ function isCodePointPosition (line, pos) {
     if (pos < offset) {
       return false
     }
-    offset += computeLineLength(content[i])
+    offset += stringWidth(content[i])
   }
 
   // Reaching end means character position
@@ -264,7 +264,7 @@ function substringLine (line, start, end) {
       str += content[i]
     }
 
-    offset += computeLineLength(content[i])
+    offset += stringWidth(content[i])
 
     if (offset >= end) {
       break
@@ -272,24 +272,6 @@ function substringLine (line, start, end) {
   }
 
   return str
-}
-
-function isNormalWidth (unicode) {
-  return (unicode <= 0xff && unicode !== 0x00d7) || (unicode >= 0xff61 && unicode <= 0xffdf)
-}
-
-function computeLineLength (line) {
-  let length = 0
-
-  splitter.splitGraphemes(line).forEach(char => {
-    length += 1
-    const codepoint = char.codePointAt()
-    if (!isNormalWidth(codepoint)) {
-      length += isFullwidth(codepoint)
-    }
-  })
-
-  return length
 }
 
 function extractTable (value, eat, tokenizer) {
@@ -302,7 +284,7 @@ function extractTable (value, eat, tokenizer) {
   for (; i < markdownLines.length; i++) {
     const line = markdownLines[i]
     if (isSeparationLine(line)) break
-    if (computeLineLength(line) === 0) break
+    if (stringWidth(line) === 0) break
     before.push(line)
   }
 
@@ -311,14 +293,14 @@ function extractTable (value, eat, tokenizer) {
 
   // Extract table
   if (!possibleGridTable[i + 1]) return [null, null, null, null]
-  const lineLength = computeLineLength(possibleGridTable[i + 1])
+  const lineLength = stringWidth(possibleGridTable[i + 1])
   const gridTable = []
   let hasHeader = false
   for (; i < possibleGridTable.length; i++) {
     const line = possibleGridTable[i]
     const isMainLine = totalMainLineRegex.exec(line)
     // line is in table
-    if (isMainLine && computeLineLength(line) === lineLength) {
+    if (isMainLine && stringWidth(line) === lineLength) {
       const isHeaderLine = headerLineRegex.exec(line)
       if (isHeaderLine && !hasHeader) hasHeader = true
       // A table can't have 2 headers
@@ -347,7 +329,7 @@ function extractTable (value, eat, tokenizer) {
   const after = []
   for (; i < possibleGridTable.length; i++) {
     const line = possibleGridTable[i]
-    if (computeLineLength(line) === 0) break
+    if (stringWidth(line) === 0) break
     after.push(markdownLines[i])
   }
 
