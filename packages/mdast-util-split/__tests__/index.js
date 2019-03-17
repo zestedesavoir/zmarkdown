@@ -12,19 +12,19 @@ const doSplit = (text, {splitDepth = 1,
 
 const text = dedent `
   a global introduction
-  
+
   # hello
-  
+
   a paragraph
-  
+
   > a quote to *ensure this is parsed*
-  
+
   ## a sub title
-  
+
   other paragraph
-  
+
   # conclusion title
-  
+
   paragraph
   `
 
@@ -118,98 +118,11 @@ test('default parameter with canonical text', () => {
   })
 })
 
-test('extract conclusion', () => {
-  const result = doSplit(text, {conclusionAsProperty: true})
-  expect(result.introduction).toMatchObject({
-    type: 'root',
-    children: [
-      {
-        type: 'paragraph',
-        children: [
-          {
-            type: 'text',
-            value: 'a global introduction',
-          },
-        ],
-      },
-    ],
-  })
-  expect(result.trees.length).toBe(1)
-  expect(result.trees[0].children).toMatchObject({
-    type: 'root',
-    children: [
-      {
-        type: 'paragraph',
-        children: [
-          {
-            type: 'text',
-            value: 'a paragraph',
-          },
-        ],
-      },
-      {
-        type: 'blockquote',
-        children: [
-          {
-            type: 'paragraph',
-            children: [
-              {
-                type: 'text',
-                value: 'a quote to ',
-              },
-              {
-                type: 'emphasis',
-                children: [
-                  {
-                    type: 'text',
-                    value: 'ensure this is parsed',
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        type: 'heading',
-        depth: 2,
-        children: [
-          {
-            type: 'text',
-            value: 'a sub title',
-          },
-        ],
-      },
-      {
-        type: 'paragraph',
-        children: [
-          {
-            type: 'text',
-            value: 'other paragraph',
-          },
-        ],
-      },
-    ],
-  })
-  expect(result.conclusion).toMatchObject({
-    type: 'root',
-    children: [
-      {
-        type: 'paragraph',
-        children: [
-          {
-            type: 'text',
-            value: 'paragraph',
-          },
-        ],
-      },
-    ],
-  })
-})
-
 test('no heading', () => {
-  const noHeadingText = text.replace(/#/g, '')
-  expect(() => doSplit(noHeadingText, {})).toThrowError('No heading')
+  const headingStripped = text.replace(/#/g, '')
+  const result = doSplit(headingStripped, {})
+  expect(result.trees).toHaveLength(0)
+  expect(result.introduction.type).toBe('root')
 })
 
 test('split level 2 titles', () => {
