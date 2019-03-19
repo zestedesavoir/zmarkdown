@@ -78,6 +78,7 @@
     "remark-kbd": "file:packages/remark-kbd",
     "remark-numbered-footnotes": "file:packages/remark-numbered-footnotes",
     "remark-ping": "file:packages/remark-ping",
+    "remark-seclink": "^1.0.0",
     "remark-sub-super": "file:packages/remark-sub-super",
     "typographic-colon": "file:packages/typographic-colon",
     "typographic-em-dash": "file:packages/typographic-em-dash",
