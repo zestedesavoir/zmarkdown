@@ -40,6 +40,7 @@ const rehypeKatex = require('rehype-katex')
 const rehypeLineNumbers = require('./utils/rehype-line-numbers')
 const rehypePostfixFootnotes = require('rehype-postfix-footnote-anchors')
 const rehypeSlug = require('rehype-slug')
+const rehypeSanitize = require('rehype-sanitize')
 
 const rehypeStringify = require('rehype-stringify')
 
@@ -147,6 +148,7 @@ function getHTMLProcessor (config) {
     .use(rehypeFootnotesTitles, config.remarkConfig.footnotesTitles)
     .use(rehypePostfixFootnotes, `-${shortid.generate()}`)
     .use(rehypeKatex, config.remarkConfig.katex)
+    .use(rehypeSanitize, config.remarkConfig.sanitize)
     .use(() => (tree) => {
       Object.keys(wrappers).forEach(nodeName =>
         wrappers[nodeName].forEach(wrapper => {
