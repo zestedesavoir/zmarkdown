@@ -1,7 +1,7 @@
 # mdast-util-split [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
 
-**rebber** is a LaTeX stringifier for [remark][]
+**mdast-util-split** is a tool usefull to split a markdown text into separate chapters.
 
 ## Installation
 
@@ -33,14 +33,7 @@ Splits a MDAST tree into separate trees by [heading depth](https://github.com/sy
 
 #### `options.splitDepth = 1`
 
-An integer greater or equal to 1 determining the max heading depth at which the tree is split.
-
-#### `options.introductionAsProperty = true`
-
-A boolean driving the way we want to process introduction :
-- if `true`, all MDAST elements between the split header and the first sub header will be extracted and put in the `introduction` property of the result
-property of the returned object
-- if `false` they will just be added as MDAST elements of the `children` property.
+An integer greater or equal to 1 determining which header you want to match while splitting.
 
 #### `options.conclusionAsProperty`
 
@@ -59,14 +52,12 @@ import split from 'mdast-util-split'
 const doSplit = (text, options) => {
   const {
     splitDepth = 1,
-    introductionAsProperty = true,
     conclusionAsProperty = false
   } = options
   return split(
     unified().use(reParse).parse(text),
     {
       splitDepth: splitDepth,
-      introductionAsProperty: introductionAsProperty,
       conclusionAsProperty: conclusionAsProperty
     }
   )
@@ -137,122 +128,44 @@ doSplit(text)
     {
       "title": {
         "type": "root",
-        "children": [
-          {
-            "type": "heading",
-            "depth": 1,
-            "children": [
-              {
-                "type": "text",
-                "value": "hello",
-                "position": {
-                  "start": {
-                    "line": 3,
-                    "column": 3,
-                    "offset": 25
-                  },
-                  "end": {
-                    "line": 3,
-                    "column": 8,
-                    "offset": 30
-                  },
-                  "indent": []
-                }
+        "children": {
+          "type": "heading",
+          "depth": 1,
+          "children": [
+            {
+              "type": "text",
+              "value": "hello",
+              "position": {
+                "start": {
+                  "line": 3,
+                  "column": 3,
+                  "offset": 25
+                },
+                "end": {
+                  "line": 3,
+                  "column": 8,
+                  "offset": 30
+                },
+                "indent": []
               }
-            ],
-            "position": {
-              "start": {
-                "line": 3,
-                "column": 1,
-                "offset": 23
-              },
-              "end": {
-                "line": 3,
-                "column": 8,
-                "offset": 30
-              },
-              "indent": []
             }
+          ],
+          "position": {
+            "start": {
+              "line": 3,
+              "column": 1,
+              "offset": 23
+            },
+            "end": {
+              "line": 3,
+              "column": 8,
+              "offset": 30
+            },
+            "indent": []
           }
-        ]
+        }
       },
       "children": {
-        "type": "root",
-        "children": [
-          {
-            "type": "heading",
-            "depth": 2,
-            "children": [
-              {
-                "type": "text",
-                "value": "a sub title",
-                "position": {
-                  "start": {
-                    "line": 9,
-                    "column": 4,
-                    "offset": 86
-                  },
-                  "end": {
-                    "line": 9,
-                    "column": 15,
-                    "offset": 97
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 9,
-                "column": 1,
-                "offset": 83
-              },
-              "end": {
-                "line": 9,
-                "column": 15,
-                "offset": 97
-              },
-              "indent": []
-            }
-          },
-          {
-            "type": "paragraph",
-            "children": [
-              {
-                "type": "text",
-                "value": "other paragraph",
-                "position": {
-                  "start": {
-                    "line": 11,
-                    "column": 1,
-                    "offset": 99
-                  },
-                  "end": {
-                    "line": 11,
-                    "column": 16,
-                    "offset": 114
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 11,
-                "column": 1,
-                "offset": 99
-              },
-              "end": {
-                "line": 11,
-                "column": 16,
-                "offset": 114
-              },
-              "indent": []
-            }
-          }
-        ]
-      },
-      "introduction": {
         "type": "root",
         "children": [
           {
@@ -377,31 +290,24 @@ doSplit(text)
               },
               "indent": []
             }
-          }
-        ]
-      }
-    },
-    {
-      "title": {
-        "type": "root",
-        "children": [
+          },
           {
             "type": "heading",
-            "depth": 1,
+            "depth": 2,
             "children": [
               {
                 "type": "text",
-                "value": "conclusion title",
+                "value": "a sub title",
                 "position": {
                   "start": {
-                    "line": 13,
-                    "column": 3,
-                    "offset": 118
+                    "line": 9,
+                    "column": 4,
+                    "offset": 86
                   },
                   "end": {
-                    "line": 13,
-                    "column": 19,
-                    "offset": 134
+                    "line": 9,
+                    "column": 15,
+                    "offset": 97
                   },
                   "indent": []
                 }
@@ -409,19 +315,95 @@ doSplit(text)
             ],
             "position": {
               "start": {
-                "line": 13,
+                "line": 9,
                 "column": 1,
-                "offset": 116
+                "offset": 83
               },
               "end": {
-                "line": 13,
-                "column": 19,
-                "offset": 134
+                "line": 9,
+                "column": 15,
+                "offset": 97
+              },
+              "indent": []
+            }
+          },
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "type": "text",
+                "value": "other paragraph",
+                "position": {
+                  "start": {
+                    "line": 11,
+                    "column": 1,
+                    "offset": 99
+                  },
+                  "end": {
+                    "line": 11,
+                    "column": 16,
+                    "offset": 114
+                  },
+                  "indent": []
+                }
+              }
+            ],
+            "position": {
+              "start": {
+                "line": 11,
+                "column": 1,
+                "offset": 99
+              },
+              "end": {
+                "line": 11,
+                "column": 16,
+                "offset": 114
               },
               "indent": []
             }
           }
         ]
+      }
+    },
+    {
+      "title": {
+        "type": "root",
+        "children": {
+          "type": "heading",
+          "depth": 1,
+          "children": [
+            {
+              "type": "text",
+              "value": "conclusion title",
+              "position": {
+                "start": {
+                  "line": 13,
+                  "column": 3,
+                  "offset": 118
+                },
+                "end": {
+                  "line": 13,
+                  "column": 19,
+                  "offset": 134
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 13,
+              "column": 1,
+              "offset": 116
+            },
+            "end": {
+              "line": 13,
+              "column": 19,
+              "offset": 134
+            },
+            "indent": []
+          }
+        }
       },
       "children": {
         "type": "root",
