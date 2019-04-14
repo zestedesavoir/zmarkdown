@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Sanitize HTML to prevent XSS advanced XSS 1`] = `"<p>This is [not obvious](   lives\\\\0cript:promp('It works !')) !</p>"`;
+
 exports[`code highlight special cases does not highlight console 1`] = `
 "<div class=\\"hljs-code-div\\"><div class=\\"hljs-line-numbers\\"><span></span></div><pre><code class=\\"language-console\\">echo \\"Hello world\\"
 </code></pre></div>"
