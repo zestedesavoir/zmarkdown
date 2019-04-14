@@ -1,7 +1,7 @@
 import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
-import split from '../src/'
+import split from '../src'
 
 const doSplit = (text, {splitDepth = 1,
   introductionAsProperty = true, conclusionAsProperty = false}) => {

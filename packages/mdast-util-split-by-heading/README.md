@@ -1,14 +1,16 @@
-# mdast-util-split [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
+# mdast-util-split-by-heading [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
 
-**mdast-util-split** is a tool usefull to split a markdown text into separate chapters.
+**mdast-util-split-by-heading** splits a markdown AST into several markdown ASTs based on their headings.
+
+It is useful when you want to split a document with many headings into several documents, for instance one by chapter.
 
 ## Installation
 
 [npm][]:
 
 ```bash
-npm install mdast-util-split
+npm install mdast-util-split-by-heading
 ```
 
 ## Usage
@@ -16,7 +18,7 @@ npm install mdast-util-split
 ```javascript
 const unified = require('unified')
 const parse = require('remark-parse')
-const split = require('mdast-util-split')
+const split = require('mdast-util-split-by-heading')
 
 var tree = unified()
   .use(parse)
@@ -27,19 +29,13 @@ console.log(split(tree))
 
 ## API
 
-### `split(node[, options])`
+### `split(node, options = { splitDepth: 1 })`
 
 Splits a MDAST tree into separate trees by [heading depth](https://github.com/syntax-tree/mdast#heading).
 
 #### `options.splitDepth = 1`
 
-An integer greater or equal to 1 determining which header you want to match while splitting.
-
-#### `options.conclusionAsProperty`
-
-A boolean driving the way we want to process the last sub header if there are more than one.
-- if `true`, the last sub header is removed from tree and all following elements are stored in the `conclusion` property of the result
-- if `false` (default), nothing is changed.
+An integer greater or equal to 1 determining the heading depth you want to match when splitting.
 
 ## Examples:
 
@@ -47,19 +43,13 @@ A boolean driving the way we want to process the last sub header if there are mo
 import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
-import split from 'mdast-util-split'
+import split from 'mdast-util-split-by-heading'
 
 const doSplit = (text, options) => {
-  const {
-    splitDepth = 1,
-    conclusionAsProperty = false
-  } = options
+  const { splitDepth = 1 } = options
   return split(
     unified().use(reParse).parse(text),
-    {
-      splitDepth: splitDepth,
-      conclusionAsProperty: conclusionAsProperty
-    }
+    { splitDepth: splitDepth }
   )
 }
 
