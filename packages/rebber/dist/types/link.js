@@ -1,18 +1,21 @@
-'use strict';
+"use strict";
 
 /* Dependencies. */
 var has = require('has');
-var escape = require('../escaper');
 
+var escape = require('../escaper');
 /* Expose. */
+
+
 module.exports = link;
 
 var defaultMacro = function defaultMacro(displayText, url, title) {
-  return '\\externalLink{' + displayText + '}{' + url + '}';
+  return "\\externalLink{".concat(displayText, "}{").concat(url, "}");
 };
-
 /* Stringify a link `node`.
 */
+
+
 function link(ctx, node) {
   if (!node.url) return '';
   var config = ctx.link || {};

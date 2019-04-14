@@ -1,18 +1,17 @@
-'use strict';
+"use strict";
 
 /* Dependencies. */
 var one = require('../one');
-
 /* Expose. */
-module.exports = root;
 
+
+module.exports = root;
 /* Stringify a text `node`. */
+
 function root(ctx, node, _, parent) {
   var children = node.children;
   if (!children) return '';
-
-  var previous = void 0;
-
+  var previous;
   return children.reduce(function (output, child, index) {
     if (previous) {
       if (child.type === previous.type && previous.type === 'list') {

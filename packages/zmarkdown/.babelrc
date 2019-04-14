@@ -1,16 +1,11 @@
 {
   "presets": [
-    [
-      "env",
-      {
-        "targets": "> 0.5%, last 2 versions, Firefox ESR, not dead, ie >=11"
-      }
-    ]
+    [ "@babel/preset-env", {
+      "targets": {
+        "browsers": "> 0.5%, last 2 versions, Firefox ESR, not dead, ie >=11"
+      },
+      "useBuiltIns": "usage"
+    }]
   ],
-  "plugins": [],
-  "env": {
-    "development": {
-      "sourceMaps": "inline"
-    }
-  }
+  "plugins": []
 }

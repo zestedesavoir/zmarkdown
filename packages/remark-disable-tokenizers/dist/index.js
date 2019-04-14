@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var clone = require('clone');
 
@@ -17,9 +17,9 @@ function plugin() {
 
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       _ref$block = _ref.block,
-      block = _ref$block === undefined ? [] : _ref$block,
+      block = _ref$block === void 0 ? [] : _ref$block,
       _ref$inline = _ref.inline,
-      inline = _ref$inline === undefined ? [] : _ref$inline;
+      inline = _ref$inline === void 0 ? [] : _ref$inline;
 
   if (block.length) {
     block.filter(function (key) {
@@ -43,8 +43,9 @@ function plugin() {
       }).includes(key[0]);
       return inline.includes(key);
     }).forEach(function (key) {
-      var tokenizerName = void 0;
-      var replacer = void 0;
+      var tokenizerName;
+      var replacer;
+
       if (Array.isArray(key) && key.length === 2) {
         tokenizerName = key[0];
         replacer = throwing(key[1]);
@@ -52,11 +53,13 @@ function plugin() {
         tokenizerName = key;
         replacer = clone(noop);
       }
+
       if (_this.Parser.prototype.inlineTokenizers[tokenizerName]) {
         Object.keys(_this.Parser.prototype.inlineTokenizers[tokenizerName]).forEach(function (prop) {
           replacer[prop] = _this.Parser.prototype.inlineTokenizers[tokenizerName][prop];
         });
       }
+
       _this.Parser.prototype.inlineTokenizers[tokenizerName] = replacer;
     });
   }

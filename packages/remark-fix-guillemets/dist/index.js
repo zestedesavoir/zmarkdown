@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var visit = require('unist-util-visit');
 
@@ -13,6 +13,7 @@ function transformer(tree) {
 function visitor(node, index, parent) {
   for (var c = 1; c < node.children.length - 1; c++) {
     var child = node.children[c];
+
     if (child.type === 'html') {
       var previousNode = node.children[c - 1];
       var nextNode = node.children[c + 1];

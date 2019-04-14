@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var whitespace = require('is-whitespace-character');
 
@@ -30,10 +30,8 @@ function plugin() {
       character = value.charAt(index);
 
       if (character === C_PIPE && previous === C_PIPE && (!preceding || !whitespace(preceding))) {
-
         /* istanbul ignore if - never used (yet) */
         if (silent) return true;
-
         return eat(DOUBLE + subvalue + DOUBLE)({
           type: 'kbd',
           children: this.tokenizeInline(subvalue, now),
@@ -48,23 +46,21 @@ function plugin() {
       previous = character;
     }
   }
+
   inlineTokenizer.locator = locator;
+  var Parser = this.Parser; // Inject inlineTokenizer
 
-  var Parser = this.Parser;
-
-  // Inject inlineTokenizer
   var inlineTokenizers = Parser.prototype.inlineTokenizers;
   var inlineMethods = Parser.prototype.inlineMethods;
   inlineTokenizers.kbd = inlineTokenizer;
   inlineMethods.splice(inlineMethods.indexOf('text'), 0, 'kbd');
+  var Compiler = this.Compiler; // Stringify
 
-  var Compiler = this.Compiler;
-
-  // Stringify
   if (Compiler) {
     var visitors = Compiler.prototype.visitors;
+
     visitors.kbd = function (node) {
-      return '||' + this.all(node).join('') + '||';
+      return "||".concat(this.all(node).join(''), "||");
     };
   }
 }

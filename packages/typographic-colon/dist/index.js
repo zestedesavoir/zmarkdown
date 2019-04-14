@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var db = require('./db');
 
@@ -9,12 +9,11 @@ module.exports = function () {
       locale = _ref.locale;
 
   if (!Object.keys(db).includes(locale)) return input;
-
   var beforeColon = db[locale];
-
   var pattern = / :(\s|$)/gim;
+
   var handleColon = function handleColon(withColon, afterColon) {
-    return beforeColon + ':' + afterColon;
+    return "".concat(beforeColon, ":").concat(afterColon);
   };
 
   return input.replace(pattern, handleColon);
