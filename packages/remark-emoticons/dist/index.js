@@ -1,6 +1,12 @@
-'use strict';
+"use strict";
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function escapeRegExp(str) {
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&'); // eslint-disable-line no-useless-escape
@@ -14,65 +20,45 @@ module.exports = function inlinePlugin(ctx) {
     throw new Error('remark-emoticons needs to be passed a configuration object as option');
   }
 
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
+  for (var _i = 0, _Object$entries = Object.entries(emoticons); _i < _Object$entries.length; _i++) {
+    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+        key = _Object$entries$_i[0],
+        val = _Object$entries$_i[1];
 
-  try {
-    for (var _iterator = Object.entries(emoticons)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var _ref = _step.value;
-
-      var _ref2 = _slicedToArray(_ref, 2);
-
-      var key = _ref2[0];
-      var val = _ref2[1];
-
-      emoticons[key.toLowerCase()] = val;
-    }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
+    emoticons[key.toLowerCase()] = val;
   }
 
   var pattern = Object.keys(emoticons).map(escapeRegExp).join('|');
-
-  var regex = new RegExp('(?:\\s|^)(' + pattern + ')(?:\\s|$)', 'i');
+  var regex = new RegExp("(?:\\s|^)(".concat(pattern, ")(?:\\s|$)"), 'i');
 
   function locator(value, fromIndex) {
     var keep = regex.exec(value);
+
     if (keep) {
       var index = keep.index;
+
       while (/^\s/.test(value.charAt(index))) {
         index++;
       }
+
       return index;
     }
+
     return -1;
   }
 
   function inlineTokenizer(eat, value, silent) {
     var keep = regex.exec(value);
+
     if (keep) {
       if (keep.index !== 0) return true;
       if (!keep[0].startsWith(keep[1])) return true;
-
       /* istanbul ignore if - never used (yet) */
-      if (silent) return true;
 
+      if (silent) return true;
       var toEat = keep[1];
       var emoticon = toEat.trim();
       var src = emoticons[emoticon.toLowerCase()];
-
       var emoticonNode = {
         type: 'emoticon',
         value: emoticon,
@@ -86,7 +72,7 @@ module.exports = function inlinePlugin(ctx) {
       };
 
       if (emoticonClasses) {
-        emoticonNode.data.hProperties.class = emoticonClasses;
+        emoticonNode.data.hProperties["class"] = emoticonClasses;
       }
 
       eat(toEat)(emoticonNode);
@@ -94,19 +80,18 @@ module.exports = function inlinePlugin(ctx) {
   }
 
   inlineTokenizer.locator = locator;
+  var Parser = this.Parser; // Inject inlineTokenizer
 
-  var Parser = this.Parser;
-
-  // Inject inlineTokenizer
   var inlineTokenizers = Parser.prototype.inlineTokenizers;
   var inlineMethods = Parser.prototype.inlineMethods;
   inlineTokenizers.emoticons = inlineTokenizer;
   inlineMethods.splice(inlineMethods.indexOf('text'), 0, 'emoticons');
-
   var Compiler = this.Compiler;
+
   if (Compiler) {
     var visitors = Compiler.prototype.visitors;
     if (!visitors) return;
+
     visitors.emoticon = function (node) {
       return node.value;
     };

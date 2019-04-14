@@ -1,26 +1,30 @@
-'use strict';
+"use strict";
 
 /* Dependencies. */
 var all = require('rebber/dist/all');
+
 var has = require('has');
-
 /* Expose. */
-module.exports = math;
 
+
+module.exports = math;
 var defaultMacros = {
   inlineMath: function inlineMath(content) {
-    return '$' + content + '$';
+    return "$".concat(content, "$");
   },
   inlineMathDouble: function inlineMathDouble(content) {
-    return '$$' + content + '$$';
+    return "$$".concat(content, "$$");
   },
   math: function math(content) {
-    return '\\[ ' + content + ' \\]\n\n';
+    return "\\[ ".concat(content, " \\]\n\n");
   }
-
   /* Stringify a Figure `node`. */
-};function math(ctx, node, index, parent) {
+
+};
+
+function math(ctx, node, index, parent) {
   var type = 'math';
+
   if (node.type === 'inlineMath') {
     try {
       var classes = node.data.hProperties.className.split(' ');
@@ -31,7 +35,6 @@ var defaultMacros = {
   }
 
   var macro = has(ctx, 'math') && has(ctx.math, type) && ctx.math[type] || has(defaultMacros, type) && defaultMacros[type];
-
   var content = all(ctx, node) || node.value || '';
   return macro(content.trim());
 }

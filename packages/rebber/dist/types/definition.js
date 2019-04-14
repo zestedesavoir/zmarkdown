@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 module.exports = definition;
 
@@ -17,7 +17,7 @@ var defaultMacro = function defaultMacro(ctx, identifier, url, title) {
 
   var link = require('../all')(ctx, node);
 
-  return '\\footnote{\\label{' + identifier + '}' + link + '}';
+  return "\\footnote{\\label{".concat(identifier, "}").concat(link, "}");
 };
 
 function definition(ctx, node) {

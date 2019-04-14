@@ -1,21 +1,21 @@
-'use strict';
+"use strict";
 
 /* Dependencies. */
 var all = require('rebber/dist/all');
-
 /* Expose. */
-module.exports = customBlock;
 
+
+module.exports = customBlock;
 var defaultMacros = {
   defaultBlock: function defaultBlock(environmentName, blockTitle, blockContent) {
-    return '\\begin{' + environmentName + '}' + (blockTitle ? '[' + blockTitle + ']' : '') + ('\n' + blockContent) + ('\n\\end{' + environmentName + '}\n');
+    return "\\begin{".concat(environmentName, "}").concat(blockTitle ? "[".concat(blockTitle, "]") : '') + "\n".concat(blockContent) + "\n\\end{".concat(environmentName, "}\n");
   }
 };
 
 function customBlock(ctx, node) {
   var blockMacro = ctx[node.type] || defaultMacros[node.type] || defaultMacros.defaultBlock;
-
   var blockTitle = '';
+
   if (node.children && node.children.length) {
     if (node.children[0].type.endsWith('CustomBlockHeading')) {
       var titleNode = node.children.splice(0, 1)[0];
@@ -24,11 +24,9 @@ function customBlock(ctx, node) {
   }
 
   node.children[0].type = 'paragraph';
-
   var blockContent = all(ctx, node).trim();
   var options = ctx.customBlocks || {};
-
-  var environmentName = void 0;
+  var environmentName;
   var type = node.type.replace('CustomBlock', '');
 
   if (options.map && options.map[type]) {

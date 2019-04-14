@@ -1,7 +1,6 @@
-'use strict';
+"use strict";
 
 module.exports = plugin;
-
 /*
 LaTeX requires special handlings of footnotes placed in headings such as \section{}
 We therefore mark each footnote placed in heading for later handling.

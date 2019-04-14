@@ -1,13 +1,15 @@
-'use strict';
+"use strict";
 
 module.exports = function () {
   return function (node, index, parent) {
     var linkNode = {
       type: 'link',
       url: node.data.hProperties.src,
-      children: [{ type: 'text', value: node.data.hProperties.src }]
+      children: [{
+        type: 'text',
+        value: node.data.hProperties.src
+      }]
     };
-
     var thumbnailNode = {
       type: 'image',
       url: node.data.thumbnail

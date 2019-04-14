@@ -1,9 +1,11 @@
-'use strict';
+"use strict";
 
 var xtend = require('xtend');
+
 var visit = require('unist-util-visit');
 
 var headingPlugin = require('./headingVisitor');
+
 var referenceVisitors = require('./referenceVisitors');
 
 module.exports = preprocess;
@@ -18,9 +20,7 @@ function preprocess(ctx, tree) {
     imageReference: [imageReferenceVisitor],
     heading: [headingPlugin]
   };
-
   var visitors = xtend(defaultVisitors, ctx.preprocessors || {});
-
   Object.keys(visitors).forEach(function (nodeType) {
     if (Array.isArray(visitors[nodeType])) {
       visitors[nodeType].forEach(function (visitor) {

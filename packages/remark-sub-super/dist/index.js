@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var SPACE = ' ';
 var markers = {
@@ -9,32 +9,14 @@ var markers = {
 function locator(value, fromIndex) {
   var index = -1;
   var found = [];
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
 
-  try {
-    for (var _iterator = Object.keys(markers)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var marker = _step.value;
+  for (var _i = 0, _Object$keys = Object.keys(markers); _i < _Object$keys.length; _i++) {
+    var marker = _Object$keys[_i];
+    index = value.indexOf(marker, fromIndex);
 
-      index = value.indexOf(marker, fromIndex);
-      if (index !== -1) {
-        found.push(index);
-        continue;
-      }
-    }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
+    if (index !== -1) {
+      found.push(index);
+      continue;
     }
   }
 
@@ -51,29 +33,9 @@ function locator(value, fromIndex) {
 function inlinePlugin() {
   function inlineTokenizer(eat, value, silent) {
     // allow escaping of all markers
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
-
-    try {
-      for (var _iterator2 = Object.keys(markers)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-        var _marker = _step2.value;
-
-        if (!this.escape.includes(_marker)) this.escape.push(_marker);
-      }
-    } catch (err) {
-      _didIteratorError2 = true;
-      _iteratorError2 = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion2 && _iterator2.return) {
-          _iterator2.return();
-        }
-      } finally {
-        if (_didIteratorError2) {
-          throw _iteratorError2;
-        }
-      }
+    for (var _i2 = 0, _Object$keys2 = Object.keys(markers); _i2 < _Object$keys2.length; _i2++) {
+      var _marker = _Object$keys2[_i2];
+      if (!this.escape.includes(_marker)) this.escape.push(_marker);
     }
 
     var marker = value[0];
@@ -83,14 +45,16 @@ function inlinePlugin() {
 
     if (markers.hasOwnProperty(marker) && !value.startsWith(marker + SPACE) && !value.startsWith(marker + marker)) {
       var endMarkerIndex = 1;
-      for (; value[endMarkerIndex] !== marker && endMarkerIndex < value.length; endMarkerIndex++) {}
 
-      // if it's actually empty, don't tokenize (disallows e.g. <sup></sup>)
+      for (; value[endMarkerIndex] !== marker && endMarkerIndex < value.length; endMarkerIndex++) {
+        ;
+      } // if it's actually empty, don't tokenize (disallows e.g. <sup></sup>)
+
+
       if (endMarkerIndex === value.length) return;
-
       /* istanbul ignore if - never used (yet) */
-      if (silent) return true;
 
+      if (silent) return true;
       eat(value.substring(0, endMarkerIndex + 1))({
         type: markers[marker],
         children: this.tokenizeInline(value.substring(1, endMarkerIndex), now),
@@ -102,10 +66,8 @@ function inlinePlugin() {
   }
 
   inlineTokenizer.locator = locator;
+  var Parser = this.Parser; // Inject inlineTokenizer
 
-  var Parser = this.Parser;
-
-  // Inject inlineTokenizer
   var inlineTokenizers = Parser.prototype.inlineTokenizers;
   var inlineMethods = Parser.prototype.inlineMethods;
   inlineTokenizers.sub_super = inlineTokenizer;

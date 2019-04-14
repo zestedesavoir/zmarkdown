@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var visit = require('unist-util-visit');
 
@@ -9,9 +9,7 @@ function plugin() {
 function transformer(tree) {
   var footnotes = {};
   visit(tree, 'footnote', convert);
-
   visit(tree, 'footnoteDefinition', createIds(footnotes));
-
   visit(tree, 'footnoteReference', replaceIds(footnotes));
 }
 
@@ -36,6 +34,7 @@ function createIds(footnotes) {
     if (!footnotes.hasOwnProperty(identifier)) {
       footnotes[identifier] = Object.keys(footnotes).length + 1;
     }
+
     node.identifier = footnotes[identifier];
   };
 }
@@ -47,6 +46,7 @@ function replaceIds(footnotes) {
     if (!footnotes.hasOwnProperty(identifier)) {
       footnotes[identifier] = Object.keys(footnotes).length + 1;
     }
+
     node.identifier = footnotes[identifier];
   };
 }
@@ -55,8 +55,7 @@ function autoId(node) {
   var line = node.line,
       column = node.column,
       offset = node.offset;
-
-  return 'l' + line + 'c' + column + 'o' + offset;
+  return "l".concat(line, "c").concat(column, "o").concat(offset);
 }
 
 module.exports = plugin;

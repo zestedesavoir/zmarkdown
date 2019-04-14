@@ -1,12 +1,12 @@
-'use strict';
+"use strict";
 
 module.exports = function () {
   var state = {};
-
   return {
     definitionVisitor: function definitionVisitor() {
       return function (node, index, parent) {
         var identifier = node.identifier;
+
         while (Object.keys(state).includes(identifier)) {
           identifier += '-1';
         }

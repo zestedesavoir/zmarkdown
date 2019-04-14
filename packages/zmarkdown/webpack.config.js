@@ -20,7 +20,7 @@ const defaultConf = {
 module.exports = [
   Object.assign({}, defaultConf, {
     name: 'ZMarkdown',
-    entry: ['babel-polyfill', './client/index'],
+    entry: ['@babel/polyfill', './client/index'],
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'zmarkdown.js',

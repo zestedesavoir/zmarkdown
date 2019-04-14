@@ -1,8 +1,14 @@
-'use strict';
+"use strict";
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 var _require = require('url'),
     format = _require.format,
@@ -10,7 +16,7 @@ var _require = require('url'),
     URLSearchParams = _require.URLSearchParams;
 
 module.exports = function plugin(opts) {
-  if ((typeof opts === 'undefined' ? 'undefined' : _typeof(opts)) !== 'object' || !Object.keys(opts).length) {
+  if (_typeof(opts) !== 'object' || !Object.keys(opts).length) {
     throw new Error('remark-iframes needs to be passed a configuration object as option');
   }
 
@@ -21,21 +27,23 @@ module.exports = function plugin(opts) {
 
   function blockTokenizer(eat, value, silent) {
     if (!value.startsWith('!(http')) return;
-
     var eatenValue = '';
     var url = '';
     var specialChars = ['!', '(', ')'];
+
     for (var i = 0; i < value.length && value[i - 1] !== ')'; i++) {
       eatenValue += value[i];
+
       if (!specialChars.includes(value[i])) {
         url += value[i];
       }
     }
-
     /* istanbul ignore if - never used (yet) */
-    if (silent) return true;
 
+
+    if (silent) return true;
     var provider = detectProvider(url);
+
     if (!provider || provider.disabled === true || provider.match && provider.match instanceof RegExp && !provider.match.test(url)) {
       return eat(eatenValue)({
         type: 'paragraph',
@@ -65,20 +73,20 @@ module.exports = function plugin(opts) {
     });
   }
 
-  var Parser = this.Parser;
+  var Parser = this.Parser; // Inject blockTokenizer
 
-  // Inject blockTokenizer
   var blockTokenizers = Parser.prototype.blockTokenizers;
   var blockMethods = Parser.prototype.blockMethods;
   blockTokenizers.iframes = blockTokenizer;
   blockMethods.splice(blockMethods.indexOf('blockquote') + 1, 0, 'iframes');
-
   var Compiler = this.Compiler;
+
   if (Compiler) {
     var visitors = Compiler.prototype.visitors;
     if (!visitors) return;
+
     visitors.iframe = function (node) {
-      return '!(' + node.src + ')';
+      return "!(".concat(node.src, ")");
     };
   }
 };
@@ -90,7 +98,7 @@ function computeFinalUrl(provider, url) {
   if (provider.droppedQueryParameters && parsed.search) {
     var search = new URLSearchParams(parsed.search);
     provider.droppedQueryParameters.forEach(function (ignored) {
-      return search.delete(ignored);
+      return search["delete"](ignored);
     });
     parsed.search = search.toString();
     finalUrl = format(parsed);
@@ -127,15 +135,17 @@ function computeFinalUrl(provider, url) {
 function computeThumbnail(provider, url) {
   var thumbnailURL = '';
   var thumbnailConfig = provider.thumbnail;
+
   if (thumbnailConfig && thumbnailConfig.format) {
     thumbnailURL = thumbnailConfig.format;
     Object.keys(thumbnailConfig).filter(function (key) {
       return key !== 'format';
     }).forEach(function (key) {
-      var search = new RegExp('{' + key + '}', 'g');
+      var search = new RegExp("{".concat(key, "}"), 'g');
       var replace = new RegExp(thumbnailConfig[key]).exec(url);
       if (replace) thumbnailURL = thumbnailURL.replace(search, replace[1]);
     });
   }
+
   return thumbnailURL;
 }
