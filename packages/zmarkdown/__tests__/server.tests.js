@@ -294,6 +294,6 @@ describe('EPUB endpoint', () => {
     const [rendered, , messages] = response.data
     expect(messages[0].message).toMatch("Protocol 'file:' not allowed.")
 
-    expect(rendered).toBe('<p><img src="file://tmp/passwd"></p>')
+    expect(rendered).toBe('<p><img></p>')
   })
 })
