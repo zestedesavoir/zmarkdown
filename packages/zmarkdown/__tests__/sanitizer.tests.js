@@ -13,7 +13,7 @@ const renderString = (config = {remarkConfig, rebberConfig}) =>
       vfile.toString().trim())
 
 describe('#ping', () => {
-  it('do not oversanitive ping', () => {
+  it('do not oversanitize ping', () => {
     const rendered = renderString()('@Clem')
     expect(rendered).resolves.toContain('class="ping ping-link"')
     expect(rendered).resolves.toContain('class="ping-username"')
@@ -21,8 +21,13 @@ describe('#ping', () => {
 })
 
 describe('#math', () => {
-  it('do not oversanitize math', () => {
-    const rendered = renderString()('$$1_n$$')
+  it('do not oversanitize math - test sub/sup', () => {
+    const rendered = renderString()('$$1_n + 1^n$$')
+    expect(rendered).resolves.toMatchSnapshot()
+  })
+
+  it('do not oversanitize math - test frac', () => {
+    const rendered = renderString()('$$\frac{1+1}{x+y}$$')
     expect(rendered).resolves.toMatchSnapshot()
   })
 })
