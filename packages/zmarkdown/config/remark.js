@@ -18,63 +18,15 @@ const textrQuestionMark = require('typographic-question-mark/src')
 const textrSemicolon = require('typographic-semicolon/src')
 
 const gh = require('hast-util-sanitize/lib/github')
+const katex = require('./sanitize-katex')
 const merge = require('deepmerge')
 
-const sanitizeConfig = merge(gh, {
-  tagNames: [
-    'span',
-    'abbr',
-    'figure',
-    'figcaption',
-    'iframe',
-    // MathML elements
-    'math',
-    'maction',
-    'maligngroup',
-    'malignmark',
-    'menclose',
-    'merror',
-    'mfenced',
-    'mfrac',
-    'mglyph',
-    'mi',
-    'mlabeledtr',
-    'mlongdiv',
-    'mmultiscripts',
-    'mn',
-    'mo',
-    'mover',
-    'mpadded',
-    'mphantom',
-    'mroot',
-    'mrow',
-    'ms',
-    'mscarries',
-    'mscarry',
-    'msgroup',
-    'mstack',
-    'msline',
-    'mspace',
-    'msqrt',
-    'msrow',
-    'mstyle',
-    'msub',
-    'msubsup',
-    'msup',
-    'mtable',
-    'mtd',
-    'mtext',
-    'mtr',
-    'munder',
-    'munderover',
-    'semantics',
-    'annotation',
-    'annotation-xml',
-  ],
+const sanitizeConfig = merge.all([gh, katex, {
+  tagNames: ['span', 'abbr', 'figure', 'figcaption', 'iframe'],
   attributes: {
     a: ['ariaHidden', 'class', 'className'],
     div: ['id', 'class', 'className'],
-    span: ['id', 'className', 'class', 'style'],
+    span: ['id'],
     h1: ['ariaHidden'],
     h2: ['ariaHidden'],
     h3: ['ariaHidden'],
@@ -91,7 +43,7 @@ const sanitizeConfig = merge(gh, {
   },
   clobberPrefix: '',
   clobber: [],
-})
+}])
 
 const remarkConfig = {
   maxNesting: 100,
