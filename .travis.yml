@@ -10,6 +10,7 @@ cache:
 node_js:
   - '8'
   - '10'
+  - '12'
 
 env:
   matrix:
@@ -28,6 +29,8 @@ before_script:
 
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+
+before_deploy:
   - npm run build-demo
 
 deploy:
