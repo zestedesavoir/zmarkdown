@@ -166,7 +166,8 @@
       "infixlinebreakstyle",
       "scriptlevel",
       "scriptminsize",
-      "scriptsizemultiplier"
+      "scriptsizemultiplier",
+      "mathcolor"
     ],
     "mpadded": [
       "depth",
