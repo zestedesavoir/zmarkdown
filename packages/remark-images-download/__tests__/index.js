@@ -441,8 +441,8 @@ describe('mock server tests', () => {
     const render = renderFactory({httpRequestTimeout: 500})
 
     return render(file).then(vfile => {
-      expect(firstMsg(vfile)).toBe(
-        'getaddrinfo ENOTFOUND doesnotexist-kqwtkk78.com doesnotexist-kqwtkk78.com:80')
+      expect(firstMsg(vfile)).toContain(
+        'getaddrinfo ENOTFOUND doesnotexist-kqwtkk78.com')
       expect(vfile.contents).toBe(html)
     })
   })
