@@ -51,11 +51,229 @@
     "path"
   ],
   "attributes": {
+    "annotation": [
+      "encoding"
+    ],
+    "mo": [
+      "accent",
+      "dir",
+      "fence",
+      "form",
+      "indentalign",
+      "indentalignfirst",
+      "indentalignlast",
+      "indentshift",
+      "indentshiftfirst",
+      "indentshiftlast",
+      "indenttarget",
+      "largeop",
+      "linebreak",
+      "linebreakmultchar",
+      "linebreakstyle",
+      "lineleading",
+      "lspace",
+      "mathsize",
+      "mathvariant",
+      "maxsize",
+      "minsize",
+      "movablelimits",
+      "rspace",
+      "separator",
+      "stretchy",
+      "symmetric"
+    ],
+    "mover": [
+      "accent",
+      "align"
+    ],
+    "munderover": [
+      "accent",
+      "accentunder",
+      "align"
+    ],
+    "munder": [
+      "accentunder",
+      "align"
+    ],
+    "maction": [
+      "actiontype",
+      "selection"
+    ],
+    "mtable": [
+      "align",
+      "alignmentscope",
+      "columnalign",
+      "columnlines",
+      "columnspacing",
+      "columnwidth",
+      "displaystyle",
+      "equalcolumns",
+      "equalrows",
+      "frame",
+      "framespacing",
+      "groupalign",
+      "minlabelspacing",
+      "rowalign",
+      "rowlines",
+      "rowspacing",
+      "side",
+      "width"
+    ],
+    "mstack": [
+      "align",
+      "charalign",
+      "stackalign"
+    ],
+    "math": [
+      "altimg",
+      "dir",
+      "display",
+      "overflow",
+      "xmlns"
+    ],
+    "mfrac": [
+      "bevelled",
+      "denomalign",
+      "linethickness",
+      "numalign"
+    ],
+    "mfenced": [
+      "close",
+      "open",
+      "separators"
+    ],
+    "mtd": [
+      "columnalign",
+      "columnspan",
+      "groupalign",
+      "rowalign",
+      "rowspan"
+    ],
+    "mtr": [
+      "columnalign",
+      "groupalign",
+      "rowalign"
+    ],
+    "mlabeledtr": [
+      "columnalign"
+    ],
+    "mscarry": [
+      "crossout"
+    ],
+    "mstyle": [
+      "decimalpoint",
+      "displaystyle",
+      "infixlinebreakstyle",
+      "scriptlevel",
+      "scriptminsize",
+      "scriptsizemultiplier"
+    ],
+    "mpadded": [
+      "depth",
+      "height",
+      "lspace",
+      "voffset",
+      "width"
+    ],
+    "mi": [
+      "dir",
+      "mathsize",
+      "mathvariant"
+    ],
+    "mrow": [
+      "dir"
+    ],
+    "ms": [
+      "dir",
+      "lquote",
+      "mathsize",
+      "mathvariant",
+      "rquote"
+    ],
+    "mtext": [
+      "dir",
+      "mathsize",
+      "mathvariant"
+    ],
+    "malignmark": [
+      "edge"
+    ],
+    "maligngroup": [
+      "groupalign"
+    ],
+    "mglyph": [
+      "height",
+      "src",
+      "width"
+    ],
+    "mspace": [
+      "height",
+      "indentalign",
+      "indentalignfirst",
+      "indentalignlast",
+      "indentshift",
+      "indentshiftfirst",
+      "indentshiftlast",
+      "indenttarget",
+      "linebreak",
+      "linebreakmultchar",
+      "linebreakstyle",
+      "lineleading",
+      "width"
+    ],
+    "msline": [
+      "length",
+      "position"
+    ],
+    "mscarries": [
+      "location",
+      "position"
+    ],
+    "mlongdiv": [
+      "longdivstyle"
+    ],
+    "mn": [
+      "mathsize",
+      "mathvariant"
+    ],
+    "menclose": [
+      "notation"
+    ],
+    "msgroup": [
+      "position",
+      "shift"
+    ],
+    "msrow": [
+      "position"
+    ],
+    "mmultiscripts": [
+      "subscriptshift",
+      "supscriptshift"
+    ],
+    "msub": [
+      "subscriptshift"
+    ],
+    "msubsup": [
+      "subscriptshift",
+      "supscriptshift"
+    ],
+    "msup": [
+      "supscriptshift"
+    ],
     "span": [
       "className",
       "class",
       "style",
       "ariaHidden"
+    ],
+    "svg": [
+      "width",
+      "height",
+      "viewBox",
+      "preserveAspectRatio"
+    ],
+    "path": [
+      "d"
     ]
   }
 }
