@@ -175,7 +175,6 @@ const remarkConfig = {
       ':magicien:': '/static/smileys/svg/magicien.svg',
       ':colere2:': '/static/smileys/svg/mechant.svg',
       ':ninja:': '/static/smileys/svg/ninja.svg',
-      'x(': '/static/smileys/svg/pinch.svg',
       '>_<': '/static/smileys/svg/pinch.svg',
       'X/': '/static/smileys/svg/pinch.svg',
       ':pirate:': '/static/smileys/svg/pirate.svg',
@@ -309,7 +308,7 @@ const remarkConfig = {
       ':désolé:': '/static/smileys/svg/f97a.svg',
       ':desole:': '/static/smileys/svg/f97a.svg',
       ':triste:': '/static/smileys/svg/2639.svg',
-      ':rougir:': '/static/smileys/svg/263a.svg'
+      ':rougir:': '/static/smileys/svg/263a.svg',
     },
     classes: 'smiley',
   },
