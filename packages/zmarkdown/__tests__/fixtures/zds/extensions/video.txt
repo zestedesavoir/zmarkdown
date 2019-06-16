@@ -1,4 +1,4 @@
-!(https://www.youtube.com/watch?v=BpJKvrjLUp0)
+!(https://www.youtube.com/watch?v=FdltlrKFr1w)
 
 !(https://www.dailymotion.com/video/x2y6lhm)
 
@@ -6,9 +6,9 @@
 
 !(https://screen.yahoo.com/weatherman-gives-forecast-using-taylor-191821481.html)
 
-!(https://youtu.be/BpJKvrjLUp0)
+!(https://youtu.be/FdltlrKFr1w)
 
-!(http://youtube.com/watch?v=BpJKvrjLUp0)
+!(http://youtube.com/watch?v=FdltlrKFr1w)
 
 !(http://jsfiddle.net/Sandhose/BcKhe/1/)
 
@@ -24,5 +24,5 @@ This one should not be allowed:
 
 !(http://jsfiddle.net/Sandhose/BcKhe/)
 
-!(https://www.youtube.com/watch?v=BpJKvrjLUp0)
+!(https://www.youtube.com/watch?v=FdltlrKFr1w)
 with text after
