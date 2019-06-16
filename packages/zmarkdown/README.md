@@ -56,6 +56,10 @@ Only `metadata` is described in the **Response** sections below.
 
   Only parse inline Markdown elements (such as links and emphasis, unlike lists and fenced code blocks)
 
+* `opts.stats`, bool, default: `false`
+
+  Will compute and return statistics about markdown text
+ 
 ### Response
 
 * `metadata.disableToc`, bool
@@ -72,6 +76,12 @@ Only `metadata` is described in the **Response** sections below.
 * `metadata.languages`, string[]
 
   A list of unique languages used in GitHub Flavoured Markdown fences with a flag.
+
+* `metadata.stats` , object
+
+  stats about the parsed text:
+   - `signs`: number of chars, spaces uncluded
+   - ` words`: number of words
 
 ## `/latex` - Markdown to LaTeX
 
