@@ -55,49 +55,22 @@ test('video', () => {
       ],
     },
     'www.youtube.com': {
-      tag: 'iframe',
       width: 560,
       height: 315,
       disabled: false,
-      replace: [
-        ['watch?v=', 'embed/'],
-        ['http://', 'https://'],
-      ],
-      thumbnail: {
-        format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/(.+)$',
-      },
-      removeAfter: '&',
+      oembed: "https://www.youtube.com/oembed",
     },
     'youtube.com': {
-      tag: 'iframe',
       width: 560,
       height: 315,
       disabled: false,
-      replace: [
-        ['watch?v=', 'embed/'],
-        ['http://', 'https://'],
-      ],
-      thumbnail: {
-        format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/(.+)$',
-      },
-      removeAfter: '&',
+      oembed: "https://www.youtube.com/oembed",
     },
     'youtu.be': {
-      tag: 'iframe',
       width: 560,
       height: 315,
       disabled: false,
-      replace: [
-        ['watch?v=', 'embed/'],
-        ['youtu.be', 'www.youtube.com/embed'],
-      ],
-      thumbnail: {
-        format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/x(.+)$',
-      },
-      removeAfter: '&',
+      oembed: "https://www.youtube.com/oembed",
     },
     'screen.yahoo.com': {
       tag: 'iframe',
@@ -143,7 +116,7 @@ test('video', () => {
   }
 
   const {contents} = render(dedent`
-    !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
+    !(https://www.youtube.com/watch?v=FdltlrKFr1w)
 
     !(https://www.dailymotion.com/video/x2y6lhm)
 
@@ -153,9 +126,9 @@ test('video', () => {
 
     A [link with **bold**](http://example.com)
 
-    !(https://youtu.be/BpJKvrjLUp0)
+    !(https://youtu.be/FdltlrKFr1w)
 
-    !(http://youtube.com/watch?v=BpJKvrjLUp0)
+    !(http://youtube.com/watch?v=FdltlrKFr1w)
 
     !(http://jsfiddle.net/Sandhose/BcKhe/1/)
 
@@ -171,7 +144,7 @@ test('video', () => {
 
     !(http://jsfiddle.net/Sandhose/BcKhe/)
 
-    !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
+    !(https://www.youtube.com/watch?v=FdltlrKFr1w)
     with text after
   `, config)
 
@@ -205,9 +178,9 @@ test('extra', () => {
   }
 
   const {contents: parsed} = render(dedent`
-    !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
+    !(https://www.youtube.com/watch?v=FdltlrKFr1w)
 
-    !(https://www.youtube.com/watch?feature=embedded&v=BpJKvrjLUp0)
+    !(https://www.youtube.com/watch?feature=embedded&v=FdltlrKFr1w)
   `, config)
   expect(parsed).toMatch(/iframe.*iframe/)
 
@@ -240,9 +213,9 @@ test('does not parse without markers', () => {
   }
 
   const {contents} = render(dedent`
-    !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
+    !(https://www.youtube.com/watch?v=FdltlrKFr1w)
 
-    https://www.youtube.com/watch?v=BpJKvrjLUp0
+    https://www.youtube.com/watch?v=FdltlrKFr1w
   `, config)
 
   expect(contents).toMatchSnapshot()
@@ -297,7 +270,7 @@ test('Compiles to Markdown', () => {
   const txt = dedent`
     A [link with **bold**](http://example.com)
 
-    !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
+    !(https://www.youtube.com/watch?v=FdltlrKFr1w)
 
     These ones should not be allowed by config:
 

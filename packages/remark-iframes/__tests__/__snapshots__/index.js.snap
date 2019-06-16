@@ -3,7 +3,7 @@
 exports[`Compiles to Markdown 1`] = `
 "A [link with **bold**](http://example.com)
 
-!(https://www.youtube.com/watch?v=BpJKvrjLUp0)
+!(https://www.youtube.com/watch?v=FdltlrKFr1w)
 
 These ones should not be allowed by config:
 
@@ -22,7 +22,7 @@ Foo !(this is a parenthesis) bar
 exports[`Compiles to Markdown 2`] = `
 "A [link with **bold**](http://example.com)
 
-!(https://www.youtube.com/watch?v=BpJKvrjLUp0)
+!(https://www.youtube.com/watch?v=FdltlrKFr1w)
 
 These ones should not be allowed by config:
 
@@ -39,25 +39,25 @@ Foo !(this is a parenthesis) bar
 `;
 
 exports[`does not parse without markers 1`] = `
-"<iframe src=\\"https://www.youtube.com/embed/BpJKvrjLUp0\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>
-<p><a href=\\"https://www.youtube.com/watch?v=BpJKvrjLUp0\\">https://www.youtube.com/watch?v=BpJKvrjLUp0</a></p>"
+"<iframe src=\\"https://www.youtube.com/embed/FdltlrKFr1w\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>
+<p><a href=\\"https://www.youtube.com/watch?v=FdltlrKFr1w\\">https://www.youtube.com/watch?v=FdltlrKFr1w</a></p>"
 `;
 
 exports[`video 1`] = `
-"<iframe src=\\"https://www.youtube.com/embed/BpJKvrjLUp0\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>
+"<iframe src=\\"https://www.youtube.com/embed/FdltlrKFr1w?feature=oembed\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>
 <iframe src=\\"https://www.dailymotion.com/embed/video/x2y6lhm\\" width=\\"480\\" height=\\"270\\" allowfullscreen frameborder=\\"0\\"></iframe>
 <iframe src=\\"https://player.vimeo.com/video/133693532\\" width=\\"500\\" height=\\"281\\" allowfullscreen frameborder=\\"0\\"></iframe>
 <iframe src=\\"https://screen.yahoo.com/weatherman-gives-forecast-using-taylor-191821481.html?format=embed&#x26;player_autoplay=false\\" width=\\"624\\" height=\\"351\\" allowfullscreen frameborder=\\"0\\"></iframe>
 <p>A <a href=\\"http://example.com\\">link with <strong>bold</strong></a></p>
-<iframe src=\\"https://www.youtube.com/embed/BpJKvrjLUp0\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>
-<iframe src=\\"https://youtube.com/embed/BpJKvrjLUp0\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>
+<iframe src=\\"https://www.youtube.com/embed/FdltlrKFr1w?feature=oembed\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>
+<iframe src=\\"https://www.youtube.com/embed/FdltlrKFr1w?feature=oembed\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>
 <iframe src=\\"https://jsfiddle.net/Sandhose/BcKhe/1/embedded/result,js,html,css/\\" width=\\"560\\" height=\\"560\\" allowfullscreen frameborder=\\"0\\"></iframe>
 <iframe src=\\"https://jsfiddle.net/zgjhjv9j/embedded/result,js,html,css/\\" width=\\"560\\" height=\\"560\\" allowfullscreen frameborder=\\"0\\"></iframe>
 <iframe src=\\"https://jsfiddle.net/zgjhjv9j/1/embedded/result,js,html,css/\\" width=\\"560\\" height=\\"560\\" allowfullscreen frameborder=\\"0\\"></iframe>
-<iframe src=\\"https://www.youtube.com/embed/1Bh4DZ2xGmw\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>
+<iframe src=\\"https://www.youtube.com/embed/1Bh4DZ2xGmw?feature=oembed\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>
 <iframe src=\\"http://player.ina.fr/player/embed/MAN9062216517/1/1b0bd203fbcd702f9bc9b10ac3d0fc21/560/315/1/148db8\\" width=\\"620\\" height=\\"349\\" allowfullscreen frameborder=\\"0\\"></iframe>
 <p>Not parsed:</p>
 <p>!(http://jsfiddle.net/Sandhose/BcKhe/)</p>
-<iframe src=\\"https://www.youtube.com/embed/BpJKvrjLUp0\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>
+<iframe src=\\"https://www.youtube.com/embed/FdltlrKFr1w?feature=oembed\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>
 <p>with text after</p>"
 `;
