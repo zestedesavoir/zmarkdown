@@ -64,7 +64,7 @@ module.exports = function plugin(opts) {
 
       if (req.statusCode < 300) {
         var reqRes = JSON.parse(req.getBody('utf8'));
-        finalUrl = reqRes.html.match(/src=\"([A-Za-z0-9\/\?&=:\.]+)\"/)[1];
+        finalUrl = reqRes.html.match(/src=\"([A-Za-z0-9_\/\?&=:\.]+)\"/)[1];
         thumbnail = reqRes.thumbnail_url;
         if (!provider.height) provider.height = reqRes.height;
         if (!provider.width) provider.width = reqRes.width;

@@ -205,57 +205,40 @@ const remarkConfig = {
 
   iframes: {
     'www.dailymotion.com': {
-      tag: 'iframe',
       width: 480,
       height: 270,
       disabled: false,
-      replace: [
-        ['video/', 'embed/video/'],
-      ],
-      thumbnail: {
-        format: 'http://www.dailymotion.com/thumbnail/video/{id}',
-        id: '.+/(.+)$',
-      },
+      oembed: 'https://www.dailymotion.com/services/oembed',
     },
     'www.vimeo.com': {
-      tag: 'iframe',
       width: 500,
       height: 281,
       disabled: false,
-      replace: [
-        ['http://', 'https://'],
-        ['www.', ''],
-        ['vimeo.com/', 'player.vimeo.com/video/'],
-      ],
+      oembed: 'https://vimeo.com/api/oembed.json',
     },
     'vimeo.com': {
-      tag: 'iframe',
       width: 500,
       height: 281,
       disabled: false,
-      replace: [
-        ['http://', 'https://'],
-        ['www.', ''],
-        ['vimeo.com/', 'player.vimeo.com/video/'],
-      ],
+      oembed: 'https://vimeo.com/api/oembed.json',
     },
     'www.youtube.com': {
       width: 560,
       height: 315,
       disabled: false,
-      oembed: "https://www.youtube.com/oembed",
+      oembed: 'https://www.youtube.com/oembed',
     },
     'youtube.com': {
       width: 560,
       height: 315,
       disabled: false,
-      oembed: "https://www.youtube.com/oembed",
+      oembed: 'https://www.youtube.com/oembed',
     },
     'youtu.be': {
       width: 560,
       height: 315,
       disabled: false,
-      oembed: "https://www.youtube.com/oembed",
+      oembed: 'https://www.youtube.com/oembed',
     },
     'www.ina.fr': {
       tag: 'iframe',
