@@ -240,49 +240,22 @@ const remarkConfig = {
       ],
     },
     'www.youtube.com': {
-      tag: 'iframe',
       width: 560,
       height: 315,
       disabled: false,
-      replace: [
-        ['watch?v=', 'embed/'],
-        ['http://', 'https://'],
-      ],
-      thumbnail: {
-        format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/(.+)$',
-      },
-      removeAfter: '&',
+      oembed: "https://www.youtube.com/oembed",
     },
     'youtube.com': {
-      tag: 'iframe',
       width: 560,
       height: 315,
       disabled: false,
-      replace: [
-        ['watch?v=', 'embed/'],
-        ['http://', 'https://'],
-      ],
-      thumbnail: {
-        format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/(.+)$',
-      },
-      removeAfter: '&',
+      oembed: "https://www.youtube.com/oembed",
     },
     'youtu.be': {
-      tag: 'iframe',
       width: 560,
       height: 315,
       disabled: false,
-      replace: [
-        ['watch?v=', 'embed/'],
-        ['youtu.be', 'www.youtube.com/embed'],
-      ],
-      thumbnail: {
-        format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/(.+)$',
-      },
-      removeAfter: '&',
+      oembed: "https://www.youtube.com/oembed",
     },
     'www.ina.fr': {
       tag: 'iframe',
