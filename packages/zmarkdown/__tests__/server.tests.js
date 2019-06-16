@@ -134,7 +134,7 @@ describe('HTML endpoint', () => {
     ![no chars here](https.//github.com/zestedesavoir/zmarkdown)
     Figure: 13 chars here
     `)
-    const response = await a.post(latex, {md: text, opts: {stats: true}})
+    const response = await a.post(html, {md: text, opts: {stats: true}})
     expect(response.status).toBe(200)
 
     const [string, metadata] = response.data
