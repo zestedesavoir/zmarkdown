@@ -15,6 +15,8 @@ var _require = require('url'),
     parse = _require.parse,
     URLSearchParams = _require.URLSearchParams;
 
+var request = require('sync-request');
+
 module.exports = function plugin(opts) {
   if (_typeof(opts) !== 'object' || !Object.keys(opts).length) {
     throw new Error('remark-iframes needs to be passed a configuration object as option');
@@ -54,23 +56,52 @@ module.exports = function plugin(opts) {
       });
     }
 
-    var finalUrl = computeFinalUrl(provider, url);
-    var thumbnail = computeThumbnail(provider, finalUrl);
-    eat(eatenValue)({
-      type: 'iframe',
-      src: url,
-      data: {
-        hName: provider.tag,
-        hProperties: {
-          src: finalUrl,
-          width: provider.width,
-          height: provider.height,
-          allowfullscreen: true,
-          frameborder: '0'
-        },
-        thumbnail: thumbnail
+    var finalUrl, thumbnail, fallback;
+
+    if (provider.oembed) {
+      var reqUrl = provider.oembed + '?format=json&url=' + encodeURIComponent(url);
+      var req = request('GET', reqUrl);
+
+      if (req.statusCode < 300) {
+        var reqRes = JSON.parse(req.getBody('utf8'));
+        finalUrl = reqRes.html.match(/src=\"([A-Za-z0-9\/\?&=:\.]+)\"/)[1];
+        thumbnail = reqRes.thumbnail_url;
+        if (!provider.height) provider.height = reqRes.height;
+        if (!provider.width) provider.width = reqRes.width;
+        if (!provider.tag) provider.tag = 'iframe';
+      } else {
+        fallback = "Content " + url + " not found.";
       }
-    });
+    } else {
+      finalUrl = computeFinalUrl(provider, url);
+      thumbnail = computeThumbnail(provider, finalUrl);
+    }
+
+    if (!fallback) {
+      eat(eatenValue)({
+        type: 'iframe',
+        src: url,
+        data: {
+          hName: provider.tag,
+          hProperties: {
+            src: finalUrl,
+            width: provider.width,
+            height: provider.height,
+            allowfullscreen: true,
+            frameborder: '0'
+          },
+          thumbnail: thumbnail
+        }
+      });
+    } else {
+      eat(eatenValue)({
+        type: 'paragraph',
+        children: [{
+          type: 'text',
+          value: fallback
+        }]
+      });
+    }
   }
 
   var Parser = this.Parser; // Inject blockTokenizer
