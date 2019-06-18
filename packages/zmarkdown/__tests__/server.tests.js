@@ -139,7 +139,7 @@ describe('HTML endpoint', () => {
 
     const [string, metadata] = response.data
     expect(string).toMatchSnapshot()
-    expect(metadata.stats.signs).toBe(59)
+    expect(metadata.stats.signs).toBe(64)
     expect(metadata.stats.words).toBe(14)
   })
 })
