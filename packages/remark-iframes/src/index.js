@@ -44,20 +44,20 @@ module.exports = function plugin (opts) {
     let finalUrl, thumbnail, fallback
 
     if (provider.oembed) {
-      let reqUrl = provider.oembed + '?format=json&url=' + encodeURIComponent(url)
-      let req = request('GET', reqUrl)
+      const reqUrl = `${provider.oembed}?format=json&url=${encodeURIComponent(url)}`
+      const req = request('GET', reqUrl)
 
       if (req.statusCode < 300) {
-        let reqRes = JSON.parse(req.getBody('utf8'))
+        const reqRes = JSON.parse(req.getBody('utf8'))
 
-        finalUrl = reqRes.html.match(/src=\"([A-Za-z0-9_\/\?&=:\.]+)\"/)[1]
+        finalUrl = reqRes.html.match(/src="([A-Za-z0-9_/?&=:.]+)"/)[1]
         thumbnail = reqRes.thumbnail_url
 
         if (!provider.height) provider.height = reqRes.height
         if (!provider.width) provider.width = reqRes.width
         if (!provider.tag) provider.tag = 'iframe'
       } else {
-        fallback = "Content " + url + " not found."
+        fallback = `Content ${url} not found.`
       }
     } else {
       finalUrl = computeFinalUrl(provider, url)

@@ -59,18 +59,18 @@ module.exports = function plugin(opts) {
     var finalUrl, thumbnail, fallback;
 
     if (provider.oembed) {
-      var reqUrl = provider.oembed + '?format=json&url=' + encodeURIComponent(url);
+      var reqUrl = "".concat(provider.oembed, "?format=json&url=").concat(encodeURIComponent(url));
       var req = request('GET', reqUrl);
 
       if (req.statusCode < 300) {
         var reqRes = JSON.parse(req.getBody('utf8'));
-        finalUrl = reqRes.html.match(/src=\"([A-Za-z0-9_\/\?&=:\.]+)\"/)[1];
+        finalUrl = reqRes.html.match(/src="([A-Za-z0-9_/?&=:.]+)"/)[1];
         thumbnail = reqRes.thumbnail_url;
         if (!provider.height) provider.height = reqRes.height;
         if (!provider.width) provider.width = reqRes.width;
         if (!provider.tag) provider.tag = 'iframe';
       } else {
-        fallback = "Content " + url + " not found.";
+        fallback = "Content ".concat(url, " not found.");
       }
     } else {
       finalUrl = computeFinalUrl(provider, url);

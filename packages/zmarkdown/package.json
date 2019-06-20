@@ -58,6 +58,7 @@
     "remark-rehype": "^3.0.0",
     "remark-sub-super": "file:../remark-sub-super",
     "shortid": "^2.2.12",
+    "sync-request": "^6.1.0",
     "textr": "^0.3.0",
     "to-vfile": "^5.0.0",
     "typographic-apostrophes": "^1.1.1",

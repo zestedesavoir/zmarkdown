@@ -58,19 +58,19 @@ test('video', () => {
       width: 560,
       height: 315,
       disabled: false,
-      oembed: "https://www.youtube.com/oembed",
+      oembed: 'https://www.youtube.com/oembed',
     },
     'youtube.com': {
       width: 560,
       height: 315,
       disabled: false,
-      oembed: "https://www.youtube.com/oembed",
+      oembed: 'https://www.youtube.com/oembed',
     },
     'youtu.be': {
       width: 560,
       height: 315,
       disabled: false,
-      oembed: "https://www.youtube.com/oembed",
+      oembed: 'https://www.youtube.com/oembed',
     },
     'screen.yahoo.com': {
       tag: 'iframe',
