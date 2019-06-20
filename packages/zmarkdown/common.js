@@ -127,9 +127,11 @@ const zmdParser = (config, extraRemarkPlugins = []) => {
       let signs = 0
       let words = 0
       visit(tree, 'text', (node) => {
-        // +1 stands for EOL char
-        signs += node.value.length + 1
+        signs += node.value.length
         words += node.value.match(/\w+/g).length
+      })
+      visit(tree, 'paragraph', (node) => {
+        signs += 1
       })
       vfile.data.stats = {
         signs: signs,
