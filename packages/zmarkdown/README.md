@@ -80,7 +80,7 @@ Only `metadata` is described in the **Response** sections below.
 * `metadata.stats` , object
 
   stats about the parsed text:
-   - `signs`: number of chars, spaces uncluded
+   - `signs`: number of chars, spaces included
    - ` words`: number of words
 
 ## `/latex` - Markdown to LaTeX
