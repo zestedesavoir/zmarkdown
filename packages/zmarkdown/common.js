@@ -122,6 +122,24 @@ const zmdParser = (config, extraRemarkPlugins = []) => {
       }
     })
 
+  if (config.stats) {
+    mdProcessor.use(() => (tree, vfile) => {
+      let signs = 0
+      let words = 0
+      visit(tree, 'text', (node) => {
+        signs += node.value.length
+        words += node.value.match(/\w+/g).length
+      })
+      visit(tree, 'paragraph', (node) => {
+        signs += 1
+      })
+      vfile.data.stats = {
+        signs: signs,
+        words: words,
+      }
+    })
+  }
+
   for (const record of extraRemarkPlugins) {
     mdProcessor.use(record.obj, record.option)
   }

@@ -119,7 +119,7 @@ module.exports = function markdownHandlers (Raven) {
         remark.iframes['jsfiddle.net'].disabled = true
         remark.iframes['www.jsfiddle.net'].disabled = true
       }
-
+      remark.stats = opts.stats === true
       remark.imagesDownload.disabled = opts.disable_images_download === true
       if (remark.imagesDownload.disabled !== true) {
         if (opts.images_download_dir) {

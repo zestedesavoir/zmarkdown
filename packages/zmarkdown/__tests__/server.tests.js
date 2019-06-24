@@ -121,6 +121,27 @@ describe('HTML endpoint', () => {
     expect(rendered).not.toContain('view-box')
     expect(rendered).not.toContain('preserve-aspect-ratio')
   })
+
+  it('produces statistics when configured', async () => {
+    const text = dedent(`
+    7 chars
+    # 13 chars here
+    
+    [13 chars here](https.//github.com/zestedesavoir/zmarkdown)
+    
+    ![13 chars here](https.//github.com/zestedesavoir/zmarkdown)
+    
+    ![no chars here](https.//github.com/zestedesavoir/zmarkdown)
+    Figure: 13 chars here
+    `)
+    const response = await a.post(html, {md: text, opts: {stats: true}})
+    expect(response.status).toBe(200)
+
+    const [string, metadata] = response.data
+    expect(string).toMatchSnapshot()
+    expect(metadata.stats.signs).toBe(61)
+    expect(metadata.stats.words).toBe(14)
+  })
 })
 
 describe('LaTeX endpoint', () => {
