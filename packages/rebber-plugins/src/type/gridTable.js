@@ -57,7 +57,9 @@ class GridTableStringifier {
       baseText = `\\multirow{${node.data.hProperties.rowspan}}{*}{${baseText}}`
       this.colspan = node.data.hProperties.colspan > 1 ? node.data.hProperties.colspan : 1
     } else if (node.data && node.data.hProperties.colspan > 1) {
-      baseText = `\\multicolumn{${node.data.hProperties.colspan}}{|c|}{${baseText}}`
+      const colspan = node.data.hProperties.colspan
+      const colDim = `p{\\dimexpr(\\linewidth) * ${colspan} / \\number-of-column}`
+      baseText = `\\multicolumn{${colspan}}{|${colDim}|}{${baseText}}`
     }
 
     if (node.data && node.data.hProperties.colspan > 1) {
@@ -112,7 +114,7 @@ class GridTableStringifier {
       this.nbOfColumns = this.colIndex
     }
     this.colIndex = 0
-    return rowText
+    return rowText.replace(/\\number-of-column/, this.nbOfColumns)
   }
 
   flushMultiRowLineIfNeeded () {
@@ -130,7 +132,7 @@ class GridTableStringifier {
   }
 
   gridTableHeaderParse () {
-    const headers = `|p{\\linewidth / ${this.nbOfColumns}}`.repeat(this.nbOfColumns)
+    const headers = `|p{\\dimexpr(\\linewidth) / ${this.nbOfColumns}}`.repeat(this.nbOfColumns)
     return `${headers}|`
   }
 
