@@ -1,26 +1,28 @@
 const spaceSeparated = require('space-separated-tokens')
 
-function escapeRegExp (str) {
-  return str.replace(/[-[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
+function escapeRegExp(str) {
+  return str.replace(/[-[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&') // eslint-disable-line no-useless-escape
 }
 
 const C_NEWLINE = '\n'
 const C_FENCE = '|'
 
-function compilerFactory (nodeType) {
+function compilerFactory(nodeType) {
   let text
   let title
 
   return {
-    blockHeading (node) {
+    blockHeading(node) {
       title = this.all(node).join('')
       return ''
     },
-    blockBody (node) {
-      text = this.all(node).map(s => s.replace(/\n/g, '\n| ')).join('\n|\n| ')
+    blockBody(node) {
+      text = this.all(node)
+        .map(s => s.replace(/\n/g, '\n| '))
+        .join('\n|\n| ')
       return text
     },
-    block (node) {
+    block(node) {
       text = ''
       title = ''
       this.all(node)
@@ -33,19 +35,20 @@ function compilerFactory (nodeType) {
   }
 }
 
-module.exports = function blockPlugin (availableBlocks = {}) {
-  const pattern = Object
-    .keys(availableBlocks)
+module.exports = function blockPlugin(availableBlocks = {}) {
+  const pattern = Object.keys(availableBlocks)
     .map(escapeRegExp)
     .join('|')
 
   if (!pattern) {
-    throw new Error('remark-custom-blocks needs to be passed a configuration object as option')
+    throw new Error(
+      'remark-custom-blocks needs to be passed a configuration object as option',
+    )
   }
 
   const regex = new RegExp(`\\[\\[(${pattern})(?: *\\| *(.*))?\\]\\]\n`)
 
-  function blockTokenizer (eat, value, silent) {
+  function blockTokenizer(eat, value, silent) {
     const now = eat.now()
     const keep = regex.exec(value)
     if (!keep) return
@@ -62,7 +65,8 @@ module.exports = function blockPlugin (availableBlocks = {}) {
     while ((idx = value.indexOf(C_NEWLINE)) !== -1) {
       const next = value.indexOf(C_NEWLINE, idx + 1)
       // either slice until next NEWLINE or slice until end of string
-      const lineToEat = next !== -1 ? value.slice(idx + 1, next) : value.slice(idx + 1)
+      const lineToEat =
+        next !== -1 ? value.slice(idx + 1, next) : value.slice(idx + 1)
       if (lineToEat[0] !== C_FENCE) break
       // remove leading `FENCE ` or leading `FENCE`
       const line = lineToEat.slice(lineToEat.startsWith(`${C_FENCE} `) ? 2 : 1)
@@ -76,9 +80,11 @@ module.exports = function blockPlugin (availableBlocks = {}) {
     const stringToEat = eaten + linesToEat.join(C_NEWLINE)
 
     const potentialBlock = availableBlocks[blockType]
-    const titleAllowed = potentialBlock.title &&
+    const titleAllowed =
+      potentialBlock.title &&
       ['optional', 'required'].includes(potentialBlock.title)
-    const titleRequired = potentialBlock.title && potentialBlock.title === 'required'
+    const titleRequired =
+      potentialBlock.title && potentialBlock.title === 'required'
 
     if (titleRequired && !blockTitle) return
     if (!titleAllowed && blockTitle) return
@@ -150,7 +156,13 @@ module.exports = function blockPlugin (availableBlocks = {}) {
   const interruptParagraph = Parser.prototype.interruptParagraph
   const interruptList = Parser.prototype.interruptList
   const interruptBlockquote = Parser.prototype.interruptBlockquote
-  interruptParagraph.splice(interruptParagraph.indexOf('fencedCode') + 1, 0, ['customBlocks'])
-  interruptList.splice(interruptList.indexOf('fencedCode') + 1, 0, ['customBlocks'])
-  interruptBlockquote.splice(interruptBlockquote.indexOf('fencedCode') + 1, 0, ['customBlocks'])
+  interruptParagraph.splice(interruptParagraph.indexOf('fencedCode') + 1, 0, [
+    'customBlocks',
+  ])
+  interruptList.splice(interruptList.indexOf('fencedCode') + 1, 0, [
+    'customBlocks',
+  ])
+  interruptBlockquote.splice(interruptBlockquote.indexOf('fencedCode') + 1, 0, [
+    'customBlocks',
+  ])
 }
