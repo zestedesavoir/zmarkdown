@@ -1,7 +1,7 @@
 const spaceSeparated = require('space-separated-tokens')
 
 function escapeRegExp (str) {
-  return str.replace(new RegExp(`[-[\\]{}()*+?.\\\\^$|/]`, 'g'))
+  return str.replace(new RegExp(`[-[\\]{}()*+?.\\\\^$|/]`, 'g'), "\\$&")
 }
 
 const C_NEWLINE = '\n'
