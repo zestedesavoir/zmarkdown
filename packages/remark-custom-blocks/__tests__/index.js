@@ -301,3 +301,45 @@ test('compile multiline block to markdown, with multiline paragraph', () => {
   contents = renderToMarkdown(contents).contents.trim()
   expect(contents).toBe(fixture)
 })
+
+test('weirdly named blocks', () => {
+  // a block name would usually be something like "info" or "spoiler"
+  // here we test that using regex special characters still works as
+  // block names since they are correctly escaped
+  const blockNames = [
+    '[a]',
+    '(b|)',
+    '[a})',
+    '[a-Z]',
+    '.*',
+    '??}',
+    '^$',
+    '|||',
+    ']',
+    '[]]',
+  ]
+  const config = blockNames.reduce((acc, blockName, idx) => {
+    acc[blockName] = {
+      classes: `class${idx}`,
+    }
+    return acc
+  }, {})
+  const render = (text, allowTitle) => unified()
+    .use(reParse)
+    .use(remark2rehype)
+    .use(plugin, config, allowTitle)
+    .use(stringify)
+    .processSync(text)
+
+  const makeFixture = (blockName) => dedent`
+    [[${blockName}]]
+    |     [[${blockName}]]
+    |     | this
+  `
+
+  blockNames.forEach((blockName, idx) => {
+    const {contents} = render(makeFixture(blockName))
+    expect(contents).toContain(`class="custom-block class${idx}"`)
+    expect(contents).toContain(`<pre><code>[[${blockName}]]`)
+  })
+})

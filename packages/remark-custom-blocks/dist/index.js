@@ -19,7 +19,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var spaceSeparated = require('space-separated-tokens');
 
 function escapeRegExp(str) {
-  return str.replace(/[-[]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+  return str.replace(new RegExp("[-[\\]{}()*+?.\\\\^$|/]", 'g'), '\\$&');
 }
 
 var C_NEWLINE = '\n';
