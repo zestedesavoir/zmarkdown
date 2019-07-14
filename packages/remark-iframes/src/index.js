@@ -1,5 +1,60 @@
 const {format, parse, URLSearchParams} = require('url')
-const request = require('sync-request')
+const http = require('http')
+const https = require('https')
+
+const makeHttpRequest = async url =>
+  new Promise((resolve, reject) => {
+    const parsedUrl = parse(url)
+    const client = (parsedUrl.protocol === 'https:') ? https : http
+
+    const options = Object.assign(
+      {},
+      parsedUrl,
+      {timeout: 3000}
+    )
+
+    const req = client.get(options, res => {
+      const {statusCode} = res
+
+      if (statusCode !== 200) {
+        req.abort()
+        res.resume()
+        reject(new Error(`Received HTTP ${statusCode} for: ${url}`))
+      } else {
+        res.setEncoding('utf8')
+
+        let rawData = ''
+        res.on('data', (chunk) => { rawData += chunk })
+
+        res.on('end', () => {
+          let oembedRes
+
+          try {
+            oembedRes = JSON.parse(rawData)
+          } catch (e) {
+            reject(e)
+          }
+
+          const oembedUrl = oembedRes.html.match(/src="([A-Za-z0-9_/?&=:.]+)"/)[1]
+          const oembedThumbnail = oembedRes.thumbnail_url
+
+          resolve({
+            url: oembedUrl,
+            thumbnail: oembedThumbnail,
+            width: oembedRes.width,
+            height: oembedRes.height,
+          })
+        })
+      }
+    })
+
+    req.on('timeout', () => {
+      req.abort()
+      reject(new Error(`Request timed out for: ${url}`))
+    })
+
+    req.on('error', e => reject(e))
+  })
 
 module.exports = function plugin (opts) {
   if (typeof opts !== 'object' || !Object.keys(opts).length) {
@@ -11,7 +66,7 @@ module.exports = function plugin (opts) {
     return opts[hostname]
   }
 
-  function blockTokenizer (eat, value, silent) {
+  async function blockTokenizer (eat, value, silent) {
     if (!value.startsWith('!(http')) return
 
     let eatenValue = ''
@@ -45,20 +100,17 @@ module.exports = function plugin (opts) {
 
     if (provider.oembed) {
       const reqUrl = `${provider.oembed}?format=json&url=${encodeURIComponent(url)}`
-      const req = request('GET', reqUrl)
 
-      if (req.statusCode < 300) {
-        const reqRes = JSON.parse(req.getBody('utf8'))
+      await makeHttpRequest(reqUrl).then((oembedRes) => {
+        finalUrl = oembedRes.url
+        thumbnail = oembedRes.thumbnail
 
-        finalUrl = reqRes.html.match(/src="([A-Za-z0-9_/?&=:.]+)"/)[1]
-        thumbnail = reqRes.thumbnail_url
-
-        if (!provider.height) provider.height = reqRes.height
-        if (!provider.width) provider.width = reqRes.width
+        if (!provider.height) provider.height = oembedRes.height
+        if (!provider.width) provider.width = oembedRes.width
         if (!provider.tag) provider.tag = 'iframe'
-      } else {
-        fallback = `Content ${url} not found.`
-      }
+      }, (e) => {
+        fallback = true
+      })
     } else {
       finalUrl = computeFinalUrl(provider, url)
       thumbnail = computeThumbnail(provider, finalUrl)
@@ -82,13 +134,9 @@ module.exports = function plugin (opts) {
       })
     } else {
       eat(eatenValue)({
-        type: 'paragraph',
-        children: [
-          {
-            type: 'text',
-            value: fallback,
-          },
-        ],
+        type: 'link',
+        url: url,
+        children: [{type: 'text', value: url}],
       })
     }
   }
