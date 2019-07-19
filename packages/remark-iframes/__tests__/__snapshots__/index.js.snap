@@ -43,6 +43,8 @@ exports[`does not parse without markers 1`] = `
 <p><a href=\\"https://www.youtube.com/watch?v=FdltlrKFr1w\\">https://www.youtube.com/watch?v=FdltlrKFr1w</a></p>"
 `;
 
+exports[`oembed falls back 1`] = `"<a href=\\"https://www.youtube.com/watch?v=FdltlrKFr1w\\">https://www.youtube.com/watch?v=FdltlrKFr1w</a>"`;
+
 exports[`video 1`] = `
 "<iframe src=\\"https://www.youtube.com/embed/FdltlrKFr1w?feature=oembed\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe>
 <iframe src=\\"https://www.dailymotion.com/embed/video/x2y6lhm\\" width=\\"480\\" height=\\"270\\" allowfullscreen frameborder=\\"0\\"></iframe>

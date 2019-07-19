@@ -1,60 +1,6 @@
 const {format, parse, URLSearchParams} = require('url')
-const http = require('http')
-const https = require('https')
-
-const makeHttpRequest = async url =>
-  new Promise((resolve, reject) => {
-    const parsedUrl = parse(url)
-    const client = (parsedUrl.protocol === 'https:') ? https : http
-
-    const options = Object.assign(
-      {},
-      parsedUrl,
-      {timeout: 3000}
-    )
-
-    const req = client.get(options, res => {
-      const {statusCode} = res
-
-      if (statusCode !== 200) {
-        req.abort()
-        res.resume()
-        reject(new Error(`Received HTTP ${statusCode} for: ${url}`))
-      } else {
-        res.setEncoding('utf8')
-
-        let rawData = ''
-        res.on('data', (chunk) => { rawData += chunk })
-
-        res.on('end', () => {
-          let oembedRes
-
-          try {
-            oembedRes = JSON.parse(rawData)
-          } catch (e) {
-            reject(e)
-          }
-
-          const oembedUrl = oembedRes.html.match(/src="([A-Za-z0-9_/?&=:.]+)"/)[1]
-          const oembedThumbnail = oembedRes.thumbnail_url
-
-          resolve({
-            url: oembedUrl,
-            thumbnail: oembedThumbnail,
-            width: oembedRes.width,
-            height: oembedRes.height,
-          })
-        })
-      }
-    })
-
-    req.on('timeout', () => {
-      req.abort()
-      reject(new Error(`Request timed out for: ${url}`))
-    })
-
-    req.on('error', e => reject(e))
-  })
+const visit = require('unist-util-visit')
+const fetch = require('node-fetch')
 
 module.exports = function plugin (opts) {
   if (typeof opts !== 'object' || !Object.keys(opts).length) {
@@ -66,7 +12,7 @@ module.exports = function plugin (opts) {
     return opts[hostname]
   }
 
-  async function blockTokenizer (eat, value, silent) {
+  function blockTokenizer (eat, value, silent) {
     if (!value.startsWith('!(http')) return
 
     let eatenValue = ''
@@ -96,49 +42,51 @@ module.exports = function plugin (opts) {
       })
     }
 
-    let finalUrl, thumbnail, fallback
+    let finalUrl, thumbnail
+    const data = {
+      hName: provider.tag || 'iframe',
+      hProperties: {
+        src: 'tmp',
+        width: provider.width,
+        height: provider.height,
+        allowfullscreen: true,
+        frameborder: '0',
+      },
+    }
 
     if (provider.oembed) {
-      const reqUrl = `${provider.oembed}?format=json&url=${encodeURIComponent(url)}`
-
-      await makeHttpRequest(reqUrl).then((oembedRes) => {
-        finalUrl = oembedRes.url
-        thumbnail = oembedRes.thumbnail
-
-        if (!provider.height) provider.height = oembedRes.height
-        if (!provider.width) provider.width = oembedRes.width
-        if (!provider.tag) provider.tag = 'iframe'
-      }, (e) => {
-        fallback = true
+      Object.assign(data, {
+        oembed: {
+          provider: provider,
+          url: `${provider.oembed}?format=json&url=${encodeURIComponent(url)}`,
+          fallback: {
+            type: 'link',
+            url: url,
+            children: [{type: 'text', value: url}],
+          },
+        },
       })
     } else {
       finalUrl = computeFinalUrl(provider, url)
       thumbnail = computeThumbnail(provider, finalUrl)
+
+      Object.assign(data, {
+        hProperties: {
+          src: finalUrl,
+          width: provider.width,
+          height: provider.height,
+          allowfullscreen: true,
+          frameborder: '0',
+        },
+        thumbnail: thumbnail,
+      })
     }
 
-    if (!fallback) {
-      eat(eatenValue)({
-        type: 'iframe',
-        src: url,
-        data: {
-          hName: provider.tag,
-          hProperties: {
-            src: finalUrl,
-            width: provider.width,
-            height: provider.height,
-            allowfullscreen: true,
-            frameborder: '0',
-          },
-          thumbnail: thumbnail,
-        },
-      })
-    } else {
-      eat(eatenValue)({
-        type: 'link',
-        url: url,
-        children: [{type: 'text', value: url}],
-      })
-    }
+    eat(eatenValue)({
+      type: 'iframe',
+      src: url,
+      data,
+    })
   }
 
   const Parser = this.Parser
@@ -154,6 +102,59 @@ module.exports = function plugin (opts) {
     const visitors = Compiler.prototype.visitors
     if (!visitors) return
     visitors.iframe = (node) => `!(${node.src})`
+  }
+
+  return async function transform (tree, vfile, next) {
+    let toVisit = 0
+    visit(tree, 'iframe', async (node) => {
+      toVisit++
+    })
+
+    function nextVisitOrBail () {
+      if (toVisit === 0) next()
+    }
+    nextVisitOrBail()
+
+    visit(tree, 'iframe', async (node) => {
+      if (!node.data.oembed) {
+        toVisit--
+        nextVisitOrBail()
+        return
+      }
+      const data = node.data
+      const oembed = data.oembed
+      const provider = data.oembed.provider
+      const fallback = data.oembed.fallback
+      try {
+        const {
+          url,
+          thumbnail,
+          height,
+          width,
+        } = await fetchEmbed(oembed.url)
+
+        node.thumbnail = thumbnail
+        Object.assign(data.hProperties, {
+          src: url,
+          width: provider.width || width,
+          height: provider.height || height,
+          allowfullscreen: true,
+          frameborder: '0',
+        })
+
+      } catch (err) {
+        let message = err.message
+        if (err.name === 'AbortError') {
+          message = `oEmbed URL timeout: ${oembed.url}`
+        }
+        vfile.message(message, node.position, oembed.url)
+        node.data = {}
+        Object.assign(node, fallback)
+      }
+      delete data.oembed
+      toVisit--
+      nextVisitOrBail()
+    })
   }
 }
 
@@ -208,4 +209,19 @@ function computeThumbnail (provider, url) {
       })
   }
   return thumbnailURL
+}
+
+async function fetchEmbed (url) {
+  return fetch(url, {timeout: 1500})
+    .then((res) => res.json())
+    .then((oembedRes) => {
+      const oembedUrl = oembedRes.html.match(/src="([A-Za-z0-9_/?&=:.]+)"/)[1]
+      const oembedThumbnail = oembedRes.thumbnail_url
+      return {
+        url: oembedUrl,
+        thumbnail: oembedThumbnail,
+        width: oembedRes.width,
+        height: oembedRes.height,
+      }
+    })
 }

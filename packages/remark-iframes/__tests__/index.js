@@ -8,12 +8,12 @@ import remarkStringify from 'remark-stringify'
 import plugin from '../src/'
 
 
-const render = (text, config) => unified()
+const render = async (text, config) => unified()
   .use(reParse)
   .use(plugin, config)
   .use(remark2rehype)
   .use(stringify)
-  .processSync(text)
+  .process(text)
 
 const renderMarkdown = (text, config) => unified()
   .use(reParse)
@@ -21,8 +21,8 @@ const renderMarkdown = (text, config) => unified()
   .use(plugin, config)
   .processSync(text)
 
-test('video', () => {
-  const config = {
+const config = {
+  video: {
     'www.dailymotion.com': {
       tag: 'iframe',
       width: 480,
@@ -113,9 +113,63 @@ test('video', () => {
       append: 'embedded/result,js,html,css/',
       match: /https?:\/\/(www\.)?jsfiddle\.net\/([\w\d]+\/[\w\d]+\/\d+\/?|[\w\d]+\/\d+\/?|[\w\d]+\/?)$/,
     },
-  }
+  },
+  extra: {
+    'www.youtube.com': {
+      tag: 'iframe',
+      width: 560,
+      height: 315,
+      disabled: false,
+      replace: [
+        ['watch?v=', 'embed/'],
+        ['http://', 'https://'],
+      ],
+      droppedQueryParameters: ['feature'],
+      removeAfter: '&',
+    },
+    'jsfiddle.net': {
+      tag: 'iframe',
+      width: 560,
+      height: 560,
+      disabled: true,
+      replace: [
+        ['http://', 'https://'],
+      ],
+      append: 'embedded/result,js,html,css/',
+    },
+  },
+  toMd: {
+    'www.youtube.com': {
+      tag: 'iframe',
+      width: 560,
+      height: 315,
+      disabled: false,
+      replace: [
+        ['watch?v=', 'embed/'],
+        ['http://', 'https://'],
+      ],
+      removeAfter: '&',
+    },
+    'jsfiddle.net': {
+      tag: 'iframe',
+      width: 560,
+      height: 560,
+      disabled: true,
+      replace: [
+        ['http://', 'https://'],
+      ],
+      append: 'embedded/result,js,html,css/',
+      match: /https?:\/\/(www\.)?jsfiddle\.net\/([\w\d]+\/[\w\d]+\/\d+\/?|[\w\d]+\/\d+\/?|[\w\d]+\/?)$/,
+      thumbnail: {
+        format: 'http://www.unixstickers.com/image/data/stickers' +
+        '/jsfiddle/JSfiddle-blue-w-type.sh.png',
+      },
+    },
+  },
+}
 
-  const {contents} = render(dedent`
+test('video', async () => {
+  const {contents} = await render(dedent`
     !(https://www.youtube.com/watch?v=FdltlrKFr1w)
 
     !(https://www.dailymotion.com/video/x2y6lhm)
@@ -146,45 +200,37 @@ test('video', () => {
 
     !(https://www.youtube.com/watch?v=FdltlrKFr1w)
     with text after
-  `, config)
+  `, config.video)
 
   expect(contents).toMatchSnapshot()
 })
 
-test('extra', () => {
+test('oembed falls back', async () => {
   const config = {
     'www.youtube.com': {
-      tag: 'iframe',
       width: 560,
       height: 315,
       disabled: false,
-      replace: [
-        ['watch?v=', 'embed/'],
-        ['http://', 'https://'],
-      ],
-      droppedQueryParameters: ['feature'],
-      removeAfter: '&',
-    },
-    'jsfiddle.net': {
-      tag: 'iframe',
-      width: 560,
-      height: 560,
-      disabled: true,
-      replace: [
-        ['http://', 'https://'],
-      ],
-      append: 'embedded/result,js,html,css/',
+      oembed: 'http://example.com:7777/oembed',
     },
   }
+  const result = await render(dedent`
+    !(https://www.youtube.com/watch?v=FdltlrKFr1w)
+  `, config)
 
-  const {contents: parsed} = render(dedent`
+  expect(result.messages[0].message).toContain('timeout')
+  expect(result.contents).toMatchSnapshot()
+})
+
+test('extra', async () => {
+  const {contents: parsed} = await render(dedent`
     !(https://www.youtube.com/watch?v=FdltlrKFr1w)
 
     !(https://www.youtube.com/watch?feature=embedded&v=FdltlrKFr1w)
-  `, config)
+  `, config.extra)
   expect(parsed).toMatch(/iframe.*iframe/)
 
-  const {contents: notParsed} = render(dedent`
+  const {contents: notParsed} = await render(dedent`
     !(http://jsfiddle.net/Sandhose/BcKhe/1/)
 
     !(http://jsfiddle.net/zgjhjv9j/)
@@ -192,11 +238,11 @@ test('extra', () => {
     !(http://jsfiddle.net/zgjhjv9j/1/)
 
     !(http://jsfiddle.net/Sandhose/BcKhe/)
-  `, config)
+  `, config.extra)
   expect(notParsed).not.toMatch('iframe')
 })
 
-test('does not parse without markers', () => {
+test('does not parse without markers', async () => {
   const config = {
     'www.youtube.com': {
       tag: 'iframe',
@@ -212,7 +258,7 @@ test('does not parse without markers', () => {
     },
   }
 
-  const {contents} = render(dedent`
+  const {contents} = await render(dedent`
     !(https://www.youtube.com/watch?v=FdltlrKFr1w)
 
     https://www.youtube.com/watch?v=FdltlrKFr1w
@@ -221,52 +267,21 @@ test('does not parse without markers', () => {
   expect(contents).toMatchSnapshot()
 })
 
-test('Errors without config', () => {
-  const fail = () => render('')
-  expect(fail).toThrowError(Error)
+test('Errors without config', async () => {
+  expect(render('')).rejects.toThrowError(Error)
 })
 
-test('Errors with empty config', () => {
-  const fail = () => render('', {})
-  expect(fail).toThrowError(Error)
+test('Errors with empty config', async () => {
+  expect(render('', {})).rejects.toThrowError(Error)
 })
 
 
-test('Errors with invalid config', () => {
-  const fail = () => render('', '')
-  expect(fail).toThrowError(Error)
+test('Errors with invalid config', async () => {
+  expect(render('', '')).rejects.toThrowError(Error)
 })
 
 
 test('Compiles to Markdown', () => {
-  const config = {
-    'www.youtube.com': {
-      tag: 'iframe',
-      width: 560,
-      height: 315,
-      disabled: false,
-      replace: [
-        ['watch?v=', 'embed/'],
-        ['http://', 'https://'],
-      ],
-      removeAfter: '&',
-    },
-    'jsfiddle.net': {
-      tag: 'iframe',
-      width: 560,
-      height: 560,
-      disabled: true,
-      replace: [
-        ['http://', 'https://'],
-      ],
-      append: 'embedded/result,js,html,css/',
-      match: /https?:\/\/(www\.)?jsfiddle\.net\/([\w\d]+\/[\w\d]+\/\d+\/?|[\w\d]+\/\d+\/?|[\w\d]+\/?)$/,
-      thumbnail: {
-        format: 'http://www.unixstickers.com/image/data/stickers' +
-        '/jsfiddle/JSfiddle-blue-w-type.sh.png',
-      },
-    },
-  }
   const txt = dedent`
     A [link with **bold**](http://example.com)
 
@@ -284,16 +299,16 @@ test('Compiles to Markdown', () => {
 
     Foo !(this is a parenthesis) bar
   `
-  const {contents} = renderMarkdown(txt, config)
+  const {contents} = renderMarkdown(txt, config.toMd)
   expect(contents).toMatchSnapshot()
 
-  const recompiled = renderMarkdown(contents.replace(/&#x3A;/g, ':'), config).contents
+  const recompiled = renderMarkdown(contents.replace(/&#x3A;/g, ':'), config.toMd).contents
   expect(recompiled).toBe(contents)
 
-  config['jsfiddle.net'].disabled = false
-  const withJsFiddleActivated = renderMarkdown(txt, config).contents
+  config.toMd['jsfiddle.net'].disabled = false
+  const withJsFiddleActivated = renderMarkdown(txt, config.toMd).contents
   expect(withJsFiddleActivated).toMatchSnapshot()
 
-  const recompiledWithJsFiddleActivated = renderMarkdown(withJsFiddleActivated.replace(/&#x3A;/g, ':'), config).contents
+  const recompiledWithJsFiddleActivated = renderMarkdown(withJsFiddleActivated.replace(/&#x3A;/g, ':'), config.toMd).contents
   expect(recompiledWithJsFiddleActivated).toBe(withJsFiddleActivated)
 })

@@ -32,6 +32,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "sync-request": "^6.1.0"
+    "node-fetch": "^2.6.0"
   }
 }
