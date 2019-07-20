@@ -221,6 +221,14 @@ describe('ping', () => {
   })
 })
 
+describe('oembed', () => {
+  it(`correctly render oEmbed iframe`, () => {
+    const input = '!(https://soundcloud.com/paresh-sankhe/sets/h2g2)'
+
+    return expect(renderString(input)).resolves.toContain('<iframe')
+  })
+})
+
 describe('smileys', () => {
   it(`translates >_<`, () => {
     const input = 'This is funny >_<'

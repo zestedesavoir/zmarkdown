@@ -240,6 +240,12 @@ const remarkConfig = {
       disabled: false,
       oembed: 'https://www.youtube.com/oembed',
     },
+    'soundcloud.com': {
+      width: 500,
+      height: 305,
+      disabled: false,
+      oembed: 'https://soundcloud.com/oembed',
+    },
     'www.ina.fr': {
       tag: 'iframe',
       width: 620,

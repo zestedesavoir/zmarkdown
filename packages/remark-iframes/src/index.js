@@ -215,7 +215,7 @@ async function fetchEmbed (url) {
   return fetch(url, {timeout: 1500})
     .then((res) => res.json())
     .then((oembedRes) => {
-      const oembedUrl = oembedRes.html.match(/src="([A-Za-z0-9_/?&=:.]+)"/)[1]
+      const oembedUrl = oembedRes.html.match(/src="(.+?)"/)[1]
       const oembedThumbnail = oembedRes.thumbnail_url
       return {
         url: oembedUrl,
