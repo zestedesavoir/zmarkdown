@@ -355,7 +355,7 @@ A & B & C \\\\\\\\ \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 A & B & C & D \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
-\\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 4}|}{E} & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / \\\\number-of-column}|}{F} \\\\\\\\ \\\\hline
+\\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 4}|}{E} & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 4}|}{F} \\\\\\\\ \\\\hline
 \\\\multicolumn{4}{|p{\\\\dimexpr(\\\\linewidth) * 4 / 4}|}{G} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
@@ -364,7 +364,7 @@ A & B & C & D \\\\\\\\ \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 \\\\multicolumn{4}{|p{\\\\dimexpr(\\\\linewidth) * 4 / 4}|}{A} \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
-\\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 4}|}{B} & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / \\\\number-of-column}|}{C} \\\\\\\\ \\\\hline
+\\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 4}|}{B} & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 4}|}{C} \\\\\\\\ \\\\hline
 D & E & F & G \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
@@ -413,6 +413,14 @@ b &  &  & c \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 \\\\captionof{table}{multirow}
 
+
+
+\\\\begin{longtabu}{|p{\\\\dimexpr(\\\\linewidth) / 5}|p{\\\\dimexpr(\\\\linewidth) / 5}|p{\\\\dimexpr(\\\\linewidth) / 5}|p{\\\\dimexpr(\\\\linewidth) / 5}|p{\\\\dimexpr(\\\\linewidth) / 5}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
+\\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 5}|}{span} & header & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 5}|}{span} \\\\\\\\ \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
+elem & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 5}|}{span middle} & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 5}|}{} \\\\\\\\ \\\\hline
+\\\\end{longtabu}
 
 
 \\\\part{Annexes}
@@ -858,7 +866,7 @@ A & B & C \\\\\\\\ \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 A & B & C & D \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
-\\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 4}|}{E} & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / \\\\number-of-column}|}{F} \\\\\\\\ \\\\hline
+\\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 4}|}{E} & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 4}|}{F} \\\\\\\\ \\\\hline
 \\\\multicolumn{4}{|p{\\\\dimexpr(\\\\linewidth) * 4 / 4}|}{G} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
@@ -867,7 +875,7 @@ A & B & C & D \\\\\\\\ \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 \\\\multicolumn{4}{|p{\\\\dimexpr(\\\\linewidth) * 4 / 4}|}{A} \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
-\\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 4}|}{B} & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / \\\\number-of-column}|}{C} \\\\\\\\ \\\\hline
+\\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 4}|}{B} & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 4}|}{C} \\\\\\\\ \\\\hline
 D & E & F & G \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 

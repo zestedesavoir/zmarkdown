@@ -114,7 +114,7 @@ class GridTableStringifier {
       this.nbOfColumns = this.colIndex
     }
     this.colIndex = 0
-    return rowText.replace(/\\number-of-column/, this.nbOfColumns)
+    return rowText.replace(/\\number-of-column/g, this.nbOfColumns)
   }
 
   flushMultiRowLineIfNeeded () {
