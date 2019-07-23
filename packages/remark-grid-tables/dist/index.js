@@ -384,10 +384,12 @@ function extractTable(value, eat, tokenizer) {
   if (!possibleGridTable[i + 1]) return [null, null, null, null];
   var lineLength = stringWidth(possibleGridTable[i + 1]);
   var gridTable = [];
+  var realGridTable = [];
   var hasHeader = false;
 
   for (; i < possibleGridTable.length; i++) {
     var _line = possibleGridTable[i];
+    var realLine = markdownLines[i];
     var isMainLine = totalMainLineRegex.exec(_line); // line is in table
 
     if (isMainLine && stringWidth(_line) === lineLength) {
@@ -397,6 +399,7 @@ function extractTable(value, eat, tokenizer) {
       else if (_isHeaderLine && hasHeader) {
           break;
         }
+      realGridTable.push(realLine);
       gridTable.push(_line);
     } else {
       // this line is not in the grid table.
@@ -424,7 +427,7 @@ function extractTable(value, eat, tokenizer) {
     after.push(markdownLines[i]);
   }
 
-  return [before, gridTable, after, hasHeader];
+  return [before, gridTable, realGridTable, after, hasHeader];
 }
 
 function extractTableContent(lines, linesInfos, hasHeader) {
@@ -544,18 +547,19 @@ function gridTableTokenizer(eat, value, silent) {
   if (!keep) return;
 
   var _extractTable = extractTable(value, eat, this),
-      _extractTable2 = _slicedToArray(_extractTable, 4),
+      _extractTable2 = _slicedToArray(_extractTable, 5),
       before = _extractTable2[0],
       gridTable = _extractTable2[1],
-      after = _extractTable2[2],
-      hasHeader = _extractTable2[3];
+      realGridTable = _extractTable2[2],
+      after = _extractTable2[3],
+      hasHeader = _extractTable2[4];
 
   if (!gridTable || gridTable.length < 3) return;
   var now = eat.now();
   var linesInfos = computeColumnStartingPositions(gridTable);
   var tableContent = extractTableContent(gridTable, linesInfos, hasHeader);
   var tableElt = generateTable(tableContent, now, this);
-  var merged = merge(before, gridTable, after); // Because we can't add multiples blocs in one eat, I use a temp block
+  var merged = merge(before, realGridTable, after); // Because we can't add multiples blocs in one eat, I use a temp block
 
   var wrapperBlock = {
     type: 'element',
