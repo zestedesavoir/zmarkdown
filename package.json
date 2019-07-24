@@ -31,7 +31,7 @@
     "remark": "^11.0.0",
     "remark-math": "^1.0.6",
     "remark-parse": "^5.0.0",
-    "remark-rehype": "^3.0.2",
+    "remark-rehype": "^5.0.0",
     "remark-stringify": "^7.0.1",
     "textr": "^0.3.0",
     "unified": "^8.3.2",
