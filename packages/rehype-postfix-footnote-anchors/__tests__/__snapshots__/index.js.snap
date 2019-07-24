@@ -5,18 +5,9 @@ exports[`{"gfm":false,"commonmark":false,"footnotes":true} footnote-split 1`] = 
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-first-postfix\\">
-<p>first def</p>
-<a href=\\"#fnref-first-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-third-postfix\\">
-<p>third def</p>
-<a href=\\"#fnref-third-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-1-postfix\\">
-<p>second def</p>
-<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-first-postfix\\">first def<a href=\\"#fnref-first-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-1-postfix\\">second def<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-third-postfix\\">third def<a href=\\"#fnref-third-postfix\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -35,26 +26,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-bar-postfix\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-bar-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-bar-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-baz-postfix\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-baz-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-baz-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-qux-postfix\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-qux-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-qux-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-fiji-postfix\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -74,26 +62,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-1-bar\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-1-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-2-bar\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-2-bar\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-2-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-3-bar\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-3-bar\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-3-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-4-bar\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-4-bar\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-4-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5-bar\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -113,26 +98,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-2-postfix\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-3-postfix\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-4-postfix\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5-postfix\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -152,26 +134,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#foo--fnref-1--bar\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#foo--fnref-1--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-2--bar\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#foo--fnref-2--bar\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#foo--fnref-2--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-3--bar\\">
-<p>A simple oneliner.</p>
-<a href=\\"#foo--fnref-3--bar\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#foo--fnref-3--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-4--bar\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#foo--fnref-4--bar\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#foo--fnref-4--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-5--bar\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -187,10 +166,7 @@ exports[`{"gfm":false,"commonmark":false,"footnotes":true} regression-1 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-foo-postfix\\">
-<p>MyNote</p>
-<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-foo-postfix\\">MyNote<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -205,26 +181,11 @@ exports[`{"gfm":false,"commonmark":false,"footnotes":true} regression-2 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-w-postfix\\">
-<p>foo</p>
-<a href=\\"#fnref-w-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-1-postfix\\">
-<p>alpha bravo one</p>
-<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-2-postfix\\">
-<p>alpha bravo two</p>
-<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-3-postfix\\">
-<p>alpha bravo third</p>
-<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-4-postfix\\">
-<p>alpha bravo fourth</p>
-<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-1-postfix\\">alpha bravo one<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-2-postfix\\">alpha bravo two<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-3-postfix\\">alpha bravo third<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-w-postfix\\">foo<a href=\\"#fnref-w-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-4-postfix\\">alpha bravo fourth<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -234,18 +195,9 @@ exports[`{"gfm":false,"commonmark":true,"footnotes":true} footnote-split 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-first-postfix\\">
-<p>first def</p>
-<a href=\\"#fnref-first-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-third-postfix\\">
-<p>third def</p>
-<a href=\\"#fnref-third-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-1-postfix\\">
-<p>second def</p>
-<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-first-postfix\\">first def<a href=\\"#fnref-first-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-1-postfix\\">second def<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-third-postfix\\">third def<a href=\\"#fnref-third-postfix\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -264,26 +216,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-bar-postfix\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-bar-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-bar-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-baz-postfix\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-baz-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-baz-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-qux-postfix\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-qux-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-qux-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-fiji-postfix\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -303,26 +252,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-1-bar\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-1-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-2-bar\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-2-bar\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-2-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-3-bar\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-3-bar\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-3-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-4-bar\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-4-bar\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-4-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5-bar\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -342,26 +288,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-2-postfix\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-3-postfix\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-4-postfix\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5-postfix\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -381,26 +324,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#foo--fnref-1--bar\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#foo--fnref-1--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-2--bar\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#foo--fnref-2--bar\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#foo--fnref-2--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-3--bar\\">
-<p>A simple oneliner.</p>
-<a href=\\"#foo--fnref-3--bar\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#foo--fnref-3--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-4--bar\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#foo--fnref-4--bar\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#foo--fnref-4--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-5--bar\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -416,10 +356,7 @@ exports[`{"gfm":false,"commonmark":true,"footnotes":true} regression-1 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-foo-postfix\\">
-<p>MyNote</p>
-<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-foo-postfix\\">MyNote<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -434,26 +371,11 @@ exports[`{"gfm":false,"commonmark":true,"footnotes":true} regression-2 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-w-postfix\\">
-<p>foo</p>
-<a href=\\"#fnref-w-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-1-postfix\\">
-<p>alpha bravo one</p>
-<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-2-postfix\\">
-<p>alpha bravo two</p>
-<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-3-postfix\\">
-<p>alpha bravo third</p>
-<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-4-postfix\\">
-<p>alpha bravo fourth</p>
-<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-1-postfix\\">alpha bravo one<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-2-postfix\\">alpha bravo two<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-3-postfix\\">alpha bravo third<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-w-postfix\\">foo<a href=\\"#fnref-w-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-4-postfix\\">alpha bravo fourth<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -463,18 +385,9 @@ exports[`{"gfm":true,"commonmark":false,"footnotes":true} footnote-split 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-first-postfix\\">
-<p>first def</p>
-<a href=\\"#fnref-first-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-third-postfix\\">
-<p>third def</p>
-<a href=\\"#fnref-third-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-1-postfix\\">
-<p>second def</p>
-<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-first-postfix\\">first def<a href=\\"#fnref-first-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-1-postfix\\">second def<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-third-postfix\\">third def<a href=\\"#fnref-third-postfix\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -493,26 +406,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-bar-postfix\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-bar-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-bar-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-baz-postfix\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-baz-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-baz-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-qux-postfix\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-qux-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-qux-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-fiji-postfix\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -532,26 +442,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-1-bar\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-1-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-2-bar\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-2-bar\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-2-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-3-bar\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-3-bar\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-3-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-4-bar\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-4-bar\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-4-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5-bar\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -571,26 +478,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-2-postfix\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-3-postfix\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-4-postfix\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5-postfix\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -610,26 +514,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#foo--fnref-1--bar\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#foo--fnref-1--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-2--bar\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#foo--fnref-2--bar\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#foo--fnref-2--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-3--bar\\">
-<p>A simple oneliner.</p>
-<a href=\\"#foo--fnref-3--bar\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#foo--fnref-3--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-4--bar\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#foo--fnref-4--bar\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#foo--fnref-4--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-5--bar\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -645,10 +546,7 @@ exports[`{"gfm":true,"commonmark":false,"footnotes":true} regression-1 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-foo-postfix\\">
-<p>MyNote</p>
-<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-foo-postfix\\">MyNote<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -663,26 +561,11 @@ exports[`{"gfm":true,"commonmark":false,"footnotes":true} regression-2 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-w-postfix\\">
-<p>foo</p>
-<a href=\\"#fnref-w-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-1-postfix\\">
-<p>alpha bravo one</p>
-<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-2-postfix\\">
-<p>alpha bravo two</p>
-<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-3-postfix\\">
-<p>alpha bravo third</p>
-<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-4-postfix\\">
-<p>alpha bravo fourth</p>
-<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-1-postfix\\">alpha bravo one<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-2-postfix\\">alpha bravo two<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-3-postfix\\">alpha bravo third<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-w-postfix\\">foo<a href=\\"#fnref-w-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-4-postfix\\">alpha bravo fourth<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -692,18 +575,9 @@ exports[`{"gfm":true,"commonmark":true,"footnotes":true} footnote-split 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-first-postfix\\">
-<p>first def</p>
-<a href=\\"#fnref-first-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-third-postfix\\">
-<p>third def</p>
-<a href=\\"#fnref-third-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-1-postfix\\">
-<p>second def</p>
-<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-first-postfix\\">first def<a href=\\"#fnref-first-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-1-postfix\\">second def<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-third-postfix\\">third def<a href=\\"#fnref-third-postfix\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -722,26 +596,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-bar-postfix\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-bar-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-bar-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-baz-postfix\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-baz-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-baz-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-qux-postfix\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-qux-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-qux-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-fiji-postfix\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -761,26 +632,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-1-bar\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-1-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-2-bar\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-2-bar\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-2-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-3-bar\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-3-bar\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-3-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-4-bar\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-4-bar\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-4-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5-bar\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -800,26 +668,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-2-postfix\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-3-postfix\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-4-postfix\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5-postfix\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -839,26 +704,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#foo--fnref-1--bar\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#foo--fnref-1--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-2--bar\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#foo--fnref-2--bar\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#foo--fnref-2--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-3--bar\\">
-<p>A simple oneliner.</p>
-<a href=\\"#foo--fnref-3--bar\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#foo--fnref-3--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-4--bar\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#foo--fnref-4--bar\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#foo--fnref-4--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-5--bar\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -874,10 +736,7 @@ exports[`{"gfm":true,"commonmark":true,"footnotes":true} regression-1 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-foo-postfix\\">
-<p>MyNote</p>
-<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-foo-postfix\\">MyNote<a href=\\"#fnref-foo-postfix\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -892,26 +751,11 @@ exports[`{"gfm":true,"commonmark":true,"footnotes":true} regression-2 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-w-postfix\\">
-<p>foo</p>
-<a href=\\"#fnref-w-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-1-postfix\\">
-<p>alpha bravo one</p>
-<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-2-postfix\\">
-<p>alpha bravo two</p>
-<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-3-postfix\\">
-<p>alpha bravo third</p>
-<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-4-postfix\\">
-<p>alpha bravo fourth</p>
-<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-1-postfix\\">alpha bravo one<a href=\\"#fnref-1-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-2-postfix\\">alpha bravo two<a href=\\"#fnref-2-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-3-postfix\\">alpha bravo third<a href=\\"#fnref-3-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-w-postfix\\">foo<a href=\\"#fnref-w-postfix\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-4-postfix\\">alpha bravo fourth<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
