@@ -14,26 +14,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\" title=\\"Foo bar 1\\">↩</a>
+<p><a href=\\"#fnref-1\\" class=\\"footnote-backref\\" title=\\"Foo bar 1\\">↩</a></p>
 </li>
 <li id=\\"fn-2\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-2\\" class=\\"footnote-backref\\" title=\\"Foo bar 2\\">↩</a>
+<p><a href=\\"#fnref-2\\" class=\\"footnote-backref\\" title=\\"Foo bar 2\\">↩</a></p>
 </li>
 <li id=\\"fn-3\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-3\\" class=\\"footnote-backref\\" title=\\"Foo bar 3\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-3\\" class=\\"footnote-backref\\" title=\\"Foo bar 3\\">↩</a></p>
 </li>
 <li id=\\"fn-4\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-4\\" class=\\"footnote-backref\\" title=\\"Foo bar 4\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-4\\" class=\\"footnote-backref\\" title=\\"Foo bar 4\\">↩</a></p>
 </li>
 <li id=\\"fn-5\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-5\\" class=\\"footnote-backref\\" title=\\"Foo bar 5\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-5\\" class=\\"footnote-backref\\" title=\\"Foo bar 5\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -53,26 +50,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\" title=\\"Baz 1 qux?\\">↩</a>
+<p><a href=\\"#fnref-1\\" class=\\"footnote-backref\\" title=\\"Baz 1 qux?\\">↩</a></p>
 </li>
 <li id=\\"fn-2\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-2\\" class=\\"footnote-backref\\" title=\\"Baz 2 qux?\\">↩</a>
+<p><a href=\\"#fnref-2\\" class=\\"footnote-backref\\" title=\\"Baz 2 qux?\\">↩</a></p>
 </li>
 <li id=\\"fn-3\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-3\\" class=\\"footnote-backref\\" title=\\"Baz 3 qux?\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-3\\" class=\\"footnote-backref\\" title=\\"Baz 3 qux?\\">↩</a></p>
 </li>
 <li id=\\"fn-4\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-4\\" class=\\"footnote-backref\\" title=\\"Baz 4 qux?\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-4\\" class=\\"footnote-backref\\" title=\\"Baz 4 qux?\\">↩</a></p>
 </li>
 <li id=\\"fn-5\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-5\\" class=\\"footnote-backref\\" title=\\"Baz 5 qux?\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-5\\" class=\\"footnote-backref\\" title=\\"Baz 5 qux?\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -92,26 +86,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\" title=\\"1\\">↩</a>
+<p><a href=\\"#fnref-1\\" class=\\"footnote-backref\\" title=\\"1\\">↩</a></p>
 </li>
 <li id=\\"fn-2\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-2\\" class=\\"footnote-backref\\" title=\\"2\\">↩</a>
+<p><a href=\\"#fnref-2\\" class=\\"footnote-backref\\" title=\\"2\\">↩</a></p>
 </li>
 <li id=\\"fn-3\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-3\\" class=\\"footnote-backref\\" title=\\"3\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-3\\" class=\\"footnote-backref\\" title=\\"3\\">↩</a></p>
 </li>
 <li id=\\"fn-4\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-4\\" class=\\"footnote-backref\\" title=\\"4\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-4\\" class=\\"footnote-backref\\" title=\\"4\\">↩</a></p>
 </li>
 <li id=\\"fn-5\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-5\\" class=\\"footnote-backref\\" title=\\"5\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-5\\" class=\\"footnote-backref\\" title=\\"5\\">↩</a></p>
 </li>
 </ol>
 </div>"
