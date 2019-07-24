@@ -1,16 +1,19 @@
-const visit = require('unist-util-visit')
+const visit = require('unist-util-visit-parents')
 
 function plugin (title = '') {
   function transformer (tree) {
     visit(tree, 'element', visitor)
   }
 
-  function visitor (node, index, parent) {
+  function visitor (node, parents) {
     if (
       node.tagName === 'a' &&
       node.properties.className &&
-      node.properties.className.includes('footnote-backref')
+      node.properties.className.includes('footnote-backref') &&
+      parents.length > 2 &&
+      parents[parents.length - 2].tagName === 'li'
     ) {
+      const parent = parents[parents.length - 2]
       const identifier = parent.properties.id.slice(3)
       const placeholderIndex = title.indexOf('$id')
       let thisTitle

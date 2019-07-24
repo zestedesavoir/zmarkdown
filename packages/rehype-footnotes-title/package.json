@@ -32,6 +32,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "unist-util-visit": "^1.4.1"
+    "unist-util-visit-parents": "^2.1.2"
   }
 }
