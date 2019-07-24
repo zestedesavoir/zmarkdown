@@ -6,6 +6,7 @@ function plugin () {
 
 function transformer (tree) {
   const footnotes = {}
+
   visit(tree, 'footnote', convert)
 
   visit(tree, 'footnoteDefinition', createIds(footnotes))
@@ -34,7 +35,8 @@ function createIds (footnotes) {
     if (!footnotes.hasOwnProperty(identifier)) {
       footnotes[identifier] = Object.keys(footnotes).length + 1
     }
-    node.identifier = footnotes[identifier]
+    node.identifier = `${footnotes[identifier]}`
+
   }
 }
 
@@ -45,7 +47,7 @@ function replaceIds (footnotes) {
     if (!footnotes.hasOwnProperty(identifier)) {
       footnotes[identifier] = Object.keys(footnotes).length + 1
     }
-    node.identifier = footnotes[identifier]
+    node.identifier = `${footnotes[identifier]}`
   }
 }
 
