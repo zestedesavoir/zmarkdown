@@ -28,7 +28,7 @@
     "parallel-webpack": "^2.4.0",
     "regenerator-runtime": "^0.13.2",
     "rehype-stringify": "^6.0.0",
-    "remark": "^9.0.0",
+    "remark": "^11.0.0",
     "remark-math": "^1.0.6",
     "remark-parse": "^5.0.0",
     "remark-rehype": "^3.0.2",
