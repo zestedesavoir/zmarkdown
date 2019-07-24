@@ -32,7 +32,7 @@
     "remark-math": "^1.0.6",
     "remark-parse": "^5.0.0",
     "remark-rehype": "^3.0.2",
-    "remark-stringify": "^5.0.0",
+    "remark-stringify": "^7.0.1",
     "textr": "^0.3.0",
     "unified": "^8.3.2",
     "unist-util-visit": "^1.4.1",
