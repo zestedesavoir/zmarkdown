@@ -313,7 +313,7 @@ A & B & C & D \\\\\\\\ \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 \\\\multirow{2}{*}{D} & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 4}|}{E} &  \\\\\\\\ \\\\cline{2-4}
 \\\\rowfont[l]{}
- & F & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / \\\\number-of-column}|}{G} \\\\\\\\ \\\\hline
+ & F & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 4}|}{G} \\\\\\\\ \\\\hline
 a & b & \\\\multirow{2}{*}{c   d \\\\par  \\\\par g} \\\\\\\\ \\\\cline{1-2}
 e & f &  &  \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -347,7 +347,7 @@ A & B & C \\\\\\\\ \\\\hline
 \\\\multirow{3}{*}{A} & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{B} \\\\\\\\ \\\\cline{2-3}
 \\\\rowfont[l]{}
  & C & D \\\\\\\\ \\\\cline{2-3}
- & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / \\\\number-of-column}|}{E} \\\\\\\\ \\\\hline
+ & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{E} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
@@ -824,7 +824,7 @@ A & B & C & D \\\\\\\\ \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 \\\\multirow{2}{*}{D} & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 4}|}{E} &  \\\\\\\\ \\\\cline{2-4}
 \\\\rowfont[l]{}
- & F & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / \\\\number-of-column}|}{G} \\\\\\\\ \\\\hline
+ & F & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 4}|}{G} \\\\\\\\ \\\\hline
 a & b & \\\\multirow{2}{*}{c   d \\\\par  \\\\par g} \\\\\\\\ \\\\cline{1-2}
 e & f &  &  \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -858,7 +858,7 @@ A & B & C \\\\\\\\ \\\\hline
 \\\\multirow{3}{*}{A} & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{B} \\\\\\\\ \\\\cline{2-3}
 \\\\rowfont[l]{}
  & C & D \\\\\\\\ \\\\cline{2-3}
- & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / \\\\number-of-column}|}{E} \\\\\\\\ \\\\hline
+ & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{E} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 

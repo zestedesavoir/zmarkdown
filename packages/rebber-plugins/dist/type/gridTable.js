@@ -144,7 +144,7 @@ function () {
       }
 
       this.colIndex = 0;
-      return rowText.replace(/\\number-of-column/g, this.nbOfColumns);
+      return rowText;
     }
   }, {
     key: "flushMultiRowLineIfNeeded",
@@ -194,5 +194,5 @@ function gridTable(ctx, node) {
   overriddenCtx.tableCell = stringifier.gridTableCell.bind(stringifier);
   overriddenCtx.tableRow = stringifier.gridTableRow.bind(stringifier);
   overriddenCtx.headerParse = stringifier.gridTableHeaderParse.bind(stringifier);
-  return table(overriddenCtx, node);
+  return table(overriddenCtx, node).replace(/\\number-of-column/gm, stringifier.nbOfColumns);
 }

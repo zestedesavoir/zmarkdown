@@ -184,6 +184,7 @@ test('gridTable', () => {
     .processSync(fixture)
 
   expect(contents.trim()).toMatchSnapshot()
+  expect(contents.trim()).not.toContain('\\number-of-column')
 })
 
 test('blockquote', () => {
