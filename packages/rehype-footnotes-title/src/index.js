@@ -1,5 +1,21 @@
 const visit = require('unist-util-visit')
 
+function findLastTag (node, tag = 'p') {
+  if (!node.children || !node.children.length) return
+  const links = node.children.filter(e => e.tagName === tag)
+  if (!links.length) return
+  return links[links.length - 1]
+}
+function findLastLink (node, className) {
+  if (!node.children || !node.children.length) return
+  const links = node.children.filter(e => e.tagName === 'a')
+  if (!links.length) return
+  const aTag = links[links.length - 1]
+  if (!aTag.properties || !aTag.properties.className ||
+    !aTag.properties.className.includes(className)) return
+  return aTag
+}
+
 function plugin (title = '') {
   function transformer (tree) {
     visit(tree, 'element', visitor)
@@ -7,17 +23,16 @@ function plugin (title = '') {
 
   function visitor (node, index, parent) {
     if (node.tagName === 'li' && node.properties.id) {
-      let aTag
 
       if (!node.children || !node.children.length) return
+      let aTag = findLastLink(node, 'footnote-backref')
 
-      if (node.children[node.children.length - 1].tagName === 'a') {
-        aTag = node.children[node.children.length - 1]
-      } else if (node.children[node.children.length - 2].tagName === 'p') {
-        const pTag = node.children[node.children.length - 2]
-        if (pTag.children[pTag.children.length - 1].tagName !== 'a') return
-        aTag = pTag.children[pTag.children.length - 1]
-      } else return
+      if (!aTag) {
+        const pTag = findLastTag(node, 'p')
+        aTag = findLastLink(pTag, 'footnote-backref')
+      }
+
+      if (!aTag) return
 
       const identifier = node.properties.id.slice(3)
       const placeholderIndex = title.indexOf('$id')
