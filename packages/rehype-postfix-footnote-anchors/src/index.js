@@ -1,5 +1,31 @@
 const visit = require('unist-util-visit')
 
+function findLastTag (node, tag = 'p') {
+  if (!node.children || !node.children.length) return
+  const links = node.children.filter(e => e.tagName === tag)
+  if (!links.length) return
+  return links[links.length - 1]
+}
+function findLastLink (node, className) {
+  if (!node.children || !node.children.length) return
+  const links = node.children.filter(e => e.tagName === 'a')
+  if (!links.length) return
+  const aTag = links[links.length - 1]
+  if (!aTag.properties || !aTag.properties.className ||
+    !aTag.properties.className.includes(className)) return
+  return aTag
+}
+function setPostfix (node, aTag, postfix) {
+  if (typeof postfix === 'function') {
+    const id = node.properties.id
+    node.properties.id = postfix(id)
+    const link = aTag.properties.href
+    aTag.properties.href = `#${postfix(link.substr(1))}`
+  } else {
+    node.properties.id += postfix
+    aTag.properties.href += postfix
+  }
+}
 function plugin (postfix = '-postfix') {
   return (tree) => {
     visit(tree, 'element', (node, index, parent) => {
@@ -7,29 +33,18 @@ function plugin (postfix = '-postfix') {
       if (node.tagName === 'li') {
         if (!node.properties || !node.properties.id) return
         if (!node.properties.id.startsWith('fn-')) return
-        let aTag
 
         if (!node.children.length) return
-        if (node.children[node.children.length - 1].tagName === 'a') {
-          aTag = node.children[node.children.length - 1]
-        } else if (node.children[node.children.length - 2].tagName === 'p') {
-          const pTag = node.children[node.children.length - 2]
-          if (pTag.children[pTag.children.length - 1].tagName !== 'a') return
-          aTag = pTag.children[pTag.children.length - 1]
-        } else return
+        let aTag = findLastLink(node, 'footnote-backref')
 
-        if (!aTag.properties || !aTag.properties.className ||
-            !aTag.properties.className.includes('footnote-backref')) return
-
-        if (typeof postfix === 'function') {
-          const id = node.properties.id
-          node.properties.id = postfix(id)
-          const link = aTag.properties.href
-          aTag.properties.href = `#${postfix(link.substr(1))}`
-        } else {
-          node.properties.id += postfix
-          aTag.properties.href += postfix
+        if (!aTag) {
+          const pTag = findLastTag(node, 'p')
+          aTag = findLastLink(pTag, 'footnote-backref')
         }
+
+        if (!aTag) return
+
+        setPostfix(node, aTag, postfix)
       }
 
       if (node.tagName === 'sup') {
@@ -42,15 +57,7 @@ function plugin (postfix = '-postfix') {
         if (!aTag.properties || !aTag.properties.className ||
             !aTag.properties.className.includes('footnote-ref')) return
 
-        if (typeof postfix === 'function') {
-          const id = node.properties.id
-          node.properties.id = postfix(id)
-          const link = aTag.properties.href
-          aTag.properties.href = `#${postfix(link.substr(1))}`
-        } else {
-          node.properties.id += postfix
-          aTag.properties.href += postfix
-        }
+        setPostfix(node, aTag, postfix)
       }
     })
   }
