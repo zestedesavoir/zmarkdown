@@ -36,6 +36,10 @@ function createIds(footnotes) {
     }
 
     node.identifier = "".concat(footnotes[identifier]);
+
+    if (node.hasOwnProperty('label')) {
+      node.label = "".concat(footnotes[identifier]);
+    }
   };
 }
 
@@ -48,6 +52,10 @@ function replaceIds(footnotes) {
     }
 
     node.identifier = "".concat(footnotes[identifier]);
+
+    if (node.hasOwnProperty('label')) {
+      node.label = "".concat(footnotes[identifier]);
+    }
   };
 }
 
