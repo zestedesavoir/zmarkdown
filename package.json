@@ -42,7 +42,7 @@
   },
   "scripts": {
     "pretest": "npm run lint && lerna run pretest --scope zmarkdown",
-    "bootstrap": "npm install && npm install packages/*",
+    "bootstrap": "lerna bootstrap",
     "bootstrap-ci": "npm ci && npm ci packages/*",
     "test": "cross-env DEST=/tmp jest",
     "lint": "eslint .",

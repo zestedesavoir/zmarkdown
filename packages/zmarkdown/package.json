@@ -95,8 +95,5 @@
   },
   "engines": {
     "node": ">=8.0.0"
-  },
-  "devDependencies": {
-    "core-js": "^2.6.5"
   }
 }

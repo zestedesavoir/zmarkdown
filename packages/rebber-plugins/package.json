@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "pretest": "eslint .",
-    "prepare": "del-cli dist && cross-env BABEL_ENV=production babel src --out-dir dist",
+    "build": "del-cli dist && cross-env BABEL_ENV=production babel src --out-dir dist",
     "test": "jest",
     "coverage": "jest --coverage"
   },
@@ -40,7 +40,6 @@
     "remark-captions": "file:../remark-captions",
     "remark-emoticons": "file:../remark-emoticons",
     "remark-grid-tables": "file:../remark-grid-tables",
-    "remark-math": "^1.0.5",
     "remark-numbered-footnotes": "file:../remark-numbered-footnotes",
     "remark-sub-super": "file:../remark-sub-super"
   }
