@@ -1,6 +1,6 @@
 {
   "name": "remark-iframes",
-  "version": "3.0.8",
+  "version": "4.0.0",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-iframes",
     "type": "git"

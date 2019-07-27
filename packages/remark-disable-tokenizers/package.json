@@ -1,6 +1,6 @@
 {
   "name": "remark-disable-tokenizers",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-disable-tokenizers",
     "type": "git"

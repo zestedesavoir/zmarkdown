@@ -1,6 +1,6 @@
 {
   "name": "remark-grid-tables",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-grid-tables",
     "type": "git"
