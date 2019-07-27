@@ -340,7 +340,7 @@ function _fetchEmbed() {
             }).then(function (res) {
               return res.json();
             }).then(function (oembedRes) {
-              var oembedUrl = oembedRes.html.match(/src="([A-Za-z0-9_/?&%=:.]+)"/)[1];
+              var oembedUrl = oembedRes.html.match(/src="(.+?)"/)[1];
               var oembedThumbnail = oembedRes.thumbnail_url;
               return {
                 url: oembedUrl,
