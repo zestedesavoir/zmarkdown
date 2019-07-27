@@ -97,6 +97,13 @@ unified()
 - `match`: a regular expression passed to `String.prototype.test`, used to validate the URL.
 - `thumbnail`: a way to retrieve a thumbnail. This param is an object with a `format` key of this type: `'http://url/{param1}/{param2}'` you must then provide patterns `param: 'pattern'` to extract the value which will replace the corresponding `{param}` in the `format` URL.
 - `droppedQueryParameters`: a list of query parameters to remove from the iframe source URL.
+- `oembed`: an URL to the oEmbed API of the website you want to embed.
+
+### oEmbed usage
+
+When using the `oembed` configuration parameter, the other parameters are discarded, excepted for `disabled`, which can be used freely; you may use `width` and `height` if really needed, altough it is not recommended by the oEmbed specification.
+
+The thumbnail is constructed from the oEmbed `thumbnail_url` response, so there is no need for providing any URL, and any configuration will not be taken into account.
 
 ### Thumbnail construction
 
@@ -117,7 +124,8 @@ for each property of provider.thumbnail
 
 ```javascript
 {
-   'www.youtube.com': {
+    // Youtube RegEx example
+    'www.youtube.com': {
       tag: 'iframe',
       width: 560,
       height: 315,
@@ -131,6 +139,13 @@ for each property of provider.thumbnail
         id: '.+/(.+)$'
       },
       removeAfter: '&'
+    },
+    // Youtube oEmbed example
+    'youtu.be': {
+      width: 560,
+      height: 315,
+      disabled: false,
+      oembed: 'https://www.youtube.com/oembed'
     }
 }
 ```

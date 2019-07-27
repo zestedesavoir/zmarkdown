@@ -8,12 +8,12 @@ import remarkStringify from 'remark-stringify'
 import plugin from '../src/'
 
 
-const render = (text, config) => unified()
+const render = async (text, config) => unified()
   .use(reParse)
   .use(plugin, config)
   .use(remark2rehype)
   .use(stringify)
-  .processSync(text)
+  .process(text)
 
 const renderMarkdown = (text, config) => unified()
   .use(reParse)
@@ -21,8 +21,8 @@ const renderMarkdown = (text, config) => unified()
   .use(plugin, config)
   .processSync(text)
 
-test('video', () => {
-  const config = {
+const config = {
+  video: {
     'www.dailymotion.com': {
       tag: 'iframe',
       width: 480,
@@ -55,49 +55,22 @@ test('video', () => {
       ],
     },
     'www.youtube.com': {
-      tag: 'iframe',
       width: 560,
       height: 315,
       disabled: false,
-      replace: [
-        ['watch?v=', 'embed/'],
-        ['http://', 'https://'],
-      ],
-      thumbnail: {
-        format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/(.+)$',
-      },
-      removeAfter: '&',
+      oembed: 'https://www.youtube.com/oembed',
     },
     'youtube.com': {
-      tag: 'iframe',
       width: 560,
       height: 315,
       disabled: false,
-      replace: [
-        ['watch?v=', 'embed/'],
-        ['http://', 'https://'],
-      ],
-      thumbnail: {
-        format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/(.+)$',
-      },
-      removeAfter: '&',
+      oembed: 'https://www.youtube.com/oembed',
     },
     'youtu.be': {
-      tag: 'iframe',
       width: 560,
       height: 315,
       disabled: false,
-      replace: [
-        ['watch?v=', 'embed/'],
-        ['youtu.be', 'www.youtube.com/embed'],
-      ],
-      thumbnail: {
-        format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/x(.+)$',
-      },
-      removeAfter: '&',
+      oembed: 'https://www.youtube.com/oembed',
     },
     'screen.yahoo.com': {
       tag: 'iframe',
@@ -140,46 +113,8 @@ test('video', () => {
       append: 'embedded/result,js,html,css/',
       match: /https?:\/\/(www\.)?jsfiddle\.net\/([\w\d]+\/[\w\d]+\/\d+\/?|[\w\d]+\/\d+\/?|[\w\d]+\/?)$/,
     },
-  }
-
-  const {contents} = render(dedent`
-    !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
-
-    !(https://www.dailymotion.com/video/x2y6lhm)
-
-    !(http://vimeo.com/133693532)
-
-    !(https://screen.yahoo.com/weatherman-gives-forecast-using-taylor-191821481.html)
-
-    A [link with **bold**](http://example.com)
-
-    !(https://youtu.be/BpJKvrjLUp0)
-
-    !(http://youtube.com/watch?v=BpJKvrjLUp0)
-
-    !(http://jsfiddle.net/Sandhose/BcKhe/1/)
-
-    !(http://jsfiddle.net/zgjhjv9j/)
-
-    !(http://jsfiddle.net/zgjhjv9j/1/)
-
-    !(https://www.youtube.com/watch?v=1Bh4DZ2xGmw&ab_channel=DestinationPr%C3%A9pa)
-
-    !(http://www.ina.fr/video/MAN9062216517/)
-
-    Not parsed:
-
-    !(http://jsfiddle.net/Sandhose/BcKhe/)
-
-    !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
-    with text after
-  `, config)
-
-  expect(contents).toMatchSnapshot()
-})
-
-test('extra', () => {
-  const config = {
+  },
+  extra: {
     'www.youtube.com': {
       tag: 'iframe',
       width: 560,
@@ -202,71 +137,8 @@ test('extra', () => {
       ],
       append: 'embedded/result,js,html,css/',
     },
-  }
-
-  const {contents: parsed} = render(dedent`
-    !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
-
-    !(https://www.youtube.com/watch?feature=embedded&v=BpJKvrjLUp0)
-  `, config)
-  expect(parsed).toMatch(/iframe.*iframe/)
-
-  const {contents: notParsed} = render(dedent`
-    !(http://jsfiddle.net/Sandhose/BcKhe/1/)
-
-    !(http://jsfiddle.net/zgjhjv9j/)
-
-    !(http://jsfiddle.net/zgjhjv9j/1/)
-
-    !(http://jsfiddle.net/Sandhose/BcKhe/)
-  `, config)
-  expect(notParsed).not.toMatch('iframe')
-})
-
-test('does not parse without markers', () => {
-  const config = {
-    'www.youtube.com': {
-      tag: 'iframe',
-      width: 560,
-      height: 315,
-      disabled: false,
-      replace: [
-        ['watch?v=', 'embed/'],
-        ['http://', 'https://'],
-      ],
-      droppedQueryParameters: ['feature'],
-      removeAfter: '&',
-    },
-  }
-
-  const {contents} = render(dedent`
-    !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
-
-    https://www.youtube.com/watch?v=BpJKvrjLUp0
-  `, config)
-
-  expect(contents).toMatchSnapshot()
-})
-
-test('Errors without config', () => {
-  const fail = () => render('')
-  expect(fail).toThrowError(Error)
-})
-
-test('Errors with empty config', () => {
-  const fail = () => render('', {})
-  expect(fail).toThrowError(Error)
-})
-
-
-test('Errors with invalid config', () => {
-  const fail = () => render('', '')
-  expect(fail).toThrowError(Error)
-})
-
-
-test('Compiles to Markdown', () => {
-  const config = {
+  },
+  toMd: {
     'www.youtube.com': {
       tag: 'iframe',
       width: 560,
@@ -293,11 +165,127 @@ test('Compiles to Markdown', () => {
         '/jsfiddle/JSfiddle-blue-w-type.sh.png',
       },
     },
+  },
+}
+
+test('video', async () => {
+  const {contents} = await render(dedent`
+    !(https://www.youtube.com/watch?v=FdltlrKFr1w)
+
+    !(https://www.dailymotion.com/video/x2y6lhm)
+
+    !(http://vimeo.com/133693532)
+
+    !(https://screen.yahoo.com/weatherman-gives-forecast-using-taylor-191821481.html)
+
+    A [link with **bold**](http://example.com)
+
+    !(https://youtu.be/FdltlrKFr1w)
+
+    !(http://youtube.com/watch?v=FdltlrKFr1w)
+
+    !(http://jsfiddle.net/Sandhose/BcKhe/1/)
+
+    !(http://jsfiddle.net/zgjhjv9j/)
+
+    !(http://jsfiddle.net/zgjhjv9j/1/)
+
+    !(https://www.youtube.com/watch?v=1Bh4DZ2xGmw&ab_channel=DestinationPr%C3%A9pa)
+
+    !(http://www.ina.fr/video/MAN9062216517/)
+
+    Not parsed:
+
+    !(http://jsfiddle.net/Sandhose/BcKhe/)
+
+    !(https://www.youtube.com/watch?v=FdltlrKFr1w)
+    with text after
+  `, config.video)
+
+  expect(contents).toMatchSnapshot()
+})
+
+test('oembed falls back', async () => {
+  const config = {
+    'www.youtube.com': {
+      width: 560,
+      height: 315,
+      disabled: false,
+      oembed: 'http://example.com:7777/oembed',
+    },
   }
+  const result = await render(dedent`
+    !(https://www.youtube.com/watch?v=FdltlrKFr1w)
+  `, config)
+
+  expect(result.messages[0].message).toContain('timeout')
+  expect(result.contents).toMatchSnapshot()
+})
+
+test('extra', async () => {
+  const {contents: parsed} = await render(dedent`
+    !(https://www.youtube.com/watch?v=FdltlrKFr1w)
+
+    !(https://www.youtube.com/watch?feature=embedded&v=FdltlrKFr1w)
+  `, config.extra)
+  expect(parsed).toMatch(/iframe.*iframe/)
+
+  const {contents: notParsed} = await render(dedent`
+    !(http://jsfiddle.net/Sandhose/BcKhe/1/)
+
+    !(http://jsfiddle.net/zgjhjv9j/)
+
+    !(http://jsfiddle.net/zgjhjv9j/1/)
+
+    !(http://jsfiddle.net/Sandhose/BcKhe/)
+  `, config.extra)
+  expect(notParsed).not.toMatch('iframe')
+})
+
+test('does not parse without markers', async () => {
+  const config = {
+    'www.youtube.com': {
+      tag: 'iframe',
+      width: 560,
+      height: 315,
+      disabled: false,
+      replace: [
+        ['watch?v=', 'embed/'],
+        ['http://', 'https://'],
+      ],
+      droppedQueryParameters: ['feature'],
+      removeAfter: '&',
+    },
+  }
+
+  const {contents} = await render(dedent`
+    !(https://www.youtube.com/watch?v=FdltlrKFr1w)
+
+    https://www.youtube.com/watch?v=FdltlrKFr1w
+  `, config)
+
+  expect(contents).toMatchSnapshot()
+})
+
+test('Errors without config', async () => {
+  expect(render('')).rejects.toThrowError(Error)
+})
+
+test('Errors with empty config', async () => {
+  expect(render('', {})).rejects.toThrowError(Error)
+})
+
+
+test('Errors with invalid config', async () => {
+  expect(render('', '')).rejects.toThrowError(Error)
+})
+
+
+test('Compiles to Markdown', () => {
   const txt = dedent`
     A [link with **bold**](http://example.com)
 
-    !(https://www.youtube.com/watch?v=BpJKvrjLUp0)
+    !(https://www.youtube.com/watch?v=FdltlrKFr1w)
 
     These ones should not be allowed by config:
 
@@ -311,16 +299,16 @@ test('Compiles to Markdown', () => {
 
     Foo !(this is a parenthesis) bar
   `
-  const {contents} = renderMarkdown(txt, config)
+  const {contents} = renderMarkdown(txt, config.toMd)
   expect(contents).toMatchSnapshot()
 
-  const recompiled = renderMarkdown(contents.replace(/&#x3A;/g, ':'), config).contents
+  const recompiled = renderMarkdown(contents.replace(/&#x3A;/g, ':'), config.toMd).contents
   expect(recompiled).toBe(contents)
 
-  config['jsfiddle.net'].disabled = false
-  const withJsFiddleActivated = renderMarkdown(txt, config).contents
+  config.toMd['jsfiddle.net'].disabled = false
+  const withJsFiddleActivated = renderMarkdown(txt, config.toMd).contents
   expect(withJsFiddleActivated).toMatchSnapshot()
 
-  const recompiledWithJsFiddleActivated = renderMarkdown(withJsFiddleActivated.replace(/&#x3A;/g, ':'), config).contents
+  const recompiledWithJsFiddleActivated = renderMarkdown(withJsFiddleActivated.replace(/&#x3A;/g, ':'), config.toMd).contents
   expect(recompiledWithJsFiddleActivated).toBe(withJsFiddleActivated)
 })

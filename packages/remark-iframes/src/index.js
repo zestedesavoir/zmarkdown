@@ -1,4 +1,6 @@
 const {format, parse, URLSearchParams} = require('url')
+const visit = require('unist-util-visit')
+const fetch = require('node-fetch')
 
 module.exports = function plugin (opts) {
   if (typeof opts !== 'object' || !Object.keys(opts).length) {
@@ -40,13 +42,35 @@ module.exports = function plugin (opts) {
       })
     }
 
-    const finalUrl = computeFinalUrl(provider, url)
-    const thumbnail = computeThumbnail(provider, finalUrl)
-    eat(eatenValue)({
-      type: 'iframe',
-      src: url,
-      data: {
-        hName: provider.tag,
+    let finalUrl, thumbnail
+    const data = {
+      hName: provider.tag || 'iframe',
+      hProperties: {
+        src: 'tmp',
+        width: provider.width,
+        height: provider.height,
+        allowfullscreen: true,
+        frameborder: '0',
+      },
+    }
+
+    if (provider.oembed) {
+      Object.assign(data, {
+        oembed: {
+          provider: provider,
+          url: `${provider.oembed}?format=json&url=${encodeURIComponent(url)}`,
+          fallback: {
+            type: 'link',
+            url: url,
+            children: [{type: 'text', value: url}],
+          },
+        },
+      })
+    } else {
+      finalUrl = computeFinalUrl(provider, url)
+      thumbnail = computeThumbnail(provider, finalUrl)
+
+      Object.assign(data, {
         hProperties: {
           src: finalUrl,
           width: provider.width,
@@ -55,7 +79,13 @@ module.exports = function plugin (opts) {
           frameborder: '0',
         },
         thumbnail: thumbnail,
-      },
+      })
+    }
+
+    eat(eatenValue)({
+      type: 'iframe',
+      src: url,
+      data,
     })
   }
 
@@ -72,6 +102,59 @@ module.exports = function plugin (opts) {
     const visitors = Compiler.prototype.visitors
     if (!visitors) return
     visitors.iframe = (node) => `!(${node.src})`
+  }
+
+  return async function transform (tree, vfile, next) {
+    let toVisit = 0
+    visit(tree, 'iframe', async (node) => {
+      toVisit++
+    })
+
+    function nextVisitOrBail () {
+      if (toVisit === 0) next()
+    }
+    nextVisitOrBail()
+
+    visit(tree, 'iframe', async (node) => {
+      if (!node.data.oembed) {
+        toVisit--
+        nextVisitOrBail()
+        return
+      }
+      const data = node.data
+      const oembed = data.oembed
+      const provider = data.oembed.provider
+      const fallback = data.oembed.fallback
+      try {
+        const {
+          url,
+          thumbnail,
+          height,
+          width,
+        } = await fetchEmbed(oembed.url)
+
+        node.thumbnail = thumbnail
+        Object.assign(data.hProperties, {
+          src: url,
+          width: provider.width || width,
+          height: provider.height || height,
+          allowfullscreen: true,
+          frameborder: '0',
+        })
+
+      } catch (err) {
+        let message = err.message
+        if (err.name === 'AbortError') {
+          message = `oEmbed URL timeout: ${oembed.url}`
+        }
+        vfile.message(message, node.position, oembed.url)
+        node.data = {}
+        Object.assign(node, fallback)
+      }
+      delete data.oembed
+      toVisit--
+      nextVisitOrBail()
+    })
   }
 }
 
@@ -126,4 +209,19 @@ function computeThumbnail (provider, url) {
       })
   }
   return thumbnailURL
+}
+
+async function fetchEmbed (url) {
+  return fetch(url, {timeout: 1500})
+    .then((res) => res.json())
+    .then((oembedRes) => {
+      const oembedUrl = oembedRes.html.match(/src="(.+?)"/)[1]
+      const oembedThumbnail = oembedRes.thumbnail_url
+      return {
+        url: oembedUrl,
+        thumbnail: oembedThumbnail,
+        width: oembedRes.width,
+        height: oembedRes.height,
+      }
+    })
 }
