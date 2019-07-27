@@ -141,6 +141,28 @@ test('regression: should not crash when followed by "sth<space>"', () => {
   expect(contents).toBe(base)
 })
 
+test('regression: should ignore spaces at the right of the table', () => {
+  const {contents: base} = render(dedent`
+    +---+
+    | A |
+    +===+
+    | B |
+    +---+
+
+    `)
+
+  const {contents} = render(dedent`
+    +---+
+    | A |
+    +===+···
+    | B |·
+    +---+
+
+    `.replace(/·/g, ' '))
+
+  expect(contents).toBe(base)
+})
+
 test('regression: handles east asian ambiguous width', () => {
   const {contents: base} = render(dedent`
     +---+

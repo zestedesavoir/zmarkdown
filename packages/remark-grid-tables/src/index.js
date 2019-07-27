@@ -295,9 +295,11 @@ function extractTable (value, eat, tokenizer) {
   if (!possibleGridTable[i + 1]) return [null, null, null, null]
   const lineLength = stringWidth(possibleGridTable[i + 1])
   const gridTable = []
+  const realGridTable = []
   let hasHeader = false
   for (; i < possibleGridTable.length; i++) {
     const line = possibleGridTable[i]
+    const realLine = markdownLines[i]
     const isMainLine = totalMainLineRegex.exec(line)
     // line is in table
     if (isMainLine && stringWidth(line) === lineLength) {
@@ -307,6 +309,7 @@ function extractTable (value, eat, tokenizer) {
       else if (isHeaderLine && hasHeader) {
         break
       }
+      realGridTable.push(realLine)
       gridTable.push(line)
     } else {
       // this line is not in the grid table.
@@ -333,7 +336,7 @@ function extractTable (value, eat, tokenizer) {
     after.push(markdownLines[i])
   }
 
-  return [before, gridTable, after, hasHeader]
+  return [before, gridTable, realGridTable, after, hasHeader]
 }
 
 function extractTableContent (lines, linesInfos, hasHeader) {
@@ -453,14 +456,14 @@ function gridTableTokenizer (eat, value, silent) {
   const keep = mainLineRegex.exec(value)
   if (!keep) return
 
-  const [before, gridTable, after, hasHeader] = extractTable(value, eat, this)
+  const [before, gridTable, realGridTable, after, hasHeader] = extractTable(value, eat, this)
   if (!gridTable || gridTable.length < 3) return
 
   const now = eat.now()
   const linesInfos = computeColumnStartingPositions(gridTable)
   const tableContent = extractTableContent(gridTable, linesInfos, hasHeader)
   const tableElt = generateTable(tableContent, now, this)
-  const merged = merge(before, gridTable, after)
+  const merged = merge(before, realGridTable, after)
 
   // Because we can't add multiples blocs in one eat, I use a temp block
   const wrapperBlock = {
