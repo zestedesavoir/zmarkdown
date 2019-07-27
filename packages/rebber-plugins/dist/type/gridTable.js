@@ -84,7 +84,9 @@ function () {
         baseText = "\\multirow{".concat(node.data.hProperties.rowspan, "}{*}{").concat(baseText, "}");
         this.colspan = node.data.hProperties.colspan > 1 ? node.data.hProperties.colspan : 1;
       } else if (node.data && node.data.hProperties.colspan > 1) {
-        baseText = "\\multicolumn{".concat(node.data.hProperties.colspan, "}{|c|}{").concat(baseText, "}");
+        var colspan = node.data.hProperties.colspan;
+        var colDim = "p{\\dimexpr(\\linewidth) * ".concat(colspan, " / \\number-of-column}");
+        baseText = "\\multicolumn{".concat(colspan, "}{|").concat(colDim, "|}{").concat(baseText, "}");
       }
 
       if (node.data && node.data.hProperties.colspan > 1) {
@@ -166,7 +168,7 @@ function () {
   }, {
     key: "gridTableHeaderParse",
     value: function gridTableHeaderParse() {
-      var headers = "|p{\\linewidth / ".concat(this.nbOfColumns, "}").repeat(this.nbOfColumns);
+      var headers = "|p{\\dimexpr(\\linewidth) / ".concat(this.nbOfColumns, "}").repeat(this.nbOfColumns);
       return "".concat(headers, "|");
     }
   }, {
@@ -192,5 +194,5 @@ function gridTable(ctx, node) {
   overriddenCtx.tableCell = stringifier.gridTableCell.bind(stringifier);
   overriddenCtx.tableRow = stringifier.gridTableRow.bind(stringifier);
   overriddenCtx.headerParse = stringifier.gridTableHeaderParse.bind(stringifier);
-  return table(overriddenCtx, node);
+  return table(overriddenCtx, node).replace(/\\number-of-column/gm, stringifier.nbOfColumns);
 }
