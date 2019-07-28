@@ -30,5 +30,8 @@
   "keywords": [
     "remark"
   ],
+  "dependencies": {
+    "is-whitespace-character": "^1.0.0"
+  },
   "license": "MIT"
 }
