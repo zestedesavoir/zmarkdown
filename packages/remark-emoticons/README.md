@@ -6,13 +6,7 @@ It introduces a new [MDAST][mdast] node type: "emoticon".
 
 This plugin is compatible with [rehype][rehype], turning the emoticons or shortcodes into HTML `<img>` tags with customizable classes.
 
-## Syntax
-
-```markdown
-:D
-```
-
-will yield an element of type:
+## AST node (see [mdast][mdast] specification)
 
 ```javascript
 interface emoticon <: Node {
@@ -29,7 +23,15 @@ interface emoticon <: Node {
 }
 ```
 
-if you configured the plugin with :
+## Syntax
+
+The following Markdown:
+
+```markdown
+:D
+```
+
+if you configured the plugin with:
 
 ```javascript
 {
@@ -40,7 +42,7 @@ if you configured the plugin with :
 }
 ```
 
-the produced AST node will contain :
+will produce this AST node:
 
 ```javascript
 {
@@ -57,7 +59,7 @@ the produced AST node will contain :
 }
 ```
 
-If you use [rehype][rehype] stringifier it will output :
+If you use [rehype][rehype] stringifier it will output:
 
 ```html
 <img src="/static/smileys/happy.png" alt=":D" class="some-smiley foo">
