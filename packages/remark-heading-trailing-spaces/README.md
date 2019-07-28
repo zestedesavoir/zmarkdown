@@ -1,4 +1,4 @@
-This package manages headers with trailing spaces.
+This plugin removes trailing spaces from Markdown headers.
 
 Examples, here `·` represents a space ` `
 
