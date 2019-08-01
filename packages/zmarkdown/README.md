@@ -1,167 +1,248 @@
-# zmarkdown server HTTP API
+# zmarkdown
 
-### Usage
+  [![NPM Version][npm-image]][npm-url]
+  [![NPM Downloads][downloads-image]][downloads-url]
+  [![Linux Build][travis-image]][travis-url]
+  [![Test Coverage][coveralls-image]][coveralls-url]
 
-* See `npm run server`
-* `pm2 monit` etc
+This sub-repository is a **HTTP Server API** to provide fast and extensible **markdown parser**. It is the current Markdown engine powering [Zeste de Savoir][zds].
 
-### Requests
-All endpoints respond to `HTTP POST` requests sending a JSON body with these keys:
+It is a collection of packages extending the [**remark**
+processor][processor] and its [**MDAST**][mdast] syntax tree, [**rehype**][rehype] (for HTML processing) and [**textr**][textr] (text transformation framework). It also provides [**MDAST**][mdast] to LaTeX compilation via [**rebber**][rebber] (and its [plugins][rebber-plugins]).
 
-* `md` - required, markdown source string
-* `opts` - optional, JSON options
+```sh
+curl -H "Content-Type: application/json" -X POST -d '{"md":"Hello word"}' http://localhost:27272/html
+#return: ["<p>Hello word</p>",{"disableToc":true,"languages":[],"depth":1},[]]
+```
 
-`md` being a boring Markdown string, only `opts` will be specified below.
+[npm-image]: https://img.shields.io/npm/v/zmarkdown.svg
+[npm-url]: https://npmjs.org/package/zmarkdown
+[downloads-image]: https://img.shields.io/npm/dm/zmarkdown.svg
+[downloads-url]: https://npmjs.org/package/zmarkdown
+[travis-image]: https://img.shields.io/travis/zestedesavoir/zmarkdown/master.svg?label=linux
+[travis-url]: https://travis-ci.com/zestedesavoir/zmarkdown
+[coveralls-image]: https://img.shields.io/coveralls/zestedesavoir/zmarkdown/master.svg
+[coveralls-url]: https://coveralls.io/r/zestedesavoir/zmarkdown?branch=master
 
-### Responses
+[zds]: https://zestedesavoir.com
+[processor]: https://github.com/remarkjs/remark/blob/master/packages/remark
+[mdast]: https://github.com/wooorm/mdast
+[rehype]: https://github.com/rehypejs/rehype
+[textr]: https://github.com/A/textr
+[rebber]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rebber#rebber--
+[rebber-plugins]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rebber-plugins#rebber-plugins--
+
+## Features
+ - Convert Markdown to HTML ;
+ - Convert Markdown to EPUB file ;
+ - Convert Markdown to LaTeX ;
+ - Convert Markdown to TEX file.
+
+## Installation
+
+This is a [Node.js](https://nodejs.org/en/) module available through the [npm registry][npm-url]. Install with npm:
+
+```
+npm install zmarkdown
+```
+
+## Getting start
+
+ 1. Start your zmarkdown server  `npm run server`
+ 2. Send a `POST` request to `http://localhost:27272/{endpoint}`
+ 
+`pm2 monit`: provides a realtime dashboard that fits directly into your terminal, is a [simple way to monitor][pm2-monit] the ressource usage of you server.
+
+[pm2-monit]:http://pm2.keymetrics.io/docs/usage/monitoring/
+
+### Limit the ressource usage of your server
+
+You can change the number of thread (default: `3`) and the max-memory of each thread (default: `150M`) in you package.json to `scripts.start` :
+
+```json
+    "server": "pm2 start -f server/index.js -i 3 --max-memory-restart 150M",
+```
+
+## The Request
+All endpoints respond to `HTTP POST`. Requests body is a JSON.
+
+### URL
+
+```
+POST http://localhost:27272/{endpoint}
+```
+
+### Body
+
+#### Required Body JSON Value
+
+| Name | Type | Description |
+| - | - | - |
+| `md` | string | markdown source string. |
+
+#### Optionnal Body JSON Value
+
+| Name | Type | Description |
+| - | - | - |
+| `opts` | JSON | Options, specific option for each endpoints. This part will be supplemented in **Request** of the endpoints sections. |
+
+### Response
 
 All endpoints return `[contents, metadata, messages]` as JSON.
 
-* `contents` - string, the rendered HTML or LaTeX
-* `metadata` - object, depends on request options
-* `messages` - string[], info/debug/errors from parsers, plugins, compilers etc
+| Name | Type | Description |
+| - | - | - |
+| `contents` | string | the rendered HTML or LaTeX. |
+| `metadata` | object | depends on request options. This part will be supplemented in **Response** of the endpoints sections. |
+| `messages` | string[] | info/debug/errors from parsers, plugins, compilers, etc. |
 
 Only `metadata` is described in the **Response** sections below.
 
-# Endpoints
+### Examples
 
-## `/epub` - Markdown to HTML
+```yml
+#POST http://localhost:27272/html
+{
+  "md": "Hello word",
+  "opts": {}
+}
+```
 
-### Request
+## Endpoints 
 
-* `opts.images_download_dir`: see `/latex`
-* `opts.local_url_to_local_path`: see `/latex`
+[ref-epub]: #epub
+[ref-html]: #html
+[ref-latex]: #latex
+[ref-tex]: #tex
 
-### Response
+### epub
 
-* `metadata.disableToc`, bool
+Markdown to EPUB file
 
-  Whether or not the input Markdown did **not** contain headings (`#`, `##`, …). This property is named that way because we use it to disable Table of Contents generation when no headings were found.
-  `disableToc: true` means *no headings*
-  `disableToc: false` means at least one *heading*
+#### URL
 
-## `/html` - Markdown to HTML
+```
+POST http://localhost:27272/epub
+```
 
-### Request
+#### Request `opts` values
 
-* `opts.disable_ping`, bool, default: `false`
+| Name | Type | Description |
+| - | - | - |
+| `opts.images_download_dir` | bool | [see `/latex`][ref-latex] |
+| `opts.local_url_to_local_path` | string | [see `/latex`][ref-latex] |
 
-  [pings][ping] won't get parsed
+#### Response `metadata` values
 
-* `opts.disable_jsfiddle`, bool, default: `false`
+| Name | Type | Description |
+| - | - | - |
+| `metadata.disableToc` | bool | Whether or not the input Markdown did **not** contain headings (`#`, `##`, …). This property is named that way because we use it to disable Table of Contents generation when no headings were found.<br>- `disableToc: true` means *no headings*<br>- `disableToc: false` means at least one *heading*. |
 
-  JSFiddle [iframes][iframes] are disabled
+### html
 
-* `opts.inline`, bool, default: `false`
+Markdown to HTML
 
-  Only parse inline Markdown elements (such as links and emphasis, unlike lists and fenced code blocks)
+#### URL
 
-* `opts.stats`, bool, default: `false`
+```
+POST http://localhost:27272/html
+```
 
-  Will compute and return statistics about markdown text
- 
-### Response
+#### Request `opts` values
 
-* `metadata.disableToc`, bool
+| Name | Type | Description |
+| - | - | - |
+| `opts.disable_ping` | bool | default: `false`, [pings][ping] won't get parsed. |
+| `opts.disable_jsfiddle` | bool |  default: `false`, JSFiddle [iframes][iframes] are disabled. |
+| `opts.inline` | bool | default: `false`, Only parse inline Markdown elements (such as links and emphasis, unlike lists and fenced code blocks). |
+| `opts.stats` | bool | default: `false`, Will compute and return statistics about markdown text. |
 
-  Whether or not the input Markdown did **not** contain headings (`#`, `##`, …). This property is named that way because we use it to disable Table of Contents generation when no headings were found.
-  `disableToc: true` means *no headings*
-  `disableToc: false` means at least one *heading*
+#### Response `metadata` values
 
-* `metadata.ping`, string[], undefined if `opts.disable_ping: true`
+| Name | Type | Description |
+| - | - | - |
+| `metadata.disableToc` | bool | Whether or not the input Markdown did **not** contain headings (`#`, `##`, …). This property is named that way because we use it to disable Table of Contents generation when no headings were found.<br>`disableToc: true` means *no headings*<br>`disableToc: false` means at least one *heading* |
+| `metadata.ping` | string[] | undefined if `opts.disable_ping: true` The list of nicknames returned by `remark-ping`. Can be used to send "ping" notifications to the corresponding users.<br>Note: this is fully customizable, `remark-ping` can validate potential *ping*s by any means, including sending an HTTP request (we recommend `HEAD`) to a REST API to make sure this username actually exists. |
+| `metadata.languages` | string[] | A list of unique languages used in GitHub Flavoured Markdown fences with a flag. |
+| `metadata.stats` | object | stats about the parsed text:<br>- `signs`: number of chars, spaces included.<br>- ` words`: number of words. |
 
-  The list of nicknames returned by `remark-ping`. Can be used to send "ping" notifications to the corresponding users.
-  Note: this is fully customizable, `remark-ping` can validate potential *ping*s by any means, including sending an HTTP request (we recommend `HEAD`) to a REST API to make sure this username actually exists.
+### LaTeX
 
-* `metadata.languages`, string[]
+Markdown to LaTeX
 
-  A list of unique languages used in GitHub Flavoured Markdown fences with a flag.
+#### URL
 
-* `metadata.stats` , object
+```
+POST http://localhost:27272/epub
+```
 
-  stats about the parsed text:
-   - `signs`: number of chars, spaces included
-   - ` words`: number of words
+#### Request `opts` values
 
-## `/latex` - Markdown to LaTeX
+| Name | Type | Description |
+| - | - | - |
+| `opts.disable_images_download` | bool | default: `false` Do not download images. |
+| `opts.images_download_dir` | string | Where to download the images to. |
+| `opts.local_url_to_local_path` | - | [see below](#optslocal_url_to_local_path) this table. |
+| `opts.images_download_timeout` | number | Defaults: `5000` ms. HTTP request timeout for each image, in milliseconds. |
+| `opts.disable_jsfiddle` | bool | [see `/html`][ref-html] |
 
-### Request
+#### opts.local_url_to_local_path
 
-* `opts.disable_images_download`, bool, default: `false`
+ - \[from: string, to: string\], default: `<none>`
 
-  Do not download images.
+   If provided, local images referenced in Markdown source (such as `![](/img/example.png)`)
+   will be copied to `images_download_dir` after replacing the string `from` with `to` using
+   the following RegExp:
 
-* `opts.images_download_dir`, string
+   ```js
+   '/img/example.png'.replace(new RegExp(`^${from}`), to)
+   ```
 
-  Where to download the images to.
+#### Response `metadata` values
 
-* `opts.local_url_to_local_path`, \[from: string, to: string\], default: `<none>`
+This endpoint only returns `{}` as metadata, i.e. an empty object.
 
-  If provided, local images referenced in Markdown source (such
-  as `![](/img/example.png)`) will be copied to `images_download_dir`
-  after replacing the string `from` with `to` using the following RegExp:
+### TeX
 
-  ```js
-  '/img/example.png'.replace(new RegExp(`^${from}`), to)
-  ```
+Markdown to TEX file
 
-* `opts.images_download_timeout`
+#### URL
 
-  HTTP request timeout for each image, in milliseconds. Defaults to 5000 ms.
+```
+POST http://localhost:27272/latex-document
+```
 
-* `opts.disable_jsfiddle`: see `/html`
+#### Request required `opts` values
 
-### Response
+These values are **required**.
 
+| Name | Type | Description |
+| - | - | - |
+| `opts.content_type` | string | (**required**) Will be interpolated in `\documentclass[${content_type}]{zmdocument}` |
+| `opts.title` | string | (**required**) Will be interpolated in `\title{${title}}` |
+| `opts.authors`, | string[] | (**required**) Will be interpolated in `\author{${authors.join(', ')}}` |
+| `opts.license` | string | (**required**) E.g. `CC-BY-SA` will be displayed as-is, using `${license_directory}/by-sa.svg` as license icon with a link to `https://creativecommons.org/licenses/by-sa/4.0/legalcode` |
+| `opts.license_directory` | string | (**required**) Path to the directory where CC license SVG icons are stored, see `license` above. |
+| `opts.smileys_directory` | string | (**required**) Path to the directory where smileys are stored. |
+  
+#### Request `opts` values
 
-* `[contents, metadata, messages]`
+| Name | Type | Description |
+| - | - | - |
+| `opts.disable_images_download` | bool | [see `/latex`][ref-latex] |
+| `opts.images_download_dir` | string | [see `/latex`][ref-latex] |
+| `opts.local_url_to_local_path` | string | [see `/latex`][ref-latex] |
+| `opts.disable_jsfiddle` | bool | [see `/html`][ref-html] |
 
-  This endpoint only returns `{}` as metadata, i.e. an empty object.
+#### Response `metadata` values
 
-## `/latex-document` - Markdown to tex file
+This endpoint only returns `{}` as metadata, i.e. an empty object.
 
-### Request
-
-
-* `opts.disable_images_download`: see `/latex`
-* `opts.images_download_dir`: see `/latex`
-* `opts.local_url_to_local_path`: see `/latex`
-* `opts.disable_jsfiddle`: see `/html`
-* `opts.content_type`, string, **required**
-
-  Will be interpolated in `\documentclass[${content_type}]{zmdocument}`
-
-* `opts.title`, string, **required**
-
-  Will be interpolated in `\title{${title}}`
-
-* `opts.authors`, string[], **required**
-
-  Will be interpolated in `\author{${authors.join(', ')}}`
-
-* `opts.license`, string, **required**
-
-  E.g. `CC-BY-SA` will be displayed as-is, using `${license_directory}/by-sa.svg` as license icon with a link to `https://creativecommons.org/licenses/by-sa/4.0/legalcode`
-
-* `opts.license_directory`, string, **required**
-
-  Path to the directory where CC license SVG icons are stored, see `license` above.
-
-* `opts.smileys_directory`, string, **required**
-
-  Path to the directory where smileys are stored.
-
-### Response
-
-* `[contents, metadata, messages]`
-
-  This endpoint only returns `{}` as metadata, i.e. an empty object.
-
-## Client Architecture
+### Client Architecture
 
 The architecture of the client is similar to `remark` or `Vue`. The *manager*, here `client/client.js`, exposes a global variable `ZMarkdown`. This *manager* doesn't work alone because it does not know how to convert the input to the desired output. Example, if you want to convert markdown to html, the *manager* doesn't know how to do this. It need modules to know how to do this.
 
-### Manager
+#### Manager
 
 You need to add modules with `ZMarkdown.use(obj)` to manage rendering.
 
@@ -174,7 +255,7 @@ This function returns a `Promise` if no callback specified.
 
 `ZMarkdown` also has a `parse(moduleName)` function to get the MDAST tree and `getParser(moduleName)` to get the whole parser. This parameter can be **omitted only** if you define a default module with `ZMarkdown.setDefaultModule`.
 
-### Module
+#### Module
 
 A module is an object with the following properties:
 
@@ -184,7 +265,7 @@ A module is an object with the following properties:
 - **getParser**: `function(): object`, gets the whole of parser.
 - **initialize**: `function(config)`, configure the module with a custom configuration. You do not have to call this function if you want to use the default configuration.
 
-### Tips
+#### Tips
 
 You can start a module with a base parser using `./common.js` (see `./modules/zhtml.js` for instance). The module exports a function that can take two optionals parameters:
 - **opts**: an object that can have:
@@ -194,7 +275,7 @@ You can start a module with a base parser using `./common.js` (see `./modules/zh
     - **option**: optional, plugin config.
 - **processor**: `function(config)` (defaults to `getHTMLProcessor` of `./common.js`), processor function used to configure the remark pipeline for your output
 
-### Module Example
+#### Module Example
 
 ```js
 const common = require('zmarkdown/modules/common') /* zmarkdown common file */
@@ -266,13 +347,13 @@ module.exports = {
 }
 ```
 
-### Dev build
+#### Dev build
 
 If you want to watch the local files while working zmarkdown, you can use `npm run watch:client`. Run the client by opening `./public/index.html`.
 
 *Note: the current implementation (parallel-webpack) doesn't support hot-reload, you will have to manually refresh the webpage after each change*.
 
-### Production build
+#### Production build
 
 To build for production, just run `npm run release`. Generated files are located in `./dist`.
 
