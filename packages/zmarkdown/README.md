@@ -108,47 +108,47 @@ Only `metadata` is described in the **Response** sections below.
 }
 ```
 
-## Endpoints 
+# Endpoints 
 
 [ref-epub]: #epub
 [ref-html]: #html
 [ref-latex]: #latex
 [ref-tex]: #tex
 
-### epub
+## epub
 
 Markdown to EPUB file
 
-#### URL
+### URL
 
 ```
 POST http://localhost:27272/epub
 ```
 
-#### Request `opts` values
+### Request `opts` values
 
 | Name | Type | Description |
 | - | - | - |
 | `opts.images_download_dir` | bool | [see `/latex`][ref-latex] |
 | `opts.local_url_to_local_path` | string | [see `/latex`][ref-latex] |
 
-#### Response `metadata` values
+### Response `metadata` values
 
 | Name | Type | Description |
 | - | - | - |
 | `metadata.disableToc` | bool | Whether or not the input Markdown did **not** contain headings (`#`, `##`, …). This property is named that way because we use it to disable Table of Contents generation when no headings were found.<br>- `disableToc: true` means *no headings*<br>- `disableToc: false` means at least one *heading*. |
 
-### html
+## html
 
 Markdown to HTML
 
-#### URL
+### URL
 
 ```
 POST http://localhost:27272/html
 ```
 
-#### Request `opts` values
+### Request `opts` values
 
 | Name | Type | Description |
 | - | - | - |
@@ -157,7 +157,7 @@ POST http://localhost:27272/html
 | `opts.inline` | bool | default: `false`, Only parse inline Markdown elements (such as links and emphasis, unlike lists and fenced code blocks). |
 | `opts.stats` | bool | default: `false`, Will compute and return statistics about markdown text. |
 
-#### Response `metadata` values
+### Response `metadata` values
 
 | Name | Type | Description |
 | - | - | - |
@@ -166,17 +166,17 @@ POST http://localhost:27272/html
 | `metadata.languages` | string[] | A list of unique languages used in GitHub Flavoured Markdown fences with a flag. |
 | `metadata.stats` | object | stats about the parsed text:<br>- `signs`: number of chars, spaces included.<br>- ` words`: number of words. |
 
-### LaTeX
+## LaTeX
 
 Markdown to LaTeX
 
-#### URL
+### URL
 
 ```
 POST http://localhost:27272/epub
 ```
 
-#### Request `opts` values
+### Request `opts` values
 
 | Name | Type | Description |
 | - | - | - |
@@ -186,7 +186,7 @@ POST http://localhost:27272/epub
 | `opts.images_download_timeout` | number | Defaults: `5000` ms. HTTP request timeout for each image, in milliseconds. |
 | `opts.disable_jsfiddle` | bool | [see `/html`][ref-html] |
 
-#### opts.local_url_to_local_path
+### opts.local_url_to_local_path
 
  - \[from: string, to: string\], default: `<none>`
 
@@ -198,21 +198,21 @@ POST http://localhost:27272/epub
    '/img/example.png'.replace(new RegExp(`^${from}`), to)
    ```
 
-#### Response `metadata` values
+### Response `metadata` values
 
 This endpoint only returns `{}` as metadata, i.e. an empty object.
 
-### TeX
+## TeX
 
 Markdown to TEX file
 
-#### URL
+### URL
 
 ```
 POST http://localhost:27272/latex-document
 ```
 
-#### Request required `opts` values
+### Request required `opts` values
 
 These values are **required**.
 
@@ -225,7 +225,7 @@ These values are **required**.
 | `opts.license_directory` | string | (**required**) Path to the directory where CC license SVG icons are stored, see `license` above. |
 | `opts.smileys_directory` | string | (**required**) Path to the directory where smileys are stored. |
   
-#### Request `opts` values
+### Request `opts` values
 
 | Name | Type | Description |
 | - | - | - |
@@ -234,15 +234,15 @@ These values are **required**.
 | `opts.local_url_to_local_path` | string | [see `/latex`][ref-latex] |
 | `opts.disable_jsfiddle` | bool | [see `/html`][ref-html] |
 
-#### Response `metadata` values
+### Response `metadata` values
 
 This endpoint only returns `{}` as metadata, i.e. an empty object.
 
-### Client Architecture
+## Client Architecture
 
 The architecture of the client is similar to `remark` or `Vue`. The *manager*, here `client/client.js`, exposes a global variable `ZMarkdown`. This *manager* doesn't work alone because it does not know how to convert the input to the desired output. Example, if you want to convert markdown to html, the *manager* doesn't know how to do this. It need modules to know how to do this.
 
-#### Manager
+### Manager
 
 You need to add modules with `ZMarkdown.use(obj)` to manage rendering.
 
@@ -255,7 +255,7 @@ This function returns a `Promise` if no callback specified.
 
 `ZMarkdown` also has a `parse(moduleName)` function to get the MDAST tree and `getParser(moduleName)` to get the whole parser. This parameter can be **omitted only** if you define a default module with `ZMarkdown.setDefaultModule`.
 
-#### Module
+### Module
 
 A module is an object with the following properties:
 
@@ -265,7 +265,7 @@ A module is an object with the following properties:
 - **getParser**: `function(): object`, gets the whole of parser.
 - **initialize**: `function(config)`, configure the module with a custom configuration. You do not have to call this function if you want to use the default configuration.
 
-#### Tips
+### Tips
 
 You can start a module with a base parser using `./common.js` (see `./modules/zhtml.js` for instance). The module exports a function that can take two optionals parameters:
 - **opts**: an object that can have:
@@ -275,7 +275,7 @@ You can start a module with a base parser using `./common.js` (see `./modules/zh
     - **option**: optional, plugin config.
 - **processor**: `function(config)` (defaults to `getHTMLProcessor` of `./common.js`), processor function used to configure the remark pipeline for your output
 
-#### Module Example
+### Module Example
 
 ```js
 const common = require('zmarkdown/modules/common') /* zmarkdown common file */
@@ -347,13 +347,13 @@ module.exports = {
 }
 ```
 
-#### Dev build
+### Dev build
 
 If you want to watch the local files while working zmarkdown, you can use `npm run watch:client`. Run the client by opening `./public/index.html`.
 
 *Note: the current implementation (parallel-webpack) doesn't support hot-reload, you will have to manually refresh the webpage after each change*.
 
-#### Production build
+### Production build
 
 To build for production, just run `npm run release`. Generated files are located in `./dist`.
 
