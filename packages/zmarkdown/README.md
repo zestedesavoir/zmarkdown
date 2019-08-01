@@ -57,7 +57,7 @@ npm install zmarkdown
 
 ### Limit the ressource usage of your server
 
-You can change the number of thread (default: `3`) and the max-memory of each thread (default: `150M`) in you package.json to `scripts.start` :
+You can change the number of thread (default: `3`) and the max-memory of each thread (default: `150M`) in you package.json to `scripts.server` :
 
 ```json
     "server": "pm2 start -f server/index.js -i 3 --max-memory-restart 150M",
@@ -163,7 +163,7 @@ POST http://localhost:27272/html
 | Name | Type | Description |
 | - | - | - |
 | `metadata.disableToc` | bool | Whether or not the input Markdown did **not** contain headings (`#`, `##`, …). This property is named that way because we use it to disable Table of Contents generation when no headings were found.<br>`disableToc: true` means *no headings*<br>`disableToc: false` means at least one *heading* |
-| `metadata.ping` | string[] | undefined if `opts.disable_ping: true` The list of nicknames returned by `remark-ping`. Can be used to send "ping" notifications to the corresponding users.<br>Note: this is fully customizable, `remark-ping` can validate potential *ping*s by any means, including sending an HTTP request (we recommend `HEAD`) to a REST API to make sure this username actually exists. |
+| `metadata.ping` | string[] | undefined if `opts.disable_ping: true`<br>The list of nicknames returned by `remark-ping`. Can be used to send "ping" notifications to the corresponding users.<br>Note: this is fully customizable, `remark-ping` can validate potential *ping*s by any means, including sending an HTTP request (we recommend `HEAD`) to a REST API to make sure this username actually exists. |
 | `metadata.languages` | string[] | A list of unique languages used in GitHub Flavoured Markdown fences with a flag. |
 | `metadata.stats` | object | stats about the parsed text:<br>- `signs`: number of chars, spaces included.<br>- ` words`: number of words. |
 
