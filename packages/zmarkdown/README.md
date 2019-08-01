@@ -63,8 +63,8 @@ You can change the number of thread (default: `3`) and the max-memory of each th
     "server": "pm2 start -f server/index.js -i 3 --max-memory-restart 150M",
 ```
 
-## The Request
-All endpoints respond to `HTTP POST`. Requests body is a JSON.
+## Requests
+All endpoints respond to `HTTP POST`. The request body must be a JSON and `md` is required in every endpoints, `opts` object depends of endpoint, each endpoint have their own options.
 
 ### URL
 
@@ -98,10 +98,11 @@ All endpoints return `[contents, metadata, messages]` as JSON.
 
 Only `metadata` is described in the **Response** sections below.
 
-### Examples
+### Example
 
-```yml
-#POST http://localhost:27272/html
+Sending `POST` to `http://localhost:27272/html` a JSON:
+
+```
 {
   "md": "Hello word",
   "opts": {}
