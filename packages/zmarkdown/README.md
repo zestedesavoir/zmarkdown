@@ -5,7 +5,7 @@
   [![Linux Build][travis-image]][travis-url]
   [![Test Coverage][coveralls-image]][coveralls-url]
 
-This sub-repository is a **HTTP Server API** to provide fast and extensible **markdown parser**. It is the current Markdown engine powering [Zeste de Savoir][zds].
+This project is an **HTTP Server API** providing fast and extensible **markdown parser**. It is the Markdown engine powering [Zeste de Savoir][zds].
 
 It is a collection of packages extending the [**remark**
 processor][processor] and its [**MDAST**][mdast] syntax tree, [**rehype**][rehype] (for HTML processing) and [**textr**][textr] (text transformation framework). It also provides [**MDAST**][mdast] to LaTeX compilation via [**rebber**][rebber] (and its [plugins][rebber-plugins]).
