@@ -55,7 +55,7 @@ npm install zmarkdown
 
 [pm2-monit]:http://pm2.keymetrics.io/docs/usage/monitoring/
 
-### Limit the ressource usage of your server
+### Limit the resource usage of your server
 
 You can change the number of thread (default: `3`) and the max-memory of each thread (default: `150M`) in you package.json to `scripts.server` :
 
