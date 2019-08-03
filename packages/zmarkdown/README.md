@@ -46,7 +46,7 @@ This is a [Node.js](https://nodejs.org/en/) module available through the [npm re
 npm install zmarkdown
 ```
 
-## Getting start
+## Getting started
 
  1. Start your zmarkdown server  `npm run server`
  2. Send a `POST` request to `http://localhost:27272/{endpoint}`
