@@ -64,7 +64,7 @@ You can change the number of threads (default: `3`) and the max-memory of each t
 ```
 
 ## Requests
-All endpoints respond to `HTTP POST`. The request body must be a JSON and `md` is required in every endpoints, `opts` object depends of endpoint, each endpoint have their own options.
+All endpoints respond to `HTTP POST`. The request body must be JSON with a required `md` key. An optional `opts` key can be provided, the value of which depends on the endpoint.
 
 ### URL
 
