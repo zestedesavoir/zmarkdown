@@ -34,7 +34,7 @@ curl -H "Content-Type: application/json" -X POST -d '{"md":"Hello word"}' http:/
 
 ## Features
  - Convert Markdown to HTML ;
- - Convert Markdown to EPUB file ;
+ - Convert Markdown to EPUB compatible HTML ;
  - Convert Markdown to LaTeX ;
  - Convert Markdown to TEX file.
 
