@@ -51,7 +51,7 @@ npm install zmarkdown
  1. Start your zmarkdown server  `npm run server`
  2. Send a `POST` request to `http://localhost:27272/{endpoint}`
  
-`pm2 monit`: provides a realtime dashboard that fits directly into your terminal, is a [simple way to monitor][pm2-monit] the ressource usage of you server.
+`pm2 monit`: provides a realtime dashboard that fits directly into your terminal, it is a [simple way to monitor][pm2-monit] the resource usage of you server.
 
 [pm2-monit]:http://pm2.keymetrics.io/docs/usage/monitoring/
 
