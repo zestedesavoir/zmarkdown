@@ -93,7 +93,7 @@ All endpoints return `[contents, metadata, messages]` as JSON.
 | Name | Type | Description |
 | - | - | - |
 | `contents` | string | the rendered HTML or LaTeX. |
-| `metadata` | object | depends on request options. This part will be supplemented in **Response** of the endpoints sections. |
+| `metadata` | object | depends on request options. This object is documented in the **Response** section of each endpoint. |
 | `messages` | string[] | info/debug/errors from parsers, plugins, compilers, etc. |
 
 Only `metadata` is described in the **Response** sections below.
