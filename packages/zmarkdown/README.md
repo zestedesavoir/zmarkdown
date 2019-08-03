@@ -57,7 +57,7 @@ npm install zmarkdown
 
 ### Limit the resource usage of your server
 
-You can change the number of thread (default: `3`) and the max-memory of each thread (default: `150M`) in you package.json to `scripts.server` :
+You can change the number of threads (default: `3`) and the max-memory of each thread (default: `150M`) in your package.json at `scripts.server` :
 
 ```json
     "server": "pm2 start -f server/index.js -i 3 --max-memory-restart 150M",
