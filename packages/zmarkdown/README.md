@@ -84,7 +84,7 @@ POST http://localhost:27272/{endpoint}
 
 | Name | Type | Description |
 | - | - | - |
-| `opts` | JSON | Options, specific option for each endpoints. This part will be supplemented in **Request** of the endpoints sections. |
+| `opts` | JSON | Options specific to this endpoint. This object is documented in the **Request** section of each endpoint. |
 
 ### Response
 
