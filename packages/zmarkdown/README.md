@@ -80,7 +80,7 @@ POST http://localhost:27272/{endpoint}
 | - | - | - |
 | `md` | string | markdown source string. |
 
-#### Optionnal Body JSON Value
+#### Optional Body JSON Value
 
 | Name | Type | Description |
 | - | - | - |
