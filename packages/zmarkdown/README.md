@@ -118,7 +118,7 @@ Sending `POST` to `http://localhost:27272/html` a JSON:
 
 ## epub
 
-Markdown to EPUB file
+Markdown to EPUB compatible HTML
 
 ### URL
 
