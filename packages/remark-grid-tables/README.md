@@ -2,17 +2,63 @@
 
 This plugin parses custom Markdown syntax to describe tables. It was inspired by [this syntax](https://github.com/smartboyathome/Markdown-GridTables/blob/b4d16d5d254bed4336713d27eb8a37dc0e5f4273/mdx_grid_tables.py).
 
+## AST nodes
+
 It adds a new node type to the [mdast][mdast] produced by [remark][remark]: `gridTable`.
-
-A `gridTable` mdast node can contain the following mdast node types:
-
-* `tableHeader`
-* `tableRow`
-* `tableCell`
 
 If you are using [rehype][rehype], the stringified HTML result will be a `table`.
 
 It is up to you to have CSS rules producing the desired result for these `table`.
+
+```javascript
+interface GridTable <: Parent {
+  type: "gridTable";
+  data: {
+    hName: "table";
+  }
+}
+```
+
+A `gridTable` mdast node can contain the following mdast node types:
+
+### `tableHeader`
+
+```javascript
+interface TableHeader <: Parent {
+  type: "tableHeader";
+  data: {
+    hName: string;
+  }
+}
+```
+
+Where `hName` can be either `thead` or `tbody`.
+
+### `tableRow`
+
+```javascript
+interface TableRow <: Parent {
+  type: "tableRow";
+  data: {
+    hName: "tr";
+  }
+}
+```
+
+### `tableCell`
+
+```javascript
+interface TableCell <: Parent {
+  type: "tableCell";
+  data: {
+    hName: "td";
+    hProperties: {
+      colspan: number >= 1;
+      rowspan: number >= 1;
+    }
+  }
+}
+```
 
 ## Syntax
 
