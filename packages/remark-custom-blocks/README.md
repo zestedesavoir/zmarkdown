@@ -15,6 +15,48 @@ Each custom block can specify CSS classes and whether users are allowed or requi
 
 Only inline Markdown will be parsed in titles.
 
+## AST nodes (see [mdast][mdast] specification)
+
+By default, the plugin will produce the following two nodes, where `whatnot` is the name of you block:
+
+```javascript
+interface whatnotCustomBlock <: Parent {
+  type: "whatnotCustomBlock";
+  data: {
+    hName: string;
+    hProperties: {
+      className: [string];
+    }
+  }
+}
+```
+
+```javascript
+interface whatnotCustomBlockBody <: Parent {
+  type: "whatnotCustomBlockBody";
+  data: {
+    hName: string;
+    hProperties: {
+      className: [string];
+    }
+  }
+}
+```
+
+If your block has an heading, the following node will also be produced:
+
+```javascript
+interface whatnotCustomBlockHeading <: Parent {
+  type: "whatnotCustomBlockHeading";
+  data: {
+    hName: "div";
+    hProperties: {
+      className: [string];
+    }
+  }
+}
+```
+
 ## Installation
 
 [npm][npm]:
