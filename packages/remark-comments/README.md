@@ -12,6 +12,19 @@ Foo<--COMMENTS I am a comment COMMENTS-->bar
 
 Everything between `<--COMMENTS` and `COMMENTS-->` will be absent from the HTML output. Compiling to Markdown will preserve all comments.
 
+## AST node (see [mdast][mdast] specification)
+
+The plugin will product the following node and add it to the MDAST syntax tree:
+
+```javascript
+interface Comments <: Node {
+  type: "comments";
+  data: {
+    comment: string;
+  }
+}
+```
+
 ## Installation
 
 [npm][npm]:
