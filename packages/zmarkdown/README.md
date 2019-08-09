@@ -7,10 +7,10 @@
 
 This project is an **HTTP Server API** providing fast and extensible **markdown parser**. It is the Markdown engine powering [Zeste de Savoir][zds].
 
-It is a collection of packages extending the [**remark**
+It is a small express server leveraging the [**remark**
 processor][processor] and its [**MDAST**][mdast] syntax tree, [**rehype**][rehype] (for HTML processing) and [**textr**][textr] (text transformation framework). It also provides [**MDAST**][mdast] to LaTeX compilation via [**rebber**][rebber] (and its [plugins][rebber-plugins]).
 
-```sh
+```log
 curl -H "Content-Type: application/json" -X POST -d '{"md":"Hello word"}' http://localhost:27272/html
 #return: ["<p>Hello word</p>",{"disableToc":true,"languages":[],"depth":1},[]]
 ```
@@ -97,17 +97,6 @@ All endpoints return `[contents, metadata, messages]` as JSON.
 | `messages` | string[] | info/debug/errors from parsers, plugins, compilers, etc. |
 
 Only `metadata` is described in the **Response** sections below.
-
-### Example
-
-Sending `POST` to `http://localhost:27272/html` a JSON:
-
-```
-{
-  "md": "Hello word",
-  "opts": {}
-}
-```
 
 # Endpoints 
 
