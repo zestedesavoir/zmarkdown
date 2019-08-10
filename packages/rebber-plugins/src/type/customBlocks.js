@@ -6,7 +6,7 @@ module.exports = customBlock
 
 const defaultMacros = {
   defaultBlock: (environmentName, blockTitle, blockContent) => {
-    return `\\begin{${environmentName}}${blockTitle ? `[${blockTitle}]` : ''}` +
+    return `\\begin{${environmentName}}${blockTitle ? `[{{${blockTitle}}}]` : ''}` +
       `\n${blockContent}` +
       `\n\\end{${environmentName}}\n`
   },

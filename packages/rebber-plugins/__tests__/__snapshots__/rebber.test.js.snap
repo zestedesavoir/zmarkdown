@@ -194,14 +194,14 @@ baz
 \\\\end{Error}
 
 
-\\\\begin{Error}[a bad error]
+\\\\begin{Error}[{{a bad error}}]
 \\\\textbf{error}
 foo bar \\\\\\\\
 baz
 \\\\end{Error}
 
 
-\\\\begin{Neutre}[\\\\textbf{title}]
+\\\\begin{Neutre}[{{\\\\textbf{title}}}]
 foo
 \\\\end{Neutre}"
 `;

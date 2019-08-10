@@ -4083,12 +4083,12 @@ with content after
 
 
 
-\\\\begin{Error}[a \\\\textbf{title}]
+\\\\begin{Error}[{{a \\\\textbf{title}}}]
 content
 \\\\end{Error}
 
 
-\\\\begin{Neutral}[a \\\\textbf{title}]
+\\\\begin{Neutral}[{{a \\\\textbf{title}}}]
 content
 \\\\end{Neutral}"
 `;
