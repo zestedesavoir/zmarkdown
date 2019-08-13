@@ -2,11 +2,51 @@
 
 This plugin parses custom Markdown syntax to center- or right-align elements.
 
-It adds three new node types to the [mdast][mdast] produced by [remark][remark]:
+## AST node (see [mdast][mdast] specification)
 
-* `LeftAligned`
-* `CenterAligned`
-* `RightAligned`
+It adds three new node types, described below, to the [mdast][mdast] produced by [remark][remark]:
+
+### `LeftAligned`
+
+```javascript
+interface LeftAligned <: Parent {
+  type: "leftAligned";
+  data: {
+    hName: "div";
+    hProperties: {
+      class: string;
+    }
+  }
+}
+```
+
+### `CenterAligned`
+
+```javascript
+interface CenterAligned <: Parent {
+  type: "centerAligned";
+  data: {
+    hName: "div";
+    hProperties: {
+      class: string;
+    }
+  }
+}
+```
+
+### `RightAligned`
+
+```javascript
+interface RightAligned <: Parent {
+  type: "rightAligned";
+  data: {
+    hName: "div";
+    hProperties: {
+      class: string;
+    }
+  }
+}
+```
 
 If you are using [rehype][rehype], the stringified HTML result will be `div`s with configurable CSS classes.
 
