@@ -46,6 +46,11 @@ describe('#math', () => {
     expect(rendered).resolves.toMatchSnapshot()
   })
 
+  it('do not oversanitize math - test vec', () => {
+    const rendered = renderString()('$$\\vec{a}$$')
+    expect(rendered).resolves.toMatchSnapshot()
+  })
+
   it('do not oversanitize math - test color', () => {
     const rendered = renderString()('$$\\color{red}{x}$$')
     expect(rendered).resolves.toMatchSnapshot()
