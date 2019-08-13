@@ -101,7 +101,7 @@ The sample configuration provided above would have the following effect:
 
 1. This Remark plugin would create [mdast][mdast] nodes for these two blocks, these nodes would be of type:
 
-    * `fooCustomBlock`, content will be in `fooCustomBlockBlody`
+    * `fooCustomBlock`, content will be in `fooCustomBlockBody`
     * `barCustomBlock`, content in `barCustomBlockBody`, optional title in `barCustomBlockHeading`
     * `quxCustomBlock`, content in `quxCustomBlockBody`, required title in `quxCustomBlockHeading`
 
