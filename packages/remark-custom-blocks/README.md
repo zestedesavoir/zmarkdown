@@ -43,7 +43,7 @@ interface whatnotCustomBlockBody <: Parent {
 }
 ```
 
-If your block has an heading, the following node will also be produced:
+If your block has a heading, the following node will also be produced:
 
 ```javascript
 interface whatnotCustomBlockHeading <: Parent {
