@@ -27,7 +27,7 @@ A `gridTable` mdast node can contain the following mdast node types:
 interface TableHeader <: Parent {
   type: "tableHeader";
   data: {
-    hName: string;
+    hName: "thead" or "tbody";
   }
 }
 ```

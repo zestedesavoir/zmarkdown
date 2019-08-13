@@ -23,7 +23,7 @@ By default, the plugin will produce the following two nodes, where `whatnot` is 
 interface whatnotCustomBlock <: Parent {
   type: "whatnotCustomBlock";
   data: {
-    hName: string;
+    hName: "div" or "details";
     hProperties: {
       className: [string];
     }
@@ -35,7 +35,7 @@ interface whatnotCustomBlock <: Parent {
 interface whatnotCustomBlockBody <: Parent {
   type: "whatnotCustomBlockBody";
   data: {
-    hName: string;
+    hName: "div";
     hProperties: {
       className: [string];
     }
@@ -49,7 +49,7 @@ If your block has an heading, the following node will also be produced:
 interface whatnotCustomBlockHeading <: Parent {
   type: "whatnotCustomBlockHeading";
   data: {
-    hName: "div";
+    hName: "div" or "summary";
     hProperties: {
       className: [string];
     }
