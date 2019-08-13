@@ -8,7 +8,7 @@ var all = require('rebber/dist/all');
 module.exports = customBlock;
 var defaultMacros = {
   defaultBlock: function defaultBlock(environmentName, blockTitle, blockContent) {
-    return "\\begin{".concat(environmentName, "}").concat(blockTitle ? "[".concat(blockTitle, "]") : '') + "\n".concat(blockContent) + "\n\\end{".concat(environmentName, "}\n");
+    return "\\begin{".concat(environmentName, "}").concat(blockTitle ? "[{{".concat(blockTitle, "}}]") : '') + "\n".concat(blockContent) + "\n\\end{".concat(environmentName, "}\n");
   }
 };
 
