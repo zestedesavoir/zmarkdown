@@ -283,7 +283,7 @@ multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|p{\\
 \\\\rowfont[c]{\\\\bfseries}
 title & image \\\\\\\\ \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
-space & \\\\image{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg} \\\\\\\\ \\\\hline
+space & \\\\inlineImage{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
@@ -461,6 +461,12 @@ exports[`heading 1`] = `
 
 
 \\\\part{a \\\\} b}
+
+
+\\\\part{\\\\includegraphics{https://www.johnfdoherty.com/wp-content/uploads/2011/07/Titles1.jpg}}
+
+
+\\\\part{a title with \\\\includegraphics{https://www.johnfdoherty.com/wp-content/uploads/2011/07/Titles1.jpg} and text}
 "
 `;
 
@@ -493,6 +499,12 @@ exports[`heading with custom config 1`] = `
 
 
 \\\\LevelOneTitle{a \\\\} b}
+
+
+\\\\LevelOneTitle{\\\\inlineImage{https://www.johnfdoherty.com/wp-content/uploads/2011/07/Titles1.jpg}}
+
+
+\\\\LevelOneTitle{a title with \\\\inlineImage{https://www.johnfdoherty.com/wp-content/uploads/2011/07/Titles1.jpg} and text}
 "
 `;
 
@@ -794,7 +806,7 @@ multi \\\\par line \\\\par  \\\\par cells \\\\par too & \\\\multicolumn{2}{|p{\\
 \\\\rowfont[c]{\\\\bfseries}
 title & image \\\\\\\\ \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
-space & \\\\image{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg} \\\\\\\\ \\\\hline
+space & \\\\inlineImage{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
@@ -1073,5 +1085,17 @@ exports[`table 1`] = `
 1 & 2 \\\\\\\\ \\\\hline
 1 & 2  & 3 \\\\\\\\ \\\\hline
 1 & 2  & 3 \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+Another test for inline image with overridden configuration:
+
+
+
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
+c1 & c2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
+c3 & \\\\inlineImage{https://zestedesavoir.com/media/galleries/426/56dc4a1e-416b-4a9d-830d-95b45d58a17a.png} \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
