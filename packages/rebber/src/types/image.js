@@ -1,6 +1,11 @@
 /* Expose. */
 module.exports = image
 
+const defaultInlineMatcher = (node, parent) => {
+  return (parent.type === 'paragraph' && parent.children.length - 1) ||
+    parent.type === 'heading'
+}
+
 const defaultMacro = (node) => {
   /*
   Note that MDAST `Image` nodes don't have a `width` property.
@@ -40,7 +45,9 @@ function image (ctx, node, _, parent) {
   }
 
   let macro = options.image ? options.image : defaultMacro
-  if (parent.type === 'paragraph' && parent.children.length - 1) {
+  const inlineMatcher = options.inlineMatcher ? options.inlineMatcher : defaultInlineMatcher
+
+  if (inlineMatcher(node, parent)) {
     macro = options.inlineImage ? options.inlineImage : defaultInline
   }
 

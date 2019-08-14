@@ -149,5 +149,9 @@ function gridTable (ctx, node) {
   overriddenCtx.tableCell = stringifier.gridTableCell.bind(stringifier)
   overriddenCtx.tableRow = stringifier.gridTableRow.bind(stringifier)
   overriddenCtx.headerParse = stringifier.gridTableHeaderParse.bind(stringifier)
+
+  overriddenCtx.image = overriddenCtx.image ? overriddenCtx.image : {}
+  overriddenCtx.image.inlineMatcher = () => true
+
   return table(overriddenCtx, node).replace(/\\number-of-column/gm, stringifier.nbOfColumns)
 }
