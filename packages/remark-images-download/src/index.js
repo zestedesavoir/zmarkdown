@@ -95,6 +95,12 @@ function plugin ({
   maxFileSize = 1000000,
   dirSizeLimit = 10000000,
   downloadDestination = '/tmp',
+  defaultImagePath = false,
+  defaultOn = {
+    statusCode: false,
+    mimeType: false,
+    fileTooBig: false,
+  },
   localUrlToLocalPath,
   httpRequestTimeout = 5000, // in milliseconds
 } = {}) {
@@ -121,13 +127,16 @@ function plugin ({
 
         if (statusCode !== 200) {
           error = new Error(`Received HTTP${statusCode} for: ${url}`)
+          error.replaceWithDefault = defaultOn && defaultOn.statusCode
         } else if (!isImage(headers)) {
           error = new Error(`Content-Type of ${url} is not an image/ type`)
+          error.replaceWithDefault = defaultOn && defaultOn.mimeType
         } else if (maxFileSize && fileSize > maxFileSize) {
           error = new Error(
             `File at ${url} weighs ${headers['content-length']}, ` +
             `max size is ${maxFileSize}`
           )
+          error.replaceWithDefault = defaultOn && defaultOn.fileTooBig
         }
 
         if (error) {
@@ -222,6 +231,10 @@ function plugin ({
 
     // images are downloaded to destinationPath
     const destinationPath = path.join(downloadDestination, shortid.generate())
+    // allow to fallback when image is not found
+    const defaultImageDestination = defaultImagePath
+      ? path.join(downloadDestination, defaultImagePath)
+      : false
 
     let downloadTasks = []
     let localCopyTasks = []
@@ -305,6 +318,11 @@ function plugin ({
 
       for (const task of failedTasks) {
         for (const node of task.nodes) {
+          // mutates the AST even in case of error if requested
+          if (defaultImageDestination && task.error.replaceWithDefault) {
+            node.url = defaultImageDestination
+          }
+
           vfile.message(task.error, node.position, task.url)
         }
       }

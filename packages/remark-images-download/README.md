@@ -33,6 +33,12 @@ unified()
   .use(remarkImagesDownload, {
     disabled: true,
     downloadDestination: './img/',
+    defaultImagePath: 'black.png',
+    defaultOn: {
+      statusCode: true,
+      mimeType: false,
+      fileTooBig: false,
+    },
     maxlength: 1000000,
     dirSizeLimit: 10000000,
     localUrlToLocalPath: (localUrl) => localPath
@@ -52,6 +58,27 @@ All options are optional.
 - `downloadDestination`: string, default: `/tmp`
 
   Parent destination folder for downloads.
+
+- `defaultImagePath`: string or boolean, default: `false`
+
+  Image path to fallback to for images that couldn't be found.
+  Set to `false` or keep default value to disable.
+
+- `defaultOn`: object, with properties,
+
+  Cases when the default image should be used.
+
+  - `statusCode`: boolean, default `false`
+
+    The status code is different than 200.
+
+  - `mimeType`: boolean, default `false`
+
+    The MIME type does not match an image.
+
+  - `fileTooBig`: boolean, default `false`
+
+    The file size exceed the `maxFileSize` limit.
 
 - `maxFileLength`: number, default: `1000000`
 
