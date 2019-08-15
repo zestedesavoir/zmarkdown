@@ -164,6 +164,14 @@ function plugin() {
       dirSizeLimit = _ref2$dirSizeLimit === void 0 ? 10000000 : _ref2$dirSizeLimit,
       _ref2$downloadDestina = _ref2.downloadDestination,
       downloadDestination = _ref2$downloadDestina === void 0 ? '/tmp' : _ref2$downloadDestina,
+      _ref2$defaultImagePat = _ref2.defaultImagePath,
+      defaultImagePath = _ref2$defaultImagePat === void 0 ? false : _ref2$defaultImagePat,
+      _ref2$defaultOn = _ref2.defaultOn,
+      defaultOn = _ref2$defaultOn === void 0 ? {
+    statusCode: false,
+    mimeType: false,
+    fileTooBig: false
+  } : _ref2$defaultOn,
       localUrlToLocalPath = _ref2.localUrlToLocalPath,
       _ref2$httpRequestTime = _ref2.httpRequestTimeout,
       httpRequestTimeout = _ref2$httpRequestTime === void 0 ? 5000 : _ref2$httpRequestTime;
@@ -186,10 +194,13 @@ function plugin() {
 
         if (statusCode !== 200) {
           error = new Error("Received HTTP".concat(statusCode, " for: ").concat(url));
+          error.replaceWithDefault = defaultOn && defaultOn.statusCode;
         } else if (!isImage(headers)) {
           error = new Error("Content-Type of ".concat(url, " is not an image/ type"));
+          error.replaceWithDefault = defaultOn && defaultOn.mimeType;
         } else if (maxFileSize && fileSize > maxFileSize) {
           error = new Error("File at ".concat(url, " weighs ").concat(headers['content-length'], ", ") + "max size is ".concat(maxFileSize));
+          error.replaceWithDefault = defaultOn && defaultOn.fileTooBig;
         }
 
         if (error) {
@@ -369,7 +380,7 @@ function plugin() {
       var _transform = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee4(tree, vfile) {
-        var destinationPath, downloadTasks, localCopyTasks, groupTasksByUrl, tasks, successfulTasks, failedTasks, _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3, task, _iteratorNormalCompletion5, _didIteratorError5, _iteratorError5, _iterator5, _step5, node, _iteratorNormalCompletion4, _didIteratorError4, _iteratorError4, _iterator4, _step4, _task, _iteratorNormalCompletion6, _didIteratorError6, _iteratorError6, _iterator6, _step6, _node;
+        var destinationPath, defaultImageDestination, downloadTasks, localCopyTasks, groupTasksByUrl, tasks, successfulTasks, failedTasks, _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3, task, _iteratorNormalCompletion5, _didIteratorError5, _iteratorError5, _iterator5, _step5, node, _iteratorNormalCompletion4, _didIteratorError4, _iteratorError4, _iterator4, _step4, _task, _iteratorNormalCompletion6, _didIteratorError6, _iteratorError6, _iterator6, _step6, _node;
 
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
@@ -384,7 +395,9 @@ function plugin() {
 
               case 2:
                 // images are downloaded to destinationPath
-                destinationPath = path.join(downloadDestination, shortid.generate());
+                destinationPath = path.join(downloadDestination, shortid.generate()); // allow to fallback when image is not found
+
+                defaultImageDestination = defaultImagePath ? path.join(downloadDestination, defaultImagePath) : false;
                 downloadTasks = [];
                 localCopyTasks = [];
                 visit(tree, 'image',
@@ -523,23 +536,23 @@ function plugin() {
                 tasks = downloadTasks.concat(localCopyTasks);
 
                 if (tasks.length) {
-                  _context4.next = 12;
+                  _context4.next = 13;
                   break;
                 }
 
                 return _context4.abrupt("return", tree);
 
-              case 12:
+              case 13:
                 successfulTasks = [];
-                _context4.next = 15;
+                _context4.next = 16;
                 return mkdir(destinationPath);
 
-              case 15:
-                _context4.prev = 15;
-                _context4.next = 18;
+              case 16:
+                _context4.prev = 16;
+                _context4.next = 19;
                 return Promise.all([doDownloadTasks(downloadTasks), doLocalCopyTasks(localCopyTasks)]);
 
-              case 18:
+              case 19:
                 failedTasks = tasks.filter(function (t) {
                   return t.error;
                 });
@@ -549,12 +562,12 @@ function plugin() {
                 _iteratorNormalCompletion3 = true;
                 _didIteratorError3 = false;
                 _iteratorError3 = undefined;
-                _context4.prev = 23;
+                _context4.prev = 24;
                 _iterator3 = failedTasks[Symbol.iterator]();
 
-              case 25:
+              case 26:
                 if (_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done) {
-                  _context4.next = 49;
+                  _context4.next = 50;
                   break;
                 }
 
@@ -562,95 +575,101 @@ function plugin() {
                 _iteratorNormalCompletion5 = true;
                 _didIteratorError5 = false;
                 _iteratorError5 = undefined;
-                _context4.prev = 30;
+                _context4.prev = 31;
 
                 for (_iterator5 = task.nodes[Symbol.iterator](); !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
                   node = _step5.value;
+
+                  // mutates the AST even in case of error if requested
+                  if (defaultImageDestination && task.error.replaceWithDefault) {
+                    node.url = defaultImageDestination;
+                  }
+
                   vfile.message(task.error, node.position, task.url);
                 }
 
-                _context4.next = 38;
+                _context4.next = 39;
                 break;
 
-              case 34:
-                _context4.prev = 34;
-                _context4.t0 = _context4["catch"](30);
+              case 35:
+                _context4.prev = 35;
+                _context4.t0 = _context4["catch"](31);
                 _didIteratorError5 = true;
                 _iteratorError5 = _context4.t0;
 
-              case 38:
-                _context4.prev = 38;
+              case 39:
                 _context4.prev = 39;
+                _context4.prev = 40;
 
                 if (!_iteratorNormalCompletion5 && _iterator5["return"] != null) {
                   _iterator5["return"]();
                 }
 
-              case 41:
-                _context4.prev = 41;
+              case 42:
+                _context4.prev = 42;
 
                 if (!_didIteratorError5) {
-                  _context4.next = 44;
+                  _context4.next = 45;
                   break;
                 }
 
                 throw _iteratorError5;
 
-              case 44:
-                return _context4.finish(41);
-
               case 45:
-                return _context4.finish(38);
+                return _context4.finish(42);
 
               case 46:
+                return _context4.finish(39);
+
+              case 47:
                 _iteratorNormalCompletion3 = true;
-                _context4.next = 25;
+                _context4.next = 26;
                 break;
 
-              case 49:
-                _context4.next = 55;
+              case 50:
+                _context4.next = 56;
                 break;
 
-              case 51:
-                _context4.prev = 51;
-                _context4.t1 = _context4["catch"](23);
+              case 52:
+                _context4.prev = 52;
+                _context4.t1 = _context4["catch"](24);
                 _didIteratorError3 = true;
                 _iteratorError3 = _context4.t1;
 
-              case 55:
-                _context4.prev = 55;
+              case 56:
                 _context4.prev = 56;
+                _context4.prev = 57;
 
                 if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
                   _iterator3["return"]();
                 }
 
-              case 58:
-                _context4.prev = 58;
+              case 59:
+                _context4.prev = 59;
 
                 if (!_didIteratorError3) {
-                  _context4.next = 61;
+                  _context4.next = 62;
                   break;
                 }
 
                 throw _iteratorError3;
 
-              case 61:
-                return _context4.finish(58);
-
               case 62:
-                return _context4.finish(55);
+                return _context4.finish(59);
 
               case 63:
+                return _context4.finish(56);
+
+              case 64:
                 _iteratorNormalCompletion4 = true;
                 _didIteratorError4 = false;
                 _iteratorError4 = undefined;
-                _context4.prev = 66;
+                _context4.prev = 67;
                 _iterator4 = successfulTasks[Symbol.iterator]();
 
-              case 68:
+              case 69:
                 if (_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done) {
-                  _context4.next = 92;
+                  _context4.next = 93;
                   break;
                 }
 
@@ -658,7 +677,7 @@ function plugin() {
                 _iteratorNormalCompletion6 = true;
                 _didIteratorError6 = false;
                 _iteratorError6 = undefined;
-                _context4.prev = 73;
+                _context4.prev = 74;
 
                 for (_iterator6 = _task.nodes[Symbol.iterator](); !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
                   _node = _step6.value;
@@ -666,112 +685,112 @@ function plugin() {
                   _node.url = _task.destination;
                 }
 
-                _context4.next = 81;
+                _context4.next = 82;
                 break;
 
-              case 77:
-                _context4.prev = 77;
-                _context4.t2 = _context4["catch"](73);
+              case 78:
+                _context4.prev = 78;
+                _context4.t2 = _context4["catch"](74);
                 _didIteratorError6 = true;
                 _iteratorError6 = _context4.t2;
 
-              case 81:
-                _context4.prev = 81;
+              case 82:
                 _context4.prev = 82;
+                _context4.prev = 83;
 
                 if (!_iteratorNormalCompletion6 && _iterator6["return"] != null) {
                   _iterator6["return"]();
                 }
 
-              case 84:
-                _context4.prev = 84;
+              case 85:
+                _context4.prev = 85;
 
                 if (!_didIteratorError6) {
-                  _context4.next = 87;
+                  _context4.next = 88;
                   break;
                 }
 
                 throw _iteratorError6;
 
-              case 87:
-                return _context4.finish(84);
-
               case 88:
-                return _context4.finish(81);
+                return _context4.finish(85);
 
               case 89:
+                return _context4.finish(82);
+
+              case 90:
                 _iteratorNormalCompletion4 = true;
-                _context4.next = 68;
+                _context4.next = 69;
                 break;
 
-              case 92:
-                _context4.next = 98;
+              case 93:
+                _context4.next = 99;
                 break;
 
-              case 94:
-                _context4.prev = 94;
-                _context4.t3 = _context4["catch"](66);
+              case 95:
+                _context4.prev = 95;
+                _context4.t3 = _context4["catch"](67);
                 _didIteratorError4 = true;
                 _iteratorError4 = _context4.t3;
 
-              case 98:
-                _context4.prev = 98;
+              case 99:
                 _context4.prev = 99;
+                _context4.prev = 100;
 
                 if (!_iteratorNormalCompletion4 && _iterator4["return"] != null) {
                   _iterator4["return"]();
                 }
 
-              case 101:
-                _context4.prev = 101;
+              case 102:
+                _context4.prev = 102;
 
                 if (!_didIteratorError4) {
-                  _context4.next = 104;
+                  _context4.next = 105;
                   break;
                 }
 
                 throw _iteratorError4;
 
-              case 104:
-                return _context4.finish(101);
-
               case 105:
-                return _context4.finish(98);
+                return _context4.finish(102);
 
               case 106:
-                _context4.next = 113;
+                return _context4.finish(99);
+
+              case 107:
+                _context4.next = 114;
                 break;
 
-              case 108:
-                _context4.prev = 108;
-                _context4.t4 = _context4["catch"](15);
+              case 109:
+                _context4.prev = 109;
+                _context4.t4 = _context4["catch"](16);
                 vfile.message(_context4.t4);
-                _context4.next = 113;
+                _context4.next = 114;
                 return promisify(rimraf)(destinationPath);
 
-              case 113:
+              case 114:
                 if (!successfulTasks.length) {
-                  _context4.next = 117;
+                  _context4.next = 118;
                   break;
                 }
 
                 vfile.data.imageDir = destinationPath;
-                _context4.next = 119;
+                _context4.next = 120;
                 break;
 
-              case 117:
-                _context4.next = 119;
+              case 118:
+                _context4.next = 120;
                 return promisify(rimraf)(destinationPath);
 
-              case 119:
+              case 120:
                 return _context4.abrupt("return", tree);
 
-              case 120:
+              case 121:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[15, 108], [23, 51, 55, 63], [30, 34, 38, 46], [39,, 41, 45], [56,, 58, 62], [66, 94, 98, 106], [73, 77, 81, 89], [82,, 84, 88], [99,, 101, 105]]);
+        }, _callee4, null, [[16, 109], [24, 52, 56, 64], [31, 35, 39, 47], [40,, 42, 46], [57,, 59, 63], [67, 95, 99, 107], [74, 78, 82, 90], [83,, 85, 89], [100,, 102, 106]]);
       }));
 
       function transform(_x4, _x5) {
