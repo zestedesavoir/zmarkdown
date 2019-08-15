@@ -30,6 +30,7 @@ Only `metadata` is described in the **Response** sections below.
 ### Request
 
 * `opts.images_download_dir`: see `/latex`
+* `opts.images_download_default`: see `/latex`
 * `opts.local_url_to_local_path`: see `/latex`
 
 ### Response
@@ -94,6 +95,10 @@ Only `metadata` is described in the **Response** sections below.
 * `opts.images_download_dir`, string
 
   Where to download the images to.
+
+* `opts.images_download_default`, string, default: `black.png`
+
+  Path where to default where the distant image is not found.
 
 * `opts.local_url_to_local_path`, \[from: string, to: string\], default: `<none>`
 

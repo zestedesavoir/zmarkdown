@@ -210,6 +210,32 @@ describe('LaTeX endpoint', () => {
     const [, dir, file, ext] = rendered.match(regex)
     return expect(rm(`${destination}/${dir}`, `${file}.${ext}`)).resolves.toBe('ok')
   })
+
+  it('properly defaults image', async () => {
+    const destination = process.env.DEST || `${__dirname}/../public/`
+    const response = await a.post(latex, {
+      md: `![](${u('/static/noimage.png')})`,
+      opts: {inline: true, images_download_dir: destination},
+    })
+
+    const rendered = response.data[0]
+    expect(rendered).toContain('black.png')
+  })
+
+  it('properly defaults image with custom path', async () => {
+    const destination = process.env.DEST || `${__dirname}/../public/`
+    const response = await a.post(latex, {
+      md: `![](${u('/static/noimage.png')})`,
+      opts: {
+        inline: true,
+        images_download_dir: destination,
+        images_download_default: 'default.png',
+      },
+    })
+
+    const rendered = response.data[0]
+    expect(rendered).toContain('default.png')
+  })
 })
 
 describe('Texfile endpoint', () => {
