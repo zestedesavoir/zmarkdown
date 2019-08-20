@@ -128,7 +128,8 @@ const zmdParser = (config, extraRemarkPlugins = []) => {
       let words = 0
       visit(tree, 'text', (node) => {
         signs += node.value.length
-        words += node.value.match(/\w+/g).length
+        const wordReg = node.value.match(/\w+/g)
+        if (wordReg) words += wordReg.length
       })
       visit(tree, 'paragraph', (node) => {
         signs += 1
