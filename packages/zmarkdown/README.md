@@ -156,6 +156,44 @@ POST http://localhost:27272/html
 | `metadata.languages` | string[] | A list of unique languages used in GitHub Flavoured Markdown fences with a flag. |
 | `metadata.stats` | object | stats about the parsed text:<br>- `signs`: number of chars, spaces included.<br>- ` words`: number of words. |
 
+### Example
+
+Here is a quick example of the request to be made to the `http://localhost:27272/html` endpoint, using the software of your choice:
+
+```json
+{
+	"md": "# Hello\n\nThis is @zmarkdown, a wonderful [Markdown](https://fr.wikipedia.org/wiki/Markdown) parser. You can **embed** code in it:\n\n```js\n\nconst zmd = require('zmarkdown/modules/common')\n\n\n\nconst globalParser = common(opts, processor)\n\n```\n\n- Oh wait, this is *Mise en abyme*, isn't it?\n\n- Of course it is, you @silly.\n\n- Silly, me? Let me remind you that the main usage of this module is to launch the server directly, not using this Node.js crap:\n\n```bash\n\nnpm -g install pm2 && npm install zmarkdown\ncd ./node_modules/zmarkdown && npm run server\n\n```\n\nNow you know how it works, at least for the API endpoint, but we do support a lot more syntax, if you want.",
+	"opts": {
+		"stats": true
+	}
+}
+```
+
+This request will trigger the following response from the server:
+
+```json
+[
+  "<h3 id=\"hello\">Hello<a aria-hidden=\"true\" href=\"#hello\"><span class=\"icon icon-link\"></span></a></h3>\n<p>This is <a href=\"/membres/voir/zmarkdown/\" rel=\"nofollow\" class=\"ping ping-link\">@<span class=\"ping-username\">zmarkdown</span></a>, a wonderful <a href=\"https://fr.wikipedia.org/wiki/Markdown\">Markdown</a> parser. You can <strong>embed</strong> code in it:</p>\n<div class=\"hljs-code-div\"><div class=\"hljs-line-numbers\"><span></span><span></span><span></span><span></span><span></span></div><pre><code class=\"hljs language-js\"><span class=\"hljs-keyword\">const</span> zmd = <span class=\"hljs-built_in\">require</span>(<span class=\"hljs-string\">'zmarkdown/modules/common'</span>)\n\n\n\n<span class=\"hljs-keyword\">const</span> globalParser = common(opts, processor)\n</code></pre></div>\n<ul>\n<li>\n<p>Oh wait, this is <em>Mise en abyme</em>, isn’t it?</p>\n</li>\n<li>\n<p>Of course it is, you <a href=\"/membres/voir/silly/\" rel=\"nofollow\" class=\"ping ping-link\">@<span class=\"ping-username\">silly</span></a>.</p>\n</li>\n<li>\n<p>Silly, me? Let me remind you that the main usage of this module is to launch the server directly, not using this Node.js crap:</p>\n</li>\n</ul>\n<div class=\"hljs-code-div\"><div class=\"hljs-line-numbers\"><span></span><span></span></div><pre><code class=\"hljs language-bash\">npm -g install pm2 &#x26;&#x26; npm install zmarkdown\n<span class=\"hljs-built_in\">cd</span> ./node_modules/zmarkdown &#x26;&#x26; npm run server\n</code></pre></div>\n<p>Now you know how it works, at least for the API endpoint, but we do support a lot more syntax, if you want.</p>",
+  {
+    "ping": [
+      "zmarkdown",
+      "silly"
+    ],
+    "disableToc": false,
+    "languages": [
+      "js",
+      "bash"
+    ],
+    "depth": 5,
+    "stats": {
+      "signs": 386,
+      "words": 78
+    }
+  },
+  []
+]
+```
+
 ## LaTeX
 
 Markdown to LaTeX
