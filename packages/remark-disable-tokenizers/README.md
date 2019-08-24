@@ -69,6 +69,20 @@ unified()
   .use(stringify)
 ```
 
+## Caveats
+
+* `autoLink` is not working correctly -- in order to disable auto-linking, you have to pass `url` to the array of disabled inline tokenizers.
+
+```javascript
+unified()
+  .use(remarkParse)
+  .use(remarkDisableTokenizers, {
+    inline: ['url']
+  })
+  .use(remark2rehype)
+  .use(stringify)
+```
+
 ## License
 
 [MIT][license] © [Zeste de Savoir][zds]
