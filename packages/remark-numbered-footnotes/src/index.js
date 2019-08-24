@@ -35,6 +35,7 @@ function createIds (footnotes) {
       footnotes[identifier] = Object.keys(footnotes).length + 1
     }
     node.identifier = footnotes[identifier]
+    node.label = footnotes[identifier]
   }
 }
 
@@ -46,6 +47,7 @@ function replaceIds (footnotes) {
       footnotes[identifier] = Object.keys(footnotes).length + 1
     }
     node.identifier = footnotes[identifier]
+    node.label = footnotes[identifier]
   }
 }
 
