@@ -968,6 +968,26 @@ Video: a caption
 no caption"
 `;
 
+exports[`mix-7 1`] = `
+"\\\\begin{longtabu}{|p{\\\\dimexpr(\\\\linewidth) / 2}|p{\\\\dimexpr(\\\\linewidth) / 2}|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
+cell & \\\\texttt{code
+with line break} \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
+\\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 2}|}{[]} \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+
+
+\\\\part{Annexes}
+
+
+\\\\footnote{\\\\label{appendix-1}}
+\\\\begin{CodeBlock}{text}
+line 1
+line2
+\\\\end{CodeBlock}"
+`;
+
 exports[`paragraph 1`] = `
 "\\\\part{first 1}
 

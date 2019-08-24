@@ -4230,7 +4230,12 @@ D & E & F & G \\\\\\\\ \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 A & \\\\multicolumn{6}{|p{\\\\dimexpr(\\\\linewidth) * 6 / 7}|}{B} \\\\\\\\ \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
-\\\\multirow{4}{*}{C} & \\\\multirow{4}{*}{\\\\begin{longtabu}{|p{\\\\dimexpr(\\\\linewidth) / 4}|p{\\\\dimexpr(\\\\linewidth) / 4}|p{\\\\dimexpr(\\\\linewidth) / 4}|p{\\\\dimexpr(\\\\linewidth) / 4}|} \\\\cline{1-1} \\\\par \\\\rowfont[c]{\\\\bfseries} \\\\par D & E & F & G \\\\\\\\ \\\\hline \\\\par \\\\rowfont[l]{} \\\\par \\\\multicolumn{4}{|p{\\\\dimexpr(\\\\linewidth) * 4 / 4}|}{H} \\\\\\\\ \\\\hline \\\\par \\\\end{longtabu}} \\\\\\\\ \\\\hline
+\\\\multirow{4}{*}{C} & \\\\multirow{4}{*}{\\\\begin{longtabu}{|p{\\\\dimexpr(\\\\linewidth) / 4}|p{\\\\dimexpr(\\\\linewidth) / 4}|p{\\\\dimexpr(\\\\linewidth) / 4}|p{\\\\dimexpr(\\\\linewidth) / 4}|} \\\\cline{1-1}
+\\\\rowfont[c]{\\\\bfseries}
+D & E & F & G \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
+\\\\multicolumn{4}{|p{\\\\dimexpr(\\\\linewidth) * 4 / 4}|}{H} \\\\\\\\ \\\\hline
+\\\\end{longtabu}} \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
  &  &  &  &  &  \\\\\\\\ \\\\cline{1-1}
  &  &  &  &  &  \\\\\\\\ \\\\cline{1-1}
