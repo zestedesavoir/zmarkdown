@@ -3,6 +3,10 @@
 /* Expose. */
 module.exports = image;
 
+var defaultInlineMatcher = function defaultInlineMatcher(node, parent) {
+  return parent.type === 'paragraph' && parent.children.length - 1 || parent.type === 'heading';
+};
+
 var defaultMacro = function defaultMacro(node) {
   /*
   Note that MDAST `Image` nodes don't have a `width` property.
@@ -37,8 +41,9 @@ function image(ctx, node, _, parent) {
   }
 
   var macro = options.image ? options.image : defaultMacro;
+  var inlineMatcher = options.inlineMatcher ? options.inlineMatcher : defaultInlineMatcher;
 
-  if (parent.type === 'paragraph' && parent.children.length - 1) {
+  if (inlineMatcher(node, parent)) {
     macro = options.inlineImage ? options.inlineImage : defaultInline;
   }
 

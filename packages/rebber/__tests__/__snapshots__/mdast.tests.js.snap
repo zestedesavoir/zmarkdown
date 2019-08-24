@@ -6746,6 +6746,19 @@ Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
 
+exports[`rebber: remark specs table-with-image: table-with-image 1`] = `
+"Someone wanted to do this, let's implement it!
+
+
+
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
+c1 & c2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
+c3 & \\\\includegraphics{https://zestedesavoir.com/media/galleries/426/56dc4a1e-416b-4a9d-830d-95b45d58a17a.png} \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
 exports[`rebber: remark specs tabs: tabs 1`] = `
 "\\\\begin{itemize}
 \\\\item this is a list item
@@ -12715,6 +12728,19 @@ Header 1 & Header 2 \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
+\\\\end{longtabu}"
+`;
+
+exports[`rebber: remark specs with config: custom macros table-with-image 1`] = `
+"Someone wanted to do this, let's implement it!
+
+
+
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
+c1 & c2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
+c3 & \\\\includegraphics{https://zestedesavoir.com/media/galleries/426/56dc4a1e-416b-4a9d-830d-95b45d58a17a.png} \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
 
@@ -20060,6 +20086,20 @@ Header 1 & Header 2 \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
 Cell 1 & Cell 2 \\\\\\\\ \\\\hline
 Cell 3 & Cell 4 \\\\\\\\ \\\\hline
+\\\\end{longtabu}
+"
+`;
+
+exports[`toLaTeX: remark specs table-with-image: table-with-image 1`] = `
+"Someone wanted to do this, let's implement it!
+
+
+
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\rowfont[c]{\\\\bfseries}
+c1 & c2 \\\\\\\\ \\\\hline
+\\\\rowfont[l]{}
+c3 & \\\\includegraphics{https://zestedesavoir.com/media/galleries/426/56dc4a1e-416b-4a9d-830d-95b45d58a17a.png} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 "
 `;

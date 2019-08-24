@@ -8,6 +8,8 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
+var clone = require('clone');
+
 var one = require('../one');
 /* Expose. */
 
@@ -38,5 +40,12 @@ var defaultMacro = function defaultMacro(ctx, node) {
 
 function table(ctx, node) {
   var macro = ctx.table || defaultMacro;
-  return macro(ctx, node);
+  var overriddenCtx = clone(ctx);
+  overriddenCtx.image = overriddenCtx.image ? overriddenCtx.image : {};
+
+  overriddenCtx.image.inlineMatcher = function () {
+    return true;
+  };
+
+  return macro(overriddenCtx, node);
 }

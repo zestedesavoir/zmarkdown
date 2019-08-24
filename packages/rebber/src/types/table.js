@@ -1,3 +1,5 @@
+const clone = require('clone')
+
 const one = require('../one')
 
 /* Expose. */
@@ -24,5 +26,10 @@ const defaultMacro = (ctx, node) => {
 /* Stringify a table `node`. */
 function table (ctx, node) {
   const macro = ctx.table || defaultMacro
-  return macro(ctx, node)
+  const overriddenCtx = clone(ctx)
+
+  overriddenCtx.image = overriddenCtx.image ? overriddenCtx.image : {}
+  overriddenCtx.image.inlineMatcher = () => true
+
+  return macro(overriddenCtx, node)
 }
