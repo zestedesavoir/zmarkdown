@@ -260,7 +260,7 @@ These values are **required**.
 | - | - | - |
 | `opts.disable_images_download` | bool | [see `/latex`][ref-latex] |
 | `opts.images_download_dir` | string | [see `/latex`][ref-latex] |
-* `opts.images_download_default` | string | [see `/latex`][ref-latex] |
+| `opts.images_download_default` | string | [see `/latex`][ref-latex] |
 | `opts.local_url_to_local_path` | string | [see `/latex`][ref-latex] |
 | `opts.disable_jsfiddle` | bool | [see `/html`][ref-html] |
 
