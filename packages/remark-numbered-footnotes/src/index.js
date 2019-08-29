@@ -34,7 +34,8 @@ function createIds (footnotes) {
     if (!footnotes.hasOwnProperty(identifier)) {
       footnotes[identifier] = Object.keys(footnotes).length + 1
     }
-    node.identifier = footnotes[identifier]
+    node.identifier = String(footnotes[identifier])
+    node.label = String(footnotes[identifier])
   }
 }
 
@@ -45,7 +46,8 @@ function replaceIds (footnotes) {
     if (!footnotes.hasOwnProperty(identifier)) {
       footnotes[identifier] = Object.keys(footnotes).length + 1
     }
-    node.identifier = footnotes[identifier]
+    node.identifier = String(footnotes[identifier])
+    node.label = String(footnotes[identifier])
   }
 }
 
