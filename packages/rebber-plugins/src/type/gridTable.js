@@ -4,6 +4,8 @@ const clone = require('clone')
 const tableCell = require('rebber/dist/types/tableCell')
 const tableRow = require('rebber/dist/types/tableRow')
 const table = require('rebber/dist/types/table')
+const text = require('rebber/dist/types/text')
+const paragraph = require('rebber/dist/types/paragraph')
 
 /* Expose. */
 module.exports = gridTable
@@ -49,8 +51,14 @@ class GridTableStringifier {
     const overriddenCtx = clone(ctx)
     this.colIndex++
     overriddenCtx.tableCell = undefined
-    let baseText = tableCell(overriddenCtx, node).trim().replace(/\n/g, ' \\par ')
-
+    // we have to replace \n by \par only in text node, not in other
+    // see #352
+    overriddenCtx.overrides.text = (c, n, index, parent) => text(c, n, index, parent).replace(/\n/g, ' \\par ')
+    overriddenCtx.overrides.paragraph = (c, n) => `${paragraph(c, n).trim()} \\par  \\par `
+    let baseText = tableCell(overriddenCtx, node).trim()
+    while (baseText.substring(baseText.length - '\\par'.length) === '\\par') {
+      baseText = baseText.substring(0, baseText.length - '\\par'.length).trim()
+    }
     if (node.data && node.data.hProperties.rowspan > 1) {
       this.currentSpan = node.data.hProperties.rowspan
       this.multiLineCellIndex = this.colIndex

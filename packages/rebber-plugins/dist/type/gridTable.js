@@ -14,6 +14,10 @@ var tableCell = require('rebber/dist/types/tableCell');
 var tableRow = require('rebber/dist/types/tableRow');
 
 var table = require('rebber/dist/types/table');
+
+var text = require('rebber/dist/types/text');
+
+var paragraph = require('rebber/dist/types/paragraph');
 /* Expose. */
 
 
@@ -75,8 +79,22 @@ function () {
     value: function gridTableCell(ctx, node) {
       var overriddenCtx = clone(ctx);
       this.colIndex++;
-      overriddenCtx.tableCell = undefined;
-      var baseText = tableCell(overriddenCtx, node).trim().replace(/\n/g, ' \\par ');
+      overriddenCtx.tableCell = undefined; // we have to replace \n by \par only in text node, not in other
+      // see #352
+
+      overriddenCtx.overrides.text = function (c, n, index, parent) {
+        return text(c, n, index, parent).replace(/\n/g, ' \\par ');
+      };
+
+      overriddenCtx.overrides.paragraph = function (c, n) {
+        return "".concat(paragraph(c, n).trim(), " \\par  \\par ");
+      };
+
+      var baseText = tableCell(overriddenCtx, node).trim();
+
+      while (baseText.substring(baseText.length - '\\par'.length) === '\\par') {
+        baseText = baseText.substring(0, baseText.length - '\\par'.length).trim();
+      }
 
       if (node.data && node.data.hProperties.rowspan > 1) {
         this.currentSpan = node.data.hProperties.rowspan;
