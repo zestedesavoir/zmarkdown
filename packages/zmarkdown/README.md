@@ -208,10 +208,11 @@ POST http://localhost:27272/epub
 
 | Name | Type | Description |
 | - | - | - |
-| `opts.disable_images_download` | bool | default: `false` Do not download images. |
+| `opts.disable_images_download` | bool | Default: `false`, does not download images. |
 | `opts.images_download_dir` | string | Where to download the images to. |
+| `opts.images_download_default` | string | Default: `black.png`, image used when the distant image is not found. |
+| `opts.images_download_timeout` | number | Default: `5000` ms. HTTP request timeout for each image, in milliseconds. |
 | `opts.local_url_to_local_path` | - | [see below](#optslocal_url_to_local_path) this table. |
-| `opts.images_download_timeout` | number | Defaults: `5000` ms. HTTP request timeout for each image, in milliseconds. |
 | `opts.disable_jsfiddle` | bool | [see `/html`][ref-html] |
 
 ### opts.local_url_to_local_path
@@ -259,6 +260,7 @@ These values are **required**.
 | - | - | - |
 | `opts.disable_images_download` | bool | [see `/latex`][ref-latex] |
 | `opts.images_download_dir` | string | [see `/latex`][ref-latex] |
+* `opts.images_download_default` | string | [see `/latex`][ref-latex] |
 | `opts.local_url_to_local_path` | string | [see `/latex`][ref-latex] |
 | `opts.disable_jsfiddle` | bool | [see `/html`][ref-html] |
 

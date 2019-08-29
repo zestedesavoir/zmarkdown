@@ -134,6 +134,9 @@ module.exports = function markdownHandlers (Raven) {
         if (opts.images_download_timeout) {
           remark.imagesDownload.httpRequestTimeout = opts.images_download_timeout
         }
+        if (typeof opts.images_download_default === 'string') {
+          remark.imagesDownload.defaultImagePath = opts.images_download_default
+        }
       }
 
       if (opts.inline === true) {
