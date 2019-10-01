@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
-import {readdirSync as directory, readFileSync as file} from 'fs'
-import {join} from 'path'
-import dedent from 'dedent'
-import remarkConfig from '../config/remark'
-import rebberConfig from '../config/rebber'
+const directory = require('fs').readdirSync
+const file = require('fs').readFileSync
+const {join} = require('path')
+const dedent = require('dedent')
+const remarkConfig = require('../config/remark')
+const rebberConfig = require('../config/rebber')
 
 remarkConfig.noTypography = true
 remarkConfig._test = true
