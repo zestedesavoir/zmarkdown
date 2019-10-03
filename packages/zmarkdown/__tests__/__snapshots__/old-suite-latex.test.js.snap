@@ -2243,6 +2243,7 @@ Code without matching end
 
 
 \\\\begin{CodeBlock}{html}
+
 ~~~
 
 Code into paragraph
@@ -2562,7 +2563,11 @@ blah
 \\\\begin{Quotation}
 this nested blockquote has 0 on level one and 3 (one after the first \\\\CodeInline{>} + 2 more) on level 2.
 \\\\end{Quotation}
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 \\\\begin{Quotation}
 and this has 4 on level 2 - another code block.
 \\\\end{Quotation}
@@ -2868,7 +2873,11 @@ exports[`#misc properly renders lazy-block-quote.txt 1`] = `
 "\\\\begin{Quotation}
 Line one of lazy block quote.
 Line two of lazy block quote.
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 Line one of paragraph two.
 Line two of paragraph two.
 \\\\end{Quotation}"
@@ -3053,9 +3062,17 @@ exports[`#misc properly renders multi-paragraph-block-quote.txt 1`] = `
 "\\\\begin{Quotation}
 This is line one of paragraph one
 This is line two of paragraph one
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 This is line one of paragraph two
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 This is another blockquote.
 \\\\end{Quotation}"
 `;

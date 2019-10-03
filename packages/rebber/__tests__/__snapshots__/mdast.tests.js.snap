@@ -627,7 +627,8 @@ Caret: \\\\texttt{\\\\textbackslash{}\\\\textasciicircum{}}
 
 
 
-New line: \\\\texttt{\\\\textbackslash{}} only works in paragraphs.
+New line: \\\\texttt{\\\\textbackslash{}
+} only works in paragraphs.
 
 
 
@@ -824,7 +825,11 @@ world
 exports[`rebber: remark specs blockquotes: blockquotes 1`] = `
 "\\\\begin{Quotation}
 This is a blockquote.
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 This is, in commonmark mode, another blockquote.
 \\\\end{Quotation}"
 `;
@@ -1060,11 +1065,11 @@ Here's how you put \\\\texttt{\`backticks\`} in a code span.
 
 
 
-Additionally, empty code spans are also supported: \\\\texttt{}.
+Additionally, empty code spans are NOT supported: \`\`.
 
 
 
-Here’s an example, \\\\texttt{foo \` bar}.
+Here’s an example, \\\\texttt{foo \` bar }.
 
 
 
@@ -1091,7 +1096,7 @@ exports[`rebber: remark specs def-blocks: def-blocks 1`] = `
 "\\\\begin{Quotation}
 hello
 
-1\\\\ref{1}: hello
+\\\\footnote{\\\\label{1}\\\\externalLink{hello}{hello}}
 \\\\end{Quotation}
 
 
@@ -1110,7 +1115,7 @@ hello
 
 \\\\begin{itemize}
 \\\\item hello
-\\\\item [3]: hello
+\\\\item \\\\footnote{\\\\label{3}\\\\externalLink{hello}{hello}}
 \\\\end{itemize}
 
 
@@ -1129,7 +1134,7 @@ bar
 
 
 
-\\\\footnote{\\\\label{1}\\\\externalLink{foo}{foo}}
+\\\\footnote{\\\\label{1-1}\\\\externalLink{foo}{foo}}
 
 \\\\begin{Quotation}
 bar
@@ -1309,22 +1314,50 @@ C&Ouml;DE block.
 exports[`rebber: remark specs entities-advanced: entities-advanced 1`] = `
 "\\\\begin{Quotation}
 However, \\\\&MadeUpEntities; are kept in the document.
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 Entities even work in the language flag of fenced code blocks:
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 \\\\begin{CodeBlock}{some©language}
 alert('Hello');
 
 \\\\end{CodeBlock}
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 And in an auto-link: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com}
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 Foo and bar and \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} and baz.
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 Or in \\\\externalLink{l©nks}{\\\\textasciitilde{}/some\\\\&copyfile}
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 Or in \\\\externalLink{l©lnks}{\\\\textasciitilde{}/some\\\\&copyfile}
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 Or in \\\\includegraphics{~/some&copyfile}
 \\\\end{Quotation}
 
@@ -1336,16 +1369,24 @@ Or in \\\\includegraphics{~/some&copyfile}
 
 \\\\begin{Quotation}
 Or in \\\\includegraphics{~/some&copyfile}
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 Or in \\\\includegraphics{undefined}
+\\\\end{Quotation}
 
-[1]: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
-pl©ce\\"
 
-[
-1
-]: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
-pl©ce\\"
+
+\\\\begin{Quotation}
+\\\\footnote{\\\\label{1}\\\\externalLink{http://example\\\\&copyxample.com}{http://example\\\\&copyxample.com}}
+\\\\end{Quotation}
+
+
+
+\\\\begin{Quotation}
+\\\\footnote{\\\\label{ 1 }\\\\externalLink{http://example\\\\&copyxample.com}{http://example\\\\&copyxample.com}}
 \\\\end{Quotation}
 
 
@@ -1357,7 +1398,11 @@ pl©ce\\"
 \\\\begin{Quotation}
 But, entities are not interpreted in \\\\texttt{inline c\\\\&oumlde}, or in
 code blocks:
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 \\\\begin{CodeBlock}{text}
 C&OumlDE block.
 
@@ -1543,7 +1588,7 @@ exports[`rebber: remark specs footnote-indent: footnote-indent 1`] = `
 exports[`rebber: remark specs footnote-inline: footnote-inline 1`] = `"This is an example of an inline footnote.\\\\footnote[l1c42o41]{\\\\label{footnote:l1c42o41} This is the \\\\textit{actual} footnote.}"`;
 
 exports[`rebber: remark specs footnote-like: footnote-like 1`] = `
-"This one isn't even [defined].
+"This one isn't even [defined]\\\\textsuperscript{\\\\ref{footnote:foo}}.
 
 
 
@@ -1554,7 +1599,7 @@ exports[`rebber: remark specs footnote-matrix: footnote-matrix 1`] = `
 "\\\\begin{enumerate}
 \\\\item [foo]
 \\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}[bar]
-\\\\item [foo]
+\\\\item [foo]\\\\textsuperscript{\\\\ref{footnote:bar}}
 \\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}\\\\textsuperscript{\\\\ref{footnote:bar}}
 \\\\end{enumerate}"
 `;
@@ -1710,6 +1755,11 @@ A normal paragraph.
 
 \\\\begin{Quotation}
 \\\\chapter{A blockquote followed by a horizontal rule (in CommonMark).}
+\\\\end{Quotation}
+
+
+
+\\\\begin{Quotation}
 \\\\chapter{A heading in a blockquote}
 \\\\end{Quotation}"
 `;
@@ -1980,8 +2030,9 @@ you today?
 \\\\item Neither do these
 \\\\item how are
 \\\\item \\\\begin{itemize}
-\\\\item *
-you today?
+\\\\item \\\\begin{itemize}
+\\\\item you today?
+\\\\end{itemize}
 \\\\end{itemize}
 \\\\end{itemize}
 
@@ -3511,7 +3562,11 @@ exports[`rebber: remark specs list-item-empty: list-item-empty 1`] = `
 \\\\end{itemize}"
 `;
 
-exports[`rebber: remark specs list-item-empty-with-white-space: list-item-empty-with-white-space 1`] = `"-"`;
+exports[`rebber: remark specs list-item-empty-with-white-space: list-item-empty-with-white-space 1`] = `
+"\\\\begin{itemize}
+\\\\item 
+\\\\end{itemize}"
+`;
 
 exports[`rebber: remark specs list-item-indent: list-item-indent 1`] = `
 "\\\\begin{enumerate}
@@ -5994,7 +6049,7 @@ exports[`rebber: remark specs nested-square-link: nested-square-link 1`] = `
 
 
 
-[the \\\\texttt{} \\\\externalLink{ \`\\\\texttt{} character}{/url}
+[the \`\` \\\\externalLink{ \`\`\` character}{/url}
 
 
 
@@ -6880,28 +6935,28 @@ Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 `;
 
 exports[`rebber: remark specs table-pipes-in-code: table-pipes-in-code 1`] = `
-"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|X[-1]|X[-1]|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 abc & head2 \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
-x & \\\\texttt{|||} \\\\\\\\ \\\\hline
+x & \` &  &  & \` \\\\\\\\ \\\\hline
 x & \` \\\\\\\\ \\\\hline
-x & \\\\texttt{|} \\\\\\\\ \\\\hline
+x & \` & \` \\\\\\\\ \\\\hline
 x & \\\\texttt{f} \\\\\\\\ \\\\hline
-x & \\\\texttt{} \\\\\\\\ \\\\hline
-x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
+x & \`\`\`\` \\\\\\\\ \\\\hline
+x & \`\\\\texttt{f} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 abc & head2 \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
 x & \` \\\\\\\\ \\\\hline
-x & \\\\texttt{|} \\\\\\\\ \\\\hline
+x & \` & \` \\\\\\\\ \\\\hline
 x & \\\\texttt{f} \\\\\\\\ \\\\hline
-x & \\\\texttt{} \\\\\\\\ \\\\hline
-x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
+x & \`\`\`\` \\\\\\\\ \\\\hline
+x & \`\\\\texttt{f} \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
 
@@ -8071,7 +8126,8 @@ Caret: \\\\texttt{\\\\textbackslash{}\\\\textasciicircum{}}
 
 
 
-New line: \\\\texttt{\\\\textbackslash{}} only works in paragraphs.
+New line: \\\\texttt{\\\\textbackslash{}
+} only works in paragraphs.
 
 
 
@@ -8195,9 +8251,9 @@ exports[`rebber: remark specs with config: custom macros blockquote-list-item 1`
 `;
 
 exports[`rebber: remark specs with config: custom macros blockquotes 1`] = `
-"[blockquote(This is a blockquote.
+"[blockquote(This is a blockquote.)]
 
-This is, in commonmark mode, another blockquote.)]"
+[blockquote(This is, in commonmark mode, another blockquote.)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros blockquotes-empty-lines 1`] = `
@@ -8382,11 +8438,11 @@ Here's how you put \\\\texttt{\`backticks\`} in a code span.
 
 
 
-Additionally, empty code spans are also supported: \\\\texttt{}.
+Additionally, empty code spans are NOT supported: \`\`.
 
 
 
-Here’s an example, \\\\texttt{foo \` bar}.
+Here’s an example, \\\\texttt{foo \` bar }.
 
 
 
@@ -8412,7 +8468,7 @@ And \\\\texttt{this\\\\textbackslash{}}but this is text\`."
 exports[`rebber: remark specs with config: custom macros def-blocks 1`] = `
 "[blockquote(hello
 
-[linkReference(reference=1, content=1)]: hello)]
+[definition(identifier=1, url=hello, title=null)])]
 
 [thematicBreak(---)]
 
@@ -8420,7 +8476,7 @@ exports[`rebber: remark specs with config: custom macros def-blocks 1`] = `
 
 [definition(identifier=2, url=hello, title=null)]
 
-[unorderedList([listItem(hello)][listItem([3]: hello)])]
+[unorderedList([listItem(hello)][listItem([definition(identifier=3, url=hello, title=null)])])]
 
 
 [unorderedList([listItem(hello)])]
@@ -8430,7 +8486,7 @@ exports[`rebber: remark specs with config: custom macros def-blocks 1`] = `
 [blockquote(foo
 bar)]
 
-[definition(identifier=1, url=foo, title=null)]
+[definition(identifier=1-1, url=foo, title=null)]
 
 [blockquote(bar)]"
 `;
@@ -8603,42 +8659,40 @@ code blocks:
 `;
 
 exports[`rebber: remark specs with config: custom macros entities-advanced 1`] = `
-"[blockquote(However, \\\\&MadeUpEntities; are kept in the document.
+"[blockquote(However, \\\\&MadeUpEntities; are kept in the document.)]
 
-Entities even work in the language flag of fenced code blocks:
+[blockquote(Entities even work in the language flag of fenced code blocks:)]
 
-[codeSome©language(alert('Hello');
-)]And in an auto-link: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com}
+[blockquote([codeSome©language(alert('Hello');)])]
 
-Foo and bar and \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} and baz.
+[blockquote(And in an auto-link: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com})]
 
-Or in \\\\externalLink{l©nks}{\\\\textasciitilde{}/some\\\\&copyfile}
+[blockquote(Foo and bar and \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} and baz.)]
 
-Or in \\\\externalLink{l©lnks}{\\\\textasciitilde{}/some\\\\&copyfile}
+[blockquote(Or in \\\\externalLink{l©nks}{\\\\textasciitilde{}/some\\\\&copyfile})]
 
-Or in \\\\includegraphics{~/some&copyfile})]
+[blockquote(Or in \\\\externalLink{l©lnks}{\\\\textasciitilde{}/some\\\\&copyfile})]
+
+[blockquote(Or in \\\\includegraphics{~/some&copyfile})]
 
 [thematicBreak(---)]
 
-[blockquote(Or in \\\\includegraphics{~/some&copyfile}
+[blockquote(Or in \\\\includegraphics{~/some&copyfile})]
 
-Or in \\\\includegraphics{undefined}
+[blockquote(Or in \\\\includegraphics{undefined})]
 
-[1]: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
-pl©ce\\"
+[blockquote([definition(identifier=1, url=http://example&copyxample.com, title=in some
+pl©ce)])]
 
-[
-1
-]: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
-pl©ce\\")]
+[blockquote([definition(identifier= 1 , url=http://example&copyxample.com, title=in some
+pl©ce)])]
 
 [thematicBreak(---)]
 
 [blockquote(But, entities are not interpreted in \\\\texttt{inline c\\\\&oumlde}, or in
-code blocks:
+code blocks:)]
 
-[code(C&OumlDE block.
-)])]"
+[blockquote([code(C&OumlDE block.)])]"
 `;
 
 exports[`rebber: remark specs with config: custom macros escaped-angles 1`] = `">"`;
@@ -8780,14 +8834,14 @@ exports[`rebber: remark specs with config: custom macros footnote-indent 1`] = `
 exports[`rebber: remark specs with config: custom macros footnote-inline 1`] = `"This is an example of an inline footnote.[footnote(identifier=l1c42o41, text=This is the \\\\textit{actual} footnote., protect=false)]"`;
 
 exports[`rebber: remark specs with config: custom macros footnote-like 1`] = `
-"This one isn't even [defined].
+"This one isn't even [defined][footnoteReference(foo)].
 
 
 
 [footnoteReference(both)][invalid], [footnote(identifier=l3c19o56, text=this too, protect=false)][]."
 `;
 
-exports[`rebber: remark specs with config: custom macros footnote-matrix 1`] = `"[orderedList([listItem([foo])][listItem([footnoteReference(foo)][bar])][listItem([foo])][listItem([footnoteReference(foo)][footnoteReference(bar)])])]"`;
+exports[`rebber: remark specs with config: custom macros footnote-matrix 1`] = `"[orderedList([listItem([foo])][listItem([footnoteReference(foo)][bar])][listItem([foo][footnoteReference(bar)])][listItem([footnoteReference(foo)][footnoteReference(bar)])])]"`;
 
 exports[`rebber: remark specs with config: custom macros footnote-multiple 1`] = `
 "heading1(International Radiotelephony Spelling Alphabet[footnoteReference(wiki)])
@@ -8910,7 +8964,9 @@ A normal paragraph.
 
 
 
-[blockquote(heading2(A blockquote followed by a horizontal rule (in CommonMark).)heading2(A heading in a blockquote))]"
+[blockquote(heading2(A blockquote followed by a horizontal rule (in CommonMark).))]
+
+[blockquote(heading2(A heading in a blockquote))]"
 `;
 
 exports[`rebber: remark specs with config: custom macros heading-in-paragraph 1`] = `
@@ -9079,8 +9135,7 @@ The above asterisks do split the list, but the below ones do not.
 [unorderedList([listItem(hello world)][listItem(how are)][listItem([thematicBreak(---)]you today?)])]
 
 
-[unorderedList([listItem(Neither do these)][listItem(how are)][listItem([unorderedList([listItem(*
-you today?)])])])]
+[unorderedList([listItem(Neither do these)][listItem(how are)][listItem([unorderedList([listItem([unorderedList([listItem(you today?)])])])])])]
 
 
 [unorderedList([listItem(But these do)][listItem(how are)])]
@@ -10489,7 +10544,7 @@ World 5b.
 
 exports[`rebber: remark specs with config: custom macros list-item-empty 1`] = `"[unorderedList([listItem(foo)][listItem()][listItem(bar)][listItem(foo)][listItem()][listItem(bar)])]"`;
 
-exports[`rebber: remark specs with config: custom macros list-item-empty-with-white-space 1`] = `"-"`;
+exports[`rebber: remark specs with config: custom macros list-item-empty-with-white-space 1`] = `"[unorderedList([listItem()])]"`;
 
 exports[`rebber: remark specs with config: custom macros list-item-indent 1`] = `
 "[orderedList([listItem(foo bar baz.)])]
@@ -12337,7 +12392,7 @@ exports[`rebber: remark specs with config: custom macros nested-square-link 1`] 
 
 
 
-[the \\\\texttt{} \\\\externalLink{ \`\\\\texttt{} character}{/url}
+[the \`\` \\\\externalLink{ \`\`\` character}{/url}
 
 
 
@@ -13052,28 +13107,28 @@ Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 `;
 
 exports[`rebber: remark specs with config: custom macros table-pipes-in-code 1`] = `
-"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|X[-1]|X[-1]|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 abc & head2 \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
-x & \\\\texttt{|||} \\\\\\\\ \\\\hline
+x & \` &  &  & \` \\\\\\\\ \\\\hline
 x & \` \\\\\\\\ \\\\hline
-x & \\\\texttt{|} \\\\\\\\ \\\\hline
+x & \` & \` \\\\\\\\ \\\\hline
 x & \\\\texttt{f} \\\\\\\\ \\\\hline
-x & \\\\texttt{} \\\\\\\\ \\\\hline
-x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
+x & \`\`\`\` \\\\\\\\ \\\\hline
+x & \`\\\\texttt{f} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 abc & head2 \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
 x & \` \\\\\\\\ \\\\hline
-x & \\\\texttt{|} \\\\\\\\ \\\\hline
+x & \` & \` \\\\\\\\ \\\\hline
 x & \\\\texttt{f} \\\\\\\\ \\\\hline
-x & \\\\texttt{} \\\\\\\\ \\\\hline
-x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
+x & \`\`\`\` \\\\\\\\ \\\\hline
+x & \`\\\\texttt{f} \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
 
@@ -14061,7 +14116,8 @@ Caret: \\\\texttt{\\\\textbackslash{}\\\\textasciicircum{}}
 
 
 
-New line: \\\\texttt{\\\\textbackslash{}} only works in paragraphs.
+New line: \\\\texttt{\\\\textbackslash{}
+} only works in paragraphs.
 
 
 
@@ -14273,7 +14329,11 @@ world
 exports[`toLaTeX: remark specs blockquotes: blockquotes 1`] = `
 "\\\\begin{Quotation}
 This is a blockquote.
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 This is, in commonmark mode, another blockquote.
 \\\\end{Quotation}
 
@@ -14527,11 +14587,11 @@ Here's how you put \\\\texttt{\`backticks\`} in a code span.
 
 
 
-Additionally, empty code spans are also supported: \\\\texttt{}.
+Additionally, empty code spans are NOT supported: \`\`.
 
 
 
-Here’s an example, \\\\texttt{foo \` bar}.
+Here’s an example, \\\\texttt{foo \` bar }.
 
 
 
@@ -14560,7 +14620,7 @@ exports[`toLaTeX: remark specs def-blocks: def-blocks 1`] = `
 "\\\\begin{Quotation}
 hello
 
-1\\\\ref{1}: hello
+\\\\footnote{\\\\label{1}\\\\externalLink{hello}{hello}}
 \\\\end{Quotation}
 
 
@@ -14579,7 +14639,7 @@ hello
 
 \\\\begin{itemize}
 \\\\item hello
-\\\\item [3]: hello
+\\\\item \\\\footnote{\\\\label{3}\\\\externalLink{hello}{hello}}
 \\\\end{itemize}
 
 
@@ -14598,7 +14658,7 @@ bar
 
 
 
-\\\\footnote{\\\\label{1}\\\\externalLink{foo}{foo}}
+\\\\footnote{\\\\label{1-1}\\\\externalLink{foo}{foo}}
 
 \\\\begin{Quotation}
 bar
@@ -14804,22 +14864,50 @@ C&Ouml;DE block.
 exports[`toLaTeX: remark specs entities-advanced: entities-advanced 1`] = `
 "\\\\begin{Quotation}
 However, \\\\&MadeUpEntities; are kept in the document.
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 Entities even work in the language flag of fenced code blocks:
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 \\\\begin{CodeBlock}{some©language}
 alert('Hello');
 
 \\\\end{CodeBlock}
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 And in an auto-link: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com}
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 Foo and bar and \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} and baz.
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 Or in \\\\externalLink{l©nks}{\\\\textasciitilde{}/some\\\\&copyfile}
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 Or in \\\\externalLink{l©lnks}{\\\\textasciitilde{}/some\\\\&copyfile}
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 Or in \\\\includegraphics{~/some&copyfile}
 \\\\end{Quotation}
 
@@ -14831,16 +14919,24 @@ Or in \\\\includegraphics{~/some&copyfile}
 
 \\\\begin{Quotation}
 Or in \\\\includegraphics{~/some&copyfile}
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 Or in \\\\includegraphics{undefined}
+\\\\end{Quotation}
 
-[1]: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
-pl©ce\\"
 
-[
-1
-]: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} \\"in some
-pl©ce\\"
+
+\\\\begin{Quotation}
+\\\\footnote{\\\\label{1}\\\\externalLink{http://example\\\\&copyxample.com}{http://example\\\\&copyxample.com}}
+\\\\end{Quotation}
+
+
+
+\\\\begin{Quotation}
+\\\\footnote{\\\\label{ 1 }\\\\externalLink{http://example\\\\&copyxample.com}{http://example\\\\&copyxample.com}}
 \\\\end{Quotation}
 
 
@@ -14852,7 +14948,11 @@ pl©ce\\"
 \\\\begin{Quotation}
 But, entities are not interpreted in \\\\texttt{inline c\\\\&oumlde}, or in
 code blocks:
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 \\\\begin{CodeBlock}{text}
 C&OumlDE block.
 
@@ -15062,7 +15162,7 @@ exports[`toLaTeX: remark specs footnote-inline: footnote-inline 1`] = `
 `;
 
 exports[`toLaTeX: remark specs footnote-like: footnote-like 1`] = `
-"This one isn't even [defined].
+"This one isn't even [defined]\\\\textsuperscript{\\\\ref{footnote:foo}}.
 
 
 
@@ -15075,7 +15175,7 @@ exports[`toLaTeX: remark specs footnote-matrix: footnote-matrix 1`] = `
 "\\\\begin{enumerate}
 \\\\item [foo]
 \\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}[bar]
-\\\\item [foo]
+\\\\item [foo]\\\\textsuperscript{\\\\ref{footnote:bar}}
 \\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}\\\\textsuperscript{\\\\ref{footnote:bar}}
 \\\\end{enumerate}
 "
@@ -15236,6 +15336,11 @@ A normal paragraph.
 
 \\\\begin{Quotation}
 \\\\chapter{A blockquote followed by a horizontal rule (in CommonMark).}
+\\\\end{Quotation}
+
+
+
+\\\\begin{Quotation}
 \\\\chapter{A heading in a blockquote}
 \\\\end{Quotation}
 
@@ -15521,8 +15626,9 @@ you today?
 \\\\item Neither do these
 \\\\item how are
 \\\\item \\\\begin{itemize}
-\\\\item *
-you today?
+\\\\item \\\\begin{itemize}
+\\\\item you today?
+\\\\end{itemize}
 \\\\end{itemize}
 \\\\end{itemize}
 
@@ -17163,8 +17269,9 @@ exports[`toLaTeX: remark specs list-item-empty: list-item-empty 1`] = `
 `;
 
 exports[`toLaTeX: remark specs list-item-empty-with-white-space: list-item-empty-with-white-space 1`] = `
-"-
-
+"\\\\begin{itemize}
+\\\\item 
+\\\\end{itemize}
 "
 `;
 
@@ -19668,7 +19775,7 @@ exports[`toLaTeX: remark specs nested-square-link: nested-square-link 1`] = `
 
 
 
-[the \\\\texttt{} \\\\externalLink{ \`\\\\texttt{} character}{/url}
+[the \`\` \\\\externalLink{ \`\`\` character}{/url}
 
 
 
@@ -20594,28 +20701,28 @@ Cell 3 & Cell 4 \\\\\\\\ \\\\hline
 `;
 
 exports[`toLaTeX: remark specs table-pipes-in-code: table-pipes-in-code 1`] = `
-"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|X[-1]|X[-1]|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 abc & head2 \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
-x & \\\\texttt{|||} \\\\\\\\ \\\\hline
+x & \` &  &  & \` \\\\\\\\ \\\\hline
 x & \` \\\\\\\\ \\\\hline
-x & \\\\texttt{|} \\\\\\\\ \\\\hline
+x & \` & \` \\\\\\\\ \\\\hline
 x & \\\\texttt{f} \\\\\\\\ \\\\hline
-x & \\\\texttt{} \\\\\\\\ \\\\hline
-x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
+x & \`\`\`\` \\\\\\\\ \\\\hline
+x & \`\\\\texttt{f} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
+\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 abc & head2 \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
 x & \` \\\\\\\\ \\\\hline
-x & \\\\texttt{|} \\\\\\\\ \\\\hline
+x & \` & \` \\\\\\\\ \\\\hline
 x & \\\\texttt{f} \\\\\\\\ \\\\hline
-x & \\\\texttt{} \\\\\\\\ \\\\hline
-x & \\\\texttt{}f\` \\\\\\\\ \\\\hline
+x & \`\`\`\` \\\\\\\\ \\\\hline
+x & \`\\\\texttt{f} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 "
 `;

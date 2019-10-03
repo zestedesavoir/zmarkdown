@@ -1,10 +1,10 @@
 const detab = require('detab')
 
-const defaultMacro = (content, lang) => {
+const defaultMacro = (content, lang, meta) => {
   if (!lang) lang = 'text'
   let param = ''
-  if (lang.indexOf('hl_lines=') > -1) {
-    let lines = lang.split('hl_lines=')[1].trim()
+  if (meta.indexOf('hl_lines=') > -1) {
+    let lines = meta.split('hl_lines=')[1].trim()
     if (
       (lines.startsWith('"') && lines.endsWith('"')) ||
       (lines.startsWith("'") && lines.endsWith("'"))
@@ -21,5 +21,5 @@ const defaultMacro = (content, lang) => {
 module.exports = function code (ctx, node) {
   const value = node.value ? detab(`${node.value}\n`) : ''
   const macro = ctx.code || defaultMacro
-  return macro(value, node.lang)
+  return macro(node.value, node.lang, node.meta || '')
 }

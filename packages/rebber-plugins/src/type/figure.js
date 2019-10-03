@@ -32,11 +32,16 @@ const makeExtra = {
   code: (node) => {
     const language = node.lang || 'text'
     const extra = {language: language.split(' ')[0]}
-    if (language.includes(' ')) {
-      const tail = node.lang.split(' ')[1]
-      if (tail) {
-        extra.lines = tail.replace('hl_lines=', '').trim()
+
+    if (node.meta && node.meta.includes('hl_lines')) {
+      let lines = node.meta.split('hl_lines=')[1]
+      if (
+        (lines.startsWith('"') && lines.endsWith('"')) ||
+        (lines.startsWith("'") && lines.endsWith("'"))
+      ) {
+        lines = lines.slice(1, -1).trim()
       }
+      extra.lines = lines
     }
     return extra
   },
