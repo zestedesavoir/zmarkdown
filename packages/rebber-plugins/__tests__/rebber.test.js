@@ -19,8 +19,11 @@ const fixtures = directory(base).reduce((tests, contents) => {
   return tests
 }, {})
 
-const emoticons = {
-  ':)': 'smile',
+const emoticonsConfig = {
+  emoticons: {
+    ':)': '/path/to/smile.png',
+    ';)': '/path/to/wink.png',
+  },
 }
 
 const integrationConfig = {
@@ -49,7 +52,7 @@ const integrationConfig = {
     tableHeader: require('../src/type/tableHeader'),
     warningCustomBlock: require('../src/type/customBlocks'),
   },
-  emoticons: emoticons,
+  emoticons: emoticonsConfig,
   codeAppendiceTitle: 'Annexes',
   customBlocks: {
     map: {
@@ -156,12 +159,12 @@ test('emoticon', () => {
   const fixture = fixtures['emoticon']
   const {contents} = unified()
     .use(reParse)
-    .use(require('remark-emoticons/src'), {emoticons})
+    .use(require('remark-emoticons/src'), emoticonsConfig)
     .use(rebber, {
       overrides: {
         emoticon: require('../src/type/emoticon'),
       },
-      emoticons: emoticons,
+      emoticons: emoticonsConfig,
     })
     .processSync(fixture)
 
@@ -324,7 +327,7 @@ Object.keys(fixtures).filter(Boolean).filter(name => name.startsWith('mix-')).fo
       .use(reParse, {
         footnotes: true,
       })
-      .use(require('remark-emoticons/src'), {emoticons})
+      .use(require('remark-emoticons/src'), emoticonsConfig)
       .use(require('remark-captions/src'), {external: {gridTable: 'Table:', math: 'Equation'},
         internal: {iframe: 'Video:'}})
       .use(require('remark-grid-tables/src'))
