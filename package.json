@@ -43,10 +43,8 @@
   "scripts": {
     "pretest": "npm run lint && lerna run pretest --scope zmarkdown",
     "bootstrap": "lerna bootstrap",
-    "bootstrap-ci": "npm ci && npm ci packages/*",
     "test": "cross-env DEST=/tmp jest",
     "lint": "eslint .",
-    "lockfiles": "lerna exec -- npm install",
     "posttest": "lerna run posttest --scope zmarkdown",
     "d": "node --inspect --debug-brk ./node_modules/.bin/jest --runInBand -i",
     "clean": "lerna clean --yes && del-cli node_modules && npm run bootstrap && lerna run prepare && npm run test",

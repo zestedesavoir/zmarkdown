@@ -22,7 +22,7 @@ before_install:
   - npm install -g pm2
 
 install:
-  - npm run bootstrap-ci
+  - npm ci
 
 before_script:
   - pm2 ping
