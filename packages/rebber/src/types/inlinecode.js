@@ -1,10 +1,7 @@
-// TODO: make it customizable
-/* Expose. */
-module.exports = inlineCode
-
+const collapse = require('collapse-white-space')
 const escape = require('../escaper')
 
-function inlineCode (ctx, node) {
-  const finalCode = escape(node.value)
+module.exports = function inlineCode (ctx, node) {
+  const finalCode = escape(collapse(node.value))
   return `\\texttt{${finalCode}}`
 }

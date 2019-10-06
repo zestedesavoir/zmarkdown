@@ -1,12 +1,10 @@
 /* Dependencies. */
+const trimLines = require('trim-lines')
 const escaper = require('../escaper')
 
-/* Expose. */
-module.exports = text
-
 /* Stringify a text `node`. */
-function text (ctx, node, index, parent) {
-  const value = node.value
+module.exports = function text (ctx, node, index, parent) {
+  const value = trimLines(node.value)
 
   return isLiteral(parent) ? value : escaper(value, ctx.escapes)
 }

@@ -1,5 +1,4 @@
-/* Expose. */
-module.exports = code
+const detab = require('detab')
 
 const defaultMacro = (content, lang) => {
   if (!lang) lang = 'text'
@@ -19,7 +18,8 @@ const defaultMacro = (content, lang) => {
 }
 
 /* Stringify a Blockquote `node`. */
-function code (ctx, node) {
+module.exports = function code (ctx, node) {
+  const value = node.value ? detab(`${node.value}\n`) : ''
   const macro = ctx.code || defaultMacro
-  return macro(node.value, node.lang)
+  return macro(value, node.lang)
 }
