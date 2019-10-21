@@ -128,7 +128,7 @@ baz
 \\\\end{Error}"
 `;
 
-exports[`emoticon 1`] = `"foo \\\\smiley{/static/smileys/langue.png} bar \\\\smiley{/static/smileys/smile.png}"`;
+exports[`emoticon 1`] = `"foo \\\\smiley{langue.png} bar \\\\smiley{smile.png}"`;
 
 exports[`figure+caption 1`] = `
 "\\\\begin{Quotation}[With Source]
