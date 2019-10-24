@@ -39,7 +39,12 @@ const rebberConfig = {
       return `\\iframe{${node.data.hProperties.src}}[${alternative}][${caption}]`
     },
   },
-  emoticons: remarkConfig.emoticons,
+  emoticons: {
+    emoticons: Object.entries(remarkConfig.emoticons.emoticons).reduce((acc, [key, val]) => {
+      acc[key] = val.substring(val.lastIndexOf('/') + 1)
+      return acc
+    }, {}),
+  },
   codeAppendiceTitle: 'Annexes',
   customBlocks: {
     map: {

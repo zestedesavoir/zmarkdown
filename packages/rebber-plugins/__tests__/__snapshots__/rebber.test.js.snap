@@ -206,7 +206,13 @@ foo
 \\\\end{Neutre}"
 `;
 
-exports[`emoticon 1`] = `"foo :p bar \\\\smiley{smile}"`;
+exports[`emoticon 1`] = `
+"foo :p bar \\\\smiley{/path/to/smile.png}
+
+
+
+\\\\smiley{/path/to/wink.png}"
+`;
 
 exports[`figure+caption 1`] = `
 "\\\\begin{Quotation}[With Source]

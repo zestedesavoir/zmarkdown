@@ -10,6 +10,6 @@ module.exports = emoticon;
 
 function emoticon(ctx, node) {
   var code = node.value;
-  if (!ctx.emoticons || !has(ctx.emoticons, code)) return;
-  return "\\smiley{".concat(ctx.emoticons[code], "}");
+  if (!ctx.emoticons.emoticons || !has(ctx.emoticons.emoticons, code)) return;
+  return "\\smiley{".concat(ctx.emoticons.emoticons[code], "}");
 }
