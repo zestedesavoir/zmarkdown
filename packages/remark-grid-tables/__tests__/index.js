@@ -200,38 +200,28 @@ test('regression: handles east asian ambiguous width', () => {
   expect(test4).toBe(base.replace('ï', '¯'))
 })
 
-test('handles various character widths', () => {
-  // these should "look ok" in monospace fonts
-  const {contents: test1a} = render(dedent`
-    +----+
-    | 👨‍👨‍👧‍👦 |
-    +----+
+test('distinguish between tables of the same width', () => {
+  const {contents: test1} = render(dedent`
+    +---+---+---+
+    | 1 | 2 | 3 |
+    +---+---+---+
+    |   | a     |
+    +---+---+---+
+    |     b |   |
+    +-------+---+
   `)
 
-  const {contents: test2a} = render(dedent`
-    +----+
-    | 🌵 |
-    +----+
+  const {contents: test2} = render(dedent`
+    +---+---+---+
+    | 1 | 2 | 3 |
+    +---+---+---+
+    |   | a     |
+    +---+-------+
+    | b |       |
+    +---+-------+
   `)
 
-  // these should not look ok in monospace fonts, it should be
-  // visible that the top and bottom lines (`+---+`) are 1 dash too short
-  const {contents: test1b} = render(dedent`
-    +---+
-    | 👨‍👨‍👧‍👦 |
-    +---+
-  `)
-
-  const {contents: test2b} = render(dedent`
-    +---+
-    | 🌵 |
-    +---+
-  `)
-
-  expect(test1a).toContain('<table>')
-  expect(test1b).not.toContain('<table>')
-  expect(test2a).toContain('<table>')
-  expect(test2b).not.toContain('<table>')
+  expect(test1).not.toEqual(test2)
 })
 
 test('handles Cyrillic script', () => {
