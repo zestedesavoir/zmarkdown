@@ -1,6 +1,6 @@
 {
   "name": "rebber",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Stringifies MDAST to LaTeX",
   "repository": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rebber",
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
