@@ -1,33 +1,53 @@
+const whitespace = require('is-whitespace-character')
+
 function escapeRegExp (str) {
-  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&') // eslint-disable-line no-useless-escape
+  return str.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&')
 }
 
 module.exports = function inlinePlugin (ctx) {
   const emoticonClasses = ctx && ctx.classes
-  const emoticons = ctx && ctx.emoticons
+  const emoticonsRaw = ctx && ctx.emoticons
 
-  if (!emoticons) {
+  if (!emoticonsRaw) {
     throw new Error('remark-emoticons needs to be passed a configuration object as option')
   }
 
-  for (const [key, val] of Object.entries(emoticons)) {
-    emoticons[key.toLowerCase()] = val
-  }
+  // Convert emoticons to lowercase
+  const emoticons = Object.keys(emoticonsRaw).reduce((acc, key) => {
+    acc[key.toLowerCase()] = emoticonsRaw[key]
+    return acc
+  }, {})
+
+  // Create a list composed of the first character of each emoticon
+  const firstChars = Object.keys(emoticons).reduce((acc, key) => {
+    const firstChar = key.charAt(0)
+    if (acc.indexOf(firstChar) === -1) acc.push(firstChar)
+    return acc
+  }, [])
 
   const pattern = Object.keys(emoticons).map(escapeRegExp).join('|')
-
   const regex = new RegExp(`(?:\\s|^)(${pattern})(?:\\s|$)`, 'i')
 
   function locator (value, fromIndex) {
-    const keep = regex.exec(value)
-    if (keep) {
-      let index = keep.index
-      while (/^\s/.test(value.charAt(index))) {
-        index++
+    let lowestMatch = -1
+
+    for (let c = 0; c < firstChars.length; c++) {
+      const char = firstChars[c]
+      let match = value.indexOf(char, fromIndex)
+
+      if (match === -1 && char !== char.toUpperCase()) {
+        match = value.indexOf(char.toUpperCase(), fromIndex)
       }
-      return index
+
+      if (match !== -1) {
+        // A smiley should be precedeed by at least one whitespace
+        if (whitespace(value[match - 1]) && (lowestMatch === -1 || match > lowestMatch)) {
+          lowestMatch = match
+        }
+      }
     }
-    return -1
+
+    return lowestMatch
   }
 
   function inlineTokenizer (eat, value, silent) {

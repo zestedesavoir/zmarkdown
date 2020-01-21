@@ -1,50 +1,53 @@
 "use strict";
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var whitespace = require('is-whitespace-character');
 
 function escapeRegExp(str) {
-  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&'); // eslint-disable-line no-useless-escape
+  return str.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&');
 }
 
 module.exports = function inlinePlugin(ctx) {
   var emoticonClasses = ctx && ctx.classes;
-  var emoticons = ctx && ctx.emoticons;
+  var emoticonsRaw = ctx && ctx.emoticons;
 
-  if (!emoticons) {
+  if (!emoticonsRaw) {
     throw new Error('remark-emoticons needs to be passed a configuration object as option');
-  }
+  } // Convert emoticons to lowercase
 
-  for (var _i = 0, _Object$entries = Object.entries(emoticons); _i < _Object$entries.length; _i++) {
-    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
-        key = _Object$entries$_i[0],
-        val = _Object$entries$_i[1];
 
-    emoticons[key.toLowerCase()] = val;
-  }
+  var emoticons = Object.keys(emoticonsRaw).reduce(function (acc, key) {
+    acc[key.toLowerCase()] = emoticonsRaw[key];
+    return acc;
+  }, {}); // Create a list composed of the first character of each emoticon
 
+  var firstChars = Object.keys(emoticons).reduce(function (acc, key) {
+    var firstChar = key.charAt(0);
+    if (acc.indexOf(firstChar) === -1) acc.push(firstChar);
+    return acc;
+  }, []);
   var pattern = Object.keys(emoticons).map(escapeRegExp).join('|');
   var regex = new RegExp("(?:\\s|^)(".concat(pattern, ")(?:\\s|$)"), 'i');
 
   function locator(value, fromIndex) {
-    var keep = regex.exec(value);
+    var lowestMatch = -1;
 
-    if (keep) {
-      var index = keep.index;
+    for (var c = 0; c < firstChars.length; c++) {
+      var _char = firstChars[c];
+      var match = value.indexOf(_char, fromIndex);
 
-      while (/^\s/.test(value.charAt(index))) {
-        index++;
+      if (match === -1 && _char !== _char.toUpperCase()) {
+        match = value.indexOf(_char.toUpperCase(), fromIndex);
       }
 
-      return index;
+      if (match !== -1) {
+        // A smiley should be precedeed by at least one whitespace
+        if (whitespace(value[match - 1]) && (lowestMatch === -1 || match > lowestMatch)) {
+          lowestMatch = match;
+        }
+      }
     }
 
-    return -1;
+    return lowestMatch;
   }
 
   function inlineTokenizer(eat, value, silent) {
