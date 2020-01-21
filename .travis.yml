@@ -41,3 +41,4 @@ deploy:
   local-dir: ./packages/zmarkdown/public
   on:
     branch: master
+    node_js: '12'
