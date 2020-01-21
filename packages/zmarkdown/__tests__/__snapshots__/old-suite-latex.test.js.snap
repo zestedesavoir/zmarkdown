@@ -4156,11 +4156,11 @@ sfdgs \\\\textasciitilde{} \\\\textasciitilde{} dfg \\\\textasciitilde{}\\\\text
 `;
 
 exports[`#zds #extensions properly renders emoticons.txt 1`] = `
-"Lolilol \\\\smiley{smile.png} Hey \\\\smiley{heureux.png}
+"Lolilol \\\\smiley{smile.svg} Hey \\\\smiley{heureux.svg}
 
 
 
-\\\\smiley{smile.png}
+\\\\smiley{smile.svg}
 
 
 
@@ -4170,14 +4170,14 @@ Citation
 
 
 
-\\\\smiley{heureux.png} Ce n'est pas une légende
+\\\\smiley{heureux.svg} Ce n'est pas une légende
 
 
 
 \\\\image{https://zestedesavoir.com/media/galleries/3014/bee33fae-2216-463a-8b85-d1d9efe2c374.png}[toto]
 
 
-\\\\smiley{heureux.png} ce n'est pas une légende non plus"
+\\\\smiley{heureux.svg} ce n'est pas une légende non plus"
 `;
 
 exports[`#zds #extensions properly renders grid_tables.txt 1`] = `
