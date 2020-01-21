@@ -382,17 +382,15 @@ function extractTable(value, eat, tokenizer) {
   }); // Extract table
 
   if (!possibleGridTable[i + 1]) return [null, null, null, null];
-  var lineLength = stringWidth(possibleGridTable[i + 1]);
   var gridTable = [];
   var realGridTable = [];
   var hasHeader = false;
 
   for (; i < possibleGridTable.length; i++) {
     var _line = possibleGridTable[i];
-    var realLine = markdownLines[i];
-    var isMainLine = totalMainLineRegex.exec(_line); // line is in table
+    var realLine = markdownLines[i]; // line is in table
 
-    if (isMainLine && stringWidth(_line) === lineLength) {
+    if (totalMainLineRegex.exec(_line)) {
       var _isHeaderLine = headerLineRegex.exec(_line);
 
       if (_isHeaderLine && !hasHeader) hasHeader = true; // A table can't have 2 headers

@@ -293,16 +293,15 @@ function extractTable (value, eat, tokenizer) {
 
   // Extract table
   if (!possibleGridTable[i + 1]) return [null, null, null, null]
-  const lineLength = stringWidth(possibleGridTable[i + 1])
+
   const gridTable = []
   const realGridTable = []
   let hasHeader = false
   for (; i < possibleGridTable.length; i++) {
     const line = possibleGridTable[i]
     const realLine = markdownLines[i]
-    const isMainLine = totalMainLineRegex.exec(line)
     // line is in table
-    if (isMainLine && stringWidth(line) === lineLength) {
+    if (totalMainLineRegex.exec(line)) {
       const isHeaderLine = headerLineRegex.exec(line)
       if (isHeaderLine && !hasHeader) hasHeader = true
       // A table can't have 2 headers
