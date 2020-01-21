@@ -1,7 +1,6 @@
 "use strict";
 
-/* Expose. */
-module.exports = code;
+var detab = require('detab');
 
 var defaultMacro = function defaultMacro(content, lang) {
   if (!lang) lang = 'text';
@@ -23,7 +22,8 @@ var defaultMacro = function defaultMacro(content, lang) {
 /* Stringify a Blockquote `node`. */
 
 
-function code(ctx, node) {
+module.exports = function code(ctx, node) {
+  var value = node.value ? detab("".concat(node.value, "\n")) : '';
   var macro = ctx.code || defaultMacro;
-  return macro(node.value, node.lang);
-}
+  return macro(value, node.lang);
+};

@@ -18,9 +18,8 @@ var defaultMacros = {
   math: function math(content) {
     return "\\[ ".concat(content, " \\]\n\n");
   }
-  /* Stringify a Figure `node`. */
-
 };
+/* Stringify a Figure `node`. */
 
 function math(ctx, node, index, parent) {
   var type = 'math';

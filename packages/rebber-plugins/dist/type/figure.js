@@ -52,9 +52,8 @@ var makeExtra = {
       width: '\\linewidth'
     };
   }
-  /* Stringify a Figure `node`. */
-
 };
+/* Stringify a Figure `node`. */
 
 function figure(ctx, node, index, parent) {
   var type = node.children[0].type;

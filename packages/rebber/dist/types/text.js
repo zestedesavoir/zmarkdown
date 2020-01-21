@@ -1,17 +1,16 @@
 "use strict";
 
 /* Dependencies. */
+var trimLines = require('trim-lines');
+
 var escaper = require('../escaper');
-/* Expose. */
-
-
-module.exports = text;
 /* Stringify a text `node`. */
 
-function text(ctx, node, index, parent) {
-  var value = node.value;
+
+module.exports = function text(ctx, node, index, parent) {
+  var value = trimLines(node.value);
   return isLiteral(parent) ? value : escaper(value, ctx.escapes);
-} // TODO: `tagName` isn't part of MDAST!
+}; // TODO: `tagName` isn't part of MDAST!
 
 /* Check if content of `node` should not be escaped. */
 
