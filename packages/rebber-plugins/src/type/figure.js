@@ -1,8 +1,8 @@
 /* Dependencies. */
 const all = require('rebber/dist/all')
 const one = require('rebber/dist/one')
+const codeStringifier = require('rebber/dist/types/code').macro
 const has = require('has')
-
 
 /* Expose. */
 module.exports = figure
@@ -11,14 +11,9 @@ const defaultMacros = {
   blockquote: (innerText, caption = 'Anonymous') =>
     `\\begin{Quotation}[${caption}]\n${innerText}\n\\end{Quotation}\n\n`,
   code: (code, caption, extra) => {
-    let params = ''
-    if (extra.lines) {
-      params += `[][${extra.lines}]`
-    }
-    return `\\begin{CodeBlock}${params}{${extra.language}}\n` +
-            `${code}\n` +
-            `\\end{CodeBlock}\n` +
-            `\\captionof{listing}{${caption}}\n\n`
+    // Remove the two last line feed
+    const rebberCode = codeStringifier(code, extra.language, extra.others).slice(0, -2)
+    return `${rebberCode}\n\\captionof{listing}{${caption}}\n\n`
   },
   image: (_, caption, extra) =>
     `\\begin{center}\n` +
@@ -30,20 +25,10 @@ const defaultMacros = {
 const makeExtra = {
   blockquote: node => {},
   code: (node) => {
-    const language = node.lang || 'text'
-    const extra = {language: language.split(' ')[0]}
-
-    if (node.meta && node.meta.includes('hl_lines')) {
-      let lines = node.meta.split('hl_lines=')[1]
-      if (
-        (lines.startsWith('"') && lines.endsWith('"')) ||
-        (lines.startsWith("'") && lines.endsWith("'"))
-      ) {
-        lines = lines.slice(1, -1).trim()
-      }
-      extra.lines = lines
+    return {
+      language: node.lang || 'text',
+      others: node.meta,
     }
-    return extra
   },
   image: node => ({url: node.url, width: '\\linewidth'}),
 }
