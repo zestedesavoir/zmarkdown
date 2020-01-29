@@ -2208,7 +2208,7 @@ Test support for foo+bar lexer names with linenostart.
 
 
 
-\\\\begin{CodeBlock}{html+jinja}
+\\\\begin{CodeBlock}[][][10]{html+jinja}
 <title>{% block title %}{% endblock %}</title>
 <ul>
 
@@ -2226,7 +2226,7 @@ Test support for foo+bar lexer names with both.
 
 
 
-\\\\begin{CodeBlock}[][\\"2-4\\" linenostart=10]{html+jinja}
+\\\\begin{CodeBlock}[][2-4][10]{html+jinja}
 <title>{% block title %}{% endblock %}</title>
 <ul>
 {% for user in users %}

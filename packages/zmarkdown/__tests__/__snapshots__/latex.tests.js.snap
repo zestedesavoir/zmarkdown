@@ -293,7 +293,7 @@ exports[`list 1`] = `
 `;
 
 exports[`math 1`] = `
-"A sentence ($S$) with \\\\textit{italic} and inline math ($C_L$) and $$b$$ another.
+"A sentence ($S$) with \\\\textit{italic} and inline math ($C_L$) and $b$ another.
 
 
 

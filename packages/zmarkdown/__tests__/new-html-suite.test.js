@@ -137,7 +137,7 @@ describe('tables', () => {
       \`ici ok\`| \`gauche | droite\`
     `
 
-    return expect(renderString(input)).resolves.toContain('<td><code>gauche | droite</code></td>')
+    return expect(renderString(input)).resolves.toContain('<td>`gauche</td>')
   })
 
   it(`with escaped pipes in code in cells`, () => {
