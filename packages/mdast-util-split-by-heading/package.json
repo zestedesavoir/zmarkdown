@@ -26,6 +26,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "unist-util-visit": "^2.0.0"
+    "unist-util-visit": "^2.0.1"
   }
 }
