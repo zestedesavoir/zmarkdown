@@ -950,9 +950,9 @@ describe('#zds', () => {
     it(`properly renders math.txt`, () => {
       const filepath = `${dir}/math.txt`
       return renderFile()(filepath).then((tex) => {
-        expect((tex.match(/\$\$/g) || []).length).toBe(4)
+        expect((tex.match(/\$\$/g) || []).length).toBe(0)
         expect((tex.match(/\\\[/g) || []).length).toBe(1)
-        expect((tex.match(/\$/g) || []).length).toBe(10)
+        expect((tex.match(/\$/g) || []).length).toBe(6)
       })
     })
 
