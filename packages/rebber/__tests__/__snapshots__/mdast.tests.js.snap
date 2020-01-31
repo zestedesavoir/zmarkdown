@@ -148,7 +148,6 @@ Auto-links should not occur here: \\\\texttt{<http://example.com/>}
 
 \\\\begin{CodeBlock}{text}
 or here: <http://example.com/>
-
 \\\\end{CodeBlock}"
 `;
 
@@ -429,7 +428,6 @@ Bang: \\\\!
 Plus: \\\\+
 
 Minus: \\\\-
-
 \\\\end{CodeBlock}
 
 
@@ -442,7 +440,6 @@ Minus: \\\\-
 Pipe: \\\\|
 
 Tilde: \\\\~
-
 \\\\end{CodeBlock}
 
 
@@ -482,7 +479,6 @@ Caret: \\\\^
 
 New line: \\\\
 only works in paragraphs.
-
 \\\\end{CodeBlock}
 
 
@@ -627,8 +623,7 @@ Caret: \\\\texttt{\\\\textbackslash{}\\\\textasciicircum{}}
 
 
 
-New line: \\\\texttt{\\\\textbackslash{}
-} only works in paragraphs.
+New line: \\\\texttt{\\\\textbackslash{} } only works in paragraphs.
 
 
 
@@ -696,7 +691,6 @@ between them.
 
 \\\\begin{CodeBlock}{text}
 1.   Second sublist.
-
 \\\\end{CodeBlock}
 
 
@@ -713,7 +707,6 @@ And for lists followed by indented code blocks:
 
 \\\\begin{CodeBlock}{text}
 And this is code();
-
 \\\\end{CodeBlock}"
 `;
 
@@ -729,7 +722,6 @@ exports[`rebber: remark specs blockquote-lazy-code: blockquote-lazy-code 1`] = `
 \\\\begin{CodeBlock}{text}
 foo
 bar
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}"
 `;
@@ -738,7 +730,6 @@ exports[`rebber: remark specs blockquote-lazy-fence: blockquote-lazy-fence 1`] =
 "\\\\begin{Quotation}
 \\\\begin{CodeBlock}{text}
 aNormalCodeBlockInABlockqoute();
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}
 
@@ -751,7 +742,6 @@ A paragraph.
 \\\\begin{Quotation}
 \\\\begin{CodeBlock}{text}
 thisIsAlsoSomeCodeInABlockquote();
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}
 
@@ -764,7 +754,6 @@ A paragraph.
 \\\\begin{Quotation}
 \\\\begin{CodeBlock}{text}
 aNonTerminatedCodeBlockInABlockquote();
-
 \\\\end{CodeBlock}
 
 aNewCodeBlockFollowingTheBlockQuote();
@@ -785,7 +774,6 @@ Something in a blockquote.
 
 \\\\begin{CodeBlock}{text}
 aNewCodeBlock();
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}"
 `;
@@ -850,7 +838,6 @@ Example:
 sub status {
     print \\"working\\";
 }
-
 \\\\end{CodeBlock}
 
 Or:
@@ -859,7 +846,6 @@ Or:
 sub status {
     return \\"working\\";
 }
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}"
 `;
@@ -916,7 +902,6 @@ exports[`rebber: remark specs code-block: code-block 1`] = `
 
 \\\\begin{CodeBlock}{javascript}
 alert('Hello World!');
-
 \\\\end{CodeBlock}"
 `;
 
@@ -931,7 +916,6 @@ the code is exdented by up to that amount of spaces.
     This is a code block...
         
     ...which is not exdented.
-
 \\\\end{CodeBlock}
 
 
@@ -944,7 +928,6 @@ But...
   This one...
       
   ...is.
-
 \\\\end{CodeBlock}
 
 
@@ -957,7 +940,6 @@ And...
 So is this...
       
   ...one.
-
 \\\\end{CodeBlock}"
 `;
 
@@ -975,7 +957,6 @@ Note that this bug does not occur on indented code-blocks.
 \`\`\`bar
 baz
 \`\`\`
-
 \\\\end{CodeBlock}
 
 
@@ -988,7 +969,6 @@ Even with a different fence marker:
 ~~~bar
 baz
 ~~~
-
 \\\\end{CodeBlock}
 
 
@@ -1001,7 +981,6 @@ And reversed:
 ~~~bar
 baz
 ~~~
-
 \\\\end{CodeBlock}
 
 
@@ -1010,7 +989,6 @@ baz
 \`\`\`bar
 baz
 \`\`\`
-
 \\\\end{CodeBlock}"
 `;
 
@@ -1025,7 +1003,6 @@ Regular text.
 
 \\\\begin{CodeBlock}{text}
 code block indented by spaces
-
 \\\\end{CodeBlock}
 
 
@@ -1037,7 +1014,6 @@ Regular text.
 \\\\begin{CodeBlock}{text}
 the lines in this block  
 all contain trailing spaces  
-
 \\\\end{CodeBlock}
 
 
@@ -1048,7 +1024,6 @@ Regular Text.
 
 \\\\begin{CodeBlock}{text}
 code block on the last line
-
 \\\\end{CodeBlock}"
 `;
 
@@ -1287,7 +1262,6 @@ Entities even work in the language flag of fenced code blocks:
 
 \\\\begin{CodeBlock}{some—language}
 alert('Hello');
-
 \\\\end{CodeBlock}
 
 
@@ -1307,7 +1281,6 @@ code blocks:
 
 \\\\begin{CodeBlock}{text}
 C&Ouml;DE block.
-
 \\\\end{CodeBlock}"
 `;
 
@@ -1327,7 +1300,6 @@ Entities even work in the language flag of fenced code blocks:
 \\\\begin{Quotation}
 \\\\begin{CodeBlock}{some©language}
 alert('Hello');
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}
 
@@ -1405,7 +1377,6 @@ code blocks:
 \\\\begin{Quotation}
 \\\\begin{CodeBlock}{text}
 C&OumlDE block.
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}"
 `;
@@ -1416,28 +1387,24 @@ exports[`rebber: remark specs fenced-code: fenced-code 1`] = `
 "\\\\begin{CodeBlock}{js}
 var a = 'hello';
 console.log(a + ' world');
-
 \\\\end{CodeBlock}
 
 
 
 \\\\begin{CodeBlock}{bash}
 echo \\"hello, \${WORLD}\\"
-
 \\\\end{CodeBlock}
 
 
 
 \\\\begin{CodeBlock}{longfence}
 Q: What do you call a tall person who sells stolen goods?
-
 \\\\end{CodeBlock}
 
 
 
 \\\\begin{CodeBlock}{ManyTildes}
 A longfence!
-
 \\\\end{CodeBlock}"
 `;
 
@@ -1485,28 +1452,24 @@ exports[`rebber: remark specs fenced-code-trailing-characters: fenced-code-trail
 "\\\\begin{CodeBlock}{js}
 foo();
 \`\`\`bash
-
 \\\\end{CodeBlock}"
 `;
 
 exports[`rebber: remark specs fenced-code-trailing-characters-2: fenced-code-trailing-characters-2 1`] = `
 "\\\\begin{CodeBlock}{text}
 \`\`\` aaa
-
 \\\\end{CodeBlock}"
 `;
 
 exports[`rebber: remark specs fenced-code-white-space-after-flag: fenced-code-white-space-after-flag 1`] = `
 "\\\\begin{CodeBlock}{js}
 foo();
-
 \\\\end{CodeBlock}
 
 
 
 \\\\begin{CodeBlock}{bash}
 echo \\"hello, \${WORLD}\\"
-
 \\\\end{CodeBlock}"
 `;
 
@@ -1829,7 +1792,6 @@ exports[`rebber: remark specs horizontal-rules: horizontal-rules 1`] = `
 
 \\\\begin{CodeBlock}{text}
 ---
-
 \\\\end{CodeBlock}
 
 
@@ -1852,7 +1814,6 @@ exports[`rebber: remark specs horizontal-rules: horizontal-rules 1`] = `
 
 \\\\begin{CodeBlock}{text}
 - - -
-
 \\\\end{CodeBlock}
 
 
@@ -1879,7 +1840,6 @@ Asterisks:
 
 \\\\begin{CodeBlock}{text}
 ***
-
 \\\\end{CodeBlock}
 
 
@@ -1902,7 +1862,6 @@ Asterisks:
 
 \\\\begin{CodeBlock}{text}
 * * *
-
 \\\\end{CodeBlock}
 
 
@@ -1929,7 +1888,6 @@ Underscores:
 
 \\\\begin{CodeBlock}{text}
 ___
-
 \\\\end{CodeBlock}
 
 
@@ -1952,7 +1910,6 @@ ___
 
 \\\\begin{CodeBlock}{text}
 _ _ _
-
 \\\\end{CodeBlock}"
 `;
 
@@ -2208,9 +2165,8 @@ This should be a code block, though:
 
 \\\\begin{CodeBlock}{text}
 <div>
-    foo
+	foo
 </div>
-
 \\\\end{CodeBlock}
 
 
@@ -2221,7 +2177,6 @@ As should this:
 
 \\\\begin{CodeBlock}{text}
 <div>foo</div>
-
 \\\\end{CodeBlock}
 
 
@@ -2259,7 +2214,6 @@ Code block:
 
 \\\\begin{CodeBlock}{text}
 <!-- Comment -->
-
 \\\\end{CodeBlock}
 
 
@@ -2276,7 +2230,6 @@ Code:
 
 \\\\begin{CodeBlock}{text}
 <hr>
-
 \\\\end{CodeBlock}
 
 
@@ -2647,7 +2600,6 @@ Indented [four] times.
 
 \\\\begin{CodeBlock}{text}
 [four]: /url
-
 \\\\end{CodeBlock}
 
 
@@ -3469,7 +3421,6 @@ exports[`rebber: remark specs list-and-code: list-and-code 1`] = `
 
 \\\\begin{CodeBlock}{text}
 This is code
-
 \\\\end{CodeBlock}"
 `;
 
@@ -3490,7 +3441,6 @@ exports[`rebber: remark specs list-continuation: list-continuation 1`] = `
 
 \\\\begin{CodeBlock}{js}
 code();
-
 \\\\end{CodeBlock}
 
 
@@ -3538,7 +3488,6 @@ World 4a.
 World 4b.
 \\\\item \\\\begin{CodeBlock}{text}
 Hello 5a
-
 \\\\end{CodeBlock}
 
 World 5a.
@@ -3546,7 +3495,6 @@ World 5a.
 Hello 5b
 
 World 5b.
-
 \\\\end{CodeBlock}
 \\\\end{itemize}"
 `;
@@ -3680,7 +3628,6 @@ exports[`rebber: remark specs lists-with-code-and-rules: lists-with-code-and-rul
 \\\\begin{CodeBlock}{text}
 line 1
 line 2
-
 \\\\end{CodeBlock}
 \\\\item foo:
 
@@ -3689,7 +3636,6 @@ line 2
 
 \\\\begin{CodeBlock}{erb}
 some code here
-
 \\\\end{CodeBlock}
 \\\\item foo \\\\texttt{bar} bar:
 
@@ -3700,7 +3646,6 @@ bar
 ---
 foo
 bar
-
 \\\\end{CodeBlock}
 \\\\item foo \\\\texttt{bar} bar:
 
@@ -3710,7 +3655,6 @@ foo
 foo
 ---
 bar
-
 \\\\end{CodeBlock}
 \\\\item foo \\\\texttt{bar} bar:
 
@@ -3718,7 +3662,6 @@ bar
 foo
 ---
 bar
-
 \\\\end{CodeBlock}
 \\\\item foo
 \\\\end{enumerate}
@@ -3884,7 +3827,6 @@ And an image with an empty alt attribute \\\\includegraphics{src}.
 \\\\begin{CodeBlock}{text}
 Code goes here.
 Lots of it...
-
 \\\\end{CodeBlock}"
 `;
 
@@ -3977,7 +3919,6 @@ dog's back.
 > This is the second paragraph in the blockquote.
 >
 > ## This is an H2 in a blockquote
-
 \\\\end{CodeBlock}
 
 
@@ -4007,7 +3948,6 @@ dog's back.</p>
     
     <h2>This is an H2 in a blockquote</h2>
 </blockquote>
-
 \\\\end{CodeBlock}
 
 
@@ -4029,7 +3969,6 @@ Some of these words _are emphasized also_.
 
 Use two asterisks for **strong emphasis**.
 Or, if you prefer, __use two underscores instead__.
-
 \\\\end{CodeBlock}
 
 
@@ -4044,7 +3983,6 @@ Some of these words <em>are emphasized also</em>.</p>
 
 <p>Use two asterisks for <strong>strong emphasis</strong>.
 Or, if you prefer, <strong>use two underscores instead</strong>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -4062,7 +4000,6 @@ interchangable; this:
 *   Candy.
 *   Gum.
 *   Booze.
-
 \\\\end{CodeBlock}
 
 
@@ -4075,7 +4012,6 @@ this:
 +   Candy.
 +   Gum.
 +   Booze.
-
 \\\\end{CodeBlock}
 
 
@@ -4088,7 +4024,6 @@ and this:
 -   Candy.
 -   Gum.
 -   Booze.
-
 \\\\end{CodeBlock}
 
 
@@ -4103,7 +4038,6 @@ all produce the same output:
 <li>Gum.</li>
 <li>Booze.</li>
 </ul>
-
 \\\\end{CodeBlock}
 
 
@@ -4117,7 +4051,6 @@ list markers:
 1.  Red
 2.  Green
 3.  Blue
-
 \\\\end{CodeBlock}
 
 
@@ -4132,7 +4065,6 @@ Output:
 <li>Green</li>
 <li>Blue</li>
 </ol>
-
 \\\\end{CodeBlock}
 
 
@@ -4149,7 +4081,6 @@ the paragraphs by 4 spaces or 1 tab:
     With multiple paragraphs.
 
 *   Another item in the list.
-
 \\\\end{CodeBlock}
 
 
@@ -4164,7 +4095,6 @@ Output:
 <p>With multiple paragraphs.</p></li>
 <li><p>Another item in the list.</p></li>
 </ul>
-
 \\\\end{CodeBlock}
 
 
@@ -4185,7 +4115,6 @@ For example:
 
 \\\\begin{CodeBlock}{text}
 This is an [example link](http://example.com/).
-
 \\\\end{CodeBlock}
 
 
@@ -4197,7 +4126,6 @@ Output:
 \\\\begin{CodeBlock}{text}
 <p>This is an <a href=\\"http://example.com/\\">
 example link</a>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -4208,7 +4136,6 @@ Optionally, you may include a title attribute in the parentheses:
 
 \\\\begin{CodeBlock}{text}
 This is an [example link](http://example.com/ \\"With a Title\\").
-
 \\\\end{CodeBlock}
 
 
@@ -4220,7 +4147,6 @@ Output:
 \\\\begin{CodeBlock}{text}
 <p>This is an <a href=\\"http://example.com/\\" title=\\"With a Title\\">
 example link</a>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -4237,7 +4163,6 @@ I get 10 times more traffic from [Google][1] than from
 [1]: http://google.com/        \\"Google\\"
 [2]: http://search.yahoo.com/  \\"Yahoo Search\\"
 [3]: http://search.msn.com/    \\"MSN Search\\"
-
 \\\\end{CodeBlock}
 
 
@@ -4251,7 +4176,6 @@ Output:
 title=\\"Google\\">Google</a> than from <a href=\\"http://search.yahoo.com/\\"
 title=\\"Yahoo Search\\">Yahoo</a> or <a href=\\"http://search.msn.com/\\"
 title=\\"MSN Search\\">MSN</a>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -4266,7 +4190,6 @@ I start my morning with a cup of coffee and
 [The New York Times][NY Times].
 
 [ny times]: http://www.nytimes.com/
-
 \\\\end{CodeBlock}
 
 
@@ -4278,7 +4201,6 @@ Output:
 \\\\begin{CodeBlock}{text}
 <p>I start my morning with a cup of coffee and
 <a href=\\"http://www.nytimes.com/\\">The New York Times</a>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -4296,7 +4218,6 @@ Inline (titles are optional):
 
 \\\\begin{CodeBlock}{text}
 ![alt text](/path/to/img.jpg \\"Title\\")
-
 \\\\end{CodeBlock}
 
 
@@ -4309,7 +4230,6 @@ Reference-style:
 ![alt text][id]
 
 [id]: /path/to/img.jpg \\"Title\\"
-
 \\\\end{CodeBlock}
 
 
@@ -4320,7 +4240,6 @@ Both of the above examples produce the same output:
 
 \\\\begin{CodeBlock}{text}
 <img src=\\"/path/to/img.jpg\\" alt=\\"alt text\\" title=\\"Title\\" />
-
 \\\\end{CodeBlock}
 
 
@@ -4340,7 +4259,6 @@ I strongly recommend against using any \`<blink>\` tags.
 
 I wish SmartyPants used named entities like \`&mdash;\`
 instead of decimal-encoded entites like \`&#8212;\`.
-
 \\\\end{CodeBlock}
 
 
@@ -4356,7 +4274,6 @@ Output:
 <p>I wish SmartyPants used named entities like
 <code>&amp;mdash;</code> instead of decimal-encoded
 entites like <code>&amp;#8212;</code>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -4378,7 +4295,6 @@ you've got to put paragraph tags in your blockquotes:
     <blockquote>
         <p>For example.</p>
     </blockquote>
-
 \\\\end{CodeBlock}
 
 
@@ -4395,7 +4311,6 @@ you've got to put paragraph tags in your blockquotes:</p>
     &lt;p&gt;For example.&lt;/p&gt;
 &lt;/blockquote&gt;
 </code></pre>
-
 \\\\end{CodeBlock}"
 `;
 
@@ -4543,7 +4458,6 @@ This is a regular paragraph.
 </table>
 
 This is another regular paragraph.
-
 \\\\end{CodeBlock}
 
 
@@ -4585,7 +4499,6 @@ escape ampersands within URLs. Thus, if you want to link to:
 
 \\\\begin{CodeBlock}{text}
 http://images.google.com/images?num=30&q=larry+bird
-
 \\\\end{CodeBlock}
 
 
@@ -4596,7 +4509,6 @@ you need to encode the URL as:
 
 \\\\begin{CodeBlock}{text}
 http://images.google.com/images?num=30&amp;q=larry+bird
-
 \\\\end{CodeBlock}
 
 
@@ -4620,7 +4532,6 @@ So, if you want to include a copyright symbol in your article, you can write:
 
 \\\\begin{CodeBlock}{text}
 &copy;
-
 \\\\end{CodeBlock}
 
 
@@ -4631,7 +4542,6 @@ and Markdown will leave it alone. But if you write:
 
 \\\\begin{CodeBlock}{text}
 AT&T
-
 \\\\end{CodeBlock}
 
 
@@ -4642,7 +4552,6 @@ Markdown will translate it to:
 
 \\\\begin{CodeBlock}{text}
 AT&amp;T
-
 \\\\end{CodeBlock}
 
 
@@ -4655,7 +4564,6 @@ such. But if you write:
 
 \\\\begin{CodeBlock}{text}
 4 < 5
-
 \\\\end{CodeBlock}
 
 
@@ -4666,7 +4574,6 @@ Markdown will translate it to:
 
 \\\\begin{CodeBlock}{text}
 4 &lt; 5
-
 \\\\end{CodeBlock}
 
 
@@ -4735,7 +4642,6 @@ This is an H1
 
 This is an H2
 -------------
-
 \\\\end{CodeBlock}
 
 
@@ -4755,7 +4661,6 @@ corresponding to header levels 1-6. For example:
 ## This is an H2
 
 ###### This is an H6
-
 \\\\end{CodeBlock}
 
 
@@ -4774,7 +4679,6 @@ determines the header level.) :
 ## This is an H2 ##
 
 ### This is an H3 ######
-
 \\\\end{CodeBlock}
 
 
@@ -4795,7 +4699,6 @@ wrap the text and put a \\\\texttt{>} before every line:
 > 
 > Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
 > id sem consectetuer libero luctus adipiscing.
-
 \\\\end{CodeBlock}
 
 
@@ -4812,7 +4715,6 @@ Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 
 > Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
 id sem consectetuer libero luctus adipiscing.
-
 \\\\end{CodeBlock}
 
 
@@ -4828,7 +4730,6 @@ adding additional levels of \\\\texttt{>}:
 > > This is nested blockquote.
 >
 > Back to the first level.
-
 \\\\end{CodeBlock}
 
 
@@ -4847,7 +4748,6 @@ and code blocks:
 > Here's some example code:
 > 
 >     return shell_exec(\\"echo $input | $markdown_script\\");
-
 \\\\end{CodeBlock}
 
 
@@ -4873,7 +4773,6 @@ Unordered lists use asterisks, pluses, and hyphens -- interchangably
 *   Red
 *   Green
 *   Blue
-
 \\\\end{CodeBlock}
 
 
@@ -4886,7 +4785,6 @@ is equivalent to:
 +   Red
 +   Green
 +   Blue
-
 \\\\end{CodeBlock}
 
 
@@ -4899,7 +4797,6 @@ and:
 -   Red
 -   Green
 -   Blue
-
 \\\\end{CodeBlock}
 
 
@@ -4912,7 +4809,6 @@ Ordered lists use numbers followed by periods:
 1.  Bird
 2.  McHale
 3.  Parish
-
 \\\\end{CodeBlock}
 
 
@@ -4929,7 +4825,6 @@ Markdown produces from the above list is:
 <li>McHale</li>
 <li>Parish</li>
 </ol>
-
 \\\\end{CodeBlock}
 
 
@@ -4942,7 +4837,6 @@ If you instead wrote the list in Markdown like this:
 1.  Bird
 1.  McHale
 1.  Parish
-
 \\\\end{CodeBlock}
 
 
@@ -4955,7 +4849,6 @@ or even:
 3. Bird
 1. McHale
 8. Parish
-
 \\\\end{CodeBlock}
 
 
@@ -4989,7 +4882,6 @@ To make lists look nice, you can wrap items with hanging indents:
     viverra nec, fringilla in, laoreet vitae, risus.
 *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
     Suspendisse id sem consectetuer libero luctus adipiscing.
-
 \\\\end{CodeBlock}
 
 
@@ -5004,7 +4896,6 @@ Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
 viverra nec, fringilla in, laoreet vitae, risus.
 *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
 Suspendisse id sem consectetuer libero luctus adipiscing.
-
 \\\\end{CodeBlock}
 
 
@@ -5017,7 +4908,6 @@ items in \\\\texttt{<p>} tags in the HTML output. For example, this input:
 \\\\begin{CodeBlock}{text}
 *   Bird
 *   Magic
-
 \\\\end{CodeBlock}
 
 
@@ -5031,7 +4921,6 @@ will turn into:
 <li>Bird</li>
 <li>Magic</li>
 </ul>
-
 \\\\end{CodeBlock}
 
 
@@ -5044,7 +4933,6 @@ But this:
 *   Bird
 
 *   Magic
-
 \\\\end{CodeBlock}
 
 
@@ -5058,7 +4946,6 @@ will turn into:
 <li><p>Bird</p></li>
 <li><p>Magic</p></li>
 </ul>
-
 \\\\end{CodeBlock}
 
 
@@ -5079,7 +4966,6 @@ or one tab:
     sit amet velit.
 
 2.  Suspendisse id sem consectetuer libero luctus adipiscing.
-
 \\\\end{CodeBlock}
 
 
@@ -5098,7 +4984,6 @@ only required to indent the first line. Lorem ipsum dolor
 sit amet, consectetuer adipiscing elit.
 
 *   Another item in the same list.
-
 \\\\end{CodeBlock}
 
 
@@ -5113,7 +4998,6 @@ delimiters need to be indented:
 
     > This is a blockquote
     > inside a list item.
-
 \\\\end{CodeBlock}
 
 
@@ -5127,7 +5011,6 @@ to be indented \\\\textit{twice} -- 8 spaces or two tabs:
 *   A list item with a code block:
 
         <code goes here>
-
 \\\\end{CodeBlock}
 
 
@@ -5139,7 +5022,6 @@ accident, by writing something like this:
 
 \\\\begin{CodeBlock}{text}
 1986. What a great season.
-
 \\\\end{CodeBlock}
 
 
@@ -5151,7 +5033,6 @@ line. To avoid this, you can backslash-escape the period:
 
 \\\\begin{CodeBlock}{text}
 1986\\\\. What a great season.
-
 \\\\end{CodeBlock}
 
 
@@ -5174,7 +5055,6 @@ block by at least 4 spaces or 1 tab. For example, given this input:
 This is a normal paragraph:
 
     This is a code block.
-
 \\\\end{CodeBlock}
 
 
@@ -5188,7 +5068,6 @@ Markdown will generate:
 
 <pre><code>This is a code block.
 </code></pre>
-
 \\\\end{CodeBlock}
 
 
@@ -5204,7 +5083,6 @@ Here is an example of AppleScript:
     tell application \\"Foo\\"
         beep
     end tell
-
 \\\\end{CodeBlock}
 
 
@@ -5220,7 +5098,6 @@ will turn into:
     beep
 end tell
 </code></pre>
-
 \\\\end{CodeBlock}
 
 
@@ -5242,7 +5119,6 @@ ampersands and angle brackets. For example, this:
     <div class=\\"footer\\">
         &copy; 2004 Foo Corporation
     </div>
-
 \\\\end{CodeBlock}
 
 
@@ -5256,7 +5132,6 @@ will turn into:
     &amp;copy; 2004 Foo Corporation
 &lt;/div&gt;
 </code></pre>
-
 \\\\end{CodeBlock}
 
 
@@ -5288,7 +5163,6 @@ following lines will produce a horizontal rule:
 ---------------------------------------
 
 _ _ _
-
 \\\\end{CodeBlock}
 
 
@@ -5320,7 +5194,6 @@ title for the link, surrounded in quotes. For example:
 This is [an example](http://example.com/ \\"Title\\") inline link.
 
 [This link](http://example.net/) has no title attribute.
-
 \\\\end{CodeBlock}
 
 
@@ -5335,7 +5208,6 @@ an example</a> inline link.</p>
 
 <p><a href=\\"http://example.net/\\">This link</a> has no
 title attribute.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -5347,7 +5219,6 @@ use relative paths:
 
 \\\\begin{CodeBlock}{text}
 See my [About](/about/) page for details.
-
 \\\\end{CodeBlock}
 
 
@@ -5359,7 +5230,6 @@ which you place a label of your choosing to identify the link:
 
 \\\\begin{CodeBlock}{text}
 This is [an example][id] reference-style link.
-
 \\\\end{CodeBlock}
 
 
@@ -5370,7 +5240,6 @@ You can optionally use a space to separate the sets of brackets:
 
 \\\\begin{CodeBlock}{text}
 This is [an example] [id] reference-style link.
-
 \\\\end{CodeBlock}
 
 
@@ -5382,7 +5251,6 @@ on a line by itself:
 
 \\\\begin{CodeBlock}{text}
 [id]: http://example.com/  \\"Optional Title Here\\"
-
 \\\\end{CodeBlock}
 
 
@@ -5408,7 +5276,6 @@ The link URL may, optionally, be surrounded by angle brackets:
 
 \\\\begin{CodeBlock}{text}
 [id]: <http://example.com/>  \\"Optional Title Here\\"
-
 \\\\end{CodeBlock}
 
 
@@ -5421,7 +5288,6 @@ or tabs for padding, which tends to look better with longer URLs:
 \\\\begin{CodeBlock}{text}
 [id]: http://example.com/longish/path/to/resource/here
     \\"Optional Title Here\\"
-
 \\\\end{CodeBlock}
 
 
@@ -5438,7 +5304,6 @@ Link definition names may constist of letters, numbers, spaces, and punctuation 
 \\\\begin{CodeBlock}{text}
 [link text][a]
 [link text][A]
-
 \\\\end{CodeBlock}
 
 
@@ -5456,7 +5321,6 @@ Just use an empty set of square brackets -- e.g., to link the word
 
 \\\\begin{CodeBlock}{text}
 [Google][]
-
 \\\\end{CodeBlock}
 
 
@@ -5467,7 +5331,6 @@ And then define the link:
 
 \\\\begin{CodeBlock}{text}
 [Google]: http://google.com/
-
 \\\\end{CodeBlock}
 
 
@@ -5479,7 +5342,6 @@ multiple words in the link text:
 
 \\\\begin{CodeBlock}{text}
 Visit [Daring Fireball][] for more information.
-
 \\\\end{CodeBlock}
 
 
@@ -5490,7 +5352,6 @@ And then define the link:
 
 \\\\begin{CodeBlock}{text}
 [Daring Fireball]: http://daringfireball.net/
-
 \\\\end{CodeBlock}
 
 
@@ -5513,7 +5374,6 @@ I get 10 times more traffic from [Google] [1] than from
   [1]: http://google.com/        \\"Google\\"
   [2]: http://search.yahoo.com/  \\"Yahoo Search\\"
   [3]: http://search.msn.com/    \\"MSN Search\\"
-
 \\\\end{CodeBlock}
 
 
@@ -5529,7 +5389,6 @@ I get 10 times more traffic from [Google][] than from
   [google]: http://google.com/        \\"Google\\"
   [yahoo]:  http://search.yahoo.com/  \\"Yahoo Search\\"
   [msn]:    http://search.msn.com/    \\"MSN Search\\"
-
 \\\\end{CodeBlock}
 
 
@@ -5543,7 +5402,6 @@ Both of the above examples will produce the following HTML output:
 title=\\"Google\\">Google</a> than from
 <a href=\\"http://search.yahoo.com/\\" title=\\"Yahoo Search\\">Yahoo</a>
 or <a href=\\"http://search.msn.com/\\" title=\\"MSN Search\\">MSN</a>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -5557,7 +5415,6 @@ Markdown's inline link style:
 I get 10 times more traffic from [Google](http://google.com/ \\"Google\\")
 than from [Yahoo](http://search.yahoo.com/ \\"Yahoo Search\\") or
 [MSN](http://search.msn.com/ \\"MSN Search\\").
-
 \\\\end{CodeBlock}
 
 
@@ -5597,7 +5454,6 @@ _single underscores_
 **double asterisks**
 
 __double underscores__
-
 \\\\end{CodeBlock}
 
 
@@ -5614,7 +5470,6 @@ will produce:
 <strong>double asterisks</strong>
 
 <strong>double underscores</strong>
-
 \\\\end{CodeBlock}
 
 
@@ -5630,7 +5485,6 @@ Emphasis can be used in the middle of a word:
 
 \\\\begin{CodeBlock}{text}
 un*fucking*believable
-
 \\\\end{CodeBlock}
 
 
@@ -5648,7 +5502,6 @@ escape it:
 
 \\\\begin{CodeBlock}{text}
 \\\\*this text is surrounded by literal asterisks\\\\*
-
 \\\\end{CodeBlock}
 
 
@@ -5663,7 +5516,6 @@ normal paragraph. For example:
 
 \\\\begin{CodeBlock}{text}
 Use the \`printf()\` function.
-
 \\\\end{CodeBlock}
 
 
@@ -5674,7 +5526,6 @@ will produce:
 
 \\\\begin{CodeBlock}{text}
 <p>Use the <code>printf()</code> function.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -5686,7 +5537,6 @@ multiple backticks as the opening and closing delimiters:
 
 \\\\begin{CodeBlock}{text}
 \`\`There is a literal backtick (\`) here.\`\`
-
 \\\\end{CodeBlock}
 
 
@@ -5697,7 +5547,6 @@ which will produce this:
 
 \\\\begin{CodeBlock}{text}
 <p><code>There is a literal backtick (\`) here.</code></p>
-
 \\\\end{CodeBlock}
 
 
@@ -5712,7 +5561,6 @@ literal backtick characters at the beginning or end of a code span:
 A single backtick in a code span: \`\` \` \`\`
 
 A backtick-delimited string in a code span: \`\` \`foo\` \`\`
-
 \\\\end{CodeBlock}
 
 
@@ -5725,7 +5573,6 @@ will produce:
 <p>A single backtick in a code span: <code>\`</code></p>
 
 <p>A backtick-delimited string in a code span: <code>\`foo\`</code></p>
-
 \\\\end{CodeBlock}
 
 
@@ -5738,7 +5585,6 @@ tags. Markdown will turn this:
 
 \\\\begin{CodeBlock}{text}
 Please don't use any \`<blink>\` tags.
-
 \\\\end{CodeBlock}
 
 
@@ -5749,7 +5595,6 @@ into:
 
 \\\\begin{CodeBlock}{text}
 <p>Please don't use any <code>&lt;blink&gt;</code> tags.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -5760,7 +5605,6 @@ You can write this:
 
 \\\\begin{CodeBlock}{text}
 \`&#8212;\` is the decimal-encoded equivalent of \`&mdash;\`.
-
 \\\\end{CodeBlock}
 
 
@@ -5772,7 +5616,6 @@ to produce:
 \\\\begin{CodeBlock}{text}
 <p><code>&amp;#8212;</code> is the decimal-encoded
 equivalent of <code>&amp;mdash;</code>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -5797,7 +5640,6 @@ Inline image syntax looks like this:
 ![Alt text](/path/to/img.jpg)
 
 ![Alt text](/path/to/img.jpg \\"Optional title\\")
-
 \\\\end{CodeBlock}
 
 
@@ -5822,7 +5664,6 @@ Reference-style image syntax looks like this:
 
 \\\\begin{CodeBlock}{text}
 ![Alt text][id]
-
 \\\\end{CodeBlock}
 
 
@@ -5834,7 +5675,6 @@ are defined using syntax identical to link references:
 
 \\\\begin{CodeBlock}{text}
 [id]: url/to/image  \\"Optional title attribute\\"
-
 \\\\end{CodeBlock}
 
 
@@ -5859,7 +5699,6 @@ Markdown supports a shortcut style for creating \\"automatic\\" links for URLs a
 
 \\\\begin{CodeBlock}{text}
 <http://example.com/>
-
 \\\\end{CodeBlock}
 
 
@@ -5870,7 +5709,6 @@ Markdown will turn this into:
 
 \\\\begin{CodeBlock}{text}
 <a href=\\"http://example.com/\\">http://example.com/</a>
-
 \\\\end{CodeBlock}
 
 
@@ -5884,7 +5722,6 @@ spambots. For example, Markdown will turn this:
 
 \\\\begin{CodeBlock}{text}
 <address@example.com>
-
 \\\\end{CodeBlock}
 
 
@@ -5898,7 +5735,6 @@ into something like this:
 &#115;&#115;&#64;&#101;&#120;&#x61;&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;
 &#109;\\">&#x61;&#x64;&#x64;&#x72;&#x65;&#115;&#115;&#64;&#101;&#120;&#x61;
 &#109;&#x70;&#x6C;e&#x2E;&#99;&#111;&#109;</a>
-
 \\\\end{CodeBlock}
 
 
@@ -5926,7 +5762,6 @@ before the asterisks, like this:
 
 \\\\begin{CodeBlock}{text}
 \\\\*literal asterisks\\\\*
-
 \\\\end{CodeBlock}
 
 
@@ -5944,11 +5779,10 @@ _   underscore
 []  square brackets
 ()  parentheses
 #   hash mark
-+   plus sign
--   minus sign (hyphen)
++	plus sign
+-	minus sign (hyphen)
 .   dot
 !   exclamation mark
-
 \\\\end{CodeBlock}"
 `;
 
@@ -6371,7 +6205,6 @@ Multiple paragraphs:
 \\\\begin{CodeBlock}{text}
 Item 2. graf two. The quick brown fox jumped over the lazy dog's
 back.
-
 \\\\end{CodeBlock}
 
 
@@ -6403,7 +6236,6 @@ This is a paragraph with some asterisks
 
 \\\\begin{CodeBlock}{text}
 ***
-
 \\\\end{CodeBlock}
 
 
@@ -6425,7 +6257,6 @@ This is a paragraph
 
 \\\\begin{CodeBlock}{text}
 and this is code
-
 \\\\end{CodeBlock}
 
 
@@ -6444,7 +6275,6 @@ This is a paragraph with some asterisks in a code block
 
 \\\\begin{CodeBlock}{text}
 ***
-
 \\\\end{CodeBlock}
 
 
@@ -6775,7 +6605,6 @@ Cell 5 & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
 
 \\\\begin{CodeBlock}{text}
 Test code
-
 \\\\end{CodeBlock}
 
 
@@ -6998,7 +6827,6 @@ Code:
 
 \\\\begin{CodeBlock}{text}
 this code block is indented by one tab
-
 \\\\end{CodeBlock}
 
 
@@ -7008,8 +6836,7 @@ And:
 
 
 \\\\begin{CodeBlock}{text}
-    this code block is indented by two tabs
-
+	this code block is indented by two tabs
 \\\\end{CodeBlock}
 
 
@@ -7019,12 +6846,11 @@ And:
 
 
 \\\\begin{CodeBlock}{text}
-+   this is an example list item
-    indented with tabs
++	this is an example list item
+	indented with tabs
 
 +   this is an example list item
     indented with spaces
-
 \\\\end{CodeBlock}"
 `;
 
@@ -7043,7 +6869,6 @@ Code:
 
 \\\\begin{CodeBlock}{text}
 this code block is indented by one tab
-
 \\\\end{CodeBlock}
 
 
@@ -7053,8 +6878,7 @@ And:
 
 
 \\\\begin{CodeBlock}{text}
-    this code block is indented by two tabs
-
+	this code block is indented by two tabs
 \\\\end{CodeBlock}
 
 
@@ -7064,12 +6888,11 @@ And:
 
 
 \\\\begin{CodeBlock}{text}
-+   this is an example list item
-    indented with tabs
++	this is an example list item
+	indented with tabs
 
 +   this is an example list item
     indented with spaces
-
 \\\\end{CodeBlock}"
 `;
 
@@ -7170,11 +6993,9 @@ exports[`rebber: remark specs task-list: task-list 1`] = `
 \\\\begin{itemize}
 \\\\item \\\\begin{CodeBlock}{text}
 Hello;
-
 \\\\end{CodeBlock}
 \\\\item \\\\begin{CodeBlock}{text}
 World;
-
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
@@ -7191,11 +7012,9 @@ World;
 \\\\begin{itemize}
 \\\\item \\\\begin{CodeBlock}{text}
 Hello;
-
 \\\\end{CodeBlock}
 \\\\item \\\\begin{CodeBlock}{text}
 World;
-
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
@@ -7203,11 +7022,9 @@ World;
 \\\\begin{enumerate}
 \\\\item \\\\begin{CodeBlock}{text}
 Foo.
-
 \\\\end{CodeBlock}
 \\\\item \\\\begin{CodeBlock}{text}
 Bar.
-
 \\\\end{CodeBlock}
 \\\\end{enumerate}
 
@@ -7218,7 +7035,6 @@ Bar.
 \\\\begin{itemize}
 \\\\item \\\\begin{CodeBlock}{text}
     Hello;
-
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
@@ -7226,15 +7042,13 @@ Bar.
 \\\\begin{enumerate}
 \\\\item \\\\begin{CodeBlock}{text}
 World;
-
 \\\\end{CodeBlock}
 \\\\end{enumerate}
 
 
 \\\\begin{itemize}
 \\\\item \\\\begin{CodeBlock}{text}
-    Hello;
-
+	Hello;
 \\\\end{CodeBlock}
 \\\\item World.
 \\\\end{itemize}
@@ -7487,7 +7301,6 @@ hello world
 
 \\\\begin{CodeBlock}{text}
 how are you
-
 \\\\end{CodeBlock}
 
 
@@ -7659,8 +7472,7 @@ Auto-links should not occur here: \\\\texttt{<http://example.com/>}
 
 
 
-[code(or here: <http://example.com/>
-)]"
+[code(or here: <http://example.com/>)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros auto-link-invalid 1`] = `
@@ -7938,8 +7750,7 @@ Bang: \\\\!
 
 Plus: \\\\+
 
-Minus: \\\\-
-)]
+Minus: \\\\-)]
 
 \\\\textbf{GFM:}
 
@@ -7947,8 +7758,7 @@ Minus: \\\\-
 
 [code(Pipe: \\\\|
 
-Tilde: \\\\~
-)]
+Tilde: \\\\~)]
 
 \\\\textbf{Commonmark:}
 
@@ -7983,8 +7793,7 @@ At-sign: \\\\@
 Caret: \\\\^
 
 New line: \\\\
-only works in paragraphs.
-)]
+only works in paragraphs.)]
 
 Nor should these, which occur in code spans:
 
@@ -8126,8 +7935,7 @@ Caret: \\\\texttt{\\\\textbackslash{}\\\\textasciicircum{}}
 
 
 
-New line: \\\\texttt{\\\\textbackslash{}
-} only works in paragraphs.
+New line: \\\\texttt{\\\\textbackslash{} } only works in paragraphs.
 
 
 
@@ -8173,8 +7981,7 @@ between them.)])]
 [orderedList([listItem(First sublist.)])])])]
 
 
-[code(1.   Second sublist.
-)]
+[code(1.   Second sublist.)]
 
 And for lists followed by indented code blocks:
 
@@ -8183,8 +7990,7 @@ And for lists followed by indented code blocks:
 [unorderedList([listItem(This is a paragraph in a list)])]
 
 
-[code(And this is code();
-)]"
+[code(And this is code();)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros blockquote-indented 1`] = `
@@ -8194,27 +8000,23 @@ baz)]"
 
 exports[`rebber: remark specs with config: custom macros blockquote-lazy-code 1`] = `
 "[blockquote([code(foo
-bar
-)])]"
+bar)])]"
 `;
 
 exports[`rebber: remark specs with config: custom macros blockquote-lazy-fence 1`] = `
-"[blockquote([code(aNormalCodeBlockInABlockqoute();
-)])]
+"[blockquote([code(aNormalCodeBlockInABlockqoute();)])]
 
 A paragraph.
 
 
 
-[blockquote([code(thisIsAlsoSomeCodeInABlockquote();
-)])]
+[blockquote([code(thisIsAlsoSomeCodeInABlockquote();)])]
 
 A paragraph.
 
 
 
-[blockquote([code(aNonTerminatedCodeBlockInABlockquote();
-)]aNewCodeBlockFollowingTheBlockQuote();
+[blockquote([code(aNonTerminatedCodeBlockInABlockquote();)]aNewCodeBlockFollowingTheBlockQuote();
 
 [code()])]
 
@@ -8224,8 +8026,7 @@ A paragraph.
 
 [blockquote(Something in a blockquote.
 
-[code(aNewCodeBlock();
-)])]"
+[code(aNewCodeBlock();)])]"
 `;
 
 exports[`rebber: remark specs with config: custom macros blockquote-lazy-list 1`] = `
@@ -8267,13 +8068,11 @@ exports[`rebber: remark specs with config: custom macros blockquotes-with-code-b
 
 [code(sub status {
     print \\"working\\";
-}
-)]Or:
+})]Or:
 
 [code(sub status {
     return \\"working\\";
-}
-)])]"
+})])]"
 `;
 
 exports[`rebber: remark specs with config: custom macros bom 1`] = `
@@ -8323,8 +8122,7 @@ exports[`rebber: remark specs with config: custom macros code-block 1`] = `
 
 
 
-[codeJavascript(alert('Hello World!');
-)]"
+[codeJavascript(alert('Hello World!');)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros code-block-indentation 1`] = `
@@ -8336,8 +8134,7 @@ the code is exdented by up to that amount of spaces.
 
 [code(    This is a code block...
         
-    ...which is not exdented.
-)]
+    ...which is not exdented.)]
 
 But...
 
@@ -8345,8 +8142,7 @@ But...
 
 [code(  This one...
       
-  ...is.
-)]
+  ...is.)]
 
 And...
 
@@ -8354,8 +8150,7 @@ And...
 
 [code(So is this...
       
-  ...one.
-)]"
+  ...one.)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros code-block-nesting-bug 1`] = `
@@ -8370,8 +8165,7 @@ Note that this bug does not occur on indented code-blocks.
 
 [codeFoo(\`\`\`bar
 baz
-\`\`\`
-)]
+\`\`\`)]
 
 Even with a different fence marker:
 
@@ -8379,8 +8173,7 @@ Even with a different fence marker:
 
 [codeFoo(~~~bar
 baz
-~~~
-)]
+~~~)]
 
 And reversed:
 
@@ -8388,13 +8181,11 @@ And reversed:
 
 [codeFoo(~~~bar
 baz
-~~~
-)]
+~~~)]
 
 [codeFoo(\`\`\`bar
 baz
-\`\`\`
-)]"
+\`\`\`)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros code-blocks 1`] = `
@@ -8406,23 +8197,20 @@ Regular text.
 
 
 
-[code(code block indented by spaces
-)]
+[code(code block indented by spaces)]
 
 Regular text.
 
 
 
 [code(the lines in this block  
-all contain trailing spaces  
-)]
+all contain trailing spaces  )]
 
 Regular Text.
 
 
 
-[code(code block on the last line
-)]"
+[code(code block on the last line)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros code-spans 1`] = `
@@ -8638,8 +8426,7 @@ Entities even work in the language flag of fenced code blocks:
 
 
 
-[codeSome—language(alert('Hello');
-)]
+[codeSome—language(alert('Hello');)]
 
 Or in \\\\externalLink{línks}{\\\\textasciitilde{}/some—file}
 
@@ -8654,8 +8441,7 @@ code blocks:
 
 
 
-[code(C&Ouml;DE block.
-)]"
+[code(C&Ouml;DE block.)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros entities-advanced 1`] = `
@@ -8699,17 +8485,13 @@ exports[`rebber: remark specs with config: custom macros escaped-angles 1`] = `"
 
 exports[`rebber: remark specs with config: custom macros fenced-code 1`] = `
 "[codeJs(var a = 'hello';
-console.log(a + ' world');
-)]
+console.log(a + ' world');)]
 
-[codeBash(echo \\"hello, \${WORLD}\\"
-)]
+[codeBash(echo \\"hello, \${WORLD}\\")]
 
-[codeLongfence(Q: What do you call a tall person who sells stolen goods?
-)]
+[codeLongfence(Q: What do you call a tall person who sells stolen goods?)]
 
-[codeManyTildes(A longfence!
-)]"
+[codeManyTildes(A longfence!)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros fenced-code-empty 1`] = `
@@ -8740,21 +8522,15 @@ With nothing:
 
 exports[`rebber: remark specs with config: custom macros fenced-code-trailing-characters 1`] = `
 "[codeJs(foo();
-\`\`\`bash
-)]"
+\`\`\`bash)]"
 `;
 
-exports[`rebber: remark specs with config: custom macros fenced-code-trailing-characters-2 1`] = `
-"[code(\`\`\` aaa
-)]"
-`;
+exports[`rebber: remark specs with config: custom macros fenced-code-trailing-characters-2 1`] = `"[code(\`\`\` aaa)]"`;
 
 exports[`rebber: remark specs with config: custom macros fenced-code-white-space-after-flag 1`] = `
-"[codeJs(foo();
-)]
+"[codeJs(foo();)]
 
-[codeBash(echo \\"hello, \${WORLD}\\"
-)]"
+[codeBash(echo \\"hello, \${WORLD}\\")]"
 `;
 
 exports[`rebber: remark specs with config: custom macros footnote 1`] = `
@@ -9022,8 +8798,7 @@ exports[`rebber: remark specs with config: custom macros horizontal-rules 1`] = 
 
 [thematicBreak(---)]
 
-[code(---
-)]
+[code(---)]
 
 [thematicBreak(---)]
 
@@ -9033,8 +8808,7 @@ exports[`rebber: remark specs with config: custom macros horizontal-rules 1`] = 
 
 [thematicBreak(---)]
 
-[code(- - -
-)]
+[code(- - -)]
 
 Asterisks:
 
@@ -9048,8 +8822,7 @@ Asterisks:
 
 [thematicBreak(---)]
 
-[code(***
-)]
+[code(***)]
 
 [thematicBreak(---)]
 
@@ -9059,8 +8832,7 @@ Asterisks:
 
 [thematicBreak(---)]
 
-[code(* * *
-)]
+[code(* * *)]
 
 Underscores:
 
@@ -9074,8 +8846,7 @@ Underscores:
 
 [thematicBreak(---)]
 
-[code(___
-)]
+[code(___)]
 
 [thematicBreak(---)]
 
@@ -9085,8 +8856,7 @@ Underscores:
 
 [thematicBreak(---)]
 
-[code(_ _ _
-)]"
+[code(_ _ _)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros horizontal-rules-adjacent 1`] = `
@@ -9299,16 +9069,14 @@ This should be a code block, though:
 
 
 [code(<div>
-    foo
-</div>
-)]
+	foo
+</div>)]
 
 As should this:
 
 
 
-[code(<div>foo</div>
-)]
+[code(<div>foo</div>)]
 
 Now, nested:
 
@@ -9341,8 +9109,7 @@ Code block:
 
 
 
-[code(<!-- Comment -->
-)]
+[code(<!-- Comment -->)]
 
 Just plain comment, with trailing spaces on the line:
 
@@ -9354,8 +9121,7 @@ Code:
 
 
 
-[code(<hr>
-)]
+[code(<hr>)]
 
 Hr's:
 
@@ -9715,8 +9481,7 @@ Indented [four] times.
 
 [definition(identifier=thrice, url=/url, title=null)]
 
-[code([four]: /url
-)]
+[code([four]: /url)]
 
 [definition(identifier=b, url=/url/, title=null)]
 
@@ -10495,8 +10260,7 @@ exports[`rebber: remark specs with config: custom macros list-and-code 1`] = `
 "[unorderedList([listItem(This is a list item)])]
 
 
-[code(This is code
-)]"
+[code(This is code)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros list-continuation 1`] = `
@@ -10506,8 +10270,7 @@ exports[`rebber: remark specs with config: custom macros list-continuation 1`] =
 
 [orderedList([listItem(foo)])]
 
-[codeJs(code();
-)]
+[codeJs(code();)]
 
 [orderedList([listItem([linkReference(reference=foo, content=foo)])])]
 
@@ -10535,11 +10298,9 @@ World 3b.)][listItem(Hello 4a
 
 World 4a.)][listItem(Hello 4b
 
-World 4b.)][listItem([code(Hello 5a
-)]World 5a.)][listItem([code(Hello 5b
+World 4b.)][listItem([code(Hello 5a)]World 5a.)][listItem([code(Hello 5b
 
-World 5b.
-)])])]"
+World 5b.)])])]"
 `;
 
 exports[`rebber: remark specs with config: custom macros list-item-empty 1`] = `"[unorderedList([listItem(foo)][listItem()][listItem(bar)][listItem(foo)][listItem()][listItem(bar)])]"`;
@@ -10604,33 +10365,28 @@ exports[`rebber: remark specs with config: custom macros lists-with-code-and-rul
 [unorderedList([listItem(three)][listItem(four)][listItem(five)])])])])])])])][listItem(foo:
 
 [code(line 1
-line 2
-)])][listItem(foo:
+line 2)])][listItem(foo:
 
 [orderedList([listItem(foo \\\\texttt{bar} bar:
 
-[codeErb(some code here
-)])][listItem(foo \\\\texttt{bar} bar:
+[codeErb(some code here)])][listItem(foo \\\\texttt{bar} bar:
 
 [codeErb(foo
 ---
 bar
 ---
 foo
-bar
-)])][listItem(foo \\\\texttt{bar} bar:
+bar)])][listItem(foo \\\\texttt{bar} bar:
 
 [codeHtml(---
 foo
 foo
 ---
-bar
-)])][listItem(foo \\\\texttt{bar} bar:
+bar)])][listItem(foo \\\\texttt{bar} bar:
 
 [code(foo
 ---
-bar
-)])][listItem(foo)])])])]"
+bar)])][listItem(foo)])])])]"
 `;
 
 exports[`rebber: remark specs with config: custom macros loose-lists 1`] = `
@@ -10727,8 +10483,7 @@ And an image with an empty alt attribute \\\\includegraphics{src}.
 
 
 [code(Code goes here.
-Lots of it...
-)]"
+Lots of it...)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros markdown-documentation-basics 1`] = `
@@ -10815,8 +10570,7 @@ dog's back.
 > 
 > This is the second paragraph in the blockquote.
 >
-> ## This is an H2 in a blockquote
-)]
+> ## This is an H2 in a blockquote)]
 
 Output:
 
@@ -10841,8 +10595,7 @@ dog's back.</p>
     <p>This is the second paragraph in the blockquote.</p>
     
     <h2>This is an H2 in a blockquote</h2>
-</blockquote>
-)]
+</blockquote>)]
 
 heading3(Phrase Emphasis)
 
@@ -10858,8 +10611,7 @@ Markdown:
 Some of these words _are emphasized also_.
 
 Use two asterisks for **strong emphasis**.
-Or, if you prefer, __use two underscores instead__.
-)]
+Or, if you prefer, __use two underscores instead__.)]
 
 Output:
 
@@ -10869,8 +10621,7 @@ Output:
 Some of these words <em>are emphasized also</em>.</p>
 
 <p>Use two asterisks for <strong>strong emphasis</strong>.
-Or, if you prefer, <strong>use two underscores instead</strong>.</p>
-)]
+Or, if you prefer, <strong>use two underscores instead</strong>.</p>)]
 
 heading2(Lists)
 
@@ -10882,8 +10633,7 @@ interchangable; this:
 
 [code(*   Candy.
 *   Gum.
-*   Booze.
-)]
+*   Booze.)]
 
 this:
 
@@ -10891,8 +10641,7 @@ this:
 
 [code(+   Candy.
 +   Gum.
-+   Booze.
-)]
++   Booze.)]
 
 and this:
 
@@ -10900,8 +10649,7 @@ and this:
 
 [code(-   Candy.
 -   Gum.
--   Booze.
-)]
+-   Booze.)]
 
 all produce the same output:
 
@@ -10911,8 +10659,7 @@ all produce the same output:
 <li>Candy.</li>
 <li>Gum.</li>
 <li>Booze.</li>
-</ul>
-)]
+</ul>)]
 
 Ordered (numbered) lists use regular numbers, followed by periods, as
 list markers:
@@ -10921,8 +10668,7 @@ list markers:
 
 [code(1.  Red
 2.  Green
-3.  Blue
-)]
+3.  Blue)]
 
 Output:
 
@@ -10932,8 +10678,7 @@ Output:
 <li>Red</li>
 <li>Green</li>
 <li>Blue</li>
-</ol>
-)]
+</ol>)]
 
 If you put blank lines between items, you'll get \\\\texttt{<p>} tags for the
 list item text. You can create multi-paragraph list items by indenting
@@ -10945,8 +10690,7 @@ the paragraphs by 4 spaces or 1 tab:
 
     With multiple paragraphs.
 
-*   Another item in the list.
-)]
+*   Another item in the list.)]
 
 Output:
 
@@ -10956,8 +10700,7 @@ Output:
 <li><p>A list item.</p>
 <p>With multiple paragraphs.</p></li>
 <li><p>Another item in the list.</p></li>
-</ul>
-)]
+</ul>)]
 
 heading3(Links)
 
@@ -10972,31 +10715,27 @@ For example:
 
 
 
-[code(This is an [example link](http://example.com/).
-)]
+[code(This is an [example link](http://example.com/).)]
 
 Output:
 
 
 
 [code(<p>This is an <a href=\\"http://example.com/\\">
-example link</a>.</p>
-)]
+example link</a>.</p>)]
 
 Optionally, you may include a title attribute in the parentheses:
 
 
 
-[code(This is an [example link](http://example.com/ \\"With a Title\\").
-)]
+[code(This is an [example link](http://example.com/ \\"With a Title\\").)]
 
 Output:
 
 
 
 [code(<p>This is an <a href=\\"http://example.com/\\" title=\\"With a Title\\">
-example link</a>.</p>
-)]
+example link</a>.</p>)]
 
 Reference-style links allow you to refer to your links by names, which
 you define elsewhere in your document:
@@ -11008,8 +10747,7 @@ you define elsewhere in your document:
 
 [1]: http://google.com/        \\"Google\\"
 [2]: http://search.yahoo.com/  \\"Yahoo Search\\"
-[3]: http://search.msn.com/    \\"MSN Search\\"
-)]
+[3]: http://search.msn.com/    \\"MSN Search\\")]
 
 Output:
 
@@ -11018,8 +10756,7 @@ Output:
 [code(<p>I get 10 times more traffic from <a href=\\"http://google.com/\\"
 title=\\"Google\\">Google</a> than from <a href=\\"http://search.yahoo.com/\\"
 title=\\"Yahoo Search\\">Yahoo</a> or <a href=\\"http://search.msn.com/\\"
-title=\\"MSN Search\\">MSN</a>.</p>
-)]
+title=\\"MSN Search\\">MSN</a>.</p>)]
 
 The title attribute is optional. Link names may contain letters,
 numbers and spaces, but are \\\\textit{not} case sensitive:
@@ -11029,16 +10766,14 @@ numbers and spaces, but are \\\\textit{not} case sensitive:
 [code(I start my morning with a cup of coffee and
 [The New York Times][NY Times].
 
-[ny times]: http://www.nytimes.com/
-)]
+[ny times]: http://www.nytimes.com/)]
 
 Output:
 
 
 
 [code(<p>I start my morning with a cup of coffee and
-<a href=\\"http://www.nytimes.com/\\">The New York Times</a>.</p>
-)]
+<a href=\\"http://www.nytimes.com/\\">The New York Times</a>.</p>)]
 
 heading3(Images)
 
@@ -11050,8 +10785,7 @@ Inline (titles are optional):
 
 
 
-[code(![alt text](/path/to/img.jpg \\"Title\\")
-)]
+[code(![alt text](/path/to/img.jpg \\"Title\\"))]
 
 Reference-style:
 
@@ -11059,15 +10793,13 @@ Reference-style:
 
 [code(![alt text][id]
 
-[id]: /path/to/img.jpg \\"Title\\"
-)]
+[id]: /path/to/img.jpg \\"Title\\")]
 
 Both of the above examples produce the same output:
 
 
 
-[code(<img src=\\"/path/to/img.jpg\\" alt=\\"alt text\\" title=\\"Title\\" />
-)]
+[code(<img src=\\"/path/to/img.jpg\\" alt=\\"alt text\\" title=\\"Title\\" />)]
 
 heading3(Code)
 
@@ -11081,8 +10813,7 @@ it easy to use Markdown to write about HTML example code:
 [code(I strongly recommend against using any \`<blink>\` tags.
 
 I wish SmartyPants used named entities like \`&mdash;\`
-instead of decimal-encoded entites like \`&#8212;\`.
-)]
+instead of decimal-encoded entites like \`&#8212;\`.)]
 
 Output:
 
@@ -11093,8 +10824,7 @@ Output:
 
 <p>I wish SmartyPants used named entities like
 <code>&amp;mdash;</code> instead of decimal-encoded
-entites like <code>&amp;#8212;</code>.</p>
-)]
+entites like <code>&amp;#8212;</code>.</p>)]
 
 To specify an entire block of pre-formatted code, indent every line of
 the block by 4 spaces or 1 tab. Just like with code spans, \\\\texttt{\\\\&}, \\\\texttt{<},
@@ -11111,8 +10841,7 @@ you've got to put paragraph tags in your blockquotes:
 
     <blockquote>
         <p>For example.</p>
-    </blockquote>
-)]
+    </blockquote>)]
 
 Output:
 
@@ -11124,8 +10853,7 @@ you've got to put paragraph tags in your blockquotes:</p>
 <pre><code>&lt;blockquote&gt;
     &lt;p&gt;For example.&lt;/p&gt;
 &lt;/blockquote&gt;
-</code></pre>
-)]"
+</code></pre>)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros markdown-documentation-syntax 1`] = `
@@ -11242,8 +10970,7 @@ For example, to add an HTML table to a Markdown article:
     </tr>
 </table>
 
-This is another regular paragraph.
-)]
+This is another regular paragraph.)]
 
 Note that Markdown formatting syntax is not processed within block-level
 HTML tags. E.g., you can't use Markdown-style \\\\texttt{*emphasis*} inside an
@@ -11280,15 +11007,13 @@ escape ampersands within URLs. Thus, if you want to link to:
 
 
 
-[code(http://images.google.com/images?num=30&q=larry+bird
-)]
+[code(http://images.google.com/images?num=30&q=larry+bird)]
 
 you need to encode the URL as:
 
 
 
-[code(http://images.google.com/images?num=30&amp;q=larry+bird
-)]
+[code(http://images.google.com/images?num=30&amp;q=larry+bird)]
 
 in your anchor tag \\\\texttt{href} attribute. Needless to say, this is easy to
 forget, and is probably the single most common source of HTML validation
@@ -11307,22 +11032,19 @@ So, if you want to include a copyright symbol in your article, you can write:
 
 
 
-[code(&copy;
-)]
+[code(&copy;)]
 
 and Markdown will leave it alone. But if you write:
 
 
 
-[code(AT&T
-)]
+[code(AT&T)]
 
 Markdown will translate it to:
 
 
 
-[code(AT&amp;T
-)]
+[code(AT&amp;T)]
 
 Similarly, because Markdown supports \\\\externalLink{inline HTML}{\\\\#html}, if you use
 angle brackets as delimiters for HTML tags, Markdown will treat them as
@@ -11330,15 +11052,13 @@ such. But if you write:
 
 
 
-[code(4 < 5
-)]
+[code(4 < 5)]
 
 Markdown will translate it to:
 
 
 
-[code(4 &lt; 5
-)]
+[code(4 &lt; 5)]
 
 However, inside Markdown code spans and blocks, angle brackets and
 ampersands are \\\\textit{always} encoded automatically. This makes it easy to use
@@ -11400,8 +11120,7 @@ headers) and dashes (for second-level headers). For example:
 =============
 
 This is an H2
--------------
-)]
+-------------)]
 
 Any number of underlining \\\\texttt{=}'s or \\\\texttt{-}'s will work.
 
@@ -11416,8 +11135,7 @@ corresponding to header levels 1-6. For example:
 
 ## This is an H2
 
-###### This is an H6
-)]
+###### This is an H6)]
 
 Optionally, you may \\"close\\" atx-style headers. This is purely
 cosmetic -- you can use this if you think it looks better. The
@@ -11431,8 +11149,7 @@ determines the header level.) :
 
 ## This is an H2 ##
 
-### This is an H3 ######
-)]
+### This is an H3 ######)]
 
 <h3 id=\\"blockquote\\">Blockquotes</h3>
 
@@ -11448,8 +11165,7 @@ wrap the text and put a \\\\texttt{>} before every line:
 > Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 > 
 > Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-> id sem consectetuer libero luctus adipiscing.
-)]
+> id sem consectetuer libero luctus adipiscing.)]
 
 Markdown allows you to be lazy and only put the \\\\texttt{>} before the first
 line of a hard-wrapped paragraph:
@@ -11461,8 +11177,7 @@ consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
 Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 
 > Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
-id sem consectetuer libero luctus adipiscing.
-)]
+id sem consectetuer libero luctus adipiscing.)]
 
 Blockquotes can be nested (i.e. a blockquote-in-a-blockquote) by
 adding additional levels of \\\\texttt{>}:
@@ -11473,8 +11188,7 @@ adding additional levels of \\\\texttt{>}:
 >
 > > This is nested blockquote.
 >
-> Back to the first level.
-)]
+> Back to the first level.)]
 
 Blockquotes can contain other Markdown elements, including headers, lists,
 and code blocks:
@@ -11488,8 +11202,7 @@ and code blocks:
 > 
 > Here's some example code:
 > 
->     return shell_exec(\\"echo $input | $markdown_script\\");
-)]
+>     return shell_exec(\\"echo $input | $markdown_script\\");)]
 
 Any decent text editor should make email-style quoting easy. For
 example, with BBEdit, you can make a selection and choose Increase
@@ -11510,8 +11223,7 @@ Unordered lists use asterisks, pluses, and hyphens -- interchangably
 
 [code(*   Red
 *   Green
-*   Blue
-)]
+*   Blue)]
 
 is equivalent to:
 
@@ -11519,8 +11231,7 @@ is equivalent to:
 
 [code(+   Red
 +   Green
-+   Blue
-)]
++   Blue)]
 
 and:
 
@@ -11528,8 +11239,7 @@ and:
 
 [code(-   Red
 -   Green
--   Blue
-)]
+-   Blue)]
 
 Ordered lists use numbers followed by periods:
 
@@ -11537,8 +11247,7 @@ Ordered lists use numbers followed by periods:
 
 [code(1.  Bird
 2.  McHale
-3.  Parish
-)]
+3.  Parish)]
 
 It's important to note that the actual numbers you use to mark the
 list have no effect on the HTML output Markdown produces. The HTML
@@ -11550,8 +11259,7 @@ Markdown produces from the above list is:
 <li>Bird</li>
 <li>McHale</li>
 <li>Parish</li>
-</ol>
-)]
+</ol>)]
 
 If you instead wrote the list in Markdown like this:
 
@@ -11559,8 +11267,7 @@ If you instead wrote the list in Markdown like this:
 
 [code(1.  Bird
 1.  McHale
-1.  Parish
-)]
+1.  Parish)]
 
 or even:
 
@@ -11568,8 +11275,7 @@ or even:
 
 [code(3. Bird
 1. McHale
-8. Parish
-)]
+8. Parish)]
 
 you'd get the exact same HTML output. The point is, if you want to,
 you can use ordinal numbers in your ordered Markdown lists, so that
@@ -11598,8 +11304,7 @@ To make lists look nice, you can wrap items with hanging indents:
     Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
     viverra nec, fringilla in, laoreet vitae, risus.
 *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
-    Suspendisse id sem consectetuer libero luctus adipiscing.
-)]
+    Suspendisse id sem consectetuer libero luctus adipiscing.)]
 
 But if you want to be lazy, you don't have to:
 
@@ -11609,8 +11314,7 @@ But if you want to be lazy, you don't have to:
 Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
 viverra nec, fringilla in, laoreet vitae, risus.
 *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
-Suspendisse id sem consectetuer libero luctus adipiscing.
-)]
+Suspendisse id sem consectetuer libero luctus adipiscing.)]
 
 If list items are separated by blank lines, Markdown will wrap the
 items in \\\\texttt{<p>} tags in the HTML output. For example, this input:
@@ -11618,8 +11322,7 @@ items in \\\\texttt{<p>} tags in the HTML output. For example, this input:
 
 
 [code(*   Bird
-*   Magic
-)]
+*   Magic)]
 
 will turn into:
 
@@ -11628,8 +11331,7 @@ will turn into:
 [code(<ul>
 <li>Bird</li>
 <li>Magic</li>
-</ul>
-)]
+</ul>)]
 
 But this:
 
@@ -11637,8 +11339,7 @@ But this:
 
 [code(*   Bird
 
-*   Magic
-)]
+*   Magic)]
 
 will turn into:
 
@@ -11647,8 +11348,7 @@ will turn into:
 [code(<ul>
 <li><p>Bird</p></li>
 <li><p>Magic</p></li>
-</ul>
-)]
+</ul>)]
 
 List items may consist of multiple paragraphs. Each subsequent
 paragraph in a list item must be intended by either 4 spaces
@@ -11664,8 +11364,7 @@ or one tab:
     vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
     sit amet velit.
 
-2.  Suspendisse id sem consectetuer libero luctus adipiscing.
-)]
+2.  Suspendisse id sem consectetuer libero luctus adipiscing.)]
 
 It looks nice if you indent every line of the subsequent
 paragraphs, but here again, Markdown will allow you to be
@@ -11679,8 +11378,7 @@ lazy:
 only required to indent the first line. Lorem ipsum dolor
 sit amet, consectetuer adipiscing elit.
 
-*   Another item in the same list.
-)]
+*   Another item in the same list.)]
 
 To put a blockquote within a list item, the blockquote's \\\\texttt{>}
 delimiters need to be indented:
@@ -11690,8 +11388,7 @@ delimiters need to be indented:
 [code(*   A list item with a blockquote:
 
     > This is a blockquote
-    > inside a list item.
-)]
+    > inside a list item.)]
 
 To put a code block within a list item, the code block needs
 to be indented \\\\textit{twice} -- 8 spaces or two tabs:
@@ -11700,24 +11397,21 @@ to be indented \\\\textit{twice} -- 8 spaces or two tabs:
 
 [code(*   A list item with a code block:
 
-        <code goes here>
-)]
+        <code goes here>)]
 
 It's worth noting that it's possible to trigger an ordered list by
 accident, by writing something like this:
 
 
 
-[code(1986. What a great season.
-)]
+[code(1986. What a great season.)]
 
 In other words, a \\\\textit{number-period-space} sequence at the beginning of a
 line. To avoid this, you can backslash-escape the period:
 
 
 
-[code(1986\\\\. What a great season.
-)]
+[code(1986\\\\. What a great season.)]
 
 <h3 id=\\"precode\\">Code Blocks</h3>
 
@@ -11735,8 +11429,7 @@ block by at least 4 spaces or 1 tab. For example, given this input:
 
 [code(This is a normal paragraph:
 
-    This is a code block.
-)]
+    This is a code block.)]
 
 Markdown will generate:
 
@@ -11745,8 +11438,7 @@ Markdown will generate:
 [code(<p>This is a normal paragraph:</p>
 
 <pre><code>This is a code block.
-</code></pre>
-)]
+</code></pre>)]
 
 One level of indentation -- 4 spaces or 1 tab -- is removed from each
 line of the code block. For example, this:
@@ -11757,8 +11449,7 @@ line of the code block. For example, this:
 
     tell application \\"Foo\\"
         beep
-    end tell
-)]
+    end tell)]
 
 will turn into:
 
@@ -11769,8 +11460,7 @@ will turn into:
 <pre><code>tell application \\"Foo\\"
     beep
 end tell
-</code></pre>
-)]
+</code></pre>)]
 
 A code block continues until it reaches a line that is not indented
 (or the end of the article).
@@ -11787,8 +11477,7 @@ ampersands and angle brackets. For example, this:
 
 [code(    <div class=\\"footer\\">
         &copy; 2004 Foo Corporation
-    </div>
-)]
+    </div>)]
 
 will turn into:
 
@@ -11797,8 +11486,7 @@ will turn into:
 [code(<pre><code>&lt;div class=\\"footer\\"&gt;
     &amp;copy; 2004 Foo Corporation
 &lt;/div&gt;
-</code></pre>
-)]
+</code></pre>)]
 
 Regular Markdown syntax is not processed within code blocks. E.g.,
 asterisks are just literal asterisks within a code block. This means
@@ -11825,8 +11513,7 @@ following lines will produce a horizontal rule:
 
 ---------------------------------------
 
-_ _ _
-)]
+_ _ _)]
 
 [thematicBreak(---)]
 
@@ -11851,8 +11538,7 @@ title for the link, surrounded in quotes. For example:
 
 [code(This is [an example](http://example.com/ \\"Title\\") inline link.
 
-[This link](http://example.net/) has no title attribute.
-)]
+[This link](http://example.net/) has no title attribute.)]
 
 Will produce:
 
@@ -11862,39 +11548,34 @@ Will produce:
 an example</a> inline link.</p>
 
 <p><a href=\\"http://example.net/\\">This link</a> has no
-title attribute.</p>
-)]
+title attribute.</p>)]
 
 If you're referring to a local resource on the same server, you can
 use relative paths:
 
 
 
-[code(See my [About](/about/) page for details.
-)]
+[code(See my [About](/about/) page for details.)]
 
 Reference-style links use a second set of square brackets, inside
 which you place a label of your choosing to identify the link:
 
 
 
-[code(This is [an example][id] reference-style link.
-)]
+[code(This is [an example][id] reference-style link.)]
 
 You can optionally use a space to separate the sets of brackets:
 
 
 
-[code(This is [an example] [id] reference-style link.
-)]
+[code(This is [an example] [id] reference-style link.)]
 
 Then, anywhere in the document, you define your link label like this,
 on a line by itself:
 
 
 
-[code([id]: http://example.com/  \\"Optional Title Here\\"
-)]
+[code([id]: http://example.com/  \\"Optional Title Here\\")]
 
 That is:
 
@@ -11908,8 +11589,7 @@ The link URL may, optionally, be surrounded by angle brackets:
 
 
 
-[code([id]: <http://example.com/>  \\"Optional Title Here\\"
-)]
+[code([id]: <http://example.com/>  \\"Optional Title Here\\")]
 
 You can put the title attribute on the next line and use extra spaces
 or tabs for padding, which tends to look better with longer URLs:
@@ -11917,8 +11597,7 @@ or tabs for padding, which tends to look better with longer URLs:
 
 
 [code([id]: http://example.com/longish/path/to/resource/here
-    \\"Optional Title Here\\"
-)]
+    \\"Optional Title Here\\")]
 
 Link definitions are only used for creating links during Markdown
 processing, and are stripped from your document in the HTML output.
@@ -11930,8 +11609,7 @@ Link definition names may constist of letters, numbers, spaces, and punctuation 
 
 
 [code([link text][a]
-[link text][A]
-)]
+[link text][A])]
 
 are equivalent.
 
@@ -11944,30 +11622,26 @@ Just use an empty set of square brackets -- e.g., to link the word
 
 
 
-[code([Google][]
-)]
+[code([Google][])]
 
 And then define the link:
 
 
 
-[code([Google]: http://google.com/
-)]
+[code([Google]: http://google.com/)]
 
 Because link names may contain spaces, this shortcut even works for
 multiple words in the link text:
 
 
 
-[code(Visit [Daring Fireball][] for more information.
-)]
+[code(Visit [Daring Fireball][] for more information.)]
 
 And then define the link:
 
 
 
-[code([Daring Fireball]: http://daringfireball.net/
-)]
+[code([Daring Fireball]: http://daringfireball.net/)]
 
 Link definitions can be placed anywhere in your Markdown document. I
 tend to put them immediately after each paragraph in which they're
@@ -11985,8 +11659,7 @@ Here's an example of reference links in action:
 
   [1]: http://google.com/        \\"Google\\"
   [2]: http://search.yahoo.com/  \\"Yahoo Search\\"
-  [3]: http://search.msn.com/    \\"MSN Search\\"
-)]
+  [3]: http://search.msn.com/    \\"MSN Search\\")]
 
 Using the implicit link name shortcut, you could instead write:
 
@@ -11997,8 +11670,7 @@ Using the implicit link name shortcut, you could instead write:
 
   [google]: http://google.com/        \\"Google\\"
   [yahoo]:  http://search.yahoo.com/  \\"Yahoo Search\\"
-  [msn]:    http://search.msn.com/    \\"MSN Search\\"
-)]
+  [msn]:    http://search.msn.com/    \\"MSN Search\\")]
 
 Both of the above examples will produce the following HTML output:
 
@@ -12007,8 +11679,7 @@ Both of the above examples will produce the following HTML output:
 [code(<p>I get 10 times more traffic from <a href=\\"http://google.com/\\"
 title=\\"Google\\">Google</a> than from
 <a href=\\"http://search.yahoo.com/\\" title=\\"Yahoo Search\\">Yahoo</a>
-or <a href=\\"http://search.msn.com/\\" title=\\"MSN Search\\">MSN</a>.</p>
-)]
+or <a href=\\"http://search.msn.com/\\" title=\\"MSN Search\\">MSN</a>.</p>)]
 
 For comparison, here is the same paragraph written using
 Markdown's inline link style:
@@ -12017,8 +11688,7 @@ Markdown's inline link style:
 
 [code(I get 10 times more traffic from [Google](http://google.com/ \\"Google\\")
 than from [Yahoo](http://search.yahoo.com/ \\"Yahoo Search\\") or
-[MSN](http://search.msn.com/ \\"MSN Search\\").
-)]
+[MSN](http://search.msn.com/ \\"MSN Search\\").)]
 
 The point of reference-style links is not that they're easier to
 write. The point is that with reference-style links, your document
@@ -12053,8 +11723,7 @@ _single underscores_
 
 **double asterisks**
 
-__double underscores__
-)]
+__double underscores__)]
 
 will produce:
 
@@ -12066,8 +11735,7 @@ will produce:
 
 <strong>double asterisks</strong>
 
-<strong>double underscores</strong>
-)]
+<strong>double underscores</strong>)]
 
 You can use whichever style you prefer; the lone restriction is that
 the same character must be used to open and close an emphasis span.
@@ -12078,8 +11746,7 @@ Emphasis can be used in the middle of a word:
 
 
 
-[code(un*fucking*believable
-)]
+[code(un*fucking*believable)]
 
 But if you surround an \\\\texttt{*} or \\\\texttt{\\\\_} with spaces, it'll be treated as a
 literal asterisk or underscore.
@@ -12092,8 +11759,7 @@ escape it:
 
 
 
-[code(\\\\*this text is surrounded by literal asterisks\\\\*
-)]
+[code(\\\\*this text is surrounded by literal asterisks\\\\*)]
 
 <h3 id=\\"code\\">Code</h3>
 
@@ -12103,30 +11769,26 @@ normal paragraph. For example:
 
 
 
-[code(Use the \`printf()\` function.
-)]
+[code(Use the \`printf()\` function.)]
 
 will produce:
 
 
 
-[code(<p>Use the <code>printf()</code> function.</p>
-)]
+[code(<p>Use the <code>printf()</code> function.</p>)]
 
 To include a literal backtick character within a code span, you can use
 multiple backticks as the opening and closing delimiters:
 
 
 
-[code(\`\`There is a literal backtick (\`) here.\`\`
-)]
+[code(\`\`There is a literal backtick (\`) here.\`\`)]
 
 which will produce this:
 
 
 
-[code(<p><code>There is a literal backtick (\`) here.</code></p>
-)]
+[code(<p><code>There is a literal backtick (\`) here.</code></p>)]
 
 The backtick delimiters surrounding a code span may include spaces --
 one after the opening, one before the closing. This allows you to place
@@ -12136,8 +11798,7 @@ literal backtick characters at the beginning or end of a code span:
 
 [code(A single backtick in a code span: \`\` \` \`\`
 
-A backtick-delimited string in a code span: \`\` \`foo\` \`\`
-)]
+A backtick-delimited string in a code span: \`\` \`foo\` \`\`)]
 
 will produce:
 
@@ -12145,8 +11806,7 @@ will produce:
 
 [code(<p>A single backtick in a code span: <code>\`</code></p>
 
-<p>A backtick-delimited string in a code span: <code>\`foo\`</code></p>
-)]
+<p>A backtick-delimited string in a code span: <code>\`foo\`</code></p>)]
 
 With a code span, ampersands and angle brackets are encoded as HTML
 entities automatically, which makes it easy to include example HTML
@@ -12154,30 +11814,26 @@ tags. Markdown will turn this:
 
 
 
-[code(Please don't use any \`<blink>\` tags.
-)]
+[code(Please don't use any \`<blink>\` tags.)]
 
 into:
 
 
 
-[code(<p>Please don't use any <code>&lt;blink&gt;</code> tags.</p>
-)]
+[code(<p>Please don't use any <code>&lt;blink&gt;</code> tags.</p>)]
 
 You can write this:
 
 
 
-[code(\`&#8212;\` is the decimal-encoded equivalent of \`&mdash;\`.
-)]
+[code(\`&#8212;\` is the decimal-encoded equivalent of \`&mdash;\`.)]
 
 to produce:
 
 
 
 [code(<p><code>&amp;#8212;</code> is the decimal-encoded
-equivalent of <code>&amp;mdash;</code>.</p>
-)]
+equivalent of <code>&amp;mdash;</code>.</p>)]
 
 <h3 id=\\"img\\">Images</h3>
 
@@ -12197,8 +11853,7 @@ Inline image syntax looks like this:
 
 [code(![Alt text](/path/to/img.jpg)
 
-![Alt text](/path/to/img.jpg \\"Optional title\\")
-)]
+![Alt text](/path/to/img.jpg \\"Optional title\\"))]
 
 That is:
 
@@ -12213,16 +11868,14 @@ Reference-style image syntax looks like this:
 
 
 
-[code(![Alt text][id]
-)]
+[code(![Alt text][id])]
 
 Where \\"id\\" is the name of a defined image reference. Image references
 are defined using syntax identical to link references:
 
 
 
-[code([id]: url/to/image  \\"Optional title attribute\\"
-)]
+[code([id]: url/to/image  \\"Optional title attribute\\")]
 
 As of this writing, Markdown has no syntax for specifying the
 dimensions of an image; if this is important to you, you can simply
@@ -12240,15 +11893,13 @@ Markdown supports a shortcut style for creating \\"automatic\\" links for URLs a
 
 
 
-[code(<http://example.com/>
-)]
+[code(<http://example.com/>)]
 
 Markdown will turn this into:
 
 
 
-[code(<a href=\\"http://example.com/\\">http://example.com/</a>
-)]
+[code(<a href=\\"http://example.com/\\">http://example.com/</a>)]
 
 Automatic links for email addresses work similarly, except that
 Markdown will also perform a bit of randomized decimal and hex
@@ -12257,8 +11908,7 @@ spambots. For example, Markdown will turn this:
 
 
 
-[code(<address@example.com>
-)]
+[code(<address@example.com>)]
 
 into something like this:
 
@@ -12267,8 +11917,7 @@ into something like this:
 [code(<a href=\\"&#x6D;&#x61;i&#x6C;&#x74;&#x6F;:&#x61;&#x64;&#x64;&#x72;&#x65;
 &#115;&#115;&#64;&#101;&#120;&#x61;&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;
 &#109;\\">&#x61;&#x64;&#x64;&#x72;&#x65;&#115;&#115;&#64;&#101;&#120;&#x61;
-&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;&#109;</a>
-)]
+&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;&#109;</a>)]
 
 which will render in a browser as a clickable link to \\"address@example.com\\".
 
@@ -12291,8 +11940,7 @@ before the asterisks, like this:
 
 
 
-[code(\\\\*literal asterisks\\\\*
-)]
+[code(\\\\*literal asterisks\\\\*)]
 
 Markdown provides backslash escapes for the following characters:
 
@@ -12306,11 +11954,10 @@ _   underscore
 []  square brackets
 ()  parentheses
 #   hash mark
-+   plus sign
--   minus sign (hyphen)
++	plus sign
+-	minus sign (hyphen)
 .   dot
-!   exclamation mark
-)]"
+!   exclamation mark)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros mixed-indentation 1`] = `
@@ -12604,8 +12251,7 @@ Multiple paragraphs:
 
 
 [code(Item 2. graf two. The quick brown fox jumped over the lazy dog's
-back.
-)]
+back.)]
 
 2)	Item 2.
 
@@ -12631,8 +12277,7 @@ This is a paragraph with some asterisks
 
 
 
-[code(***
-)]
+[code(***)]
 
 This is a paragraph followed by a horizontal rule
 
@@ -12646,8 +12291,7 @@ This is a paragraph
 
 
 
-[code(and this is code
-)]
+[code(and this is code)]
 
 This is a paragraph
 
@@ -12661,8 +12305,7 @@ This is a paragraph with some asterisks in a code block
 
 
 
-[code(***
-)]
+[code(***)]
 
 This is a paragraph followed by a horizontal rule
 
@@ -12955,8 +12598,7 @@ Cell 5 & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-[code(Test code
-)]
+[code(Test code)]
 
 \\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
@@ -13164,26 +12806,23 @@ Code:
 
 
 
-[code(this code block is indented by one tab
-)]
+[code(this code block is indented by one tab)]
 
 And:
 
 
 
-[code(    this code block is indented by two tabs
-)]
+[code(	this code block is indented by two tabs)]
 
 And:
 
 
 
-[code(+   this is an example list item
-    indented with tabs
+[code(+	this is an example list item
+	indented with tabs
 
 +   this is an example list item
-    indented with spaces
-)]"
+    indented with spaces)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros tabs-and-spaces 1`] = `
@@ -13195,26 +12834,23 @@ Code:
 
 
 
-[code(this code block is indented by one tab
-)]
+[code(this code block is indented by one tab)]
 
 And:
 
 
 
-[code(    this code block is indented by two tabs
-)]
+[code(	this code block is indented by two tabs)]
 
 And:
 
 
 
-[code(+   this is an example list item
-    indented with tabs
+[code(+	this is an example list item
+	indented with tabs
 
 +   this is an example list item
-    indented with spaces
-)]"
+    indented with spaces)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros task-list 1`] = `
@@ -13256,32 +12892,23 @@ heading1(Single tab with content)
 
 heading1(Multiple spaces with content)
 
-[unorderedList([listItem([code(Hello;
-)])][listItem([code(World;
-)])])]
+[unorderedList([listItem([code(Hello;)])][listItem([code(World;)])])]
 
 [orderedList([listItem(Foo.)][listItem(Bar.)])]
 
 heading1(Multiple tabs with content)
 
-[unorderedList([listItem([code(Hello;
-)])][listItem([code(World;
-)])])]
+[unorderedList([listItem([code(Hello;)])][listItem([code(World;)])])]
 
-[orderedList([listItem([code(Foo.
-)])][listItem([code(Bar.
-)])])]
+[orderedList([listItem([code(Foo.)])][listItem([code(Bar.)])])]
 
 heading1(Mixed tabs and spaces)
 
-[unorderedList([listItem([code(    Hello;
-)])])]
+[unorderedList([listItem([code(    Hello;)])])]
 
-[orderedList([listItem([code(World;
-)])])]
+[orderedList([listItem([code(World;)])])]
 
-[unorderedList([listItem([code(    Hello;
-)])][listItem(World.)])]
+[unorderedList([listItem([code(	Hello;)])][listItem(World.)])]
 
 [orderedList([listItem(Bar.)])]
 
@@ -13466,8 +13093,7 @@ hello world
 
 
 
-[code(how are you
-)]
+[code(how are you)]
 
 hello world
 
@@ -13625,7 +13251,6 @@ Auto-links should not occur here: \\\\texttt{<http://example.com/>}
 
 \\\\begin{CodeBlock}{text}
 or here: <http://example.com/>
-
 \\\\end{CodeBlock}
 
 "
@@ -13918,7 +13543,6 @@ Bang: \\\\!
 Plus: \\\\+
 
 Minus: \\\\-
-
 \\\\end{CodeBlock}
 
 
@@ -13931,7 +13555,6 @@ Minus: \\\\-
 Pipe: \\\\|
 
 Tilde: \\\\~
-
 \\\\end{CodeBlock}
 
 
@@ -13971,7 +13594,6 @@ Caret: \\\\^
 
 New line: \\\\
 only works in paragraphs.
-
 \\\\end{CodeBlock}
 
 
@@ -14116,8 +13738,7 @@ Caret: \\\\texttt{\\\\textbackslash{}\\\\textasciicircum{}}
 
 
 
-New line: \\\\texttt{\\\\textbackslash{}
-} only works in paragraphs.
+New line: \\\\texttt{\\\\textbackslash{} } only works in paragraphs.
 
 
 
@@ -14187,7 +13808,6 @@ between them.
 
 \\\\begin{CodeBlock}{text}
 1.   Second sublist.
-
 \\\\end{CodeBlock}
 
 
@@ -14204,7 +13824,6 @@ And for lists followed by indented code blocks:
 
 \\\\begin{CodeBlock}{text}
 And this is code();
-
 \\\\end{CodeBlock}
 
 "
@@ -14224,7 +13843,6 @@ exports[`toLaTeX: remark specs blockquote-lazy-code: blockquote-lazy-code 1`] = 
 \\\\begin{CodeBlock}{text}
 foo
 bar
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}
 
@@ -14235,7 +13853,6 @@ exports[`toLaTeX: remark specs blockquote-lazy-fence: blockquote-lazy-fence 1`] 
 "\\\\begin{Quotation}
 \\\\begin{CodeBlock}{text}
 aNormalCodeBlockInABlockqoute();
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}
 
@@ -14248,7 +13865,6 @@ A paragraph.
 \\\\begin{Quotation}
 \\\\begin{CodeBlock}{text}
 thisIsAlsoSomeCodeInABlockquote();
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}
 
@@ -14261,7 +13877,6 @@ A paragraph.
 \\\\begin{Quotation}
 \\\\begin{CodeBlock}{text}
 aNonTerminatedCodeBlockInABlockquote();
-
 \\\\end{CodeBlock}
 
 aNewCodeBlockFollowingTheBlockQuote();
@@ -14282,7 +13897,6 @@ Something in a blockquote.
 
 \\\\begin{CodeBlock}{text}
 aNewCodeBlock();
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}
 
@@ -14358,7 +13972,6 @@ Example:
 sub status {
     print \\"working\\";
 }
-
 \\\\end{CodeBlock}
 
 Or:
@@ -14367,7 +13980,6 @@ Or:
 sub status {
     return \\"working\\";
 }
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}
 
@@ -14430,7 +14042,6 @@ exports[`toLaTeX: remark specs code-block: code-block 1`] = `
 
 \\\\begin{CodeBlock}{javascript}
 alert('Hello World!');
-
 \\\\end{CodeBlock}
 
 "
@@ -14447,7 +14058,6 @@ the code is exdented by up to that amount of spaces.
     This is a code block...
         
     ...which is not exdented.
-
 \\\\end{CodeBlock}
 
 
@@ -14460,7 +14070,6 @@ But...
   This one...
       
   ...is.
-
 \\\\end{CodeBlock}
 
 
@@ -14473,7 +14082,6 @@ And...
 So is this...
       
   ...one.
-
 \\\\end{CodeBlock}
 
 "
@@ -14493,7 +14101,6 @@ Note that this bug does not occur on indented code-blocks.
 \`\`\`bar
 baz
 \`\`\`
-
 \\\\end{CodeBlock}
 
 
@@ -14506,7 +14113,6 @@ Even with a different fence marker:
 ~~~bar
 baz
 ~~~
-
 \\\\end{CodeBlock}
 
 
@@ -14519,7 +14125,6 @@ And reversed:
 ~~~bar
 baz
 ~~~
-
 \\\\end{CodeBlock}
 
 
@@ -14528,7 +14133,6 @@ baz
 \`\`\`bar
 baz
 \`\`\`
-
 \\\\end{CodeBlock}
 
 "
@@ -14545,7 +14149,6 @@ Regular text.
 
 \\\\begin{CodeBlock}{text}
 code block indented by spaces
-
 \\\\end{CodeBlock}
 
 
@@ -14557,7 +14160,6 @@ Regular text.
 \\\\begin{CodeBlock}{text}
 the lines in this block  
 all contain trailing spaces  
-
 \\\\end{CodeBlock}
 
 
@@ -14568,7 +14170,6 @@ Regular Text.
 
 \\\\begin{CodeBlock}{text}
 code block on the last line
-
 \\\\end{CodeBlock}
 
 "
@@ -14835,7 +14436,6 @@ Entities even work in the language flag of fenced code blocks:
 
 \\\\begin{CodeBlock}{some—language}
 alert('Hello');
-
 \\\\end{CodeBlock}
 
 
@@ -14855,7 +14455,6 @@ code blocks:
 
 \\\\begin{CodeBlock}{text}
 C&Ouml;DE block.
-
 \\\\end{CodeBlock}
 
 "
@@ -14877,7 +14476,6 @@ Entities even work in the language flag of fenced code blocks:
 \\\\begin{Quotation}
 \\\\begin{CodeBlock}{some©language}
 alert('Hello');
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}
 
@@ -14955,7 +14553,6 @@ code blocks:
 \\\\begin{Quotation}
 \\\\begin{CodeBlock}{text}
 C&OumlDE block.
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}
 
@@ -14972,28 +14569,24 @@ exports[`toLaTeX: remark specs fenced-code: fenced-code 1`] = `
 "\\\\begin{CodeBlock}{js}
 var a = 'hello';
 console.log(a + ' world');
-
 \\\\end{CodeBlock}
 
 
 
 \\\\begin{CodeBlock}{bash}
 echo \\"hello, \${WORLD}\\"
-
 \\\\end{CodeBlock}
 
 
 
 \\\\begin{CodeBlock}{longfence}
 Q: What do you call a tall person who sells stolen goods?
-
 \\\\end{CodeBlock}
 
 
 
 \\\\begin{CodeBlock}{ManyTildes}
 A longfence!
-
 \\\\end{CodeBlock}
 
 "
@@ -15045,7 +14638,6 @@ exports[`toLaTeX: remark specs fenced-code-trailing-characters: fenced-code-trai
 "\\\\begin{CodeBlock}{js}
 foo();
 \`\`\`bash
-
 \\\\end{CodeBlock}
 
 "
@@ -15054,7 +14646,6 @@ foo();
 exports[`toLaTeX: remark specs fenced-code-trailing-characters-2: fenced-code-trailing-characters-2 1`] = `
 "\\\\begin{CodeBlock}{text}
 \`\`\` aaa
-
 \\\\end{CodeBlock}
 
 "
@@ -15063,14 +14654,12 @@ exports[`toLaTeX: remark specs fenced-code-trailing-characters-2: fenced-code-tr
 exports[`toLaTeX: remark specs fenced-code-white-space-after-flag: fenced-code-white-space-after-flag 1`] = `
 "\\\\begin{CodeBlock}{js}
 foo();
-
 \\\\end{CodeBlock}
 
 
 
 \\\\begin{CodeBlock}{bash}
 echo \\"hello, \${WORLD}\\"
-
 \\\\end{CodeBlock}
 
 "
@@ -15417,7 +15006,6 @@ exports[`toLaTeX: remark specs horizontal-rules: horizontal-rules 1`] = `
 
 \\\\begin{CodeBlock}{text}
 ---
-
 \\\\end{CodeBlock}
 
 
@@ -15440,7 +15028,6 @@ exports[`toLaTeX: remark specs horizontal-rules: horizontal-rules 1`] = `
 
 \\\\begin{CodeBlock}{text}
 - - -
-
 \\\\end{CodeBlock}
 
 
@@ -15467,7 +15054,6 @@ Asterisks:
 
 \\\\begin{CodeBlock}{text}
 ***
-
 \\\\end{CodeBlock}
 
 
@@ -15490,7 +15076,6 @@ Asterisks:
 
 \\\\begin{CodeBlock}{text}
 * * *
-
 \\\\end{CodeBlock}
 
 
@@ -15517,7 +15102,6 @@ Underscores:
 
 \\\\begin{CodeBlock}{text}
 ___
-
 \\\\end{CodeBlock}
 
 
@@ -15540,7 +15124,6 @@ ___
 
 \\\\begin{CodeBlock}{text}
 _ _ _
-
 \\\\end{CodeBlock}
 
 "
@@ -15814,9 +15397,8 @@ This should be a code block, though:
 
 \\\\begin{CodeBlock}{text}
 <div>
-    foo
+	foo
 </div>
-
 \\\\end{CodeBlock}
 
 
@@ -15827,7 +15409,6 @@ As should this:
 
 \\\\begin{CodeBlock}{text}
 <div>foo</div>
-
 \\\\end{CodeBlock}
 
 
@@ -15865,7 +15446,6 @@ Code block:
 
 \\\\begin{CodeBlock}{text}
 <!-- Comment -->
-
 \\\\end{CodeBlock}
 
 
@@ -15882,7 +15462,6 @@ Code:
 
 \\\\begin{CodeBlock}{text}
 <hr>
-
 \\\\end{CodeBlock}
 
 
@@ -16285,7 +15864,6 @@ Indented [four] times.
 
 \\\\begin{CodeBlock}{text}
 [four]: /url
-
 \\\\end{CodeBlock}
 
 
@@ -17171,7 +16749,6 @@ exports[`toLaTeX: remark specs list-and-code: list-and-code 1`] = `
 
 \\\\begin{CodeBlock}{text}
 This is code
-
 \\\\end{CodeBlock}
 
 "
@@ -17194,7 +16771,6 @@ exports[`toLaTeX: remark specs list-continuation: list-continuation 1`] = `
 
 \\\\begin{CodeBlock}{js}
 code();
-
 \\\\end{CodeBlock}
 
 
@@ -17242,7 +16818,6 @@ World 4a.
 World 4b.
 \\\\item \\\\begin{CodeBlock}{text}
 Hello 5a
-
 \\\\end{CodeBlock}
 
 World 5a.
@@ -17250,7 +16825,6 @@ World 5a.
 Hello 5b
 
 World 5b.
-
 \\\\end{CodeBlock}
 \\\\end{itemize}
 "
@@ -17391,7 +16965,6 @@ exports[`toLaTeX: remark specs lists-with-code-and-rules: lists-with-code-and-ru
 \\\\begin{CodeBlock}{text}
 line 1
 line 2
-
 \\\\end{CodeBlock}
 \\\\item foo:
 
@@ -17400,7 +16973,6 @@ line 2
 
 \\\\begin{CodeBlock}{erb}
 some code here
-
 \\\\end{CodeBlock}
 \\\\item foo \\\\texttt{bar} bar:
 
@@ -17411,7 +16983,6 @@ bar
 ---
 foo
 bar
-
 \\\\end{CodeBlock}
 \\\\item foo \\\\texttt{bar} bar:
 
@@ -17421,7 +16992,6 @@ foo
 foo
 ---
 bar
-
 \\\\end{CodeBlock}
 \\\\item foo \\\\texttt{bar} bar:
 
@@ -17429,7 +16999,6 @@ bar
 foo
 ---
 bar
-
 \\\\end{CodeBlock}
 \\\\item foo
 \\\\end{enumerate}
@@ -17597,7 +17166,6 @@ And an image with an empty alt attribute \\\\includegraphics{src}.
 \\\\begin{CodeBlock}{text}
 Code goes here.
 Lots of it...
-
 \\\\end{CodeBlock}
 
 "
@@ -17692,7 +17260,6 @@ dog's back.
 > This is the second paragraph in the blockquote.
 >
 > ## This is an H2 in a blockquote
-
 \\\\end{CodeBlock}
 
 
@@ -17722,7 +17289,6 @@ dog's back.</p>
     
     <h2>This is an H2 in a blockquote</h2>
 </blockquote>
-
 \\\\end{CodeBlock}
 
 
@@ -17744,7 +17310,6 @@ Some of these words _are emphasized also_.
 
 Use two asterisks for **strong emphasis**.
 Or, if you prefer, __use two underscores instead__.
-
 \\\\end{CodeBlock}
 
 
@@ -17759,7 +17324,6 @@ Some of these words <em>are emphasized also</em>.</p>
 
 <p>Use two asterisks for <strong>strong emphasis</strong>.
 Or, if you prefer, <strong>use two underscores instead</strong>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -17777,7 +17341,6 @@ interchangable; this:
 *   Candy.
 *   Gum.
 *   Booze.
-
 \\\\end{CodeBlock}
 
 
@@ -17790,7 +17353,6 @@ this:
 +   Candy.
 +   Gum.
 +   Booze.
-
 \\\\end{CodeBlock}
 
 
@@ -17803,7 +17365,6 @@ and this:
 -   Candy.
 -   Gum.
 -   Booze.
-
 \\\\end{CodeBlock}
 
 
@@ -17818,7 +17379,6 @@ all produce the same output:
 <li>Gum.</li>
 <li>Booze.</li>
 </ul>
-
 \\\\end{CodeBlock}
 
 
@@ -17832,7 +17392,6 @@ list markers:
 1.  Red
 2.  Green
 3.  Blue
-
 \\\\end{CodeBlock}
 
 
@@ -17847,7 +17406,6 @@ Output:
 <li>Green</li>
 <li>Blue</li>
 </ol>
-
 \\\\end{CodeBlock}
 
 
@@ -17864,7 +17422,6 @@ the paragraphs by 4 spaces or 1 tab:
     With multiple paragraphs.
 
 *   Another item in the list.
-
 \\\\end{CodeBlock}
 
 
@@ -17879,7 +17436,6 @@ Output:
 <p>With multiple paragraphs.</p></li>
 <li><p>Another item in the list.</p></li>
 </ul>
-
 \\\\end{CodeBlock}
 
 
@@ -17900,7 +17456,6 @@ For example:
 
 \\\\begin{CodeBlock}{text}
 This is an [example link](http://example.com/).
-
 \\\\end{CodeBlock}
 
 
@@ -17912,7 +17467,6 @@ Output:
 \\\\begin{CodeBlock}{text}
 <p>This is an <a href=\\"http://example.com/\\">
 example link</a>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -17923,7 +17477,6 @@ Optionally, you may include a title attribute in the parentheses:
 
 \\\\begin{CodeBlock}{text}
 This is an [example link](http://example.com/ \\"With a Title\\").
-
 \\\\end{CodeBlock}
 
 
@@ -17935,7 +17488,6 @@ Output:
 \\\\begin{CodeBlock}{text}
 <p>This is an <a href=\\"http://example.com/\\" title=\\"With a Title\\">
 example link</a>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -17952,7 +17504,6 @@ I get 10 times more traffic from [Google][1] than from
 [1]: http://google.com/        \\"Google\\"
 [2]: http://search.yahoo.com/  \\"Yahoo Search\\"
 [3]: http://search.msn.com/    \\"MSN Search\\"
-
 \\\\end{CodeBlock}
 
 
@@ -17966,7 +17517,6 @@ Output:
 title=\\"Google\\">Google</a> than from <a href=\\"http://search.yahoo.com/\\"
 title=\\"Yahoo Search\\">Yahoo</a> or <a href=\\"http://search.msn.com/\\"
 title=\\"MSN Search\\">MSN</a>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -17981,7 +17531,6 @@ I start my morning with a cup of coffee and
 [The New York Times][NY Times].
 
 [ny times]: http://www.nytimes.com/
-
 \\\\end{CodeBlock}
 
 
@@ -17993,7 +17542,6 @@ Output:
 \\\\begin{CodeBlock}{text}
 <p>I start my morning with a cup of coffee and
 <a href=\\"http://www.nytimes.com/\\">The New York Times</a>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -18011,7 +17559,6 @@ Inline (titles are optional):
 
 \\\\begin{CodeBlock}{text}
 ![alt text](/path/to/img.jpg \\"Title\\")
-
 \\\\end{CodeBlock}
 
 
@@ -18024,7 +17571,6 @@ Reference-style:
 ![alt text][id]
 
 [id]: /path/to/img.jpg \\"Title\\"
-
 \\\\end{CodeBlock}
 
 
@@ -18035,7 +17581,6 @@ Both of the above examples produce the same output:
 
 \\\\begin{CodeBlock}{text}
 <img src=\\"/path/to/img.jpg\\" alt=\\"alt text\\" title=\\"Title\\" />
-
 \\\\end{CodeBlock}
 
 
@@ -18055,7 +17600,6 @@ I strongly recommend against using any \`<blink>\` tags.
 
 I wish SmartyPants used named entities like \`&mdash;\`
 instead of decimal-encoded entites like \`&#8212;\`.
-
 \\\\end{CodeBlock}
 
 
@@ -18071,7 +17615,6 @@ Output:
 <p>I wish SmartyPants used named entities like
 <code>&amp;mdash;</code> instead of decimal-encoded
 entites like <code>&amp;#8212;</code>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -18093,7 +17636,6 @@ you've got to put paragraph tags in your blockquotes:
     <blockquote>
         <p>For example.</p>
     </blockquote>
-
 \\\\end{CodeBlock}
 
 
@@ -18110,7 +17652,6 @@ you've got to put paragraph tags in your blockquotes:</p>
     &lt;p&gt;For example.&lt;/p&gt;
 &lt;/blockquote&gt;
 </code></pre>
-
 \\\\end{CodeBlock}
 
 "
@@ -18260,7 +17801,6 @@ This is a regular paragraph.
 </table>
 
 This is another regular paragraph.
-
 \\\\end{CodeBlock}
 
 
@@ -18302,7 +17842,6 @@ escape ampersands within URLs. Thus, if you want to link to:
 
 \\\\begin{CodeBlock}{text}
 http://images.google.com/images?num=30&q=larry+bird
-
 \\\\end{CodeBlock}
 
 
@@ -18313,7 +17852,6 @@ you need to encode the URL as:
 
 \\\\begin{CodeBlock}{text}
 http://images.google.com/images?num=30&amp;q=larry+bird
-
 \\\\end{CodeBlock}
 
 
@@ -18337,7 +17875,6 @@ So, if you want to include a copyright symbol in your article, you can write:
 
 \\\\begin{CodeBlock}{text}
 &copy;
-
 \\\\end{CodeBlock}
 
 
@@ -18348,7 +17885,6 @@ and Markdown will leave it alone. But if you write:
 
 \\\\begin{CodeBlock}{text}
 AT&T
-
 \\\\end{CodeBlock}
 
 
@@ -18359,7 +17895,6 @@ Markdown will translate it to:
 
 \\\\begin{CodeBlock}{text}
 AT&amp;T
-
 \\\\end{CodeBlock}
 
 
@@ -18372,7 +17907,6 @@ such. But if you write:
 
 \\\\begin{CodeBlock}{text}
 4 < 5
-
 \\\\end{CodeBlock}
 
 
@@ -18383,7 +17917,6 @@ Markdown will translate it to:
 
 \\\\begin{CodeBlock}{text}
 4 &lt; 5
-
 \\\\end{CodeBlock}
 
 
@@ -18452,7 +17985,6 @@ This is an H1
 
 This is an H2
 -------------
-
 \\\\end{CodeBlock}
 
 
@@ -18472,7 +18004,6 @@ corresponding to header levels 1-6. For example:
 ## This is an H2
 
 ###### This is an H6
-
 \\\\end{CodeBlock}
 
 
@@ -18491,7 +18022,6 @@ determines the header level.) :
 ## This is an H2 ##
 
 ### This is an H3 ######
-
 \\\\end{CodeBlock}
 
 
@@ -18512,7 +18042,6 @@ wrap the text and put a \\\\texttt{>} before every line:
 > 
 > Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
 > id sem consectetuer libero luctus adipiscing.
-
 \\\\end{CodeBlock}
 
 
@@ -18529,7 +18058,6 @@ Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 
 > Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
 id sem consectetuer libero luctus adipiscing.
-
 \\\\end{CodeBlock}
 
 
@@ -18545,7 +18073,6 @@ adding additional levels of \\\\texttt{>}:
 > > This is nested blockquote.
 >
 > Back to the first level.
-
 \\\\end{CodeBlock}
 
 
@@ -18564,7 +18091,6 @@ and code blocks:
 > Here's some example code:
 > 
 >     return shell_exec(\\"echo $input | $markdown_script\\");
-
 \\\\end{CodeBlock}
 
 
@@ -18590,7 +18116,6 @@ Unordered lists use asterisks, pluses, and hyphens -- interchangably
 *   Red
 *   Green
 *   Blue
-
 \\\\end{CodeBlock}
 
 
@@ -18603,7 +18128,6 @@ is equivalent to:
 +   Red
 +   Green
 +   Blue
-
 \\\\end{CodeBlock}
 
 
@@ -18616,7 +18140,6 @@ and:
 -   Red
 -   Green
 -   Blue
-
 \\\\end{CodeBlock}
 
 
@@ -18629,7 +18152,6 @@ Ordered lists use numbers followed by periods:
 1.  Bird
 2.  McHale
 3.  Parish
-
 \\\\end{CodeBlock}
 
 
@@ -18646,7 +18168,6 @@ Markdown produces from the above list is:
 <li>McHale</li>
 <li>Parish</li>
 </ol>
-
 \\\\end{CodeBlock}
 
 
@@ -18659,7 +18180,6 @@ If you instead wrote the list in Markdown like this:
 1.  Bird
 1.  McHale
 1.  Parish
-
 \\\\end{CodeBlock}
 
 
@@ -18672,7 +18192,6 @@ or even:
 3. Bird
 1. McHale
 8. Parish
-
 \\\\end{CodeBlock}
 
 
@@ -18706,7 +18225,6 @@ To make lists look nice, you can wrap items with hanging indents:
     viverra nec, fringilla in, laoreet vitae, risus.
 *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
     Suspendisse id sem consectetuer libero luctus adipiscing.
-
 \\\\end{CodeBlock}
 
 
@@ -18721,7 +18239,6 @@ Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
 viverra nec, fringilla in, laoreet vitae, risus.
 *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
 Suspendisse id sem consectetuer libero luctus adipiscing.
-
 \\\\end{CodeBlock}
 
 
@@ -18734,7 +18251,6 @@ items in \\\\texttt{<p>} tags in the HTML output. For example, this input:
 \\\\begin{CodeBlock}{text}
 *   Bird
 *   Magic
-
 \\\\end{CodeBlock}
 
 
@@ -18748,7 +18264,6 @@ will turn into:
 <li>Bird</li>
 <li>Magic</li>
 </ul>
-
 \\\\end{CodeBlock}
 
 
@@ -18761,7 +18276,6 @@ But this:
 *   Bird
 
 *   Magic
-
 \\\\end{CodeBlock}
 
 
@@ -18775,7 +18289,6 @@ will turn into:
 <li><p>Bird</p></li>
 <li><p>Magic</p></li>
 </ul>
-
 \\\\end{CodeBlock}
 
 
@@ -18796,7 +18309,6 @@ or one tab:
     sit amet velit.
 
 2.  Suspendisse id sem consectetuer libero luctus adipiscing.
-
 \\\\end{CodeBlock}
 
 
@@ -18815,7 +18327,6 @@ only required to indent the first line. Lorem ipsum dolor
 sit amet, consectetuer adipiscing elit.
 
 *   Another item in the same list.
-
 \\\\end{CodeBlock}
 
 
@@ -18830,7 +18341,6 @@ delimiters need to be indented:
 
     > This is a blockquote
     > inside a list item.
-
 \\\\end{CodeBlock}
 
 
@@ -18844,7 +18354,6 @@ to be indented \\\\textit{twice} -- 8 spaces or two tabs:
 *   A list item with a code block:
 
         <code goes here>
-
 \\\\end{CodeBlock}
 
 
@@ -18856,7 +18365,6 @@ accident, by writing something like this:
 
 \\\\begin{CodeBlock}{text}
 1986. What a great season.
-
 \\\\end{CodeBlock}
 
 
@@ -18868,7 +18376,6 @@ line. To avoid this, you can backslash-escape the period:
 
 \\\\begin{CodeBlock}{text}
 1986\\\\. What a great season.
-
 \\\\end{CodeBlock}
 
 
@@ -18891,7 +18398,6 @@ block by at least 4 spaces or 1 tab. For example, given this input:
 This is a normal paragraph:
 
     This is a code block.
-
 \\\\end{CodeBlock}
 
 
@@ -18905,7 +18411,6 @@ Markdown will generate:
 
 <pre><code>This is a code block.
 </code></pre>
-
 \\\\end{CodeBlock}
 
 
@@ -18921,7 +18426,6 @@ Here is an example of AppleScript:
     tell application \\"Foo\\"
         beep
     end tell
-
 \\\\end{CodeBlock}
 
 
@@ -18937,7 +18441,6 @@ will turn into:
     beep
 end tell
 </code></pre>
-
 \\\\end{CodeBlock}
 
 
@@ -18959,7 +18462,6 @@ ampersands and angle brackets. For example, this:
     <div class=\\"footer\\">
         &copy; 2004 Foo Corporation
     </div>
-
 \\\\end{CodeBlock}
 
 
@@ -18973,7 +18475,6 @@ will turn into:
     &amp;copy; 2004 Foo Corporation
 &lt;/div&gt;
 </code></pre>
-
 \\\\end{CodeBlock}
 
 
@@ -19005,7 +18506,6 @@ following lines will produce a horizontal rule:
 ---------------------------------------
 
 _ _ _
-
 \\\\end{CodeBlock}
 
 
@@ -19037,7 +18537,6 @@ title for the link, surrounded in quotes. For example:
 This is [an example](http://example.com/ \\"Title\\") inline link.
 
 [This link](http://example.net/) has no title attribute.
-
 \\\\end{CodeBlock}
 
 
@@ -19052,7 +18551,6 @@ an example</a> inline link.</p>
 
 <p><a href=\\"http://example.net/\\">This link</a> has no
 title attribute.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -19064,7 +18562,6 @@ use relative paths:
 
 \\\\begin{CodeBlock}{text}
 See my [About](/about/) page for details.
-
 \\\\end{CodeBlock}
 
 
@@ -19076,7 +18573,6 @@ which you place a label of your choosing to identify the link:
 
 \\\\begin{CodeBlock}{text}
 This is [an example][id] reference-style link.
-
 \\\\end{CodeBlock}
 
 
@@ -19087,7 +18583,6 @@ You can optionally use a space to separate the sets of brackets:
 
 \\\\begin{CodeBlock}{text}
 This is [an example] [id] reference-style link.
-
 \\\\end{CodeBlock}
 
 
@@ -19099,7 +18594,6 @@ on a line by itself:
 
 \\\\begin{CodeBlock}{text}
 [id]: http://example.com/  \\"Optional Title Here\\"
-
 \\\\end{CodeBlock}
 
 
@@ -19125,7 +18619,6 @@ The link URL may, optionally, be surrounded by angle brackets:
 
 \\\\begin{CodeBlock}{text}
 [id]: <http://example.com/>  \\"Optional Title Here\\"
-
 \\\\end{CodeBlock}
 
 
@@ -19138,7 +18631,6 @@ or tabs for padding, which tends to look better with longer URLs:
 \\\\begin{CodeBlock}{text}
 [id]: http://example.com/longish/path/to/resource/here
     \\"Optional Title Here\\"
-
 \\\\end{CodeBlock}
 
 
@@ -19155,7 +18647,6 @@ Link definition names may constist of letters, numbers, spaces, and punctuation 
 \\\\begin{CodeBlock}{text}
 [link text][a]
 [link text][A]
-
 \\\\end{CodeBlock}
 
 
@@ -19173,7 +18664,6 @@ Just use an empty set of square brackets -- e.g., to link the word
 
 \\\\begin{CodeBlock}{text}
 [Google][]
-
 \\\\end{CodeBlock}
 
 
@@ -19184,7 +18674,6 @@ And then define the link:
 
 \\\\begin{CodeBlock}{text}
 [Google]: http://google.com/
-
 \\\\end{CodeBlock}
 
 
@@ -19196,7 +18685,6 @@ multiple words in the link text:
 
 \\\\begin{CodeBlock}{text}
 Visit [Daring Fireball][] for more information.
-
 \\\\end{CodeBlock}
 
 
@@ -19207,7 +18695,6 @@ And then define the link:
 
 \\\\begin{CodeBlock}{text}
 [Daring Fireball]: http://daringfireball.net/
-
 \\\\end{CodeBlock}
 
 
@@ -19230,7 +18717,6 @@ I get 10 times more traffic from [Google] [1] than from
   [1]: http://google.com/        \\"Google\\"
   [2]: http://search.yahoo.com/  \\"Yahoo Search\\"
   [3]: http://search.msn.com/    \\"MSN Search\\"
-
 \\\\end{CodeBlock}
 
 
@@ -19246,7 +18732,6 @@ I get 10 times more traffic from [Google][] than from
   [google]: http://google.com/        \\"Google\\"
   [yahoo]:  http://search.yahoo.com/  \\"Yahoo Search\\"
   [msn]:    http://search.msn.com/    \\"MSN Search\\"
-
 \\\\end{CodeBlock}
 
 
@@ -19260,7 +18745,6 @@ Both of the above examples will produce the following HTML output:
 title=\\"Google\\">Google</a> than from
 <a href=\\"http://search.yahoo.com/\\" title=\\"Yahoo Search\\">Yahoo</a>
 or <a href=\\"http://search.msn.com/\\" title=\\"MSN Search\\">MSN</a>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -19274,7 +18758,6 @@ Markdown's inline link style:
 I get 10 times more traffic from [Google](http://google.com/ \\"Google\\")
 than from [Yahoo](http://search.yahoo.com/ \\"Yahoo Search\\") or
 [MSN](http://search.msn.com/ \\"MSN Search\\").
-
 \\\\end{CodeBlock}
 
 
@@ -19314,7 +18797,6 @@ _single underscores_
 **double asterisks**
 
 __double underscores__
-
 \\\\end{CodeBlock}
 
 
@@ -19331,7 +18813,6 @@ will produce:
 <strong>double asterisks</strong>
 
 <strong>double underscores</strong>
-
 \\\\end{CodeBlock}
 
 
@@ -19347,7 +18828,6 @@ Emphasis can be used in the middle of a word:
 
 \\\\begin{CodeBlock}{text}
 un*fucking*believable
-
 \\\\end{CodeBlock}
 
 
@@ -19365,7 +18845,6 @@ escape it:
 
 \\\\begin{CodeBlock}{text}
 \\\\*this text is surrounded by literal asterisks\\\\*
-
 \\\\end{CodeBlock}
 
 
@@ -19380,7 +18859,6 @@ normal paragraph. For example:
 
 \\\\begin{CodeBlock}{text}
 Use the \`printf()\` function.
-
 \\\\end{CodeBlock}
 
 
@@ -19391,7 +18869,6 @@ will produce:
 
 \\\\begin{CodeBlock}{text}
 <p>Use the <code>printf()</code> function.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -19403,7 +18880,6 @@ multiple backticks as the opening and closing delimiters:
 
 \\\\begin{CodeBlock}{text}
 \`\`There is a literal backtick (\`) here.\`\`
-
 \\\\end{CodeBlock}
 
 
@@ -19414,7 +18890,6 @@ which will produce this:
 
 \\\\begin{CodeBlock}{text}
 <p><code>There is a literal backtick (\`) here.</code></p>
-
 \\\\end{CodeBlock}
 
 
@@ -19429,7 +18904,6 @@ literal backtick characters at the beginning or end of a code span:
 A single backtick in a code span: \`\` \` \`\`
 
 A backtick-delimited string in a code span: \`\` \`foo\` \`\`
-
 \\\\end{CodeBlock}
 
 
@@ -19442,7 +18916,6 @@ will produce:
 <p>A single backtick in a code span: <code>\`</code></p>
 
 <p>A backtick-delimited string in a code span: <code>\`foo\`</code></p>
-
 \\\\end{CodeBlock}
 
 
@@ -19455,7 +18928,6 @@ tags. Markdown will turn this:
 
 \\\\begin{CodeBlock}{text}
 Please don't use any \`<blink>\` tags.
-
 \\\\end{CodeBlock}
 
 
@@ -19466,7 +18938,6 @@ into:
 
 \\\\begin{CodeBlock}{text}
 <p>Please don't use any <code>&lt;blink&gt;</code> tags.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -19477,7 +18948,6 @@ You can write this:
 
 \\\\begin{CodeBlock}{text}
 \`&#8212;\` is the decimal-encoded equivalent of \`&mdash;\`.
-
 \\\\end{CodeBlock}
 
 
@@ -19489,7 +18959,6 @@ to produce:
 \\\\begin{CodeBlock}{text}
 <p><code>&amp;#8212;</code> is the decimal-encoded
 equivalent of <code>&amp;mdash;</code>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -19514,7 +18983,6 @@ Inline image syntax looks like this:
 ![Alt text](/path/to/img.jpg)
 
 ![Alt text](/path/to/img.jpg \\"Optional title\\")
-
 \\\\end{CodeBlock}
 
 
@@ -19539,7 +19007,6 @@ Reference-style image syntax looks like this:
 
 \\\\begin{CodeBlock}{text}
 ![Alt text][id]
-
 \\\\end{CodeBlock}
 
 
@@ -19551,7 +19018,6 @@ are defined using syntax identical to link references:
 
 \\\\begin{CodeBlock}{text}
 [id]: url/to/image  \\"Optional title attribute\\"
-
 \\\\end{CodeBlock}
 
 
@@ -19576,7 +19042,6 @@ Markdown supports a shortcut style for creating \\"automatic\\" links for URLs a
 
 \\\\begin{CodeBlock}{text}
 <http://example.com/>
-
 \\\\end{CodeBlock}
 
 
@@ -19587,7 +19052,6 @@ Markdown will turn this into:
 
 \\\\begin{CodeBlock}{text}
 <a href=\\"http://example.com/\\">http://example.com/</a>
-
 \\\\end{CodeBlock}
 
 
@@ -19601,7 +19065,6 @@ spambots. For example, Markdown will turn this:
 
 \\\\begin{CodeBlock}{text}
 <address@example.com>
-
 \\\\end{CodeBlock}
 
 
@@ -19615,7 +19078,6 @@ into something like this:
 &#115;&#115;&#64;&#101;&#120;&#x61;&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;
 &#109;\\">&#x61;&#x64;&#x64;&#x72;&#x65;&#115;&#115;&#64;&#101;&#120;&#x61;
 &#109;&#x70;&#x6C;e&#x2E;&#99;&#111;&#109;</a>
-
 \\\\end{CodeBlock}
 
 
@@ -19643,7 +19105,6 @@ before the asterisks, like this:
 
 \\\\begin{CodeBlock}{text}
 \\\\*literal asterisks\\\\*
-
 \\\\end{CodeBlock}
 
 
@@ -19661,11 +19122,10 @@ _   underscore
 []  square brackets
 ()  parentheses
 #   hash mark
-+   plus sign
--   minus sign (hyphen)
++	plus sign
+-	minus sign (hyphen)
 .   dot
 !   exclamation mark
-
 \\\\end{CodeBlock}
 
 "
@@ -20107,7 +19567,6 @@ Multiple paragraphs:
 \\\\begin{CodeBlock}{text}
 Item 2. graf two. The quick brown fox jumped over the lazy dog's
 back.
-
 \\\\end{CodeBlock}
 
 
@@ -20141,7 +19600,6 @@ This is a paragraph with some asterisks
 
 \\\\begin{CodeBlock}{text}
 ***
-
 \\\\end{CodeBlock}
 
 
@@ -20163,7 +19621,6 @@ This is a paragraph
 
 \\\\begin{CodeBlock}{text}
 and this is code
-
 \\\\end{CodeBlock}
 
 
@@ -20182,7 +19639,6 @@ This is a paragraph with some asterisks in a code block
 
 \\\\begin{CodeBlock}{text}
 ***
-
 \\\\end{CodeBlock}
 
 
@@ -20529,7 +19985,6 @@ Cell 5 & Cell 6 & Cell 7 & Cell 8 \\\\\\\\ \\\\hline
 
 \\\\begin{CodeBlock}{text}
 Test code
-
 \\\\end{CodeBlock}
 
 
@@ -20767,7 +20222,6 @@ Code:
 
 \\\\begin{CodeBlock}{text}
 this code block is indented by one tab
-
 \\\\end{CodeBlock}
 
 
@@ -20777,8 +20231,7 @@ And:
 
 
 \\\\begin{CodeBlock}{text}
-    this code block is indented by two tabs
-
+	this code block is indented by two tabs
 \\\\end{CodeBlock}
 
 
@@ -20788,12 +20241,11 @@ And:
 
 
 \\\\begin{CodeBlock}{text}
-+   this is an example list item
-    indented with tabs
++	this is an example list item
+	indented with tabs
 
 +   this is an example list item
     indented with spaces
-
 \\\\end{CodeBlock}
 
 "
@@ -20814,7 +20266,6 @@ Code:
 
 \\\\begin{CodeBlock}{text}
 this code block is indented by one tab
-
 \\\\end{CodeBlock}
 
 
@@ -20824,8 +20275,7 @@ And:
 
 
 \\\\begin{CodeBlock}{text}
-    this code block is indented by two tabs
-
+	this code block is indented by two tabs
 \\\\end{CodeBlock}
 
 
@@ -20835,12 +20285,11 @@ And:
 
 
 \\\\begin{CodeBlock}{text}
-+   this is an example list item
-    indented with tabs
++	this is an example list item
+	indented with tabs
 
 +   this is an example list item
     indented with spaces
-
 \\\\end{CodeBlock}
 
 "
@@ -20943,11 +20392,9 @@ exports[`toLaTeX: remark specs task-list: task-list 1`] = `
 \\\\begin{itemize}
 \\\\item \\\\begin{CodeBlock}{text}
 Hello;
-
 \\\\end{CodeBlock}
 \\\\item \\\\begin{CodeBlock}{text}
 World;
-
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
@@ -20964,11 +20411,9 @@ World;
 \\\\begin{itemize}
 \\\\item \\\\begin{CodeBlock}{text}
 Hello;
-
 \\\\end{CodeBlock}
 \\\\item \\\\begin{CodeBlock}{text}
 World;
-
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
@@ -20976,11 +20421,9 @@ World;
 \\\\begin{enumerate}
 \\\\item \\\\begin{CodeBlock}{text}
 Foo.
-
 \\\\end{CodeBlock}
 \\\\item \\\\begin{CodeBlock}{text}
 Bar.
-
 \\\\end{CodeBlock}
 \\\\end{enumerate}
 
@@ -20991,7 +20434,6 @@ Bar.
 \\\\begin{itemize}
 \\\\item \\\\begin{CodeBlock}{text}
     Hello;
-
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
@@ -20999,15 +20441,13 @@ Bar.
 \\\\begin{enumerate}
 \\\\item \\\\begin{CodeBlock}{text}
 World;
-
 \\\\end{CodeBlock}
 \\\\end{enumerate}
 
 
 \\\\begin{itemize}
 \\\\item \\\\begin{CodeBlock}{text}
-    Hello;
-
+	Hello;
 \\\\end{CodeBlock}
 \\\\item World.
 \\\\end{itemize}
@@ -21269,7 +20709,6 @@ hello world
 
 \\\\begin{CodeBlock}{text}
 how are you
-
 \\\\end{CodeBlock}
 
 

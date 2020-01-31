@@ -75,7 +75,6 @@ quote
 exports[`code 1`] = `
 "\\\\begin{CodeBlock}{python}
 print('bla')
-
 \\\\end{CodeBlock}
 
 
@@ -84,14 +83,12 @@ print('bla')
 print('bla')
 print('bla')
 print('bla')
-
 \\\\end{CodeBlock}
 
 
 
 \\\\begin{CodeBlock}{text}
 a code without lang
-
 \\\\end{CodeBlock}"
 `;
 
@@ -457,7 +454,6 @@ Code: Second
 
 \\\\begin{CodeBlock}{python}
 print('code without caption')
-
 \\\\end{CodeBlock}"
 `;
 
@@ -541,7 +537,6 @@ block & [] \\\\\\\\ \\\\hline
 \\\\footnote{\\\\label{appendix-1}}
 \\\\begin{CodeBlock}{python}
 print('bla')
-
 \\\\end{CodeBlock}"
 `;
 
@@ -654,7 +649,6 @@ Messenger bag locavore swag raclette brunch whatever, portland food truck. PBR\\
 exports[`regression: code block without language 1`] = `
 "\\\\begin{CodeBlock}{text}
 a
-
 \\\\end{CodeBlock}"
 `;
 

@@ -1,4 +1,5 @@
-const detab = require('detab')
+/* Expose. */
+module.exports = code
 
 const codeBlockParamsMapping = [
   null,

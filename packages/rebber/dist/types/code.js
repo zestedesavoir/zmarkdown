@@ -43,8 +43,7 @@ var defaultMacro = function defaultMacro(content, lang, attrs) {
 /* Stringify a code `node`. */
 
 
-module.exports = function code(ctx, node) {
-  var value = node.value ? detab("".concat(node.value, "\n")) : '';
+function code(ctx, node) {
   var macro = ctx.code || defaultMacro;
   return "".concat(macro(node.value, node.lang, node.meta, node));
 }
