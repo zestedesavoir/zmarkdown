@@ -376,3 +376,22 @@ describe('Sanitize HTML to prevent XSS', () => {
   })
 })
 
+describe('footnotes', () => {
+  it('orders footnotes as their definitions', async () => {
+    const input = dedent `
+      a[^first_footnote_reference]
+      b[^\`b\` second footnote reference but first footnote definition]
+      c[^last_footnote_reference]
+      [^last_footnote_reference]: \`c\` last footnote reference but second footnote definition
+      [^first_footnote_reference]: \`a\` first footnote reference but last footnote definition
+    `
+    const html = await renderString(input)
+    let [, olContent] = html.split('<ol>')
+    ;[olContent] = olContent.split('</ol>')
+    const footnotes = olContent
+      .split('\n')
+      .filter(Boolean)
+      .map((line) => parseInt(line.match(/"fn-(\d+)/)[1]))
+    expect(footnotes).toStrictEqual(Array.from(footnotes).sort())
+  })
+})

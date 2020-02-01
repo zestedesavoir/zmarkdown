@@ -18,7 +18,10 @@ function convert (node, index, parent) {
   const footnoteDefinition = {
     type: 'footnoteDefinition',
     identifier: id,
-    children: node.children,
+    children: [{
+      type: 'paragraph',
+      children: node.children,
+    }],
   }
   const footnoteReference = {
     type: 'footnoteReference',
