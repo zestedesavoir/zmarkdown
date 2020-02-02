@@ -351,7 +351,7 @@ exports[`fixture suite 1 compiles to Markdown: m1 1`] = `
 "## Test ping @**I AM CLEM**
 
 > > no metadata output @**I AM CLEM**
->
+
 > no metadata output @**I AM CLEM**
 
 ping @**I AM CLEM**
@@ -550,6 +550,24 @@ Object {
           },
           "type": "blockquote",
         },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 38,
+          "line": 3,
+          "offset": 66,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 3,
+          "offset": 29,
+        },
+      },
+      "type": "blockquote",
+    },
+    Object {
+      "children": Array [
         Object {
           "children": Array [
             Object {
@@ -639,14 +657,11 @@ Object {
           "line": 5,
           "offset": 103,
         },
-        "indent": Array [
-          1,
-          1,
-        ],
+        "indent": Array [],
         "start": Object {
           "column": 1,
-          "line": 3,
-          "offset": 29,
+          "line": 5,
+          "offset": 68,
         },
       },
       "type": "blockquote",

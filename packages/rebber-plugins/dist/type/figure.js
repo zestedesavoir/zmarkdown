@@ -5,6 +5,8 @@ var all = require('rebber/dist/all');
 
 var one = require('rebber/dist/one');
 
+var codeStringifier = require('rebber/dist/types/code').macro;
+
 var has = require('has');
 /* Expose. */
 
@@ -16,13 +18,9 @@ var defaultMacros = {
     return "\\begin{Quotation}[".concat(caption, "]\n").concat(innerText, "\n\\end{Quotation}\n\n");
   },
   code: function code(_code, caption, extra) {
-    var params = '';
-
-    if (extra.lines) {
-      params += "[][".concat(extra.lines, "]");
-    }
-
-    return "\\begin{CodeBlock}".concat(params, "{").concat(extra.language, "}\n") + "".concat(_code, "\n") + "\\end{CodeBlock}\n" + "\\captionof{listing}{".concat(caption, "}\n\n");
+    // Remove the two last line feed
+    var rebberCode = codeStringifier(_code, extra.language, extra.others).slice(0, -2);
+    return "".concat(rebberCode, "\n\\captionof{listing}{").concat(caption, "}\n\n");
   },
   image: function image(_, caption, extra) {
     return "\\begin{center}\n" + "\\includegraphics".concat(extra.width ? "[".concat(extra.width, "]") : '', "{").concat(extra.url, "}\n") + "\\captionof{figure}{".concat(caption, "}\n") + "\\end{center}\n";
@@ -31,20 +29,10 @@ var defaultMacros = {
 var makeExtra = {
   blockquote: function blockquote(node) {},
   code: function code(node) {
-    var language = node.lang || 'text';
-    var extra = {
-      language: language.split(' ')[0]
+    return {
+      language: node.lang || 'text',
+      others: node.meta
     };
-
-    if (language.includes(' ')) {
-      var tail = node.lang.split(' ')[1];
-
-      if (tail) {
-        extra.lines = tail.replace('hl_lines=', '').trim();
-      }
-    }
-
-    return extra;
   },
   image: function image(node) {
     return {

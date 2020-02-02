@@ -32,6 +32,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "space-separated-tokens": "^1.1.1"
+    "space-separated-tokens": "^1.1.5"
   }
 }

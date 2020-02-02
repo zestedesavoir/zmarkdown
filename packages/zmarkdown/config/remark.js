@@ -317,10 +317,6 @@ const remarkConfig = {
     inlineMathDouble: true,
   },
 
-  katex: {
-    inlineMathDoubleDisplay: true,
-  },
-
   iframes: {
     'www.dailymotion.com': {
       width: 480,

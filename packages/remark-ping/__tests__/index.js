@@ -94,6 +94,8 @@ const outputs = [
     <p>no metadata output <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping ping-link">\
     @<span class="ping-username">I AM CLEM</span></a></p>
     </blockquote>
+    </blockquote>
+    <blockquote>
     <p>no metadata output <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping ping-link">\
     @<span class="ping-username">I AM CLEM</span></a></p>
     </blockquote>

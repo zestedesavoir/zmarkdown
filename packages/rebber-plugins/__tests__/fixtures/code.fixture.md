@@ -8,6 +8,18 @@ print('bla')
 print('bla')
 ```
 
+```python linenostart=10
+print('bla')
+print('bla')
+print('bla')
+```
+
+```python hl_lines=1,2 linenostart=10
+print('bla')
+print('bla')
+print('bla')
+```
+
 ```css hl_lines="2"
 .tmp {
   font-weight: bold;

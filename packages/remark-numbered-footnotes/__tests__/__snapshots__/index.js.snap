@@ -5,18 +5,9 @@ exports[`{"gfm":false,"commonmark":false,"footnotes":true} footnote-split 1`] = 
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-1\\">
-second def
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-2\\">
-<p>first def</p>
-<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-3\\">
-<p>third def</p>
-<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-2\\">first def<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-1\\">second def<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-3\\">third def<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -35,26 +26,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-2\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-3\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-4\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-5\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-5\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -70,10 +58,7 @@ exports[`{"gfm":false,"commonmark":false,"footnotes":true} regression-1 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-1\\">
-<p>MyNote</p>
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-1\\">MyNote<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -88,26 +73,11 @@ exports[`{"gfm":false,"commonmark":false,"footnotes":true} regression-2 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-1\\">
-alpha bravo one
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-2\\">
-alpha bravo two
-<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-3\\">
-alpha bravo third
-<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-4\\">
-alpha bravo fourth
-<a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-5\\">
-<p>foo</p>
-<a href=\\"#fnref-5\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-1\\">alpha bravo one<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-2\\">alpha bravo two<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-3\\">alpha bravo third<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-5\\">foo<a href=\\"#fnref-5\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-4\\">alpha bravo fourth<a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -117,18 +87,9 @@ exports[`{"gfm":false,"commonmark":true,"footnotes":true} footnote-split 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-1\\">
-second def
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-2\\">
-<p>first def</p>
-<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-3\\">
-<p>third def</p>
-<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-2\\">first def<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-1\\">second def<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-3\\">third def<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -147,26 +108,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-2\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-3\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-4\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-5\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-5\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -182,10 +140,7 @@ exports[`{"gfm":false,"commonmark":true,"footnotes":true} regression-1 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-1\\">
-<p>MyNote</p>
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-1\\">MyNote<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -200,26 +155,11 @@ exports[`{"gfm":false,"commonmark":true,"footnotes":true} regression-2 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-1\\">
-alpha bravo one
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-2\\">
-alpha bravo two
-<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-3\\">
-alpha bravo third
-<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-4\\">
-alpha bravo fourth
-<a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-5\\">
-<p>foo</p>
-<a href=\\"#fnref-5\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-1\\">alpha bravo one<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-2\\">alpha bravo two<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-3\\">alpha bravo third<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-5\\">foo<a href=\\"#fnref-5\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-4\\">alpha bravo fourth<a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -229,18 +169,9 @@ exports[`{"gfm":true,"commonmark":false,"footnotes":true} footnote-split 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-1\\">
-second def
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-2\\">
-<p>first def</p>
-<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-3\\">
-<p>third def</p>
-<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-2\\">first def<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-1\\">second def<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-3\\">third def<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -259,26 +190,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-2\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-3\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-4\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-5\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-5\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -294,10 +222,7 @@ exports[`{"gfm":true,"commonmark":false,"footnotes":true} regression-1 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-1\\">
-<p>MyNote</p>
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-1\\">MyNote<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -312,26 +237,11 @@ exports[`{"gfm":true,"commonmark":false,"footnotes":true} regression-2 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-1\\">
-alpha bravo one
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-2\\">
-alpha bravo two
-<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-3\\">
-alpha bravo third
-<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-4\\">
-alpha bravo fourth
-<a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-5\\">
-<p>foo</p>
-<a href=\\"#fnref-5\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-1\\">alpha bravo one<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-2\\">alpha bravo two<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-3\\">alpha bravo third<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-5\\">foo<a href=\\"#fnref-5\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-4\\">alpha bravo fourth<a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -341,18 +251,9 @@ exports[`{"gfm":true,"commonmark":true,"footnotes":true} footnote-split 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-1\\">
-second def
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-2\\">
-<p>first def</p>
-<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-3\\">
-<p>third def</p>
-<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-2\\">first def<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-1\\">second def<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-3\\">third def<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -371,26 +272,23 @@ Nor is third...</p>
 <li>item 1</li>
 <li>item 2</li>
 </ul>
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-2\\">
 <blockquote>
 <p>This footnote is a blockquote.</p>
 </blockquote>
-<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a>
+<p><a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-3\\">
-<p>A simple oneliner.</p>
-<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a>
+<p>A simple oneliner.<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-4\\">
 <p>A footnote with multiple paragraphs.</p>
-<p>Paragraph two.</p>
-<a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a>
+<p>Paragraph two.<a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5\\">
-<p>First line of first paragraph.</p>
-<a href=\\"#fnref-5\\" class=\\"footnote-backref\\">↩</a>
+<p>First line of first paragraph.<a href=\\"#fnref-5\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -406,10 +304,7 @@ exports[`{"gfm":true,"commonmark":true,"footnotes":true} regression-1 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-1\\">
-<p>MyNote</p>
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-1\\">MyNote<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;
@@ -424,26 +319,11 @@ exports[`{"gfm":true,"commonmark":true,"footnotes":true} regression-2 1`] = `
 <div class=\\"footnotes\\">
 <hr>
 <ol>
-<li id=\\"fn-1\\">
-alpha bravo one
-<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-2\\">
-alpha bravo two
-<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-3\\">
-alpha bravo third
-<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-4\\">
-alpha bravo fourth
-<a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a>
-</li>
-<li id=\\"fn-5\\">
-<p>foo</p>
-<a href=\\"#fnref-5\\" class=\\"footnote-backref\\">↩</a>
-</li>
+<li id=\\"fn-1\\">alpha bravo one<a href=\\"#fnref-1\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-2\\">alpha bravo two<a href=\\"#fnref-2\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-3\\">alpha bravo third<a href=\\"#fnref-3\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-5\\">foo<a href=\\"#fnref-5\\" class=\\"footnote-backref\\">↩</a></li>
+<li id=\\"fn-4\\">alpha bravo fourth<a href=\\"#fnref-4\\" class=\\"footnote-backref\\">↩</a></li>
 </ol>
 </div>"
 `;

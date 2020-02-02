@@ -85,7 +85,6 @@ Auto-links should not occur here: \\\\CodeInline{<http://example.com/>}
 
 \\\\begin{CodeBlock}{text}
 or here: <http://example.com/>
-
 \\\\end{CodeBlock}"
 `;
 
@@ -194,7 +193,6 @@ Bang: \\\\!
 Plus: \\\\+
 
 Minus: \\\\-
-
 \\\\end{CodeBlock}
 
 
@@ -274,7 +272,6 @@ Example:
 sub status {
     print \\"working\\";
 }
-
 \\\\end{CodeBlock}
 
 Or:
@@ -283,7 +280,6 @@ Or:
 sub status {
     return \\"working\\";
 }
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}"
 `;
@@ -294,7 +290,6 @@ exports[`#basic properly renders codeblock-in-list.txt 1`] = `
 
 \\\\begin{CodeBlock}{text}
   Some *code*
-
 \\\\end{CodeBlock}
 \\\\item Another list item
 
@@ -302,7 +297,6 @@ exports[`#basic properly renders codeblock-in-list.txt 1`] = `
   More code
 
   And more code
-
 \\\\end{CodeBlock}
 \\\\end{itemize}"
 `;
@@ -348,7 +342,6 @@ exports[`#basic properly renders horizontal-rules.txt 1`] = `
 
 \\\\begin{CodeBlock}{text}
 ---
-
 \\\\end{CodeBlock}
 
 
@@ -371,7 +364,6 @@ exports[`#basic properly renders horizontal-rules.txt 1`] = `
 
 \\\\begin{CodeBlock}{text}
 - - -
-
 \\\\end{CodeBlock}
 
 
@@ -398,7 +390,6 @@ Asterisks:
 
 \\\\begin{CodeBlock}{text}
 ***
-
 \\\\end{CodeBlock}
 
 
@@ -421,7 +412,6 @@ Asterisks:
 
 \\\\begin{CodeBlock}{text}
 * * *
-
 \\\\end{CodeBlock}
 
 
@@ -448,7 +438,6 @@ Underscores:
 
 \\\\begin{CodeBlock}{text}
 ___
-
 \\\\end{CodeBlock}
 
 
@@ -471,7 +460,6 @@ ___
 
 \\\\begin{CodeBlock}{text}
 _ _ _
-
 \\\\end{CodeBlock}"
 `;
 
@@ -533,9 +521,8 @@ This should be a code block, though:
 
 \\\\begin{CodeBlock}{text}
 <div>
-    foo
+	foo
 </div>
-
 \\\\end{CodeBlock}
 
 
@@ -546,7 +533,6 @@ As should this:
 
 \\\\begin{CodeBlock}{text}
 <div>foo</div>
-
 \\\\end{CodeBlock}
 
 
@@ -584,7 +570,6 @@ Code block:
 
 \\\\begin{CodeBlock}{text}
 <!-- Comment -->
-
 \\\\end{CodeBlock}
 
 
@@ -601,7 +586,6 @@ Code:
 
 \\\\begin{CodeBlock}{text}
 <hr />
-
 \\\\end{CodeBlock}
 
 
@@ -694,7 +678,6 @@ Indented [four] times.
 
 \\\\begin{CodeBlock}{text}
 [four]: /url
-
 \\\\end{CodeBlock}
 
 
@@ -991,7 +974,6 @@ Code:
 
 \\\\begin{CodeBlock}{text}
 this code block is indented by one tab
-
 \\\\end{CodeBlock}
 
 
@@ -1001,8 +983,7 @@ And:
 
 
 \\\\begin{CodeBlock}{text}
-    this code block is indented by two tabs
-
+	this code block is indented by two tabs
 \\\\end{CodeBlock}
 
 
@@ -1012,12 +993,11 @@ And:
 
 
 \\\\begin{CodeBlock}{text}
-+   this is an example list item
-    indented with tabs
++	this is an example list item
+	indented with tabs
 
 +   this is an example list item
     indented with spaces
-
 \\\\end{CodeBlock}"
 `;
 
@@ -2055,7 +2035,6 @@ First Header | Second Header
 ------------ | -------------
 Content Cell | Content Cell
 Content Cell | Content Cell
-
 \\\\end{CodeBlock}"
 `;
 
@@ -2105,7 +2084,6 @@ exports[`#extensions properly renders fenced_code.txt 1`] = `
 +     return _wrap_diff(CONTEXT_DIFF_HEADER_PATTERN,
 +                       CONTEXT_DIFF_LINE_PATTERN,
 +\`\`\`
-
 \\\\end{CodeBlock}"
 `;
 
@@ -2145,7 +2123,6 @@ exports[`#extensions properly renders github_flavored.txt 1`] = `
 +     return _wrap_diff(CONTEXT_DIFF_HEADER_PATTERN,
 +                       CONTEXT_DIFF_LINE_PATTERN,
 +\`\`\`
-
 \\\\end{CodeBlock}
 
 
@@ -2161,7 +2138,6 @@ Test support for foo+bar lexer names.
   <li><a href=\\"{{ user.url }}\\">{{ user.username }}</a></li>
 {% endfor %}
 </ul>
-
 \\\\end{CodeBlock}
 
 
@@ -2180,7 +2156,6 @@ Test support for foo+bar lexer names in citation.
 {% endfor %}
 
 </ul>
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}
 
@@ -2199,7 +2174,6 @@ Test support for foo+bar lexer names with hightlight.
 {% endfor %}
 
 </ul>
-
 \\\\end{CodeBlock}
 
 
@@ -2208,7 +2182,7 @@ Test support for foo+bar lexer names with linenostart.
 
 
 
-\\\\begin{CodeBlock}{html+jinja}
+\\\\begin{CodeBlock}[][][10]{html+jinja}
 <title>{% block title %}{% endblock %}</title>
 <ul>
 
@@ -2217,7 +2191,6 @@ Test support for foo+bar lexer names with linenostart.
 {% endfor %}
 
 </ul>
-
 \\\\end{CodeBlock}
 
 
@@ -2226,14 +2199,13 @@ Test support for foo+bar lexer names with both.
 
 
 
-\\\\begin{CodeBlock}[][\\"2-4\\" linenostart=10]{html+jinja}
+\\\\begin{CodeBlock}[][2-4][10]{html+jinja}
 <title>{% block title %}{% endblock %}</title>
 <ul>
 {% for user in users %}
   <li><a href=\\"{{ user.url }}\\">{{ user.username }}</a></li>
 {% endfor %}
 </ul>
-
 \\\\end{CodeBlock}
 
 
@@ -2243,6 +2215,7 @@ Code without matching end
 
 
 \\\\begin{CodeBlock}{html}
+
 ~~~
 
 Code into paragraph
@@ -2317,7 +2290,6 @@ exports[`#misc properly renders arabic.txt 1`] = `
 
 \\\\begin{CodeBlock}{text}
 print \\"Hello World!\\"
-
 \\\\end{CodeBlock}
 
 
@@ -2339,7 +2311,6 @@ else:
   x = x-1
 
  print num
-
 \\\\end{CodeBlock}
 
 
@@ -2394,7 +2365,6 @@ six tabbed lines
 
 
 End of tabbed block
-
 \\\\end{CodeBlock}
 
 
@@ -2432,7 +2402,6 @@ six blank lines
 
 
 End of block
-
 \\\\end{CodeBlock}
 
 
@@ -2553,7 +2522,6 @@ blah
 
 \\\\begin{CodeBlock}{text}
 > this one had four so it's a code block.
-
 \\\\end{CodeBlock}
 
 
@@ -2562,7 +2530,11 @@ blah
 \\\\begin{Quotation}
 this nested blockquote has 0 on level one and 3 (one after the first \\\\CodeInline{>} + 2 more) on level 2.
 \\\\end{Quotation}
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 \\\\begin{Quotation}
 and this has 4 on level 2 - another code block.
 \\\\end{Quotation}
@@ -2615,7 +2587,6 @@ Some of these words <em>are emphasized also</em>.</p>
 
 <p>Use two asterisks for <strong>strong emphasis</strong>.
 Or, if you prefer, <strong>use two underscores instead</strong>.</p>
-
 \\\\end{CodeBlock}
 
 
@@ -2691,7 +2662,6 @@ xxx xxx xxx xxx xxx xxx xxx xxx"
 exports[`#misc properly renders code-first-line.txt 1`] = `
 "\\\\begin{CodeBlock}{text}
 print \\"This is a code block.\\"
-
 \\\\end{CodeBlock}"
 `;
 
@@ -2868,7 +2838,11 @@ exports[`#misc properly renders lazy-block-quote.txt 1`] = `
 "\\\\begin{Quotation}
 Line one of lazy block quote.
 Line two of lazy block quote.
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 Line one of paragraph two.
 Line two of paragraph two.
 \\\\end{Quotation}"
@@ -3053,9 +3027,17 @@ exports[`#misc properly renders multi-paragraph-block-quote.txt 1`] = `
 "\\\\begin{Quotation}
 This is line one of paragraph one
 This is line two of paragraph one
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 This is line one of paragraph two
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 This is another blockquote.
 \\\\end{Quotation}"
 `;
@@ -3235,7 +3217,6 @@ on three lines."
 exports[`#php properly renders Code block on second line.txt 1`] = `
 "\\\\begin{CodeBlock}{text}
 Codeblock on second line
-
 \\\\end{CodeBlock}"
 `;
 
@@ -3401,7 +3382,6 @@ Auto-links should not occur here: \\\\CodeInline{<http://example.com/>}
 
 \\\\begin{CodeBlock}{text}
 or here: <http://example.com/>
-
 \\\\end{CodeBlock}"
 `;
 
@@ -3413,7 +3393,6 @@ Example:
 sub status {
     print \\"working\\";
 }
-
 \\\\end{CodeBlock}
 
 Or:
@@ -3422,7 +3401,6 @@ Or:
 sub status {
     return \\"working\\";
 }
-
 \\\\end{CodeBlock}
 \\\\end{Quotation}"
 `;
@@ -3450,7 +3428,6 @@ exports[`#pl #Tests_2007 properly renders Horizontal rules.txt 1`] = `
 
 \\\\begin{CodeBlock}{text}
 ---
-
 \\\\end{CodeBlock}
 
 
@@ -3473,7 +3450,6 @@ exports[`#pl #Tests_2007 properly renders Horizontal rules.txt 1`] = `
 
 \\\\begin{CodeBlock}{text}
 - - -
-
 \\\\end{CodeBlock}
 
 
@@ -3500,7 +3476,6 @@ Asterisks:
 
 \\\\begin{CodeBlock}{text}
 ***
-
 \\\\end{CodeBlock}
 
 
@@ -3523,7 +3498,6 @@ Asterisks:
 
 \\\\begin{CodeBlock}{text}
 * * *
-
 \\\\end{CodeBlock}
 
 
@@ -3550,7 +3524,6 @@ Underscores:
 
 \\\\begin{CodeBlock}{text}
 ___
-
 \\\\end{CodeBlock}
 
 
@@ -3573,7 +3546,6 @@ ___
 
 \\\\begin{CodeBlock}{text}
 _ _ _
-
 \\\\end{CodeBlock}"
 `;
 
@@ -3864,7 +3836,6 @@ Code:
 
 \\\\begin{CodeBlock}{text}
 this code block is indented by one tab
-
 \\\\end{CodeBlock}
 
 
@@ -3874,8 +3845,7 @@ And:
 
 
 \\\\begin{CodeBlock}{text}
-    this code block is indented by two tabs
-
+	this code block is indented by two tabs
 \\\\end{CodeBlock}
 
 
@@ -3885,12 +3855,11 @@ And:
 
 
 \\\\begin{CodeBlock}{text}
-+   this is an example list item
-    indented with tabs
++	this is an example list item
+	indented with tabs
 
 +   this is an example list item
     indented with spaces
-
 \\\\end{CodeBlock}"
 `;
 
@@ -4018,7 +3987,6 @@ Balbla
 
 \\\\begin{CodeBlock}{text}
 Blabla<--COMMENTS hahaha COMMENTS-->Balbla
-
 \\\\end{CodeBlock}
 
 

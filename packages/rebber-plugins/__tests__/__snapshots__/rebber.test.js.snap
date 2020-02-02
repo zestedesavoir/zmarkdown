@@ -15,7 +15,11 @@ exports[`abbr with custom config 1`] = `
 exports[`blockquote 1`] = `
 "\\\\begin{Quotation}
 a quote
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 a
 multiline
 quote
@@ -47,7 +51,11 @@ quote
 exports[`blockquote 2`] = `
 "\\\\begin{Quotation}
 a quote
+\\\\end{Quotation}
 
+
+
+\\\\begin{Quotation}
 a
 multiline
 quote
@@ -79,7 +87,11 @@ quote
 exports[`blockquote with custom config 1`] = `
 "\\\\begin{Foo}
 a quote
+\\\\end{Foo}
 
+
+
+\\\\begin{Foo}
 a
 multiline
 quote
@@ -111,7 +123,6 @@ quote
 exports[`code 1`] = `
 "\\\\begin{CodeBlock}{python}
 print('bla')
-
 \\\\end{CodeBlock}
 
 
@@ -120,7 +131,22 @@ print('bla')
 print('bla')
 print('bla')
 print('bla')
+\\\\end{CodeBlock}
 
+
+
+\\\\begin{CodeBlock}[][][10]{python}
+print('bla')
+print('bla')
+print('bla')
+\\\\end{CodeBlock}
+
+
+
+\\\\begin{CodeBlock}[][1,2][10]{python}
+print('bla')
+print('bla')
+print('bla')
 \\\\end{CodeBlock}
 
 
@@ -129,7 +155,6 @@ print('bla')
 .tmp {
   font-weight: bold;
 }
-
 \\\\end{CodeBlock}
 
 
@@ -138,14 +163,12 @@ print('bla')
 .tmp {
   font-weight: bold;
 }
-
 \\\\end{CodeBlock}
 
 
 
 \\\\begin{CodeBlock}{text}
 a code without lang
-
 \\\\end{CodeBlock}"
 `;
 
@@ -440,7 +463,6 @@ elem & \\\\multicolumn{2}{|p{\\\\dimexpr(\\\\linewidth) * 2 / 5}|}{span middle} 
 \\\\footnote{\\\\label{appendix-1}}
 \\\\begin{CodeBlock}{python}
 print('bla')
-
 \\\\end{CodeBlock}"
 `;
 
@@ -751,7 +773,6 @@ Code: Second
 
 \\\\begin{CodeBlock}{python}
 print('code without caption')
-
 \\\\end{CodeBlock}"
 `;
 
@@ -953,7 +974,6 @@ b &  &  & c \\\\\\\\ \\\\hline
 \\\\footnote{\\\\label{appendix-1}}
 \\\\begin{CodeBlock}{python}
 print('bla')
-
 \\\\end{CodeBlock}"
 `;
 
@@ -994,7 +1014,6 @@ cell & \\\\texttt{code with line break} \\\\\\\\ \\\\hline
 \\\\begin{CodeBlock}{text}
 line 1
 line2
-
 \\\\end{CodeBlock}"
 `;
 
@@ -1092,7 +1111,6 @@ Messenger bag locavore swag raclette brunch whatever, portland food truck. PBR\\
 exports[`regression: code block without language 1`] = `
 "\\\\begin{CodeBlock}{text}
 a
-
 \\\\end{CodeBlock}
 
 "

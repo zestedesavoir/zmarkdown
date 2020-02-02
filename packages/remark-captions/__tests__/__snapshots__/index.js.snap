@@ -21,9 +21,10 @@ print('bla')
 exports[`captions should break lists 1`] = `
 "<figure><blockquote>
 <ul>
-<li>Bar
-Source: fc2</li>
+<li>Bar</li>
 </ul>
+</blockquote><figcaption>fc2</figcaption></figure>
+<figure><blockquote>
 <ul>
 <li>Baz
 * Baz</li>

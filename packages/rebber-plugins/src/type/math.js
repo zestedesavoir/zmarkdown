@@ -16,8 +16,8 @@ function math (ctx, node, index, parent) {
   let type = 'math'
   if (node.type === 'inlineMath') {
     try {
-      const classes = node.data.hProperties.className.split(' ')
-      type = classes.includes('inlineMathDouble') ? 'inlineMathDouble' : 'inlineMath'
+      const classes = node.data.hProperties.className
+      type = classes.includes('math-display') ? 'inlineMathDouble' : 'inlineMath'
     } catch (e) {
       console.error(e, 'This rebber math plugin is only compatible with remark-math.')
     }

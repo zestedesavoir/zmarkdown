@@ -59,7 +59,7 @@ Test support for foo+bar lexer names in citation.
 
 Test support for foo+bar lexer names with hightlight.
 
-```html+jinja hl_lines= "2-4"
+```html+jinja hl_lines="2-4"
 <title>{% block title %}{% endblock %}</title>
 <ul>
 
@@ -85,7 +85,7 @@ Test support for foo+bar lexer names with linenostart.
 
 Test support for foo+bar lexer names with both.
 
-```html+jinja hl_lines= "2-4" linenostart=10
+```html+jinja hl_lines="2-4" linenostart=10
 <title>{% block title %}{% endblock %}</title>
 <ul>
 {% for user in users %}

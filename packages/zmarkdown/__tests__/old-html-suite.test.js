@@ -881,8 +881,8 @@ describe('#zds', () => {
       return renderFile(config)(filepath).then((html) => {
         expect((html.match(/katex-mathml/g) || []).length).toBe(4)
         expect((html.match(/span class="katex-display"/g) || []).length).toBe(1)
-        expect((html.match(/inlineMath inlineMathDouble/g) || []).length).toBe(0)
-        expect((html.match(/div class="math"/g) || []).length).toBe(1)
+        expect((html.match(/inlineMath math-display/g) || []).length).toBe(0)
+        expect((html.match(/div class="math/g) || []).length).toBe(1)
       })
     })
 
@@ -891,8 +891,8 @@ describe('#zds', () => {
       return renderFile()(filepath).then((html) => {
         expect((html.match(/katex-mathml/g) || []).length).toBe(4)
         expect((html.match(/span class="katex-display"/g) || []).length).toBe(3)
-        expect((html.match(/inlineMath inlineMathDouble/g) || []).length).toBe(2)
-        expect((html.match(/div class="math"/g) || []).length).toBe(1)
+        expect((html.match(/math-inline math-display/g) || []).length).toBe(2)
+        expect((html.match(/div class="math/g) || []).length).toBe(1)
       })
     })
 
