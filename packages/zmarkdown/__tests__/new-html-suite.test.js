@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 const clone = require('clone')
 const dedent = require('dedent')
 
@@ -10,12 +9,11 @@ remarkConfig.ping.pingUsername = () => false
 
 const zmarkdown = require('../server')
 
-const renderString = (config = {remarkConfig, rebberConfig}) => {
+const renderVfile = (config = {remarkConfig, rebberConfig}) => {
   let configToUse = config
 
   const renderWithConfig = (input) =>
-    zmarkdown(configToUse).renderString(input).then((vfile) =>
-      vfile.toString().trim())
+    zmarkdown(configToUse).renderString(input)
 
   if (typeof config === 'string') {
     const input = config
@@ -25,9 +23,10 @@ const renderString = (config = {remarkConfig, rebberConfig}) => {
   return renderWithConfig
 }
 
-const renderFile = (config = {remarkConfig, rebberConfig}) =>
-  (input) =>
-    zmarkdown(config).renderFile(input).then((vfile) => vfile.toString())
+const renderString = (config = {remarkConfig, rebberConfig}) => {
+  return renderVfile(config).then((vfile) =>
+    vfile.toString().trim())
+}
 
 /* jest */
 const HtmlDiffer = require('html-differ').HtmlDiffer
@@ -69,7 +68,6 @@ describe('math', () => {
     expect(renderString(markdown)).resolves.not.toMatch('inlineMath')
   })
 
-
   it('must not parse a raw starting dollar', () => {
     const markdown = '`$`\\alpha$'
 
@@ -87,6 +85,14 @@ describe('math', () => {
 
     expect(renderString(markdown)).resolves.not.toMatch('<pre')
   })
+
+  it('properly loads extensions - mhchem', async () => {
+    const markdown = '$\\ce{H2O}$'
+    const result = await renderVfile(markdown)
+    const errorMsg = result.messages[0]
+
+    expect(errorMsg).toBeUndefined()
+  })
 })
 
 describe('pedantic', () => {
@@ -100,7 +106,6 @@ describe('pedantic', () => {
 const maxNesting = remarkConfig.maxNesting
 describe('depth checks', () => {
   it(`is fast enough with ${maxNesting} nested quotes`, () => {
-    const fs = require('fs')
     const base = ['foo', '\n']
     const input = Array.from({length: maxNesting}).reduce((acc, _, i) => {
       return acc + base.map((x, j) => ('>'.repeat(i) + ((i && !j && ' ') || '') + x)).join('\n')
@@ -117,7 +122,6 @@ describe('depth checks', () => {
   })
 
   it(`fails with > ${maxNesting} nested quotes`, () => {
-    const fs = require('fs')
     const base = ['foo', '\n']
     const input = Array.from({length: maxNesting + 1}).reduce((acc, _, i) => {
       return acc + base.map((x, j) => ('>'.repeat(i) + ((i && !j && ' ') || '') + x)).join('\n')

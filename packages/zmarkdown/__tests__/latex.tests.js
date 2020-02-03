@@ -193,3 +193,10 @@ test('regression: code block without language', () => {
 
   return expect(p).resolves.toMatchSnapshot()
 })
+
+test('properly loads extensions - mhchem', () => {
+  const markdown = '$\\ce{H2O}$'
+  const result = renderString()(markdown)
+
+  return expect(result).resolves.toContain(markdown)
+})
