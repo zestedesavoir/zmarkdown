@@ -1,4 +1,4 @@
-const fileType = require('file-type')
+const FileType = require('file-type')
 const fs = require('fs')
 const isSvg = require('is-svg')
 const path = require('path')
@@ -15,8 +15,13 @@ const isImage = (headers) => {
   return (headers['content-type'].substring(0, 6) === 'image/')
 }
 
-const getSize = (headers = {}) =>
-  parseInt(headers['content-length'], 10)
+const getSize = (headers = {}) => {
+  const size = parseInt(headers['content-length'], 10)
+  if (Number.isNaN(size)) {
+    return 0
+  }
+  return size
+}
 
 const mkdir = (path) => new Promise((resolve, reject) => {
   fs.mkdir(path, (err) => {
@@ -25,20 +30,24 @@ const mkdir = (path) => new Promise((resolve, reject) => {
   })
 })
 
-const checkFileType = (name, data) => {
+const checkFileType = async (name, data) => {
   if (!data.length) {
     throw new Error(`Empty file: ${name}`)
   }
 
-  const type = fileType(data) || {mime: ''}
-  if (!type.mime || type.mime === 'application/xml') {
-    if (!isSvg(data.toString())) {
-      throw new Error(`Could not detect ${name} mime type, not SVG either`)
-    }
-  } else if (type.mime.slice(0, 6) !== 'image/') {
-    throw new Error(
-      `Detected mime of local file '${name}' is not an image/ type`)
-  }
+  return FileType.fromBuffer(data)
+    .catch(() => {})
+    .then((type = {mime: ''}) => {
+      if (!type.mime || type.mime === 'application/xml') {
+        if (!isSvg(data.toString())) {
+          return Promise.reject(new Error(`Could not detect ${name} mime type, not SVG either`))
+        }
+      } else if (type.mime.slice(0, 6) !== 'image/') {
+        return Promise.reject(new Error(
+          `Detected mime of local file '${name}' is not an image/ type`))
+      }
+      return Promise.resolve()
+    })
 }
 
 // Creates a Transform stream which raises an error if the file type
@@ -65,24 +74,25 @@ const makeValidatorStream = (fileName, maxSize) => {
       }
 
       if (firstChunk) {
-        try {
-          checkFileType(fileName, chunk)
-        } catch (error) {
-          cb(error)
-          return
-        }
+        checkFileType(fileName, chunk)
+          .then(() => {
+            firstChunk = false
+            cb(null, chunk)
+          })
+          .catch((error) => {
+            cb(error)
+          })
+      } else {
+        cb(null, chunk)
+        return
       }
-
-      firstChunk = false
-
-      cb(null, chunk)
     },
   })
 }
 
 const checkAndCopy = async (from, to) => {
   const data = await promisify(fs.readFile)(from)
-  checkFileType(from, data)
+  await checkFileType(from, data)
   try {
     await promisify(fs.copyFile)(from, to)
   } catch (err) {
@@ -116,7 +126,7 @@ function plugin ({
       const options = Object.assign(
         {},
         parsedUrl,
-        {timeout: httpRequestTimeout}
+        {timeout: httpRequestTimeout},
       )
 
       const req = proto.get(options, res => {
@@ -134,7 +144,7 @@ function plugin ({
         } else if (maxFileSize && fileSize > maxFileSize) {
           error = new Error(
             `File at ${url} weighs ${headers['content-length']}, ` +
-            `max size is ${maxFileSize}`
+            `max size is ${maxFileSize}`,
           )
           error.replaceWithDefault = defaultOn && defaultOn.fileTooBig
         }
@@ -177,15 +187,15 @@ function plugin ({
         })
         .on('close', e => {
           resolve()
-        })
+        }),
     )
 
   const doDownloadTasks = async tasks => {
     await Promise.all(tasks.map(task =>
       initDownload(task.url).then(
         res => { task.res = res },
-        error => { task.error = error }
-      )
+        error => { task.error = error },
+      ),
     ))
 
     if (dirSizeLimit) {
@@ -290,8 +300,8 @@ function plugin ({
           Object.assign(
             {},
             taskGroup[0],
-            {nodes: taskGroup.map(t => t.node)}
-          )
+            {nodes: taskGroup.map(t => t.node)},
+          ),
         )
     }
 

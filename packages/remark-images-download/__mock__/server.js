@@ -1,9 +1,17 @@
 import path from 'path'
 import express from 'express'
+import fs from 'fs'
 
 const app = express()
 
-const pngHeader = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])
+let pngHeader
+const fd = fs.createReadStream(path.join(__dirname, 'files', 'ok.png'))
+fd.on('data', (data) => {
+  if (!pngHeader) {
+    pngHeader = data
+  }
+})
+
 const bloat = Buffer.alloc(10 * 1024)
 
 app.get('/stream-bomb', (req, res) => {
