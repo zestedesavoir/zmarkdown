@@ -105,7 +105,7 @@ describe('mock server tests', () => {
     return noDownloads(() =>
       render(file).then(vfile => {
         expect(vfile.data.imageDir).toBe(undefined)
-      })
+      }),
     )
   })
 
@@ -124,7 +124,7 @@ describe('mock server tests', () => {
         expect(firstMsg(vfile)).toBe(error)
         expect(vfile.contents).toBe(html)
         expect(vfile.data.imageDir).toBe(undefined)
-      })
+      }),
     )
   })
 

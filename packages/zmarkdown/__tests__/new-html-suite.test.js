@@ -124,7 +124,7 @@ describe('depth checks', () => {
     }, '')
 
     return expect(
-      renderString(input).catch((err) => Promise.reject(err.message))
+      renderString(input).catch((err) => Promise.reject(err.message)),
     ).rejects.toContain(`Markdown AST too complex: tree depth > ${maxNesting}`)
   })
 })

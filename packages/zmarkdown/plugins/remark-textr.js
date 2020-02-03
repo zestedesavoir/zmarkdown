@@ -9,7 +9,7 @@ function plugin ({plugins = [], options = {}} = {}) {
   return function transformer (tree) {
     fn = plugins.reduce(
       (processor, p) => processor.use(typeof p === 'string' ? require(p) : p),
-      textr(options)
+      textr(options),
     )
 
     visit(tree, 'text', visitor)

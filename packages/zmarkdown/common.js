@@ -57,7 +57,7 @@ const wrappers = {
       'iframe',
       ['div', 'div'],
       [['video-wrapper'], ['video-container']],
-      node => !jsFiddleAndInaFilter(node)
+      node => !jsFiddleAndInaFilter(node),
     ),
     createWrapper('iframe', 'div', ['iframe-wrapper'], jsFiddleAndInaFilter),
   ],
@@ -249,7 +249,7 @@ function getDepth (node) {
 
 module.exports = (
   opts = {remarkConfig},
-  processor = null
+  processor = null,
 ) => {
   if (!opts) {
     opts = {}

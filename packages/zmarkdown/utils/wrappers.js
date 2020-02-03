@@ -9,7 +9,7 @@ function createWrapper (tagToWrap, wrapInTags, classes, filter = allowAll) {
   if (!Array.isArray(classes)) classes = [classes]
   assert(
     wrapInTags.length === classes.length,
-    'You should provide the same number of wrapInTags and classes'
+    'You should provide the same number of wrapInTags and classes',
   )
 
   const visitor = (node, index, parent) => {

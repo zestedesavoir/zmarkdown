@@ -33,7 +33,7 @@ function rendererFactory (config, target) {
 
 module.exports = (
   opts = {remarkConfig, rebberConfig},
-  target = 'html'
+  target = 'html',
 ) => {
   if (!opts.remarkConfig || !Object.keys(remarkConfig).length) {
     opts.remarkConfig = clone(remarkConfig)
