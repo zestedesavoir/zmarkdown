@@ -32,12 +32,12 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "clone": "^2.1.1",
-    "file-type": "^8.1.0",
-    "is-svg": "^4.2.0",
+    "clone": "^2.1.2",
+    "file-type": "^14.0.0",
+    "is-svg": "^4.2.1",
     "read-chunk": "^3.2.0",
-    "rimraf": "^2.6.3",
-    "shortid": "^2.2.12",
-    "unist-util-visit": "^2.0.0"
+    "rimraf": "^3.0.1",
+    "shortid": "^2.2.15",
+    "unist-util-visit": "^2.0.1"
   }
 }

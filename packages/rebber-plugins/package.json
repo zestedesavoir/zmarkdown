@@ -31,7 +31,6 @@
   "license": "MIT",
   "dependencies": {
     "has": "^1.0.3",
-    "unist-util-inspect": "^5.0.0",
     "xtend": "^4.0.2"
   },
   "devDependencies": {
