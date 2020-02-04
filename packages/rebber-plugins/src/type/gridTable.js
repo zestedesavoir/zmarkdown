@@ -51,23 +51,24 @@ class GridTableStringifier {
     const overriddenCtx = clone(ctx)
     this.colIndex++
     overriddenCtx.tableCell = undefined
-    // we have to replace \n by \par only in text node, not in other
+    // we have to replace \n by \endgraf only in text node, not in other
     // see #352
-    overriddenCtx.overrides.text = (c, n, index, parent) => text(c, n, index, parent).replace(/\n/g, ' \\par ')
-    overriddenCtx.overrides.paragraph = (c, n) => `${paragraph(c, n).trim()} \\par  \\par `
+    overriddenCtx.overrides.text = (c, n, index, parent) => text(c, n, index, parent)
+      .replace(/\n/g, ' \\endgraf ')
+    overriddenCtx.overrides.paragraph = (c, n) => `${paragraph(c, n).trim()} \\endgraf \\endgraf `
     let baseText = tableCell(overriddenCtx, node).trim()
-    while (baseText.substring(baseText.length - '\\par'.length) === '\\par') {
-      baseText = baseText.substring(0, baseText.length - '\\par'.length).trim()
+    while (baseText.substring(baseText.length - '\\endgraf'.length) === '\\endgraf') {
+      baseText = baseText.substring(0, baseText.length - '\\endgraf'.length).trim()
     }
     if (node.data && node.data.hProperties.rowspan > 1) {
       this.currentSpan = node.data.hProperties.rowspan
       this.multiLineCellIndex = this.colIndex
-      baseText = `\\multirow{${node.data.hProperties.rowspan}}{*}{${baseText}}`
+      baseText = `\\multirow{${this.currentSpan}}{*}{\\parbox{\\linewidth}{${baseText}}}`
       this.colspan = node.data.hProperties.colspan > 1 ? node.data.hProperties.colspan : 1
     } else if (node.data && node.data.hProperties.colspan > 1) {
       const colspan = node.data.hProperties.colspan
-      const colDim = `p{\\dimexpr(\\linewidth) * ${colspan} / \\number-of-column}`
-      baseText = `\\multicolumn{${colspan}}{|${colDim}|}{${baseText}}`
+      const colDim = `m{\\dimexpr(\\linewidth) * ${colspan} / \\number-of-column}`
+      baseText = `\\multicolumn{${colspan}}{|${colDim}|}{\\parbox{\\linewidth}{${baseText}}}`
     }
 
     if (node.data && node.data.hProperties.colspan > 1) {
@@ -140,7 +141,7 @@ class GridTableStringifier {
   }
 
   gridTableHeaderParse () {
-    const headers = `|p{\\dimexpr(\\linewidth) / ${this.nbOfColumns}}`.repeat(this.nbOfColumns)
+    const headers = `|m{\\dimexpr(\\linewidth) / ${this.nbOfColumns}}`.repeat(this.nbOfColumns)
     return `${headers}|`
   }
 
@@ -153,7 +154,7 @@ function gridTable (ctx, node) {
   const overriddenCtx = clone(ctx)
   overriddenCtx.spreadCell = ''
   const stringifier = new GridTableStringifier()
-  overriddenCtx.break = () => ' \\par' // in gridtables '\\\\' won't work
+  overriddenCtx.break = () => ' \\endgraf' // in gridtables '\\\\' won't work
   overriddenCtx.tableCell = stringifier.gridTableCell.bind(stringifier)
   overriddenCtx.tableRow = stringifier.gridTableRow.bind(stringifier)
   overriddenCtx.headerParse = stringifier.gridTableHeaderParse.bind(stringifier)

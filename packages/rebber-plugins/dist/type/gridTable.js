@@ -79,32 +79,32 @@ function () {
     value: function gridTableCell(ctx, node) {
       var overriddenCtx = clone(ctx);
       this.colIndex++;
-      overriddenCtx.tableCell = undefined; // we have to replace \n by \par only in text node, not in other
+      overriddenCtx.tableCell = undefined; // we have to replace \n by \endgraf only in text node, not in other
       // see #352
 
       overriddenCtx.overrides.text = function (c, n, index, parent) {
-        return text(c, n, index, parent).replace(/\n/g, ' \\par ');
+        return text(c, n, index, parent).replace(/\n/g, ' \\endgraf ');
       };
 
       overriddenCtx.overrides.paragraph = function (c, n) {
-        return "".concat(paragraph(c, n).trim(), " \\par  \\par ");
+        return "".concat(paragraph(c, n).trim(), " \\endgraf \\endgraf ");
       };
 
       var baseText = tableCell(overriddenCtx, node).trim();
 
-      while (baseText.substring(baseText.length - '\\par'.length) === '\\par') {
-        baseText = baseText.substring(0, baseText.length - '\\par'.length).trim();
+      while (baseText.substring(baseText.length - '\\endgraf'.length) === '\\endgraf') {
+        baseText = baseText.substring(0, baseText.length - '\\endgraf'.length).trim();
       }
 
       if (node.data && node.data.hProperties.rowspan > 1) {
         this.currentSpan = node.data.hProperties.rowspan;
         this.multiLineCellIndex = this.colIndex;
-        baseText = "\\multirow{".concat(node.data.hProperties.rowspan, "}{*}{").concat(baseText, "}");
+        baseText = "\\multirow{".concat(this.currentSpan, "}{*}{\\parbox{\\linewidth}{").concat(baseText, "}}");
         this.colspan = node.data.hProperties.colspan > 1 ? node.data.hProperties.colspan : 1;
       } else if (node.data && node.data.hProperties.colspan > 1) {
         var colspan = node.data.hProperties.colspan;
-        var colDim = "p{\\dimexpr(\\linewidth) * ".concat(colspan, " / \\number-of-column}");
-        baseText = "\\multicolumn{".concat(colspan, "}{|").concat(colDim, "|}{").concat(baseText, "}");
+        var colDim = "m{\\dimexpr(\\linewidth) * ".concat(colspan, " / \\number-of-column}");
+        baseText = "\\multicolumn{".concat(colspan, "}{|").concat(colDim, "|}{\\parbox{\\linewidth}{").concat(baseText, "}}");
       }
 
       if (node.data && node.data.hProperties.colspan > 1) {
@@ -186,7 +186,7 @@ function () {
   }, {
     key: "gridTableHeaderParse",
     value: function gridTableHeaderParse() {
-      var headers = "|p{\\dimexpr(\\linewidth) / ".concat(this.nbOfColumns, "}").repeat(this.nbOfColumns);
+      var headers = "|m{\\dimexpr(\\linewidth) / ".concat(this.nbOfColumns, "}").repeat(this.nbOfColumns);
       return "".concat(headers, "|");
     }
   }, {
@@ -205,7 +205,7 @@ function gridTable(ctx, node) {
   var stringifier = new GridTableStringifier();
 
   overriddenCtx["break"] = function () {
-    return ' \\par';
+    return ' \\endgraf';
   }; // in gridtables '\\\\' won't work
 
 

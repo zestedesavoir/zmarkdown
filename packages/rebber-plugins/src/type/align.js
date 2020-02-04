@@ -6,8 +6,8 @@ module.exports = align
 
 const defaultMacros = {
   leftAligned: (innerText) => `\n\n${innerText}\n\n`,
-  centerAligned: (innerText) => `\n\\begin{center}\n${innerText}\n\\end{center}\n`,
-  rightAligned: (innerText) => `\n\\begin{flushright}\n${innerText}\n\\end{flushright}\n`,
+  centerAligned: (innerText) => `\n{\\centering ${innerText}}\n`,
+  rightAligned: (innerText) => `\n{\\raggedleft\n${innerText}}\n`,
   defaultType: (innerText, type) => `\n\\begin{${type}}\n${innerText}\n\\end{${type}}\n`,
 }
 
