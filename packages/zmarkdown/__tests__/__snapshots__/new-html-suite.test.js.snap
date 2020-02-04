@@ -36,8 +36,8 @@ exports[`pedantic mode disabled unordered lists markers 1`] = `
 </ul>"
 `;
 
-exports[`smileys translates >_< 1`] = `"<p>This is funny <img src=\\"/static/smileys/svg/pinch.svg\\" alt=\\">_<\\" class=\\"smiley\\"></p>"`;
+exports[`smileys translates >_< 1`] = `"<p>This is funny <img src=\\"/static/smileys/pinch.svg\\" alt=\\">_<\\" class=\\"smiley\\"></p>"`;
 
-exports[`smileys translates X/ 1`] = `"<p>This is funny <img src=\\"/static/smileys/svg/pinch.svg\\" alt=\\"X/\\" class=\\"smiley\\"></p>"`;
+exports[`smileys translates X/ 1`] = `"<p>This is funny <img src=\\"/static/smileys/pinch.svg\\" alt=\\"X/\\" class=\\"smiley\\"></p>"`;
 
-exports[`smileys translates cthulhu 1`] = `"<p><img src=\\"/static/smileys/svg/cthulhu.svg\\" alt=\\"^(;,;)^\\" class=\\"smiley\\"></p>"`;
+exports[`smileys translates cthulhu 1`] = `"<p><img src=\\"/static/smileys/cthulhu.svg\\" alt=\\"^(;,;)^\\" class=\\"smiley\\"></p>"`;
