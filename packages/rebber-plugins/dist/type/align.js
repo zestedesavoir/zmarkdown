@@ -11,10 +11,10 @@ var defaultMacros = {
     return "\n\n".concat(innerText, "\n\n");
   },
   centerAligned: function centerAligned(innerText) {
-    return "\n\\begin{center}\n".concat(innerText, "\n\\end{center}\n");
+    return "\n{\\centering ".concat(innerText, "}\n");
   },
   rightAligned: function rightAligned(innerText) {
-    return "\n\\begin{flushright}\n".concat(innerText, "\n\\end{flushright}\n");
+    return "\n{\\raggedleft\n".concat(innerText, "}\n");
   },
   defaultType: function defaultType(innerText, type) {
     return "\n\\begin{".concat(type, "}\n").concat(innerText, "\n\\end{").concat(type, "}\n");

@@ -3881,11 +3881,9 @@ exports[`#zds #extensions properly renders align.txt 1`] = `
 
 
 
-\\\\begin{center}
-A centered paragraph
+{\\\\centering A centered paragraph
 
-
-\\\\end{center}
+}
 
 
 a simple paragraph
@@ -3893,11 +3891,10 @@ a simple paragraph
 
 
 
-\\\\begin{flushright}
+{\\\\raggedleft
 A right aligned paragraph
 
-
-\\\\end{flushright}
+}
 
 
 an other simple paragraph
@@ -3909,11 +3906,9 @@ A simple paragraph
 
 
 
-\\\\begin{center}
-A centered paragraph
+{\\\\centering A centered paragraph
 
-
-\\\\end{center}
+}
 
 
 a simple paragraph
@@ -3921,11 +3916,10 @@ a simple paragraph
 
 
 
-\\\\begin{flushright}
+{\\\\raggedleft
 A right aligned paragraph
 
-
-\\\\end{flushright}
+}
 
 
 an other simple paragraph
@@ -3933,13 +3927,11 @@ an other simple paragraph
 
 
 
-\\\\begin{center}
-A centered paragraph.
+{\\\\centering A centered paragraph.
 
 Containing two paragraph
 
-
-\\\\end{center}
+}
 
 
 an other simple paragraph
@@ -3947,13 +3939,11 @@ an other simple paragraph
 
 
 
-\\\\begin{center}
-A right aligned paragraph.
+{\\\\centering A right aligned paragraph.
 
 Containing two paragraph
 
-
-\\\\end{center}
+}
 
 
 an other simple paragraph
@@ -3961,13 +3951,11 @@ an other simple paragraph
 
 
 
-\\\\begin{center}
-A centered paragraph.
+{\\\\centering A centered paragraph.
 
 An other centered paragraph.
 
-
-\\\\end{center}
+}
 
 
 a simple paragraph

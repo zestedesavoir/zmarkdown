@@ -781,27 +781,24 @@ exports[`mix-3 1`] = `
 
 
 
-\\\\begin{flushright}
+{\\\\raggedleft
 \\\\begin{itemize}
 \\\\item item
 \\\\item item
 \\\\end{itemize}
-
-\\\\end{flushright}
+}
 
 
 \\\\part{centered list}
 
 
 
-\\\\begin{center}
-\\\\begin{itemize}
+{\\\\centering \\\\begin{itemize}
 \\\\item item
 \\\\item item
 \\\\item item
 \\\\end{itemize}
-
-\\\\end{center}
+}
 
 
 \\\\part{left list}
