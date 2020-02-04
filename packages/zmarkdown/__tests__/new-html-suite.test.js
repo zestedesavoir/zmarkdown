@@ -89,9 +89,9 @@ describe('math', () => {
   it('properly loads extensions - mhchem', async () => {
     const markdown = '$\\ce{H2O}$'
     const result = await renderVfile(markdown)
-    const errorMsg = result.messages[0]
 
-    expect(errorMsg).toBeUndefined()
+    expect(result.messages).toEqual([])
+    expect(result.contents).toContain('<span class="mord mathrm">H</span>')
   })
 })
 
