@@ -98,7 +98,7 @@ class GridTableStringifier {
         })
       }
       this.colIndex = 0
-      let rowStr = tableRow(overriddenCtx, node)
+      let rowStr = tableRow(overriddenCtx, node, this.rowIndex - 1)
       if (lastMultiRowline.multilineCounter > 0) {
         rowStr = rowStr.replace(/\\hline/, lastMultiRowline.getCLine())
       }
@@ -106,7 +106,7 @@ class GridTableStringifier {
       return rowStr
     }
 
-    let rowText = tableRow(overriddenCtx, node)
+    let rowText = tableRow(overriddenCtx, node, this.rowIndex - 1)
     if (this.currentSpan !== 0) {
       this.lastMultiRowLine = new MultiRowLine(
         this.rowIndex,
