@@ -498,9 +498,8 @@ exports[`mix-4 1`] = `
 "\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 3}|m{\\\\dimexpr(\\\\linewidth) / 3}|m{\\\\dimexpr(\\\\linewidth) / 3}|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 Sub & Headings & \\\\abbr{ABBR}{abbreviation} \\\\\\\\ \\\\hline
-\\\\rowfont[c]{\\\\bfseries}
-\\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{cell \\\\endgraf spans \\\\endgraf rows}} & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{\\\\parbox{\\\\linewidth}{column spanning}} \\\\\\\\ \\\\cline{2-3}
 \\\\rowfont[l]{}
+\\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{cell \\\\endgraf spans \\\\endgraf rows}} & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{\\\\parbox{\\\\linewidth}{column spanning}} \\\\\\\\ \\\\cline{2-3}
  & normal & cell \\\\\\\\ \\\\hline
 multi \\\\endgraf line \\\\endgraf \\\\endgraf cells \\\\endgraf too & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{\\\\parbox{\\\\linewidth}{cells can be \\\\endgraf \\\\textit{formatted} \\\\endgraf \\\\textbf{paragraphs}}} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -513,7 +512,7 @@ multi \\\\endgraf line \\\\endgraf \\\\endgraf cells \\\\endgraf too & \\\\multi
 \\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 2}|m{\\\\dimexpr(\\\\linewidth) / 2}|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 title & image \\\\\\\\ \\\\hline
-\\\\rowfont[c]{\\\\bfseries}
+\\\\rowfont[l]{}
 space & \\\\image{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg}[space] \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
@@ -521,9 +520,8 @@ space & \\\\image{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg}[space] \
 \\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 2}|m{\\\\dimexpr(\\\\linewidth) / 2}|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 title & code \\\\\\\\ \\\\hline
-\\\\rowfont[c]{\\\\bfseries}
-inline & \\\\CodeInline{inline} br \\\\endgraf \\\\CodeInline{inline} \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
+inline & \\\\CodeInline{inline} br \\\\endgraf \\\\CodeInline{inline} \\\\\\\\ \\\\hline
 block & [] \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
