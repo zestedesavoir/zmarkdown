@@ -81,6 +81,31 @@ describe('HTML endpoint', () => {
     expect(languages).toEqual([])
   })
 
+  it('can disable tokenizers', async () => {
+    const response = await a.post(html, {
+      md: '# foo\nhello bar!',
+      opts: {disable_tokenizers: {block: ['atxHeading']}},
+    })
+
+    const [rendered] = response.data
+    expect(rendered).not.toContain('<h')
+  })
+
+  it('can disable tokenizers in inline mode', async () => {
+    const response = await a.post(html, {
+      md: '# foo\n*hello bar!*',
+      opts: {
+        inline: true,
+        disable_tokenizers: {inline: ['emphasis']},
+      },
+    })
+
+    const [rendered, {languages}] = response.data
+    expect(rendered).not.toContain('<h')
+    expect(rendered).not.toContain('<em')
+    expect(languages).toEqual([])
+  })
+
   it('extracts languages', async () => {
     const response = await a.post(html, {
       md: dedent`
