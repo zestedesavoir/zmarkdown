@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import {readdirSync as directory, readFileSync as file, lstatSync as stat} from 'fs'
 import {join} from 'path'
 import unified from 'unified'
@@ -30,6 +29,8 @@ const integrationConfig = {
   preprocessors: {
     tableCell: require('../src/preprocessors/codeVisitor'),
     iframe: require('../src/preprocessors/iframe'),
+    // eslint-disable-next-line max-len
+    spoilerFlatten: require('../src/preprocessors/spoilerFlatten')(['sCustomBlock', 'secretCustomBlock']),
   },
   overrides: {
     abbr: require('../src/type/abbr'),

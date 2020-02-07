@@ -1,9 +1,11 @@
+/* eslint-disable max-len */
 const remarkConfig = require('./remark')
 const escape = require('rebber/dist/escaper')
 
 const rebberConfig = {
   preprocessors: {
     tableCell: require('rebber-plugins/dist/preprocessors/codeVisitor'),
+    spoilerFlatten: require('rebber-plugins/dist/preprocessors/spoilerFlatten')(['sCustomBlock', 'secretCustomBlock']),
   },
   overrides: {
     abbr: require('rebber-plugins/dist/type/abbr'),
