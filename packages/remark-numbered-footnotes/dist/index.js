@@ -9,8 +9,8 @@ function plugin() {
 function transformer(tree) {
   var footnotes = {};
   visit(tree, 'footnote', convert);
-  visit(tree, 'footnoteDefinition', createIds(footnotes));
-  visit(tree, 'footnoteReference', replaceIds(footnotes));
+  visit(tree, 'footnoteReference', createIds(footnotes));
+  visit(tree, 'footnoteDefinition', replaceIds(footnotes));
 }
 
 function convert(node, index, parent) {
