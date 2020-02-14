@@ -2,17 +2,32 @@
 
 var visit = require('unist-util-visit');
 
+var _require = require('rebber/dist/preprocessors/referenceVisitors')(),
+    addIdentifier = _require.addIdentifier;
+
+var appendix = require('../type/appendix');
+
 module.exports = function (ctx, tree) {
-  var title = ctx.codeAppendiceTitle || 'Appendices';
+  ctx.overrides.appendix = appendix;
   return function (node) {
-    var inAppendix = [];
-    var appendixIndex = 1;
+    var appendix = tree.children[tree.children.length - 1];
+
+    if (!appendix || appendix.type !== 'appendix') {
+      appendix = {
+        type: 'appendix',
+        children: []
+      };
+      tree.children.push(appendix);
+    }
+
+    var appendixIndex = appendix.children.length + 1;
     visit(node, 'code', function (innerNode, index, _parent) {
-      inAppendix.push({
+      appendix.children.push({
         type: 'paragraph',
         children: [{
           type: 'definition',
           identifier: "appendix-".concat(appendixIndex),
+          url: "appendix ".concat(appendixIndex),
           referenceType: 'full',
           children: [{
             type: 'text',
@@ -21,30 +36,22 @@ module.exports = function (ctx, tree) {
         }, {
           type: 'text',
           value: '\n'
-        }, innerNode]
+        }]
       });
+      appendix.children.push(innerNode);
+      addIdentifier("appendix-".concat(appendixIndex), 'code');
       var referenceNode = {
         type: 'linkReference',
-        identifier: "appendix-".concat(appendixIndex)
+        identifier: "appendix-".concat(appendixIndex),
+        children: [{
+          type: 'text',
+          value: 'code'
+        }]
       };
 
       _parent.children.splice(index, 1, referenceNode);
 
       appendixIndex++;
     });
-
-    if (inAppendix.length) {
-      tree.children.push({
-        type: 'heading',
-        depth: 1,
-        children: [{
-          type: 'text',
-          value: title
-        }]
-      });
-      inAppendix.forEach(function (element) {
-        return tree.children.push(element);
-      });
-    }
   };
 };

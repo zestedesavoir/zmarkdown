@@ -1,9 +1,10 @@
 const remarkConfig = require('./remark')
 const escape = require('rebber/dist/escaper')
-
+const appendix = require('rebber-plugins/dist/preprocessors/codeVisitor')
 const rebberConfig = {
   preprocessors: {
-    tableCell: require('rebber-plugins/dist/preprocessors/codeVisitor'),
+    tableCell: appendix,
+    footnoteDefinition: [appendix],
   },
   overrides: {
     abbr: require('rebber-plugins/dist/type/abbr'),

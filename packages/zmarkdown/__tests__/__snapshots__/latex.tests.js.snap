@@ -108,6 +108,36 @@ print('bla')
 \\\\captionof{listing}{With Source}"
 `;
 
+exports[`codes in notes 1`] = `
+"hello \\\\textsuperscript{\\\\ref{footnote:1}}\\\\textsuperscript{\\\\ref{footnote:2}}
+
+
+
+\\\\footnotetext[1]{\\\\label{footnote:1} test
+
+\\\\href{appendix-1}{code}}
+
+\\\\footnotetext[2]{\\\\label{footnote:2} test
+
+\\\\href{appendix-3}{code}}
+
+\\\\begin{appendices}
+\\\\label{appendix-1}appendix 1
+
+\\\\begin{CodeBlock}{javascript}
+ console.log('hello')
+\\\\end{CodeBlock}
+
+\\\\label{appendix-3}appendix 3
+
+\\\\begin{CodeBlock}{javascript}
+console.log('hello')
+\\\\end{CodeBlock}
+
+
+\\\\end{appendices}"
+`;
+
 exports[`custom-blocks 1`] = `
 "\\\\begin{Information}
 info
@@ -522,17 +552,19 @@ space & \\\\image{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg}[space] \
 title & code \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
 inline & \\\\CodeInline{inline} br \\\\endgraf \\\\CodeInline{inline} \\\\\\\\ \\\\hline
-block & [] \\\\\\\\ \\\\hline
+block & \\\\href{appendix-1}{code} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\levelOneTitle{Annexes}
+\\\\begin{appendices}
+\\\\label{appendix-1}appendix 1
 
-
-\\\\footnote{\\\\label{appendix-1}}
 \\\\begin{CodeBlock}{python}
 print('bla')
-\\\\end{CodeBlock}"
+\\\\end{CodeBlock}
+
+
+\\\\end{appendices}"
 `;
 
 exports[`mix-5 1`] = `
