@@ -1,5 +1,4 @@
 const visit = require('unist-util-visit')
-const {addIdentifier} = require('rebber/dist/preprocessors/referenceVisitors')()
 const appendix = require('../type/appendix')
 
 module.exports = (ctx, tree) => {
@@ -20,18 +19,22 @@ module.exports = (ctx, tree) => {
         type: 'paragraph',
         children: [
           {
-            type: 'definition',
-            identifier: `appendix-${appendixIndex}`,
-            url: `appendix ${appendixIndex}`,
-            referenceType: 'full',
-            children: [{type: 'text', value: 'code'}],
-          },
-          {type: 'text', value: '\n'},
+            type: 'heading',
+            children: [
 
+              {
+                type: 'definition',
+                identifier: `appendix-${appendixIndex}`,
+                url: `${ctx.codeAppendiceTitle || 'Appendix'} ${appendixIndex}`,
+                referenceType: 'full',
+                children: [{type: 'text', value: 'code'}],
+              },
+            ],
+            depth: 1,
+          },
         ],
       })
       appendix.children.push(innerNode)
-      addIdentifier(`appendix-${appendixIndex}`, 'code')
       const referenceNode = {
         type: 'linkReference',
         identifier: `appendix-${appendixIndex}`,

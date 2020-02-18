@@ -2,9 +2,6 @@
 
 var visit = require('unist-util-visit');
 
-var _require = require('rebber/dist/preprocessors/referenceVisitors')(),
-    addIdentifier = _require.addIdentifier;
-
 var appendix = require('../type/appendix');
 
 module.exports = function (ctx, tree) {
@@ -25,21 +22,21 @@ module.exports = function (ctx, tree) {
       appendix.children.push({
         type: 'paragraph',
         children: [{
-          type: 'definition',
-          identifier: "appendix-".concat(appendixIndex),
-          url: "appendix ".concat(appendixIndex),
-          referenceType: 'full',
+          type: 'heading',
           children: [{
-            type: 'text',
-            value: 'code'
-          }]
-        }, {
-          type: 'text',
-          value: '\n'
+            type: 'definition',
+            identifier: "appendix-".concat(appendixIndex),
+            url: "".concat(ctx.codeAppendiceTitle || 'Appendix', " ").concat(appendixIndex),
+            referenceType: 'full',
+            children: [{
+              type: 'text',
+              value: 'code'
+            }]
+          }],
+          depth: 1
         }]
       });
       appendix.children.push(innerNode);
-      addIdentifier("appendix-".concat(appendixIndex), 'code');
       var referenceNode = {
         type: 'linkReference',
         identifier: "appendix-".concat(appendixIndex),

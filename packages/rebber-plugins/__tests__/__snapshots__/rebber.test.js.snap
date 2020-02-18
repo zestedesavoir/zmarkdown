@@ -451,7 +451,7 @@ elem & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 5}|}{\\\\parbox{\\
 
 
 \\\\begin{appendices}
-\\\\label{appendix-1}appendix 1
+\\\\part{\\\\label{appendix-1}Annexes 1}
 
 \\\\begin{CodeBlock}{python}
 print('bla')
@@ -954,7 +954,7 @@ b &  &  & c \\\\\\\\ \\\\hline
 
 
 \\\\begin{appendices}
-\\\\label{appendix-1}appendix 1
+\\\\part{\\\\label{appendix-1}Annexes 1}
 
 \\\\begin{CodeBlock}{python}
 print('bla')
@@ -995,7 +995,7 @@ cell & \\\\texttt{code with line break} \\\\\\\\ \\\\hline
 
 
 \\\\begin{appendices}
-\\\\label{appendix-1}appendix 1
+\\\\part{\\\\label{appendix-1}Annexes 1}
 
 \\\\begin{CodeBlock}{text}
 line 1

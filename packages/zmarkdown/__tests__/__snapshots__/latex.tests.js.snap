@@ -122,13 +122,13 @@ exports[`codes in notes 1`] = `
 \\\\href{appendix-3}{code}}
 
 \\\\begin{appendices}
-\\\\label{appendix-1}appendix 1
+\\\\levelOneTitle{\\\\label{appendix-1}Annexes 1}
 
 \\\\begin{CodeBlock}{javascript}
  console.log('hello')
 \\\\end{CodeBlock}
 
-\\\\label{appendix-3}appendix 3
+\\\\levelOneTitle{\\\\label{appendix-3}Annexes 3}
 
 \\\\begin{CodeBlock}{javascript}
 console.log('hello')
@@ -557,7 +557,7 @@ block & \\\\href{appendix-1}{code} \\\\\\\\ \\\\hline
 
 
 \\\\begin{appendices}
-\\\\label{appendix-1}appendix 1
+\\\\levelOneTitle{\\\\label{appendix-1}Annexes 1}
 
 \\\\begin{CodeBlock}{python}
 print('bla')
