@@ -328,6 +328,26 @@ describe('Texfile endpoint', () => {
     const [, dir, file, ext] = rendered.match(regex)
     return expect(rm(`${destination}/${dir}`, `${file}.${ext}`)).resolves.toBe('ok')
   })
+
+  it('allows extra arguments', async () => {
+    const additionalOpts = {
+      logo_directory: '/tmp/logo',
+      content_logo: 'h2g2.png',
+      content_link: 'https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy_(novel)',
+      editor_logo: 'pmm.jpg',
+      editor_link: 'https://www.panmacmillan.com/',
+    }
+    const opts = Object.assign({}, texfileOpts, additionalOpts)
+    const response = await a.post(texfile, {md: '# foo', opts})
+    expect(response.status).toBe(200)
+
+    const [string] = response.data
+    expect(string).toMatchSnapshot()
+    expect(string).toContain(dedent`\logo{/tmp/logo/h2g2.png}
+    \editorLogo{/tmp/logo/pmm.jpg}
+    \tutoLink{https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy_(novel)}
+    \editor{https://www.panmacmillan.com/}`)
+  })
 })
 
 

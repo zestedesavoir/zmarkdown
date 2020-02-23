@@ -8,6 +8,11 @@ const template = (opts, callback) => {
     license_directory: licenseDirectory,
     license_url: licenseUrl,
     license_logo: licenseLogo,
+    logo_directory: logoDirectory,
+    content_logo: contentLogo,
+    content_link: contentLink,
+    editor_logo: editorLogo,
+    editor_link: editorLink,
     smileys_directory: smileysDirectory,
     title,
     authors,
@@ -15,6 +20,7 @@ const template = (opts, callback) => {
     latex,
   } = opts
   try {
+    // Required options
     assert(contentType, 'Error with argument: "contentType"')
     assert(title, 'Error with argument: "title"')
     assert(Array.isArray(authors), 'Error with argument: "authors"')
@@ -25,8 +31,16 @@ const template = (opts, callback) => {
   } catch (err) {
     return callback(err)
   }
-  const logoPath = licenseLogo ? `${licenseDirectory}/${licenseLogo}` : ''
-  const licenseLine = `\\licence[${logoPath}]{${license}}{${licenseUrl || ''}}`
+
+  const licenceLogoPath = licenseLogo ? `${licenseDirectory}/${licenseLogo}` : ''
+  const licenseLine = `\\licence[${licenceLogoPath}]{${license}}{${licenseUrl || ''}}`
+
+  // Optional arguments
+  const extraHeaders = []
+  if (logoDirectory && contentLogo) extraHeaders.push(`\\logo{${logoDirectory}/${contentLogo}}`)
+  if (logoDirectory && editorLogo) extraHeaders.push(`\\editorLogo{${logoDirectory}/${editorLogo}}`)
+  if (contentLink) extraHeaders.push(`\\tutoLink{${contentLink}}`)
+  if (editorLink) extraHeaders.push(`\\editor{${editorLink}}`)
 
   return callback(null, `\\documentclass[${contentType}]{zmdocument}
 
@@ -34,7 +48,7 @@ const template = (opts, callback) => {
 \\title{${escape(title)}}
 \\author{${escape(authors.join(', '))}}
 ${licenseLine}
-
+${extraHeaders.join('\n')}
 \\smileysPath{${smileysDirectory}}
 \\makeglossaries
 

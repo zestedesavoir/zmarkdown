@@ -35,6 +35,29 @@ exports[`Texfile endpoint accepts POSTed markdown 1`] = `
 \\\\end{document}"
 `;
 
+exports[`Texfile endpoint allows extra arguments 1`] = `
+"\\\\documentclass[contentType]{zmdocument}
+
+\\\\usepackage{blindtext}
+\\\\title{The Title}
+\\\\author{FØØ, Bär}
+\\\\licence[/tmp/l/by-nc-sa.svg]{CC-BY-NC-SA}{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}
+\\\\logo{/tmp/logo/h2g2.png}
+\\\\editorLogo{/tmp/logo/pmm.jpg}
+\\\\tutoLink{https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy_(novel)}
+\\\\editor{https://www.panmacmillan.com/}
+\\\\smileysPath{/tmp/s}
+\\\\makeglossaries
+
+\\\\begin{document}
+\\\\maketitle
+\\\\tableofcontents
+
+\\\\levelOneTitle{foo}
+
+\\\\end{document}"
+`;
+
 exports[`Texfile endpoint escapes title and author 1`] = `
 "\\\\documentclass[contentType]{zmdocument}
 
