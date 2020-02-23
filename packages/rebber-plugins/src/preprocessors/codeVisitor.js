@@ -14,14 +14,12 @@ module.exports = (ctx, tree) => {
     }
     let appendixIndex = appendix.children.length + 1
     visit(node, 'code', (innerNode, index, _parent) => {
-
       appendix.children.push({
         type: 'paragraph',
         children: [
           {
             type: 'heading',
             children: [
-
               {
                 type: 'definition',
                 identifier: `appendix-${appendixIndex}`,
@@ -34,7 +32,9 @@ module.exports = (ctx, tree) => {
           },
         ],
       })
+
       appendix.children.push(innerNode)
+
       const referenceNode = {
         type: 'linkReference',
         identifier: `appendix-${appendixIndex}`,

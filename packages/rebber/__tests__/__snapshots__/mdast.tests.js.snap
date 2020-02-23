@@ -91,11 +91,11 @@ This \\\\& that.
 
 
 
-Here's a \\\\href{1}{link} with an ampersand in the URL.
+Here's a \\\\hyperref[1]{link} with an ampersand in the URL.
 
 
 
-Here's a link with an amersand in the link text: \\\\href{2}{AT\\\\&T}.
+Here's a link with an amersand in the link text: \\\\hyperref[2]{AT\\\\&T}.
 
 
 
@@ -888,7 +888,7 @@ breaks."
 `;
 
 exports[`rebber: remark specs case-insensitive-refs: case-insensitive-refs 1`] = `
-"\\\\href{hi}{hi}
+"\\\\hyperref[hi]{hi}
 
 
 
@@ -1117,7 +1117,7 @@ bar
 `;
 
 exports[`rebber: remark specs definition-newline: definition-newline 1`] = `
-"\\\\href{baz}{baz}: /url (
+"\\\\hyperref[baz]{baz}: /url (
 )
 
 
@@ -1138,7 +1138,7 @@ exports[`rebber: remark specs definition-newline: definition-newline 1`] = `
 
 \\\\footnote{\\\\label{baz-1-1}\\\\externalLink{/url}{/url}}
 
-\\\\href{baz}{baz}: /url 'foo"
+\\\\hyperref[baz]{baz}: /url 'foo"
 `;
 
 exports[`rebber: remark specs definition-unclosed: definition-unclosed 1`] = `
@@ -1480,13 +1480,13 @@ exports[`rebber: remark specs footnote: footnote 1`] = `
 
 \\\\footnotetext[somesamplefootnote]{\\\\label{footnote:somesamplefootnote} Here is the text of the footnote itself.}
 
-Even go to a new \\\\href{paragraph}{paragraph} and the footnotes will go to the bottom of the document\\\\textsuperscript{\\\\ref{footnote:documentdetails}}.
+Even go to a new \\\\hyperref[paragraph]{paragraph} and the footnotes will go to the bottom of the document\\\\textsuperscript{\\\\ref{footnote:documentdetails}}.
 
 
 
 \\\\footnotetext[documentdetails]{\\\\label{footnote:documentdetails} Depending on the \\\\textbf{final} form of your document, of course. See the documentation and experiment.
 
-This footnote has a second \\\\href{paragraph}{paragraph}.}
+This footnote has a second \\\\hyperref[paragraph]{paragraph}.}
 
 \\\\footnote{\\\\label{paragraph}\\\\externalLink{http://example.com}{http://example.com}}"
 `;
@@ -2546,7 +2546,7 @@ exports[`rebber: remark specs links-inline-style: links-inline-style 1`] = `
 `;
 
 exports[`rebber: remark specs links-reference-proto: links-reference-proto 1`] = `
-"A \\\\href{tostring}{primary}, \\\\href{constructor}{secondary}, and \\\\href{__proto__}{tertiary} link.
+"A \\\\hyperref[tostring]{primary}, \\\\hyperref[constructor]{secondary}, and \\\\hyperref[__proto__]{tertiary} link.
 
 
 
@@ -2558,33 +2558,33 @@ exports[`rebber: remark specs links-reference-proto: links-reference-proto 1`] =
 `;
 
 exports[`rebber: remark specs links-reference-style: links-reference-style 1`] = `
-"Foo \\\\href{1}{bar}.
+"Foo \\\\hyperref[1]{bar}.
 
 
 
-Foo \\\\href{1}{bar}.
+Foo \\\\hyperref[1]{bar}.
 
 
 
-Foo \\\\href{1}{bar}.
+Foo \\\\hyperref[1]{bar}.
 
 
 
 \\\\footnote{\\\\label{1}\\\\externalLink{/url/}{/url/}}
 
-With \\\\href{b}{embedded [brackets]}.
+With \\\\hyperref[b]{embedded [brackets]}.
 
 
 
-Indented \\\\href{once}{once}.
+Indented \\\\hyperref[once]{once}.
 
 
 
-Indented \\\\href{twice}{twice}.
+Indented \\\\hyperref[twice]{twice}.
 
 
 
-Indented \\\\href{thrice}{thrice}.
+Indented \\\\hyperref[thrice]{thrice}.
 
 
 
@@ -2610,23 +2610,23 @@ Indented [four] times.
 
 
 
-\\\\href{this}{this} should work
+\\\\hyperref[this]{this} should work
 
 
 
-So should \\\\href{this}{this}.
+So should \\\\hyperref[this]{this}.
 
 
 
-And \\\\href{this}{this}.
+And \\\\hyperref[this]{this}.
 
 
 
-And \\\\href{this}{this}.
+And \\\\hyperref[this]{this}.
 
 
 
-And \\\\href{this}{this}.
+And \\\\hyperref[this]{this}.
 
 
 
@@ -2642,11 +2642,11 @@ Nor [that].
 
 
 
-[Something in brackets like \\\\href{this}{this} should work]
+[Something in brackets like \\\\hyperref[this]{this} should work]
 
 
 
-[Same with \\\\href{this}{this}.]
+[Same with \\\\hyperref[this]{this}.]
 
 
 
@@ -2664,12 +2664,12 @@ Backslashing should suppress [this] and [this].
 
 
 
-Here's one where the \\\\href{link breaks}{link
+Here's one where the \\\\hyperref[link breaks]{link
 breaks} across lines.
 
 
 
-Here's another where the \\\\href{link breaks}{link
+Here's another where the \\\\hyperref[link breaks]{link
 breaks} across lines, but with a line-ending space.
 
 
@@ -2678,25 +2678,25 @@ breaks} across lines, but with a line-ending space.
 `;
 
 exports[`rebber: remark specs links-shortcut-references: links-shortcut-references 1`] = `
-"This is the \\\\href{simple case}{simple case}.
+"This is the \\\\hyperref[simple case]{simple case}.
 
 
 
 \\\\footnote{\\\\label{simple case}\\\\externalLink{/simple}{/simple}}
 
-This one has a \\\\href{line break}{line
+This one has a \\\\hyperref[line break]{line
 break}.
 
 
 
-This one has a \\\\href{line break}{line
+This one has a \\\\hyperref[line break]{line
 break} with a line-ending space.
 
 
 
 \\\\footnote{\\\\label{line break}\\\\externalLink{/foo}{/foo}}
 
-\\\\href{that}{this} and the \\\\href{other}{other}
+\\\\hyperref[that]{this} and the \\\\hyperref[other]{other}
 
 
 
@@ -3446,7 +3446,7 @@ code();
 
 
 \\\\begin{enumerate}
-\\\\item \\\\href{foo}{foo}
+\\\\item \\\\hyperref[foo]{foo}
 \\\\end{enumerate}
 
 
@@ -3750,7 +3750,7 @@ exports[`rebber: remark specs main: main 1`] = `
 
 Just a note, I've found that I can't test my markdown parser vs others.
 For example, both markdown.js and showdown code blocks in lists wrong. They're
-also completely \\\\href{test}{inconsistent} with regards to paragraphs in list items.
+also completely \\\\hyperref[test]{inconsistent} with regards to paragraphs in list items.
 
 
 
@@ -3846,7 +3846,7 @@ exports[`rebber: remark specs markdown-documentation-basics: markdown-documentat
 
 
 This page offers a brief overview of what it's like to use Markdown.
-The \\\\href{s}{syntax page} provides complete, detailed documentation for
+The \\\\hyperref[s]{syntax page} provides complete, detailed documentation for
 every feature, but Markdown should be very easy to pick up simply by
 looking at a few examples of it in action. The examples on this page
 are written in a before/after style, showing example syntax and the
@@ -3854,14 +3854,14 @@ HTML output produced by Markdown.
 
 
 
-It's also helpful to simply try Markdown out; the \\\\href{d}{Dingus} is a
+It's also helpful to simply try Markdown out; the \\\\hyperref[d]{Dingus} is a
 web application that allows you type your own Markdown-formatted text
 and translate it to XHTML.
 
 
 
 \\\\textbf{Note:} This document is itself written using Markdown; you
-can \\\\href{src}{see the source for it by adding '.text' to the URL}.
+can \\\\hyperref[src]{see the source for it by adding '.text' to the URL}.
 
 
 
@@ -4362,7 +4362,7 @@ exports[`rebber: remark specs markdown-documentation-syntax: markdown-documentat
 
 
 \\\\textbf{Note:} This document is itself written using Markdown; you
-can \\\\href{src}{see the source for it by adding '.text' to the URL}.
+can \\\\hyperref[src]{see the source for it by adding '.text' to the URL}.
 
 
 
@@ -4384,8 +4384,8 @@ Readability, however, is emphasized above all else. A Markdown-formatted
 document should be publishable as-is, as plain text, without looking
 like it's been marked up with tags or formatting instructions. While
 Markdown's syntax has been influenced by several existing text-to-HTML
-filters -- including \\\\href{1}{Setext}, \\\\href{2}{atx}, \\\\href{3}{Textile}, \\\\href{4}{reStructuredText},
-\\\\href{5}{Grutatext}, and \\\\href{6}{EtText} -- the single biggest source of
+filters -- including \\\\hyperref[1]{Setext}, \\\\hyperref[2]{atx}, \\\\hyperref[3]{Textile}, \\\\hyperref[4]{reStructuredText},
+\\\\hyperref[5]{Grutatext}, and \\\\hyperref[6]{EtText} -- the single biggest source of
 inspiration for Markdown's syntax is the format of plain text email.
 
 
@@ -4616,7 +4616,7 @@ end a line with two or more spaces, then type return.
 
 Yes, this takes a tad more effort to create a \\\\texttt{<br />}, but a simplistic
 \\"every line break is a \\\\texttt{<br />}\\" rule wouldn't work for Markdown.
-Markdown's email-style \\\\href{bq}{blockquoting} and multi-paragraph \\\\href{l}{list items}
+Markdown's email-style \\\\hyperref[bq]{blockquoting} and multi-paragraph \\\\hyperref[l]{list items}
 work best -- and look better -- when you format them with hard breaks.
 
 
@@ -4627,7 +4627,7 @@ work best -- and look better -- when you format them with hard breaks.
 
 <h3 id=\\"header\\">Headers</h3>
 
-Markdown supports two styles of headers, \\\\href{1}{Setext} and \\\\href{2}{atx}.
+Markdown supports two styles of headers, \\\\hyperref[1]{Setext} and \\\\hyperref[2]{atx}.
 
 
 
@@ -5847,7 +5847,7 @@ exports[`rebber: remark specs nested-references: nested-references 1`] = `
 
 
 
-\\\\href{baz}{\\\\includegraphics{https://bar.com}}
+\\\\hyperref[baz]{\\\\includegraphics{https://bar.com}}
 
 
 
@@ -5855,7 +5855,7 @@ This nested link should not work:
 
 
 
-\\\\href{baz}{[Foo][bar]}
+\\\\hyperref[baz]{[Foo][bar]}
 
 
 
@@ -5863,7 +5863,7 @@ This nested footnote not work:
 
 
 
-\\\\href{baz}{\\\\textsuperscript{\\\\ref{footnote:foo}}}
+\\\\hyperref[baz]{\\\\textsuperscript{\\\\ref{footnote:foo}}}
 
 
 
@@ -6302,7 +6302,7 @@ ccc"
 `;
 
 exports[`rebber: remark specs ref-paren: ref-paren 1`] = `
-"\\\\href{hi}{hi}
+"\\\\hyperref[hi]{hi}
 
 
 
@@ -6318,7 +6318,7 @@ exports[`rebber: remark specs reference-image-empty-alt: reference-image-empty-a
 `;
 
 exports[`rebber: remark specs reference-link-escape: reference-link-escape 1`] = `
-"[b*r*], \\\\href{b\\\\*r*}{b*r*}, \\\\href{b\\\\*r*}{b*r*}.
+"[b*r*], \\\\hyperref[b\\\\*r*]{b*r*}, \\\\hyperref[b\\\\*r*]{b*r*}.
 
 
 
@@ -6342,7 +6342,7 @@ exports[`rebber: remark specs reference-link-not-closed: reference-link-not-clos
 `;
 
 exports[`rebber: remark specs reference-link-with-angle-brackets: reference-link-with-angle-brackets 1`] = `
-"\\\\href{foo}{foo}
+"\\\\hyperref[foo]{foo}
 
 
 
@@ -6350,7 +6350,7 @@ exports[`rebber: remark specs reference-link-with-angle-brackets: reference-link
 `;
 
 exports[`rebber: remark specs reference-link-with-multiple-definitions: reference-link-with-multiple-definitions 1`] = `
-"\\\\href{foo}{foo}
+"\\\\hyperref[foo]{foo}
 
 
 
@@ -7357,7 +7357,7 @@ hello world
 
 
 
-hello \\\\href{how}{world}
+hello \\\\hyperref[how]{world}
 
 
 
@@ -13194,11 +13194,11 @@ This \\\\& that.
 
 
 
-Here's a \\\\href{1}{link} with an ampersand in the URL.
+Here's a \\\\hyperref[1]{link} with an ampersand in the URL.
 
 
 
-Here's a link with an amersand in the link text: \\\\href{2}{AT\\\\&T}.
+Here's a link with an amersand in the link text: \\\\hyperref[2]{AT\\\\&T}.
 
 
 
@@ -14028,7 +14028,7 @@ breaks.
 `;
 
 exports[`toLaTeX: remark specs case-insensitive-refs: case-insensitive-refs 1`] = `
-"\\\\href{hi}{hi}
+"\\\\hyperref[hi]{hi}
 
 
 
@@ -14269,7 +14269,7 @@ bar
 `;
 
 exports[`toLaTeX: remark specs definition-newline: definition-newline 1`] = `
-"\\\\href{baz}{baz}: /url (
+"\\\\hyperref[baz]{baz}: /url (
 )
 
 
@@ -14290,7 +14290,7 @@ exports[`toLaTeX: remark specs definition-newline: definition-newline 1`] = `
 
 \\\\footnote{\\\\label{baz-1-1}\\\\externalLink{/url}{/url}}
 
-\\\\href{baz}{baz}: /url 'foo
+\\\\hyperref[baz]{baz}: /url 'foo
 
 "
 `;
@@ -14672,13 +14672,13 @@ exports[`toLaTeX: remark specs footnote: footnote 1`] = `
 
 \\\\footnotetext[somesamplefootnote]{\\\\label{footnote:somesamplefootnote} Here is the text of the footnote itself.}
 
-Even go to a new \\\\href{paragraph}{paragraph} and the footnotes will go to the bottom of the document\\\\textsuperscript{\\\\ref{footnote:documentdetails}}.
+Even go to a new \\\\hyperref[paragraph]{paragraph} and the footnotes will go to the bottom of the document\\\\textsuperscript{\\\\ref{footnote:documentdetails}}.
 
 
 
 \\\\footnotetext[documentdetails]{\\\\label{footnote:documentdetails} Depending on the \\\\textbf{final} form of your document, of course. See the documentation and experiment.
 
-This footnote has a second \\\\href{paragraph}{paragraph}.}
+This footnote has a second \\\\hyperref[paragraph]{paragraph}.}
 
 \\\\footnote{\\\\label{paragraph}\\\\externalLink{http://example.com}{http://example.com}}"
 `;
@@ -15810,7 +15810,7 @@ exports[`toLaTeX: remark specs links-inline-style: links-inline-style 1`] = `
 `;
 
 exports[`toLaTeX: remark specs links-reference-proto: links-reference-proto 1`] = `
-"A \\\\href{tostring}{primary}, \\\\href{constructor}{secondary}, and \\\\href{__proto__}{tertiary} link.
+"A \\\\hyperref[tostring]{primary}, \\\\hyperref[constructor]{secondary}, and \\\\hyperref[__proto__]{tertiary} link.
 
 
 
@@ -15822,33 +15822,33 @@ exports[`toLaTeX: remark specs links-reference-proto: links-reference-proto 1`] 
 `;
 
 exports[`toLaTeX: remark specs links-reference-style: links-reference-style 1`] = `
-"Foo \\\\href{1}{bar}.
+"Foo \\\\hyperref[1]{bar}.
 
 
 
-Foo \\\\href{1}{bar}.
+Foo \\\\hyperref[1]{bar}.
 
 
 
-Foo \\\\href{1}{bar}.
+Foo \\\\hyperref[1]{bar}.
 
 
 
 \\\\footnote{\\\\label{1}\\\\externalLink{/url/}{/url/}}
 
-With \\\\href{b}{embedded [brackets]}.
+With \\\\hyperref[b]{embedded [brackets]}.
 
 
 
-Indented \\\\href{once}{once}.
+Indented \\\\hyperref[once]{once}.
 
 
 
-Indented \\\\href{twice}{twice}.
+Indented \\\\hyperref[twice]{twice}.
 
 
 
-Indented \\\\href{thrice}{thrice}.
+Indented \\\\hyperref[thrice]{thrice}.
 
 
 
@@ -15874,23 +15874,23 @@ Indented [four] times.
 
 
 
-\\\\href{this}{this} should work
+\\\\hyperref[this]{this} should work
 
 
 
-So should \\\\href{this}{this}.
+So should \\\\hyperref[this]{this}.
 
 
 
-And \\\\href{this}{this}.
+And \\\\hyperref[this]{this}.
 
 
 
-And \\\\href{this}{this}.
+And \\\\hyperref[this]{this}.
 
 
 
-And \\\\href{this}{this}.
+And \\\\hyperref[this]{this}.
 
 
 
@@ -15906,11 +15906,11 @@ Nor [that].
 
 
 
-[Something in brackets like \\\\href{this}{this} should work]
+[Something in brackets like \\\\hyperref[this]{this} should work]
 
 
 
-[Same with \\\\href{this}{this}.]
+[Same with \\\\hyperref[this]{this}.]
 
 
 
@@ -15928,12 +15928,12 @@ Backslashing should suppress [this] and [this].
 
 
 
-Here's one where the \\\\href{link breaks}{link
+Here's one where the \\\\hyperref[link breaks]{link
 breaks} across lines.
 
 
 
-Here's another where the \\\\href{link breaks}{link
+Here's another where the \\\\hyperref[link breaks]{link
 breaks} across lines, but with a line-ending space.
 
 
@@ -15942,25 +15942,25 @@ breaks} across lines, but with a line-ending space.
 `;
 
 exports[`toLaTeX: remark specs links-shortcut-references: links-shortcut-references 1`] = `
-"This is the \\\\href{simple case}{simple case}.
+"This is the \\\\hyperref[simple case]{simple case}.
 
 
 
 \\\\footnote{\\\\label{simple case}\\\\externalLink{/simple}{/simple}}
 
-This one has a \\\\href{line break}{line
+This one has a \\\\hyperref[line break]{line
 break}.
 
 
 
-This one has a \\\\href{line break}{line
+This one has a \\\\hyperref[line break]{line
 break} with a line-ending space.
 
 
 
 \\\\footnote{\\\\label{line break}\\\\externalLink{/foo}{/foo}}
 
-\\\\href{that}{this} and the \\\\href{other}{other}
+\\\\hyperref[that]{this} and the \\\\hyperref[other]{other}
 
 
 
@@ -16776,7 +16776,7 @@ code();
 
 
 \\\\begin{enumerate}
-\\\\item \\\\href{foo}{foo}
+\\\\item \\\\hyperref[foo]{foo}
 \\\\end{enumerate}
 
 
@@ -17089,7 +17089,7 @@ exports[`toLaTeX: remark specs main: main 1`] = `
 
 Just a note, I've found that I can't test my markdown parser vs others.
 For example, both markdown.js and showdown code blocks in lists wrong. They're
-also completely \\\\href{test}{inconsistent} with regards to paragraphs in list items.
+also completely \\\\hyperref[test]{inconsistent} with regards to paragraphs in list items.
 
 
 
@@ -17187,7 +17187,7 @@ exports[`toLaTeX: remark specs markdown-documentation-basics: markdown-documenta
 
 
 This page offers a brief overview of what it's like to use Markdown.
-The \\\\href{s}{syntax page} provides complete, detailed documentation for
+The \\\\hyperref[s]{syntax page} provides complete, detailed documentation for
 every feature, but Markdown should be very easy to pick up simply by
 looking at a few examples of it in action. The examples on this page
 are written in a before/after style, showing example syntax and the
@@ -17195,14 +17195,14 @@ HTML output produced by Markdown.
 
 
 
-It's also helpful to simply try Markdown out; the \\\\href{d}{Dingus} is a
+It's also helpful to simply try Markdown out; the \\\\hyperref[d]{Dingus} is a
 web application that allows you type your own Markdown-formatted text
 and translate it to XHTML.
 
 
 
 \\\\textbf{Note:} This document is itself written using Markdown; you
-can \\\\href{src}{see the source for it by adding '.text' to the URL}.
+can \\\\hyperref[src]{see the source for it by adding '.text' to the URL}.
 
 
 
@@ -17705,7 +17705,7 @@ exports[`toLaTeX: remark specs markdown-documentation-syntax: markdown-documenta
 
 
 \\\\textbf{Note:} This document is itself written using Markdown; you
-can \\\\href{src}{see the source for it by adding '.text' to the URL}.
+can \\\\hyperref[src]{see the source for it by adding '.text' to the URL}.
 
 
 
@@ -17727,8 +17727,8 @@ Readability, however, is emphasized above all else. A Markdown-formatted
 document should be publishable as-is, as plain text, without looking
 like it's been marked up with tags or formatting instructions. While
 Markdown's syntax has been influenced by several existing text-to-HTML
-filters -- including \\\\href{1}{Setext}, \\\\href{2}{atx}, \\\\href{3}{Textile}, \\\\href{4}{reStructuredText},
-\\\\href{5}{Grutatext}, and \\\\href{6}{EtText} -- the single biggest source of
+filters -- including \\\\hyperref[1]{Setext}, \\\\hyperref[2]{atx}, \\\\hyperref[3]{Textile}, \\\\hyperref[4]{reStructuredText},
+\\\\hyperref[5]{Grutatext}, and \\\\hyperref[6]{EtText} -- the single biggest source of
 inspiration for Markdown's syntax is the format of plain text email.
 
 
@@ -17959,7 +17959,7 @@ end a line with two or more spaces, then type return.
 
 Yes, this takes a tad more effort to create a \\\\texttt{<br />}, but a simplistic
 \\"every line break is a \\\\texttt{<br />}\\" rule wouldn't work for Markdown.
-Markdown's email-style \\\\href{bq}{blockquoting} and multi-paragraph \\\\href{l}{list items}
+Markdown's email-style \\\\hyperref[bq]{blockquoting} and multi-paragraph \\\\hyperref[l]{list items}
 work best -- and look better -- when you format them with hard breaks.
 
 
@@ -17970,7 +17970,7 @@ work best -- and look better -- when you format them with hard breaks.
 
 <h3 id=\\"header\\">Headers</h3>
 
-Markdown supports two styles of headers, \\\\href{1}{Setext} and \\\\href{2}{atx}.
+Markdown supports two styles of headers, \\\\hyperref[1]{Setext} and \\\\hyperref[2]{atx}.
 
 
 
@@ -19199,7 +19199,7 @@ exports[`toLaTeX: remark specs nested-references: nested-references 1`] = `
 
 
 
-\\\\href{baz}{\\\\includegraphics{https://bar.com}}
+\\\\hyperref[baz]{\\\\includegraphics{https://bar.com}}
 
 
 
@@ -19207,7 +19207,7 @@ This nested link should not work:
 
 
 
-\\\\href{baz}{[Foo][bar]}
+\\\\hyperref[baz]{[Foo][bar]}
 
 
 
@@ -19215,7 +19215,7 @@ This nested footnote not work:
 
 
 
-\\\\href{baz}{\\\\textsuperscript{\\\\ref{footnote:foo}}}
+\\\\hyperref[baz]{\\\\textsuperscript{\\\\ref{footnote:foo}}}
 
 
 
@@ -19670,7 +19670,7 @@ ccc
 `;
 
 exports[`toLaTeX: remark specs ref-paren: ref-paren 1`] = `
-"\\\\href{hi}{hi}
+"\\\\hyperref[hi]{hi}
 
 
 
@@ -19686,7 +19686,7 @@ exports[`toLaTeX: remark specs reference-image-empty-alt: reference-image-empty-
 `;
 
 exports[`toLaTeX: remark specs reference-link-escape: reference-link-escape 1`] = `
-"[b*r*], \\\\href{b\\\\*r*}{b*r*}, \\\\href{b\\\\*r*}{b*r*}.
+"[b*r*], \\\\hyperref[b\\\\*r*]{b*r*}, \\\\hyperref[b\\\\*r*]{b*r*}.
 
 
 
@@ -19712,7 +19712,7 @@ exports[`toLaTeX: remark specs reference-link-not-closed: reference-link-not-clo
 `;
 
 exports[`toLaTeX: remark specs reference-link-with-angle-brackets: reference-link-with-angle-brackets 1`] = `
-"\\\\href{foo}{foo}
+"\\\\hyperref[foo]{foo}
 
 
 
@@ -19720,7 +19720,7 @@ exports[`toLaTeX: remark specs reference-link-with-angle-brackets: reference-lin
 `;
 
 exports[`toLaTeX: remark specs reference-link-with-multiple-definitions: reference-link-with-multiple-definitions 1`] = `
-"\\\\href{foo}{foo}
+"\\\\hyperref[foo]{foo}
 
 
 
@@ -20765,7 +20765,7 @@ hello world
 
 
 
-hello \\\\href{how}{world}
+hello \\\\hyperref[how]{world}
 
 
 

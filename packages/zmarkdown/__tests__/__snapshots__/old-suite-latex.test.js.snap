@@ -21,11 +21,11 @@ This \\\\& that.
 
 
 
-Here's a \\\\href{1}{link} with an ampersand in the URL.
+Here's a \\\\hyperref[1]{link} with an ampersand in the URL.
 
 
 
-Here's a link with an amersand in the link text: \\\\href{2}{AT\\\\&T}.
+Here's a link with an amersand in the link text: \\\\hyperref[2]{AT\\\\&T}.
 
 
 
@@ -636,33 +636,33 @@ exports[`#basic properly renders links-inline.txt 1`] = `
 `;
 
 exports[`#basic properly renders links-reference.txt 1`] = `
-"Foo \\\\href{1}{bar}.
+"Foo \\\\hyperref[1]{bar}.
 
 
 
-Foo \\\\href{1}{bar}.
+Foo \\\\hyperref[1]{bar}.
 
 
 
-Foo \\\\href{1}{bar}.
+Foo \\\\hyperref[1]{bar}.
 
 
 
 \\\\footnote{\\\\label{1}\\\\externalLink{/url/}{http://zestedesavoir.com/url/}}
 
-With \\\\href{b}{embedded [brackets]}.
+With \\\\hyperref[b]{embedded [brackets]}.
 
 
 
-Indented \\\\href{once}{once}.
+Indented \\\\hyperref[once]{once}.
 
 
 
-Indented \\\\href{twice}{twice}.
+Indented \\\\hyperref[twice]{twice}.
 
 
 
-Indented \\\\href{thrice}{thrice}.
+Indented \\\\hyperref[thrice]{thrice}.
 
 
 
@@ -684,11 +684,11 @@ Indented [four] times.
 
 \\\\footnote{\\\\label{b}\\\\externalLink{/url/}{http://zestedesavoir.com/url/}}
 
-With \\\\href{angle brackets}{angle brackets}.
+With \\\\hyperref[angle brackets]{angle brackets}.
 
 
 
-And \\\\href{without}{without}.
+And \\\\hyperref[without]{without}.
 
 
 
@@ -696,12 +696,12 @@ And \\\\href{without}{without}.
 
 \\\\footnote{\\\\label{without}\\\\externalLink{http://example.com/}{http://example.com/}}
 
-With \\\\href{line breaks}{line
+With \\\\hyperref[line breaks]{line
 breaks}
 
 
 
-and \\\\href{line breaks}{line
+and \\\\hyperref[line breaks]{line
 breaks} with one space.
 
 
@@ -713,18 +713,18 @@ breaks[] with two spaces.
 
 \\\\footnote{\\\\label{line breaks}\\\\externalLink{http://example.com}{http://example.com}}
 
-\\\\href{short ref}{short ref}
+\\\\hyperref[short ref]{short ref}
 
 
 
-\\\\href{short ref}{short
+\\\\hyperref[short ref]{short
 ref}
 
 
 
 \\\\footnote{\\\\label{short ref}\\\\externalLink{http://example.com}{http://example.com}}
 
-\\\\href{a ref}{a ref}
+\\\\hyperref[a ref]{a ref}
 
 
 
@@ -3333,11 +3333,11 @@ This \\\\& that.
 
 
 
-Here's a \\\\href{1}{link} with an ampersand in the URL.
+Here's a \\\\hyperref[1]{link} with an ampersand in the URL.
 
 
 
-Here's a link with an amersand in the link text: \\\\href{2}{AT\\\\&T}.
+Here's a link with an amersand in the link text: \\\\hyperref[2]{AT\\\\&T}.
 
 
 
@@ -3570,25 +3570,25 @@ The end."
 `;
 
 exports[`#pl #Tests_2007 properly renders Links, shortcut references.txt 1`] = `
-"This is the \\\\href{simple case}{simple case}.
+"This is the \\\\hyperref[simple case]{simple case}.
 
 
 
 \\\\footnote{\\\\label{simple case}\\\\externalLink{/simple}{http://zestedesavoir.com/simple}}
 
-This one has a \\\\href{line break}{line
+This one has a \\\\hyperref[line break]{line
 break}.
 
 
 
-This one has a \\\\href{line break}{line
+This one has a \\\\hyperref[line break]{line
 break} with a line-ending space.
 
 
 
 \\\\footnote{\\\\label{line break}\\\\externalLink{/foo}{http://zestedesavoir.com/foo}}
 
-\\\\href{that}{this} and the \\\\href{other}{other}
+\\\\hyperref[that]{this} and the \\\\hyperref[other]{other}
 
 
 
