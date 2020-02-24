@@ -325,7 +325,7 @@ space & \\\\inlineImage{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg} \\
 title & code \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
 inline & \\\\texttt{inline} br \\\\endgraf \\\\texttt{inline} \\\\\\\\ \\\\hline
-block & \\\\hyperref[appendix-1]{code} \\\\\\\\ \\\\hline
+block & \\\\hyperref[appendix-1]{Code appendice 1} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
@@ -456,8 +456,6 @@ elem & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 5}|}{\\\\parbox{\\
 \\\\begin{CodeBlock}{python}
 print('bla')
 \\\\end{CodeBlock}
-
-
 \\\\end{appendices}"
 `;
 
@@ -836,7 +834,7 @@ space & \\\\inlineImage{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg} \\
 title & code \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
 inline & \\\\texttt{inline} br \\\\endgraf \\\\texttt{inline} \\\\\\\\ \\\\hline
-block & \\\\hyperref[appendix-1]{code} \\\\\\\\ \\\\hline
+block & \\\\hyperref[appendix-1]{Code appendice 1} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
@@ -959,8 +957,6 @@ b &  &  & c \\\\\\\\ \\\\hline
 \\\\begin{CodeBlock}{python}
 print('bla')
 \\\\end{CodeBlock}
-
-
 \\\\end{appendices}"
 `;
 
@@ -990,7 +986,7 @@ exports[`mix-7 1`] = `
 \\\\rowfont[c]{\\\\bfseries}
 cell & \\\\texttt{code with line break} \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
-\\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 2}|}{\\\\parbox{\\\\linewidth}{\\\\hyperref[appendix-1]{code}}} \\\\\\\\ \\\\hline
+\\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 2}|}{\\\\parbox{\\\\linewidth}{\\\\hyperref[appendix-1]{Code appendice 1}}} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
@@ -1001,8 +997,6 @@ cell & \\\\texttt{code with line break} \\\\\\\\ \\\\hline
 line 1
 line2
 \\\\end{CodeBlock}
-
-
 \\\\end{appendices}"
 `;
 

@@ -21,5 +21,5 @@ function appendixPlugin(ctx, node) {
   var overriddenCtx = clone(ctx);
   overriddenCtx.definition = definitionMacro;
   var innerText = all(overriddenCtx, node);
-  return "\\begin{appendices}\n".concat(innerText, "\n\\end{appendices}");
+  return "\\begin{appendices}\n".concat(innerText.trimEnd(), "\n\\end{appendices}");
 }

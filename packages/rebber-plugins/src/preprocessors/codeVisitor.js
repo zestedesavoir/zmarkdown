@@ -1,6 +1,8 @@
 const visit = require('unist-util-visit')
 const appendix = require('../type/appendix')
 
+const defaultReferenceGenerator = (appendixIndex) => `Code appendice ${appendixIndex}`
+
 module.exports = (ctx, tree) => {
   ctx.overrides.appendix = appendix
   return (node) => {
@@ -25,7 +27,6 @@ module.exports = (ctx, tree) => {
                 identifier: `appendix-${appendixIndex}`,
                 url: `${ctx.codeAppendiceTitle || 'Appendix'} ${appendixIndex}`,
                 referenceType: 'full',
-                children: [{type: 'text', value: 'code'}],
               },
             ],
             depth: 1,
@@ -35,13 +36,15 @@ module.exports = (ctx, tree) => {
 
       appendix.children.push(innerNode)
 
+      const generator = ctx.appendiceReferenceGenerator || defaultReferenceGenerator
+
       const referenceNode = {
         type: 'linkReference',
         identifier: `appendix-${appendixIndex}`,
         children: [
           {
             type: 'text',
-            value: 'code',
+            value: generator(appendixIndex),
           },
         ],
       }

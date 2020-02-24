@@ -115,11 +115,11 @@ exports[`codes in notes 1`] = `
 
 \\\\footnotetext[1]{\\\\label{footnote:1} test
 
-\\\\hyperref[appendix-1]{code}}
+\\\\hyperref[appendix-1]{Annexe de code 1}}
 
 \\\\footnotetext[2]{\\\\label{footnote:2} test
 
-\\\\hyperref[appendix-3]{code}}
+\\\\hyperref[appendix-3]{Annexe de code 3}}
 
 \\\\begin{appendices}
 \\\\levelOneTitle{\\\\label{appendix-1}Annexes 1}
@@ -133,8 +133,6 @@ exports[`codes in notes 1`] = `
 \\\\begin{CodeBlock}{javascript}
 console.log('hello')
 \\\\end{CodeBlock}
-
-
 \\\\end{appendices}"
 `;
 
@@ -552,7 +550,7 @@ space & \\\\image{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg}[space] \
 title & code \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
 inline & \\\\CodeInline{inline} br \\\\endgraf \\\\CodeInline{inline} \\\\\\\\ \\\\hline
-block & \\\\hyperref[appendix-1]{code} \\\\\\\\ \\\\hline
+block & \\\\hyperref[appendix-1]{Annexe de code 1} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
@@ -562,8 +560,6 @@ block & \\\\hyperref[appendix-1]{code} \\\\\\\\ \\\\hline
 \\\\begin{CodeBlock}{python}
 print('bla')
 \\\\end{CodeBlock}
-
-
 \\\\end{appendices}"
 `;
 
@@ -575,9 +571,9 @@ exports[`mix-5 1`] = `
 `;
 
 exports[`mix-6 1`] = `
-"\\\\iframe{https://www.youtube.com/embed/8TQIvdFl4aU?feature=oembed}[Video][a caption]
+"\\\\externalLink{https://www.youtube.com/watch?v=8TQIvdFl4aU}{https://www.youtube.com/watch?v=8TQIvdFl4aU}
 
-\\\\iframe{https://www.youtube.com/embed/8TQIvdFl4aU?feature=oembed}[Video][]
+\\\\externalLink{https://www.youtube.com/watch?v=8TQIvdFl4aU}{https://www.youtube.com/watch?v=8TQIvdFl4aU}
 
 no caption"
 `;

@@ -47,6 +47,7 @@ const rebberConfig = {
     }, {}),
   },
   codeAppendiceTitle: 'Annexes',
+  appendiceReferenceGenerator: (appendixIndex) => `Annexe de code ${appendixIndex}`,
   customBlocks: {
     map: {
       error: 'Error',

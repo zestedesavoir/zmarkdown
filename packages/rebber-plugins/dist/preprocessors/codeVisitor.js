@@ -4,6 +4,10 @@ var visit = require('unist-util-visit');
 
 var appendix = require('../type/appendix');
 
+var defaultReferenceGenerator = function defaultReferenceGenerator(appendixIndex) {
+  return "Code appendice ".concat(appendixIndex);
+};
+
 module.exports = function (ctx, tree) {
   ctx.overrides.appendix = appendix;
   return function (node) {
@@ -27,22 +31,19 @@ module.exports = function (ctx, tree) {
             type: 'definition',
             identifier: "appendix-".concat(appendixIndex),
             url: "".concat(ctx.codeAppendiceTitle || 'Appendix', " ").concat(appendixIndex),
-            referenceType: 'full',
-            children: [{
-              type: 'text',
-              value: 'code'
-            }]
+            referenceType: 'full'
           }],
           depth: 1
         }]
       });
       appendix.children.push(innerNode);
+      var generator = ctx.appendiceReferenceGenerator || defaultReferenceGenerator;
       var referenceNode = {
         type: 'linkReference',
         identifier: "appendix-".concat(appendixIndex),
         children: [{
           type: 'text',
-          value: 'code'
+          value: generator(appendixIndex)
         }]
       };
 

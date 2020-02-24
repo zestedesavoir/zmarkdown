@@ -16,5 +16,5 @@ function appendixPlugin (ctx, node) {
   const overriddenCtx = clone(ctx)
   overriddenCtx.definition = definitionMacro
   const innerText = all(overriddenCtx, node)
-  return `\\begin{appendices}\n${innerText}\n\\end{appendices}`
+  return `\\begin{appendices}\n${innerText.trimEnd()}\n\\end{appendices}`
 }
