@@ -8,11 +8,11 @@ const preprocess = require('./preprocessors')
 module.exports = stringify
 module.exports.toLaTeX = toLaTeX
 
-/* Stringify the given MDAST node. */
 function toLaTeX (tree, options = {}) {
-  options.definitions = definitions(tree, options)
-
+  /* Stringify the given MDAST node. */
   preprocess(options, tree)
+  // resolve definition after preprocess because this step can create new identifiers
+  options.definitions = definitions(tree, options)
   return one(options, tree, undefined, undefined)
 }
 

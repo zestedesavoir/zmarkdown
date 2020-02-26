@@ -200,3 +200,10 @@ test('properly loads extensions - mhchem', () => {
 
   return expect(result).resolves.toContain(markdown)
 })
+
+test('codes in notes', () => {
+  const fixture = fixtures['code-inside-notes']
+  const p = renderString()(fixture.replace(/·/g, ' '))
+
+  return expect(p).resolves.toMatchSnapshot()
+})

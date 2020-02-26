@@ -13,12 +13,14 @@ var preprocess = require('./preprocessors');
 
 module.exports = stringify;
 module.exports.toLaTeX = toLaTeX;
-/* Stringify the given MDAST node. */
 
 function toLaTeX(tree) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  /* Stringify the given MDAST node. */
+  preprocess(options, tree); // resolve definition after preprocess because this step can create new identifiers
+
   options.definitions = definitions(tree, options);
-  preprocess(options, tree);
   return one(options, tree, undefined, undefined);
 }
 /* Compile MDAST tree using toLaTeX */
