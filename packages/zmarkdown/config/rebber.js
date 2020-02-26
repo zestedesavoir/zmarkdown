@@ -16,6 +16,7 @@ const rebberConfig = {
     inlineMath: require('rebber-plugins/dist/type/math'),
     kbd: require('rebber-plugins/dist/type/kbd'),
     math: require('rebber-plugins/dist/type/math'),
+    ping: require('rebber-plugins/dist/type/ping'),
     sub: require('rebber-plugins/dist/type/sub'),
     sup: require('rebber-plugins/dist/type/sup'),
     tableHeader: require('rebber-plugins/dist/type/tableHeader'),

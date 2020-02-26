@@ -707,6 +707,8 @@ Asymmetrical normcore portland, vaporware viral tote bag DIY slow-carb kogi fann
 Messenger bag locavore swag raclette brunch whatever, portland food truck. PBR\\\\&B cred mlkshk, poke letterpress waistcoat celiac. La croix letterpress forage keffiyeh."
 `;
 
+exports[`ping 1`] = `"Hello \\\\ping{you} and \\\\ping{you_too}, and \\\\ping{also you}"`;
+
 exports[`regression: code block without language 1`] = `
 "\\\\begin{CodeBlock}{text}
 a

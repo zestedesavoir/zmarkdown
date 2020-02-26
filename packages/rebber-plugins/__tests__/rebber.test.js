@@ -3,6 +3,7 @@ import {join} from 'path'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import remarkMath from 'remark-math'
+import remarkPing from 'remark-ping'
 import rebber from 'rebber'
 import dedent from 'dedent'
 
@@ -45,6 +46,7 @@ const integrationConfig = {
     leftAligned: require('../src/type/align'),
     math: require('../src/type/math'),
     neutreCustomBlock: require('../src/type/customBlocks'),
+    ping: require('../src/type/ping'),
     questionCustomBlock: require('../src/type/customBlocks'),
     rightAligned: require('../src/type/align'),
     secretCustomBlock: require('../src/type/customBlocks'),
@@ -428,6 +430,20 @@ test('math', () => {
       $$
 
       hehe
+    `)
+  expect(contents).toMatchSnapshot()
+})
+
+test('ping', () => {
+  const {contents} = unified()
+    .use(reParse)
+    .use(remarkPing, {
+      pingUsername: username => true,
+      userURL: username => `/membres/voir/${username}/`,
+    })
+    .use(rebber, integrationConfig)
+    .processSync(dedent`
+      Hello @you and @you_too, and @**also you**
     `)
   expect(contents).toMatchSnapshot()
 })
