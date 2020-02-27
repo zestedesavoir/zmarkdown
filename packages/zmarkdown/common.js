@@ -39,10 +39,12 @@ const rehypeLineNumbers = require('./utils/rehype-line-numbers')
 const rehypePostfixFootnotes = require('rehype-postfix-footnote-anchors')
 const rehypeSlug = require('rehype-slug')
 const rehypeSanitize = require('rehype-sanitize')
-
 const rehypeStringify = require('rehype-stringify')
 
 const remarkConfig = require('./config/remark')
+
+// KaTeX uses globals: load the mhchem extension
+require('katex/dist/contrib/mhchem')
 
 const jsFiddleAndInaFilter = node => {
   if (node.properties.src) {

@@ -21,11 +21,11 @@ This \\\\& that.
 
 
 
-Here's a link\\\\ref{1} with an ampersand in the URL.
+Here's a \\\\hyperref[1]{link} with an ampersand in the URL.
 
 
 
-Here's a link with an amersand in the link text: AT\\\\&T\\\\ref{2}.
+Here's a link with an amersand in the link text: \\\\hyperref[2]{AT\\\\&T}.
 
 
 
@@ -636,33 +636,33 @@ exports[`#basic properly renders links-inline.txt 1`] = `
 `;
 
 exports[`#basic properly renders links-reference.txt 1`] = `
-"Foo bar\\\\ref{1}.
+"Foo \\\\hyperref[1]{bar}.
 
 
 
-Foo bar\\\\ref{1}.
+Foo \\\\hyperref[1]{bar}.
 
 
 
-Foo bar\\\\ref{1}.
+Foo \\\\hyperref[1]{bar}.
 
 
 
 \\\\footnote{\\\\label{1}\\\\externalLink{/url/}{http://zestedesavoir.com/url/}}
 
-With embedded [brackets]\\\\ref{b}.
+With \\\\hyperref[b]{embedded [brackets]}.
 
 
 
-Indented once\\\\ref{once}.
+Indented \\\\hyperref[once]{once}.
 
 
 
-Indented twice\\\\ref{twice}.
+Indented \\\\hyperref[twice]{twice}.
 
 
 
-Indented thrice\\\\ref{thrice}.
+Indented \\\\hyperref[thrice]{thrice}.
 
 
 
@@ -684,11 +684,11 @@ Indented [four] times.
 
 \\\\footnote{\\\\label{b}\\\\externalLink{/url/}{http://zestedesavoir.com/url/}}
 
-With angle brackets\\\\ref{angle brackets}.
+With \\\\hyperref[angle brackets]{angle brackets}.
 
 
 
-And without\\\\ref{without}.
+And \\\\hyperref[without]{without}.
 
 
 
@@ -696,13 +696,13 @@ And without\\\\ref{without}.
 
 \\\\footnote{\\\\label{without}\\\\externalLink{http://example.com/}{http://example.com/}}
 
-With line
-breaks\\\\ref{line breaks}
+With \\\\hyperref[line breaks]{line
+breaks}
 
 
 
-and line
-breaks\\\\ref{line breaks} with one space.
+and \\\\hyperref[line breaks]{line
+breaks} with one space.
 
 
 
@@ -713,18 +713,18 @@ breaks[] with two spaces.
 
 \\\\footnote{\\\\label{line breaks}\\\\externalLink{http://example.com}{http://example.com}}
 
-short ref\\\\ref{short ref}
+\\\\hyperref[short ref]{short ref}
 
 
 
-short
-ref\\\\ref{short ref}
+\\\\hyperref[short ref]{short
+ref}
 
 
 
 \\\\footnote{\\\\label{short ref}\\\\externalLink{http://example.com}{http://example.com}}
 
-a ref\\\\ref{a ref}
+\\\\hyperref[a ref]{a ref}
 
 
 
@@ -3333,11 +3333,11 @@ This \\\\& that.
 
 
 
-Here's a link\\\\ref{1} with an ampersand in the URL.
+Here's a \\\\hyperref[1]{link} with an ampersand in the URL.
 
 
 
-Here's a link with an amersand in the link text: AT\\\\&T\\\\ref{2}.
+Here's a link with an amersand in the link text: \\\\hyperref[2]{AT\\\\&T}.
 
 
 
@@ -3570,25 +3570,25 @@ The end."
 `;
 
 exports[`#pl #Tests_2007 properly renders Links, shortcut references.txt 1`] = `
-"This is the simple case\\\\ref{simple case}.
+"This is the \\\\hyperref[simple case]{simple case}.
 
 
 
 \\\\footnote{\\\\label{simple case}\\\\externalLink{/simple}{http://zestedesavoir.com/simple}}
 
-This one has a line
-break\\\\ref{line break}.
+This one has a \\\\hyperref[line break]{line
+break}.
 
 
 
-This one has a line
-break\\\\ref{line break} with a line-ending space.
+This one has a \\\\hyperref[line break]{line
+break} with a line-ending space.
 
 
 
 \\\\footnote{\\\\label{line break}\\\\externalLink{/foo}{http://zestedesavoir.com/foo}}
 
-this\\\\ref{that} and the other\\\\ref{other}
+\\\\hyperref[that]{this} and the \\\\hyperref[other]{other}
 
 
 
@@ -4146,11 +4146,9 @@ exports[`#zds #extensions properly renders grid_tables.txt 1`] = `
 \\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 3}|m{\\\\dimexpr(\\\\linewidth) / 3}|m{\\\\dimexpr(\\\\linewidth) / 3}|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{\\\\parbox{\\\\linewidth}{Table Headings}} & Here \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
 Sub & Headings & Too \\\\\\\\ \\\\hline
-\\\\rowfont[c]{\\\\bfseries}
-\\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{cell \\\\endgraf spans \\\\endgraf rows}} & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{\\\\parbox{\\\\linewidth}{column spanning}} \\\\\\\\ \\\\cline{2-3}
 \\\\rowfont[l]{}
+\\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{cell \\\\endgraf spans \\\\endgraf rows}} & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{\\\\parbox{\\\\linewidth}{column spanning}} \\\\\\\\ \\\\cline{2-3}
  & normal & cell \\\\\\\\ \\\\hline
 multi \\\\endgraf line \\\\endgraf \\\\endgraf cells \\\\endgraf too & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{\\\\parbox{\\\\linewidth}{cells can be \\\\endgraf \\\\textit{formatted} \\\\endgraf \\\\textbf{paragraphs}}} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -4159,9 +4157,8 @@ multi \\\\endgraf line \\\\endgraf \\\\endgraf cells \\\\endgraf too & \\\\multi
 \\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 3}|m{\\\\dimexpr(\\\\linewidth) / 3}|m{\\\\dimexpr(\\\\linewidth) / 3}|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 A & B & C \\\\\\\\ \\\\hline
-\\\\rowfont[c]{\\\\bfseries}
-\\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{D}} & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{\\\\parbox{\\\\linewidth}{E}} \\\\\\\\ \\\\cline{2-3}
 \\\\rowfont[l]{}
+\\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{D}} & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{\\\\parbox{\\\\linewidth}{E}} \\\\\\\\ \\\\cline{2-3}
  & F & G \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
@@ -4235,14 +4232,13 @@ D & E & F & G \\\\\\\\ \\\\hline
 \\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 7}|m{\\\\dimexpr(\\\\linewidth) / 7}|m{\\\\dimexpr(\\\\linewidth) / 7}|m{\\\\dimexpr(\\\\linewidth) / 7}|m{\\\\dimexpr(\\\\linewidth) / 7}|m{\\\\dimexpr(\\\\linewidth) / 7}|m{\\\\dimexpr(\\\\linewidth) / 7}|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 A & \\\\multicolumn{6}{|m{\\\\dimexpr(\\\\linewidth) * 6 / 7}|}{\\\\parbox{\\\\linewidth}{B}} \\\\\\\\ \\\\hline
-\\\\rowfont[c]{\\\\bfseries}
+\\\\rowfont[l]{}
 \\\\multirow{4}{*}{\\\\parbox{\\\\linewidth}{C}} & \\\\multirow{4}{*}{\\\\parbox{\\\\linewidth}{\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 4}|m{\\\\dimexpr(\\\\linewidth) / 4}|m{\\\\dimexpr(\\\\linewidth) / 4}|m{\\\\dimexpr(\\\\linewidth) / 4}|} \\\\cline{1-1}
 \\\\rowfont[c]{\\\\bfseries}
 D & E & F & G \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
 \\\\multicolumn{4}{|m{\\\\dimexpr(\\\\linewidth) * 4 / 4}|}{\\\\parbox{\\\\linewidth}{H}} \\\\\\\\ \\\\hline
 \\\\end{longtabu}}} \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
  &  &  &  &  &  \\\\\\\\ \\\\cline{1-1}
  &  &  &  &  &  \\\\\\\\ \\\\cline{1-1}
  &  &  &  &  &  \\\\\\\\ \\\\hline
@@ -4372,9 +4368,8 @@ Bug \\\\#107
 \\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 6}|m{\\\\dimexpr(\\\\linewidth) / 6}|m{\\\\dimexpr(\\\\linewidth) / 6}|m{\\\\dimexpr(\\\\linewidth) / 6}|m{\\\\dimexpr(\\\\linewidth) / 6}|m{\\\\dimexpr(\\\\linewidth) / 6}|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
  & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 6}|}{\\\\parbox{\\\\linewidth}{case1}} & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 6}|}{\\\\parbox{\\\\linewidth}{case2}} & case3 \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
  & case4 & case5 & case6 & case7 &  \\\\\\\\ \\\\hline
-\\\\rowfont[c]{\\\\bfseries}
+\\\\rowfont[l]{}
 X & X & X & X & X & X \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;

@@ -23,8 +23,10 @@ function tableRow(ctx, node, index) {
   var firstLineRowFont = ctx.firstLineRowFont || defaultFirstLineRowFont;
   var otherLineRowFont = ctx.otherLineRowFont || defaultOtherLineRowFont;
 
-  if (index < 2) {
-    return "".concat(index === 0 ? firstLineRowFont : otherLineRowFont, "\n").concat(macro(ctx, node));
+  if (index === 0) {
+    return "".concat(firstLineRowFont, "\n").concat(macro(ctx, node));
+  } else if (index === 1) {
+    return "".concat(otherLineRowFont, "\n").concat(macro(ctx, node));
   } else {
     return macro(ctx, node);
   }

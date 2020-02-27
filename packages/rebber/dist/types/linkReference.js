@@ -3,7 +3,7 @@
 module.exports = linkReference;
 
 var defaultMacro = function defaultMacro(reference, inner) {
-  return "".concat(inner, "\\ref{").concat(reference, "}");
+  return "\\hyperref[".concat(reference, "]{").concat(inner, "}");
 };
 
 function linkReference(ctx, node) {

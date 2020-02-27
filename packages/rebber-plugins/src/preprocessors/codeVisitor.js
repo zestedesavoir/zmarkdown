@@ -1,41 +1,56 @@
 const visit = require('unist-util-visit')
+const appendix = require('../type/appendix')
+
+const defaultReferenceGenerator = (appendixIndex) => `Code appendice ${appendixIndex}`
 
 module.exports = (ctx, tree) => {
-  const title = ctx.codeAppendiceTitle || 'Appendices'
+  ctx.overrides.appendix = appendix
   return (node) => {
-    const inAppendix = []
-    let appendixIndex = 1
-
+    let appendix = tree.children[tree.children.length - 1]
+    if (!appendix || appendix.type !== 'appendix') {
+      appendix = {
+        type: 'appendix',
+        children: [],
+      }
+      tree.children.push(appendix)
+    }
+    let appendixIndex = appendix.children.length + 1
     visit(node, 'code', (innerNode, index, _parent) => {
-      inAppendix.push({
+      appendix.children.push({
         type: 'paragraph',
         children: [
           {
-            type: 'definition',
-            identifier: `appendix-${appendixIndex}`,
-            referenceType: 'full',
-            children: [{type: 'text', value: 'code'}],
+            type: 'heading',
+            children: [
+              {
+                type: 'definition',
+                identifier: `appendix-${appendixIndex}`,
+                url: `${ctx.codeAppendiceTitle || 'Appendix'} ${appendixIndex}`,
+                referenceType: 'full',
+              },
+            ],
+            depth: 1,
           },
-          {type: 'text', value: '\n'},
-          innerNode,
         ],
       })
+
+      appendix.children.push(innerNode)
+
+      const generator = ctx.appendiceReferenceGenerator || defaultReferenceGenerator
+
       const referenceNode = {
         type: 'linkReference',
         identifier: `appendix-${appendixIndex}`,
+        children: [
+          {
+            type: 'text',
+            value: generator(appendixIndex),
+          },
+        ],
       }
       _parent.children.splice(index, 1, referenceNode)
       appendixIndex++
     })
 
-    if (inAppendix.length) {
-      tree.children.push({
-        type: 'heading',
-        depth: 1,
-        children: [{type: 'text', value: title}],
-
-      })
-      inAppendix.forEach((element) => tree.children.push(element))
-    }
   }
 }

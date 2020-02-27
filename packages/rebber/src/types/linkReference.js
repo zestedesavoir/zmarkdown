@@ -1,6 +1,6 @@
 module.exports = linkReference
 
-const defaultMacro = (reference, inner) => `${inner}\\ref{${reference}}`
+const defaultMacro = (reference, inner) => `\\hyperref[${reference}]{${inner}}`
 
 function linkReference (ctx, node) {
   const macro = ctx.linkReference ? ctx.linkReference : defaultMacro

@@ -26,6 +26,9 @@ module.exports = function () {
         node.title = '';
         node.url = state[node.identifier];
       };
+    },
+    addIdentifier: function addIdentifier(identifier, content) {
+      state[identifier] = content;
     }
   };
 };

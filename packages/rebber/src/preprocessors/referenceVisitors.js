@@ -25,5 +25,8 @@ module.exports = () => {
         node.url = state[node.identifier]
       }
     },
+    addIdentifier (identifier, content) {
+      state[identifier] = content
+    },
   }
 }

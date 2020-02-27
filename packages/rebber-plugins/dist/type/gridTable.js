@@ -116,7 +116,7 @@ function () {
     }
   }, {
     key: "gridTableRow",
-    value: function gridTableRow(ctx, node) {
+    value: function gridTableRow(ctx, node, index) {
       var overriddenCtx = clone(ctx);
       this.rowIndex++;
       overriddenCtx.tableRow = undefined;
@@ -138,7 +138,7 @@ function () {
         }
 
         this.colIndex = 0;
-        var rowStr = tableRow(overriddenCtx, node);
+        var rowStr = tableRow(overriddenCtx, node, index);
 
         if (lastMultiRowline.multilineCounter > 0) {
           rowStr = rowStr.replace(/\\hline/, lastMultiRowline.getCLine());
@@ -148,7 +148,7 @@ function () {
         return rowStr;
       }
 
-      var rowText = tableRow(overriddenCtx, node);
+      var rowText = tableRow(overriddenCtx, node, index);
 
       if (this.currentSpan !== 0) {
         this.lastMultiRowLine = new MultiRowLine(this.rowIndex, this.rowIndex + this.currentSpan + -1, this.multiLineCellIndex, this.colIndex + this.colspan, this.colspan, this.colIndex);

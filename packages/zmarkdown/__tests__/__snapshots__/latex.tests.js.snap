@@ -108,6 +108,34 @@ print('bla')
 \\\\captionof{listing}{With Source}"
 `;
 
+exports[`codes in notes 1`] = `
+"hello \\\\textsuperscript{\\\\ref{footnote:1}}\\\\textsuperscript{\\\\ref{footnote:2}}
+
+
+
+\\\\footnotetext[1]{\\\\label{footnote:1} test
+
+\\\\hyperref[appendix-1]{Annexe de code 1}}
+
+\\\\footnotetext[2]{\\\\label{footnote:2} test
+
+\\\\hyperref[appendix-3]{Annexe de code 3}}
+
+\\\\begin{appendices}
+\\\\levelOneTitle{\\\\label{appendix-1}Annexes 1}
+
+\\\\begin{CodeBlock}{javascript}
+ console.log('hello')
+\\\\end{CodeBlock}
+
+\\\\levelOneTitle{\\\\label{appendix-3}Annexes 3}
+
+\\\\begin{CodeBlock}{javascript}
+console.log('hello')
+\\\\end{CodeBlock}
+\\\\end{appendices}"
+`;
+
 exports[`custom-blocks 1`] = `
 "\\\\begin{Information}
 info
@@ -562,9 +590,8 @@ exports[`mix-4 1`] = `
 "\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 3}|m{\\\\dimexpr(\\\\linewidth) / 3}|m{\\\\dimexpr(\\\\linewidth) / 3}|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 Sub & Headings & \\\\abbr{ABBR}{abbreviation} \\\\\\\\ \\\\hline
-\\\\rowfont[c]{\\\\bfseries}
-\\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{cell \\\\endgraf spans \\\\endgraf rows}} & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{\\\\parbox{\\\\linewidth}{column spanning}} \\\\\\\\ \\\\cline{2-3}
 \\\\rowfont[l]{}
+\\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{cell \\\\endgraf spans \\\\endgraf rows}} & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{\\\\parbox{\\\\linewidth}{column spanning}} \\\\\\\\ \\\\cline{2-3}
  & normal & cell \\\\\\\\ \\\\hline
 multi \\\\endgraf line \\\\endgraf \\\\endgraf cells \\\\endgraf too & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{\\\\parbox{\\\\linewidth}{cells can be \\\\endgraf \\\\textit{formatted} \\\\endgraf \\\\textbf{paragraphs}}} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
@@ -577,7 +604,7 @@ multi \\\\endgraf line \\\\endgraf \\\\endgraf cells \\\\endgraf too & \\\\multi
 \\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 2}|m{\\\\dimexpr(\\\\linewidth) / 2}|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 title & image \\\\\\\\ \\\\hline
-\\\\rowfont[c]{\\\\bfseries}
+\\\\rowfont[l]{}
 space & \\\\image{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg}[space] \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
@@ -585,20 +612,19 @@ space & \\\\image{https://i.ytimg.com/vi/lt0WQ8JzLz4/maxresdefault.jpg}[space] \
 \\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 2}|m{\\\\dimexpr(\\\\linewidth) / 2}|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
 title & code \\\\\\\\ \\\\hline
-\\\\rowfont[c]{\\\\bfseries}
-inline & \\\\CodeInline{inline} br \\\\endgraf \\\\CodeInline{inline} \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
-block & [] \\\\\\\\ \\\\hline
+inline & \\\\CodeInline{inline} br \\\\endgraf \\\\CodeInline{inline} \\\\\\\\ \\\\hline
+block & \\\\hyperref[appendix-1]{Annexe de code 1} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
 
 
-\\\\levelOneTitle{Annexes}
+\\\\begin{appendices}
+\\\\levelOneTitle{\\\\label{appendix-1}Annexes 1}
 
-
-\\\\footnote{\\\\label{appendix-1}}
 \\\\begin{CodeBlock}{python}
 print('bla')
-\\\\end{CodeBlock}"
+\\\\end{CodeBlock}
+\\\\end{appendices}"
 `;
 
 exports[`mix-5 1`] = `
