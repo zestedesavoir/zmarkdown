@@ -1,9 +1,9 @@
-/* eslint-disable no-console */
 import {readdirSync as directory, readFileSync as file, lstatSync as stat} from 'fs'
 import {join} from 'path'
 import unified from 'unified'
 import reParse from 'remark-parse'
 import remarkMath from 'remark-math'
+import remarkPing from 'remark-ping'
 import rebber from 'rebber'
 import dedent from 'dedent'
 
@@ -30,6 +30,8 @@ const integrationConfig = {
   preprocessors: {
     tableCell: require('../src/preprocessors/codeVisitor'),
     iframe: require('../src/preprocessors/iframe'),
+    // eslint-disable-next-line max-len
+    spoilerFlatten: require('../src/preprocessors/spoilerFlatten')(['sCustomBlock', 'secretCustomBlock']),
   },
   overrides: {
     abbr: require('../src/type/abbr'),
@@ -44,6 +46,7 @@ const integrationConfig = {
     leftAligned: require('../src/type/align'),
     math: require('../src/type/math'),
     neutreCustomBlock: require('../src/type/customBlocks'),
+    ping: require('../src/type/ping'),
     questionCustomBlock: require('../src/type/customBlocks'),
     rightAligned: require('../src/type/align'),
     secretCustomBlock: require('../src/type/customBlocks'),
@@ -427,6 +430,20 @@ test('math', () => {
       $$
 
       hehe
+    `)
+  expect(contents).toMatchSnapshot()
+})
+
+test('ping', () => {
+  const {contents} = unified()
+    .use(reParse)
+    .use(remarkPing, {
+      pingUsername: username => true,
+      userURL: username => `/membres/voir/${username}/`,
+    })
+    .use(rebber, integrationConfig)
+    .processSync(dedent`
+      Hello @you and @you_too, and @**also you**
     `)
   expect(contents).toMatchSnapshot()
 })

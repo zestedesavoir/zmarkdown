@@ -100,7 +100,7 @@ module.exports = function markdownHandlers (Raven) {
       return callback(new Error(`Unknown target 'target=${target}'`))
     }
 
-    /* zmd parser memoization */
+    /* zmd parser options */
     const key = String(target) + JSON.stringify(opts)
     if (!processors.hasOwnProperty(key)) {
       const remark = clone(remarkConfig)
@@ -119,8 +119,14 @@ module.exports = function markdownHandlers (Raven) {
         remark.iframes['jsfiddle.net'].disabled = true
         remark.iframes['www.jsfiddle.net'].disabled = true
       }
+
+      if (typeof opts.disable_tokenizers === 'object' && !Array.isArray(opts.disable_tokenizers)) {
+        remark.disableTokenizers = opts.disable_tokenizers
+      }
+
       remark.stats = opts.stats === true
       remark.imagesDownload.disabled = opts.disable_images_download === true
+
       if (remark.imagesDownload.disabled !== true) {
         if (opts.images_download_dir) {
           remark.imagesDownload.downloadDestination = opts.images_download_dir
@@ -140,18 +146,20 @@ module.exports = function markdownHandlers (Raven) {
       }
 
       if (opts.inline === true) {
-        remark.disableTokenizers = {
-          block: [
-            'indentedCode',
-            'fencedCode',
-            'blockquote',
-            'atxHeading',
-            'setextHeading',
-            'footnote',
-            'table',
-            'custom_blocks',
-          ],
+        if (!Array.isArray(remark.disableTokenizers.block)) {
+          remark.disableTokenizers.block = []
         }
+
+        remark.disableTokenizers.block = remark.disableTokenizers.block.concat([
+          'indentedCode',
+          'fencedCode',
+          'blockquote',
+          'atxHeading',
+          'setextHeading',
+          'footnote',
+          'table',
+          'custom_blocks',
+        ])
       }
 
       processors[key] = zmarkdown({

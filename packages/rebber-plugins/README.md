@@ -12,6 +12,7 @@ It currently supports:
 * [remark-grid-tables][]
 * [remark-iframes][]
 * [remark-kbd][]
+* [remark-ping][]
 * [remark-sub-super][]
 
 ## Installation
@@ -134,6 +135,11 @@ console.log(contents);
 * `remarkConfig` needs to be configured for `remark-kbd`
 * `rebberConfig.overrides.kbd = require('rebber-plugins/dist/type/kbd')`
 
+###### [remark-ping][]
+
+* `remarkConfig` needs to be configured for `remark-ping`
+* `rebberConfig.overrides.ping = require('rebber-plugins/dist/type/ping')`
+
 
 ###### [remark-sub-super][]
 
@@ -179,5 +185,7 @@ console.log(contents);
 [remark-iframes]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-iframes#remark-iframes--
 
 [remark-kbd]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-kbd#remark-kbd--
+
+[remark-ping]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-ping#remark-ping--
 
 [remark-sub-super]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-sub-super#remark-sub-super--

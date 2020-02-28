@@ -6,7 +6,7 @@ var all = require('rebber/dist/all');
 
 
 module.exports = kbd;
-/* Stringify a sub `node`. */
+/* Stringify a kbd `node`. */
 
 function kbd(ctx, node) {
   var contents = all(ctx, node);

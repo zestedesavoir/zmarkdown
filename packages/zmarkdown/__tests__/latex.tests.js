@@ -8,7 +8,6 @@ const rebberConfig = require('../config/rebber')
 
 remarkConfig.noTypography = true
 remarkConfig._test = true
-remarkConfig.ping.pingUsername = () => false
 
 const zmarkdown = require('../server')
 
@@ -174,6 +173,13 @@ test('math', () => {
 
     hehe
   `)
+  return expect(p).resolves.toMatchSnapshot()
+})
+
+test('ping', () => {
+  const p = renderString()(dedent`
+      Hello @you and @you_too, and @**also you**
+    `)
   return expect(p).resolves.toMatchSnapshot()
 })
 

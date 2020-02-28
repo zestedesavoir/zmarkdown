@@ -210,6 +210,70 @@ secret
 \\\\end{FooBar}
 
 
+\\\\begin{FooBar}
+imbricated spoilers
+
+and another
+
+and that's it
+\\\\end{FooBar}
+
+
+\\\\begin{FooBar}
+imbricated spoilers
+
+second level
+
+second level too
+\\\\end{FooBar}
+
+
+\\\\begin{FooBar}
+imbricated spoilers
+
+second level
+
+with text in between
+
+second level too
+\\\\end{FooBar}
+
+
+\\\\begin{FooBar}
+imbricated spoilers
+
+\\\\begin{CodeBlock}{markdown}
+and here is some code
+\\\\end{CodeBlock}
+
+second level
+\\\\end{FooBar}
+
+
+\\\\begin{FooBar}
+do not over-flattenize
+
+expected to be flattened
+
+first level
+
+\\\\begin{Question}
+this remains a question
+\\\\end{Question}
+\\\\end{FooBar}
+
+
+\\\\begin{FooBar}
+flattenize children of children
+
+\\\\begin{Question}
+this remains a question
+
+but the content in it is flattened to the question
+\\\\end{Question}
+\\\\end{FooBar}
+
+
 \\\\begin{Question}
 question \\\\texttt{coded}
 \\\\end{Question}
@@ -1089,6 +1153,12 @@ Asymmetrical normcore portland, vaporware viral tote bag DIY slow-carb kogi fann
 
 
 Messenger bag locavore swag raclette brunch whatever, portland food truck. PBR\\\\&B cred mlkshk, poke letterpress waistcoat celiac. La croix letterpress forage keffiyeh."
+`;
+
+exports[`ping 1`] = `
+"Hello \\\\ping{you} and \\\\ping{you_too}, and \\\\ping{also you}
+
+"
 `;
 
 exports[`regression: code block without language 1`] = `

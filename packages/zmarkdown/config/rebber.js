@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const remarkConfig = require('./remark')
 const escape = require('rebber/dist/escaper')
 const appendix = require('rebber-plugins/dist/preprocessors/codeVisitor')
@@ -5,6 +6,7 @@ const rebberConfig = {
   preprocessors: {
     tableCell: appendix,
     footnoteDefinition: [appendix],
+    spoilerFlatten: require('rebber-plugins/dist/preprocessors/spoilerFlatten')(['sCustomBlock', 'secretCustomBlock']),
   },
   overrides: {
     abbr: require('rebber-plugins/dist/type/abbr'),
@@ -15,6 +17,7 @@ const rebberConfig = {
     inlineMath: require('rebber-plugins/dist/type/math'),
     kbd: require('rebber-plugins/dist/type/kbd'),
     math: require('rebber-plugins/dist/type/math'),
+    ping: require('rebber-plugins/dist/type/ping'),
     sub: require('rebber-plugins/dist/type/sub'),
     sup: require('rebber-plugins/dist/type/sup'),
     tableHeader: require('rebber-plugins/dist/type/tableHeader'),
