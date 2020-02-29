@@ -450,9 +450,28 @@ function generateTable (tableContent, now, tokenizer) {
   return tableElt
 }
 
-
 function gridTableTokenizer (eat, value, silent) {
-  const keep = mainLineRegex.exec(value)
+  let index = 0
+  const length = value.length
+  let character
+  while (index < length) {
+    character = value.charAt(index)
+
+    if (character !== ' ' && character !== '\t') {
+      break
+    }
+
+    index++
+  }
+
+  if (value.charAt(index) !== '+') {
+    return
+  }
+  if (value.charAt(index + 1) !== '-') {
+    return
+  }
+
+  const keep = mainLineRegex.test(value)
   if (!keep) return
 
   const [before, gridTable, realGridTable, after, hasHeader] = extractTable(value, eat, this)
@@ -554,7 +573,7 @@ function setHeight (grid, i, j, values) {
   }
 }
 
-function extractAST (gridNode, grid, nbRows, nbCols, getMD) {
+function extractAST (gridNode, grid) {
   let i = 0
   /* Fill the grid with value, height and width from the ast */
   gridNode.children.forEach(th => {
@@ -728,7 +747,7 @@ function stringifyGridTables (gridNode) {
    * Finaly we fill it up.
    */
 
-  extractAST.bind(this)(gridNode, grid, nbRows, nbCols)
+  extractAST.bind(this)(gridNode, grid)
 
   setSize(grid)
 
