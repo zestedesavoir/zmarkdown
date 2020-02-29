@@ -137,3 +137,33 @@ exports[`title is required 1`] = `
 <div class=\\"custom-block neutral foo\\"><div class=\\"custom-block-heading\\">my title</div><div class=\\"custom-block-body\\"><p>yes</p></div></div>
 <div class=\\"custom-block neutral foo\\"><div class=\\"custom-block-heading\\">my <strong>title</strong></div><div class=\\"custom-block-body\\"><p>yes</p></div></div>"
 `;
+
+exports[`with customized container, contents and title element types 1`] = `
+"<div class=\\"custom-block spoiler\\"><div class=\\"custom-block-body\\"><p>Secret Block</p></div></div>
+<div class=\\"custom-block spoiler\\"><div class=\\"custom-block-body\\"><p>Secret Block</p></div></div>
+<details class=\\"custom-block\\"><div class=\\"custom-block-body\\"><p>another</p></div></details>
+<blockquote>
+<div class=\\"custom-block spoiler\\"><div class=\\"custom-block-body\\"><blockquote>
+<p>Blockquote in secret block in blockquote</p>
+</blockquote></div></div>
+</blockquote>
+<div class=\\"custom-block information ico-after\\"><div class=\\"custom-block-body\\"><p>Information Block</p></div></div>
+<div class=\\"custom-block information ico-after\\"><fieldset class=\\"custom-block-body\\"><p>another</p></fieldset></div>
+<div class=\\"custom-block question ico-after\\"><div class=\\"custom-block-body\\"><p>Question Block</p></div></div>
+<div class=\\"custom-block question ico-after\\"><div class=\\"custom-block-body\\"><p>another</p></div></div>
+<div class=\\"custom-block warning ico-after\\"><div class=\\"custom-block-body\\"><p>Attention Block</p></div></div>
+<article class=\\"custom-block warning ico-after\\"><section class=\\"custom-block-body\\"><p>another</p></section></article>
+<div class=\\"custom-block error ico-after\\"><div class=\\"custom-block-body\\"><p>Erreur Block</p></div></div>
+<div class=\\"custom-block error ico-after\\"><div class=\\"custom-block-body\\"><p>another</p></div></div>
+<p>[[se]]
+| not a block</p>
+<p>[[secretsecret]]
+| not a block</p>
+<p>[[SECRET]]
+| not a block</p>
+<div class=\\"custom-block spoiler\\"><div class=\\"custom-block-body\\"><p>Multiline block</p><blockquote>
+<p>with blockquote !</p>
+</blockquote></div></div>
+<p>| Not a block</p>
+<article class=\\"custom-block warning ico-after\\"><header class=\\"custom-block-heading\\">title</header><section class=\\"custom-block-body\\"><p>not parsed</p></section></article>"
+`;

@@ -84,12 +84,16 @@ module.exports = function blockPlugin (availableBlocks = {}) {
     if (!titleAllowed && blockTitle) return
 
     const add = eat(stringToEat)
+    if (potentialBlock.details) {
+      potentialBlock.containerElement = 'details'
+      potentialBlock.titleElement = 'summary'
+    }
 
     const exit = this.enterBlock()
     const contents = {
       type: `${blockType}CustomBlockBody`,
       data: {
-        hName: 'div',
+        hName: potentialBlock.contentsElement ? potentialBlock.contentsElement : 'div',
         hProperties: {
           className: 'custom-block-body',
         },
@@ -100,10 +104,12 @@ module.exports = function blockPlugin (availableBlocks = {}) {
 
     const blockChildren = [contents]
     if (titleAllowed && blockTitle) {
+
+      const titleElement = potentialBlock.titleElement ? potentialBlock.titleElement : 'div'
       const titleNode = {
         type: `${blockType}CustomBlockHeading`,
         data: {
-          hName: potentialBlock.details ? 'summary' : 'div',
+          hName: titleElement,
           hProperties: {
             className: 'custom-block-heading',
           },
@@ -120,7 +126,7 @@ module.exports = function blockPlugin (availableBlocks = {}) {
       type: `${blockType}CustomBlock`,
       children: blockChildren,
       data: {
-        hName: potentialBlock.details ? 'details' : 'div',
+        hName: potentialBlock.containerElement ? potentialBlock.containerElement : 'div',
         hProperties: {
           className: ['custom-block', ...classList],
         },
