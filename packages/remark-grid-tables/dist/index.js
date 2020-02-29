@@ -541,7 +541,29 @@ function generateTable(tableContent, now, tokenizer) {
 }
 
 function gridTableTokenizer(eat, value, silent) {
-  var keep = mainLineRegex.exec(value);
+  var index = 0;
+  var length = value.length;
+  var character;
+
+  while (index < length) {
+    character = value.charAt(index);
+
+    if (character !== ' ' && character !== '\t') {
+      break;
+    }
+
+    index++;
+  }
+
+  if (value.charAt(index) !== '+') {
+    return;
+  }
+
+  if (value.charAt(index + 1) !== '-') {
+    return;
+  }
+
+  var keep = mainLineRegex.test(value);
   if (!keep) return;
 
   var _extractTable = extractTable(value, eat, this),
@@ -662,7 +684,7 @@ function setHeight(grid, i, j, values) {
   }
 }
 
-function extractAST(gridNode, grid, nbRows, nbCols, getMD) {
+function extractAST(gridNode, grid) {
   var _this = this;
 
   var i = 0;
@@ -838,7 +860,7 @@ function stringifyGridTables(gridNode) {
    * Finaly we fill it up.
    */
 
-  extractAST.bind(this)(gridNode, grid, nbRows, nbCols);
+  extractAST.bind(this)(gridNode, grid);
   setSize(grid);
   generateBorders(grid, nbRows, nbCols, gridString);
   writeText(grid, gridString);

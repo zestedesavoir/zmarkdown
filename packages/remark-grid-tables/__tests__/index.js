@@ -97,7 +97,7 @@ test('regression: should be parsed with two spaces on last line', () => {
 
 test('regression: should not crash with leading space', () => {
   const {contents: base} = render(dedent`
-    ax
+    a
     +---+
     | b |
     +---+
@@ -114,7 +114,7 @@ test('regression: should not crash with leading space', () => {
     hello
     `.replace(/·/g, ' '))
 
-  expect(contents).toBe(base.replace('x', ' '))
+  expect(contents).toBe(base)
 })
 
 test('regression: should not crash when followed by "sth<space>"', () => {
