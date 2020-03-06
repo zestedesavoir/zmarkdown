@@ -101,11 +101,17 @@ module.exports = function blockPlugin() {
     if (titleRequired && !blockTitle) return;
     if (!titleAllowed && blockTitle) return;
     var add = eat(stringToEat);
+
+    if (potentialBlock.details) {
+      potentialBlock.containerElement = 'details';
+      potentialBlock.titleElement = 'summary';
+    }
+
     var exit = this.enterBlock();
     var contents = {
       type: "".concat(blockType, "CustomBlockBody"),
       data: {
-        hName: 'div',
+        hName: potentialBlock.contentsElement ? potentialBlock.contentsElement : 'div',
         hProperties: {
           className: 'custom-block-body'
         }
@@ -116,10 +122,11 @@ module.exports = function blockPlugin() {
     var blockChildren = [contents];
 
     if (titleAllowed && blockTitle) {
+      var configuredTitleBlockType = potentialBlock.titleElement ? potentialBlock.titleElement : 'div';
       var titleNode = {
         type: "".concat(blockType, "CustomBlockHeading"),
         data: {
-          hName: potentialBlock.details ? 'summary' : 'div',
+          hName: configuredTitleBlockType,
           hProperties: {
             className: 'custom-block-heading'
           }
@@ -134,7 +141,7 @@ module.exports = function blockPlugin() {
       type: "".concat(blockType, "CustomBlock"),
       children: blockChildren,
       data: {
-        hName: potentialBlock.details ? 'details' : 'div',
+        hName: potentialBlock.containerElement ? potentialBlock.containerElement : 'div',
         hProperties: {
           className: ['custom-block'].concat(_toConsumableArray(classList))
         }

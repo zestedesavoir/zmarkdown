@@ -4,13 +4,11 @@ import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remarkStringify from 'remark-stringify'
 import remark2rehype from 'remark-rehype'
-
+import xtend from 'xtend'
 import plugin from '../src/'
 
-const render = (text, allowTitle) => unified()
-  .use(reParse)
-  .use(remark2rehype)
-  .use(plugin, {
+const render = (text, allowTitle, config) => {
+  const realConfig = xtend({
     secret: {
       classes: 'spoiler',
     },
@@ -54,9 +52,14 @@ const render = (text, allowTitle) => unified()
       title: 'optional',
       details: true,
     },
-  }, allowTitle)
-  .use(stringify)
-  .processSync(text)
+  }, config)
+  return unified()
+    .use(reParse)
+    .use(remark2rehype)
+    .use(plugin, realConfig, allowTitle)
+    .use(stringify)
+    .processSync(text)
+}
 
 
 const renderToMarkdown = (text) => unified()
@@ -300,6 +303,28 @@ test('compile multiline block to markdown, with multiline paragraph', () => {
   contents = renderToMarkdown(contents).contents
   contents = renderToMarkdown(contents).contents.trim()
   expect(contents).toBe(fixture)
+})
+
+test('with customized container, contents and title element types', () => {
+  const {contents} = render(fixture, true, {
+    attention: {
+      title: 'optional',
+      titleElement: 'header',
+      contentsElement: 'section',
+      containerElement: 'article',
+      classes: 'warning ico-after',
+    },
+    information: {
+      classes: 'information ico-after',
+      contentsElement: 'fieldset',
+    },
+    secret: {
+      title: 'optional',
+      containerElement: 'details',
+      titleElement: 'summary',
+    },
+  })
+  expect(contents).toMatchSnapshot()
 })
 
 test('weirdly named blocks', () => {
