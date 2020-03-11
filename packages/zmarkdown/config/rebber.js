@@ -2,6 +2,7 @@
 const remarkConfig = require('./remark')
 const escape = require('rebber/dist/escaper')
 const appendix = require('rebber-plugins/dist/preprocessors/codeVisitor')
+
 const rebberConfig = {
   preprocessors: {
     tableCell: appendix,
@@ -32,6 +33,8 @@ const rebberConfig = {
     questionCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     secretCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     warningCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
+    introduction: require('rebber-plugins/dist/type/introduction'),
+    conclusion: require('rebber-plugins/dist/type/conclusion'),
 
     inlineCode: (ctx, node) => {
       const escaped = escape(node.value)

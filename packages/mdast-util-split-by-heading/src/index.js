@@ -37,6 +37,7 @@ class Splitter {
     if (node.type === 'heading' && node.depth === this.depth) {
       this.lastIndex = index
       const subtree = {
+        index: index,
         title: newRootTree(node),
         children: newRootTree(),
       }

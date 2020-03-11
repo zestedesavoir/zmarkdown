@@ -4,10 +4,12 @@ const zmarkdown = require('../server')
 const remarkConfig = require('../config/remark')
 const rebberConfig = require('../config/rebber')
 const latexDocumentTemplate = require('../templates/latex-document')
-
+const introductionAndConclusionVisitor =
+  require('rebber-plugins/dist/preprocessors/introductionAndConclusionVisitor')
 const probe = pmx.probe()
 
 const endpoints = ['toEPUB', 'toHTML', 'toLatex', 'toLatexDocument']
+
 
 const meters = endpoints.reduce((acc, endpoint) => {
   const meter = probe.meter({
@@ -160,6 +162,14 @@ module.exports = function markdownHandlers (Raven) {
           'table',
           'custom_blocks',
         ])
+      }
+
+      if (opts.content_type === 'big') {
+        rebber.preprocessors.root = introductionAndConclusionVisitor(2)
+      } else if (opts.content_type === 'middle') {
+        rebber.preprocessors.root = introductionAndConclusionVisitor(1)
+      } else {
+        rebber.preprocessors.root = introductionAndConclusionVisitor(0)
       }
 
       processors[key] = zmarkdown({

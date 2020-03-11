@@ -41,6 +41,7 @@
     "remark-emoticons": "file:../remark-emoticons",
     "remark-grid-tables": "file:../remark-grid-tables",
     "remark-numbered-footnotes": "file:../remark-numbered-footnotes",
-    "remark-sub-super": "file:../remark-sub-super"
+    "remark-sub-super": "file:../remark-sub-super",
+    "mdast-util-split-by-heading": "file:../mdast-util-split-by-heading"
   }
 }

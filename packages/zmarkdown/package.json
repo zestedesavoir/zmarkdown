@@ -27,6 +27,7 @@
     "pmx": "^1.6.7",
     "raven": "^2.6.4",
     "rebber": "file:../rebber",
+    "mdast-util-split-by-heading": "file:../mdast-util-split-by-heading",
     "rebber-plugins": "file:../rebber-plugins",
     "rehype-autolink-headings": "^2.0.5",
     "rehype-footnotes-title": "file:../rehype-footnotes-title",

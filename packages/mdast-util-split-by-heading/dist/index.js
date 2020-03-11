@@ -58,6 +58,7 @@ function () {
       if (node.type === 'heading' && node.depth === this.depth) {
         this.lastIndex = index;
         var subtree = {
+          index: index,
           title: newRootTree(node),
           children: newRootTree()
         };
