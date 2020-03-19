@@ -2,7 +2,7 @@
 
 var splitAtDepth = require('mdast-util-split-by-heading/dist');
 
-var introductionAndConclusionVisitor = function introductionAndConclusionVisitor() {
+function introductionAndConclusionVisitor() {
   var headingDepth = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
   var currentDepth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   return function (ctx, rootNode) {
@@ -29,6 +29,6 @@ var introductionAndConclusionVisitor = function introductionAndConclusionVisitor
       });
     }
   };
-};
+}
 
 module.exports = introductionAndConclusionVisitor;

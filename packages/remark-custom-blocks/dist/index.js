@@ -122,11 +122,11 @@ module.exports = function blockPlugin() {
     var blockChildren = [contents];
 
     if (titleAllowed && blockTitle) {
-      var configuredTitleBlockType = potentialBlock.titleElement ? potentialBlock.titleElement : 'div';
+      var titleElement = potentialBlock.titleElement ? potentialBlock.titleElement : 'div';
       var titleNode = {
         type: "".concat(blockType, "CustomBlockHeading"),
         data: {
-          hName: configuredTitleBlockType,
+          hName: titleElement,
           hProperties: {
             className: 'custom-block-heading'
           }

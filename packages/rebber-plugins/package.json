@@ -31,7 +31,8 @@
   "license": "MIT",
   "dependencies": {
     "has": "^1.0.3",
-    "xtend": "^4.0.2"
+    "xtend": "^4.0.2",
+    "mdast-util-split-by-heading": "file:../mdast-util-split-by-heading"
   },
   "devDependencies": {
     "rebber": "file:../rebber",
@@ -41,7 +42,6 @@
     "remark-emoticons": "file:../remark-emoticons",
     "remark-grid-tables": "file:../remark-grid-tables",
     "remark-numbered-footnotes": "file:../remark-numbered-footnotes",
-    "remark-sub-super": "file:../remark-sub-super",
-    "mdast-util-split-by-heading": "file:../mdast-util-split-by-heading"
+    "remark-sub-super": "file:../remark-sub-super"
   }
 }

@@ -33,6 +33,7 @@ const rebberConfig = {
     questionCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     secretCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
     warningCustomBlock: require('rebber-plugins/dist/type/customBlocks'),
+
     introduction: require('rebber-plugins/dist/type/introduction'),
     conclusion: require('rebber-plugins/dist/type/conclusion'),
 

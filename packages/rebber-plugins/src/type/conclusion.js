@@ -1,8 +1,9 @@
 module.exports = conclusion
 const all = require('rebber/dist/all')
-const conclusionCommands = ['\\levelOneConclusion', '\\levelTwoConclusion',
-  '\\levelThreeConclusion']
+const conclusionCommands = ['levelOneConclusion', 'levelTwoConclusion',
+  'levelThreeConclusion']
 function conclusion (ctx, node) {
   const commands = ctx.conclusionCommands || conclusionCommands
-  return `${commands[node.depth]}{${all(ctx, node)}}`
+  const command = commands[node.depth]
+  return `\\begin{${command}}\n${all(ctx, node)}\n\\end{${command}`
 }

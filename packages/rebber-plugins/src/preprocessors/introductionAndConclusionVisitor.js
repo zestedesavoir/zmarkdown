@@ -1,8 +1,7 @@
 const splitAtDepth = require('mdast-util-split-by-heading/dist')
 
-const introductionAndConclusionVisitor = (headingDepth = 0, currentDepth = 0) =>
-  (ctx, rootNode) => {
-
+function introductionAndConclusionVisitor (headingDepth = 0, currentDepth = 0) {
+  return (ctx, rootNode) => {
     const splitted = splitAtDepth(rootNode, currentDepth + 1)
     const conclusionCandidate = splitted.subTrees[splitted.subTrees.length]
     const titleContent = conclusionCandidate.title.children
@@ -23,6 +22,6 @@ const introductionAndConclusionVisitor = (headingDepth = 0, currentDepth = 0) =>
       splitted.subTrees.forEach((subTree) => introductionAndConclusionVisitor(headingDepth,
         currentDepth + 1)(ctx, subTree))
     }
-
   }
+}
 module.exports = introductionAndConclusionVisitor
