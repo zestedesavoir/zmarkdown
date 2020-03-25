@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sanitize HTML to prevent XSS advanced XSS 1`] = `"<p>This is [not obvious](   lives\\\\0cript:promp('It works !')) !</p>"`;
+
+exports[`code highlight special cases does not highlight console 1`] = `
+"<div class=\\"hljs-code-div\\"><div class=\\"hljs-line-numbers\\"><span></span></div><pre><code class=\\"language-console\\">echo \\"Hello world\\"
+</code></pre></div>"
+`;
+
+exports[`code highlight special cases highlights latex 1`] = `
+"<div class=\\"hljs-code-div\\"><div class=\\"hljs-line-numbers\\"><span></span><span></span><span></span><span></span></div><pre><code class=\\"hljs language-latex\\"><span class=\\"hljs-tag\\">\\\\<span class=\\"hljs-name\\">usepackage</span><span class=\\"hljs-string\\">{inputenc}</span><span class=\\"hljs-string\\">[utf8]</span></span>
+<span class=\\"hljs-tag\\">\\\\<span class=\\"hljs-name\\">begin</span><span class=\\"hljs-string\\">{document}</span></span>
+<span class=\\"hljs-tag\\">\\\\<span class=\\"hljs-name\\">texttt</span><span class=\\"hljs-string\\">{code}</span></span>
+<span class=\\"hljs-tag\\">\\\\<span class=\\"hljs-name\\">end</span><span class=\\"hljs-string\\">{document}</span></span>
+</code></pre></div>"
+`;
+
+exports[`images become figures: does not apply when a caption is present 1`] = `
+"<figure><img src=\\"http://example.com\\" alt=\\"foo\\"><figcaption>foo</figcaption></figure>
+<figure><img src=\\"http://example.com\\"><figcaption>Caption</figcaption></figure>
+<figure><img src=\\"http://example.com\\" alt=\\"foo\\"><figcaption>Caption</figcaption></figure>
+<figure><img src=\\"http://example.com\\"><figcaption></figcaption></figure>"
+`;
+
+exports[`images become figures: works with only an image 1`] = `"<figure><img src=\\"http://blabla.fr\\" alt=\\"wrapped into _figure_\\"><figcaption>wrapped into _figure_</figcaption></figure>"`;
+
+exports[`pedantic mode disabled unordered lists markers 1`] = `
+"<ul>
+<li>a</li>
+</ul>
+<ul>
+<li>b</li>
+</ul>
+<ul>
+<li>c</li>
+</ul>"
+`;
+
+exports[`smileys translates >_< 1`] = `"<p>This is funny <img src=\\"/static/smileys/svg/pinch.svg\\" alt=\\">_<\\" class=\\"smiley\\"></p>"`;
+
+exports[`smileys translates X/ 1`] = `"<p>This is funny <img src=\\"/static/smileys/svg/pinch.svg\\" alt=\\"X/\\" class=\\"smiley\\"></p>"`;
+
+exports[`smileys translates cthulhu 1`] = `"<p><img src=\\"/static/smileys/svg/cthulhu.svg\\" alt=\\"^(;,;)^\\" class=\\"smiley\\"></p>"`;

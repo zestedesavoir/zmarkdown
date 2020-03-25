@@ -1,0 +1,5 @@
+/!\ Count of signs changed:
+    - before: count [a-zA-Z0-9_]
+    - now: only count [a-zA-Z]
+
+Add test on count word/signs

@@ -1,0 +1,62 @@
+{
+  "name": "zmd-next",
+  "version": "0.1.0",
+  "description": "HTTP server API providing fast and extensible markdown parser",
+  "keywords": [
+    "markdown",
+    "md",
+    "http",
+    "api"
+  ],
+  "author": "Titouan S. <talone@boxph.one>",
+  "homepage": "https://zestedesavoir.github.io/zmarkdown/",
+  "license": "MIT",
+  "main": "server/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/zmd-next"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "deepmerge": "^4.2.2",
+    "rehype-autolink-headings": "^2.0.5",
+    "rehype-footnotes-title": "file:../rehype-footnotes-title",
+    "rehype-highlight": "^3.1.0",
+    "rehype-html-blocks": "file:../rehype-html-blocks",
+    "rehype-katex": "2.0.0",
+    "rehype-postfix-footnote-anchors": "file:../rehype-postfix-footnote-anchors",
+    "rehype-sanitize": "^3.0.0",
+    "rehype-slug": "^2.0.3",
+    "rehype-stringify": "^6.0.1",
+    "remark-abbr": "file:../remark-abbr",
+    "remark-align": "file:../remark-align",
+    "remark-captions": "file:../remark-captions",
+    "remark-comments": "file:../remark-comments",
+    "remark-custom-blocks": "file:../remark-custom-blocks",
+    "remark-disable-tokenizers": "file:../remark-disable-tokenizers",
+    "remark-emoticons": "file:../remark-emoticons",
+    "remark-escape-escaped": "file:../remark-escape-escaped",
+    "remark-grid-tables": "file:../remark-grid-tables",
+    "remark-heading-shift": "file:../remark-heading-shift",
+    "remark-heading-trailing-spaces": "file:../remark-heading-trailing-spaces",
+    "remark-iframes": "file:../remark-iframes",
+    "remark-images-download": "file:../remark-images-download",
+    "remark-kbd": "file:../remark-kbd",
+    "remark-math": "^2.0.0",
+    "remark-numbered-footnotes": "file:../remark-numbered-footnotes",
+    "remark-parse": "^7.0.2",
+    "remark-ping": "file:../remark-ping",
+    "remark-sub-super": "file:../remark-sub-super",
+    "unified": "^8.4.2",
+    "unist-util-visit": "^2.0.1"
+  }
+}
