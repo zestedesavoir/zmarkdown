@@ -6,12 +6,12 @@ const rehypeStringify = require('rehype-stringify')
 const defaultStringifierList = {
   lineNumbers:      require('../plugins/rehype-line-numbers'),
   highlight:        require('rehype-highlight'),
+  slug:             require('rehype-slug'),
   autolinkHeadings: require('rehype-autolink-headings'),
   footnotesTitles:  require('rehype-footnotes-title'),
   htmlBlocks:       require('rehype-html-blocks'),
   katex:            require('rehype-katex'),
   postfixFootnotes: require('rehype-postfix-footnote-anchors'),
-  slug:             require('rehype-slug'),
   sanitize:         require('rehype-sanitize'),
 }
 

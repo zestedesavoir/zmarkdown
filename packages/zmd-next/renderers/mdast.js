@@ -12,6 +12,7 @@ const defaultTokenizerList = {
   customBlocks:         require('remark-custom-blocks/src'),
   emoticons:            require('remark-emoticons/src'),
   escapeEscaped:        require('remark-escape-escaped/src'),
+  headingShifter:       require('remark-heading-shift/src'),
   gridTables:           require('remark-grid-tables/src'),
   iframes:              require('remark-iframes/src'),
   imageToFigure:        require('../plugins/remark-image-to-figure'),

@@ -1,53 +1,10 @@
-const clone = require('clone')
 const dedent = require('dedent')
 
-const mdastConfig = clone(require('../config/mdast'))
-const htmlConfig = clone(require('../config/html'))
-
-mdastConfig.disabledPlugins = { internal: ['textr'], meta: [], inline: [] }
-mdastConfig.ping.pingUsername = () => false
-// TODO: handle shortId test mode
-//remarkConfig._test = true
-
-const zmarkdown = require('../common')
-
-const renderVfile = input => zmarkdown('html', mdastConfig, htmlConfig)(input)
-
-const renderString = input => renderVfile(input)
-  .then(vfile => vfile.contents.trim())
-
-/* jest */
-const HtmlDiffer = require('html-differ').HtmlDiffer
-const htmlDiffer = new HtmlDiffer({
-  ignoreWhitespaces: true,
-})
-const logger = require('html-differ/lib/logger')
-
-expect.extend({
-  toHTML (received, expected) {
-    const pass = htmlDiffer.isEqual(received, expected)
-    const diff = htmlDiffer.diffHtml(expected, received)
-    const diffString = logger.getDiffText(diff)
-
-    const message = pass
-      ? () => `${this.utils.matcherHint('.not.toHTML')}\n\n` +
-        `Expected value to not be:\n` +
-        `  ${this.utils.printExpected(expected)}\n` +
-        `Received:\n` +
-        `  ${this.utils.printReceived(received)}${
-          diffString ? `\n\nDifference:\n\n${diffString}` : ''}`
-      : () => {
-        return `${this.utils.matcherHint('.toHTML')}\n\n` +
-        `Expected value to be:\n` +
-        `  ${this.utils.printExpected(expected)}\n` +
-        `Received:\n` +
-        `  ${this.utils.printReceived(received)}${
-          diffString ? `\n\nDifference:\n\n${diffString}` : ''}`
-      }
-
-    return {actual: received, message, pass}
-  },
-})
+const {
+  defaultMdastConfig,
+  defaultHtmlConfig,
+  renderString,
+} = require('../utils/renderer-tests')
 
 describe('math', () => {
   it('must escape a dollar with backslash', () => {
@@ -76,7 +33,7 @@ describe('math', () => {
 
   it('properly loads extensions - mhchem', async () => {
     const markdown = '$\\ce{H2O}$'
-    const result = await renderVfile(markdown)
+    const result = await renderString(markdown, true)
 
     expect(result.messages).toEqual([])
     expect(result.contents).toContain('<span class="mord mathrm">H</span>')
@@ -91,7 +48,7 @@ describe('pedantic', () => {
   })
 })
 
-const maxNesting = mdastConfig.postProcessors.limitDepth
+const maxNesting = defaultMdastConfig.postProcessors.limitDepth
 describe('depth checks', () => {
   it(`is fast enough with ${maxNesting} nested quotes`, () => {
     const base = ['foo', '\n']
@@ -199,7 +156,7 @@ describe('images become figures:', () => {
 
 describe('ping', () => {
   beforeEach(() => {
-    mdastConfig.ping.pingUsername = () => true
+    defaultMdastConfig.ping.pingUsername = () => true
   })
 
   it(`does not ping parts of email addresses`, () => {
@@ -209,7 +166,7 @@ describe('ping', () => {
   })
 
   afterEach(() => {
-    mdastConfig.ping.pingUsername = () => false
+    defaultMdastConfig.ping.pingUsername = () => false
   })
 })
 
@@ -282,9 +239,9 @@ describe('pedantic mode disabled', () => {
 
 
 describe('code highlight special cases', () => {
-  /*beforeEach(() => {
-    remarkConfig._test = false
-  })*/
+  beforeEach(() => {
+    defaultHtmlConfig.disabledPlugins.internal = []
+  })
 
   it('does not highlight console', () => {
     const input = dedent `
@@ -327,16 +284,12 @@ describe('code highlight special cases', () => {
     expect(result2).toBe(result1)
   })
 
-  /*afterEach(() => {
-    remarkConfig._test = true
-  })*/
+  afterEach(() => {
+    defaultHtmlConfig.disabledPlugins.internal = ['lineNumbers', 'highlight']
+  })
 })
 
 describe('Sanitize HTML to prevent XSS', () => {
-  /*beforeEach(() => {
-    remarkConfig._test = false
-  })*/
-
   it('XSS test', () => {
     const input = dedent `
     [test XSS](javascript:alert(11))
@@ -363,9 +316,6 @@ describe('Sanitize HTML to prevent XSS', () => {
     `
     return expect(renderString(input)).resolves.not.toContain('iframe')
   })
-  /*afterEach(() => {
-    remarkConfig._test = true
-  })*/
 })
 
 describe('footnotes', () => {

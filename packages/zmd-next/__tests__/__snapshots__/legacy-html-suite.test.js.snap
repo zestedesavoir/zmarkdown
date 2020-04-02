@@ -1,0 +1,2495 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`basic renders amps-and-angle-encoding.txt 1`] = `
+"<p>AT&#x26;T has an ampersand in their name.</p>
+<p>AT&#x26;amp;T is another way to write it.</p>
+<p>This &#x26; that.</p>
+<p>4 &#x3C; 5.</p>
+<p>6 > 5.</p>
+<p>Here's a <a href=\\"http://example.com/?foo=1&#x26;bar=2\\">link</a> with an ampersand in the URL.</p>
+<p>Here's a link with an amersand in the link text: <a href=\\"http://att.com/\\" title=\\"AT&#x26;T\\">AT&#x26;T</a>.</p>
+<p>Here's an inline <a href=\\"/script?foo=1&#x26;bar=2\\">link</a>.</p>
+<p>Here's an inline <a href=\\"/script?foo=1&#x26;bar=2\\">link</a>.</p>"
+`;
+
+exports[`basic renders angle-links-and-img.txt 1`] = `
+"<p><a href=\\"simple%20link\\" title=\\"my title\\">link</a>
+<img src=\\"http://example.com/image.jpg\\" alt=\\"image\\">
+<a href=\\"http://example.com/(()((())923)(\\">link</a>
+<img src=\\"link(()))(\\" alt=\\"image\\"></p>"
+`;
+
+exports[`basic renders auto-links.txt 1`] = `
+"<p>Link: <a href=\\"http://example.com/\\">http://example.com/</a>.</p>
+<p>Https link: <a href=\\"https://example.com\\">https://example.com</a></p>
+<p>Ftp link: <a href=\\"ftp://example.com\\">ftp://example.com</a></p>
+<p>With an ampersand: <a href=\\"http://example.com/?foo=1&#x26;bar=2\\">http://example.com/?foo=1&#x26;bar=2</a></p>
+<ul>
+<li>In a list?</li>
+<li><a href=\\"http://example.com/\\">http://example.com/</a></li>
+<li>It should.</li>
+</ul>
+<blockquote>
+<p>Blockquoted: <a href=\\"http://example.com/\\">http://example.com/</a></p>
+</blockquote>
+<p>Auto-links should not occur here: <code>&#x3C;http://example.com/></code></p>
+<pre><code>or here: &#x3C;http://example.com/>
+</code></pre>"
+`;
+
+exports[`basic renders backlash-escapes.txt 1`] = `
+"<p>These should all get escaped:</p>
+<p>Backslash: \\\\</p>
+<p>Backtick: \`</p>
+<p>Asterisk: *</p>
+<p>Underscore: _</p>
+<p>Left brace: {</p>
+<p>Right brace: }</p>
+<p>Left bracket: [</p>
+<p>Right bracket: ]</p>
+<p>Left paren: (</p>
+<p>Right paren: )</p>
+<p>Greater-than: ></p>
+<p>Hash: #</p>
+<p>Period: .</p>
+<p>Bang: !</p>
+<p>Plus: +</p>
+<p>Minus: -</p>
+<p>These should not, because they occur within a code block:</p>
+<pre><code>Backslash: \\\\\\\\
+
+Backtick: \\\\\`
+
+Asterisk: \\\\*
+
+Underscore: \\\\_
+
+Left brace: \\\\{
+
+Right brace: \\\\}
+
+Left bracket: \\\\[
+
+Right bracket: \\\\]
+
+Left paren: \\\\(
+
+Right paren: \\\\)
+
+Greater-than: \\\\>
+
+Hash: \\\\#
+
+Period: \\\\.
+
+Bang: \\\\!
+
+Plus: \\\\+
+
+Minus: \\\\-
+</code></pre>
+<p>Nor should these, which occur in code spans:</p>
+<p>Backslash: <code>\\\\\\\\</code></p>
+<p>Backtick: <code>\\\\\`</code></p>
+<p>Asterisk: <code>\\\\*</code></p>
+<p>Underscore: <code>\\\\_</code></p>
+<p>Left brace: <code>\\\\{</code></p>
+<p>Right brace: <code>\\\\}</code></p>
+<p>Left bracket: <code>\\\\[</code></p>
+<p>Right bracket: <code>\\\\]</code></p>
+<p>Left paren: <code>\\\\(</code></p>
+<p>Right paren: <code>\\\\)</code></p>
+<p>Greater-than: <code>\\\\></code></p>
+<p>Hash: <code>\\\\#</code></p>
+<p>Period: <code>\\\\.</code></p>
+<p>Bang: <code>\\\\!</code></p>
+<p>Plus: <code>\\\\+</code></p>
+<p>Minus: <code>\\\\-</code></p>"
+`;
+
+exports[`basic renders blockquotes-with-code-blocks.txt 1`] = `
+"<blockquote>
+<p>Example:</p>
+<pre><code>sub status {
+    print \\"working\\";
+}
+</code></pre>
+<p>Or:</p>
+<pre><code>sub status {
+    return \\"working\\";
+}
+</code></pre>
+</blockquote>"
+`;
+
+exports[`basic renders codeblock-in-list.txt 1`] = `
+"<ul>
+<li>
+<p>A list item with a code block</p>
+<pre><code>  Some *code*
+</code></pre>
+</li>
+<li>
+<p>Another list item</p>
+<pre><code>  More code
+
+  And more code
+</code></pre>
+</li>
+</ul>"
+`;
+
+exports[`basic renders hard-wrapped.txt 1`] = `
+"<p>In Markdown 1.0.0 and earlier. Version
+8. This line turns into a list item.
+Because a hard-wrapped line in the
+middle of a paragraph looked like a
+list item.</p>
+<p>Here's one with a bullet.</p>
+<ul>
+<li>criminey.</li>
+</ul>"
+`;
+
+exports[`basic renders horizontal-rules.txt 1`] = `
+"<p>Dashes:</p>
+<hr>
+<hr>
+<hr>
+<hr>
+<pre><code>---
+</code></pre>
+<hr>
+<hr>
+<hr>
+<hr>
+<pre><code>- - -
+</code></pre>
+<p>Asterisks:</p>
+<hr>
+<hr>
+<hr>
+<hr>
+<pre><code>***
+</code></pre>
+<hr>
+<hr>
+<hr>
+<hr>
+<pre><code>* * *
+</code></pre>
+<p>Underscores:</p>
+<hr>
+<hr>
+<hr>
+<hr>
+<pre><code>___
+</code></pre>
+<hr>
+<hr>
+<hr>
+<hr>
+<pre><code>_ _ _
+</code></pre>"
+`;
+
+exports[`basic renders inline-html-advanced.txt 1`] = `
+"<p>Simple block on one line:</p>
+<p>&#x3C;div>foo&#x3C;/div></p>
+<p>And nested without indentation:</p>
+<p>&#x3C;div>
+&#x3C;div>
+&#x3C;div>
+foo
+&#x3C;/div>
+&#x3C;/div>
+&#x3C;div>bar&#x3C;/div>
+&#x3C;/div></p>"
+`;
+
+exports[`basic renders inline-html-comments.txt 1`] = `
+"<p>Paragraph one.</p>
+<p>&#x3C;!-- This is a simple comment --></p>
+<p>&#x3C;!--
+	This is another comment.
+--></p>
+<p>Paragraph two.</p>
+<p>&#x3C;!-- one comment block -- -- with two comments --></p>
+<p>The end.</p>"
+`;
+
+exports[`basic renders inline-html-simple.txt 1`] = `
+"<p>Here's a simple block:</p>
+<p>&#x3C;div>
+	foo
+&#x3C;/div></p>
+<p>This should be a code block, though:</p>
+<pre><code>&#x3C;div>
+    foo
+&#x3C;/div>
+</code></pre>
+<p>As should this:</p>
+<pre><code>&#x3C;div>foo&#x3C;/div>
+</code></pre>
+<p>Now, nested:</p>
+<p>&#x3C;div>
+	&#x3C;div>
+		&#x3C;div>
+			foo
+		&#x3C;/div>
+	&#x3C;/div>
+&#x3C;/div></p>
+<p>This should just be an HTML comment:</p>
+<p>&#x3C;!-- Comment --></p>
+<p>Multiline:</p>
+<p>&#x3C;!--
+Blah
+Blah
+--></p>
+<p>Code block:</p>
+<pre><code>&#x3C;!-- Comment -->
+</code></pre>
+<p>Just plain comment, with trailing spaces on the line:</p>
+<p>&#x3C;!-- foo -->   </p>
+<p>Code:</p>
+<pre><code>&#x3C;hr />
+</code></pre>
+<p>Hr's:</p>
+<p>&#x3C;hr></p>
+<p>&#x3C;hr/></p>
+<p>&#x3C;hr /></p>
+<p>&#x3C;hr>   </p>
+<p>&#x3C;hr/>  </p>
+<p>&#x3C;hr /> </p>
+<p>&#x3C;hr class=\\"foo\\" id=\\"bar\\" /></p>
+<p>&#x3C;hr class=\\"foo\\" id=\\"bar\\"/></p>
+<p>&#x3C;hr class=\\"foo\\" id=\\"bar\\" ></p>
+<p>&#x3C;some <a href=\\"http://example.com\\">weird</a> stuff></p>"
+`;
+
+exports[`basic renders links-inline.txt 1`] = `
+"<p>Just a <a href=\\"/url/\\">URL</a>.</p>
+<p><a href=\\"/url/\\" title=\\"title\\">URL and title</a>.</p>
+<p><a href=\\"/url/\\" title=\\"title preceded by two spaces\\">URL and title</a>.</p>
+<p><a href=\\"/url/\\" title=\\"title preceded by a tab\\">URL and title</a>.</p>
+<p><a href=\\"\\">Empty</a>.</p>"
+`;
+
+exports[`basic renders links-reference.txt 1`] = `
+"<p>Foo <a href=\\"/url/\\" title=\\"Title\\">bar</a>.</p>
+<p>Foo <a href=\\"/url/\\" title=\\"Title\\">bar</a>.</p>
+<p>Foo <a href=\\"/url/\\" title=\\"Title\\">bar</a>.</p>
+<p>With <a href=\\"/url/\\">embedded [brackets]</a>.</p>
+<p>Indented <a href=\\"/url\\">once</a>.</p>
+<p>Indented <a href=\\"/url\\">twice</a>.</p>
+<p>Indented <a href=\\"/url\\">thrice</a>.</p>
+<p>Indented [four][] times.</p>
+<pre><code>[four]: /url
+</code></pre>
+<p>With <a href=\\"http://example.com/\\" title=\\"Angle Brackets\\">angle brackets</a>.</p>
+<p>And <a href=\\"http://example.com/\\" title=\\"Without angle brackets.\\">without</a>.</p>
+<p>With <a href=\\"http://example.com\\" title=\\"Yes this works\\">line
+breaks</a></p>
+<p>and <a href=\\"http://example.com\\" title=\\"Yes this works\\">line
+breaks</a> with one space.</p>
+<p>and [line<br>
+breaks[] with two spaces.</p>
+<p><a href=\\"http://example.com\\" title=\\"No more hanging empty bracket!\\">short ref</a></p>
+<p><a href=\\"http://example.com\\" title=\\"No more hanging empty bracket!\\">short
+ref</a></p>
+<p><a href=\\"http://example.com\\" title=\\"Title on next line.\\">a ref</a></p>"
+`;
+
+exports[`basic renders nested-blockquotes.txt 1`] = `
+"<blockquote>
+<p>foo</p>
+<blockquote>
+<p>bar</p>
+</blockquote>
+<p>foo</p>
+</blockquote>"
+`;
+
+exports[`basic renders ordered-and-unordered-list.txt 1`] = `
+"<p>Unordered</p>
+<p>Asterisks tight:</p>
+<ul>
+<li>asterisk 1</li>
+<li>asterisk 2</li>
+<li>asterisk 3</li>
+</ul>
+<p>Asterisks loose:</p>
+<ul>
+<li>
+<p>asterisk 1</p>
+</li>
+<li>
+<p>asterisk 2</p>
+</li>
+<li>
+<p>asterisk 3</p>
+</li>
+</ul>
+<hr>
+<p>Pluses tight:</p>
+<ul>
+<li>Plus 1</li>
+<li>Plus 2</li>
+<li>Plus 3</li>
+</ul>
+<p>Pluses loose:</p>
+<ul>
+<li>
+<p>Plus 1</p>
+</li>
+<li>
+<p>Plus 2</p>
+</li>
+<li>
+<p>Plus 3</p>
+</li>
+</ul>
+<hr>
+<p>Minuses tight:</p>
+<ul>
+<li>Minus 1</li>
+<li>Minus 2</li>
+<li>Minus 3</li>
+</ul>
+<p>Minuses loose:</p>
+<ul>
+<li>
+<p>Minus 1</p>
+</li>
+<li>
+<p>Minus 2</p>
+</li>
+<li>
+<p>Minus 3</p>
+</li>
+</ul>
+<hr>
+<p>Ordered</p>
+<p>Tight:</p>
+<ol>
+<li>First</li>
+<li>Second</li>
+<li>Third</li>
+</ol>
+<p>and:</p>
+<ol>
+<li>One</li>
+<li>Two</li>
+<li>Three</li>
+</ol>
+<p>Loose using tabs:</p>
+<ol>
+<li>
+<p>First</p>
+</li>
+<li>
+<p>Second</p>
+</li>
+<li>
+<p>Third</p>
+</li>
+</ol>
+<p>and using spaces:</p>
+<ol>
+<li>
+<p>One</p>
+</li>
+<li>
+<p>Two</p>
+</li>
+<li>
+<p>Three</p>
+</li>
+</ol>
+<p>Multiple paragraphs:</p>
+<ol>
+<li>
+<p>Item 1, graf one.</p>
+<p>Item 2. graf two. The quick brown fox jumped over the lazy dog's
+back.</p>
+</li>
+<li>
+<p>Item 2.</p>
+</li>
+<li>
+<p>Item 3.</p>
+</li>
+</ol>
+<hr>
+<p>Nested</p>
+<ul>
+<li>Tab<ul>
+<li>Tab<ul>
+<li>Tab</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Here's another:</p>
+<ol>
+<li>First</li>
+<li>Second:<ul>
+<li>Fee</li>
+<li>Fie</li>
+<li>Foe</li>
+</ul></li>
+<li>Third</li>
+</ol>
+<p>Same thing but with paragraphs:</p>
+<ol>
+<li>
+<p>First</p>
+</li>
+<li>
+<p>Second:</p>
+<ul>
+<li>Fee</li>
+<li>Fie</li>
+<li>Foe</li>
+</ul>
+</li>
+<li>
+<p>Third</p>
+</li>
+</ol>"
+`;
+
+exports[`basic renders strong-and-em-together.txt 1`] = `
+"<p><strong><em>This is strong and em.</em></strong></p>
+<p>So is <strong><em>this</em></strong> word.</p>
+<p><strong><em>This is strong and em.</em></strong></p>
+<p>So is <strong><em>this</em></strong> word.</p>"
+`;
+
+exports[`basic renders tabs.txt 1`] = `
+"<ul>
+<li>
+<p>this is a list item
+indented with tabs</p>
+</li>
+<li>
+<p>this is a list item
+indented with spaces</p>
+</li>
+</ul>
+<p>Code:</p>
+<pre><code>this code block is indented by one tab
+</code></pre>
+<p>And:</p>
+<pre><code>    this code block is indented by two tabs
+</code></pre>
+<p>And:</p>
+<pre><code>+   this is an example list item
+    indented with tabs
+
++   this is an example list item
+    indented with spaces
+</code></pre>"
+`;
+
+exports[`basic renders tidyness.txt 1`] = `
+"<blockquote>
+<p>A list within a blockquote:</p>
+<ul>
+<li>asterisk 1</li>
+<li>asterisk 2</li>
+<li>asterisk 3</li>
+</ul>
+</blockquote>"
+`;
+
+exports[`extensions renders abbr.txt 1`] = `
+"<p>An <abbr title=\\"Abbreviation\\">ABBR</abbr>: \\"<abbr title=\\"Reference\\">REF</abbr>\\".
+ref and REFERENCE should be ignored.</p>
+<p>The <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr> specification
+is maintained by the <abbr title=\\"World Wide Web Consortium\\">W3C</abbr>.</p>"
+`;
+
+exports[`extensions renders fenced_code.txt 1`] = `
+"<p>index 0000000..6e956a9</p>
+<pre><code>--- /dev/null
++++ b/test/data/stripped_text/mike-30-lili
+@@ -0,0 +1,27 @@
++Summary:
++ drift_mod.py |    1 +
++ 1 files changed, 1 insertions(+), 0 deletions(-)
++
++commit da4bfb04debdd994683740878d09988b2641513d
++Author: Mike Dirolf &#x3C;mike@dirolf.com>
++Date:   Tue Jan 17 13:42:28 2012 -0500
++
++\`\`\`
++minor: just wanted to push something.
++\`\`\`
++
++diff --git a/drift_mod.py b/drift_mod.py
++index 34dfba6..8a88a69 100644
++
++\`\`\`
++--- a/drift_mod.py
+++++ b/drift_mod.py
++@@ -281,6 +281,7 @@ CONTEXT_DIFF_LINE_PATTERN = re.compile(r'^('
++                                        '|\\\\+ .*'
++                                        '|- .*'
++                                        ')$')
+++
++ def wrap_context_diffs(message_text):
++     return _wrap_diff(CONTEXT_DIFF_HEADER_PATTERN,
++                       CONTEXT_DIFF_LINE_PATTERN,
++\`\`\`
+</code></pre>"
+`;
+
+exports[`extensions renders footnote.txt 1`] = `
+"<p>This is the body with a footnote<sup id=\\"fnref-1-shortId\\"><a href=\\"#fn-1-shortId\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-shortId\\"><a href=\\"#fn-2-shortId\\" class=\\"footnote-ref\\">2</a></sup> or more<sup id=\\"fnref-3-shortId\\"><a href=\\"#fn-3-shortId\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-shortId\\"><a href=\\"#fn-4-shortId\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-shortId\\"><a href=\\"#fn-5-shortId\\" class=\\"footnote-ref\\">5</a></sup>.</p>
+<p>Also a reference that does not exist<sup id=\\"fnref-6-shortId\\"><a href=\\"#fn-6-shortId\\" class=\\"footnote-ref\\">6</a></sup>.</p>
+<p>Second line of first paragraph is not intended.
+Nor is third...</p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-1-shortId\\">
+<p>Footnote that ends with a list:</p>
+<ul>
+<li>item 1</li>
+<li>item 2</li>
+</ul>
+<p><a href=\\"#fnref-1-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 1\\">↩</a></p>
+</li>
+<li id=\\"fn-2-shortId\\">
+<blockquote>
+<p>This footnote is a blockquote.</p>
+</blockquote>
+<p><a href=\\"#fnref-2-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 2\\">↩</a></p>
+</li>
+<li id=\\"fn-3-shortId\\">
+<p>A simple oneliner.<a href=\\"#fnref-3-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 3\\">↩</a></p>
+</li>
+<li id=\\"fn-4-shortId\\">
+<p>A footnote with multiple paragraphs.</p>
+<p>Paragraph two.<a href=\\"#fnref-4-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 4\\">↩</a></p>
+</li>
+<li id=\\"fn-5-shortId\\">
+<p>First line of first paragraph.<a href=\\"#fnref-5-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 5\\">↩</a></p>
+</li>
+</ol>
+</div>"
+`;
+
+exports[`extensions renders footnote_many_footnotes.txt 1`] = `
+"<p>Something<sup id=\\"fnref-1-shortId\\"><a href=\\"#fn-1-shortId\\" class=\\"footnote-ref\\">1</a></sup></p>
+<p>Something<sup id=\\"fnref-2-shortId\\"><a href=\\"#fn-2-shortId\\" class=\\"footnote-ref\\">2</a></sup></p>
+<p>Something<sup id=\\"fnref-3-shortId\\"><a href=\\"#fn-3-shortId\\" class=\\"footnote-ref\\">3</a></sup></p>
+<p>Something<sup id=\\"fnref-4-shortId\\"><a href=\\"#fn-4-shortId\\" class=\\"footnote-ref\\">4</a></sup></p>
+<p>Something<sup id=\\"fnref-5-shortId\\"><a href=\\"#fn-5-shortId\\" class=\\"footnote-ref\\">5</a></sup></p>
+<p>Something<sup id=\\"fnref-6-shortId\\"><a href=\\"#fn-6-shortId\\" class=\\"footnote-ref\\">6</a></sup></p>
+<p>Something<sup id=\\"fnref-7-shortId\\"><a href=\\"#fn-7-shortId\\" class=\\"footnote-ref\\">7</a></sup></p>
+<p>Something<sup id=\\"fnref-8-shortId\\"><a href=\\"#fn-8-shortId\\" class=\\"footnote-ref\\">8</a></sup></p>
+<p>Something<sup id=\\"fnref-9-shortId\\"><a href=\\"#fn-9-shortId\\" class=\\"footnote-ref\\">9</a></sup></p>
+<p>Something<sup id=\\"fnref-10-shortId\\"><a href=\\"#fn-10-shortId\\" class=\\"footnote-ref\\">10</a></sup></p>
+<p>Something<sup id=\\"fnref-11-shortId\\"><a href=\\"#fn-11-shortId\\" class=\\"footnote-ref\\">11</a></sup></p>
+<p>Something<sup id=\\"fnref-12-shortId\\"><a href=\\"#fn-12-shortId\\" class=\\"footnote-ref\\">12</a></sup></p>
+<p>Something<sup id=\\"fnref-13-shortId\\"><a href=\\"#fn-13-shortId\\" class=\\"footnote-ref\\">13</a></sup></p>
+<p>Something<sup id=\\"fnref-14-shortId\\"><a href=\\"#fn-14-shortId\\" class=\\"footnote-ref\\">14</a></sup></p>
+<p>Something<sup id=\\"fnref-15-shortId\\"><a href=\\"#fn-15-shortId\\" class=\\"footnote-ref\\">15</a></sup></p>
+<p>Something<sup id=\\"fnref-16-shortId\\"><a href=\\"#fn-16-shortId\\" class=\\"footnote-ref\\">16</a></sup></p>
+<p>Something<sup id=\\"fnref-17-shortId\\"><a href=\\"#fn-17-shortId\\" class=\\"footnote-ref\\">17</a></sup></p>
+<p>Something<sup id=\\"fnref-18-shortId\\"><a href=\\"#fn-18-shortId\\" class=\\"footnote-ref\\">18</a></sup></p>
+<p>Something<sup id=\\"fnref-19-shortId\\"><a href=\\"#fn-19-shortId\\" class=\\"footnote-ref\\">19</a></sup></p>
+<p>Something<sup id=\\"fnref-20-shortId\\"><a href=\\"#fn-20-shortId\\" class=\\"footnote-ref\\">20</a></sup></p>
+<p>Something<sup id=\\"fnref-21-shortId\\"><a href=\\"#fn-21-shortId\\" class=\\"footnote-ref\\">21</a></sup></p>
+<p>Something<sup id=\\"fnref-22-shortId\\"><a href=\\"#fn-22-shortId\\" class=\\"footnote-ref\\">22</a></sup></p>
+<p>Something<sup id=\\"fnref-23-shortId\\"><a href=\\"#fn-23-shortId\\" class=\\"footnote-ref\\">23</a></sup></p>
+<p>Something<sup id=\\"fnref-24-shortId\\"><a href=\\"#fn-24-shortId\\" class=\\"footnote-ref\\">24</a></sup></p>
+<p>Something<sup id=\\"fnref-25-shortId\\"><a href=\\"#fn-25-shortId\\" class=\\"footnote-ref\\">25</a></sup></p>
+<p>Something<sup id=\\"fnref-26-shortId\\"><a href=\\"#fn-26-shortId\\" class=\\"footnote-ref\\">26</a></sup></p>
+<p>Something<sup id=\\"fnref-27-shortId\\"><a href=\\"#fn-27-shortId\\" class=\\"footnote-ref\\">27</a></sup></p>
+<p>Something<sup id=\\"fnref-28-shortId\\"><a href=\\"#fn-28-shortId\\" class=\\"footnote-ref\\">28</a></sup></p>
+<p>Something<sup id=\\"fnref-29-shortId\\"><a href=\\"#fn-29-shortId\\" class=\\"footnote-ref\\">29</a></sup></p>
+<p>Something<sup id=\\"fnref-30-shortId\\"><a href=\\"#fn-30-shortId\\" class=\\"footnote-ref\\">30</a></sup></p>
+<p>Something<sup id=\\"fnref-31-shortId\\"><a href=\\"#fn-31-shortId\\" class=\\"footnote-ref\\">31</a></sup></p>
+<p>Something<sup id=\\"fnref-32-shortId\\"><a href=\\"#fn-32-shortId\\" class=\\"footnote-ref\\">32</a></sup></p>
+<p>Something<sup id=\\"fnref-33-shortId\\"><a href=\\"#fn-33-shortId\\" class=\\"footnote-ref\\">33</a></sup></p>
+<p>Something<sup id=\\"fnref-34-shortId\\"><a href=\\"#fn-34-shortId\\" class=\\"footnote-ref\\">34</a></sup></p>
+<p>Something<sup id=\\"fnref-35-shortId\\"><a href=\\"#fn-35-shortId\\" class=\\"footnote-ref\\">35</a></sup></p>
+<p>Something<sup id=\\"fnref-36-shortId\\"><a href=\\"#fn-36-shortId\\" class=\\"footnote-ref\\">36</a></sup></p>
+<p>Something<sup id=\\"fnref-37-shortId\\"><a href=\\"#fn-37-shortId\\" class=\\"footnote-ref\\">37</a></sup></p>
+<p>Something<sup id=\\"fnref-38-shortId\\"><a href=\\"#fn-38-shortId\\" class=\\"footnote-ref\\">38</a></sup></p>
+<p>Something<sup id=\\"fnref-39-shortId\\"><a href=\\"#fn-39-shortId\\" class=\\"footnote-ref\\">39</a></sup></p>
+<p>Something<sup id=\\"fnref-40-shortId\\"><a href=\\"#fn-40-shortId\\" class=\\"footnote-ref\\">40</a></sup></p>
+<p>Something<sup id=\\"fnref-41-shortId\\"><a href=\\"#fn-41-shortId\\" class=\\"footnote-ref\\">41</a></sup></p>
+<p>Something<sup id=\\"fnref-42-shortId\\"><a href=\\"#fn-42-shortId\\" class=\\"footnote-ref\\">42</a></sup></p>
+<p>Something<sup id=\\"fnref-43-shortId\\"><a href=\\"#fn-43-shortId\\" class=\\"footnote-ref\\">43</a></sup></p>
+<p>Something<sup id=\\"fnref-44-shortId\\"><a href=\\"#fn-44-shortId\\" class=\\"footnote-ref\\">44</a></sup></p>
+<p>Something<sup id=\\"fnref-45-shortId\\"><a href=\\"#fn-45-shortId\\" class=\\"footnote-ref\\">45</a></sup></p>
+<p>Something<sup id=\\"fnref-46-shortId\\"><a href=\\"#fn-46-shortId\\" class=\\"footnote-ref\\">46</a></sup></p>
+<p>Something<sup id=\\"fnref-47-shortId\\"><a href=\\"#fn-47-shortId\\" class=\\"footnote-ref\\">47</a></sup></p>
+<p>Something<sup id=\\"fnref-48-shortId\\"><a href=\\"#fn-48-shortId\\" class=\\"footnote-ref\\">48</a></sup></p>
+<p>Something<sup id=\\"fnref-49-shortId\\"><a href=\\"#fn-49-shortId\\" class=\\"footnote-ref\\">49</a></sup></p>
+<p>Something<sup id=\\"fnref-50-shortId\\"><a href=\\"#fn-50-shortId\\" class=\\"footnote-ref\\">50</a></sup></p>
+<p>Something<sup id=\\"fnref-51-shortId\\"><a href=\\"#fn-51-shortId\\" class=\\"footnote-ref\\">51</a></sup></p>
+<p>Something<sup id=\\"fnref-52-shortId\\"><a href=\\"#fn-52-shortId\\" class=\\"footnote-ref\\">52</a></sup></p>
+<p>Something<sup id=\\"fnref-53-shortId\\"><a href=\\"#fn-53-shortId\\" class=\\"footnote-ref\\">53</a></sup></p>
+<p>Something<sup id=\\"fnref-54-shortId\\"><a href=\\"#fn-54-shortId\\" class=\\"footnote-ref\\">54</a></sup></p>
+<p>Something<sup id=\\"fnref-55-shortId\\"><a href=\\"#fn-55-shortId\\" class=\\"footnote-ref\\">55</a></sup></p>
+<p>Something<sup id=\\"fnref-56-shortId\\"><a href=\\"#fn-56-shortId\\" class=\\"footnote-ref\\">56</a></sup></p>
+<p>Something<sup id=\\"fnref-57-shortId\\"><a href=\\"#fn-57-shortId\\" class=\\"footnote-ref\\">57</a></sup></p>
+<p>Something<sup id=\\"fnref-58-shortId\\"><a href=\\"#fn-58-shortId\\" class=\\"footnote-ref\\">58</a></sup></p>
+<p>Something<sup id=\\"fnref-59-shortId\\"><a href=\\"#fn-59-shortId\\" class=\\"footnote-ref\\">59</a></sup></p>
+<p>Something<sup id=\\"fnref-60-shortId\\"><a href=\\"#fn-60-shortId\\" class=\\"footnote-ref\\">60</a></sup></p>
+<p>Something<sup id=\\"fnref-61-shortId\\"><a href=\\"#fn-61-shortId\\" class=\\"footnote-ref\\">61</a></sup></p>
+<p>Something<sup id=\\"fnref-62-shortId\\"><a href=\\"#fn-62-shortId\\" class=\\"footnote-ref\\">62</a></sup></p>
+<p>Something<sup id=\\"fnref-63-shortId\\"><a href=\\"#fn-63-shortId\\" class=\\"footnote-ref\\">63</a></sup></p>
+<p>Something<sup id=\\"fnref-64-shortId\\"><a href=\\"#fn-64-shortId\\" class=\\"footnote-ref\\">64</a></sup></p>
+<p>Something<sup id=\\"fnref-65-shortId\\"><a href=\\"#fn-65-shortId\\" class=\\"footnote-ref\\">65</a></sup></p>
+<p>Something<sup id=\\"fnref-66-shortId\\"><a href=\\"#fn-66-shortId\\" class=\\"footnote-ref\\">66</a></sup></p>
+<p>Something<sup id=\\"fnref-67-shortId\\"><a href=\\"#fn-67-shortId\\" class=\\"footnote-ref\\">67</a></sup></p>
+<p>Something<sup id=\\"fnref-68-shortId\\"><a href=\\"#fn-68-shortId\\" class=\\"footnote-ref\\">68</a></sup></p>
+<p>Something<sup id=\\"fnref-69-shortId\\"><a href=\\"#fn-69-shortId\\" class=\\"footnote-ref\\">69</a></sup></p>
+<p>Something<sup id=\\"fnref-70-shortId\\"><a href=\\"#fn-70-shortId\\" class=\\"footnote-ref\\">70</a></sup></p>
+<p>Something<sup id=\\"fnref-71-shortId\\"><a href=\\"#fn-71-shortId\\" class=\\"footnote-ref\\">71</a></sup></p>
+<p>Something<sup id=\\"fnref-72-shortId\\"><a href=\\"#fn-72-shortId\\" class=\\"footnote-ref\\">72</a></sup></p>
+<p>Something<sup id=\\"fnref-73-shortId\\"><a href=\\"#fn-73-shortId\\" class=\\"footnote-ref\\">73</a></sup></p>
+<p>Something<sup id=\\"fnref-74-shortId\\"><a href=\\"#fn-74-shortId\\" class=\\"footnote-ref\\">74</a></sup></p>
+<p>Something<sup id=\\"fnref-75-shortId\\"><a href=\\"#fn-75-shortId\\" class=\\"footnote-ref\\">75</a></sup></p>
+<p>Something<sup id=\\"fnref-76-shortId\\"><a href=\\"#fn-76-shortId\\" class=\\"footnote-ref\\">76</a></sup></p>
+<p>Something<sup id=\\"fnref-77-shortId\\"><a href=\\"#fn-77-shortId\\" class=\\"footnote-ref\\">77</a></sup></p>
+<p>Something<sup id=\\"fnref-78-shortId\\"><a href=\\"#fn-78-shortId\\" class=\\"footnote-ref\\">78</a></sup></p>
+<p>Something<sup id=\\"fnref-79-shortId\\"><a href=\\"#fn-79-shortId\\" class=\\"footnote-ref\\">79</a></sup></p>
+<p>Something<sup id=\\"fnref-80-shortId\\"><a href=\\"#fn-80-shortId\\" class=\\"footnote-ref\\">80</a></sup></p>
+<p>Something<sup id=\\"fnref-81-shortId\\"><a href=\\"#fn-81-shortId\\" class=\\"footnote-ref\\">81</a></sup></p>
+<p>Something<sup id=\\"fnref-82-shortId\\"><a href=\\"#fn-82-shortId\\" class=\\"footnote-ref\\">82</a></sup></p>
+<p>Something<sup id=\\"fnref-83-shortId\\"><a href=\\"#fn-83-shortId\\" class=\\"footnote-ref\\">83</a></sup></p>
+<p>Something<sup id=\\"fnref-84-shortId\\"><a href=\\"#fn-84-shortId\\" class=\\"footnote-ref\\">84</a></sup></p>
+<p>Something<sup id=\\"fnref-85-shortId\\"><a href=\\"#fn-85-shortId\\" class=\\"footnote-ref\\">85</a></sup></p>
+<p>Something<sup id=\\"fnref-86-shortId\\"><a href=\\"#fn-86-shortId\\" class=\\"footnote-ref\\">86</a></sup></p>
+<p>Something<sup id=\\"fnref-87-shortId\\"><a href=\\"#fn-87-shortId\\" class=\\"footnote-ref\\">87</a></sup></p>
+<p>Something<sup id=\\"fnref-88-shortId\\"><a href=\\"#fn-88-shortId\\" class=\\"footnote-ref\\">88</a></sup></p>
+<p>Something<sup id=\\"fnref-89-shortId\\"><a href=\\"#fn-89-shortId\\" class=\\"footnote-ref\\">89</a></sup></p>
+<p>Something<sup id=\\"fnref-90-shortId\\"><a href=\\"#fn-90-shortId\\" class=\\"footnote-ref\\">90</a></sup></p>
+<p>Something<sup id=\\"fnref-91-shortId\\"><a href=\\"#fn-91-shortId\\" class=\\"footnote-ref\\">91</a></sup></p>
+<p>Something<sup id=\\"fnref-92-shortId\\"><a href=\\"#fn-92-shortId\\" class=\\"footnote-ref\\">92</a></sup></p>
+<p>Something<sup id=\\"fnref-93-shortId\\"><a href=\\"#fn-93-shortId\\" class=\\"footnote-ref\\">93</a></sup></p>
+<p>Something<sup id=\\"fnref-94-shortId\\"><a href=\\"#fn-94-shortId\\" class=\\"footnote-ref\\">94</a></sup></p>
+<p>Something<sup id=\\"fnref-95-shortId\\"><a href=\\"#fn-95-shortId\\" class=\\"footnote-ref\\">95</a></sup></p>
+<p>Something<sup id=\\"fnref-96-shortId\\"><a href=\\"#fn-96-shortId\\" class=\\"footnote-ref\\">96</a></sup></p>
+<p>Something<sup id=\\"fnref-97-shortId\\"><a href=\\"#fn-97-shortId\\" class=\\"footnote-ref\\">97</a></sup></p>
+<p>Something<sup id=\\"fnref-98-shortId\\"><a href=\\"#fn-98-shortId\\" class=\\"footnote-ref\\">98</a></sup></p>
+<p>Something<sup id=\\"fnref-99-shortId\\"><a href=\\"#fn-99-shortId\\" class=\\"footnote-ref\\">99</a></sup></p>
+<p>Something<sup id=\\"fnref-100-shortId\\"><a href=\\"#fn-100-shortId\\" class=\\"footnote-ref\\">100</a></sup></p>
+<p>Something<sup id=\\"fnref-101-shortId\\"><a href=\\"#fn-101-shortId\\" class=\\"footnote-ref\\">101</a></sup></p>
+<p>Something<sup id=\\"fnref-102-shortId\\"><a href=\\"#fn-102-shortId\\" class=\\"footnote-ref\\">102</a></sup></p>
+<p>Something<sup id=\\"fnref-103-shortId\\"><a href=\\"#fn-103-shortId\\" class=\\"footnote-ref\\">103</a></sup></p>
+<p>Something<sup id=\\"fnref-104-shortId\\"><a href=\\"#fn-104-shortId\\" class=\\"footnote-ref\\">104</a></sup></p>
+<p>Something<sup id=\\"fnref-105-shortId\\"><a href=\\"#fn-105-shortId\\" class=\\"footnote-ref\\">105</a></sup></p>
+<p>Something<sup id=\\"fnref-106-shortId\\"><a href=\\"#fn-106-shortId\\" class=\\"footnote-ref\\">106</a></sup></p>
+<p>Something<sup id=\\"fnref-107-shortId\\"><a href=\\"#fn-107-shortId\\" class=\\"footnote-ref\\">107</a></sup></p>
+<p>Something<sup id=\\"fnref-108-shortId\\"><a href=\\"#fn-108-shortId\\" class=\\"footnote-ref\\">108</a></sup></p>
+<p>Something<sup id=\\"fnref-109-shortId\\"><a href=\\"#fn-109-shortId\\" class=\\"footnote-ref\\">109</a></sup></p>
+<p>Something<sup id=\\"fnref-110-shortId\\"><a href=\\"#fn-110-shortId\\" class=\\"footnote-ref\\">110</a></sup></p>
+<p>Something<sup id=\\"fnref-111-shortId\\"><a href=\\"#fn-111-shortId\\" class=\\"footnote-ref\\">111</a></sup></p>
+<p>Something<sup id=\\"fnref-112-shortId\\"><a href=\\"#fn-112-shortId\\" class=\\"footnote-ref\\">112</a></sup></p>
+<p>Something<sup id=\\"fnref-113-shortId\\"><a href=\\"#fn-113-shortId\\" class=\\"footnote-ref\\">113</a></sup></p>
+<p>Something<sup id=\\"fnref-114-shortId\\"><a href=\\"#fn-114-shortId\\" class=\\"footnote-ref\\">114</a></sup></p>
+<p>Something<sup id=\\"fnref-115-shortId\\"><a href=\\"#fn-115-shortId\\" class=\\"footnote-ref\\">115</a></sup></p>
+<p>Something<sup id=\\"fnref-116-shortId\\"><a href=\\"#fn-116-shortId\\" class=\\"footnote-ref\\">116</a></sup></p>
+<p>Something<sup id=\\"fnref-117-shortId\\"><a href=\\"#fn-117-shortId\\" class=\\"footnote-ref\\">117</a></sup></p>
+<p>Something<sup id=\\"fnref-118-shortId\\"><a href=\\"#fn-118-shortId\\" class=\\"footnote-ref\\">118</a></sup></p>
+<p>Something<sup id=\\"fnref-119-shortId\\"><a href=\\"#fn-119-shortId\\" class=\\"footnote-ref\\">119</a></sup></p>
+<p>Something<sup id=\\"fnref-120-shortId\\"><a href=\\"#fn-120-shortId\\" class=\\"footnote-ref\\">120</a></sup></p>
+<p>Something<sup id=\\"fnref-121-shortId\\"><a href=\\"#fn-121-shortId\\" class=\\"footnote-ref\\">121</a></sup></p>
+<p>Something<sup id=\\"fnref-122-shortId\\"><a href=\\"#fn-122-shortId\\" class=\\"footnote-ref\\">122</a></sup></p>
+<p>Something<sup id=\\"fnref-123-shortId\\"><a href=\\"#fn-123-shortId\\" class=\\"footnote-ref\\">123</a></sup></p>
+<p>Something<sup id=\\"fnref-124-shortId\\"><a href=\\"#fn-124-shortId\\" class=\\"footnote-ref\\">124</a></sup></p>
+<p>Something<sup id=\\"fnref-125-shortId\\"><a href=\\"#fn-125-shortId\\" class=\\"footnote-ref\\">125</a></sup></p>
+<p>Something<sup id=\\"fnref-126-shortId\\"><a href=\\"#fn-126-shortId\\" class=\\"footnote-ref\\">126</a></sup></p>
+<p>Something<sup id=\\"fnref-127-shortId\\"><a href=\\"#fn-127-shortId\\" class=\\"footnote-ref\\">127</a></sup></p>
+<p>Something<sup id=\\"fnref-128-shortId\\"><a href=\\"#fn-128-shortId\\" class=\\"footnote-ref\\">128</a></sup></p>
+<p>Something<sup id=\\"fnref-129-shortId\\"><a href=\\"#fn-129-shortId\\" class=\\"footnote-ref\\">129</a></sup></p>
+<p>Something<sup id=\\"fnref-130-shortId\\"><a href=\\"#fn-130-shortId\\" class=\\"footnote-ref\\">130</a></sup></p>
+<p>Something<sup id=\\"fnref-131-shortId\\"><a href=\\"#fn-131-shortId\\" class=\\"footnote-ref\\">131</a></sup></p>
+<p>Something<sup id=\\"fnref-132-shortId\\"><a href=\\"#fn-132-shortId\\" class=\\"footnote-ref\\">132</a></sup></p>
+<p>Something<sup id=\\"fnref-133-shortId\\"><a href=\\"#fn-133-shortId\\" class=\\"footnote-ref\\">133</a></sup></p>
+<p>Something<sup id=\\"fnref-134-shortId\\"><a href=\\"#fn-134-shortId\\" class=\\"footnote-ref\\">134</a></sup></p>
+<p>Something<sup id=\\"fnref-135-shortId\\"><a href=\\"#fn-135-shortId\\" class=\\"footnote-ref\\">135</a></sup></p>
+<p>Something<sup id=\\"fnref-136-shortId\\"><a href=\\"#fn-136-shortId\\" class=\\"footnote-ref\\">136</a></sup></p>
+<p>Something<sup id=\\"fnref-137-shortId\\"><a href=\\"#fn-137-shortId\\" class=\\"footnote-ref\\">137</a></sup></p>
+<p>Something<sup id=\\"fnref-138-shortId\\"><a href=\\"#fn-138-shortId\\" class=\\"footnote-ref\\">138</a></sup></p>
+<p>Something<sup id=\\"fnref-139-shortId\\"><a href=\\"#fn-139-shortId\\" class=\\"footnote-ref\\">139</a></sup></p>
+<p>Something<sup id=\\"fnref-140-shortId\\"><a href=\\"#fn-140-shortId\\" class=\\"footnote-ref\\">140</a></sup></p>
+<p>Something<sup id=\\"fnref-141-shortId\\"><a href=\\"#fn-141-shortId\\" class=\\"footnote-ref\\">141</a></sup></p>
+<p>Something<sup id=\\"fnref-142-shortId\\"><a href=\\"#fn-142-shortId\\" class=\\"footnote-ref\\">142</a></sup></p>
+<p>Something<sup id=\\"fnref-143-shortId\\"><a href=\\"#fn-143-shortId\\" class=\\"footnote-ref\\">143</a></sup></p>
+<p>Something<sup id=\\"fnref-144-shortId\\"><a href=\\"#fn-144-shortId\\" class=\\"footnote-ref\\">144</a></sup></p>
+<p>Something<sup id=\\"fnref-145-shortId\\"><a href=\\"#fn-145-shortId\\" class=\\"footnote-ref\\">145</a></sup></p>
+<p>Something<sup id=\\"fnref-146-shortId\\"><a href=\\"#fn-146-shortId\\" class=\\"footnote-ref\\">146</a></sup></p>
+<p>Something<sup id=\\"fnref-147-shortId\\"><a href=\\"#fn-147-shortId\\" class=\\"footnote-ref\\">147</a></sup></p>
+<p>Something<sup id=\\"fnref-148-shortId\\"><a href=\\"#fn-148-shortId\\" class=\\"footnote-ref\\">148</a></sup></p>
+<p>Something<sup id=\\"fnref-149-shortId\\"><a href=\\"#fn-149-shortId\\" class=\\"footnote-ref\\">149</a></sup></p>
+<p>Something<sup id=\\"fnref-150-shortId\\"><a href=\\"#fn-150-shortId\\" class=\\"footnote-ref\\">150</a></sup></p>
+<div class=\\"footnotes\\">
+<hr>
+<ol>
+<li id=\\"fn-1-shortId\\">Another thing<a href=\\"#fnref-1-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 1\\">↩</a></li>
+<li id=\\"fn-2-shortId\\">Another thing<a href=\\"#fnref-2-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 2\\">↩</a></li>
+<li id=\\"fn-3-shortId\\">Another thing<a href=\\"#fnref-3-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 3\\">↩</a></li>
+<li id=\\"fn-4-shortId\\">Another thing<a href=\\"#fnref-4-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 4\\">↩</a></li>
+<li id=\\"fn-5-shortId\\">Another thing<a href=\\"#fnref-5-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 5\\">↩</a></li>
+<li id=\\"fn-6-shortId\\">Another thing<a href=\\"#fnref-6-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 6\\">↩</a></li>
+<li id=\\"fn-7-shortId\\">Another thing<a href=\\"#fnref-7-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 7\\">↩</a></li>
+<li id=\\"fn-8-shortId\\">Another thing<a href=\\"#fnref-8-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 8\\">↩</a></li>
+<li id=\\"fn-9-shortId\\">Another thing<a href=\\"#fnref-9-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 9\\">↩</a></li>
+<li id=\\"fn-10-shortId\\">Another thing<a href=\\"#fnref-10-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 10\\">↩</a></li>
+<li id=\\"fn-11-shortId\\">Another thing<a href=\\"#fnref-11-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 11\\">↩</a></li>
+<li id=\\"fn-12-shortId\\">Another thing<a href=\\"#fnref-12-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 12\\">↩</a></li>
+<li id=\\"fn-13-shortId\\">Another thing<a href=\\"#fnref-13-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 13\\">↩</a></li>
+<li id=\\"fn-14-shortId\\">Another thing<a href=\\"#fnref-14-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 14\\">↩</a></li>
+<li id=\\"fn-15-shortId\\">Another thing<a href=\\"#fnref-15-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 15\\">↩</a></li>
+<li id=\\"fn-16-shortId\\">Another thing<a href=\\"#fnref-16-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 16\\">↩</a></li>
+<li id=\\"fn-17-shortId\\">Another thing<a href=\\"#fnref-17-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 17\\">↩</a></li>
+<li id=\\"fn-18-shortId\\">Another thing<a href=\\"#fnref-18-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 18\\">↩</a></li>
+<li id=\\"fn-19-shortId\\">Another thing<a href=\\"#fnref-19-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 19\\">↩</a></li>
+<li id=\\"fn-20-shortId\\">Another thing<a href=\\"#fnref-20-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 20\\">↩</a></li>
+<li id=\\"fn-21-shortId\\">Another thing<a href=\\"#fnref-21-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 21\\">↩</a></li>
+<li id=\\"fn-22-shortId\\">Another thing<a href=\\"#fnref-22-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 22\\">↩</a></li>
+<li id=\\"fn-23-shortId\\">Another thing<a href=\\"#fnref-23-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 23\\">↩</a></li>
+<li id=\\"fn-24-shortId\\">Another thing<a href=\\"#fnref-24-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 24\\">↩</a></li>
+<li id=\\"fn-25-shortId\\">Another thing<a href=\\"#fnref-25-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 25\\">↩</a></li>
+<li id=\\"fn-26-shortId\\">Another thing<a href=\\"#fnref-26-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 26\\">↩</a></li>
+<li id=\\"fn-27-shortId\\">Another thing<a href=\\"#fnref-27-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 27\\">↩</a></li>
+<li id=\\"fn-28-shortId\\">Another thing<a href=\\"#fnref-28-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 28\\">↩</a></li>
+<li id=\\"fn-29-shortId\\">Another thing<a href=\\"#fnref-29-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 29\\">↩</a></li>
+<li id=\\"fn-30-shortId\\">Another thing<a href=\\"#fnref-30-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 30\\">↩</a></li>
+<li id=\\"fn-31-shortId\\">Another thing<a href=\\"#fnref-31-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 31\\">↩</a></li>
+<li id=\\"fn-32-shortId\\">Another thing<a href=\\"#fnref-32-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 32\\">↩</a></li>
+<li id=\\"fn-33-shortId\\">Another thing<a href=\\"#fnref-33-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 33\\">↩</a></li>
+<li id=\\"fn-34-shortId\\">Another thing<a href=\\"#fnref-34-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 34\\">↩</a></li>
+<li id=\\"fn-35-shortId\\">Another thing<a href=\\"#fnref-35-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 35\\">↩</a></li>
+<li id=\\"fn-36-shortId\\">Another thing<a href=\\"#fnref-36-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 36\\">↩</a></li>
+<li id=\\"fn-37-shortId\\">Another thing<a href=\\"#fnref-37-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 37\\">↩</a></li>
+<li id=\\"fn-38-shortId\\">Another thing<a href=\\"#fnref-38-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 38\\">↩</a></li>
+<li id=\\"fn-39-shortId\\">Another thing<a href=\\"#fnref-39-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 39\\">↩</a></li>
+<li id=\\"fn-40-shortId\\">Another thing<a href=\\"#fnref-40-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 40\\">↩</a></li>
+<li id=\\"fn-41-shortId\\">Another thing<a href=\\"#fnref-41-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 41\\">↩</a></li>
+<li id=\\"fn-42-shortId\\">Another thing<a href=\\"#fnref-42-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 42\\">↩</a></li>
+<li id=\\"fn-43-shortId\\">Another thing<a href=\\"#fnref-43-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 43\\">↩</a></li>
+<li id=\\"fn-44-shortId\\">Another thing<a href=\\"#fnref-44-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 44\\">↩</a></li>
+<li id=\\"fn-45-shortId\\">Another thing<a href=\\"#fnref-45-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 45\\">↩</a></li>
+<li id=\\"fn-46-shortId\\">Another thing<a href=\\"#fnref-46-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 46\\">↩</a></li>
+<li id=\\"fn-47-shortId\\">Another thing<a href=\\"#fnref-47-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 47\\">↩</a></li>
+<li id=\\"fn-48-shortId\\">Another thing<a href=\\"#fnref-48-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 48\\">↩</a></li>
+<li id=\\"fn-49-shortId\\">Another thing<a href=\\"#fnref-49-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 49\\">↩</a></li>
+<li id=\\"fn-50-shortId\\">Another thing<a href=\\"#fnref-50-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 50\\">↩</a></li>
+<li id=\\"fn-51-shortId\\">Another thing<a href=\\"#fnref-51-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 51\\">↩</a></li>
+<li id=\\"fn-52-shortId\\">Another thing<a href=\\"#fnref-52-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 52\\">↩</a></li>
+<li id=\\"fn-53-shortId\\">Another thing<a href=\\"#fnref-53-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 53\\">↩</a></li>
+<li id=\\"fn-54-shortId\\">Another thing<a href=\\"#fnref-54-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 54\\">↩</a></li>
+<li id=\\"fn-55-shortId\\">Another thing<a href=\\"#fnref-55-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 55\\">↩</a></li>
+<li id=\\"fn-56-shortId\\">Another thing<a href=\\"#fnref-56-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 56\\">↩</a></li>
+<li id=\\"fn-57-shortId\\">Another thing<a href=\\"#fnref-57-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 57\\">↩</a></li>
+<li id=\\"fn-58-shortId\\">Another thing<a href=\\"#fnref-58-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 58\\">↩</a></li>
+<li id=\\"fn-59-shortId\\">Another thing<a href=\\"#fnref-59-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 59\\">↩</a></li>
+<li id=\\"fn-60-shortId\\">Another thing<a href=\\"#fnref-60-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 60\\">↩</a></li>
+<li id=\\"fn-61-shortId\\">Another thing<a href=\\"#fnref-61-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 61\\">↩</a></li>
+<li id=\\"fn-62-shortId\\">Another thing<a href=\\"#fnref-62-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 62\\">↩</a></li>
+<li id=\\"fn-63-shortId\\">Another thing<a href=\\"#fnref-63-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 63\\">↩</a></li>
+<li id=\\"fn-64-shortId\\">Another thing<a href=\\"#fnref-64-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 64\\">↩</a></li>
+<li id=\\"fn-65-shortId\\">Another thing<a href=\\"#fnref-65-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 65\\">↩</a></li>
+<li id=\\"fn-66-shortId\\">Another thing<a href=\\"#fnref-66-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 66\\">↩</a></li>
+<li id=\\"fn-67-shortId\\">Another thing<a href=\\"#fnref-67-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 67\\">↩</a></li>
+<li id=\\"fn-68-shortId\\">Another thing<a href=\\"#fnref-68-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 68\\">↩</a></li>
+<li id=\\"fn-69-shortId\\">Another thing<a href=\\"#fnref-69-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 69\\">↩</a></li>
+<li id=\\"fn-70-shortId\\">Another thing<a href=\\"#fnref-70-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 70\\">↩</a></li>
+<li id=\\"fn-71-shortId\\">Another thing<a href=\\"#fnref-71-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 71\\">↩</a></li>
+<li id=\\"fn-72-shortId\\">Another thing<a href=\\"#fnref-72-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 72\\">↩</a></li>
+<li id=\\"fn-73-shortId\\">Another thing<a href=\\"#fnref-73-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 73\\">↩</a></li>
+<li id=\\"fn-74-shortId\\">Another thing<a href=\\"#fnref-74-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 74\\">↩</a></li>
+<li id=\\"fn-75-shortId\\">Another thing<a href=\\"#fnref-75-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 75\\">↩</a></li>
+<li id=\\"fn-76-shortId\\">Another thing<a href=\\"#fnref-76-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 76\\">↩</a></li>
+<li id=\\"fn-77-shortId\\">Another thing<a href=\\"#fnref-77-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 77\\">↩</a></li>
+<li id=\\"fn-78-shortId\\">Another thing<a href=\\"#fnref-78-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 78\\">↩</a></li>
+<li id=\\"fn-79-shortId\\">Another thing<a href=\\"#fnref-79-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 79\\">↩</a></li>
+<li id=\\"fn-80-shortId\\">Another thing<a href=\\"#fnref-80-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 80\\">↩</a></li>
+<li id=\\"fn-81-shortId\\">Another thing<a href=\\"#fnref-81-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 81\\">↩</a></li>
+<li id=\\"fn-82-shortId\\">Another thing<a href=\\"#fnref-82-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 82\\">↩</a></li>
+<li id=\\"fn-83-shortId\\">Another thing<a href=\\"#fnref-83-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 83\\">↩</a></li>
+<li id=\\"fn-84-shortId\\">Another thing<a href=\\"#fnref-84-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 84\\">↩</a></li>
+<li id=\\"fn-85-shortId\\">Another thing<a href=\\"#fnref-85-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 85\\">↩</a></li>
+<li id=\\"fn-86-shortId\\">Another thing<a href=\\"#fnref-86-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 86\\">↩</a></li>
+<li id=\\"fn-87-shortId\\">Another thing<a href=\\"#fnref-87-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 87\\">↩</a></li>
+<li id=\\"fn-88-shortId\\">Another thing<a href=\\"#fnref-88-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 88\\">↩</a></li>
+<li id=\\"fn-89-shortId\\">Another thing<a href=\\"#fnref-89-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 89\\">↩</a></li>
+<li id=\\"fn-90-shortId\\">Another thing<a href=\\"#fnref-90-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 90\\">↩</a></li>
+<li id=\\"fn-91-shortId\\">Another thing<a href=\\"#fnref-91-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 91\\">↩</a></li>
+<li id=\\"fn-92-shortId\\">Another thing<a href=\\"#fnref-92-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 92\\">↩</a></li>
+<li id=\\"fn-93-shortId\\">Another thing<a href=\\"#fnref-93-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 93\\">↩</a></li>
+<li id=\\"fn-94-shortId\\">Another thing<a href=\\"#fnref-94-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 94\\">↩</a></li>
+<li id=\\"fn-95-shortId\\">Another thing<a href=\\"#fnref-95-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 95\\">↩</a></li>
+<li id=\\"fn-96-shortId\\">Another thing<a href=\\"#fnref-96-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 96\\">↩</a></li>
+<li id=\\"fn-97-shortId\\">Another thing<a href=\\"#fnref-97-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 97\\">↩</a></li>
+<li id=\\"fn-98-shortId\\">Another thing<a href=\\"#fnref-98-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 98\\">↩</a></li>
+<li id=\\"fn-99-shortId\\">Another thing<a href=\\"#fnref-99-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 99\\">↩</a></li>
+<li id=\\"fn-100-shortId\\">Another thing<a href=\\"#fnref-100-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 100\\">↩</a></li>
+<li id=\\"fn-101-shortId\\">Another thing<a href=\\"#fnref-101-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 101\\">↩</a></li>
+<li id=\\"fn-102-shortId\\">Another thing<a href=\\"#fnref-102-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 102\\">↩</a></li>
+<li id=\\"fn-103-shortId\\">Another thing<a href=\\"#fnref-103-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 103\\">↩</a></li>
+<li id=\\"fn-104-shortId\\">Another thing<a href=\\"#fnref-104-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 104\\">↩</a></li>
+<li id=\\"fn-105-shortId\\">Another thing<a href=\\"#fnref-105-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 105\\">↩</a></li>
+<li id=\\"fn-106-shortId\\">Another thing<a href=\\"#fnref-106-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 106\\">↩</a></li>
+<li id=\\"fn-107-shortId\\">Another thing<a href=\\"#fnref-107-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 107\\">↩</a></li>
+<li id=\\"fn-108-shortId\\">Another thing<a href=\\"#fnref-108-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 108\\">↩</a></li>
+<li id=\\"fn-109-shortId\\">Another thing<a href=\\"#fnref-109-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 109\\">↩</a></li>
+<li id=\\"fn-110-shortId\\">Another thing<a href=\\"#fnref-110-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 110\\">↩</a></li>
+<li id=\\"fn-111-shortId\\">Another thing<a href=\\"#fnref-111-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 111\\">↩</a></li>
+<li id=\\"fn-112-shortId\\">Another thing<a href=\\"#fnref-112-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 112\\">↩</a></li>
+<li id=\\"fn-113-shortId\\">Another thing<a href=\\"#fnref-113-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 113\\">↩</a></li>
+<li id=\\"fn-114-shortId\\">Another thing<a href=\\"#fnref-114-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 114\\">↩</a></li>
+<li id=\\"fn-115-shortId\\">Another thing<a href=\\"#fnref-115-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 115\\">↩</a></li>
+<li id=\\"fn-116-shortId\\">Another thing<a href=\\"#fnref-116-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 116\\">↩</a></li>
+<li id=\\"fn-117-shortId\\">Another thing<a href=\\"#fnref-117-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 117\\">↩</a></li>
+<li id=\\"fn-118-shortId\\">Another thing<a href=\\"#fnref-118-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 118\\">↩</a></li>
+<li id=\\"fn-119-shortId\\">Another thing<a href=\\"#fnref-119-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 119\\">↩</a></li>
+<li id=\\"fn-120-shortId\\">Another thing<a href=\\"#fnref-120-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 120\\">↩</a></li>
+<li id=\\"fn-121-shortId\\">Another thing<a href=\\"#fnref-121-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 121\\">↩</a></li>
+<li id=\\"fn-122-shortId\\">Another thing<a href=\\"#fnref-122-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 122\\">↩</a></li>
+<li id=\\"fn-123-shortId\\">Another thing<a href=\\"#fnref-123-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 123\\">↩</a></li>
+<li id=\\"fn-124-shortId\\">Another thing<a href=\\"#fnref-124-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 124\\">↩</a></li>
+<li id=\\"fn-125-shortId\\">Another thing<a href=\\"#fnref-125-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 125\\">↩</a></li>
+<li id=\\"fn-126-shortId\\">Another thing<a href=\\"#fnref-126-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 126\\">↩</a></li>
+<li id=\\"fn-127-shortId\\">Another thing<a href=\\"#fnref-127-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 127\\">↩</a></li>
+<li id=\\"fn-128-shortId\\">Another thing<a href=\\"#fnref-128-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 128\\">↩</a></li>
+<li id=\\"fn-129-shortId\\">Another thing<a href=\\"#fnref-129-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 129\\">↩</a></li>
+<li id=\\"fn-130-shortId\\">Another thing<a href=\\"#fnref-130-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 130\\">↩</a></li>
+<li id=\\"fn-131-shortId\\">Another thing<a href=\\"#fnref-131-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 131\\">↩</a></li>
+<li id=\\"fn-132-shortId\\">Another thing<a href=\\"#fnref-132-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 132\\">↩</a></li>
+<li id=\\"fn-133-shortId\\">Another thing<a href=\\"#fnref-133-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 133\\">↩</a></li>
+<li id=\\"fn-134-shortId\\">Another thing<a href=\\"#fnref-134-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 134\\">↩</a></li>
+<li id=\\"fn-135-shortId\\">Another thing<a href=\\"#fnref-135-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 135\\">↩</a></li>
+<li id=\\"fn-136-shortId\\">Another thing<a href=\\"#fnref-136-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 136\\">↩</a></li>
+<li id=\\"fn-137-shortId\\">Another thing<a href=\\"#fnref-137-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 137\\">↩</a></li>
+<li id=\\"fn-138-shortId\\">Another thing<a href=\\"#fnref-138-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 138\\">↩</a></li>
+<li id=\\"fn-139-shortId\\">Another thing<a href=\\"#fnref-139-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 139\\">↩</a></li>
+<li id=\\"fn-140-shortId\\">Another thing<a href=\\"#fnref-140-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 140\\">↩</a></li>
+<li id=\\"fn-141-shortId\\">Another thing<a href=\\"#fnref-141-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 141\\">↩</a></li>
+<li id=\\"fn-142-shortId\\">Another thing<a href=\\"#fnref-142-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 142\\">↩</a></li>
+<li id=\\"fn-143-shortId\\">Another thing<a href=\\"#fnref-143-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 143\\">↩</a></li>
+<li id=\\"fn-144-shortId\\">Another thing<a href=\\"#fnref-144-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 144\\">↩</a></li>
+<li id=\\"fn-145-shortId\\">Another thing<a href=\\"#fnref-145-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 145\\">↩</a></li>
+<li id=\\"fn-146-shortId\\">Another thing<a href=\\"#fnref-146-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 146\\">↩</a></li>
+<li id=\\"fn-147-shortId\\">Another thing<a href=\\"#fnref-147-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 147\\">↩</a></li>
+<li id=\\"fn-148-shortId\\">Another thing<a href=\\"#fnref-148-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 148\\">↩</a></li>
+<li id=\\"fn-149-shortId\\">Another thing<a href=\\"#fnref-149-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 149\\">↩</a></li>
+<li id=\\"fn-150-shortId\\">Another thing<a href=\\"#fnref-150-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 150\\">↩</a></li>
+</ol>
+</div>"
+`;
+
+exports[`extensions renders github_flavored.txt 1`] = `
+"<p>index 0000000..6e956a9</p>
+<pre><code class=\\"language-diff\\">--- /dev/null
++++ b/test/data/stripped_text/mike-30-lili
+@@ -0,0 +1,27 @@
++Summary:
++ drift_mod.py |    1 +
++ 1 files changed, 1 insertions(+), 0 deletions(-)
++
++commit da4bfb04debdd994683740878d09988b2641513d
++Author: Mike Dirolf &#x3C;mike@dirolf.com>
++Date:   Tue Jan 17 13:42:28 2012 -0500
++
++\`\`\`
++minor: just wanted to push something.
++\`\`\`
++
++diff --git a/drift_mod.py b/drift_mod.py
++index 34dfba6..8a88a69 100644
++
++\`\`\`
++--- a/drift_mod.py
+++++ b/drift_mod.py
++@@ -281,6 +281,7 @@ CONTEXT_DIFF_LINE_PATTERN = re.compile(r'^('
++                                        '|\\\\+ .*'
++                                        '|- .*'
++                                        ')$')
+++
++ def wrap_context_diffs(message_text):
++     return _wrap_diff(CONTEXT_DIFF_HEADER_PATTERN,
++                       CONTEXT_DIFF_LINE_PATTERN,
++\`\`\`
+</code></pre>
+<p>Test support for foo+bar lexer names.</p>
+<pre><code class=\\"language-html+jinja\\">&#x3C;title>{% block title %}{% endblock %}&#x3C;/title>
+&#x3C;ul>
+{% for user in users %}
+  &#x3C;li>&#x3C;a href=\\"{{ user.url }}\\">{{ user.username }}&#x3C;/a>&#x3C;/li>
+{% endfor %}
+&#x3C;/ul>
+</code></pre>
+<p>Test support for foo+bar lexer names in citation.</p>
+<blockquote>
+<pre><code class=\\"language-html+jinja\\">&#x3C;title>{% block title %}{% endblock %}&#x3C;/title>
+&#x3C;ul>
+
+{% for user in users %}
+  &#x3C;li>&#x3C;a href=\\"{{ user.url }}\\">{{ user.username }}&#x3C;/a>&#x3C;/li>
+{% endfor %}
+
+&#x3C;/ul>
+</code></pre>
+</blockquote>
+<p>Test support for foo+bar lexer names with hightlight.</p>
+<pre><code class=\\"language-html+jinja\\">&#x3C;title>{% block title %}{% endblock %}&#x3C;/title>
+&#x3C;ul>
+
+{% for user in users %}
+  &#x3C;li>&#x3C;a href=\\"{{ user.url }}\\">{{ user.username }}&#x3C;/a>&#x3C;/li>
+{% endfor %}
+
+&#x3C;/ul>
+</code></pre>
+<p>Test support for foo+bar lexer names with linenostart.</p>
+<pre><code class=\\"language-html+jinja\\">&#x3C;title>{% block title %}{% endblock %}&#x3C;/title>
+&#x3C;ul>
+
+{% for user in users %}
+  &#x3C;li>&#x3C;a href=\\"{{ user.url }}\\">{{ user.username }}&#x3C;/a>&#x3C;/li>
+{% endfor %}
+
+&#x3C;/ul>
+</code></pre>
+<p>Test support for foo+bar lexer names with both.</p>
+<pre><code class=\\"language-html+jinja\\">&#x3C;title>{% block title %}{% endblock %}&#x3C;/title>
+&#x3C;ul>
+{% for user in users %}
+  &#x3C;li>&#x3C;a href=\\"{{ user.url }}\\">{{ user.username }}&#x3C;/a>&#x3C;/li>
+{% endfor %}
+&#x3C;/ul>
+</code></pre>
+<p>Code without matching end</p>
+<pre><code class=\\"language-html\\">
+~~~
+
+Code into paragraph
+\`\`\`html+jinja hl_lines= \\"2-4\\" linenostart=10
+&#x3C;title>{% block title %}{% endblock %}&#x3C;/title>
+&#x3C;ul>
+{% for user in users %}
+  &#x3C;li>&#x3C;a href=\\"{{ user.url }}\\">{{ user.username }}&#x3C;/a>&#x3C;/li>
+{% endfor %}
+&#x3C;/ul>
+\`\`\`
+with end
+
+</code></pre>"
+`;
+
+exports[`extensions renders tables.txt 1`] = `
+"<div class=\\"table-wrapper\\"><table>
+<thead>
+<tr>
+<th>First Header</th>
+<th>Second Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table></div>
+<div class=\\"table-wrapper\\"><table>
+<thead>
+<tr>
+<th>First Header</th>
+<th>Second Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table></div>
+<div class=\\"table-wrapper\\"><table>
+<thead>
+<tr>
+<th align=\\"left\\">Item</th>
+<th align=\\"right\\">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align=\\"left\\">Computer</td>
+<td align=\\"right\\">$1600</td>
+</tr>
+<tr>
+<td align=\\"left\\">Phone</td>
+<td align=\\"right\\">$12</td>
+</tr>
+<tr>
+<td align=\\"left\\">Pipe</td>
+<td align=\\"right\\">$1</td>
+</tr>
+</tbody>
+</table></div>
+<div class=\\"table-wrapper\\"><table>
+<thead>
+<tr>
+<th>Function name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>help()</code></td>
+<td>Display the help window.</td>
+</tr>
+<tr>
+<td><code>destroy()</code></td>
+<td><strong>Destroy your computer!</strong></td>
+</tr>
+</tbody>
+</table></div>
+<div class=\\"table-wrapper\\"><table>
+<thead>
+<tr>
+<th align=\\"left\\">foo</th>
+<th align=\\"center\\">bar</th>
+<th align=\\"right\\">baz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align=\\"left\\"></td>
+<td align=\\"center\\">Q</td>
+<td align=\\"right\\"></td>
+</tr>
+<tr>
+<td align=\\"left\\">W</td>
+<td align=\\"center\\"></td>
+<td align=\\"right\\">W</td>
+</tr>
+</tbody>
+</table></div>
+<p>Three spaces in front of a table:</p>
+<div class=\\"table-wrapper\\"><table>
+<thead>
+<tr>
+<th>First Header</th>
+<th>Second Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table></div>
+<div class=\\"table-wrapper\\"><table>
+<thead>
+<tr>
+<th>First Header</th>
+<th>Second Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr>
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table></div>
+<p>Four spaces is a code block:</p>
+<pre><code>First Header | Second Header
+------------ | -------------
+Content Cell | Content Cell
+Content Cell | Content Cell
+</code></pre>"
+`;
+
+exports[`extensions renders tables-2.txt 1`] = `
+"<div class=\\"table-wrapper\\"><table>
+<thead>
+<tr>
+<th>foo</th>
+<th>bar</th>
+<th>baz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>W</td>
+<td></td>
+<td>W</td>
+</tr>
+</tbody>
+</table></div>"
+`;
+
+exports[`heading-shift shifts before range 1`] = `"<h1 id=\\"should-be-h1\\">should be h1<a aria-hidden=\\"true\\" href=\\"#should-be-h1\\"><span class=\\"icon icon-link\\"></span></a></h1>"`;
+
+exports[`heading-shift shifts in range 1`] = `"<h4 id=\\"should-be-h4\\">should be h4<a aria-hidden=\\"true\\" href=\\"#should-be-h4\\"><span class=\\"icon icon-link\\"></span></a></h4>"`;
+
+exports[`heading-shift shifts past range 1`] = `"<h6 id=\\"should-be-h6\\">should be h6<a aria-hidden=\\"true\\" href=\\"#should-be-h6\\"><span class=\\"icon icon-link\\"></span></a></h6>"`;
+
+exports[`misc renders CRLF_line_ends.txt 1`] = `
+"<p>foo</p>
+<p>&#x3C;div>
+bar
+&#x3C;/div></p>"
+`;
+
+exports[`misc renders adjacent-headers.txt 1`] = `
+"<h1 id=\\"this-is-a-huge-header\\">this is a huge header<a aria-hidden=\\"true\\" href=\\"#this-is-a-huge-header\\"><span class=\\"icon icon-link\\"></span></a></h1>
+<h2 id=\\"this-is-a-smaller-header\\">this is a smaller header<a aria-hidden=\\"true\\" href=\\"#this-is-a-smaller-header\\"><span class=\\"icon icon-link\\"></span></a></h2>"
+`;
+
+exports[`misc renders amp-in-url.txt 1`] = `"<p><a href=\\"http://www.freewisdom.org/this&#x26;that\\">link</a></p>"`;
+
+exports[`misc renders ampersand.txt 1`] = `
+"<p>&#x26;</p>
+<p>AT&#x26;T</p>"
+`;
+
+exports[`misc renders arabic.txt 1`] = `
+"<h1 id=\\"بايثون\\">بايثون<a aria-hidden=\\"true\\" href=\\"#بايثون\\"><span class=\\"icon icon-link\\"></span></a></h1>
+<p><strong>بايثون</strong> لغة برمجة حديثة بسيطة، واضحة، سريعة ، تستخدم أسلوب البرمجة الكائنية (OOP) وقابلة للتطوير بالإضافة إلى أنها مجانية و مفتوحة المصدر. صُنفت بالأساس كلغة تفسيرية ، بايثون مصممة أصلاً للأداء بعض المهام الخاصة أو المحدودة. إلا أنه يمكن استخدامها بايثون لإنجاز المشاريع الضخمه كأي لغة برمجية أخرى،  غالباً ما يُنصح المبتدئين في ميدان البرمجة بتعلم هذه اللغة لأنها من بين أسهل اللغات البرمجية تعلماً.</p>
+<p>نشأت بايثون في مركز CWI (مركز العلوم والحاسب الآلي) بأمستردام على يد جويدو فان رُزوم. تم تطويرها بلغة C. أطلق فان رُزوم اسم \\"بايثون\\" على لغته تعبيرًا عن إعجابه بفِرقَة مسرحية هزلية شهيرة من بريطانيا، كانت تطلق على نفسها اسم مونتي بايثون Monty Python.</p>
+<p>تتميز بايثون بمجتمعها النشط ، كما أن لها الكثير من المكتبات البرمجية ذات الأغراض الخاصة والتي برمجها أشخاص من مجتمع هذه اللغة ، مثلاً مكتبة PyGame التي توفر مجموعه من الوظائف من اجل برمجة الالعاب. ويمكن لبايثون التعامل مع العديد من أنواع قواعد البيانات مثل MySQL وغيره.</p>
+<h2 id=\\"أمثلة\\">أمثلة<a aria-hidden=\\"true\\" href=\\"#أمثلة\\"><span class=\\"icon icon-link\\"></span></a></h2>
+<p>مثال Hello World!</p>
+<pre><code>print \\"Hello World!\\"
+</code></pre>
+<p>مثال لاستخراج المضروب Factorial :</p>
+<pre><code>num = 1
+x = raw_input('Insert the number please ')
+x = int(x)
+
+if x > 69:
+ print 'Math Error !'
+else:
+ while x > 1:
+  num *= x
+  x = x-1
+
+ print num
+</code></pre>
+<h2 id=\\"وصلات-خارجية\\">وصلات خارجية<a aria-hidden=\\"true\\" href=\\"#وصلات-خارجية\\"><span class=\\"icon icon-link\\"></span></a></h2>
+<ul>
+<li>
+<p><a href=\\"http://www.python.org\\">الموقع الرسمي للغة بايثون</a></p>
+<p>بذرة حاس</p>
+</li>
+</ul>"
+`;
+
+exports[`misc renders autolinks_with_asterisks.txt 1`] = `"<p><a href=\\"http://some.site/weird*url*thing\\">http://some.site/weird*url*thing</a></p>"`;
+
+exports[`misc renders backtick-escape.txt 1`] = `
+"<p>\`This also should not be in code.\`
+\\\\<code>This should be in code.\\\\\\\\</code>
+\`And finally this should not be in code.\`</p>"
+`;
+
+exports[`misc renders blank_lines_in_codeblocks.txt 1`] = `
+"<p>Preserve blank lines in code blocks with tabs:</p>
+<pre><code>a code block
+
+two tabbed lines
+
+
+three tabbed lines
+
+
+
+four tabbed lines
+
+
+
+
+five tabbed lines
+
+
+
+
+
+six tabbed lines
+
+
+
+
+
+
+End of tabbed block
+</code></pre>
+<p>And without tabs:</p>
+<pre><code>a code block
+
+two blank lines
+
+
+three blank lines
+
+
+
+four blank lines
+
+
+
+
+five blank lines
+
+
+
+
+
+six blank lines
+
+
+
+
+
+
+End of block
+</code></pre>
+<p>End of document</p>"
+`;
+
+exports[`misc renders blank-block-quote.txt 1`] = `
+"<p>aaaaaaaaaaa</p>
+<blockquote>
+</blockquote>
+<p>bbbbbbbbbbb</p>"
+`;
+
+exports[`misc renders block_html_attr.txt 1`] = `
+"<p>&#x3C;blockquote>
+Raw HTML processing should not confuse this with the blockquote below
+&#x3C;/blockquote>
+&#x3C;div id=\\"current-content\\">
+    &#x3C;div id=\\"primarycontent\\" class=\\"hfeed\\">
+        &#x3C;div id=\\"post-\\">
+            &#x3C;div class=\\"page-head\\">
+                &#x3C;h2>Header2&#x3C;/h2>
+            &#x3C;/div>
+            &#x3C;div class=\\"entry-content\\">
+                &#x3C;h3>Header3&#x3C;/h3>
+                    &#x3C;p>Paragraph&#x3C;/p>
+                &#x3C;h3>Header3&#x3C;/h3>
+                    &#x3C;p>Paragraph&#x3C;/p>
+                    &#x3C;blockquote>
+                        &#x3C;p>Paragraph&#x3C;/p>
+                    &#x3C;/blockquote>
+                    &#x3C;p>Paragraph&#x3C;/p>
+                    &#x3C;p>&#x3C;a href=\\"/somelink\\">linktext&#x3C;/a>&#x3C;/p>
+            &#x3C;/div>
+        &#x3C;/div>&#x3C;!-- #post-ID -->
+        &#x3C;!-- add contact form here -->
+    &#x3C;/div>&#x3C;!-- #primarycontent -->
+&#x3C;/div>&#x3C;!-- #current-content --></p>"
+`;
+
+exports[`misc renders block_html_simple.txt 1`] = `
+"<p>&#x3C;p>foo&#x3C;/p>
+&#x3C;ul>
+&#x3C;li>
+&#x3C;p>bar&#x3C;/p>
+&#x3C;/li>
+&#x3C;li>
+&#x3C;p>baz&#x3C;/p>
+&#x3C;/li>
+&#x3C;/ul></p>"
+`;
+
+exports[`misc renders block_html5.txt 1`] = `
+"<p>&#x3C;section>
+    &#x3C;header>
+        &#x3C;hgroup>
+            &#x3C;h1>Hello :-)&#x3C;/h1>
+        &#x3C;/hgroup>
+    &#x3C;/header>
+    &#x3C;figure>
+        &#x3C;img src=\\"image.png\\" alt=\\"\\" />
+        &#x3C;figcaption>Caption&#x3C;/figcaption>
+    &#x3C;/figure>
+    &#x3C;footer>
+        &#x3C;p>Some footer&#x3C;/p>
+    &#x3C;/footer>
+&#x3C;/section>&#x3C;figure>&#x3C;/figure></p>"
+`;
+
+exports[`misc renders blockquote.txt 1`] = `
+"<blockquote>
+<p>blockquote with no whitespace before <code>></code>.</p>
+</blockquote>
+<p>foo</p>
+<blockquote>
+<p>blockquote with one space before the <code>></code>.</p>
+</blockquote>
+<p>bar</p>
+<blockquote>
+<p>blockquote with 2 spaces.</p>
+</blockquote>
+<p>baz</p>
+<blockquote>
+<p>this has three spaces so its a paragraph.</p>
+</blockquote>
+<p>blah</p>
+<pre><code>> this one had four so it's a code block.
+</code></pre>
+<blockquote>
+<blockquote>
+<p>this nested blockquote has 0 on level one and 3 (one after the first <code>></code> + 2 more) on level 2.</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>and this has 4 on level 2 - another code block.</p>
+</blockquote>
+</blockquote>"
+`;
+
+exports[`misc renders blockquote-below-paragraph.txt 1`] = `
+"<p>Paragraph</p>
+<blockquote>
+<p>Block quote
+Yep</p>
+</blockquote>
+<p>Paragraph</p>
+<blockquote>
+<p>no space
+Nope</p>
+</blockquote>
+<p>Paragraph one</p>
+<blockquote>
+<p>blockquote
+More blockquote.</p>
+</blockquote>"
+`;
+
+exports[`misc renders blockquote-hr.txt 1`] = `
+"<p>This is a paragraph.</p>
+<hr>
+<blockquote>
+<p>Block quote with horizontal lines.</p>
+<hr>
+<blockquote>
+<p>Double block quote.</p>
+<hr>
+<p>End of the double block quote.</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>A new paragraph.
+With multiple lines.
+Even a lazy line.</p>
+<hr>
+<p>The last line.</p>
+</blockquote>"
+`;
+
+exports[`misc renders bold_links.txt 1`] = `"<p><strong>bold <a href=\\"http://example.com\\">link</a></strong></p>"`;
+
+exports[`misc renders br.txt 1`] = `
+"<p>Output:</p>
+<pre><code>&#x3C;p>Some of these words &#x3C;em>are emphasized&#x3C;/em>.
+Some of these words &#x3C;em>are emphasized also&#x3C;/em>.&#x3C;/p>
+
+&#x3C;p>Use two asterisks for &#x3C;strong>strong emphasis&#x3C;/strong>.
+Or, if you prefer, &#x3C;strong>use two underscores instead&#x3C;/strong>.&#x3C;/p>
+</code></pre>
+<p>Unordered (bulleted) lists use asterisks, pluses, and hyphens (<code>*</code>,
+<code>+</code>, and <code>-</code>) as list markers. These three markers are
+interchangable; this:</p>"
+`;
+
+exports[`misc renders bracket_re.txt 1`] = `
+"<p>[x
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx
+xxx xxx xxx xxx xxx xxx xxx xxx</p>"
+`;
+
+exports[`misc renders brackets-in-img-title.txt 1`] = `
+"<p><img src=\\"local-img.jpg\\" alt=\\"alt\\">
+<img src=\\"local-img.jpg\\" alt=\\"alt\\">
+<img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"normal title\\"></p>
+<p><img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"(just title in brackets)\\">
+<img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"title with brackets (I think)\\"></p>
+<p><img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"(\\">
+<img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"(open only\\">
+<img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\")\\">
+<img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"close only)\\"></p>"
+`;
+
+exports[`misc renders code-first-line.txt 1`] = `
+"<pre><code>print \\"This is a code block.\\"
+</code></pre>"
+`;
+
+exports[`misc renders comments.txt 1`] = `
+"<p>X&#x3C;0</p>
+<p>X>0</p>
+<p>&#x3C;!-- A comment --></p>
+<p>&#x3C;div>as if&#x3C;/div></p>
+<p>&#x3C;!-- comment --></p>
+<p><strong>no blank line</strong></p>"
+`;
+
+exports[`misc renders div.txt 1`] = `
+"<p>&#x3C;div id=\\"sidebar\\"></p>
+<p>   <em>foo</em></p>
+<p>&#x3C;/div></p>
+<p>And now in uppercase:</p>
+<p>&#x3C;DIV>
+foo
+&#x3C;/DIV></p>"
+`;
+
+exports[`misc renders em_strong.txt 1`] = `
+"<p>One asterisk: *</p>
+<p>One underscore: _</p>
+<p>Two asterisks: **</p>
+<p>With spaces: * *</p>
+<p>Two underscores __</p>
+<p>with spaces: _ _</p>
+<p>three asterisks: ***</p>
+<p>with spaces: * * *</p>
+<p>three underscores: ___</p>
+<p>with spaces: _ _ _</p>
+<p>One char: <em>a</em></p>"
+`;
+
+exports[`misc renders em-around-links.txt 1`] = `
+"<ul>
+<li><em><a href=\\"https://pythonhosted.org/Markdown/\\">Python in Markdown</a> by some
+great folks</em> - This <em>does</em> work as expected.</li>
+<li><em><a href=\\"https://pythonhosted.org/Markdown/\\">Python in Markdown</a> by some
+great folks</em> - This <em>does</em> work as expected.</li>
+<li><a href=\\"https://pythonhosted.org/Markdown/\\"><em>Python in Markdown</em></a> by some
+great folks - This <em>does</em> work as expected.</li>
+<li><a href=\\"https://pythonhosted.org/Markdown/\\"><em>Python in Markdown</em></a> <em>by some
+great folks</em> - This <em>does</em> work as expected.</li>
+</ul>
+<p><em><a href=\\"https://pythonhosted.org/Markdown/\\">Python in Markdown</a> by some
+great folks</em> - This <em>does</em> work as expected.</p>"
+`;
+
+exports[`misc renders email.txt 1`] = `
+"<p>asdfasdfadsfasd <a href=\\"mailto:yuri@freewisdom.org\\">yuri@freewisdom.org</a> or you can say
+instead <a href=\\"mailto:yuri@freewisdom.org\\">yuri@freewisdom.org</a></p>
+<p><a href=\\"mailto:bob&#x26;sue@example.com\\">bob&#x26;sue@example.com</a></p>"
+`;
+
+exports[`misc renders escaped_chars_in_js.txt 1`] = `
+"<p>&#x3C;span id=\\"e116142240\\">[javascript protected email address]&#x3C;/span></p>
+<p>&#x3C;script type=\\"text/javascript\\">
+    var a=\\"gqMjyw7lZCaKk6p0J3uAUYS1.dbIW2hXzDHmiVNotOPRe_Ev@c4Gs58+LBr-F9QTfxn\\";
+    var b=a.split(\\"\\").sort().join(\\"\\");
+    var c=\\"F_-F6F_-FMe_\\";
+    var d=\\"\\";
+    for(var e=0;e&#x3C;c.length;e++)
+    d+=b.charAt(a.indexOf(c.charAt(e)));
+        document
+            .getElementById(\\"e116142240\\")
+            .innerHTML=\\"&#x3C;a href=\\\\\\"mailto:\\"+d+\\"\\\\\\">\\"+d+\\"&#x3C;/a>\\";
+&#x3C;/script></p>"
+`;
+
+exports[`misc renders h1.txt 1`] = `
+"<h2 id=\\"header\\">Header<a aria-hidden=\\"true\\" href=\\"#header\\"><span class=\\"icon icon-link\\"></span></a></h2>
+<h1 id=\\"header-2\\">Header 2<a aria-hidden=\\"true\\" href=\\"#header-2\\"><span class=\\"icon icon-link\\"></span></a></h1>
+<h3 id=\\"h3\\">H3<a aria-hidden=\\"true\\" href=\\"#h3\\"><span class=\\"icon icon-link\\"></span></a></h3>
+<h1 id=\\"h1\\">H1<a aria-hidden=\\"true\\" href=\\"#h1\\"><span class=\\"icon icon-link\\"></span></a></h1>
+<h2 id=\\"h2\\">H2<a aria-hidden=\\"true\\" href=\\"#h2\\"><span class=\\"icon icon-link\\"></span></a></h2>"
+`;
+
+exports[`misc renders image.txt 1`] = `
+"<figure><img src=\\"http://humane_man.jpg\\" alt=\\"Poster\\" title=\\"The most humane man.\\"><figcaption>Poster</figcaption></figure>
+<p><img src=\\"http://humane_man.jpg\\" alt=\\"Poster\\" title=\\"The most humane man.\\"></p>
+<figure><img src=\\"\\" alt=\\"Blank\\"><figcaption>Blank</figcaption></figure>"
+`;
+
+exports[`misc renders image_in_links.txt 1`] = `"<p><a href=\\"path/to/image.png\\"><img src=\\"path/to/img_thumb.png\\" alt=\\"altname\\"></a></p>"`;
+
+exports[`misc renders image-2.txt 1`] = `
+"<p><a href=\\"http://src.com/\\"><em>link!</em></a></p>
+<p><em><a href=\\"http://www.freewisdom.org\\">link</a></em></p>"
+`;
+
+exports[`misc renders ins-at-start-of-paragraph.txt 1`] = `"<p>&#x3C;ins>Hello, fellow developer&#x3C;/ins> this ins should be wrapped in a p.</p>"`;
+
+exports[`misc renders inside_html.txt 1`] = `"<p>&#x3C;a href=\\"stuff\\"> <strong>ok</strong>? &#x3C;/a></p>"`;
+
+exports[`misc renders lazy-block-quote.txt 1`] = `
+"<blockquote>
+<p>Line one of lazy block quote.
+Line two of lazy block quote.</p>
+</blockquote>
+<blockquote>
+<p>Line one of paragraph two.
+Line two of paragraph two.</p>
+</blockquote>"
+`;
+
+exports[`misc renders link-with-parenthesis.txt 1`] = `"<p><a href=\\"http://en.wikipedia.org/wiki/ZIP_(file_format)\\" title=\\"ZIP (file format) - Wikipedia, the free encyclopedia\\">ZIP archives</a></p>"`;
+
+exports[`misc renders lists.txt 1`] = `
+"<ul>
+<li>A multi-paragraph list,
+unindented.</li>
+</ul>
+<p>Simple tight list</p>
+<ul>
+<li>Uno</li>
+<li>Due</li>
+<li>Tri</li>
+</ul>
+<p>A singleton tight list:</p>
+<ul>
+<li>Uno</li>
+</ul>
+<p>A lose list:</p>
+<ul>
+<li>
+<p>One</p>
+</li>
+<li>
+<p>Two</p>
+</li>
+<li>
+<p>Three</p>
+</li>
+</ul>
+<p>A lose list with paragraphs</p>
+<ul>
+<li>
+<p>One one one one</p>
+<p>  one one one one</p>
+</li>
+<li>
+<p>Two two two two</p>
+</li>
+</ul>"
+`;
+
+exports[`misc renders lists2.txt 1`] = `
+"<ul>
+<li>blah blah blah
+sdf asdf asdf asdf asdf
+asda asdf asdfasd</li>
+</ul>"
+`;
+
+exports[`misc renders lists3.txt 1`] = `
+"<ul>
+<li>blah blah blah
+sdf asdf asdf asdf asdf
+asda asdf asdfasd</li>
+</ul>"
+`;
+
+exports[`misc renders lists4.txt 1`] = `
+"<ul>
+<li>item1</li>
+<li>item2<ol>
+<li>Number 1</li>
+<li>Number 2</li>
+</ol></li>
+</ul>"
+`;
+
+exports[`misc renders lists5.txt 1`] = `
+"<blockquote>
+<p>This is a test of a block quote
+With just two lines</p>
+</blockquote>
+<p>A paragraph</p>
+<blockquote>
+<p>This is a more difficult case
+With a list item inside the quote</p>
+<ul>
+<li>Alpha</li>
+<li>Beta
+Etc.</li>
+</ul>
+</blockquote>"
+`;
+
+exports[`misc renders lists6.txt 1`] = `
+"<p>Test five or more spaces as start of list:</p>
+<ul>
+<li><pre><code>five spaces
+</code></pre></li>
+</ul>
+<p>not first item:</p>
+<ul>
+<li>one space</li>
+<li><pre><code>five spaces
+</code></pre></li>
+</ul>
+<p>loose list:</p>
+<ul>
+<li>
+<p>one space</p>
+</li>
+<li>
+<pre><code>five spaces
+</code></pre>
+</li>
+</ul>"
+`;
+
+exports[`misc renders lists8.txt 1`] = `
+"<ol>
+<li>
+<blockquote>
+<p>Four-score and seven years ago...</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>We have nothing to fear...</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>This is it...</p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<ul>
+<li>
+<blockquote>
+<p>Four-score and sever years ago
+our fathers brought forth</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>We have nothing to fear
+but fear itself</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>This is it
+as far as I'm concerned</p>
+</blockquote>
+</li>
+</ul>"
+`;
+
+exports[`misc renders mismatched-tags.txt 1`] = `
+"<p>&#x3C;p>Some text&#x3C;/p>&#x3C;div>some more text&#x3C;/div></p>
+<p>and a bit more</p>
+<p>&#x3C;p>And this output&#x3C;/p> <em>Compatible with PHP Markdown Extra 1.2.2 and Markdown.pl1.0.2b8:</em></p>
+<p>&#x3C;!-- comment -->&#x3C;p>&#x3C;div>text&#x3C;/div>&#x3C;br />&#x3C;/p>&#x3C;br /></p>
+<p>Should be in p</p>"
+`;
+
+exports[`misc renders missing-link-def.txt 1`] = `"<p>This is a [missing link][empty] and a <a href=\\"http://example.com\\">valid</a> and [missing][again].</p>"`;
+
+exports[`misc renders multi-line-tags.txt 1`] = `
+"<p>&#x3C;div></p>
+<p>asdf asdfasd</p>
+<p>&#x3C;/div></p>
+<p>&#x3C;div></p>
+<p>foo bar</p>
+<p>&#x3C;/div>
+No blank line.</p>"
+`;
+
+exports[`misc renders multi-paragraph-block-quote.txt 1`] = `
+"<blockquote>
+<p>This is line one of paragraph one
+This is line two of paragraph one</p>
+</blockquote>
+<blockquote>
+<p>This is line one of paragraph two</p>
+</blockquote>
+<blockquote>
+<p>This is another blockquote.</p>
+</blockquote>"
+`;
+
+exports[`misc renders nested-lists.txt 1`] = `
+"<ul>
+<li>
+<p>item 1</p>
+<p>  paragraph 2</p>
+</li>
+<li>
+<p>item 2</p>
+<ul>
+<li>
+<p>item 2-1</p>
+</li>
+<li>
+<p>item 2-2</p>
+<ul>
+<li>item 2-2-1</li>
+</ul>
+</li>
+<li>
+<p>item 2-3</p>
+<ul>
+<li>item 2-3-1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>item 3</p>
+</li>
+</ul>
+<p>plain text</p>
+<ul>
+<li>
+<p>item 1</p>
+<ul>
+<li>item 1-1</li>
+<li>item 1-2<ul>
+<li>item 1-2-1</li>
+</ul></li>
+</ul>
+</li>
+<li>
+<p>item 2</p>
+</li>
+<li>
+<p>item 3</p>
+</li>
+<li>
+<p>item 4</p>
+<ul>
+<li>
+<p>item 4-1</p>
+</li>
+<li>
+<p>item 4-2</p>
+</li>
+<li>
+<p>item 4-3</p>
+<pre><code>Code under item 4-3
+</code></pre>
+<p>Paragraph under item 4</p>
+</li>
+</ul>
+</li>
+</ul>"
+`;
+
+exports[`misc renders nested-patterns.txt 1`] = `
+"<p><strong><em><a href=\\"http://example.com\\">link</a></em></strong>
+<strong><em><a href=\\"http://example.com\\">link</a></em></strong>
+<strong><a href=\\"http://example.com\\"><em>link</em></a></strong>
+<strong><a href=\\"http://example.com\\"><em>link</em></a></strong>
+<strong><a href=\\"http://example.com\\"><em>link</em></a></strong>
+<strong><a href=\\"http://example.com\\"><em>link</em></a></strong>
+<a href=\\"http://example.com\\"><strong><em>link</em></strong></a></p>
+<p><strong><em>I am <strong><em>italic</em> and</strong> bold</em> I am <code>just</code> bold</strong></p>
+<p>Example <strong><em>bold italic</em></strong> on the same line <strong><em>bold italic</em></strong>.</p>
+<p>Example <strong><em>bold italic</em></strong> on the same line <strong><em>bold italic</em></strong>.</p>"
+`;
+
+exports[`misc renders normalize.txt 1`] = `"<p><a href=\\"http://www.stuff.com/q?x=1&#x26;y=2%3C%3E\\">Link</a></p>"`;
+
+exports[`misc renders numeric-entity.txt 1`] = `
+"<p><a href=\\"mailto:user@gmail.com\\">user@gmail.com</a></p>
+<p>This is an entity: &#x26;#234; </p>"
+`;
+
+exports[`misc renders para-with-hr.txt 1`] = `
+"<p>Here is a paragraph, followed by a horizontal rule.</p>
+<hr>
+<p>Followed by another paragraph.</p>
+<p>Here is another paragraph, followed by:
+*** not an HR.
+Followed by more of the same paragraph.</p>"
+`;
+
+exports[`misc renders php.txt 1`] = `
+"<p>&#x3C;!DOCTYPE HTML PUBLIC \\"-//W3C//DTD HTML 4.01//EN\\"
+            \\"http://www.w3.org/TR/html4/strict.dtd\\"></p>
+<p>&#x3C;b>This should have a p tag&#x3C;/b></p>
+<p>&#x3C;!--This is a comment --></p>
+<p>&#x3C;div>This shouldn't&#x3C;/div></p>
+<p>&#x3C;?php echo \\"block_level\\";?></p>
+<p> &#x3C;?php echo \\"not_block_level\\";?></p>"
+`;
+
+exports[`misc renders smart_em.txt 1`] = `
+"<p><em>emphasis</em></p>
+<p>this_is_not_emphasis</p>
+<p>[<em>punctuation with emphasis</em>]</p>
+<p>[<em>punctuation_with_emphasis</em>]</p>
+<p>[punctuation_without_emphasis]</p>"
+`;
+
+exports[`misc renders span.txt 1`] = `
+"<p>&#x3C;span id=\\"someId\\"> Foo <em>bar</em> Baz &#x3C;/span></p>
+<p>&#x3C;div>&#x3C;b><em>foo</em>&#x3C;/b>&#x3C;/div></p>
+<p>&#x3C;div id=\\"someId\\"> Foo <em>bar</em> Baz &#x3C;/div></p>
+<p>&#x3C;baza id=\\"someId\\"> Foo <em>bar</em> Baz &#x3C;/baza></p>"
+`;
+
+exports[`misc renders strong-with-underscores.txt 1`] = `"<p><strong>this_is_strong</strong></p>"`;
+
+exports[`misc renders strongintags.txt 1`] = `
+"<p>this is a <a href=\\"http://example.com/\\"><strong>test</strong></a></p>
+<p>this is a second <strong><a href=\\"http://example.com\\">test</a></strong></p>
+<p>reference <strong>[test][]</strong>
+reference [<strong>test</strong>][]</p>"
+`;
+
+exports[`misc renders underscores.txt 1`] = `
+"<p>THIS_SHOULD_STAY_AS_IS</p>
+<p>Here is some <em>emphasis</em>, ok?</p>
+<p>Ok, at least <em>this</em> should work.</p>
+<p>THIS<strong>SHOULD</strong>STAY</p>
+<p>Here is some <strong>strong</strong> stuff.</p>
+<p>THIS<strong><em>SHOULD</em></strong>STAY?</p>"
+`;
+
+exports[`options renders no-attributes.txt 1`] = `
+"<p>Regression <em>test</em> for issue 87</p>
+<p>It's run with enable_attributes=False so this {@id=explanation} should not become an attribute</p>"
+`;
+
+exports[`php renders Code Spans.txt 1`] = `
+"<p>From <code>&#x3C;!--</code> to <code>--></code>
+on two lines.</p>
+<p>From <code>&#x3C;!--</code>
+to <code>--></code>
+on three lines.</p>"
+`;
+
+exports[`php renders Code block on second line.txt 1`] = `
+"<pre><code>Codeblock on second line
+</code></pre>"
+`;
+
+exports[`php renders Horizontal Rules.txt 1`] = `
+"<p>Horizontal rules:</p>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<p>Not horizontal rules (testing for a bug in 1.0.1j):</p>
+<p>+++</p>
+<p>,,,</p>
+<p>===</p>
+<p>???</p>
+<p>AAA</p>
+<p>jjj</p>
+<p>j j j</p>
+<p>n n n</p>"
+`;
+
+exports[`php renders Inline HTML comments.txt 1`] = `
+"<p>Paragraph one.</p>
+<p>&#x3C;!-- double--dash (invalid SGML comment) --></p>
+<p>Paragraph two.</p>
+<p>&#x3C;!-- enclosed tag &#x3C;/div> --></p>
+<p>The end.</p>"
+`;
+
+exports[`php renders MD5 Hashes.txt 1`] = `
+"<p>The MD5 value for <code>+</code> is \\"26b17225b626fb9238849fd60eabdf60\\".</p>
+<p>&#x3C;p>test&#x3C;/p></p>
+<p>The MD5 value for <code>&#x3C;p>test&#x3C;/p></code> is:</p>
+<p>6205333b793f34273d75379350b36826</p>"
+`;
+
+exports[`pl renders Amps and angle encoding.txt 1`] = `
+"<p>AT&#x26;T has an ampersand in their name.</p>
+<p>AT&#x26;amp;T is another way to write it.</p>
+<p>This &#x26; that.</p>
+<p>4 &#x3C; 5.</p>
+<p>6 > 5.</p>
+<p>Here's a <a href=\\"http://example.com/?foo=1&#x26;bar=2\\">link</a> with an ampersand in the URL.</p>
+<p>Here's a link with an amersand in the link text: <a href=\\"http://att.com/\\" title=\\"AT&#x26;T\\">AT&#x26;T</a>.</p>
+<p>Here's an inline <a href=\\"/script?foo=1&#x26;bar=2\\">link</a>.</p>
+<p>Here's an inline <a href=\\"/script?foo=1&#x26;bar=2\\">link</a>.</p>"
+`;
+
+exports[`pl renders Auto links.txt 1`] = `
+"<p>Link: <a href=\\"http://example.com/\\">http://example.com/</a>.</p>
+<p>With an ampersand: <a href=\\"http://example.com/?foo=1&#x26;bar=2\\">http://example.com/?foo=1&#x26;bar=2</a></p>
+<ul>
+<li>In a list?</li>
+<li><a href=\\"http://example.com/\\">http://example.com/</a></li>
+<li>It should.</li>
+</ul>
+<blockquote>
+<p>Blockquoted: <a href=\\"http://example.com/\\">http://example.com/</a></p>
+</blockquote>
+<p>Auto-links should not occur here: <code>&#x3C;http://example.com/></code></p>
+<pre><code>or here: &#x3C;http://example.com/>
+</code></pre>"
+`;
+
+exports[`pl renders Blockquotes with code blocks.txt 1`] = `
+"<blockquote>
+<p>Example:</p>
+<pre><code>sub status {
+    print \\"working\\";
+}
+</code></pre>
+<p>Or:</p>
+<pre><code>sub status {
+    return \\"working\\";
+}
+</code></pre>
+</blockquote>"
+`;
+
+exports[`pl renders Horizontal rules.txt 1`] = `
+"<p>Dashes:</p>
+<hr>
+<hr>
+<hr>
+<hr>
+<pre><code>---
+</code></pre>
+<hr>
+<hr>
+<hr>
+<hr>
+<pre><code>- - -
+</code></pre>
+<p>Asterisks:</p>
+<hr>
+<hr>
+<hr>
+<hr>
+<pre><code>***
+</code></pre>
+<hr>
+<hr>
+<hr>
+<hr>
+<pre><code>* * *
+</code></pre>
+<p>Underscores:</p>
+<hr>
+<hr>
+<hr>
+<hr>
+<pre><code>___
+</code></pre>
+<hr>
+<hr>
+<hr>
+<hr>
+<pre><code>_ _ _
+</code></pre>"
+`;
+
+exports[`pl renders Inline HTML comments.txt 1`] = `
+"<p>Paragraph one.</p>
+<p>&#x3C;!-- This is a simple comment --></p>
+<p>&#x3C;!--
+	This is another comment.
+--></p>
+<p>Paragraph two.</p>
+<p>&#x3C;!-- one comment block -- -- with two comments --></p>
+<p>The end.</p>"
+`;
+
+exports[`pl renders Links, shortcut references.txt 1`] = `
+"<p>This is the <a href=\\"/simple\\">simple case</a>.</p>
+<p>This one has a <a href=\\"/foo\\">line
+break</a>.</p>
+<p>This one has a <a href=\\"/foo\\">line
+break</a> with a line-ending space.</p>
+<p><a href=\\"/that\\">this</a> and the <a href=\\"/other\\">other</a></p>"
+`;
+
+exports[`pl renders Nested blockquotes.txt 1`] = `
+"<blockquote>
+<p>foo</p>
+<blockquote>
+<p>bar</p>
+</blockquote>
+<p>foo</p>
+</blockquote>"
+`;
+
+exports[`pl renders Ordered and unordered lists.txt 1`] = `
+"<p>Asterisks tight:</p>
+<ul>
+<li>asterisk 1</li>
+<li>asterisk 2</li>
+<li>asterisk 3</li>
+</ul>
+<p>Asterisks loose:</p>
+<ul>
+<li>
+<p>asterisk 1</p>
+</li>
+<li>
+<p>asterisk 2</p>
+</li>
+<li>
+<p>asterisk 3</p>
+</li>
+</ul>
+<hr>
+<p>Pluses tight:</p>
+<ul>
+<li>Plus 1</li>
+<li>Plus 2</li>
+<li>Plus 3</li>
+</ul>
+<p>Pluses loose:</p>
+<ul>
+<li>
+<p>Plus 1</p>
+</li>
+<li>
+<p>Plus 2</p>
+</li>
+<li>
+<p>Plus 3</p>
+</li>
+</ul>
+<hr>
+<p>Minuses tight:</p>
+<ul>
+<li>Minus 1</li>
+<li>Minus 2</li>
+<li>Minus 3</li>
+</ul>
+<p>Minuses loose:</p>
+<ul>
+<li>
+<p>Minus 1</p>
+</li>
+<li>
+<p>Minus 2</p>
+</li>
+<li>
+<p>Minus 3</p>
+</li>
+</ul>
+<p>Tight:</p>
+<ol>
+<li>First</li>
+<li>Second</li>
+<li>Third</li>
+</ol>
+<p>and:</p>
+<ol>
+<li>One</li>
+<li>Two</li>
+<li>Three</li>
+</ol>
+<p>Loose using tabs:</p>
+<ol>
+<li>
+<p>First</p>
+</li>
+<li>
+<p>Second</p>
+</li>
+<li>
+<p>Third</p>
+</li>
+</ol>
+<p>and using spaces:</p>
+<ol>
+<li>
+<p>One</p>
+</li>
+<li>
+<p>Two</p>
+</li>
+<li>
+<p>Three</p>
+</li>
+</ol>
+<p>Multiple paragraphs:</p>
+<ol>
+<li>
+<p>Item 1, graf one.</p>
+<p>Item 2. graf two. The quick brown fox jumped over the lazy dog's
+back.</p>
+</li>
+<li>
+<p>Item 2.</p>
+</li>
+<li>
+<p>Item 3.</p>
+</li>
+</ol>
+<ul>
+<li>Tab<ul>
+<li>Tab<ul>
+<li>Tab</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Here's another:</p>
+<ol>
+<li>First</li>
+<li>Second:<ul>
+<li>Fee</li>
+<li>Fie</li>
+<li>Foe</li>
+</ul></li>
+<li>Third</li>
+</ol>
+<p>Same thing but with paragraphs:</p>
+<ol>
+<li>
+<p>First</p>
+</li>
+<li>
+<p>Second:</p>
+<ul>
+<li>Fee</li>
+<li>Fie</li>
+<li>Foe</li>
+</ul>
+</li>
+<li>
+<p>Third</p>
+</li>
+</ol>
+<p>This was an error in Markdown 1.0.1:</p>
+<ul>
+<li>
+<p>this</p>
+<ul>
+<li>sub</li>
+</ul>
+<p>that</p>
+</li>
+</ul>"
+`;
+
+exports[`pl renders Strong and em together.txt 1`] = `
+"<p><strong><em>This is strong and em.</em></strong></p>
+<p>So is <strong><em>this</em></strong> word.</p>
+<p><strong><em>This is strong and em.</em></strong></p>
+<p>So is <strong><em>this</em></strong> word.</p>"
+`;
+
+exports[`pl renders Tabs.txt 1`] = `
+"<ul>
+<li>
+<p>this is a list item
+indented with tabs</p>
+</li>
+<li>
+<p>this is a list item
+indented with spaces</p>
+</li>
+</ul>
+<p>Code:</p>
+<pre><code>this code block is indented by one tab
+</code></pre>
+<p>And:</p>
+<pre><code>    this code block is indented by two tabs
+</code></pre>
+<p>And:</p>
+<pre><code>+   this is an example list item
+    indented with tabs
+
++   this is an example list item
+    indented with spaces
+</code></pre>"
+`;
+
+exports[`pl renders Tidyness.txt 1`] = `
+"<blockquote>
+<p>A list within a blockquote:</p>
+<ul>
+<li>asterisk 1</li>
+<li>asterisk 2</li>
+<li>asterisk 3</li>
+</ul>
+</blockquote>"
+`;
+
+exports[`zds renders align.txt 1`] = `
+"<p>A simple paragraph</p>
+<div class=\\"align-center\\"><p>A centered paragraph</p></div>
+<p>a simple paragraph</p>
+<div class=\\"align-right\\"><p>A right aligned paragraph</p></div>
+<p>an other simple paragraph</p>
+<p>A simple paragraph</p>
+<div class=\\"align-center\\"><p>A centered paragraph</p></div>
+<p>a simple paragraph</p>
+<div class=\\"align-right\\"><p>A right aligned paragraph</p></div>
+<p>an other simple paragraph</p>
+<div class=\\"align-center\\"><p>A centered paragraph.</p><p>Containing two paragraph</p></div>
+<p>an other simple paragraph</p>
+<div class=\\"align-center\\"><p>A right aligned paragraph.</p><p>Containing two paragraph</p></div>
+<p>an other simple paragraph</p>
+<div class=\\"align-center\\"><p>A centered paragraph.</p><p>An other centered paragraph.</p></div>
+<p>a simple paragraph</p>
+<p>->A started block without end.</p>"
+`;
+
+exports[`zds renders comments.txt 1`] = `
+"<p>BlablaBalbla</p>
+<pre><code>Blabla&#x3C;--COMMENTS hahaha COMMENTS-->Balbla
+</code></pre>
+<p>&#x3C;--COMMENTS Unfinished block</p>"
+`;
+
+exports[`zds renders customblock.txt 1`] = `
+"<div class=\\"custom-block custom-block-spoiler\\"><div class=\\"custom-block-body\\"><p>Secret Block</p></div></div>
+<div class=\\"custom-block custom-block-spoiler\\"><div class=\\"custom-block-body\\"><p>Secret Block</p></div></div>
+<div class=\\"custom-block custom-block-spoiler\\"><div class=\\"custom-block-body\\"><p>another</p></div></div>
+<blockquote>
+<div class=\\"custom-block custom-block-spoiler\\"><div class=\\"custom-block-body\\"><blockquote>
+<p>Blockquote in secret block in blockquote</p>
+</blockquote></div></div>
+</blockquote>
+<div class=\\"custom-block custom-block-information\\"><div class=\\"custom-block-body\\"><p>Information Block</p></div></div>
+<div class=\\"custom-block custom-block-information\\"><div class=\\"custom-block-body\\"><p>an other</p></div></div>
+<div class=\\"custom-block custom-block-question\\"><div class=\\"custom-block-body\\"><p>Question Block</p></div></div>
+<div class=\\"custom-block custom-block-question\\"><div class=\\"custom-block-body\\"><p>an other</p></div></div>
+<div class=\\"custom-block custom-block-warning\\"><div class=\\"custom-block-body\\"><p>Attention Block</p></div></div>
+<div class=\\"custom-block custom-block-warning\\"><div class=\\"custom-block-body\\"><p>an other</p></div></div>
+<div class=\\"custom-block custom-block-error\\"><div class=\\"custom-block-body\\"><p>Erreur Block</p></div></div>
+<div class=\\"custom-block custom-block-error\\"><div class=\\"custom-block-body\\"><p>an other</p></div></div>
+<p>[[se]]
+| not a block</p>
+<p>[[secretsecret]]
+| not a block</p>
+<p>[[SECRET]]
+| not a block</p>
+<div class=\\"custom-block custom-block-spoiler\\"><div class=\\"custom-block-body\\"><p>Multiline block</p><blockquote>
+<p>with blockquote !</p>
+</blockquote></div></div>
+<p>| Not a block</p>
+<p>content before</p>
+<div class=\\"custom-block custom-block-spoiler\\"><div class=\\"custom-block-body\\"><p>A Block</p></div></div>
+<p>with content after</p>
+<div class=\\"custom-block custom-block-error\\"><div class=\\"custom-block-heading\\">a <strong>title</strong></div><div class=\\"custom-block-body\\"><p>content</p></div></div>
+<div class=\\"custom-block custom-block-neutral\\"><div class=\\"custom-block-heading\\">a <strong>title</strong></div><div class=\\"custom-block-body\\"><p>content</p></div></div>"
+`;
+
+exports[`zds renders delext.txt 1`] = `
+"<p>Blabla <del>truc</del> kxcvj <del>sdv sd</del> sdff</p>
+<p>sdf <del></del> df</p>
+<p>sfdgs ~ ~ dfg ~~ dgsg ~ qs</p>"
+`;
+
+exports[`zds renders emoticons.txt 1`] = `
+"<p>Lolilol <img src=\\"/static/smileys/svg/smile.svg\\" alt=\\":)\\" class=\\"smiley\\"> Hey <img src=\\"/static/smileys/svg/heureux.svg\\" alt=\\":D\\" class=\\"smiley\\"></p>
+<p><img src=\\"/static/smileys/svg/smile.svg\\" alt=\\":)\\" class=\\"smiley\\"></p>
+<blockquote>
+<p>Citation</p>
+</blockquote>
+<p><img src=\\"/static/smileys/svg/heureux.svg\\" alt=\\":D\\" class=\\"smiley\\"> Ce n'est pas une légende</p>
+<figure><img src=\\"https://zestedesavoir.com/media/galleries/3014/bee33fae-2216-463a-8b85-d1d9efe2c374.png\\" alt=\\"toto\\"><figcaption>toto</figcaption></figure>
+<p><img src=\\"/static/smileys/svg/heureux.svg\\" alt=\\":D\\" class=\\"smiley\\"> ce n'est pas une légende non plus</p>"
+`;
+
+exports[`zds renders grid_tables.txt 1`] = `
+"<h1 id=\\"grid-table\\">Grid table<a aria-hidden=\\"true\\" href=\\"#grid-table\\"><span class=\\"icon icon-link\\"></span></a></h1>
+<h2 id=\\"basic-example\\">Basic example<a aria-hidden=\\"true\\" href=\\"#basic-example\\"><span class=\\"icon icon-link\\"></span></a></h2>
+<div class=\\"table-wrapper\\"><table><thead><tr><th colspan=\\"2\\" rowspan=\\"1\\"><p>Table Headings</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>Here</p></th></tr><tr><th colspan=\\"1\\" rowspan=\\"1\\"><p>Sub</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>Headings</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>Too</p></th></tr></thead><tbody><tr><td colspan=\\"1\\" rowspan=\\"2\\"><p>cell
+spans
+rows</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p>column spanning</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>normal</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>cell</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>multi
+line</p><p>cells
+too</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p>cells can be
+<em>formatted</em>
+<strong>paragraphs</strong></p></td></tr></tbody></table></div>
+<div class=\\"table-wrapper\\"><table><thead><tr><th colspan=\\"1\\" rowspan=\\"1\\"><p>A</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>B</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>C</p></th></tr></thead><tbody><tr><td colspan=\\"1\\" rowspan=\\"2\\"><p>D</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p>E</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>F</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>G</p></td></tr></tbody></table></div>
+<div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"3\\"><p>A</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p>B</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>C</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>D</p></td></tr><tr><td colspan=\\"2\\" rowspan=\\"1\\"><p>E</p></td></tr></tbody></table></div>
+<div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"3\\" rowspan=\\"1\\"><p>A</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"2\\"><p>B</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>C</p></td><td colspan=\\"1\\" rowspan=\\"2\\"><p>D</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>E</p></td></tr></tbody></table></div>
+<div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"4\\"><p>C</p></td><td colspan=\\"1\\" rowspan=\\"2\\"><p>D</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>E</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>F</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"2\\"><p>G</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>H</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>I</p></td></tr></tbody></table></div>
+<div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>A</p></td><td colspan=\\"1\\" rowspan=\\"2\\"><p>B</p></td><td colspan=\\"1\\" rowspan=\\"4\\"><p>C</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>D</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>E</p></td><td colspan=\\"1\\" rowspan=\\"2\\"><p>F</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>G</p></td></tr></tbody></table></div>
+<div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>A</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>B</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>C</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>D</p></td></tr><tr><td colspan=\\"2\\" rowspan=\\"1\\"><p>E</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p>F</p></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>G</p></td></tr></tbody></table></div>
+<div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>A</p></td></tr><tr><td colspan=\\"2\\" rowspan=\\"1\\"><p>B</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p>C</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>D</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>E</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>F</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>G</p></td></tr></tbody></table></div>
+<div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"3\\"><p>A</p></td><td colspan=\\"1\\" rowspan=\\"2\\"><p>B</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>C</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>D</p></td><td colspan=\\"1\\" rowspan=\\"2\\"><p>E</p></td><td colspan=\\"1\\" rowspan=\\"3\\"><p>F</p></td></tr><tr><td colspan=\\"2\\" rowspan=\\"1\\"><p>G</p></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>H</p></td></tr><tr><td colspan=\\"6\\" rowspan=\\"1\\"><p>I</p></td></tr></tbody></table></div>
+<div class=\\"table-wrapper\\"><table><thead><tr><th colspan=\\"1\\" rowspan=\\"1\\"><p>A</p></th><th colspan=\\"6\\" rowspan=\\"1\\"><p>B</p></th></tr></thead><tbody><tr><td colspan=\\"1\\" rowspan=\\"4\\"><p>C</p></td><td colspan=\\"6\\" rowspan=\\"4\\"><div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>D</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>E</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>F</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>G</p></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>H</p></td></tr></tbody></table></div></td></tr><tr></tr><tr></tr><tr></tr></tbody></table></div>
+<div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>H</p></td><td colspan=\\"16\\" rowspan=\\"1\\"></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>He</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>Li</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Be</p></td><td colspan=\\"10\\" rowspan=\\"2\\"></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>B</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>C</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>N</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>O</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>F</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ne</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>Na</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Mg</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Al</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Si</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>P</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>S</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Cl</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ar</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>K</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ca</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Sc</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ti</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>V</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Cr</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Mn</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Fe</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Co</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ni</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Cu</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Zn</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ga</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ge</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>As</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Se</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Br</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Kr</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>Rb</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Sr</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Y</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Zr</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Nb</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Mo</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Tc</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ru</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Rh</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Pd</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ag</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Cd</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>In</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Sn</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Sb</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Te</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>I</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Xe</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>Cs</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ba</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>LAN</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Hf</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ta</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>W</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Re</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Os</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ir</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Pt</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Au</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Hg</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Tl</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Pb</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Bi</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Po</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>At</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Rn</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>Fr</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ra</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>ACT</p></td><td colspan=\\"15\\" rowspan=\\"1\\"></td></tr><tr><td colspan=\\"18\\" rowspan=\\"1\\"></td></tr><tr><td colspan=\\"3\\" rowspan=\\"1\\"><p>Lanthanide</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>La</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ce</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Pr</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Nd</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Pm</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Sm</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Eu</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Gd</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Tb</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Dy</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ho</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Er</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Tm</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Yb</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Lu</p></td></tr><tr><td colspan=\\"3\\" rowspan=\\"1\\"><p>Actinide</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ac</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Th</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Pa</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>U</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Np</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Pu</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Am</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Cm</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Bk</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Cf</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Es</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Fm</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Md</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>No</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Lw</p></td></tr></tbody></table></div>
+<div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>A</p></td></tr></tbody></table></div>
+<p>Text at the end</p>
+<div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>A</p></td></tr></tbody></table></div>
+<p>Text at the</p>
+<h2 id=\\"specific-tests\\">specific tests<a aria-hidden=\\"true\\" href=\\"#specific-tests\\"><span class=\\"icon icon-link\\"></span></a></h2>
+<p>In this examples, the second row should always be a full-cell</p>
+<div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>A</p></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>B | C</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>D</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>E</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>F</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>G</p></td></tr></tbody></table></div>
+<div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>A</p></td><td colspan=\\"3\\" rowspan=\\"1\\"></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>B | C</p></td></tr><tr><td colspan=\\"2\\" rowspan=\\"1\\"><p>D   E</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>F</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>G</p></td></tr></tbody></table></div>
+<div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>A</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>B</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>C</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>D</p></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>B | C</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>D</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>E</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>F</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>G</p></td></tr></tbody></table></div>
+<div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>A</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>B</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>C</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>D</p></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>B  | C</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>D</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>E</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>F</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>G</p></td></tr></tbody></table></div>
+<h2 id=\\"failing-example\\">Failing example<a aria-hidden=\\"true\\" href=\\"#failing-example\\"><span class=\\"icon icon-link\\"></span></a></h2>
+<p>+--- A ---+</p>
+<p>+---------+
++---------+</p>
+<p>+---------+
+| A       |
+|         |</p>
+<p>+---------+
+| A       |
++=========+
+| B       |
++=========+</p>
+<p>+--- A ---+
+|         |</p>
+<div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"></td></tr></tbody></table></div>
+<p>Bug #107</p>
+<div class=\\"table-wrapper\\"><table><thead><tr><th colspan=\\"1\\" rowspan=\\"1\\"></th><th colspan=\\"2\\" rowspan=\\"1\\"><p>case1</p></th><th colspan=\\"2\\" rowspan=\\"1\\"><p>case2</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>case3</p></th></tr><tr><th colspan=\\"1\\" rowspan=\\"1\\"></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>case4</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>case5</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>case6</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>case7</p></th><th colspan=\\"1\\" rowspan=\\"1\\"></th></tr></thead><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>X</p></td></tr></tbody></table></div>"
+`;
+
+exports[`zds renders kbd.txt 1`] = `
+"<p>Blabla <kbd>ok</kbd> kxcvj <kbd>ok foo</kbd> sdff</p>
+<p>sdf |||| df</p>
+<p>sfdgs | | dfg || dgsg | qs</p>
+<p>With two pipes: ||key|| you'll get <kbd>key</kbd>.</p>
+<p>It parses inline elements inside:</p>
+<ul>
+<li><kbd>hell<a href=\\"#he\\"><del>o</del></a>?</kbd></li>
+</ul>
+<p>but not block elements inside:</p>
+<ul>
+<li><kbd>hello: [[secret]]?</kbd></li>
+</ul>"
+`;
+
+exports[`zds renders subsuperscript.txt 1`] = `
+"<p>Foo <sup>sup</sup> kxcvj <sup>sup <em>string</em></sup> bar</p>
+<p>not ^ here</p>
+<p>neither ^ here ^ because it's escaped</p>
+<p>Foo <sub>sup</sub> kxcvj <sub>sup <em>string</em></sub> bar</p>
+<p>not ~ here</p>
+<p>neither ~ here ~ because it's escaped</p>
+<p>foo ^<sup>a</sup>^ bar</p>"
+`;
+
+exports[`zds renders urlize.txt 1`] = `
+"<p><a href=\\"http://www.google.fr\\">http://www.google.fr</a></p>
+<p><a href=\\"https://www.google.fr\\">https://www.google.fr</a></p>
+<p>www.google.fr</p>
+<p>google.fr</p>
+<p><a href=\\"http://www.google.fr\\">http://www.google.fr</a></p>
+<p>Voici mon super lien qui termine une phrase <a href=\\"http://www.google.fr\\">http://www.google.fr</a>.</p>
+<p><a href=\\"https://fr.wikipedia.org/wiki/Compactifi%C3%A9_d&#x27;Alexandrov\\">https://fr.wikipedia.org/wiki/Compactifié_d'Alexandrov</a></p>
+<p><a href=\\"https://fr.wikipedia.org/wiki/Compactifi%C3%A9_d%27Alexandrov\\">https://fr.wikipedia.org/wiki/Compactifi%C3%A9_d%27Alexandrov</a></p>
+<p>javascript:alert%28'Hello%20world!'%29</p>
+<p>vbscript:msgbox%28%22Hello%20world!%22%29</p>
+<p>livescript:alert%28'Hello%20world!'%29</p>
+<p>mocha:[code])</p>
+<p>jAvAsCrIpT:alert%28'Hello%20world!'%29</p>
+<p>ja&#x26;#32;vas&#x26;#32;cr&#x26;#32;ipt:alert%28'Hello%20world!'%29</p>
+<p>ja&#x26;#00032;vas&#x26;#32;cr&#x26;#32;ipt:alert%28'Hello%20world!'%29</p>
+<p>ja&#x26;#x00020;vas&#x26;#32;cr&#x26;#32;ipt:alert%28'Hello%20world!'%29</p>
+<p>ja%09&#x26;#x20;%0Avas&#x26;#32;cr&#x26;#x0a;ipt:alert%28'Hello%20world!'%29</p>
+<p>ja%20vas%20cr%20ipt:alert%28'Hello%20world!'%29</p>
+<p>live%20script:alert%28'Hello%20world!'%29</p>
+<p>javascript:alert%29'XSS'%29</p>
+<p><a href=\\"https://isocpp.org/std/status\\">sur isocpp.org</a></p>"
+`;
+
+exports[`zds renders video.txt 1`] = `
+"<div class=\\"video-container\\"><div class=\\"video-wrapper\\"><iframe src=\\"https://www.youtube.com/embed/FdltlrKFr1w?feature=oembed\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe></div></div>
+<div class=\\"video-container\\"><div class=\\"video-wrapper\\"><iframe src=\\"https://www.dailymotion.com/embed/video/x2y6lhm\\" width=\\"480\\" height=\\"270\\" allowfullscreen frameborder=\\"0\\"></iframe></div></div>
+<div class=\\"video-container\\"><div class=\\"video-wrapper\\"><iframe src=\\"https://player.vimeo.com/video/133693532?app_id=122963\\" width=\\"500\\" height=\\"281\\" allowfullscreen frameborder=\\"0\\"></iframe></div></div>
+<p>!(https://screen.yahoo.com/weatherman-gives-forecast-using-taylor-191821481.html)</p>
+<div class=\\"video-container\\"><div class=\\"video-wrapper\\"><iframe src=\\"https://www.youtube.com/embed/FdltlrKFr1w?feature=oembed\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe></div></div>
+<div class=\\"video-container\\"><div class=\\"video-wrapper\\"><iframe src=\\"https://www.youtube.com/embed/FdltlrKFr1w?feature=oembed\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe></div></div>
+<div class=\\"iframe-wrapper\\"><iframe src=\\"https://jsfiddle.net/Sandhose/BcKhe/1/embedded/result,js,html,css/\\" width=\\"560\\" height=\\"560\\" allowfullscreen frameborder=\\"0\\"></iframe></div>
+<div class=\\"iframe-wrapper\\"><iframe src=\\"https://jsfiddle.net/zgjhjv9j/embedded/result,js,html,css/\\" width=\\"560\\" height=\\"560\\" allowfullscreen frameborder=\\"0\\"></iframe></div>
+<div class=\\"iframe-wrapper\\"><iframe src=\\"https://jsfiddle.net/zgjhjv9j/1/embedded/result,js,html,css/\\" width=\\"560\\" height=\\"560\\" allowfullscreen frameborder=\\"0\\"></iframe></div>
+<div class=\\"video-container\\"><div class=\\"video-wrapper\\"><iframe src=\\"https://www.youtube.com/embed/1Bh4DZ2xGmw?feature=oembed\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe></div></div>
+<div class=\\"iframe-wrapper\\"><iframe src=\\"http://player.ina.fr/player/embed/MAN9062216517/1/1b0bd203fbcd702f9bc9b10ac3d0fc21/560/315/1/148db8\\" width=\\"620\\" height=\\"349\\" allowfullscreen frameborder=\\"0\\"></iframe></div>
+<p>This one should not be allowed:</p>
+<p>!(http://jsfiddle.net/Sandhose/BcKhe/)</p>
+<div class=\\"video-container\\"><div class=\\"video-wrapper\\"><iframe src=\\"https://www.youtube.com/embed/FdltlrKFr1w?feature=oembed\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe></div></div>
+<p>with text after</p>"
+`;

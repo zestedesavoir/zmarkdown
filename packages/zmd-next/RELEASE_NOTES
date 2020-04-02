@@ -3,3 +3,6 @@
     - now: only count [a-zA-Z]
 
 Add test on count word/signs
+
+Fixtures were moved into snapshots!
+-> Detail procedure on PR

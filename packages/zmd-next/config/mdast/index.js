@@ -35,6 +35,8 @@ module.exports = {
 
   escapeEscaped: ['&'],
 
+  headingShifter: 0,
+
   iframes: require('./iframes'),
 
   math: {

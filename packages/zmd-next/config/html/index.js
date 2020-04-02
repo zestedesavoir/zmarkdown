@@ -1,3 +1,5 @@
+const shortid = require('shortid')
+
 const createWrapper = require('../../postprocessors/wrappers')
 
 const jsFiddleAndInaFilter = node => {
@@ -18,8 +20,6 @@ module.exports = {
 
   footnotesTitles: 'Retourner au texte de la note $id',
 
-  headingShifter: 0,
-
   highlight: {
     ignoreMissing: true,
     plainText: ['console'],
@@ -27,6 +27,8 @@ module.exports = {
   },
 
   sanitize: require('../sanitize'),
+
+  postfixFootnotes: `-${shortid.generate()}`,
 
   postProcessors: {
     iframeWrappers: {

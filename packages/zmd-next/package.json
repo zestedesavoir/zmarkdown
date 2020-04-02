@@ -56,6 +56,7 @@
     "remark-parse": "^7.0.2",
     "remark-ping": "file:../remark-ping",
     "remark-sub-super": "file:../remark-sub-super",
+    "shortid": "^2.2.15",
     "unified": "^8.4.2",
     "unist-util-visit": "^2.0.1"
   }
