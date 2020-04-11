@@ -1,7 +1,9 @@
 const {
   defaultMdastConfig,
-  renderString,
+  renderAs,
 } = require('../utils/renderer-tests')
+
+const renderString = renderAs('html')
 
 describe('#ping', () => {
   beforeEach(() => {

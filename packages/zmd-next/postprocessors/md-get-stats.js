@@ -6,11 +6,11 @@ module.exports = () => (tree, vfile) => {
 
   visit(tree, 'text', (node) => {
     let wordMatchFlag = false
-  
-    for(let i = 0; i < node.value.length; i++) {
+
+    for (let i = 0; i < node.value.length; i++) {
       const currentCharCode = node.value.charCodeAt(i)
 
-      if(
+      if (
         // a-z
         (currentCharCode >= 65 && currentCharCode <= 90) ||
         // A-Z
@@ -18,13 +18,13 @@ module.exports = () => (tree, vfile) => {
       ) {
         signs++
         wordMatchFlag = true
-      } else if(currentCharCode == 32) {
-        if(wordMatchFlag) words++
+      } else if (currentCharCode === 32) {
+        if (wordMatchFlag) words++
         wordMatchFlag = false
       }
     }
-  
-    if(wordMatchFlag) words++
+
+    if (wordMatchFlag) words++
   })
 
   vfile.data.stats = {

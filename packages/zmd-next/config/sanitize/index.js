@@ -3,7 +3,7 @@ const katex = require('./katex')
 const merge = require('deepmerge')
 
 module.exports = merge.all([gh, katex, {
-  tagNames: ['span', 'abbr', 'figure', 'figcaption', 'iframe'],
+  tagNames:   ['span', 'abbr', 'figure', 'figcaption', 'iframe'],
   attributes: {
     a:      ['ariaHidden', 'class', 'className'],
     div:    ['id', 'class', 'className'],
@@ -23,5 +23,5 @@ module.exports = merge.all([gh, katex, {
     src:  ['ftp', 'dav', 'sftp', 'tftp'],
   },
   clobberPrefix: '',
-  clobber: [],
+  clobber:       [],
 }])

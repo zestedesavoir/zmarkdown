@@ -26,9 +26,9 @@ const defaultTokenizerList = {
 }
 
 const postProcessorList = {
-  getStats:       require('../postprocessors/md-get-stats'),
-  limitDepth:     require('../postprocessors/md-limit-depth'),
-  listLanguages:  require('../postprocessors/md-list-languages'),
+  getStats:      require('../postprocessors/md-get-stats'),
+  limitDepth:    require('../postprocessors/md-limit-depth'),
+  listLanguages: require('../postprocessors/md-list-languages'),
 }
 
 module.exports = (config) => {

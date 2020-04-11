@@ -1,29 +1,53 @@
+/* eslint-disable no-tabs */
+/* eslint-disable max-len */
 const {
   defaultMdastConfig,
   defaultHtmlConfig,
+  defaultLatexConfig,
   configOverride,
-  renderString,
+  renderAs,
 } = require('../utils/renderer-tests')
 
+const renderHtml = renderAs('html')
+const renderLatex = renderAs('latex')
+
 describe('heading-shift', () => {
-  it(`shifts in range`, () => {
-    const newMdastConfig = configOverride(defaultMdastConfig, { headingShifter: 1 })
-    return expect(renderString(newMdastConfig, defaultHtmlConfig)('### should be h4')).resolves.toMatchSnapshot()
+  it(`shifts in range`, async () => {
+    const input = '### should be h4'
+    const newMdastConfig = configOverride(defaultMdastConfig, {headingShifter: 1})
+
+    const html = await renderHtml(newMdastConfig, defaultHtmlConfig)(input)
+    const latex = await renderLatex(newMdastConfig, defaultLatexConfig)(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`shifts past range`, () => {
-    const newMdastConfig = configOverride(defaultMdastConfig, { headingShifter: 10 })
-    return expect(renderString(newMdastConfig, defaultHtmlConfig)('### should be h6')).resolves.toMatchSnapshot()
+  it(`shifts past range`, async () => {
+    const input = '### should be h6'
+    const newMdastConfig = configOverride(defaultMdastConfig, {headingShifter: 10})
+
+    const html = await renderHtml(newMdastConfig, defaultHtmlConfig)(input)
+    const latex = await renderLatex(newMdastConfig, defaultLatexConfig)(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`shifts before range`, () => {
-    const newMdastConfig = configOverride(defaultMdastConfig, { headingShifter: -10 })
-    return expect(renderString(newMdastConfig, defaultHtmlConfig)('### should be h1')).resolves.toMatchSnapshot()
+  it(`shifts before range`, async () => {
+    const input = '### should be h1'
+    const newMdastConfig = configOverride(defaultMdastConfig, {headingShifter: -10})
+
+    const html = await renderHtml(newMdastConfig, defaultHtmlConfig)(input)
+    const latex = await renderLatex(newMdastConfig, defaultLatexConfig)(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 })
 
 describe('basic', () => {
-  it(`renders amps-and-angle-encoding.txt`, () => {
+  it(`renders amps-and-angle-encoding.txt`, async () => {
     const input = `AT&T has an ampersand in their name.
 
 AT&amp;T is another way to write it.
@@ -46,20 +70,28 @@ Here's an inline [link](</script?foo=1&bar=2>).
 [1]: http://example.com/?foo=1&bar=2
 [2]: http://att.com/  "AT&T"`
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders angle-links-and-img.txt`, () => {
+  it(`renders angle-links-and-img.txt`, async () => {
     const input = `[link](<simple link> "my title")
 ![image](<http://example.com/image.jpg>)
 [link](<http://example.com/(()((())923)(>)
 ![image](<link(()))(>)
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders auto-links.txt`, () => {
+  it(`renders auto-links.txt`, async () => {
     const input = `Link: <http://example.com/>.
 
 Https link: <https://example.com>
@@ -79,10 +111,14 @@ Auto-links should not occur here: \`<http://example.com/>\`
 	or here: <http://example.com/>
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders backlash-escapes.txt`, () => {
+  it(`renders backlash-escapes.txt`, async () => {
     const input = `These should all get escaped:
 
 Backslash: \\\\
@@ -189,10 +225,14 @@ Plus: \`\\+\`
 Minus: \`\\-\`
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders blockquotes-with-code-blocks.txt`, () => {
+  it(`renders blockquotes-with-code-blocks.txt`, async () => {
     const input = `> Example:
 > 
 >     sub status {
@@ -206,10 +246,14 @@ Minus: \`\\-\`
 >     }
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders codeblock-in-list.txt`, () => {
+  it(`renders codeblock-in-list.txt`, async () => {
     const input = `* A list item with a code block
 
         Some *code*
@@ -221,10 +265,14 @@ Minus: \`\\-\`
         And more code
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders hard-wrapped.txt`, () => {
+  it(`renders hard-wrapped.txt`, async () => {
     const input = `In Markdown 1.0.0 and earlier. Version
 8. This line turns into a list item.
 Because a hard-wrapped line in the
@@ -235,10 +283,14 @@ Here's one with a bullet.
 * criminey.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders horizontal-rules.txt`, () => {
+  it(`renders horizontal-rules.txt`, async () => {
     const input = `Dashes:
 
 ---
@@ -308,10 +360,14 @@ _ _ _
     _ _ _
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders inline-html-advanced.txt`, () => {
+  it(`renders inline-html-advanced.txt`, async () => {
     const input = `Simple block on one line:
 
 <div>foo</div>
@@ -328,10 +384,14 @@ foo
 </div>
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders inline-html-comments.txt`, () => {
+  it(`renders inline-html-comments.txt`, async () => {
     const input = `Paragraph one.
 
 <!-- This is a simple comment -->
@@ -347,10 +407,14 @@ Paragraph two.
 The end.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders inline-html-simple.txt`, () => {
+  it(`renders inline-html-simple.txt`, async () => {
     const input = `Here's a simple block:
 
 <div>
@@ -423,10 +487,14 @@ Hr's:
 <some [weird](http://example.com) stuff>
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders links-inline.txt`, () => {
+  it(`renders links-inline.txt`, async () => {
     const input = `Just a [URL](/url/).
 
 [URL and title](/url/ "title").
@@ -438,10 +506,14 @@ Hr's:
 [Empty]().
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders links-reference.txt`, () => {
+  it(`renders links-reference.txt`, async () => {
     const input = `Foo [bar] [1].
 
 Foo [bar][1].
@@ -505,10 +577,14 @@ ref]
     "Title on next line."
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders nested-blockquotes.txt`, () => {
+  it(`renders nested-blockquotes.txt`, async () => {
     const input = `> foo
 >
 > > bar
@@ -516,10 +592,14 @@ ref]
 > foo
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders ordered-and-unordered-list.txt`, () => {
+  it(`renders ordered-and-unordered-list.txt`, async () => {
     const input = `Unordered
 
 Asterisks tight:
@@ -648,10 +728,14 @@ Same thing but with paragraphs:
 3. Third
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders strong-and-em-together.txt`, () => {
+  it(`renders strong-and-em-together.txt`, async () => {
     const input = `***This is strong and em.***
 
 So is ***this*** word.
@@ -661,10 +745,14 @@ ___This is strong and em.___
 So is ___this___ word.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders tabs.txt`, () => {
+  it(`renders tabs.txt`, async () => {
     const input = `+	this is a list item
 	indented with tabs
 
@@ -688,10 +776,14 @@ And:
 	    indented with spaces
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders tidyness.txt`, () => {
+  it(`renders tidyness.txt`, async () => {
     const input = `> A list within a blockquote:
 > 
 > *	asterisk 1
@@ -699,13 +791,17 @@ And:
 > *	asterisk 3
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
 })
 
 describe('extensions', () => {
-  it(`renders abbr.txt`, () => {
+  it(`renders abbr.txt`, async () => {
     const input = `An ABBR: "REF".
 ref and REFERENCE should be ignored.
 
@@ -721,10 +817,14 @@ is maintained by the W3C.
 
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders footnote.txt`, () => {
+  it(`renders footnote.txt`, async () => {
     const input = `This is the body with a footnote[^1] or two[^2] or more[^3] [^4] [^5].
 
 Also a reference that does not exist[^6].
@@ -747,10 +847,14 @@ Second line of first paragraph is not intended.
 Nor is third...
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders footnote_many_footnotes.txt`, () => {
+  it(`renders footnote_many_footnotes.txt`, async () => {
     const input = `Something[^1]
 
 Something[^2]
@@ -1352,20 +1456,28 @@ Something[^150]
 [^150]: Another thing
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders tables-2.txt`, () => {
+  it(`renders tables-2.txt`, async () => {
     const input = `foo|bar|baz
 ---|---|---
    | Q |
  W |   | W
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders tables.txt`, () => {
+  it(`renders tables.txt`, async () => {
     const input = `First Header  | Second Header
 ------------- | -------------
 Content Cell  | Content Cell
@@ -1412,10 +1524,14 @@ Four spaces is a code block:
     Content Cell | Content Cell
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders fenced_code.txt`, () => {
+  it(`renders fenced_code.txt`, async () => {
     const input = `index 0000000..6e956a9
 
 \`\`\`
@@ -1452,10 +1568,14 @@ Four spaces is a code block:
 \`\`\`
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders github_flavored.txt`, () => {
+  it(`renders github_flavored.txt`, async () => {
     const input = `index 0000000..6e956a9
 
 \`\`\`diff
@@ -1570,13 +1690,17 @@ Code into paragraph
 with end
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
 })
 
 describe('misc', () => {
-  it(`renders CRLF_line_ends.txt`, () => {
+  it(`renders CRLF_line_ends.txt`, async () => {
     const input = `foo
 
 <div>
@@ -1584,25 +1708,37 @@ bar
 </div>
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders adjacent-headers.txt`, () => {
+  it(`renders adjacent-headers.txt`, async () => {
     const input = `# this is a huge header #
 ## this is a smaller header ##
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders amp-in-url.txt`, () => {
+  it(`renders amp-in-url.txt`, async () => {
     const input = `[link](http://www.freewisdom.org/this&that)
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders ampersand.txt`, () => {
+  it(`renders ampersand.txt`, async () => {
     const input = `&
 
 AT&T
@@ -1610,10 +1746,14 @@ AT&T
 
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders arabic.txt`, () => {
+  it(`renders arabic.txt`, async () => {
     const input = `
 بايثون
 =====
@@ -1653,7 +1793,11 @@ AT&T
  بذرة حاس
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
   it(`renders autolinks_with_asterisks.txt`, () => {
@@ -1661,19 +1805,23 @@ AT&T
 
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    return expect(renderHtml(input)).resolves.toMatchSnapshot()
   })
 
-  it(`renders backtick-escape.txt`, () => {
+  it(`renders backtick-escape.txt`, async () => {
     const input = `\\\`This also should not be in code.\\\`
 \\\\\`This should be in code.\\\\\`
 \\\`And finally this should not be in code.\`
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders blank-block-quote.txt`, () => {
+  it(`renders blank-block-quote.txt`, async () => {
     const input = `
 aaaaaaaaaaa
 
@@ -1682,10 +1830,14 @@ aaaaaaaaaaa
 bbbbbbbbbbb
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders blank_lines_in_codeblocks.txt`, () => {
+  it(`renders blank_lines_in_codeblocks.txt`, async () => {
     const input = `Preserve blank lines in code blocks with tabs:
 
     a code block
@@ -1760,10 +1912,14 @@ And without tabs:
 
 End of document`
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders block_html5.txt`, () => {
+  it(`renders block_html5.txt`, async () => {
     const input = `<section>
     <header>
         <hgroup>
@@ -1780,10 +1936,14 @@ End of document`
 </section><figure></figure>
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders block_html_attr.txt`, () => {
+  it(`renders block_html_attr.txt`, async () => {
     const input = `<blockquote>
 Raw HTML processing should not confuse this with the blockquote below
 </blockquote>
@@ -1810,10 +1970,14 @@ Raw HTML processing should not confuse this with the blockquote below
 </div><!-- #current-content -->
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders block_html_simple.txt`, () => {
+  it(`renders block_html_simple.txt`, async () => {
     const input = `<p>foo</p>
 <ul>
 <li>
@@ -1825,10 +1989,14 @@ Raw HTML processing should not confuse this with the blockquote below
 </ul>
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders blockquote-below-paragraph.txt`, () => {
+  it(`renders blockquote-below-paragraph.txt`, async () => {
     const input = `Paragraph
 > Block quote
 > Yep
@@ -1842,7 +2010,11 @@ Paragraph one
 More blockquote.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
   it(`renders blockquote-hr.txt`, () => {
@@ -1869,10 +2041,10 @@ Even a lazy line.
 > The last line.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    return expect(renderHtml(input)).resolves.toMatchSnapshot()
   })
 
-  it(`renders blockquote.txt`, () => {
+  it(`renders blockquote.txt`, async () => {
     const input = `> blockquote with no whitespace before \`>\`.
 
 foo
@@ -1896,17 +2068,25 @@ blah
 >    > and this has 4 on level 2 - another code block.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders bold_links.txt`, () => {
+  it(`renders bold_links.txt`, async () => {
     const input = `**bold [link](http://example.com)**
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders br.txt`, () => {
+  it(`renders br.txt`, async () => {
     const input = `Output:
 
     <p>Some of these words <em>are emphasized</em>.
@@ -1922,10 +2102,14 @@ Unordered (bulleted) lists use asterisks, pluses, and hyphens (\`*\`,
 interchangable; this:
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders bracket_re.txt`, () => {
+  it(`renders bracket_re.txt`, async () => {
     const input = `
 [x
 xxx xxx xxx xxx xxx xxx xxx xxx
@@ -1989,7 +2173,11 @@ xxx xxx xxx xxx xxx xxx xxx xxx
 xxx xxx xxx xxx xxx xxx xxx xxx
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
   it(`renders brackets-in-img-title.txt`, () => {
@@ -2007,17 +2195,21 @@ xxx xxx xxx xxx xxx xxx xxx xxx
 
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    return expect(renderHtml(input)).resolves.toMatchSnapshot()
   })
 
-  it(`renders code-first-line.txt`, () => {
+  it(`renders code-first-line.txt`, async () => {
     const input = `    print "This is a code block."
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders comments.txt`, () => {
+  it(`renders comments.txt`, async () => {
     const input = `X<0
 
 X>0
@@ -2030,10 +2222,14 @@ X>0
 __no blank line__
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders div.txt`, () => {
+  it(`renders div.txt`, async () => {
     const input = `<div id="sidebar">
 
    _foo_
@@ -2047,10 +2243,14 @@ foo
 </DIV>
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders em-around-links.txt`, () => {
+  it(`renders em-around-links.txt`, async () => {
     const input = `  - *[Python in Markdown](https://pythonhosted.org/Markdown/) by some
     great folks* - This *does* work as expected.
   - _[Python in Markdown](https://pythonhosted.org/Markdown/) by some
@@ -2064,10 +2264,14 @@ _[Python in Markdown](https://pythonhosted.org/Markdown/) by some
 great folks_ - This *does* work as expected.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders em_strong.txt`, () => {
+  it(`renders em_strong.txt`, async () => {
     const input = `One asterisk: *
 
 One underscore: _
@@ -2091,10 +2295,14 @@ with spaces: _ _ _
 One char: _a_
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders email.txt`, () => {
+  it(`renders email.txt`, async () => {
     const input = `
 asdfasdfadsfasd <yuri@freewisdom.org> or you can say 
 instead <mailto:yuri@freewisdom.org>
@@ -2102,10 +2310,14 @@ instead <mailto:yuri@freewisdom.org>
 <bob&sue@example.com>
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders escaped_chars_in_js.txt`, () => {
+  it(`renders escaped_chars_in_js.txt`, async () => {
     const input = `<span id="e116142240">[javascript protected email address]</span>
 <script type="text/javascript">
     var a="gqMjyw7lZCaKk6p0J3uAUYS1.dbIW2hXzDHmiVNotOPRe_Ev@c4Gs58+LBr-F9QTfxn";
@@ -2120,10 +2332,14 @@ instead <mailto:yuri@freewisdom.org>
 </script>
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders h1.txt`, () => {
+  it(`renders h1.txt`, async () => {
     const input = `Header
 ------  
 
@@ -2139,19 +2355,27 @@ H2
 --  
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders image-2.txt`, () => {
+  it(`renders image-2.txt`, async () => {
     const input = `[*link!*](http://src.com/)
 
 *[link](http://www.freewisdom.org)*
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders image.txt`, () => {
+  it(`renders image.txt`, async () => {
     const input = `
 ![Poster](http://humane_man.jpg "The most humane man.")
 
@@ -2161,33 +2385,49 @@ H2
 
 ![Blank]()`
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders image_in_links.txt`, () => {
+  it(`renders image_in_links.txt`, async () => {
     const input = `
 
 [![altname](path/to/img_thumb.png)](path/to/image.png)
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders ins-at-start-of-paragraph.txt`, () => {
+  it(`renders ins-at-start-of-paragraph.txt`, async () => {
     const input = `<ins>Hello, fellow developer</ins> this ins should be wrapped in a p.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders inside_html.txt`, () => {
+  it(`renders inside_html.txt`, async () => {
     const input = `<a href="stuff"> __ok__? </a>
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders lazy-block-quote.txt`, () => {
+  it(`renders lazy-block-quote.txt`, async () => {
     const input = `> Line one of lazy block quote.
 Line two of lazy block quote.
 
@@ -2195,17 +2435,25 @@ Line two of lazy block quote.
 Line two of paragraph two.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders link-with-parenthesis.txt`, () => {
+  it(`renders link-with-parenthesis.txt`, async () => {
     const input = `[ZIP archives](http://en.wikipedia.org/wiki/ZIP_(file_format) "ZIP (file format) - Wikipedia, the free encyclopedia")
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders lists.txt`, () => {
+  it(`renders lists.txt`, async () => {
     const input = `
 * A multi-paragraph list, 
 unindented.
@@ -2239,28 +2487,40 @@ A lose list with paragraphs
 * Two two two two
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders lists2.txt`, () => {
+  it(`renders lists2.txt`, async () => {
     const input = `* blah blah blah
 sdf asdf asdf asdf asdf
 asda asdf asdfasd
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders lists3.txt`, () => {
+  it(`renders lists3.txt`, async () => {
     const input = `* blah blah blah
     sdf asdf asdf asdf asdf
     asda asdf asdfasd
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders lists4.txt`, () => {
+  it(`renders lists4.txt`, async () => {
     const input = `
 * item1
 * item2
@@ -2268,10 +2528,14 @@ asda asdf asdfasd
     2. Number 2
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders lists5.txt`, () => {
+  it(`renders lists5.txt`, async () => {
     const input = `> This is a test of a block quote
 > With just two lines
 
@@ -2286,10 +2550,14 @@ A paragraph
 
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders lists6.txt`, () => {
+  it(`renders lists6.txt`, async () => {
     const input = `Test five or more spaces as start of list:
 
 *     five spaces
@@ -2306,10 +2574,10 @@ loose list:
 *     five spaces
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    return expect(renderHtml(input)).resolves.toMatchSnapshot()
   })
 
-  it(`renders lists8.txt`, () => {
+  it(`renders lists8.txt`, async () => {
     const input = `1. > Four-score and seven years ago...
 
 2. > We have nothing to fear...
@@ -2328,10 +2596,14 @@ loose list:
   > as far as I'm concerned
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders mismatched-tags.txt`, () => {
+  it(`renders mismatched-tags.txt`, async () => {
     const input = `<p>Some text</p><div>some more text</div>
 
 and a bit more
@@ -2343,20 +2615,24 @@ and a bit more
 Should be in p
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders missing-link-def.txt`, () => {
+  it(`renders missing-link-def.txt`, async () => {
     const input = `This is a [missing link][empty] and a [valid][link] and [missing][again].
 
 [link]: http://example.com
 
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    return expect(renderHtml(input)).resolves.toMatchSnapshot()
   })
 
-  it(`renders multi-line-tags.txt`, () => {
+  it(`renders multi-line-tags.txt`, async () => {
     const input = `
 <div>
 
@@ -2372,10 +2648,14 @@ foo bar
 No blank line.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders multi-paragraph-block-quote.txt`, () => {
+  it(`renders multi-paragraph-block-quote.txt`, async () => {
     const input = `> This is line one of paragraph one
 > This is line two of paragraph one
 
@@ -2386,7 +2666,11 @@ No blank line.
 > This is another blockquote.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
   it(`renders nested-lists.txt`, () => {
@@ -2425,10 +2709,10 @@ plain text
     Paragraph under item 4
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    return expect(renderHtml(input)).resolves.toMatchSnapshot()
   })
 
-  it(`renders nested-patterns.txt`, () => {
+  it(`renders nested-patterns.txt`, async () => {
     const input = `___[link](http://example.com)___
 ***[link](http://example.com)***
 **[*link*](http://example.com)**
@@ -2444,28 +2728,40 @@ Example __*bold italic*__ on the same line __*bold italic*__.
 Example **_bold italic_** on the same line **_bold italic_**.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders normalize.txt`, () => {
+  it(`renders normalize.txt`, async () => {
     const input = `
 [Link](http://www.stuff.com/q?x=1&y=2<>)
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders numeric-entity.txt`, () => {
+  it(`renders numeric-entity.txt`, async () => {
     const input = `
 <user@gmail.com>
 
 This is an entity: &#234; 
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders para-with-hr.txt`, () => {
+  it(`renders para-with-hr.txt`, async () => {
     const input = `Here is a paragraph, followed by a horizontal rule.
 ***
 Followed by another paragraph.
@@ -2475,10 +2771,14 @@ Here is another paragraph, followed by:
 Followed by more of the same paragraph.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders php.txt`, () => {
+  it(`renders php.txt`, async () => {
     const input = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
             "http://www.w3.org/TR/html4/strict.dtd">
 
@@ -2494,10 +2794,14 @@ Followed by more of the same paragraph.
 
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders smart_em.txt`, () => {
+  it(`renders smart_em.txt`, async () => {
     const input = `_emphasis_
 
 this_is_not_emphasis
@@ -2509,10 +2813,14 @@ this_is_not_emphasis
 [punctuation_without_emphasis]
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders span.txt`, () => {
+  it(`renders span.txt`, async () => {
     const input = `
 <span id="someId"> Foo *bar* Baz </span>
 
@@ -2525,17 +2833,25 @@ this_is_not_emphasis
 
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders strong-with-underscores.txt`, () => {
+  it(`renders strong-with-underscores.txt`, async () => {
     const input = `__this_is_strong__
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders strongintags.txt`, () => {
+  it(`renders strongintags.txt`, async () => {
     const input = `this is a [**test**](http://example.com/)
 
 this is a second **[test](http://example.com)**
@@ -2546,10 +2862,10 @@ reference [**test**][]
 
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    return expect(renderHtml(input)).resolves.toMatchSnapshot()
   })
 
-  it(`renders underscores.txt`, () => {
+  it(`renders underscores.txt`, async () => {
     const input = `THIS_SHOULD_STAY_AS_IS
 
 Here is some _emphasis_, ok?
@@ -2563,25 +2879,33 @@ Here is some __strong__ stuff.
 THIS___SHOULD___STAY?
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
 })
 
 describe('options', () => {
-  it(`renders no-attributes.txt`, () => {
+  it(`renders no-attributes.txt`, async () => {
     const input = `Regression *test* for issue 87
 
 It's run with enable_attributes=False so this {@id=explanation} should not become an attribute
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
 })
 
 describe('php', () => {
-  it(`renders Code Spans.txt`, () => {
+  it(`renders Code Spans.txt`, async () => {
     const input = `From \`<!--\` to \`-->\`
 on two lines.
 
@@ -2590,18 +2914,26 @@ to \`-->\`
 on three lines.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders Code block on second line.txt`, () => {
+  it(`renders Code block on second line.txt`, async () => {
     const input = `
     Codeblock on second line
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders Horizontal Rules.txt`, () => {
+  it(`renders Horizontal Rules.txt`, async () => {
     const input = `Horizontal rules:
 
 - - -
@@ -2633,10 +2965,14 @@ j j j
 n n n
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders Inline HTML comments.txt`, () => {
+  it(`renders Inline HTML comments.txt`, async () => {
     const input = `Paragraph one.
 
 <!-- double--dash (invalid SGML comment) -->
@@ -2648,10 +2984,14 @@ Paragraph two.
 The end.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders MD5 Hashes.txt`, () => {
+  it(`renders MD5 Hashes.txt`, async () => {
     const input = `The MD5 value for \`+\` is "26b17225b626fb9238849fd60eabdf60".
 
 <p>test</p>
@@ -2661,13 +3001,17 @@ The MD5 value for \`<p>test</p>\` is:
 6205333b793f34273d75379350b36826
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
 })
 
 describe('pl', () => {
-  it(`renders Amps and angle encoding.txt`, () => {
+  it(`renders Amps and angle encoding.txt`, async () => {
     const input = `AT&T has an ampersand in their name.
 
 AT&amp;T is another way to write it.
@@ -2690,10 +3034,14 @@ Here's an inline [link](</script?foo=1&bar=2>).
 [1]: http://example.com/?foo=1&bar=2
 [2]: http://att.com/  "AT&T"`
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders Auto links.txt`, () => {
+  it(`renders Auto links.txt`, async () => {
     const input = `Link: <http://example.com/>.
 
 With an ampersand: <http://example.com/?foo=1&bar=2>
@@ -2708,10 +3056,14 @@ Auto-links should not occur here: \`<http://example.com/>\`
 
 	or here: <http://example.com/>`
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders Blockquotes with code blocks.txt`, () => {
+  it(`renders Blockquotes with code blocks.txt`, async () => {
     const input = `> Example:
 > 
 >     sub status {
@@ -2725,10 +3077,14 @@ Auto-links should not occur here: \`<http://example.com/>\`
 >     }
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders Horizontal rules.txt`, () => {
+  it(`renders Horizontal rules.txt`, async () => {
     const input = `Dashes:
 
 ---
@@ -2798,10 +3154,14 @@ _ _ _
     _ _ _
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders Inline HTML comments.txt`, () => {
+  it(`renders Inline HTML comments.txt`, async () => {
     const input = `Paragraph one.
 
 <!-- This is a simple comment -->
@@ -2817,10 +3177,14 @@ Paragraph two.
 The end.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders Links, shortcut references.txt`, () => {
+  it(`renders Links, shortcut references.txt`, async () => {
     const input = `This is the [simple case].
 
 [simple case]: /simple
@@ -2843,10 +3207,14 @@ break] with a line-ending space.
 [other]: /other
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders Nested blockquotes.txt`, () => {
+  it(`renders Nested blockquotes.txt`, async () => {
     const input = `> foo
 >
 > > bar
@@ -2854,10 +3222,14 @@ break] with a line-ending space.
 > foo
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders Ordered and unordered lists.txt`, () => {
+  it(`renders Ordered and unordered lists.txt`, async () => {
     const input = `Asterisks tight:
 
 *	asterisk 1
@@ -2985,10 +3357,14 @@ This was an error in Markdown 1.0.1:
 	that
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders Strong and em together.txt`, () => {
+  it(`renders Strong and em together.txt`, async () => {
     const input = `***This is strong and em.***
 
 So is ***this*** word.
@@ -2998,10 +3374,14 @@ ___This is strong and em.___
 So is ___this___ word.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders Tabs.txt`, () => {
+  it(`renders Tabs.txt`, async () => {
     const input = `+	this is a list item
 	indented with tabs
 
@@ -3025,10 +3405,14 @@ And:
 	    indented with spaces
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders Tidyness.txt`, () => {
+  it(`renders Tidyness.txt`, async () => {
     const input = `> A list within a blockquote:
 > 
 > *	asterisk 1
@@ -3036,13 +3420,17 @@ And:
 > *	asterisk 3
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
 })
 
 describe('zds', () => {
-  it(`renders align.txt`, () => {
+  it(`renders align.txt`, async () => {
     const input = `A simple paragraph
 
 ->A centered paragraph<-
@@ -3083,10 +3471,14 @@ a simple paragraph
 ->A started block without end.
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders comments.txt`, () => {
+  it(`renders comments.txt`, async () => {
     const input = `Blabla<--COMMENTS hahaha COMMENTS-->Balbla
 
 \`\`\`
@@ -3096,10 +3488,14 @@ Blabla<--COMMENTS hahaha COMMENTS-->Balbla
 <--COMMENTS Unfinished block
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders customblock.txt`, () => {
+  it(`renders customblock.txt`, async () => {
     const input = `[[s]]
 | Secret Block
 
@@ -3165,10 +3561,14 @@ with content after
 | content
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders delext.txt`, () => {
+  it(`renders delext.txt`, async () => {
     const input = `Blabla ~~truc~~ kxcvj ~~sdv sd~~ sdff
 
 sdf ~~~~ df
@@ -3176,10 +3576,14 @@ sdf ~~~~ df
 sfdgs ~ ~ dfg ~~ dgsg ~ qs
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders emoticons.txt`, () => {
+  it(`renders emoticons.txt`, async () => {
     const input = `Lolilol :) Hey :D
 
 :)
@@ -3192,10 +3596,14 @@ sfdgs ~ ~ dfg ~~ dgsg ~ qs
 
 :D ce n'est pas une légende non plus`
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders grid_tables.txt`, () => {
+  it(`renders grid_tables.txt`, async () => {
     const input = `# Grid table
 
 ## Basic example
@@ -3402,10 +3810,14 @@ Bug #107
 +-----+-------+-------+-------+-------+-------+
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders math.txt without custom config`, () => {
+  it(`renders math.txt without custom config`, async () => {
     const input = `inline $simple$ math
 
 *inline* $$doubledisplay$$ math
@@ -3416,10 +3828,10 @@ $$
 
 $$again$$
 `
-    const newMdastConfig = configOverride(defaultMdastConfig, { math: {} })
-    const newHtmlConfig = configOverride(defaultHtmlConfig, { katex: {} })
+    const newMdastConfig = configOverride(defaultMdastConfig, {math: {}})
+    const newHtmlConfig = configOverride(defaultHtmlConfig, {katex: {}})
 
-    return renderString(newMdastConfig, newHtmlConfig)(input).then((html) => {
+    return renderHtml(newMdastConfig, newHtmlConfig)(input).then((html) => {
       expect((html.match(/katex-mathml/g) || []).length).toBe(4)
       expect((html.match(/span class="katex-display"/g) || []).length).toBe(1)
       expect((html.match(/inlineMath math-display/g) || []).length).toBe(0)
@@ -3427,7 +3839,7 @@ $$again$$
     })
   })
 
-  it(`renders math.txt`, () => {
+  it(`renders math.txt`, async () => {
     const input = `inline $simple$ math
 
 *inline* $$doubledisplay$$ math
@@ -3439,7 +3851,7 @@ $$
 $$again$$
 `
 
-    return renderString(input).then((html) => {
+    return renderHtml(input).then((html) => {
       expect((html.match(/katex-mathml/g) || []).length).toBe(4)
       expect((html.match(/span class="katex-display"/g) || []).length).toBe(3)
       expect((html.match(/math-inline math-display/g) || []).length).toBe(2)
@@ -3447,7 +3859,7 @@ $$again$$
     })
   })
 
-  it(`renders kbd.txt`, () => {
+  it(`renders kbd.txt`, async () => {
     const input = `Blabla ||ok|| kxcvj ||ok foo|| sdff
 
 sdf |||| df
@@ -3465,10 +3877,14 @@ but not block elements inside:
 * ||hello: [[secret]]?||
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders subsuperscript.txt`, () => {
+  it(`renders subsuperscript.txt`, async () => {
     const input = `Foo ^sup^ kxcvj ^sup *string*^ bar
 
 not ^ here
@@ -3484,10 +3900,14 @@ neither \\~ here ~ because it's escaped
 foo ^^a^^ bar
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders urlize.txt`, () => {
+  it(`renders urlize.txt`, async () => {
     const input = `http://www.google.fr
 
 https://www.google.fr
@@ -3531,10 +3951,14 @@ javascript:alert%29'XSS'%29
 [sur isocpp.org](https://isocpp.org/std/status)
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 
-  it(`renders video.txt`, () => {
+  it(`renders video.txt`, async () => {
     const input = `!(https://www.youtube.com/watch?v=FdltlrKFr1w)
 
 !(https://www.dailymotion.com/video/x2y6lhm)
@@ -3565,6 +3989,10 @@ This one should not be allowed:
 with text after
 `
 
-    return expect(renderString(input)).resolves.toMatchSnapshot()
+    const html = await renderHtml(input)
+    const latex = await renderLatex(input)
+
+    expect(html).toMatchSnapshot()
+    expect(latex).toMatchSnapshot()
   })
 })

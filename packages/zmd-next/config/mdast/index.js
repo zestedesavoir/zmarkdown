@@ -1,31 +1,31 @@
 module.exports = {
   parse: {
-    gfm: true,
+    gfm:        true,
     commonmark: false,
-    footnotes: true,
-    pedantic: false,
+    footnotes:  true,
+    pedantic:   false,
     /* sets list of known blocks to nothing, otherwise <h3>hey</h3> would become
     &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
-    blocks: [],
+    blocks:     [],
   },
 
   alignBlocks: {
     center: 'align-center',
-    right: 'align-right',
+    right:  'align-right',
   },
 
   captions: {
     external: {
-      table: 'Table:',
+      table:     'Table:',
       gridTable: 'Table:',
-      code: 'Code:',
-      math: 'Equation:',
-      iframe: 'Video:',
+      code:      'Code:',
+      math:      'Equation:',
+      iframe:    'Video:',
     },
     internal: {
-      math: 'Equation:',
+      math:       'Equation:',
       inlineMath: 'Equation:',
-      image: 'Figure:',
+      image:      'Figure:',
     },
   },
 
@@ -44,14 +44,14 @@ module.exports = {
   },
 
   ping: {
-    pingUsername: (_username) => true,
-    userURL: (username) => `/membres/voir/${username}/`,
+    pingUsername:  (_username) => true,
+    userURL:       (username) => `/membres/voir/${username}/`,
     usernameRegex: /\B@(?:\*\*([^*]+)\*\*|(\w+))/,
   },
 
   postProcessors: {
-    getStats: true,
-    limitDepth: 100,
+    getStats:      true,
+    limitDepth:    100,
     listLanguages: true,
   },
 

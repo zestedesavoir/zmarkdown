@@ -28,8 +28,8 @@ function wrap ({wrapInTags, classes}, {node, index, parent}) {
   for (let i = 0; i < wrapInTags.length; i++) {
     node.__wrapped = true
     wrapped = {
-      type: 'element',
-      tagName: wrapInTags[i] || 'div',
+      type:       'element',
+      tagName:    wrapInTags[i] || 'div',
       properties: {
         class: classes[i] || [],
       },

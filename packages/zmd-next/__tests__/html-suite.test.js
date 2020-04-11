@@ -3,8 +3,10 @@ const dedent = require('dedent')
 const {
   defaultMdastConfig,
   defaultHtmlConfig,
-  renderString,
+  renderAs,
 } = require('../utils/renderer-tests')
+
+const renderString = renderAs('html')
 
 describe('math', () => {
   it('must escape a dollar with backslash', () => {

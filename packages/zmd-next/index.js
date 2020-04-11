@@ -6,11 +6,11 @@ Hello, this is a *short* text to see if everything works **fine**!
 
 const zmarkdown = require('./common')
 
-const htmlParser = zmarkdown('html');
+const htmlParser = zmarkdown('latex')
 
 htmlParser(text).then(val => console.log(val))
 
 htmlParser(text, (err, vfile) => {
-  if(err) console.error(err)
+  if (err) console.error(err)
   console.log(vfile)
 })

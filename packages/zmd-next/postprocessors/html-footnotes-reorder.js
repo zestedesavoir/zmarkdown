@@ -21,12 +21,12 @@ module.exports = () => (tree) => {
         return aId > bId ? -1 : 1
       })
 
-        // Interchange footnotes in HAST
-        node.children.forEach((child, id) => {
-          if (child.type === 'element' && child.tagName === 'li') {
-            node.children[id] = footnotes.pop()
-          }
-        })
-      }
-    })
+      // Interchange footnotes in HAST
+      node.children.forEach((child, id) => {
+        if (child.type === 'element' && child.tagName === 'li') {
+          node.children[id] = footnotes.pop()
+        }
+      })
+    }
+  })
 }

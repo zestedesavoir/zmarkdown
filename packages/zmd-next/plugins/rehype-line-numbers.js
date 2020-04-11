@@ -1,24 +1,24 @@
 const visit = require('unist-util-visit')
 
 const containerDiv = (children) => ({
-  type: 'element',
-  tagName: 'div',
+  type:       'element',
+  tagName:    'div',
   properties: {className: ['hljs-code-div']},
   children,
 })
 
 const lineNumbersDiv = (children) => ({
-  type: 'element',
-  tagName: 'div',
+  type:       'element',
+  tagName:    'div',
   properties: {className: ['hljs-line-numbers']},
   children,
 })
 
 const lineNumber = {
-  type: 'element',
-  tagName: 'span',
+  type:       'element',
+  tagName:    'span',
   properties: {},
-  children: [],
+  children:   [],
 }
 
 const rehypeLineNumbers = () => (tree) => {

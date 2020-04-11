@@ -1,6 +1,6 @@
 const shortid = require('shortid')
 
-const createWrapper = require('../../postprocessors/wrappers')
+const createWrapper = require('../../utils/create-wrappers')
 
 const jsFiddleAndInaFilter = node => {
   if (node.properties.src) {
@@ -22,8 +22,8 @@ module.exports = {
 
   highlight: {
     ignoreMissing: true,
-    plainText: ['console'],
-    aliases: {tex: ['latex']},
+    plainText:     ['console'],
+    aliases:       {tex: ['latex']},
   },
 
   sanitize: require('../sanitize'),
@@ -46,5 +46,5 @@ module.exports = {
       ],
     },
     footnotesReorder: true,
-  }
+  },
 }
