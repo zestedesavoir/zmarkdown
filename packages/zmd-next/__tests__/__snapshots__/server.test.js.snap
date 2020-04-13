@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HTML endpoint accepts POSTed markdown 1`] = `"<h3 id=\\"foo\\">foo<a aria-hidden=\\"true\\" href=\\"#foo\\"><span class=\\"icon icon-link\\"></span></a></h3>"`;
+
+exports[`HTML endpoint produces statistics when configured 1`] = `
+"<p>6 chars</p>
+<h3 id=\\"11-chars-here\\">11 chars here<a aria-hidden=\\"true\\" href=\\"#11-chars-here\\"><span class=\\"icon icon-link\\"></span></a></h3>
+<p><a href=\\"https.//github.com/zestedesavoir/zmarkdown\\">11 chars here</a></p>
+<figure><img src=\\"https.//github.com/zestedesavoir/zmarkdown\\" alt=\\"11 chars here\\"><figcaption>11 chars here</figcaption></figure>
+<figure><img src=\\"https.//github.com/zestedesavoir/zmarkdown\\" alt=\\"no chars here\\"><figcaption>11 chars here</figcaption></figure>"
+`;
+
+exports[`LaTeX endpoint accepts POSTed markdown 1`] = `
+"\\\\levelOneTitle{foo}
+"
+`;
+
+exports[`Texfile endpoint accepts POSTed markdown 1`] = `
+"\\\\documentclass[contentType]{zmdocument}
+
+\\\\usepackage{blindtext}
+\\\\title{The Title}
+\\\\author{FØØ, Bär}
+\\\\licence[/tmp/l/by-nc-sa.svg]{CC-BY-NC-SA}{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}
+
+\\\\smileysPath{/tmp/s}
+\\\\makeglossaries
+
+\\\\begin{document}
+\\\\maketitle
+\\\\tableofcontents
+
+\\\\levelOneTitle{foo}
+
+\\\\end{document}"
+`;
+
+exports[`Texfile endpoint allows extra arguments 1`] = `
+"\\\\documentclass[contentType]{zmdocument}
+
+\\\\usepackage{blindtext}
+\\\\title{The Title}
+\\\\author{FØØ, Bär}
+\\\\licence[/tmp/l/by-nc-sa.svg]{CC-BY-NC-SA}{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}
+\\\\logo{/tmp/logo/h2g2.png}
+\\\\editorLogo{/tmp/logo/pmm.jpg}
+\\\\tutoLink{https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy_(novel)}
+\\\\editor{https://www.panmacmillan.com/}
+\\\\smileysPath{/tmp/s}
+\\\\makeglossaries
+
+\\\\begin{document}
+\\\\maketitle
+\\\\tableofcontents
+
+\\\\levelOneTitle{foo}
+
+\\\\end{document}"
+`;
+
+exports[`Texfile endpoint escapes title and author 1`] = `
+"\\\\documentclass[contentType]{zmdocument}
+
+\\\\usepackage{blindtext}
+\\\\title{recap \\\\#1}
+\\\\author{titi\\\\_alone}
+\\\\licence[/tmp/l/by-nc-sa.svg]{CC-BY-NC-SA}{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}
+
+\\\\smileysPath{/tmp/s}
+\\\\makeglossaries
+
+\\\\begin{document}
+\\\\maketitle
+\\\\tableofcontents
+
+\\\\levelOneTitle{foo}
+
+\\\\end{document}"
+`;

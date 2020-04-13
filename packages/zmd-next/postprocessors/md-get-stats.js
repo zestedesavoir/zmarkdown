@@ -14,7 +14,9 @@ module.exports = () => (tree, vfile) => {
         // a-z
         (currentCharCode >= 65 && currentCharCode <= 90) ||
         // A-Z
-        (currentCharCode >= 97 && currentCharCode <= 122)
+        (currentCharCode >= 97 && currentCharCode <= 122) ||
+        // 0-9
+        (currentCharCode >= 48 && currentCharCode <= 57)
       ) {
         signs++
         wordMatchFlag = true

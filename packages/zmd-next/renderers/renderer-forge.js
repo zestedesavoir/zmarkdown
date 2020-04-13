@@ -1,12 +1,14 @@
 module.exports = (base, defaultPluginList, postProcessorList) => config => {
   // Use defaults
-  if (!config.disabledPlugins) {
-    config.disabledPlugins = {
+  if (!config.disableTokenizers) {
+    config.disableTokenizers = {
       internal: [],
       meta:     [],
       inline:   [],
     }
   }
+
+  const disabledInternalTokenizers = config.disableTokenizers.internal || []
 
   if (!config.extraPlugins) {
     config.extraPlugins = {}
@@ -19,7 +21,7 @@ module.exports = (base, defaultPluginList, postProcessorList) => config => {
   const postProcessorNames = Object.keys(postProcessorList)
 
   const filteredPlugins = pluginNames
-    .filter(name => !config.disabledPlugins.internal.includes(name))
+    .filter(name => !disabledInternalTokenizers.includes(name))
 
   const filteredPostProcessors = postProcessorNames
     .filter(name => Boolean(config.postProcessors[name]))

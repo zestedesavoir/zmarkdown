@@ -1,4 +1,4 @@
-const rendererForge   = require('./rendererForge')
+const rendererForge   = require('./renderer-forge')
 
 const remark2rehype   = require('remark-rehype')
 const rehypeStringify = require('rehype-stringify')

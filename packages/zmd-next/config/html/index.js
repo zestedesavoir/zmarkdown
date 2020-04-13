@@ -1,14 +1,5 @@
 const shortid = require('shortid')
 
-const createWrapper = require('../../utils/create-wrappers')
-
-const jsFiddleAndInaFilter = node => {
-  if (node.properties.src) {
-    return node.properties.src.includes('jsfiddle.') || node.properties.src.includes('ina.')
-  }
-  return false
-}
-
 module.exports = {
   autolinkHeadings: {
     behaviour: 'append',
@@ -31,20 +22,7 @@ module.exports = {
   postfixFootnotes: `-${shortid.generate()}`,
 
   postProcessors: {
-    iframeWrappers: {
-      iframe: [
-        createWrapper(
-          'iframe',
-          ['div', 'div'],
-          [['video-wrapper'], ['video-container']],
-          node => !jsFiddleAndInaFilter(node),
-        ),
-        createWrapper('iframe', 'div', ['iframe-wrapper'], jsFiddleAndInaFilter),
-      ],
-      table: [
-        createWrapper('table', 'div', ['table-wrapper']),
-      ],
-    },
+    iframeWrappers:   require('./iframe-wrappers'),
     footnotesReorder: true,
   },
 }

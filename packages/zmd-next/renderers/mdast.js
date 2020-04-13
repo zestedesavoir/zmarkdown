@@ -1,4 +1,4 @@
-const rendererForge           = require('./rendererForge')
+const rendererForge           = require('./renderer-forge')
 
 const unified                 = require('unified')
 const remarkParse             = require('remark-parse')
@@ -16,6 +16,7 @@ const defaultTokenizerList = {
   gridTables:           require('remark-grid-tables/src'),
   iframes:              require('remark-iframes/src'),
   imageToFigure:        require('../plugins/remark-image-to-figure'),
+  imagesDownload:       require('remark-images-download/src'),
   kbd:                  require('remark-kbd/src'),
   math:                 require('remark-math'),
   numberedFootnotes:    require('remark-numbered-footnotes/src'),
@@ -38,9 +39,9 @@ module.exports = (config) => {
   rendererForge(
     baseTokenizer,
     defaultTokenizerList,
-    postProcessorList
+    postProcessorList,
   )(config)
 
   return baseTokenizer
-    .use(remarkDisableTokenizers, config.disabledTokenizers)
+    .use(remarkDisableTokenizers, config.disableTokenizers)
 }

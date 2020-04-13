@@ -31,6 +31,8 @@ module.exports = {
 
   customBlocks: require('./custom-blocks'),
 
+  disableTokenizers: {},
+
   emoticons: require('./emoticons'),
 
   escapeEscaped: ['&'],
@@ -38,6 +40,8 @@ module.exports = {
   headingShifter: 0,
 
   iframes: require('./iframes'),
+
+  imagesDownload: require('./images-download'),
 
   math: {
     inlineMathDouble: true,

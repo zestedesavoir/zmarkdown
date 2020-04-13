@@ -1,9 +1,0 @@
-/!\ Count of signs changed:
-    - before: count [a-zA-Z0-9_]
-    - now: only count [a-zA-Z]
-
-Add test on count word/signs
-
-Fixtures were moved into snapshots!
--> Detail procedure on PR
-=> CHECK THAT THEY'RE ALL HERE!!! (compare old and new results)

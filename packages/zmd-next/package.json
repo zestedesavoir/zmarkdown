@@ -24,10 +24,18 @@
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/zmd-next"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "server": "pm2 start -f server/index.js -i 3 --max-memory-restart 150M"
   },
   "dependencies": {
+    "@pm2/io": "^4.3.4",
+    "@sentry/node": "^5.15.4",
+    "body-parser": "^1.19.0",
+    "clone": "^2.1.2",
+    "cors": "^2.8.5",
     "deepmerge": "^4.2.2",
+    "express": "^4.17.1",
+    "parallel-webpack": "^2.6.0",
+    "pm2": "^4.2.3",
     "rehype-autolink-headings": "^2.0.5",
     "rehype-footnotes-title": "file:../rehype-footnotes-title",
     "rehype-highlight": "^3.1.0",
@@ -57,7 +65,15 @@
     "remark-ping": "file:../remark-ping",
     "remark-sub-super": "file:../remark-sub-super",
     "shortid": "^2.2.15",
+    "textr": "^0.3.0",
     "unified": "^8.4.2",
-    "unist-util-visit": "^2.0.1"
+    "unist-util-visit": "^2.0.1",
+    "webpack": "^4.42.1"
+  },
+  "devDependencies": {
+    "axios": "^0.19.2",
+    "dedent": "^0.7.0",
+    "webpack-cli": "^3.3.11",
+    "xtend": "^4.0.2"
   }
 }

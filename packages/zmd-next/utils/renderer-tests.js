@@ -6,14 +6,14 @@ const defaultMdastConfig = clone(require('../config/mdast'))
 const defaultHtmlConfig = clone(require('../config/html'))
 const defaultLatexConfig = clone(require('../config/latex'))
 
-defaultMdastConfig.disabledPlugins = {
+defaultMdastConfig.disableTokenizers = {
   internal: ['textr'],
   meta:     [],
   inline:   [],
 }
 defaultMdastConfig.ping.pingUsername = () => false
 
-defaultHtmlConfig.disabledPlugins = {
+defaultHtmlConfig.disableTokenizers = {
   internal: ['lineNumbers', 'highlight'],
 }
 defaultHtmlConfig.postfixFootnotes = '-shortId'

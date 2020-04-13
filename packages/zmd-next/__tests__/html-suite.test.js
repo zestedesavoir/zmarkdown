@@ -242,7 +242,7 @@ describe('pedantic mode disabled', () => {
 
 describe('code highlight special cases', () => {
   beforeEach(() => {
-    defaultHtmlConfig.disabledPlugins.internal = []
+    defaultHtmlConfig.disableTokenizers.internal = []
   })
 
   it('does not highlight console', () => {
@@ -287,7 +287,7 @@ describe('code highlight special cases', () => {
   })
 
   afterEach(() => {
-    defaultHtmlConfig.disabledPlugins.internal = ['lineNumbers', 'highlight']
+    defaultHtmlConfig.disableTokenizers.internal = ['lineNumbers', 'highlight']
   })
 })
 
