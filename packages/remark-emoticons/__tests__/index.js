@@ -35,6 +35,7 @@ const config = {
     ':euh:': '/static/smileys/unsure.gif',
     ':waw:': '/static/smileys/waw.png',
     ':zorro:': '/static/smileys/zorro.png',
+    '🧐': '/static/smileys/svg/1f9d0.svg',
   },
   classes: 'foo bar',
 }
@@ -88,6 +89,21 @@ test('does not eat spaces leading to a smiley', () => {
   `)
   expect(contents).not.toContain('</em><img')
   expect(contents).not.toContain('</a><img')
+})
+
+test('confusable locators', () => {
+  const {contents} = render(dedent`
+    :)     o_O   :)
+  `)
+  expect((contents.match(/<img/g) || []).length).toBe(3)
+})
+
+test('unicode emoticons', () => {
+  const {contents} = render(dedent`
+    🧐
+  `)
+  expect(contents).toContain('<img')
+  expect(contents).toMatchSnapshot()
 })
 
 test('emoticons without class', () => {

@@ -41,7 +41,7 @@ module.exports = function inlinePlugin (ctx) {
 
       if (match !== -1) {
         // A smiley should be precedeed by at least one whitespace
-        if (whitespace(value[match - 1]) && (lowestMatch === -1 || match > lowestMatch)) {
+        if (whitespace(value[match - 1]) && (lowestMatch === -1 || match < lowestMatch)) {
           lowestMatch = match
         }
       }
