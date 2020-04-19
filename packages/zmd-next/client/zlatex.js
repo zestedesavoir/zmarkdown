@@ -1,20 +1,20 @@
 const defaultMdastConfig = require('../config/mdast')
 const defaultLatexConfig = require('../config/latex')
 
-import {mdastParser} from './zmdast'
+import {parser as mdastParser} from './zmdast'
 
-export const latexParser = require('../renderers/latex')
+export const parser = require('../renderers/latex')
 
-export function renderLatex (
+export function render (
   markdown,
   cb,
   mdConfig = defaultMdastConfig,
   latexConfig = defaultLatexConfig,
 ) {
-  const parser = mdastParser(mdConfig)
-  latexParser(parser, latexConfig)
+  const processor = mdastParser(mdConfig)
+  parser(processor, latexConfig)
 
-  parser.process(markdown, (err, vfile) => {
+  processor.process(markdown, (err, vfile) => {
     if (err) return cb(err)
 
     cb(null, vfile)

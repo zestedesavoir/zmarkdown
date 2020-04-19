@@ -27,22 +27,7 @@ module.exports = (
     latexRenderer(parser, processorConfig)
   // No processor given: output syntax tree
   } else if (processor === null) {
-    return (input, cb) => {
-      if (typeof cb !== 'function') {
-        return new Promise((resolve, reject) =>
-          parser.parse(input, (err, vfile) => {
-            if (err) return reject(err)
-
-            resolve(vfile)
-          }))
-      }
-
-      parser.parse(input, (err, vfile) => {
-        if (err) return cb(err)
-
-        cb(null, vfile)
-      })
-    }
+    return parser.parse
   // Custom processor: use it
   } else {
     parser.use(processor, processorConfig)

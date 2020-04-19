@@ -12,10 +12,9 @@ const defaultTokenizerList = {
   customBlocks:         require('remark-custom-blocks/src'),
   emoticons:            require('remark-emoticons/src'),
   escapeEscaped:        require('remark-escape-escaped/src'),
-  headingShifter:       require('remark-heading-shift/src'),
   gridTables:           require('remark-grid-tables/src'),
+  headingShifter:       require('remark-heading-shift/src'),
   iframes:              require('remark-iframes/src'),
-  imageToFigure:        require('../plugins/remark-image-to-figure'),
   imagesDownload:       require('remark-images-download/src'),
   kbd:                  require('remark-kbd/src'),
   math:                 require('remark-math'),
@@ -24,6 +23,7 @@ const defaultTokenizerList = {
   subSuper:             require('remark-sub-super/src'),
   textr:                require('../plugins/remark-textr'),
   trailingSpaceHeading: require('remark-heading-trailing-spaces'),
+  imageToFigure:        require('../plugins/remark-image-to-figure'),
 }
 
 const postProcessorList = {

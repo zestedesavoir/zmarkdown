@@ -1,6 +1,8 @@
 // This is the same as the `mdast` renderer, but downloadImages was removed.
 // We need to duplicate the file because otherwise Webpack would
 // load the module anyway...
+export const inspect          = require('unist-util-inspect')
+
 const rendererForge           = require('../renderers/renderer-forge')
 
 const unified                 = require('unified')
@@ -36,7 +38,7 @@ const postProcessorList = {
   listLanguages: require('../postprocessors/md-list-languages'),
 }
 
-export function mdastParser (config) {
+export function parser (config) {
   const baseTokenizer = unified()
     .use(remarkParse, config.parse)
 
@@ -50,8 +52,8 @@ export function mdastParser (config) {
     .use(remarkDisableTokenizers, config.disableTokenizers)
 }
 
-export function renderMdast (markdown, cb, config = defaultMdastConfig) {
-  const parser = mdastParser(config)
+export function render (markdown, cb, config = defaultMdastConfig) {
+  const processor = parser(config)
 
-  return parser.parse(markdown)
+  return processor.parse(markdown)
 }

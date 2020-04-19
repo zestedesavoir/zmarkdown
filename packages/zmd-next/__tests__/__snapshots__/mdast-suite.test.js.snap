@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 6,
+              "line": 1,
+              "offset": 5,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 3,
+              "line": 1,
+              "offset": 2,
+            },
+          },
+          "type": "text",
+          "value": "foo",
+        },
+      ],
+      "depth": 1,
+      "position": Position {
+        "end": Object {
+          "column": 6,
+          "line": 1,
+          "offset": 5,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "type": "heading",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "position": Position {
+                "end": Object {
+                  "column": 17,
+                  "line": 2,
+                  "offset": 22,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 3,
+                  "line": 2,
+                  "offset": 8,
+                },
+              },
+              "type": "text",
+              "value": "something else",
+            },
+          ],
+          "position": Position {
+            "end": Object {
+              "column": 19,
+              "line": 2,
+              "offset": 24,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 2,
+              "offset": 6,
+            },
+          },
+          "type": "strong",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 19,
+          "line": 2,
+          "offset": 24,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 2,
+          "offset": 6,
+        },
+      },
+      "type": "paragraph",
+    },
+  ],
+  "position": Object {
+    "end": Object {
+      "column": 19,
+      "line": 2,
+      "offset": 24,
+    },
+    "start": Object {
+      "column": 1,
+      "line": 1,
+      "offset": 0,
+    },
+  },
+  "type": "root",
+}
+`;

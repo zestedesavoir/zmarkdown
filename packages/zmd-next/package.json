@@ -1,6 +1,6 @@
 {
-  "name": "zmd-next",
-  "version": "0.1.0",
+  "name": "zmarkdown",
+  "version": "8.2.0",
   "description": "HTTP server API providing fast and extensible markdown parser",
   "keywords": [
     "markdown",
@@ -8,23 +8,33 @@
     "http",
     "api"
   ],
-  "author": "Titouan S. <talone@boxph.one>",
+  "author": "Victor Felder <victor@draft.li> (https://draft.li)",
+  "contributors": [
+    "Sébastien (AmarOk) Blin <contact@enconn.fr>",
+    "François (artragis) Dambrine <perso@francoisdambrine.me>",
+    "Victor Felder <victor@draft.li> (https://draft.li)",
+    "Titouan (TAlone) S. <talone@boxph.one>"
+  ],
   "homepage": "https://zestedesavoir.github.io/zmarkdown/",
   "license": "MIT",
   "main": "server/index.js",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "lib"
-  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/zmd-next"
+    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/zmarkdown"
   },
   "scripts": {
-    "server": "pm2 start -f server/index.js -i 3 --max-memory-restart 150M"
+    "lint": "eslint .",
+    "pretest": "npm run server && eslint .",
+    "test": "cross-env DEST=/tmp jest",
+    "posttest": "npm run stop",
+    "watch": "jest --watch",
+    "server": "pm2 start -f server/index.js -i 3 --max-memory-restart 150M",
+    "stop": "pm2 kill",
+    "watch:client": "cross-env NODE_ENV=development parallel-webpack --watch --info-verbosity=verbose",
+    "release": "parallel-webpack"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   },
   "dependencies": {
     "@pm2/io": "^4.3.4",
@@ -34,8 +44,11 @@
     "cors": "^2.8.5",
     "deepmerge": "^4.2.2",
     "express": "^4.17.1",
-    "parallel-webpack": "^2.6.0",
+    "hast-util-sanitize": "^2.0.1",
+    "katex": "0.11.1",
     "pm2": "^4.2.3",
+    "rebber": "file:../rebber",
+    "rebber-plugins": "file:../rebber-plugins",
     "rehype-autolink-headings": "^2.0.5",
     "rehype-footnotes-title": "file:../rehype-footnotes-title",
     "rehype-highlight": "^3.1.0",
@@ -63,16 +76,36 @@
     "remark-numbered-footnotes": "file:../remark-numbered-footnotes",
     "remark-parse": "^7.0.2",
     "remark-ping": "file:../remark-ping",
+    "remark-rehype": "^5.0.0",
     "remark-sub-super": "file:../remark-sub-super",
     "shortid": "^2.2.15",
     "textr": "^0.3.0",
+    "typographic-apostrophes": "^1.1.1",
+    "typographic-apostrophes-for-possessive-plurals": "^1.0.5",
+    "typographic-colon": "file:../typographic-colon",
+    "typographic-copyright": "^1.0.1",
+    "typographic-ellipses": "^1.0.11",
+    "typographic-em-dash": "file:../typographic-em-dash",
+    "typographic-em-dashes": "^1.0.2",
+    "typographic-en-dashes": "^1.0.1",
+    "typographic-exclamation-mark": "file:../typographic-exclamation-mark",
+    "typographic-guillemets": "file:../typographic-guillemets",
+    "typographic-percent": "file:../typographic-percent",
+    "typographic-permille": "file:../typographic-permille",
+    "typographic-question-mark": "file:../typographic-question-mark",
+    "typographic-registered-trademark": "^1.0.1",
+    "typographic-semicolon": "file:../typographic-semicolon",
+    "typographic-single-spaces": "^1.0.2",
+    "typographic-trademark": "^1.0.1",
     "unified": "^8.4.2",
-    "unist-util-visit": "^2.0.1",
-    "webpack": "^4.42.1"
+    "unist-util-inspect": "^5.0.0",
+    "unist-util-visit": "^2.0.1"
   },
   "devDependencies": {
     "axios": "^0.19.2",
     "dedent": "^0.7.0",
+    "parallel-webpack": "^2.6.0",
+    "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "xtend": "^4.0.2"
   }

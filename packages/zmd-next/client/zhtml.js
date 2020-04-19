@@ -1,20 +1,20 @@
 const defaultMdastConfig = require('../config/mdast')
 const defaultHtmlConfig = require('../config/html')
 
-import {mdastParser} from './zmdast'
+import {parser as mdastParser} from './zmdast'
 
-export const htmlParser = require('../renderers/html')
+export const parser = require('../renderers/html')
 
-export function renderHtml (
+export function render (
   markdown,
   cb,
   mdConfig = defaultMdastConfig,
   htmlConfig = defaultHtmlConfig,
 ) {
-  const parser = mdastParser(mdConfig)
-  htmlParser(parser, htmlConfig)
+  const processor = mdastParser(mdConfig)
+  parser(processor, htmlConfig)
 
-  parser.process(markdown, (err, vfile) => {
+  processor.process(markdown, (err, vfile) => {
     if (err) return cb(err)
 
     cb(null, vfile)

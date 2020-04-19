@@ -1,7 +1,7 @@
 // This is the same as the `html` renderer, but highlight & katex were removed.
 // We need to duplicate the file because otherwise Webpack would
 // load the modules anyway...
-import {mdastParser} from './zmdast'
+import {parser as mdastParser} from './zmdast'
 
 const rendererForge   = require('../renderers/renderer-forge')
 
@@ -26,7 +26,7 @@ const postProcessorList = {
   footnotesReorder: require('../postprocessors/html-footnotes-reorder'),
 }
 
-export function htmlParser (tokenizer, config) {
+export function parser (tokenizer, config) {
   tokenizer
     .use(remark2rehype, config.bridge)
 
@@ -40,16 +40,16 @@ export function htmlParser (tokenizer, config) {
     .use(rehypeStringify, config.stringify)
 }
 
-export function renderHtml (
+export function render (
   markdown,
   cb,
   mdConfig = defaultMdastConfig,
   htmlConfig = defaultHtmlConfig,
 ) {
-  const parser = mdastParser(mdConfig)
-  htmlParser(parser, htmlConfig)
+  const processor = mdastParser(mdConfig)
+  parser(processor, htmlConfig)
 
-  parser.process(markdown, (err, vfile) => {
+  processor.process(markdown, (err, vfile) => {
     if (err) return cb(err)
 
     cb(null, vfile)
