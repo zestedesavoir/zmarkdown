@@ -12,11 +12,6 @@ Split(['#center-top', '#center-bottom'], {
   direction: 'vertical'
 })
 
-ZMarkdown.use(ZMarkdownZHTML);
-ZMarkdown.use(ZMarkdownZLatex);
-
-ZMarkdown.setDefaultModule('zhtml');
-
 const ansiUp = new AnsiUp()
 const editor = document.querySelector('#left-top > textarea')
 const ast = document.querySelector('#left-bottom > pre > code')
@@ -47,14 +42,16 @@ function buildSpoilers (elems) {
 }
 
 function update () {
-  ZMarkdown.render(editor.value).then((vFile) => {
+  ZMarkdownZHTML.render(editor.value, (err, vFile) => {
     render.innerHTML = vFile.toString().trim()
     html.textContent = vFile.toString().trim()
     buildSpoilers(render.querySelectorAll('.custom-block-spoiler'))
   })
-  ZMarkdown.render(editor.value, 'zlatex').then((vFile) => {
+
+  ZMarkdownZLATEX.render(editor.value, (err, vFile) => {
     latex.textContent = vFile.toString().trim()
   })
-  const mdast = ZMarkdown.parse(editor.value)
-  ast.innerHTML = ansiUp.ansi_to_html(ZMarkdown.getParser().inspect.color(mdast))
+
+  const mdast = ZMarkdownZMDAST.render(editor.value)
+  ast.innerHTML = ansiUp.ansi_to_html(ZMarkdownZMDAST.inspect.color(mdast))
 }

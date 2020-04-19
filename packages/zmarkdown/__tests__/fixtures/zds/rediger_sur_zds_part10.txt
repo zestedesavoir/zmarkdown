@@ -1,9 +1,0 @@
-Si vous avez besoin d'écrire un caractère réservé entrant en conflit avec l'une des syntaxes décrites ici (l'astérisque par exemple), vous pouvez le faire en le précédent d'un antislash : `\*`
-
-Enfin, vous pouvez mettre une partie de votre texte en commentaires en le mettant entre des balises spécifiques :
-
-```text
-Ceci est mon texte. <--COMMENT Et ceci est une partie commentée. COMMENT-->
-```
-
-La partie commentée n'apparaîtra tout simplement pas dans le rendu final.

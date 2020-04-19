@@ -1,31 +1,52 @@
 {
   "name": "zmarkdown",
   "version": "8.3.0",
+  "description": "HTTP server API providing fast and extensible markdown parser",
+  "keywords": [
+    "markdown",
+    "md",
+    "http",
+    "api"
+  ],
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
   "contributors": [
     "Sébastien (AmarOk) Blin <contact@enconn.fr>",
     "François (artragis) Dambrine <perso@francoisdambrine.me>",
-    "Victor Felder <victor@draft.li> (https://draft.li)"
+    "Victor Felder <victor@draft.li> (https://draft.li)",
+    "Titouan (TAlone) S. <talone@boxph.one>"
   ],
+  "homepage": "https://zestedesavoir.github.io/zmarkdown/",
   "license": "MIT",
+  "main": "server/index.js",
   "repository": {
-    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/zmarkdown",
-    "type": "git"
+    "type": "git",
+    "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/zmarkdown"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run server && eslint .",
+    "test": "cross-env DEST=/tmp jest",
+    "posttest": "npm run stop",
+    "watch": "jest --watch",
+    "server": "pm2 start -f server/index.js -i 3 --max-memory-restart 150M",
+    "stop": "pm2 kill",
+    "watch:client": "cross-env NODE_ENV=development parallel-webpack --watch --info-verbosity=verbose",
+    "release": "parallel-webpack"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   },
   "dependencies": {
+    "@pm2/io": "^4.3.4",
+    "@sentry/node": "^5.15.4",
     "body-parser": "^1.19.0",
     "clone": "^2.1.2",
     "cors": "^2.8.5",
-    "dedent": "^0.7.0",
     "deepmerge": "^4.2.2",
     "express": "^4.17.1",
     "hast-util-sanitize": "^2.0.1",
     "katex": "0.11.1",
-    "mdast-util-to-hast": "^7.0.0",
-    "parallel-webpack": "^2.4.0",
     "pm2": "^4.2.3",
-    "pmx": "^1.6.7",
-    "raven": "^2.6.4",
     "rebber": "file:../rebber",
     "rebber-plugins": "file:../rebber-plugins",
     "rehype-autolink-headings": "^2.0.5",
@@ -58,9 +79,7 @@
     "remark-rehype": "^5.0.0",
     "remark-sub-super": "file:../remark-sub-super",
     "shortid": "^2.2.15",
-    "sync-request": "^6.1.0",
     "textr": "^0.3.0",
-    "to-vfile": "^6.0.0",
     "typographic-apostrophes": "^1.1.1",
     "typographic-apostrophes-for-possessive-plurals": "^1.0.5",
     "typographic-colon": "file:../typographic-colon",
@@ -82,18 +101,12 @@
     "unist-util-inspect": "^5.0.0",
     "unist-util-visit": "^2.0.1"
   },
-  "scripts": {
-    "lint": "eslint .",
-    "pretest": "npm run server && eslint .",
-    "test": "cross-env DEST=/tmp jest",
-    "posttest": "npm run stop",
-    "watch": "jest --watch",
-    "server": "pm2 start -f server/index.js -i 3 --max-memory-restart 150M",
-    "stop": "pm2 kill",
-    "watch:client": "cross-env NODE_ENV=development parallel-webpack --watch --info-verbosity=verbose",
-    "release": "parallel-webpack"
-  },
-  "engines": {
-    "node": ">=8.0.0"
+  "devDependencies": {
+    "axios": "^0.19.2",
+    "dedent": "^0.7.0",
+    "parallel-webpack": "^2.6.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "xtend": "^4.0.2"
   }
 }
