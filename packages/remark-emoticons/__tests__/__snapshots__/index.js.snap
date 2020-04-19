@@ -56,3 +56,5 @@ Smiley after another node w/2 spaces: [link](#foo)  :)
 Smiley after another node w/3 spaces: [link](#foo)   :)
 "
 `;
+
+exports[`unicode emoticons 1`] = `"<p><img src=\\"/static/smileys/svg/1f9d0.svg\\" alt=\\"🧐\\" class=\\"foo bar\\"></p>"`;
