@@ -22,6 +22,7 @@ module.exports = () => (tree, vfile) => {
         wordMatchFlag = true
       } else if (currentCharCode === 32) {
         if (wordMatchFlag) words++
+        signs++
         wordMatchFlag = false
       }
     }

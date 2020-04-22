@@ -136,22 +136,22 @@ describe('HTML endpoint', () => {
 
   it('produces statistics when configured', async () => {
     const text = dedent(`
-    6 chars
-    # 11 chars here
+    7 chars
+    # 13 chars here
     
-    [11 chars here](https.//github.com/zestedesavoir/zmarkdown)
+    [13 chars here](https.//github.com/zestedesavoir/zmarkdown)
     
-    ![11 chars here](https.//github.com/zestedesavoir/zmarkdown)
+    ![13 chars here](https.//github.com/zestedesavoir/zmarkdown)
     
     ![no chars here](https.//github.com/zestedesavoir/zmarkdown)
-    Figure: 11 chars here
+    Figure: 13 chars here
     `)
     const response = await a.post(html, {md: text, opts: {stats: true}})
     expect(response.status).toBe(200)
 
     const [string, metadata] = response.data
     expect(string).toMatchSnapshot()
-    expect(metadata.stats.signs).toBe(50)
+    expect(metadata.stats.signs).toBe(59)
     expect(metadata.stats.words).toBe(14)
   })
 })
