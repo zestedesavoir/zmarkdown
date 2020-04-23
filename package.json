@@ -48,7 +48,7 @@
     "posttest": "lerna run posttest --scope zmarkdown",
     "d": "node --inspect --debug-brk ./node_modules/.bin/jest --runInBand -i",
     "clean": "lerna clean --yes && del-cli node_modules && npm run bootstrap && lerna run prepare && npm run test",
-    "build-demo": "lerna run release --scope zmarkdown && del-cli ./packages/zmarkdown/public/js && cp -r ./packages/zmarkdown/dist ./packages/zmarkdown/public/js"
+    "build-demo": "lerna run release --scope zmarkdown && del-cli ./packages/zmarkdown/public/js && cp -r ./packages/zmarkdown/client/dist ./packages/zmarkdown/public/js"
   },
   "engines": {
     "node": ">=8",
