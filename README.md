@@ -1,7 +1,7 @@
 # ZMarkdown
 
-  [![Build Status](build-badge)](build-status)
-  [![Coverage Status](coverage-badge)](coverage-status)
+  [![Build Status][build-badge]][build-status]
+  [![Coverage Status][coverage-badge]][coverage-status]
 
 This repository contains all the plugins for ZMarkdown, the Markdown engine powering [Zeste de Savoir][zds].
 
