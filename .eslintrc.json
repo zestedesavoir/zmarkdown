@@ -51,7 +51,11 @@
         "body": 1
       }
     }],
-    "key-spacing": [2, {"beforeColon": false, "afterColon": true}],
+    "key-spacing": [2, {
+      "beforeColon": false,
+      "afterColon": true,
+      "align": "value"
+    }],
     "keyword-spacing": [2, {"before": true, "after": true}],
     "linebreak-style": [2, "unix"],
     "max-len": ["error", {
@@ -109,7 +113,12 @@
       "allowSamePrecedence": false
     }],
     "no-mixed-spaces-and-tabs": 2,
-    "no-multi-spaces": 2,
+    "no-multi-spaces": [2, {
+      "exceptions": {
+        "Property": true,
+        "VariableDeclarator": true
+      }
+    }],
     "no-multi-str": 2,
     "no-multiple-empty-lines": [2, {"max": 2}],
     "no-native-reassign": 2,

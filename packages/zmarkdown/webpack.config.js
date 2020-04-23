@@ -7,9 +7,9 @@ const defaultConf = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test:    /\.js$/,
         exclude: /(node_modules|bower_components)/,
-        use: {
+        use:     {
           loader: 'babel-loader',
         },
       },
@@ -17,32 +17,18 @@ const defaultConf = {
   },
 }
 
-module.exports = [
-  Object.assign({}, defaultConf, {
-    name: 'ZMarkdown',
-    entry: ['./client/index'],
+const makeExportObject = (type) => {
+  const upperType = type.toUpperCase()
+
+  return Object.assign({}, defaultConf, {
+    name:   `ZMarkdown${upperType}`,
+    entry:  [`./client/${type}`],
     output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: 'zmarkdown.js',
-      library: 'ZMarkdown',
+      path:     path.resolve(__dirname, 'client/dist'),
+      filename: `zmarkdown-${type}.js`,
+      library:  `ZMarkdown${upperType}`,
     },
-  }),
-  Object.assign({}, defaultConf, {
-    name: 'ZMarkdownZHTML',
-    entry: ['./modules/zhtml'],
-    output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: 'zmarkdown-zhtml.js',
-      library: 'ZMarkdownZHTML',
-    },
-  }),
-  Object.assign({}, defaultConf, {
-    name: 'ZMarkdownZLatex',
-    entry: ['./modules/zlatex'],
-    output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: 'zmarkdown-zlatex.js',
-      library: 'ZMarkdownZLatex',
-    },
-  }),
-]
+  })
+}
+
+module.exports = ['zmdast', 'zhtml', 'zhlite', 'zlatex'].map(makeExportObject)

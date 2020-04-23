@@ -1,6 +1,9 @@
-# zmarkdown [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
+# ZMarkdown
 
-This repository forms the basis for zmarkdown, the JavaScript project replaced [Python-ZMarkdown][pyzmd], the Markdown engine that was powering [Zeste de Savoir][zds].
+  [![Build Status](build-badge)](build-status)
+  [![Coverage Status](coverage-badge)](coverage-status)
+
+This repository contains all the plugins for ZMarkdown, the Markdown engine powering [Zeste de Savoir][zds].
 
 It is a collection of packages extending the [**remark** processor][processor] and its [**MDAST**][mdast] syntax tree, [**rehype**][rehype] (for HTML processing) and [**textr**][textr] (text transformation framework).
 It also provides [**MDAST**][mdast] to LaTeX compilation via [**rebber**][rebber] (and its [plugins][rebber-plugins]).
@@ -9,7 +12,7 @@ It also provides [**MDAST**][mdast] to LaTeX compilation via [**rebber**][rebber
 
 ### Prerequisites
 
-* node >= 8
+* node >= 10
 * npm >= 6
 
 ### Installation
@@ -120,21 +123,19 @@ This project uses [Jest][jest] for testing. It is recommended to install the Jes
 
   Fully integrated package to be used in [zeste de savoir website](https://zestedesavoir.com)
 
-
-
 ## License
 
 [MIT][license] © [Zeste de Savoir][zds]
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/zestedesavoir/zmarkdown/master.svg
+[build-badge]: https://travis-ci.com/zestedesavoir/zmarkdown.svg?branch=master
 
-[build-status]: https://travis-ci.org/zestedesavoir/zmarkdown
+[build-status]: https://travis-ci.com/zestedesavoir/zmarkdown
 
-[coverage-badge]: https://img.shields.io/coveralls/zestedesavoir/zmarkdown/master.svg
+[coverage-badge]: https://coveralls.io/repos/github/zestedesavoir/zmarkdown/badge.svg?branch=master
 
-[coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown
+[coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown?branch=master
 
 [license]: https://github.com/zestedesavoir/zmarkdown/blob/master/LICENSE-MIT
 

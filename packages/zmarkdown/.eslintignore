@@ -1,4 +1,3 @@
 coverage
 public/*
-packages/*/dist/*
-dist/
+client/dist/

@@ -16,10 +16,10 @@ function imageToFigure (img, index, parent) {
     if (!img.alt) return
 
     const figureCaptionNode = {
-      type: 'figcaption',
+      type:     'figcaption',
       children: [
         {
-          type: 'text',
+          type:  'text',
           value: img.alt,
         },
       ],

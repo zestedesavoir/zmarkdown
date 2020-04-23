@@ -1,8 +1,6 @@
 # zmarkdown
 
   [![NPM Version][npm-image]][npm-url]
-  [![NPM Downloads][downloads-image]][downloads-url]
-  [![Linux Build][travis-image]][travis-url]
   [![Test Coverage][coveralls-image]][coveralls-url]
 
 This project is an **HTTP Server API** providing fast and extensible **markdown parser**. It is the Markdown engine powering [Zeste de Savoir][zds].
@@ -270,112 +268,31 @@ This endpoint only returns `{}` as metadata, i.e. an empty object.
 
 ## Client Architecture
 
-The architecture of the client is similar to `remark` or `Vue`. The *manager*, here `client/client.js`, exposes a global variable `ZMarkdown`. This *manager* doesn't work alone because it does not know how to convert the input to the desired output. Example, if you want to convert markdown to html, the *manager* doesn't know how to do this. It need modules to know how to do this.
+Four client builds are currently available (starting from version 9.0.0), they can all be found in the `client/dist` folder:
 
-### Manager
+- `zmarkdown-zmdast` compiles Markdown to MDAST and return the result, and optionally an inspector to get a pretty output;
+- `zmarkdown-zhtml` compiles Markdown to HTML, using the same modules as the server, but this renderer is quite huge (1.8 MB), so it is not recommended for use in a web browser;
+- `zmarkdown-zhlite` is a browser-friendly version of the MD-to-HTML renderer; it has the same capabilities, except for KaTeX and highlight.js, so you'll need to provide yourself if you want to use them;
+- `zmarkdown-zlatex` compiles Markdown to LaTeX, using the same modules as the server.
 
-You need to add modules with `ZMarkdown.use(obj)` to manage rendering.
+### Getting started
 
-To convert a markdown string you should use `ZMarkdown.render(str, moduleName = defaultModule, cb = undefined)`:
-- **str**: `string`, string to convert
-- **moduleName**: `string`, name of the module you want to use. This parameter can be **omitted only** if you define a default module with `ZMarkdown.setDefaultModule` (you can reset default module with `ZMarkdown.resetDefaultModule`)
-- **cb**: `function(err, vfile)`, called when process is done
+Simply import one of the three files mentionned above, it will expose a `ZMarkdownZ*`, depending on the imported file. For instance, `zhlite` exposes a `ZMarkdownZHLITE` object. This exported object have a `render` method, that takes the input string and a callback.
 
-This function returns a `Promise` if no callback specified.
+### Example
 
-`ZMarkdown` also has a `parse(moduleName)` function to get the MDAST tree and `getParser(moduleName)` to get the whole parser. This parameter can be **omitted only** if you define a default module with `ZMarkdown.setDefaultModule`.
-
-### Module
-
-A module is an object with the following properties:
-
-- **name**: `string`, module name used to identify each module.
-- **render**: `function(input, cb): void`, a function called by `ZMarkdown.render`. It returns a `Promise` if no callback specified.
-- **parse**: `function(input): object`, gets MDAST tree.
-- **getParser**: `function(): object`, gets the whole of parser.
-- **initialize**: `function(config)`, configure the module with a custom configuration. You do not have to call this function if you want to use the default configuration.
-
-### Tips
-
-You can start a module with a base parser using `./common.js` (see `./modules/zhtml.js` for instance). The module exports a function that can take two optionals parameters:
-- **opts**: an object that can have:
-  - **remarkConfig**: `object`, your remark config (defaults to the configuration from `config/remark.js`).
-  - **extraRemarkPlugins**: `Array<objects>`, remark plugins you want to add to the default parser (remark pipeline). The object should contain:
-    - **obj**: `remark plugin`.
-    - **option**: optional, plugin config.
-- **processor**: `function(config)` (defaults to `getHTMLProcessor` of `./common.js`), processor function used to configure the remark pipeline for your output
-
-### Module Example
-
-```js
-const common = require('zmarkdown/modules/common') /* zmarkdown common file */
-const remarkToc = require('remark-toc')
-const remark2rehype = require('remark-rehype')
-
-const opts = {
-  remarkConfig: undefined /* custom remark config, defaults to ./config/remark.js */,
-  extraRemarkPlugins: [
-    {
-      obj: remarkToc,
-      option: undefined /* remark plugin option, undefined or omit to not configure it */
-    },
-    …
-  ],
-}
-
-const processor = (config) => {
-  config.remarkConfig.noTypography = true
-
-  return globalParser.zmdParser(config.remarkConfig, config.extraRemarkPlugins)
-    .use(remark2rehype, config.remarkConfig.remark2rehype)
-}
-
-const globalParser = common(opts, processor)
-
-export function render (input, cb) {
-  return globalParser.render(input, cb)
-}
-
-export function parse (input) {
-  return parser.parse(input)
-}
-
-export function getParser () {
-  return parser
-}
-
-export const name = 'custom-html'
+```javascript
+ZMarkdownZHTML.render("# Hello", (err, vFile) => {
+  console.log(vFile.contents);
+  // will display: "<h1 id="title">Title<a aria-hidden="true" href="#title"><span class="icon icon-link"></span></a></h1>"
+});
 ```
 
-Modules need to be bundled, here is a webpack config for the previous example:
+### Specific MDAST renderer
 
-```js
-const path = require('path')
+The MDAST renderer is synchronous, unlike the other renderers, so it will return instead of requiring a callback. Moreover, this renderer exposes an `inspect` method, from [unist-util-inspect].
 
-const mode = process.env.NODE_ENV ? process.env.NODE_ENV : 'production'
-
-module.exports = {
-    mode,
-    name: 'ZMarkdownCustomHTML', // name of process if you use parallel-webpack
-    entry: ['./modules/custom-html'], // path to your module
-    output: {
-      path: path.resolve(__dirname, 'dist'), // destination folder
-      filename: 'custom-html.js', // file name
-      library: 'ZMarkdownCustomHTML', // Name of the object that will be available on the `window` global object
-    },
-    module: {
-        rules: [
-          {
-            test: /\.js$/,
-            exclude: /(node_modules|bower_components)/,
-            use: {
-              loader: 'babel-loader',
-            },
-          },
-        ],
-    },
-}
-```
+## Builds
 
 ### Dev build
 
@@ -389,3 +306,4 @@ To build for production, just run `npm run release`. Generated files are located
 
 [ping]: https://www.npmjs.com/package/remark-ping
 [iframes]: https://www.npmjs.com/package/remark-iframes
+[unist-util-inspect]: https://www.npmjs.com/package/unist-util-inspect
