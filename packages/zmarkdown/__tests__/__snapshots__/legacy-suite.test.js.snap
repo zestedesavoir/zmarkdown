@@ -104,9 +104,9 @@ With an ampersand: \\\\externalLink{http://example.com/?foo=1\\\\&bar=2}{http://
 
 
 \\\\begin{itemize}
-\\\\item In a list?
-\\\\item \\\\externalLink{http://example.com/}{http://example.com/}
-\\\\item It should.
+\\\\item\\\\relax In a list?
+\\\\item\\\\relax \\\\externalLink{http://example.com/}{http://example.com/}
+\\\\item\\\\relax It should.
 \\\\end{itemize}
 
 
@@ -425,12 +425,12 @@ exports[`basic renders codeblock-in-list.txt 1`] = `
 
 exports[`basic renders codeblock-in-list.txt 2`] = `
 "\\\\begin{itemize}
-\\\\item A list item with a code block
+\\\\item\\\\relax A list item with a code block
 
 \\\\begin{CodeBlock}{text}
   Some *code*
 \\\\end{CodeBlock}
-\\\\item Another list item
+\\\\item\\\\relax Another list item
 
 \\\\begin{CodeBlock}{text}
   More code
@@ -466,7 +466,7 @@ Here's one with a bullet.
 
 
 \\\\begin{itemize}
-\\\\item criminey.
+\\\\item\\\\relax criminey.
 \\\\end{itemize}"
 `;
 
@@ -1211,9 +1211,9 @@ Asterisks tight:
 
 
 \\\\begin{itemize}
-\\\\item asterisk 1
-\\\\item asterisk 2
-\\\\item asterisk 3
+\\\\item\\\\relax asterisk 1
+\\\\item\\\\relax asterisk 2
+\\\\item\\\\relax asterisk 3
 \\\\end{itemize}
 
 
@@ -1222,9 +1222,9 @@ Asterisks loose:
 
 
 \\\\begin{itemize}
-\\\\item asterisk 1
-\\\\item asterisk 2
-\\\\item asterisk 3
+\\\\item\\\\relax asterisk 1
+\\\\item\\\\relax asterisk 2
+\\\\item\\\\relax asterisk 3
 \\\\end{itemize}
 
 
@@ -1237,9 +1237,9 @@ Pluses tight:
 
 
 \\\\begin{itemize}
-\\\\item Plus 1
-\\\\item Plus 2
-\\\\item Plus 3
+\\\\item\\\\relax Plus 1
+\\\\item\\\\relax Plus 2
+\\\\item\\\\relax Plus 3
 \\\\end{itemize}
 
 
@@ -1248,9 +1248,9 @@ Pluses loose:
 
 
 \\\\begin{itemize}
-\\\\item Plus 1
-\\\\item Plus 2
-\\\\item Plus 3
+\\\\item\\\\relax Plus 1
+\\\\item\\\\relax Plus 2
+\\\\item\\\\relax Plus 3
 \\\\end{itemize}
 
 
@@ -1263,9 +1263,9 @@ Minuses tight:
 
 
 \\\\begin{itemize}
-\\\\item Minus 1
-\\\\item Minus 2
-\\\\item Minus 3
+\\\\item\\\\relax Minus 1
+\\\\item\\\\relax Minus 2
+\\\\item\\\\relax Minus 3
 \\\\end{itemize}
 
 
@@ -1274,9 +1274,9 @@ Minuses loose:
 
 
 \\\\begin{itemize}
-\\\\item Minus 1
-\\\\item Minus 2
-\\\\item Minus 3
+\\\\item\\\\relax Minus 1
+\\\\item\\\\relax Minus 2
+\\\\item\\\\relax Minus 3
 \\\\end{itemize}
 
 
@@ -1293,9 +1293,9 @@ Tight:
 
 
 \\\\begin{enumerate}
-\\\\item First
-\\\\item Second
-\\\\item Third
+\\\\item\\\\relax First
+\\\\item\\\\relax Second
+\\\\item\\\\relax Third
 \\\\end{enumerate}
 
 
@@ -1304,9 +1304,9 @@ and:
 
 
 \\\\begin{enumerate}
-\\\\item One
-\\\\item Two
-\\\\item Three
+\\\\item\\\\relax One
+\\\\item\\\\relax Two
+\\\\item\\\\relax Three
 \\\\end{enumerate}
 
 
@@ -1315,9 +1315,9 @@ Loose using tabs:
 
 
 \\\\begin{enumerate}
-\\\\item First
-\\\\item Second
-\\\\item Third
+\\\\item\\\\relax First
+\\\\item\\\\relax Second
+\\\\item\\\\relax Third
 \\\\end{enumerate}
 
 
@@ -1326,9 +1326,9 @@ and using spaces:
 
 
 \\\\begin{enumerate}
-\\\\item One
-\\\\item Two
-\\\\item Three
+\\\\item\\\\relax One
+\\\\item\\\\relax Two
+\\\\item\\\\relax Three
 \\\\end{enumerate}
 
 
@@ -1337,12 +1337,12 @@ Multiple paragraphs:
 
 
 \\\\begin{enumerate}
-\\\\item Item 1, graf one.
+\\\\item\\\\relax Item 1, graf one.
 
 Item 2. graf two. The quick brown fox jumped over the lazy dog's
 back.
-\\\\item Item 2.
-\\\\item Item 3.
+\\\\item\\\\relax Item 2.
+\\\\item\\\\relax Item 3.
 \\\\end{enumerate}
 
 
@@ -1355,13 +1355,13 @@ Nested
 
 
 \\\\begin{itemize}
-\\\\item Tab
+\\\\item\\\\relax Tab
 
 \\\\begin{itemize}
-\\\\item Tab
+\\\\item\\\\relax Tab
 
 \\\\begin{itemize}
-\\\\item Tab
+\\\\item\\\\relax Tab
 \\\\end{itemize}
 \\\\end{itemize}
 \\\\end{itemize}
@@ -1372,15 +1372,15 @@ Here's another:
 
 
 \\\\begin{enumerate}
-\\\\item First
-\\\\item Second:
+\\\\item\\\\relax First
+\\\\item\\\\relax Second:
 
 \\\\begin{itemize}
-\\\\item Fee
-\\\\item Fie
-\\\\item Foe
+\\\\item\\\\relax Fee
+\\\\item\\\\relax Fie
+\\\\item\\\\relax Foe
 \\\\end{itemize}
-\\\\item Third
+\\\\item\\\\relax Third
 \\\\end{enumerate}
 
 
@@ -1389,15 +1389,15 @@ Same thing but with paragraphs:
 
 
 \\\\begin{enumerate}
-\\\\item First
-\\\\item Second:
+\\\\item\\\\relax First
+\\\\item\\\\relax Second:
 
 \\\\begin{itemize}
-\\\\item Fee
-\\\\item Fie
-\\\\item Foe
+\\\\item\\\\relax Fee
+\\\\item\\\\relax Fie
+\\\\item\\\\relax Foe
 \\\\end{itemize}
-\\\\item Third
+\\\\item\\\\relax Third
 \\\\end{enumerate}"
 `;
 
@@ -1452,9 +1452,9 @@ indented with spaces</p>
 
 exports[`basic renders tabs.txt 2`] = `
 "\\\\begin{itemize}
-\\\\item this is a list item
+\\\\item\\\\relax this is a list item
 indented with tabs
-\\\\item this is a list item
+\\\\item\\\\relax this is a list item
 indented with spaces
 \\\\end{itemize}
 
@@ -1508,9 +1508,9 @@ exports[`basic renders tidyness.txt 2`] = `
 A list within a blockquote:
 
 \\\\begin{itemize}
-\\\\item asterisk 1
-\\\\item asterisk 2
-\\\\item asterisk 3
+\\\\item\\\\relax asterisk 1
+\\\\item\\\\relax asterisk 2
+\\\\item\\\\relax asterisk 3
 \\\\end{itemize}
 \\\\end{Quotation}"
 `;
@@ -1654,8 +1654,8 @@ Also a reference that does not exist\\\\textsuperscript{\\\\ref{footnote:6}}.
 \\\\footnotetext[1]{\\\\label{footnote:1} Footnote that ends with a list:
 
 \\\\begin{itemize}
-\\\\item item 1
-\\\\item item 2
+\\\\item\\\\relax item 1
+\\\\item\\\\relax item 2
 \\\\end{itemize}}
 
 \\\\footnotetext[2]{\\\\label{footnote:2} \\\\begin{Quotation}
@@ -3530,7 +3530,7 @@ else:
 
 
 \\\\begin{itemize}
-\\\\item \\\\externalLink{الموقع الرسمي للغة بايثون}{http://www.python.org}
+\\\\item\\\\relax \\\\externalLink{الموقع الرسمي للغة بايثون}{http://www.python.org}
 
 بذرة حاس
 \\\\end{itemize}"
@@ -4308,13 +4308,13 @@ great folks</em> - This <em>does</em> work as expected.</p>"
 
 exports[`misc renders em-around-links.txt 2`] = `
 "\\\\begin{itemize}
-\\\\item \\\\textit{\\\\externalLink{Python in Markdown}{https://pythonhosted.org/Markdown/} by some
+\\\\item\\\\relax \\\\textit{\\\\externalLink{Python in Markdown}{https://pythonhosted.org/Markdown/} by some
 great folks} - This \\\\textit{does} work as expected.
-\\\\item \\\\textit{\\\\externalLink{Python in Markdown}{https://pythonhosted.org/Markdown/} by some
+\\\\item\\\\relax \\\\textit{\\\\externalLink{Python in Markdown}{https://pythonhosted.org/Markdown/} by some
 great folks} - This \\\\textit{does} work as expected.
-\\\\item \\\\externalLink{\\\\textit{Python in Markdown}}{https://pythonhosted.org/Markdown/} by some
+\\\\item\\\\relax \\\\externalLink{\\\\textit{Python in Markdown}}{https://pythonhosted.org/Markdown/} by some
 great folks - This \\\\textit{does} work as expected.
-\\\\item \\\\externalLink{\\\\textit{Python in Markdown}}{https://pythonhosted.org/Markdown/} \\\\textit{by some
+\\\\item\\\\relax \\\\externalLink{\\\\textit{Python in Markdown}}{https://pythonhosted.org/Markdown/} \\\\textit{by some
 great folks} - This \\\\textit{does} work as expected.
 \\\\end{itemize}
 
@@ -4509,7 +4509,7 @@ unindented.</li>
 
 exports[`misc renders lists.txt 2`] = `
 "\\\\begin{itemize}
-\\\\item A multi-paragraph list,
+\\\\item\\\\relax A multi-paragraph list,
 unindented.
 \\\\end{itemize}
 
@@ -4519,9 +4519,9 @@ Simple tight list
 
 
 \\\\begin{itemize}
-\\\\item Uno
-\\\\item Due
-\\\\item Tri
+\\\\item\\\\relax Uno
+\\\\item\\\\relax Due
+\\\\item\\\\relax Tri
 \\\\end{itemize}
 
 
@@ -4530,7 +4530,7 @@ A singleton tight list:
 
 
 \\\\begin{itemize}
-\\\\item Uno
+\\\\item\\\\relax Uno
 \\\\end{itemize}
 
 
@@ -4539,9 +4539,9 @@ A lose list:
 
 
 \\\\begin{itemize}
-\\\\item One
-\\\\item Two
-\\\\item Three
+\\\\item\\\\relax One
+\\\\item\\\\relax Two
+\\\\item\\\\relax Three
 \\\\end{itemize}
 
 
@@ -4550,10 +4550,10 @@ A lose list with paragraphs
 
 
 \\\\begin{itemize}
-\\\\item One one one one
+\\\\item\\\\relax One one one one
 
 one one one one
-\\\\item Two two two two
+\\\\item\\\\relax Two two two two
 \\\\end{itemize}"
 `;
 
@@ -4567,7 +4567,7 @@ asda asdf asdfasd</li>
 
 exports[`misc renders lists2.txt 2`] = `
 "\\\\begin{itemize}
-\\\\item blah blah blah
+\\\\item\\\\relax blah blah blah
 sdf asdf asdf asdf asdf
 asda asdf asdfasd
 \\\\end{itemize}"
@@ -4583,7 +4583,7 @@ asda asdf asdfasd</li>
 
 exports[`misc renders lists3.txt 2`] = `
 "\\\\begin{itemize}
-\\\\item blah blah blah
+\\\\item\\\\relax blah blah blah
 sdf asdf asdf asdf asdf
 asda asdf asdfasd
 \\\\end{itemize}"
@@ -4601,12 +4601,12 @@ exports[`misc renders lists4.txt 1`] = `
 
 exports[`misc renders lists4.txt 2`] = `
 "\\\\begin{itemize}
-\\\\item item1
-\\\\item item2
+\\\\item\\\\relax item1
+\\\\item\\\\relax item2
 
 \\\\begin{enumerate}
-\\\\item Number 1
-\\\\item Number 2
+\\\\item\\\\relax Number 1
+\\\\item\\\\relax Number 2
 \\\\end{enumerate}
 \\\\end{itemize}"
 `;
@@ -4645,8 +4645,8 @@ This is a more difficult case
 With a list item inside the quote
 
 \\\\begin{itemize}
-\\\\item Alpha
-\\\\item Beta
+\\\\item\\\\relax Alpha
+\\\\item\\\\relax Beta
 Etc.
 \\\\end{itemize}
 \\\\end{Quotation}"
@@ -4719,13 +4719,13 @@ as far as I'm concerned</p>
 
 exports[`misc renders lists8.txt 2`] = `
 "\\\\begin{enumerate}
-\\\\item \\\\begin{Quotation}
+\\\\item\\\\relax \\\\begin{Quotation}
 Four-score and seven years ago...
 \\\\end{Quotation}
-\\\\item \\\\begin{Quotation}
+\\\\item\\\\relax \\\\begin{Quotation}
 We have nothing to fear...
 \\\\end{Quotation}
-\\\\item \\\\begin{Quotation}
+\\\\item\\\\relax \\\\begin{Quotation}
 This is it...
 \\\\end{Quotation}
 \\\\end{enumerate}
@@ -4736,15 +4736,15 @@ This is it...
 
 
 \\\\begin{itemize}
-\\\\item \\\\begin{Quotation}
+\\\\item\\\\relax \\\\begin{Quotation}
 Four-score and sever years ago
 our fathers brought forth
 \\\\end{Quotation}
-\\\\item \\\\begin{Quotation}
+\\\\item\\\\relax \\\\begin{Quotation}
 We have nothing to fear
 but fear itself
 \\\\end{Quotation}
-\\\\item \\\\begin{Quotation}
+\\\\item\\\\relax \\\\begin{Quotation}
 This is it
 as far as I'm concerned
 \\\\end{Quotation}
@@ -5358,9 +5358,9 @@ With an ampersand: \\\\externalLink{http://example.com/?foo=1\\\\&bar=2}{http://
 
 
 \\\\begin{itemize}
-\\\\item In a list?
-\\\\item \\\\externalLink{http://example.com/}{http://example.com/}
-\\\\item It should.
+\\\\item\\\\relax In a list?
+\\\\item\\\\relax \\\\externalLink{http://example.com/}{http://example.com/}
+\\\\item\\\\relax It should.
 \\\\end{itemize}
 
 
@@ -5851,9 +5851,9 @@ exports[`pl renders Ordered and unordered lists.txt 2`] = `
 
 
 \\\\begin{itemize}
-\\\\item asterisk 1
-\\\\item asterisk 2
-\\\\item asterisk 3
+\\\\item\\\\relax asterisk 1
+\\\\item\\\\relax asterisk 2
+\\\\item\\\\relax asterisk 3
 \\\\end{itemize}
 
 
@@ -5862,9 +5862,9 @@ Asterisks loose:
 
 
 \\\\begin{itemize}
-\\\\item asterisk 1
-\\\\item asterisk 2
-\\\\item asterisk 3
+\\\\item\\\\relax asterisk 1
+\\\\item\\\\relax asterisk 2
+\\\\item\\\\relax asterisk 3
 \\\\end{itemize}
 
 
@@ -5877,9 +5877,9 @@ Pluses tight:
 
 
 \\\\begin{itemize}
-\\\\item Plus 1
-\\\\item Plus 2
-\\\\item Plus 3
+\\\\item\\\\relax Plus 1
+\\\\item\\\\relax Plus 2
+\\\\item\\\\relax Plus 3
 \\\\end{itemize}
 
 
@@ -5888,9 +5888,9 @@ Pluses loose:
 
 
 \\\\begin{itemize}
-\\\\item Plus 1
-\\\\item Plus 2
-\\\\item Plus 3
+\\\\item\\\\relax Plus 1
+\\\\item\\\\relax Plus 2
+\\\\item\\\\relax Plus 3
 \\\\end{itemize}
 
 
@@ -5903,9 +5903,9 @@ Minuses tight:
 
 
 \\\\begin{itemize}
-\\\\item Minus 1
-\\\\item Minus 2
-\\\\item Minus 3
+\\\\item\\\\relax Minus 1
+\\\\item\\\\relax Minus 2
+\\\\item\\\\relax Minus 3
 \\\\end{itemize}
 
 
@@ -5914,9 +5914,9 @@ Minuses loose:
 
 
 \\\\begin{itemize}
-\\\\item Minus 1
-\\\\item Minus 2
-\\\\item Minus 3
+\\\\item\\\\relax Minus 1
+\\\\item\\\\relax Minus 2
+\\\\item\\\\relax Minus 3
 \\\\end{itemize}
 
 
@@ -5925,9 +5925,9 @@ Tight:
 
 
 \\\\begin{enumerate}
-\\\\item First
-\\\\item Second
-\\\\item Third
+\\\\item\\\\relax First
+\\\\item\\\\relax Second
+\\\\item\\\\relax Third
 \\\\end{enumerate}
 
 
@@ -5936,9 +5936,9 @@ and:
 
 
 \\\\begin{enumerate}
-\\\\item One
-\\\\item Two
-\\\\item Three
+\\\\item\\\\relax One
+\\\\item\\\\relax Two
+\\\\item\\\\relax Three
 \\\\end{enumerate}
 
 
@@ -5947,9 +5947,9 @@ Loose using tabs:
 
 
 \\\\begin{enumerate}
-\\\\item First
-\\\\item Second
-\\\\item Third
+\\\\item\\\\relax First
+\\\\item\\\\relax Second
+\\\\item\\\\relax Third
 \\\\end{enumerate}
 
 
@@ -5958,9 +5958,9 @@ and using spaces:
 
 
 \\\\begin{enumerate}
-\\\\item One
-\\\\item Two
-\\\\item Three
+\\\\item\\\\relax One
+\\\\item\\\\relax Two
+\\\\item\\\\relax Three
 \\\\end{enumerate}
 
 
@@ -5969,23 +5969,23 @@ Multiple paragraphs:
 
 
 \\\\begin{enumerate}
-\\\\item Item 1, graf one.
+\\\\item\\\\relax Item 1, graf one.
 
 Item 2. graf two. The quick brown fox jumped over the lazy dog's
 back.
-\\\\item Item 2.
-\\\\item Item 3.
+\\\\item\\\\relax Item 2.
+\\\\item\\\\relax Item 3.
 \\\\end{enumerate}
 
 
 \\\\begin{itemize}
-\\\\item Tab
+\\\\item\\\\relax Tab
 
 \\\\begin{itemize}
-\\\\item Tab
+\\\\item\\\\relax Tab
 
 \\\\begin{itemize}
-\\\\item Tab
+\\\\item\\\\relax Tab
 \\\\end{itemize}
 \\\\end{itemize}
 \\\\end{itemize}
@@ -5996,15 +5996,15 @@ Here's another:
 
 
 \\\\begin{enumerate}
-\\\\item First
-\\\\item Second:
+\\\\item\\\\relax First
+\\\\item\\\\relax Second:
 
 \\\\begin{itemize}
-\\\\item Fee
-\\\\item Fie
-\\\\item Foe
+\\\\item\\\\relax Fee
+\\\\item\\\\relax Fie
+\\\\item\\\\relax Foe
 \\\\end{itemize}
-\\\\item Third
+\\\\item\\\\relax Third
 \\\\end{enumerate}
 
 
@@ -6013,15 +6013,15 @@ Same thing but with paragraphs:
 
 
 \\\\begin{enumerate}
-\\\\item First
-\\\\item Second:
+\\\\item\\\\relax First
+\\\\item\\\\relax Second:
 
 \\\\begin{itemize}
-\\\\item Fee
-\\\\item Fie
-\\\\item Foe
+\\\\item\\\\relax Fee
+\\\\item\\\\relax Fie
+\\\\item\\\\relax Foe
 \\\\end{itemize}
-\\\\item Third
+\\\\item\\\\relax Third
 \\\\end{enumerate}
 
 
@@ -6030,10 +6030,10 @@ This was an error in Markdown 1.0.1:
 
 
 \\\\begin{itemize}
-\\\\item this
+\\\\item\\\\relax this
 
 \\\\begin{itemize}
-\\\\item sub
+\\\\item\\\\relax sub
 \\\\end{itemize}
 that
 \\\\end{itemize}"
@@ -6090,9 +6090,9 @@ indented with spaces</p>
 
 exports[`pl renders Tabs.txt 2`] = `
 "\\\\begin{itemize}
-\\\\item this is a list item
+\\\\item\\\\relax this is a list item
 indented with tabs
-\\\\item this is a list item
+\\\\item\\\\relax this is a list item
 indented with spaces
 \\\\end{itemize}
 
@@ -6146,9 +6146,9 @@ exports[`pl renders Tidyness.txt 2`] = `
 A list within a blockquote:
 
 \\\\begin{itemize}
-\\\\item asterisk 1
-\\\\item asterisk 2
-\\\\item asterisk 3
+\\\\item\\\\relax asterisk 1
+\\\\item\\\\relax asterisk 2
+\\\\item\\\\relax asterisk 3
 \\\\end{itemize}
 \\\\end{Quotation}"
 `;
@@ -6816,7 +6816,7 @@ It parses inline elements inside:
 
 
 \\\\begin{itemize}
-\\\\item \\\\keys{hell\\\\externalLink{\\\\sout{o}}{\\\\#he}?}
+\\\\item\\\\relax \\\\keys{hell\\\\externalLink{\\\\sout{o}}{\\\\#he}?}
 \\\\end{itemize}
 
 
@@ -6825,7 +6825,7 @@ but not block elements inside:
 
 
 \\\\begin{itemize}
-\\\\item \\\\keys{hello: [[secret]]?}
+\\\\item\\\\relax \\\\keys{hello: [[secret]]?}
 \\\\end{itemize}"
 `;
 

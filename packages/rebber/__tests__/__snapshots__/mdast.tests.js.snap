@@ -30,10 +30,10 @@ exports[`rebber generated-footnote-ids: generated-footnote-ids 1`] = `
 
 exports[`rebber generated-footnote-ids-2: generated-footnote-ids-2 1`] = `
 "\\\\begin{itemize}
-\\\\item one\\\\footnote[l1c6o5]{\\\\label{footnote:l1c6o5} the first}
-\\\\item two\\\\textsuperscript{\\\\ref{footnote:2nd}}
-\\\\item three\\\\textsuperscript{\\\\ref{footnote:3rd}}
-\\\\item four\\\\footnote[l4c7o50]{\\\\label{footnote:l4c7o50} the last}
+\\\\item\\\\relax one\\\\footnote[l1c6o5]{\\\\label{footnote:l1c6o5} the first}
+\\\\item\\\\relax two\\\\textsuperscript{\\\\ref{footnote:2nd}}
+\\\\item\\\\relax three\\\\textsuperscript{\\\\ref{footnote:3rd}}
+\\\\item\\\\relax four\\\\footnote[l4c7o50]{\\\\label{footnote:l4c7o50} the last}
 \\\\end{itemize}
 
 
@@ -130,9 +130,9 @@ With an ampersand: \\\\externalLink{http://example.com/?foo=1\\\\&bar=2}{http://
 
 
 \\\\begin{itemize}
-\\\\item In a list?
-\\\\item \\\\externalLink{http://example.com/}{http://example.com/}
-\\\\item It should.
+\\\\item\\\\relax In a list?
+\\\\item\\\\relax \\\\externalLink{http://example.com/}{http://example.com/}
+\\\\item\\\\relax It should.
 \\\\end{itemize}
 
 
@@ -657,33 +657,33 @@ This is a tag with backslashes <span attr='\\\\\\\\backslashes\\\\\\\\'>bar</spa
 
 exports[`rebber: remark specs block-elements: block-elements 1`] = `
 "\\\\begin{itemize}
-\\\\item Different lists should receive two newline characters
+\\\\item\\\\relax Different lists should receive two newline characters
 between them.
 \\\\end{itemize}
 
 
 
 \\\\begin{itemize}
-\\\\item This is another list.
+\\\\item\\\\relax This is another list.
 \\\\end{itemize}
 
 
 \\\\begin{Quotation}
 \\\\begin{itemize}
-\\\\item The same goes for lists in block quotes.
+\\\\item\\\\relax The same goes for lists in block quotes.
 \\\\end{itemize}
 \\\\begin{itemize}
-\\\\item This is another list.
+\\\\item\\\\relax This is another list.
 \\\\end{itemize}
 \\\\end{Quotation}
 
 
 
 \\\\begin{itemize}
-\\\\item And for lists in lists:
+\\\\item\\\\relax And for lists in lists:
 
 \\\\begin{enumerate}
-\\\\item First sublist.
+\\\\item\\\\relax First sublist.
 \\\\end{enumerate}
 \\\\end{itemize}
 
@@ -700,7 +700,7 @@ And for lists followed by indented code blocks:
 
 
 \\\\begin{itemize}
-\\\\item This is a paragraph in a list
+\\\\item\\\\relax This is a paragraph in a list
 \\\\end{itemize}
 
 
@@ -783,7 +783,7 @@ exports[`rebber: remark specs blockquote-lazy-list: blockquote-lazy-list 1`] = `
 This is a blockquote.
 
 \\\\begin{itemize}
-\\\\item And in normal mode this is an internal list, but in commonmark this is a top level list.
+\\\\item\\\\relax And in normal mode this is an internal list, but in commonmark this is a top level list.
 \\\\end{itemize}
 \\\\end{Quotation}"
 `;
@@ -802,7 +802,7 @@ exports[`rebber: remark specs blockquote-list-item: blockquote-list-item 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item hello
+\\\\item\\\\relax hello
 
 \\\\begin{Quotation}
 world
@@ -1089,14 +1089,14 @@ hello
 \\\\footnote{\\\\label{2}\\\\externalLink{hello}{hello}}
 
 \\\\begin{itemize}
-\\\\item hello
-\\\\item \\\\footnote{\\\\label{3}\\\\externalLink{hello}{hello}}
+\\\\item\\\\relax hello
+\\\\item\\\\relax \\\\footnote{\\\\label{3}\\\\externalLink{hello}{hello}}
 \\\\end{itemize}
 
 
 
 \\\\begin{itemize}
-\\\\item hello
+\\\\item\\\\relax hello
 \\\\end{itemize}
 
 
@@ -1560,10 +1560,10 @@ exports[`rebber: remark specs footnote-like: footnote-like 1`] = `
 
 exports[`rebber: remark specs footnote-matrix: footnote-matrix 1`] = `
 "\\\\begin{enumerate}
-\\\\item [foo]
-\\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}[bar]
-\\\\item [foo]\\\\textsuperscript{\\\\ref{footnote:bar}}
-\\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}\\\\textsuperscript{\\\\ref{footnote:bar}}
+\\\\item\\\\relax [foo]
+\\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}[bar]
+\\\\item\\\\relax [foo]\\\\textsuperscript{\\\\ref{footnote:bar}}
+\\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}\\\\textsuperscript{\\\\ref{footnote:bar}}
 \\\\end{enumerate}"
 `;
 
@@ -1626,7 +1626,7 @@ Here's one with a bullet.
 
 
 \\\\begin{itemize}
-\\\\item criminey.
+\\\\item\\\\relax criminey.
 \\\\end{itemize}
 
 
@@ -1638,10 +1638,10 @@ All versions create lists for the following.
 
 
 \\\\begin{itemize}
-\\\\item Here's one with a bullet.
+\\\\item\\\\relax Here's one with a bullet.
 
 \\\\begin{itemize}
-\\\\item criminey.
+\\\\item\\\\relax criminey.
 \\\\end{itemize}
 \\\\end{itemize}
 
@@ -1651,10 +1651,10 @@ All versions create lists for the following.
 
 
 \\\\begin{enumerate}
-\\\\item In Markdown 1.0.0 and earlier. Version
+\\\\item\\\\relax In Markdown 1.0.0 and earlier. Version
 
 \\\\begin{enumerate}
-\\\\item This line turns into a list item.
+\\\\item\\\\relax This line turns into a list item.
 \\\\end{enumerate}
 \\\\end{enumerate}"
 `;
@@ -1956,8 +1956,8 @@ exports[`rebber: remark specs hr: hr 1`] = `"\\\\horizontalLine"`;
 
 exports[`rebber: remark specs hr-list-break: hr-list-break 1`] = `
 "\\\\begin{itemize}
-\\\\item hello world
-\\\\item how are
+\\\\item\\\\relax hello world
+\\\\item\\\\relax how are
 \\\\end{itemize}
 
 
@@ -1974,9 +1974,9 @@ The above asterisks do split the list, but the below ones do not.
 
 
 \\\\begin{itemize}
-\\\\item hello world
-\\\\item how are
-\\\\item \\\\horizontalLine
+\\\\item\\\\relax hello world
+\\\\item\\\\relax how are
+\\\\item\\\\relax \\\\horizontalLine
 
 you today?
 \\\\end{itemize}
@@ -1984,11 +1984,11 @@ you today?
 
 
 \\\\begin{itemize}
-\\\\item Neither do these
-\\\\item how are
-\\\\item \\\\begin{itemize}
-\\\\item \\\\begin{itemize}
-\\\\item you today?
+\\\\item\\\\relax Neither do these
+\\\\item\\\\relax how are
+\\\\item\\\\relax \\\\begin{itemize}
+\\\\item\\\\relax \\\\begin{itemize}
+\\\\item\\\\relax you today?
 \\\\end{itemize}
 \\\\end{itemize}
 \\\\end{itemize}
@@ -1996,8 +1996,8 @@ you today?
 
 
 \\\\begin{itemize}
-\\\\item But these do
-\\\\item how are
+\\\\item\\\\relax But these do
+\\\\item\\\\relax how are
 \\\\end{itemize}
 
 
@@ -3364,33 +3364,33 @@ exports[`rebber: remark specs list: list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item One:
+\\\\item\\\\relax One:
 
 \\\\begin{itemize}
-\\\\item Nested one;
-\\\\item Nested two:
+\\\\item\\\\relax Nested one;
+\\\\item\\\\relax Nested two:
 
 \\\\begin{itemize}
-\\\\item Nested three.
+\\\\item\\\\relax Nested three.
 \\\\end{itemize}
 \\\\end{itemize}
-\\\\item Two;
-\\\\item Three.
+\\\\item\\\\relax Two;
+\\\\item\\\\relax Three.
 \\\\end{itemize}"
 `;
 
 exports[`rebber: remark specs list-after-list: list-after-list 1`] = `
 "\\\\begin{itemize}
-\\\\item item
-\\\\item item
-\\\\item item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item item
-\\\\item item
-\\\\item item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
 \\\\end{enumerate}
 
 
@@ -3399,22 +3399,22 @@ exports[`rebber: remark specs list-after-list: list-after-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item item
-\\\\item item
-\\\\item item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item item
-\\\\item item
-\\\\item item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
 \\\\end{enumerate}"
 `;
 
 exports[`rebber: remark specs list-and-code: list-and-code 1`] = `
 "\\\\begin{itemize}
-\\\\item This is a list item
+\\\\item\\\\relax This is a list item
 \\\\end{itemize}
 
 
@@ -3426,7 +3426,7 @@ This is code
 
 exports[`rebber: remark specs list-continuation: list-continuation 1`] = `
 "\\\\begin{enumerate}
-\\\\item foo
+\\\\item\\\\relax foo
 \\\\end{enumerate}
 
 
@@ -3435,7 +3435,7 @@ exports[`rebber: remark specs list-continuation: list-continuation 1`] = `
 
 
 \\\\begin{enumerate}
-\\\\item foo
+\\\\item\\\\relax foo
 \\\\end{enumerate}
 
 
@@ -3446,14 +3446,14 @@ code();
 
 
 \\\\begin{enumerate}
-\\\\item \\\\hyperref[foo]{foo}
+\\\\item\\\\relax \\\\hyperref[foo]{foo}
 \\\\end{enumerate}
 
 
 \\\\footnote{\\\\label{foo}\\\\externalLink{http://google.com}{http://google.com}}
 
 \\\\begin{enumerate}
-\\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}
+\\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}
 \\\\end{enumerate}
 
 
@@ -3462,36 +3462,36 @@ code();
 
 exports[`rebber: remark specs list-indentation: list-indentation 1`] = `
 "\\\\begin{itemize}
-\\\\item Hello 1a
+\\\\item\\\\relax Hello 1a
 
 World 1a.
-\\\\item Hello 1b
+\\\\item\\\\relax Hello 1b
 
 World 1b.
-\\\\item Hello 2a
+\\\\item\\\\relax Hello 2a
 
 World 2a.
-\\\\item Hello 2b
+\\\\item\\\\relax Hello 2b
 
 World 2b.
-\\\\item Hello 3a
+\\\\item\\\\relax Hello 3a
 
 World 3a.
-\\\\item Hello 3b
+\\\\item\\\\relax Hello 3b
 
 World 3b.
-\\\\item Hello 4a
+\\\\item\\\\relax Hello 4a
 
 World 4a.
-\\\\item Hello 4b
+\\\\item\\\\relax Hello 4b
 
 World 4b.
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 Hello 5a
 \\\\end{CodeBlock}
 
 World 5a.
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 Hello 5b
 
 World 5b.
@@ -3501,45 +3501,45 @@ World 5b.
 
 exports[`rebber: remark specs list-item-empty: list-item-empty 1`] = `
 "\\\\begin{itemize}
-\\\\item foo
-\\\\item 
-\\\\item bar
-\\\\item foo
-\\\\item 
-\\\\item bar
+\\\\item\\\\relax foo
+\\\\item\\\\relax 
+\\\\item\\\\relax bar
+\\\\item\\\\relax foo
+\\\\item\\\\relax 
+\\\\item\\\\relax bar
 \\\\end{itemize}"
 `;
 
 exports[`rebber: remark specs list-item-empty-with-white-space: list-item-empty-with-white-space 1`] = `
 "\\\\begin{itemize}
-\\\\item 
+\\\\item\\\\relax 
 \\\\end{itemize}"
 `;
 
 exports[`rebber: remark specs list-item-indent: list-item-indent 1`] = `
 "\\\\begin{enumerate}
-\\\\item foo bar baz.
+\\\\item\\\\relax foo bar baz.
 \\\\end{enumerate}
 
 
 <!--  -->
 
 \\\\begin{enumerate}
-\\\\item foo bar baz.
+\\\\item\\\\relax foo bar baz.
 \\\\end{enumerate}
 
 
 <!--  -->
 
 \\\\begin{enumerate}
-\\\\item foo bar baz.
+\\\\item\\\\relax foo bar baz.
 \\\\end{enumerate}
 
 
 <!--  -->
 
 \\\\begin{enumerate}
-\\\\item foo bar baz.
+\\\\item\\\\relax foo bar baz.
 foo bar baz.
 \\\\end{enumerate}
 
@@ -3547,7 +3547,7 @@ foo bar baz.
 <!--  -->
 
 \\\\begin{enumerate}
-\\\\item foo bar baz.
+\\\\item\\\\relax foo bar baz.
 foo bar baz.
 \\\\end{enumerate}
 
@@ -3555,7 +3555,7 @@ foo bar baz.
 <!--  -->
 
 \\\\begin{enumerate}
-\\\\item foo bar baz.
+\\\\item\\\\relax foo bar baz.
 foo bar baz.
 \\\\end{enumerate}
 
@@ -3563,31 +3563,31 @@ foo bar baz.
 <!--  -->
 
 \\\\begin{itemize}
-\\\\item foo bar baz.
+\\\\item\\\\relax foo bar baz.
 \\\\end{itemize}
 
 
 <!--  -->
 
 \\\\begin{itemize}
-\\\\item foo bar baz.
+\\\\item\\\\relax foo bar baz.
 foo bar baz.
 \\\\end{itemize}"
 `;
 
 exports[`rebber: remark specs list-item-newline: list-item-newline 1`] = `
 "\\\\begin{itemize}
-\\\\item Foo
-\\\\item Bar
+\\\\item\\\\relax Foo
+\\\\item\\\\relax Bar
 \\\\end{itemize}"
 `;
 
 exports[`rebber: remark specs list-item-text: list-item-text 1`] = `
 "\\\\begin{itemize}
-\\\\item item1
+\\\\item\\\\relax item1
 
 \\\\begin{itemize}
-\\\\item item2
+\\\\item\\\\relax item2
 \\\\end{itemize}
 text
 \\\\end{itemize}"
@@ -3595,9 +3595,9 @@ text
 
 exports[`rebber: remark specs list-ordered: list-ordered 1`] = `
 "\\\\begin{enumerate}
-\\\\item foo;
-\\\\item bar;
-\\\\item baz.
+\\\\item\\\\relax foo;
+\\\\item\\\\relax bar;
+\\\\item\\\\relax baz.
 \\\\end{enumerate}"
 `;
 
@@ -3606,38 +3606,38 @@ exports[`rebber: remark specs lists-with-code-and-rules: lists-with-code-and-rul
 
 
 \\\\begin{enumerate}
-\\\\item bar:
+\\\\item\\\\relax bar:
 
 \\\\begin{Quotation}
 \\\\begin{itemize}
-\\\\item one
+\\\\item\\\\relax one
 
 \\\\begin{itemize}
-\\\\item two
+\\\\item\\\\relax two
 
 \\\\begin{itemize}
-\\\\item three
-\\\\item four
-\\\\item five
+\\\\item\\\\relax three
+\\\\item\\\\relax four
+\\\\item\\\\relax five
 \\\\end{itemize}
 \\\\end{itemize}
 \\\\end{itemize}
 \\\\end{Quotation}
-\\\\item foo:
+\\\\item\\\\relax foo:
 
 \\\\begin{CodeBlock}{text}
 line 1
 line 2
 \\\\end{CodeBlock}
-\\\\item foo:
+\\\\item\\\\relax foo:
 
 \\\\begin{enumerate}
-\\\\item foo \\\\texttt{bar} bar:
+\\\\item\\\\relax foo \\\\texttt{bar} bar:
 
 \\\\begin{CodeBlock}{erb}
 some code here
 \\\\end{CodeBlock}
-\\\\item foo \\\\texttt{bar} bar:
+\\\\item\\\\relax foo \\\\texttt{bar} bar:
 
 \\\\begin{CodeBlock}{erb}
 foo
@@ -3647,7 +3647,7 @@ bar
 foo
 bar
 \\\\end{CodeBlock}
-\\\\item foo \\\\texttt{bar} bar:
+\\\\item\\\\relax foo \\\\texttt{bar} bar:
 
 \\\\begin{CodeBlock}{html}
 ---
@@ -3656,26 +3656,26 @@ foo
 ---
 bar
 \\\\end{CodeBlock}
-\\\\item foo \\\\texttt{bar} bar:
+\\\\item\\\\relax foo \\\\texttt{bar} bar:
 
 \\\\begin{CodeBlock}{text}
 foo
 ---
 bar
 \\\\end{CodeBlock}
-\\\\item foo
+\\\\item\\\\relax foo
 \\\\end{enumerate}
 \\\\end{enumerate}"
 `;
 
 exports[`rebber: remark specs loose-lists: loose-lists 1`] = `
 "\\\\begin{itemize}
-\\\\item hello
+\\\\item\\\\relax hello
 world
 
 how
 are
-\\\\item you
+\\\\item\\\\relax you
 \\\\end{itemize}
 
 
@@ -3684,60 +3684,60 @@ better behavior:
 
 
 \\\\begin{itemize}
-\\\\item hello
+\\\\item\\\\relax hello
 
 \\\\begin{itemize}
-\\\\item world
+\\\\item\\\\relax world
 how
 
 are
 you
-\\\\item today
+\\\\item\\\\relax today
 \\\\end{itemize}
-\\\\item hi
-\\\\end{itemize}
-
-
-
-\\\\begin{itemize}
-\\\\item hello
-\\\\item world
-\\\\item hi
+\\\\item\\\\relax hi
 \\\\end{itemize}
 
 
 
 \\\\begin{itemize}
-\\\\item hello
-\\\\item world
-\\\\item hi
+\\\\item\\\\relax hello
+\\\\item\\\\relax world
+\\\\item\\\\relax hi
 \\\\end{itemize}
 
 
 
 \\\\begin{itemize}
-\\\\item hello
-\\\\item world
+\\\\item\\\\relax hello
+\\\\item\\\\relax world
+\\\\item\\\\relax hi
+\\\\end{itemize}
+
+
+
+\\\\begin{itemize}
+\\\\item\\\\relax hello
+\\\\item\\\\relax world
 
 how
-\\\\item hi
+\\\\item\\\\relax hi
 \\\\end{itemize}
 
 
 
 \\\\begin{itemize}
-\\\\item hello
-\\\\item world
-\\\\item how
+\\\\item\\\\relax hello
+\\\\item\\\\relax world
+\\\\item\\\\relax how
 are
 \\\\end{itemize}
 
 
 
 \\\\begin{itemize}
-\\\\item hello
-\\\\item world
-\\\\item how
+\\\\item\\\\relax hello
+\\\\item\\\\relax world
+\\\\item\\\\relax how
 are
 \\\\end{itemize}"
 `;
@@ -3762,22 +3762,22 @@ A link. Not anymore.
 markdown.js doesnt acknowledge arbitrary html blocks =/</aside>
 
 \\\\begin{itemize}
-\\\\item List Item 1
-\\\\item List Item 2
+\\\\item\\\\relax List Item 1
+\\\\item\\\\relax List Item 2
 
 \\\\begin{itemize}
-\\\\item New List Item 1
+\\\\item\\\\relax New List Item 1
 Hi, this is a list item.
-\\\\item New List Item 2
+\\\\item\\\\relax New List Item 2
 Another item
 Code goes here.
 Lots of it...
-\\\\item New List Item 3
+\\\\item\\\\relax New List Item 3
 The last item
 \\\\end{itemize}
-\\\\item List Item 3
+\\\\item\\\\relax List Item 3
 The final item.
-\\\\item List Item 4
+\\\\item\\\\relax List Item 4
 The real final item.
 \\\\end{itemize}
 
@@ -3788,12 +3788,12 @@ Paragraph.
 
 \\\\begin{Quotation}
 \\\\begin{itemize}
-\\\\item bq Item 1
-\\\\item bq Item 2
+\\\\item\\\\relax bq Item 1
+\\\\item\\\\relax bq Item 2
 
 \\\\begin{itemize}
-\\\\item New bq Item 1
-\\\\item New bq Item 2
+\\\\item\\\\relax New bq Item 1
+\\\\item\\\\relax New bq Item 2
 Text here
 \\\\end{itemize}
 \\\\end{itemize}
@@ -4327,36 +4327,36 @@ exports[`rebber: remark specs markdown-documentation-syntax: markdown-documentat
 </ul>
 
 \\\\begin{itemize}
-\\\\item \\\\externalLink{Overview}{\\\\#overview}
+\\\\item\\\\relax \\\\externalLink{Overview}{\\\\#overview}
 
 \\\\begin{itemize}
-\\\\item \\\\externalLink{Philosophy}{\\\\#philosophy}
-\\\\item \\\\externalLink{Inline HTML}{\\\\#html}
-\\\\item \\\\externalLink{Automatic Escaping for Special Characters}{\\\\#autoescape}
+\\\\item\\\\relax \\\\externalLink{Philosophy}{\\\\#philosophy}
+\\\\item\\\\relax \\\\externalLink{Inline HTML}{\\\\#html}
+\\\\item\\\\relax \\\\externalLink{Automatic Escaping for Special Characters}{\\\\#autoescape}
 \\\\end{itemize}
-\\\\item \\\\externalLink{Block Elements}{\\\\#block}
+\\\\item\\\\relax \\\\externalLink{Block Elements}{\\\\#block}
 
 \\\\begin{itemize}
-\\\\item \\\\externalLink{Paragraphs and Line Breaks}{\\\\#p}
-\\\\item \\\\externalLink{Headers}{\\\\#header}
-\\\\item \\\\externalLink{Blockquotes}{\\\\#blockquote}
-\\\\item \\\\externalLink{Lists}{\\\\#list}
-\\\\item \\\\externalLink{Code Blocks}{\\\\#precode}
-\\\\item \\\\externalLink{Horizontal Rules}{\\\\#hr}
+\\\\item\\\\relax \\\\externalLink{Paragraphs and Line Breaks}{\\\\#p}
+\\\\item\\\\relax \\\\externalLink{Headers}{\\\\#header}
+\\\\item\\\\relax \\\\externalLink{Blockquotes}{\\\\#blockquote}
+\\\\item\\\\relax \\\\externalLink{Lists}{\\\\#list}
+\\\\item\\\\relax \\\\externalLink{Code Blocks}{\\\\#precode}
+\\\\item\\\\relax \\\\externalLink{Horizontal Rules}{\\\\#hr}
 \\\\end{itemize}
-\\\\item \\\\externalLink{Span Elements}{\\\\#span}
+\\\\item\\\\relax \\\\externalLink{Span Elements}{\\\\#span}
 
 \\\\begin{itemize}
-\\\\item \\\\externalLink{Links}{\\\\#link}
-\\\\item \\\\externalLink{Emphasis}{\\\\#em}
-\\\\item \\\\externalLink{Code}{\\\\#code}
-\\\\item \\\\externalLink{Images}{\\\\#img}
+\\\\item\\\\relax \\\\externalLink{Links}{\\\\#link}
+\\\\item\\\\relax \\\\externalLink{Emphasis}{\\\\#em}
+\\\\item\\\\relax \\\\externalLink{Code}{\\\\#code}
+\\\\item\\\\relax \\\\externalLink{Images}{\\\\#img}
 \\\\end{itemize}
-\\\\item \\\\externalLink{Miscellaneous}{\\\\#misc}
+\\\\item\\\\relax \\\\externalLink{Miscellaneous}{\\\\#misc}
 
 \\\\begin{itemize}
-\\\\item \\\\externalLink{Backslash Escapes}{\\\\#backslash}
-\\\\item \\\\externalLink{Automatic Links}{\\\\#autolink}
+\\\\item\\\\relax \\\\externalLink{Backslash Escapes}{\\\\#backslash}
+\\\\item\\\\relax \\\\externalLink{Automatic Links}{\\\\#autolink}
 \\\\end{itemize}
 \\\\end{itemize}
 
@@ -5260,12 +5260,12 @@ That is:
 
 
 \\\\begin{itemize}
-\\\\item Square brackets containing the link identifier (optionally
+\\\\item\\\\relax Square brackets containing the link identifier (optionally
 indented from the left margin using up to three spaces);
-\\\\item followed by a colon;
-\\\\item followed by one or more spaces (or tabs);
-\\\\item followed by the URL for the link;
-\\\\item optionally followed by a title attribute for the link, enclosed
+\\\\item\\\\relax followed by a colon;
+\\\\item\\\\relax followed by one or more spaces (or tabs);
+\\\\item\\\\relax followed by the URL for the link;
+\\\\item\\\\relax optionally followed by a title attribute for the link, enclosed
 in double or single quotes.
 \\\\end{itemize}
 
@@ -5649,10 +5649,10 @@ That is:
 
 
 \\\\begin{itemize}
-\\\\item An exclamation mark: \\\\texttt{!};
-\\\\item followed by a set of square brackets, containing the \\\\texttt{alt}
+\\\\item\\\\relax An exclamation mark: \\\\texttt{!};
+\\\\item\\\\relax followed by a set of square brackets, containing the \\\\texttt{alt}
 attribute text for the image;
-\\\\item followed by a set of parentheses, containing the URL or path to
+\\\\item\\\\relax followed by a set of parentheses, containing the URL or path to
 the image, and an optional \\\\texttt{title} attribute enclosed in double
 or single quotes.
 \\\\end{itemize}
@@ -5791,25 +5791,25 @@ exports[`rebber: remark specs mixed-indentation: mixed-indentation 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item Very long
+\\\\item\\\\relax Very long
 paragraph
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item Very long
+\\\\item\\\\relax Very long
 paragraph
 \\\\end{enumerate}
 
 
 \\\\begin{itemize}
-\\\\item Very long
+\\\\item\\\\relax Very long
 paragraph
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item Very long
+\\\\item\\\\relax Very long
 paragraph
 \\\\end{enumerate}"
 `;
@@ -5900,7 +5900,7 @@ option.
 Block-quotes
 
 \\\\begin{itemize}
-\\\\item With list items.
+\\\\item\\\\relax With list items.
 \\\\end{itemize}
 \\\\end{Quotation}
 
@@ -5912,7 +5912,7 @@ Another block-quote:
 
 \\\\begin{Quotation}
 \\\\begin{enumerate}
-\\\\item And another list.
+\\\\item\\\\relax And another list.
 \\\\end{enumerate}
 \\\\end{Quotation}
 
@@ -5936,9 +5936,9 @@ Asterisks tight:
 
 
 \\\\begin{itemize}
-\\\\item asterisk 1
-\\\\item asterisk 2
-\\\\item asterisk 3
+\\\\item\\\\relax asterisk 1
+\\\\item\\\\relax asterisk 2
+\\\\item\\\\relax asterisk 3
 \\\\end{itemize}
 
 
@@ -5947,9 +5947,9 @@ Asterisks loose:
 
 
 \\\\begin{itemize}
-\\\\item asterisk 1
-\\\\item asterisk 2
-\\\\item asterisk 3
+\\\\item\\\\relax asterisk 1
+\\\\item\\\\relax asterisk 2
+\\\\item\\\\relax asterisk 3
 \\\\end{itemize}
 
 
@@ -5962,9 +5962,9 @@ Pluses tight:
 
 
 \\\\begin{itemize}
-\\\\item Plus 1
-\\\\item Plus 2
-\\\\item Plus 3
+\\\\item\\\\relax Plus 1
+\\\\item\\\\relax Plus 2
+\\\\item\\\\relax Plus 3
 \\\\end{itemize}
 
 
@@ -5973,9 +5973,9 @@ Pluses loose:
 
 
 \\\\begin{itemize}
-\\\\item Plus 1
-\\\\item Plus 2
-\\\\item Plus 3
+\\\\item\\\\relax Plus 1
+\\\\item\\\\relax Plus 2
+\\\\item\\\\relax Plus 3
 \\\\end{itemize}
 
 
@@ -5988,9 +5988,9 @@ Minuses tight:
 
 
 \\\\begin{itemize}
-\\\\item Minus 1
-\\\\item Minus 2
-\\\\item Minus 3
+\\\\item\\\\relax Minus 1
+\\\\item\\\\relax Minus 2
+\\\\item\\\\relax Minus 3
 \\\\end{itemize}
 
 
@@ -5999,9 +5999,9 @@ Minuses loose:
 
 
 \\\\begin{itemize}
-\\\\item Minus 1
-\\\\item Minus 2
-\\\\item Minus 3
+\\\\item\\\\relax Minus 1
+\\\\item\\\\relax Minus 2
+\\\\item\\\\relax Minus 3
 \\\\end{itemize}
 
 
@@ -6013,9 +6013,9 @@ Tight:
 
 
 \\\\begin{enumerate}
-\\\\item First
-\\\\item Second
-\\\\item Third
+\\\\item\\\\relax First
+\\\\item\\\\relax Second
+\\\\item\\\\relax Third
 \\\\end{enumerate}
 
 
@@ -6024,9 +6024,9 @@ and:
 
 
 \\\\begin{enumerate}
-\\\\item One
-\\\\item Two
-\\\\item Three
+\\\\item\\\\relax One
+\\\\item\\\\relax Two
+\\\\item\\\\relax Three
 \\\\end{enumerate}
 
 
@@ -6035,9 +6035,9 @@ Loose using tabs:
 
 
 \\\\begin{enumerate}
-\\\\item First
-\\\\item Second
-\\\\item Third
+\\\\item\\\\relax First
+\\\\item\\\\relax Second
+\\\\item\\\\relax Third
 \\\\end{enumerate}
 
 
@@ -6046,9 +6046,9 @@ and using spaces:
 
 
 \\\\begin{enumerate}
-\\\\item One
-\\\\item Two
-\\\\item Three
+\\\\item\\\\relax One
+\\\\item\\\\relax Two
+\\\\item\\\\relax Three
 \\\\end{enumerate}
 
 
@@ -6057,12 +6057,12 @@ Multiple paragraphs:
 
 
 \\\\begin{enumerate}
-\\\\item Item 1, graf one.
+\\\\item\\\\relax Item 1, graf one.
 
 Item 2. graf two. The quick brown fox jumped over the lazy dog's
 back.
-\\\\item Item 2.
-\\\\item Item 3.
+\\\\item\\\\relax Item 2.
+\\\\item\\\\relax Item 3.
 \\\\end{enumerate}
 
 
@@ -6070,13 +6070,13 @@ back.
 
 
 \\\\begin{itemize}
-\\\\item Tab
+\\\\item\\\\relax Tab
 
 \\\\begin{itemize}
-\\\\item Tab
+\\\\item\\\\relax Tab
 
 \\\\begin{itemize}
-\\\\item Tab
+\\\\item\\\\relax Tab
 \\\\end{itemize}
 \\\\end{itemize}
 \\\\end{itemize}
@@ -6087,15 +6087,15 @@ Here's another:
 
 
 \\\\begin{enumerate}
-\\\\item First
-\\\\item Second:
+\\\\item\\\\relax First
+\\\\item\\\\relax Second:
 
 \\\\begin{itemize}
-\\\\item Fee
-\\\\item Fie
-\\\\item Foe
+\\\\item\\\\relax Fee
+\\\\item\\\\relax Fie
+\\\\item\\\\relax Foe
 \\\\end{itemize}
-\\\\item Third
+\\\\item\\\\relax Third
 \\\\end{enumerate}
 
 
@@ -6104,15 +6104,15 @@ Same thing but with paragraphs:
 
 
 \\\\begin{enumerate}
-\\\\item First
-\\\\item Second:
+\\\\item\\\\relax First
+\\\\item\\\\relax Second:
 
 \\\\begin{itemize}
-\\\\item Fee
-\\\\item Fie
-\\\\item Foe
+\\\\item\\\\relax Fee
+\\\\item\\\\relax Fie
+\\\\item\\\\relax Foe
 \\\\end{itemize}
-\\\\item Third
+\\\\item\\\\relax Third
 \\\\end{enumerate}
 
 
@@ -6121,10 +6121,10 @@ This was an error in Markdown 1.0.1:
 
 
 \\\\begin{itemize}
-\\\\item this
+\\\\item\\\\relax this
 
 \\\\begin{itemize}
-\\\\item sub
+\\\\item\\\\relax sub
 \\\\end{itemize}
 that
 \\\\end{itemize}"
@@ -6132,8 +6132,8 @@ that
 
 exports[`rebber: remark specs ordered-different-types: ordered-different-types 1`] = `
 "\\\\begin{enumerate}
-\\\\item foo
-\\\\item bar
+\\\\item\\\\relax foo
+\\\\item\\\\relax bar
 3) baz
 \\\\end{enumerate}"
 `;
@@ -6361,19 +6361,19 @@ exports[`rebber: remark specs reference-link-with-multiple-definitions: referenc
 
 exports[`rebber: remark specs same-bullet: same-bullet 1`] = `
 "\\\\begin{itemize}
-\\\\item test
+\\\\item\\\\relax test
 \\\\end{itemize}
 
 
 
 \\\\begin{itemize}
-\\\\item test
+\\\\item\\\\relax test
 \\\\end{itemize}
 
 
 
 \\\\begin{itemize}
-\\\\item test
+\\\\item\\\\relax test
 \\\\end{itemize}"
 `;
 
@@ -6404,9 +6404,9 @@ Ampersands are escaped only when they would otherwise start an entity:
 
 
 \\\\begin{itemize}
-\\\\item \\\\textbackslash{}©cat \\\\textbackslash{}\\\\& \\\\textbackslash{}\\\\&
-\\\\item \\\\&copycat \\\\&amp; \\\\&\\\\#x26
-\\\\item But: ©cat; \\\\texttt{\\\\&between;} \\\\&foo; \\\\& AT\\\\&T \\\\&c
+\\\\item\\\\relax \\\\textbackslash{}©cat \\\\textbackslash{}\\\\& \\\\textbackslash{}\\\\&
+\\\\item\\\\relax \\\\&copycat \\\\&amp; \\\\&\\\\#x26
+\\\\item\\\\relax But: ©cat; \\\\texttt{\\\\&between;} \\\\&foo; \\\\& AT\\\\&T \\\\&c
 \\\\end{itemize}
 
 
@@ -6458,12 +6458,12 @@ Text under a shortcut reference should be preserved verbatim:
 
 
 \\\\begin{itemize}
-\\\\item [two*three]
-\\\\item [two*three]
-\\\\item [a\\\\textbackslash{}a]
-\\\\item [a\\\\textbackslash{}a]
-\\\\item [a\\\\textbackslash{}\\\\textbackslash{}a]
-\\\\item [a\\\\_a\\\\_a]
+\\\\item\\\\relax [two*three]
+\\\\item\\\\relax [two*three]
+\\\\item\\\\relax [a\\\\textbackslash{}a]
+\\\\item\\\\relax [a\\\\textbackslash{}a]
+\\\\item\\\\relax [a\\\\textbackslash{}\\\\textbackslash{}a]
+\\\\item\\\\relax [a\\\\_a\\\\_a]
 \\\\end{itemize}
 
 
@@ -6476,10 +6476,10 @@ Colon should be escaped in URLs:
 
 
 \\\\begin{itemize}
-\\\\item http\\\\textbackslash{}://user:password@host:port/path?key=value\\\\#fragment
-\\\\item https\\\\textbackslash{}://user:password@host:port/path?key=value\\\\#fragment
-\\\\item http://user:password@host:port/path?key=value\\\\#fragment
-\\\\item https://user:password@host:port/path?key=value\\\\#fragment
+\\\\item\\\\relax http\\\\textbackslash{}://user:password@host:port/path?key=value\\\\#fragment
+\\\\item\\\\relax https\\\\textbackslash{}://user:password@host:port/path?key=value\\\\#fragment
+\\\\item\\\\relax http://user:password@host:port/path?key=value\\\\#fragment
+\\\\item\\\\relax https://user:password@host:port/path?key=value\\\\#fragment
 \\\\end{itemize}
 
 
@@ -6529,10 +6529,10 @@ Open angle bracket should be escaped:
 
 
 \\\\begin{itemize}
-\\\\item \\\\textbackslash{}<div>\\\\textbackslash{}</div>
-\\\\item \\\\textbackslash{}<http\\\\textbackslash{}:google.com>
-\\\\item <div></div>
-\\\\item <http:google.com>
+\\\\item\\\\relax \\\\textbackslash{}<div>\\\\textbackslash{}</div>
+\\\\item\\\\relax \\\\textbackslash{}<http\\\\textbackslash{}:google.com>
+\\\\item\\\\relax <div></div>
+\\\\item\\\\relax <http:google.com>
 \\\\end{itemize}"
 `;
 
@@ -6651,7 +6651,7 @@ first & second \\\\textbackslash{}| second & third \\\\textbackslash{}| \\\\\\\\
 
 exports[`rebber: remark specs table-in-list: table-in-list 1`] = `
 "\\\\begin{itemize}
-\\\\item Unordered:
+\\\\item\\\\relax Unordered:
 
 \\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
@@ -6659,7 +6659,7 @@ A & B \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
 1 & 2 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-\\\\item Ordered:
+\\\\item\\\\relax Ordered:
 
 \\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
@@ -6814,9 +6814,9 @@ c3 & \\\\includegraphics{https://zestedesavoir.com/media/galleries/426/56dc4a1e-
 
 exports[`rebber: remark specs tabs: tabs 1`] = `
 "\\\\begin{itemize}
-\\\\item this is a list item
+\\\\item\\\\relax this is a list item
 indented with tabs
-\\\\item this is a list item
+\\\\item\\\\relax this is a list item
 indented with spaces
 \\\\end{itemize}
 
@@ -6856,9 +6856,9 @@ And:
 
 exports[`rebber: remark specs tabs-and-spaces: tabs-and-spaces 1`] = `
 "\\\\begin{itemize}
-\\\\item this is a list item
+\\\\item\\\\relax this is a list item
 indented with tabs
-\\\\item this is a list item
+\\\\item\\\\relax this is a list item
 indented with spaces
 \\\\end{itemize}
 
@@ -6901,14 +6901,14 @@ exports[`rebber: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item [ ]
-\\\\item [	]
+\\\\item\\\\relax [ ]
+\\\\item\\\\relax [	]
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item [x]
-\\\\item [X]
+\\\\item\\\\relax [x]
+\\\\item\\\\relax [X]
 \\\\end{enumerate}
 
 
@@ -6916,14 +6916,14 @@ exports[`rebber: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item 
-\\\\item 
+\\\\item\\\\relax 
+\\\\item\\\\relax 
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item 
-\\\\item 
+\\\\item\\\\relax 
+\\\\item\\\\relax 
 \\\\end{enumerate}
 
 
@@ -6931,14 +6931,14 @@ exports[`rebber: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item 
-\\\\item 
+\\\\item\\\\relax 
+\\\\item\\\\relax 
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item 
-\\\\item 
+\\\\item\\\\relax 
+\\\\item\\\\relax 
 \\\\end{enumerate}
 
 
@@ -6946,14 +6946,14 @@ exports[`rebber: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item [ ]Hello;
-\\\\item [	]World;
+\\\\item\\\\relax [ ]Hello;
+\\\\item\\\\relax [	]World;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item [x]Foo.
-\\\\item [X]Bar
+\\\\item\\\\relax [x]Foo.
+\\\\item\\\\relax [X]Bar
 \\\\end{enumerate}
 
 
@@ -6961,14 +6961,14 @@ exports[`rebber: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item Hello;
-\\\\item World;
+\\\\item\\\\relax Hello;
+\\\\item\\\\relax World;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item Foo.
-\\\\item World :D
+\\\\item\\\\relax Foo.
+\\\\item\\\\relax World :D
 \\\\end{enumerate}
 
 
@@ -6976,14 +6976,14 @@ exports[`rebber: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item Hello;
-\\\\item World;
+\\\\item\\\\relax Hello;
+\\\\item\\\\relax World;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item Foo.
-\\\\item Hello.
+\\\\item\\\\relax Foo.
+\\\\item\\\\relax Hello.
 \\\\end{enumerate}
 
 
@@ -6991,18 +6991,18 @@ exports[`rebber: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 Hello;
 \\\\end{CodeBlock}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 World;
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item Foo.
-\\\\item Bar.
+\\\\item\\\\relax Foo.
+\\\\item\\\\relax Bar.
 \\\\end{enumerate}
 
 
@@ -7010,20 +7010,20 @@ World;
 
 
 \\\\begin{itemize}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 Hello;
 \\\\end{CodeBlock}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 World;
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 Foo.
 \\\\end{CodeBlock}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 Bar.
 \\\\end{CodeBlock}
 \\\\end{enumerate}
@@ -7033,29 +7033,29 @@ Bar.
 
 
 \\\\begin{itemize}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
     Hello;
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 World;
 \\\\end{CodeBlock}
 \\\\end{enumerate}
 
 
 \\\\begin{itemize}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 	Hello;
 \\\\end{CodeBlock}
-\\\\item World.
+\\\\item\\\\relax World.
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item Bar.
+\\\\item\\\\relax Bar.
 \\\\end{enumerate}
 
 
@@ -7063,13 +7063,13 @@ World;
 
 
 \\\\begin{itemize}
-\\\\item [
+\\\\item\\\\relax [
 ] Hello;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item [
+\\\\item\\\\relax [
 ] Hello;
 \\\\end{enumerate}
 
@@ -7078,71 +7078,71 @@ World;
 
 
 \\\\begin{itemize}
-\\\\item [  ] Hello;
+\\\\item\\\\relax [  ] Hello;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item [
+\\\\item\\\\relax [
 ] World;
-\\\\item [		] Hello;
-\\\\item [ 	 ] World.
+\\\\item\\\\relax [		] Hello;
+\\\\item\\\\relax [ 	 ] World.
 \\\\end{enumerate}"
 `;
 
 exports[`rebber: remark specs task-list-ordered: task-list-ordered 1`] = `
 "\\\\begin{enumerate}
-\\\\item Mercury;
-\\\\item [] Venus (this one’s invalid);
-\\\\item Earth:
+\\\\item\\\\relax Mercury;
+\\\\item\\\\relax [] Venus (this one’s invalid);
+\\\\item\\\\relax Earth:
 
 \\\\begin{enumerate}
-\\\\item Moon.
+\\\\item\\\\relax Moon.
 \\\\end{enumerate}
-\\\\item Mars;
-\\\\item [] Neptune (this one’s also invalid).
+\\\\item\\\\relax Mars;
+\\\\item\\\\relax [] Neptune (this one’s also invalid).
 \\\\end{enumerate}"
 `;
 
 exports[`rebber: remark specs task-list-unordered-asterisk: task-list-unordered-asterisk 1`] = `
 "\\\\begin{itemize}
-\\\\item Mercury;
-\\\\item [] Venus (this one’s invalid);
-\\\\item Earth:
+\\\\item\\\\relax Mercury;
+\\\\item\\\\relax [] Venus (this one’s invalid);
+\\\\item\\\\relax Earth:
 
 \\\\begin{itemize}
-\\\\item Moon.
+\\\\item\\\\relax Moon.
 \\\\end{itemize}
-\\\\item Mars;
-\\\\item [] Neptune (this one’s also invalid).
+\\\\item\\\\relax Mars;
+\\\\item\\\\relax [] Neptune (this one’s also invalid).
 \\\\end{itemize}"
 `;
 
 exports[`rebber: remark specs task-list-unordered-dash: task-list-unordered-dash 1`] = `
 "\\\\begin{itemize}
-\\\\item Mercury;
-\\\\item [] Venus (this one’s invalid);
-\\\\item Earth:
+\\\\item\\\\relax Mercury;
+\\\\item\\\\relax [] Venus (this one’s invalid);
+\\\\item\\\\relax Earth:
 
 \\\\begin{itemize}
-\\\\item Moon.
+\\\\item\\\\relax Moon.
 \\\\end{itemize}
-\\\\item Mars;
-\\\\item [] Neptune (this one’s also invalid).
+\\\\item\\\\relax Mars;
+\\\\item\\\\relax [] Neptune (this one’s also invalid).
 \\\\end{itemize}"
 `;
 
 exports[`rebber: remark specs task-list-unordered-plus: task-list-unordered-plus 1`] = `
 "\\\\begin{itemize}
-\\\\item Mercury;
-\\\\item [] Venus (this one’s invalid);
-\\\\item Earth:
+\\\\item\\\\relax Mercury;
+\\\\item\\\\relax [] Venus (this one’s invalid);
+\\\\item\\\\relax Earth:
 
 \\\\begin{itemize}
-\\\\item Moon.
+\\\\item\\\\relax Moon.
 \\\\end{itemize}
-\\\\item Mars;
-\\\\item [] Neptune (this one’s also invalid).
+\\\\item\\\\relax Mars;
+\\\\item\\\\relax [] Neptune (this one’s also invalid).
 \\\\end{itemize}"
 `;
 
@@ -7151,9 +7151,9 @@ exports[`rebber: remark specs tidyness: tidyness 1`] = `
 A list within a blockquote:
 
 \\\\begin{itemize}
-\\\\item asterisk 1
-\\\\item asterisk 2
-\\\\item asterisk 3
+\\\\item\\\\relax asterisk 1
+\\\\item\\\\relax asterisk 2
+\\\\item\\\\relax asterisk 3
 \\\\end{itemize}
 \\\\end{Quotation}"
 `;
@@ -7342,7 +7342,7 @@ hello world
 
 
 \\\\begin{itemize}
-\\\\item how are you
+\\\\item\\\\relax how are you
 \\\\end{itemize}
 
 
@@ -7374,7 +7374,7 @@ exports[`rebber: remark specs tricky-list: tricky-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item hello world
+\\\\item\\\\relax hello world
 \\\\end{itemize}
 
 
@@ -7383,7 +7383,7 @@ exports[`rebber: remark specs tricky-list: tricky-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item hello world
+\\\\item\\\\relax hello world
 \\\\end{itemize}
 
 
@@ -7392,7 +7392,7 @@ exports[`rebber: remark specs tricky-list: tricky-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item Hello world
+\\\\item\\\\relax Hello world
 \\\\end{itemize}
 
 
@@ -7401,7 +7401,7 @@ exports[`rebber: remark specs tricky-list: tricky-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item hello world
+\\\\item\\\\relax hello world
 \\\\end{itemize}"
 `;
 
@@ -13233,9 +13233,9 @@ With an ampersand: \\\\externalLink{http://example.com/?foo=1\\\\&bar=2}{http://
 
 
 \\\\begin{itemize}
-\\\\item In a list?
-\\\\item \\\\externalLink{http://example.com/}{http://example.com/}
-\\\\item It should.
+\\\\item\\\\relax In a list?
+\\\\item\\\\relax \\\\externalLink{http://example.com/}{http://example.com/}
+\\\\item\\\\relax It should.
 \\\\end{itemize}
 
 
@@ -13774,33 +13774,33 @@ This is a tag with backslashes <span attr='\\\\\\\\backslashes\\\\\\\\'>bar</spa
 
 exports[`toLaTeX: remark specs block-elements: block-elements 1`] = `
 "\\\\begin{itemize}
-\\\\item Different lists should receive two newline characters
+\\\\item\\\\relax Different lists should receive two newline characters
 between them.
 \\\\end{itemize}
 
 
 
 \\\\begin{itemize}
-\\\\item This is another list.
+\\\\item\\\\relax This is another list.
 \\\\end{itemize}
 
 
 \\\\begin{Quotation}
 \\\\begin{itemize}
-\\\\item The same goes for lists in block quotes.
+\\\\item\\\\relax The same goes for lists in block quotes.
 \\\\end{itemize}
 \\\\begin{itemize}
-\\\\item This is another list.
+\\\\item\\\\relax This is another list.
 \\\\end{itemize}
 \\\\end{Quotation}
 
 
 
 \\\\begin{itemize}
-\\\\item And for lists in lists:
+\\\\item\\\\relax And for lists in lists:
 
 \\\\begin{enumerate}
-\\\\item First sublist.
+\\\\item\\\\relax First sublist.
 \\\\end{enumerate}
 \\\\end{itemize}
 
@@ -13817,7 +13817,7 @@ And for lists followed by indented code blocks:
 
 
 \\\\begin{itemize}
-\\\\item This is a paragraph in a list
+\\\\item\\\\relax This is a paragraph in a list
 \\\\end{itemize}
 
 
@@ -13908,7 +13908,7 @@ exports[`toLaTeX: remark specs blockquote-lazy-list: blockquote-lazy-list 1`] = 
 This is a blockquote.
 
 \\\\begin{itemize}
-\\\\item And in normal mode this is an internal list, but in commonmark this is a top level list.
+\\\\item\\\\relax And in normal mode this is an internal list, but in commonmark this is a top level list.
 \\\\end{itemize}
 \\\\end{Quotation}
 
@@ -13931,7 +13931,7 @@ exports[`toLaTeX: remark specs blockquote-list-item: blockquote-list-item 1`] = 
 
 
 \\\\begin{itemize}
-\\\\item hello
+\\\\item\\\\relax hello
 
 \\\\begin{Quotation}
 world
@@ -14239,14 +14239,14 @@ hello
 \\\\footnote{\\\\label{2}\\\\externalLink{hello}{hello}}
 
 \\\\begin{itemize}
-\\\\item hello
-\\\\item \\\\footnote{\\\\label{3}\\\\externalLink{hello}{hello}}
+\\\\item\\\\relax hello
+\\\\item\\\\relax \\\\footnote{\\\\label{3}\\\\externalLink{hello}{hello}}
 \\\\end{itemize}
 
 
 
 \\\\begin{itemize}
-\\\\item hello
+\\\\item\\\\relax hello
 \\\\end{itemize}
 
 
@@ -14762,10 +14762,10 @@ exports[`toLaTeX: remark specs footnote-like: footnote-like 1`] = `
 
 exports[`toLaTeX: remark specs footnote-matrix: footnote-matrix 1`] = `
 "\\\\begin{enumerate}
-\\\\item [foo]
-\\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}[bar]
-\\\\item [foo]\\\\textsuperscript{\\\\ref{footnote:bar}}
-\\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}\\\\textsuperscript{\\\\ref{footnote:bar}}
+\\\\item\\\\relax [foo]
+\\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}[bar]
+\\\\item\\\\relax [foo]\\\\textsuperscript{\\\\ref{footnote:bar}}
+\\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}\\\\textsuperscript{\\\\ref{footnote:bar}}
 \\\\end{enumerate}
 "
 `;
@@ -14829,7 +14829,7 @@ Here's one with a bullet.
 
 
 \\\\begin{itemize}
-\\\\item criminey.
+\\\\item\\\\relax criminey.
 \\\\end{itemize}
 
 
@@ -14841,10 +14841,10 @@ All versions create lists for the following.
 
 
 \\\\begin{itemize}
-\\\\item Here's one with a bullet.
+\\\\item\\\\relax Here's one with a bullet.
 
 \\\\begin{itemize}
-\\\\item criminey.
+\\\\item\\\\relax criminey.
 \\\\end{itemize}
 \\\\end{itemize}
 
@@ -14854,10 +14854,10 @@ All versions create lists for the following.
 
 
 \\\\begin{enumerate}
-\\\\item In Markdown 1.0.0 and earlier. Version
+\\\\item\\\\relax In Markdown 1.0.0 and earlier. Version
 
 \\\\begin{enumerate}
-\\\\item This line turns into a list item.
+\\\\item\\\\relax This line turns into a list item.
 \\\\end{enumerate}
 \\\\end{enumerate}
 "
@@ -15178,8 +15178,8 @@ exports[`toLaTeX: remark specs hr: hr 1`] = `
 
 exports[`toLaTeX: remark specs hr-list-break: hr-list-break 1`] = `
 "\\\\begin{itemize}
-\\\\item hello world
-\\\\item how are
+\\\\item\\\\relax hello world
+\\\\item\\\\relax how are
 \\\\end{itemize}
 
 
@@ -15196,9 +15196,9 @@ The above asterisks do split the list, but the below ones do not.
 
 
 \\\\begin{itemize}
-\\\\item hello world
-\\\\item how are
-\\\\item \\\\horizontalLine
+\\\\item\\\\relax hello world
+\\\\item\\\\relax how are
+\\\\item\\\\relax \\\\horizontalLine
 
 you today?
 \\\\end{itemize}
@@ -15206,11 +15206,11 @@ you today?
 
 
 \\\\begin{itemize}
-\\\\item Neither do these
-\\\\item how are
-\\\\item \\\\begin{itemize}
-\\\\item \\\\begin{itemize}
-\\\\item you today?
+\\\\item\\\\relax Neither do these
+\\\\item\\\\relax how are
+\\\\item\\\\relax \\\\begin{itemize}
+\\\\item\\\\relax \\\\begin{itemize}
+\\\\item\\\\relax you today?
 \\\\end{itemize}
 \\\\end{itemize}
 \\\\end{itemize}
@@ -15218,8 +15218,8 @@ you today?
 
 
 \\\\begin{itemize}
-\\\\item But these do
-\\\\item how are
+\\\\item\\\\relax But these do
+\\\\item\\\\relax how are
 \\\\end{itemize}
 
 
@@ -16690,34 +16690,34 @@ exports[`toLaTeX: remark specs list: list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item One:
+\\\\item\\\\relax One:
 
 \\\\begin{itemize}
-\\\\item Nested one;
-\\\\item Nested two:
+\\\\item\\\\relax Nested one;
+\\\\item\\\\relax Nested two:
 
 \\\\begin{itemize}
-\\\\item Nested three.
+\\\\item\\\\relax Nested three.
 \\\\end{itemize}
 \\\\end{itemize}
-\\\\item Two;
-\\\\item Three.
+\\\\item\\\\relax Two;
+\\\\item\\\\relax Three.
 \\\\end{itemize}
 "
 `;
 
 exports[`toLaTeX: remark specs list-after-list: list-after-list 1`] = `
 "\\\\begin{itemize}
-\\\\item item
-\\\\item item
-\\\\item item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item item
-\\\\item item
-\\\\item item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
 \\\\end{enumerate}
 
 
@@ -16726,23 +16726,23 @@ exports[`toLaTeX: remark specs list-after-list: list-after-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item item
-\\\\item item
-\\\\item item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item item
-\\\\item item
-\\\\item item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
 \\\\end{enumerate}
 "
 `;
 
 exports[`toLaTeX: remark specs list-and-code: list-and-code 1`] = `
 "\\\\begin{itemize}
-\\\\item This is a list item
+\\\\item\\\\relax This is a list item
 \\\\end{itemize}
 
 
@@ -16756,7 +16756,7 @@ This is code
 
 exports[`toLaTeX: remark specs list-continuation: list-continuation 1`] = `
 "\\\\begin{enumerate}
-\\\\item foo
+\\\\item\\\\relax foo
 \\\\end{enumerate}
 
 
@@ -16765,7 +16765,7 @@ exports[`toLaTeX: remark specs list-continuation: list-continuation 1`] = `
 
 
 \\\\begin{enumerate}
-\\\\item foo
+\\\\item\\\\relax foo
 \\\\end{enumerate}
 
 
@@ -16776,14 +16776,14 @@ code();
 
 
 \\\\begin{enumerate}
-\\\\item \\\\hyperref[foo]{foo}
+\\\\item\\\\relax \\\\hyperref[foo]{foo}
 \\\\end{enumerate}
 
 
 \\\\footnote{\\\\label{foo}\\\\externalLink{http://google.com}{http://google.com}}
 
 \\\\begin{enumerate}
-\\\\item \\\\textsuperscript{\\\\ref{footnote:foo}}
+\\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}
 \\\\end{enumerate}
 
 
@@ -16792,36 +16792,36 @@ code();
 
 exports[`toLaTeX: remark specs list-indentation: list-indentation 1`] = `
 "\\\\begin{itemize}
-\\\\item Hello 1a
+\\\\item\\\\relax Hello 1a
 
 World 1a.
-\\\\item Hello 1b
+\\\\item\\\\relax Hello 1b
 
 World 1b.
-\\\\item Hello 2a
+\\\\item\\\\relax Hello 2a
 
 World 2a.
-\\\\item Hello 2b
+\\\\item\\\\relax Hello 2b
 
 World 2b.
-\\\\item Hello 3a
+\\\\item\\\\relax Hello 3a
 
 World 3a.
-\\\\item Hello 3b
+\\\\item\\\\relax Hello 3b
 
 World 3b.
-\\\\item Hello 4a
+\\\\item\\\\relax Hello 4a
 
 World 4a.
-\\\\item Hello 4b
+\\\\item\\\\relax Hello 4b
 
 World 4b.
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 Hello 5a
 \\\\end{CodeBlock}
 
 World 5a.
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 Hello 5b
 
 World 5b.
@@ -16832,47 +16832,47 @@ World 5b.
 
 exports[`toLaTeX: remark specs list-item-empty: list-item-empty 1`] = `
 "\\\\begin{itemize}
-\\\\item foo
-\\\\item 
-\\\\item bar
-\\\\item foo
-\\\\item 
-\\\\item bar
+\\\\item\\\\relax foo
+\\\\item\\\\relax 
+\\\\item\\\\relax bar
+\\\\item\\\\relax foo
+\\\\item\\\\relax 
+\\\\item\\\\relax bar
 \\\\end{itemize}
 "
 `;
 
 exports[`toLaTeX: remark specs list-item-empty-with-white-space: list-item-empty-with-white-space 1`] = `
 "\\\\begin{itemize}
-\\\\item 
+\\\\item\\\\relax 
 \\\\end{itemize}
 "
 `;
 
 exports[`toLaTeX: remark specs list-item-indent: list-item-indent 1`] = `
 "\\\\begin{enumerate}
-\\\\item foo bar baz.
+\\\\item\\\\relax foo bar baz.
 \\\\end{enumerate}
 
 
 <!--  -->
 
 \\\\begin{enumerate}
-\\\\item foo bar baz.
+\\\\item\\\\relax foo bar baz.
 \\\\end{enumerate}
 
 
 <!--  -->
 
 \\\\begin{enumerate}
-\\\\item foo bar baz.
+\\\\item\\\\relax foo bar baz.
 \\\\end{enumerate}
 
 
 <!--  -->
 
 \\\\begin{enumerate}
-\\\\item foo bar baz.
+\\\\item\\\\relax foo bar baz.
 foo bar baz.
 \\\\end{enumerate}
 
@@ -16880,7 +16880,7 @@ foo bar baz.
 <!--  -->
 
 \\\\begin{enumerate}
-\\\\item foo bar baz.
+\\\\item\\\\relax foo bar baz.
 foo bar baz.
 \\\\end{enumerate}
 
@@ -16888,7 +16888,7 @@ foo bar baz.
 <!--  -->
 
 \\\\begin{enumerate}
-\\\\item foo bar baz.
+\\\\item\\\\relax foo bar baz.
 foo bar baz.
 \\\\end{enumerate}
 
@@ -16896,14 +16896,14 @@ foo bar baz.
 <!--  -->
 
 \\\\begin{itemize}
-\\\\item foo bar baz.
+\\\\item\\\\relax foo bar baz.
 \\\\end{itemize}
 
 
 <!--  -->
 
 \\\\begin{itemize}
-\\\\item foo bar baz.
+\\\\item\\\\relax foo bar baz.
 foo bar baz.
 \\\\end{itemize}
 "
@@ -16911,18 +16911,18 @@ foo bar baz.
 
 exports[`toLaTeX: remark specs list-item-newline: list-item-newline 1`] = `
 "\\\\begin{itemize}
-\\\\item Foo
-\\\\item Bar
+\\\\item\\\\relax Foo
+\\\\item\\\\relax Bar
 \\\\end{itemize}
 "
 `;
 
 exports[`toLaTeX: remark specs list-item-text: list-item-text 1`] = `
 "\\\\begin{itemize}
-\\\\item item1
+\\\\item\\\\relax item1
 
 \\\\begin{itemize}
-\\\\item item2
+\\\\item\\\\relax item2
 \\\\end{itemize}
 text
 \\\\end{itemize}
@@ -16931,9 +16931,9 @@ text
 
 exports[`toLaTeX: remark specs list-ordered: list-ordered 1`] = `
 "\\\\begin{enumerate}
-\\\\item foo;
-\\\\item bar;
-\\\\item baz.
+\\\\item\\\\relax foo;
+\\\\item\\\\relax bar;
+\\\\item\\\\relax baz.
 \\\\end{enumerate}
 "
 `;
@@ -16943,38 +16943,38 @@ exports[`toLaTeX: remark specs lists-with-code-and-rules: lists-with-code-and-ru
 
 
 \\\\begin{enumerate}
-\\\\item bar:
+\\\\item\\\\relax bar:
 
 \\\\begin{Quotation}
 \\\\begin{itemize}
-\\\\item one
+\\\\item\\\\relax one
 
 \\\\begin{itemize}
-\\\\item two
+\\\\item\\\\relax two
 
 \\\\begin{itemize}
-\\\\item three
-\\\\item four
-\\\\item five
+\\\\item\\\\relax three
+\\\\item\\\\relax four
+\\\\item\\\\relax five
 \\\\end{itemize}
 \\\\end{itemize}
 \\\\end{itemize}
 \\\\end{Quotation}
-\\\\item foo:
+\\\\item\\\\relax foo:
 
 \\\\begin{CodeBlock}{text}
 line 1
 line 2
 \\\\end{CodeBlock}
-\\\\item foo:
+\\\\item\\\\relax foo:
 
 \\\\begin{enumerate}
-\\\\item foo \\\\texttt{bar} bar:
+\\\\item\\\\relax foo \\\\texttt{bar} bar:
 
 \\\\begin{CodeBlock}{erb}
 some code here
 \\\\end{CodeBlock}
-\\\\item foo \\\\texttt{bar} bar:
+\\\\item\\\\relax foo \\\\texttt{bar} bar:
 
 \\\\begin{CodeBlock}{erb}
 foo
@@ -16984,7 +16984,7 @@ bar
 foo
 bar
 \\\\end{CodeBlock}
-\\\\item foo \\\\texttt{bar} bar:
+\\\\item\\\\relax foo \\\\texttt{bar} bar:
 
 \\\\begin{CodeBlock}{html}
 ---
@@ -16993,14 +16993,14 @@ foo
 ---
 bar
 \\\\end{CodeBlock}
-\\\\item foo \\\\texttt{bar} bar:
+\\\\item\\\\relax foo \\\\texttt{bar} bar:
 
 \\\\begin{CodeBlock}{text}
 foo
 ---
 bar
 \\\\end{CodeBlock}
-\\\\item foo
+\\\\item\\\\relax foo
 \\\\end{enumerate}
 \\\\end{enumerate}
 "
@@ -17008,12 +17008,12 @@ bar
 
 exports[`toLaTeX: remark specs loose-lists: loose-lists 1`] = `
 "\\\\begin{itemize}
-\\\\item hello
+\\\\item\\\\relax hello
 world
 
 how
 are
-\\\\item you
+\\\\item\\\\relax you
 \\\\end{itemize}
 
 
@@ -17022,60 +17022,60 @@ better behavior:
 
 
 \\\\begin{itemize}
-\\\\item hello
+\\\\item\\\\relax hello
 
 \\\\begin{itemize}
-\\\\item world
+\\\\item\\\\relax world
 how
 
 are
 you
-\\\\item today
+\\\\item\\\\relax today
 \\\\end{itemize}
-\\\\item hi
-\\\\end{itemize}
-
-
-
-\\\\begin{itemize}
-\\\\item hello
-\\\\item world
-\\\\item hi
+\\\\item\\\\relax hi
 \\\\end{itemize}
 
 
 
 \\\\begin{itemize}
-\\\\item hello
-\\\\item world
-\\\\item hi
+\\\\item\\\\relax hello
+\\\\item\\\\relax world
+\\\\item\\\\relax hi
 \\\\end{itemize}
 
 
 
 \\\\begin{itemize}
-\\\\item hello
-\\\\item world
+\\\\item\\\\relax hello
+\\\\item\\\\relax world
+\\\\item\\\\relax hi
+\\\\end{itemize}
+
+
+
+\\\\begin{itemize}
+\\\\item\\\\relax hello
+\\\\item\\\\relax world
 
 how
-\\\\item hi
+\\\\item\\\\relax hi
 \\\\end{itemize}
 
 
 
 \\\\begin{itemize}
-\\\\item hello
-\\\\item world
-\\\\item how
+\\\\item\\\\relax hello
+\\\\item\\\\relax world
+\\\\item\\\\relax how
 are
 \\\\end{itemize}
 
 
 
 \\\\begin{itemize}
-\\\\item hello
-\\\\item world
-\\\\item how
+\\\\item\\\\relax hello
+\\\\item\\\\relax world
+\\\\item\\\\relax how
 are
 \\\\end{itemize}
 "
@@ -17101,22 +17101,22 @@ A link. Not anymore.
 markdown.js doesnt acknowledge arbitrary html blocks =/</aside>
 
 \\\\begin{itemize}
-\\\\item List Item 1
-\\\\item List Item 2
+\\\\item\\\\relax List Item 1
+\\\\item\\\\relax List Item 2
 
 \\\\begin{itemize}
-\\\\item New List Item 1
+\\\\item\\\\relax New List Item 1
 Hi, this is a list item.
-\\\\item New List Item 2
+\\\\item\\\\relax New List Item 2
 Another item
 Code goes here.
 Lots of it...
-\\\\item New List Item 3
+\\\\item\\\\relax New List Item 3
 The last item
 \\\\end{itemize}
-\\\\item List Item 3
+\\\\item\\\\relax List Item 3
 The final item.
-\\\\item List Item 4
+\\\\item\\\\relax List Item 4
 The real final item.
 \\\\end{itemize}
 
@@ -17127,12 +17127,12 @@ Paragraph.
 
 \\\\begin{Quotation}
 \\\\begin{itemize}
-\\\\item bq Item 1
-\\\\item bq Item 2
+\\\\item\\\\relax bq Item 1
+\\\\item\\\\relax bq Item 2
 
 \\\\begin{itemize}
-\\\\item New bq Item 1
-\\\\item New bq Item 2
+\\\\item\\\\relax New bq Item 1
+\\\\item\\\\relax New bq Item 2
 Text here
 \\\\end{itemize}
 \\\\end{itemize}
@@ -17670,36 +17670,36 @@ exports[`toLaTeX: remark specs markdown-documentation-syntax: markdown-documenta
 </ul>
 
 \\\\begin{itemize}
-\\\\item \\\\externalLink{Overview}{\\\\#overview}
+\\\\item\\\\relax \\\\externalLink{Overview}{\\\\#overview}
 
 \\\\begin{itemize}
-\\\\item \\\\externalLink{Philosophy}{\\\\#philosophy}
-\\\\item \\\\externalLink{Inline HTML}{\\\\#html}
-\\\\item \\\\externalLink{Automatic Escaping for Special Characters}{\\\\#autoescape}
+\\\\item\\\\relax \\\\externalLink{Philosophy}{\\\\#philosophy}
+\\\\item\\\\relax \\\\externalLink{Inline HTML}{\\\\#html}
+\\\\item\\\\relax \\\\externalLink{Automatic Escaping for Special Characters}{\\\\#autoescape}
 \\\\end{itemize}
-\\\\item \\\\externalLink{Block Elements}{\\\\#block}
+\\\\item\\\\relax \\\\externalLink{Block Elements}{\\\\#block}
 
 \\\\begin{itemize}
-\\\\item \\\\externalLink{Paragraphs and Line Breaks}{\\\\#p}
-\\\\item \\\\externalLink{Headers}{\\\\#header}
-\\\\item \\\\externalLink{Blockquotes}{\\\\#blockquote}
-\\\\item \\\\externalLink{Lists}{\\\\#list}
-\\\\item \\\\externalLink{Code Blocks}{\\\\#precode}
-\\\\item \\\\externalLink{Horizontal Rules}{\\\\#hr}
+\\\\item\\\\relax \\\\externalLink{Paragraphs and Line Breaks}{\\\\#p}
+\\\\item\\\\relax \\\\externalLink{Headers}{\\\\#header}
+\\\\item\\\\relax \\\\externalLink{Blockquotes}{\\\\#blockquote}
+\\\\item\\\\relax \\\\externalLink{Lists}{\\\\#list}
+\\\\item\\\\relax \\\\externalLink{Code Blocks}{\\\\#precode}
+\\\\item\\\\relax \\\\externalLink{Horizontal Rules}{\\\\#hr}
 \\\\end{itemize}
-\\\\item \\\\externalLink{Span Elements}{\\\\#span}
+\\\\item\\\\relax \\\\externalLink{Span Elements}{\\\\#span}
 
 \\\\begin{itemize}
-\\\\item \\\\externalLink{Links}{\\\\#link}
-\\\\item \\\\externalLink{Emphasis}{\\\\#em}
-\\\\item \\\\externalLink{Code}{\\\\#code}
-\\\\item \\\\externalLink{Images}{\\\\#img}
+\\\\item\\\\relax \\\\externalLink{Links}{\\\\#link}
+\\\\item\\\\relax \\\\externalLink{Emphasis}{\\\\#em}
+\\\\item\\\\relax \\\\externalLink{Code}{\\\\#code}
+\\\\item\\\\relax \\\\externalLink{Images}{\\\\#img}
 \\\\end{itemize}
-\\\\item \\\\externalLink{Miscellaneous}{\\\\#misc}
+\\\\item\\\\relax \\\\externalLink{Miscellaneous}{\\\\#misc}
 
 \\\\begin{itemize}
-\\\\item \\\\externalLink{Backslash Escapes}{\\\\#backslash}
-\\\\item \\\\externalLink{Automatic Links}{\\\\#autolink}
+\\\\item\\\\relax \\\\externalLink{Backslash Escapes}{\\\\#backslash}
+\\\\item\\\\relax \\\\externalLink{Automatic Links}{\\\\#autolink}
 \\\\end{itemize}
 \\\\end{itemize}
 
@@ -18603,12 +18603,12 @@ That is:
 
 
 \\\\begin{itemize}
-\\\\item Square brackets containing the link identifier (optionally
+\\\\item\\\\relax Square brackets containing the link identifier (optionally
 indented from the left margin using up to three spaces);
-\\\\item followed by a colon;
-\\\\item followed by one or more spaces (or tabs);
-\\\\item followed by the URL for the link;
-\\\\item optionally followed by a title attribute for the link, enclosed
+\\\\item\\\\relax followed by a colon;
+\\\\item\\\\relax followed by one or more spaces (or tabs);
+\\\\item\\\\relax followed by the URL for the link;
+\\\\item\\\\relax optionally followed by a title attribute for the link, enclosed
 in double or single quotes.
 \\\\end{itemize}
 
@@ -18992,10 +18992,10 @@ That is:
 
 
 \\\\begin{itemize}
-\\\\item An exclamation mark: \\\\texttt{!};
-\\\\item followed by a set of square brackets, containing the \\\\texttt{alt}
+\\\\item\\\\relax An exclamation mark: \\\\texttt{!};
+\\\\item\\\\relax followed by a set of square brackets, containing the \\\\texttt{alt}
 attribute text for the image;
-\\\\item followed by a set of parentheses, containing the URL or path to
+\\\\item\\\\relax followed by a set of parentheses, containing the URL or path to
 the image, and an optional \\\\texttt{title} attribute enclosed in double
 or single quotes.
 \\\\end{itemize}
@@ -19136,25 +19136,25 @@ exports[`toLaTeX: remark specs mixed-indentation: mixed-indentation 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item Very long
+\\\\item\\\\relax Very long
 paragraph
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item Very long
+\\\\item\\\\relax Very long
 paragraph
 \\\\end{enumerate}
 
 
 \\\\begin{itemize}
-\\\\item Very long
+\\\\item\\\\relax Very long
 paragraph
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item Very long
+\\\\item\\\\relax Very long
 paragraph
 \\\\end{enumerate}
 "
@@ -19254,7 +19254,7 @@ option.
 Block-quotes
 
 \\\\begin{itemize}
-\\\\item With list items.
+\\\\item\\\\relax With list items.
 \\\\end{itemize}
 \\\\end{Quotation}
 
@@ -19266,7 +19266,7 @@ Another block-quote:
 
 \\\\begin{Quotation}
 \\\\begin{enumerate}
-\\\\item And another list.
+\\\\item\\\\relax And another list.
 \\\\end{enumerate}
 \\\\end{Quotation}
 
@@ -19296,9 +19296,9 @@ Asterisks tight:
 
 
 \\\\begin{itemize}
-\\\\item asterisk 1
-\\\\item asterisk 2
-\\\\item asterisk 3
+\\\\item\\\\relax asterisk 1
+\\\\item\\\\relax asterisk 2
+\\\\item\\\\relax asterisk 3
 \\\\end{itemize}
 
 
@@ -19307,9 +19307,9 @@ Asterisks loose:
 
 
 \\\\begin{itemize}
-\\\\item asterisk 1
-\\\\item asterisk 2
-\\\\item asterisk 3
+\\\\item\\\\relax asterisk 1
+\\\\item\\\\relax asterisk 2
+\\\\item\\\\relax asterisk 3
 \\\\end{itemize}
 
 
@@ -19322,9 +19322,9 @@ Pluses tight:
 
 
 \\\\begin{itemize}
-\\\\item Plus 1
-\\\\item Plus 2
-\\\\item Plus 3
+\\\\item\\\\relax Plus 1
+\\\\item\\\\relax Plus 2
+\\\\item\\\\relax Plus 3
 \\\\end{itemize}
 
 
@@ -19333,9 +19333,9 @@ Pluses loose:
 
 
 \\\\begin{itemize}
-\\\\item Plus 1
-\\\\item Plus 2
-\\\\item Plus 3
+\\\\item\\\\relax Plus 1
+\\\\item\\\\relax Plus 2
+\\\\item\\\\relax Plus 3
 \\\\end{itemize}
 
 
@@ -19348,9 +19348,9 @@ Minuses tight:
 
 
 \\\\begin{itemize}
-\\\\item Minus 1
-\\\\item Minus 2
-\\\\item Minus 3
+\\\\item\\\\relax Minus 1
+\\\\item\\\\relax Minus 2
+\\\\item\\\\relax Minus 3
 \\\\end{itemize}
 
 
@@ -19359,9 +19359,9 @@ Minuses loose:
 
 
 \\\\begin{itemize}
-\\\\item Minus 1
-\\\\item Minus 2
-\\\\item Minus 3
+\\\\item\\\\relax Minus 1
+\\\\item\\\\relax Minus 2
+\\\\item\\\\relax Minus 3
 \\\\end{itemize}
 
 
@@ -19373,9 +19373,9 @@ Tight:
 
 
 \\\\begin{enumerate}
-\\\\item First
-\\\\item Second
-\\\\item Third
+\\\\item\\\\relax First
+\\\\item\\\\relax Second
+\\\\item\\\\relax Third
 \\\\end{enumerate}
 
 
@@ -19384,9 +19384,9 @@ and:
 
 
 \\\\begin{enumerate}
-\\\\item One
-\\\\item Two
-\\\\item Three
+\\\\item\\\\relax One
+\\\\item\\\\relax Two
+\\\\item\\\\relax Three
 \\\\end{enumerate}
 
 
@@ -19395,9 +19395,9 @@ Loose using tabs:
 
 
 \\\\begin{enumerate}
-\\\\item First
-\\\\item Second
-\\\\item Third
+\\\\item\\\\relax First
+\\\\item\\\\relax Second
+\\\\item\\\\relax Third
 \\\\end{enumerate}
 
 
@@ -19406,9 +19406,9 @@ and using spaces:
 
 
 \\\\begin{enumerate}
-\\\\item One
-\\\\item Two
-\\\\item Three
+\\\\item\\\\relax One
+\\\\item\\\\relax Two
+\\\\item\\\\relax Three
 \\\\end{enumerate}
 
 
@@ -19417,12 +19417,12 @@ Multiple paragraphs:
 
 
 \\\\begin{enumerate}
-\\\\item Item 1, graf one.
+\\\\item\\\\relax Item 1, graf one.
 
 Item 2. graf two. The quick brown fox jumped over the lazy dog's
 back.
-\\\\item Item 2.
-\\\\item Item 3.
+\\\\item\\\\relax Item 2.
+\\\\item\\\\relax Item 3.
 \\\\end{enumerate}
 
 
@@ -19430,13 +19430,13 @@ back.
 
 
 \\\\begin{itemize}
-\\\\item Tab
+\\\\item\\\\relax Tab
 
 \\\\begin{itemize}
-\\\\item Tab
+\\\\item\\\\relax Tab
 
 \\\\begin{itemize}
-\\\\item Tab
+\\\\item\\\\relax Tab
 \\\\end{itemize}
 \\\\end{itemize}
 \\\\end{itemize}
@@ -19447,15 +19447,15 @@ Here's another:
 
 
 \\\\begin{enumerate}
-\\\\item First
-\\\\item Second:
+\\\\item\\\\relax First
+\\\\item\\\\relax Second:
 
 \\\\begin{itemize}
-\\\\item Fee
-\\\\item Fie
-\\\\item Foe
+\\\\item\\\\relax Fee
+\\\\item\\\\relax Fie
+\\\\item\\\\relax Foe
 \\\\end{itemize}
-\\\\item Third
+\\\\item\\\\relax Third
 \\\\end{enumerate}
 
 
@@ -19464,15 +19464,15 @@ Same thing but with paragraphs:
 
 
 \\\\begin{enumerate}
-\\\\item First
-\\\\item Second:
+\\\\item\\\\relax First
+\\\\item\\\\relax Second:
 
 \\\\begin{itemize}
-\\\\item Fee
-\\\\item Fie
-\\\\item Foe
+\\\\item\\\\relax Fee
+\\\\item\\\\relax Fie
+\\\\item\\\\relax Foe
 \\\\end{itemize}
-\\\\item Third
+\\\\item\\\\relax Third
 \\\\end{enumerate}
 
 
@@ -19481,10 +19481,10 @@ This was an error in Markdown 1.0.1:
 
 
 \\\\begin{itemize}
-\\\\item this
+\\\\item\\\\relax this
 
 \\\\begin{itemize}
-\\\\item sub
+\\\\item\\\\relax sub
 \\\\end{itemize}
 that
 \\\\end{itemize}
@@ -19493,8 +19493,8 @@ that
 
 exports[`toLaTeX: remark specs ordered-different-types: ordered-different-types 1`] = `
 "\\\\begin{enumerate}
-\\\\item foo
-\\\\item bar
+\\\\item\\\\relax foo
+\\\\item\\\\relax bar
 3) baz
 \\\\end{enumerate}
 "
@@ -19731,19 +19731,19 @@ exports[`toLaTeX: remark specs reference-link-with-multiple-definitions: referen
 
 exports[`toLaTeX: remark specs same-bullet: same-bullet 1`] = `
 "\\\\begin{itemize}
-\\\\item test
+\\\\item\\\\relax test
 \\\\end{itemize}
 
 
 
 \\\\begin{itemize}
-\\\\item test
+\\\\item\\\\relax test
 \\\\end{itemize}
 
 
 
 \\\\begin{itemize}
-\\\\item test
+\\\\item\\\\relax test
 \\\\end{itemize}
 "
 `;
@@ -19775,9 +19775,9 @@ Ampersands are escaped only when they would otherwise start an entity:
 
 
 \\\\begin{itemize}
-\\\\item \\\\textbackslash{}©cat \\\\textbackslash{}\\\\& \\\\textbackslash{}\\\\&
-\\\\item \\\\&copycat \\\\&amp; \\\\&\\\\#x26
-\\\\item But: ©cat; \\\\texttt{\\\\&between;} \\\\&foo; \\\\& AT\\\\&T \\\\&c
+\\\\item\\\\relax \\\\textbackslash{}©cat \\\\textbackslash{}\\\\& \\\\textbackslash{}\\\\&
+\\\\item\\\\relax \\\\&copycat \\\\&amp; \\\\&\\\\#x26
+\\\\item\\\\relax But: ©cat; \\\\texttt{\\\\&between;} \\\\&foo; \\\\& AT\\\\&T \\\\&c
 \\\\end{itemize}
 
 
@@ -19829,12 +19829,12 @@ Text under a shortcut reference should be preserved verbatim:
 
 
 \\\\begin{itemize}
-\\\\item [two*three]
-\\\\item [two*three]
-\\\\item [a\\\\textbackslash{}a]
-\\\\item [a\\\\textbackslash{}a]
-\\\\item [a\\\\textbackslash{}\\\\textbackslash{}a]
-\\\\item [a\\\\_a\\\\_a]
+\\\\item\\\\relax [two*three]
+\\\\item\\\\relax [two*three]
+\\\\item\\\\relax [a\\\\textbackslash{}a]
+\\\\item\\\\relax [a\\\\textbackslash{}a]
+\\\\item\\\\relax [a\\\\textbackslash{}\\\\textbackslash{}a]
+\\\\item\\\\relax [a\\\\_a\\\\_a]
 \\\\end{itemize}
 
 
@@ -19847,10 +19847,10 @@ Colon should be escaped in URLs:
 
 
 \\\\begin{itemize}
-\\\\item http\\\\textbackslash{}://user:password@host:port/path?key=value\\\\#fragment
-\\\\item https\\\\textbackslash{}://user:password@host:port/path?key=value\\\\#fragment
-\\\\item http://user:password@host:port/path?key=value\\\\#fragment
-\\\\item https://user:password@host:port/path?key=value\\\\#fragment
+\\\\item\\\\relax http\\\\textbackslash{}://user:password@host:port/path?key=value\\\\#fragment
+\\\\item\\\\relax https\\\\textbackslash{}://user:password@host:port/path?key=value\\\\#fragment
+\\\\item\\\\relax http://user:password@host:port/path?key=value\\\\#fragment
+\\\\item\\\\relax https://user:password@host:port/path?key=value\\\\#fragment
 \\\\end{itemize}
 
 
@@ -19900,10 +19900,10 @@ Open angle bracket should be escaped:
 
 
 \\\\begin{itemize}
-\\\\item \\\\textbackslash{}<div>\\\\textbackslash{}</div>
-\\\\item \\\\textbackslash{}<http\\\\textbackslash{}:google.com>
-\\\\item <div></div>
-\\\\item <http:google.com>
+\\\\item\\\\relax \\\\textbackslash{}<div>\\\\textbackslash{}</div>
+\\\\item\\\\relax \\\\textbackslash{}<http\\\\textbackslash{}:google.com>
+\\\\item\\\\relax <div></div>
+\\\\item\\\\relax <http:google.com>
 \\\\end{itemize}
 "
 `;
@@ -20034,7 +20034,7 @@ first & second \\\\textbackslash{}| second & third \\\\textbackslash{}| \\\\\\\\
 
 exports[`toLaTeX: remark specs table-in-list: table-in-list 1`] = `
 "\\\\begin{itemize}
-\\\\item Unordered:
+\\\\item\\\\relax Unordered:
 
 \\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
@@ -20042,7 +20042,7 @@ A & B \\\\\\\\ \\\\hline
 \\\\rowfont[l]{}
 1 & 2 \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-\\\\item Ordered:
+\\\\item\\\\relax Ordered:
 
 \\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
@@ -20209,9 +20209,9 @@ c3 & \\\\includegraphics{https://zestedesavoir.com/media/galleries/426/56dc4a1e-
 
 exports[`toLaTeX: remark specs tabs: tabs 1`] = `
 "\\\\begin{itemize}
-\\\\item this is a list item
+\\\\item\\\\relax this is a list item
 indented with tabs
-\\\\item this is a list item
+\\\\item\\\\relax this is a list item
 indented with spaces
 \\\\end{itemize}
 
@@ -20253,9 +20253,9 @@ And:
 
 exports[`toLaTeX: remark specs tabs-and-spaces: tabs-and-spaces 1`] = `
 "\\\\begin{itemize}
-\\\\item this is a list item
+\\\\item\\\\relax this is a list item
 indented with tabs
-\\\\item this is a list item
+\\\\item\\\\relax this is a list item
 indented with spaces
 \\\\end{itemize}
 
@@ -20300,14 +20300,14 @@ exports[`toLaTeX: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item [ ]
-\\\\item [	]
+\\\\item\\\\relax [ ]
+\\\\item\\\\relax [	]
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item [x]
-\\\\item [X]
+\\\\item\\\\relax [x]
+\\\\item\\\\relax [X]
 \\\\end{enumerate}
 
 
@@ -20315,14 +20315,14 @@ exports[`toLaTeX: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item 
-\\\\item 
+\\\\item\\\\relax 
+\\\\item\\\\relax 
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item 
-\\\\item 
+\\\\item\\\\relax 
+\\\\item\\\\relax 
 \\\\end{enumerate}
 
 
@@ -20330,14 +20330,14 @@ exports[`toLaTeX: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item 
-\\\\item 
+\\\\item\\\\relax 
+\\\\item\\\\relax 
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item 
-\\\\item 
+\\\\item\\\\relax 
+\\\\item\\\\relax 
 \\\\end{enumerate}
 
 
@@ -20345,14 +20345,14 @@ exports[`toLaTeX: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item [ ]Hello;
-\\\\item [	]World;
+\\\\item\\\\relax [ ]Hello;
+\\\\item\\\\relax [	]World;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item [x]Foo.
-\\\\item [X]Bar
+\\\\item\\\\relax [x]Foo.
+\\\\item\\\\relax [X]Bar
 \\\\end{enumerate}
 
 
@@ -20360,14 +20360,14 @@ exports[`toLaTeX: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item Hello;
-\\\\item World;
+\\\\item\\\\relax Hello;
+\\\\item\\\\relax World;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item Foo.
-\\\\item World :D
+\\\\item\\\\relax Foo.
+\\\\item\\\\relax World :D
 \\\\end{enumerate}
 
 
@@ -20375,14 +20375,14 @@ exports[`toLaTeX: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item Hello;
-\\\\item World;
+\\\\item\\\\relax Hello;
+\\\\item\\\\relax World;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item Foo.
-\\\\item Hello.
+\\\\item\\\\relax Foo.
+\\\\item\\\\relax Hello.
 \\\\end{enumerate}
 
 
@@ -20390,18 +20390,18 @@ exports[`toLaTeX: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 Hello;
 \\\\end{CodeBlock}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 World;
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item Foo.
-\\\\item Bar.
+\\\\item\\\\relax Foo.
+\\\\item\\\\relax Bar.
 \\\\end{enumerate}
 
 
@@ -20409,20 +20409,20 @@ World;
 
 
 \\\\begin{itemize}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 Hello;
 \\\\end{CodeBlock}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 World;
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 Foo.
 \\\\end{CodeBlock}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 Bar.
 \\\\end{CodeBlock}
 \\\\end{enumerate}
@@ -20432,29 +20432,29 @@ Bar.
 
 
 \\\\begin{itemize}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
     Hello;
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 World;
 \\\\end{CodeBlock}
 \\\\end{enumerate}
 
 
 \\\\begin{itemize}
-\\\\item \\\\begin{CodeBlock}{text}
+\\\\item\\\\relax \\\\begin{CodeBlock}{text}
 	Hello;
 \\\\end{CodeBlock}
-\\\\item World.
+\\\\item\\\\relax World.
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item Bar.
+\\\\item\\\\relax Bar.
 \\\\end{enumerate}
 
 
@@ -20462,13 +20462,13 @@ World;
 
 
 \\\\begin{itemize}
-\\\\item [
+\\\\item\\\\relax [
 ] Hello;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item [
+\\\\item\\\\relax [
 ] Hello;
 \\\\end{enumerate}
 
@@ -20477,75 +20477,75 @@ World;
 
 
 \\\\begin{itemize}
-\\\\item [  ] Hello;
+\\\\item\\\\relax [  ] Hello;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item [
+\\\\item\\\\relax [
 ] World;
-\\\\item [		] Hello;
-\\\\item [ 	 ] World.
+\\\\item\\\\relax [		] Hello;
+\\\\item\\\\relax [ 	 ] World.
 \\\\end{enumerate}
 "
 `;
 
 exports[`toLaTeX: remark specs task-list-ordered: task-list-ordered 1`] = `
 "\\\\begin{enumerate}
-\\\\item Mercury;
-\\\\item [] Venus (this one’s invalid);
-\\\\item Earth:
+\\\\item\\\\relax Mercury;
+\\\\item\\\\relax [] Venus (this one’s invalid);
+\\\\item\\\\relax Earth:
 
 \\\\begin{enumerate}
-\\\\item Moon.
+\\\\item\\\\relax Moon.
 \\\\end{enumerate}
-\\\\item Mars;
-\\\\item [] Neptune (this one’s also invalid).
+\\\\item\\\\relax Mars;
+\\\\item\\\\relax [] Neptune (this one’s also invalid).
 \\\\end{enumerate}
 "
 `;
 
 exports[`toLaTeX: remark specs task-list-unordered-asterisk: task-list-unordered-asterisk 1`] = `
 "\\\\begin{itemize}
-\\\\item Mercury;
-\\\\item [] Venus (this one’s invalid);
-\\\\item Earth:
+\\\\item\\\\relax Mercury;
+\\\\item\\\\relax [] Venus (this one’s invalid);
+\\\\item\\\\relax Earth:
 
 \\\\begin{itemize}
-\\\\item Moon.
+\\\\item\\\\relax Moon.
 \\\\end{itemize}
-\\\\item Mars;
-\\\\item [] Neptune (this one’s also invalid).
+\\\\item\\\\relax Mars;
+\\\\item\\\\relax [] Neptune (this one’s also invalid).
 \\\\end{itemize}
 "
 `;
 
 exports[`toLaTeX: remark specs task-list-unordered-dash: task-list-unordered-dash 1`] = `
 "\\\\begin{itemize}
-\\\\item Mercury;
-\\\\item [] Venus (this one’s invalid);
-\\\\item Earth:
+\\\\item\\\\relax Mercury;
+\\\\item\\\\relax [] Venus (this one’s invalid);
+\\\\item\\\\relax Earth:
 
 \\\\begin{itemize}
-\\\\item Moon.
+\\\\item\\\\relax Moon.
 \\\\end{itemize}
-\\\\item Mars;
-\\\\item [] Neptune (this one’s also invalid).
+\\\\item\\\\relax Mars;
+\\\\item\\\\relax [] Neptune (this one’s also invalid).
 \\\\end{itemize}
 "
 `;
 
 exports[`toLaTeX: remark specs task-list-unordered-plus: task-list-unordered-plus 1`] = `
 "\\\\begin{itemize}
-\\\\item Mercury;
-\\\\item [] Venus (this one’s invalid);
-\\\\item Earth:
+\\\\item\\\\relax Mercury;
+\\\\item\\\\relax [] Venus (this one’s invalid);
+\\\\item\\\\relax Earth:
 
 \\\\begin{itemize}
-\\\\item Moon.
+\\\\item\\\\relax Moon.
 \\\\end{itemize}
-\\\\item Mars;
-\\\\item [] Neptune (this one’s also invalid).
+\\\\item\\\\relax Mars;
+\\\\item\\\\relax [] Neptune (this one’s also invalid).
 \\\\end{itemize}
 "
 `;
@@ -20555,9 +20555,9 @@ exports[`toLaTeX: remark specs tidyness: tidyness 1`] = `
 A list within a blockquote:
 
 \\\\begin{itemize}
-\\\\item asterisk 1
-\\\\item asterisk 2
-\\\\item asterisk 3
+\\\\item\\\\relax asterisk 1
+\\\\item\\\\relax asterisk 2
+\\\\item\\\\relax asterisk 3
 \\\\end{itemize}
 \\\\end{Quotation}
 
@@ -20750,7 +20750,7 @@ hello world
 
 
 \\\\begin{itemize}
-\\\\item how are you
+\\\\item\\\\relax how are you
 \\\\end{itemize}
 
 
@@ -20784,7 +20784,7 @@ exports[`toLaTeX: remark specs tricky-list: tricky-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item hello world
+\\\\item\\\\relax hello world
 \\\\end{itemize}
 
 
@@ -20793,7 +20793,7 @@ exports[`toLaTeX: remark specs tricky-list: tricky-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item hello world
+\\\\item\\\\relax hello world
 \\\\end{itemize}
 
 
@@ -20802,7 +20802,7 @@ exports[`toLaTeX: remark specs tricky-list: tricky-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item Hello world
+\\\\item\\\\relax Hello world
 \\\\end{itemize}
 
 
@@ -20811,7 +20811,7 @@ exports[`toLaTeX: remark specs tricky-list: tricky-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item hello world
+\\\\item\\\\relax hello world
 \\\\end{itemize}
 "
 `;

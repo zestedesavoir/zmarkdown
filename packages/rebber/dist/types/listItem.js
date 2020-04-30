@@ -3,7 +3,7 @@
 var has = require('has');
 
 var defaultMacro = function defaultMacro(innerText) {
-  return "\\item ".concat(innerText, "\n");
+  return "\\item\\relax ".concat(innerText, "\n");
 };
 
 module.exports = listItem;

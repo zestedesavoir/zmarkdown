@@ -1,6 +1,6 @@
 const has = require('has')
 
-const defaultMacro = (innerText) => `\\item ${innerText}\n`
+const defaultMacro = (innerText) => `\\item\\relax ${innerText}\n`
 
 module.exports = listItem
 

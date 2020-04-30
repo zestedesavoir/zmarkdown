@@ -22,9 +22,8 @@ var defaultEscapes = {
   '{': '\\{',
   '}': '\\}',
   '~': '\\textasciitilde{}'
-  /* Encode special characters in `value`. */
-
 };
+/* Encode special characters in `value`. */
 
 function encode(value) {
   var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
