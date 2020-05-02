@@ -20,6 +20,7 @@ require('katex/dist/contrib/mhchem')
 const postProcessorList = {
   iframeWrappers:   require('../postprocessors/html-iframe-wrappers'),
   footnotesReorder: require('../postprocessors/html-footnotes-reorder'),
+  codeHighlight:    require('../postprocessors/html-code-highlight'),
 }
 
 module.exports = (tokenizer, config) => {

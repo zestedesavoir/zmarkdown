@@ -1,5 +1,6 @@
 module.exports = code
 
+const attrsParser = require('md-attr-parser')
 const detab = require('detab')
 
 const codeNodeConstructor = (lang, value) => {
@@ -53,38 +54,6 @@ const lineNumberElemConstructor = (count, hl) => {
   }
 }
 
-// Parse all attributes on the code block
-const attrsHandler = meta => {
-  const parsedAttrs = {}
-
-  let currentWord = ''
-  let currentProp = ''
-  let quotesFlag = false
-
-  for (let charIndex = 0; charIndex < meta.length; charIndex++) {
-    const currentChar = meta[charIndex]
-
-    // Spaces are separators
-    if (!quotesFlag && currentChar === ' ') {
-      parsedAttrs[currentProp] = currentWord
-      currentProp = currentWord = ''
-    } else if (currentChar === '=') {
-      currentProp = currentWord
-      currentWord = ''
-    // Spaces inside quotes should not break current property
-    } else if (currentChar === '"' || currentChar === '\'') {
-      quotesFlag = !quotesFlag
-    } else {
-      currentWord += currentChar
-    }
-  }
-
-  // Parse the last property if any
-  if (currentProp) parsedAttrs[currentProp] = currentWord
-
-  return parsedAttrs
-}
-
 // Parse ranges for hl_lines
 const rangeHandler = range => {
   const parsedRange = []
@@ -132,18 +101,17 @@ const rangeHandler = range => {
 function code (_, node) {
   const value = node.value ? detab(`${node.value}\n`) : ''
   const lang = node.lang && node.lang.match(/^[^ \t]+(?=[ \t]|$)/)
-  const attrs = attrsHandler(node.meta)
+  const attrs = attrsParser(node.meta).prop
 
   const linenostart = parseInt(attrs.linenostart) || 1
-  // eslint-disable-next-line camelcase
-  const hl_lines = rangeHandler(attrs.hl_lines || '')
+  const hlLines = rangeHandler(attrs.hl_lines || '')
 
   const lineNumberElems = value
     .split('\n')
     .slice(0, -1)
     .map((_, i) => {
       const realLn = i + linenostart
-      return lineNumberElemConstructor(realLn, hl_lines.includes(realLn))
+      return lineNumberElemConstructor(realLn, hlLines.includes(realLn))
     })
 
   return parentDivConstructor([
