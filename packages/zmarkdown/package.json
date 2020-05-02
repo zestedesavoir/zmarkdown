@@ -55,6 +55,7 @@
     "rehype-highlight": "^3.1.0",
     "rehype-html-blocks": "file:../rehype-html-blocks",
     "rehype-katex": "2.0.0",
+    "rehype-parse": "^6.0.2",
     "rehype-postfix-footnote-anchors": "file:../rehype-postfix-footnote-anchors",
     "rehype-sanitize": "^3.0.0",
     "rehype-slug": "^2.0.3",
