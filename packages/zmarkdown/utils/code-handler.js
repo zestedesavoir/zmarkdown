@@ -101,7 +101,7 @@ const rangeHandler = range => {
 function code (_, node) {
   const value = node.value ? detab(`${node.value}\n`) : ''
   const lang = node.lang && node.lang.match(/^[^ \t]+(?=[ \t]|$)/)
-  const attrs = attrsParser(node.meta).prop
+  const attrs = attrsParser(node.meta || '').prop
 
   const linenostart = parseInt(attrs.linenostart) || 1
   const hlLines = rangeHandler(attrs.hl_lines || '')

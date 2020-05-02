@@ -3,12 +3,12 @@
 exports[`Sanitize HTML to prevent XSS advanced XSS 1`] = `"<p>This is [not obvious](   lives\\\\0cript:promp('It works !')) !</p>"`;
 
 exports[`code highlight special cases does not highlight console 1`] = `
-"<div class=\\"hljs-code-div\\"><div class=\\"hljs-line-numbers\\"><span></span></div><pre><code class=\\"language-console\\">echo \\"Hello world\\"
+"<div class=\\"hljs-code-div\\"><div class=\\"hljs-line-numbers\\"><span data-count=\\"1\\"></span></div><pre><code class=\\"language-console\\">echo \\"Hello world\\"
 </code></pre></div>"
 `;
 
 exports[`code highlight special cases highlights latex 1`] = `
-"<div class=\\"hljs-code-div\\"><div class=\\"hljs-line-numbers\\"><span></span><span></span><span></span><span></span></div><pre><code class=\\"hljs language-latex\\"><span class=\\"hljs-tag\\">\\\\<span class=\\"hljs-name\\">usepackage</span><span class=\\"hljs-string\\">{inputenc}</span><span class=\\"hljs-string\\">[utf8]</span></span>
+"<div class=\\"hljs-code-div\\"><div class=\\"hljs-line-numbers\\"><span data-count=\\"1\\"></span><span data-count=\\"2\\"></span><span data-count=\\"3\\"></span><span data-count=\\"4\\"></span></div><pre><code class=\\"hljs language-latex\\"><span class=\\"hljs-tag\\">\\\\<span class=\\"hljs-name\\">usepackage</span><span class=\\"hljs-string\\">{inputenc}</span><span class=\\"hljs-string\\">[utf8]</span></span>
 <span class=\\"hljs-tag\\">\\\\<span class=\\"hljs-name\\">begin</span><span class=\\"hljs-string\\">{document}</span></span>
 <span class=\\"hljs-tag\\">\\\\<span class=\\"hljs-name\\">texttt</span><span class=\\"hljs-string\\">{code}</span></span>
 <span class=\\"hljs-tag\\">\\\\<span class=\\"hljs-name\\">end</span><span class=\\"hljs-string\\">{document}</span></span>

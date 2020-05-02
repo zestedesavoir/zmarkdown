@@ -14,9 +14,12 @@ defaultMdastConfig.disableTokenizers = {
 defaultMdastConfig.ping.pingUsername = () => false
 
 defaultHtmlConfig.disableTokenizers = {
-  internal: ['lineNumbers', 'highlight'],
+  internal: ['highlight'],
 }
 defaultHtmlConfig.postfixFootnotes = '-shortId'
+// Remove custom handlers (only code for now)
+defaultHtmlConfig.bridge.handlers = {}
+defaultHtmlConfig.postProcessors.codeHighlight = false
 
 module.exports.defaultMdastConfig = defaultMdastConfig
 
