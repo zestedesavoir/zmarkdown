@@ -31,19 +31,32 @@ module.exports = function inlinePlugin (ctx) {
   function locator (value, fromIndex) {
     let lowestMatch = -1
 
+    // Iterate on chars
     for (let c = 0; c < firstChars.length; c++) {
       const char = firstChars[c]
-      let match = value.indexOf(char, fromIndex)
+      let offset = 0
+      let match = -1
 
-      if (match === -1 && char !== char.toUpperCase()) {
-        match = value.indexOf(char.toUpperCase(), fromIndex)
+      // Oftentimes, the first occurence is not good, so loop on all possible ones
+      while (match === -1 && offset < (value.length - 1)) {
+        match = value.indexOf(char, fromIndex + offset)
+
+        // Also match uppercase
+        if (match === -1 && char !== char.toUpperCase()) {
+          match = value.indexOf(char.toUpperCase(), fromIndex + offset)
+        }
+
+        if (match === -1) {
+          break
+        // A smiley should be precedeed by at least one whitespace
+        } else if (!whitespace(value[match - 1])) {
+          offset = match
+          match = -1
+        }
       }
 
-      if (match !== -1) {
-        // A smiley should be precedeed by at least one whitespace
-        if (whitespace(value[match - 1]) && (lowestMatch === -1 || match < lowestMatch)) {
-          lowestMatch = match
-        }
+      if (match !== -1 && (lowestMatch === -1 || match < lowestMatch)) {
+        lowestMatch = match
       }
     }
 
@@ -52,35 +65,34 @@ module.exports = function inlinePlugin (ctx) {
 
   function inlineTokenizer (eat, value, silent) {
     const keep = regex.exec(value)
-    if (keep) {
-      if (keep.index !== 0) return true
-      if (!keep[0].startsWith(keep[1])) return true
 
-      /* istanbul ignore if - never used (yet) */
-      if (silent) return true
+    if (!keep || keep.index !== 0) return true
+    if (!keep[0].startsWith(keep[1])) return true
 
-      const toEat = keep[1]
-      const emoticon = toEat.trim()
-      const src = emoticons[emoticon.toLowerCase()]
+    /* istanbul ignore if - never used (yet) */
+    if (silent) return true
 
-      const emoticonNode = {
-        type: 'emoticon',
-        value: emoticon,
-        data: {
-          hName: 'img',
-          hProperties: {
-            src: src,
-            alt: emoticon,
-          },
+    const toEat = keep[1]
+    const emoticon = toEat.trim()
+    const src = emoticons[emoticon.toLowerCase()]
+
+    const emoticonNode = {
+      type: 'emoticon',
+      value: emoticon,
+      data: {
+        hName: 'img',
+        hProperties: {
+          src: src,
+          alt: emoticon,
         },
-      }
-
-      if (emoticonClasses) {
-        emoticonNode.data.hProperties.class = emoticonClasses
-      }
-
-      eat(toEat)(emoticonNode)
+      },
     }
+
+    if (emoticonClasses) {
+      emoticonNode.data.hProperties.class = emoticonClasses
+    }
+
+    eat(toEat)(emoticonNode)
   }
 
   inlineTokenizer.locator = locator

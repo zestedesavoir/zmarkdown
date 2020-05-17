@@ -29,21 +29,30 @@ module.exports = function inlinePlugin(ctx) {
   var regex = new RegExp("(?:\\s|^)(".concat(pattern, ")(?:\\s|$)"), 'i');
 
   function locator(value, fromIndex) {
-    var lowestMatch = -1;
+    var lowestMatch = -1; // Iterate on chars
 
     for (var c = 0; c < firstChars.length; c++) {
       var _char = firstChars[c];
-      var match = value.indexOf(_char, fromIndex);
+      var offset = 0;
+      var match = -1; // Oftentimes, the first occurence is not good, so loop on all possible ones
 
-      if (match === -1 && _char !== _char.toUpperCase()) {
-        match = value.indexOf(_char.toUpperCase(), fromIndex);
+      while (match === -1 && offset < value.length - 1) {
+        match = value.indexOf(_char, fromIndex + offset); // Also match uppercase
+
+        if (match === -1 && _char !== _char.toUpperCase()) {
+          match = value.indexOf(_char.toUpperCase(), fromIndex + offset);
+        }
+
+        if (match === -1) {
+          break; // A smiley should be precedeed by at least one whitespace
+        } else if (!whitespace(value[match - 1])) {
+          offset = match;
+          match = -1;
+        }
       }
 
-      if (match !== -1) {
-        // A smiley should be precedeed by at least one whitespace
-        if (whitespace(value[match - 1]) && (lowestMatch === -1 || match > lowestMatch)) {
-          lowestMatch = match;
-        }
+      if (match !== -1 && (lowestMatch === -1 || match < lowestMatch)) {
+        lowestMatch = match;
       }
     }
 
@@ -52,34 +61,31 @@ module.exports = function inlinePlugin(ctx) {
 
   function inlineTokenizer(eat, value, silent) {
     var keep = regex.exec(value);
+    if (!keep || keep.index !== 0) return true;
+    if (!keep[0].startsWith(keep[1])) return true;
+    /* istanbul ignore if - never used (yet) */
 
-    if (keep) {
-      if (keep.index !== 0) return true;
-      if (!keep[0].startsWith(keep[1])) return true;
-      /* istanbul ignore if - never used (yet) */
-
-      if (silent) return true;
-      var toEat = keep[1];
-      var emoticon = toEat.trim();
-      var src = emoticons[emoticon.toLowerCase()];
-      var emoticonNode = {
-        type: 'emoticon',
-        value: emoticon,
-        data: {
-          hName: 'img',
-          hProperties: {
-            src: src,
-            alt: emoticon
-          }
+    if (silent) return true;
+    var toEat = keep[1];
+    var emoticon = toEat.trim();
+    var src = emoticons[emoticon.toLowerCase()];
+    var emoticonNode = {
+      type: 'emoticon',
+      value: emoticon,
+      data: {
+        hName: 'img',
+        hProperties: {
+          src: src,
+          alt: emoticon
         }
-      };
-
-      if (emoticonClasses) {
-        emoticonNode.data.hProperties["class"] = emoticonClasses;
       }
+    };
 
-      eat(toEat)(emoticonNode);
+    if (emoticonClasses) {
+      emoticonNode.data.hProperties["class"] = emoticonClasses;
     }
+
+    eat(toEat)(emoticonNode);
   }
 
   inlineTokenizer.locator = locator;

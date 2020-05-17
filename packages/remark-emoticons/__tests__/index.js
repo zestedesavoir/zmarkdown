@@ -98,6 +98,14 @@ test('confusable locators', () => {
   expect((contents.match(/<img/g) || []).length).toBe(3)
 })
 
+test('multiple chars no match', () => {
+  const {contents} = render(dedent`
+    this contains an o_O
+  `)
+
+  expect((contents.match(/<img/g) || []).length).toBe(1)
+})
+
 test('unicode emoticons', () => {
   const {contents} = render(dedent`
     🧐
