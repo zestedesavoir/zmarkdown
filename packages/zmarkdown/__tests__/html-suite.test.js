@@ -302,7 +302,7 @@ describe('code highlight special cases', () => {
     `
 
     const result = await renderString(input)
-    expect((result.match(/class="hll"/g) || []).length).toBe(4)
+    expect((result.match(/class="hll"/g) || []).length).toBe(2)
     expect(result).toMatchSnapshot()
   })
 
@@ -318,13 +318,13 @@ describe('code highlight special cases', () => {
     `
 
     const result = await renderString(input)
-    expect((result.match(/class="hll"/g) || []).length).toBe(4)
+    expect((result.match(/class="hll"/g) || []).length).toBe(2)
     expect(result).toMatchSnapshot()
   })
 
   it('supports hl_lines - interval syntax', async () => {
     const input = dedent `
-      \`\`\`python hl_lines=1-2
+      \`\`\`python hl_lines=1-3
       def main():
         print('It\'s amazing!')
       
@@ -334,7 +334,7 @@ describe('code highlight special cases', () => {
     `
 
     const result = await renderString(input)
-    expect((result.match(/class="hll"/g) || []).length).toBe(4)
+    expect((result.match(/class="hll"/g) || []).length).toBe(3)
     expect(result).toMatchSnapshot()
   })
 

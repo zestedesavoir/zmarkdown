@@ -27,6 +27,5 @@ module.exports = {
   postProcessors: {
     iframeWrappers:   require('./iframe-wrappers'),
     footnotesReorder: true,
-    codeHighlight:    true,
   },
 }
