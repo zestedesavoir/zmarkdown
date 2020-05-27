@@ -24,7 +24,7 @@
     "html-differ": "^1.4.0",
     "jest": "^25.1.0",
     "jest-environment-node-debug": "^2.0.0",
-    "lerna": "^3.20.2",
+    "lerna": "^3.22.0",
     "mdast-util-to-hast": "^7.0.0",
     "parallel-webpack": "^2.4.0",
     "rehype-stringify": "^6.0.1",

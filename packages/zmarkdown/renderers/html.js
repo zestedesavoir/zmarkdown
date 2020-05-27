@@ -4,7 +4,6 @@ const remark2rehype   = require('remark-rehype')
 const rehypeStringify = require('rehype-stringify')
 
 const defaultStringifierList = {
-  lineNumbers:      require('../plugins/rehype-line-numbers'),
   highlight:        require('rehype-highlight'),
   slug:             require('rehype-slug'),
   autolinkHeadings: require('rehype-autolink-headings'),

@@ -7,6 +7,9 @@ module.exports = {
 
   bridge: {
     allowDangerousHTML: true,
+    handlers:           {
+      code: require('../../utils/code-handler'),
+    },
   },
 
   footnotesTitles: 'Retourner au texte de la note $id',

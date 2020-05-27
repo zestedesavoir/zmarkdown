@@ -7,7 +7,7 @@ module.exports = merge.all([gh, katex, {
   attributes: {
     a:      ['ariaHidden', 'class', 'className'],
     div:    ['id', 'class', 'className'],
-    span:   ['id'],
+    span:   ['id', 'data-count', 'class', 'className'],
     h1:     ['ariaHidden'],
     h2:     ['ariaHidden'],
     h3:     ['ariaHidden'],

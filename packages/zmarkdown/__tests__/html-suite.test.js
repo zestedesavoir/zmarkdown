@@ -243,6 +243,10 @@ describe('pedantic mode disabled', () => {
 describe('code highlight special cases', () => {
   beforeEach(() => {
     defaultHtmlConfig.disableTokenizers.internal = []
+    defaultHtmlConfig.bridge.handlers = {
+      code: require('../utils/code-handler'),
+    }
+    defaultHtmlConfig.postProcessors.codeHighlight = true
   })
 
   it('does not highlight console', () => {
@@ -286,8 +290,104 @@ describe('code highlight special cases', () => {
     expect(result2).toBe(result1)
   })
 
+  it('supports hl_lines - spaced syntax', async () => {
+    const input = dedent `
+      \`\`\`python hl_lines="4 5"
+      def main():
+        print('It\'s amazing!')
+      
+      def unused():
+        print('Please use me!')
+      \`\`\`
+    `
+
+    const result = await renderString(input)
+    expect((result.match(/class="hll"/g) || []).length).toBe(2)
+    expect(result).toMatchSnapshot()
+  })
+
+  it('supports hl_lines - comma syntax', async () => {
+    const input = dedent `
+      \`\`\`python hl_lines=4,5
+      def main():
+        print('It\'s amazing!')
+      
+      def unused():
+        print('Please use me!')
+      \`\`\`
+    `
+
+    const result = await renderString(input)
+    expect((result.match(/class="hll"/g) || []).length).toBe(2)
+    expect(result).toMatchSnapshot()
+  })
+
+  it('supports hl_lines - interval syntax', async () => {
+    const input = dedent `
+      \`\`\`python hl_lines=1-3
+      def main():
+        print('It\'s amazing!')
+      
+      def unused():
+        print('Please use me!')
+      \`\`\`
+    `
+
+    const result = await renderString(input)
+    expect((result.match(/class="hll"/g) || []).length).toBe(3)
+    expect(result).toMatchSnapshot()
+  })
+
+  it('supports linenostart', async () => {
+    const input = dedent `
+      \`\`\`python linenostart=3
+      def main():
+        print('It\'s amazing!')
+      
+      def unused():
+        print('Please use me!')
+      \`\`\`
+    `
+
+    const result = await renderString(input)
+    expect(result).not.toContain('data-count="1"')
+    expect(result).toMatchSnapshot()
+  })
+
+  it('supports both hl_lines and linenostart', () => {
+    const input = dedent `
+      \`\`\`python hl_lines=4 linenostart=3
+      def main():
+        print('It\'s amazing!')
+      
+      def unused():
+        print('Please use me!')
+      \`\`\`
+    `
+
+    expect(renderString(input)).resolves.toMatchSnapshot()
+  })
+
+  it('discards unused attributes', async () => {
+    const input = dedent `
+      \`\`\`python none hl_lines
+      def main():
+        print('It\'s amazing!')
+      
+      def unused():
+        print('Please use me!')
+      \`\`\`
+    `
+
+    const result = await renderString(input)
+    expect(result).not.toContain('class="hll"')
+    expect(result).toMatchSnapshot()
+  })
+
   afterEach(() => {
-    defaultHtmlConfig.disableTokenizers.internal = ['lineNumbers', 'highlight']
+    defaultHtmlConfig.disableTokenizers.internal = ['highlight']
+    defaultHtmlConfig.bridge.handlers = {}
+    defaultHtmlConfig.postProcessors.codeHighlight = false
   })
 })
 
