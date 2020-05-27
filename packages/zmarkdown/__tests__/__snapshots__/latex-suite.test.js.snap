@@ -289,16 +289,16 @@ exports[`link with special characters 1`] = `"\\\\externalLink{foo}{http://examp
 
 exports[`list 1`] = `
 "\\\\begin{itemize}
-\\\\item an
-\\\\item \\\\textbf{unordered}
-\\\\item list
+\\\\item\\\\relax an
+\\\\item\\\\relax \\\\textbf{unordered}
+\\\\item\\\\relax list
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item an
-\\\\item \\\\CodeInline{ordered}
-\\\\item list
+\\\\item\\\\relax an
+\\\\item\\\\relax \\\\CodeInline{ordered}
+\\\\item\\\\relax list
 \\\\end{enumerate}"
 `;
 
@@ -477,8 +477,8 @@ exports[`mix-3 1`] = `
 
 {\\\\raggedleft
 \\\\begin{itemize}
-\\\\item item
-\\\\item item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
 \\\\end{itemize}
 }
 
@@ -488,9 +488,9 @@ exports[`mix-3 1`] = `
 
 
 {\\\\centering \\\\begin{itemize}
-\\\\item item
-\\\\item item
-\\\\item item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
 \\\\end{itemize}
 }
 
@@ -501,9 +501,9 @@ exports[`mix-3 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item item
-\\\\item item
-\\\\item item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
 \\\\end{itemize}"
 `;
 

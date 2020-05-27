@@ -652,16 +652,16 @@ exports[`link-prepend 1`] = `
 
 exports[`list 1`] = `
 "\\\\begin{itemize}
-\\\\item an
-\\\\item \\\\textbf{unordered}
-\\\\item list
+\\\\item\\\\relax an
+\\\\item\\\\relax \\\\textbf{unordered}
+\\\\item\\\\relax list
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item an
-\\\\item \\\\texttt{ordered}
-\\\\item list
+\\\\item\\\\relax an
+\\\\item\\\\relax \\\\texttt{ordered}
+\\\\item\\\\relax list
 \\\\end{enumerate}"
 `;
 
@@ -840,8 +840,8 @@ exports[`mix-3 1`] = `
 
 {\\\\raggedleft
 \\\\begin{itemize}
-\\\\item item
-\\\\item item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
 \\\\end{itemize}
 }
 
@@ -851,9 +851,9 @@ exports[`mix-3 1`] = `
 
 
 {\\\\centering \\\\begin{itemize}
-\\\\item item
-\\\\item item
-\\\\item item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
 \\\\end{itemize}
 }
 
@@ -864,9 +864,9 @@ exports[`mix-3 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item item
-\\\\item item
-\\\\item item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
+\\\\item\\\\relax item
 \\\\end{itemize}"
 `;
 
