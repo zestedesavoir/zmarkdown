@@ -12,7 +12,6 @@ const defaultMdastConfig = require('../config/mdast')
 const defaultHtmlConfig  = require('../config/html')
 
 const defaultStringifierList = {
-  lineNumbers:      require('../plugins/rehype-line-numbers'),
   slug:             require('rehype-slug'),
   autolinkHeadings: require('rehype-autolink-headings'),
   footnotesTitles:  require('rehype-footnotes-title'),
