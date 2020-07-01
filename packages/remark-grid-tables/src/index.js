@@ -15,41 +15,41 @@ module.exports = plugin
 
 // A small class helping table generation
 class Table {
-  constructor(linesInfos) {
+  constructor (linesInfos) {
     this.parts = []
     this.linesInfos = linesInfos
     this.addPart()
   }
 
-  lastPart() {
+  lastPart () {
     return this.parts[this.parts.length - 1]
   }
 
-  addPart() {
+  addPart () {
     this.parts.push(new TablePart(this.linesInfos))
   }
 }
 
 class TablePart {
-  constructor(linesInfos) {
+  constructor (linesInfos) {
     this.rows = []
     this.linesInfos = linesInfos
     this.addRow()
   }
 
-  addRow() {
+  addRow () {
     this.rows.push(new TableRow(this.linesInfos))
   }
 
-  removeLastRow() {
+  removeLastRow () {
     this.rows.pop()
   }
 
-  lastRow() {
+  lastRow () {
     return this.rows[this.rows.length - 1]
   }
 
-  updateWithMainLine(line, isEndLine) {
+  updateWithMainLine (line, isEndLine) {
     // Update last row according to a line.
     const mergeChars = isEndLine ? '+|' : '|'
     const newCells = [this.lastRow().cells[0]]
@@ -80,7 +80,7 @@ class TablePart {
     this.lastRow().cells = newCells
   }
 
-  updateWithPartLine(line) {
+  updateWithPartLine (line) {
     // Get cells not finished
     const remainingCells = []
 
@@ -156,7 +156,7 @@ class TablePart {
 }
 
 class TableRow {
-  constructor(linesInfos) {
+  constructor (linesInfos) {
     this.linesInfos = linesInfos
     this.cells = linesInfos
       .slice(0, -1)
@@ -169,7 +169,7 @@ class TableRow {
       )
   }
 
-  updateContent(line) {
+  updateContent (line) {
     this.cells.forEach((cell, c) => {
       cell.lines.push(
         substringLine(
@@ -183,7 +183,7 @@ class TableRow {
 }
 
 class TableCell {
-  constructor(startPosition, endPosition) {
+  constructor (startPosition, endPosition) {
     this.startPosition = startPosition
     this.endPosition = endPosition
     this.colspan = 1
@@ -191,7 +191,7 @@ class TableCell {
     this.lines = []
   }
 
-  mergeWith(other) {
+  mergeWith (other) {
     this.endPosition = other.endPosition
     this.colspan += other.colspan
 
@@ -201,7 +201,7 @@ class TableCell {
   }
 }
 
-function findIndexOrLast(
+function findIndexOrLast (
   arr,
   conditionFunction,
   modifier = 0
@@ -211,26 +211,26 @@ function findIndexOrLast(
   return i < 0 ? arr.length + modifier : i
 }
 
-function merge(beforeTable, gridTable, afterTable) {
+function merge (beforeTable, gridTable, afterTable) {
   // get the eaten text
   return []
     .concat(beforeTable, gridTable, afterTable)
     .join('\n')
 }
 
-function isSeparationLine(line) {
+function isSeparationLine (line) {
   return separationLineRegex.exec(line)
 }
 
-function isHeaderLine(line) {
+function isHeaderLine (line) {
   return headerLineRegex.exec(line)
 }
 
-function isPartLine(line) {
+function isPartLine (line) {
   return partLineRegex.exec(line)
 }
 
-function findAll(str, characters) {
+function findAll (str, characters) {
   let current = 0
   const content = splitter.splitGraphemes(str)
 
@@ -244,11 +244,11 @@ function findAll(str, characters) {
   }, [])
 }
 
-function computePlainLineColumnsStartingPositions(line) {
+function computePlainLineColumnsStartingPositions (line) {
   return findAll(line, '+|')
 }
 
-function mergeColumnsStartingPositions(allPos) {
+function mergeColumnsStartingPositions (allPos) {
   // Get all starting positions, allPos is an array of array of positions
   return allPos
     .flat()
@@ -262,7 +262,7 @@ function mergeColumnsStartingPositions(allPos) {
     .sort((a, b) => a - b)
 }
 
-function computeColumnStartingPositions(lines) {
+function computeColumnStartingPositions (lines) {
   const linesInfo = lines
     .filter(
       (line) => isHeaderLine(line) || isPartLine(line)
@@ -274,7 +274,7 @@ function computeColumnStartingPositions(lines) {
   return mergeColumnsStartingPositions(linesInfo)
 }
 
-function isCodePointPosition(line, pos) {
+function isCodePointPosition (line, pos) {
   const content = splitter.splitGraphemes(line)
   let offset = 0
 
@@ -294,7 +294,7 @@ function isCodePointPosition(line, pos) {
   return true
 }
 
-function substringLine(line, start, end) {
+function substringLine (line, start, end) {
   end = end || start + 1
 
   const content = splitter.splitGraphemes(line)
@@ -316,11 +316,11 @@ function substringLine(line, start, end) {
   return str
 }
 
-function extractTable(value, eat, tokenizer) {
+function extractTable (value, eat, tokenizer) {
   // Extract lines before the grid table
   const markdownLines = value.split('\n')
 
-  let markdownStart = findIndexOrLast(
+  const markdownStart = findIndexOrLast(
     markdownLines,
     (line) =>
       isSeparationLine(line) || stringWidth(line) === 0,
@@ -334,8 +334,9 @@ function extractTable(value, eat, tokenizer) {
   )
 
   // Extract table
-  if (!possibleGridTable[markdownStart + 1])
+  if (!possibleGridTable[markdownStart + 1]) {
     return [null, null, null, null]
+  }
 
   const gridTable = []
   const realGridTable = []
@@ -373,12 +374,12 @@ function extractTable(value, eat, tokenizer) {
   ) {
     // Remove lines not in the table
     const index = findIndexOrLast(
-      gridTable.slice().reverse(), //slice is to reverse a copy of the array
+      gridTable.slice().reverse(), // slice is to reverse a copy of the array
       (line) => isSeparationLine(line),
       0
     )
 
-    markdownStop -= gridTable.splice(index - 1).length //splice return the deleted elements
+    markdownStop -= gridTable.splice(index - 1).length // splice return the deleted elements
   }
 
   // Extract lines after table
@@ -399,7 +400,7 @@ function extractTable(value, eat, tokenizer) {
   ]
 }
 
-function extractTableContent(lines, linesInfos, hasHeader) {
+function extractTableContent (lines, linesInfos, hasHeader) {
   const table = new Table(linesInfos)
 
   lines.forEach((line, lineIndex) => {
@@ -439,7 +440,7 @@ function extractTableContent(lines, linesInfos, hasHeader) {
   return table
 }
 
-function generateTable(tableContent, now, tokenizer) {
+function generateTable (tableContent, now, tokenizer) {
   // Generate the gridTable node to insert in the AST
   const tableElt = {
     type: 'gridTable',
@@ -542,8 +543,8 @@ function generateTable(tableContent, now, tokenizer) {
   return tableElt
 }
 
-function gridTableTokenizer(eat, value, silent) {
-  let index = findIndexOrLast(
+function gridTableTokenizer (eat, value, silent) {
+  const index = findIndexOrLast(
     value.split(),
     (character) => character !== ' ' && character !== '\t'
   )
@@ -602,8 +603,8 @@ function gridTableTokenizer(eat, value, silent) {
   return eat(merged)(wrapperBlock)
 }
 
-function deleteWrapperBlock() {
-  return function one(node, index, parent) {
+function deleteWrapperBlock () {
+  return function one (node, index, parent) {
     if (!node.children) return
 
     let replace = false
@@ -631,12 +632,12 @@ function deleteWrapperBlock() {
   }
 }
 
-function transformer(tree) {
+function transformer (tree) {
   // Remove the temporary block in which we previously wrapped the table parts
   visit(tree, deleteWrapperBlock())
 }
 
-function createGrid(nbRows, nbCols) {
+function createGrid (nbRows, nbCols) {
   const grid = []
 
   for (let i = 0; i < nbRows; i++) {
@@ -654,7 +655,7 @@ function createGrid(nbRows, nbCols) {
   return grid
 }
 
-function setWidth(grid, i, j, cols) {
+function setWidth (grid, i, j, cols) {
   /* To do it, we put enougth space to write the text.
    * For multi-cell, we divid it among the cells. */
   let tmpWidth =
@@ -674,7 +675,7 @@ function setWidth(grid, i, j, cols) {
   })
 }
 
-function setHeight(grid, i, j, values) {
+function setHeight (grid, i, j, values) {
   // To do it, we count the line. Extra length to cell with a pipe
   // in the value of the last line, to not be confuse with a border.
   const row = grid[i]
@@ -686,7 +687,7 @@ function setHeight(grid, i, j, values) {
   }
 }
 
-function extractAST(gridNode, grid) {
+function extractAST (gridNode, grid) {
   let i = 0
   /* Fill the grid with value, height and width from the ast */
   gridNode.children.forEach((th) => {
@@ -697,7 +698,7 @@ function extractAST(gridNode, grid) {
 
         while (row[j + X].evaluated) X++
         row[j + X].value = this.all(cell)
-          .join('\n\n') //these two lines need explaination
+          .join('\n\n') // these two lines need explaination
           .split('\n')
 
         setHeight(grid, i, j + X, row[j + X].value)
@@ -727,7 +728,7 @@ function extractAST(gridNode, grid) {
             y < cell.data.hProperties.colspan;
             y++
           ) {
-            const anOtherCell = grid[i + x][j + X + y] //wich one ?
+            const anOtherCell = grid[i + x][j + X + y] // wich one ?
 
             // b attribute is for bottom
             anOtherCell.hasBottom =
@@ -754,12 +755,12 @@ function extractAST(gridNode, grid) {
   }
 }
 
-function setSize(grid) {
+function setSize (grid) {
   // The idea is the max win
 
   // Set the height of each cell
   grid.forEach((row) => {
-    //For each row
+    // For each row
 
     // Find the max
     const maxHeight = Math.max(
@@ -774,7 +775,7 @@ function setSize(grid) {
 
   // Set the width of each cell
   grid[0].forEach((firstRowCell, columnIndex) => {
-    //For each column
+    // For each column
     const column = grid.map((row) => row[columnIndex])
 
     // Find the largest cell
@@ -787,7 +788,7 @@ function setSize(grid) {
   })
 }
 
-function generateBorders(grid, nbRows, nbCols, gridString) {
+function generateBorders (grid, nbRows, nbCols, gridString) {
   /** **** Create the borders *******/
 
   // Create the first line
@@ -801,15 +802,13 @@ function generateBorders(grid, nbRows, nbCols, gridString) {
    * cells
    */
 
-  const first =
-    '+' +
-    grid[0]
-      .map(
-        (cell, i) =>
-          '-'.repeat(cell.width) +
-          (cell.hasRigth || i === nbCols - 1 ? '+' : '-')
-      )
-      .join('')
+  const first = `+${grid[0]
+    .map(
+      (cell, i) =>
+        '-'.repeat(cell.width) +
+        (cell.hasRigth || i === nbCols - 1 ? '+' : '-')
+    )
+    .join('')}`
 
   gridString.push(first)
 
@@ -875,7 +874,7 @@ function generateBorders(grid, nbRows, nbCols, gridString) {
   })
 }
 
-function writeText(grid, gridString) {
+function writeText (grid, gridString) {
   grid.forEach((row) =>
     row
       .filter((cell) => cell.value && cell.value[0])
@@ -893,7 +892,7 @@ function writeText(grid, gridString) {
   )
 }
 
-function stringifyGridTables(gridNode) {
+function stringifyGridTables (gridNode) {
   const gridString = []
 
   const nbRows = gridNode.children
@@ -922,7 +921,7 @@ function stringifyGridTables(gridNode) {
   return gridString.join('\n')
 }
 
-function plugin() {
+function plugin () {
   const Parser = this.Parser
 
   // Inject blockTokenizer
