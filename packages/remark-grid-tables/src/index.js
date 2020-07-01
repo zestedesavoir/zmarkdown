@@ -250,8 +250,8 @@ function computePlainLineColumnsStartingPositions (line) {
 
 function mergeColumnsStartingPositions (allPos) {
   // Get all starting positions, allPos is an array of array of positions
-  return allPos
-    .flat()
+  return []
+    .concat(...allPos)
     .reduce((sum, pos) => {
       if (!sum.includes(pos)) {
         sum.push(pos)
