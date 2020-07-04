@@ -62,14 +62,14 @@ class TablePart {
         // or the char before the cell is a separation character
         if (
           cell.rowspan ===
-      newCells[newCells.length - 1].rowspan &&
-     (!isCodePointPosition(
-       line,
-       cell.startPosition - 1
-     ) ||
-      !mergeChars.includes(
-        substringLine(line, cell.startPosition - 1)
-      ))
+            newCells[newCells.length - 1].rowspan &&
+          (!isCodePointPosition(
+            line,
+            cell.startPosition - 1
+          ) ||
+            !mergeChars.includes(
+              substringLine(line, cell.startPosition - 1)
+            ))
         ) {
           newCells[newCells.length - 1].mergeWith(cell)
         } else {
@@ -112,15 +112,15 @@ class TablePart {
           ...this.lastRow().cells.filter(
             (cell) =>
               cell.endPosition <
-        remainingCell.startPosition &&
-       !sum.includes(cell)
+                remainingCell.startPosition &&
+              !sum.includes(cell)
           ),
           remainingCell,
           ...this.lastRow().cells.filter(
             (cell) =>
               cell.startPosition >
-        remainingCell.endPosition &&
-       !sum.includes(cell)
+                remainingCell.endPosition &&
+              !sum.includes(cell)
           )
         )
 
@@ -138,8 +138,8 @@ class TablePart {
 
           if (
             other.startPosition >= newCell.startPosition &&
-      other.endPosition <= newCell.endPosition &&
-      other.lines.length === 0
+            other.endPosition <= newCell.endPosition &&
+            other.lines.length === 0
           ) {
             newCells.splice(ncc, 1)
             ncc -= 1
@@ -230,68 +230,27 @@ function isPartLine (line) {
   return partLineRegex.exec(line)
 }
 
-function findAll (str, characters) {
-  let current = 0
-  const content = splitter.splitGraphemes(str)
-
-  return content.reduce((sum, char) => {
-    if (characters.includes(char)) {
-      sum.push(current)
-    }
-    current += stringWidth(char)
-
-    return sum
-  }, [])
-}
-
-function computePlainLineColumnsStartingPositions (line) {
-  return findAll(line, '+|')
-}
-
-function mergeColumnsStartingPositions (allPos) {
-  // Get all starting positions, allPos is an array of array of positions
-  return []
-    .concat(...allPos)
-    .reduce((sum, pos) => {
-      if (!sum.includes(pos)) {
-        sum.push(pos)
-      }
-
-      return sum
-    }, [])
-    .sort((a, b) => a - b)
-}
-
-function computeColumnStartingPositions (lines) {
-  const linesInfo = lines
-    .filter(
-      (line) => isHeaderLine(line) || isPartLine(line)
-    )
-    .map((line) =>
-      computePlainLineColumnsStartingPositions(line)
-    )
-
-  return mergeColumnsStartingPositions(linesInfo)
-}
-
 function isCodePointPosition (line, pos) {
+  if (stringWidth(line) <= pos) return true // optimisation
+
   const content = splitter.splitGraphemes(line)
   let offset = 0
 
-  for (let i = 0; i < content.length; i++) {
-    // The pos points character position
-    if (pos === offset) {
-      return true
-    }
+  let i = 0
+  // The pos points character position
+  while (i < content.length) {
     // The pos points non-character position
     if (pos < offset) {
       return false
+    } else if (pos === offset) {
+      return true
     }
+
     offset += stringWidth(content[i])
+    i++
   }
 
   // Reaching end means character position
-  return true
 }
 
 function substringLine (line, start, end) {
@@ -316,130 +275,6 @@ function substringLine (line, start, end) {
   return str
 }
 
-function extractTable (value, eat, tokenizer) {
-  // Extract lines before the grid table
-  const markdownLines = value.split('\n')
-
-  const markdownStart = findIndexOrLast(
-    markdownLines,
-    (line) =>
-      isSeparationLine(line) || stringWidth(line) === 0,
-    -1
-  )
-
-  const before = markdownLines.slice(0, markdownStart)
-
-  const possibleGridTable = markdownLines.map((line) =>
-    trimEnd(line)
-  )
-
-  // Extract table
-  if (!possibleGridTable[markdownStart + 1]) {
-    return [null, null, null, null]
-  }
-
-  const gridTable = []
-  const realGridTable = []
-  let hasHeader = false
-
-  let markdownStop = markdownStart
-
-  for (
-    ;
-    markdownStop < possibleGridTable.length;
-    markdownStop++
-  ) {
-    const line = possibleGridTable[markdownStop]
-    // line is in table
-    if (totalMainLineRegex.exec(line)) {
-      const isHeaderLine = headerLineRegex.exec(line)
-      if (isHeaderLine && !hasHeader) hasHeader = true
-      // A table can't have 2 headers
-      else if (isHeaderLine && hasHeader) {
-        break
-      }
-      gridTable.push(line)
-      realGridTable.push(markdownLines[markdownStop])
-    } else {
-      // this line is not in the grid table.
-      break
-    }
-  }
-
-  // if the last line is not a plain line
-  if (
-    !separationLineRegex.exec(
-      gridTable[gridTable.length - 1]
-    )
-  ) {
-    // Remove lines not in the table
-    const index = findIndexOrLast(
-      gridTable.slice().reverse(), // slice is to reverse a copy of the array
-      (line) => isSeparationLine(line),
-      0
-    )
-
-    markdownStop -= gridTable.splice(index - 1).length // splice return the deleted elements
-  }
-
-  // Extract lines after table
-  const after = markdownLines.slice(
-    markdownStop,
-    findIndexOrLast(
-      possibleGridTable,
-      (line) => stringWidth(line) === 0
-    )
-  )
-
-  return [
-    before,
-    gridTable,
-    realGridTable,
-    after,
-    hasHeader,
-  ]
-}
-
-function extractTableContent (lines, linesInfos, hasHeader) {
-  const table = new Table(linesInfos)
-
-  lines.forEach((line, lineIndex) => {
-    // Get if the line separate the head of the table from the body
-    const matchHeader =
-   hasHeader & (isHeaderLine(line) !== null)
-    // Get if the line close some cells
-    const isEndLine =
-   matchHeader | (isPartLine(line) !== null)
-
-    if (isEndLine) {
-      // It is a header, a plain line or a line with plain line part.
-      // First, update the last row
-      table.lastPart().updateWithMainLine(line, isEndLine)
-
-      // Create the new row
-      if (lineIndex !== 0) {
-        if (matchHeader) {
-          table.addPart()
-        } else if (isSeparationLine(line)) {
-          table.lastPart().addRow()
-        } else {
-          table.lastPart().updateWithPartLine(line)
-        }
-      }
-      // update the last row
-      table.lastPart().updateWithMainLine(line, isEndLine)
-    } else {
-      // it's a plain line
-      table.lastPart().updateWithMainLine(line, isEndLine)
-      table.lastPart().lastRow().updateContent(line)
-    }
-  })
-  // Because the last line is a separation, the last row is always empty
-  table.lastPart().removeLastRow()
-
-  return table
-}
-
 function generateTable (tableContent, now, tokenizer) {
   // Generate the gridTable node to insert in the AST
   const tableElt = {
@@ -459,9 +294,9 @@ function generateTable (tableContent, now, tokenizer) {
         children: [],
         data: {
           hName:
-      hasHeader && partIndex === 0
-        ? 'thead'
-        : 'tbody',
+            hasHeader && partIndex === 0
+              ? 'thead'
+              : 'tbody',
         },
       }
 
@@ -479,13 +314,13 @@ function generateTable (tableContent, now, tokenizer) {
             const endLine = rowIndex + cell.rowspan
             if (
               cell.rowspan > 1 &&
-       endLine - 1 < part.rows.length
+              endLine - 1 < part.rows.length
             ) {
               /*
-        *
-        * Maybe need of refactorisation here, ^5 loop imbrication
-        *
-        */
+               *
+               * Maybe need of refactorisation here, ^5 loop imbrication
+               *
+               */
               part.rows.forEach((ross, id) => {
                 if (id >= 1 && id < cell.rowspan) {
                   const ross = part.rows[rowIndex + id]
@@ -493,12 +328,12 @@ function generateTable (tableContent, now, tokenizer) {
                   ross.cells.forEach((other, cc) => {
                     if (
                       cell.startPosition ===
-            other.startPosition &&
-           cell.endPosition ===
-            other.endPosition &&
-           cell.colspan === other.colspan &&
-           cell.rowspan === other.rowspan &&
-           cell.lines === other.lines
+                        other.startPosition &&
+                      cell.endPosition ===
+                        other.endPosition &&
+                      cell.colspan === other.colspan &&
+                      cell.rowspan === other.rowspan &&
+                      cell.lines === other.lines
                     ) {
                       ross.cells.splice(cc, 1)
                     }
@@ -508,8 +343,8 @@ function generateTable (tableContent, now, tokenizer) {
             }
 
             /*
-       *
-       */
+             *
+             */
 
             const tokenizedContent = tokenizer.tokenizeBlock(
               cell.lines.map((e) => e.trim()).join('\n'),
@@ -521,9 +356,9 @@ function generateTable (tableContent, now, tokenizer) {
               children: tokenizedContent,
               data: {
                 hName:
-         hasHeader && partIndex === 0
-           ? 'th'
-           : 'td',
+                  hasHeader && partIndex === 0
+                    ? 'th'
+                    : 'td',
                 hProperties: {
                   colspan: cell.colspan,
                   rowspan: cell.rowspan,
@@ -541,68 +376,6 @@ function generateTable (tableContent, now, tokenizer) {
   )
 
   return tableElt
-}
-
-function gridTableTokenizer (eat, value, silent) {
-  const index = findIndexOrLast(
-    value.split(),
-    (character) => character !== ' ' && character !== '\t'
-  )
-
-  if (
-    value.charAt(index) !== '+' ||
-  value.charAt(index + 1) !== '-' ||
-  !mainLineRegex.test(value)
-  ) {
-    return
-  }
-
-  // Extract the table from string
-  const [
-    before,
-    gridTable,
-    realGridTable,
-    after,
-    hasHeader,
-  ] = extractTable(value, eat, this)
-
-  // if the grid is empty or if there are not enought lines to make a row
-  if (!gridTable || gridTable.length < 3) { return }
-
-  const now = eat.now()
-  const linesInfos = computeColumnStartingPositions(
-    gridTable
-  )
-  const tableContent = extractTableContent(
-    gridTable,
-    linesInfos,
-    hasHeader
-  )
-  const tableElt = generateTable(tableContent, now, this)
-
-  // Because we can't add multiples blocs in one eat, I use a temp block
-  const wrapperBlock = {
-    type: 'element',
-    tagName: 'WrapperBlock',
-    children: [],
-  }
-
-  const addBlock = (block) => {
-    const tokens = this.tokenizeBlock(block.join('\n'), now)
-    if (tokens.length) {
-      wrapperBlock.children.push(tokens[0])
-    }
-  }
-
-  if (before.length) addBlock(before)
-
-  wrapperBlock.children.push(tableElt)
-
-  if (after.length) addBlock(after)
-
-  const merged = merge(before, realGridTable, after)
-
-  return eat(merged)(wrapperBlock)
 }
 
 function createGrid (nbRows, nbCols) {
@@ -625,11 +398,11 @@ function createGrid (nbRows, nbCols) {
 
 function setWidth (grid, i, j, cols) {
   /* To do it, we put enougth space to write the text.
-  * For multi-cell, we divid it among the cells. */
+   * For multi-cell, we divid it among the cells. */
   let tmpWidth =
-  Math.max(
-    ...Array.from(grid[i][j].value).map((x) => x.length)
-  ) + 2
+    Math.max(
+      ...Array.from(grid[i][j].value).map((x) => x.length)
+    ) + 2
 
   const row = grid[i]
 
@@ -700,10 +473,10 @@ function extractAST (gridNode, grid) {
 
             // b attribute is for bottom
             anOtherCell.hasBottom =
-       x + 1 === cell.data.hProperties.rowspan
+              x + 1 === cell.data.hProperties.rowspan
             // r attribute is for right
             anOtherCell.hasRigth =
-       y + 1 === cell.data.hProperties.colspan
+              y + 1 === cell.data.hProperties.colspan
 
             // set v if a cell has ever been define
             anOtherCell.evaluated = ' '
@@ -761,20 +534,20 @@ function generateBorders (grid, nbRows, nbCols, gridString) {
 
   // Create the first line
   /*
-  * We have to create the first line manually because
-  * we process the borders from the attributes bottom
-  * and right of each cell. For the first line, their
-  * is no bottom nor right cell.
-  *
-  * We only need the right attribute of the first row's
-  * cells
-  */
+   * We have to create the first line manually because
+   * we process the borders from the attributes bottom
+   * and right of each cell. For the first line, their
+   * is no bottom nor right cell.
+   *
+   * We only need the right attribute of the first row's
+   * cells
+   */
 
   const first = `+${grid[0]
     .map(
       (cell, i) =>
         '-'.repeat(cell.width) +
-    (cell.hasRigth || i === nbCols - 1 ? '+' : '-')
+        (cell.hasRigth || i === nbCols - 1 ? '+' : '-')
     )
     .join('')}`
 
@@ -818,11 +591,11 @@ function generateBorders (grid, nbRows, nbCols, gridString) {
 
       if (
         cell.hasBottom ||
-    (j + 1 < nbCols && grid[i][j + 1].hasBottom)
+        (j + 1 < nbCols && grid[i][j + 1].hasBottom)
       ) {
         if (
           cell.hasRigth ||
-     (i + 1 < nbRows && grid[i + 1][j].hasRigth)
+          (i + 1 < nbRows && grid[i + 1][j].hasRigth)
         ) {
           line += '+'
         } else {
@@ -830,7 +603,7 @@ function generateBorders (grid, nbRows, nbCols, gridString) {
         }
       } else if (
         cell.hasRigth ||
-    (i + 1 < nbRows && grid[i + 1][j].hasRigth)
+        (i + 1 < nbRows && grid[i + 1][j].hasRigth)
       ) {
         line += '|'
       } else {
@@ -852,9 +625,9 @@ function writeText (grid, gridString) {
           const lineEdit = gridString[tmpLine]
 
           gridString[tmpLine] =
-      lineEdit.substr(0, cell.x) +
-      line +
-      lineEdit.substr(cell.x + line.length)
+            lineEdit.substr(0, cell.x) +
+            line +
+            lineEdit.substr(cell.x + line.length)
         })
       )
   )
@@ -873,10 +646,10 @@ function stringifyGridTables (gridNode) {
   const grid = createGrid(nbRows, nbCols)
 
   /* First, we extract the information
-  * then, we set the size(2) of the border
-  * and create it(3).
-  * Finaly we fill it up.
-  */
+   * then, we set the size(2) of the border
+   * and create it(3).
+   * Finaly we fill it up.
+   */
 
   extractAST.bind(this)(gridNode, grid)
 
@@ -889,6 +662,231 @@ function stringifyGridTables (gridNode) {
   return gridString.join('\n')
 }
 
+/*
+ *
+ * Reviewed
+ *
+ */
+
+function extractTableContent (lines, linesInfos, hasHeader) {
+  const table = new Table(linesInfos)
+
+  lines.forEach((line, lineIndex) => {
+    // Get if the line separate the head of the table from the body
+    const matchHeader =
+      hasHeader & (isHeaderLine(line) !== null)
+    // Get if the line close some cells
+    const isEndLine =
+      matchHeader | (isPartLine(line) !== null)
+
+    if (isEndLine) {
+      // It is a header, a plain line or a line with plain line part.
+      // First, update the last row
+      table.lastPart().updateWithMainLine(line, isEndLine)
+
+      // Create the new row
+      if (lineIndex !== 0) {
+        if (matchHeader) {
+          table.addPart()
+        } else if (isSeparationLine(line)) {
+          table.lastPart().addRow()
+        } else {
+          table.lastPart().updateWithPartLine(line)
+        }
+      }
+      // update the last row
+      table.lastPart().updateWithMainLine(line, isEndLine)
+    } else {
+      // it's a plain line
+      table.lastPart().updateWithMainLine(line, isEndLine)
+      table.lastPart().lastRow().updateContent(line)
+    }
+  })
+  // Because the last line is a separation, the last row is always empty
+  table.lastPart().removeLastRow()
+
+  return table
+}
+
+function mergeColumnsStartingPositions (allPos) {
+  // Get all starting positions, allPos is an array of array of positions
+  return [...new Set([].concat(...allPos))] // make allPos flat, then extract uniques values
+    .sort((a, b) => a - b)
+}
+
+function findAll (str, characters) {
+  let width = 0
+
+  return str
+    .split(/[+|]/g)
+    .slice(0, -1) // remove last one
+    .map(
+      (chunk, id) =>
+        (width += stringWidth(chunk) + (id === 0 ? 0 : 1))
+      // append 1 for the char removed by .split() at each (except the first one) chunk start
+    )
+}
+
+function computeColumnStartingPositions (lines) {
+  const linesInfo = lines
+    .filter(
+      (line) => isHeaderLine(line) || isPartLine(line)
+    )
+    .map(
+      (line) => findAll(line, '+|') // compute plain-line columns starting positions
+    )
+
+  return mergeColumnsStartingPositions(linesInfo)
+}
+
+function extractTable (value, eat, tokenizer) {
+  // Extract lines before the grid table
+  const markdownLines = value.split('\n')
+
+  const markdownStart = findIndexOrLast(
+    markdownLines,
+    (line) =>
+      isSeparationLine(line) || stringWidth(line) === 0
+  )
+
+  const before = markdownLines.slice(0, markdownStart)
+
+  const possibleGridTable = markdownLines.map((line) =>
+    trimEnd(line)
+  )
+
+  // Extract table
+  if (!possibleGridTable[markdownStart + 1]) {
+    return [null, null, null, null]
+  }
+
+  const gridTable = []
+  const realGridTable = []
+  let hasHeader = false
+
+  let markdownStop = markdownStart
+
+  for (
+    ;
+    markdownStop < possibleGridTable.length;
+    markdownStop++
+  ) {
+    const line = possibleGridTable[markdownStop]
+    // line is in table
+    if (totalMainLineRegex.exec(line)) {
+      const isHeaderLine = headerLineRegex.exec(line)
+
+      if (isHeaderLine && !hasHeader) hasHeader = true
+      // A table can't have 2 headers
+      else if (isHeaderLine && hasHeader) {
+        break
+      }
+
+      gridTable.push(line)
+      realGridTable.push(markdownLines[markdownStop])
+    } else {
+      // this line is not in the grid table.
+      break
+    }
+  }
+
+  // if the last line is not a plain line
+  if (
+    !separationLineRegex.exec(
+      gridTable[gridTable.length - 1]
+    )
+  ) {
+    // Remove lines not in the table
+    const index = findIndexOrLast(
+      gridTable.slice().reverse(), // slice is to reverse a copy of the array
+      (line) => isSeparationLine(line)
+    )
+
+    markdownStop -= gridTable.splice(index - 1).length // splice return the deleted elements
+  }
+
+  // Extract lines after table
+  const after = markdownLines.slice(
+    markdownStop,
+    findIndexOrLast(
+      possibleGridTable,
+      (line) => stringWidth(line) === 0
+    )
+  )
+
+  return [
+    before,
+    gridTable,
+    realGridTable,
+    after,
+    hasHeader,
+  ]
+}
+
+function gridTableTokenizer (eat, value, silent) {
+  const index = findIndexOrLast(
+    value.split(),
+    (character) => character !== ' ' && character !== '\t'
+  )
+
+  if (
+    value.charAt(index) !== '+' ||
+    value.charAt(index + 1) !== '-' ||
+    !mainLineRegex.test(value)
+  ) {
+    return
+  }
+
+  // Extract the table from string
+  const [
+    before,
+    gridTable,
+    realGridTable,
+    after,
+    hasHeader,
+  ] = extractTable(value, eat, this)
+
+  // if the grid is empty or if there are not enought lines to make a row
+  if (!gridTable || gridTable.length < 3) { return }
+
+  // console.log(gridTable)
+
+  const now = eat.now()
+  const linesInfos = computeColumnStartingPositions(
+    gridTable
+  )
+  const tableContent = extractTableContent(
+    gridTable,
+    linesInfos,
+    hasHeader
+  )
+  const tableElt = generateTable(tableContent, now, this)
+
+  // Because we can't add multiples blocs in one eat, I use a temp block
+  const wrapperBlock = {
+    type: 'element',
+    tagName: 'WrapperBlock',
+    children: [],
+  }
+
+  const addBlock = (block) => {
+    const tokens = this.tokenizeBlock(block.join('\n'), now)
+    if (tokens.length) {
+      wrapperBlock.children.push(tokens[0])
+    }
+  }
+
+  if (before.length) addBlock(before)
+
+  wrapperBlock.children.push(tableElt)
+
+  if (after.length) addBlock(after)
+
+  const merged = merge(before, realGridTable, after)
+
+  return eat(merged)(wrapperBlock)
+}
+
 function deleteWrapperBlock (node, index, parent) {
   if (!node.children) return
 
@@ -897,7 +895,7 @@ function deleteWrapperBlock (node, index, parent) {
   const newChildren = node.children.reduce((sum, child) => {
     if (
       child.tagName === 'WrapperBlock' &&
-   child.type === 'element'
+      child.type === 'element'
     ) {
       replace = true
       sum = sum.concat(child.children)
