@@ -282,10 +282,14 @@ describe('code highlight special cases', () => {
       '```',
     ]
 
-    const result1 = (await renderString(input.join('\n'))).replace('language-latex', '')
+    const result1 = (await renderString(input.join('\n')))
+      .replace('language-latex', '')
+      .replace('hljs-code-latex', '')
 
     input[0] = '```tex'
-    const result2 = (await renderString(input.join('\n'))).replace('language-tex', '')
+    const result2 = (await renderString(input.join('\n')))
+      .replace('language-tex', '')
+      .replace('hljs-code-tex', '')
 
     expect(result2).toBe(result1)
   })
