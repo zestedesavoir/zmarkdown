@@ -32,6 +32,6 @@
     "grapheme-splitter": "^1.0.4",
     "lodash.trimend": "^4.5.1",
     "string-width": "^4.2.0",
-    "unist-util-visit": "^2.0.1"
+    "unist-util-visit": "^2.0.3"
   }
 }
