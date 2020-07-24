@@ -3,8 +3,8 @@
 exports[`renders correctly with first config 1`] = `
 "<p>This is the body with a footnote<sup id=\\"fnref-1\\"><a href=\\"#fn-1\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2\\"><a href=\\"#fn-2\\" class=\\"footnote-ref\\">2</a></sup> or more<sup id=\\"fnref-3\\"><a href=\\"#fn-3\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4\\"><a href=\\"#fn-4\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5\\"><a href=\\"#fn-5\\" class=\\"footnote-ref\\">5</a></sup>.</p>
 <p>Also a reference that does not exist<sup id=\\"fnref-6\\"><a href=\\"#fn-6\\" class=\\"footnote-ref\\">6</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
+<p>Second line of first paragraph.
+And then third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -30,7 +30,8 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#fnref-4\\" class=\\"footnote-backref\\" title=\\"Foo bar 4\\">↩</a></p>
 </li>
 <li id=\\"fn-5\\">
-<p>First line of first paragraph.<a href=\\"#fnref-5\\" class=\\"footnote-backref\\" title=\\"Foo bar 5\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of the footnote : nice!<a href=\\"#fnref-5\\" class=\\"footnote-backref\\" title=\\"Foo bar 5\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -39,8 +40,8 @@ Nor is third...</p>
 exports[`renders correctly with second config 1`] = `
 "<p>This is the body with a footnote<sup id=\\"fnref-1\\"><a href=\\"#fn-1\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2\\"><a href=\\"#fn-2\\" class=\\"footnote-ref\\">2</a></sup> or more<sup id=\\"fnref-3\\"><a href=\\"#fn-3\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4\\"><a href=\\"#fn-4\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5\\"><a href=\\"#fn-5\\" class=\\"footnote-ref\\">5</a></sup>.</p>
 <p>Also a reference that does not exist<sup id=\\"fnref-6\\"><a href=\\"#fn-6\\" class=\\"footnote-ref\\">6</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
+<p>Second line of first paragraph.
+And then third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -66,7 +67,8 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#fnref-4\\" class=\\"footnote-backref\\" title=\\"Baz 4 qux?\\">↩</a></p>
 </li>
 <li id=\\"fn-5\\">
-<p>First line of first paragraph.<a href=\\"#fnref-5\\" class=\\"footnote-backref\\" title=\\"Baz 5 qux?\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of the footnote : nice!<a href=\\"#fnref-5\\" class=\\"footnote-backref\\" title=\\"Baz 5 qux?\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -75,8 +77,8 @@ Nor is third...</p>
 exports[`renders correctly without config 1`] = `
 "<p>This is the body with a footnote<sup id=\\"fnref-1\\"><a href=\\"#fn-1\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2\\"><a href=\\"#fn-2\\" class=\\"footnote-ref\\">2</a></sup> or more<sup id=\\"fnref-3\\"><a href=\\"#fn-3\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4\\"><a href=\\"#fn-4\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5\\"><a href=\\"#fn-5\\" class=\\"footnote-ref\\">5</a></sup>.</p>
 <p>Also a reference that does not exist<sup id=\\"fnref-6\\"><a href=\\"#fn-6\\" class=\\"footnote-ref\\">6</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
+<p>Second line of first paragraph.
+And then third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -102,7 +104,8 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#fnref-4\\" class=\\"footnote-backref\\" title=\\"4\\">↩</a></p>
 </li>
 <li id=\\"fn-5\\">
-<p>First line of first paragraph.<a href=\\"#fnref-5\\" class=\\"footnote-backref\\" title=\\"5\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of the footnote : nice!<a href=\\"#fnref-5\\" class=\\"footnote-backref\\" title=\\"5\\">↩</a></p>
 </li>
 </ol>
 </div>"

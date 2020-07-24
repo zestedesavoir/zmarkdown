@@ -15,7 +15,7 @@ const render = (use, text) => unified()
     &#x3C;h3>hey&#x3C;/h3> instead of <p>&#x3C;h3>hey&#x3C;/h3></p> */
     blocks: [],
   })
-  .use(remark2rehype, {allowDangerousHTML: true})
+  .use(remark2rehype, {allowDangerousHtml: true})
   .use(use ? htmlBlocks : () => {})
   .use(rehypeStringify)
   .processSync(text)

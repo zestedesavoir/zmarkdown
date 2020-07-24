@@ -3,6 +3,7 @@ import {join} from 'path'
 import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
+import footnotes from 'remark-footnotes'
 import rebber from '../src'
 
 const rebberConfig = {
@@ -76,7 +77,8 @@ describe('rebber: remark specs', () => {
 
     test(name, () => {
       const {contents} = unified()
-        .use(reParse, {footnotes: true})
+        .use(reParse)
+        .use(footnotes, {inlineNotes: true})
         .use(rebber)
         .processSync(spec)
 
@@ -91,7 +93,8 @@ describe('rebber: remark specs with config: custom macros', () => {
 
     test(name, () => {
       const {contents} = unified()
-        .use(reParse, {footnotes: true})
+        .use(reParse)
+        .use(footnotes, {inlineNotes: true})
         .use(rebber, rebberConfig)
         .processSync(spec)
 
@@ -106,7 +109,8 @@ describe('toLaTeX: remark specs', () => {
 
     test(name, () => {
       const mdast = unified()
-        .use(reParse, {footnotes: true})
+        .use(reParse)
+        .use(footnotes, {inlineNotes: true})
         .parse(spec)
 
       const latex = rebber.toLaTeX(mdast)
@@ -124,7 +128,8 @@ describe('rebber', () => {
 
     test(name, () => {
       const {contents} = unified()
-        .use(reParse, {footnotes: true})
+        .use(reParse)
+        .use(footnotes, {inlineNotes: true})
         .use(rebber)
         .processSync(spec)
 
@@ -141,7 +146,8 @@ describe('rebber with config: custom macros', () => {
 
     test(name, () => {
       const {contents} = unified()
-        .use(reParse, {footnotes: true})
+        .use(reParse)
+        .use(footnotes, {inlineNotes: true})
         .use(rebber, rebberConfig)
         .processSync(spec)
 
@@ -152,7 +158,8 @@ describe('rebber with config: custom macros', () => {
 
 test('preprocessor', () => {
   const mdast = unified()
-    .use(reParse, {footnotes: true})
+    .use(reParse)
+    .use(footnotes, {inlineNotes: true})
     .parse(dedent`
       # foo[^ref]
 

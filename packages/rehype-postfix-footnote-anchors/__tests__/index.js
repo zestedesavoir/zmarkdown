@@ -2,6 +2,7 @@ import {readdirSync as directory, readFileSync as file} from 'fs'
 import {join} from 'path'
 import unified from 'unified'
 import reParse from 'remark-parse'
+import footnotes from 'remark-footnotes'
 import remarkNumberedFootnotes from 'remark-numbered-footnotes'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
@@ -21,22 +22,18 @@ const configs = [
   {
     gfm: true,
     commonmark: false,
-    footnotes: true,
   },
   {
     gfm: false,
     commonmark: false,
-    footnotes: true,
   },
   {
     gfm: false,
     commonmark: true,
-    footnotes: true,
   },
   {
     gfm: true,
     commonmark: true,
-    footnotes: true,
   },
 ]
 
@@ -45,6 +42,7 @@ configs.forEach(config => {
     test('footnotes', () => {
       const {contents} = unified()
         .use(reParse, config)
+        .use(footnotes, {inlineNotes: true})
         .use(remark2rehype)
         .use(require('../src'))
         .use(stringify)
@@ -56,6 +54,7 @@ configs.forEach(config => {
     test('numbered footnotes', () => {
       const {contents} = unified()
         .use(reParse, config)
+        .use(footnotes, {inlineNotes: true})
         .use(remarkNumberedFootnotes)
         .use(remark2rehype)
         .use(require('../src'))
@@ -68,6 +67,7 @@ configs.forEach(config => {
     test('given postfix', () => {
       const {contents} = unified()
         .use(reParse, config)
+        .use(footnotes, {inlineNotes: true})
         .use(remarkNumberedFootnotes)
         .use(remark2rehype)
         .use(require('../src'), '-bar')
@@ -80,6 +80,7 @@ configs.forEach(config => {
     test('postfixing function', () => {
       const {contents} = unified()
         .use(reParse, config)
+        .use(footnotes, {inlineNotes: true})
         .use(remarkNumberedFootnotes)
         .use(remark2rehype)
         .use(require('../src'), (identifier) => `foo--${identifier}--bar`)
@@ -92,6 +93,7 @@ configs.forEach(config => {
     test('regression-1', () => {
       const {contents} = unified()
         .use(reParse, config)
+        .use(footnotes, {inlineNotes: true})
         .use(remark2rehype)
         .use(require('../src'))
         .use(stringify)
@@ -103,6 +105,7 @@ configs.forEach(config => {
     test('regression-2', () => {
       const {contents} = unified()
         .use(reParse, config)
+        .use(footnotes, {inlineNotes: true})
         .use(remark2rehype)
         .use(require('../src'))
         .use(stringify)
@@ -114,6 +117,7 @@ configs.forEach(config => {
     test('footnote-split', () => {
       const {contents} = unified()
         .use(reParse, config)
+        .use(footnotes, {inlineNotes: true})
         .use(remark2rehype)
         .use(require('../src'))
         .use(stringify)

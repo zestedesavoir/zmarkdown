@@ -2,6 +2,7 @@ import {readdirSync as directory, readFileSync as file, lstatSync as stat} from 
 import {join} from 'path'
 import unified from 'unified'
 import reParse from 'remark-parse'
+import footnotes from 'remark-footnotes'
 import remarkMath from 'remark-math'
 import remarkPing from 'remark-ping'
 import rebber from 'rebber'
@@ -327,9 +328,8 @@ Object.keys(fixtures).filter(Boolean).filter(name => name.startsWith('mix-')).fo
 
   test(name, () => {
     const {contents} = unified()
-      .use(reParse, {
-        footnotes: true,
-      })
+      .use(reParse)
+      .use(footnotes, {inlineNotes: true})
       .use(require('remark-emoticons/src'), emoticonsConfig)
       .use(require('remark-captions/src'), {external: {gridTable: 'Table:', math: 'Equation'},
         internal: {iframe: 'Video:'}})
@@ -366,18 +366,19 @@ Object.keys(fixtures).filter(Boolean).filter(name => name.startsWith('mix-')).fo
 
 test('footnotes', () => {
   const {contents} = unified()
-    .use(reParse, {footnotes: true})
+    .use(reParse)
+    .use(footnotes, {inlineNotes: true})
     .use(rebber, integrationConfig)
     .processSync(dedent`
       # mytitle A[^footnoteRef]
 
       [^footnoteRef]: reference in title
 
-      # mytitle B[^footnoterawhead inner]
+      # mytitle B^[footnoterawhead inner]
 
-      # myti*tle C[^foo inner]*
+      # myti*tle C^[foo inner]*
 
-      a paragraph[^footnoteRawPar inner]
+      a paragraph^[footnoteRawPar inner]
     `)
   expect(contents).toMatchSnapshot()
 })

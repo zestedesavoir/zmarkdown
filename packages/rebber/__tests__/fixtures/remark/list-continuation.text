@@ -13,4 +13,5 @@ code();
 
 
 1. [^foo]
+
 [^foo]: bar baz.

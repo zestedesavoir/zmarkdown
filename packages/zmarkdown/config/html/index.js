@@ -6,7 +6,7 @@ module.exports = {
   },
 
   bridge: {
-    allowDangerousHTML: true,
+    allowDangerousHtml: true,
     handlers:           {
       code: require('../../utils/code-handler'),
     },

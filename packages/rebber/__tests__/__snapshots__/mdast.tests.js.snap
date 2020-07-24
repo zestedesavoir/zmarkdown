@@ -1312,7 +1312,7 @@ And in an auto-link: \\\\externalLink{http://example©xample.com}{http://example
 
 
 \\\\begin{Quotation}
-Foo and bar and \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} and baz.
+Foo and bar and http://example©xample.com and baz.
 \\\\end{Quotation}
 
 
@@ -1551,7 +1551,7 @@ exports[`rebber: remark specs footnote-indent: footnote-indent 1`] = `
 exports[`rebber: remark specs footnote-inline: footnote-inline 1`] = `"This is an example of an inline footnote.\\\\footnote[l1c42o41]{\\\\label{footnote:l1c42o41} This is the \\\\textit{actual} footnote.}"`;
 
 exports[`rebber: remark specs footnote-like: footnote-like 1`] = `
-"This one isn't even [defined]\\\\textsuperscript{\\\\ref{footnote:foo}}.
+"This one isn't even [defined].
 
 
 
@@ -1562,7 +1562,7 @@ exports[`rebber: remark specs footnote-matrix: footnote-matrix 1`] = `
 "\\\\begin{enumerate}
 \\\\item\\\\relax [foo]
 \\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}[bar]
-\\\\item\\\\relax [foo]\\\\textsuperscript{\\\\ref{footnote:bar}}
+\\\\item\\\\relax [foo]
 \\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}\\\\textsuperscript{\\\\ref{footnote:bar}}
 \\\\end{enumerate}"
 `;
@@ -1652,10 +1652,7 @@ All versions create lists for the following.
 
 \\\\begin{enumerate}
 \\\\item\\\\relax In Markdown 1.0.0 and earlier. Version
-
-\\\\begin{enumerate}
-\\\\item\\\\relax This line turns into a list item.
-\\\\end{enumerate}
+8. This line turns into a list item.
 \\\\end{enumerate}"
 `;
 
@@ -2434,11 +2431,11 @@ exports[`rebber: remark specs link-spaces: link-spaces 1`] = `
 
 
 
-\\\\externalLink{echo}{http://foxtrot.golf}
+[echo]	(\\\\externalLink{http://foxtrot.golf}{http://foxtrot.golf})
 
 
 
-\\\\includegraphics{india.com/juliett}"
+\\\\includegraphics{undefined}   (india.com/juliett)"
 `;
 
 exports[`rebber: remark specs link-whitespace: link-whitespace 1`] = `
@@ -5739,7 +5736,7 @@ into something like this:
 
 
 
-which will render in a browser as a clickable link to \\"address@example.com\\".
+which will render in a browser as a clickable link to \\"\\\\externalLink{address@example.com}{mailto:address@example.com}\\".
 
 
 
@@ -8453,7 +8450,7 @@ exports[`rebber: remark specs with config: custom macros entities-advanced 1`] =
 
 [blockquote(And in an auto-link: \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com})]
 
-[blockquote(Foo and bar and \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} and baz.)]
+[blockquote(Foo and bar and http://example©xample.com and baz.)]
 
 [blockquote(Or in \\\\externalLink{l©nks}{\\\\textasciitilde{}/some\\\\&copyfile})]
 
@@ -8610,14 +8607,14 @@ exports[`rebber: remark specs with config: custom macros footnote-indent 1`] = `
 exports[`rebber: remark specs with config: custom macros footnote-inline 1`] = `"This is an example of an inline footnote.[footnote(identifier=l1c42o41, text=This is the \\\\textit{actual} footnote., protect=false)]"`;
 
 exports[`rebber: remark specs with config: custom macros footnote-like 1`] = `
-"This one isn't even [defined][footnoteReference(foo)].
+"This one isn't even [defined].
 
 
 
 [footnoteReference(both)][invalid], [footnote(identifier=l3c19o56, text=this too, protect=false)][]."
 `;
 
-exports[`rebber: remark specs with config: custom macros footnote-matrix 1`] = `"[orderedList([listItem([foo])][listItem([footnoteReference(foo)][bar])][listItem([foo][footnoteReference(bar)])][listItem([footnoteReference(foo)][footnoteReference(bar)])])]"`;
+exports[`rebber: remark specs with config: custom macros footnote-matrix 1`] = `"[orderedList([listItem([foo])][listItem([footnoteReference(foo)][bar])][listItem([foo])][listItem([footnoteReference(foo)][footnoteReference(bar)])])]"`;
 
 exports[`rebber: remark specs with config: custom macros footnote-multiple 1`] = `
 "heading1(International Radiotelephony Spelling Alphabet[footnoteReference(wiki)])
@@ -8694,8 +8691,7 @@ All versions create lists for the following.
 
 
 [orderedList([listItem(In Markdown 1.0.0 and earlier. Version
-
-[orderedList([listItem(This line turns into a list item.)])])])]"
+8. This line turns into a list item.)])]"
 `;
 
 exports[`rebber: remark specs with config: custom macros heading 1`] = `
@@ -9317,11 +9313,11 @@ exports[`rebber: remark specs with config: custom macros link-spaces 1`] = `
 
 
 
-\\\\externalLink{echo}{http://foxtrot.golf}
+[echo]	(\\\\externalLink{http://foxtrot.golf}{http://foxtrot.golf})
 
 
 
-\\\\includegraphics{india.com/juliett}"
+\\\\includegraphics{undefined}   (india.com/juliett)"
 `;
 
 exports[`rebber: remark specs with config: custom macros link-whitespace 1`] = `
@@ -11919,7 +11915,7 @@ into something like this:
 &#109;\\">&#x61;&#x64;&#x64;&#x72;&#x65;&#115;&#115;&#64;&#101;&#120;&#x61;
 &#109;&#x70;&#x6C;e&#x2E;&#99;&#111;&#109;</a>)]
 
-which will render in a browser as a clickable link to \\"address@example.com\\".
+which will render in a browser as a clickable link to \\"\\\\externalLink{address@example.com}{mailto:address@example.com}\\".
 
 
 
@@ -14488,7 +14484,7 @@ And in an auto-link: \\\\externalLink{http://example©xample.com}{http://example
 
 
 \\\\begin{Quotation}
-Foo and bar and \\\\externalLink{http://example©xample.com}{http://example\\\\&copyxample.com} and baz.
+Foo and bar and http://example©xample.com and baz.
 \\\\end{Quotation}
 
 
@@ -14751,7 +14747,7 @@ exports[`toLaTeX: remark specs footnote-inline: footnote-inline 1`] = `
 `;
 
 exports[`toLaTeX: remark specs footnote-like: footnote-like 1`] = `
-"This one isn't even [defined]\\\\textsuperscript{\\\\ref{footnote:foo}}.
+"This one isn't even [defined].
 
 
 
@@ -14764,7 +14760,7 @@ exports[`toLaTeX: remark specs footnote-matrix: footnote-matrix 1`] = `
 "\\\\begin{enumerate}
 \\\\item\\\\relax [foo]
 \\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}[bar]
-\\\\item\\\\relax [foo]\\\\textsuperscript{\\\\ref{footnote:bar}}
+\\\\item\\\\relax [foo]
 \\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}\\\\textsuperscript{\\\\ref{footnote:bar}}
 \\\\end{enumerate}
 "
@@ -14855,10 +14851,7 @@ All versions create lists for the following.
 
 \\\\begin{enumerate}
 \\\\item\\\\relax In Markdown 1.0.0 and earlier. Version
-
-\\\\begin{enumerate}
-\\\\item\\\\relax This line turns into a list item.
-\\\\end{enumerate}
+8. This line turns into a list item.
 \\\\end{enumerate}
 "
 `;
@@ -15688,11 +15681,11 @@ exports[`toLaTeX: remark specs link-spaces: link-spaces 1`] = `
 
 
 
-\\\\externalLink{echo}{http://foxtrot.golf}
+[echo]	(\\\\externalLink{http://foxtrot.golf}{http://foxtrot.golf})
 
 
 
-\\\\includegraphics{india.com/juliett}
+\\\\includegraphics{undefined}   (india.com/juliett)
 
 "
 `;
@@ -19082,7 +19075,7 @@ into something like this:
 
 
 
-which will render in a browser as a clickable link to \\"address@example.com\\".
+which will render in a browser as a clickable link to \\"\\\\externalLink{address@example.com}{mailto:address@example.com}\\".
 
 
 

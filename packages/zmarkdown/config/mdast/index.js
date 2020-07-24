@@ -37,6 +37,10 @@ module.exports = {
 
   escapeEscaped: ['&'],
 
+  footnotes: {
+    inlineNotes: true,
+  },
+
   headingShifter: 0,
 
   iframes: require('./iframes'),

@@ -1609,8 +1609,6 @@ exports[`extensions renders fenced_code.txt 2`] = `
 exports[`extensions renders footnote.txt 1`] = `
 "<p>This is the body with a footnote<sup id=\\"fnref-1-shortId\\"><a href=\\"#fn-1-shortId\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-shortId\\"><a href=\\"#fn-2-shortId\\" class=\\"footnote-ref\\">2</a></sup> or more<sup id=\\"fnref-3-shortId\\"><a href=\\"#fn-3-shortId\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-shortId\\"><a href=\\"#fn-4-shortId\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-shortId\\"><a href=\\"#fn-5-shortId\\" class=\\"footnote-ref\\">5</a></sup>.</p>
 <p>Also a reference that does not exist<sup id=\\"fnref-6-shortId\\"><a href=\\"#fn-6-shortId\\" class=\\"footnote-ref\\">6</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -1636,7 +1634,9 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#fnref-4-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 4\\">↩</a></p>
 </li>
 <li id=\\"fn-5-shortId\\">
-<p>First line of first paragraph.<a href=\\"#fnref-5-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 5\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#fnref-5-shortId\\" class=\\"footnote-backref\\" title=\\"Retourner au texte de la note 5\\">↩</a></p>
 </li>
 </ol>
 </div>"
@@ -1668,10 +1668,9 @@ This footnote is a blockquote.
 
 Paragraph two.}
 
-\\\\footnotetext[5]{\\\\label{footnote:5} First line of first paragraph.}
-
+\\\\footnotetext[5]{\\\\label{footnote:5} First line of first paragraph.
 Second line of first paragraph is not intended.
-Nor is third..."
+Nor is third...}"
 `;
 
 exports[`extensions renders footnote_many_footnotes.txt 1`] = `
@@ -3386,15 +3385,15 @@ W &  & W \\\\\\\\ \\\\hline
 \\\\end{longtabu}"
 `;
 
-exports[`heading-shift shifts before range 1`] = `"<h1 id=\\"should-be-h1\\">should be h1<a aria-hidden=\\"true\\" href=\\"#should-be-h1\\"><span class=\\"icon icon-link\\"></span></a></h1>"`;
+exports[`heading-shift shifts before range 1`] = `"<h1 id=\\"should-be-h1\\">should be h1<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#should-be-h1\\"><span class=\\"icon icon-link\\"></span></a></h1>"`;
 
 exports[`heading-shift shifts before range 2`] = `"\\\\levelOneTitle{should be h1}"`;
 
-exports[`heading-shift shifts in range 1`] = `"<h4 id=\\"should-be-h4\\">should be h4<a aria-hidden=\\"true\\" href=\\"#should-be-h4\\"><span class=\\"icon icon-link\\"></span></a></h4>"`;
+exports[`heading-shift shifts in range 1`] = `"<h4 id=\\"should-be-h4\\">should be h4<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#should-be-h4\\"><span class=\\"icon icon-link\\"></span></a></h4>"`;
 
 exports[`heading-shift shifts in range 2`] = `"\\\\levelFourTitle{should be h4}"`;
 
-exports[`heading-shift shifts past range 1`] = `"<h6 id=\\"should-be-h6\\">should be h6<a aria-hidden=\\"true\\" href=\\"#should-be-h6\\"><span class=\\"icon icon-link\\"></span></a></h6>"`;
+exports[`heading-shift shifts past range 1`] = `"<h6 id=\\"should-be-h6\\">should be h6<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#should-be-h6\\"><span class=\\"icon icon-link\\"></span></a></h6>"`;
 
 exports[`heading-shift shifts past range 2`] = `"\\\\levelSixTitle{should be h6}"`;
 
@@ -3416,8 +3415,8 @@ bar
 `;
 
 exports[`misc renders adjacent-headers.txt 1`] = `
-"<h1 id=\\"this-is-a-huge-header\\">this is a huge header<a aria-hidden=\\"true\\" href=\\"#this-is-a-huge-header\\"><span class=\\"icon icon-link\\"></span></a></h1>
-<h2 id=\\"this-is-a-smaller-header\\">this is a smaller header<a aria-hidden=\\"true\\" href=\\"#this-is-a-smaller-header\\"><span class=\\"icon icon-link\\"></span></a></h2>"
+"<h1 id=\\"this-is-a-huge-header\\">this is a huge header<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#this-is-a-huge-header\\"><span class=\\"icon icon-link\\"></span></a></h1>
+<h2 id=\\"this-is-a-smaller-header\\">this is a smaller header<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#this-is-a-smaller-header\\"><span class=\\"icon icon-link\\"></span></a></h2>"
 `;
 
 exports[`misc renders adjacent-headers.txt 2`] = `
@@ -3445,11 +3444,11 @@ AT\\\\&T"
 `;
 
 exports[`misc renders arabic.txt 1`] = `
-"<h1 id=\\"بايثون\\">بايثون<a aria-hidden=\\"true\\" href=\\"#بايثون\\"><span class=\\"icon icon-link\\"></span></a></h1>
+"<h1 id=\\"بايثون\\">بايثون<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#بايثون\\"><span class=\\"icon icon-link\\"></span></a></h1>
 <p><strong>بايثون</strong> لغة برمجة حديثة بسيطة، واضحة، سريعة ، تستخدم أسلوب البرمجة الكائنية (OOP) وقابلة للتطوير بالإضافة إلى أنها مجانية و مفتوحة المصدر. صُنفت بالأساس كلغة تفسيرية ، بايثون مصممة أصلاً للأداء بعض المهام الخاصة أو المحدودة. إلا أنه يمكن استخدامها بايثون لإنجاز المشاريع الضخمه كأي لغة برمجية أخرى،  غالباً ما يُنصح المبتدئين في ميدان البرمجة بتعلم هذه اللغة لأنها من بين أسهل اللغات البرمجية تعلماً.</p>
 <p>نشأت بايثون في مركز CWI (مركز العلوم والحاسب الآلي) بأمستردام على يد جويدو فان رُزوم. تم تطويرها بلغة C. أطلق فان رُزوم اسم \\"بايثون\\" على لغته تعبيرًا عن إعجابه بفِرقَة مسرحية هزلية شهيرة من بريطانيا، كانت تطلق على نفسها اسم مونتي بايثون Monty Python.</p>
 <p>تتميز بايثون بمجتمعها النشط ، كما أن لها الكثير من المكتبات البرمجية ذات الأغراض الخاصة والتي برمجها أشخاص من مجتمع هذه اللغة ، مثلاً مكتبة PyGame التي توفر مجموعه من الوظائف من اجل برمجة الالعاب. ويمكن لبايثون التعامل مع العديد من أنواع قواعد البيانات مثل MySQL وغيره.</p>
-<h2 id=\\"أمثلة\\">أمثلة<a aria-hidden=\\"true\\" href=\\"#أمثلة\\"><span class=\\"icon icon-link\\"></span></a></h2>
+<h2 id=\\"أمثلة\\">أمثلة<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#أمثلة\\"><span class=\\"icon icon-link\\"></span></a></h2>
 <p>مثال Hello World!</p>
 <pre><code>print \\"Hello World!\\"
 </code></pre>
@@ -3467,7 +3466,7 @@ else:
 
  print num
 </code></pre>
-<h2 id=\\"وصلات-خارجية\\">وصلات خارجية<a aria-hidden=\\"true\\" href=\\"#وصلات-خارجية\\"><span class=\\"icon icon-link\\"></span></a></h2>
+<h2 id=\\"وصلات-خارجية\\">وصلات خارجية<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#وصلات-خارجية\\"><span class=\\"icon icon-link\\"></span></a></h2>
 <ul>
 <li>
 <p><a href=\\"http://www.python.org\\">الموقع الرسمي للغة بايثون</a></p>
@@ -4372,11 +4371,11 @@ exports[`misc renders escaped_chars_in_js.txt 2`] = `
 `;
 
 exports[`misc renders h1.txt 1`] = `
-"<h2 id=\\"header\\">Header<a aria-hidden=\\"true\\" href=\\"#header\\"><span class=\\"icon icon-link\\"></span></a></h2>
-<h1 id=\\"header-2\\">Header 2<a aria-hidden=\\"true\\" href=\\"#header-2\\"><span class=\\"icon icon-link\\"></span></a></h1>
-<h3 id=\\"h3\\">H3<a aria-hidden=\\"true\\" href=\\"#h3\\"><span class=\\"icon icon-link\\"></span></a></h3>
-<h1 id=\\"h1\\">H1<a aria-hidden=\\"true\\" href=\\"#h1\\"><span class=\\"icon icon-link\\"></span></a></h1>
-<h2 id=\\"h2\\">H2<a aria-hidden=\\"true\\" href=\\"#h2\\"><span class=\\"icon icon-link\\"></span></a></h2>"
+"<h2 id=\\"header\\">Header<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#header\\"><span class=\\"icon icon-link\\"></span></a></h2>
+<h1 id=\\"header-2\\">Header 2<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#header-2\\"><span class=\\"icon icon-link\\"></span></a></h1>
+<h3 id=\\"h3\\">H3<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#h3\\"><span class=\\"icon icon-link\\"></span></a></h3>
+<h1 id=\\"h1\\">H1<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#h1\\"><span class=\\"icon icon-link\\"></span></a></h1>
+<h2 id=\\"h2\\">H2<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#h2\\"><span class=\\"icon icon-link\\"></span></a></h2>"
 `;
 
 exports[`misc renders h1.txt 2`] = `
@@ -6493,8 +6492,8 @@ Citation
 `;
 
 exports[`zds renders grid_tables.txt 1`] = `
-"<h1 id=\\"grid-table\\">Grid table<a aria-hidden=\\"true\\" href=\\"#grid-table\\"><span class=\\"icon icon-link\\"></span></a></h1>
-<h2 id=\\"basic-example\\">Basic example<a aria-hidden=\\"true\\" href=\\"#basic-example\\"><span class=\\"icon icon-link\\"></span></a></h2>
+"<h1 id=\\"grid-table\\">Grid table<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#grid-table\\"><span class=\\"icon icon-link\\"></span></a></h1>
+<h2 id=\\"basic-example\\">Basic example<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#basic-example\\"><span class=\\"icon icon-link\\"></span></a></h2>
 <div class=\\"table-wrapper\\"><table><thead><tr><th colspan=\\"2\\" rowspan=\\"1\\"><p>Table Headings</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>Here</p></th></tr><tr><th colspan=\\"1\\" rowspan=\\"1\\"><p>Sub</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>Headings</p></th><th colspan=\\"1\\" rowspan=\\"1\\"><p>Too</p></th></tr></thead><tbody><tr><td colspan=\\"1\\" rowspan=\\"2\\"><p>cell
 spans
 rows</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p>column spanning</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>normal</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>cell</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>multi
@@ -6516,13 +6515,13 @@ too</p></td><td colspan=\\"2\\" rowspan=\\"1\\"><p>cells can be
 <p>Text at the end</p>
 <div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>A</p></td></tr></tbody></table></div>
 <p>Text at the</p>
-<h2 id=\\"specific-tests\\">specific tests<a aria-hidden=\\"true\\" href=\\"#specific-tests\\"><span class=\\"icon icon-link\\"></span></a></h2>
+<h2 id=\\"specific-tests\\">specific tests<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#specific-tests\\"><span class=\\"icon icon-link\\"></span></a></h2>
 <p>In this examples, the second row should always be a full-cell</p>
 <div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>A</p></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>B | C</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>D</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>E</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>F</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>G</p></td></tr></tbody></table></div>
 <div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>A</p></td><td colspan=\\"3\\" rowspan=\\"1\\"></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>B | C</p></td></tr><tr><td colspan=\\"2\\" rowspan=\\"1\\"><p>D   E</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>F</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>G</p></td></tr></tbody></table></div>
 <div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>A</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>B</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>C</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>D</p></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>B | C</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>D</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>E</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>F</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>G</p></td></tr></tbody></table></div>
 <div class=\\"table-wrapper\\"><table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>A</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>B</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>C</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>D</p></td></tr><tr><td colspan=\\"4\\" rowspan=\\"1\\"><p>B  | C</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>D</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>E</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>F</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>G</p></td></tr></tbody></table></div>
-<h2 id=\\"failing-example\\">Failing example<a aria-hidden=\\"true\\" href=\\"#failing-example\\"><span class=\\"icon icon-link\\"></span></a></h2>
+<h2 id=\\"failing-example\\">Failing example<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#failing-example\\"><span class=\\"icon icon-link\\"></span></a></h2>
 <p>+--- A ---+</p>
 <p>+---------+
 +---------+</p>
@@ -6870,7 +6869,7 @@ foo \\\\textasciicircum{}\\\\textsuperscript{a}\\\\textasciicircum{} bar"
 exports[`zds renders urlize.txt 1`] = `
 "<p><a href=\\"http://www.google.fr\\">http://www.google.fr</a></p>
 <p><a href=\\"https://www.google.fr\\">https://www.google.fr</a></p>
-<p>www.google.fr</p>
+<p><a href=\\"http://www.google.fr\\">www.google.fr</a></p>
 <p>google.fr</p>
 <p><a href=\\"http://www.google.fr\\">http://www.google.fr</a></p>
 <p>Voici mon super lien qui termine une phrase <a href=\\"http://www.google.fr\\">http://www.google.fr</a>.</p>
@@ -6900,7 +6899,7 @@ exports[`zds renders urlize.txt 2`] = `
 
 
 
-www.google.fr
+\\\\externalLink{www.google.fr}{http://www.google.fr}
 
 
 
