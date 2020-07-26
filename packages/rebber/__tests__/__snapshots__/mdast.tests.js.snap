@@ -1,75 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`preprocessor 1`] = `
-"heading1(foo[footnoteReference(ref)])
-
-[footnoteDefinition(identifier=ref, text=def)]"
-`;
-
-exports[`rebber footnotes-in-headings: footnotes-in-headings 1`] = `
-"\\\\part{my heading\\\\footnote[l1c13o12]{\\\\label{footnote:l1c13o12} ref def}\\\\protect}
-
-
-or
-
-
-
-\\\\part{my heading\\\\textsuperscript{\\\\ref{footnote:ref}}}
-
-
-\\\\footnotetext[ref]{\\\\label{footnote:ref} def}"
-`;
-
-exports[`rebber generated-footnote-ids: generated-footnote-ids 1`] = `
-"First\\\\footnote[l1c6o5]{\\\\label{footnote:l1c6o5} the generated} and then a manual numbered def\\\\textsuperscript{\\\\ref{footnote:def}}.
-
-
-
-\\\\footnotetext[def]{\\\\label{footnote:def} hello}"
-`;
-
-exports[`rebber generated-footnote-ids-2: generated-footnote-ids-2 1`] = `
-"\\\\begin{itemize}
-\\\\item\\\\relax one\\\\footnote[l1c6o5]{\\\\label{footnote:l1c6o5} the first}
-\\\\item\\\\relax two\\\\textsuperscript{\\\\ref{footnote:2nd}}
-\\\\item\\\\relax three\\\\textsuperscript{\\\\ref{footnote:3rd}}
-\\\\item\\\\relax four\\\\footnote[l4c7o50]{\\\\label{footnote:l4c7o50} the last}
-\\\\end{itemize}
-
-
-\\\\footnotetext[2nd]{\\\\label{footnote:2nd} second}
-
-\\\\footnotetext[3rd]{\\\\label{footnote:3rd} third}"
-`;
-
-exports[`rebber with config: custom macros footnotes-in-headings: footnotes-in-headings 1`] = `
-"heading1(my heading[footnote(identifier=l1c13o12, text=ref def, protect=true)])
-
-or
-
-
-
-heading1(my heading[footnoteReference(ref)])
-
-[footnoteDefinition(identifier=ref, text=def)]"
-`;
-
-exports[`rebber with config: custom macros generated-footnote-ids: generated-footnote-ids 1`] = `
-"First[footnote(identifier=l1c6o5, text=the generated, protect=false)] and then a manual numbered def[footnoteReference(def)].
-
-
-
-[footnoteDefinition(identifier=def, text=hello)]"
-`;
-
-exports[`rebber with config: custom macros generated-footnote-ids-2: generated-footnote-ids-2 1`] = `
-"[unorderedList([listItem(one[footnote(identifier=l1c6o5, text=the first, protect=false)])][listItem(two[footnoteReference(2nd)])][listItem(three[footnoteReference(3rd)])][listItem(four[footnote(identifier=l4c7o50, text=the last, protect=false)])])]
-
-[footnoteDefinition(identifier=2nd, text=second)]
-
-[footnoteDefinition(identifier=3rd, text=third)]"
-`;
-
 exports[`rebber: remark specs amps-and-angles-encoding: amps-and-angles-encoding 1`] = `
 "AT\\\\&T has an ampersand in their name.
 
@@ -1471,145 +1401,6 @@ foo();
 \\\\begin{CodeBlock}{bash}
 echo \\"hello, \${WORLD}\\"
 \\\\end{CodeBlock}"
-`;
-
-exports[`rebber: remark specs footnote: footnote 1`] = `
-"Here is some text containing a footnote\\\\textsuperscript{\\\\ref{footnote:somesamplefootnote}}. You can then continue your thought...
-
-
-
-\\\\footnotetext[somesamplefootnote]{\\\\label{footnote:somesamplefootnote} Here is the text of the footnote itself.}
-
-Even go to a new \\\\hyperref[paragraph]{paragraph} and the footnotes will go to the bottom of the document\\\\textsuperscript{\\\\ref{footnote:documentdetails}}.
-
-
-
-\\\\footnotetext[documentdetails]{\\\\label{footnote:documentdetails} Depending on the \\\\textbf{final} form of your document, of course. See the documentation and experiment.
-
-This footnote has a second \\\\hyperref[paragraph]{paragraph}.}
-
-\\\\footnote{\\\\label{paragraph}\\\\externalLink{http://example.com}{http://example.com}}"
-`;
-
-exports[`rebber: remark specs footnote-consecutive: footnote-consecutive 1`] = `
-"\\\\part{International Radiotelephony Spelling Alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}}
-
-
-Here's the NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}\\\\textsuperscript{\\\\ref{footnote:wiki2}}: Alfa, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango, Uniform, Victor\\\\textsuperscript{\\\\ref{footnote:name}}\\\\textsuperscript{\\\\ref{footnote:consecutive}}, Whiskey, X-ray, Yankee, and Zulu.
-
-
-
-And here's some more text.
-
-
-
-\\\\footnotetext[wiki]{\\\\label{footnote:wiki} Read more about it here.}
-
-\\\\footnotetext[wiki2]{\\\\label{footnote:wiki2} Here's another good article on the subject.}
-
-\\\\footnotetext[name]{\\\\label{footnote:name} A great first name.}
-
-\\\\footnotetext[consecutive]{\\\\label{footnote:consecutive} I know.}"
-`;
-
-exports[`rebber: remark specs footnote-duplicate: footnote-duplicate 1`] = `
-"The NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}.
-
-
-
-\\\\footnotetext[wiki]{\\\\label{footnote:wiki} Read more about it here.}
-
-\\\\footnotetext[wiki]{\\\\label{footnote:wiki} And here.}"
-`;
-
-exports[`rebber: remark specs footnote-empty: footnote-empty 1`] = `"This is a document with \\\\texttt{footnotes: true}, but not actual footnote definition."`;
-
-exports[`rebber: remark specs footnote-escape: footnote-escape 1`] = `
-"The NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wi\\\\-ki}}.
-
-
-
-\\\\footnotetext[wi\\\\-ki]{\\\\label{footnote:wi\\\\-ki} Read more about it somewhere else.}"
-`;
-
-exports[`rebber: remark specs footnote-ids: footnote-ids 1`] = `
-"This example checks that \\\\footnote[l1c26o25]{\\\\label{footnote:l1c26o25} the generated} IDs do not overwrite the user's IDs\\\\textsuperscript{\\\\ref{footnote:1}}.
-
-
-
-\\\\footnotetext[1]{\\\\label{footnote:1} Old behavior would, for \\"generated\\", generate a footnote with an ID set to \\\\texttt{1}, thus overwriting this footnote.}"
-`;
-
-exports[`rebber: remark specs footnote-indent: footnote-indent 1`] = `
-"The NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}.
-
-
-
-\\\\footnotetext[wiki]{\\\\label{footnote:wiki} Read more about it somewhere else.}"
-`;
-
-exports[`rebber: remark specs footnote-inline: footnote-inline 1`] = `"This is an example of an inline footnote.\\\\footnote[l1c42o41]{\\\\label{footnote:l1c42o41} This is the \\\\textit{actual} footnote.}"`;
-
-exports[`rebber: remark specs footnote-like: footnote-like 1`] = `
-"This one isn't even [defined].
-
-
-
-\\\\textsuperscript{\\\\ref{footnote:both}}[invalid], \\\\footnote[l3c19o56]{\\\\label{footnote:l3c19o56} this too}[]."
-`;
-
-exports[`rebber: remark specs footnote-matrix: footnote-matrix 1`] = `
-"\\\\begin{enumerate}
-\\\\item\\\\relax [foo]
-\\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}[bar]
-\\\\item\\\\relax [foo]
-\\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}\\\\textsuperscript{\\\\ref{footnote:bar}}
-\\\\end{enumerate}"
-`;
-
-exports[`rebber: remark specs footnote-multiple: footnote-multiple 1`] = `
-"\\\\part{International Radiotelephony Spelling Alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}}
-
-
-Here's the NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}: Alfa, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango, Uniform, Victor, Whiskey, X-ray, Yankee, and Zulu.
-
-
-
-And here's some more text.
-
-
-
-\\\\footnotetext[wiki]{\\\\label{footnote:wiki} Read more about it here.}"
-`;
-
-exports[`rebber: remark specs footnote-nested: footnote-nested 1`] = `
-"A footnote\\\\textsuperscript{\\\\ref{footnote:1}}.
-
-
-
-\\\\footnotetext[1]{\\\\label{footnote:1} Including \\\\footnote[l3c17o33]{\\\\label{footnote:l3c17o33} another \\\\textbf{footnote}}}"
-`;
-
-exports[`rebber: remark specs footnote-proto: footnote-proto 1`] = `
-"A footnote\\\\textsuperscript{\\\\ref{footnote:tostring}} and \\\\textsuperscript{\\\\ref{footnote:__proto__}} and \\\\textsuperscript{\\\\ref{footnote:constructor}}.
-
-
-
-\\\\footnotetext[tostring]{\\\\label{footnote:tostring} See \\\\texttt{Object.prototype.toString()}.}
-
-\\\\footnotetext[constructor]{\\\\label{footnote:constructor} See \\\\texttt{Object.prototype.valueOf()}.}
-
-\\\\footnotetext[__proto__]{\\\\label{footnote:__proto__} See \\\\texttt{Object.prototype.\\\\_\\\\_proto\\\\_\\\\_()}.}"
-`;
-
-exports[`rebber: remark specs footnote-without-space: footnote-without-space 1`] = `
-"foo\\\\textsuperscript{\\\\ref{footnote:abc}} bar. foo\\\\textsuperscript{\\\\ref{footnote:xyz}} bar
-
-
-
-\\\\footnotetext[abc]{\\\\label{footnote:abc} Baz baz}
-
-\\\\footnotetext[xyz]{\\\\label{footnote:xyz} Baz}"
 `;
 
 exports[`rebber: remark specs hard-wrapped-paragraphs-with-list-like-lines: hard-wrapped-paragraphs-with-list-like-lines 1`] = `
@@ -3447,14 +3238,7 @@ code();
 \\\\end{enumerate}
 
 
-\\\\footnote{\\\\label{foo}\\\\externalLink{http://google.com}{http://google.com}}
-
-\\\\begin{enumerate}
-\\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}
-\\\\end{enumerate}
-
-
-\\\\footnotetext[foo]{\\\\label{footnote:foo} bar baz.}"
+\\\\footnote{\\\\label{foo}\\\\externalLink{http://google.com}{http://google.com}}"
 `;
 
 exports[`rebber: remark specs list-indentation: list-indentation 1`] = `
@@ -5844,7 +5628,7 @@ exports[`rebber: remark specs nested-references: nested-references 1`] = `
 
 
 
-\\\\hyperref[baz]{\\\\includegraphics{https://bar.com}}
+[\\\\includegraphics{undefined}]
 
 
 
@@ -5852,23 +5636,7 @@ This nested link should not work:
 
 
 
-\\\\hyperref[baz]{[Foo][bar]}
-
-
-
-This nested footnote not work:
-
-
-
-\\\\hyperref[baz]{\\\\textsuperscript{\\\\ref{footnote:foo}}}
-
-
-
-\\\\footnote{\\\\label{bar}\\\\externalLink{https://bar.com}{https://bar.com}}
-
-\\\\footnote{\\\\label{baz}\\\\externalLink{https://baz.com}{https://baz.com}}
-
-\\\\footnotetext[foo]{\\\\label{footnote:foo} A footnote.}"
+[[Foo][bar]]"
 `;
 
 exports[`rebber: remark specs nested-square-link: nested-square-link 1`] = `
@@ -8530,136 +8298,6 @@ exports[`rebber: remark specs with config: custom macros fenced-code-white-space
 [codeBash(echo \\"hello, \${WORLD}\\")]"
 `;
 
-exports[`rebber: remark specs with config: custom macros footnote 1`] = `
-"Here is some text containing a footnote[footnoteReference(somesamplefootnote)]. You can then continue your thought...
-
-
-
-[footnoteDefinition(identifier=somesamplefootnote, text=Here is the text of the footnote itself.)]
-
-Even go to a new [linkReference(reference=paragraph, content=paragraph)] and the footnotes will go to the bottom of the document[footnoteReference(documentdetails)].
-
-
-
-[footnoteDefinition(identifier=documentdetails, text=Depending on the \\\\textbf{final} form of your document, of course. See the documentation and experiment.
-
-This footnote has a second [linkReference(reference=paragraph, content=paragraph)].)]
-
-[definition(identifier=paragraph, url=http://example.com, title=null)]"
-`;
-
-exports[`rebber: remark specs with config: custom macros footnote-consecutive 1`] = `
-"heading1(International Radiotelephony Spelling Alphabet[footnoteReference(wiki)])
-
-Here's the NATO phonetic alphabet[footnoteReference(wiki)][footnoteReference(wiki2)]: Alfa, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango, Uniform, Victor[footnoteReference(name)][footnoteReference(consecutive)], Whiskey, X-ray, Yankee, and Zulu.
-
-
-
-And here's some more text.
-
-
-
-[footnoteDefinition(identifier=wiki, text=Read more about it here.)]
-
-[footnoteDefinition(identifier=wiki2, text=Here's another good article on the subject.)]
-
-[footnoteDefinition(identifier=name, text=A great first name.)]
-
-[footnoteDefinition(identifier=consecutive, text=I know.)]"
-`;
-
-exports[`rebber: remark specs with config: custom macros footnote-duplicate 1`] = `
-"The NATO phonetic alphabet[footnoteReference(wiki)].
-
-
-
-[footnoteDefinition(identifier=wiki, text=Read more about it here.)]
-
-[footnoteDefinition(identifier=wiki, text=And here.)]"
-`;
-
-exports[`rebber: remark specs with config: custom macros footnote-empty 1`] = `"This is a document with \\\\texttt{footnotes: true}, but not actual footnote definition."`;
-
-exports[`rebber: remark specs with config: custom macros footnote-escape 1`] = `
-"The NATO phonetic alphabet[footnoteReference(wi\\\\-ki)].
-
-
-
-[footnoteDefinition(identifier=wi\\\\-ki, text=Read more about it somewhere else.)]"
-`;
-
-exports[`rebber: remark specs with config: custom macros footnote-ids 1`] = `
-"This example checks that [footnote(identifier=l1c26o25, text=the generated, protect=false)] IDs do not overwrite the user's IDs[footnoteReference(1)].
-
-
-
-[footnoteDefinition(identifier=1, text=Old behavior would, for \\"generated\\", generate a footnote with an ID set to \\\\texttt{1}, thus overwriting this footnote.)]"
-`;
-
-exports[`rebber: remark specs with config: custom macros footnote-indent 1`] = `
-"The NATO phonetic alphabet[footnoteReference(wiki)].
-
-
-
-[footnoteDefinition(identifier=wiki, text=Read more about it somewhere else.)]"
-`;
-
-exports[`rebber: remark specs with config: custom macros footnote-inline 1`] = `"This is an example of an inline footnote.[footnote(identifier=l1c42o41, text=This is the \\\\textit{actual} footnote., protect=false)]"`;
-
-exports[`rebber: remark specs with config: custom macros footnote-like 1`] = `
-"This one isn't even [defined].
-
-
-
-[footnoteReference(both)][invalid], [footnote(identifier=l3c19o56, text=this too, protect=false)][]."
-`;
-
-exports[`rebber: remark specs with config: custom macros footnote-matrix 1`] = `"[orderedList([listItem([foo])][listItem([footnoteReference(foo)][bar])][listItem([foo])][listItem([footnoteReference(foo)][footnoteReference(bar)])])]"`;
-
-exports[`rebber: remark specs with config: custom macros footnote-multiple 1`] = `
-"heading1(International Radiotelephony Spelling Alphabet[footnoteReference(wiki)])
-
-Here's the NATO phonetic alphabet[footnoteReference(wiki)]: Alfa, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango, Uniform, Victor, Whiskey, X-ray, Yankee, and Zulu.
-
-
-
-And here's some more text.
-
-
-
-[footnoteDefinition(identifier=wiki, text=Read more about it here.)]"
-`;
-
-exports[`rebber: remark specs with config: custom macros footnote-nested 1`] = `
-"A footnote[footnoteReference(1)].
-
-
-
-[footnoteDefinition(identifier=1, text=Including [footnote(identifier=l3c17o33, text=another \\\\textbf{footnote}, protect=false)])]"
-`;
-
-exports[`rebber: remark specs with config: custom macros footnote-proto 1`] = `
-"A footnote[footnoteReference(tostring)] and [footnoteReference(__proto__)] and [footnoteReference(constructor)].
-
-
-
-[footnoteDefinition(identifier=tostring, text=See \\\\texttt{Object.prototype.toString()}.)]
-
-[footnoteDefinition(identifier=constructor, text=See \\\\texttt{Object.prototype.valueOf()}.)]
-
-[footnoteDefinition(identifier=__proto__, text=See \\\\texttt{Object.prototype.\\\\_\\\\_proto\\\\_\\\\_()}.)]"
-`;
-
-exports[`rebber: remark specs with config: custom macros footnote-without-space 1`] = `
-"foo[footnoteReference(abc)] bar. foo[footnoteReference(xyz)] bar
-
-
-
-[footnoteDefinition(identifier=abc, text=Baz baz)]
-
-[footnoteDefinition(identifier=xyz, text=Baz)]"
-`;
-
 exports[`rebber: remark specs with config: custom macros hard-wrapped-paragraphs-with-list-like-lines 1`] = `
 "In Markdown 1.0.0 and earlier. Version
 8. This line turns into a list item.
@@ -10270,11 +9908,7 @@ exports[`rebber: remark specs with config: custom macros list-continuation 1`] =
 
 [orderedList([listItem([linkReference(reference=foo, content=foo)])])]
 
-[definition(identifier=foo, url=http://google.com, title=null)]
-
-[orderedList([listItem([footnoteReference(foo)])])]
-
-[footnoteDefinition(identifier=foo, text=bar baz.)]"
+[definition(identifier=foo, url=http://google.com, title=null)]"
 `;
 
 exports[`rebber: remark specs with config: custom macros list-indentation 1`] = `
@@ -11999,7 +11633,7 @@ exports[`rebber: remark specs with config: custom macros nested-references 1`] =
 
 
 
-[linkReference(reference=baz, content=\\\\includegraphics{https://bar.com})]
+[\\\\includegraphics{undefined}]
 
 
 
@@ -12007,23 +11641,7 @@ This nested link should not work:
 
 
 
-[linkReference(reference=baz, content=[Foo][bar])]
-
-
-
-This nested footnote not work:
-
-
-
-[linkReference(reference=baz, content=[footnoteReference(foo)])]
-
-
-
-[definition(identifier=bar, url=https://bar.com, title=bar)]
-
-[definition(identifier=baz, url=https://baz.com, title=baz)]
-
-[footnoteDefinition(identifier=foo, text=A footnote.)]"
+[[Foo][bar]]"
 `;
 
 exports[`rebber: remark specs with config: custom macros nested-square-link 1`] = `
@@ -14661,156 +14279,6 @@ echo \\"hello, \${WORLD}\\"
 "
 `;
 
-exports[`toLaTeX: remark specs footnote: footnote 1`] = `
-"Here is some text containing a footnote\\\\textsuperscript{\\\\ref{footnote:somesamplefootnote}}. You can then continue your thought...
-
-
-
-\\\\footnotetext[somesamplefootnote]{\\\\label{footnote:somesamplefootnote} Here is the text of the footnote itself.}
-
-Even go to a new \\\\hyperref[paragraph]{paragraph} and the footnotes will go to the bottom of the document\\\\textsuperscript{\\\\ref{footnote:documentdetails}}.
-
-
-
-\\\\footnotetext[documentdetails]{\\\\label{footnote:documentdetails} Depending on the \\\\textbf{final} form of your document, of course. See the documentation and experiment.
-
-This footnote has a second \\\\hyperref[paragraph]{paragraph}.}
-
-\\\\footnote{\\\\label{paragraph}\\\\externalLink{http://example.com}{http://example.com}}"
-`;
-
-exports[`toLaTeX: remark specs footnote-consecutive: footnote-consecutive 1`] = `
-"\\\\part{International Radiotelephony Spelling Alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}}
-
-
-Here's the NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}\\\\textsuperscript{\\\\ref{footnote:wiki2}}: Alfa, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango, Uniform, Victor\\\\textsuperscript{\\\\ref{footnote:name}}\\\\textsuperscript{\\\\ref{footnote:consecutive}}, Whiskey, X-ray, Yankee, and Zulu.
-
-
-
-And here's some more text.
-
-
-
-\\\\footnotetext[wiki]{\\\\label{footnote:wiki} Read more about it here.}
-
-\\\\footnotetext[wiki2]{\\\\label{footnote:wiki2} Here's another good article on the subject.}
-
-\\\\footnotetext[name]{\\\\label{footnote:name} A great first name.}
-
-\\\\footnotetext[consecutive]{\\\\label{footnote:consecutive} I know.}"
-`;
-
-exports[`toLaTeX: remark specs footnote-duplicate: footnote-duplicate 1`] = `
-"The NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}.
-
-
-
-\\\\footnotetext[wiki]{\\\\label{footnote:wiki} Read more about it here.}
-
-\\\\footnotetext[wiki]{\\\\label{footnote:wiki} And here.}"
-`;
-
-exports[`toLaTeX: remark specs footnote-empty: footnote-empty 1`] = `
-"This is a document with \\\\texttt{footnotes: true}, but not actual footnote definition.
-
-"
-`;
-
-exports[`toLaTeX: remark specs footnote-escape: footnote-escape 1`] = `
-"The NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wi\\\\-ki}}.
-
-
-
-\\\\footnotetext[wi\\\\-ki]{\\\\label{footnote:wi\\\\-ki} Read more about it somewhere else.}"
-`;
-
-exports[`toLaTeX: remark specs footnote-ids: footnote-ids 1`] = `
-"This example checks that \\\\footnote[l1c26o25]{\\\\label{footnote:l1c26o25} the generated} IDs do not overwrite the user's IDs\\\\textsuperscript{\\\\ref{footnote:1}}.
-
-
-
-\\\\footnotetext[1]{\\\\label{footnote:1} Old behavior would, for \\"generated\\", generate a footnote with an ID set to \\\\texttt{1}, thus overwriting this footnote.}"
-`;
-
-exports[`toLaTeX: remark specs footnote-indent: footnote-indent 1`] = `
-"The NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}.
-
-
-
-\\\\footnotetext[wiki]{\\\\label{footnote:wiki} Read more about it somewhere else.}"
-`;
-
-exports[`toLaTeX: remark specs footnote-inline: footnote-inline 1`] = `
-"This is an example of an inline footnote.\\\\footnote[l1c42o41]{\\\\label{footnote:l1c42o41} This is the \\\\textit{actual} footnote.}
-
-"
-`;
-
-exports[`toLaTeX: remark specs footnote-like: footnote-like 1`] = `
-"This one isn't even [defined].
-
-
-
-\\\\textsuperscript{\\\\ref{footnote:both}}[invalid], \\\\footnote[l3c19o56]{\\\\label{footnote:l3c19o56} this too}[].
-
-"
-`;
-
-exports[`toLaTeX: remark specs footnote-matrix: footnote-matrix 1`] = `
-"\\\\begin{enumerate}
-\\\\item\\\\relax [foo]
-\\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}[bar]
-\\\\item\\\\relax [foo]
-\\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}\\\\textsuperscript{\\\\ref{footnote:bar}}
-\\\\end{enumerate}
-"
-`;
-
-exports[`toLaTeX: remark specs footnote-multiple: footnote-multiple 1`] = `
-"\\\\part{International Radiotelephony Spelling Alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}}
-
-
-Here's the NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}: Alfa, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango, Uniform, Victor, Whiskey, X-ray, Yankee, and Zulu.
-
-
-
-And here's some more text.
-
-
-
-\\\\footnotetext[wiki]{\\\\label{footnote:wiki} Read more about it here.}"
-`;
-
-exports[`toLaTeX: remark specs footnote-nested: footnote-nested 1`] = `
-"A footnote\\\\textsuperscript{\\\\ref{footnote:1}}.
-
-
-
-\\\\footnotetext[1]{\\\\label{footnote:1} Including \\\\footnote[l3c17o33]{\\\\label{footnote:l3c17o33} another \\\\textbf{footnote}}}"
-`;
-
-exports[`toLaTeX: remark specs footnote-proto: footnote-proto 1`] = `
-"A footnote\\\\textsuperscript{\\\\ref{footnote:tostring}} and \\\\textsuperscript{\\\\ref{footnote:__proto__}} and \\\\textsuperscript{\\\\ref{footnote:constructor}}.
-
-
-
-\\\\footnotetext[tostring]{\\\\label{footnote:tostring} See \\\\texttt{Object.prototype.toString()}.}
-
-\\\\footnotetext[constructor]{\\\\label{footnote:constructor} See \\\\texttt{Object.prototype.valueOf()}.}
-
-\\\\footnotetext[__proto__]{\\\\label{footnote:__proto__} See \\\\texttt{Object.prototype.\\\\_\\\\_proto\\\\_\\\\_()}.}"
-`;
-
-exports[`toLaTeX: remark specs footnote-without-space: footnote-without-space 1`] = `
-"foo\\\\textsuperscript{\\\\ref{footnote:abc}} bar. foo\\\\textsuperscript{\\\\ref{footnote:xyz}} bar
-
-
-
-\\\\footnotetext[abc]{\\\\label{footnote:abc} Baz baz}
-
-\\\\footnotetext[xyz]{\\\\label{footnote:xyz} Baz}"
-`;
-
 exports[`toLaTeX: remark specs hard-wrapped-paragraphs-with-list-like-lines: hard-wrapped-paragraphs-with-list-like-lines 1`] = `
 "In Markdown 1.0.0 and earlier. Version
 8. This line turns into a list item.
@@ -16773,14 +16241,7 @@ code();
 \\\\end{enumerate}
 
 
-\\\\footnote{\\\\label{foo}\\\\externalLink{http://google.com}{http://google.com}}
-
-\\\\begin{enumerate}
-\\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}
-\\\\end{enumerate}
-
-
-\\\\footnotetext[foo]{\\\\label{footnote:foo} bar baz.}"
+\\\\footnote{\\\\label{foo}\\\\externalLink{http://google.com}{http://google.com}}"
 `;
 
 exports[`toLaTeX: remark specs list-indentation: list-indentation 1`] = `
@@ -19192,7 +18653,7 @@ exports[`toLaTeX: remark specs nested-references: nested-references 1`] = `
 
 
 
-\\\\hyperref[baz]{\\\\includegraphics{https://bar.com}}
+[\\\\includegraphics{undefined}]
 
 
 
@@ -19200,23 +18661,9 @@ This nested link should not work:
 
 
 
-\\\\hyperref[baz]{[Foo][bar]}
+[[Foo][bar]]
 
-
-
-This nested footnote not work:
-
-
-
-\\\\hyperref[baz]{\\\\textsuperscript{\\\\ref{footnote:foo}}}
-
-
-
-\\\\footnote{\\\\label{bar}\\\\externalLink{https://bar.com}{https://bar.com}}
-
-\\\\footnote{\\\\label{baz}\\\\externalLink{https://baz.com}{https://baz.com}}
-
-\\\\footnotetext[foo]{\\\\label{footnote:foo} A footnote.}"
+"
 `;
 
 exports[`toLaTeX: remark specs nested-square-link: nested-square-link 1`] = `

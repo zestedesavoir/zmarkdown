@@ -31,8 +31,11 @@ const integrationConfig = {
   preprocessors: {
     tableCell: require('../src/preprocessors/codeVisitor'),
     iframe: require('../src/preprocessors/iframe'),
-    // eslint-disable-next-line max-len
-    spoilerFlatten: require('../src/preprocessors/spoilerFlatten')(['sCustomBlock', 'secretCustomBlock']),
+    spoilerFlatten: require('../src/preprocessors/spoilerFlatten')([
+      'sCustomBlock',
+      'secretCustomBlock',
+    ]),
+    heading: require('../src/preprocessors/headingVisitor'),
   },
   overrides: {
     abbr: require('../src/type/abbr'),
@@ -40,6 +43,9 @@ const integrationConfig = {
     emoticon: require('../src/type/emoticon'),
     errorCustomBlock: require('../src/type/customBlocks'),
     figure: require('../src/type/figure'),
+    footnote: require('../src/type/footnote'),
+    footnoteDefinition: require('../src/type/footnoteDefinition'),
+    footnoteReference: require('../src/type/footnoteReference'),
     gridTable: require('../src/type/gridTable'),
     informationCustomBlock: require('../src/type/customBlocks'),
     inlineMath: require('../src/type/math'),
@@ -365,21 +371,13 @@ Object.keys(fixtures).filter(Boolean).filter(name => name.startsWith('mix-')).fo
 })
 
 test('footnotes', () => {
+  const fixture = fixtures['footnote']
+
   const {contents} = unified()
     .use(reParse)
     .use(footnotes, {inlineNotes: true})
     .use(rebber, integrationConfig)
-    .processSync(dedent`
-      # mytitle A[^footnoteRef]
-
-      [^footnoteRef]: reference in title
-
-      # mytitle B^[footnoterawhead inner]
-
-      # myti*tle C^[foo inner]*
-
-      a paragraph^[footnoteRawPar inner]
-    `)
+    .processSync(fixture)
   expect(contents).toMatchSnapshot()
 })
 

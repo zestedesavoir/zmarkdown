@@ -1,7 +1,0 @@
-* one^[the first]
-* two[^2nd]
-* three[^3rd]
-* four^[the last]
-
-[^2nd]: second
-[^3rd]: third

@@ -1,5 +1,10 @@
 "use strict";
 
+/* Dependencies. */
+var all = require('rebber/dist/all');
+/* Expose. */
+
+
 module.exports = notes;
 
 var defaultMacro = function defaultMacro(identifier, text, protect) {
@@ -15,5 +20,5 @@ var defaultMacro = function defaultMacro(identifier, text, protect) {
 function notes(ctx, node) {
   var macro = ctx.footnoteDefinition || defaultMacro;
   var protect = !!node.inHeading;
-  return macro(node.identifier, require('../all')(ctx, node, protect).trim());
+  return macro(node.identifier, all(ctx, node, protect).trim());
 }

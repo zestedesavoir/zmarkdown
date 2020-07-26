@@ -9,6 +9,7 @@ It currently supports:
 * [remark-align][]
 * [remark-custom-blocks][]
 * [remark-emoticons][]
+* [remark-footnotes][]
 * [remark-grid-tables][]
 * [remark-iframes][]
 * [remark-kbd][]
@@ -179,6 +180,8 @@ console.log(contents);
 [remark-custom-blocks]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-custom-blocks#remark-custom-blocks--
 
 [remark-emoticons]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-emoticons#remark-emoticons--
+
+[remark-footnotes]: https://github.com/remarkjs/remark-footnotes
 
 [remark-grid-tables]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-grid-tables#remark-grid-tables--
 

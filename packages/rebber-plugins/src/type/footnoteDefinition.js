@@ -1,3 +1,7 @@
+/* Dependencies. */
+const all = require('rebber/dist/all')
+
+/* Expose. */
 module.exports = notes
 
 const defaultMacro = (identifier, text, protect) => {
@@ -12,5 +16,5 @@ function notes (ctx, node) {
   const macro = ctx.footnoteDefinition || defaultMacro
   const protect = !!node.inHeading
 
-  return macro(node.identifier, require('../all')(ctx, node, protect).trim())
+  return macro(node.identifier, all(ctx, node, protect).trim())
 }
