@@ -1,5 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`allow different left-right characters 1`] = `"<p><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>SUPPR</kbd></p>"`;
+
+exports[`allow non-pipe characters 1`] = `"<p><kbd>CTRL</kbd>, +<kbd>D</kbd></p>"`;
+
 exports[`parses kbd parses a big fixture 1`] = `
 "<p>Blabla <kbd>ok</kbd> kxcvj <kbd>ok foo</kbd> sdff</p>
 <p>sdf |||| df</p>

@@ -2,17 +2,22 @@
 
 var whitespace = require('is-whitespace-character');
 
-var C_PIPE = '|';
-var DOUBLE = '||';
+var DEFAULT_LEFT = '|';
+var DEFAULT_RIGHT = '|';
 
-function locator(value, fromIndex) {
-  var index = value.indexOf(DOUBLE, fromIndex);
-  return index;
-}
+function plugin(config) {
+  var CHAR_LEFT = config && config.charLeft || DEFAULT_LEFT;
+  var CHAR_RIGHT = config && config.charRight || DEFAULT_RIGHT;
+  var DOUBLE_LEFT = CHAR_LEFT + CHAR_LEFT;
+  var DOUBLE_RIGHT = CHAR_RIGHT + CHAR_RIGHT;
 
-function plugin() {
+  function locator(value, fromIndex) {
+    var index = value.indexOf(DOUBLE_LEFT, fromIndex);
+    return index;
+  }
+
   function inlineTokenizer(eat, value, silent) {
-    if (!this.options.gfm || value.substr(0, 2) !== DOUBLE || value.substr(0, 4) === DOUBLE + DOUBLE || whitespace(value.charAt(2))) {
+    if (!this.options.gfm || value.substr(0, 2) !== DOUBLE_LEFT || value.substr(0, 4) === DOUBLE_LEFT + DOUBLE_RIGHT || whitespace(value.charAt(2))) {
       return;
     }
 
@@ -29,10 +34,10 @@ function plugin() {
     while (++index < length) {
       character = value.charAt(index);
 
-      if (character === C_PIPE && previous === C_PIPE && (!preceding || !whitespace(preceding))) {
+      if (character === CHAR_RIGHT && previous === CHAR_RIGHT && (!preceding || !whitespace(preceding))) {
         /* istanbul ignore if - never used (yet) */
         if (silent) return true;
-        return eat(DOUBLE + subvalue + DOUBLE)({
+        return eat(DOUBLE_LEFT + subvalue + DOUBLE_RIGHT)({
           type: 'kbd',
           children: this.tokenizeInline(subvalue, now),
           data: {
@@ -60,7 +65,7 @@ function plugin() {
     var visitors = Compiler.prototype.visitors;
 
     visitors.kbd = function (node) {
-      return "||".concat(this.all(node).join(''), "||");
+      return "".concat(DOUBLE_LEFT).concat(this.all(node).join('')).concat(DOUBLE_RIGHT);
     };
   }
 }

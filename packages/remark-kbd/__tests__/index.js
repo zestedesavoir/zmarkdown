@@ -8,7 +8,6 @@ import remarkCustomBlocks from '../../remark-custom-blocks'
 
 import plugin from '../src/'
 
-
 const render = text => unified()
   .use(reParse, {
     footnotes: true,
@@ -53,6 +52,28 @@ describe('parses kbd', () => {
     expect(contents).toContain('||escaped||')
     expect(contents).toContain('|<kbd>four</kbd>')
   })
+})
+
+test('allow non-pipe characters', () => {
+  const {contents} = unified()
+    .use(reParse)
+    .use(plugin, {charLeft: '+', charRight: '+'})
+    .use(remark2rehype)
+    .use(rehypeStringify)
+    .processSync('++CTRL++, \\+++D++')
+
+  expect(contents).toMatchSnapshot()
+})
+
+test('allow different left-right characters', () => {
+  const {contents} = unified()
+    .use(reParse)
+    .use(plugin, {charLeft: '[', charRight: ']'})
+    .use(remark2rehype)
+    .use(rehypeStringify)
+    .processSync('[[CTRL]]+[[ALT]]+[[SUPPR]]')
+
+  expect(contents).toMatchSnapshot()
 })
 
 test('to markdown', () => {
