@@ -339,10 +339,10 @@ Mathilde & 35 \\\\\\\\ \\\\hline
 `;
 
 exports[`footnotes 1`] = `
-"\\\\part{International Radiotelephony Spelling Alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}}
+"\\\\part{International Radiotelephony Spelling Alphabet\\\\textsuperscript{\\\\footnotemark{footnote:wiki}}}
 
 
-Here's the NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wiki}}: Alfa, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango, Uniform, Victor\\\\textsuperscript{\\\\ref{footnote:name}}\\\\textsuperscript{\\\\ref{footnote:consecutive}}, Whiskey, X-ray, Yankee, and Zulu.
+Here's the NATO phonetic alphabet\\\\textsuperscript{\\\\footnotemark{footnote:wiki}}: Alfa, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango, Uniform, Victor\\\\textsuperscript{\\\\footnotemark{footnote:name}}\\\\textsuperscript{\\\\footnotemark{footnote:consecutive}}, Whiskey, X-ray, Yankee, and Zulu.
 
 
 
@@ -350,35 +350,35 @@ And here's some more text.
 
 
 
-\\\\footnotetext[wiki]{\\\\label{footnote:wiki} Read more about it here.}
+\\\\footnotetext[wiki]{\\\\footnotemark{footnote:wiki} Read more about it here.}
 
-\\\\footnotetext[wiki]{\\\\label{footnote:wiki} And here.}
+\\\\footnotetext[wiki]{\\\\footnotemark{footnote:wiki} And here.}
 
-\\\\footnotetext[wiki2]{\\\\label{footnote:wiki2} Here's another good article on the subject.}
+\\\\footnotetext[wiki2]{\\\\footnotemark{footnote:wiki2} Here's another good article on the subject.}
 
-\\\\footnotetext[name]{\\\\label{footnote:name} A great first name.}
+\\\\footnotetext[name]{\\\\footnotemark{footnote:name} A great first name.}
 
-\\\\footnotetext[consecutive]{\\\\label{footnote:consecutive} I know.}
+\\\\footnotetext[consecutive]{\\\\footnotemark{footnote:consecutive} I know.}
 
-The NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wi\\\\-ki}}.
-
-
-
-\\\\footnotetext[wi\\\\-ki]{\\\\label{footnote:wi\\\\-ki} Read more about it somewhere else.}
-
-This example checks that \\\\footnote[l17c26o614]{\\\\label{footnote:l17c26o614} the generated} IDs do not overwrite the user's IDs\\\\textsuperscript{\\\\ref{footnote:1}}.
+The NATO phonetic alphabet\\\\textsuperscript{\\\\footnotemark{footnote:wi\\\\-ki}}.
 
 
 
-\\\\footnotetext[1]{\\\\label{footnote:1} Old behavior would, for \\"generated\\", generate a footnote with an ID set to \\\\texttt{1}, thus overwriting this footnote.}
+\\\\footnotetext[wi\\\\-ki]{\\\\footnotemark{footnote:wi\\\\-ki} Read more about it somewhere else.}
 
-The NATO phonetic alphabet\\\\textsuperscript{\\\\ref{footnote:wiki3}}.
+This example checks that \\\\footnote[l17c26o614]{\\\\footnotemark{footnote:l17c26o614} the generated} IDs do not overwrite the user's IDs\\\\textsuperscript{\\\\footnotemark{footnote:1}}.
 
 
 
-\\\\footnotetext[wiki3]{\\\\label{footnote:wiki3} Read more about it somewhere else.}
+\\\\footnotetext[1]{\\\\footnotemark{footnote:1} Old behavior would, for \\"generated\\", generate a footnote with an ID set to \\\\texttt{1}, thus overwriting this footnote.}
 
-This is an example of an inline footnote.\\\\footnote[l25c42o918]{\\\\label{footnote:l25c42o918} This is the \\\\textit{actual} footnote.}
+The NATO phonetic alphabet\\\\textsuperscript{\\\\footnotemark{footnote:wiki3}}.
+
+
+
+\\\\footnotetext[wiki3]{\\\\footnotemark{footnote:wiki3} Read more about it somewhere else.}
+
+This is an example of an inline footnote.\\\\footnote[l25c42o918]{\\\\footnotemark{footnote:l25c42o918} This is the \\\\textit{actual} footnote.}
 
 
 
@@ -386,111 +386,111 @@ This one isn't even [defined].
 
 
 
-\\\\textsuperscript{\\\\ref{footnote:both}}[invalid], \\\\footnote[l29c19o1015]{\\\\label{footnote:l29c19o1015} this too}[].
+\\\\textsuperscript{\\\\footnotemark{footnote:both}}[invalid], \\\\footnote[l29c19o1015]{\\\\footnotemark{footnote:l29c19o1015} this too}[].
 
 
 
 \\\\begin{enumerate}
 \\\\item\\\\relax \\\\hyperref[bar]{foo}
-\\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}\\\\hyperref[bar]{bar}
+\\\\item\\\\relax \\\\textsuperscript{\\\\footnotemark{footnote:foo}}\\\\hyperref[bar]{bar}
 \\\\item\\\\relax [foo]
-\\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}\\\\textsuperscript{\\\\ref{footnote:bar}}
+\\\\item\\\\relax \\\\textsuperscript{\\\\footnotemark{footnote:foo}}\\\\textsuperscript{\\\\footnotemark{footnote:bar}}
 \\\\end{enumerate}
 
 
-A footnote\\\\textsuperscript{\\\\ref{footnote:2}}.
+A footnote\\\\textsuperscript{\\\\footnotemark{footnote:2}}.
 
 
 
-\\\\footnotetext[2]{\\\\label{footnote:2} Including \\\\footnote[l38c17o1125]{\\\\label{footnote:l38c17o1125} another \\\\textbf{footnote}}}
+\\\\footnotetext[2]{\\\\footnotemark{footnote:2} Including \\\\footnote[l38c17o1125]{\\\\footnotemark{footnote:l38c17o1125} another \\\\textbf{footnote}}}
 
-A footnote\\\\textsuperscript{\\\\ref{footnote:tostring}} and \\\\textsuperscript{\\\\ref{footnote:__proto__}} and \\\\textsuperscript{\\\\ref{footnote:constructor}}.
-
-
-
-\\\\footnotetext[tostring]{\\\\label{footnote:tostring} See \\\\texttt{Object.prototype.toString()}.}
-
-\\\\footnotetext[constructor]{\\\\label{footnote:constructor} See \\\\texttt{Object.prototype.valueOf()}.}
-
-\\\\footnotetext[__proto__]{\\\\label{footnote:__proto__} See \\\\texttt{Object.prototype.\\\\_\\\\_proto\\\\_\\\\_()}.}
-
-foo\\\\textsuperscript{\\\\ref{footnote:abc}} bar. foo\\\\textsuperscript{\\\\ref{footnote:xyz}} bar
+A footnote\\\\textsuperscript{\\\\footnotemark{footnote:tostring}} and \\\\textsuperscript{\\\\footnotemark{footnote:__proto__}} and \\\\textsuperscript{\\\\footnotemark{footnote:constructor}}.
 
 
 
-\\\\footnotetext[abc]{\\\\label{footnote:abc} Baz baz}
+\\\\footnotetext[tostring]{\\\\footnotemark{footnote:tostring} See \\\\texttt{Object.prototype.toString()}.}
 
-\\\\footnotetext[xyz]{\\\\label{footnote:xyz} Baz}
+\\\\footnotetext[constructor]{\\\\footnotemark{footnote:constructor} See \\\\texttt{Object.prototype.valueOf()}.}
 
-Lorem ipsum dolor sit amet\\\\textsuperscript{\\\\ref{footnote:3}}.
+\\\\footnotetext[__proto__]{\\\\footnotemark{footnote:__proto__} See \\\\texttt{Object.prototype.\\\\_\\\\_proto\\\\_\\\\_()}.}
 
-
-
-Nulla finibus\\\\textsuperscript{\\\\ref{footnote:4}} neque et diam rhoncus convallis.
+foo\\\\textsuperscript{\\\\footnotemark{footnote:abc}} bar. foo\\\\textsuperscript{\\\\footnotemark{footnote:xyz}} bar
 
 
 
-\\\\footnotetext[3]{\\\\label{footnote:3} Consectetur \\\\textbf{adipiscing} elit. Praesent dictum purus ullamcorper ligula semper pellentesque\\\\textsuperscript{\\\\ref{footnote:3}}.
+\\\\footnotetext[abc]{\\\\footnotemark{footnote:abc} Baz baz}
+
+\\\\footnotetext[xyz]{\\\\footnotemark{footnote:xyz} Baz}
+
+Lorem ipsum dolor sit amet\\\\textsuperscript{\\\\footnotemark{footnote:3}}.
+
+
+
+Nulla finibus\\\\textsuperscript{\\\\footnotemark{footnote:4}} neque et diam rhoncus convallis.
+
+
+
+\\\\footnotetext[3]{\\\\footnotemark{footnote:3} Consectetur \\\\textbf{adipiscing} elit. Praesent dictum purus ullamcorper ligula semper pellentesque\\\\textsuperscript{\\\\footnotemark{footnote:3}}.
 
 \\\\begin{itemize}
 \\\\item\\\\relax Containing a list.
 \\\\end{itemize}}
 
-\\\\footnotetext[4]{\\\\label{footnote:4} Nam dictum sapien nec sem ultrices fermentum. Nulla \\\\textbf{facilisi}. In et feugiat massa.}
+\\\\footnotetext[4]{\\\\footnotemark{footnote:4} Nam dictum sapien nec sem ultrices fermentum. Nulla \\\\textbf{facilisi}. In et feugiat massa.}
 
-\\\\footnotetext[5]{\\\\label{footnote:5} Nunc dapibus ipsum ut mi \\\\textit{ultrices}, non euismod velit pretium.}
+\\\\footnotetext[5]{\\\\footnotemark{footnote:5} Nunc dapibus ipsum ut mi \\\\textit{ultrices}, non euismod velit pretium.}
 
-Here is some text containing a footnote\\\\textsuperscript{\\\\ref{footnote:somesamplefootnote}}. You can then continue your thought...
-
-
-
-\\\\footnotetext[somesamplefootnote]{\\\\label{footnote:somesamplefootnote} Here is the text of the footnote itself.}
-
-Even go to a new \\\\hyperref[paragraph]{paragraph} and the footnotes will go to the bottom of the document\\\\textsuperscript{\\\\ref{footnote:documentdetails}}.
+Here is some text containing a footnote\\\\textsuperscript{\\\\footnotemark{footnote:somesamplefootnote}}. You can then continue your thought...
 
 
 
-\\\\footnotetext[documentdetails]{\\\\label{footnote:documentdetails} Depending on the \\\\textbf{final} form of your document, of course. See the documentation and experiment.
+\\\\footnotetext[somesamplefootnote]{\\\\footnotemark{footnote:somesamplefootnote} Here is the text of the footnote itself.}
+
+Even go to a new \\\\hyperref[paragraph]{paragraph} and the footnotes will go to the bottom of the document\\\\textsuperscript{\\\\footnotemark{footnote:documentdetails}}.
+
+
+
+\\\\footnotetext[documentdetails]{\\\\footnotemark{footnote:documentdetails} Depending on the \\\\textbf{final} form of your document, of course. See the documentation and experiment.
 
 This footnote has a second \\\\hyperref[paragraph]{paragraph}.}
 
 \\\\footnote{\\\\label{paragraph}\\\\externalLink{http://example.com}{http://example.com}}
 
-\\\\part{my heading\\\\footnote[l76c13o2284]{\\\\label{footnote:l76c13o2284} ref def}\\\\protect}
+\\\\part{my heading\\\\footnote[l76c13o2284]{\\\\footnotemark{footnote:l76c13o2284} ref def}\\\\protect}
 
 
 or
 
 
 
-\\\\part{my heading\\\\textsuperscript{\\\\ref{footnote:ref}}}
+\\\\part{my heading\\\\textsuperscript{\\\\footnotemark{footnote:ref}}}
 
 
-\\\\footnotetext[ref]{\\\\label{footnote:ref} def}
+\\\\footnotetext[ref]{\\\\footnotemark{footnote:ref} def}
 
-First\\\\footnote[l84c6o2338]{\\\\label{footnote:l84c6o2338} the generated} and then a manual numbered def\\\\textsuperscript{\\\\ref{footnote:def}}.
+First\\\\footnote[l84c6o2338]{\\\\footnotemark{footnote:l84c6o2338} the generated} and then a manual numbered def\\\\textsuperscript{\\\\footnotemark{footnote:def}}.
 
 
 
-\\\\footnotetext[def]{\\\\label{footnote:def} hello}
+\\\\footnotetext[def]{\\\\footnotemark{footnote:def} hello}
 
 \\\\begin{itemize}
-\\\\item\\\\relax one\\\\footnote[l89c6o2415]{\\\\label{footnote:l89c6o2415} the first}
-\\\\item\\\\relax two\\\\textsuperscript{\\\\ref{footnote:2nd}}
-\\\\item\\\\relax three\\\\textsuperscript{\\\\ref{footnote:3rd}}
-\\\\item\\\\relax four\\\\footnote[l92c7o2460]{\\\\label{footnote:l92c7o2460} the last}
+\\\\item\\\\relax one\\\\footnote[l89c6o2415]{\\\\footnotemark{footnote:l89c6o2415} the first}
+\\\\item\\\\relax two\\\\textsuperscript{\\\\footnotemark{footnote:2nd}}
+\\\\item\\\\relax three\\\\textsuperscript{\\\\footnotemark{footnote:3rd}}
+\\\\item\\\\relax four\\\\footnote[l92c7o2460]{\\\\footnotemark{footnote:l92c7o2460} the last}
 \\\\end{itemize}
 
 
-\\\\footnotetext[2nd]{\\\\label{footnote:2nd} second}
+\\\\footnotetext[2nd]{\\\\footnotemark{footnote:2nd} second}
 
-\\\\footnotetext[3rd]{\\\\label{footnote:3rd} third}
+\\\\footnotetext[3rd]{\\\\footnotemark{footnote:3rd} third}
 
 This nested footnote would not work:
 
 
 
-\\\\hyperref[baz]{\\\\textsuperscript{\\\\ref{footnote:foo2}}}
+\\\\hyperref[baz]{\\\\textsuperscript{\\\\footnotemark{footnote:foo2}}}
 
 
 
@@ -498,30 +498,30 @@ This nested footnote would not work:
 
 \\\\footnote{\\\\label{baz}\\\\externalLink{https://baz.com}{https://baz.com}}
 
-\\\\footnotetext[foo2]{\\\\label{footnote:foo2} A footnote.}
+\\\\footnotetext[foo2]{\\\\footnotemark{footnote:foo2} A footnote.}
 
 \\\\chapter{New list continuation}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax \\\\textsuperscript{\\\\ref{footnote:foo}}
+\\\\item\\\\relax \\\\textsuperscript{\\\\footnotemark{footnote:foo}}
 \\\\end{enumerate}
 
 
-\\\\footnotetext[foo]{\\\\label{footnote:foo} bar baz.}
+\\\\footnotetext[foo]{\\\\footnotemark{footnote:foo} bar baz.}
 
-\\\\part{mytitle A\\\\textsuperscript{\\\\ref{footnote:footnoteref}}}
-
-
-\\\\footnotetext[footnoteref]{\\\\label{footnote:footnoteref} reference in title}
-
-\\\\part{mytitle B\\\\footnote[l117c12o2768]{\\\\label{footnote:l117c12o2768} footnoterawhead inner}\\\\protect}
+\\\\part{mytitle A\\\\textsuperscript{\\\\footnotemark{footnote:footnoteref}}}
 
 
-\\\\part{myti\\\\textit{tle C\\\\footnote[l119c13o2806]{\\\\label{footnote:l119c13o2806} foo inner}\\\\protect}}
+\\\\footnotetext[footnoteref]{\\\\footnotemark{footnote:footnoteref} reference in title}
+
+\\\\part{mytitle B\\\\footnote[l117c12o2768]{\\\\footnotemark{footnote:l117c12o2768} footnoterawhead inner}\\\\protect}
 
 
-a paragraph\\\\footnote[l121c12o2832]{\\\\label{footnote:l121c12o2832} footnoteRawPar inner}
+\\\\part{myti\\\\textit{tle C\\\\footnote[l119c13o2806]{\\\\footnotemark{footnote:l119c13o2806} foo inner}\\\\protect}}
+
+
+a paragraph\\\\footnote[l121c12o2832]{\\\\footnotemark{footnote:l121c12o2832} footnoteRawPar inner}
 
 "
 `;
@@ -1050,11 +1050,11 @@ Sub & Headings & \\\\abbr{ABBR}{abbreviation} \\\\\\\\ \\\\hline
  & normal & cell \\\\\\\\ \\\\hline
 multi \\\\endgraf line \\\\endgraf \\\\endgraf cells \\\\endgraf too & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{\\\\parbox{\\\\linewidth}{cells can be \\\\endgraf \\\\textit{formatted} \\\\endgraf \\\\textbf{paragraphs}}} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-\\\\captionof{table}{The new table \\\\abbr{ABBR}{abbreviation} \\\\textsuperscript{\\\\ref{footnote:foot}} with \\\\keys{CTRL} + \\\\keys{S}}
+\\\\captionof{table}{The new table \\\\abbr{ABBR}{abbreviation} \\\\textsuperscript{\\\\footnotemark{footnote:foot}} with \\\\keys{CTRL} + \\\\keys{S}}
 
 
 
-\\\\footnotetext[foot]{\\\\label{footnote:foot} a foot}
+\\\\footnotetext[foot]{\\\\footnotemark{footnote:foot} a foot}
 
 \\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 2}|m{\\\\dimexpr(\\\\linewidth) / 2}|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
@@ -1196,10 +1196,10 @@ print('bla')
 `;
 
 exports[`mix-5 1`] = `
-"\\\\image{http://www.numerama.com/content/uploads/2016/07/espace.jpg}[espace\\\\textsuperscript{\\\\ref{footnote:node}}]
+"\\\\image{http://www.numerama.com/content/uploads/2016/07/espace.jpg}[espace\\\\textsuperscript{\\\\footnotemark{footnote:node}}]
 
 
-\\\\footnotetext[node]{\\\\label{footnote:node} Two things are infinite: the universe and human stupidity.}"
+\\\\footnotetext[node]{\\\\footnotemark{footnote:node} Two things are infinite: the universe and human stupidity.}"
 `;
 
 exports[`mix-6 1`] = `

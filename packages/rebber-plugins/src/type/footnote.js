@@ -5,7 +5,7 @@ const all = require('rebber/dist/all')
 module.exports = notes
 
 const defaultMacro = (identifier, text, protect) => {
-  const footnote = `\\footnote[${identifier}]{\\label{footnote:${identifier}} ${text}}`
+  const footnote = `\\footnote[${identifier}]{\\footnotemark{footnote:${identifier}} ${text}}`
   if (protect) {
     return `${footnote}\\protect`
   }

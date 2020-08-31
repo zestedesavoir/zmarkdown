@@ -8,17 +8,13 @@ var all = require('rebber/dist/all');
 module.exports = notes;
 
 var defaultMacro = function defaultMacro(identifier, text, protect) {
-  var footnote = "\\footnotetext[".concat(identifier, "]{\\label{footnote:").concat(identifier, "} ").concat(text, "}");
-
-  if (protect) {
-    return "".concat(footnote, "\\protect");
-  }
-
-  return footnote;
+  return (// eslint-disable-next-line max-len
+    "".concat(protect ? '\\protect' : '', "\\footnotetext[").concat(identifier, "]{\\footnotemark{footnote:").concat(identifier, "} ").concat(text, "}")
+  );
 };
 
 function notes(ctx, node) {
   var macro = ctx.footnoteDefinition || defaultMacro;
-  var protect = !!node.inHeading;
-  return macro(node.identifier, all(ctx, node, protect).trim());
+  var protect = Boolean(node.inHeading);
+  return macro(node.identifier, all(ctx, node).trim(), protect);
 }

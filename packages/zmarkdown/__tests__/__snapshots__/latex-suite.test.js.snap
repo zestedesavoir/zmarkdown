@@ -73,15 +73,15 @@ print('bla')
 `;
 
 exports[`codes in notes 1`] = `
-"hello \\\\textsuperscript{\\\\ref{footnote:1}}\\\\textsuperscript{\\\\ref{footnote:2}}
+"hello \\\\textsuperscript{\\\\footnotemark{footnote:1}}\\\\textsuperscript{\\\\footnotemark{footnote:2}}
 
 
 
-\\\\footnotetext[1]{\\\\label{footnote:1} test
+\\\\footnotetext[1]{\\\\footnotemark{footnote:1} test
 
 \\\\hyperref[appendix-1]{Annexe de code 1}}
 
-\\\\footnotetext[2]{\\\\label{footnote:2} test
+\\\\footnotetext[2]{\\\\footnotemark{footnote:2} test
 
 \\\\hyperref[appendix-3]{Annexe de code 3}}
 
@@ -203,18 +203,18 @@ quote
 `;
 
 exports[`footnotes 1`] = `
-"\\\\levelOneTitle{mytitle A\\\\textsuperscript{\\\\ref{footnote:1}}}
+"\\\\levelOneTitle{mytitle A\\\\textsuperscript{\\\\footnotemark{footnote:1}}}
 
 
-\\\\footnotetext[1]{\\\\label{footnote:1} reference in title}
+\\\\footnotetext[1]{\\\\footnotemark{footnote:1} reference in title}
 
-\\\\levelOneTitle{mytitle B\\\\textsuperscript{\\\\ref{footnote:2}}\\\\footnotetext[2]{\\\\label{footnote:2} footnoterawhead inner}}
-
-
-\\\\levelOneTitle{myti\\\\textit{tle C\\\\textsuperscript{\\\\ref{footnote:3}}\\\\footnotetext[3]{\\\\label{footnote:3} foo inner}}}
+\\\\levelOneTitle{mytitle B\\\\textsuperscript{\\\\footnotemark{footnote:2}}\\\\protect\\\\footnotetext[2]{\\\\footnotemark{footnote:2} footnoterawhead inner}}
 
 
-a paragraph\\\\textsuperscript{\\\\ref{footnote:4}}\\\\footnotetext[4]{\\\\label{footnote:4} footnoteRawPar inner}"
+\\\\levelOneTitle{myti\\\\textit{tle C\\\\textsuperscript{\\\\footnotemark{footnote:3}}\\\\protect\\\\footnotetext[3]{\\\\footnotemark{footnote:3} foo inner}}}
+
+
+a paragraph\\\\textsuperscript{\\\\footnotemark{footnote:4}}\\\\footnotetext[4]{\\\\footnotemark{footnote:4} footnoteRawPar inner}"
 `;
 
 exports[`heading 1`] = `
@@ -516,11 +516,11 @@ Sub & Headings & \\\\abbr{ABBR}{abbreviation} \\\\\\\\ \\\\hline
  & normal & cell \\\\\\\\ \\\\hline
 multi \\\\endgraf line \\\\endgraf \\\\endgraf cells \\\\endgraf too & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3}|}{\\\\parbox{\\\\linewidth}{cells can be \\\\endgraf \\\\textit{formatted} \\\\endgraf \\\\textbf{paragraphs}}} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-\\\\captionof{table}{The new table \\\\abbr{ABBR}{abbreviation} \\\\textsuperscript{\\\\ref{footnote:1}} with \\\\keys{CTRL} + \\\\keys{S}}
+\\\\captionof{table}{The new table \\\\abbr{ABBR}{abbreviation} \\\\textsuperscript{\\\\footnotemark{footnote:1}} with \\\\keys{CTRL} + \\\\keys{S}}
 
 
 
-\\\\footnotetext[1]{\\\\label{footnote:1} a foot}
+\\\\footnotetext[1]{\\\\footnotemark{footnote:1} a foot}
 
 \\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 2}|m{\\\\dimexpr(\\\\linewidth) / 2}|} \\\\hline
 \\\\rowfont[c]{\\\\bfseries}
@@ -549,10 +549,10 @@ print('bla')
 `;
 
 exports[`mix-5 1`] = `
-"\\\\image{http://www.numerama.com/content/uploads/2016/07/espace.jpg}[espace\\\\textsuperscript{\\\\ref{footnote:1}}]
+"\\\\image{http://www.numerama.com/content/uploads/2016/07/espace.jpg}[espace\\\\textsuperscript{\\\\footnotemark{footnote:1}}]
 
 
-\\\\footnotetext[1]{\\\\label{footnote:1} Two things are infinite: the universe and human stupidity.}"
+\\\\footnotetext[1]{\\\\footnotemark{footnote:1} Two things are infinite: the universe and human stupidity.}"
 `;
 
 exports[`mix-6 1`] = `
