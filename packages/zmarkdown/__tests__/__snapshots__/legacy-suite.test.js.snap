@@ -731,7 +731,7 @@ exports[`basic renders inline-html-simple.txt 1`] = `
 &#x3C;/div></p>
 <p>This should be a code block, though:</p>
 <pre><code>&#x3C;div>
-    foo
+	foo
 &#x3C;/div>
 </code></pre>
 <p>As should this:</p>
@@ -1166,20 +1166,26 @@ back.</p>
 <hr>
 <p>Nested</p>
 <ul>
-<li>Tab<ul>
-<li>Tab<ul>
+<li>Tab
+<ul>
+<li>Tab
+<ul>
 <li>Tab</li>
-</ul></li>
-</ul></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p>Here's another:</p>
 <ol>
 <li>First</li>
-<li>Second:<ul>
+<li>Second:
+<ul>
 <li>Fee</li>
 <li>Fie</li>
 <li>Foe</li>
-</ul></li>
+</ul>
+</li>
 <li>Third</li>
 </ol>
 <p>Same thing but with paragraphs:</p>
@@ -1439,11 +1445,11 @@ indented with spaces</p>
 <pre><code>this code block is indented by one tab
 </code></pre>
 <p>And:</p>
-<pre><code>    this code block is indented by two tabs
+<pre><code>	this code block is indented by two tabs
 </code></pre>
 <p>And:</p>
-<pre><code>+   this is an example list item
-    indented with tabs
+<pre><code>+	this is an example list item
+	indented with tabs
 
 +   this is an example list item
     indented with spaces
@@ -4591,10 +4597,12 @@ asda asdf asdfasd
 exports[`misc renders lists4.txt 1`] = `
 "<ul>
 <li>item1</li>
-<li>item2<ol>
+<li>item2
+<ol>
 <li>Number 1</li>
 <li>Number 2</li>
-</ol></li>
+</ol>
+</li>
 </ul>"
 `;
 
@@ -4654,14 +4662,18 @@ Etc.
 exports[`misc renders lists6.txt 1`] = `
 "<p>Test five or more spaces as start of list:</p>
 <ul>
-<li><pre><code>five spaces
-</code></pre></li>
+<li>
+<pre><code>five spaces
+</code></pre>
+</li>
 </ul>
 <p>not first item:</p>
 <ul>
 <li>one space</li>
-<li><pre><code>five spaces
-</code></pre></li>
+<li>
+<pre><code>five spaces
+</code></pre>
+</li>
 </ul>
 <p>loose list:</p>
 <ul>
@@ -4875,9 +4887,11 @@ exports[`misc renders nested-lists.txt 1`] = `
 <p>item 1</p>
 <ul>
 <li>item 1-1</li>
-<li>item 1-2<ul>
+<li>item 1-2
+<ul>
 <li>item 1-2-1</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
@@ -5799,20 +5813,26 @@ back.</p>
 </li>
 </ol>
 <ul>
-<li>Tab<ul>
-<li>Tab<ul>
+<li>Tab
+<ul>
+<li>Tab
+<ul>
 <li>Tab</li>
-</ul></li>
-</ul></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p>Here's another:</p>
 <ol>
 <li>First</li>
-<li>Second:<ul>
+<li>Second:
+<ul>
 <li>Fee</li>
 <li>Fie</li>
 <li>Foe</li>
-</ul></li>
+</ul>
+</li>
 <li>Third</li>
 </ol>
 <p>Same thing but with paragraphs:</p>
@@ -6076,11 +6096,11 @@ indented with spaces</p>
 <pre><code>this code block is indented by one tab
 </code></pre>
 <p>And:</p>
-<pre><code>    this code block is indented by two tabs
+<pre><code>	this code block is indented by two tabs
 </code></pre>
 <p>And:</p>
-<pre><code>+   this is an example list item
-    indented with tabs
+<pre><code>+	this is an example list item
+	indented with tabs
 
 +   this is an example list item
     indented with spaces
