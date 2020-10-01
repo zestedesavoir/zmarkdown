@@ -24,14 +24,11 @@
     "src",
     "README.md"
   ],
-  "engines": {
-    "node": ">=4"
-  },
   "keywords": [
     "remark"
   ],
   "dependencies": {
-    "is-whitespace-character": "^1.0.0"
+    "is-whitespace-character": "^1.0.4"
   },
   "license": "MIT"
 }

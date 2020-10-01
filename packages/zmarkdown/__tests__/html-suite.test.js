@@ -430,6 +430,7 @@ describe('footnotes', () => {
       a[^first_footnote_reference]
       b[^\`b\` second footnote reference but first footnote definition]
       c[^last_footnote_reference]
+
       [^last_footnote_reference]: \`c\` last footnote reference but second footnote definition
       [^first_footnote_reference]: \`a\` first footnote reference but last footnote definition
     `

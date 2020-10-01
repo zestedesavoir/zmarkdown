@@ -3,6 +3,17 @@
 
 **rebber** is a LaTeX stringifier for [remark][]
 
+## remark-rebber version compatibility
+
+Starting from version 8.0.0, `remark` dropped support for footnotes; hence, `rebber` also dropped it's support starting from version 6.0.0.
+
+Therefore, we have the following compatibility table for remark-rebber versions:
+
+| remark  | rebber  |
+| ------- | ------- |
+| < 8.0.0 | < 6.0.0 |
+| > 8.0.0 |   any   |
+
 ## Installation
 
 [npm][]:

@@ -114,7 +114,6 @@ function plugin ({
   localUrlToLocalPath,
   httpRequestTimeout = 5000, // in milliseconds
 } = {}) {
-
   // Sends an HTTP request, checks headers and resolves a readable stream
   // if headers are valid.
   // Rejects with an error if headers are invalid.
@@ -251,6 +250,13 @@ function plugin ({
 
     visit(tree, 'image', async node => {
       const {url, position} = node
+
+      // Empty URL make nasty error messages, so ignore them
+      if (!url) {
+        vfile.message(`URL is empty`, position)
+        return
+      }
+
       let parsedURI
       try {
         parsedURI = URL.parse(url)

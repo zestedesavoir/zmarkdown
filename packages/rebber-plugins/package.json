@@ -21,9 +21,6 @@
     "src",
     "README.md"
   ],
-  "engines": {
-    "node": ">=4"
-  },
   "keywords": [
     "mdast",
     "latex"

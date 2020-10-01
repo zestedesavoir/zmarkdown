@@ -1,15 +1,15 @@
 import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
+import footnotes from 'remark-footnotes'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
 import footnotesTitle from '../src/'
 
 const render = config => unified()
-  .use(reParse, {
-    footnotes: true,
-  })
+  .use(reParse)
   .use(remark2rehype)
+  .use(footnotes, {inlineNotes: true})
   .use(footnotesTitle, config)
   .use(stringify)
   .processSync(dedent`
@@ -31,8 +31,10 @@ const render = config => unified()
         Paragraph two.
 
     [^5]: First line of first paragraph.
-    Second line of first paragraph is not intended.
-    Nor is third...
+    Second line of the footnote : nice!
+
+    Second line of first paragraph.
+    And then third...
   `)
 
 it('renders correctly with first config', () => {

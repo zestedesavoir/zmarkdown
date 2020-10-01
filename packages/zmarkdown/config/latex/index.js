@@ -7,7 +7,11 @@ const rebberConfig = {
   preprocessors: {
     tableCell:          appendix,
     footnoteDefinition: [appendix],
-    spoilerFlatten:     require('rebber-plugins/dist/preprocessors/spoilerFlatten')(['sCustomBlock', 'secretCustomBlock']),
+    spoilerFlatten:     require('rebber-plugins/dist/preprocessors/spoilerFlatten')([
+      'sCustomBlock',
+      'secretCustomBlock',
+    ]),
+    heading: require('rebber-plugins/dist/preprocessors/headingVisitor'),
   },
   overrides: {
     abbr:        require('rebber-plugins/dist/type/abbr'),
@@ -22,6 +26,10 @@ const rebberConfig = {
     sub:         require('rebber-plugins/dist/type/sub'),
     sup:         require('rebber-plugins/dist/type/sup'),
     tableHeader: require('rebber-plugins/dist/type/tableHeader'),
+
+    footnote:           require('rebber-plugins/dist/type/footnote'),
+    footnoteDefinition: require('rebber-plugins/dist/type/footnoteDefinition'),
+    footnoteReference:  require('rebber-plugins/dist/type/footnoteReference'),
 
     centerAligned: require('rebber-plugins/dist/type/align'),
     leftAligned:   require('rebber-plugins/dist/type/align'),

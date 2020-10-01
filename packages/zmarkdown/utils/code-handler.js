@@ -1,7 +1,6 @@
 module.exports = code
 
 const attrsParser = require('md-attr-parser')
-const detab = require('detab')
 
 const codeNodeConstructor = (lang, value) => {
   // no properties, except if a langage is specified
@@ -99,7 +98,7 @@ const rangeHandler = range => {
 }
 
 function code (_, node) {
-  const value = node.value ? detab(`${node.value}\n`) : ''
+  const value = node.value ? `${node.value}\n` : ''
   const lang = node.lang && node.lang.match(/^[^ \t]+(?=[ \t]|$)/)
   const attrs = attrsParser(node.meta || '').prop
 

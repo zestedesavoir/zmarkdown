@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`{"gfm":false,"commonmark":false,"footnotes":true} footnote-split 1`] = `
+exports[`{"gfm":false,"commonmark":false} footnote-split 1`] = `
 "<p>a<sup id=\\"fnref-first-postfix\\"><a href=\\"#fn-first-postfix\\" class=\\"footnote-ref\\">first</a></sup>b<sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup>c<sup id=\\"fnref-third-postfix\\"><a href=\\"#fn-third-postfix\\" class=\\"footnote-ref\\">third</a></sup></p>
 <div class=\\"footnotes\\">
 <hr>
@@ -12,11 +12,9 @@ exports[`{"gfm":false,"commonmark":false,"footnotes":true} footnote-split 1`] = 
 </div>"
 `;
 
-exports[`{"gfm":false,"commonmark":false,"footnotes":true} footnotes 1`] = `
+exports[`{"gfm":false,"commonmark":false} footnotes 1`] = `
 "<p>This is the body with a footnote<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup> or two<sup id=\\"fnref-bar-postfix\\"><a href=\\"#fn-bar-postfix\\" class=\\"footnote-ref\\">bar</a></sup> or more <sup id=\\"fnref-baz-postfix\\"><a href=\\"#fn-baz-postfix\\" class=\\"footnote-ref\\">baz</a></sup> <sup id=\\"fnref-qux-postfix\\"><a href=\\"#fn-qux-postfix\\" class=\\"footnote-ref\\">qux</a></sup> <sup id=\\"fnref-fiji-postfix\\"><a href=\\"#fn-fiji-postfix\\" class=\\"footnote-ref\\">fiji</a></sup>. One again: <sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
 <p>Also a reference that does not exist<sup id=\\"fnref-nope-postfix\\"><a href=\\"#fn-nope-postfix\\" class=\\"footnote-ref\\">nope</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -42,17 +40,17 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#fnref-qux-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-fiji-postfix\\">
-<p>First line of first paragraph.<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
 `;
 
-exports[`{"gfm":false,"commonmark":false,"footnotes":true} given postfix 1`] = `
+exports[`{"gfm":false,"commonmark":false} given postfix 1`] = `
 "<p>This is the body with a footnote<sup id=\\"fnref-1-bar\\"><a href=\\"#fn-1-bar\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-bar\\"><a href=\\"#fn-2-bar\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"fnref-3-bar\\"><a href=\\"#fn-3-bar\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-bar\\"><a href=\\"#fn-4-bar\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-bar\\"><a href=\\"#fn-5-bar\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"fnref-1-bar\\"><a href=\\"#fn-1-bar\\" class=\\"footnote-ref\\">1</a></sup></p>
 <p>Also a reference that does not exist<sup id=\\"fnref-6-bar\\"><a href=\\"#fn-6-bar\\" class=\\"footnote-ref\\">6</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -78,17 +76,17 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#fnref-4-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5-bar\\">
-<p>First line of first paragraph.<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
 `;
 
-exports[`{"gfm":false,"commonmark":false,"footnotes":true} numbered footnotes 1`] = `
+exports[`{"gfm":false,"commonmark":false} numbered footnotes 1`] = `
 "<p>This is the body with a footnote<sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-postfix\\"><a href=\\"#fn-2-postfix\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"fnref-3-postfix\\"><a href=\\"#fn-3-postfix\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-postfix\\"><a href=\\"#fn-4-postfix\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-postfix\\"><a href=\\"#fn-5-postfix\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup></p>
 <p>Also a reference that does not exist<sup id=\\"fnref-6-postfix\\"><a href=\\"#fn-6-postfix\\" class=\\"footnote-ref\\">6</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -114,17 +112,17 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5-postfix\\">
-<p>First line of first paragraph.<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
 `;
 
-exports[`{"gfm":false,"commonmark":false,"footnotes":true} postfixing function 1`] = `
+exports[`{"gfm":false,"commonmark":false} postfixing function 1`] = `
 "<p>This is the body with a footnote<sup id=\\"foo--fnref-1--bar\\"><a href=\\"#foo--fn-1--bar\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"foo--fnref-2--bar\\"><a href=\\"#foo--fn-2--bar\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"foo--fnref-3--bar\\"><a href=\\"#foo--fn-3--bar\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"foo--fnref-4--bar\\"><a href=\\"#foo--fn-4--bar\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"foo--fnref-5--bar\\"><a href=\\"#foo--fn-5--bar\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"foo--fnref-1--bar\\"><a href=\\"#foo--fn-1--bar\\" class=\\"footnote-ref\\">1</a></sup></p>
 <p>Also a reference that does not exist<sup id=\\"foo--fnref-6--bar\\"><a href=\\"#foo--fn-6--bar\\" class=\\"footnote-ref\\">6</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -150,13 +148,15 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#foo--fnref-4--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-5--bar\\">
-<p>First line of first paragraph.<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
 `;
 
-exports[`{"gfm":false,"commonmark":false,"footnotes":true} regression-1 1`] = `
+exports[`{"gfm":false,"commonmark":false} regression-1 1`] = `
 "<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
 <p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
 <p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
@@ -171,7 +171,7 @@ exports[`{"gfm":false,"commonmark":false,"footnotes":true} regression-1 1`] = `
 </div>"
 `;
 
-exports[`{"gfm":false,"commonmark":false,"footnotes":true} regression-2 1`] = `
+exports[`{"gfm":false,"commonmark":false} regression-2 1`] = `
 "<p>1 <sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup>
 2 <sup id=\\"fnref-2-postfix\\"><a href=\\"#fn-2-postfix\\" class=\\"footnote-ref\\">2</a></sup>
 3 <sup id=\\"fnref-3-postfix\\"><a href=\\"#fn-3-postfix\\" class=\\"footnote-ref\\">3</a></sup>
@@ -190,7 +190,7 @@ exports[`{"gfm":false,"commonmark":false,"footnotes":true} regression-2 1`] = `
 </div>"
 `;
 
-exports[`{"gfm":false,"commonmark":true,"footnotes":true} footnote-split 1`] = `
+exports[`{"gfm":false,"commonmark":true} footnote-split 1`] = `
 "<p>a<sup id=\\"fnref-first-postfix\\"><a href=\\"#fn-first-postfix\\" class=\\"footnote-ref\\">first</a></sup>b<sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup>c<sup id=\\"fnref-third-postfix\\"><a href=\\"#fn-third-postfix\\" class=\\"footnote-ref\\">third</a></sup></p>
 <div class=\\"footnotes\\">
 <hr>
@@ -202,11 +202,9 @@ exports[`{"gfm":false,"commonmark":true,"footnotes":true} footnote-split 1`] = `
 </div>"
 `;
 
-exports[`{"gfm":false,"commonmark":true,"footnotes":true} footnotes 1`] = `
+exports[`{"gfm":false,"commonmark":true} footnotes 1`] = `
 "<p>This is the body with a footnote<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup> or two<sup id=\\"fnref-bar-postfix\\"><a href=\\"#fn-bar-postfix\\" class=\\"footnote-ref\\">bar</a></sup> or more <sup id=\\"fnref-baz-postfix\\"><a href=\\"#fn-baz-postfix\\" class=\\"footnote-ref\\">baz</a></sup> <sup id=\\"fnref-qux-postfix\\"><a href=\\"#fn-qux-postfix\\" class=\\"footnote-ref\\">qux</a></sup> <sup id=\\"fnref-fiji-postfix\\"><a href=\\"#fn-fiji-postfix\\" class=\\"footnote-ref\\">fiji</a></sup>. One again: <sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
 <p>Also a reference that does not exist<sup id=\\"fnref-nope-postfix\\"><a href=\\"#fn-nope-postfix\\" class=\\"footnote-ref\\">nope</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -232,17 +230,17 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#fnref-qux-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-fiji-postfix\\">
-<p>First line of first paragraph.<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
 `;
 
-exports[`{"gfm":false,"commonmark":true,"footnotes":true} given postfix 1`] = `
+exports[`{"gfm":false,"commonmark":true} given postfix 1`] = `
 "<p>This is the body with a footnote<sup id=\\"fnref-1-bar\\"><a href=\\"#fn-1-bar\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-bar\\"><a href=\\"#fn-2-bar\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"fnref-3-bar\\"><a href=\\"#fn-3-bar\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-bar\\"><a href=\\"#fn-4-bar\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-bar\\"><a href=\\"#fn-5-bar\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"fnref-1-bar\\"><a href=\\"#fn-1-bar\\" class=\\"footnote-ref\\">1</a></sup></p>
 <p>Also a reference that does not exist<sup id=\\"fnref-6-bar\\"><a href=\\"#fn-6-bar\\" class=\\"footnote-ref\\">6</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -268,17 +266,17 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#fnref-4-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5-bar\\">
-<p>First line of first paragraph.<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
 `;
 
-exports[`{"gfm":false,"commonmark":true,"footnotes":true} numbered footnotes 1`] = `
+exports[`{"gfm":false,"commonmark":true} numbered footnotes 1`] = `
 "<p>This is the body with a footnote<sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-postfix\\"><a href=\\"#fn-2-postfix\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"fnref-3-postfix\\"><a href=\\"#fn-3-postfix\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-postfix\\"><a href=\\"#fn-4-postfix\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-postfix\\"><a href=\\"#fn-5-postfix\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup></p>
 <p>Also a reference that does not exist<sup id=\\"fnref-6-postfix\\"><a href=\\"#fn-6-postfix\\" class=\\"footnote-ref\\">6</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -304,17 +302,17 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5-postfix\\">
-<p>First line of first paragraph.<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
 `;
 
-exports[`{"gfm":false,"commonmark":true,"footnotes":true} postfixing function 1`] = `
+exports[`{"gfm":false,"commonmark":true} postfixing function 1`] = `
 "<p>This is the body with a footnote<sup id=\\"foo--fnref-1--bar\\"><a href=\\"#foo--fn-1--bar\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"foo--fnref-2--bar\\"><a href=\\"#foo--fn-2--bar\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"foo--fnref-3--bar\\"><a href=\\"#foo--fn-3--bar\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"foo--fnref-4--bar\\"><a href=\\"#foo--fn-4--bar\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"foo--fnref-5--bar\\"><a href=\\"#foo--fn-5--bar\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"foo--fnref-1--bar\\"><a href=\\"#foo--fn-1--bar\\" class=\\"footnote-ref\\">1</a></sup></p>
 <p>Also a reference that does not exist<sup id=\\"foo--fnref-6--bar\\"><a href=\\"#foo--fn-6--bar\\" class=\\"footnote-ref\\">6</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -340,13 +338,15 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#foo--fnref-4--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-5--bar\\">
-<p>First line of first paragraph.<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
 `;
 
-exports[`{"gfm":false,"commonmark":true,"footnotes":true} regression-1 1`] = `
+exports[`{"gfm":false,"commonmark":true} regression-1 1`] = `
 "<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
 <p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
 <p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
@@ -361,7 +361,7 @@ exports[`{"gfm":false,"commonmark":true,"footnotes":true} regression-1 1`] = `
 </div>"
 `;
 
-exports[`{"gfm":false,"commonmark":true,"footnotes":true} regression-2 1`] = `
+exports[`{"gfm":false,"commonmark":true} regression-2 1`] = `
 "<p>1 <sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup>
 2 <sup id=\\"fnref-2-postfix\\"><a href=\\"#fn-2-postfix\\" class=\\"footnote-ref\\">2</a></sup>
 3 <sup id=\\"fnref-3-postfix\\"><a href=\\"#fn-3-postfix\\" class=\\"footnote-ref\\">3</a></sup>
@@ -380,7 +380,7 @@ exports[`{"gfm":false,"commonmark":true,"footnotes":true} regression-2 1`] = `
 </div>"
 `;
 
-exports[`{"gfm":true,"commonmark":false,"footnotes":true} footnote-split 1`] = `
+exports[`{"gfm":true,"commonmark":false} footnote-split 1`] = `
 "<p>a<sup id=\\"fnref-first-postfix\\"><a href=\\"#fn-first-postfix\\" class=\\"footnote-ref\\">first</a></sup>b<sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup>c<sup id=\\"fnref-third-postfix\\"><a href=\\"#fn-third-postfix\\" class=\\"footnote-ref\\">third</a></sup></p>
 <div class=\\"footnotes\\">
 <hr>
@@ -392,11 +392,9 @@ exports[`{"gfm":true,"commonmark":false,"footnotes":true} footnote-split 1`] = `
 </div>"
 `;
 
-exports[`{"gfm":true,"commonmark":false,"footnotes":true} footnotes 1`] = `
+exports[`{"gfm":true,"commonmark":false} footnotes 1`] = `
 "<p>This is the body with a footnote<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup> or two<sup id=\\"fnref-bar-postfix\\"><a href=\\"#fn-bar-postfix\\" class=\\"footnote-ref\\">bar</a></sup> or more <sup id=\\"fnref-baz-postfix\\"><a href=\\"#fn-baz-postfix\\" class=\\"footnote-ref\\">baz</a></sup> <sup id=\\"fnref-qux-postfix\\"><a href=\\"#fn-qux-postfix\\" class=\\"footnote-ref\\">qux</a></sup> <sup id=\\"fnref-fiji-postfix\\"><a href=\\"#fn-fiji-postfix\\" class=\\"footnote-ref\\">fiji</a></sup>. One again: <sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
 <p>Also a reference that does not exist<sup id=\\"fnref-nope-postfix\\"><a href=\\"#fn-nope-postfix\\" class=\\"footnote-ref\\">nope</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -422,17 +420,17 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#fnref-qux-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-fiji-postfix\\">
-<p>First line of first paragraph.<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
 `;
 
-exports[`{"gfm":true,"commonmark":false,"footnotes":true} given postfix 1`] = `
+exports[`{"gfm":true,"commonmark":false} given postfix 1`] = `
 "<p>This is the body with a footnote<sup id=\\"fnref-1-bar\\"><a href=\\"#fn-1-bar\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-bar\\"><a href=\\"#fn-2-bar\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"fnref-3-bar\\"><a href=\\"#fn-3-bar\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-bar\\"><a href=\\"#fn-4-bar\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-bar\\"><a href=\\"#fn-5-bar\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"fnref-1-bar\\"><a href=\\"#fn-1-bar\\" class=\\"footnote-ref\\">1</a></sup></p>
 <p>Also a reference that does not exist<sup id=\\"fnref-6-bar\\"><a href=\\"#fn-6-bar\\" class=\\"footnote-ref\\">6</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -458,17 +456,17 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#fnref-4-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5-bar\\">
-<p>First line of first paragraph.<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
 `;
 
-exports[`{"gfm":true,"commonmark":false,"footnotes":true} numbered footnotes 1`] = `
+exports[`{"gfm":true,"commonmark":false} numbered footnotes 1`] = `
 "<p>This is the body with a footnote<sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-postfix\\"><a href=\\"#fn-2-postfix\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"fnref-3-postfix\\"><a href=\\"#fn-3-postfix\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-postfix\\"><a href=\\"#fn-4-postfix\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-postfix\\"><a href=\\"#fn-5-postfix\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup></p>
 <p>Also a reference that does not exist<sup id=\\"fnref-6-postfix\\"><a href=\\"#fn-6-postfix\\" class=\\"footnote-ref\\">6</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -494,17 +492,17 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5-postfix\\">
-<p>First line of first paragraph.<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
 `;
 
-exports[`{"gfm":true,"commonmark":false,"footnotes":true} postfixing function 1`] = `
+exports[`{"gfm":true,"commonmark":false} postfixing function 1`] = `
 "<p>This is the body with a footnote<sup id=\\"foo--fnref-1--bar\\"><a href=\\"#foo--fn-1--bar\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"foo--fnref-2--bar\\"><a href=\\"#foo--fn-2--bar\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"foo--fnref-3--bar\\"><a href=\\"#foo--fn-3--bar\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"foo--fnref-4--bar\\"><a href=\\"#foo--fn-4--bar\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"foo--fnref-5--bar\\"><a href=\\"#foo--fn-5--bar\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"foo--fnref-1--bar\\"><a href=\\"#foo--fn-1--bar\\" class=\\"footnote-ref\\">1</a></sup></p>
 <p>Also a reference that does not exist<sup id=\\"foo--fnref-6--bar\\"><a href=\\"#foo--fn-6--bar\\" class=\\"footnote-ref\\">6</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -530,13 +528,15 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#foo--fnref-4--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-5--bar\\">
-<p>First line of first paragraph.<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
 `;
 
-exports[`{"gfm":true,"commonmark":false,"footnotes":true} regression-1 1`] = `
+exports[`{"gfm":true,"commonmark":false} regression-1 1`] = `
 "<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
 <p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
 <p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
@@ -551,7 +551,7 @@ exports[`{"gfm":true,"commonmark":false,"footnotes":true} regression-1 1`] = `
 </div>"
 `;
 
-exports[`{"gfm":true,"commonmark":false,"footnotes":true} regression-2 1`] = `
+exports[`{"gfm":true,"commonmark":false} regression-2 1`] = `
 "<p>1 <sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup>
 2 <sup id=\\"fnref-2-postfix\\"><a href=\\"#fn-2-postfix\\" class=\\"footnote-ref\\">2</a></sup>
 3 <sup id=\\"fnref-3-postfix\\"><a href=\\"#fn-3-postfix\\" class=\\"footnote-ref\\">3</a></sup>
@@ -570,7 +570,7 @@ exports[`{"gfm":true,"commonmark":false,"footnotes":true} regression-2 1`] = `
 </div>"
 `;
 
-exports[`{"gfm":true,"commonmark":true,"footnotes":true} footnote-split 1`] = `
+exports[`{"gfm":true,"commonmark":true} footnote-split 1`] = `
 "<p>a<sup id=\\"fnref-first-postfix\\"><a href=\\"#fn-first-postfix\\" class=\\"footnote-ref\\">first</a></sup>b<sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup>c<sup id=\\"fnref-third-postfix\\"><a href=\\"#fn-third-postfix\\" class=\\"footnote-ref\\">third</a></sup></p>
 <div class=\\"footnotes\\">
 <hr>
@@ -582,11 +582,9 @@ exports[`{"gfm":true,"commonmark":true,"footnotes":true} footnote-split 1`] = `
 </div>"
 `;
 
-exports[`{"gfm":true,"commonmark":true,"footnotes":true} footnotes 1`] = `
+exports[`{"gfm":true,"commonmark":true} footnotes 1`] = `
 "<p>This is the body with a footnote<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup> or two<sup id=\\"fnref-bar-postfix\\"><a href=\\"#fn-bar-postfix\\" class=\\"footnote-ref\\">bar</a></sup> or more <sup id=\\"fnref-baz-postfix\\"><a href=\\"#fn-baz-postfix\\" class=\\"footnote-ref\\">baz</a></sup> <sup id=\\"fnref-qux-postfix\\"><a href=\\"#fn-qux-postfix\\" class=\\"footnote-ref\\">qux</a></sup> <sup id=\\"fnref-fiji-postfix\\"><a href=\\"#fn-fiji-postfix\\" class=\\"footnote-ref\\">fiji</a></sup>. One again: <sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
 <p>Also a reference that does not exist<sup id=\\"fnref-nope-postfix\\"><a href=\\"#fn-nope-postfix\\" class=\\"footnote-ref\\">nope</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -612,17 +610,17 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#fnref-qux-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-fiji-postfix\\">
-<p>First line of first paragraph.<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#fnref-fiji-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
 `;
 
-exports[`{"gfm":true,"commonmark":true,"footnotes":true} given postfix 1`] = `
+exports[`{"gfm":true,"commonmark":true} given postfix 1`] = `
 "<p>This is the body with a footnote<sup id=\\"fnref-1-bar\\"><a href=\\"#fn-1-bar\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-bar\\"><a href=\\"#fn-2-bar\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"fnref-3-bar\\"><a href=\\"#fn-3-bar\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-bar\\"><a href=\\"#fn-4-bar\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-bar\\"><a href=\\"#fn-5-bar\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"fnref-1-bar\\"><a href=\\"#fn-1-bar\\" class=\\"footnote-ref\\">1</a></sup></p>
 <p>Also a reference that does not exist<sup id=\\"fnref-6-bar\\"><a href=\\"#fn-6-bar\\" class=\\"footnote-ref\\">6</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -648,17 +646,17 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#fnref-4-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5-bar\\">
-<p>First line of first paragraph.<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#fnref-5-bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
 `;
 
-exports[`{"gfm":true,"commonmark":true,"footnotes":true} numbered footnotes 1`] = `
+exports[`{"gfm":true,"commonmark":true} numbered footnotes 1`] = `
 "<p>This is the body with a footnote<sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"fnref-2-postfix\\"><a href=\\"#fn-2-postfix\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"fnref-3-postfix\\"><a href=\\"#fn-3-postfix\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"fnref-4-postfix\\"><a href=\\"#fn-4-postfix\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"fnref-5-postfix\\"><a href=\\"#fn-5-postfix\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup></p>
 <p>Also a reference that does not exist<sup id=\\"fnref-6-postfix\\"><a href=\\"#fn-6-postfix\\" class=\\"footnote-ref\\">6</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -684,17 +682,17 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#fnref-4-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"fn-5-postfix\\">
-<p>First line of first paragraph.<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#fnref-5-postfix\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
 `;
 
-exports[`{"gfm":true,"commonmark":true,"footnotes":true} postfixing function 1`] = `
+exports[`{"gfm":true,"commonmark":true} postfixing function 1`] = `
 "<p>This is the body with a footnote<sup id=\\"foo--fnref-1--bar\\"><a href=\\"#foo--fn-1--bar\\" class=\\"footnote-ref\\">1</a></sup> or two<sup id=\\"foo--fnref-2--bar\\"><a href=\\"#foo--fn-2--bar\\" class=\\"footnote-ref\\">2</a></sup> or more <sup id=\\"foo--fnref-3--bar\\"><a href=\\"#foo--fn-3--bar\\" class=\\"footnote-ref\\">3</a></sup> <sup id=\\"foo--fnref-4--bar\\"><a href=\\"#foo--fn-4--bar\\" class=\\"footnote-ref\\">4</a></sup> <sup id=\\"foo--fnref-5--bar\\"><a href=\\"#foo--fn-5--bar\\" class=\\"footnote-ref\\">5</a></sup>. One again: <sup id=\\"foo--fnref-1--bar\\"><a href=\\"#foo--fn-1--bar\\" class=\\"footnote-ref\\">1</a></sup></p>
 <p>Also a reference that does not exist<sup id=\\"foo--fnref-6--bar\\"><a href=\\"#foo--fn-6--bar\\" class=\\"footnote-ref\\">6</a></sup>.</p>
-<p>Second line of first paragraph is not intended.
-Nor is third...</p>
 <div class=\\"footnotes\\">
 <hr>
 <ol>
@@ -720,13 +718,15 @@ Nor is third...</p>
 <p>Paragraph two.<a href=\\"#foo--fnref-4--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 <li id=\\"foo--fn-5--bar\\">
-<p>First line of first paragraph.<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a></p>
+<p>First line of first paragraph.
+Second line of first paragraph is not intended.
+Nor is third...<a href=\\"#foo--fnref-5--bar\\" class=\\"footnote-backref\\">↩</a></p>
 </li>
 </ol>
 </div>"
 `;
 
-exports[`{"gfm":true,"commonmark":true,"footnotes":true} regression-1 1`] = `
+exports[`{"gfm":true,"commonmark":true} regression-1 1`] = `
 "<p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
 <p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
 <p>a<sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup><sup id=\\"fnref-foo-postfix\\"><a href=\\"#fn-foo-postfix\\" class=\\"footnote-ref\\">foo</a></sup></p>
@@ -741,7 +741,7 @@ exports[`{"gfm":true,"commonmark":true,"footnotes":true} regression-1 1`] = `
 </div>"
 `;
 
-exports[`{"gfm":true,"commonmark":true,"footnotes":true} regression-2 1`] = `
+exports[`{"gfm":true,"commonmark":true} regression-2 1`] = `
 "<p>1 <sup id=\\"fnref-1-postfix\\"><a href=\\"#fn-1-postfix\\" class=\\"footnote-ref\\">1</a></sup>
 2 <sup id=\\"fnref-2-postfix\\"><a href=\\"#fn-2-postfix\\" class=\\"footnote-ref\\">2</a></sup>
 3 <sup id=\\"fnref-3-postfix\\"><a href=\\"#fn-3-postfix\\" class=\\"footnote-ref\\">3</a></sup>

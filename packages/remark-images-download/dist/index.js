@@ -1,12 +1,18 @@
 "use strict";
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -62,12 +68,8 @@ var mkdir = function mkdir(path) {
   });
 };
 
-var checkFileType =
-/*#__PURE__*/
-function () {
-  var _ref = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(name, data) {
+var checkFileType = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(name, data) {
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -146,12 +148,8 @@ var makeValidatorStream = function makeValidatorStream(fileName, maxSize) {
   });
 };
 
-var checkAndCopy =
-/*#__PURE__*/
-function () {
-  var _ref2 = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2(from, to) {
+var checkAndCopy = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(from, to) {
     var data;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -277,13 +275,9 @@ function plugin() {
     });
   };
 
-  var doDownloadTasks =
-  /*#__PURE__*/
-  function () {
-    var _ref4 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee3(tasks) {
-      var totalSize, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, task, fileSize, e;
+  var doDownloadTasks = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(tasks) {
+      var totalSize, _iterator, _step, task, fileSize, e;
 
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
@@ -300,33 +294,32 @@ function plugin() {
 
             case 2:
               if (!dirSizeLimit) {
-                _context3.next = 32;
+                _context3.next = 23;
                 break;
               }
 
               totalSize = 0;
-              _iteratorNormalCompletion = true;
-              _didIteratorError = false;
-              _iteratorError = undefined;
-              _context3.prev = 7;
-              _iterator = tasks[Symbol.iterator]();
+              _iterator = _createForOfIteratorHelper(tasks);
+              _context3.prev = 5;
 
-            case 9:
-              if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                _context3.next = 18;
+              _iterator.s();
+
+            case 7:
+              if ((_step = _iterator.n()).done) {
+                _context3.next = 15;
                 break;
               }
 
               task = _step.value;
 
               if (!task.error) {
-                _context3.next = 13;
+                _context3.next = 11;
                 break;
               }
 
-              return _context3.abrupt("continue", 15);
+              return _context3.abrupt("continue", 13);
 
-            case 13:
+            case 11:
               fileSize = getSize(task.res.headers);
 
               if (totalSize + fileSize >= dirSizeLimit) {
@@ -337,47 +330,29 @@ function plugin() {
                 totalSize += fileSize;
               }
 
-            case 15:
-              _iteratorNormalCompletion = true;
-              _context3.next = 9;
+            case 13:
+              _context3.next = 7;
               break;
 
-            case 18:
-              _context3.next = 24;
+            case 15:
+              _context3.next = 20;
               break;
+
+            case 17:
+              _context3.prev = 17;
+              _context3.t0 = _context3["catch"](5);
+
+              _iterator.e(_context3.t0);
 
             case 20:
               _context3.prev = 20;
-              _context3.t0 = _context3["catch"](7);
-              _didIteratorError = true;
-              _iteratorError = _context3.t0;
 
-            case 24:
-              _context3.prev = 24;
-              _context3.prev = 25;
+              _iterator.f();
 
-              if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-                _iterator["return"]();
-              }
+              return _context3.finish(20);
 
-            case 27:
-              _context3.prev = 27;
-
-              if (!_didIteratorError) {
-                _context3.next = 30;
-                break;
-              }
-
-              throw _iteratorError;
-
-            case 30:
-              return _context3.finish(27);
-
-            case 31:
-              return _context3.finish(24);
-
-            case 32:
-              _context3.next = 34;
+            case 23:
+              _context3.next = 25;
               return Promise.all(tasks.map(function (task) {
                 if (!task.error) {
                   return downloadAndSave(task.node, task.url, task.res, task.destination)["catch"](function (error) {
@@ -386,12 +361,12 @@ function plugin() {
                 }
               }));
 
-            case 34:
+            case 25:
             case "end":
               return _context3.stop();
           }
         }
-      }, _callee3, null, [[7, 20, 24, 32], [25,, 27, 31]]);
+      }, _callee3, null, [[5, 17, 20, 23]]);
     }));
 
     return function doDownloadTasks(_x5) {
@@ -412,432 +387,280 @@ function plugin() {
     }));
   };
 
-  return (
-    /*#__PURE__*/
-    function () {
-      var _transform = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee5(tree, vfile) {
-        var destinationPath, defaultImageDestination, downloadTasks, localCopyTasks, groupTasksByUrl, tasks, successfulTasks, failedTasks, _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3, task, _iteratorNormalCompletion5, _didIteratorError5, _iteratorError5, _iterator5, _step5, node, _iteratorNormalCompletion4, _didIteratorError4, _iteratorError4, _iterator4, _step4, _task, _iteratorNormalCompletion6, _didIteratorError6, _iteratorError6, _iterator6, _step6, _node;
+  return /*#__PURE__*/function () {
+    var _transform = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(tree, vfile) {
+      var destinationPath, defaultImageDestination, downloadTasks, localCopyTasks, groupTasksByUrl, tasks, successfulTasks, failedTasks, _iterator3, _step3, task, _iterator5, _step5, node, _iterator4, _step4, _task, _iterator6, _step6, _node;
 
-        return regeneratorRuntime.wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                if (!disabled) {
-                  _context5.next = 2;
-                  break;
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              if (!disabled) {
+                _context5.next = 2;
+                break;
+              }
+
+              return _context5.abrupt("return");
+
+            case 2:
+              // images are downloaded to destinationPath
+              destinationPath = path.join(downloadDestination, shortid.generate()); // allow to fallback when image is not found
+
+              defaultImageDestination = defaultImagePath ? path.join(downloadDestination, defaultImagePath) : false;
+              downloadTasks = [];
+              localCopyTasks = [];
+              visit(tree, 'image', /*#__PURE__*/function () {
+                var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(node) {
+                  var url, position, parsedURI, extension, filename, destination, localPath, _localUrlToLocalPath, from, to;
+
+                  return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                    while (1) {
+                      switch (_context4.prev = _context4.next) {
+                        case 0:
+                          url = node.url, position = node.position; // Empty URL make nasty error messages, so ignore them
+
+                          if (url) {
+                            _context4.next = 4;
+                            break;
+                          }
+
+                          vfile.message("URL is empty", position);
+                          return _context4.abrupt("return");
+
+                        case 4:
+                          _context4.prev = 4;
+                          parsedURI = URL.parse(url);
+                          _context4.next = 12;
+                          break;
+
+                        case 8:
+                          _context4.prev = 8;
+                          _context4.t0 = _context4["catch"](4);
+                          vfile.message("Invalid URL: ".concat(url), position, url);
+                          return _context4.abrupt("return");
+
+                        case 12:
+                          extension = path.extname(parsedURI.pathname);
+                          filename = "".concat(shortid.generate()).concat(extension);
+                          destination = path.join(destinationPath, filename);
+
+                          if (parsedURI.host) {
+                            _context4.next = 28;
+                            break;
+                          }
+
+                          if (!(typeof localUrlToLocalPath === 'function')) {
+                            _context4.next = 20;
+                            break;
+                          }
+
+                          localPath = localUrlToLocalPath(url);
+                          _context4.next = 26;
+                          break;
+
+                        case 20:
+                          if (!(Array.isArray(localUrlToLocalPath) && localUrlToLocalPath.length === 2)) {
+                            _context4.next = 25;
+                            break;
+                          }
+
+                          _localUrlToLocalPath = _slicedToArray(localUrlToLocalPath, 2), from = _localUrlToLocalPath[0], to = _localUrlToLocalPath[1];
+                          localPath = url.replace(new RegExp("^".concat(from)), to);
+                          _context4.next = 26;
+                          break;
+
+                        case 25:
+                          return _context4.abrupt("return");
+
+                        case 26:
+                          localCopyTasks.push({
+                            node: node,
+                            url: url,
+                            destination: destination,
+                            localSourcePath: localPath
+                          });
+                          return _context4.abrupt("return");
+
+                        case 28:
+                          if (['http:', 'https:'].includes(parsedURI.protocol)) {
+                            _context4.next = 31;
+                            break;
+                          }
+
+                          vfile.message("Protocol '".concat(parsedURI.protocol, "' not allowed."), position, url);
+                          return _context4.abrupt("return");
+
+                        case 31:
+                          downloadTasks.push({
+                            node: node,
+                            url: url,
+                            destination: destination
+                          });
+
+                        case 32:
+                        case "end":
+                          return _context4.stop();
+                      }
+                    }
+                  }, _callee4, null, [[4, 8]]);
+                }));
+
+                return function (_x8) {
+                  return _ref5.apply(this, arguments);
+                };
+              }()); // Group by URL in order to download each file only once
+
+              groupTasksByUrl = function groupTasksByUrl(tasks) {
+                var map = new Map();
+
+                var _iterator2 = _createForOfIteratorHelper(tasks),
+                    _step2;
+
+                try {
+                  for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                    var task = _step2.value;
+                    var otherTasks = map.get(task.url) || [];
+                    map.set(task.url, otherTasks.concat([task]));
+                  }
+                } catch (err) {
+                  _iterator2.e(err);
+                } finally {
+                  _iterator2.f();
                 }
 
-                return _context5.abrupt("return");
+                return Array.from(map.values()).map(function (taskGroup) {
+                  return Object.assign({}, taskGroup[0], {
+                    nodes: taskGroup.map(function (t) {
+                      return t.node;
+                    })
+                  });
+                });
+              };
 
-              case 2:
-                // images are downloaded to destinationPath
-                destinationPath = path.join(downloadDestination, shortid.generate()); // allow to fallback when image is not found
+              downloadTasks = groupTasksByUrl(downloadTasks);
+              localCopyTasks = groupTasksByUrl(localCopyTasks);
+              tasks = downloadTasks.concat(localCopyTasks);
 
-                defaultImageDestination = defaultImagePath ? path.join(downloadDestination, defaultImagePath) : false;
-                downloadTasks = [];
-                localCopyTasks = [];
-                visit(tree, 'image',
-                /*#__PURE__*/
-                function () {
-                  var _ref5 = _asyncToGenerator(
-                  /*#__PURE__*/
-                  regeneratorRuntime.mark(function _callee4(node) {
-                    var url, position, parsedURI, extension, filename, destination, localPath, _localUrlToLocalPath, from, to;
+              if (tasks.length) {
+                _context5.next = 13;
+                break;
+              }
 
-                    return regeneratorRuntime.wrap(function _callee4$(_context4) {
-                      while (1) {
-                        switch (_context4.prev = _context4.next) {
-                          case 0:
-                            url = node.url, position = node.position;
-                            _context4.prev = 1;
-                            parsedURI = URL.parse(url);
-                            _context4.next = 9;
-                            break;
+              return _context5.abrupt("return", tree);
 
-                          case 5:
-                            _context4.prev = 5;
-                            _context4.t0 = _context4["catch"](1);
-                            vfile.message("Invalid URL: ".concat(url), position, url);
-                            return _context4.abrupt("return");
+            case 13:
+              successfulTasks = [];
+              _context5.next = 16;
+              return mkdir(destinationPath);
 
-                          case 9:
-                            extension = path.extname(parsedURI.pathname);
-                            filename = "".concat(shortid.generate()).concat(extension);
-                            destination = path.join(destinationPath, filename);
+            case 16:
+              _context5.prev = 16;
+              _context5.next = 19;
+              return Promise.all([doDownloadTasks(downloadTasks), doLocalCopyTasks(localCopyTasks)]);
 
-                            if (parsedURI.host) {
-                              _context4.next = 25;
-                              break;
-                            }
+            case 19:
+              failedTasks = tasks.filter(function (t) {
+                return t.error;
+              });
+              successfulTasks = tasks.filter(function (t) {
+                return !t.error;
+              });
+              _iterator3 = _createForOfIteratorHelper(failedTasks);
 
-                            if (!(typeof localUrlToLocalPath === 'function')) {
-                              _context4.next = 17;
-                              break;
-                            }
-
-                            localPath = localUrlToLocalPath(url);
-                            _context4.next = 23;
-                            break;
-
-                          case 17:
-                            if (!(Array.isArray(localUrlToLocalPath) && localUrlToLocalPath.length === 2)) {
-                              _context4.next = 22;
-                              break;
-                            }
-
-                            _localUrlToLocalPath = _slicedToArray(localUrlToLocalPath, 2), from = _localUrlToLocalPath[0], to = _localUrlToLocalPath[1];
-                            localPath = url.replace(new RegExp("^".concat(from)), to);
-                            _context4.next = 23;
-                            break;
-
-                          case 22:
-                            return _context4.abrupt("return");
-
-                          case 23:
-                            localCopyTasks.push({
-                              node: node,
-                              url: url,
-                              destination: destination,
-                              localSourcePath: localPath
-                            });
-                            return _context4.abrupt("return");
-
-                          case 25:
-                            if (['http:', 'https:'].includes(parsedURI.protocol)) {
-                              _context4.next = 28;
-                              break;
-                            }
-
-                            vfile.message("Protocol '".concat(parsedURI.protocol, "' not allowed."), position, url);
-                            return _context4.abrupt("return");
-
-                          case 28:
-                            downloadTasks.push({
-                              node: node,
-                              url: url,
-                              destination: destination
-                            });
-
-                          case 29:
-                          case "end":
-                            return _context4.stop();
-                        }
-                      }
-                    }, _callee4, null, [[1, 5]]);
-                  }));
-
-                  return function (_x8) {
-                    return _ref5.apply(this, arguments);
-                  };
-                }()); // Group by URL in order to download each file only once
-
-                groupTasksByUrl = function groupTasksByUrl(tasks) {
-                  var map = new Map();
-                  var _iteratorNormalCompletion2 = true;
-                  var _didIteratorError2 = false;
-                  var _iteratorError2 = undefined;
+              try {
+                for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+                  task = _step3.value;
+                  _iterator5 = _createForOfIteratorHelper(task.nodes);
 
                   try {
-                    for (var _iterator2 = tasks[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                      var task = _step2.value;
-                      var otherTasks = map.get(task.url) || [];
-                      map.set(task.url, otherTasks.concat([task]));
+                    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+                      node = _step5.value;
+
+                      // mutates the AST even in case of error if requested
+                      if (defaultImageDestination && task.error.replaceWithDefault) {
+                        node.url = defaultImageDestination;
+                      }
+
+                      vfile.message(task.error, node.position, task.url);
                     }
                   } catch (err) {
-                    _didIteratorError2 = true;
-                    _iteratorError2 = err;
+                    _iterator5.e(err);
                   } finally {
-                    try {
-                      if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-                        _iterator2["return"]();
-                      }
-                    } finally {
-                      if (_didIteratorError2) {
-                        throw _iteratorError2;
-                      }
+                    _iterator5.f();
+                  }
+                }
+              } catch (err) {
+                _iterator3.e(err);
+              } finally {
+                _iterator3.f();
+              }
+
+              _iterator4 = _createForOfIteratorHelper(successfulTasks);
+
+              try {
+                for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+                  _task = _step4.value;
+                  _iterator6 = _createForOfIteratorHelper(_task.nodes);
+
+                  try {
+                    for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+                      _node = _step6.value;
+                      // mutates the AST!
+                      _node.url = _task.destination;
                     }
+                  } catch (err) {
+                    _iterator6.e(err);
+                  } finally {
+                    _iterator6.f();
                   }
-
-                  return Array.from(map.values()).map(function (taskGroup) {
-                    return Object.assign({}, taskGroup[0], {
-                      nodes: taskGroup.map(function (t) {
-                        return t.node;
-                      })
-                    });
-                  });
-                };
-
-                downloadTasks = groupTasksByUrl(downloadTasks);
-                localCopyTasks = groupTasksByUrl(localCopyTasks);
-                tasks = downloadTasks.concat(localCopyTasks);
-
-                if (tasks.length) {
-                  _context5.next = 13;
-                  break;
                 }
+              } catch (err) {
+                _iterator4.e(err);
+              } finally {
+                _iterator4.f();
+              }
 
-                return _context5.abrupt("return", tree);
+              _context5.next = 32;
+              break;
 
-              case 13:
-                successfulTasks = [];
-                _context5.next = 16;
-                return mkdir(destinationPath);
+            case 27:
+              _context5.prev = 27;
+              _context5.t0 = _context5["catch"](16);
+              vfile.message(_context5.t0);
+              _context5.next = 32;
+              return promisify(rimraf)(destinationPath);
 
-              case 16:
-                _context5.prev = 16;
-                _context5.next = 19;
-                return Promise.all([doDownloadTasks(downloadTasks), doLocalCopyTasks(localCopyTasks)]);
-
-              case 19:
-                failedTasks = tasks.filter(function (t) {
-                  return t.error;
-                });
-                successfulTasks = tasks.filter(function (t) {
-                  return !t.error;
-                });
-                _iteratorNormalCompletion3 = true;
-                _didIteratorError3 = false;
-                _iteratorError3 = undefined;
-                _context5.prev = 24;
-                _iterator3 = failedTasks[Symbol.iterator]();
-
-              case 26:
-                if (_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done) {
-                  _context5.next = 50;
-                  break;
-                }
-
-                task = _step3.value;
-                _iteratorNormalCompletion5 = true;
-                _didIteratorError5 = false;
-                _iteratorError5 = undefined;
-                _context5.prev = 31;
-
-                for (_iterator5 = task.nodes[Symbol.iterator](); !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-                  node = _step5.value;
-
-                  // mutates the AST even in case of error if requested
-                  if (defaultImageDestination && task.error.replaceWithDefault) {
-                    node.url = defaultImageDestination;
-                  }
-
-                  vfile.message(task.error, node.position, task.url);
-                }
-
-                _context5.next = 39;
+            case 32:
+              if (!successfulTasks.length) {
+                _context5.next = 36;
                 break;
+              }
 
-              case 35:
-                _context5.prev = 35;
-                _context5.t0 = _context5["catch"](31);
-                _didIteratorError5 = true;
-                _iteratorError5 = _context5.t0;
+              vfile.data.imageDir = destinationPath;
+              _context5.next = 38;
+              break;
 
-              case 39:
-                _context5.prev = 39;
-                _context5.prev = 40;
+            case 36:
+              _context5.next = 38;
+              return promisify(rimraf)(destinationPath);
 
-                if (!_iteratorNormalCompletion5 && _iterator5["return"] != null) {
-                  _iterator5["return"]();
-                }
+            case 38:
+              return _context5.abrupt("return", tree);
 
-              case 42:
-                _context5.prev = 42;
-
-                if (!_didIteratorError5) {
-                  _context5.next = 45;
-                  break;
-                }
-
-                throw _iteratorError5;
-
-              case 45:
-                return _context5.finish(42);
-
-              case 46:
-                return _context5.finish(39);
-
-              case 47:
-                _iteratorNormalCompletion3 = true;
-                _context5.next = 26;
-                break;
-
-              case 50:
-                _context5.next = 56;
-                break;
-
-              case 52:
-                _context5.prev = 52;
-                _context5.t1 = _context5["catch"](24);
-                _didIteratorError3 = true;
-                _iteratorError3 = _context5.t1;
-
-              case 56:
-                _context5.prev = 56;
-                _context5.prev = 57;
-
-                if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
-                  _iterator3["return"]();
-                }
-
-              case 59:
-                _context5.prev = 59;
-
-                if (!_didIteratorError3) {
-                  _context5.next = 62;
-                  break;
-                }
-
-                throw _iteratorError3;
-
-              case 62:
-                return _context5.finish(59);
-
-              case 63:
-                return _context5.finish(56);
-
-              case 64:
-                _iteratorNormalCompletion4 = true;
-                _didIteratorError4 = false;
-                _iteratorError4 = undefined;
-                _context5.prev = 67;
-                _iterator4 = successfulTasks[Symbol.iterator]();
-
-              case 69:
-                if (_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done) {
-                  _context5.next = 93;
-                  break;
-                }
-
-                _task = _step4.value;
-                _iteratorNormalCompletion6 = true;
-                _didIteratorError6 = false;
-                _iteratorError6 = undefined;
-                _context5.prev = 74;
-
-                for (_iterator6 = _task.nodes[Symbol.iterator](); !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-                  _node = _step6.value;
-                  // mutates the AST!
-                  _node.url = _task.destination;
-                }
-
-                _context5.next = 82;
-                break;
-
-              case 78:
-                _context5.prev = 78;
-                _context5.t2 = _context5["catch"](74);
-                _didIteratorError6 = true;
-                _iteratorError6 = _context5.t2;
-
-              case 82:
-                _context5.prev = 82;
-                _context5.prev = 83;
-
-                if (!_iteratorNormalCompletion6 && _iterator6["return"] != null) {
-                  _iterator6["return"]();
-                }
-
-              case 85:
-                _context5.prev = 85;
-
-                if (!_didIteratorError6) {
-                  _context5.next = 88;
-                  break;
-                }
-
-                throw _iteratorError6;
-
-              case 88:
-                return _context5.finish(85);
-
-              case 89:
-                return _context5.finish(82);
-
-              case 90:
-                _iteratorNormalCompletion4 = true;
-                _context5.next = 69;
-                break;
-
-              case 93:
-                _context5.next = 99;
-                break;
-
-              case 95:
-                _context5.prev = 95;
-                _context5.t3 = _context5["catch"](67);
-                _didIteratorError4 = true;
-                _iteratorError4 = _context5.t3;
-
-              case 99:
-                _context5.prev = 99;
-                _context5.prev = 100;
-
-                if (!_iteratorNormalCompletion4 && _iterator4["return"] != null) {
-                  _iterator4["return"]();
-                }
-
-              case 102:
-                _context5.prev = 102;
-
-                if (!_didIteratorError4) {
-                  _context5.next = 105;
-                  break;
-                }
-
-                throw _iteratorError4;
-
-              case 105:
-                return _context5.finish(102);
-
-              case 106:
-                return _context5.finish(99);
-
-              case 107:
-                _context5.next = 114;
-                break;
-
-              case 109:
-                _context5.prev = 109;
-                _context5.t4 = _context5["catch"](16);
-                vfile.message(_context5.t4);
-                _context5.next = 114;
-                return promisify(rimraf)(destinationPath);
-
-              case 114:
-                if (!successfulTasks.length) {
-                  _context5.next = 118;
-                  break;
-                }
-
-                vfile.data.imageDir = destinationPath;
-                _context5.next = 120;
-                break;
-
-              case 118:
-                _context5.next = 120;
-                return promisify(rimraf)(destinationPath);
-
-              case 120:
-                return _context5.abrupt("return", tree);
-
-              case 121:
-              case "end":
-                return _context5.stop();
-            }
+            case 39:
+            case "end":
+              return _context5.stop();
           }
-        }, _callee5, null, [[16, 109], [24, 52, 56, 64], [31, 35, 39, 47], [40,, 42, 46], [57,, 59, 63], [67, 95, 99, 107], [74, 78, 82, 90], [83,, 85, 89], [100,, 102, 106]]);
-      }));
+        }
+      }, _callee5, null, [[16, 27]]);
+    }));
 
-      function transform(_x6, _x7) {
-        return _transform.apply(this, arguments);
-      }
+    function transform(_x6, _x7) {
+      return _transform.apply(this, arguments);
+    }
 
-      return transform;
-    }()
-  );
+    return transform;
+  }();
 }
 
 module.exports = plugin;

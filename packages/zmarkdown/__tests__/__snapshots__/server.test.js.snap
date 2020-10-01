@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HTML endpoint accepts POSTed markdown 1`] = `"<h3 id=\\"foo\\">foo<a aria-hidden=\\"true\\" href=\\"#foo\\"><span class=\\"icon icon-link\\"></span></a></h3>"`;
+exports[`HTML endpoint accepts POSTed markdown 1`] = `"<h3 id=\\"foo\\">foo<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#foo\\"><span class=\\"icon icon-link\\"></span></a></h3>"`;
 
 exports[`HTML endpoint produces statistics when configured 1`] = `
 "<p>7 chars</p>
-<h3 id=\\"13-chars-here\\">13 chars here<a aria-hidden=\\"true\\" href=\\"#13-chars-here\\"><span class=\\"icon icon-link\\"></span></a></h3>
+<h3 id=\\"13-chars-here\\">13 chars here<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#13-chars-here\\"><span class=\\"icon icon-link\\"></span></a></h3>
 <p><a href=\\"https.//github.com/zestedesavoir/zmarkdown\\">13 chars here</a></p>
 <figure><img src=\\"https.//github.com/zestedesavoir/zmarkdown\\" alt=\\"13 chars here\\"><figcaption>13 chars here</figcaption></figure>
 <figure><img src=\\"https.//github.com/zestedesavoir/zmarkdown\\" alt=\\"no chars here\\"><figcaption>13 chars here</figcaption></figure>"

@@ -24,16 +24,13 @@
     "src",
     "README.md"
   ],
-  "engines": {
-    "node": ">=4"
-  },
   "keywords": [
     "rehype",
     "footnotes"
   ],
   "license": "MIT",
   "dependencies": {
-    "unist-util-visit": "^2.0.1"
+    "unist-util-visit": "^2.0.3"
   },
   "devDependencies": {
     "remark-numbered-footnotes": "file:../remark-numbered-footnotes"

@@ -27,7 +27,9 @@ exports[`captions should break lists 1`] = `
 <figure><blockquote>
 <ul>
 <li>Baz
-* Baz</li>
+<pre><code>* Baz
+</code></pre>
+</li>
 </ul>
 </blockquote><figcaption>fc3</figcaption></figure>"
 `;

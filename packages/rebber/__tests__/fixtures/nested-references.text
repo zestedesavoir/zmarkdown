@@ -1,0 +1,7 @@
+This nested image should work:
+
+[![Foo][bar]][baz]
+
+This nested link should not work:
+
+[[Foo][bar]][baz]

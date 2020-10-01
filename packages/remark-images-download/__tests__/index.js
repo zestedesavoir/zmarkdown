@@ -128,6 +128,18 @@ describe('mock server tests', () => {
     )
   })
 
+  test('skips empty images', () => {
+    const md = `![]()`
+    const html = `<p><img src=""></p>`
+
+    const render = renderFactory()
+
+    return render(md).then(vfile => {
+      expect(firstMsg(vfile)).toBe('URL is empty')
+      expect(vfile.contents).toBe(html)
+    })
+  })
+
   test('default big images', () => {
     const defaultImagePath = 'default.png'
     const file = `![](http://localhost:27273/ok.png)`

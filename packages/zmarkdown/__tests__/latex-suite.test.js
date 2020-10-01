@@ -438,11 +438,11 @@ test('footnotes', () => {
 
     [^footnoteRef]: reference in title
 
-    # mytitle B[^footnoterawhead inner]
+    # mytitle B^[footnoterawhead inner]
 
-    # myti*tle C[^foo inner]*
+    # myti*tle C^[foo inner]*
 
-    a paragraph[^footnoteRawPar inner]
+    a paragraph^[footnoteRawPar inner]
   `)
   return expect(p).resolves.toMatchSnapshot()
 })

@@ -1,7 +1,6 @@
 const xtend = require('xtend')
 const visit = require('unist-util-visit')
 
-const headingPlugin = require('./headingVisitor')
 const referenceVisitors = require('./referenceVisitors')
 
 module.exports = preprocess
@@ -12,7 +11,6 @@ function preprocess (ctx, tree) {
   const defaultVisitors = {
     definition: [definitionVisitor],
     imageReference: [imageReferenceVisitor],
-    heading: [headingPlugin],
   }
 
   const visitors = xtend(defaultVisitors, ctx.preprocessors || {})

@@ -23,9 +23,7 @@ var paragraph = require('rebber/dist/types/paragraph');
 
 module.exports = gridTable;
 
-var MultiRowLine =
-/*#__PURE__*/
-function () {
+var MultiRowLine = /*#__PURE__*/function () {
   function MultiRowLine(startRow, endRow, startCell, endCell, colspan, endOfLine) {
     _classCallCheck(this, MultiRowLine);
 
@@ -59,9 +57,7 @@ function () {
   return MultiRowLine;
 }();
 
-var GridTableStringifier =
-/*#__PURE__*/
-function () {
+var GridTableStringifier = /*#__PURE__*/function () {
   function GridTableStringifier() {
     _classCallCheck(this, GridTableStringifier);
 

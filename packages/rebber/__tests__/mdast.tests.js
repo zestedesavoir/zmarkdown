@@ -1,8 +1,8 @@
 import {readdirSync as directory, readFileSync as file, lstatSync as stat} from 'fs'
 import {join} from 'path'
-import dedent from 'dedent'
 import unified from 'unified'
 import reParse from 'remark-parse'
+import footnotes from 'remark-footnotes'
 import rebber from '../src'
 
 const rebberConfig = {
@@ -20,12 +20,6 @@ const rebberConfig = {
   //   `delete(${text})`,
   // emphasis: (text) =>
   //   `emphasis(${text})`,
-  footnote: (identifier, text, protect) =>
-    `[footnote(identifier=${identifier}, text=${text}, protect=${protect})]`,
-  footnoteDefinition: (identifier, text) =>
-    `[footnoteDefinition(identifier=${identifier}, text=${text})]`,
-  footnoteReference: (identifier) =>
-    `[footnoteReference(${identifier})]`,
   headings: [
     (text) => `heading1(${text})`,
     (text) => `heading2(${text})`,
@@ -68,7 +62,7 @@ const rebberConfig = {
     `[thematicBreak(---)]`,
 }
 
-const specs = hydrateFixturesFrom('remark')
+const specs = hydrateFixtures()
 
 describe('rebber: remark specs', () => {
   Object.keys(specs).filter(Boolean).forEach(name => {
@@ -76,7 +70,8 @@ describe('rebber: remark specs', () => {
 
     test(name, () => {
       const {contents} = unified()
-        .use(reParse, {footnotes: true})
+        .use(reParse)
+        .use(footnotes, {inlineNotes: true})
         .use(rebber)
         .processSync(spec)
 
@@ -91,7 +86,8 @@ describe('rebber: remark specs with config: custom macros', () => {
 
     test(name, () => {
       const {contents} = unified()
-        .use(reParse, {footnotes: true})
+        .use(reParse)
+        .use(footnotes, {inlineNotes: true})
         .use(rebber, rebberConfig)
         .processSync(spec)
 
@@ -106,7 +102,8 @@ describe('toLaTeX: remark specs', () => {
 
     test(name, () => {
       const mdast = unified()
-        .use(reParse, {footnotes: true})
+        .use(reParse)
+        .use(footnotes, {inlineNotes: true})
         .parse(spec)
 
       const latex = rebber.toLaTeX(mdast)
@@ -116,60 +113,9 @@ describe('toLaTeX: remark specs', () => {
   })
 })
 
-describe('rebber', () => {
-  const specs = hydrateFixturesFrom('rebber')
-
-  Object.keys(specs).filter(Boolean).forEach(name => {
-    const spec = specs[name]
-
-    test(name, () => {
-      const {contents} = unified()
-        .use(reParse, {footnotes: true})
-        .use(rebber)
-        .processSync(spec)
-
-      expect(contents.trim()).toMatchSnapshot(name)
-    })
-  })
-})
-
-describe('rebber with config: custom macros', () => {
-  const specs = hydrateFixturesFrom('rebber')
-
-  Object.keys(specs).filter(Boolean).forEach(name => {
-    const spec = specs[name]
-
-    test(name, () => {
-      const {contents} = unified()
-        .use(reParse, {footnotes: true})
-        .use(rebber, rebberConfig)
-        .processSync(spec)
-
-      expect(contents.trim()).toMatchSnapshot(name)
-    })
-  })
-})
-
-test('preprocessor', () => {
-  const mdast = unified()
-    .use(reParse, {footnotes: true})
-    .parse(dedent`
-      # foo[^ref]
-
-      [^ref]: def
-    `)
-
-  rebberConfig.preprocessors = {
-    heading: require('../src/preprocessors/headingVisitor'),
-  }
-
-  const latex = rebber.toLaTeX(mdast, rebberConfig)
-  expect(latex).toMatchSnapshot()
-})
-
 /* helpers */
-function hydrateFixturesFrom (folder) {
-  const base = join(__dirname, `fixtures/${folder}/`)
+function hydrateFixtures () {
+  const base = join(__dirname, `fixtures/`)
   return directory(base)
     .reduce((tests, filename) => {
       const parts = filename.split('.')

@@ -1,19 +1,25 @@
 const whitespace = require('is-whitespace-character')
 
-const C_PIPE = '|'
-const DOUBLE = '||'
+const DEFAULT_LEFT = '|'
+const DEFAULT_RIGHT = '|'
 
-function locator (value, fromIndex) {
-  const index = value.indexOf(DOUBLE, fromIndex)
-  return index
-}
+function plugin (config) {
+  const CHAR_LEFT = (config && config.charLeft) || DEFAULT_LEFT
+  const CHAR_RIGHT = (config && config.charRight) || DEFAULT_RIGHT
 
-function plugin () {
+  const DOUBLE_LEFT = CHAR_LEFT + CHAR_LEFT
+  const DOUBLE_RIGHT = CHAR_RIGHT + CHAR_RIGHT
+
+  function locator (value, fromIndex) {
+    const index = value.indexOf(DOUBLE_LEFT, fromIndex)
+    return index
+  }
+
   function inlineTokenizer (eat, value, silent) {
     if (
       !this.options.gfm ||
-      (value.substr(0, 2) !== DOUBLE) ||
-      (value.substr(0, 4) === (DOUBLE + DOUBLE)) ||
+      (value.substr(0, 2) !== DOUBLE_LEFT) ||
+      (value.substr(0, 4) === (DOUBLE_LEFT + DOUBLE_RIGHT)) ||
       whitespace(value.charAt(2))
     ) {
       return
@@ -33,15 +39,15 @@ function plugin () {
       character = value.charAt(index)
 
       if (
-        character === C_PIPE &&
-        previous === C_PIPE &&
+        character === CHAR_RIGHT &&
+        previous === CHAR_RIGHT &&
         (!preceding || !whitespace(preceding))
       ) {
 
         /* istanbul ignore if - never used (yet) */
         if (silent) return true
 
-        return eat(DOUBLE + subvalue + DOUBLE)({
+        return eat(DOUBLE_LEFT + subvalue + DOUBLE_RIGHT)({
           type: 'kbd',
           children: this.tokenizeInline(subvalue, now),
           data: {
@@ -55,6 +61,7 @@ function plugin () {
       previous = character
     }
   }
+
   inlineTokenizer.locator = locator
 
   const Parser = this.Parser
@@ -71,7 +78,7 @@ function plugin () {
   if (Compiler) {
     const visitors = Compiler.prototype.visitors
     visitors.kbd = function (node) {
-      return `||${this.all(node).join('')}||`
+      return `${DOUBLE_LEFT}${this.all(node).join('')}${DOUBLE_RIGHT}`
     }
   }
 }
