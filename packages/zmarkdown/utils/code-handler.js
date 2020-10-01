@@ -64,10 +64,15 @@ const rangeHandler = range => {
   function insert () {
     if (previousNumber >= 0) {
       const currentInt = parseInt(currentNumber)
-      const rangeLength = (currentInt - previousNumber) + 1
+      const previousInt = parseInt(previousNumber)
+
+      const minLineNumber = Math.min(currentInt, previousInt)
+      const maxLineNumber = Math.max(currentInt, previousInt)
+
+      const rangeLength = (maxLineNumber - minLineNumber) + 1
 
       parsedRange.push(...[...Array(rangeLength).keys()]
-        .map(i => i + previousNumber))
+        .map(i => i + minLineNumber))
     } else {
       parsedRange.push(parseInt(currentNumber))
     }
