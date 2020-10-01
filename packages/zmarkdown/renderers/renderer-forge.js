@@ -24,7 +24,11 @@ module.exports = (base, defaultPluginList, postProcessorList) => config => {
     .filter(name => !disabledInternalTokenizers.includes(name))
 
   const filteredPostProcessors = postProcessorNames
-    .filter(name => Boolean(config.postProcessors[name]))
+    .filter(name => {
+      const ppc = config.postProcessors
+
+      return (ppc && ppc[name]) ? Boolean(ppc[name]) : false
+    })
 
   for (const pluginName of filteredPlugins) {
     base.use(pluginList[pluginName], config[pluginName])

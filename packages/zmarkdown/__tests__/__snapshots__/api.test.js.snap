@@ -1,0 +1,231 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`html can take custom config 1`] = `
+"<h1 id=\\"some-md\\">some md<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#some-md\\"><span class=\\"icon icon-link\\"></span></a></h1>
+<div class=\\"hljs-code-div\\"><div class=\\"hljs-line-numbers\\"><span data-count=\\"1\\"></span></div><pre><code class=\\"hljs language-latex\\">Some LaTeX
+</code></pre></div>"
+`;
+
+exports[`html uses default config 1`] = `
+"<h1 id=\\"some-md\\">some md<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#some-md\\"><span class=\\"icon icon-link\\"></span></a></h1>
+<div class=\\"hljs-code-div hljs-code-latex\\"><div class=\\"hljs-line-numbers\\"><span data-count=\\"1\\"></span></div><pre><code class=\\"hljs language-latex\\">Some LaTeX
+</code></pre></div>"
+`;
+
+exports[`latex can take custom config 1`] = `"\\\\thisIsNotATitle{some md}"`;
+
+exports[`latex uses default config 1`] = `"\\\\levelOneTitle{some md}"`;
+
+exports[`mdast can take custom config 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 10,
+              "line": 1,
+              "offset": 9,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 3,
+              "line": 1,
+              "offset": 2,
+            },
+          },
+          "type": "text",
+          "value": "some md",
+        },
+      ],
+      "depth": 1,
+      "position": Position {
+        "end": Object {
+          "column": 10,
+          "line": 1,
+          "offset": 9,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "type": "heading",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 7,
+              "line": 3,
+              "offset": 17,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 3,
+              "offset": 11,
+            },
+          },
+          "type": "text",
+          "value": "@hello",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 7,
+          "line": 3,
+          "offset": 17,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 3,
+          "offset": 11,
+        },
+      },
+      "type": "paragraph",
+    },
+  ],
+  "position": Object {
+    "end": Object {
+      "column": 7,
+      "line": 3,
+      "offset": 17,
+    },
+    "start": Object {
+      "column": 1,
+      "line": 1,
+      "offset": 0,
+    },
+  },
+  "type": "root",
+}
+`;
+
+exports[`mdast uses default config 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 10,
+              "line": 1,
+              "offset": 9,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 3,
+              "line": 1,
+              "offset": 2,
+            },
+          },
+          "type": "text",
+          "value": "some md",
+        },
+      ],
+      "depth": 1,
+      "position": Position {
+        "end": Object {
+          "column": 10,
+          "line": 1,
+          "offset": 9,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "type": "heading",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "type": "text",
+              "value": "@",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "type": "text",
+                  "value": "hello",
+                },
+              ],
+              "data": Object {
+                "hName": "span",
+                "hProperties": Object {
+                  "class": "ping-username",
+                },
+              },
+              "type": "emphasis",
+            },
+          ],
+          "data": Object {
+            "hName": "a",
+            "hProperties": Object {
+              "class": "ping ping-link",
+              "href": "/membres/voir/hello/",
+              "rel": "nofollow",
+            },
+          },
+          "position": Position {
+            "end": Object {
+              "column": 7,
+              "line": 3,
+              "offset": 17,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 3,
+              "offset": 11,
+            },
+          },
+          "type": "ping",
+          "url": "/membres/voir/hello/",
+          "username": "hello",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 7,
+          "line": 3,
+          "offset": 17,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 3,
+          "offset": 11,
+        },
+      },
+      "type": "paragraph",
+    },
+  ],
+  "position": Object {
+    "end": Object {
+      "column": 7,
+      "line": 3,
+      "offset": 17,
+    },
+    "start": Object {
+      "column": 1,
+      "line": 1,
+      "offset": 0,
+    },
+  },
+  "type": "root",
+}
+`;
+
+exports[`misc can use callback 1`] = `"\\\\levelOneTitle{some md}"`;
