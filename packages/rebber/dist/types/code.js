@@ -30,7 +30,7 @@ var defaultMacro = function defaultMacro(content, lang, attrs) {
 
 
         if (_param === 'hl_lines=') {
-          var hlItems = value.split(/, /);
+          var hlItems = value.split(/,| /);
 
           for (var _i in hlItems) {
             var item = hlItems[_i];

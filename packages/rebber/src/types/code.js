@@ -40,7 +40,7 @@ const defaultMacro = (content, lang, attrs) => {
         // For hl_lines, we parse the parameters to ensure we don't have
         // inverted ranges.
         if (param === 'hl_lines=') {
-          const hlItems = value.split(/, /)
+          const hlItems = value.split(/,| /)
 
           for (const i in hlItems) {
             const item = hlItems[i]
