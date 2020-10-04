@@ -25,6 +25,34 @@ var defaultMacro = function defaultMacro(content, lang, attrs) {
 
         if (value.startsWith('"') && value.endsWith('"') || value.startsWith("'") && value.endsWith("'")) {
           value = value.slice(1, -1).trim();
+        } // For hl_lines, we parse the parameters to ensure we don't have
+        // inverted ranges.
+
+
+        if (_param === 'hl_lines=') {
+          var hlItems = value.split(/, /);
+
+          for (var _i in hlItems) {
+            var item = hlItems[_i];
+
+            if (!item.includes('-')) {
+              continue;
+            }
+
+            var n = item.split('-').map(function (n) {
+              return parseInt(n);
+            }).filter(function (n) {
+              return !isNaN(n);
+            });
+
+            if (n.length !== 2) {
+              continue;
+            }
+
+            hlItems[_i] = "".concat(Math.min(n[0], n[1]), "-").concat(Math.max(n[0], n[1]));
+          }
+
+          value = hlItems.join(',');
         }
 
         localCodeBlockParams[i] = value;

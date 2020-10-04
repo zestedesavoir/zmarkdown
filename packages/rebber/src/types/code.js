@@ -37,6 +37,28 @@ const defaultMacro = (content, lang, attrs) => {
           value = value.slice(1, -1).trim()
         }
 
+        // For hl_lines, we parse the parameters to ensure we don't have
+        // inverted ranges.
+        if (param === 'hl_lines=') {
+          const hlItems = value.split(/, /)
+
+          for (const i in hlItems) {
+            const item = hlItems[i]
+            if (!item.includes('-')) {
+              continue
+            }
+
+            const n = item.split('-').map(n => parseInt(n)).filter(n => !isNaN(n))
+            if (n.length !== 2) {
+              continue
+            }
+
+            hlItems[i] = `${Math.min(n[0], n[1])}-${Math.max(n[0], n[1])}`
+          }
+
+          value = hlItems.join(',')
+        }
+
         localCodeBlockParams[i] = value
       }
     }
