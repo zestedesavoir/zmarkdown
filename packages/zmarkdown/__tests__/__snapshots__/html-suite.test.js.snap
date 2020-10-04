@@ -51,6 +51,15 @@ exports[`code highlight special cases supports hl_lines - interval syntax 1`] = 
 </code></pre></div>"
 `;
 
+exports[`code highlight special cases supports hl_lines - interval syntax reversed 1`] = `
+"<div class=\\"hljs-code-div hljs-code-python\\"><div class=\\"hljs-line-numbers\\"><span data-count=\\"1\\" class=\\"hll\\"></span><span data-count=\\"2\\" class=\\"hll\\"></span><span data-count=\\"3\\" class=\\"hll\\"></span><span data-count=\\"4\\"></span><span data-count=\\"5\\"></span></div><pre><code class=\\"hljs language-python\\"><span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">def</span> <span class=\\"hljs-title\\">main</span>():</span>
+  print(<span class=\\"hljs-string\\">'It\\\\'s amazing!'</span>)
+
+<span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">def</span> <span class=\\"hljs-title\\">unused</span>():</span>
+  print(<span class=\\"hljs-string\\">'Please use me!'</span>)
+</code></pre></div>"
+`;
+
 exports[`code highlight special cases supports hl_lines - spaced syntax 1`] = `
 "<div class=\\"hljs-code-div hljs-code-python\\"><div class=\\"hljs-line-numbers\\"><span data-count=\\"1\\"></span><span data-count=\\"2\\"></span><span data-count=\\"3\\"></span><span data-count=\\"4\\" class=\\"hll\\"></span><span data-count=\\"5\\" class=\\"hll\\"></span></div><pre><code class=\\"hljs language-python\\"><span class=\\"hljs-function\\"><span class=\\"hljs-keyword\\">def</span> <span class=\\"hljs-title\\">main</span>():</span>
   print(<span class=\\"hljs-string\\">'It\\\\'s amazing!'</span>)

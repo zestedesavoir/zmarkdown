@@ -51,6 +51,14 @@ print('bla')
 
 
 
+\\\\begin{CodeBlock}[][2-3]{python}
+print('bla')
+print('bla')
+print('bla')
+\\\\end{CodeBlock}
+
+
+
 \\\\begin{CodeBlock}{text}
 a code without lang
 \\\\end{CodeBlock}"
