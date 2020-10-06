@@ -42,8 +42,7 @@ const defaultMacro = (content, lang, attrs) => {
         if (param === 'hl_lines=') {
           const hlItems = value.split(/,| /)
 
-          for (const i in hlItems) {
-            const item = hlItems[i]
+          for (const [i, item] of hlItems.entries()) {
             if (!item.includes('-')) {
               continue
             }

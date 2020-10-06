@@ -299,7 +299,7 @@ describe('code highlight special cases', () => {
       \`\`\`python hl_lines="4 5"
       def main():
         print('It\'s amazing!')
-
+      
       def unused():
         print('Please use me!')
       \`\`\`
@@ -315,7 +315,7 @@ describe('code highlight special cases', () => {
       \`\`\`python hl_lines=4,5
       def main():
         print('It\'s amazing!')
-
+      
       def unused():
         print('Please use me!')
       \`\`\`
@@ -331,10 +331,10 @@ describe('code highlight special cases', () => {
       \`\`\`python hl_lines=1-3
       def main():
         print('It\'s amazing!')
-
+      
       def unused():
-        print('Please use me!')
-      \`\`\`
+      print('Please use me!')
+    \`\`\`
     `
 
     const result = await renderString(input)
@@ -344,10 +344,10 @@ describe('code highlight special cases', () => {
 
   it('supports hl_lines - interval syntax reversed', async () => {
     const input = dedent `
-      \`\`\`python hl_lines=3-1
-      def main():
-        print('It\'s amazing!')
-
+    \`\`\`python hl_lines=3-1
+    def main():
+      print('It\'s amazing!')
+      
       def unused():
         print('Please use me!')
       \`\`\`
@@ -363,7 +363,7 @@ describe('code highlight special cases', () => {
       \`\`\`python linenostart=3
       def main():
         print('It\'s amazing!')
-
+      
       def unused():
         print('Please use me!')
       \`\`\`
@@ -379,7 +379,7 @@ describe('code highlight special cases', () => {
       \`\`\`python hl_lines=4 linenostart=3
       def main():
         print('It\'s amazing!')
-
+      
       def unused():
         print('Please use me!')
       \`\`\`
@@ -393,7 +393,7 @@ describe('code highlight special cases', () => {
       \`\`\`python none hl_lines
       def main():
         print('It\'s amazing!')
-
+      
       def unused():
         print('Please use me!')
       \`\`\`
