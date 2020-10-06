@@ -328,11 +328,11 @@ describe('code highlight special cases', () => {
 
   it('supports hl_lines - interval syntax', async () => {
     const input = dedent `
-      \`\`\`python hl_lines=1-3
-      def main():
-        print('It\'s amazing!')
-      
-      def unused():
+    \`\`\`python hl_lines=1-3
+    def main():
+      print('It\'s amazing!')
+    
+    def unused():
       print('Please use me!')
     \`\`\`
     `
@@ -347,10 +347,10 @@ describe('code highlight special cases', () => {
     \`\`\`python hl_lines=3-1
     def main():
       print('It\'s amazing!')
-      
-      def unused():
-        print('Please use me!')
-      \`\`\`
+    
+    def unused():
+      print('Please use me!')
+    \`\`\`
     `
 
     const result = await renderString(input)
