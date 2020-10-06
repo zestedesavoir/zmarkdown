@@ -192,6 +192,28 @@ test('code', () => {
   return expect(p).resolves.toMatchSnapshot()
 })
 
+test('code+reversed-hl', () => {
+  const p = renderString(dedent`
+    \`\`\`python hl_lines=3-2
+    print('bla')
+    print('bla')
+    print('bla')
+    \`\`\`
+
+    \`\`\`python hl_lines=2-1,4-3
+    print('bla')
+    print('bla')
+    print('bla')
+    print('bla')
+    \`\`\`
+  `)
+
+  return expect(p).resolves.toMatchSnapshot() &&
+    expect(p).not.toContain('3-2') &&
+    expect(p).not.toContain('2-1') &&
+    expect(p).not.toContain('4-3')
+})
+
 test('code+caption', () => {
   const p = renderString(dedent`
     \`\`\`python

@@ -56,6 +56,23 @@ a code without lang
 \\\\end{CodeBlock}"
 `;
 
+exports[`code+reversed-hl 1`] = `
+"\\\\begin{CodeBlock}[][2-3]{python}
+print('bla')
+print('bla')
+print('bla')
+\\\\end{CodeBlock}
+
+
+
+\\\\begin{CodeBlock}[][1-2,3-4]{python}
+print('bla')
+print('bla')
+print('bla')
+print('bla')
+\\\\end{CodeBlock}"
+`;
+
 exports[`code+caption 1`] = `
 "\\\\begin{CodeBlock}{python}
 print('bla')

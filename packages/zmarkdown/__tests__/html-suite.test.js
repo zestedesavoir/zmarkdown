@@ -328,13 +328,29 @@ describe('code highlight special cases', () => {
 
   it('supports hl_lines - interval syntax', async () => {
     const input = dedent `
-      \`\`\`python hl_lines=1-3
-      def main():
-        print('It\'s amazing!')
-      
-      def unused():
-        print('Please use me!')
-      \`\`\`
+    \`\`\`python hl_lines=1-3
+    def main():
+      print('It\'s amazing!')
+    
+    def unused():
+      print('Please use me!')
+    \`\`\`
+    `
+
+    const result = await renderString(input)
+    expect((result.match(/class="hll"/g) || []).length).toBe(3)
+    expect(result).toMatchSnapshot()
+  })
+
+  it('supports hl_lines - interval syntax reversed', async () => {
+    const input = dedent `
+    \`\`\`python hl_lines=3-1
+    def main():
+      print('It\'s amazing!')
+    
+    def unused():
+      print('Please use me!')
+    \`\`\`
     `
 
     const result = await renderString(input)
