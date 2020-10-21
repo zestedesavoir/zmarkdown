@@ -9,7 +9,8 @@
   "contributors": [
     "Sébastien (AmarOk) Blin <contact@enconn.fr>",
     "François (artragis) Dambrine <perso@francoisdambrine.me>",
-    "Victor Felder <victor@draft.li> (https://draft.li)"
+    "Victor Felder <victor@draft.li> (https://draft.li)",
+    "Luke Carrier <luke@carrier.im>"
   ],
   "scripts": {
     "pretest": "eslint .",
@@ -18,10 +19,12 @@
     "coverage": "jest --coverage"
   },
   "main": "dist/index.js",
+  "types": "types/index.d.ts",
   "files": [
     "LICENSE-MIT",
     "dist",
     "src",
+    "types/index.d.ts",
     "README.md"
   ],
   "keywords": [
