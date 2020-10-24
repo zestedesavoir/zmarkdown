@@ -16,7 +16,8 @@
     "pretest": "eslint .",
     "build": "del-cli dist && cross-env BABEL_ENV=production babel src --out-dir dist",
     "test": "jest",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "dtslint": "../../node_modules/.bin/dtslint types"
   },
   "main": "dist/index.js",
   "types": "types/index.d.ts",

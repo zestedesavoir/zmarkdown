@@ -56,7 +56,7 @@
   "scripts": {
     "pretest": "npm run lint && lerna run pretest --scope zmarkdown",
     "bootstrap": "lerna bootstrap",
-    "test": "cross-env DEST=/tmp jest",
+    "test": "cross-env DEST=/tmp jest && lerna run dtslint",
     "lint": "eslint .",
     "posttest": "lerna run posttest --scope zmarkdown",
     "d": "node --inspect --debug-brk ./node_modules/.bin/jest --runInBand -i",
