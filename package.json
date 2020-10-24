@@ -1,7 +1,8 @@
 {
   "jest": {
     "testPathIgnorePatterns": [
-      "/node_modules/"
+      "/node_modules/",
+      "/types/"
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [
