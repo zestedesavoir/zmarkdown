@@ -104,7 +104,7 @@ const rangeHandler = range => {
 
 function code (_, node) {
   const value = node.value ? `${node.value}\n` : ''
-  const lang = node.lang && node.lang.match(/^[^ \t]+(?=[ \t]|$)/)
+  const lang = (node.lang && node.lang.match(/^[^ \t]+(?=[ \t]|$)/)) || 'text'
   const attrs = attrsParser(node.meta || '').prop
 
   const linenostart = parseInt(attrs.linenostart) || 1
