@@ -1,17 +1,19 @@
 const visit = require('unist-util-visit')
 
-module.exports = processQuizz
+module.exports = processQuizzFactory
 const clone = require('clone')
-function processQuizz (correctionTitle = 'Correction') {
+function processQuizzFactory (ctx) {
+  const correctionTitle = ctx.correctionTitle || 'Correction'
   return function quizzCustomBlockVisitor (node, index, parent) {
     node.type = 'neutralCustomBlock'
     const correction = clone(node)
     correction.type = 'sCustomBlock'
-    correction.children[0].value = correctionTitle
+    correction.children[0].children[0].value = correctionTitle
     parent.children.splice(index + 1, 0, correction)
-    while (node.children.length > 0 &&
-    node.children[node.children.length - 1].type !== 'listItem') {
-      node.children.splice(node.children.length - 1, 1)
+    const bodyChildren = node.children[1].children
+    while (bodyChildren.length > 0 &&
+    bodyChildren[bodyChildren.length - 1].type !== 'listItem') {
+      bodyChildren.splice(bodyChildren.length - 1, 1)
     }
     visit(node, 'listItem', (itemNode) => {
       itemNode.checked = null

@@ -56,6 +56,22 @@ a code without lang
 \\\\end{CodeBlock}"
 `;
 
+exports[`code+caption 1`] = `
+"\\\\begin{CodeBlock}{python}
+print('bla')
+\\\\end{CodeBlock}
+\\\\captionof{listing}{With Source}
+
+
+
+\\\\begin{CodeBlock}[][1,2]{python}
+print('bla')
+print('bla')
+print('bla')
+\\\\end{CodeBlock}
+\\\\captionof{listing}{With Source}"
+`;
+
 exports[`code+reversed-hl 1`] = `
 "\\\\begin{CodeBlock}[][2-3]{python}
 print('bla')
@@ -71,22 +87,6 @@ print('bla')
 print('bla')
 print('bla')
 \\\\end{CodeBlock}"
-`;
-
-exports[`code+caption 1`] = `
-"\\\\begin{CodeBlock}{python}
-print('bla')
-\\\\end{CodeBlock}
-\\\\captionof{listing}{With Source}
-
-
-
-\\\\begin{CodeBlock}[][1,2]{python}
-print('bla')
-print('bla')
-print('bla')
-\\\\end{CodeBlock}
-\\\\captionof{listing}{With Source}"
 `;
 
 exports[`codes in notes 1`] = `
@@ -672,6 +672,23 @@ Messenger bag locavore swag raclette brunch whatever, portland food truck. PBR\\
 `;
 
 exports[`ping 1`] = `"Hello \\\\ping{you} and \\\\ping{you_too}, and \\\\ping{also you}"`;
+
+exports[`quizz with answers 1`] = `
+"\\\\begin{Neutral}[{{question}}]
+
+\\\\end{Neutral}
+
+
+\\\\begin{Spoiler}[{{Correction}}]
+\\\\begin{itemize}
+\\\\item[$\\\\square$]]\\\\relax bad answer
+\\\\item[$\\\\boxtimes$]]\\\\relax good answer
+\\\\item[$\\\\square$]]\\\\relax other bad answer
+\\\\end{itemize}
+the good answer is \\"good answer\\" as it better matches the philosophy
+of what good is for answers
+\\\\end{Spoiler}"
+`;
 
 exports[`regression: code block without language 1`] = `
 "\\\\begin{CodeBlock}{text}
