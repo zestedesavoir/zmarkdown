@@ -1,10 +1,14 @@
 "use strict";
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -128,140 +132,127 @@ module.exports = function plugin(opts) {
     };
   }
 
-  return (
-    /*#__PURE__*/
-    function () {
-      var _transform = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(tree, vfile, next) {
-        var toVisit, nextVisitOrBail;
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                nextVisitOrBail = function _ref4() {
-                  if (toVisit === 0) next();
+  return /*#__PURE__*/function () {
+    var _transform = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(tree, vfile, next) {
+      var toVisit, nextVisitOrBail;
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              nextVisitOrBail = function _nextVisitOrBail() {
+                if (toVisit === 0) next();
+              };
+
+              toVisit = 0;
+              visit(tree, 'iframe', /*#__PURE__*/function () {
+                var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(node) {
+                  return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          toVisit++;
+
+                        case 1:
+                        case "end":
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee);
+                }));
+
+                return function (_x4) {
+                  return _ref.apply(this, arguments);
                 };
+              }());
+              nextVisitOrBail();
+              visit(tree, 'iframe', /*#__PURE__*/function () {
+                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(node) {
+                  var data, oembed, provider, fallback, _yield$fetchEmbed, url, thumbnail, height, width, message;
 
-                toVisit = 0;
-                visit(tree, 'iframe',
-                /*#__PURE__*/
-                function () {
-                  var _ref = _asyncToGenerator(
-                  /*#__PURE__*/
-                  regeneratorRuntime.mark(function _callee(node) {
-                    return regeneratorRuntime.wrap(function _callee$(_context) {
-                      while (1) {
-                        switch (_context.prev = _context.next) {
-                          case 0:
-                            toVisit++;
-
-                          case 1:
-                          case "end":
-                            return _context.stop();
-                        }
-                      }
-                    }, _callee);
-                  }));
-
-                  return function (_x4) {
-                    return _ref.apply(this, arguments);
-                  };
-                }());
-                nextVisitOrBail();
-                visit(tree, 'iframe',
-                /*#__PURE__*/
-                function () {
-                  var _ref2 = _asyncToGenerator(
-                  /*#__PURE__*/
-                  regeneratorRuntime.mark(function _callee2(node) {
-                    var data, oembed, provider, fallback, _ref3, url, thumbnail, height, width, message;
-
-                    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                      while (1) {
-                        switch (_context2.prev = _context2.next) {
-                          case 0:
-                            if (node.data.oembed) {
-                              _context2.next = 4;
-                              break;
-                            }
-
-                            toVisit--;
-                            nextVisitOrBail();
-                            return _context2.abrupt("return");
-
-                          case 4:
-                            data = node.data;
-                            oembed = data.oembed;
-                            provider = data.oembed.provider;
-                            fallback = data.oembed.fallback;
-                            _context2.prev = 8;
-                            _context2.next = 11;
-                            return fetchEmbed(oembed.url);
-
-                          case 11:
-                            _ref3 = _context2.sent;
-                            url = _ref3.url;
-                            thumbnail = _ref3.thumbnail;
-                            height = _ref3.height;
-                            width = _ref3.width;
-                            node.thumbnail = thumbnail;
-                            Object.assign(data.hProperties, {
-                              src: url,
-                              width: provider.width || width,
-                              height: provider.height || height,
-                              allowfullscreen: true,
-                              frameborder: '0'
-                            });
-                            _context2.next = 27;
+                  return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                      switch (_context2.prev = _context2.next) {
+                        case 0:
+                          if (node.data.oembed) {
+                            _context2.next = 4;
                             break;
+                          }
 
-                          case 20:
-                            _context2.prev = 20;
-                            _context2.t0 = _context2["catch"](8);
-                            message = _context2.t0.message;
+                          toVisit--;
+                          nextVisitOrBail();
+                          return _context2.abrupt("return");
 
-                            if (_context2.t0.name === 'AbortError') {
-                              message = "oEmbed URL timeout: ".concat(oembed.url);
-                            }
+                        case 4:
+                          data = node.data;
+                          oembed = data.oembed;
+                          provider = data.oembed.provider;
+                          fallback = data.oembed.fallback;
+                          _context2.prev = 8;
+                          _context2.next = 11;
+                          return fetchEmbed(oembed.url);
 
-                            vfile.message(message, node.position, oembed.url);
-                            node.data = {};
-                            Object.assign(node, fallback);
+                        case 11:
+                          _yield$fetchEmbed = _context2.sent;
+                          url = _yield$fetchEmbed.url;
+                          thumbnail = _yield$fetchEmbed.thumbnail;
+                          height = _yield$fetchEmbed.height;
+                          width = _yield$fetchEmbed.width;
+                          node.thumbnail = thumbnail;
+                          Object.assign(data.hProperties, {
+                            src: url,
+                            width: provider.width || width,
+                            height: provider.height || height,
+                            allowfullscreen: true,
+                            frameborder: '0'
+                          });
+                          _context2.next = 27;
+                          break;
 
-                          case 27:
-                            delete data.oembed;
-                            toVisit--;
-                            nextVisitOrBail();
+                        case 20:
+                          _context2.prev = 20;
+                          _context2.t0 = _context2["catch"](8);
+                          message = _context2.t0.message;
 
-                          case 30:
-                          case "end":
-                            return _context2.stop();
-                        }
+                          if (_context2.t0.name === 'AbortError') {
+                            message = "oEmbed URL timeout: ".concat(oembed.url);
+                          }
+
+                          vfile.message(message, node.position, oembed.url);
+                          node.data = {};
+                          Object.assign(node, fallback);
+
+                        case 27:
+                          delete data.oembed;
+                          toVisit--;
+                          nextVisitOrBail();
+
+                        case 30:
+                        case "end":
+                          return _context2.stop();
                       }
-                    }, _callee2, null, [[8, 20]]);
-                  }));
+                    }
+                  }, _callee2, null, [[8, 20]]);
+                }));
 
-                  return function (_x5) {
-                    return _ref2.apply(this, arguments);
-                  };
-                }());
+                return function (_x5) {
+                  return _ref2.apply(this, arguments);
+                };
+              }());
 
-              case 5:
-              case "end":
-                return _context3.stop();
-            }
+            case 5:
+            case "end":
+              return _context3.stop();
           }
-        }, _callee3);
-      }));
+        }
+      }, _callee3);
+    }));
 
-      function transform(_x, _x2, _x3) {
-        return _transform.apply(this, arguments);
-      }
+    function transform(_x, _x2, _x3) {
+      return _transform.apply(this, arguments);
+    }
 
-      return transform;
-    }()
-  );
+    return transform;
+  }();
 };
 
 function computeFinalUrl(provider, url) {
@@ -328,9 +319,7 @@ function fetchEmbed(_x6) {
 }
 
 function _fetchEmbed() {
-  _fetchEmbed = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee4(url) {
+  _fetchEmbed = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(url) {
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {

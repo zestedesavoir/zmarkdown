@@ -33,9 +33,7 @@ function newRootTree() {
   };
 }
 
-var Splitter =
-/*#__PURE__*/
-function () {
+var Splitter = /*#__PURE__*/function () {
   function Splitter() {
     var depth = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 

@@ -47,4 +47,8 @@ module.exports = {
     classes: 'custom-block-neutral',
     title:   'required',
   },
+  quizz: {
+    classes: 'custom-block-quizz',
+    title:   'required',
+  }
 }
