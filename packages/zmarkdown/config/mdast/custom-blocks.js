@@ -50,5 +50,5 @@ module.exports = {
   quizz: {
     classes: 'custom-block-quizz',
     title:   'required',
-  }
+  },
 }
