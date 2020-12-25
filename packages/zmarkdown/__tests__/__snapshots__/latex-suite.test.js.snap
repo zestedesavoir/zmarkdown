@@ -681,9 +681,9 @@ exports[`quizz with answers 1`] = `
 
 \\\\begin{Spoiler}[{{Correction}}]
 \\\\begin{itemize}
-\\\\item[$\\\\square$]]\\\\relax bad answer
-\\\\item[$\\\\boxtimes$]]\\\\relax good answer
-\\\\item[$\\\\square$]]\\\\relax other bad answer
+\\\\item[$\\\\square$]\\\\relax bad answer
+\\\\item[$\\\\boxtimes$]\\\\relax good answer
+\\\\item[$\\\\square$]\\\\relax other bad answer
 \\\\end{itemize}
 the good answer is \\"good answer\\" as it better matches the philosophy
 of what good is for answers

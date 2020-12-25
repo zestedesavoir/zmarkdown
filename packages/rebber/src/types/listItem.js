@@ -1,8 +1,8 @@
 const has = require('has')
 
 const defaultMacro = (innerText) => `\\item\\relax ${innerText}\n`
-const defaultCheckedMacro = (innerText) => `\\item[$\\boxtimes$]]\\relax ${innerText}\n`
-const defaultUncheckedMacro = (innerText) => `\\item[$\\square$]]\\relax ${innerText}\n`
+const defaultCheckedMacro = (innerText) => `\\item[$\\boxtimes$]\\relax ${innerText}\n`
+const defaultUncheckedMacro = (innerText) => `\\item[$\\square$]\\relax ${innerText}\n`
 
 module.exports = listItem
 

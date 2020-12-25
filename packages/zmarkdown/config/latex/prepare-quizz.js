@@ -1,10 +1,13 @@
+const clone = require('clone')
 const visit = require('unist-util-visit')
 
 module.exports = processQuizzFactory
-const clone = require('clone')
 function processQuizzFactory (ctx) {
   const correctionTitle = ctx.correctionTitle || 'Correction'
   return function quizzCustomBlockVisitor (node, index, parent) {
+    if (node.children.length < 2 || !node.children[0].children || !node.children[1].children) {
+      return
+    }
     node.type = 'neutralCustomBlock'
     const correction = clone(node)
     correction.type = 'sCustomBlock'

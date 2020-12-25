@@ -7,11 +7,11 @@ var defaultMacro = function defaultMacro(innerText) {
 };
 
 var defaultCheckedMacro = function defaultCheckedMacro(innerText) {
-  return "\\item[$\\boxtimes$]]\\relax ".concat(innerText, "\n");
+  return "\\item[$\\boxtimes$]\\relax ".concat(innerText, "\n");
 };
 
 var defaultUncheckedMacro = function defaultUncheckedMacro(innerText) {
-  return "\\item[$\\square$]]\\relax ".concat(innerText, "\n");
+  return "\\item[$\\square$]\\relax ".concat(innerText, "\n");
 };
 
 module.exports = listItem;
