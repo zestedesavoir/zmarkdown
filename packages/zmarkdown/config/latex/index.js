@@ -13,7 +13,7 @@ const rebberConfig = {
     ]),
 
     heading:          require('rebber-plugins/dist/preprocessors/headingVisitor'),
-    quizzCustomBlock: require('./prepare-quizz'),
+    quizzCustomBlock: require('rebber-plugins/dist/preprocessors/prepare-quizz'),
   },
   overrides: {
     abbr:        require('rebber-plugins/dist/type/abbr'),
