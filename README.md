@@ -8,6 +8,8 @@ This repository contains all the plugins for ZMarkdown, the Markdown engine powe
 It is a collection of packages extending the [**remark** processor][processor] and its [**MDAST**][mdast] syntax tree, [**rehype**][rehype] (for HTML processing) and [**textr**][textr] (text transformation framework).
 It also provides [**MDAST**][mdast] to LaTeX compilation via [**rebber**][rebber] (and its [plugins][rebber-plugins]).
 
+Currently, all the plugins provided only works for remark versions **lesser than** 15.0.0 (i.e. previous to [**micromark][micromark]). While we intend to switch to the new system, no due date has been planned, and it requires a significant amount of work, so please be patient, or, even better, help us making the switch!
+
 ## Install
 
 ### Prerequisites
@@ -17,24 +19,19 @@ It also provides [**MDAST**][mdast] to LaTeX compilation via [**rebber**][rebber
 
 ### Installation
 
-1. clone
+1. `git clone git@github.com:zestedesavoir/zmarkdown.git`
 1. `npm install`
 1. `npm run bootstrap`
 
-This project uses [Jest][jest] for testing. It is recommended to install the Jest CLI tools globally, and run Jest in watch mode when developing.
+This project uses [Jest][jest] for testing. It is recommended to use the locally installed version using `npx`, and run Jest in watch mode when developing `npx jest --watch --notify` (`--notify` sends desktop notifications when tests run).
 
-* `npm install -g jest`
-* `jest --watch --notify` (`--notify` sends desktop notifications when tests run)
+### Useful commands
 
-### Running the Tests
-
-* `npm run test`
-
-    This script tests all packages.
-
-* `npm run clean`
-
-    This script clears local dependencies, reinstalls the project and runs all tests.
+* `npm run test` : tests all packages.
+* `npm run clean` : clears local dependencies, reinstalls the project and runs all tests.
+* `npm run lint` : runs [eslint][eslint] to check the syntax of the full codebase.
+* `npm run build` : build all the packages using [babel][babel].
+* `npm run build -- --scope=<package>` : same as above, but builds only `<package>`.
 
 ## Packages
 
@@ -130,28 +127,22 @@ This project uses [Jest][jest] for testing. It is recommended to install the Jes
 <!-- Definitions -->
 
 [build-badge]: https://travis-ci.com/zestedesavoir/zmarkdown.svg?branch=master
-
 [build-status]: https://travis-ci.com/zestedesavoir/zmarkdown
-
 [coverage-badge]: https://coveralls.io/repos/github/zestedesavoir/zmarkdown/badge.svg?branch=master
 
 [coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown?branch=master
-
 [license]: https://github.com/zestedesavoir/zmarkdown/blob/master/LICENSE-MIT
 
 [processor]: https://github.com/remarkjs/remark/blob/master/packages/remark
-
 [mdast]: https://github.com/wooorm/mdast
-
+[micromark]: https://github.com/micromark/micromark
 [pyzmd]: https://github.com/zestedesavoir/Python-ZMarkdown
-
 [zds]: https://zestedesavoir.com
-
 [rehype]: https://github.com/rehypejs/rehype
-
 [textr]: https://github.com/A/textr
-
 [jest]: https://facebook.github.io/jest/
+[eslint]: https://github.com/eslint/eslint
+[babel]: https://github.com/babel/babel
 
 [mdast-util-split-by-heading]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/mdast-util-split-by-heading#mdast-util-split-by-heading--
 [rebber]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rebber#rebber--
