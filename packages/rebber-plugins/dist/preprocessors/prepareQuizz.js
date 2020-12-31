@@ -8,7 +8,7 @@ module.exports = processQuizzFactory;
 
 function processQuizzFactory(ctx) {
   var correctionTitle = ctx.correctionTitle || 'Correction';
-  return function quizzCustomBlockVisitor(node, index, parent) {
+  return function (node, index, parent) {
     if (node.children.length < 2 || !node.children[0].children || !node.children[1].children) {
       return;
     }
