@@ -6681,14 +6681,14 @@ exports[`rebber: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item\\\\relax 
-\\\\item\\\\relax 
+\\\\item[$\\\\square$]\\\\relax 
+\\\\item[$\\\\square$]\\\\relax 
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax 
-\\\\item\\\\relax 
+\\\\item[$\\\\boxtimes$]\\\\relax 
+\\\\item[$\\\\boxtimes$]\\\\relax 
 \\\\end{enumerate}
 
 
@@ -6696,14 +6696,14 @@ exports[`rebber: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item\\\\relax 
-\\\\item\\\\relax 
+\\\\item[$\\\\square$]\\\\relax 
+\\\\item[$\\\\square$]\\\\relax 
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax 
-\\\\item\\\\relax 
+\\\\item[$\\\\boxtimes$]\\\\relax 
+\\\\item[$\\\\boxtimes$]\\\\relax 
 \\\\end{enumerate}
 
 
@@ -6726,14 +6726,14 @@ exports[`rebber: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item\\\\relax Hello;
-\\\\item\\\\relax World;
+\\\\item[$\\\\square$]\\\\relax Hello;
+\\\\item[$\\\\square$]\\\\relax World;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax Foo.
-\\\\item\\\\relax World :D
+\\\\item[$\\\\boxtimes$]\\\\relax Foo.
+\\\\item[$\\\\boxtimes$]\\\\relax World :D
 \\\\end{enumerate}
 
 
@@ -6741,14 +6741,14 @@ exports[`rebber: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item\\\\relax Hello;
-\\\\item\\\\relax World;
+\\\\item[$\\\\square$]\\\\relax Hello;
+\\\\item[$\\\\square$]\\\\relax World;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax Foo.
-\\\\item\\\\relax Hello.
+\\\\item[$\\\\boxtimes$]\\\\relax Foo.
+\\\\item[$\\\\boxtimes$]\\\\relax Hello.
 \\\\end{enumerate}
 
 
@@ -6756,18 +6756,18 @@ exports[`rebber: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\square$]\\\\relax \\\\begin{CodeBlock}{text}
 Hello;
 \\\\end{CodeBlock}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\square$]\\\\relax \\\\begin{CodeBlock}{text}
 World;
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax Foo.
-\\\\item\\\\relax Bar.
+\\\\item[$\\\\boxtimes$]\\\\relax Foo.
+\\\\item[$\\\\boxtimes$]\\\\relax Bar.
 \\\\end{enumerate}
 
 
@@ -6775,20 +6775,20 @@ World;
 
 
 \\\\begin{itemize}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\square$]\\\\relax \\\\begin{CodeBlock}{text}
 Hello;
 \\\\end{CodeBlock}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\square$]\\\\relax \\\\begin{CodeBlock}{text}
 World;
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\boxtimes$]\\\\relax \\\\begin{CodeBlock}{text}
 Foo.
 \\\\end{CodeBlock}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\boxtimes$]\\\\relax \\\\begin{CodeBlock}{text}
 Bar.
 \\\\end{CodeBlock}
 \\\\end{enumerate}
@@ -6798,29 +6798,29 @@ Bar.
 
 
 \\\\begin{itemize}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\square$]\\\\relax \\\\begin{CodeBlock}{text}
     Hello;
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\boxtimes$]\\\\relax \\\\begin{CodeBlock}{text}
 World;
 \\\\end{CodeBlock}
 \\\\end{enumerate}
 
 
 \\\\begin{itemize}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\square$]\\\\relax \\\\begin{CodeBlock}{text}
 	Hello;
 \\\\end{CodeBlock}
-\\\\item\\\\relax World.
+\\\\item[$\\\\square$]\\\\relax World.
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax Bar.
+\\\\item[$\\\\boxtimes$]\\\\relax Bar.
 \\\\end{enumerate}
 
 
@@ -6857,56 +6857,56 @@ World;
 
 exports[`rebber: remark specs task-list-ordered: task-list-ordered 1`] = `
 "\\\\begin{enumerate}
-\\\\item\\\\relax Mercury;
+\\\\item[$\\\\square$]\\\\relax Mercury;
 \\\\item\\\\relax [] Venus (this one’s invalid);
-\\\\item\\\\relax Earth:
+\\\\item[$\\\\boxtimes$]\\\\relax Earth:
 
 \\\\begin{enumerate}
-\\\\item\\\\relax Moon.
+\\\\item[$\\\\boxtimes$]\\\\relax Moon.
 \\\\end{enumerate}
-\\\\item\\\\relax Mars;
+\\\\item[$\\\\square$]\\\\relax Mars;
 \\\\item\\\\relax [] Neptune (this one’s also invalid).
 \\\\end{enumerate}"
 `;
 
 exports[`rebber: remark specs task-list-unordered-asterisk: task-list-unordered-asterisk 1`] = `
 "\\\\begin{itemize}
-\\\\item\\\\relax Mercury;
+\\\\item[$\\\\square$]\\\\relax Mercury;
 \\\\item\\\\relax [] Venus (this one’s invalid);
-\\\\item\\\\relax Earth:
+\\\\item[$\\\\boxtimes$]\\\\relax Earth:
 
 \\\\begin{itemize}
-\\\\item\\\\relax Moon.
+\\\\item[$\\\\boxtimes$]\\\\relax Moon.
 \\\\end{itemize}
-\\\\item\\\\relax Mars;
+\\\\item[$\\\\square$]\\\\relax Mars;
 \\\\item\\\\relax [] Neptune (this one’s also invalid).
 \\\\end{itemize}"
 `;
 
 exports[`rebber: remark specs task-list-unordered-dash: task-list-unordered-dash 1`] = `
 "\\\\begin{itemize}
-\\\\item\\\\relax Mercury;
+\\\\item[$\\\\square$]\\\\relax Mercury;
 \\\\item\\\\relax [] Venus (this one’s invalid);
-\\\\item\\\\relax Earth:
+\\\\item[$\\\\boxtimes$]\\\\relax Earth:
 
 \\\\begin{itemize}
-\\\\item\\\\relax Moon.
+\\\\item[$\\\\boxtimes$]\\\\relax Moon.
 \\\\end{itemize}
-\\\\item\\\\relax Mars;
+\\\\item[$\\\\square$]\\\\relax Mars;
 \\\\item\\\\relax [] Neptune (this one’s also invalid).
 \\\\end{itemize}"
 `;
 
 exports[`rebber: remark specs task-list-unordered-plus: task-list-unordered-plus 1`] = `
 "\\\\begin{itemize}
-\\\\item\\\\relax Mercury;
+\\\\item[$\\\\square$]\\\\relax Mercury;
 \\\\item\\\\relax [] Venus (this one’s invalid);
-\\\\item\\\\relax Earth:
+\\\\item[$\\\\boxtimes$]\\\\relax Earth:
 
 \\\\begin{itemize}
-\\\\item\\\\relax Moon.
+\\\\item[$\\\\boxtimes$]\\\\relax Moon.
 \\\\end{itemize}
-\\\\item\\\\relax Mars;
+\\\\item[$\\\\square$]\\\\relax Mars;
 \\\\item\\\\relax [] Neptune (this one’s also invalid).
 \\\\end{itemize}"
 `;
@@ -12476,15 +12476,23 @@ exports[`rebber: remark specs with config: custom macros task-list 1`] = `
 
 heading1(Single space)
 
-[unorderedList([listItem()][listItem()])]
+[unorderedList(\\\\item[$\\\\square$]\\\\relax 
+\\\\item[$\\\\square$]\\\\relax 
+)]
 
-[orderedList([listItem()][listItem()])]
+[orderedList(\\\\item[$\\\\boxtimes$]\\\\relax 
+\\\\item[$\\\\boxtimes$]\\\\relax 
+)]
 
 heading1(Tab)
 
-[unorderedList([listItem()][listItem()])]
+[unorderedList(\\\\item[$\\\\square$]\\\\relax 
+\\\\item[$\\\\square$]\\\\relax 
+)]
 
-[orderedList([listItem()][listItem()])]
+[orderedList(\\\\item[$\\\\boxtimes$]\\\\relax 
+\\\\item[$\\\\boxtimes$]\\\\relax 
+)]
 
 heading1(No white space with content)
 
@@ -12494,37 +12502,58 @@ heading1(No white space with content)
 
 heading1(Single space with content)
 
-[unorderedList([listItem(Hello;)][listItem(World;)])]
+[unorderedList(\\\\item[$\\\\square$]\\\\relax Hello;
+\\\\item[$\\\\square$]\\\\relax World;
+)]
 
-[orderedList([listItem(Foo.)][listItem(World :D)])]
+[orderedList(\\\\item[$\\\\boxtimes$]\\\\relax Foo.
+\\\\item[$\\\\boxtimes$]\\\\relax World :D
+)]
 
 heading1(Single tab with content)
 
-[unorderedList([listItem(Hello;)][listItem(World;)])]
+[unorderedList(\\\\item[$\\\\square$]\\\\relax Hello;
+\\\\item[$\\\\square$]\\\\relax World;
+)]
 
-[orderedList([listItem(Foo.)][listItem(Hello.)])]
+[orderedList(\\\\item[$\\\\boxtimes$]\\\\relax Foo.
+\\\\item[$\\\\boxtimes$]\\\\relax Hello.
+)]
 
 heading1(Multiple spaces with content)
 
-[unorderedList([listItem([code(Hello;)])][listItem([code(World;)])])]
+[unorderedList(\\\\item[$\\\\square$]\\\\relax [code(Hello;)]
+\\\\item[$\\\\square$]\\\\relax [code(World;)]
+)]
 
-[orderedList([listItem(Foo.)][listItem(Bar.)])]
+[orderedList(\\\\item[$\\\\boxtimes$]\\\\relax Foo.
+\\\\item[$\\\\boxtimes$]\\\\relax Bar.
+)]
 
 heading1(Multiple tabs with content)
 
-[unorderedList([listItem([code(Hello;)])][listItem([code(World;)])])]
+[unorderedList(\\\\item[$\\\\square$]\\\\relax [code(Hello;)]
+\\\\item[$\\\\square$]\\\\relax [code(World;)]
+)]
 
-[orderedList([listItem([code(Foo.)])][listItem([code(Bar.)])])]
+[orderedList(\\\\item[$\\\\boxtimes$]\\\\relax [code(Foo.)]
+\\\\item[$\\\\boxtimes$]\\\\relax [code(Bar.)]
+)]
 
 heading1(Mixed tabs and spaces)
 
-[unorderedList([listItem([code(    Hello;)])])]
+[unorderedList(\\\\item[$\\\\square$]\\\\relax [code(    Hello;)]
+)]
 
-[orderedList([listItem([code(World;)])])]
+[orderedList(\\\\item[$\\\\boxtimes$]\\\\relax [code(World;)]
+)]
 
-[unorderedList([listItem([code(	Hello;)])][listItem(World.)])]
+[unorderedList(\\\\item[$\\\\square$]\\\\relax [code(	Hello;)]
+\\\\item[$\\\\square$]\\\\relax World.
+)]
 
-[orderedList([listItem(Bar.)])]
+[orderedList(\\\\item[$\\\\boxtimes$]\\\\relax Bar.
+)]
 
 heading1(Line breaks)
 
@@ -12543,27 +12572,43 @@ heading1(Multiple unfinished characters)
 `;
 
 exports[`rebber: remark specs with config: custom macros task-list-ordered 1`] = `
-"[orderedList([listItem(Mercury;)][listItem([] Venus (this one’s invalid);)][listItem(Earth:
+"[orderedList(\\\\item[$\\\\square$]\\\\relax Mercury;
+[listItem([] Venus (this one’s invalid);)]\\\\item[$\\\\boxtimes$]\\\\relax Earth:
 
-[orderedList([listItem(Moon.)])])][listItem(Mars;)][listItem([] Neptune (this one’s also invalid).)])]"
+[orderedList(\\\\item[$\\\\boxtimes$]\\\\relax Moon.
+)]
+\\\\item[$\\\\square$]\\\\relax Mars;
+[listItem([] Neptune (this one’s also invalid).)])]"
 `;
 
 exports[`rebber: remark specs with config: custom macros task-list-unordered-asterisk 1`] = `
-"[unorderedList([listItem(Mercury;)][listItem([] Venus (this one’s invalid);)][listItem(Earth:
+"[unorderedList(\\\\item[$\\\\square$]\\\\relax Mercury;
+[listItem([] Venus (this one’s invalid);)]\\\\item[$\\\\boxtimes$]\\\\relax Earth:
 
-[unorderedList([listItem(Moon.)])])][listItem(Mars;)][listItem([] Neptune (this one’s also invalid).)])]"
+[unorderedList(\\\\item[$\\\\boxtimes$]\\\\relax Moon.
+)]
+\\\\item[$\\\\square$]\\\\relax Mars;
+[listItem([] Neptune (this one’s also invalid).)])]"
 `;
 
 exports[`rebber: remark specs with config: custom macros task-list-unordered-dash 1`] = `
-"[unorderedList([listItem(Mercury;)][listItem([] Venus (this one’s invalid);)][listItem(Earth:
+"[unorderedList(\\\\item[$\\\\square$]\\\\relax Mercury;
+[listItem([] Venus (this one’s invalid);)]\\\\item[$\\\\boxtimes$]\\\\relax Earth:
 
-[unorderedList([listItem(Moon.)])])][listItem(Mars;)][listItem([] Neptune (this one’s also invalid).)])]"
+[unorderedList(\\\\item[$\\\\boxtimes$]\\\\relax Moon.
+)]
+\\\\item[$\\\\square$]\\\\relax Mars;
+[listItem([] Neptune (this one’s also invalid).)])]"
 `;
 
 exports[`rebber: remark specs with config: custom macros task-list-unordered-plus 1`] = `
-"[unorderedList([listItem(Mercury;)][listItem([] Venus (this one’s invalid);)][listItem(Earth:
+"[unorderedList(\\\\item[$\\\\square$]\\\\relax Mercury;
+[listItem([] Venus (this one’s invalid);)]\\\\item[$\\\\boxtimes$]\\\\relax Earth:
 
-[unorderedList([listItem(Moon.)])])][listItem(Mars;)][listItem([] Neptune (this one’s also invalid).)])]"
+[unorderedList(\\\\item[$\\\\boxtimes$]\\\\relax Moon.
+)]
+\\\\item[$\\\\square$]\\\\relax Mars;
+[listItem([] Neptune (this one’s also invalid).)])]"
 `;
 
 exports[`rebber: remark specs with config: custom macros tidyness 1`] = `
@@ -19755,14 +19800,14 @@ exports[`toLaTeX: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item\\\\relax 
-\\\\item\\\\relax 
+\\\\item[$\\\\square$]\\\\relax 
+\\\\item[$\\\\square$]\\\\relax 
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax 
-\\\\item\\\\relax 
+\\\\item[$\\\\boxtimes$]\\\\relax 
+\\\\item[$\\\\boxtimes$]\\\\relax 
 \\\\end{enumerate}
 
 
@@ -19770,14 +19815,14 @@ exports[`toLaTeX: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item\\\\relax 
-\\\\item\\\\relax 
+\\\\item[$\\\\square$]\\\\relax 
+\\\\item[$\\\\square$]\\\\relax 
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax 
-\\\\item\\\\relax 
+\\\\item[$\\\\boxtimes$]\\\\relax 
+\\\\item[$\\\\boxtimes$]\\\\relax 
 \\\\end{enumerate}
 
 
@@ -19800,14 +19845,14 @@ exports[`toLaTeX: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item\\\\relax Hello;
-\\\\item\\\\relax World;
+\\\\item[$\\\\square$]\\\\relax Hello;
+\\\\item[$\\\\square$]\\\\relax World;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax Foo.
-\\\\item\\\\relax World :D
+\\\\item[$\\\\boxtimes$]\\\\relax Foo.
+\\\\item[$\\\\boxtimes$]\\\\relax World :D
 \\\\end{enumerate}
 
 
@@ -19815,14 +19860,14 @@ exports[`toLaTeX: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item\\\\relax Hello;
-\\\\item\\\\relax World;
+\\\\item[$\\\\square$]\\\\relax Hello;
+\\\\item[$\\\\square$]\\\\relax World;
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax Foo.
-\\\\item\\\\relax Hello.
+\\\\item[$\\\\boxtimes$]\\\\relax Foo.
+\\\\item[$\\\\boxtimes$]\\\\relax Hello.
 \\\\end{enumerate}
 
 
@@ -19830,18 +19875,18 @@ exports[`toLaTeX: remark specs task-list: task-list 1`] = `
 
 
 \\\\begin{itemize}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\square$]\\\\relax \\\\begin{CodeBlock}{text}
 Hello;
 \\\\end{CodeBlock}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\square$]\\\\relax \\\\begin{CodeBlock}{text}
 World;
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax Foo.
-\\\\item\\\\relax Bar.
+\\\\item[$\\\\boxtimes$]\\\\relax Foo.
+\\\\item[$\\\\boxtimes$]\\\\relax Bar.
 \\\\end{enumerate}
 
 
@@ -19849,20 +19894,20 @@ World;
 
 
 \\\\begin{itemize}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\square$]\\\\relax \\\\begin{CodeBlock}{text}
 Hello;
 \\\\end{CodeBlock}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\square$]\\\\relax \\\\begin{CodeBlock}{text}
 World;
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\boxtimes$]\\\\relax \\\\begin{CodeBlock}{text}
 Foo.
 \\\\end{CodeBlock}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\boxtimes$]\\\\relax \\\\begin{CodeBlock}{text}
 Bar.
 \\\\end{CodeBlock}
 \\\\end{enumerate}
@@ -19872,29 +19917,29 @@ Bar.
 
 
 \\\\begin{itemize}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\square$]\\\\relax \\\\begin{CodeBlock}{text}
     Hello;
 \\\\end{CodeBlock}
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\boxtimes$]\\\\relax \\\\begin{CodeBlock}{text}
 World;
 \\\\end{CodeBlock}
 \\\\end{enumerate}
 
 
 \\\\begin{itemize}
-\\\\item\\\\relax \\\\begin{CodeBlock}{text}
+\\\\item[$\\\\square$]\\\\relax \\\\begin{CodeBlock}{text}
 	Hello;
 \\\\end{CodeBlock}
-\\\\item\\\\relax World.
+\\\\item[$\\\\square$]\\\\relax World.
 \\\\end{itemize}
 
 
 \\\\begin{enumerate}
-\\\\item\\\\relax Bar.
+\\\\item[$\\\\boxtimes$]\\\\relax Bar.
 \\\\end{enumerate}
 
 
@@ -19932,14 +19977,14 @@ World;
 
 exports[`toLaTeX: remark specs task-list-ordered: task-list-ordered 1`] = `
 "\\\\begin{enumerate}
-\\\\item\\\\relax Mercury;
+\\\\item[$\\\\square$]\\\\relax Mercury;
 \\\\item\\\\relax [] Venus (this one’s invalid);
-\\\\item\\\\relax Earth:
+\\\\item[$\\\\boxtimes$]\\\\relax Earth:
 
 \\\\begin{enumerate}
-\\\\item\\\\relax Moon.
+\\\\item[$\\\\boxtimes$]\\\\relax Moon.
 \\\\end{enumerate}
-\\\\item\\\\relax Mars;
+\\\\item[$\\\\square$]\\\\relax Mars;
 \\\\item\\\\relax [] Neptune (this one’s also invalid).
 \\\\end{enumerate}
 "
@@ -19947,14 +19992,14 @@ exports[`toLaTeX: remark specs task-list-ordered: task-list-ordered 1`] = `
 
 exports[`toLaTeX: remark specs task-list-unordered-asterisk: task-list-unordered-asterisk 1`] = `
 "\\\\begin{itemize}
-\\\\item\\\\relax Mercury;
+\\\\item[$\\\\square$]\\\\relax Mercury;
 \\\\item\\\\relax [] Venus (this one’s invalid);
-\\\\item\\\\relax Earth:
+\\\\item[$\\\\boxtimes$]\\\\relax Earth:
 
 \\\\begin{itemize}
-\\\\item\\\\relax Moon.
+\\\\item[$\\\\boxtimes$]\\\\relax Moon.
 \\\\end{itemize}
-\\\\item\\\\relax Mars;
+\\\\item[$\\\\square$]\\\\relax Mars;
 \\\\item\\\\relax [] Neptune (this one’s also invalid).
 \\\\end{itemize}
 "
@@ -19962,14 +20007,14 @@ exports[`toLaTeX: remark specs task-list-unordered-asterisk: task-list-unordered
 
 exports[`toLaTeX: remark specs task-list-unordered-dash: task-list-unordered-dash 1`] = `
 "\\\\begin{itemize}
-\\\\item\\\\relax Mercury;
+\\\\item[$\\\\square$]\\\\relax Mercury;
 \\\\item\\\\relax [] Venus (this one’s invalid);
-\\\\item\\\\relax Earth:
+\\\\item[$\\\\boxtimes$]\\\\relax Earth:
 
 \\\\begin{itemize}
-\\\\item\\\\relax Moon.
+\\\\item[$\\\\boxtimes$]\\\\relax Moon.
 \\\\end{itemize}
-\\\\item\\\\relax Mars;
+\\\\item[$\\\\square$]\\\\relax Mars;
 \\\\item\\\\relax [] Neptune (this one’s also invalid).
 \\\\end{itemize}
 "
@@ -19977,14 +20022,14 @@ exports[`toLaTeX: remark specs task-list-unordered-dash: task-list-unordered-das
 
 exports[`toLaTeX: remark specs task-list-unordered-plus: task-list-unordered-plus 1`] = `
 "\\\\begin{itemize}
-\\\\item\\\\relax Mercury;
+\\\\item[$\\\\square$]\\\\relax Mercury;
 \\\\item\\\\relax [] Venus (this one’s invalid);
-\\\\item\\\\relax Earth:
+\\\\item[$\\\\boxtimes$]\\\\relax Earth:
 
 \\\\begin{itemize}
-\\\\item\\\\relax Moon.
+\\\\item[$\\\\boxtimes$]\\\\relax Moon.
 \\\\end{itemize}
-\\\\item\\\\relax Mars;
+\\\\item[$\\\\square$]\\\\relax Mars;
 \\\\item\\\\relax [] Neptune (this one’s also invalid).
 \\\\end{itemize}
 "

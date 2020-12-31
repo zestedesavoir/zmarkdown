@@ -11,7 +11,9 @@ const rebberConfig = {
       'sCustomBlock',
       'secretCustomBlock',
     ]),
-    heading: require('rebber-plugins/dist/preprocessors/headingVisitor'),
+
+    heading:          require('rebber-plugins/dist/preprocessors/headingVisitor'),
+    quizzCustomBlock: require('rebber-plugins/dist/preprocessors/prepare-quizz'),
   },
   overrides: {
     abbr:        require('rebber-plugins/dist/type/abbr'),
