@@ -208,3 +208,21 @@ test('unknown tokenizer', () => {
 
   expect(contents).toMatchSnapshot()
 })
+
+test('regression: actually turn off the tokenizer #412', () => {
+  const {contents} = unified()
+    .use(reParse)
+    .use(plugin, {
+      block: [
+        ['html'],
+      ],
+      inline: [
+        ['html'],
+      ],
+    })
+    .use(remark2rehype)
+    .use(stringify)
+    .processSync(`hello\nworld`)
+
+  expect(contents).toMatchSnapshot()
+})
