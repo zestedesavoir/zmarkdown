@@ -62,6 +62,7 @@ const rebberConfig = {
   },
   codeAppendiceTitle:          'Annexes',
   appendiceReferenceGenerator: (appendixIndex) => `Annexe de code ${appendixIndex}`,
+  code:                        require('../../utils/latex-code'),
   customBlocks:                {
     map: {
       error:       'Error',
@@ -80,7 +81,7 @@ const rebberConfig = {
     image:       (node) => `\\image{${node.url}}`,
   },
   figure: {
-    image: (_, caption, extra) => `\\image{${extra.url}}${caption ? `[${caption}]` : ''}\n`,
+    image: (_1, _2, caption, extra) => `\\image{${extra.url}}${caption ? `[${caption}]` : ''}\n`,
   },
   headings: [
     (val) => `\\levelOneTitle{${val}}\n`,
