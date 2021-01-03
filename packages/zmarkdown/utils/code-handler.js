@@ -1,7 +1,5 @@
 module.exports = code
 
-const attrsParser = require('md-attr-parser')
-
 const codeNodeConstructor = (lang, value) => {
   // no properties, except if a langage is specified
   // remark-highlight takes care of adding the right coloration
@@ -55,66 +53,39 @@ const lineNumberElemConstructor = (count, hl) => {
 
 // Parse ranges for hl_lines
 const rangeHandler = range => {
-  const parsedRange = []
+  const fullRange = []
 
-  let previousNumber = -1
-  let currentNumber = ''
+  for (const bit of range.split(' ')) {
+    if (bit.match('-')) {
+      const [rangeStart, rangeStop] = bit.split('-')
 
-  // Insert a number or range in the list
-  function insert () {
-    if (previousNumber >= 0) {
-      const currentInt = parseInt(currentNumber)
-      const previousInt = parseInt(previousNumber)
-
-      const minLineNumber = Math.min(currentInt, previousInt)
-      const maxLineNumber = Math.max(currentInt, previousInt)
+      const minLineNumber = parseInt(rangeStart)
+      const maxLineNumber = parseInt(rangeStop)
 
       const rangeLength = (maxLineNumber - minLineNumber) + 1
 
-      parsedRange.push(...[...Array(rangeLength).keys()]
+      fullRange.push(...[...Array(rangeLength).keys()]
         .map(i => i + minLineNumber))
     } else {
-      parsedRange.push(parseInt(currentNumber))
+      fullRange.push(parseInt(bit))
     }
   }
 
-  for (let charIndex = 0; charIndex < range.length; charIndex++) {
-    const currentChar = range[charIndex]
-    const currentCharCode = range.charCodeAt(charIndex)
-
-    // Match 0-9
-    if (currentCharCode >= 48 && currentCharCode <= 57) {
-      currentNumber += currentChar
-    } else if (currentChar === '-') {
-      previousNumber = parseInt(currentNumber)
-      currentNumber = ''
-    } else if (currentChar === ' ' || currentChar === ',') {
-      insert()
-
-      previousNumber = -1
-      currentNumber = ''
-    }
-  }
-
-  // Parse the last property if any
-  if (currentNumber) insert()
-
-  return parsedRange
+  return fullRange
 }
 
 function code (_, node) {
   const value = node.value ? `${node.value}\n` : ''
   const lang = node.lang && node.lang.match(/^[^ \t]+(?=[ \t]|$)/)
-  const attrs = attrsParser(node.meta || '').prop
+  const attrs = node.meta
 
-  const linenostart = parseInt(attrs.linenostart) || 1
-  const hlLines = rangeHandler(attrs.hl_lines || '')
+  const hlLines = rangeHandler(attrs.hlLines)
 
   const lineNumberElems = value
     .split('\n')
     .slice(0, -1)
     .map((_, i) => {
-      const realLn = i + linenostart
+      const realLn = i + attrs.linenostart
       return lineNumberElemConstructor(realLn, hlLines.includes(realLn))
     })
 
