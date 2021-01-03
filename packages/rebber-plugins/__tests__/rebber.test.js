@@ -74,7 +74,7 @@ const integrationConfig = {
     image: (node) => `\\image{${node.url}}`,
   },
   figure: {
-    image: (_, caption, extra) => `\\image{${extra.url}}${caption ? `[${caption}]` : ''}\n`,
+    image: (_1, _2, caption, extra) => `\\image{${extra.url}}${caption ? `[${caption}]` : ''}\n`,
   },
 }
 
