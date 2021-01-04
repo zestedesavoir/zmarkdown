@@ -3,7 +3,11 @@
 var clone = require('clone');
 
 var noop = function noop() {
-  return true;
+  return false;
+};
+
+var noopLocator = function noopLocator() {
+  return -1;
 };
 
 var throwing = function throwing(msg) {
@@ -61,6 +65,7 @@ function plugin() {
       }
 
       _this.Parser.prototype.inlineTokenizers[tokenizerName] = replacer;
+      _this.Parser.prototype.inlineTokenizers[tokenizerName].locator = noopLocator;
     });
   }
 }

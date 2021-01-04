@@ -1,6 +1,7 @@
 const clone = require('clone')
 
-const noop = () => true
+const noop = () => false
+const noopLocator = () => -1
 
 const throwing = (msg) =>
   () => {
@@ -47,6 +48,7 @@ function plugin ({block = [], inline = []} = {}) {
             })
         }
         this.Parser.prototype.inlineTokenizers[tokenizerName] = replacer
+        this.Parser.prototype.inlineTokenizers[tokenizerName].locator = noopLocator
       })
   }
 }
