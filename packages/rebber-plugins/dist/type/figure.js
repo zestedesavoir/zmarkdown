@@ -5,7 +5,7 @@ var all = require('rebber/dist/all');
 
 var one = require('rebber/dist/one');
 
-var codeStringifier = require('rebber/dist/types/code').macro;
+var defaultCodeStringifier = require('rebber/dist/types/code').macro;
 
 var has = require('has');
 /* Expose. */
@@ -13,16 +13,17 @@ var has = require('has');
 
 module.exports = figure;
 var defaultMacros = {
-  blockquote: function blockquote(innerText) {
-    var caption = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Anonymous';
+  blockquote: function blockquote(_, innerText) {
+    var caption = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'Anonymous';
     return "\\begin{Quotation}[".concat(caption, "]\n").concat(innerText, "\n\\end{Quotation}\n\n");
   },
-  code: function code(_code, caption, extra) {
-    // Remove the two last line feed
+  code: function code(ctx, _code, caption, extra) {
+    var codeStringifier = has(ctx, 'code') && ctx.code || defaultCodeStringifier; // Remove the two last line feed
+
     var rebberCode = codeStringifier(_code, extra.language, extra.others).slice(0, -2);
     return "".concat(rebberCode, "\n\\captionof{listing}{").concat(caption, "}\n\n");
   },
-  image: function image(_, caption, extra) {
+  image: function image(_1, _2, caption, extra) {
     return "\\begin{center}\n" + "\\includegraphics".concat(extra.width ? "[".concat(extra.width, "]") : '', "{").concat(extra.url, "}\n") + "\\captionof{figure}{".concat(caption, "}\n") + "\\end{center}\n";
   }
 };
@@ -75,5 +76,5 @@ function figure(ctx, node, index, parent) {
 
   var extra = has(makeExtra, type) ? makeExtra[type](wrappedNode) : undefined;
   var innerText = all(ctx, node) || node.value || '';
-  return macro(innerText.trim(), caption, extra);
+  return macro(ctx, innerText.trim(), caption, extra);
 }

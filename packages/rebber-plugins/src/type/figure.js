@@ -1,21 +1,23 @@
 /* Dependencies. */
 const all = require('rebber/dist/all')
 const one = require('rebber/dist/one')
-const codeStringifier = require('rebber/dist/types/code').macro
+const defaultCodeStringifier = require('rebber/dist/types/code').macro
 const has = require('has')
 
 /* Expose. */
 module.exports = figure
 
 const defaultMacros = {
-  blockquote: (innerText, caption = 'Anonymous') =>
+  blockquote: (_, innerText, caption = 'Anonymous') =>
     `\\begin{Quotation}[${caption}]\n${innerText}\n\\end{Quotation}\n\n`,
-  code: (code, caption, extra) => {
+  code: (ctx, code, caption, extra) => {
+    const codeStringifier = (has(ctx, 'code') && ctx.code) || defaultCodeStringifier
+
     // Remove the two last line feed
     const rebberCode = codeStringifier(code, extra.language, extra.others).slice(0, -2)
     return `${rebberCode}\n\\captionof{listing}{${caption}}\n\n`
   },
-  image: (_, caption, extra) =>
+  image: (_1, _2, caption, extra) =>
     `\\begin{center}\n` +
     `\\includegraphics${extra.width ? `[${extra.width}]` : ''}{${extra.url}}\n` +
     `\\captionof{figure}{${caption}}\n` +
@@ -64,5 +66,5 @@ function figure (ctx, node, index, parent) {
   const extra = has(makeExtra, type) ? makeExtra[type](wrappedNode) : undefined
   const innerText = all(ctx, node) || node.value || ''
 
-  return macro(innerText.trim(), caption, extra)
+  return macro(ctx, innerText.trim(), caption, extra)
 }

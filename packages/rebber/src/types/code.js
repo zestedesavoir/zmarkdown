@@ -1,80 +1,17 @@
 /* Expose. */
 module.exports = code
 
-const codeBlockParamsMapping = [
-  null,
-  'hl_lines=',
-  'linenostart=',
-]
-
-const defaultMacro = (content, lang, attrs) => {
+const defaultMacro = (content, lang) => {
   // Default language is "text"
   if (!lang) lang = 'text'
 
-  // Create a list of attributes to be serialized
-  const localCodeBlockParams = Array(codeBlockParamsMapping.length).fill('')
-
-  // Check for attributes and enumerate them
-  if (attrs !== null) {
-    for (let i = 0; i < codeBlockParamsMapping.length; i++) {
-      const param = codeBlockParamsMapping[i]
-      // Skip unwanted parameters
-      if (param === null) continue
-      const location = attrs.indexOf(param)
-
-      // Parse the attributes we know
-      if (location > -1) {
-        const begin = location + param.length
-        const remaining = attrs.slice(begin)
-        const length = remaining.indexOf(' ')
-        let value = length > -1 ? attrs.slice(begin, begin + length) : remaining
-
-        // Remove string-delimiters
-        if (
-          (value.startsWith('"') && value.endsWith('"')) ||
-          (value.startsWith("'") && value.endsWith("'"))
-        ) {
-          value = value.slice(1, -1).trim()
-        }
-
-        // For hl_lines, we parse the parameters to ensure we don't have
-        // inverted ranges.
-        if (param === 'hl_lines=') {
-          const hlItems = value.split(/,| /)
-
-          for (const [i, item] of hlItems.entries()) {
-            if (!item.includes('-')) {
-              continue
-            }
-
-            const n = item.split('-').map(n => parseInt(n)).filter(n => !isNaN(n))
-            if (n.length !== 2) {
-              continue
-            }
-
-            hlItems[i] = `${Math.min(n[0], n[1])}-${Math.max(n[0], n[1])}`
-          }
-
-          value = hlItems.join(',')
-        }
-
-        localCodeBlockParams[i] = value
-      }
-    }
-  }
-
-  // If we matched something, return optional arguments
-  // Note that we do stop serialization on a chain of empty arguments
-  const matched = localCodeBlockParams.reduce((a, v, i) => v !== '' ? i : a, -1) + 1
-  const param = matched > 0 ? `[${localCodeBlockParams.slice(0, matched).join('][')}]` : ''
-
-  return `\\begin{CodeBlock}${param}{${lang}}\n${content}\n\\end{CodeBlock}\n\n`
+  return `\\begin{CodeBlock}{${lang}}\n${content}\n\\end{CodeBlock}\n\n`
 }
 
 /* Stringify a code `node`. */
 function code (ctx, node) {
   const macro = ctx.code || defaultMacro
-  return `${macro(node.value, node.lang, node.meta, node)}`
+  return `${macro(node.value, node.lang, node.meta)}`
 }
 
 code.macro = defaultMacro

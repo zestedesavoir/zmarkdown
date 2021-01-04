@@ -51,6 +51,38 @@ print('bla')
 
 
 
+\\\\begin{CodeBlock}[][][10]{python}
+print('bla')
+print('bla')
+print('bla')
+\\\\end{CodeBlock}
+
+
+
+\\\\begin{CodeBlock}[][1,2][10]{python}
+print('bla')
+print('bla')
+print('bla')
+\\\\end{CodeBlock}
+
+
+
+\\\\begin{CodeBlock}[][2]{css}
+.tmp {
+  font-weight: bold;
+}
+\\\\end{CodeBlock}
+
+
+
+\\\\begin{CodeBlock}[][1,3]{css}
+.tmp {
+  font-weight: bold;
+}
+\\\\end{CodeBlock}
+
+
+
 \\\\begin{CodeBlock}{text}
 a code without lang
 \\\\end{CodeBlock}"
