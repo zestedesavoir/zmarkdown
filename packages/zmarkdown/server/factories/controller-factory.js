@@ -24,14 +24,16 @@ module.exports = (givenProc, template) => (req, res) => {
   processor(req.body.md, (e, vfile) => {
     // Apply the template if necessary
     if (!e && typeof template === 'function') {
-      const opts = Object.assign(req.body.opts, {latex: vfile.contents})
+      const templateOpts = Object.assign(req.body.opts, {latex: vfile.contents})
 
-      template(opts, (e, doc) => {
-        if (e) return sendResponse(e)
+      try {
+        const doc = template(templateOpts)
 
         // Replace the content, and discard metadata, which have no meaning in LaTeX
         Object.assign(vfile, {contents: doc, data: {}})
-      })
+      } catch (e) {
+        return sendResponse(e)
+      }
     }
 
     sendResponse(e, vfile)

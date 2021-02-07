@@ -1,7 +1,7 @@
 const assert = require('assert')
 const escape = require('rebber/dist/escaper')
 
-const template = (opts, callback) => {
+module.exports = opts => {
   const {
     disableToc = false,
     content_type: contentType,
@@ -19,18 +19,14 @@ const template = (opts, callback) => {
     license,
     latex,
   } = opts
-  try {
-    // Required options
-    assert(contentType, 'Error with argument: "contentType"')
-    assert(title, 'Error with argument: "title"')
-    assert(Array.isArray(authors), 'Error with argument: "authors"')
-    assert(license, 'Error with argument: "license"')
-    assert(licenseDirectory, 'Error with argument: "licenseDirectory"')
-    assert(smileysDirectory, 'Error with argument: "smileysDirectory"')
-    assert(latex, 'Error with argument: "latex"')
-  } catch (err) {
-    return callback(err)
-  }
+  // Required options
+  assert(contentType, 'Error with argument: "contentType"')
+  assert(title, 'Error with argument: "title"')
+  assert(Array.isArray(authors), 'Error with argument: "authors"')
+  assert(license, 'Error with argument: "license"')
+  assert(licenseDirectory, 'Error with argument: "licenseDirectory"')
+  assert(smileysDirectory, 'Error with argument: "smileysDirectory"')
+  assert(latex, 'Error with argument: "latex"')
 
   const licenceLogoPath = licenseLogo ? `${licenseDirectory}/${licenseLogo}` : ''
   const licenseLine = `\\licence[${licenceLogoPath}]{${license}}{${licenseUrl || ''}}`
@@ -42,7 +38,7 @@ const template = (opts, callback) => {
   if (contentLink) extraHeaders.push(`\\tutoLink{${contentLink}}`)
   if (editorLink) extraHeaders.push(`\\editor{${editorLink}}`)
 
-  return callback(null, `\\documentclass[${contentType}]{zmdocument}
+  return `\\documentclass[${contentType}]{zmdocument}
 
 \\usepackage{blindtext}
 \\title{${escape(title)}}
@@ -57,7 +53,5 @@ ${extraHeaders.join('\n')}
 ${disableToc ? '' : '\\tableofcontents'}
 
 ${latex}
-\\end{document}`)
+\\end{document}`
 }
-
-module.exports = template
