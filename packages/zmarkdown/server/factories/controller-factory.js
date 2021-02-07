@@ -1,11 +1,17 @@
 const Sentry = require('@sentry/node')
 
 const processorFactory = require('./processor-factory')
+const manifest         = require('../utils/manifest')
 const io               = require('../factories/io-factory')
 
 module.exports = (givenProc, template) => (req, res) => {
+  // Gather data about the request
+  const manifestRender = (typeof req.body.md !== 'string')
+  const useTemplate = (typeof template === 'function')
+  const rawContent = req.body.md
+
   // Increment endpoint usage for monitoring
-  if (!template) io[givenProc]()
+  if (!useTemplate) io[givenProc]()
   else io['latex-document']()
 
   const processor = processorFactory(givenProc, req.body.opts)
@@ -20,22 +26,36 @@ module.exports = (givenProc, template) => (req, res) => {
     res.json([vfile.contents, vfile.data, vfile.messages])
   }
 
-  // First parse the document
-  processor(req.body.md, (e, vfile) => {
-    // Apply the template if necessary
-    if (!e && typeof template === 'function') {
-      const templateOpts = Object.assign(req.body.opts, {latex: vfile.contents})
+  let extractPromises
 
-      try {
-        const doc = template(templateOpts)
+  // Get a collection of Promises to execute
+  if (manifestRender) extractPromises = manifest.dispatch(rawContent)
+  else extractPromises = [processor(rawContent)]
+
+  Promise.all(extractPromises)
+    .then(vfiles => {
+      if (useTemplate) {
+        let processedContent
+        // When using the template, we need to assemble
+        // the content first.
+        if (manifestRender) processedContent = manifest.assemble(vfiles)
+        else processedContent = vfiles[0]
+
+        const templateOpts = Object.assign(req.body.opts, {
+          latex: processedContent.contents,
+        })
+        const finalDocument = template(templateOpts)
 
         // Replace the content, and discard metadata, which have no meaning in LaTeX
-        Object.assign(vfile, {contents: doc, data: {}})
-      } catch (e) {
-        return sendResponse(e)
-      }
-    }
+        Object.assign(processedContent, {contents: finalDocument, data: {}})
 
-    sendResponse(e, vfile)
-  })
+        return processedContent
+      }
+
+      // Add parsed content to original manifest and return
+      if (manifestRender) return manifest.gather(vfiles, rawContent)
+      else return vfiles[0]
+    })
+    .then(vfile => sendResponse(null, vfile))
+    .catch(e => sendResponse(e))
 }
