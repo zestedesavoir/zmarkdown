@@ -19,7 +19,6 @@ module.exports = (givenProc, template) => (req, res) => {
 
   function sendResponse (e, vfile) {
     if (e) {
-      console.error(e)
       Sentry.captureException(e, {req, vfile})
       res.status(500).json(vfile)
       return
@@ -33,7 +32,7 @@ module.exports = (givenProc, template) => (req, res) => {
   // Get a collection of Promises to execute
   if (manifestRender) {
     extractPromises = manifest
-      .dispatch(rawContent, baseShift)
+      .gatherExtracts(rawContent, baseShift)
       .map(extract => {
         // Manifest rendering requires forging a new processor
         // to handle title depths
@@ -68,7 +67,7 @@ module.exports = (givenProc, template) => (req, res) => {
       }
 
       // Add parsed content to original manifest and return
-      if (manifestRender) return manifest.gather(vfiles, rawContent)
+      if (manifestRender) return manifest.dispatch(vfiles, rawContent)
       else return vfiles[0]
     })
     .then(vfile => sendResponse(null, vfile))

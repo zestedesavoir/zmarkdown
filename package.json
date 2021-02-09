@@ -9,6 +9,7 @@
       "packages/zmarkdown/plugins/*.js",
       "packages/zmarkdown/postprocessors/*.js",
       "packages/zmarkdown/renderers/*.js",
+      "packages/zmarkdown/server/utils/*.js",
       "packages/zmarkdown/utils/*.js",
       "packages/zmarkdown/*.js",
       "!**/*.config.js"

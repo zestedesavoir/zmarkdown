@@ -15,7 +15,7 @@ const listConcatUnique = (a, b) => {
 const executeOnExtracts = (children, execFunction, depth = 0) => {
   function changeIfReturn (obj, prop, d) {
     const r = execFunction(obj[prop], d)
-    if (r) obj[prop] = r
+    if (typeof r === 'string') obj[prop] = r
   }
 
   depth++
@@ -25,8 +25,8 @@ const executeOnExtracts = (children, execFunction, depth = 0) => {
       const r = execFunction(`# ${child.title}`, depth - 1)
       if (r) child.title = r
     }
-    if (child.introduction) changeIfReturn(child, 'introduction', depth)
 
+    if (child.introduction) changeIfReturn(child, 'introduction', depth)
     if (child.text) changeIfReturn(child, 'text', depth)
 
     // Process element's children
@@ -46,7 +46,7 @@ const metadataPropertiesRules = {
   ping:       listConcatUnique,
 }
 
-manifestUtils.dispatch = (manifest, baseShift) => {
+manifestUtils.gatherExtracts = (manifest, baseShift) => {
   const rawExtracts = []
 
   const appendToExtracts = (text, depth, options = {}) => {
@@ -103,10 +103,10 @@ manifestUtils.assemble = (beginVfile, endVfile) => {
   return assembledVfile
 }
 
-manifestUtils.gather = (parsedExtracts, originalManifest) => {
+manifestUtils.dispatch = (parsedExtracts, originalManifest) => {
   // Create a clone of the original manifest
   const finalManifest = Object.assign({}, originalManifest)
-  // Gathering is quite weird: we want the manifest to be rendered
+  // Dispatching is quite weird: we want the manifest to be rendered
   // but returning every part as a vfile makes a huge response...
   const assembledExtracts = parsedExtracts.reduce(manifestUtils.assemble)
 
