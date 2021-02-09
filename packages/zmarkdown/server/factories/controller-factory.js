@@ -6,18 +6,20 @@ const io               = require('../factories/io-factory')
 
 module.exports = (givenProc, template) => (req, res) => {
   // Gather data about the request
-  const manifestRender = (typeof req.body.md !== 'string')
-  const useTemplate = (typeof template === 'function')
-  const rawContent = req.body.md
+  const rawContent     = req.body.md
+  const options        = req.body.opts || {}
+
+  const manifestRender = (typeof rawContent !== 'string')
+  const useTemplate    = (typeof template === 'function')
+  const baseShift      = options.heading_shift || 0
 
   // Increment endpoint usage for monitoring
   if (!useTemplate) io[givenProc]()
   else io['latex-document']()
 
-  const processor = processorFactory(givenProc, req.body.opts)
-
   function sendResponse (e, vfile) {
     if (e) {
+      console.error(e)
       Sentry.captureException(e, {req, vfile})
       res.status(500).json(vfile)
       return
@@ -29,8 +31,21 @@ module.exports = (givenProc, template) => (req, res) => {
   let extractPromises
 
   // Get a collection of Promises to execute
-  if (manifestRender) extractPromises = manifest.dispatch(rawContent)
-  else extractPromises = [processor(rawContent)]
+  if (manifestRender) {
+    extractPromises = manifest
+      .dispatch(rawContent, baseShift)
+      .map(extract => {
+        // Manifest rendering requires forging a new processor
+        // to handle title depths
+        const {text, options: localOptions} = extract
+        const mergedOptions = Object.assign({}, options, localOptions)
+        const processor = processorFactory(givenProc, mergedOptions)
+
+        return processor(text)
+      })
+  } else {
+    extractPromises = [processorFactory(givenProc, req.body.opts)(rawContent)]
+  }
 
   Promise.all(extractPromises)
     .then(vfiles => {
@@ -38,7 +53,7 @@ module.exports = (givenProc, template) => (req, res) => {
         let processedContent
         // When using the template, we need to assemble
         // the content first.
-        if (manifestRender) processedContent = manifest.assemble(vfiles)
+        if (manifestRender) processedContent = vfiles.reduce(manifest.assemble)
         else processedContent = vfiles[0]
 
         const templateOpts = Object.assign(req.body.opts, {
