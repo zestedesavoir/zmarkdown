@@ -4,11 +4,14 @@ const dedent = require('dedent')
 const a = require('axios')
 const fs = require('fs')
 const xtend = require('xtend')
+
 const u = (path) => `http://localhost:27272${path}`
+
 const epub = u('/epub')
 const html = u('/html')
 const latex = u('/latex')
 const texfile = u('/latex-document')
+
 const texfileOpts = {
   content_type:      'contentType',
   title:             'The Title',
@@ -171,6 +174,19 @@ describe('HTML endpoint', () => {
 
     const [string] = response.data
     expect(string).toMatchSnapshot()
+  })
+
+  it('reports quizzes', async () => {
+    const text = dedent(`
+    [[quizz | What is true?]]
+    | - true
+    | - false
+    `)
+    const response = await a.post(html, {md: text})
+    expect(response.status).toBe(200)
+
+    const [, metadata] = response.data
+    expect(metadata.hasQuizz).toBe(true)
   })
 })
 
