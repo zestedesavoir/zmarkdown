@@ -154,6 +154,24 @@ describe('HTML endpoint', () => {
     expect(metadata.stats.signs).toBe(59)
     expect(metadata.stats.words).toBe(14)
   })
+
+  it('correctly renders manifest', async () => {
+    const text = {
+      title:    'A story',
+      children: [
+        {'text': 'On a balcony in summer air'},
+        {'text': 'Escape this town for a little while'},
+        {'text': 'Marry me, Juliet, you\'ll never have to be alone'},
+      ],
+      conclusion: 'Just say "Yes"',
+    }
+
+    const response = await a.post(html, {md: text})
+    expect(response.status).toBe(200)
+
+    const [string] = response.data
+    expect(string).toMatchSnapshot()
+  })
 })
 
 describe('LaTeX endpoint', () => {
@@ -246,6 +264,24 @@ describe('LaTeX endpoint', () => {
 
     const rendered = response.data[0]
     expect(rendered).toContain('default.png')
+  })
+
+  it('correctly renders manifest', async () => {
+    const text = {
+      title:    'Another story',
+      children: [
+        {'text': 'I\'m standing there'},
+        {'text': 'And I was crying on the staircase'},
+        {'text': 'I got tired of waiting'},
+      ],
+      conclusion: 'Just say "Yes"',
+    }
+
+    const response = await a.post(latex, {md: text})
+    expect(response.status).toBe(200)
+
+    const [string] = response.data
+    expect(string).toMatchSnapshot()
   })
 })
 

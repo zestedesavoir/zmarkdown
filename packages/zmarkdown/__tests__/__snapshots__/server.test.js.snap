@@ -2,6 +2,24 @@
 
 exports[`HTML endpoint accepts POSTed markdown 1`] = `"<h3 id=\\"foo\\">foo<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#foo\\"><span class=\\"icon icon-link\\"></span></a></h3>"`;
 
+exports[`HTML endpoint correctly renders manifest 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "text": "<p>On a balcony in summer air</p>",
+    },
+    Object {
+      "text": "<p>Escape this town for a little while</p>",
+    },
+    Object {
+      "text": "<p>Marry me, Juliet, you’ll never have to be alone</p>",
+    },
+  ],
+  "conclusion": "<p>Just say \\"Yes\\"</p>",
+  "title": "<h1 id=\\"a-story\\">A story<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#a-story\\"><span class=\\"icon icon-link\\"></span></a></h1>",
+}
+`;
+
 exports[`HTML endpoint produces statistics when configured 1`] = `
 "<p>7 chars</p>
 <h3 id=\\"13-chars-here\\">13 chars here<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#13-chars-here\\"><span class=\\"icon icon-link\\"></span></a></h3>
@@ -13,6 +31,33 @@ exports[`HTML endpoint produces statistics when configured 1`] = `
 exports[`LaTeX endpoint accepts POSTed markdown 1`] = `
 "\\\\levelOneTitle{foo}
 "
+`;
+
+exports[`LaTeX endpoint correctly renders manifest 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "text": "I’m standing there
+
+",
+    },
+    Object {
+      "text": "And I was crying on the staircase
+
+",
+    },
+    Object {
+      "text": "I got tired of waiting
+
+",
+    },
+  ],
+  "conclusion": "Just say \\"Yes\\"
+
+",
+  "title": "\\\\levelOneTitle{Another story}
+",
+}
 `;
 
 exports[`Texfile endpoint accepts POSTed markdown 1`] = `

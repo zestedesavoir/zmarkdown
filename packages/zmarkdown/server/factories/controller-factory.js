@@ -38,7 +38,7 @@ module.exports = (givenProc, template) => (req, res) => {
         // to handle title depths
         const {text, options: localOptions} = extract
         const mergedOptions = Object.assign({}, options, localOptions)
-        const processor = processorFactory(givenProc, mergedOptions)
+        const processor = processorFactory(givenProc, mergedOptions, true)
 
         return processor(text)
       })
