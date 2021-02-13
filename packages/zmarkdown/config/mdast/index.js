@@ -62,6 +62,7 @@ module.exports = {
     getStats:      true,
     limitDepth:    100,
     listLanguages: true,
+    wrapIntroCcl:  false,
   },
 
   textr: require('./textr'),

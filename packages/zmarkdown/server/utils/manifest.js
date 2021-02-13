@@ -13,9 +13,12 @@ const listConcatUnique = (a, b) => {
 // If the function returns, then content inside the manifest
 // will be replaced by the returned value.
 const executeOnExtracts = (children, execFunction, depth = 0) => {
-  function changeIfReturn (obj, prop, d) {
-    const r = execFunction(obj[prop], d)
-    if (typeof r === 'string') obj[prop] = r
+  function changeIfReturn (obj, extractType, d) {
+    const r = execFunction(obj[extractType], {
+      extract_type:  extractType,
+      heading_shift: d,
+    })
+    if (typeof r === 'string') obj[extractType] = r
   }
 
   depth++
@@ -49,8 +52,7 @@ const metadataPropertiesRules = {
 manifestUtils.gatherExtracts = (manifest, baseShift) => {
   const rawExtracts = []
 
-  const appendToExtracts = (text, depth, options = {}) => {
-    options.heading_shift = depth
+  const appendToExtracts = (text, options = {}) => {
     rawExtracts.push({text, options})
   }
 

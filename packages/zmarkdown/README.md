@@ -31,10 +31,12 @@ curl -H "Content-Type: application/json" -X POST -d '{"md":"Hello word"}' http:/
 [rebber-plugins]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rebber-plugins#rebber-plugins--
 
 ## Features
+
  - Convert Markdown to HTML ;
  - Convert Markdown to EPUB compatible HTML ;
  - Convert Markdown to LaTeX ;
- - Convert Markdown to TEX file.
+ - Convert Markdown to TEX file;
+ - Convert ordered list of Markdown extracts into one of the above formats.
 
 ## Installation
 
@@ -46,7 +48,7 @@ npm install zmarkdown
 
 ## Getting started
 
- 1. Start your zmarkdown server  `npm run server`
+ 1. Start your zmarkdown server `npm run server`
  2. Send a `POST` request to `http://localhost:27272/{endpoint}`
  
 `pm2 monit`: provides a realtime dashboard that fits directly into your terminal, it is a [simple way to monitor][pm2-monit] the resource usage of you server.
@@ -76,7 +78,7 @@ POST http://localhost:27272/{endpoint}
 
 | Name | Type | Description |
 | - | - | - |
-| `md` | string | markdown source string. |
+| `md` | string | markdown source string or ordered list of Markdown extracts (see below) |
 
 #### Optional Body JSON Value
 
@@ -160,10 +162,10 @@ Here is a quick example of the request to be made to the `http://localhost:27272
 
 ```json
 {
-	"md": "# Hello\n\nThis is @zmarkdown, a wonderful [Markdown](https://fr.wikipedia.org/wiki/Markdown) parser. You can **embed** code in it:\n\n```js\n\nconst zmd = require('zmarkdown/modules/common')\n\n\n\nconst globalParser = common(opts, processor)\n\n```\n\n- Oh wait, this is *Mise en abyme*, isn't it?\n\n- Of course it is, you @silly.\n\n- Silly, me? Let me remind you that the main usage of this module is to launch the server directly, not using this Node.js crap:\n\n```bash\n\nnpm -g install pm2 && npm install zmarkdown\ncd ./node_modules/zmarkdown && npm run server\n\n```\n\nNow you know how it works, at least for the API endpoint, but we do support a lot more syntax, if you want.",
-	"opts": {
-		"stats": true
-	}
+  "md": "# Hello\n\nThis is @zmarkdown, a wonderful [Markdown](https://fr.wikipedia.org/wiki/Markdown) parser. You can **embed** code in it:\n\n```js\n\nconst zmd = require('zmarkdown/modules/common')\n\n\n\nconst globalParser = common(opts, processor)\n\n```\n\n- Oh wait, this is *Mise en abyme*, isn't it?\n\n- Of course it is, you @silly.\n\n- Silly, me? Let me remind you that the main usage of this module is to launch the server directly, not using this Node.js crap:\n\n```bash\n\nnpm -g install pm2 && npm install zmarkdown\ncd ./node_modules/zmarkdown && npm run server\n\n```\n\nNow you know how it works, at least for the API endpoint, but we do support a lot more syntax, if you want.",
+  "opts": {
+    "stats": true
+  }
 }
 ```
 
@@ -265,6 +267,52 @@ These values are **required**.
 ### Response `metadata` values
 
 This endpoint only returns `{}` as metadata, i.e. an empty object.
+
+## Manifest rendering
+
+Since version 10.0.0, ZMarkdown supports *manifest rendering*, which means it is capable of processing asynchronously an ordered list of Markdown extracts, and assembling them back together. Manifest rendering works with all the four endpoints described above. Let's take an example with HTML; the following request body:
+
+```json
+{
+  "md": {"text":"# foo\n\nHello @you", "children": [{"text": "Foobar"}, {"text": "Barfoo"}]},
+  "opts": {
+    "stats": true
+  }
+}
+```
+
+Will lead to the following response from the server:
+
+```json
+[
+  {
+    "text": "<h2 id=\"foo\">foo<a aria-hidden=\"true\" tabindex=\"-1\" href=\"#foo\"><span class=\"icon icon-link\"></span></a></h2>\n<p>Hello <a href=\"/membres/voir/you/\" rel=\"nofollow\" class=\"ping ping-link\">@<span class=\"ping-username\">you</span></a></p>",
+    "children": [
+      {
+        "text": "<p>Foobar</p>"
+      },
+      {
+        "text": "<p>Barfoo</p>"
+      }
+    ]
+  },
+  {
+    "ping": [
+      "you"
+    ],
+    "stats": {
+      "signs": 24,
+      "words": 5
+    },
+    "depth": 1,
+    "disableToc": false,
+    "languages": []
+  },
+  []
+]
+```
+
+As you can see, the extracts are positionned in the right order, and VFiles are automatically assembled. Calling the `latex-document` endpoint will also concatenate the extracts and produce a complete document.
 
 ## Client Architecture
 

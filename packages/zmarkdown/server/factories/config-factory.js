@@ -67,5 +67,14 @@ module.exports = opts => {
     ])
   }
 
+  if (typeof opts.extract_type === 'string') {
+    if (['introduction', 'conclusion'].includes(opts.extract_type)) {
+      mdastConfig.postProcessors.wrapIntroCcl = {
+        type:  opts.extract_type,
+        level: opts.heading_shift || 0,
+      }
+    }
+  }
+
   return mdastConfig
 }

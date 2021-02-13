@@ -52,7 +52,9 @@ Object {
 ",
     },
   ],
-  "conclusion": "Just say \\"Yes\\"
+  "conclusion": "\\\\begin{LevelOneConclusion}
+Just say \\"Yes\\"
+\\\\end{LevelOneConclusion}
 
 ",
   "title": "\\\\levelOneTitle{Another story}
@@ -103,6 +105,46 @@ exports[`Texfile endpoint allows extra arguments 1`] = `
 \\\\end{document}"
 `;
 
+exports[`Texfile endpoint correctly renders introduction & conclusion 1`] = `
+"\\\\documentclass[contentType]{zmdocument}
+
+\\\\usepackage{blindtext}
+\\\\title{The Title}
+\\\\author{FØØ, Bär}
+\\\\licence[/tmp/l/by-nc-sa.svg]{CC-BY-NC-SA}{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}
+
+\\\\smileysPath{/tmp/s}
+\\\\makeglossaries
+
+\\\\begin{document}
+\\\\maketitle
+\\\\tableofcontents
+
+\\\\levelOneTitle{My content™}
+
+\\\\begin{LevelOneIntroduction}
+Here I introduce My content™
+\\\\end{LevelOneIntroduction}
+
+
+\\\\begin{LevelThreeIntroduction}
+Here I introduce My section™
+\\\\end{LevelThreeIntroduction}
+
+
+\\\\begin{LevelThreeConclusion}
+Here I conclude My section™
+\\\\end{LevelThreeConclusion}
+
+
+\\\\begin{LevelOneConclusion}
+Here I conclude My content™
+\\\\end{LevelOneConclusion}
+
+
+\\\\end{document}"
+`;
+
 exports[`Texfile endpoint escapes title and author 1`] = `
 "\\\\documentclass[contentType]{zmdocument}
 
@@ -119,6 +161,36 @@ exports[`Texfile endpoint escapes title and author 1`] = `
 \\\\tableofcontents
 
 \\\\levelOneTitle{foo}
+
+\\\\end{document}"
+`;
+
+exports[`Texfile endpoint transform quizzes for document 1`] = `
+"\\\\documentclass[contentType]{zmdocument}
+
+\\\\usepackage{blindtext}
+\\\\title{The Title}
+\\\\author{FØØ, Bär}
+\\\\licence[/tmp/l/by-nc-sa.svg]{CC-BY-NC-SA}{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}
+
+\\\\smileysPath{/tmp/s}
+\\\\makeglossaries
+
+\\\\begin{document}
+\\\\maketitle
+\\\\tableofcontents
+
+\\\\begin{Neutral}[{{What is true?}}]
+
+\\\\end{Neutral}
+
+
+\\\\begin{Spoiler}[{{Correction}}]
+\\\\begin{itemize}
+\\\\item\\\\relax true
+\\\\item\\\\relax false
+\\\\end{itemize}
+\\\\end{Spoiler}
 
 \\\\end{document}"
 `;

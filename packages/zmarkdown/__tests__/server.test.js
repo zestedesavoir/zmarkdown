@@ -386,6 +386,45 @@ describe('Texfile endpoint', () => {
     \tutoLink{https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy_(novel)}
     \editor{https://www.panmacmillan.com/}`)
   })
+
+  it('transform quizzes for document', async () => {
+    const opts = clone(texfileOpts)
+    const text = dedent(`
+    [[quizz | What is true?]]
+    | - true
+    | - false
+    `)
+    const response = await a.post(texfile, {md: text, opts})
+    expect(response.status).toBe(200)
+
+    const [content] = response.data
+    expect(content).toMatchSnapshot()
+  })
+
+  it('correctly renders introduction & conclusion', async () => {
+    const opts = clone(texfileOpts)
+    const manifest = {
+      introduction: 'Here I introduce My content™',
+      title:        'My content™',
+      children:     [{
+        children: [{
+          introduction: 'Here I introduce My section™',
+          conclusion:   'Here I conclude My section™',
+        }],
+      }],
+      conclusion: 'Here I conclude My content™',
+    }
+
+    const response = await a.post(texfile, {md: manifest, opts})
+    expect(response.status).toBe(200)
+
+    const [content] = response.data
+    expect(content).toMatchSnapshot()
+    expect(content).toContain('LevelOneIntroduction')
+    expect(content).toContain('LevelOneConclusion')
+    expect(content).toContain('LevelThreeIntroduction')
+    expect(content).toContain('LevelThreeConclusion')
+  })
 })
 
 
