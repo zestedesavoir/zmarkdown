@@ -55,5 +55,6 @@ jobs:
 
       - name: Update coverage report
         uses: coverallsapp/github-action@master
+        if: matrix.node-version == '14.x'
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
