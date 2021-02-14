@@ -29,9 +29,11 @@ const defaultTokenizerList = {
 }
 
 const postProcessorList = {
+  detectQuizzes: require('../postprocessors/md-detect-quizzes'),
   getStats:      require('../postprocessors/md-get-stats'),
   limitDepth:    require('../postprocessors/md-limit-depth'),
   listLanguages: require('../postprocessors/md-list-languages'),
+  wrapIntroCcl:  require('../postprocessors/md-wrap-intro-ccl'),
 }
 
 module.exports = (config) => {

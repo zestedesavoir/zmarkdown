@@ -4,11 +4,14 @@ const dedent = require('dedent')
 const a = require('axios')
 const fs = require('fs')
 const xtend = require('xtend')
+
 const u = (path) => `http://localhost:27272${path}`
+
 const epub = u('/epub')
 const html = u('/html')
 const latex = u('/latex')
 const texfile = u('/latex-document')
+
 const texfileOpts = {
   content_type:      'contentType',
   title:             'The Title',
@@ -154,6 +157,37 @@ describe('HTML endpoint', () => {
     expect(metadata.stats.signs).toBe(59)
     expect(metadata.stats.words).toBe(14)
   })
+
+  it('correctly renders manifest', async () => {
+    const text = {
+      title:    'A story',
+      children: [
+        {'text': 'On a balcony in summer air'},
+        {'text': 'Escape this town for a little while'},
+        {'text': 'Marry me, Juliet, you\'ll never have to be alone'},
+      ],
+      conclusion: 'Just say "Yes"',
+    }
+
+    const response = await a.post(html, {md: text})
+    expect(response.status).toBe(200)
+
+    const [string] = response.data
+    expect(string).toMatchSnapshot()
+  })
+
+  it('reports quizzes', async () => {
+    const text = dedent(`
+    [[quizz | What is true?]]
+    | - true
+    | - false
+    `)
+    const response = await a.post(html, {md: text})
+    expect(response.status).toBe(200)
+
+    const [, metadata] = response.data
+    expect(metadata.hasQuizz).toBe(true)
+  })
 })
 
 describe('LaTeX endpoint', () => {
@@ -247,6 +281,24 @@ describe('LaTeX endpoint', () => {
     const rendered = response.data[0]
     expect(rendered).toContain('default.png')
   })
+
+  it('correctly renders manifest', async () => {
+    const text = {
+      title:    'Another story',
+      children: [
+        {'text': 'I\'m standing there'},
+        {'text': 'And I was crying on the staircase'},
+        {'text': 'I got tired of waiting'},
+      ],
+      conclusion: 'Just say "Yes"',
+    }
+
+    const response = await a.post(latex, {md: text})
+    expect(response.status).toBe(200)
+
+    const [string] = response.data
+    expect(string).toMatchSnapshot()
+  })
 })
 
 describe('Texfile endpoint', () => {
@@ -333,6 +385,45 @@ describe('Texfile endpoint', () => {
     \editorLogo{/tmp/logo/pmm.jpg}
     \tutoLink{https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy_(novel)}
     \editor{https://www.panmacmillan.com/}`)
+  })
+
+  it('transform quizzes for document', async () => {
+    const opts = clone(texfileOpts)
+    const text = dedent(`
+    [[quizz | What is true?]]
+    | - true
+    | - false
+    `)
+    const response = await a.post(texfile, {md: text, opts})
+    expect(response.status).toBe(200)
+
+    const [content] = response.data
+    expect(content).toMatchSnapshot()
+  })
+
+  it('correctly renders introduction & conclusion', async () => {
+    const opts = clone(texfileOpts)
+    const manifest = {
+      introduction: 'Here I introduce My content™',
+      title:        'My content™',
+      children:     [{
+        children: [{
+          introduction: 'Here I introduce My section™',
+          conclusion:   'Here I conclude My section™',
+        }],
+      }],
+      conclusion: 'Here I conclude My content™',
+    }
+
+    const response = await a.post(texfile, {md: manifest, opts})
+    expect(response.status).toBe(200)
+
+    const [content] = response.data
+    expect(content).toMatchSnapshot()
+    expect(content).toContain('LevelOneIntroduction')
+    expect(content).toContain('LevelOneConclusion')
+    expect(content).toContain('LevelThreeIntroduction')
+    expect(content).toContain('LevelThreeConclusion')
   })
 })
 

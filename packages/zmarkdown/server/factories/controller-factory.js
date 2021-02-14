@@ -1,14 +1,21 @@
 const Sentry = require('@sentry/node')
 
 const processorFactory = require('./processor-factory')
+const manifest         = require('../utils/manifest')
 const io               = require('../factories/io-factory')
 
 module.exports = (givenProc, template) => (req, res) => {
-  // Increment endpoint usage for monitoring
-  if (!template) io[givenProc]()
-  else io['latex-document']()
+  // Gather data about the request
+  const rawContent     = req.body.md
+  const options        = req.body.opts || {}
 
-  const processor = processorFactory(givenProc, req.body.opts)
+  const manifestRender = (typeof rawContent !== 'string')
+  const useTemplate    = (typeof template === 'function')
+  const baseShift      = options.heading_shift || 0
+
+  // Increment endpoint usage for monitoring
+  if (!useTemplate) io[givenProc]()
+  else io['latex-document']()
 
   function sendResponse (e, vfile) {
     if (e) {
@@ -20,20 +27,49 @@ module.exports = (givenProc, template) => (req, res) => {
     res.json([vfile.contents, vfile.data, vfile.messages])
   }
 
-  // First parse the document
-  processor(req.body.md, (e, vfile) => {
-    // Apply the template if necessary
-    if (!e && typeof template === 'function') {
-      const opts = Object.assign(req.body.opts, {latex: vfile.contents})
+  let extractPromises
 
-      template(opts, (e, doc) => {
-        if (e) return sendResponse(e)
+  // Get a collection of Promises to execute
+  if (manifestRender) {
+    extractPromises = manifest
+      .gatherExtracts(rawContent, baseShift)
+      .map(extract => {
+        // Manifest rendering requires forging a new processor
+        // to handle title depths
+        const {text, options: localOptions} = extract
+        const mergedOptions = Object.assign({}, options, localOptions)
+        const processor = processorFactory(givenProc, mergedOptions, true)
+
+        return processor(text)
+      })
+  } else {
+    extractPromises = [processorFactory(givenProc, req.body.opts)(rawContent)]
+  }
+
+  Promise.all(extractPromises)
+    .then(vfiles => {
+      if (useTemplate) {
+        let processedContent
+        // When using the template, we need to assemble
+        // the content first.
+        if (manifestRender) processedContent = vfiles.reduce(manifest.assemble)
+        else processedContent = vfiles[0]
+
+        const templateOpts = Object.assign(req.body.opts, {
+          latex: processedContent.contents,
+        })
+        const finalDocument = template(templateOpts)
 
         // Replace the content, and discard metadata, which have no meaning in LaTeX
-        Object.assign(vfile, {contents: doc, data: {}})
-      })
-    }
+        Object.assign(processedContent, {contents: finalDocument, data: {}})
 
-    sendResponse(e, vfile)
-  })
+        return processedContent
+      }
+
+      // Add parsed content to original manifest and return
+      if (manifestRender) return manifest.dispatch(vfiles, rawContent)
+      else return vfiles[0]
+    })
+    .then(vfile => sendResponse(null, vfile))
+    .catch(e => sendResponse(e))
 }

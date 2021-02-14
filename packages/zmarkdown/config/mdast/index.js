@@ -58,9 +58,11 @@ module.exports = {
   },
 
   postProcessors: {
+    detectQuizzes: true,
     getStats:      true,
     limitDepth:    100,
     listLanguages: true,
+    wrapIntroCcl:  false,
   },
 
   textr: require('./textr'),

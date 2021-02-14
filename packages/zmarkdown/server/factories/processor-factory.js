@@ -5,24 +5,34 @@ const zmd                 = require('../../common')
 // ZMd parser memoization
 const processors = {}
 
-module.exports = (processor, opts = {}) => {
+module.exports = (processor, opts = {}, bypassHeadingShift = false) => {
   if (!['epub', 'html', 'latex'].includes(processor)) {
-    return (md, cb) => cb(new Error(`Unknown target '${processor}'`))
+    const error = new Error(`Unknown target '${processor}'`)
+
+    return (md, cb) => {
+      if (typeof cb !== 'function') {
+        return new Promise((resolve, reject) => reject(error))
+      }
+
+      return cb(error)
+    }
   }
 
   if (processor === 'html') {
-    opts.heading_shift = 2
+    if (!bypassHeadingShift) opts.heading_shift = 2
     opts.disable_images_download = true
   }
 
   if (processor === 'latex') {
-    opts.heading_shift = 0
+    if (!bypassHeadingShift) opts.heading_shift = 0
     opts.disable_ping = true
     opts.disable_jsfiddle = true
+  } else {
+    delete opts.extract_type
   }
 
   if (processor === 'epub') {
-    opts.heading_shift = 2
+    if (!bypassHeadingShift) opts.heading_shift = 2
     opts.disable_ping = true
     opts.disable_jsfiddle = true
     opts.inline = false
