@@ -4,7 +4,7 @@ const express    = require('express')
 const controllerFactory = require('../factories/controller-factory')
 
 const router = express.Router()
-const limit = '300kb'
+const limit = '4mb'
 
 router.post(
   '/html',
@@ -26,7 +26,7 @@ router.post(
 
 router.post(
   '/latex-document',
-  bodyParser.json({limit: '3mb'}),
+  bodyParser.json({limit}),
   controllerFactory('latex', require('../templates/latex-document')),
 )
 
