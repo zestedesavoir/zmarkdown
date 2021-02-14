@@ -6,7 +6,28 @@ on:
   pull_request:
     branches: [master]
 
+env:
+  NODE_VERSION: "14"
+
 jobs:
+  lint:
+    name: Check linting problems
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      
+      - name: Install eslint
+        run: npm install -g eslint
+
+      - name: Run linter
+        run: eslint .
+
   unit-testing:
     name: Run unit testing
     runs-on: ubuntu-latest
