@@ -105,7 +105,7 @@
     "unist-util-visit": "^2.0.3"
   },
   "devDependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "dedent": "^0.7.0",
     "parallel-webpack": "^2.6.0",
     "webpack": "^4.44.2",
