@@ -37,6 +37,10 @@ body {
   overflow-y: auto;
 }
 
+#left-bottom {
+  background-color: #084561;
+}
+
 .result {
   padding: 30px;
   position: relative;

@@ -13,7 +13,7 @@
     "Sébastien (AmarOk) Blin <contact@enconn.fr>",
     "François (artragis) Dambrine <perso@francoisdambrine.me>",
     "Victor Felder <victor@draft.li> (https://draft.li)",
-    "Titouan (TAlone) S. <talone@boxph.one>"
+    "Titouan (Stalone) S. <talone@boxph.one>"
   ],
   "homepage": "https://zestedesavoir.github.io/zmarkdown/",
   "license": "MIT",
@@ -106,6 +106,7 @@
   },
   "devDependencies": {
     "axios": "^0.21.1",
+    "cross-env": "^7.0.3",
     "dedent": "^0.7.0",
     "parallel-webpack": "^2.6.0",
     "webpack": "^4.44.2",

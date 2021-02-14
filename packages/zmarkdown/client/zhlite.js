@@ -21,6 +21,7 @@ const defaultStringifierList = {
 }
 
 const postProcessorList = {
+  wrapCode:         require('../postprocessors/html-wrap-code'),
   iframeWrappers:   require('../postprocessors/html-iframe-wrappers'),
   footnotesReorder: require('../postprocessors/html-footnotes-reorder'),
 }
