@@ -1,6 +1,6 @@
 {
   "name": "mdast-util-split-by-heading",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Split MDAST into subtrees relying on the header hierarchy.",
   "repository": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/mdast-util-split-by-heading",
   "author": "François (artragis) Dambrine  <perso@francoisdambrine.me>",
