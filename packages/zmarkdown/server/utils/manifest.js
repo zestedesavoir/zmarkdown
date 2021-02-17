@@ -25,8 +25,9 @@ const executeOnExtracts = (children, execFunction, depth = 0) => {
 
   children.forEach(child => {
     if (child.title) {
-      const r = execFunction(`# ${child.title}`, depth - 1)
-      if (r) child.title = r
+      // Titles need to be handled as titles
+      child.title = `# ${child.title}`
+      changeIfReturn(child, 'title', depth - 1)
     }
 
     if (child.introduction) changeIfReturn(child, 'introduction', depth)
