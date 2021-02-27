@@ -32,11 +32,16 @@ module.exports = (givenProc, template) => (req, res) => {
   // Get a collection of Promises to execute
   if (manifestRender) {
     extractPromises = manifest
-      .gatherExtracts(rawContent, baseShift)
+      .gatherExtracts(rawContent)
       .map(extract => {
         // Manifest rendering requires forging a new processor
         // to handle title depths
         const {text, options: localOptions} = extract
+        if (localOptions.depth) {
+          localOptions.heading_shift = baseShift + localOptions.depth
+          localOptions.ic_shift = localOptions.depth
+        }
+
         const mergedOptions = Object.assign({}, options, localOptions)
         const processor = processorFactory(givenProc, mergedOptions, true)
 

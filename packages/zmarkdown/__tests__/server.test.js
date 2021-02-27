@@ -425,6 +425,24 @@ describe('Texfile endpoint', () => {
     expect(content).toContain('LevelThreeIntroduction')
     expect(content).toContain('LevelThreeConclusion')
   })
+
+  it('shifts titles and only titles', async () => {
+    const opts = clone(texfileOpts)
+    const manifest = {
+      introduction: 'myIntro',
+      title:        'myTitle',
+    }
+
+    opts.heading_shift = 2
+
+    const response = await a.post(texfile, {md: manifest, opts})
+    expect(response.status).toBe(200)
+
+    const [content] = response.data
+    expect(content).toMatchSnapshot()
+    expect(content).toContain('LevelOneIntroduction')
+    expect(content).toContain('levelThreeTitle')
+  })
 })
 
 

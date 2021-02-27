@@ -71,7 +71,7 @@ module.exports = opts => {
     if (['introduction', 'conclusion'].includes(opts.extract_type)) {
       mdastConfig.postProcessors.wrapIntroCcl = {
         type:  opts.extract_type,
-        level: opts.heading_shift || 0,
+        level: opts.ic_shift || 0,
       }
     }
   }
