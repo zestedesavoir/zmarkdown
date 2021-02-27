@@ -15,8 +15,8 @@ const listConcatUnique = (a, b) => {
 const executeOnExtracts = (children, execFunction, depth = 0) => {
   function changeIfReturn (obj, extractType, d) {
     const r = execFunction(obj[extractType], {
-      extract_type:  extractType,
-      heading_shift: d,
+      extract_type: extractType,
+      depth:        d,
     })
     if (typeof r === 'string') obj[extractType] = r
   }
@@ -50,7 +50,7 @@ const metadataPropertiesRules = {
   ping:       listConcatUnique,
 }
 
-manifestUtils.gatherExtracts = (manifest, baseShift) => {
+manifestUtils.gatherExtracts = manifest => {
   const rawExtracts = []
 
   const appendToExtracts = (text, options = {}) => {
@@ -58,7 +58,7 @@ manifestUtils.gatherExtracts = (manifest, baseShift) => {
   }
 
   // Start recursion by top-level element
-  executeOnExtracts([manifest], appendToExtracts, baseShift)
+  executeOnExtracts([manifest], appendToExtracts)
 
   return rawExtracts
 }
@@ -115,7 +115,7 @@ manifestUtils.dispatch = (parsedExtracts, originalManifest) => {
 
   // Replace each extract where it belongs
   let i = 0
-  executeOnExtracts([finalManifest], () => parsedExtracts[i++].contents, 0)
+  executeOnExtracts([finalManifest], () => parsedExtracts[i++].contents)
 
   assembledExtracts.contents = finalManifest
   return assembledExtracts

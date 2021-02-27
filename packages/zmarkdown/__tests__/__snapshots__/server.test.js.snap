@@ -165,6 +165,31 @@ exports[`Texfile endpoint escapes title and author 1`] = `
 \\\\end{document}"
 `;
 
+exports[`Texfile endpoint shifts titles and only titles 1`] = `
+"\\\\documentclass[contentType]{zmdocument}
+
+\\\\usepackage{blindtext}
+\\\\title{The Title}
+\\\\author{FØØ, Bär}
+\\\\licence[/tmp/l/by-nc-sa.svg]{CC-BY-NC-SA}{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}
+
+\\\\smileysPath{/tmp/s}
+\\\\makeglossaries
+
+\\\\begin{document}
+\\\\maketitle
+\\\\tableofcontents
+
+\\\\levelThreeTitle{myTitle}
+
+\\\\begin{LevelOneIntroduction}
+myIntro
+\\\\end{LevelOneIntroduction}
+
+
+\\\\end{document}"
+`;
+
 exports[`Texfile endpoint transform quizzes for document 1`] = `
 "\\\\documentclass[contentType]{zmdocument}
 
