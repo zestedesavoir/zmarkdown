@@ -53,7 +53,7 @@ module.exports = {
 
   ping: {
     pingUsername:  (_username) => true,
-    userURL:       (username) => `/membres/voir/${username}/`,
+    userURL:       (username) => `/@${username}`,
     usernameRegex: /\B@(?:\*\*([^*]+)\*\*|(\w+))/,
   },
 
