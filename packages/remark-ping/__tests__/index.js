@@ -19,7 +19,7 @@ function pingUsername (username) {
   return mockUsernames.includes(username)
 }
 function userURL (username) {
-  return `/membres/voir/${username}/`
+  return `/@${username}`
 }
 
 
@@ -83,39 +83,39 @@ const outputs = [
     <p>no ping @quxjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd</p>
     <p>ping <a href="http://example.com"><span class="ping ping-in-link">\
     @<span class="ping-username">I AM CLEM</span></span></a></p>
-    <p><a href="/membres/voir/baz baz/" rel="nofollow" class="ping ping-link">\
+    <p><a href="/@baz baz" rel="nofollow" class="ping ping-link">\
     @<span class="ping-username">baz baz</span></a></p>
   `,
   dedent`
-    <h2>Test ping <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping ping-link">\
+    <h2>Test ping <a href="/@I AM CLEM" rel="nofollow" class="ping ping-link">\
     @<span class="ping-username">I AM CLEM</span></a></h2>
     <blockquote>
     <blockquote>
-    <p>no metadata output <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping ping-link">\
+    <p>no metadata output <a href="/@I AM CLEM" rel="nofollow" class="ping ping-link">\
     @<span class="ping-username">I AM CLEM</span></a></p>
     </blockquote>
     </blockquote>
     <blockquote>
-    <p>no metadata output <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping ping-link">\
+    <p>no metadata output <a href="/@I AM CLEM" rel="nofollow" class="ping ping-link">\
     @<span class="ping-username">I AM CLEM</span></a></p>
     </blockquote>
-    <p>ping <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping ping-link">\
+    <p>ping <a href="/@I AM CLEM" rel="nofollow" class="ping ping-link">\
     @<span class="ping-username">I AM CLEM</span></a></p>
-    <p>ping <em><a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping ping-link">\
+    <p>ping <em><a href="/@I AM CLEM" rel="nofollow" class="ping ping-link">\
     @<span class="ping-username">I AM CLEM</span></a></em></p>
     <blockquote>
-    <p>no metadata output <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping ping-link">\
+    <p>no metadata output <a href="/@I AM CLEM" rel="nofollow" class="ping ping-link">\
     @<span class="ping-username">I AM CLEM</span></a></p>
     </blockquote>
   `,
   dedent `
-    <p><a href="/membres/voir/foo/" rel="nofollow" class="ping ping-link">\
+    <p><a href="/@foo" rel="nofollow" class="ping ping-link">\
     @<span class="ping-username">foo</span></a> \
-    <a href="/membres/voir/bar/" rel="nofollow" class="ping ping-link">\
+    <a href="/@bar" rel="nofollow" class="ping ping-link">\
     @<span class="ping-username">bar</span></a></p>
     <p>@baz baz</p>
     <blockquote>
-    <p><a href="/membres/voir/baz baz/" rel="nofollow" class="ping ping-link">\
+    <p><a href="/@baz baz" rel="nofollow" class="ping ping-link">\
     @<span class="ping-username">baz baz</span></a></p>
     </blockquote>
   `,

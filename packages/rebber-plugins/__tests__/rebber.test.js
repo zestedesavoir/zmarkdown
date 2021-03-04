@@ -438,7 +438,7 @@ test('ping', () => {
     .use(reParse)
     .use(remarkPing, {
       pingUsername: username => true,
-      userURL: username => `/membres/voir/${username}/`,
+      userURL: username => `/@${username}`,
     })
     .use(rebber, integrationConfig)
     .processSync(dedent`

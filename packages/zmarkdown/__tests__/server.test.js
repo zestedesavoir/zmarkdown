@@ -61,7 +61,7 @@ describe('HTML endpoint', () => {
 
     const [rendered, metadata] = response.data
     expect(rendered).toContain('class="ping ping-link"')
-    expect(rendered).toContain('href="/membres/voir/Clem/"')
+    expect(rendered).toContain('href="/@Clem"')
     expect(metadata.ping).toEqual(['Clem'])
   })
 
@@ -141,11 +141,11 @@ describe('HTML endpoint', () => {
     const text = dedent(`
     7 chars
     # 13 chars here
-    
+
     [13 chars here](https.//github.com/zestedesavoir/zmarkdown)
-    
+
     ![13 chars here](https.//github.com/zestedesavoir/zmarkdown)
-    
+
     ![no chars here](https.//github.com/zestedesavoir/zmarkdown)
     Figure: 13 chars here
     `)
