@@ -23,7 +23,7 @@ function processQuizzFactory (ctx) {
     const bodyChildren = node.children[1].children
 
     while (bodyChildren.length > 0 &&
-           bodyChildren[bodyChildren.length - 1].type !== 'listItem') {
+           bodyChildren[bodyChildren.length - 1].type !== 'list') {
       bodyChildren.splice(bodyChildren.length - 1, 1)
     }
 

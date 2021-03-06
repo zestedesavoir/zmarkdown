@@ -206,7 +206,10 @@ exports[`Texfile endpoint transform quizzes for document 1`] = `
 \\\\tableofcontents
 
 \\\\begin{Neutral}[{{What is true?}}]
-
+\\\\begin{itemize}
+\\\\item\\\\relax true
+\\\\item\\\\relax false
+\\\\end{itemize}
 \\\\end{Neutral}
 
 
