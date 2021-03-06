@@ -22,7 +22,7 @@ module.exports = {
 
   sanitize: require('../sanitize'),
 
-  postfixFootnotes: `-${shortid.generate()}`,
+  postfixFootnotes: (agg) => `${agg}-${shortid.generate()}`,
 
   postProcessors: {
     iframeWrappers:   require('./iframe-wrappers'),
