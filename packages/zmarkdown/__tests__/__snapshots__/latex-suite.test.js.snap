@@ -707,7 +707,11 @@ exports[`ping 1`] = `"Hello \\\\ping{you} and \\\\ping{you_too}, and \\\\ping{al
 
 exports[`quizz with answers 1`] = `
 "\\\\begin{Neutral}[{{question}}]
-
+\\\\begin{itemize}
+\\\\item\\\\relax bad answer
+\\\\item\\\\relax good answer
+\\\\item\\\\relax other bad answer
+\\\\end{itemize}
 \\\\end{Neutral}
 
 
