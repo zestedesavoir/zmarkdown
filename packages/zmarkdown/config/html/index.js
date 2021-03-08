@@ -1,5 +1,7 @@
 const shortid = require('shortid')
 
+let currentFootnotePostfix = shortid.generate()
+
 module.exports = {
   autolinkHeadings: {
     behaviour: 'append',
@@ -22,7 +24,11 @@ module.exports = {
 
   sanitize: require('../sanitize'),
 
-  postfixFootnotes: (agg) => `${agg}-${shortid.generate()}`,
+  postfixFootnotes: (agg) => `${agg}-${currentFootnotePostfix}`,
+
+  _regenerateFootnotePostfix: () => {
+    currentFootnotePostfix = shortid.generate()
+  },
 
   postProcessors: {
     iframeWrappers:   require('./iframe-wrappers'),
