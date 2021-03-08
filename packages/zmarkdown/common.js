@@ -33,10 +33,15 @@ module.exports = (
     parser.use(processor, processorConfig)
   }
 
+  // Regenerate footnotes postfix on extracts
+  const doRegenerate = (processor === 'html' && processorConfig._regenerateFootnotePostfix)
+  const regenerator = processorConfig._regenerateFootnotePostfix
+
   return (input, cb) => {
     if (typeof cb !== 'function') {
       return new Promise((resolve, reject) =>
         parser.process(input, (err, vfile) => {
+          if (doRegenerate) regenerator()
           if (err) return reject(err)
 
           resolve(vfile)
@@ -44,6 +49,7 @@ module.exports = (
     }
 
     parser.process(input, (err, vfile) => {
+      if (doRegenerate) regenerator()
       if (err) return cb(err)
 
       cb(null, vfile)
