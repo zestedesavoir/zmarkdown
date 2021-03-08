@@ -26,6 +26,41 @@ describe('Regression tests', () => {
       const [rendered] = response.data
       expect(rendered).toMatchSnapshot()
     })
+
+    test('#431 It uses random footnote postfix correctly', async () => {
+      const md = dedent`
+        hello[^foo] world[^bar]
+
+        [^foo]: foo
+        [^bar]: bar
+      `
+
+      const firstResponse = await a.post(html, {
+        md,
+        opts: {},
+      })
+
+      const secondResponse = await a.post(html, {
+        md,
+        opts: {},
+      })
+
+      const [firstRendered] = firstResponse.data
+      const [secondRendered] = secondResponse.data
+
+      const firstFooReference = firstRendered.match(/fnref-1-([a-zA-Z0-9-_]+)/)
+      const firstFooDefinition = firstRendered.match(/fn-1-([a-zA-Z0-9-_]+)/)
+      const firstBarReference = firstRendered.match(/fnref-2-([a-zA-Z0-9-_]+)/)
+      const secondBarDefinition = secondRendered.match(/fn-2-([a-zA-Z0-9-_]+)/)
+
+      // A unique token shall be generated for a given footnote
+      expect(firstFooReference[1]).toEqual(firstFooDefinition[1])
+      // But also for a given render
+      expect(firstFooReference[1]).toEqual(firstBarReference[1])
+
+      // Finally, we expect tokens to differ between two successive renderings
+      expect(secondBarDefinition[1]).not.toEqual(firstBarReference[1])
+    })
   })
 
   describe('Latex endpoint', () => {
