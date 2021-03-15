@@ -66,7 +66,7 @@ const remarkParse = require('remark-parse')
 const stringify = require('rehype-stringify')
 const remark2rehype = require('remark-rehype')
 
-const remarkCaption = require('remark-caption')
+const remarkCaptions = require('remark-captions')
 ```
 
 Usage:
@@ -74,7 +74,7 @@ Usage:
 ```javascript
 unified()
   .use(remarkParse)
-  .use(remarkCaption, {
+  .use(remarkCaptions, {
     external: {
       table: 'Table:',
       code: 'Code:',
