@@ -34,7 +34,7 @@
     "release": "parallel-webpack"
   },
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=12.0.0"
   },
   "dependencies": {
     "@pm2/io": "^4.3.5",
