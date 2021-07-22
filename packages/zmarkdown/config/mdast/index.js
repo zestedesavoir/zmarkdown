@@ -52,9 +52,8 @@ module.exports = {
   },
 
   ping: {
-    pingUsername:  (_username) => true,
-    userURL:       (username) => `/@${username}`,
-    usernameRegex: /\B@(?:\*\*([^*]+)\*\*|(\w+))/,
+    pingUsername: (_username) => true,
+    userURL:      (username) => `/@${username}`,
   },
 
   postProcessors: {

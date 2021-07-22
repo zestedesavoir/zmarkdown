@@ -29,6 +29,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@unicode/unicode-13.0.0": "^1.1.0",
     "unist-util-visit": "^2.0.3"
   }
 }
