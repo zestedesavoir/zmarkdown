@@ -1,4 +1,23 @@
 const visit = require('unist-util-visit')
+const interruptPunctuation = [
+  require('@unicode/unicode-13.0.0/Binary_Property/White_Space/code-points'),
+  require('@unicode/unicode-13.0.0/General_Category/Close_Punctuation/code-points'),
+  require('@unicode/unicode-13.0.0/General_Category/Final_Punctuation/code-points'),
+  require('@unicode/unicode-13.0.0/General_Category/Initial_Punctuation/code-points'),
+  require('@unicode/unicode-13.0.0/General_Category/Open_Punctuation/code-points'),
+  require('@unicode/unicode-13.0.0/General_Category/Other_Punctuation/code-points'),
+].flat()
+
+const isInterrupt = c => interruptPunctuation.includes(c.charCodeAt(0))
+const containsInterrupt = str => {
+  for (let c = 0; c < str.length; c++) {
+    const char = str.charAt(c)
+
+    if (isInterrupt(char)) return true
+  }
+
+  return false
+}
 
 const helpMsg = `remark-ping: expected configuration to be passed: {
   pingUsername: (username) => bool,\n  userURL: (username) => string\n}`
@@ -6,23 +25,57 @@ const helpMsg = `remark-ping: expected configuration to be passed: {
 module.exports = function plugin ({
   pingUsername,
   userURL,
-  usernameRegex = /@(?:\*\*([^*]+)\*\*|(\w+))/,
+  pingCharacter = '@',
+  fencedStartSequence = '**',
+  fencedEndSequence = '**',
 }) {
   if (typeof pingUsername !== 'function' || typeof userURL !== 'function') {
     throw new Error(helpMsg)
   }
 
   function inlineTokenizer (eat, value, silent) {
-    const keep = usernameRegex.exec(value)
-    if (!keep || keep.index > 0) return
+    let isFenced = false
+    let eaten = pingCharacter
+    let username = ''
+    let c = 1
 
-    const total = keep[0]
-    const username = keep[2] ? keep[2] : keep[1]
+    /* istanbul ignore if - never used (yet) */
+    if (silent) return silent
+    if (value.charAt(0) !== pingCharacter) return
+
+    // Check if we have a fenced sequence
+    if (value.substring(1).startsWith(fencedStartSequence)) {
+      eaten += fencedStartSequence
+      isFenced = true
+      c += 2
+    }
+
+    // Iterate until:
+    //   - end of string;
+    //   - interrupt character for unfenced pings;
+    //   - trailing sequence for fenced pings.
+    while (value.charAt(c)) {
+      if (!isFenced && isInterrupt(value.charAt(c))) break
+      if (isFenced &&
+          value.substring(c - 2).startsWith(fencedEndSequence) &&
+          isInterrupt(value.charAt(c))) break
+
+      username += value.charAt(c++)
+    }
+
+    eaten += username
+
+    // Remove trailing sequence
+    if (isFenced) {
+      if (!username.endsWith(fencedEndSequence)) return
+
+      username = username.slice(0, -fencedEndSequence.length)
+    }
 
     if (pingUsername(username) === true) {
       const url = userURL(username)
 
-      return eat(total)({
+      return eat(eaten)({
         type: 'ping',
         username: username,
         url: url,
@@ -52,19 +105,15 @@ module.exports = function plugin ({
         }],
       })
     } else {
-      return eat(total[0])({
+      return eat(eaten.charAt(0))({
         type: 'text',
-        value: total[0],
+        value: eaten.charAt(0),
       })
     }
   }
 
   function locator (value, fromIndex) {
-    const keep = usernameRegex.exec(value, fromIndex)
-    if (keep) {
-      return value.indexOf('@', keep.index)
-    }
-    return -1
+    return value.indexOf('@', fromIndex)
   }
 
   inlineTokenizer.locator = locator
@@ -82,11 +131,13 @@ module.exports = function plugin ({
   // Stringify
   if (Compiler) {
     const visitors = Compiler.prototype.visitors
+
     visitors.ping = (node) => {
-      if (!node.username.includes(' ')) {
-        return `@${node.username}`
+      if (!containsInterrupt(node.username)) {
+        return pingCharacter + node.username
       }
-      return `@**${node.username}**`
+
+      return pingCharacter + fencedStartSequence + node.username + fencedEndSequence
     }
   }
 

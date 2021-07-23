@@ -13,6 +13,9 @@ const mockUsernames = [
   'foo',
   'bar',
   'baz baz',
+  'Moté',
+  'Phigger Moté',
+  'Digitals@m',
 ]
 
 function pingUsername (username) {
@@ -21,7 +24,6 @@ function pingUsername (username) {
 function userURL (username) {
   return `/membres/voir/${username}/`
 }
-
 
 const remark = text => unified()
   .use(reParse)
@@ -74,50 +76,12 @@ const fixtures = [
 
     > @**baz baz**
   `,
-]
+  dedent`
+    @Moté @Phigger
 
-const outputs = [
-  dedent`
-    <p>ping @Clem</p>
-    <p>ping @<strong>FOO BAR</strong></p>
-    <p>no ping @quxjhdshqjkhfyhefezhjzjhdsjlfjlsqjdfjhsd</p>
-    <p>ping <a href="http://example.com"><span class="ping ping-in-link">\
-    @<span class="ping-username">I AM CLEM</span></span></a></p>
-    <p><a href="/membres/voir/baz baz/" rel="nofollow" class="ping ping-link">\
-    @<span class="ping-username">baz baz</span></a></p>
-  `,
-  dedent`
-    <h2>Test ping <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping ping-link">\
-    @<span class="ping-username">I AM CLEM</span></a></h2>
-    <blockquote>
-    <blockquote>
-    <p>no metadata output <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping ping-link">\
-    @<span class="ping-username">I AM CLEM</span></a></p>
-    </blockquote>
-    </blockquote>
-    <blockquote>
-    <p>no metadata output <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping ping-link">\
-    @<span class="ping-username">I AM CLEM</span></a></p>
-    </blockquote>
-    <p>ping <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping ping-link">\
-    @<span class="ping-username">I AM CLEM</span></a></p>
-    <p>ping <em><a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping ping-link">\
-    @<span class="ping-username">I AM CLEM</span></a></em></p>
-    <blockquote>
-    <p>no metadata output <a href="/membres/voir/I AM CLEM/" rel="nofollow" class="ping ping-link">\
-    @<span class="ping-username">I AM CLEM</span></a></p>
-    </blockquote>
-  `,
-  dedent `
-    <p><a href="/membres/voir/foo/" rel="nofollow" class="ping ping-link">\
-    @<span class="ping-username">foo</span></a> \
-    <a href="/membres/voir/bar/" rel="nofollow" class="ping ping-link">\
-    @<span class="ping-username">bar</span></a></p>
-    <p>@baz baz</p>
-    <blockquote>
-    <p><a href="/membres/voir/baz baz/" rel="nofollow" class="ping ping-link">\
-    @<span class="ping-username">baz baz</span></a></p>
-    </blockquote>
+    @**Phigger Moté**
+
+    @Digitals@m @**Digitals@m**
   `,
 ]
 
@@ -125,8 +89,8 @@ const pings = [
   ['I AM CLEM', 'baz baz'],
   ['I AM CLEM', 'I AM CLEM', 'I AM CLEM'],
   ['foo', 'bar'],
+  ['Moté', 'Phigger Moté', 'Digitals@m'],
 ]
-
 
 fixtures.forEach((fixture, i) => {
   describe(`fixture suite ${i}`, () => {
@@ -143,7 +107,7 @@ fixtures.forEach((fixture, i) => {
     test('compiles to HTML', () => {
       return expect(
         toHTML(fixture).then(vfile => vfile.contents)
-      ).resolves.toBe(outputs[i])
+      ).resolves.toMatchSnapshot(`h${i}`)
     })
 
     test('compiles to Markdown', () => {
