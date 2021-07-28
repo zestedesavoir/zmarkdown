@@ -15,7 +15,7 @@ Currently, all the plugins provided only work for remark versions **lesser than*
 ### Prerequisites
 
 * node >= 12
-* 7 > npm >= 6
+* npm >= 7
 
 ### Installation
 
