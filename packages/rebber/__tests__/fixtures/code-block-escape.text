@@ -1,0 +1,6 @@
+A little flaw:
+
+```python
+\end{CodeBlock}
+\end   {CodeBlock}
+```

@@ -4,9 +4,11 @@
 module.exports = code;
 
 var defaultMacro = function defaultMacro(content, lang) {
-  // Default language is "text"
+  // Escape CodeBlocks
+  var escaped = content.replace(new RegExp('\\\\end\\s*{CodeBlock}', 'g'), ''); // Default language is "text"
+
   if (!lang) lang = 'text';
-  return "\\begin{CodeBlock}{".concat(lang, "}\n").concat(content, "\n\\end{CodeBlock}\n\n");
+  return "\\begin{CodeBlock}{".concat(lang, "}\n").concat(escaped, "\n\\end{CodeBlock}\n\n");
 };
 /* Stringify a code `node`. */
 
