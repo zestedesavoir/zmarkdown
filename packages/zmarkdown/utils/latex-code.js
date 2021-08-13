@@ -2,6 +2,8 @@ const customCodeMacro = (content, lang, attrs) => {
   // Default language is "text"
   if (!lang) lang = 'text'
 
+  // Escape CodeBlocks
+  const escaped = content.replace(new RegExp('\\\\end\\s*{CodeBlock}', 'g'), '')
   const hasHlLines = (attrs && attrs.hlLines && attrs.hlLines !== [])
   const hasLinenostart = (attrs && attrs.linenostart && attrs.linenostart !== 1)
 
@@ -23,7 +25,7 @@ const customCodeMacro = (content, lang, attrs) => {
     params += `[${attrs.linenostart}]`
   }
 
-  return `\\begin{CodeBlock}${params}{${lang}}\n${content}\n\\end{CodeBlock}\n\n`
+  return `\\begin{CodeBlock}${params}{${lang}}\n${escaped}\n\\end{CodeBlock}\n\n`
 }
 
 /* Expose. */

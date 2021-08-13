@@ -835,6 +835,17 @@ alert('Hello World!');
 \\\\end{CodeBlock}"
 `;
 
+exports[`rebber: remark specs code-block-escape: code-block-escape 1`] = `
+"A little flaw:
+
+
+
+\\\\begin{CodeBlock}{python}
+
+
+\\\\end{CodeBlock}"
+`;
+
 exports[`rebber: remark specs code-block-indentation: code-block-indentation 1`] = `
 "Fenced code blocks are normally not exdented, however,
 when the initial fence is indented by spaces, the value of
@@ -7890,6 +7901,15 @@ exports[`rebber: remark specs with config: custom macros code-block 1`] = `
 [codeJavascript(alert('Hello World!');)]"
 `;
 
+exports[`rebber: remark specs with config: custom macros code-block-escape 1`] = `
+"A little flaw:
+
+
+
+[codePython(\\\\end{CodeBlock}
+\\\\end   {CodeBlock})]"
+`;
+
 exports[`rebber: remark specs with config: custom macros code-block-indentation 1`] = `
 "Fenced code blocks are normally not exdented, however,
 when the initial fence is indented by spaces, the value of
@@ -13701,6 +13721,19 @@ exports[`toLaTeX: remark specs code-block: code-block 1`] = `
 
 \\\\begin{CodeBlock}{javascript}
 alert('Hello World!');
+\\\\end{CodeBlock}
+
+"
+`;
+
+exports[`toLaTeX: remark specs code-block-escape: code-block-escape 1`] = `
+"A little flaw:
+
+
+
+\\\\begin{CodeBlock}{python}
+
+
 \\\\end{CodeBlock}
 
 "
