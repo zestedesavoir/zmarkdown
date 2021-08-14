@@ -91,16 +91,6 @@ const makeValidatorStream = (fileName, maxSize) => {
   })
 }
 
-const checkAndCopy = async (from, to) => {
-  const data = await promisify(fs.readFile)(from)
-  await checkFileType(from, data)
-  try {
-    await promisify(fs.copyFile)(from, to)
-  } catch (err) {
-    throw new Error(`Failed to copy ${from} to ${to}`)
-  }
-}
-
 function plugin ({
   disabled = false,
   maxFileSize = 1000000,
@@ -111,6 +101,7 @@ function plugin ({
     statusCode: false,
     mimeType: false,
     fileTooBig: false,
+    invalidPath: false,
   },
   localUrlToLocalPath,
   httpRequestTimeout = 5000, // in milliseconds
@@ -161,6 +152,19 @@ function plugin ({
       req.on('error', err => reject(err))
     })
 
+  const checkAndCopy = async (from, to) => {
+    const data = await promisify(fs.readFile)(from)
+      .catch(e => {
+        e.replaceWithDefault = defaultOn && defaultOn.invalidPath
+        throw e
+      })
+    await checkFileType(from, data)
+    try {
+      await promisify(fs.copyFile)(from, to)
+    } catch (err) {
+      throw new Error(`Failed to copy ${from} to ${to}`)
+    }
+  }
 
   const downloadAndSave = (node, sourceUrl, httpResponse, destinationPath) =>
     new Promise((resolve, reject) =>
@@ -225,6 +229,8 @@ function plugin ({
     Promise.all(tasks.map(task => {
       if (task.localSourcePath.includes('../')) {
         task.error = new Error(`Dangerous absolute image URL detected: ${task.localSourcePath}`)
+        task.error.replaceWithDefault = defaultOn && defaultOn.invalidPath
+
         return
       }
 
