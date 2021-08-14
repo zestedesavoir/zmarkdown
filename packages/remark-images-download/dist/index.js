@@ -148,69 +148,28 @@ var makeValidatorStream = function makeValidatorStream(fileName, maxSize) {
   });
 };
 
-var checkAndCopy = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(from, to) {
-    var data;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.next = 2;
-            return promisify(fs.readFile)(from);
-
-          case 2:
-            data = _context2.sent;
-            _context2.next = 5;
-            return checkFileType(from, data);
-
-          case 5:
-            _context2.prev = 5;
-            _context2.next = 8;
-            return promisify(fs.copyFile)(from, to);
-
-          case 8:
-            _context2.next = 13;
-            break;
-
-          case 10:
-            _context2.prev = 10;
-            _context2.t0 = _context2["catch"](5);
-            throw new Error("Failed to copy ".concat(from, " to ").concat(to));
-
-          case 13:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, null, [[5, 10]]);
-  }));
-
-  return function checkAndCopy(_x3, _x4) {
-    return _ref2.apply(this, arguments);
-  };
-}();
-
 function plugin() {
-  var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      _ref3$disabled = _ref3.disabled,
-      disabled = _ref3$disabled === void 0 ? false : _ref3$disabled,
-      _ref3$maxFileSize = _ref3.maxFileSize,
-      maxFileSize = _ref3$maxFileSize === void 0 ? 1000000 : _ref3$maxFileSize,
-      _ref3$dirSizeLimit = _ref3.dirSizeLimit,
-      dirSizeLimit = _ref3$dirSizeLimit === void 0 ? 10000000 : _ref3$dirSizeLimit,
-      _ref3$downloadDestina = _ref3.downloadDestination,
-      downloadDestination = _ref3$downloadDestina === void 0 ? '/tmp' : _ref3$downloadDestina,
-      _ref3$defaultImagePat = _ref3.defaultImagePath,
-      defaultImagePath = _ref3$defaultImagePat === void 0 ? false : _ref3$defaultImagePat,
-      _ref3$defaultOn = _ref3.defaultOn,
-      defaultOn = _ref3$defaultOn === void 0 ? {
+  var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref2$disabled = _ref2.disabled,
+      disabled = _ref2$disabled === void 0 ? false : _ref2$disabled,
+      _ref2$maxFileSize = _ref2.maxFileSize,
+      maxFileSize = _ref2$maxFileSize === void 0 ? 1000000 : _ref2$maxFileSize,
+      _ref2$dirSizeLimit = _ref2.dirSizeLimit,
+      dirSizeLimit = _ref2$dirSizeLimit === void 0 ? 10000000 : _ref2$dirSizeLimit,
+      _ref2$downloadDestina = _ref2.downloadDestination,
+      downloadDestination = _ref2$downloadDestina === void 0 ? '/tmp' : _ref2$downloadDestina,
+      _ref2$defaultImagePat = _ref2.defaultImagePath,
+      defaultImagePath = _ref2$defaultImagePat === void 0 ? false : _ref2$defaultImagePat,
+      _ref2$defaultOn = _ref2.defaultOn,
+      defaultOn = _ref2$defaultOn === void 0 ? {
     statusCode: false,
     mimeType: false,
-    fileTooBig: false
-  } : _ref3$defaultOn,
-      localUrlToLocalPath = _ref3.localUrlToLocalPath,
-      _ref3$httpRequestTime = _ref3.httpRequestTimeout,
-      httpRequestTimeout = _ref3$httpRequestTime === void 0 ? 5000 : _ref3$httpRequestTime;
+    fileTooBig: false,
+    invalidPath: false
+  } : _ref2$defaultOn,
+      localUrlToLocalPath = _ref2.localUrlToLocalPath,
+      _ref2$httpRequestTime = _ref2.httpRequestTimeout,
+      httpRequestTimeout = _ref2$httpRequestTime === void 0 ? 5000 : _ref2$httpRequestTime;
 
   // Sends an HTTP request, checks headers and resolves a readable stream
   // if headers are valid.
@@ -257,6 +216,51 @@ function plugin() {
       });
     });
   };
+
+  var checkAndCopy = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(from, to) {
+      var data;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return promisify(fs.readFile)(from)["catch"](function (e) {
+                e.replaceWithDefault = defaultOn && defaultOn.invalidPath;
+                throw e;
+              });
+
+            case 2:
+              data = _context2.sent;
+              _context2.next = 5;
+              return checkFileType(from, data);
+
+            case 5:
+              _context2.prev = 5;
+              _context2.next = 8;
+              return promisify(fs.copyFile)(from, to);
+
+            case 8:
+              _context2.next = 13;
+              break;
+
+            case 10:
+              _context2.prev = 10;
+              _context2.t0 = _context2["catch"](5);
+              throw new Error("Failed to copy ".concat(from, " to ").concat(to));
+
+            case 13:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[5, 10]]);
+    }));
+
+    return function checkAndCopy(_x3, _x4) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
 
   var downloadAndSave = function downloadAndSave(node, sourceUrl, httpResponse, destinationPath) {
     return new Promise(function (resolve, reject) {
@@ -378,6 +382,7 @@ function plugin() {
     return Promise.all(tasks.map(function (task) {
       if (task.localSourcePath.includes('../')) {
         task.error = new Error("Dangerous absolute image URL detected: ".concat(task.localSourcePath));
+        task.error.replaceWithDefault = defaultOn && defaultOn.invalidPath;
         return;
       }
 

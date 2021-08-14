@@ -468,6 +468,24 @@ describe('mock server tests', () => {
     })
   })
 
+  test('default nonexisting images', () => {
+    const defaultImagePath = 'default.png'
+    const file = `![](/home/img.png)`
+    const html = `<p><img src="${downloadDestination}/${defaultImagePath}"></p>`
+
+    const render = renderFactory({
+      defaultImagePath,
+      localUrlToLocalPath: ['/', '/tmp/'],
+      defaultOn: {
+        invalidPath: true,
+      },
+    })
+
+    return render(file).then(vfile => {
+      expect(vfile.contents).toBe(html)
+    })
+  })
+
   test('reports 404', () => {
     const file = `![](http://localhost:27273/404/notfound)`
     const html = `<p><img src="http://localhost:27273/404/notfound"></p>`
