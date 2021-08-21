@@ -1,15 +1,16 @@
-const FileType = require('file-type')
 const fs = require('fs')
-const isSvg = require('is-svg')
-const path = require('path')
-const {promisify} = require('util')
 const http = require('http')
 const https = require('https')
+const path = require('path')
+const {promisify} = require('util')
+const {Transform} = require('stream')
+const {URL} = require('url')
+
+const FileType = require('file-type')
+const isSvg = require('is-svg')
 const shortid = require('shortid')
-const URL = require('url')
 const visit = require('unist-util-visit')
 const rimraf = require('rimraf')
-const {Transform} = require('stream')
 
 const isImage = (headers) => {
   return (headers['content-type'].substring(0, 6) === 'image/')
@@ -119,16 +120,10 @@ function plugin ({
   // Rejects with an error if headers are invalid.
   const initDownload = url =>
     new Promise((resolve, reject) => {
-      const parsedUrl = URL.parse(url)
+      const parsedUrl = new URL(url)
       const proto = parsedUrl.protocol === 'https:' ? https : http
 
-      const options = Object.assign(
-        {},
-        parsedUrl,
-        {timeout: httpRequestTimeout},
-      )
-
-      const req = proto.get(options, res => {
+      const req = proto.get(parsedUrl, {timeout: httpRequestTimeout}, res => {
         const {headers, statusCode} = res
         let error
 
@@ -149,7 +144,7 @@ function plugin ({
         }
 
         if (error) {
-          req.abort()
+          req.destroy()
           res.resume()
           reject(error)
           return
@@ -159,7 +154,7 @@ function plugin ({
       })
 
       req.on('timeout', () => {
-        req.abort()
+        req.destroy()
         reject(new Error(`Request for ${url} timed out`))
       })
 
@@ -220,6 +215,8 @@ function plugin ({
       if (!task.error) {
         return downloadAndSave(task.node, task.url, task.res, task.destination)
           .catch(error => { task.error = error })
+      } else {
+        return null
       }
     }))
   }
@@ -259,10 +256,15 @@ function plugin ({
 
       let parsedURI
       try {
-        parsedURI = URL.parse(url)
+        parsedURI = new URL(url)
       } catch (error) {
-        vfile.message(`Invalid URL: ${url}`, position, url)
-        return
+        try {
+          // If the URL was invalid, it might be a local file
+          parsedURI = new URL(url, 'file://')
+        } catch (_) {
+          vfile.message(`Invalid URL: ${url}`, position, url)
+          return
+        }
       }
 
       const extension = path.extname(parsedURI.pathname)
