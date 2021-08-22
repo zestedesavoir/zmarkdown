@@ -1,3 +1,4 @@
+const dns = require('dns')
 const fs = require('fs')
 const http = require('http')
 const https = require('https')
@@ -6,6 +7,7 @@ const {promisify} = require('util')
 const {Transform} = require('stream')
 const {URL} = require('url')
 
+const {Address4, Address6} = require('ip-address')
 const FileType = require('file-type')
 const isSvg = require('is-svg')
 const shortid = require('shortid')
@@ -89,6 +91,65 @@ const makeValidatorStream = (fileName, maxSize) => {
       }
     },
   })
+}
+
+const FORBIDDEN_IPV4 = [
+  '10.0.0.0/8',
+  '172.16.0.0/12',
+  '192.168.0.0/16',
+  '192.18.0.0/15',
+].map(a => new Address4(a))
+
+const FORBIDDEN_IPV6 = [
+  'fc0::/7',
+  'fe80::/10',
+].map(a => new Address6(a))
+
+const checkHost = async rawUrl => {
+  const url = new URL(rawUrl)
+  const unbracketedHost = url.hostname.replace(/^\[/, '').replace(/\]$/, '')
+
+  // Check for IP in hostname
+  let ipv4 = Address4.isValid(url.hostname) && url.hostname
+  let ipv6 = Address6.isValid(unbracketedHost) && unbracketedHost
+
+  // Try to resolve hostname
+  if (!ipv4 && !ipv6) {
+    const {address, family} = await promisify(dns.lookup)(url.hostname)
+
+    if (family === 4) {
+      ipv4 = address
+    } else {
+      ipv6 = address
+    }
+  }
+
+  const ipv4Resolved = Boolean(ipv4)
+  const ipv6Resolved = Boolean(ipv6)
+
+  // Match forbidden ranges
+  if (ipv4Resolved) {
+    ipv4 = new Address4(ipv4)
+    ipv4 = FORBIDDEN_IPV4.reduce((acc, cur) => acc && !ipv4.isInSubnet(cur), true) && ipv4
+  }
+
+  if (ipv6Resolved) {
+    ipv6 = new Address6(ipv6)
+
+    // IPv6to4 addresses are handled separately
+    if (ipv6.is6to4()) {
+      const ipv6to4 = new Address4(ipv6.to4())
+      ipv6 = FORBIDDEN_IPV4.reduce((acc, cur) => acc && !ipv6to4.isInSubnet(cur), true) && ipv6
+    } else {
+      ipv6 = FORBIDDEN_IPV6.reduce((acc, cur) => acc && !ipv6.isInSubnet(cur), true) && ipv6
+    }
+  }
+
+  if ((ipv4Resolved && !ipv4) || (ipv6Resolved && !ipv6)) {
+    throw new Error('IP resolved in a forbidden range')
+  }
+
+  return rawUrl
 }
 
 function plugin ({
@@ -190,10 +251,12 @@ function plugin ({
 
   const doDownloadTasks = async tasks => {
     await Promise.all(tasks.map(task =>
-      initDownload(task.url).then(
-        res => { task.res = res },
-        error => { task.error = error },
-      ),
+      checkHost(task.url)
+        .then(initDownload)
+        .then(
+          res => { task.res = res },
+          error => { task.error = error },
+        ),
     ))
 
     if (dirSizeLimit) {

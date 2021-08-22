@@ -31,6 +31,7 @@
   "dependencies": {
     "clone": "^2.1.2",
     "file-type": "^14.6.2",
+    "ip-address": "^8.1.0",
     "is-svg": "^4.2.1",
     "read-chunk": "^3.2.0",
     "rimraf": "^3.0.2",

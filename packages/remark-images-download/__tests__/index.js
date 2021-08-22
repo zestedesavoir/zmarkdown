@@ -599,4 +599,19 @@ describe('mock server tests', () => {
         expect(downloadedFiles.length).toBe(1)
       })
   })
+
+  test('prevents local hosts', () => {
+    const file = `![](http://192.168.2.3:27273/ok.png)`
+    const html = `<p><img src="http://192.168.2.3:27273/ok.png"></p>`
+
+    const render = renderFactory({
+      disallowLocal: true,
+    })
+
+    return render(file).then(vfile => {
+      expect(firstMsg(vfile)).toBe(
+        'IP resolved in a forbidden range')
+      expect(vfile.contents).toBe(html)
+    })
+  })
 })

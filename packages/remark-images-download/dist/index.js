@@ -18,31 +18,38 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var FileType = require('file-type');
+var dns = require('dns');
 
 var fs = require('fs');
 
-var isSvg = require('is-svg');
+var http = require('http');
+
+var https = require('https');
 
 var path = require('path');
 
 var _require = require('util'),
     promisify = _require.promisify;
 
-var http = require('http');
+var _require2 = require('stream'),
+    Transform = _require2.Transform;
 
-var https = require('https');
+var _require3 = require('url'),
+    URL = _require3.URL;
+
+var _require4 = require('ip-address'),
+    Address4 = _require4.Address4,
+    Address6 = _require4.Address6;
+
+var FileType = require('file-type');
+
+var isSvg = require('is-svg');
 
 var shortid = require('shortid');
-
-var URL = require('url');
 
 var visit = require('unist-util-visit');
 
 var rimraf = require('rimraf');
-
-var _require2 = require('stream'),
-    Transform = _require2.Transform;
 
 var isImage = function isImage(headers) {
   return headers['content-type'].substring(0, 6) === 'image/';
@@ -148,40 +155,128 @@ var makeValidatorStream = function makeValidatorStream(fileName, maxSize) {
   });
 };
 
+var FORBIDDEN_IPV4 = ['10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16', '192.18.0.0/15'].map(function (a) {
+  return new Address4(a);
+});
+var FORBIDDEN_IPV6 = ['fc0::/7', 'fe80::/10'].map(function (a) {
+  return new Address6(a);
+});
+
+var checkHost = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(rawUrl) {
+    var url, unbracketedHost, ipv4, ipv6, _yield$promisify, address, family, ipv4Resolved, ipv6Resolved, ipv6to4;
+
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            url = new URL(rawUrl);
+            unbracketedHost = url.hostname.replace(/^\[/, '').replace(/\]$/, ''); // Check for IP in hostname
+
+            ipv4 = Address4.isValid(url.hostname) && url.hostname;
+            ipv6 = Address6.isValid(unbracketedHost) && unbracketedHost; // Try to resolve hostname
+
+            if (!(!ipv4 && !ipv6)) {
+              _context2.next = 11;
+              break;
+            }
+
+            _context2.next = 7;
+            return promisify(dns.lookup)(url.hostname);
+
+          case 7:
+            _yield$promisify = _context2.sent;
+            address = _yield$promisify.address;
+            family = _yield$promisify.family;
+
+            if (family === 4) {
+              ipv4 = address;
+            } else {
+              ipv6 = address;
+            }
+
+          case 11:
+            ipv4Resolved = Boolean(ipv4);
+            ipv6Resolved = Boolean(ipv6); // Match forbidden ranges
+
+            if (ipv4Resolved) {
+              ipv4 = new Address4(ipv4);
+              ipv4 = FORBIDDEN_IPV4.reduce(function (acc, cur) {
+                return acc && !ipv4.isInSubnet(cur);
+              }, true) && ipv4;
+            }
+
+            if (ipv6Resolved) {
+              ipv6 = new Address6(ipv6); // IPv6to4 addresses are handled separately
+
+              if (ipv6.is6to4()) {
+                ipv6to4 = new Address4(ipv6.to4());
+                ipv6 = FORBIDDEN_IPV4.reduce(function (acc, cur) {
+                  return acc && !ipv6to4.isInSubnet(cur);
+                }, true) && ipv6;
+              } else {
+                ipv6 = FORBIDDEN_IPV6.reduce(function (acc, cur) {
+                  return acc && !ipv6.isInSubnet(cur);
+                }, true) && ipv6;
+              }
+            }
+
+            if (!(ipv4Resolved && !ipv4 || ipv6Resolved && !ipv6)) {
+              _context2.next = 17;
+              break;
+            }
+
+            throw new Error('IP resolved in a forbidden range');
+
+          case 17:
+            return _context2.abrupt("return", rawUrl);
+
+          case 18:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function checkHost(_x3) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
 function plugin() {
-  var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      _ref2$disabled = _ref2.disabled,
-      disabled = _ref2$disabled === void 0 ? false : _ref2$disabled,
-      _ref2$maxFileSize = _ref2.maxFileSize,
-      maxFileSize = _ref2$maxFileSize === void 0 ? 1000000 : _ref2$maxFileSize,
-      _ref2$dirSizeLimit = _ref2.dirSizeLimit,
-      dirSizeLimit = _ref2$dirSizeLimit === void 0 ? 10000000 : _ref2$dirSizeLimit,
-      _ref2$downloadDestina = _ref2.downloadDestination,
-      downloadDestination = _ref2$downloadDestina === void 0 ? '/tmp' : _ref2$downloadDestina,
-      _ref2$defaultImagePat = _ref2.defaultImagePath,
-      defaultImagePath = _ref2$defaultImagePat === void 0 ? false : _ref2$defaultImagePat,
-      _ref2$defaultOn = _ref2.defaultOn,
-      defaultOn = _ref2$defaultOn === void 0 ? {
+  var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref3$disabled = _ref3.disabled,
+      disabled = _ref3$disabled === void 0 ? false : _ref3$disabled,
+      _ref3$maxFileSize = _ref3.maxFileSize,
+      maxFileSize = _ref3$maxFileSize === void 0 ? 1000000 : _ref3$maxFileSize,
+      _ref3$dirSizeLimit = _ref3.dirSizeLimit,
+      dirSizeLimit = _ref3$dirSizeLimit === void 0 ? 10000000 : _ref3$dirSizeLimit,
+      _ref3$downloadDestina = _ref3.downloadDestination,
+      downloadDestination = _ref3$downloadDestina === void 0 ? '/tmp' : _ref3$downloadDestina,
+      _ref3$defaultImagePat = _ref3.defaultImagePath,
+      defaultImagePath = _ref3$defaultImagePat === void 0 ? false : _ref3$defaultImagePat,
+      _ref3$defaultOn = _ref3.defaultOn,
+      defaultOn = _ref3$defaultOn === void 0 ? {
     statusCode: false,
     mimeType: false,
     fileTooBig: false,
     invalidPath: false
-  } : _ref2$defaultOn,
-      localUrlToLocalPath = _ref2.localUrlToLocalPath,
-      _ref2$httpRequestTime = _ref2.httpRequestTimeout,
-      httpRequestTimeout = _ref2$httpRequestTime === void 0 ? 5000 : _ref2$httpRequestTime;
+  } : _ref3$defaultOn,
+      localUrlToLocalPath = _ref3.localUrlToLocalPath,
+      _ref3$httpRequestTime = _ref3.httpRequestTimeout,
+      httpRequestTimeout = _ref3$httpRequestTime === void 0 ? 5000 : _ref3$httpRequestTime;
 
   // Sends an HTTP request, checks headers and resolves a readable stream
   // if headers are valid.
   // Rejects with an error if headers are invalid.
   var initDownload = function initDownload(url) {
     return new Promise(function (resolve, reject) {
-      var parsedUrl = URL.parse(url);
+      var parsedUrl = new URL(url);
       var proto = parsedUrl.protocol === 'https:' ? https : http;
-      var options = Object.assign({}, parsedUrl, {
+      var req = proto.get(parsedUrl, {
         timeout: httpRequestTimeout
-      });
-      var req = proto.get(options, function (res) {
+      }, function (res) {
         var headers = res.headers,
             statusCode = res.statusCode;
         var error;
@@ -199,7 +294,7 @@ function plugin() {
         }
 
         if (error) {
-          req.abort();
+          req.destroy();
           res.resume();
           reject(error);
           return;
@@ -208,7 +303,7 @@ function plugin() {
         resolve(res);
       });
       req.on('timeout', function () {
-        req.abort();
+        req.destroy();
         reject(new Error("Request for ".concat(url, " timed out")));
       });
       req.on('error', function (err) {
@@ -218,47 +313,47 @@ function plugin() {
   };
 
   var checkAndCopy = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(from, to) {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(from, to) {
       var data;
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
-              _context2.next = 2;
+              _context3.next = 2;
               return promisify(fs.readFile)(from)["catch"](function (e) {
                 e.replaceWithDefault = defaultOn && defaultOn.invalidPath;
                 throw e;
               });
 
             case 2:
-              data = _context2.sent;
-              _context2.next = 5;
+              data = _context3.sent;
+              _context3.next = 5;
               return checkFileType(from, data);
 
             case 5:
-              _context2.prev = 5;
-              _context2.next = 8;
+              _context3.prev = 5;
+              _context3.next = 8;
               return promisify(fs.copyFile)(from, to);
 
             case 8:
-              _context2.next = 13;
+              _context3.next = 13;
               break;
 
             case 10:
-              _context2.prev = 10;
-              _context2.t0 = _context2["catch"](5);
+              _context3.prev = 10;
+              _context3.t0 = _context3["catch"](5);
               throw new Error("Failed to copy ".concat(from, " to ").concat(to));
 
             case 13:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2, null, [[5, 10]]);
+      }, _callee3, null, [[5, 10]]);
     }));
 
-    return function checkAndCopy(_x3, _x4) {
-      return _ref3.apply(this, arguments);
+    return function checkAndCopy(_x4, _x5) {
+      return _ref4.apply(this, arguments);
     };
   }();
 
@@ -280,16 +375,16 @@ function plugin() {
   };
 
   var doDownloadTasks = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(tasks) {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(tasks) {
       var totalSize, _iterator, _step, task, fileSize, e;
 
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
-              _context3.next = 2;
+              _context4.next = 2;
               return Promise.all(tasks.map(function (task) {
-                return initDownload(task.url).then(function (res) {
+                return checkHost(task.url).then(initDownload).then(function (res) {
                   task.res = res;
                 }, function (error) {
                   task.error = error;
@@ -298,30 +393,30 @@ function plugin() {
 
             case 2:
               if (!dirSizeLimit) {
-                _context3.next = 23;
+                _context4.next = 23;
                 break;
               }
 
               totalSize = 0;
               _iterator = _createForOfIteratorHelper(tasks);
-              _context3.prev = 5;
+              _context4.prev = 5;
 
               _iterator.s();
 
             case 7:
               if ((_step = _iterator.n()).done) {
-                _context3.next = 15;
+                _context4.next = 15;
                 break;
               }
 
               task = _step.value;
 
               if (!task.error) {
-                _context3.next = 11;
+                _context4.next = 11;
                 break;
               }
 
-              return _context3.abrupt("continue", 13);
+              return _context4.abrupt("continue", 13);
 
             case 11:
               fileSize = getSize(task.res.headers);
@@ -335,46 +430,48 @@ function plugin() {
               }
 
             case 13:
-              _context3.next = 7;
+              _context4.next = 7;
               break;
 
             case 15:
-              _context3.next = 20;
+              _context4.next = 20;
               break;
 
             case 17:
-              _context3.prev = 17;
-              _context3.t0 = _context3["catch"](5);
+              _context4.prev = 17;
+              _context4.t0 = _context4["catch"](5);
 
-              _iterator.e(_context3.t0);
+              _iterator.e(_context4.t0);
 
             case 20:
-              _context3.prev = 20;
+              _context4.prev = 20;
 
               _iterator.f();
 
-              return _context3.finish(20);
+              return _context4.finish(20);
 
             case 23:
-              _context3.next = 25;
+              _context4.next = 25;
               return Promise.all(tasks.map(function (task) {
                 if (!task.error) {
                   return downloadAndSave(task.node, task.url, task.res, task.destination)["catch"](function (error) {
                     task.error = error;
                   });
+                } else {
+                  return null;
                 }
               }));
 
             case 25:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      }, _callee3, null, [[5, 17, 20, 23]]);
+      }, _callee4, null, [[5, 17, 20, 23]]);
     }));
 
-    return function doDownloadTasks(_x5) {
-      return _ref4.apply(this, arguments);
+    return function doDownloadTasks(_x6) {
+      return _ref5.apply(this, arguments);
     };
   }();
 
@@ -393,19 +490,19 @@ function plugin() {
   };
 
   return /*#__PURE__*/function () {
-    var _transform = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(tree, vfile) {
+    var _transform = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(tree, vfile) {
       var destinationPath, defaultImageDestination, downloadTasks, localCopyTasks, groupTasksByUrl, tasks, successfulTasks, failedTasks, _iterator3, _step3, task, _iterator5, _step5, node, _iterator4, _step4, _task, _iterator6, _step6, _node;
 
-      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+      return regeneratorRuntime.wrap(function _callee6$(_context6) {
         while (1) {
-          switch (_context5.prev = _context5.next) {
+          switch (_context6.prev = _context6.next) {
             case 0:
               if (!disabled) {
-                _context5.next = 2;
+                _context6.next = 2;
                 break;
               }
 
-              return _context5.abrupt("return");
+              return _context6.abrupt("return");
 
             case 2:
               // images are downloaded to destinationPath
@@ -415,103 +512,112 @@ function plugin() {
               downloadTasks = [];
               localCopyTasks = [];
               visit(tree, 'image', /*#__PURE__*/function () {
-                var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(node) {
+                var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(node) {
                   var url, position, parsedURI, extension, filename, destination, localPath, _localUrlToLocalPath, from, to;
 
-                  return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                  return regeneratorRuntime.wrap(function _callee5$(_context5) {
                     while (1) {
-                      switch (_context4.prev = _context4.next) {
+                      switch (_context5.prev = _context5.next) {
                         case 0:
                           url = node.url, position = node.position; // Empty URL make nasty error messages, so ignore them
 
                           if (url) {
-                            _context4.next = 4;
+                            _context5.next = 4;
                             break;
                           }
 
                           vfile.message("URL is empty", position);
-                          return _context4.abrupt("return");
+                          return _context5.abrupt("return");
 
                         case 4:
-                          _context4.prev = 4;
-                          parsedURI = URL.parse(url);
-                          _context4.next = 12;
+                          _context5.prev = 4;
+                          parsedURI = new URL(url);
+                          _context5.next = 18;
                           break;
 
                         case 8:
-                          _context4.prev = 8;
-                          _context4.t0 = _context4["catch"](4);
-                          vfile.message("Invalid URL: ".concat(url), position, url);
-                          return _context4.abrupt("return");
+                          _context5.prev = 8;
+                          _context5.t0 = _context5["catch"](4);
+                          _context5.prev = 10;
+                          // If the URL was invalid, it might be a local file
+                          parsedURI = new URL(url, 'file://');
+                          _context5.next = 18;
+                          break;
 
-                        case 12:
+                        case 14:
+                          _context5.prev = 14;
+                          _context5.t1 = _context5["catch"](10);
+                          vfile.message("Invalid URL: ".concat(url), position, url);
+                          return _context5.abrupt("return");
+
+                        case 18:
                           extension = path.extname(parsedURI.pathname);
                           filename = "".concat(shortid.generate()).concat(extension);
                           destination = path.join(destinationPath, filename);
 
                           if (parsedURI.host) {
-                            _context4.next = 28;
+                            _context5.next = 34;
                             break;
                           }
 
                           if (!(typeof localUrlToLocalPath === 'function')) {
-                            _context4.next = 20;
+                            _context5.next = 26;
                             break;
                           }
 
                           localPath = localUrlToLocalPath(url);
-                          _context4.next = 26;
+                          _context5.next = 32;
                           break;
 
-                        case 20:
+                        case 26:
                           if (!(Array.isArray(localUrlToLocalPath) && localUrlToLocalPath.length === 2)) {
-                            _context4.next = 25;
+                            _context5.next = 31;
                             break;
                           }
 
                           _localUrlToLocalPath = _slicedToArray(localUrlToLocalPath, 2), from = _localUrlToLocalPath[0], to = _localUrlToLocalPath[1];
                           localPath = url.replace(new RegExp("^".concat(from)), to);
-                          _context4.next = 26;
+                          _context5.next = 32;
                           break;
 
-                        case 25:
-                          return _context4.abrupt("return");
+                        case 31:
+                          return _context5.abrupt("return");
 
-                        case 26:
+                        case 32:
                           localCopyTasks.push({
                             node: node,
                             url: url,
                             destination: destination,
                             localSourcePath: localPath
                           });
-                          return _context4.abrupt("return");
+                          return _context5.abrupt("return");
 
-                        case 28:
+                        case 34:
                           if (['http:', 'https:'].includes(parsedURI.protocol)) {
-                            _context4.next = 31;
+                            _context5.next = 37;
                             break;
                           }
 
                           vfile.message("Protocol '".concat(parsedURI.protocol, "' not allowed."), position, url);
-                          return _context4.abrupt("return");
+                          return _context5.abrupt("return");
 
-                        case 31:
+                        case 37:
                           downloadTasks.push({
                             node: node,
                             url: url,
                             destination: destination
                           });
 
-                        case 32:
+                        case 38:
                         case "end":
-                          return _context4.stop();
+                          return _context5.stop();
                       }
                     }
-                  }, _callee4, null, [[4, 8]]);
+                  }, _callee5, null, [[4, 8], [10, 14]]);
                 }));
 
-                return function (_x8) {
-                  return _ref5.apply(this, arguments);
+                return function (_x9) {
+                  return _ref6.apply(this, arguments);
                 };
               }()); // Group by URL in order to download each file only once
 
@@ -547,20 +653,20 @@ function plugin() {
               tasks = downloadTasks.concat(localCopyTasks);
 
               if (tasks.length) {
-                _context5.next = 13;
+                _context6.next = 13;
                 break;
               }
 
-              return _context5.abrupt("return", tree);
+              return _context6.abrupt("return", tree);
 
             case 13:
               successfulTasks = [];
-              _context5.next = 16;
+              _context6.next = 16;
               return mkdir(destinationPath);
 
             case 16:
-              _context5.prev = 16;
-              _context5.next = 19;
+              _context6.prev = 16;
+              _context6.next = 19;
               return Promise.all([doDownloadTasks(downloadTasks), doLocalCopyTasks(localCopyTasks)]);
 
             case 19:
@@ -625,42 +731,42 @@ function plugin() {
                 _iterator4.f();
               }
 
-              _context5.next = 32;
+              _context6.next = 32;
               break;
 
             case 27:
-              _context5.prev = 27;
-              _context5.t0 = _context5["catch"](16);
-              vfile.message(_context5.t0);
-              _context5.next = 32;
+              _context6.prev = 27;
+              _context6.t0 = _context6["catch"](16);
+              vfile.message(_context6.t0);
+              _context6.next = 32;
               return promisify(rimraf)(destinationPath);
 
             case 32:
               if (!successfulTasks.length) {
-                _context5.next = 36;
+                _context6.next = 36;
                 break;
               }
 
               vfile.data.imageDir = destinationPath;
-              _context5.next = 38;
+              _context6.next = 38;
               break;
 
             case 36:
-              _context5.next = 38;
+              _context6.next = 38;
               return promisify(rimraf)(destinationPath);
 
             case 38:
-              return _context5.abrupt("return", tree);
+              return _context6.abrupt("return", tree);
 
             case 39:
             case "end":
-              return _context5.stop();
+              return _context6.stop();
           }
         }
-      }, _callee5, null, [[16, 27]]);
+      }, _callee6, null, [[16, 27]]);
     }));
 
-    function transform(_x6, _x7) {
+    function transform(_x7, _x8) {
       return _transform.apply(this, arguments);
     }
 
