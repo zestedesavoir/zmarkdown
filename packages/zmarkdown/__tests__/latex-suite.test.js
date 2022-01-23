@@ -501,6 +501,8 @@ test('math', () => {
     L = \frac{1}{2} \rho v^2 S C_L
     $$
 
+    This should be escaped: $\pink{\text{I love \LaTeX} \immediate\write18{ls / > outputrce} \input{outputrce}}$.
+
     hehe
   `)
   return expect(p).resolves.toMatchSnapshot()

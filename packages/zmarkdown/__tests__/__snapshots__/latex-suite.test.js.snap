@@ -360,6 +360,10 @@ exports[`math 1`] = `
 
 
 
+This should be escaped: $\\\\pink{\\\\text{I love    {ls / > outputrce}  {outputrce}}}$.
+
+
+
 hehe"
 `;
 

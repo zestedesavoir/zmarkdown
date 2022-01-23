@@ -1,7 +1,9 @@
 /* eslint-disable max-len */
 const remarkConfig = require('../mdast')
-const escape = require('rebber/dist/escaper')
+const globalEscape = require('rebber/dist/escaper')
+
 const appendix = require('rebber-plugins/dist/preprocessors/codeVisitor')
+const mathEscape = require('rebber-plugins/dist/preprocessors/mathEscape')
 
 const rebberConfig = {
   preprocessors: {
@@ -11,6 +13,10 @@ const rebberConfig = {
       'sCustomBlock',
       'secretCustomBlock',
     ]),
+
+    inlineMath:       [mathEscape],
+    inlineMathDouble: [mathEscape],
+    math:             [mathEscape],
 
     heading:          require('rebber-plugins/dist/preprocessors/headingVisitor'),
     quizzCustomBlock: require('rebber-plugins/dist/preprocessors/prepareQuizz'),
@@ -47,7 +53,7 @@ const rebberConfig = {
     warningCustomBlock:     require('rebber-plugins/dist/type/customBlocks'),
 
     inlineCode: (ctx, node) => {
-      const escaped = escape(node.value)
+      const escaped = globalEscape(node.value)
       return `\\CodeInline{${escaped}}`
     },
     iframe: (ctx, node) => {
