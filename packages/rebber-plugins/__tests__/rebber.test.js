@@ -99,6 +99,16 @@ integrationConfig.overrides.aCustomBlock = (ctx, node) => {
   return integrationConfig.overrides.warningCustomBlock(ctx, node)
 }
 
+test('abbr', () => {
+  const fixture = fixtures['abbr']
+  const {contents} = unified()
+    .use(reParse)
+    .use(rebber)
+    .processSync(fixture)
+
+  expect(contents).toMatchSnapshot()
+})
+
 test('heading', () => {
   const fixture = fixtures['heading']
   const {contents} = unified()

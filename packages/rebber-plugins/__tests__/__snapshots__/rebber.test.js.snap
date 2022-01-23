@@ -1,6 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`abbr 1`] = `
+"HELO to you
+
+
+
+Can I INJECT something in \\\\textbackslash{}LaTeX ?
+
+
+
+*[HELO]: In SMTP, the client initiates the dialog with a HELO command identifying itself
+
+
+
+*[INJECT]: discard\\\\}\\\\textbackslash{}LaTeX\\\\textbackslash{}abbr\\\\{INJECTED\\\\}\\\\{discard
+
+"
+`;
+
+exports[`abbr 2`] = `
 "\\\\abbr{FOO}{bar}
 
 "

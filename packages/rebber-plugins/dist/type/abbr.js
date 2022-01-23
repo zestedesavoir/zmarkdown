@@ -2,6 +2,8 @@
 
 /* Dependencies. */
 var all = require('rebber/dist/all');
+
+var escape = require('rebber/dist/escaper');
 /* Expose. */
 
 
@@ -9,7 +11,7 @@ module.exports = abbrPlugin;
 
 function abbrPlugin(ctx, node) {
   var abbr = all(ctx, node);
-  var reference = node.reference;
+  var reference = escape(node.reference);
 
   if (ctx.abbr && typeof ctx.abbr === 'function') {
     return ctx.abbr(abbr, reference);
