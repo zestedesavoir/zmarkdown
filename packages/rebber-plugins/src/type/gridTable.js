@@ -114,7 +114,7 @@ class GridTableStringifier {
         this.multiLineCellIndex,
         this.colIndex + this.colspan,
         this.colspan,
-        this.colIndex
+        this.colIndex,
       )
       rowText = rowText.replace(/\\hline/, this.lastMultiRowLine.getCLine())
     }

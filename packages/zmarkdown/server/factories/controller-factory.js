@@ -60,7 +60,7 @@ module.exports = (givenProc, template) => (req, res) => {
         if (manifestRender) processedContent = vfiles.reduce(manifest.assemble)
         else processedContent = vfiles[0]
 
-        const templateOpts = Object.assign(req.body.opts, {
+        const templateOpts = Object.assign(options, {
           latex: processedContent.contents,
         })
         const finalDocument = template(templateOpts)
