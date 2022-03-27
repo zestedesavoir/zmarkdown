@@ -5,10 +5,8 @@ const all = require('rebber/dist/all')
 module.exports = notes
 
 const defaultMacro = (identifier, text, protect) => {
-  const footnote = `\\footnote[${identifier}]{\\footnotemark{footnote:${identifier}} ${text}}`
-  if (protect) {
-    return `${footnote}\\protect`
-  }
+  const footnote = `${protect ? '\\protect' : ''}\\footnote[${identifier}]{${text}}`
+
   return footnote
 }
 
@@ -20,7 +18,7 @@ function autoId (node) {
 /* Stringify a footnote `node`. */
 function notes (ctx, node) {
   const macro = ctx.footnote || defaultMacro
-  const protect = !!node.inHeading
+  const protect = Boolean(node.inHeading)
 
   const identifier = autoId(node)
 

@@ -3,7 +3,7 @@
 module.exports = notes;
 
 var defaultMacro = function defaultMacro(identifier) {
-  return "\\textsuperscript{\\footnotemark{footnote:".concat(identifier, "}}");
+  return "\\textsuperscript{\\footnotemark[".concat(identifier, "]}");
 };
 
 function notes(ctx, node) {
