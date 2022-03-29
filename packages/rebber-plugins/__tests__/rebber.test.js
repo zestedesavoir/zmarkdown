@@ -27,6 +27,8 @@ const emoticonsConfig = {
   },
 }
 
+const mathEscape = require('../src/preprocessors/mathEscape')
+
 const integrationConfig = {
   preprocessors: {
     tableCell: require('../src/preprocessors/codeVisitor'),
@@ -36,6 +38,8 @@ const integrationConfig = {
       'secretCustomBlock',
     ]),
     heading: require('../src/preprocessors/headingVisitor'),
+    inlineMath: mathEscape,
+    math: mathEscape,
   },
   overrides: {
     abbr: require('../src/type/abbr'),
@@ -439,6 +443,10 @@ test('math', () => {
       $$
 
       hehe
+
+      We also want escaping like so: $\alphb$ or like so:
+
+      $$\ve\frac{1}{2}$$
     `)
   expect(contents).toMatchSnapshot()
 })

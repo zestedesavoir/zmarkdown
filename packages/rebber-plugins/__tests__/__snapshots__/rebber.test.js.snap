@@ -816,6 +816,14 @@ exports[`math 1`] = `
 
 hehe
 
+
+
+We also want escaping like so: $$ or like so:
+
+
+
+$\\\\frac{1}{2}$
+
 "
 `;
 

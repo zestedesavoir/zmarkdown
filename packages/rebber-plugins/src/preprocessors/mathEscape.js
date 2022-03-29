@@ -4,8 +4,14 @@ module.exports = () => node => {
   let commandStart = node.value.indexOf('\\')
 
   while (commandStart !== -1) {
-    const commandEnd = node.value.substr(commandStart).search(/[{[\s]/)
-    const commandName = node.value.substr(commandStart, commandEnd)
+    let commandEnd = node.value.substr(commandStart + 1).search(/[{[\s\\]/)
+
+    // End not found is end of line
+    if (commandEnd === -1) {
+      commandEnd = node.value.length - 1
+    }
+
+    const commandName = node.value.substr(commandStart, commandEnd + 1)
 
     // Check for unknown commands
     if (!katexConstants.includes(commandName)) {
