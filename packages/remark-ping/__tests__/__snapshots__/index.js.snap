@@ -1277,7 +1277,8 @@ Object {
 exports[`fixture suite 3 compiles to HTML: h3 1`] = `
 "<p><a href=\\"/membres/voir/Moté/\\" rel=\\"nofollow\\" class=\\"ping ping-link\\">@<span class=\\"ping-username\\">Moté</span></a> @Phigger</p>
 <p><a href=\\"/membres/voir/Phigger Moté/\\" rel=\\"nofollow\\" class=\\"ping ping-link\\">@<span class=\\"ping-username\\">Phigger Moté</span></a></p>
-<p>@Digitals@m <a href=\\"/membres/voir/Digitals@m/\\" rel=\\"nofollow\\" class=\\"ping ping-link\\">@<span class=\\"ping-username\\">Digitals@m</span></a></p>"
+<p>@Digitals@m <a href=\\"/membres/voir/Digitals@m/\\" rel=\\"nofollow\\" class=\\"ping ping-link\\">@<span class=\\"ping-username\\">Digitals@m</span></a></p>
+<p><a href=\\"/membres/voir/empty/\\" rel=\\"nofollow\\" class=\\"ping ping-link\\">@<span class=\\"ping-username\\">empty</span></a> @</p>"
 `;
 
 exports[`fixture suite 3 compiles to Markdown: m3 1`] = `
@@ -1286,6 +1287,8 @@ exports[`fixture suite 3 compiles to Markdown: m3 1`] = `
 @**Phigger Moté**
 
 @Digitals@m @**Digitals@m**
+
+@empty @
 "
 `;
 
@@ -1521,12 +1524,94 @@ Object {
       },
       "type": "paragraph",
     },
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "type": "text",
+              "value": "@",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "type": "text",
+                  "value": "empty",
+                },
+              ],
+              "data": Object {
+                "hName": "span",
+                "hProperties": Object {
+                  "class": "ping-username",
+                },
+              },
+              "type": "emphasis",
+            },
+          ],
+          "data": Object {
+            "hName": "a",
+            "hProperties": Object {
+              "class": "ping ping-link",
+              "href": "/membres/voir/empty/",
+              "rel": "nofollow",
+            },
+          },
+          "position": Position {
+            "end": Object {
+              "column": 7,
+              "line": 7,
+              "offset": 70,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 7,
+              "offset": 64,
+            },
+          },
+          "type": "ping",
+          "url": "/membres/voir/empty/",
+          "username": "empty",
+        },
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 9,
+              "line": 7,
+              "offset": 72,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 7,
+              "line": 7,
+              "offset": 70,
+            },
+          },
+          "type": "text",
+          "value": " @",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 9,
+          "line": 7,
+          "offset": 72,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 7,
+          "offset": 64,
+        },
+      },
+      "type": "paragraph",
+    },
   ],
   "position": Object {
     "end": Object {
-      "column": 28,
-      "line": 5,
-      "offset": 62,
+      "column": 9,
+      "line": 7,
+      "offset": 72,
     },
     "start": Object {
       "column": 1,
