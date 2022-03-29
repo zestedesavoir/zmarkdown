@@ -17,8 +17,8 @@ module.exports = merge.all([gh, katex, {
     img:     ['class', 'className'],
     span:    ['id', 'data-count', 'class', 'className'],
     summary: ['class', 'className'],
-    th:      ['colspan', 'colSpan', 'rowSpan', 'rowspan'],
     td:      ['colspan', 'colSpan', 'rowSpan', 'rowspan'],
+    th:      ['colspan', 'colSpan', 'rowSpan', 'rowspan'],
   },
   protocols: {
     href: ['ftp', 'dav', 'sftp', 'magnet', 'tftp', 'view-source'],

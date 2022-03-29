@@ -2,10 +2,12 @@ module.exports = {
   secret: {
     classes: 'custom-block-spoiler',
     title:   'optional',
+    details: true,
   },
   s: {
     classes: 'custom-block-spoiler',
     title:   'optional',
+    details: true,
   },
   information: {
     classes: 'custom-block-information',
