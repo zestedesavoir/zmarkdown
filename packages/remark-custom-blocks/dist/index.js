@@ -4,7 +4,7 @@ function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableTo
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
@@ -16,7 +16,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -73,12 +73,13 @@ module.exports = function blockPlugin() {
     if (!keep) return;
     if (keep.index !== 0) return;
 
-    var _keep = _slicedToArray(keep, 3),
+    var _keep = _slicedToArray(keep, 2),
         eaten = _keep[0],
-        blockType = _keep[1],
-        blockTitle = _keep[2];
-    /* istanbul ignore if - never used (yet) */
+        blockType = _keep[1];
 
+    var potentialBlock = availableBlocks[blockType];
+    var blockTitle = keep[2] || potentialBlock.defaultTitle;
+    /* istanbul ignore if - never used (yet) */
 
     if (silent) return true;
     var linesToEat = [];
@@ -99,7 +100,6 @@ module.exports = function blockPlugin() {
 
     var contentString = content.join(C_NEWLINE);
     var stringToEat = eaten + linesToEat.join(C_NEWLINE);
-    var potentialBlock = availableBlocks[blockType];
     var titleAllowed = potentialBlock.title && ['optional', 'required'].includes(potentialBlock.title);
     var titleRequired = potentialBlock.title && potentialBlock.title === 'required';
     if (titleRequired && !blockTitle) return;

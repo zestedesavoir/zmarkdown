@@ -7,52 +7,60 @@ import remark2rehype from 'remark-rehype'
 import xtend from 'xtend'
 import plugin from '../src/'
 
+const defaultConfig = {
+  secret: {
+    classes: 'spoiler',
+  },
+  s: {
+    classes: 'spoiler',
+  },
+  information: {
+    classes: 'information ico-after',
+  },
+  i: {
+    classes: 'information ico-after',
+  },
+  question: {
+    classes: 'question ico-after',
+  },
+  q: {
+    classes: 'question ico-after',
+  },
+  attention: {
+    classes: 'warning ico-after',
+  },
+  a: {
+    classes: 'warning ico-after',
+  },
+  erreur: {
+    classes: 'error ico-after',
+  },
+  e: {
+    classes: 'error ico-after',
+  },
+  neutre: {
+    classes: 'neutral foo',
+    title: 'required',
+  },
+  customizableBlock: {
+    classes: 'neutral foo',
+    title: 'optional',
+  },
+  details: {
+    classes: 'spoiler',
+    title: 'optional',
+    details: true,
+  },
+  defaultTitle: {
+    classes: 'defaultTitle',
+    title: 'optional',
+    defaultTitle: 'Anything you want',
+  },
+}
+
 const render = (text, allowTitle, config) => {
-  const realConfig = xtend({
-    secret: {
-      classes: 'spoiler',
-    },
-    s: {
-      classes: 'spoiler',
-    },
-    information: {
-      classes: 'information ico-after',
-    },
-    i: {
-      classes: 'information ico-after',
-    },
-    question: {
-      classes: 'question ico-after',
-    },
-    q: {
-      classes: 'question ico-after',
-    },
-    attention: {
-      classes: 'warning ico-after',
-    },
-    a: {
-      classes: 'warning ico-after',
-    },
-    erreur: {
-      classes: 'error ico-after',
-    },
-    e: {
-      classes: 'error ico-after',
-    },
-    neutre: {
-      classes: 'neutral foo',
-      title: 'required',
-    },
-    customizableBlock: {
-      classes: 'neutral foo',
-      title: 'optional',
-    },
-    details: {
-      classes: 'spoiler',
-      title: 'optional',
-      details: true,
-    },
-  }, config)
+  const realConfig = xtend(Object.assign({}, defaultConfig), config)
+
   return unified()
     .use(reParse)
     .use(remark2rehype)
@@ -61,57 +69,11 @@ const render = (text, allowTitle, config) => {
     .processSync(text)
 }
 
-
 const renderToMarkdown = (text) => unified()
   .use(reParse)
   .use(remarkStringify)
-  .use(plugin, {
-    secret: {
-      classes: 'spoiler',
-    },
-    s: {
-      classes: 'spoiler',
-    },
-    information: {
-      classes: 'information ico-after',
-    },
-    i: {
-      classes: 'information ico-after',
-    },
-    question: {
-      classes: 'question ico-after',
-    },
-    q: {
-      classes: 'question ico-after',
-    },
-    attention: {
-      classes: 'warning ico-after',
-    },
-    a: {
-      classes: 'warning ico-after',
-    },
-    erreur: {
-      classes: 'error ico-after',
-    },
-    e: {
-      classes: 'error ico-after',
-    },
-    neutre: {
-      classes: 'neutral foo',
-      title: 'required',
-    },
-    customizableBlock: {
-      classes: 'neutral foo',
-      title: 'optional',
-    },
-    details: {
-      classes: 'spoiler',
-      title: 'optional',
-      details: true,
-    },
-  })
+  .use(plugin, Object.assign({}, defaultConfig))
   .processSync(text)
-
 
 const fixture = dedent`
   [[s]]

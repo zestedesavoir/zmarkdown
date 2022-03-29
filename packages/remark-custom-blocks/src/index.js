@@ -48,9 +48,13 @@ module.exports = function blockPlugin (availableBlocks = {}) {
   function blockTokenizer (eat, value, silent) {
     const now = eat.now()
     const keep = regex.exec(value)
+
     if (!keep) return
     if (keep.index !== 0) return
-    const [eaten, blockType, blockTitle] = keep
+
+    const [eaten, blockType] = keep
+    const potentialBlock = availableBlocks[blockType]
+    const blockTitle = keep[2] || potentialBlock.defaultTitle
 
     /* istanbul ignore if - never used (yet) */
     if (silent) return true
@@ -72,10 +76,8 @@ module.exports = function blockPlugin (availableBlocks = {}) {
     }
 
     const contentString = content.join(C_NEWLINE)
-
     const stringToEat = eaten + linesToEat.join(C_NEWLINE)
 
-    const potentialBlock = availableBlocks[blockType]
     const titleAllowed = potentialBlock.title &&
       ['optional', 'required'].includes(potentialBlock.title)
     const titleRequired = potentialBlock.title && potentialBlock.title === 'required'
@@ -139,9 +141,12 @@ module.exports = function blockPlugin (availableBlocks = {}) {
   // Inject blockTokenizer
   const blockTokenizers = Parser.prototype.blockTokenizers
   const blockMethods = Parser.prototype.blockMethods
+
   blockTokenizers.customBlocks = blockTokenizer
   blockMethods.splice(blockMethods.indexOf('fencedCode') + 1, 0, 'customBlocks')
+
   const Compiler = this.Compiler
+
   if (Compiler) {
     const visitors = Compiler.prototype.visitors
     if (!visitors) return
@@ -152,10 +157,12 @@ module.exports = function blockPlugin (availableBlocks = {}) {
       visitors[`${key}CustomBlockBody`] = compiler.blockBody
     })
   }
+
   // Inject into interrupt rules
   const interruptParagraph = Parser.prototype.interruptParagraph
   const interruptList = Parser.prototype.interruptList
   const interruptBlockquote = Parser.prototype.interruptBlockquote
+
   interruptParagraph.splice(interruptParagraph.indexOf('fencedCode') + 1, 0, ['customBlocks'])
   interruptList.splice(interruptList.indexOf('fencedCode') + 1, 0, ['customBlocks'])
   interruptBlockquote.splice(interruptBlockquote.indexOf('fencedCode') + 1, 0, ['customBlocks'])
