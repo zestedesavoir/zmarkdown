@@ -201,7 +201,7 @@ Markdown to LaTeX
 ### URL
 
 ```
-POST http://localhost:27272/epub
+POST http://localhost:27272/latex
 ```
 
 ### Request `opts` values
