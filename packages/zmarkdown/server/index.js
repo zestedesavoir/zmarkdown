@@ -14,9 +14,8 @@ Sentry.init({
 
 const app = express()
 
-// Sentry error handling
+// Sentry request handling
 app.use(Sentry.Handlers.requestHandler())
-app.use(Sentry.Handlers.errorHandler())
 
 app.use(cors())
 
@@ -28,6 +27,9 @@ if (process.env.ZMD_ENV !== 'production') {
 // Depend on routers
 app.use('/', require('./routes/endpoints'))
 app.use('/munin', require('./routes/munin'))
+
+// Sentry error handling
+app.use(Sentry.Handlers.errorHandler())
 
 const server = app.listen(process.env.PORT || 27272, () => {
   const host = server.address().address
