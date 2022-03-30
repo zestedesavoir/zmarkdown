@@ -67,7 +67,7 @@ module.exports = function plugin(_ref) {
       username = username.slice(0, -fencedEndSequence.length);
     }
 
-    if (pingUsername(username) === true) {
+    if (pingUsername(username) === true && username.trim() !== '') {
       var url = userURL(username);
       return eat(eaten)({
         type: 'ping',

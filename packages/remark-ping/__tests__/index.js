@@ -16,6 +16,7 @@ const mockUsernames = [
   'Moté',
   'Phigger Moté',
   'Digitals@m',
+  'empty',
 ]
 
 function pingUsername (username) {
@@ -82,6 +83,8 @@ const fixtures = [
     @**Phigger Moté**
 
     @Digitals@m @**Digitals@m**
+
+    @empty @
   `,
 ]
 
@@ -89,7 +92,7 @@ const pings = [
   ['I AM CLEM', 'baz baz'],
   ['I AM CLEM', 'I AM CLEM', 'I AM CLEM'],
   ['foo', 'bar'],
-  ['Moté', 'Phigger Moté', 'Digitals@m'],
+  ['Moté', 'Phigger Moté', 'Digitals@m', 'empty'],
 ]
 
 fixtures.forEach((fixture, i) => {

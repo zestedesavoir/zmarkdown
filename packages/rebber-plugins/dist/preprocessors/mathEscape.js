@@ -7,8 +7,13 @@ module.exports = function () {
     var commandStart = node.value.indexOf('\\');
 
     while (commandStart !== -1) {
-      var commandEnd = node.value.substr(commandStart).search(/[{[\s]/);
-      var commandName = node.value.substr(commandStart, commandEnd); // Check for unknown commands
+      var commandEnd = node.value.substr(commandStart + 1).search(/[{[\s\\]/); // End not found is end of line
+
+      if (commandEnd === -1) {
+        commandEnd = node.value.length - 1;
+      }
+
+      var commandName = node.value.substr(commandStart, commandEnd + 1); // Check for unknown commands
 
       if (!katexConstants.includes(commandName)) {
         node.value = node.value.replace(commandName, ' ');
