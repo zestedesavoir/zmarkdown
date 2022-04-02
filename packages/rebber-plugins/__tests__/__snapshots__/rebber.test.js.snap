@@ -308,7 +308,7 @@ Mathilde & 35 \\\\\\\\ \\\\hline
 `;
 
 exports[`footnotes 1`] = `
-"\\\\part{International Radiotelephony Spelling Alphabet\\\\textsuperscript{\\\\footnotemark[wiki]}}
+"\\\\part{International Radiotelephony Spelling Alphabet\\\\textsuperscript{\\\\protect\\\\footnotemark[wiki]}}
 
 
 Here's the NATO phonetic alphabet\\\\textsuperscript{\\\\footnotemark[wiki]}: Alfa, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliet, Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango, Uniform, Victor\\\\textsuperscript{\\\\footnotemark[name]}\\\\textsuperscript{\\\\footnotemark[consecutive]}, Whiskey, X-ray, Yankee, and Zulu.
@@ -432,7 +432,7 @@ or
 
 
 
-\\\\part{my heading\\\\textsuperscript{\\\\footnotemark[ref]}}
+\\\\part{my heading\\\\textsuperscript{\\\\protect\\\\footnotemark[ref]}}
 
 
 \\\\footnotetext[ref]{def}
@@ -479,7 +479,7 @@ This nested footnote would not work:
 
 \\\\footnotetext[foo]{bar baz.}
 
-\\\\part{mytitle A\\\\textsuperscript{\\\\footnotemark[footnoteref]}}
+\\\\part{mytitle A\\\\textsuperscript{\\\\protect\\\\footnotemark[footnoteref]}}
 
 
 \\\\footnotetext[footnoteref]{reference in title}

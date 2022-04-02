@@ -5,7 +5,7 @@ LaTeX requires special handlings of footnotes placed in headings such as \sectio
 We therefore mark each footnote placed in heading for later handling.
 */
 
-const nodeTypes = ['footnote', 'footnoteDefinition']
+const nodeTypes = ['footnote', 'footnoteDefinition', 'footnoteReference']
 
 function plugin () {
   return function headingVisitor (node, index, parent) {

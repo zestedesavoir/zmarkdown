@@ -252,15 +252,15 @@ quote
 `;
 
 exports[`footnotes 1`] = `
-"\\\\levelOneTitle{mytitle A\\\\textsuperscript{\\\\footnotemark[1]}}
+"\\\\levelOneTitle{mytitle A\\\\textsuperscript{\\\\protect\\\\footnotemark[1]}}
 
 
 \\\\footnotetext[1]{reference in title}
 
-\\\\levelOneTitle{mytitle B\\\\textsuperscript{\\\\footnotemark[2]}\\\\protect\\\\footnotetext[2]{footnoterawhead inner}}
+\\\\levelOneTitle{mytitle B\\\\textsuperscript{\\\\protect\\\\footnotemark[2]}\\\\protect\\\\footnotetext[2]{footnoterawhead inner}}
 
 
-\\\\levelOneTitle{myti\\\\textit{tle C\\\\textsuperscript{\\\\footnotemark[3]}\\\\protect\\\\footnotetext[3]{foo inner}}}
+\\\\levelOneTitle{myti\\\\textit{tle C\\\\textsuperscript{\\\\protect\\\\footnotemark[3]}\\\\protect\\\\footnotetext[3]{foo inner}}}
 
 
 a paragraph\\\\textsuperscript{\\\\footnotemark[4]}\\\\footnotetext[4]{footnoteRawPar inner}"

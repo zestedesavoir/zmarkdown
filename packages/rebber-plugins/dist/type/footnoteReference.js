@@ -1,12 +1,14 @@
 "use strict";
 
+/* Expose. */
 module.exports = notes;
 
-var defaultMacro = function defaultMacro(identifier) {
-  return "\\textsuperscript{\\footnotemark[".concat(identifier, "]}");
+var defaultMacro = function defaultMacro(identifier, protect) {
+  return "\\textsuperscript{".concat(protect ? '\\protect' : '', "\\footnotemark[").concat(identifier, "]}");
 };
 
 function notes(ctx, node) {
   var macro = ctx.footnoteReference || defaultMacro;
-  return macro(node.identifier);
+  var protect = Boolean(node.inHeading);
+  return macro(node.identifier, protect);
 }

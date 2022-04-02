@@ -5,7 +5,6 @@ const all = require('rebber/dist/all')
 module.exports = notes
 
 const defaultMacro = (identifier, text, protect) =>
-  // eslint-disable-next-line max-len
   `${protect ? '\\protect' : ''}\\footnotetext[${identifier}]{${text}}`
 
 function notes (ctx, node) {
