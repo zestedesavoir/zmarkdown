@@ -1,6 +1,6 @@
 {
   "name": "rebber-plugins",
-  "version": "4.3.1",
+  "version": "4.3.2",
   "description": "Stringifies custom MDAST nodes to LaTeX",
   "repository": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rebber-plugins",
   "author": "Victor Felder <victor@draft.li> (https://draft.li)",
