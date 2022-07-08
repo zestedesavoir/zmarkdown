@@ -2,6 +2,11 @@
 
 exports[`HTML endpoint accepts POSTed markdown 1`] = `"<h3 id=\\"foo\\">foo<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#foo\\"><span class=\\"icon icon-link\\"></span></a></h3>"`;
 
+exports[`HTML endpoint can enforce shifting level 1`] = `
+"<h2 id=\\"i-have-seen-a-dolphin\\">I have seen a dolphin<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#i-have-seen-a-dolphin\\"><span class=\\"icon icon-link\\"></span></a></h2>
+<p>On a camera. What is happening with animals these days?\\"</p>"
+`;
+
 exports[`HTML endpoint correctly renders manifest 1`] = `
 Object {
   "children": Array [
