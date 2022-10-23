@@ -339,6 +339,16 @@ describe('Texfile endpoint', () => {
     expect(result[0]).toMatchSnapshot()
   })
 
+  it('allows date', async () => {
+    const specificOptions = {date: '2 mai 1998'}
+    const response = await a.post(texfile,
+      {md: '# foo', opts: xtend(texfileOpts, specificOptions)})
+    expect(response.status).toBe(200)
+
+    const result = response.data
+    expect(result[0]).toMatchSnapshot()
+  })
+
   it('does not return metadata', async () => {
     const response = await a.post(texfile, {md: '# foo', opts: texfileOpts})
 

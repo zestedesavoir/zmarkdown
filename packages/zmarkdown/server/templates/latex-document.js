@@ -17,6 +17,7 @@ module.exports = opts => {
     title,
     authors,
     license,
+    date,
     latex,
   } = opts
   // Required options
@@ -33,6 +34,7 @@ module.exports = opts => {
 
   // Optional arguments
   const extraHeaders = []
+  if (date) extraHeaders.push(`\\date{${date}}`)
   if (logoDirectory && contentLogo) extraHeaders.push(`\\logo{${logoDirectory}/${contentLogo}}`)
   if (logoDirectory && editorLogo) extraHeaders.push(`\\editorLogo{${logoDirectory}/${editorLogo}}`)
   if (contentLink) extraHeaders.push(`\\tutoLink{${contentLink}}`)
