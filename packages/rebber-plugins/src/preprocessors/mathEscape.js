@@ -4,21 +4,27 @@ module.exports = () => node => {
   let commandStart = node.value.indexOf('\\')
 
   while (commandStart !== -1) {
-    let commandEnd = node.value.substr(commandStart + 1).search(/[{[\s\\]/)
+    // Eat leading backslashes
+    let leadSlashes = 1
+    for (; node.value.charAt(commandStart + leadSlashes) === '\\'; leadSlashes++);
 
-    // End not found is end of line
-    if (commandEnd === -1) {
-      commandEnd = node.value.length - 1
-    }
+    // Find end of command
+    const potentialEnd = node.value.substr(commandStart + leadSlashes).search(/[{[\s\\]/)
 
-    const commandName = node.value.substr(commandStart, commandEnd + 1)
+    // Is end was not found, use end of line
+    const commandLength = potentialEnd === -1 ? node.value.length : leadSlashes + potentialEnd
+
+    const commandName = node.value.substr(commandStart, commandLength)
 
     // Check for unknown commands
     if (!katexConstants.includes(commandName)) {
-      node.value = node.value.replace(commandName, ' ')
+      const beforeCommand = node.value.substring(0, commandStart)
+      const afterCommand = node.value.substring(commandStart + commandLength, node.value.length)
+
+      node.value = `${beforeCommand} ${afterCommand}`
     }
 
-    commandStart = node.value.indexOf('\\', commandStart + 1)
+    commandStart = node.value.indexOf('\\', commandStart + leadSlashes)
   }
 
   // Check count of brackets
