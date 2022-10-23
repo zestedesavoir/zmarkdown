@@ -82,6 +82,26 @@ exports[`Texfile endpoint accepts POSTed markdown 1`] = `
 \\\\end{document}"
 `;
 
+exports[`Texfile endpoint allows date 1`] = `
+"\\\\documentclass[contentType]{zmdocument}
+
+\\\\usepackage{blindtext}
+\\\\title{The Title}
+\\\\author{FØØ, Bär}
+\\\\licence[/tmp/l/by-nc-sa.svg]{CC-BY-NC-SA}{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}
+\\\\date{2 mai 1998}
+\\\\smileysPath{/tmp/s}
+\\\\makeglossaries
+
+\\\\begin{document}
+\\\\maketitle
+\\\\tableofcontents
+
+\\\\levelOneTitle{foo}
+
+\\\\end{document}"
+`;
+
 exports[`Texfile endpoint allows extra arguments 1`] = `
 "\\\\documentclass[contentType]{zmdocument}
 
