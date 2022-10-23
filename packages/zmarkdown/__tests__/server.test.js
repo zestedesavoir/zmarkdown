@@ -188,6 +188,21 @@ describe('HTML endpoint', () => {
     const [, metadata] = response.data
     expect(metadata.hasQuizz).toBe(true)
   })
+
+  it('can enforce shifting level', async () => {
+    const text = dedent(`
+    # I have seen a dolphin
+    
+    On a camera. What is happening with animals these days?"
+    `)
+
+    const response = await a.post(html, {md: text, opts: {heading_shift: 1, enforce_shift: true}})
+    expect(response.status).toBe(200)
+
+    const [content] = response.data
+    expect(content).toMatchSnapshot()
+    expect(content).toContain('h2')
+  })
 })
 
 describe('LaTeX endpoint', () => {
