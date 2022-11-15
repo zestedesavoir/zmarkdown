@@ -9,7 +9,7 @@ module.exports = () => node => {
     for (; node.value.charAt(commandStart + leadSlashes) === '\\'; leadSlashes++);
 
     // Find end of command
-    const potentialEnd = node.value.substr(commandStart + leadSlashes).search(/[{[\s\\]/)
+    const potentialEnd = node.value.substr(commandStart + leadSlashes).search(/[^\w_-]/)
 
     // Is end was not found, use end of line
     const commandLength = potentialEnd === -1 ? node.value.length : leadSlashes + potentialEnd
