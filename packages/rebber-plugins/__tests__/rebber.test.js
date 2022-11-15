@@ -377,6 +377,7 @@ Object.keys(fixtures).filter(Boolean).filter(name => name.startsWith('mix-')).fo
         right: 'custom-right',
         center: 'custom-center',
       })
+      .use(remarkMath)
       .use(rebber, integrationConfig)
       .processSync(fixture.replace(/·/g, ' '))
 
