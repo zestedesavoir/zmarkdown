@@ -1,5 +1,24 @@
 const katexConstants = require('../../src/preprocessors/katexConstants.json')
 
+const endOfCommandChars = ['\\', '[', ']', '{', '}', ' ', '(', ')', '\t', '\n']
+
+const commandsThatDefineDelimiters = {
+  left: ['[', '(', '{', '.'],
+  right: [']', ')', '}', '.'],
+}
+function isEndOfCommand (nodeLine, index, currentIntendedCommand) {
+  if (index >= nodeLine.length) {
+    return true
+  }
+  // handle the case of \\
+  const currentChar = nodeLine.charAt(index)
+  if (currentChar === '\\' && currentIntendedCommand === '') {
+    return false
+  }
+  return endOfCommandChars.indexOf(currentChar) !== -1
+
+}
+
 module.exports = () => node => {
   let commandStart = node.value.indexOf('\\')
 
@@ -9,22 +28,26 @@ module.exports = () => node => {
     for (; node.value.charAt(commandStart + leadSlashes) === '\\'; leadSlashes++);
 
     // Find end of command
-    const potentialEnd = node.value.substr(commandStart + leadSlashes).search(/[^\w_-]/)
-
-    // Is end was not found, use end of line
-    const commandLength = potentialEnd === -1 ? node.value.length : leadSlashes + potentialEnd
-
-    const commandName = node.value.substr(commandStart, commandLength)
-
+    let potentialEnd = leadSlashes + commandStart
+    // the \\ command is special, just get rid of it
+    if (leadSlashes === 2 && isEndOfCommand(node.value, potentialEnd, currentCommand)) {
+      commandStart = node.value.indexOf('\\', potentialEnd)
+      continue
+    }
+    let currentCommand = ''
+    for (; !isEndOfCommand(node.value, potentialEnd, currentCommand); potentialEnd++) {
+      currentCommand += node.value.charAt(potentialEnd)
+    }
+    const commandLength = currentCommand.length
     // Check for unknown commands
-    if (!katexConstants.includes(commandName)) {
+    if (!katexConstants.includes(`\\${currentCommand}`)) {
       const beforeCommand = node.value.substring(0, commandStart)
-      const afterCommand = node.value.substring(commandStart + commandLength, node.value.length)
+      const afterCommand = node.value.substring(commandStart + commandLength + 1, node.value.length)
 
       node.value = `${beforeCommand} ${afterCommand}`
     }
 
-    commandStart = node.value.indexOf('\\', commandStart + leadSlashes)
+    commandStart = node.value.indexOf('\\', potentialEnd)
   }
 
   // Check count of brackets

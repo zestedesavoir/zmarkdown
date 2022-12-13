@@ -2,6 +2,27 @@
 
 var katexConstants = require('../../src/preprocessors/katexConstants.json');
 
+var endOfCommandChars = ['\\', '[', ']', '{', '}', ' ', '(', ')', '\t', '\n'];
+var commandsThatDefineDelimiters = {
+  left: ['[', '(', '{', '.'],
+  right: [']', ')', '}', '.']
+};
+
+function isEndOfCommand(nodeLine, index, currentIntendedCommand) {
+  if (index >= nodeLine.length) {
+    return true;
+  } // handle the case of \\
+
+
+  var currentChar = nodeLine.charAt(index);
+
+  if (currentChar === '\\' && currentIntendedCommand === '') {
+    return false;
+  }
+
+  return endOfCommandChars.indexOf(currentChar) !== -1;
+}
+
 module.exports = function () {
   return function (node) {
     var commandStart = node.value.indexOf('\\');
@@ -15,18 +36,28 @@ module.exports = function () {
       } // Find end of command
 
 
-      var potentialEnd = node.value.substr(commandStart + leadSlashes).search(/[{[\s\\]/); // Is end was not found, use end of line
+      var potentialEnd = leadSlashes + commandStart; // the \\ command is special, just get rid of it
 
-      var commandLength = potentialEnd === -1 ? node.value.length : leadSlashes + potentialEnd;
-      var commandName = node.value.substr(commandStart, commandLength); // Check for unknown commands
+      if (leadSlashes === 2 && isEndOfCommand(node.value, potentialEnd, currentCommand)) {
+        commandStart = node.value.indexOf('\\', potentialEnd);
+        continue;
+      }
 
-      if (!katexConstants.includes(commandName)) {
+      var currentCommand = '';
+
+      for (; !isEndOfCommand(node.value, potentialEnd, currentCommand); potentialEnd++) {
+        currentCommand += node.value.charAt(potentialEnd);
+      }
+
+      var commandLength = currentCommand.length; // Check for unknown commands
+
+      if (!katexConstants.includes("\\".concat(currentCommand))) {
         var beforeCommand = node.value.substring(0, commandStart);
-        var afterCommand = node.value.substring(commandStart + commandLength, node.value.length);
+        var afterCommand = node.value.substring(commandStart + commandLength + 1, node.value.length);
         node.value = "".concat(beforeCommand, " ").concat(afterCommand);
       }
 
-      commandStart = node.value.indexOf('\\', commandStart + leadSlashes);
+      commandStart = node.value.indexOf('\\', potentialEnd);
     } // Check count of brackets
 
 

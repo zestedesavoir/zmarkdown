@@ -1227,7 +1227,11 @@ exports[`mix-math-escape 1`] = `
 
 
 
-\\\\[ \\\\left( \\\\frac{(4 + 5)\\\\times(2 + 3) + 6}{8 + 7} \\\\right) ^9 \\\\]"
+\\\\[ \\\\left( \\\\frac{(4 + 5)\\\\times(2 + 3) + 6}{8 + 7} \\\\right) ^9 \\\\]
+
+
+
+$42\\\\%$"
 `;
 
 exports[`paragraph 1`] = `
