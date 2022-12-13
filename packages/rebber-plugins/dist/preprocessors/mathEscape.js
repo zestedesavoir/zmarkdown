@@ -3,10 +3,6 @@
 var katexConstants = require('../../src/preprocessors/katexConstants.json');
 
 var endOfCommandChars = ['\\', '[', ']', '{', '}', ' ', '(', ')', '\t', '\n'];
-var commandsThatDefineDelimiters = {
-  left: ['[', '(', '{', '.'],
-  right: [']', ')', '}', '.']
-};
 
 function isEndOfCommand(nodeLine, index, currentIntendedCommand) {
   if (index >= nodeLine.length) {
@@ -33,8 +29,9 @@ module.exports = function () {
 
       for (; node.value.charAt(commandStart + leadSlashes) === '\\'; leadSlashes++) {
         ;
-      } // Find end of command
+      }
 
+      var currentCommand = ''; // Find end of command
 
       var potentialEnd = leadSlashes + commandStart; // the \\ command is special, just get rid of it
 
@@ -42,8 +39,6 @@ module.exports = function () {
         commandStart = node.value.indexOf('\\', potentialEnd);
         continue;
       }
-
-      var currentCommand = '';
 
       for (; !isEndOfCommand(node.value, potentialEnd, currentCommand); potentialEnd++) {
         currentCommand += node.value.charAt(potentialEnd);
