@@ -22,7 +22,7 @@ module.exports = () => node => {
     // Eat leading backslashes
     let leadSlashes = 1
     for (; node.value.charAt(commandStart + leadSlashes) === '\\'; leadSlashes++);
-
+    let currentCommand = ''
     // Find end of command
     let potentialEnd = leadSlashes + commandStart
     // the \\ command is special, just get rid of it
@@ -30,7 +30,6 @@ module.exports = () => node => {
       commandStart = node.value.indexOf('\\', potentialEnd)
       continue
     }
-    let currentCommand = ''
     for (; !isEndOfCommand(node.value, potentialEnd, currentCommand); potentialEnd++) {
       currentCommand += node.value.charAt(potentialEnd)
     }
