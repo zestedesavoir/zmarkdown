@@ -2,10 +2,6 @@ const katexConstants = require('../../src/preprocessors/katexConstants.json')
 
 const endOfCommandChars = ['\\', '[', ']', '{', '}', ' ', '(', ')', '\t', '\n']
 
-const commandsThatDefineDelimiters = {
-  left: ['[', '(', '{', '.'],
-  right: [']', ')', '}', '.'],
-}
 function isEndOfCommand (nodeLine, index, currentIntendedCommand) {
   if (index >= nodeLine.length) {
     return true
