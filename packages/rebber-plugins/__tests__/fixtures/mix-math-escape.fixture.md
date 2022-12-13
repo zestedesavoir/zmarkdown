@@ -15,3 +15,5 @@ $$
 $$
 
 $$42\%$$
+
+This should be escaped: $\pink{	\ext{I love \LaTeX} \immediate\write18{ls / > outputrce} \input{outputrce}}$

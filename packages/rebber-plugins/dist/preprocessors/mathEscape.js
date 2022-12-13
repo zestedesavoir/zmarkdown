@@ -49,10 +49,12 @@ module.exports = function () {
       if (!katexConstants.includes("\\".concat(currentCommand))) {
         var beforeCommand = node.value.substring(0, commandStart);
         var afterCommand = node.value.substring(commandStart + commandLength + 1, node.value.length);
-        node.value = "".concat(beforeCommand, " ").concat(afterCommand);
+        node.value = "".concat(beforeCommand, " ").concat(afterCommand); // as we changed the command we need to restart from the very start
+
+        potentialEnd = 1;
       }
 
-      commandStart = node.value.indexOf('\\', potentialEnd);
+      commandStart = node.value.indexOf('\\', potentialEnd - 1);
     } // Check count of brackets
 
 

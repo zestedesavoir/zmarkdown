@@ -1231,7 +1231,11 @@ exports[`mix-math-escape 1`] = `
 
 
 
-$42\\\\%$"
+$42\\\\%$
+
+
+
+This should be escaped: $\\\\pink{	 {I love \\\\LaTeX}   {ls / > outputrce}  {outputrce}}$"
 `;
 
 exports[`paragraph 1`] = `
