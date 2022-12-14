@@ -4,19 +4,12 @@ var katexConstants = require('../../src/preprocessors/katexConstants.json');
 
 var endOfCommandChars = ['\\', '[', ']', '{', '}', ' ', '(', ')', '\t', '\n'];
 
-function isEndOfCommand(nodeLine, index, currentIntendedCommand) {
+function isEndOfCommand(nodeLine, index) {
   if (index >= nodeLine.length) {
     return true;
-  } // handle the case of \\
-
-
-  var currentChar = nodeLine.charAt(index);
-
-  if (currentChar === '\\' && currentIntendedCommand === '') {
-    return false;
   }
 
-  return endOfCommandChars.indexOf(currentChar) !== -1;
+  return endOfCommandChars.includes(nodeLine.charAt(index));
 }
 
 module.exports = function () {
@@ -24,37 +17,37 @@ module.exports = function () {
     var commandStart = node.value.indexOf('\\');
 
     while (commandStart !== -1) {
-      // Eat leading backslashes
+      // Eat leading backslashes (at most two)
       var leadSlashes = 1;
+      var isSlash = node.value.charAt(commandStart + leadSlashes) === '\\';
 
-      for (; node.value.charAt(commandStart + leadSlashes) === '\\'; leadSlashes++) {
-        ;
+      while (isSlash && leadSlashes < 2) {
+        isSlash = node.value.charAt(commandStart + leadSlashes) === '\\';
+        leadSlashes++;
       }
 
       var currentCommand = ''; // Find end of command
 
-      var potentialEnd = leadSlashes + commandStart; // the \\ command is special, just get rid of it
+      var potentialEnd = leadSlashes + commandStart;
 
-      if (leadSlashes === 2 && isEndOfCommand(node.value, potentialEnd, currentCommand)) {
-        commandStart = node.value.indexOf('\\', potentialEnd);
-        continue;
-      }
-
-      for (; !isEndOfCommand(node.value, potentialEnd, currentCommand); potentialEnd++) {
+      while (!isEndOfCommand(node.value, potentialEnd)) {
         currentCommand += node.value.charAt(potentialEnd);
-      }
+        potentialEnd++;
+      } // Check for unknown commands
 
-      var commandLength = currentCommand.length; // Check for unknown commands
 
-      if (!katexConstants.includes("\\".concat(currentCommand))) {
+      var slashedCommand = '\\'.repeat(leadSlashes).concat(currentCommand);
+      var commandLength = slashedCommand.length;
+
+      if (!katexConstants.includes(slashedCommand)) {
         var beforeCommand = node.value.substring(0, commandStart);
-        var afterCommand = node.value.substring(commandStart + commandLength + 1, node.value.length);
-        node.value = "".concat(beforeCommand, " ").concat(afterCommand); // as we changed the command we need to restart from the very start
+        var afterCommand = node.value.substring(commandStart + commandLength, node.value.length);
+        node.value = "".concat(beforeCommand, " ").concat(afterCommand); // As we changed the command we need to restart from the beginning
 
         potentialEnd = 1;
       }
 
-      commandStart = node.value.indexOf('\\', potentialEnd - 1);
+      commandStart = node.value.indexOf('\\', potentialEnd);
     } // Check count of brackets
 
 
