@@ -13,6 +13,7 @@ const defaultTokenizerList = {
   customBlocks:         require('remark-custom-blocks/src'),
   emoticons:            require('remark-emoticons/src'),
   escapeEscaped:        require('remark-escape-escaped/src'),
+  fixGuillemets:        require('remark-fix-guillemets/src'),
   footnotes:            require('remark-footnotes'),
   gridTables:           require('remark-grid-tables/src'),
   headingShifter:       require('remark-heading-shift/src'),

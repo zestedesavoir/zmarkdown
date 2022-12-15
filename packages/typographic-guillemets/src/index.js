@@ -8,12 +8,10 @@ module.exports = (input = '', {locale} = {}) => {
   const rightMark = chars['RIGHT-POINTING ANGLE QUOTATION MARK']
   const spaceChar = chars['NARROW NO-BREAK SPACE']
 
-  const leftAnglePattern = /<</gm
-  let result = input.replace(leftAnglePattern, leftMark)
-  const leftAngleSpacePattern = new RegExp(`(${leftMark})(\\s)`, 'gm')
-  result = result.replace(leftAngleSpacePattern, `$1${spaceChar}`)
-  const rightAnglePattern = />>/gm
-  result = result.replace(rightAnglePattern, rightMark)
-  const rightAngleSpacePattern = new RegExp(`(\\s)(${rightMark})`, 'gm')
-  return result.replace(rightAngleSpacePattern, `${spaceChar}$2`)
+  const leftAnglePattern = /<<\s*/gm
+  const rightAnglePattern = /\s*>>/gm
+
+  return input
+    .replace(leftAnglePattern, leftMark.concat(spaceChar))
+    .replace(rightAnglePattern, spaceChar.concat(rightMark))
 }

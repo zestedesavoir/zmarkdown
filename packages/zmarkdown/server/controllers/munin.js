@@ -102,14 +102,17 @@ module.exports = isConfig => (req, res) => {
           return metric ? parseFloat(metric.value) : 0
         }).reduce((sum, val) => sum + val, 0)
 
-        loopLag = parseFloat(proc.pm2_env.axm_monitor['Event Loop Latency'].value)
+        // Sometimes not available after start
+        if (proc.pm2_env.axm_monitor['Event Loop Latency']) {
+          loopLag = parseFloat(proc.pm2_env.axm_monitor['Event Loop Latency'].value)
+        }
       }
 
       const data = {
-        status:          proc.pm2_env.status in status ? status[proc.pm2_env.status] : 3,
+        status:          status[proc.pm2_env.status] || 3,
         memory:          proc.monit.memory,
         cpu:             proc.monit.cpu,
-        event_loop_lag:  loopLag,
+        event_loop_lag:  loopLag || 'U',
         avg_per_process: avgPerProcess,
       }
 

@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@pm2/io": "^4.3.5",
-    "@sentry/node": "^5.24.2",
+    "@sentry/node": "^7.19.0",
     "body-parser": "^1.19.0",
     "clone": "^2.1.2",
     "cors": "^2.8.5",
