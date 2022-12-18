@@ -68,6 +68,7 @@
     "remark-disable-tokenizers": "file:../remark-disable-tokenizers",
     "remark-emoticons": "file:../remark-emoticons",
     "remark-escape-escaped": "file:../remark-escape-escaped",
+    "remark-fix-guillemets": "file:../remark-fix-guillemets",
     "remark-footnotes": "^2.0.0",
     "remark-grid-tables": "file:../remark-grid-tables",
     "remark-heading-shift": "file:../remark-heading-shift",
