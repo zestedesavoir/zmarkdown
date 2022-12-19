@@ -351,8 +351,10 @@ Object.keys(fixtures).filter(Boolean).filter(name => name.startsWith('mix-')).fo
       .use(reParse)
       .use(footnotes, {inlineNotes: true})
       .use(require('remark-emoticons/src'), emoticonsConfig)
-      .use(require('remark-captions/src'), {external: {gridTable: 'Table:', math: 'Equation'},
-        internal: {iframe: 'Video:'}})
+      .use(require('remark-captions/src'), {
+        external: {gridTable: 'Table:', math: 'Equation'},
+        internal: {iframe: 'Video:'},
+      })
       .use(require('remark-grid-tables/src'))
       .use(require('remark-sub-super/src'))
       .use(require('remark-iframes/src'), {
@@ -370,7 +372,8 @@ Object.keys(fixtures).filter(Boolean).filter(name => name.startsWith('mix-')).fo
             id: '.+/(.+)$',
           },
           removeAfter: '&',
-        }})
+        },
+      })
       .use(require('remark-kbd/src'))
       .use(require('remark-abbr/src'))
       .use(require('remark-align/src'), {
@@ -449,6 +452,18 @@ test('math', () => {
 
       $$\ve\frac{1}{2}$$
     `)
+  expect(contents).toMatchSnapshot()
+})
+test('math-extra-command', () => {
+  const {contents} = unified()
+    .use(reParse)
+    .use(remarkMath)
+    .use(rebber, integrationConfig)
+    .processSync(dedent`
+      $$
+      xnabla^2 E(\vec x) + [n(\vec{x})\,k]^2\,E(\vec x) = -s(\vec x),
+      $$
+    `.replace('xn', '\\n'))
   expect(contents).toMatchSnapshot()
 })
 
