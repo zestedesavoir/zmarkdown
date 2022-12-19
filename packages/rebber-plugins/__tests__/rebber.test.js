@@ -467,6 +467,19 @@ test('math-extra-command', () => {
   expect(contents).toMatchSnapshot()
 })
 
+test('math-left-right', () => {
+  const {contents} = unified()
+    .use(reParse)
+    .use(remarkMath)
+    .use(rebber, integrationConfig)
+    .processSync(dedent`
+      $$
+      \boxed{xnabla^2 E(\vec x) + \left\{[n(\vec{x})\,k]^2-i\,k\,\sigma(\vec x)\right\}\,E(\vec x) = -s(\vec x)}
+      $$
+    `.replace('xn', '\\n'))
+  expect(contents).toMatchSnapshot()
+})
+
 test('ping', () => {
   const {contents} = unified()
     .use(reParse)
