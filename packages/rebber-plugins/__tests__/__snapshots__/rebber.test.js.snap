@@ -834,7 +834,7 @@ exports[`math-extra-command 1`] = `
 `;
 
 exports[`math-left-right 1`] = `
-"\\\\[ \\\\boxed{\\\\nabla^2 E(\\\\vec x) + \\\\left\\\\{[n(\\\\vec{x})\\\\,k]^2-i\\\\,k\\\\,\\\\sigma(\\\\vec x)\\\\right\\\\}\\\\,E(\\\\vec x) = -s(\\\\vec x)} \\\\]
+"\\\\[ \\\\boxed{\\\\nabla^2 E(\\\\vec x) + \\\\left\\\\{[n(\\\\vec{x})\\\\,k]^2-i\\\\,k\\\\,\\\\sigma(\\\\vec x)\\\\right\\\\}\\\\,E(\\\\vec x)} \\\\]
 
 "
 `;

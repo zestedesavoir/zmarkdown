@@ -474,7 +474,7 @@ test('math-left-right', () => {
     .use(rebber, integrationConfig)
     .processSync(dedent`
       $$
-      \boxed{xnabla^2 E(\vec x) + \left\{[n(\vec{x})\,k]^2-i\,k\,\sigma(\vec x)\right\}\,E(\vec x) = -s(\vec x)}
+      \boxed{xnabla^2 E(\vec x) + \left\{[n(\vec{x})\,k]^2-i\,k\,\sigma(\vec x)\right\}\,E(\vec x)}
       $$
     `.replace('xn', '\\n'))
   expect(contents).toMatchSnapshot()
