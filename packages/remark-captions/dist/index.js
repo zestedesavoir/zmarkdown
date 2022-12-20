@@ -115,6 +115,12 @@ function internLegendVisitor(internalBlocks) {
     });
 
     if (legendChildIndex === -1 || !node.children && legendChildIndex < index) {
+      if (node.type === 'image' && parent.children[0].type === 'figure') {
+        var captionIndex = parent.children[0].children.length - 1;
+        parent.children[0].children.splice(captionIndex, 0, clone(node));
+        parent.children.splice(index, 1);
+      }
+
       return;
     } // split the text node containing the last legend and find the line containing it
 

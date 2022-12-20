@@ -110,6 +110,11 @@ function internLegendVisitor (internalBlocks) {
     if (legendChildIndex === -1 ||
       (!node.children && legendChildIndex < index)
     ) {
+      if (node.type === 'image' && parent.children[0].type === 'figure') {
+        const captionIndex = parent.children[0].children.length - 1
+        parent.children[0].children.splice(captionIndex, 0, clone(node))
+        parent.children.splice(index, 1)
+      }
       return
     }
 

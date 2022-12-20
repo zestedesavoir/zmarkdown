@@ -7,6 +7,8 @@ exports[`#101 1`] = `
 <p><a href=\\"#\\"></a></p>"
 `;
 
+exports[`Two images in figure 1`] = `"<figure><img src=\\"img1.png\\" alt=\\"alt text1\\"><img src=\\"img2.png\\" alt=\\"alt text2\\"><figcaption>Common text</figcaption></figure>"`;
+
 exports[`caption without block 1`] = `
 "<pre><code class=\\"language-python\\">print('bla')
 </code></pre>

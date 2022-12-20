@@ -324,6 +324,15 @@ test('compiles to markdown when no caption', () => {
 
   expect(contents1).toBe(contents2)
 })
+test('Two images in figure', () => {
+  const md = dedent`
+    ![alt text1](img1.png)
+    ![alt text2](img2.png)
+    Figure: Common text
+  `
+  const {contents} = render(md)
+  expect(contents).toMatchSnapshot()
+})
 test('compiles to markdown when at least 1 block caption', () => {
   const md = dedent`
     foo
