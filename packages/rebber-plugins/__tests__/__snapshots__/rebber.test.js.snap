@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Two images in figure 1`] = `
+"\\\\inlineImage{img1.png}
+\\\\inlineImage{img2.png}
+Figure: Common text
+
+"
+`;
+
 exports[`abbr 1`] = `
 "HELO to you
 
