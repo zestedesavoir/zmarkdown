@@ -2,7 +2,7 @@
 
 var katexConstants = require('../../src/preprocessors/katexConstants.json');
 
-var endOfCommandChars = ['\\', '[', ']', '{', '}', ' ', '(', ')', '\t', '\n'];
+var endOfCommandChars = ['\\', '[', ']', '{', '}', ' ', '(', ')', '\t', '\n', '^', '_', ','];
 
 function isEndOfCommand(nodeLine, index) {
   if (index >= nodeLine.length) {
@@ -33,6 +33,11 @@ module.exports = function () {
       while (!isEndOfCommand(node.value, potentialEnd)) {
         currentCommand += node.value.charAt(potentialEnd);
         potentialEnd++;
+      } // if we just had a \{ or \, for example
+
+
+      if (currentCommand === '' && potentialEnd < node.value.length && katexConstants.includes("\\".concat(node.value.charAt(potentialEnd)))) {
+        currentCommand = node.value.charAt(potentialEnd);
       } // Check for unknown commands
 
 

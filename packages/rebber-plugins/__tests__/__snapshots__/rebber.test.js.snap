@@ -827,6 +827,18 @@ $\\\\frac{1}{2}$
 "
 `;
 
+exports[`math-extra-command 1`] = `
+"\\\\[ \\\\nabla^2 E(\\\\vec x) + [n(\\\\vec{x})\\\\,k]^2\\\\,E(\\\\vec x) = -s(\\\\vec x), \\\\]
+
+"
+`;
+
+exports[`math-left-right 1`] = `
+"\\\\[ \\\\boxed{\\\\nabla^2 E(\\\\vec x) + \\\\left\\\\{[n(\\\\vec{x})\\\\,k]^2-i\\\\,k\\\\,\\\\sigma(\\\\vec x)\\\\right\\\\}\\\\,E(\\\\vec x)} \\\\]
+
+"
+`;
+
 exports[`mix-1 1`] = `
 "(for convenience,   are replaced with simple single spaces in the tests)
 
