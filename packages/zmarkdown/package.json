@@ -1,6 +1,6 @@
 {
   "name": "zmarkdown",
-  "version": "11.2.1",
+  "version": "11.2.2",
   "description": "HTTP server API providing fast and extensible markdown parser",
   "keywords": [
     "markdown",
