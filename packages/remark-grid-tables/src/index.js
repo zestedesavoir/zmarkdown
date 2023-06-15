@@ -54,10 +54,10 @@ class TablePart {
     for (let c = 1; c < this.lastRow()._cells.length; c++) {
       const cell = this.lastRow()._cells[c]
 
-      // Only cells with rowspan equals can be merged
+      // Only cells with rowSpan equals can be merged
       // Test if the char does not compose a character
       // or the char before the cell is a separation character
-      if (cell._rowspan === newCells[newCells.length - 1]._rowspan && (
+      if (cell._rowSpan === newCells[newCells.length - 1]._rowSpan && (
         !isCodePointPosition(line, cell._startPosition - 1) ||
         !mergeChars.includes(substringLine(line, cell._startPosition - 1))
       )) {
@@ -77,7 +77,7 @@ class TablePart {
       const partLine = substringLine(line, cell._startPosition - 1, cell._endPosition + 1)
       if (!isSeparationLine(partLine)) {
         cell._lines.push(substringLine(line, cell._startPosition, cell._endPosition))
-        cell._rowspan += 1
+        cell._rowSpan += 1
         remainingCells.push(cell)
       }
     }
@@ -146,14 +146,14 @@ class TableCell {
   constructor (startPosition, endPosition) {
     this._startPosition = startPosition
     this._endPosition = endPosition
-    this._colspan = 1
-    this._rowspan = 1
+    this._colSpan = 1
+    this._rowSpan = 1
     this._lines = []
   }
 
   mergeWith (other) {
     this._endPosition = other._endPosition
-    this._colspan += other._colspan
+    this._colSpan += other._colSpan
     const newLines = []
     for (let l = 0; l < this._lines.length; l++) {
       newLines.push(`${this._lines[l]}|${other._lines[l]}`)
@@ -418,21 +418,21 @@ function generateTable (tableContent, now, tokenizer) {
           data: {
             hName: (hasHeader && p === 0) ? 'th' : 'td',
             hProperties: {
-              colspan: cell._colspan,
-              rowspan: cell._rowspan,
+              colSpan: cell._colSpan,
+              rowSpan: cell._rowSpan,
             },
           },
         }
 
-        const endLine = r + cell._rowspan
-        if (cell._rowspan > 1 && endLine - 1 < part._rows.length) {
-          for (let rs = 1; rs < cell._rowspan; rs++) {
+        const endLine = r + cell._rowSpan
+        if (cell._rowSpan > 1 && endLine - 1 < part._rows.length) {
+          for (let rs = 1; rs < cell._rowSpan; rs++) {
             for (let cc = 0; cc < part._rows[r + rs]._cells.length; cc++) {
               const other = part._rows[r + rs]._cells[cc]
               if (cell._startPosition === other._startPosition &&
               cell._endPosition === other._endPosition &&
-              cell._colspan === other._colspan &&
-              cell._rowspan === other._rowspan &&
+              cell._colSpan === other._colSpan &&
+              cell._rowSpan === other._rowSpan &&
               cell._lines === other._lines) {
                 part._rows[r + rs]._cells.splice(cc, 1)
               }
@@ -579,13 +579,13 @@ function extractAST (gridNode, grid) {
   gridNode.children.forEach(th => {
     th.children.forEach(row => {
       row.children.forEach((cell, j) => {
-        let X = 0 // x taking colspan and rowspan into account
+        let X = 0 // x taking colSpan and rowSpan into account
 
         while (grid[i][j + X].evaluated) X++
         grid[i][j + X].value = this.all(cell).join('\n\n').split('\n')
 
         setHeight(grid, i, j + X, grid[i][j + X].value)
-        setWidth(grid, i, j + X, cell.data.hProperties.colspan)
+        setWidth(grid, i, j + X, cell.data.hProperties.colSpan)
 
         // If it's empty, we fill it up with a useless space
         // Otherwise, it will not be parsed.
@@ -595,12 +595,12 @@ function extractAST (gridNode, grid) {
         }
 
         // Define the border of each cell
-        for (let x = 0; x < cell.data.hProperties.rowspan; x++) {
-          for (let y = 0; y < cell.data.hProperties.colspan; y++) {
+        for (let x = 0; x < cell.data.hProperties.rowSpan; x++) {
+          for (let y = 0; y < cell.data.hProperties.colSpan; y++) {
             // b attribute is for bottom
-            grid[i + x][j + X + y].hasBottom = x + 1 === cell.data.hProperties.rowspan
+            grid[i + x][j + X + y].hasBottom = x + 1 === cell.data.hProperties.rowSpan
             // r attribute is for right
-            grid[i + x][j + X + y].hasRigth = y + 1 === cell.data.hProperties.colspan
+            grid[i + x][j + X + y].hasRigth = y + 1 === cell.data.hProperties.colSpan
 
             // set v if a cell has ever been define
             grid[i + x][j + X + y].evaluated = ' '
@@ -736,7 +736,7 @@ function stringifyGridTables (gridNode) {
   const nbRows = gridNode.children.map(th => th.children.length).reduce((a, b) => a + b)
   const nbCols = gridNode.children[0]
     .children[0]
-    .children.map(c => c.data.hProperties.colspan)
+    .children.map(c => c.data.hProperties.colSpan)
     .reduce((a, b) => a + b)
 
   const grid = createGrid(nbRows, nbCols)
