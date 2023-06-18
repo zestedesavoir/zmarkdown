@@ -11,11 +11,11 @@ const paragraph = require('rebber/dist/types/paragraph')
 module.exports = gridTable
 
 class MultiRowLine {
-  constructor (startRow, endRow, startCell, endCell, colspan, endOfLine) {
+  constructor (startRow, endRow, startCell, endCell, colSpan, endOfLine) {
     this.multilineCounter = endRow - startRow
     this.startCell = startCell
     this.endCell = endCell
-    this.colspan = colspan
+    this.colSpan = colSpan
     this.endOfLine = endOfLine
   }
 
@@ -24,12 +24,12 @@ class MultiRowLine {
     let endCLine = this.startCell - 1
     // case where the multi row line is at the start of the table
     if (this.startCell === 1) {
-      startCLine = this.startCell + this.colspan
+      startCLine = this.startCell + this.colSpan
       endCLine = this.endOfLine
-    } else if (this.startCell > 1 && (this.startCell + this.colspan) < this.endOfLine) {
+    } else if (this.startCell > 1 && (this.startCell + this.colSpan) < this.endOfLine) {
       // case where the multi row line is in the middle of the table
       const clineBefore = `\\cline{1-${this.startCell - 1}}`
-      const clineAfter = `\\cline{${this.startCell + this.colspan}-${this.endOfLine}}`
+      const clineAfter = `\\cline{${this.startCell + this.colSpan}-${this.endOfLine}}`
       return `${clineBefore} ${clineAfter}`
     }
     return `\\cline{${startCLine}-${endCLine}}`
@@ -43,7 +43,7 @@ class GridTableStringifier {
     this.rowIndex = 0
     this.colIndex = 0
     this.multiLineCellIndex = 0
-    this.colspan = 1
+    this.colSpan = 1
     this.nbOfColumns = 0
   }
 
@@ -60,20 +60,20 @@ class GridTableStringifier {
     while (baseText.substring(baseText.length - '\\endgraf'.length) === '\\endgraf') {
       baseText = baseText.substring(0, baseText.length - '\\endgraf'.length).trim()
     }
-    if (node.data && node.data.hProperties.rowspan > 1) {
-      this.currentSpan = node.data.hProperties.rowspan
+    if (node.data && node.data.hProperties.rowSpan > 1) {
+      this.currentSpan = node.data.hProperties.rowSpan
       this.multiLineCellIndex = this.colIndex
       baseText = `\\multirow{${this.currentSpan}}{*}{\\parbox{\\linewidth}{${baseText}}}`
-      this.colspan = node.data.hProperties.colspan > 1 ? node.data.hProperties.colspan : 1
-    } else if (node.data && node.data.hProperties.colspan > 1) {
-      const colspan = node.data.hProperties.colspan
-      const colDim = `m{\\dimexpr(\\linewidth) * ${colspan} / \\number-of-column - 2 * \\tabcolsep}`
-      baseText = `\\multicolumn{${colspan}}{|${colDim}|}{\\parbox{\\linewidth}{${baseText}}}`
+      this.colSpan = node.data.hProperties.colSpan > 1 ? node.data.hProperties.colSpan : 1
+    } else if (node.data && node.data.hProperties.colSpan > 1) {
+      const colSpan = node.data.hProperties.colSpan
+      const colDim = `m{\\dimexpr(\\linewidth) * ${colSpan} / \\number-of-column - 2 * \\tabcolsep}`
+      baseText = `\\multicolumn{${colSpan}}{|${colDim}|}{\\parbox{\\linewidth}{${baseText}}}`
     }
 
-    if (node.data && node.data.hProperties.colspan > 1) {
+    if (node.data && node.data.hProperties.colSpan > 1) {
       this.colIndex -= 1
-      this.colIndex += node.data.hProperties.colspan
+      this.colIndex += node.data.hProperties.colSpan
     }
 
     return baseText
@@ -85,7 +85,7 @@ class GridTableStringifier {
     overriddenCtx.tableRow = undefined
     if (this.previousRowWasMulti()) {
       const lastMultiRowline = this.flushMultiRowLineIfNeeded()
-      for (let i = 0; i < lastMultiRowline.colspan; i++) {
+      for (let i = 0; i < lastMultiRowline.colSpan; i++) {
         node.children.splice(lastMultiRowline.startCell - 1, 0, {
           type: 'tableCell',
           children: [{
@@ -112,8 +112,8 @@ class GridTableStringifier {
         this.rowIndex,
         this.rowIndex + this.currentSpan + (-1),
         this.multiLineCellIndex,
-        this.colIndex + this.colspan,
-        this.colspan,
+        this.colIndex + this.colSpan,
+        this.colSpan,
         this.colIndex,
       )
       rowText = rowText.replace(/\\hline/, this.lastMultiRowLine.getCLine())
