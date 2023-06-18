@@ -13,6 +13,6 @@ var defaultMacro = function defaultMacro(identifier, text, protect) {
 
 function notes(ctx, node) {
   var macro = ctx.footnoteDefinition || defaultMacro;
-  var protect = Boolean(node.inHeading);
+  var protect = Boolean(node.commandProtect);
   return macro(node.identifier, all(ctx, node).trim(), protect);
 }

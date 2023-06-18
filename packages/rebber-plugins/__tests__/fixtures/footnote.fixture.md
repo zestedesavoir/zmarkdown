@@ -119,3 +119,6 @@ This nested footnote would not work:
 # myti*tle C^[foo inner]*
 
 a paragraph^[footnoteRawPar inner]
+
+![img.png](an image)
+Figure: with an ^[inline footnote] in caption

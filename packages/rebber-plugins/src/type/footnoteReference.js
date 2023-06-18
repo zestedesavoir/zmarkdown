@@ -6,7 +6,7 @@ const defaultMacro = (identifier, protect) =>
 
 function notes (ctx, node) {
   const macro = ctx.footnoteReference || defaultMacro
-  const protect = Boolean(node.inHeading)
+  const protect = Boolean(node.commandProtect)
 
   return macro(node.identifier, protect)
 }

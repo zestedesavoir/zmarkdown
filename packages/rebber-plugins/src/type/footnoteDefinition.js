@@ -9,7 +9,7 @@ const defaultMacro = (identifier, text, protect) =>
 
 function notes (ctx, node) {
   const macro = ctx.footnoteDefinition || defaultMacro
-  const protect = Boolean(node.inHeading)
+  const protect = Boolean(node.commandProtect)
 
   return macro(node.identifier, all(ctx, node).trim(), protect)
 }

@@ -24,7 +24,7 @@ function autoId(node) {
 
 function notes(ctx, node) {
   var macro = ctx.footnote || defaultMacro;
-  var protect = Boolean(node.inHeading);
+  var protect = Boolean(node.commandProtect);
   var identifier = autoId(node);
   return macro(identifier, all(ctx, node).trim(), protect);
 }

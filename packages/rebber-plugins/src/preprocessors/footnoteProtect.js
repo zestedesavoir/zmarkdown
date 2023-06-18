@@ -8,13 +8,13 @@ We therefore mark each footnote placed in heading for later handling.
 const nodeTypes = ['footnote', 'footnoteDefinition', 'footnoteReference']
 
 function plugin () {
-  return function headingVisitor (node, index, parent) {
-    if (nodeTypes.includes(node.type) && node.inHeading !== true) {
-      node.inHeading = true
+  return function footnoteProtect (node, index, parent) {
+    if (nodeTypes.includes(node.type) && node.commandProtect !== true) {
+      node.commandProtect = true
     }
 
     if (node.children) {
-      node.children.forEach((n, i) => headingVisitor(n, i, node))
+      node.children.forEach((n, i) => footnoteProtect(n, i, node))
     }
   }
 }
