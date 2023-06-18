@@ -24,13 +24,13 @@ var paragraph = require('rebber/dist/types/paragraph');
 module.exports = gridTable;
 
 var MultiRowLine = /*#__PURE__*/function () {
-  function MultiRowLine(startRow, endRow, startCell, endCell, colspan, endOfLine) {
+  function MultiRowLine(startRow, endRow, startCell, endCell, colSpan, endOfLine) {
     _classCallCheck(this, MultiRowLine);
 
     this.multilineCounter = endRow - startRow;
     this.startCell = startCell;
     this.endCell = endCell;
-    this.colspan = colspan;
+    this.colSpan = colSpan;
     this.endOfLine = endOfLine;
   }
 
@@ -41,12 +41,12 @@ var MultiRowLine = /*#__PURE__*/function () {
       var endCLine = this.startCell - 1; // case where the multi row line is at the start of the table
 
       if (this.startCell === 1) {
-        startCLine = this.startCell + this.colspan;
+        startCLine = this.startCell + this.colSpan;
         endCLine = this.endOfLine;
-      } else if (this.startCell > 1 && this.startCell + this.colspan < this.endOfLine) {
+      } else if (this.startCell > 1 && this.startCell + this.colSpan < this.endOfLine) {
         // case where the multi row line is in the middle of the table
         var clineBefore = "\\cline{1-".concat(this.startCell - 1, "}");
-        var clineAfter = "\\cline{".concat(this.startCell + this.colspan, "-").concat(this.endOfLine, "}");
+        var clineAfter = "\\cline{".concat(this.startCell + this.colSpan, "-").concat(this.endOfLine, "}");
         return "".concat(clineBefore, " ").concat(clineAfter);
       }
 
@@ -66,7 +66,7 @@ var GridTableStringifier = /*#__PURE__*/function () {
     this.rowIndex = 0;
     this.colIndex = 0;
     this.multiLineCellIndex = 0;
-    this.colspan = 1;
+    this.colSpan = 1;
     this.nbOfColumns = 0;
   }
 
@@ -92,20 +92,20 @@ var GridTableStringifier = /*#__PURE__*/function () {
         baseText = baseText.substring(0, baseText.length - '\\endgraf'.length).trim();
       }
 
-      if (node.data && node.data.hProperties.rowspan > 1) {
-        this.currentSpan = node.data.hProperties.rowspan;
+      if (node.data && node.data.hProperties.rowSpan > 1) {
+        this.currentSpan = node.data.hProperties.rowSpan;
         this.multiLineCellIndex = this.colIndex;
         baseText = "\\multirow{".concat(this.currentSpan, "}{*}{\\parbox{\\linewidth}{").concat(baseText, "}}");
-        this.colspan = node.data.hProperties.colspan > 1 ? node.data.hProperties.colspan : 1;
-      } else if (node.data && node.data.hProperties.colspan > 1) {
-        var colspan = node.data.hProperties.colspan;
-        var colDim = "m{\\dimexpr(\\linewidth) * ".concat(colspan, " / \\number-of-column - 2 * \\tabcolsep}");
-        baseText = "\\multicolumn{".concat(colspan, "}{|").concat(colDim, "|}{\\parbox{\\linewidth}{").concat(baseText, "}}");
+        this.colSpan = node.data.hProperties.colSpan > 1 ? node.data.hProperties.colSpan : 1;
+      } else if (node.data && node.data.hProperties.colSpan > 1) {
+        var colSpan = node.data.hProperties.colSpan;
+        var colDim = "m{\\dimexpr(\\linewidth) * ".concat(colSpan, " / \\number-of-column - 2 * \\tabcolsep}");
+        baseText = "\\multicolumn{".concat(colSpan, "}{|").concat(colDim, "|}{\\parbox{\\linewidth}{").concat(baseText, "}}");
       }
 
-      if (node.data && node.data.hProperties.colspan > 1) {
+      if (node.data && node.data.hProperties.colSpan > 1) {
         this.colIndex -= 1;
-        this.colIndex += node.data.hProperties.colspan;
+        this.colIndex += node.data.hProperties.colSpan;
       }
 
       return baseText;
@@ -120,7 +120,7 @@ var GridTableStringifier = /*#__PURE__*/function () {
       if (this.previousRowWasMulti()) {
         var lastMultiRowline = this.flushMultiRowLineIfNeeded();
 
-        for (var i = 0; i < lastMultiRowline.colspan; i++) {
+        for (var i = 0; i < lastMultiRowline.colSpan; i++) {
           node.children.splice(lastMultiRowline.startCell - 1, 0, {
             type: 'tableCell',
             children: [{
@@ -147,7 +147,7 @@ var GridTableStringifier = /*#__PURE__*/function () {
       var rowText = tableRow(overriddenCtx, node, index);
 
       if (this.currentSpan !== 0) {
-        this.lastMultiRowLine = new MultiRowLine(this.rowIndex, this.rowIndex + this.currentSpan + -1, this.multiLineCellIndex, this.colIndex + this.colspan, this.colspan, this.colIndex);
+        this.lastMultiRowLine = new MultiRowLine(this.rowIndex, this.rowIndex + this.currentSpan + -1, this.multiLineCellIndex, this.colIndex + this.colSpan, this.colSpan, this.colIndex);
         rowText = rowText.replace(/\\hline/, this.lastMultiRowLine.getCLine());
       }
 

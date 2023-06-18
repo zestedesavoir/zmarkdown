@@ -6997,7 +6997,7 @@ javascript:alert\\\\%29'XSS'\\\\%29
 exports[`zds renders video.txt 1`] = `
 "<div class=\\"video-container\\"><div class=\\"video-wrapper\\"><iframe src=\\"https://www.youtube.com/embed/FdltlrKFr1w?feature=oembed\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe></div></div>
 <div class=\\"video-container\\"><div class=\\"video-wrapper\\"><iframe src=\\"https://www.dailymotion.com/embed/video/x2y6lhm?pubtool=oembed\\" width=\\"480\\" height=\\"270\\" allowfullscreen frameborder=\\"0\\"></iframe></div></div>
-<div class=\\"video-container\\"><div class=\\"video-wrapper\\"><iframe src=\\"https://player.vimeo.com/video/133693532?h=8b6c32af1b&#x26;amp;app_id=122963\\" width=\\"500\\" height=\\"281\\" allowfullscreen frameborder=\\"0\\"></iframe></div></div>
+<div class=\\"video-container\\"><div class=\\"video-wrapper\\"><iframe src=\\"https://player.vimeo.com/video/133693532?app_id=122963\\" width=\\"500\\" height=\\"281\\" allowfullscreen frameborder=\\"0\\"></iframe></div></div>
 <p>!(https://screen.yahoo.com/weatherman-gives-forecast-using-taylor-191821481.html)</p>
 <div class=\\"video-container\\"><div class=\\"video-wrapper\\"><iframe src=\\"https://www.youtube.com/embed/FdltlrKFr1w?feature=oembed\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe></div></div>
 <div class=\\"video-container\\"><div class=\\"video-wrapper\\"><iframe src=\\"https://www.youtube.com/embed/FdltlrKFr1w?feature=oembed\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></iframe></div></div>
@@ -7017,7 +7017,7 @@ exports[`zds renders video.txt 2`] = `
 
 \\\\iframe{https://www.dailymotion.com/embed/video/x2y6lhm?pubtool=oembed}[Video][]
 
-\\\\iframe{https://player.vimeo.com/video/133693532?h=8b6c32af1b&amp;app_id=122963}[Video][]
+\\\\iframe{https://player.vimeo.com/video/133693532?app_id=122963}[Video][]
 
 !(https://screen.yahoo.com/weatherman-gives-forecast-using-taylor-191821481.html)
 

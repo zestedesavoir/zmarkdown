@@ -4,7 +4,7 @@ function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableTo
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
@@ -16,7 +16,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -96,12 +96,12 @@ var TablePart = /*#__PURE__*/function () {
       var newCells = [this.lastRow()._cells[0]];
 
       for (var c = 1; c < this.lastRow()._cells.length; c++) {
-        var cell = this.lastRow()._cells[c]; // Only cells with rowspan equals can be merged
+        var cell = this.lastRow()._cells[c]; // Only cells with rowSpan equals can be merged
         // Test if the char does not compose a character
         // or the char before the cell is a separation character
 
 
-        if (cell._rowspan === newCells[newCells.length - 1]._rowspan && (!isCodePointPosition(line, cell._startPosition - 1) || !mergeChars.includes(substringLine(line, cell._startPosition - 1)))) {
+        if (cell._rowSpan === newCells[newCells.length - 1]._rowSpan && (!isCodePointPosition(line, cell._startPosition - 1) || !mergeChars.includes(substringLine(line, cell._startPosition - 1)))) {
           newCells[newCells.length - 1].mergeWith(cell);
         } else {
           newCells.push(cell);
@@ -124,7 +124,7 @@ var TablePart = /*#__PURE__*/function () {
         if (!isSeparationLine(partLine)) {
           cell._lines.push(substringLine(line, cell._startPosition, cell._endPosition));
 
-          cell._rowspan += 1;
+          cell._rowSpan += 1;
           remainingCells.push(cell);
         }
       } // Generate new row
@@ -217,8 +217,8 @@ var TableCell = /*#__PURE__*/function () {
 
     this._startPosition = startPosition;
     this._endPosition = endPosition;
-    this._colspan = 1;
-    this._rowspan = 1;
+    this._colSpan = 1;
+    this._rowSpan = 1;
     this._lines = [];
   }
 
@@ -226,7 +226,7 @@ var TableCell = /*#__PURE__*/function () {
     key: "mergeWith",
     value: function mergeWith(other) {
       this._endPosition = other._endPosition;
-      this._colspan += other._colspan;
+      this._colSpan += other._colSpan;
       var newLines = [];
 
       for (var l = 0; l < this._lines.length; l++) {
@@ -391,8 +391,8 @@ function extractTable(value, eat, tokenizer) {
 
       if (_isHeaderLine && !hasHeader) hasHeader = true; // A table can't have 2 headers
       else if (_isHeaderLine && hasHeader) {
-          break;
-        }
+        break;
+      }
       realGridTable.push(realLine);
       gridTable.push(_line);
     } else {
@@ -505,19 +505,19 @@ function generateTable(tableContent, now, tokenizer) {
           data: {
             hName: hasHeader && p === 0 ? 'th' : 'td',
             hProperties: {
-              colspan: cell._colspan,
-              rowspan: cell._rowspan
+              colSpan: cell._colSpan,
+              rowSpan: cell._rowSpan
             }
           }
         };
-        var endLine = r + cell._rowspan;
+        var endLine = r + cell._rowSpan;
 
-        if (cell._rowspan > 1 && endLine - 1 < part._rows.length) {
-          for (var rs = 1; rs < cell._rowspan; rs++) {
+        if (cell._rowSpan > 1 && endLine - 1 < part._rows.length) {
+          for (var rs = 1; rs < cell._rowSpan; rs++) {
             for (var cc = 0; cc < part._rows[r + rs]._cells.length; cc++) {
               var other = part._rows[r + rs]._cells[cc];
 
-              if (cell._startPosition === other._startPosition && cell._endPosition === other._endPosition && cell._colspan === other._colspan && cell._rowspan === other._rowspan && cell._lines === other._lines) {
+              if (cell._startPosition === other._startPosition && cell._endPosition === other._endPosition && cell._colSpan === other._colSpan && cell._rowSpan === other._rowSpan && cell._lines === other._lines) {
                 part._rows[r + rs]._cells.splice(cc, 1);
               }
             }
@@ -689,7 +689,7 @@ function extractAST(gridNode, grid) {
   gridNode.children.forEach(function (th) {
     th.children.forEach(function (row) {
       row.children.forEach(function (cell, j) {
-        var X = 0; // x taking colspan and rowspan into account
+        var X = 0; // x taking colSpan and rowSpan into account
 
         while (grid[i][j + X].evaluated) {
           X++;
@@ -697,7 +697,7 @@ function extractAST(gridNode, grid) {
 
         grid[i][j + X].value = _this.all(cell).join('\n\n').split('\n');
         setHeight(grid, i, j + X, grid[i][j + X].value);
-        setWidth(grid, i, j + X, cell.data.hProperties.colspan); // If it's empty, we fill it up with a useless space
+        setWidth(grid, i, j + X, cell.data.hProperties.colSpan); // If it's empty, we fill it up with a useless space
         // Otherwise, it will not be parsed.
 
         if (!grid[0][0].value.join('\n')) {
@@ -706,12 +706,12 @@ function extractAST(gridNode, grid) {
         } // Define the border of each cell
 
 
-        for (var x = 0; x < cell.data.hProperties.rowspan; x++) {
-          for (var y = 0; y < cell.data.hProperties.colspan; y++) {
+        for (var x = 0; x < cell.data.hProperties.rowSpan; x++) {
+          for (var y = 0; y < cell.data.hProperties.colSpan; y++) {
             // b attribute is for bottom
-            grid[i + x][j + X + y].hasBottom = x + 1 === cell.data.hProperties.rowspan; // r attribute is for right
+            grid[i + x][j + X + y].hasBottom = x + 1 === cell.data.hProperties.rowSpan; // r attribute is for right
 
-            grid[i + x][j + X + y].hasRigth = y + 1 === cell.data.hProperties.colspan; // set v if a cell has ever been define
+            grid[i + x][j + X + y].hasRigth = y + 1 === cell.data.hProperties.colSpan; // set v if a cell has ever been define
 
             grid[i + x][j + X + y].evaluated = ' ';
           }
@@ -845,7 +845,7 @@ function stringifyGridTables(gridNode) {
     return a + b;
   });
   var nbCols = gridNode.children[0].children[0].children.map(function (c) {
-    return c.data.hProperties.colspan;
+    return c.data.hProperties.colSpan;
   }).reduce(function (a, b) {
     return a + b;
   });
