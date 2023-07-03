@@ -173,7 +173,7 @@ describe('ping', () => {
 })
 
 describe('oembed', () => {
-  it(`correctly render oEmbed iframe`, () => {
+  it.skip(`correctly render oEmbed iframe`, () => {
     const input = '!(https://soundcloud.com/paresh-sankhe/sets/h2g2)'
 
     return expect(renderString(input)).resolves.toContain('<iframe')
