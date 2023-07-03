@@ -9,6 +9,6 @@ var defaultMacro = function defaultMacro(identifier, protect) {
 
 function notes(ctx, node) {
   var macro = ctx.footnoteReference || defaultMacro;
-  var protect = Boolean(node.inHeading);
+  var protect = Boolean(node.commandProtect);
   return macro(node.identifier, protect);
 }

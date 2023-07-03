@@ -492,6 +492,11 @@ This nested footnote would not work:
 
 a paragraph\\\\footnote[l121c12o2832]{footnoteRawPar inner}
 
+
+
+\\\\inlineImage{undefined}(an image)
+Figure: with an \\\\footnote[l124c17o2894]{inline footnote} in caption
+
 "
 `;
 
@@ -1039,7 +1044,7 @@ Sub & Headings & \\\\abbr{ABBR}{abbreviation} \\\\\\\\ \\\\hline
  & normal & cell \\\\\\\\ \\\\hline
 multi \\\\endgraf line \\\\endgraf \\\\endgraf cells \\\\endgraf too & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{cells can be \\\\endgraf \\\\textit{formatted} \\\\endgraf \\\\textbf{paragraphs}}} \\\\\\\\ \\\\hline
 \\\\end{longtabu}
-\\\\captionof{table}{The new table \\\\abbr{ABBR}{abbreviation} \\\\textsuperscript{\\\\footnotemark[foot]} with \\\\keys{CTRL} + \\\\keys{S}}
+\\\\captionof{table}{The new table \\\\abbr{ABBR}{abbreviation} \\\\textsuperscript{\\\\protect\\\\footnotemark[foot]} with \\\\keys{CTRL} + \\\\keys{S}}
 
 
 
@@ -1185,7 +1190,7 @@ print('bla')
 `;
 
 exports[`mix-5 1`] = `
-"\\\\image{http://www.numerama.com/content/uploads/2016/07/espace.jpg}[espace\\\\textsuperscript{\\\\footnotemark[node]}]
+"\\\\image{http://www.numerama.com/content/uploads/2016/07/espace.jpg}[espace\\\\textsuperscript{\\\\protect\\\\footnotemark[node]}]
 
 
 \\\\footnotetext[node]{Two things are infinite: the universe and human stupidity.}"

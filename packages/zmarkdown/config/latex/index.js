@@ -4,6 +4,7 @@ const globalEscape = require('rebber/dist/escaper')
 
 const appendix = require('rebber-plugins/dist/preprocessors/codeVisitor')
 const mathEscape = require('rebber-plugins/dist/preprocessors/mathEscape')
+const footnoteProtect = require('rebber-plugins/dist/preprocessors/footnoteProtect')
 
 const rebberConfig = {
   preprocessors: {
@@ -18,7 +19,8 @@ const rebberConfig = {
     inlineMathDouble: [mathEscape],
     math:             [mathEscape],
 
-    heading:          require('rebber-plugins/dist/preprocessors/headingVisitor'),
+    heading:          footnoteProtect,
+    figcaption:       footnoteProtect,
     quizzCustomBlock: require('rebber-plugins/dist/preprocessors/prepareQuizz'),
   },
   overrides: {

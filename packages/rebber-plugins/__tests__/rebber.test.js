@@ -28,6 +28,7 @@ const emoticonsConfig = {
 }
 
 const mathEscape = require('../src/preprocessors/mathEscape')
+const footnoteProtect = require('../src/preprocessors/footnoteProtect')
 
 const integrationConfig = {
   preprocessors: {
@@ -37,7 +38,8 @@ const integrationConfig = {
       'sCustomBlock',
       'secretCustomBlock',
     ]),
-    heading: require('../src/preprocessors/headingVisitor'),
+    heading: footnoteProtect,
+    figcaption: footnoteProtect,
     inlineMath: mathEscape,
     math: mathEscape,
   },

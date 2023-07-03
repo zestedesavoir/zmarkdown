@@ -18,7 +18,7 @@ function autoId (node) {
 /* Stringify a footnote `node`. */
 function notes (ctx, node) {
   const macro = ctx.footnote || defaultMacro
-  const protect = Boolean(node.inHeading)
+  const protect = Boolean(node.commandProtect)
 
   const identifier = autoId(node)
 
