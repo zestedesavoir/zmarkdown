@@ -3,7 +3,15 @@ const customCodeMacro = (content, lang, attrs) => {
   if (!lang) lang = 'text'
 
   // Escape CodeBlocks
-  const escaped = content.replace(new RegExp('\\\\end\\s*{CodeBlock}', 'g'), '')
+  let escaped = content
+
+  const escapeRegex = new RegExp('\\\\end\\s*{CodeBlock}', 'g')
+
+  while (escapeRegex.test(escaped)) {
+    escaped = escaped.replace(escapeRegex, '')
+  }
+
+  // Detect features
   const hasHlLines = (attrs && attrs.hlLines && attrs.hlLines !== [])
   const hasLinenostart = (attrs && attrs.linenostart && attrs.linenostart !== 1)
 

@@ -1,3 +1,6 @@
+/* Dependencies. */
+const path = require('path')
+
 /* Expose. */
 module.exports = image
 
@@ -20,27 +23,24 @@ const defaultInline = defaultMacro
 function image (ctx, node, _, parent) {
   const options = ctx.image || {}
 
-  /*
-  LaTeX cannot handle remote images, only local ones.
-  \includegraphics crashes with filenames that contain more than one `.`,
-  the workaround is \includegraphics{/path/to/{image.foo}.jpg}
-  */
   if (node.url) {
-    const pathParts = node.url.split('/')
-    const filename = pathParts.pop()
+    // Avoid a security flaw: trying to escape image paths
+    node.url = node.url.replace(/}/g, '')
 
-    if (filename.includes('.')) {
-      const filenameParts = filename.split('.')
-      const extension = filenameParts.pop()
-      const basename = filenameParts.join('.')
+    try {
+      const {root, dir, base, ext, name} = path.parse(node.url)
 
-      const safeBasename = basename.includes('.')
-        ? `{${basename}}.${extension}`
-        : `${basename}.${extension}`
+      // \includegraphics crashes with filenames that contain more than one `.`,
+      // the workaround is \includegraphics{/path/to/{image.foo}.jpg}
+      if (base.includes('.')) {
+        const safeName = name.includes('.')
+          ? `{${name}}${ext}`
+          : `${name}${ext}`
 
-      pathParts.push(safeBasename)
-
-      node.url = `${pathParts.join('/')}`
+        node.url = `${path.format({root, dir})}${safeName}`
+      }
+    } catch (e) {
+      node.url = ''
     }
   }
 
