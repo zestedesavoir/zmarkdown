@@ -3,7 +3,13 @@ module.exports = code
 
 const defaultMacro = (content, lang) => {
   // Escape CodeBlocks
-  const escaped = content.replace(new RegExp('\\\\end\\s*{CodeBlock}', 'g'), '')
+  let escaped = content
+
+  const escapeRegex = new RegExp('\\\\end\\s*{CodeBlock}', 'g')
+
+  while (escapeRegex.test(escaped)) {
+    escaped = escaped.replace(escapeRegex, '')
+  }
 
   // Default language is "text"
   if (!lang) lang = 'text'

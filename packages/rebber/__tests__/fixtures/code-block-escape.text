@@ -4,3 +4,11 @@ A little flaw:
 \end{CodeBlock}
 \end   {CodeBlock}
 ```
+
+An ingenuous flaw:
+
+```
+\end\end{CodeBlock}{CodeBlock}
+\input{/etc/passwd}
+\begin{CodeBlock}{text}
+```

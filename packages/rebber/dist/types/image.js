@@ -1,6 +1,10 @@
 "use strict";
 
+/* Dependencies. */
+var path = require('path');
 /* Expose. */
+
+
 module.exports = image;
 
 var defaultInlineMatcher = function defaultInlineMatcher(node, parent) {
@@ -20,23 +24,30 @@ var defaultInline = defaultMacro;
 
 function image(ctx, node, _, parent) {
   var options = ctx.image || {};
-  /*
-  LaTeX cannot handle remote images, only local ones.
-  \includegraphics crashes with filenames that contain more than one `.`,
-  the workaround is \includegraphics{/path/to/{image.foo}.jpg}
-  */
 
   if (node.url) {
-    var pathParts = node.url.split('/');
-    var filename = pathParts.pop();
+    // Avoid a security flaw: trying to escape image paths
+    node.url = node.url.replace(/}/g, '');
 
-    if (filename.includes('.')) {
-      var filenameParts = filename.split('.');
-      var extension = filenameParts.pop();
-      var basename = filenameParts.join('.');
-      var safeBasename = basename.includes('.') ? "{".concat(basename, "}.").concat(extension) : "".concat(basename, ".").concat(extension);
-      pathParts.push(safeBasename);
-      node.url = "".concat(pathParts.join('/'));
+    try {
+      var _path$parse = path.parse(node.url),
+          root = _path$parse.root,
+          dir = _path$parse.dir,
+          base = _path$parse.base,
+          ext = _path$parse.ext,
+          name = _path$parse.name; // \includegraphics crashes with filenames that contain more than one `.`,
+      // the workaround is \includegraphics{/path/to/{image.foo}.jpg}
+
+
+      if (base.includes('.')) {
+        var safeName = name.includes('.') ? "{".concat(name, "}").concat(ext) : "".concat(name).concat(ext);
+        node.url = "".concat(path.format({
+          root: root,
+          dir: dir
+        })).concat(safeName);
+      }
+    } catch (e) {
+      node.url = '';
     }
   }
 

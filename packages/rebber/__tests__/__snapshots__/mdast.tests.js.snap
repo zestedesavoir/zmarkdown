@@ -843,6 +843,18 @@ exports[`rebber: remark specs code-block-escape: code-block-escape 1`] = `
 \\\\begin{CodeBlock}{python}
 
 
+\\\\end{CodeBlock}
+
+
+
+An ingenuous flaw:
+
+
+
+\\\\begin{CodeBlock}{text}
+
+\\\\input{/etc/passwd}
+\\\\begin{CodeBlock}{text}
 \\\\end{CodeBlock}"
 `;
 
@@ -2188,6 +2200,8 @@ exports[`rebber: remark specs image-in-link: image-in-link 1`] = `
 
 \\\\externalLink{\\\\includegraphics{https://img.shields.io/badge/style-flat--squared-green.svg?style=flat-square}}{http://example.com}"
 `;
+
+exports[`rebber: remark specs image-path-escape: image-path-escape 1`] = `"\\\\includegraphics{a[b]\\\\ \\\\input{/etc/passwd\\\\image{[a](b)}"`;
 
 exports[`rebber: remark specs image-with-pipe: image-with-pipe 1`] = `"f|"`;
 
@@ -7907,7 +7921,15 @@ exports[`rebber: remark specs with config: custom macros code-block-escape 1`] =
 
 
 [codePython(\\\\end{CodeBlock}
-\\\\end   {CodeBlock})]"
+\\\\end   {CodeBlock})]
+
+An ingenuous flaw:
+
+
+
+[code(\\\\end\\\\end{CodeBlock}{CodeBlock}
+\\\\input{/etc/passwd}
+\\\\begin{CodeBlock}{text})]"
 `;
 
 exports[`rebber: remark specs with config: custom macros code-block-indentation 1`] = `
@@ -8929,6 +8951,8 @@ exports[`rebber: remark specs with config: custom macros image-in-link 1`] = `
 
 \\\\externalLink{\\\\includegraphics{https://img.shields.io/badge/style-flat--squared-green.svg?style=flat-square}}{http://example.com}"
 `;
+
+exports[`rebber: remark specs with config: custom macros image-path-escape 1`] = `"\\\\includegraphics{a[b]\\\\ \\\\input{/etc/passwd\\\\image{[a](b)}"`;
 
 exports[`rebber: remark specs with config: custom macros image-with-pipe 1`] = `"f|"`;
 
@@ -13736,6 +13760,18 @@ exports[`toLaTeX: remark specs code-block-escape: code-block-escape 1`] = `
 
 \\\\end{CodeBlock}
 
+
+
+An ingenuous flaw:
+
+
+
+\\\\begin{CodeBlock}{text}
+
+\\\\input{/etc/passwd}
+\\\\begin{CodeBlock}{text}
+\\\\end{CodeBlock}
+
 "
 `;
 
@@ -15165,6 +15201,12 @@ exports[`toLaTeX: remark specs image-in-link: image-in-link 1`] = `
 
 
 \\\\externalLink{\\\\includegraphics{https://img.shields.io/badge/style-flat--squared-green.svg?style=flat-square}}{http://example.com}
+
+"
+`;
+
+exports[`toLaTeX: remark specs image-path-escape: image-path-escape 1`] = `
+"\\\\includegraphics{a[b]\\\\ \\\\input{/etc/passwd\\\\image{[a](b)}
 
 "
 `;
