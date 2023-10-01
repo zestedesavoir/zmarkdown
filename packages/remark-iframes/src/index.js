@@ -121,10 +121,12 @@ module.exports = function plugin (opts) {
         nextVisitOrBail()
         return
       }
+
       const data = node.data
       const oembed = data.oembed
       const provider = data.oembed.provider
       const fallback = data.oembed.fallback
+
       try {
         const {
           url,
@@ -134,6 +136,7 @@ module.exports = function plugin (opts) {
         } = await fetchEmbed(oembed.url)
 
         node.thumbnail = thumbnail
+
         Object.assign(data.hProperties, {
           src: url,
           width: provider.width || width,
@@ -141,16 +144,18 @@ module.exports = function plugin (opts) {
           allowfullscreen: true,
           frameborder: '0',
         })
-
       } catch (err) {
         let message = err.message
-        if (err.name === 'AbortError') {
+
+        if (err.name === 'FetchError') {
           message = `oEmbed URL timeout: ${oembed.url}`
         }
+
         vfile.message(message, node.position, oembed.url)
         node.data = {}
         Object.assign(node, fallback)
       }
+
       delete data.oembed
       toVisit--
       nextVisitOrBail()
