@@ -529,7 +529,21 @@ describe('mock server tests', () => {
     })
   })
 
-  test('report connection errors', () => {
+  test('report timeout errors', () => {
+    const blackholeAddr = '192.0.2.1'
+    const file = `![](http://${blackholeAddr}:32764/bad)`
+    const html = `<p><img src="http://${blackholeAddr}:32764/bad"></p>`
+
+    const render = renderFactory({httpRequestTimeout: 500})
+
+    return render(file).then(vfile => {
+      expect(firstMsg(vfile)).toBe(
+        `Request for http://${blackholeAddr}:32764/bad timed out`)
+      expect(vfile.contents).toBe(html)
+    })
+  })
+
+  test('report timeout errors - IPv6 unreachable', () => {
     const file = `![](http://example.com:32764/bad)`
     const html = `<p><img src="http://example.com:32764/bad"></p>`
 
@@ -540,7 +554,7 @@ describe('mock server tests', () => {
         'Request for http://example.com:32764/bad timed out')
       expect(vfile.contents).toBe(html)
     })
-  }, 600)
+  })
 
   test('does not download large chunked streams', async () => {
     const file = `![](http://localhost:27273/stream-bomb)`

@@ -210,7 +210,19 @@ function plugin ({
         reject(new Error(`Request for ${url} timed out`))
       })
 
-      req.on('error', err => reject(err))
+      req.on('error', err => {
+        if (err.errors) {
+          const errorCodes = err.errors.map(e => e.code)
+          // Node > 18 issues two requests: IPv4 and IPv6, timeout is
+          // not handled by default if one of them throws unreachable
+          if (errorCodes.length === 2 &&
+              errorCodes.includes('ETIMEDOUT') &&
+              errorCodes.includes('ENETUNREACH')) {
+            req.emit('timeout')
+          }
+        }
+        reject(err)
+      })
     })
 
   const checkAndCopy = async (from, to) => {
