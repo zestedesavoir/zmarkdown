@@ -36,7 +36,6 @@
     "jest-environment-node-debug": "^2.0.0",
     "lerna": "^3.22.1",
     "mdast-util-to-hast": "^9.1.2",
-    "parallel-webpack": "^2.6.0",
     "rehype-stringify": "^8.0.0",
     "remark": "^12.0.1",
     "remark-footnotes": "^2.0.0",
@@ -48,8 +47,8 @@
     "textr": "^0.3.0",
     "unified": "^9.2.0",
     "unist-util-visit": "^2.0.3",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   },
   "scripts": {
     "pretest": "npm run lint && lerna run pretest --scope zmarkdown",

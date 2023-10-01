@@ -3,6 +3,13 @@ const path = require('path')
 const mode = process.env.NODE_ENV ? process.env.NODE_ENV : 'production'
 
 const defaultConf = {
+  resolve: {
+    fallback: {
+      assert: require.resolve('assert'),
+      path:   require.resolve('path-browserify'),
+      url:    require.resolve('url'),
+    },
+  },
   mode,
   module: {
     rules: [
