@@ -156,36 +156,33 @@ will stringify our example Markdown to `[inserted image located at "/foo.png"]` 
 
     (ctx, node) => ``,
 
-To ensure a flexible rendering, `longtabu` environment is used by default.
 Table stringification can be configured with some advanced options:
 
-###### `options.spreadCell`
+###### `options.tableEnvName`
 
-` spread 0pt `
+    `longtblr`
 
-Customize cells spacing (usually done using the `spread` command).
-Common commands are ` spread <dimension> ` (add `<dimension>` as spacing ) or ` to <dimension> ` (fix the overall width of table).
-Default value is ` spread 0pt ` (natural spacing).
+Name of the environment to be used for tables.
+Allows defining custom environments in LaTeX with `\NewTblrEnviron`.
+To ensure a flexible rendering, the `longtblr` environment is used by default.
 
-###### `options.firstLineRowFont`
+###### `options.headerCounter: (node) => 1`
 
-`'\\rowfont[c]{\\bfseries}'`
+    (tableRows) => 1
 
-Customize the first line font (this is useful when your tables always have a header as first line).
-Default value is `'\\rowfont[c]{\\bfseries}'` (bold, center aligned).
+Function that counts the number of header rows (rows that should be emphasized).
 
-###### `options.defaultOtherLineRowFont`
+###### `options.headerProperties`
 
-`'\\rowfont[l]{}'`
+    `font=\bfseries`
 
-Customize table font for all lines except the first.
-Default value is `'\\rowfont[l]{}'` (normal font, left aligned).
+LaTeX properties added to header rows, follows the syntax of the underlying LaTeX package.
 
-###### `options.headerParse: (tableRows) => ''`
+###### `options.headerParse`
 
-    (tableRows) => ''
+    (tableRows) => ``
 
-Cunction that computes the "latex header" part of the table environment, this generates strings such as `|c|c|r|`.
+Function that computes the "latex header" part of the table environment, this generates strings such as `|c|c|r|`.
 It gets an array of all the `tableRow` [mdast] nodes for the table as argument.
 Default function extracts the number of columns for each row and uses the `X[-1]` handler ("find the best available width").
 The result for a 3 column-table is `|X[-1]|X[-1]|X[-1]|`.
