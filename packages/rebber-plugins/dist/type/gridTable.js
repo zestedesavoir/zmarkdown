@@ -59,12 +59,11 @@ class GridTableStringifier {
     if (node.data && node.data.hProperties.rowSpan > 1) {
       this.currentSpan = node.data.hProperties.rowSpan;
       this.multiLineCellIndex = this.colIndex;
-      baseText = `\\multirow{${this.currentSpan}}{*}{\\parbox{\\linewidth}{${baseText}}}`;
+      baseText = `\\SetCell[r=${this.currentSpan}]{l} ${baseText}`;
       this.colSpan = node.data.hProperties.colSpan > 1 ? node.data.hProperties.colSpan : 1;
     } else if (node.data && node.data.hProperties.colSpan > 1) {
       const colSpan = node.data.hProperties.colSpan;
-      const colDim = `m{\\dimexpr(\\linewidth) * ${colSpan} / \\number-of-column - 2 * \\tabcolsep}`;
-      baseText = `\\multicolumn{${colSpan}}{|${colDim}|}{\\parbox{\\linewidth}{${baseText}}}`;
+      baseText = `\\SetCell[c=${colSpan}]{l} ${baseText}`;
     }
     if (node.data && node.data.hProperties.colSpan > 1) {
       this.colIndex -= 1;
@@ -74,21 +73,32 @@ class GridTableStringifier {
   }
   gridTableRow(ctx, node, index) {
     const overriddenCtx = clone(ctx);
-    this.rowIndex++;
     overriddenCtx.tableRow = undefined;
+    this.rowIndex++;
+    const extraCell = {
+      type: 'tableCell',
+      children: [{
+        type: 'paragraph',
+        children: [{
+          type: 'text',
+          value: ' '
+        }]
+      }]
+    };
+
+    // Duplicate cells with colSpan greater than one
+    for (let i = 0; i < node.children.length; i++) {
+      if (!node.children[i].data) continue;
+      const colSpan = node.children[i].data.hProperties.colSpan;
+      if (!colSpan || colSpan <= 1) continue;
+      for (let j = 0; j < colSpan - 1; j++) {
+        node.children.splice(i + 1, 0, extraCell);
+      }
+    }
     if (this.previousRowWasMulti()) {
       const lastMultiRowline = this.flushMultiRowLineIfNeeded();
       for (let i = 0; i < lastMultiRowline.colSpan; i++) {
-        node.children.splice(lastMultiRowline.startCell - 1, 0, {
-          type: 'tableCell',
-          children: [{
-            type: 'paragraph',
-            children: [{
-              type: 'text',
-              value: ' '
-            }]
-          }]
-        });
+        node.children.splice(lastMultiRowline.startCell - 1, 0, extraCell);
       }
       this.colIndex = 0;
       let rowStr = tableRow(overriddenCtx, node, index);
@@ -123,8 +133,12 @@ class GridTableStringifier {
     }
     return row;
   }
+  gridTableheaderCounter(node) {
+    const tableHeaders = node.children.filter(n => n.data && n.data.hName === 'thead');
+    return tableHeaders.length >= 1 ? tableHeaders[0].children.length : 0;
+  }
   gridTableHeaderParse() {
-    return `|m{\\dimexpr(\\linewidth) / ${this.nbOfColumns} - 2 * \\tabcolsep}`.repeat(this.nbOfColumns).concat('|');
+    return ' X[-1]'.repeat(this.nbOfColumns).substring(1);
   }
   previousRowWasMulti() {
     return this.lastMultiRowLine !== null;
@@ -132,11 +146,12 @@ class GridTableStringifier {
 }
 function gridTable(ctx, node) {
   const overriddenCtx = clone(ctx);
-  overriddenCtx.spreadCell = '';
   const stringifier = new GridTableStringifier();
-  overriddenCtx.break = () => ' \\endgraf'; // in gridtables '\\\\' won't work
+  // Inside tables, `\\\\` won't work
+  overriddenCtx.break = () => ' \\endgraf';
   overriddenCtx.tableCell = stringifier.gridTableCell.bind(stringifier);
   overriddenCtx.tableRow = stringifier.gridTableRow.bind(stringifier);
+  overriddenCtx.headerCounter = stringifier.gridTableheaderCounter.bind(stringifier);
   overriddenCtx.headerParse = stringifier.gridTableHeaderParse.bind(stringifier);
   overriddenCtx.image = overriddenCtx.image ? overriddenCtx.image : {};
   overriddenCtx.image.inlineMatcher = () => true;
