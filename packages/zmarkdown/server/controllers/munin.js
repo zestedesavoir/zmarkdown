@@ -109,7 +109,7 @@ module.exports = isConfig => (req, res) => {
       }
 
       const data = {
-        status:          status[proc.pm2_env.status] || 3,
+        status:          proc.pm2_env.status in status ? status[proc.pm2_env.status] : 3,
         memory:          proc.monit.memory,
         cpu:             proc.monit.cpu,
         event_loop_lag:  loopLag || 'U',
