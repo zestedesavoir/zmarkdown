@@ -7,7 +7,8 @@ module.exports = isConfig => (req, res) => {
     status: {
       graph: [
         'graph_title Process Status',
-        'graph_vlabel',
+        'graph_vlabel Status (0=online, 1=stopped, 2=errored)',
+        'graph_args --lower-limit 0 --upper-limit 3',
       ],
       fields: (name) => [
         `${name}.label ${name}`,
