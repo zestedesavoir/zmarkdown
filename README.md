@@ -25,10 +25,6 @@ Currently, all the plugins provided only work for remark versions **lesser than*
 
 This project uses [Jest][jest] for testing. It is recommended to use the locally installed version using `npx`, and run Jest in watch mode when developing `npx jest --watch --notify` (`--notify` sends desktop notifications when tests run).
 
-### Development
-
-Read [`packages/zmarkdown/README.md`](zmarkdown-dev)
-
 ### Useful commands
 
 * `npm run test` : tests all packages.
