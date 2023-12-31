@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+const webpack = require('webpack')
 const path = require('path')
 
 const mode = process.env.NODE_ENV ? process.env.NODE_ENV : 'production'
