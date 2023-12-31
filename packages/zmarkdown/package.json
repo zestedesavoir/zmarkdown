@@ -30,7 +30,7 @@
     "watch": "jest --watch",
     "server": "pm2 start -f server/index.js -i 3 --max-memory-restart 150M",
     "stop": "pm2 kill",
-    "watch:client": "cross-env NODE_ENV=development webpack --watch --info-verbosity=verbose",
+    "watch:client": "cross-env NODE_ENV=development webpack --watch",
     "release": "webpack"
   },
   "engines": {
