@@ -30,7 +30,7 @@
     "watch": "jest --watch",
     "server": "pm2 start -f server/index.js -i 3 --max-memory-restart 150M",
     "stop": "pm2 kill",
-    "watch:client": "cross-env NODE_ENV=development webpack --watch --info-verbosity=verbose",
+    "watch:client": "cross-env NODE_ENV=development webpack --watch",
     "release": "webpack"
   },
   "engines": {
@@ -49,6 +49,7 @@
     "katex": "0.11.1",
     "md-attr-parser": "^1.3.0",
     "pm2": "^4.4.1",
+    "process": "^0.11.10",
     "rebber": "file:../rebber",
     "rebber-plugins": "file:../rebber-plugins",
     "rehype-autolink-headings": "^4.0.0",

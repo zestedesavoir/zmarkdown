@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 const path = require('path')
 
 const mode = process.env.NODE_ENV ? process.env.NODE_ENV : 'production'
@@ -22,6 +23,11 @@ const defaultConf = {
       },
     ],
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
+  ],
 }
 
 const makeExportObject = (type) => {
