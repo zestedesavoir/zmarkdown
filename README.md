@@ -166,4 +166,3 @@ This project uses [Jest][jest] for testing. It is recommended to use the locally
 [typographic-colon]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/typographic-colon#typographic-colon--
 [typographic-permille]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/typographic-permille#typographic-permille--
 [zmarkdown]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/zmarkdown#zmarkdown--
-[zmarkdown-dev]: https://github.com/zestedesavoir/zmarkdown/tree/master/packages/zmarkdown#dev-build
