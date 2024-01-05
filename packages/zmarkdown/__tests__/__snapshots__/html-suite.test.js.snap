@@ -84,13 +84,13 @@ exports[`code highlight special cases supports linenostart 1`] = `
 `;
 
 exports[`images become figures: does not apply when a caption is present 1`] = `
-"<figure><img src=\\"http://example.com\\" alt=\\"foo\\"><figcaption>foo</figcaption></figure>
-<figure><img src=\\"http://example.com\\"><figcaption>Caption</figcaption></figure>
-<figure><img src=\\"http://example.com\\" alt=\\"foo\\"><figcaption>Caption</figcaption></figure>
-<figure><img src=\\"http://example.com\\"><figcaption></figcaption></figure>"
+"<figure><img src=\\"http://example.com\\" alt=\\"foo\\" loading=\\"lazy\\"><figcaption>foo</figcaption></figure>
+<figure><img src=\\"http://example.com\\" loading=\\"lazy\\"><figcaption>Caption</figcaption></figure>
+<figure><img src=\\"http://example.com\\" alt=\\"foo\\" loading=\\"lazy\\"><figcaption>Caption</figcaption></figure>
+<figure><img src=\\"http://example.com\\" loading=\\"lazy\\"><figcaption></figcaption></figure>"
 `;
 
-exports[`images become figures: works with only an image 1`] = `"<figure><img src=\\"http://blabla.fr\\" alt=\\"wrapped into _figure_\\"><figcaption>wrapped into _figure_</figcaption></figure>"`;
+exports[`images become figures: works with only an image 1`] = `"<figure><img src=\\"http://blabla.fr\\" alt=\\"wrapped into _figure_\\" loading=\\"lazy\\"><figcaption>wrapped into _figure_</figcaption></figure>"`;
 
 exports[`pedantic mode disabled unordered lists markers 1`] = `
 "<ul>
