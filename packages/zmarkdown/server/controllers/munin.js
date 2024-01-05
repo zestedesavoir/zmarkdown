@@ -3,11 +3,18 @@ const pm2 = require('pm2')
 module.exports = isConfig => (req, res) => {
   const endpoints = Object.keys(require('../factories/io-factory'))
 
+  const status = {
+    online:  0,
+    stopped: 1,
+    errored: 2,
+  }
+
   const supportedStats = {
     status: {
       graph: [
         'graph_title Process Status',
-        'graph_vlabel',
+        `graph_vlabel Status\n(${Object.entries(status).map(([l, s]) => `${s}=${l}`).join(', ')})`,
+        'graph_args --lower-limit 0 --upper-limit 3',
       ],
       fields: (name) => [
         `${name}.label ${name}`,
@@ -65,12 +72,6 @@ module.exports = isConfig => (req, res) => {
       fields: () => endpoints.map(endpoint =>
         `${endpoint}.label ${endpoint}\n${endpoint}.draw STACK`),
     },
-  }
-
-  const status = {
-    online:  0,
-    stopped: 1,
-    errored: 2,
   }
 
   const stat = req.params.plugin
