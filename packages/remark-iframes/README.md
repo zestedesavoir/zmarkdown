@@ -97,7 +97,8 @@ unified()
 - `match`: a regular expression passed to `String.prototype.test`, used to validate the URL.
 - `thumbnail`: a way to retrieve a thumbnail. This param is an object with a `format` key of this type: `'http://url/{param1}/{param2}'` you must then provide patterns `param: 'pattern'` to extract the value which will replace the corresponding `{param}` in the `format` URL.
 - `droppedQueryParameters`: a list of query parameters to remove from the iframe source URL.
-- `oembed`: an URL to the oEmbed API of the website you want to embed.
+- `oembed`: an URL to the oEmbed API of the website you want to embed;
+- `lazyLoad`: tell browsers to lazy load the iframe whenever possible, using the HTML `loading` attribute.
 
 ### oEmbed usage
 

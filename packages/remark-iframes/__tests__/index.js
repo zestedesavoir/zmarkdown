@@ -7,7 +7,6 @@ import remarkStringify from 'remark-stringify'
 
 import plugin from '../src/'
 
-
 const render = async (text, config) => unified()
   .use(reParse)
   .use(plugin, config)
@@ -265,6 +264,21 @@ test('does not parse without markers', async () => {
   `, config)
 
   expect(contents).toMatchSnapshot()
+})
+
+test('allows lazy loading', async () => {
+  const config = {
+    'youtube.com': {
+      width: 560,
+      height: 315,
+      disabled: false,
+      lazyLoad: true,
+      oembed: 'https://www.youtube.com/oembed',
+    },
+  }
+
+  const {contents} = await render('!(http://youtube.com/watch?v=FdltlrKFr1w)', config)
+  expect(contents).toContain('loading="lazy"')
 })
 
 test('Errors without config', async () => {

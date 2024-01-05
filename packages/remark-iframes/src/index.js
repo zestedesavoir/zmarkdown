@@ -54,6 +54,8 @@ module.exports = function plugin (opts) {
       },
     }
 
+    if (provider.lazyLoad) data.hProperties.loading = 'lazy'
+
     if (provider.oembed) {
       Object.assign(data, {
         oembed: {

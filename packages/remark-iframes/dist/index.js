@@ -77,6 +77,7 @@ module.exports = function plugin(opts) {
         frameborder: '0'
       }
     };
+    if (provider.lazyLoad) data.hProperties.loading = 'lazy';
 
     if (provider.oembed) {
       Object.assign(data, {
