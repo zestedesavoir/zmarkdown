@@ -463,6 +463,46 @@ function extractTableContent(lines, linesInfos, hasHeader) {
   return table;
 }
 
+function processCellLines(lines) {
+  var trimmedLines = [];
+  var inCodeBlock = false;
+  var leadingWhitespace = 0;
+  var leadingWhitespaceRegex = null;
+
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i]; // Trim the end of the line
+
+    line = line.trimEnd(); // Check if we're entering or exiting a code block
+
+    if (line.trim().startsWith('```')) {
+      inCodeBlock = !inCodeBlock; // If we're entering a code block, remember the amount of leading whitespace
+
+      if (inCodeBlock) {
+        // Set how much whitespace to remoev from lines
+        // inside the code-block
+        leadingWhitespace = line.match(/^ */)[0].length;
+        leadingWhitespaceRegex = new RegExp("^ {0,".concat(leadingWhitespace, "}"));
+      } // Remove leading whitespace from the opening/closing code-block
+      // statement as well
+
+
+      line = line.replace(leadingWhitespaceRegex, '');
+    } else if (inCodeBlock) {
+      // If we're *already* in a code block, trim the start of the line
+      // by the amount of leading whitespace
+      line = line.replace(leadingWhitespaceRegex, '');
+    } else {
+      // We're not in a code block, trim the start of the line
+      line = line.trimStart();
+    } // Replace the line in the array
+
+
+    trimmedLines.push(line);
+  }
+
+  return trimmedLines;
+}
+
 function generateTable(tableContent, now, tokenizer) {
   // Generate the gridTable node to insert in the AST
   var tableElt = {
@@ -496,9 +536,8 @@ function generateTable(tableContent, now, tokenizer) {
 
       for (var c = 0; c < row._cells.length; c++) {
         var cell = row._cells[c];
-        var tokenizedContent = tokenizer.tokenizeBlock(cell._lines.map(function (e) {
-          return e.trim();
-        }).join('\n'), now);
+        var trimmedLines = processCellLines(cell._lines);
+        var tokenizedContent = tokenizer.tokenizeBlock(trimmedLines.join('\n'), now);
         var cellElt = {
           type: 'tableCell',
           children: tokenizedContent,

@@ -376,6 +376,49 @@ function extractTableContent (lines, linesInfos, hasHeader) {
   return table
 }
 
+function processCellLines (lines) {
+  const trimmedLines = []
+  let inCodeBlock = false
+  let leadingWhitespace = 0
+  let leadingWhitespaceRegex = null
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i]
+
+    // Trim the end of the line
+    line = line.trimEnd()
+
+    // Check if we're entering or exiting a code block
+    if (line.trim().startsWith('```')) {
+      inCodeBlock = !inCodeBlock
+
+      // If we're entering a code block, remember the amount of leading whitespace
+      if (inCodeBlock) {
+        // Set how much whitespace to remoev from lines
+        // inside the code-block
+        leadingWhitespace = line.match(/^ */)[0].length
+        leadingWhitespaceRegex = new RegExp(`^ {0,${leadingWhitespace}}`)
+      }
+
+      // Remove leading whitespace from the opening/closing code-block
+      // statement as well
+      line = line.replace(leadingWhitespaceRegex, '')
+    } else if (inCodeBlock) {
+      // If we're *already* in a code block, trim the start of the line
+      // by the amount of leading whitespace
+      line = line.replace(leadingWhitespaceRegex, '')
+    } else {
+      // We're not in a code block, trim the start of the line
+      line = line.trimStart()
+    }
+
+    // Replace the line in the array
+    trimmedLines.push(line)
+  }
+
+  return trimmedLines
+}
+
 function generateTable (tableContent, now, tokenizer) {
   // Generate the gridTable node to insert in the AST
   const tableElt = {
@@ -408,8 +451,10 @@ function generateTable (tableContent, now, tokenizer) {
       }
       for (let c = 0; c < row._cells.length; c++) {
         const cell = row._cells[c]
+        const trimmedLines = processCellLines(cell._lines)
+
         const tokenizedContent = tokenizer.tokenizeBlock(
-          cell._lines.map((e) => e.trim()).join('\n'),
+          trimmedLines.join('\n'),
           now
         )
         const cellElt = {
