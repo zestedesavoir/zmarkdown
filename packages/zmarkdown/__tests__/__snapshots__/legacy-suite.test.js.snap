@@ -56,9 +56,9 @@ Here's an inline \\\\externalLink{link}{http://zestedesavoir.com/script?foo=1\\\
 
 exports[`basic renders angle-links-and-img.txt 1`] = `
 "<p><a href=\\"simple%20link\\" title=\\"my title\\">link</a>
-<img src=\\"http://example.com/image.jpg\\" alt=\\"image\\">
+<img src=\\"http://example.com/image.jpg\\" alt=\\"image\\" loading=\\"lazy\\">
 <a href=\\"http://example.com/(()((())923)(\\">link</a>
-<img src=\\"link(()))(\\" alt=\\"image\\"></p>"
+<img src=\\"link(()))(\\" alt=\\"image\\" loading=\\"lazy\\"></p>"
 `;
 
 exports[`basic renders angle-links-and-img.txt 2`] = `
@@ -4159,15 +4159,15 @@ xxx xxx xxx xxx xxx xxx xxx xxx"
 `;
 
 exports[`misc renders brackets-in-img-title.txt 1`] = `
-"<p><img src=\\"local-img.jpg\\" alt=\\"alt\\">
-<img src=\\"local-img.jpg\\" alt=\\"alt\\">
-<img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"normal title\\"></p>
-<p><img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"(just title in brackets)\\">
-<img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"title with brackets (I think)\\"></p>
-<p><img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"(\\">
-<img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"(open only\\">
-<img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\")\\">
-<img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"close only)\\"></p>"
+"<p><img src=\\"local-img.jpg\\" alt=\\"alt\\" loading=\\"lazy\\">
+<img src=\\"local-img.jpg\\" alt=\\"alt\\" loading=\\"lazy\\">
+<img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"normal title\\" loading=\\"lazy\\"></p>
+<p><img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"(just title in brackets)\\" loading=\\"lazy\\">
+<img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"title with brackets (I think)\\" loading=\\"lazy\\"></p>
+<p><img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"(\\" loading=\\"lazy\\">
+<img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"(open only\\" loading=\\"lazy\\">
+<img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\")\\" loading=\\"lazy\\">
+<img src=\\"local-img.jpg\\" alt=\\"alt\\" title=\\"close only)\\" loading=\\"lazy\\"></p>"
 `;
 
 exports[`misc renders code-first-line.txt 1`] = `
@@ -4401,8 +4401,8 @@ exports[`misc renders h1.txt 2`] = `
 `;
 
 exports[`misc renders image.txt 1`] = `
-"<figure><img src=\\"http://humane_man.jpg\\" alt=\\"Poster\\" title=\\"The most humane man.\\"><figcaption>Poster</figcaption></figure>
-<p><img src=\\"http://humane_man.jpg\\" alt=\\"Poster\\" title=\\"The most humane man.\\"></p>
+"<figure><img src=\\"http://humane_man.jpg\\" alt=\\"Poster\\" title=\\"The most humane man.\\" loading=\\"lazy\\"><figcaption>Poster</figcaption></figure>
+<p><img src=\\"http://humane_man.jpg\\" alt=\\"Poster\\" title=\\"The most humane man.\\" loading=\\"lazy\\"></p>
 <figure><img src=\\"\\" alt=\\"Blank\\"><figcaption>Blank</figcaption></figure>"
 `;
 
@@ -4419,7 +4419,7 @@ exports[`misc renders image.txt 2`] = `
 \\\\image{}[Blank]"
 `;
 
-exports[`misc renders image_in_links.txt 1`] = `"<p><a href=\\"path/to/image.png\\"><img src=\\"path/to/img_thumb.png\\" alt=\\"altname\\"></a></p>"`;
+exports[`misc renders image_in_links.txt 1`] = `"<p><a href=\\"path/to/image.png\\"><img src=\\"path/to/img_thumb.png\\" alt=\\"altname\\" loading=\\"lazy\\"></a></p>"`;
 
 exports[`misc renders image_in_links.txt 2`] = `"\\\\externalLink{\\\\image{path/to/img_thumb.png}}{path/to/image.png}"`;
 
@@ -6482,7 +6482,7 @@ exports[`zds renders emoticons.txt 1`] = `
 <p>Citation</p>
 </blockquote>
 <p><img src=\\"/static/smileys/svg/heureux.svg\\" alt=\\":D\\" class=\\"smiley\\"> Ce n'est pas une légende</p>
-<figure><img src=\\"https://zestedesavoir.com/media/galleries/3014/bee33fae-2216-463a-8b85-d1d9efe2c374.png\\" alt=\\"toto\\"><figcaption>toto</figcaption></figure>
+<figure><img src=\\"https://zestedesavoir.com/media/galleries/3014/bee33fae-2216-463a-8b85-d1d9efe2c374.png\\" alt=\\"toto\\" loading=\\"lazy\\"><figcaption>toto</figcaption></figure>
 <p><img src=\\"/static/smileys/svg/heureux.svg\\" alt=\\":D\\" class=\\"smiley\\"> ce n'est pas une légende non plus</p>"
 `;
 

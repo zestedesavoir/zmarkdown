@@ -18,9 +18,10 @@ const defaultStringifierList = {
 require('katex/dist/contrib/mhchem')
 
 const postProcessorList = {
-  wrapCode:         require('../postprocessors/html-wrap-code'),
-  iframeWrappers:   require('../postprocessors/html-iframe-wrappers'),
   footnotesReorder: require('../postprocessors/html-footnotes-reorder'),
+  iframeWrappers:   require('../postprocessors/html-iframe-wrappers'),
+  lazyLoadImages:   require('../postprocessors/html-lazy-load-images'),
+  wrapCode:         require('../postprocessors/html-wrap-code'),
 }
 
 module.exports = (tokenizer, config) => {
