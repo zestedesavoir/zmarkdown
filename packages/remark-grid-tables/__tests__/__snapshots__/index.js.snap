@@ -109,6 +109,24 @@ exports[`handles Cyrillic script 3`] = `"<table><tbody><tr><td colspan=\\"1\\" r
 
 exports[`handles Cyrillic script 4`] = `"<table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>z</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>z</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ӽ</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>ӽ</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>Ў</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>ў</p></td></tr></tbody></table>"`;
 
+exports[`indentation in code blocks - negative indent 1`] = `
+"<table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>Code</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Block</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><pre><code class=\\"language-python\\"> def echo(str):
+print(str)
+</code></pre></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Another
+thing
+here
+maybe?</p></td></tr></tbody></table>"
+`;
+
+exports[`indentation in code blocks - simple example 1`] = `
+"<table><tbody><tr><td colspan=\\"1\\" rowspan=\\"1\\"><p>Code</p></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Block</p></td></tr><tr><td colspan=\\"1\\" rowspan=\\"1\\"><pre><code class=\\"language-python\\">def echo(str):
+  print(str)
+</code></pre></td><td colspan=\\"1\\" rowspan=\\"1\\"><p>Another
+thing
+here
+maybe?</p></td></tr></tbody></table>"
+`;
+
 exports[`regression: grid table in fenced code block 1`] = `
 "<pre><code>+---+---+---+
 | A | B | C |

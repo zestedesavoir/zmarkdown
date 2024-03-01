@@ -10,7 +10,6 @@ import stringifyRemark from 'remark-stringify'
 
 import plugin from '../src/'
 
-
 const render = text => unified()
   .use(reParse)
   .use(plugin)
@@ -222,6 +221,36 @@ test('distinguish between tables of the same width', () => {
   `)
 
   expect(test1).not.toEqual(test2)
+})
+
+test('indentation in code blocks - simple example', () => {
+  const {contents} = render(dedent`
+    +----------------+---------+
+    | Code           | Block   |
+    +----------------+---------+
+    | \`\`\`python      | Another |
+    | def echo(str): | thing   |
+    |   print(str)   | here    |
+    | \`\`\`            | maybe?  |
+    +----------------+---------+
+  `)
+
+  expect(contents).toMatchSnapshot()
+})
+
+test('indentation in code blocks - negative indent', () => {
+  const {contents} = render(dedent`
+    +-----------------+---------+
+    | Code            | Block   |
+    +-----------------+---------+
+    | \`\`\`python       | Another |
+    |  def echo(str): | thing   |
+    | print(str)      | here    |
+    | \`\`\`             | maybe?  |
+    +-----------------+---------+
+  `)
+
+  expect(contents).toMatchSnapshot()
 })
 
 test('handles Cyrillic script', () => {
