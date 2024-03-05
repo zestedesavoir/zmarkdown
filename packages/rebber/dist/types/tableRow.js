@@ -11,23 +11,12 @@ var defaultMacro = function defaultMacro(ctx, node) {
     return parsed.push(one(ctx, n, index, node));
   });
   var line = parsed.join(' & ');
-  return "".concat(line, " \\\\ \\hline\n");
+  return "".concat(line, " \\\\\n");
 };
-
-var defaultFirstLineRowFont = "\\rowfont[c]{\\bfseries}";
-var defaultOtherLineRowFont = "\\rowfont[l]{}";
 /* Stringify a tableRow `node`. */
+
 
 function tableRow(ctx, node, index) {
   var macro = ctx.tableRow || defaultMacro;
-  var firstLineRowFont = ctx.firstLineRowFont || defaultFirstLineRowFont;
-  var otherLineRowFont = ctx.otherLineRowFont || defaultOtherLineRowFont;
-
-  if (index === 0) {
-    return "".concat(firstLineRowFont, "\n").concat(macro(ctx, node));
-  } else if (index === 1) {
-    return "".concat(otherLineRowFont, "\n").concat(macro(ctx, node));
-  } else {
-    return macro(ctx, node);
-  }
+  return macro(ctx, node);
 }

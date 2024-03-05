@@ -95,12 +95,11 @@ var GridTableStringifier = /*#__PURE__*/function () {
       if (node.data && node.data.hProperties.rowSpan > 1) {
         this.currentSpan = node.data.hProperties.rowSpan;
         this.multiLineCellIndex = this.colIndex;
-        baseText = "\\multirow{".concat(this.currentSpan, "}{*}{\\parbox{\\linewidth}{").concat(baseText, "}}");
+        baseText = "\\SetCell[r=".concat(this.currentSpan, "]{l} ").concat(baseText);
         this.colSpan = node.data.hProperties.colSpan > 1 ? node.data.hProperties.colSpan : 1;
       } else if (node.data && node.data.hProperties.colSpan > 1) {
         var colSpan = node.data.hProperties.colSpan;
-        var colDim = "m{\\dimexpr(\\linewidth) * ".concat(colSpan, " / \\number-of-column - 2 * \\tabcolsep}");
-        baseText = "\\multicolumn{".concat(colSpan, "}{|").concat(colDim, "|}{\\parbox{\\linewidth}{").concat(baseText, "}}");
+        baseText = "\\SetCell[c=".concat(colSpan, "]{l} ").concat(baseText);
       }
 
       if (node.data && node.data.hProperties.colSpan > 1) {
@@ -114,23 +113,34 @@ var GridTableStringifier = /*#__PURE__*/function () {
     key: "gridTableRow",
     value: function gridTableRow(ctx, node, index) {
       var overriddenCtx = clone(ctx);
-      this.rowIndex++;
       overriddenCtx.tableRow = undefined;
+      this.rowIndex++;
+      var extraCell = {
+        type: 'tableCell',
+        children: [{
+          type: 'paragraph',
+          children: [{
+            type: 'text',
+            value: ' '
+          }]
+        }]
+      }; // Duplicate cells with colSpan greater than one
+
+      for (var i = 0; i < node.children.length; i++) {
+        if (!node.children[i].data) continue;
+        var colSpan = node.children[i].data.hProperties.colSpan;
+        if (!colSpan || colSpan <= 1) continue;
+
+        for (var j = 0; j < colSpan - 1; j++) {
+          node.children.splice(i + 1, 0, extraCell);
+        }
+      }
 
       if (this.previousRowWasMulti()) {
         var lastMultiRowline = this.flushMultiRowLineIfNeeded();
 
-        for (var i = 0; i < lastMultiRowline.colSpan; i++) {
-          node.children.splice(lastMultiRowline.startCell - 1, 0, {
-            type: 'tableCell',
-            children: [{
-              type: 'paragraph',
-              children: [{
-                type: 'text',
-                value: ' '
-              }]
-            }]
-          });
+        for (var _i = 0; _i < lastMultiRowline.colSpan; _i++) {
+          node.children.splice(lastMultiRowline.startCell - 1, 0, extraCell);
         }
 
         this.colIndex = 0;
@@ -180,9 +190,17 @@ var GridTableStringifier = /*#__PURE__*/function () {
       return row;
     }
   }, {
+    key: "gridTableheaderCounter",
+    value: function gridTableheaderCounter(node) {
+      var tableHeaders = node.children.filter(function (n) {
+        return n.data && n.data.hName === 'thead';
+      });
+      return tableHeaders.length >= 1 ? tableHeaders[0].children.length : 0;
+    }
+  }, {
     key: "gridTableHeaderParse",
     value: function gridTableHeaderParse() {
-      return "|m{\\dimexpr(\\linewidth) / ".concat(this.nbOfColumns, " - 2 * \\tabcolsep}").repeat(this.nbOfColumns).concat('|');
+      return ' X[-1]'.repeat(this.nbOfColumns).substring(1);
     }
   }, {
     key: "previousRowWasMulti",
@@ -196,16 +214,15 @@ var GridTableStringifier = /*#__PURE__*/function () {
 
 function gridTable(ctx, node) {
   var overriddenCtx = clone(ctx);
-  overriddenCtx.spreadCell = '';
-  var stringifier = new GridTableStringifier();
+  var stringifier = new GridTableStringifier(); // Inside tables, `\\\\` won't work
 
   overriddenCtx["break"] = function () {
     return ' \\endgraf';
-  }; // in gridtables '\\\\' won't work
-
+  };
 
   overriddenCtx.tableCell = stringifier.gridTableCell.bind(stringifier);
   overriddenCtx.tableRow = stringifier.gridTableRow.bind(stringifier);
+  overriddenCtx.headerCounter = stringifier.gridTableheaderCounter.bind(stringifier);
   overriddenCtx.headerParse = stringifier.gridTableHeaderParse.bind(stringifier);
   overriddenCtx.image = overriddenCtx.image ? overriddenCtx.image : {};
 

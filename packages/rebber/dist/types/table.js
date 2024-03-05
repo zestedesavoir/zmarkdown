@@ -24,20 +24,37 @@ var defaultHeaderParse = function defaultHeaderParse(rows) {
   var columns = Math.max.apply(Math, _toConsumableArray(rows.map(function (l) {
     return l.split('&').length;
   })));
-  var colHeader = "|".concat('X[-1]|'.repeat(columns));
-  return colHeader;
+  return ' X[-1]'.repeat(columns).substring(1);
+}; // Retrocompatibility: first row is always header on default tables
+
+
+var defaultheaderCounter = function defaultheaderCounter() {
+  return 1;
 };
 
 var defaultMacro = function defaultMacro(ctx, node) {
   var headerParse = ctx.headerParse ? ctx.headerParse : defaultHeaderParse;
+  var headerCounter = ctx.headerCounter ? ctx.headerCounter : defaultheaderCounter;
   var parsed = node.children.map(function (n, index) {
     return one(ctx, n, index, node);
   });
-  var inner = parsed.join('');
+  var headerCount = headerCounter(node);
   var colHeader = headerParse(parsed);
-  var spreadCell = typeof ctx.spreadCell === 'string' ? ctx.spreadCell : ' spread 0pt ';
-  var caption = node.caption ? "\n\\captionof{table}{".concat(node.caption, "}\n") : '';
-  return "\\begin{longtabu}".concat(spreadCell, "{").concat(colHeader, "} \\hline\n").concat(inner, "\\end{longtabu}").concat(caption, "\n");
+  var envName = typeof ctx.tableEnvName === 'string' ? ctx.tableEnvName : 'longtblr';
+  var caption = node.caption ? "\n\\captionof{table}{".concat(node.caption, "}\n") : ''; // eslint-disable-next-line max-len
+
+  var headerProperties = typeof ctx.headerProperties === 'string' ? ctx.headerProperties : 'font=\\bfseries';
+  var extraProps = '';
+
+  if (headerCount && headerCount > 0) {
+    var tableHeaderEnum = new Array(headerCount).fill(0).map(function (_, i) {
+      return i + 1;
+    }).join(',');
+    extraProps += ",rowhead=".concat(headerCount, ",row{").concat(tableHeaderEnum, "}={").concat(headerProperties, "}");
+  } // eslint-disable-next-line max-len
+
+
+  return "\\begin{".concat(envName, "}{colspec={").concat(colHeader, "}").concat(extraProps, "}\n").concat(parsed.join(''), "\\end{").concat(envName, "}").concat(caption, "\n");
 };
 /* Stringify a table `node`. */
 
