@@ -107,7 +107,7 @@ All options are optional.
 
   If not provided, local images will not end up in `downloadDestination`.
 
-## example
+## Example
 
 ```markdown
 Two small images:

@@ -12,6 +12,16 @@ fd.on('data', (data) => {
   }
 })
 
+app.use((req, res, next) => {
+  /* Some websites (like Wikimedia) may refuse requests without User-Agent
+   * header, so mimic their behaviour: */
+  if (!req.get('User-Agent')) {
+    res.writeHead(403)
+    res.end()
+  }
+  next()
+})
+
 const bloat = Buffer.alloc(10 * 1024)
 
 app.get('/stream-bomb', (req, res) => {

@@ -172,10 +172,20 @@ function plugin ({
   // Rejects with an error if headers are invalid.
   const initDownload = url =>
     new Promise((resolve, reject) => {
+      const packageInfo = require('../package.json')
       const parsedUrl = new URL(url)
       const proto = parsedUrl.protocol === 'https:' ? https : http
+      const reqOptions = {
+        timeout: httpRequestTimeout,
+        // Websites may refuse connection if there is no User-Agent
+        // (see for instance https://meta.wikimedia.org/wiki/User-Agent_policy)
+        headers: {
+          'User-Agent': `${packageInfo.name} bot/${packageInfo.version} (${
+            packageInfo.repository.url})`,
+        },
+      }
 
-      const req = proto.get(parsedUrl, {timeout: httpRequestTimeout}, res => {
+      const req = proto.get(parsedUrl, reqOptions, res => {
         const {headers, statusCode} = res
         let error
 
