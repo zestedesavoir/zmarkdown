@@ -272,11 +272,19 @@ function plugin() {
   // Rejects with an error if headers are invalid.
   var initDownload = function initDownload(url) {
     return new Promise(function (resolve, reject) {
+      var packageInfo = require('../package.json');
+
       var parsedUrl = new URL(url);
       var proto = parsedUrl.protocol === 'https:' ? https : http;
-      var req = proto.get(parsedUrl, {
-        timeout: httpRequestTimeout
-      }, function (res) {
+      var reqOptions = {
+        timeout: httpRequestTimeout,
+        // Websites may refuse connection if there is no User-Agent
+        // (see for instance https://meta.wikimedia.org/wiki/User-Agent_policy)
+        headers: {
+          'User-Agent': "".concat(packageInfo.name, " bot/").concat(packageInfo.version, " (").concat(packageInfo.repository.url, ")")
+        }
+      };
+      var req = proto.get(parsedUrl, reqOptions, function (res) {
         var headers = res.headers,
             statusCode = res.statusCode;
         var error;
