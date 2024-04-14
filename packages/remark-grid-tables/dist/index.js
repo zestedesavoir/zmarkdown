@@ -33,11 +33,11 @@ var visit = require('unist-util-visit');
 var stringWidth = require('string-width');
 
 var splitter = new (require('grapheme-splitter'))();
-var mainLineRegex = new RegExp(/((\+)|(\|)).+((\|)|(\+))/);
-var totalMainLineRegex = new RegExp(/^((\+)|(\|)).+((\|)|(\+))$/);
-var headerLineRegex = new RegExp(/^\+=[=+]+=\+$/);
-var partLineRegex = new RegExp(/\+-[-+]+-\+/);
-var separationLineRegex = new RegExp(/^\+-[-+]+-\+$/);
+var mainLineRegex = /((\+)|(\|)).+((\|)|(\+))/;
+var totalMainLineRegex = /^((\+)|(\|)).+((\|)|(\+))$/;
+var headerLineRegex = /^\+=[=+]+=\+$/;
+var partLineRegex = /\+-[-+]+-\+/;
+var separationLineRegex = /^\+-[-+]+-\+$/;
 module.exports = plugin; // A small class helping table generation
 
 var Table = /*#__PURE__*/function () {

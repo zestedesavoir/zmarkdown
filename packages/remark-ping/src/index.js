@@ -5,7 +5,7 @@ const interruptPunctuation = [
   require('@unicode/unicode-13.0.0/General_Category/Final_Punctuation/code-points'),
   require('@unicode/unicode-13.0.0/General_Category/Initial_Punctuation/code-points'),
   require('@unicode/unicode-13.0.0/General_Category/Open_Punctuation/code-points'),
-  require('@unicode/unicode-13.0.0/General_Category/Other_Punctuation/code-points'),
+  require('@unicode/unicode-13.0.0/General_Category/Other_Punctuation/code-points')
 ].flat()
 
 const isInterrupt = c => interruptPunctuation.includes(c.charCodeAt(0))
@@ -27,7 +27,7 @@ module.exports = function plugin ({
   userURL,
   pingCharacter = '@',
   fencedStartSequence = '**',
-  fencedEndSequence = '**',
+  fencedEndSequence = '**'
 }) {
   if (typeof pingUsername !== 'function' || typeof userURL !== 'function') {
     throw new Error(helpMsg)
@@ -77,37 +77,37 @@ module.exports = function plugin ({
 
       return eat(eaten)({
         type: 'ping',
-        username: username,
-        url: url,
+        username,
+        url,
         data: {
           hName: 'a',
           hProperties: {
             href: url,
             rel: 'nofollow',
-            class: 'ping ping-link',
-          },
+            class: 'ping ping-link'
+          }
         },
         children: [{
           type: 'text',
-          value: '@',
+          value: '@'
         }, {
           type: 'emphasis',
           data: {
             hName: 'span',
             hProperties: {
-              class: 'ping-username',
-            },
+              class: 'ping-username'
+            }
           },
           children: [{
             type: 'text',
-            value: username,
-          }],
-        }],
+            value: username
+          }]
+        }]
       })
     } else {
       return eat(eaten.charAt(0))({
         type: 'text',
-        value: eaten.charAt(0),
+        value: eaten.charAt(0)
       })
     }
   }
@@ -148,7 +148,7 @@ module.exports = function plugin ({
     visit(tree, 'link', (node) => {
       visit(node, 'ping', (ping, index) => {
         ping.data.hName = 'span'
-        ping.data.hProperties = {class: 'ping ping-in-link'}
+        ping.data.hProperties = { class: 'ping ping-in-link' }
       })
     })
     visit(tree, 'ping', (node) => {

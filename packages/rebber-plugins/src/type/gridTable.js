@@ -92,9 +92,9 @@ class GridTableStringifier {
             type: 'paragraph',
             children: [{
               type: 'text',
-              value: ' ',
-            }],
-          }],
+              value: ' '
+            }]
+          }]
         })
       }
       this.colIndex = 0
@@ -114,7 +114,7 @@ class GridTableStringifier {
         this.multiLineCellIndex,
         this.colIndex + this.colSpan,
         this.colSpan,
-        this.colIndex,
+        this.colIndex
       )
       rowText = rowText.replace(/\\hline/, this.lastMultiRowLine.getCLine())
     }

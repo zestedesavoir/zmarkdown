@@ -18,7 +18,7 @@ module.exports = opts => {
     authors,
     license,
     date,
-    latex,
+    latex
   } = opts
   // Required options
   assert(contentType, 'Error with argument: "contentType"')

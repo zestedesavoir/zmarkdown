@@ -14,8 +14,8 @@ var defaultMacro = function defaultMacro(ctx, node) {
   return "".concat(line, " \\\\ \\hline\n");
 };
 
-var defaultFirstLineRowFont = "\\rowfont[c]{\\bfseries}";
-var defaultOtherLineRowFont = "\\rowfont[l]{}";
+var defaultFirstLineRowFont = '\\rowfont[c]{\\bfseries}';
+var defaultOtherLineRowFont = '\\rowfont[l]{}';
 /* Stringify a tableRow `node`. */
 
 function tableRow(ctx, node, index) {

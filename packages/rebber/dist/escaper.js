@@ -13,12 +13,12 @@ encode.escape = escape;
 
 var defaultEscapes = {
   '#': '\\#',
-  '$': '\\$',
+  $: '\\$',
   '%': '\\%',
   '&': '\\&',
   '\\': '\\textbackslash{}',
   '^': '\\textasciicircum{}',
-  '_': '\\_',
+  _: '\\_',
   '{': '\\{',
   '}': '\\}',
   '~': '\\textasciitilde{}'

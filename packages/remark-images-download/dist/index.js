@@ -149,7 +149,6 @@ var makeValidatorStream = function makeValidatorStream(fileName, maxSize) {
         });
       } else {
         cb(null, chunk);
-        return;
       }
     }
   });
@@ -498,7 +497,8 @@ function plugin() {
     return Promise.all(tasks.map(function (task) {
       if (task.localSourcePath.includes('../')) {
         task.error = new Error("Dangerous absolute image URL detected: ".concat(task.localSourcePath));
-        task.error.replaceWithDefault = defaultOn && defaultOn.invalidPath;
+        task.error.replaceWithDefault = defaultOn && defaultOn.invalidPath; // eslint-disable-next-line array-callback-return
+
         return;
       }
 
@@ -545,7 +545,7 @@ function plugin() {
                             break;
                           }
 
-                          vfile.message("URL is empty", position);
+                          vfile.message('URL is empty', position);
                           return _context5.abrupt("return");
 
                         case 4:

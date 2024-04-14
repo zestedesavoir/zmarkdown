@@ -6,7 +6,7 @@ module.exports = code;
 var defaultMacro = function defaultMacro(content, lang) {
   // Escape CodeBlocks
   var escaped = content;
-  var escapeRegex = new RegExp('\\\\end\\s*{CodeBlock}', 'g');
+  var escapeRegex = /\\end\s*{CodeBlock}/g;
 
   while (escapeRegex.test(escaped)) {
     escaped = escaped.replace(escapeRegex, '');

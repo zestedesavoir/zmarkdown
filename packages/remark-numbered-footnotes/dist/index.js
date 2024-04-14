@@ -20,7 +20,7 @@ function plugin() {
     return function (node, index, parent) {
       var identifier = node.identifier;
 
-      if (!footnotes.hasOwnProperty(identifier)) {
+      if (!Object.prototype.hasOwnProperty.call(footnotes, identifier)) {
         footnotes[identifier] = Object.keys(footnotes).length + 1;
       }
 
@@ -33,7 +33,7 @@ function plugin() {
     return function (node, index, parent) {
       var identifier = node.identifier;
 
-      if (!footnotes.hasOwnProperty(identifier)) {
+      if (!Object.prototype.hasOwnProperty.call(footnotes, identifier)) {
         footnotes[identifier] = Object.keys(footnotes).length + 1;
       }
 

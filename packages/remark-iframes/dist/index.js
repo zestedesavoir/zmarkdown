@@ -18,11 +18,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-var _require = require('url'),
-    format = _require.format,
-    parse = _require.parse,
-    URLSearchParams = _require.URLSearchParams;
-
 var visit = require('unist-util-visit');
 
 var fetch = require('node-fetch');
@@ -33,7 +28,7 @@ module.exports = function plugin(opts) {
   }
 
   function detectProvider(url) {
-    var hostname = parse(url).hostname;
+    var hostname = new URL(url).hostname;
     return opts[hostname];
   }
 
@@ -258,7 +253,7 @@ module.exports = function plugin(opts) {
 
 function computeFinalUrl(provider, url) {
   var finalUrl = url;
-  var parsed = parse(finalUrl);
+  var parsed = new URL(finalUrl);
 
   if (provider.droppedQueryParameters && parsed.search) {
     var search = new URLSearchParams(parsed.search);
@@ -266,7 +261,7 @@ function computeFinalUrl(provider, url) {
       return search["delete"](ignored);
     });
     parsed.search = search.toString();
-    finalUrl = format(parsed);
+    finalUrl = parsed.toString();
   }
 
   if (provider.replace && provider.replace.length) {
@@ -276,14 +271,14 @@ function computeFinalUrl(provider, url) {
           to = _rule[1];
 
       if (from && to) finalUrl = finalUrl.replace(from, to);
-      parsed = parse(finalUrl);
+      parsed = new URL(finalUrl);
     });
-    finalUrl = format(parsed);
+    finalUrl = parsed.toString();
   }
 
   if (provider.removeFileName) {
     parsed.pathname = parsed.pathname.substring(0, parsed.pathname.lastIndexOf('/'));
-    finalUrl = format(parsed);
+    finalUrl = parsed.toString();
   }
 
   if (provider.removeAfter && finalUrl.includes(provider.removeAfter)) {

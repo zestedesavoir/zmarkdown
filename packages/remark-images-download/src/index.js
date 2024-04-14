@@ -3,11 +3,11 @@ const fs = require('fs')
 const http = require('http')
 const https = require('https')
 const path = require('path')
-const {promisify} = require('util')
-const {Transform} = require('stream')
-const {URL} = require('url')
+const { promisify } = require('util')
+const { Transform } = require('stream')
+const { URL } = require('url')
 
-const {Address4, Address6} = require('ip-address')
+const { Address4, Address6 } = require('ip-address')
 const FileType = require('file-type')
 const isSvg = require('is-svg')
 const shortid = require('shortid')
@@ -40,7 +40,7 @@ const checkFileType = async (name, data) => {
 
   return FileType.fromBuffer(data)
     .catch(() => {})
-    .then((type = {mime: ''}) => {
+    .then((type = { mime: '' }) => {
       if (!type.mime || type.mime === 'application/xml') {
         if (!isSvg(data.toString())) {
           return Promise.reject(new Error(`Could not detect ${name} mime type, not SVG either`))
@@ -87,9 +87,8 @@ const makeValidatorStream = (fileName, maxSize) => {
           })
       } else {
         cb(null, chunk)
-        return
       }
-    },
+    }
   })
 }
 
@@ -97,12 +96,12 @@ const FORBIDDEN_IPV4 = [
   '10.0.0.0/8',
   '172.16.0.0/12',
   '192.168.0.0/16',
-  '192.18.0.0/15',
+  '192.18.0.0/15'
 ].map(a => new Address4(a))
 
 const FORBIDDEN_IPV6 = [
   'fc0::/7',
-  'fe80::/10',
+  'fe80::/10'
 ].map(a => new Address6(a))
 
 const checkHost = async rawUrl => {
@@ -115,7 +114,7 @@ const checkHost = async rawUrl => {
 
   // Try to resolve hostname
   if (!ipv4 && !ipv6) {
-    const {address, family} = await promisify(dns.lookup)(url.hostname)
+    const { address, family } = await promisify(dns.lookup)(url.hostname)
 
     if (family === 4) {
       ipv4 = address
@@ -162,10 +161,10 @@ function plugin ({
     statusCode: false,
     mimeType: false,
     fileTooBig: false,
-    invalidPath: false,
+    invalidPath: false
   },
   localUrlToLocalPath,
-  httpRequestTimeout = 5000, // in milliseconds
+  httpRequestTimeout = 5000 // in milliseconds
 } = {}) {
   // Sends an HTTP request, checks headers and resolves a readable stream
   // if headers are valid.
@@ -181,12 +180,12 @@ function plugin ({
         // (see for instance https://meta.wikimedia.org/wiki/User-Agent_policy)
         headers: {
           'User-Agent': `${packageInfo.name} bot/${packageInfo.version} (${
-            packageInfo.repository.url})`,
-        },
+            packageInfo.repository.url})`
+        }
       }
 
       const req = proto.get(parsedUrl, reqOptions, res => {
-        const {headers, statusCode} = res
+        const { headers, statusCode } = res
         let error
 
         const fileSize = getSize(headers)
@@ -200,7 +199,7 @@ function plugin ({
         } else if (maxFileSize && fileSize > maxFileSize) {
           error = new Error(
             `File at ${url} weighs ${headers['content-length']}, ` +
-            `max size is ${maxFileSize}`,
+            `max size is ${maxFileSize}`
           )
           error.replaceWithDefault = defaultOn && defaultOn.fileTooBig
         }
@@ -268,7 +267,7 @@ function plugin ({
         })
         .on('close', e => {
           resolve()
-        }),
+        })
     )
 
   const doDownloadTasks = async tasks => {
@@ -277,8 +276,8 @@ function plugin ({
         .then(initDownload)
         .then(
           res => { task.res = res },
-          error => { task.error = error },
-        ),
+          error => { task.error = error }
+        )
     ))
 
     if (dirSizeLimit) {
@@ -316,6 +315,7 @@ function plugin ({
         task.error = new Error(`Dangerous absolute image URL detected: ${task.localSourcePath}`)
         task.error.replaceWithDefault = defaultOn && defaultOn.invalidPath
 
+        // eslint-disable-next-line array-callback-return
         return
       }
 
@@ -337,11 +337,11 @@ function plugin ({
     let localCopyTasks = []
 
     visit(tree, 'image', async node => {
-      const {url, position} = node
+      const { url, position } = node
 
       // Empty URL make nasty error messages, so ignore them
       if (!url) {
-        vfile.message(`URL is empty`, position)
+        vfile.message('URL is empty', position)
         return
       }
 
@@ -373,7 +373,7 @@ function plugin ({
           return
         }
 
-        localCopyTasks.push({node, url, destination, localSourcePath: localPath})
+        localCopyTasks.push({ node, url, destination, localSourcePath: localPath })
 
         return
       }
@@ -383,7 +383,7 @@ function plugin ({
         return
       }
 
-      downloadTasks.push({node, url, destination})
+      downloadTasks.push({ node, url, destination })
     })
 
     // Group by URL in order to download each file only once
@@ -399,8 +399,8 @@ function plugin ({
           Object.assign(
             {},
             taskGroup[0],
-            {nodes: taskGroup.map(t => t.node)},
-          ),
+            { nodes: taskGroup.map(t => t.node) }
+          )
         )
     }
 
@@ -419,7 +419,7 @@ function plugin ({
     try {
       await Promise.all([
         doDownloadTasks(downloadTasks),
-        doLocalCopyTasks(localCopyTasks),
+        doLocalCopyTasks(localCopyTasks)
       ])
 
       const failedTasks = tasks.filter(t => t.error)

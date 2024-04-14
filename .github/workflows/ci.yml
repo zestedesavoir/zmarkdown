@@ -22,8 +22,8 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Install eslint
-        run: npm install -g eslint@8
+      - name: Install local dependencies
+        run: npm ci
 
       - name: Run linter
         run: npm run lint

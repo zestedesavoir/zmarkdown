@@ -24,7 +24,7 @@ var defaultMacros = {
     return "".concat(rebberCode, "\n\\captionof{listing}{").concat(caption, "}\n\n");
   },
   image: function image(_1, _2, caption, extra) {
-    return "\\begin{center}\n" + "\\includegraphics".concat(extra.width ? "[".concat(extra.width, "]") : '', "{").concat(extra.url, "}\n") + "\\captionof{figure}{".concat(caption, "}\n") + "\\end{center}\n";
+    return '\\begin{center}\n' + "\\includegraphics".concat(extra.width ? "[".concat(extra.width, "]") : '', "{").concat(extra.url, "}\n") + "\\captionof{figure}{".concat(caption, "}\n") + '\\end{center}\n';
   }
 };
 var makeExtra = {
