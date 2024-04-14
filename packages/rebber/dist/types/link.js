@@ -1,26 +1,20 @@
 "use strict";
 
 /* Dependencies. */
-var has = require('has');
+const has = require('has');
+const escape = require('../escaper');
 
-var escape = require('../escaper');
 /* Expose. */
-
-
 module.exports = link;
+const defaultMacro = (displayText, url, title) => `\\externalLink{${displayText}}{${url}}`;
 
-var defaultMacro = function defaultMacro(displayText, url, title) {
-  return "\\externalLink{".concat(displayText, "}{").concat(url, "}");
-};
 /* Stringify a link `node`.
 */
-
-
 function link(ctx, node) {
   if (!node.url) return '';
-  var config = ctx.link || {};
-  var macro = has(config, 'macro') ? config.macro : defaultMacro;
-  var prefix = has(config, 'prefix') ? config.prefix : '';
-  var url = escape(node.url.startsWith('/') ? prefix + node.url : node.url);
+  const config = ctx.link || {};
+  const macro = has(config, 'macro') ? config.macro : defaultMacro;
+  const prefix = has(config, 'prefix') ? config.prefix : '';
+  const url = escape(node.url.startsWith('/') ? prefix + node.url : node.url);
   return macro(require('../all')(ctx, node), url, node.title);
 }

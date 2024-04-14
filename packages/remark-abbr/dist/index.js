@@ -1,44 +1,24 @@
 "use strict";
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-var visit = require('unist-util-visit');
-
+const visit = require('unist-util-visit');
 function plugin(options) {
-  var opts = options || {};
-  var expandFirst = opts.expandFirst;
-
+  const opts = options || {};
+  const expandFirst = opts.expandFirst;
   function locator(value, fromIndex) {
     return value.indexOf('*[', fromIndex);
   }
-
   function inlineTokenizer(eat, value, silent) {
-    var regex = /[*]\[([^\]]*)\]:\s*(.+)\n*/;
-    var keep = regex.exec(value);
-    /* istanbul ignore if - never used (yet) */
+    const regex = /[*]\[([^\]]*)\]:\s*(.+)\n*/;
+    const keep = regex.exec(value);
 
+    /* istanbul ignore if - never used (yet) */
     if (silent) return silent;
     if (!keep || keep.index !== 0) return;
-
-    var _keep = _slicedToArray(keep, 3),
-        matched = _keep[0],
-        abbr = _keep[1],
-        reference = _keep[2];
-
+    const [matched, abbr, reference] = keep;
     return eat(matched)({
       type: 'abbr',
-      abbr: abbr,
-      reference: reference,
+      abbr,
+      reference,
       children: [{
         type: 'text',
         value: abbr
@@ -51,72 +31,68 @@ function plugin(options) {
       }
     });
   }
-
   function transformer(tree) {
-    var abbrs = {};
-    var emptyParagraphsToRemove = new Map();
+    const abbrs = {};
+    const emptyParagraphsToRemove = new Map();
     visit(tree, 'paragraph', find(abbrs, emptyParagraphsToRemove));
-    emptyParagraphsToRemove.forEach(function (indices, key) {
+    emptyParagraphsToRemove.forEach((indices, key) => {
       indices.reverse();
-      indices.forEach(function (index) {
+      indices.forEach(index => {
         key.children.splice(index, 1);
       });
     });
     visit(tree, replace(abbrs));
   }
-
   function find(abbrs, emptyParagraphsToRemove) {
     return function one(node, index, parent) {
-      for (var i = 0; i < node.children.length; i++) {
-        var child = node.children[i];
-        if (child.type !== 'abbr') continue; // Store abbr node for later use
-
+      for (let i = 0; i < node.children.length; i++) {
+        const child = node.children[i];
+        if (child.type !== 'abbr') continue;
+        // Store abbr node for later use
         abbrs[child.abbr] = child;
         node.children.splice(i, 1);
         i -= 1;
-      } // Keep track of empty paragraphs to remove
-
-
+      }
+      // Keep track of empty paragraphs to remove
       if (node.children.length === 0) {
-        var indices = emptyParagraphsToRemove.get(parent) || [];
+        const indices = emptyParagraphsToRemove.get(parent) || [];
         indices.push(index);
         emptyParagraphsToRemove.set(parent, indices);
       }
     };
   }
-
   function replace(abbrs) {
     function escapeRegExp(str) {
       return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&'); // eslint-disable-line no-useless-escape
     }
-
-    var pattern = Object.keys(abbrs).map(escapeRegExp).join('|');
-    var regex = new RegExp("(\\b|\\W)(".concat(pattern, ")(\\b|\\W)"));
-    var expanded = {};
-
+    const pattern = Object.keys(abbrs).map(escapeRegExp).join('|');
+    const regex = new RegExp(`(\\b|\\W)(${pattern})(\\b|\\W)`);
+    const expanded = {};
     function one(node, index, parent) {
       if (Object.keys(abbrs).length === 0) return;
-      if (!node.children) return; // If a text node is present in child nodes, check if an abbreviation is present
+      if (!node.children) return;
 
-      for (var c = 0; c < node.children.length; c++) {
-        var child = node.children[c];
+      // If a text node is present in child nodes, check if an abbreviation is present
+      for (let c = 0; c < node.children.length; c++) {
+        const child = node.children[c];
         if (node.type === 'abbr' || child.type !== 'text') continue;
-        if (!regex.test(child.value)) continue; // Transform node
+        if (!regex.test(child.value)) continue;
 
-        var newTexts = child.value.split(regex); // Remove old text node
+        // Transform node
+        const newTexts = child.value.split(regex);
 
-        node.children.splice(c, 1); // Replace abbreviations
+        // Remove old text node
+        node.children.splice(c, 1);
 
-        for (var i = 0; i < newTexts.length; i++) {
-          var content = newTexts[i];
-
+        // Replace abbreviations
+        for (let i = 0; i < newTexts.length; i++) {
+          const content = newTexts[i];
           if (Object.prototype.hasOwnProperty.call(abbrs, content)) {
-            var abbr = abbrs[content];
-
+            const abbr = abbrs[content];
             if (expandFirst && !expanded[content]) {
               node.children.splice(c + i, 0, {
                 type: 'text',
-                value: "".concat(abbr.reference, " (").concat(abbr.abbr, ")")
+                value: `${abbr.reference} (${abbr.abbr})`
               });
               expanded[content] = true;
             } else {
@@ -131,40 +107,32 @@ function plugin(options) {
         }
       }
     }
-
     return one;
   }
-
   inlineTokenizer.locator = locator;
-  var Parser = this.Parser; // Inject inlineTokenizer
+  const Parser = this.Parser;
 
-  var inlineTokenizers = Parser.prototype.inlineTokenizers;
-  var inlineMethods = Parser.prototype.inlineMethods;
+  // Inject inlineTokenizer
+  const inlineTokenizers = Parser.prototype.inlineTokenizers;
+  const inlineMethods = Parser.prototype.inlineMethods;
   inlineTokenizers.abbr = inlineTokenizer;
   inlineMethods.splice(0, 0, 'abbr');
-  var Compiler = this.Compiler;
-
+  const Compiler = this.Compiler;
   if (Compiler) {
-    var visitors = Compiler.prototype.visitors;
+    const visitors = Compiler.prototype.visitors;
     if (!visitors) return;
-    var abbrMap = {};
-
-    visitors.abbr = function (node) {
+    const abbrMap = {};
+    visitors.abbr = node => {
       if (!abbrMap[node.abbr]) {
-        abbrMap[node.abbr] = "*[".concat(node.abbr, "]: ").concat(node.reference);
+        abbrMap[node.abbr] = `*[${node.abbr}]: ${node.reference}`;
       }
-
-      return "".concat(node.abbr);
+      return `${node.abbr}`;
     };
-
-    var originalRootCompiler = visitors.root;
-
+    const originalRootCompiler = visitors.root;
     visitors.root = function (node) {
-      return "".concat(originalRootCompiler.apply(this, arguments), "\n").concat(Object.values(abbrMap).join('\n'));
+      return `${originalRootCompiler.apply(this, arguments)}\n${Object.values(abbrMap).join('\n')}`;
     };
   }
-
   return transformer;
 }
-
 module.exports = plugin;

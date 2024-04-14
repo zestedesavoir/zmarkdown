@@ -1,18 +1,17 @@
 "use strict";
 
 /* Dependencies. */
-var one = require('../one');
+const one = require('../one');
+
 /* Expose. */
-
-
 module.exports = root;
-/* Stringify a text `node`. */
 
+/* Stringify a text `node`. */
 function root(ctx, node, _, parent) {
-  var children = node.children;
+  const children = node.children;
   if (!children) return '';
-  var previous;
-  return children.reduce(function (output, child, index) {
+  let previous;
+  return children.reduce((output, child, index) => {
     if (previous) {
       if (child.type === previous.type && previous.type === 'list') {
         output += previous.ordered === child.ordered ? '\n\n\n' : '\n\n';
@@ -22,7 +21,6 @@ function root(ctx, node, _, parent) {
         output += '\n\n';
       }
     }
-
     output += one(ctx, child, index, node, node);
     previous = child;
     return output;

@@ -1,14 +1,13 @@
 "use strict";
 
 /* Dependencies. */
-var all = require('rebber/dist/all');
+const all = require('rebber/dist/all');
+
 /* Expose. */
-
-
 module.exports = sub;
-/* Stringify a sub `node`. */
 
+/* Stringify a sub `node`. */
 function sub(ctx, node, index, parent) {
-  var contents = all(ctx, node);
-  return "\\textsubscript{".concat(contents, "}");
+  const contents = all(ctx, node);
+  return `\\textsubscript{${contents}}`;
 }

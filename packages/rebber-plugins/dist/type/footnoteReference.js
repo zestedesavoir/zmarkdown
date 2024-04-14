@@ -2,13 +2,9 @@
 
 /* Expose. */
 module.exports = notes;
-
-var defaultMacro = function defaultMacro(identifier, protect) {
-  return "\\textsuperscript{".concat(protect ? '\\protect' : '', "\\footnotemark[").concat(identifier, "]}");
-};
-
+const defaultMacro = (identifier, protect) => `\\textsuperscript{${protect ? '\\protect' : ''}\\footnotemark[${identifier}]}`;
 function notes(ctx, node) {
-  var macro = ctx.footnoteReference || defaultMacro;
-  var protect = Boolean(node.commandProtect);
+  const macro = ctx.footnoteReference || defaultMacro;
+  const protect = Boolean(node.commandProtect);
   return macro(node.identifier, protect);
 }
