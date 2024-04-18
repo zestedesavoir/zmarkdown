@@ -39,7 +39,7 @@
     "html-differ": "^1.4.0",
     "jest": "^26.4.2",
     "jest-environment-node-debug": "^2.0.0",
-    "lerna": "^3.22.1",
+    "lerna": "^8.1.2",
     "mdast-util-to-hast": "^9.1.2",
     "rehype-stringify": "^8.0.0",
     "remark": "^12.0.1",
@@ -57,13 +57,12 @@
   },
   "scripts": {
     "pretest": "lerna run pretest --scope zmarkdown",
-    "bootstrap": "lerna bootstrap",
     "test": "cross-env DEST=/tmp jest",
     "lint": "eslint .",
     "posttest": "lerna run posttest --scope zmarkdown",
     "build": "lerna run build",
     "d": "node --inspect --debug-brk ./node_modules/.bin/jest --runInBand -i",
-    "clean": "lerna clean --yes && del-cli node_modules && npm run bootstrap && lerna run prepare && npm run test",
+    "clean": "lerna clean --yes && del-cli node_modules && npm install && lerna run prepare && npm run test",
     "build-demo": "lerna run release --scope zmarkdown && del-cli ./packages/zmarkdown/public/js && cp -r ./packages/zmarkdown/client/dist ./packages/zmarkdown/public/js"
   },
   "engines": {
@@ -109,5 +108,8 @@
     "typographic-question-mark": "file:packages/typographic-question-mark",
     "typographic-semicolon": "file:packages/typographic-semicolon",
     "zmarkdown": "file:packages/zmarkdown"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
