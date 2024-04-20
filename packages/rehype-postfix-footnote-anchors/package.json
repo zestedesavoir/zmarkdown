@@ -1,6 +1,6 @@
 {
   "name": "rehype-postfix-footnote-anchors",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/rehype-postfix-footnote-anchors",
     "type": "git"
