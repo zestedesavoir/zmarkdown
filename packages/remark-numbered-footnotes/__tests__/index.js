@@ -85,5 +85,17 @@ configs.forEach(config => {
 
       expect(contents).toMatchSnapshot()
     })
+
+    test('footnotes with customized labelTemplate', () => {
+      const {contents} = unified()
+        .use(reParse, config)
+        .use(footnotes, {inlineNotes: true})
+        .use(require('../src'), {labelPrefix: '[', labelSuffix: ']'})
+        .use(remark2rehype)
+        .use(stringify)
+        .processSync(specs['footnotes'].fixture)
+
+      expect(contents).toMatchSnapshot()
+    })
   })
 })
