@@ -90,7 +90,7 @@ configs.forEach(config => {
       const {contents} = unified()
         .use(reParse, config)
         .use(footnotes, {inlineNotes: true})
-        .use(require('../src'), {labelTemplate: '[{index}]'})
+        .use(require('../src'), {labelPrefix: '[', labelSuffix: ']'})
         .use(remark2rehype)
         .use(stringify)
         .processSync(specs['footnotes'].fixture)

@@ -1,10 +1,6 @@
 const visit = require('unist-util-visit')
 
-function plugin ({labelTemplate = '{index}'} = {}) {
-  if (labelTemplate.indexOf('{index}') === -1) {
-    throw new Error('labelTemplate must contain {index}')
-  }
-
+function plugin ({labelPrefix = '', labelSuffix = ''} = {}) {
   function transformer (tree) {
     const footnotes = {}
     visit(tree, 'footnote', convert)
@@ -22,7 +18,7 @@ function plugin ({labelTemplate = '{index}'} = {}) {
         footnotes[identifier] = Object.keys(footnotes).length + 1
       }
       node.identifier = String(footnotes[identifier])
-      node.label = labelTemplate.replace('{index}', String(footnotes[identifier]))
+      node.label = `${labelPrefix}${footnotes[identifier]}${labelSuffix}`
     }
   }
 
@@ -34,7 +30,7 @@ function plugin ({labelTemplate = '{index}'} = {}) {
         footnotes[identifier] = Object.keys(footnotes).length + 1
       }
       node.identifier = String(footnotes[identifier])
-      node.label = labelTemplate.replace('{index}', String(footnotes[identifier]))
+      node.label = `${labelPrefix}${footnotes[identifier]}${labelSuffix}`
     }
   }
 
