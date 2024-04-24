@@ -1,10 +1,8 @@
-const Sentry = require('@sentry/node')
-
 const processorFactory = require('./processor-factory')
 const manifest = require('../utils/manifest')
 const io = require('../factories/io-factory')
 
-module.exports = (givenProc, template) => (req, res) => {
+module.exports = (givenProc, template) => (req, res, next) => {
   // Gather data about the request
   const rawContent = req.body.md
   const options = req.body.opts || {}
@@ -16,16 +14,6 @@ module.exports = (givenProc, template) => (req, res) => {
   // Increment endpoint usage for monitoring
   if (!useTemplate) io[givenProc]()
   else io['latex-document']()
-
-  function sendResponse (e, vfile) {
-    if (e) {
-      Sentry.captureException(e, { req, vfile })
-      res.status(500).json(vfile)
-      return
-    }
-
-    res.json([vfile.contents, vfile.data, vfile.messages])
-  }
 
   let extractPromises
 
@@ -75,6 +63,6 @@ module.exports = (givenProc, template) => (req, res) => {
       if (manifestRender) return manifest.dispatch(vfiles, rawContent)
       else return vfiles[0]
     })
-    .then(vfile => sendResponse(null, vfile))
-    .catch(e => sendResponse(e))
+    .then(vfile => res.json([vfile.contents, vfile.data, vfile.messages]))
+    .catch(e => next(e))
 }
