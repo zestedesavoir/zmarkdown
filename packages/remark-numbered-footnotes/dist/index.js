@@ -1,53 +1,41 @@
 "use strict";
 
-var visit = require('unist-util-visit');
-
-function plugin() {
-  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      _ref$labelPrefix = _ref.labelPrefix,
-      labelPrefix = _ref$labelPrefix === void 0 ? '' : _ref$labelPrefix,
-      _ref$labelSuffix = _ref.labelSuffix,
-      labelSuffix = _ref$labelSuffix === void 0 ? '' : _ref$labelSuffix;
-
+const visit = require('unist-util-visit');
+function plugin({
+  labelPrefix = '',
+  labelSuffix = ''
+} = {}) {
   function transformer(tree) {
-    var footnotes = {};
+    const footnotes = {};
     visit(tree, 'footnote', convert);
     visit(tree, 'footnoteDefinition', createIds(footnotes));
     visit(tree, 'footnoteReference', replaceIds(footnotes));
   }
-
   function createIds(footnotes) {
-    return function (node, index, parent) {
-      var identifier = node.identifier;
-
-      if (!footnotes.hasOwnProperty(identifier)) {
+    return (node, index, parent) => {
+      const identifier = node.identifier;
+      if (!Object.prototype.hasOwnProperty.call(footnotes, identifier)) {
         footnotes[identifier] = Object.keys(footnotes).length + 1;
       }
-
       node.identifier = String(footnotes[identifier]);
-      node.label = "".concat(labelPrefix).concat(footnotes[identifier]).concat(labelSuffix);
+      node.label = `${labelPrefix}${footnotes[identifier]}${labelSuffix}`;
     };
   }
-
   function replaceIds(footnotes) {
-    return function (node, index, parent) {
-      var identifier = node.identifier;
-
-      if (!footnotes.hasOwnProperty(identifier)) {
+    return (node, index, parent) => {
+      const identifier = node.identifier;
+      if (!Object.prototype.hasOwnProperty.call(footnotes, identifier)) {
         footnotes[identifier] = Object.keys(footnotes).length + 1;
       }
-
       node.identifier = String(footnotes[identifier]);
-      node.label = "".concat(labelPrefix).concat(footnotes[identifier]).concat(labelSuffix);
+      node.label = `${labelPrefix}${footnotes[identifier]}${labelSuffix}`;
     };
   }
-
   return transformer;
 }
-
 function convert(node, index, parent) {
-  var id = autoId(node.position.start);
-  var footnoteDefinition = {
+  const id = autoId(node.position.start);
+  const footnoteDefinition = {
     type: 'footnoteDefinition',
     identifier: id,
     children: [{
@@ -55,18 +43,18 @@ function convert(node, index, parent) {
       children: node.children
     }]
   };
-  var footnoteReference = {
+  const footnoteReference = {
     type: 'footnoteReference',
     identifier: id
   };
   parent.children.splice(index, 1, footnoteReference, footnoteDefinition);
 }
-
 function autoId(node) {
-  var line = node.line,
-      column = node.column,
-      offset = node.offset;
-  return "l".concat(line, "c").concat(column, "o").concat(offset);
+  const {
+    line,
+    column,
+    offset
+  } = node;
+  return `l${line}c${column}o${offset}`;
 }
-
 module.exports = plugin;

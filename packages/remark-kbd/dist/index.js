@@ -1,39 +1,32 @@
 "use strict";
 
-var whitespace = require('is-whitespace-character');
-
-var DEFAULT_LEFT = '|';
-var DEFAULT_RIGHT = '|';
-
+const whitespace = require('is-whitespace-character');
+const DEFAULT_LEFT = '|';
+const DEFAULT_RIGHT = '|';
 function plugin(config) {
-  var CHAR_LEFT = config && config.charLeft || DEFAULT_LEFT;
-  var CHAR_RIGHT = config && config.charRight || DEFAULT_RIGHT;
-  var DOUBLE_LEFT = CHAR_LEFT + CHAR_LEFT;
-  var DOUBLE_RIGHT = CHAR_RIGHT + CHAR_RIGHT;
-
+  const CHAR_LEFT = config && config.charLeft || DEFAULT_LEFT;
+  const CHAR_RIGHT = config && config.charRight || DEFAULT_RIGHT;
+  const DOUBLE_LEFT = CHAR_LEFT + CHAR_LEFT;
+  const DOUBLE_RIGHT = CHAR_RIGHT + CHAR_RIGHT;
   function locator(value, fromIndex) {
-    var index = value.indexOf(DOUBLE_LEFT, fromIndex);
+    const index = value.indexOf(DOUBLE_LEFT, fromIndex);
     return index;
   }
-
   function inlineTokenizer(eat, value, silent) {
     if (!this.options.gfm || value.substr(0, 2) !== DOUBLE_LEFT || value.substr(0, 4) === DOUBLE_LEFT + DOUBLE_RIGHT || whitespace(value.charAt(2))) {
       return;
     }
-
-    var character = '';
-    var previous = '';
-    var preceding = '';
-    var subvalue = '';
-    var index = 1;
-    var length = value.length;
-    var now = eat.now();
+    let character = '';
+    let previous = '';
+    let preceding = '';
+    let subvalue = '';
+    let index = 1;
+    const length = value.length;
+    const now = eat.now();
     now.column += 2;
     now.offset += 2;
-
     while (++index < length) {
       character = value.charAt(index);
-
       if (character === CHAR_RIGHT && previous === CHAR_RIGHT && (!preceding || !whitespace(preceding))) {
         /* istanbul ignore if - never used (yet) */
         if (silent) return true;
@@ -45,29 +38,27 @@ function plugin(config) {
           }
         });
       }
-
       subvalue += previous;
       preceding = previous;
       previous = character;
     }
   }
-
   inlineTokenizer.locator = locator;
-  var Parser = this.Parser; // Inject inlineTokenizer
+  const Parser = this.Parser;
 
-  var inlineTokenizers = Parser.prototype.inlineTokenizers;
-  var inlineMethods = Parser.prototype.inlineMethods;
+  // Inject inlineTokenizer
+  const inlineTokenizers = Parser.prototype.inlineTokenizers;
+  const inlineMethods = Parser.prototype.inlineMethods;
   inlineTokenizers.kbd = inlineTokenizer;
   inlineMethods.splice(inlineMethods.indexOf('text'), 0, 'kbd');
-  var Compiler = this.Compiler; // Stringify
+  const Compiler = this.Compiler;
 
+  // Stringify
   if (Compiler) {
-    var visitors = Compiler.prototype.visitors;
-
+    const visitors = Compiler.prototype.visitors;
     visitors.kbd = function (node) {
-      return "".concat(DOUBLE_LEFT).concat(this.all(node).join('')).concat(DOUBLE_RIGHT);
+      return `${DOUBLE_LEFT}${this.all(node).join('')}${DOUBLE_RIGHT}`;
     };
   }
 }
-
 module.exports = plugin;

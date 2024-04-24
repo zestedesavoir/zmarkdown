@@ -16,25 +16,30 @@
     ]
   },
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/polyfill": "^7.11.5",
-    "@babel/preset-env": "^7.11.5",
+    "@babel/cli": "^7.24.1",
+    "@babel/core": "^7.24.4",
+    "@babel/preset-env": "^7.24.4",
+    "@eslint/eslintrc": "^3.0.2",
+    "@eslint/js": "^9.0.0",
     "axios": "^0.21.1",
-    "babel-jest": "^26.3.0",
-    "babel-loader": "^8.1.0",
+    "babel-loader": "^9.1.3",
     "clone": "^2.1.2",
     "core-js": "^3.6.5",
     "coveralls": "^3.1.0",
     "cross-env": "^7.0.2",
     "dedent": "^0.7.0",
     "del-cli": "^3.0.1",
-    "eslint": "^8.26.0",
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1",
     "express": "^4.17.1",
+    "globals": "^15.0.0",
     "html-differ": "^1.4.0",
     "jest": "^26.4.2",
     "jest-environment-node-debug": "^2.0.0",
-    "lerna": "^3.22.1",
+    "lerna": "^8.1.2",
     "mdast-util-to-hast": "^9.1.2",
     "rehype-stringify": "^8.0.0",
     "remark": "^12.0.1",
@@ -51,14 +56,13 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "pretest": "npm run lint && lerna run pretest --scope zmarkdown",
-    "bootstrap": "lerna bootstrap",
+    "pretest": "lerna run pretest --scope zmarkdown",
     "test": "cross-env DEST=/tmp jest",
     "lint": "eslint .",
     "posttest": "lerna run posttest --scope zmarkdown",
     "build": "lerna run build",
     "d": "node --inspect --debug-brk ./node_modules/.bin/jest --runInBand -i",
-    "clean": "lerna clean --yes && del-cli node_modules && npm run bootstrap && lerna run prepare && npm run test",
+    "clean": "lerna clean --yes && del-cli node_modules && npm install && lerna run prepare && npm run test",
     "build-demo": "lerna run release --scope zmarkdown && del-cli ./packages/zmarkdown/public/js && cp -r ./packages/zmarkdown/client/dist ./packages/zmarkdown/public/js"
   },
   "engines": {
@@ -104,5 +108,8 @@
     "typographic-question-mark": "file:packages/typographic-question-mark",
     "typographic-semicolon": "file:packages/typographic-semicolon",
     "zmarkdown": "file:packages/zmarkdown"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

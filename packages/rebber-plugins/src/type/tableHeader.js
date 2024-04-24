@@ -1,4 +1,3 @@
-
 module.exports = (ctx, node, index, parent) => {
   const one = require('rebber/dist/one')
   if (ctx.tableHeader) {

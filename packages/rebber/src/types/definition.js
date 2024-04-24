@@ -4,13 +4,13 @@ const defaultMacro = (ctx, identifier, url, title) => {
   const node = {
     children: [{
       type: 'link',
-      title: title,
-      url: url,
+      title,
+      url,
       children: [{
         type: 'text',
-        value: url,
-      }],
-    }],
+        value: url
+      }]
+    }]
   }
 
   const link = require('../all')(ctx, node)

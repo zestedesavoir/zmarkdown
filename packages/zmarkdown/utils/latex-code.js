@@ -5,7 +5,7 @@ const customCodeMacro = (content, lang, attrs) => {
   // Escape CodeBlocks
   let escaped = content
 
-  const escapeRegex = new RegExp('\\\\end\\s*{CodeBlock}', 'g')
+  const escapeRegex = /\\end\s*{CodeBlock}/g
 
   while (escapeRegex.test(escaped)) {
     escaped = escaped.replace(escapeRegex, '')

@@ -2,14 +2,10 @@
 
 /* Expose. */
 module.exports = br;
+const defaultMacro = () => ' \\\\\n';
 
-var defaultMacro = function defaultMacro() {
-  return ' \\\\\n';
-};
 /* Stringify a break `node`. */
-
-
 function br(ctx, node) {
-  var macro = ctx["break"] ? ctx["break"] : defaultMacro;
+  const macro = ctx.break ? ctx.break : defaultMacro;
   return macro(node);
 }

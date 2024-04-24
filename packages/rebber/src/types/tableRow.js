@@ -9,8 +9,8 @@ const defaultMacro = (ctx, node) => {
   return `${line} \\\\ \\hline\n`
 }
 
-const defaultFirstLineRowFont = `\\rowfont[c]{\\bfseries}`
-const defaultOtherLineRowFont = `\\rowfont[l]{}`
+const defaultFirstLineRowFont = '\\rowfont[c]{\\bfseries}'
+const defaultOtherLineRowFont = '\\rowfont[l]{}'
 
 /* Stringify a tableRow `node`. */
 function tableRow (ctx, node, index) {

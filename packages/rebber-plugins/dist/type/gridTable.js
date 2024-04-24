@@ -1,66 +1,41 @@
 "use strict";
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 /* Dependencies. */
-var clone = require('clone');
+const clone = require('clone');
+const tableCell = require('rebber/dist/types/tableCell');
+const tableRow = require('rebber/dist/types/tableRow');
+const table = require('rebber/dist/types/table');
+const text = require('rebber/dist/types/text');
+const paragraph = require('rebber/dist/types/paragraph');
 
-var tableCell = require('rebber/dist/types/tableCell');
-
-var tableRow = require('rebber/dist/types/tableRow');
-
-var table = require('rebber/dist/types/table');
-
-var text = require('rebber/dist/types/text');
-
-var paragraph = require('rebber/dist/types/paragraph');
 /* Expose. */
-
-
 module.exports = gridTable;
-
-var MultiRowLine = /*#__PURE__*/function () {
-  function MultiRowLine(startRow, endRow, startCell, endCell, colSpan, endOfLine) {
-    _classCallCheck(this, MultiRowLine);
-
+class MultiRowLine {
+  constructor(startRow, endRow, startCell, endCell, colSpan, endOfLine) {
     this.multilineCounter = endRow - startRow;
     this.startCell = startCell;
     this.endCell = endCell;
     this.colSpan = colSpan;
     this.endOfLine = endOfLine;
   }
-
-  _createClass(MultiRowLine, [{
-    key: "getCLine",
-    value: function getCLine() {
-      var startCLine = 1;
-      var endCLine = this.startCell - 1; // case where the multi row line is at the start of the table
-
-      if (this.startCell === 1) {
-        startCLine = this.startCell + this.colSpan;
-        endCLine = this.endOfLine;
-      } else if (this.startCell > 1 && this.startCell + this.colSpan < this.endOfLine) {
-        // case where the multi row line is in the middle of the table
-        var clineBefore = "\\cline{1-".concat(this.startCell - 1, "}");
-        var clineAfter = "\\cline{".concat(this.startCell + this.colSpan, "-").concat(this.endOfLine, "}");
-        return "".concat(clineBefore, " ").concat(clineAfter);
-      }
-
-      return "\\cline{".concat(startCLine, "-").concat(endCLine, "}");
+  getCLine() {
+    let startCLine = 1;
+    let endCLine = this.startCell - 1;
+    // case where the multi row line is at the start of the table
+    if (this.startCell === 1) {
+      startCLine = this.startCell + this.colSpan;
+      endCLine = this.endOfLine;
+    } else if (this.startCell > 1 && this.startCell + this.colSpan < this.endOfLine) {
+      // case where the multi row line is in the middle of the table
+      const clineBefore = `\\cline{1-${this.startCell - 1}}`;
+      const clineAfter = `\\cline{${this.startCell + this.colSpan}-${this.endOfLine}}`;
+      return `${clineBefore} ${clineAfter}`;
     }
-  }]);
-
-  return MultiRowLine;
-}();
-
-var GridTableStringifier = /*#__PURE__*/function () {
-  function GridTableStringifier() {
-    _classCallCheck(this, GridTableStringifier);
-
+    return `\\cline{${startCLine}-${endCLine}}`;
+  }
+}
+class GridTableStringifier {
+  constructor() {
     this.lastMultiRowLine = null;
     this.currentSpan = 0;
     this.rowIndex = 0;
@@ -69,149 +44,101 @@ var GridTableStringifier = /*#__PURE__*/function () {
     this.colSpan = 1;
     this.nbOfColumns = 0;
   }
-
-  _createClass(GridTableStringifier, [{
-    key: "gridTableCell",
-    value: function gridTableCell(ctx, node) {
-      var overriddenCtx = clone(ctx);
-      this.colIndex++;
-      overriddenCtx.tableCell = undefined; // we have to replace \n by \endgraf only in text node, not in other
-      // see #352
-
-      overriddenCtx.overrides.text = function (c, n, index, parent) {
-        return text(c, n, index, parent).replace(/\n/g, ' \\endgraf ');
-      };
-
-      overriddenCtx.overrides.paragraph = function (c, n) {
-        return "".concat(paragraph(c, n).trim(), " \\endgraf \\endgraf ");
-      };
-
-      var baseText = tableCell(overriddenCtx, node).trim();
-
-      while (baseText.substring(baseText.length - '\\endgraf'.length) === '\\endgraf') {
-        baseText = baseText.substring(0, baseText.length - '\\endgraf'.length).trim();
-      }
-
-      if (node.data && node.data.hProperties.rowSpan > 1) {
-        this.currentSpan = node.data.hProperties.rowSpan;
-        this.multiLineCellIndex = this.colIndex;
-        baseText = "\\multirow{".concat(this.currentSpan, "}{*}{\\parbox{\\linewidth}{").concat(baseText, "}}");
-        this.colSpan = node.data.hProperties.colSpan > 1 ? node.data.hProperties.colSpan : 1;
-      } else if (node.data && node.data.hProperties.colSpan > 1) {
-        var colSpan = node.data.hProperties.colSpan;
-        var colDim = "m{\\dimexpr(\\linewidth) * ".concat(colSpan, " / \\number-of-column - 2 * \\tabcolsep}");
-        baseText = "\\multicolumn{".concat(colSpan, "}{|").concat(colDim, "|}{\\parbox{\\linewidth}{").concat(baseText, "}}");
-      }
-
-      if (node.data && node.data.hProperties.colSpan > 1) {
-        this.colIndex -= 1;
-        this.colIndex += node.data.hProperties.colSpan;
-      }
-
-      return baseText;
+  gridTableCell(ctx, node) {
+    const overriddenCtx = clone(ctx);
+    this.colIndex++;
+    overriddenCtx.tableCell = undefined;
+    // we have to replace \n by \endgraf only in text node, not in other
+    // see #352
+    overriddenCtx.overrides.text = (c, n, index, parent) => text(c, n, index, parent).replace(/\n/g, ' \\endgraf ');
+    overriddenCtx.overrides.paragraph = (c, n) => `${paragraph(c, n).trim()} \\endgraf \\endgraf `;
+    let baseText = tableCell(overriddenCtx, node).trim();
+    while (baseText.substring(baseText.length - '\\endgraf'.length) === '\\endgraf') {
+      baseText = baseText.substring(0, baseText.length - '\\endgraf'.length).trim();
     }
-  }, {
-    key: "gridTableRow",
-    value: function gridTableRow(ctx, node, index) {
-      var overriddenCtx = clone(ctx);
-      this.rowIndex++;
-      overriddenCtx.tableRow = undefined;
-
-      if (this.previousRowWasMulti()) {
-        var lastMultiRowline = this.flushMultiRowLineIfNeeded();
-
-        for (var i = 0; i < lastMultiRowline.colSpan; i++) {
-          node.children.splice(lastMultiRowline.startCell - 1, 0, {
-            type: 'tableCell',
+    if (node.data && node.data.hProperties.rowSpan > 1) {
+      this.currentSpan = node.data.hProperties.rowSpan;
+      this.multiLineCellIndex = this.colIndex;
+      baseText = `\\multirow{${this.currentSpan}}{*}{\\parbox{\\linewidth}{${baseText}}}`;
+      this.colSpan = node.data.hProperties.colSpan > 1 ? node.data.hProperties.colSpan : 1;
+    } else if (node.data && node.data.hProperties.colSpan > 1) {
+      const colSpan = node.data.hProperties.colSpan;
+      const colDim = `m{\\dimexpr(\\linewidth) * ${colSpan} / \\number-of-column - 2 * \\tabcolsep}`;
+      baseText = `\\multicolumn{${colSpan}}{|${colDim}|}{\\parbox{\\linewidth}{${baseText}}}`;
+    }
+    if (node.data && node.data.hProperties.colSpan > 1) {
+      this.colIndex -= 1;
+      this.colIndex += node.data.hProperties.colSpan;
+    }
+    return baseText;
+  }
+  gridTableRow(ctx, node, index) {
+    const overriddenCtx = clone(ctx);
+    this.rowIndex++;
+    overriddenCtx.tableRow = undefined;
+    if (this.previousRowWasMulti()) {
+      const lastMultiRowline = this.flushMultiRowLineIfNeeded();
+      for (let i = 0; i < lastMultiRowline.colSpan; i++) {
+        node.children.splice(lastMultiRowline.startCell - 1, 0, {
+          type: 'tableCell',
+          children: [{
+            type: 'paragraph',
             children: [{
-              type: 'paragraph',
-              children: [{
-                type: 'text',
-                value: ' '
-              }]
+              type: 'text',
+              value: ' '
             }]
-          });
-        }
-
-        this.colIndex = 0;
-        var rowStr = tableRow(overriddenCtx, node, index);
-
-        if (lastMultiRowline.multilineCounter > 0) {
-          rowStr = rowStr.replace(/\\hline/, lastMultiRowline.getCLine());
-        }
-
-        this.colIndex = 0;
-        return rowStr;
+          }]
+        });
       }
-
-      var rowText = tableRow(overriddenCtx, node, index);
-
-      if (this.currentSpan !== 0) {
-        this.lastMultiRowLine = new MultiRowLine(this.rowIndex, this.rowIndex + this.currentSpan + -1, this.multiLineCellIndex, this.colIndex + this.colSpan, this.colSpan, this.colIndex);
-        rowText = rowText.replace(/\\hline/, this.lastMultiRowLine.getCLine());
-      }
-
-      this.currentSpan = 0;
-
-      if (this.colIndex >= this.nbOfColumns) {
-        this.nbOfColumns = this.colIndex;
-      }
-
       this.colIndex = 0;
-      return rowText;
-    }
-  }, {
-    key: "flushMultiRowLineIfNeeded",
-    value: function flushMultiRowLineIfNeeded() {
-      if (!this.lastMultiRowLine) {
-        return null;
+      let rowStr = tableRow(overriddenCtx, node, index);
+      if (lastMultiRowline.multilineCounter > 0) {
+        rowStr = rowStr.replace(/\\hline/, lastMultiRowline.getCLine());
       }
-
-      var row = this.lastMultiRowLine;
-
-      if (row.multilineCounter >= 1) {
-        row.multilineCounter--;
-      }
-
-      if (row.multilineCounter === 0) {
-        this.lastMultiRowLine = null;
-      }
-
-      return row;
+      this.colIndex = 0;
+      return rowStr;
     }
-  }, {
-    key: "gridTableHeaderParse",
-    value: function gridTableHeaderParse() {
-      return "|m{\\dimexpr(\\linewidth) / ".concat(this.nbOfColumns, " - 2 * \\tabcolsep}").repeat(this.nbOfColumns).concat('|');
+    let rowText = tableRow(overriddenCtx, node, index);
+    if (this.currentSpan !== 0) {
+      this.lastMultiRowLine = new MultiRowLine(this.rowIndex, this.rowIndex + this.currentSpan + -1, this.multiLineCellIndex, this.colIndex + this.colSpan, this.colSpan, this.colIndex);
+      rowText = rowText.replace(/\\hline/, this.lastMultiRowLine.getCLine());
     }
-  }, {
-    key: "previousRowWasMulti",
-    value: function previousRowWasMulti() {
-      return this.lastMultiRowLine !== null;
+    this.currentSpan = 0;
+    if (this.colIndex >= this.nbOfColumns) {
+      this.nbOfColumns = this.colIndex;
     }
-  }]);
-
-  return GridTableStringifier;
-}();
-
+    this.colIndex = 0;
+    return rowText;
+  }
+  flushMultiRowLineIfNeeded() {
+    if (!this.lastMultiRowLine) {
+      return null;
+    }
+    const row = this.lastMultiRowLine;
+    if (row.multilineCounter >= 1) {
+      row.multilineCounter--;
+    }
+    if (row.multilineCounter === 0) {
+      this.lastMultiRowLine = null;
+    }
+    return row;
+  }
+  gridTableHeaderParse() {
+    return `|m{\\dimexpr(\\linewidth) / ${this.nbOfColumns} - 2 * \\tabcolsep}`.repeat(this.nbOfColumns).concat('|');
+  }
+  previousRowWasMulti() {
+    return this.lastMultiRowLine !== null;
+  }
+}
 function gridTable(ctx, node) {
-  var overriddenCtx = clone(ctx);
+  const overriddenCtx = clone(ctx);
   overriddenCtx.spreadCell = '';
-  var stringifier = new GridTableStringifier();
-
-  overriddenCtx["break"] = function () {
-    return ' \\endgraf';
-  }; // in gridtables '\\\\' won't work
-
-
+  const stringifier = new GridTableStringifier();
+  overriddenCtx.break = () => ' \\endgraf'; // in gridtables '\\\\' won't work
   overriddenCtx.tableCell = stringifier.gridTableCell.bind(stringifier);
   overriddenCtx.tableRow = stringifier.gridTableRow.bind(stringifier);
   overriddenCtx.headerParse = stringifier.gridTableHeaderParse.bind(stringifier);
   overriddenCtx.image = overriddenCtx.image ? overriddenCtx.image : {};
-
-  overriddenCtx.image.inlineMatcher = function () {
-    return true;
-  };
-
+  overriddenCtx.image.inlineMatcher = () => true;
   return table(overriddenCtx, node).replace(/\\number-of-column/gm, stringifier.nbOfColumns);
 }

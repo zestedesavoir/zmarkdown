@@ -1,6 +1,6 @@
-import path from 'path'
-import express from 'express'
-import fs from 'fs'
+const path = require('path')
+const express = require('express')
+const fs = require('fs')
 
 const app = express()
 
@@ -33,7 +33,7 @@ app.get('/stream-bomb', (req, res) => {
 
   // Send garbage until the client closes the connection
   const sendBloat = () => {
-    while (res.write(bloat)) {}
+    while (res.write(bloat));
   }
 
   sendBloat()

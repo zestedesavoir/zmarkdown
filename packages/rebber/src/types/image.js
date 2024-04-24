@@ -28,7 +28,7 @@ function image (ctx, node, _, parent) {
     node.url = node.url.replace(/}/g, '')
 
     try {
-      const {root, dir, base, ext, name} = path.parse(node.url)
+      const { root, dir, base, ext, name } = path.parse(node.url)
 
       // \includegraphics crashes with filenames that contain more than one `.`,
       // the workaround is \includegraphics{/path/to/{image.foo}.jpg}
@@ -37,7 +37,7 @@ function image (ctx, node, _, parent) {
           ? `{${name}}${ext}`
           : `${name}${ext}`
 
-        node.url = `${path.format({root, dir})}${safeName}`
+        node.url = `${path.format({ root, dir })}${safeName}`
       }
     } catch (e) {
       node.url = ''

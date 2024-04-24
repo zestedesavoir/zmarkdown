@@ -1,35 +1,26 @@
 "use strict";
 
 /* Dependencies. */
-var xtend = require('xtend');
+const xtend = require('xtend');
+const definitions = require('mdast-util-definitions');
+const one = require('./one');
+const preprocess = require('./preprocessors');
 
-var definitions = require('mdast-util-definitions');
-
-var one = require('./one');
-
-var preprocess = require('./preprocessors');
 /* Expose. */
-
-
 module.exports = stringify;
 module.exports.toLaTeX = toLaTeX;
-
-function toLaTeX(tree) {
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
+function toLaTeX(tree, options = {}) {
   /* Stringify the given MDAST node. */
-  preprocess(options, tree); // resolve definition after preprocess because this step can create new identifiers
-
+  preprocess(options, tree);
+  // resolve definition after preprocess because this step can create new identifiers
   options.definitions = definitions(tree, options);
   return one(options, tree, undefined, undefined);
 }
+
 /* Compile MDAST tree using toLaTeX */
-
-
 function stringify(config) {
-  var settings = xtend(config, this.data('settings'));
+  const settings = xtend(config, this.data('settings'));
   this.Compiler = compiler;
-
   function compiler(tree) {
     return toLaTeX(tree, settings, tree);
   }

@@ -21,7 +21,6 @@ Currently, all the plugins provided only work for remark versions **lesser than*
 
 1. `git clone git@github.com:zestedesavoir/zmarkdown.git`
 1. `npm install`
-1. `npm run bootstrap`
 
 This project uses [Jest][jest] for testing. It is recommended to use the locally installed version using `npx`, and run Jest in watch mode when developing `npx jest --watch --notify` (`--notify` sends desktop notifications when tests run).
 
