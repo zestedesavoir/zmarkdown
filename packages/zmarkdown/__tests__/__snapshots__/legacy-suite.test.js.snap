@@ -3277,72 +3277,58 @@ Content Cell | Content Cell
 `;
 
 exports[`extensions renders tables.txt 2`] = `
-"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-First Header & Second Header \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-Content Cell & Content Cell \\\\\\\\ \\\\hline
-Content Cell & Content Cell \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+"\\\\begin{zdstblr}{colspec={X[-1] X[-1]},rowhead=1,row{1}={font=\\\\bfseries}}
+First Header & Second Header \\\\\\\\
+Content Cell & Content Cell \\\\\\\\
+Content Cell & Content Cell \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-First Header & Second Header \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-Content Cell & Content Cell \\\\\\\\ \\\\hline
-Content Cell & Content Cell \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1]},rowhead=1,row{1}={font=\\\\bfseries}}
+First Header & Second Header \\\\\\\\
+Content Cell & Content Cell \\\\\\\\
+Content Cell & Content Cell \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-Item & Value \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-Computer & \\\\$1600 \\\\\\\\ \\\\hline
-Phone & \\\\$12 \\\\\\\\ \\\\hline
-Pipe & \\\\$1 \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1]},rowhead=1,row{1}={font=\\\\bfseries}}
+Item & Value \\\\\\\\
+Computer & \\\\$1600 \\\\\\\\
+Phone & \\\\$12 \\\\\\\\
+Pipe & \\\\$1 \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-Function name & Description \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-\\\\CodeInline{help()} & Display the help window. \\\\\\\\ \\\\hline
-\\\\CodeInline{destroy()} & \\\\textbf{Destroy your computer!} \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1]},rowhead=1,row{1}={font=\\\\bfseries}}
+Function name & Description \\\\\\\\
+\\\\CodeInline{help()} & Display the help window. \\\\\\\\
+\\\\CodeInline{destroy()} & \\\\textbf{Destroy your computer!} \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-foo & bar & baz \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
- & Q &  \\\\\\\\ \\\\hline
-W &  & W \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1]},rowhead=1,row{1}={font=\\\\bfseries}}
+foo & bar & baz \\\\\\\\
+ & Q &  \\\\\\\\
+W &  & W \\\\\\\\
+\\\\end{zdstblr}
 
 
 Three spaces in front of a table:
 
 
 
-\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-First Header & Second Header \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-Content Cell & Content Cell \\\\\\\\ \\\\hline
-Content Cell & Content Cell \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1]},rowhead=1,row{1}={font=\\\\bfseries}}
+First Header & Second Header \\\\\\\\
+Content Cell & Content Cell \\\\\\\\
+Content Cell & Content Cell \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-First Header & Second Header \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-Content Cell & Content Cell \\\\\\\\ \\\\hline
-Content Cell & Content Cell \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1]},rowhead=1,row{1}={font=\\\\bfseries}}
+First Header & Second Header \\\\\\\\
+Content Cell & Content Cell \\\\\\\\
+Content Cell & Content Cell \\\\\\\\
+\\\\end{zdstblr}
 
 
 Four spaces is a code block:
@@ -3382,13 +3368,11 @@ exports[`extensions renders tables-2.txt 1`] = `
 `;
 
 exports[`extensions renders tables-2.txt 2`] = `
-"\\\\begin{longtabu} spread 0pt {|X[-1]|X[-1]|X[-1]|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-foo & bar & baz \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-Q \\\\\\\\ \\\\hline
-W &  & W \\\\\\\\ \\\\hline
-\\\\end{longtabu}"
+"\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1]},rowhead=1,row{1}={font=\\\\bfseries}}
+foo & bar & baz \\\\\\\\
+Q \\\\\\\\
+W &  & W \\\\\\\\
+\\\\end{zdstblr}"
 `;
 
 exports[`heading-shift shifts before range 1`] = `"<h1 id=\\"should-be-h1\\">should be h1<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#should-be-h1\\"><span class=\\"icon icon-link\\"></span></a></h1>"`;
@@ -6567,138 +6551,112 @@ exports[`zds renders grid_tables.txt 2`] = `
 \\\\levelTwoTitle{Basic example}
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-\\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{Table Headings}} & Here \\\\\\\\ \\\\hline
-Sub & Headings & Too \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-\\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{cell \\\\endgraf spans \\\\endgraf rows}} & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{column spanning}} \\\\\\\\ \\\\cline{2-3}
- & normal & cell \\\\\\\\ \\\\hline
-multi \\\\endgraf line \\\\endgraf \\\\endgraf cells \\\\endgraf too & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{cells can be \\\\endgraf \\\\textit{formatted} \\\\endgraf \\\\textbf{paragraphs}}} \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1] X[-1]},rowhead=2,row{1,2}={font=\\\\bfseries}}
+\\\\SetCell[c=2]{l} Table Headings &  & Here \\\\\\\\
+Sub & Headings & Too \\\\\\\\
+\\\\SetCell[r=2]{l} cell \\\\endgraf spans \\\\endgraf rows & \\\\SetCell[c=2]{l} column spanning &  \\\\\\\\
+ & normal & cell \\\\\\\\
+multi \\\\endgraf line \\\\endgraf \\\\endgraf cells \\\\endgraf too & \\\\SetCell[c=2]{l} cells can be \\\\endgraf \\\\textit{formatted} \\\\endgraf \\\\textbf{paragraphs} &  \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-A & B & C \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-\\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{D}} & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{E}} \\\\\\\\ \\\\cline{2-3}
- & F & G \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1] X[-1]},rowhead=1,row{1}={font=\\\\bfseries}}
+A & B & C \\\\\\\\
+\\\\SetCell[r=2]{l} D & \\\\SetCell[c=2]{l} E &  \\\\\\\\
+ & F & G \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-\\\\multirow{3}{*}{\\\\parbox{\\\\linewidth}{A}} & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{B}} \\\\\\\\ \\\\cline{2-3}
-\\\\rowfont[l]{}
- & C & D \\\\\\\\ \\\\cline{2-3}
- & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 3 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{E}} \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1] X[-1]}}
+\\\\SetCell[r=3]{l} A & \\\\SetCell[c=2]{l} B &  \\\\\\\\
+ & C & D \\\\\\\\
+ & \\\\SetCell[c=2]{l} E &  \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-\\\\multicolumn{3}{|m{\\\\dimexpr(\\\\linewidth) * 3 / 3 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{A}} \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-\\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{B}} & C & \\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{D}} \\\\\\\\ \\\\cline{1-2}
-E &  \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1] X[-1] X[-1]}}
+\\\\SetCell[c=3]{l} A &  &  \\\\\\\\
+\\\\SetCell[r=2]{l} B & C & \\\\SetCell[r=2]{l} D \\\\\\\\
+E &  \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-\\\\multirow{4}{*}{\\\\parbox{\\\\linewidth}{C}} & \\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{D}} & E \\\\\\\\ \\\\cline{1-1}
-\\\\rowfont[l]{}
-F &  \\\\\\\\ \\\\hline
-\\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{G}} & H \\\\\\\\ \\\\cline{2-2}
- & I \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1]}}
+\\\\SetCell[r=4]{l} C & \\\\SetCell[r=2]{l} D & E \\\\\\\\
+F &  \\\\\\\\
+\\\\SetCell[r=2]{l} G & H \\\\\\\\
+ & I \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 3 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-A & \\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{B}} & \\\\multirow{4}{*}{\\\\parbox{\\\\linewidth}{C}} \\\\\\\\ \\\\cline{1-2}
-\\\\rowfont[l]{}
-D &  \\\\\\\\ \\\\cline{1-2}
-E & \\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{F}} &  \\\\\\\\ \\\\cline{1-2}
-G &  \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1]}}
+A & \\\\SetCell[r=2]{l} B & \\\\SetCell[r=4]{l} C \\\\\\\\
+D &  \\\\\\\\
+E & \\\\SetCell[r=2]{l} F &  \\\\\\\\
+G &  \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-A & B & C & D \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-\\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 4 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{E}} & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 4 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{F}} \\\\\\\\ \\\\hline
-\\\\multicolumn{4}{|m{\\\\dimexpr(\\\\linewidth) * 4 / 4 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{G}} \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1]}}
+A & B & C & D \\\\\\\\
+\\\\SetCell[c=2]{l} E &  & \\\\SetCell[c=2]{l} F &  \\\\\\\\
+\\\\SetCell[c=4]{l} G &  &  &  \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-\\\\multicolumn{4}{|m{\\\\dimexpr(\\\\linewidth) * 4 / 4 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{A}} \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-\\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 4 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{B}} & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 4 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{C}} \\\\\\\\ \\\\hline
-D & E & F & G \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1]}}
+\\\\SetCell[c=4]{l} A &  &  &  \\\\\\\\
+\\\\SetCell[c=2]{l} B &  & \\\\SetCell[c=2]{l} C &  \\\\\\\\
+D & E & F & G \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 6 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 6 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 6 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 6 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 6 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 6 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-\\\\multirow{3}{*}{\\\\parbox{\\\\linewidth}{A}} & \\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{B}} & C & D & \\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{E}} & \\\\multirow{3}{*}{\\\\parbox{\\\\linewidth}{F}} \\\\\\\\ \\\\cline{1-5}
-\\\\rowfont[l]{}
-\\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 6 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{G}} &  \\\\\\\\ \\\\cline{1-5}
-\\\\multicolumn{4}{|m{\\\\dimexpr(\\\\linewidth) * 4 / 6 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{H}} &  \\\\\\\\ \\\\hline
-\\\\multicolumn{6}{|m{\\\\dimexpr(\\\\linewidth) * 6 / 6 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{I}} \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1]}}
+\\\\SetCell[r=3]{l} A & \\\\SetCell[r=2]{l} B & C & D & \\\\SetCell[r=2]{l} E & \\\\SetCell[r=3]{l} F \\\\\\\\
+\\\\SetCell[c=2]{l} G &  &  \\\\\\\\
+\\\\SetCell[c=4]{l} H &  &  &  &  \\\\\\\\
+\\\\SetCell[c=6]{l} I &  &  &  &  &  \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 7 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 7 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 7 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 7 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 7 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 7 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 7 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-A & \\\\multicolumn{6}{|m{\\\\dimexpr(\\\\linewidth) * 6 / 7 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{B}} \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-\\\\multirow{4}{*}{\\\\parbox{\\\\linewidth}{C}} & \\\\multirow{4}{*}{\\\\parbox{\\\\linewidth}{\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|} \\\\cline{1-1}
-\\\\rowfont[l]{\\\\bfseries}
-D & E & F & G \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-\\\\multicolumn{4}{|m{\\\\dimexpr(\\\\linewidth) * 4 / 4 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{H}} \\\\\\\\ \\\\hline
-\\\\end{longtabu}}} \\\\\\\\ \\\\hline
- &  &  &  &  &  \\\\\\\\ \\\\cline{1-1}
- &  &  &  &  &  \\\\\\\\ \\\\cline{1-1}
- &  &  &  &  &  \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1]},rowhead=1,row{1}={font=\\\\bfseries}}
+A & \\\\SetCell[c=6]{l} B &  &  &  &  &  \\\\\\\\
+\\\\SetCell[r=4]{l} C & \\\\SetCell[r=4]{l} \\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1]}}
+D & E & F & G \\\\\\\\
+\\\\SetCell[c=4]{l} H &  &  &  \\\\\\\\
+\\\\end{zdstblr} &  &  &  &  &  \\\\\\\\
+ &  &  &  &  &  \\\\\\\\
+ &  &  &  &  &  \\\\\\\\
+ &  &  &  &  &  \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 18 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-H & \\\\multicolumn{16}{|m{\\\\dimexpr(\\\\linewidth) * 16 / 18 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{}} & He \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-Li & Be & \\\\multirow{2}{*}{\\\\parbox{\\\\linewidth}{}} & B & C & N & O & F & Ne \\\\\\\\ \\\\cline{1-2} \\\\cline{13-18}
-Na & Mg &  &  &  &  &  &  &  &  &  &  & Al & Si & P & S & Cl & Ar \\\\\\\\ \\\\hline
-K & Ca & Sc & Ti & V & Cr & Mn & Fe & Co & Ni & Cu & Zn & Ga & Ge & As & Se & Br & Kr \\\\\\\\ \\\\hline
-Rb & Sr & Y & Zr & Nb & Mo & Tc & Ru & Rh & Pd & Ag & Cd & In & Sn & Sb & Te & I & Xe \\\\\\\\ \\\\hline
-Cs & Ba & LAN & Hf & Ta & W & Re & Os & Ir & Pt & Au & Hg & Tl & Pb & Bi & Po & At & Rn \\\\\\\\ \\\\hline
-Fr & Ra & ACT & \\\\multicolumn{15}{|m{\\\\dimexpr(\\\\linewidth) * 15 / 18 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{}} \\\\\\\\ \\\\hline
-\\\\multicolumn{18}{|m{\\\\dimexpr(\\\\linewidth) * 18 / 18 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{}} \\\\\\\\ \\\\hline
-\\\\multicolumn{3}{|m{\\\\dimexpr(\\\\linewidth) * 3 / 18 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{Lanthanide}} & La & Ce & Pr & Nd & Pm & Sm & Eu & Gd & Tb & Dy & Ho & Er & Tm & Yb & Lu \\\\\\\\ \\\\hline
-\\\\multicolumn{3}{|m{\\\\dimexpr(\\\\linewidth) * 3 / 18 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{Actinide}} & Ac & Th & Pa & U & Np & Pu & Am & Cm & Bk & Cf & Es & Fm & Md & No & Lw \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1]}}
+H & \\\\SetCell[c=16]{l}  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & He \\\\\\\\
+Li & Be & \\\\SetCell[r=2]{l}  &  &  &  &  &  &  &  &  &  & B & C & N & O & F & Ne \\\\\\\\
+Na & Mg &  &  &  &  &  &  &  &  &  &  & Al & Si & P & S & Cl & Ar \\\\\\\\
+K & Ca & Sc & Ti & V & Cr & Mn & Fe & Co & Ni & Cu & Zn & Ga & Ge & As & Se & Br & Kr \\\\\\\\
+Rb & Sr & Y & Zr & Nb & Mo & Tc & Ru & Rh & Pd & Ag & Cd & In & Sn & Sb & Te & I & Xe \\\\\\\\
+Cs & Ba & LAN & Hf & Ta & W & Re & Os & Ir & Pt & Au & Hg & Tl & Pb & Bi & Po & At & Rn \\\\\\\\
+Fr & Ra & ACT & \\\\SetCell[c=15]{l}  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\\\\\\\
+\\\\SetCell[c=18]{l}  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\\\\\\\
+\\\\SetCell[c=3]{l} Lanthanide &  &  & La & Ce & Pr & Nd & Pm & Sm & Eu & Gd & Tb & Dy & Ho & Er & Tm & Yb & Lu \\\\\\\\
+\\\\SetCell[c=3]{l} Actinide &  &  & Ac & Th & Pa & U & Np & Pu & Am & Cm & Bk & Cf & Es & Fm & Md & No & Lw \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 1 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-A \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1]}}
+A \\\\\\\\
+\\\\end{zdstblr}
 
 
 Text at the end
 
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 1 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-A \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1]}}
+A \\\\\\\\
+\\\\end{zdstblr}
 
 
 Text at the
@@ -6712,40 +6670,32 @@ In this examples, the second row should always be a full-cell
 
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-\\\\multicolumn{4}{|m{\\\\dimexpr(\\\\linewidth) * 4 / 4 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{A}} \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-\\\\multicolumn{4}{|m{\\\\dimexpr(\\\\linewidth) * 4 / 4 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{B | C}} \\\\\\\\ \\\\hline
-D & E & F & G \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1]}}
+\\\\SetCell[c=4]{l} A &  &  &  \\\\\\\\
+\\\\SetCell[c=4]{l} B | C &  &  &  \\\\\\\\
+D & E & F & G \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-A & \\\\multicolumn{3}{|m{\\\\dimexpr(\\\\linewidth) * 3 / 4 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{}} \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-\\\\multicolumn{4}{|m{\\\\dimexpr(\\\\linewidth) * 4 / 4 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{B | C}} \\\\\\\\ \\\\hline
-\\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 4 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{D   E}} & F & G \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1]}}
+A & \\\\SetCell[c=3]{l}  &  &  \\\\\\\\
+\\\\SetCell[c=4]{l} B | C &  &  &  \\\\\\\\
+\\\\SetCell[c=2]{l} D   E &  & F & G \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-A & B & C & D \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-\\\\multicolumn{4}{|m{\\\\dimexpr(\\\\linewidth) * 4 / 4 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{B | C}} \\\\\\\\ \\\\hline
-D & E & F & G \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1]}}
+A & B & C & D \\\\\\\\
+\\\\SetCell[c=4]{l} B | C &  &  &  \\\\\\\\
+D & E & F & G \\\\\\\\
+\\\\end{zdstblr}
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 4 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
-A & B & C & D \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-\\\\multicolumn{4}{|m{\\\\dimexpr(\\\\linewidth) * 4 / 4 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{B  | C}} \\\\\\\\ \\\\hline
-D & E & F & G \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1]}}
+A & B & C & D \\\\\\\\
+\\\\SetCell[c=4]{l} B  | C &  &  &  \\\\\\\\
+D & E & F & G \\\\\\\\
+\\\\end{zdstblr}
 
 
 \\\\levelTwoTitle{Failing example}
@@ -6779,23 +6729,20 @@ D & E & F & G \\\\\\\\ \\\\hline
 
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 1 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
- \\\\\\\\ \\\\hline
-\\\\end{longtabu}
+\\\\begin{zdstblr}{colspec={X[-1]}}
+ \\\\\\\\
+\\\\end{zdstblr}
 
 
 Bug \\\\#107
 
 
 
-\\\\begin{longtabu}{|m{\\\\dimexpr(\\\\linewidth) / 6 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 6 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 6 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 6 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 6 - 2 * \\\\tabcolsep}|m{\\\\dimexpr(\\\\linewidth) / 6 - 2 * \\\\tabcolsep}|} \\\\hline
-\\\\rowfont[l]{\\\\bfseries}
- & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 6 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{case1}} & \\\\multicolumn{2}{|m{\\\\dimexpr(\\\\linewidth) * 2 / 6 - 2 * \\\\tabcolsep}|}{\\\\parbox{\\\\linewidth}{case2}} & case3 \\\\\\\\ \\\\hline
- & case4 & case5 & case6 & case7 &  \\\\\\\\ \\\\hline
-\\\\rowfont[l]{}
-X & X & X & X & X & X \\\\\\\\ \\\\hline
-\\\\end{longtabu}"
+\\\\begin{zdstblr}{colspec={X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1] X[-1]},rowhead=2,row{1,2}={font=\\\\bfseries}}
+ & \\\\SetCell[c=2]{l} case1 &  & \\\\SetCell[c=2]{l} case2 &  & case3 \\\\\\\\
+ & case4 & case5 & case6 & case7 &  \\\\\\\\
+X & X & X & X & X & X \\\\\\\\
+\\\\end{zdstblr}"
 `;
 
 exports[`zds renders kbd.txt 1`] = `

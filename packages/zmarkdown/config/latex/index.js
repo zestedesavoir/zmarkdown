@@ -91,6 +91,7 @@ const rebberConfig = {
     image: (node) => `\\image{${node.url}}`
   },
   firstLineRowFont: '\\rowfont[l]{\\bfseries}',
+  tableEnvName: 'zdstblr',
   figure: {
     image: (_1, _2, caption, extra) => `\\image{${extra.url}}${caption ? `[${caption}]` : ''}\n`
   },

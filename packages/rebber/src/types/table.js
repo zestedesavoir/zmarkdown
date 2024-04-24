@@ -5,22 +5,42 @@ const one = require('../one')
 /* Expose. */
 module.exports = table
 
-const defaultHeaderParse = (rows) => {
+const defaultHeaderParse = rows => {
   const columns = Math.max(...rows.map(l => l.split('&').length))
-  const colHeader = `|${'X[-1]|'.repeat(columns)}`
-  return colHeader
+  return ' X[-1]'.repeat(columns).substring(1)
+}
+
+// Retrocompatibility: first row is always header on default tables
+const defaultheaderCounter = () => {
+  return 1
 }
 
 const defaultMacro = (ctx, node) => {
   const headerParse = ctx.headerParse ? ctx.headerParse : defaultHeaderParse
+  const headerCounter = ctx.headerCounter ? ctx.headerCounter : defaultheaderCounter
+
   const parsed = node.children.map((n, index) => one(ctx, n, index, node))
-  const inner = parsed.join('')
+  const headerCount = headerCounter(node)
   const colHeader = headerParse(parsed)
-  const spreadCell = typeof ctx.spreadCell === 'string' ? ctx.spreadCell : ' spread 0pt '
+
+  const envName = typeof ctx.tableEnvName === 'string' ? ctx.tableEnvName : 'longtblr'
   const caption = node.caption
     ? `\n\\captionof{table}{${node.caption}}\n`
     : ''
-  return `\\begin{longtabu}${spreadCell}{${colHeader}} \\hline\n${inner}\\end{longtabu}${caption}\n`
+  // eslint-disable-next-line max-len
+  const headerProperties = typeof ctx.headerProperties === 'string' ? ctx.headerProperties : 'font=\\bfseries'
+  let extraProps = ''
+
+  if (headerCount && headerCount > 0) {
+    const tableHeaderEnum = new Array(headerCount)
+      .fill(0)
+      .map((_, i) => i + 1)
+      .join(',')
+    extraProps += `,rowhead=${headerCount},row{${tableHeaderEnum}}={${headerProperties}}`
+  }
+
+  // eslint-disable-next-line max-len
+  return `\\begin{${envName}}{colspec={${colHeader}}${extraProps}}\n${parsed.join('')}\\end{${envName}}${caption}\n`
 }
 
 /* Stringify a table `node`. */
