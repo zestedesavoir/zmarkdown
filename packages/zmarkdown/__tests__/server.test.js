@@ -189,14 +189,14 @@ describe('HTML endpoint', () => {
     expect(metadata.hasQuizz).toBe(true)
   })
 
-  it('can enforce shifting level', async () => {
+  it('enforce level shifting by default', async () => {
     const text = dedent(`
     # I have seen a dolphin
     
     On a camera. What is happening with animals these days?"
     `)
 
-    const response = await a.post(html, {md: text, opts: {heading_shift: 1, enforce_shift: true}})
+    const response = await a.post(html, {md: text, opts: {heading_shift: 1}})
     expect(response.status).toBe(200)
 
     const [content] = response.data

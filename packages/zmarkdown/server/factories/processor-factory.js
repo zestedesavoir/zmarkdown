@@ -19,12 +19,10 @@ module.exports = (processor, opts = {}) => {
   }
 
   if (processor === 'html') {
-    if (!opts.enforce_shift) opts.heading_shift = 2
     opts.disable_images_download = true
   }
 
   if (processor === 'latex') {
-    if (!opts.enforce_shift) opts.heading_shift = 0
     opts.disable_ping = true
     opts.disable_jsfiddle = true
   } else {
@@ -32,7 +30,6 @@ module.exports = (processor, opts = {}) => {
   }
 
   if (processor === 'epub') {
-    if (!opts.enforce_shift) opts.heading_shift = 2
     opts.disable_ping = true
     opts.disable_jsfiddle = true
     opts.inline = false

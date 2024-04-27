@@ -30,7 +30,7 @@ module.exports = (givenProc, template) => (req, res, next) => {
           localOptions.ic_shift = localOptions.depth
         }
 
-        const mergedOptions = Object.assign({ enforce_shift: true }, options, localOptions)
+        const mergedOptions = Object.assign({}, options, localOptions)
         const processor = processorFactory(givenProc, mergedOptions)
 
         return processor(text)
