@@ -17,12 +17,26 @@ export default [
       'packages/**/__tests__/*.js',
       'packages/**/dist/**/*.js',
       'packages/zmarkdown/webpack.config.js',
-      // Should not be ignored, but requires ESM
+      // Handled by ESM rules
       'packages/zmarkdown/client/*.js',
-      'packages/zmarkdown/public/*.js'
+      'packages/zmarkdown/public/*.js',
+      'packages/**/lib/*.js'
     ],
     languageOptions: {
       sourceType: 'commonjs',
+      globals: {
+        ...globals.browser,
+        ...globals.node
+      }
+    }
+  }),
+  Object.assign({}, ...compat.extends('standard'), {
+    files: [
+      'packages/**/lib/*.js'
+    ],
+    ignores: [],
+    languageOptions: {
+      sourceType: 'module',
       globals: {
         ...globals.browser,
         ...globals.node
