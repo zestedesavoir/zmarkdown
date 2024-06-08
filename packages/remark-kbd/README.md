@@ -1,7 +1,7 @@
-# remark-kbd [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
+# remark-kbd
 
 This plugin parses custom Markdown syntax to handle keyboard keys.
-It adds a new node type to the [mdast][mdast] produced by [remark][remark]: `kbd`
+It adds a new node type to the [mdast][mdast] produced by [remark][remark]: `kbd`.
 
 If you are using [rehype][rehype], the stringified HTML result will be `<kbd>`.
 
@@ -58,7 +58,6 @@ const unified = require('unified')
 const remarkParse = require('remark-parse')
 const stringify = require('rehype-stringify')
 const remark2rehype = require('remark-rehype')
-
 const remarkKbd = require('remark-kbd')
 ```
 
@@ -77,14 +76,6 @@ unified()
 [MIT][license] © [Zeste de Savoir][zds]
 
 <!-- Definitions -->
-
-[build-badge]: https://img.shields.io/travis/zestedesavoir/zmarkdown.svg
-
-[build-status]: https://travis-ci.org/zestedesavoir/zmarkdown
-
-[coverage-badge]: https://img.shields.io/coveralls/zestedesavoir/zmarkdown.svg
-
-[coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown
 
 [license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/remark-kbd/LICENSE-MIT
 
