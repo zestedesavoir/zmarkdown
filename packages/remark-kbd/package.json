@@ -1,6 +1,8 @@
 {
   "name": "remark-kbd",
   "version": "1.1.1",
+  "description": "Parses custom Markdown syntax to handle keyboard keys",
+  "type": "module",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-kbd",
     "type": "git"
@@ -9,26 +11,34 @@
   "contributors": [
     "Sébastien (AmarOk) Blin <contact@enconn.fr>",
     "François (artragis) Dambrine <perso@francoisdambrine.me>",
-    "Victor Felder <victor@draft.li> (https://draft.li)"
+    "Victor Felder <victor@draft.li> (https://draft.li)",
+    "Stalone <stalone+zmd@boxph.one>"
   ],
   "scripts": {
     "pretest": "eslint .",
-    "build": "babel --root-mode upward --delete-dir-on-start --env-name production --out-dir dist src",
-    "test": "jest",
-    "coverage": "jest --coverage"
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+    "coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage"
   },
-  "main": "dist/index.js",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
   "files": [
     "LICENSE-MIT",
-    "dist",
-    "src",
+    "lib",
     "README.md"
   ],
   "keywords": [
-    "remark"
+    "remark",
+    "keyboard"
   ],
   "license": "MIT",
   "dependencies": {
-    "is-whitespace-character": "^1.0.4"
+    "micromark-extension-kbd": "file:../micromark-extension-kbd"
+  },
+  "devDependencies": {
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "remark-rehype": "^11.1.0",
+    "rehype-stringify": "^10.0.0",
+    "unified": "^11.0.4"
   }
 }
