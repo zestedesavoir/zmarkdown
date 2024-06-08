@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`allow different left-right characters 1`] = `"<p><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>SUPPR</kbd></p>"`;
-
 exports[`allow non-pipe characters 1`] = `"<p><kbd>CTRL</kbd>, +<kbd>D</kbd></p>"`;
 
 exports[`parses kbd parses a big fixture 1`] = `
@@ -9,9 +7,9 @@ exports[`parses kbd parses a big fixture 1`] = `
 <p>sdf |||| df</p>
 <p>sfdgs | | dfg || dgsg | qs</p>
 <p>With two pipes: ||key|| you'll get <kbd>key</kbd>.</p>
-<p>It can contain inline markdown:</p>
+<p>It cannot contain inline markdown:</p>
 <ul>
-<li><kbd>hell<a href=\\"#he\\"><del>o</del></a>?</kbd></li>
+<li><kbd>hell[~~o~~](#he)?</kbd></li>
 </ul>
 <p>It cannot contain blocks:</p>
 <ul>
@@ -22,18 +20,18 @@ exports[`parses kbd parses a big fixture 1`] = `
 exports[`to markdown 1`] = `
 "Blabla ||ok|| kxcvj ||ok foo|| sdff
 
-sdf |||| df
+sdf \\|\\|\\|\\| df
 
-sfdgs | | dfg || dgsg | qs
+sfdgs \\| \\| dfg \\|\\| dgsg \\| qs
 
-With two pipes: \\\\||key|| you'll get ||key||.
+With two pipes: \\|\\|key\\|\\| you'll get ||key||.
 
-It can contain inline markdown:
+It cannot contain inline markdown:
 
--   ||hell[~~o~~](#he)?||
+* ||hell\\[~~o~~]\\(#he)?||
 
 It cannot contain blocks:
 
--   ||hello: \\\\[[secret]]?||
+* ||hello: \\[\\[secret]]?||
 "
 `;
