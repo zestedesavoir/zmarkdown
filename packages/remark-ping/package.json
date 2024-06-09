@@ -1,6 +1,8 @@
 {
   "name": "remark-ping",
   "version": "2.3.2",
+  "description": "Parses custom Markdown syntax to link user profiles",
+  "type": "module",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-ping",
     "type": "git"
@@ -10,27 +12,37 @@
     "Sébastien (AmarOk) Blin <contact@enconn.fr>",
     "François (artragis) Dambrine <perso@francoisdambrine.me>",
     "Victor Felder <victor@draft.li> (https://draft.li)",
-    "Titouan (Stalone) S. <talone@boxph.one>"
+    "Stalone <stalone+zmd@boxph.one>"
   ],
   "scripts": {
     "pretest": "eslint .",
-    "build": "babel --root-mode upward --delete-dir-on-start --env-name production --out-dir dist src",
     "test": "jest",
     "coverage": "jest --coverage"
   },
-  "main": "dist/index.js",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
   "files": [
-    "LICENSE-MIT",
-    "dist",
-    "src",
+    "LICENSE",
+    "lib",
     "README.md"
   ],
   "keywords": [
-    "remark"
+    "remark",
+    "ping",
+    "username"
   ],
   "license": "MIT",
   "dependencies": {
-    "@unicode/unicode-13.0.0": "^1.1.0",
-    "unist-util-visit": "^2.0.3"
+    "micromark-extension-ping": "file:../micromark-extension-ping",
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "dedent":"^1.5.3",
+    "remark-gfm": "^4.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "remark-rehype": "^11.1.0",
+    "rehype-stringify": "^10.0.0",
+    "unified": "^11.0.4"
   }
 }

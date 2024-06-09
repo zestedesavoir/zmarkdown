@@ -1,8 +1,9 @@
-# remark-ping [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
+# remark-ping
 
 This plugin parses custom Markdown syntax such as `@someone` or `@**nick with spaces**` to create links such as `/member/profile/someone` to the corresponding user page if this user exists in your system.
+It adds a new node type to the [mdast][mdast] produced by [remark][remark]: `ping`.
 
-## Default Syntax
+## Syntax
 
 ```markdown
 @username
@@ -53,7 +54,6 @@ gives:
 </a>
 ```
 
-
 ## Installation
 
 [npm][npm]:
@@ -64,46 +64,31 @@ npm install remark-ping
 
 ## Usage
 
-### Dependencies:
+Dependencies:
 
 ```javascript
 const unified = require('unified')
 const remarkParse = require('remark-parse')
 const stringify = require('rehype-stringify')
 const remark2rehype = require('remark-rehype')
-
 const remarkPing = require('remark-ping')
 ```
 
-### Usage:
+Usage:
 
 ```javascript
 unified()
   .use(remarkParse)
   .use(remarkPing, {
-      pingUsername: (username) => true,
-      userURL: (username) => `https://your.website.com/path/to/${username}`
+      userURL: username => `https://your.website.com/path/to/${username}`
   })
   .use(remark2rehype)
   .use(stringify)
 ```
 
-as you can see, `remark-ping` takes two mandatory options :
+### Configuration
 
-- `pingUsername` is a function taking `username` as parameter and returning `true` if the user exists or should be pinged
-    - If you want to parse any username without checking whether they exist or (like GitHub does), use a function always returning `true` (`() => true`)
-    - When `pingUsername(username)` doesn't return `true`, the ping syntax is simply ignored and no AST `Ping` node gets created for this username
-- `userUrl` is a function taking `username` as parameter and returning a path or URL to this user profile or member page
-
-You can override the default parsing regexp, for example if you don't want to include `@**username with space**` by setting up the `usernameRegex` option:
-
-```js
-  .use(remarkPing, {
-      pingUsername: (username) => true,
-      userURL: (username) => `https://your.website.com/path/to/${username}`,
-      usernameRegex: /[\s'"(,:<]?@(\w+)/,
-  })
-```
+As shown in the example above, `remark-ping` takes one mandatory option, `userUrl`, which is a function taking `username` as parameter and returning a path or URL to this user profile or member page
 
 ### Retrieving the usernames to ping
 
@@ -132,15 +117,7 @@ unified()
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/zestedesavoir/zmarkdown.svg
-
-[build-status]: https://travis-ci.org/zestedesavoir/zmarkdown
-
-[coverage-badge]: https://img.shields.io/coveralls/zestedesavoir/zmarkdown.svg
-
-[coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown
-
-[license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/remark-ping/LICENSE-MIT
+[license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/remark-ping/LICENSE
 
 [zds]: https://zestedesavoir.com
 
