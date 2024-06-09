@@ -1,8 +1,7 @@
-# remark-iframes [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
+# remark-iframes
 
 This plugin parses custom Markdown syntax to create iframes.
-
-This creates a new MDAST element called "iframe"
+It adds a new node type to the [mdast][mdast] produced by [remark][remark]: `iframe`.
 
 If you are using [rehype][rehype], the stringified HTML result will be a tag you can configure. Most of time you want `iframe`.
 
@@ -21,6 +20,7 @@ interface iframe <: Node {
       height: 0 <= uint32;
       allowfullscreen: boolean;
       frameborder: string;
+      loading: string?;
     }
     thumbnail: string?;
   }
@@ -52,7 +52,6 @@ const unified = require('unified')
 const remarkParse = require('remark-parse')
 const stringify = require('rehype-stringify')
 const remark2rehype = require('remark-rehype')
-
 const remarkIframe = require('remark-iframes')
 ```
 
@@ -62,96 +61,82 @@ Usage:
 unified()
   .use(remarkParse)
   .use(remarkIframe, {
-    // this key corresponds to the hostname: !(http://hostname/foo)
-    // the config associated to this hostname will apply to any iframe
-    // with a matching hostname
-   'www.youtube.com': {
-      tag: 'iframe',
-      width: 560,
-      height: 315,
-      disabled: false,
-      replace: [
-        ['watch?v=', 'embed/'],
-        ['http://', 'https://'],
-      ],
-      thumbnail: {
-        format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/(.+)$'
+    providers: [
+      {
+        hostname: ['youtube.com', 'www.youtube.com', 'youtu.be'],
+        width: 560,
+        height: 315,
+        disabled: false,
+        oembed: 'https://www.youtube.com/oembed'
       },
-      removeAfter: '&'
-    }
+      {
+        hostname: ['jsfiddle.net', 'www.jsfiddle.net'],
+        width: 560,
+        height: 560,
+        disabled: false,
+        match: /https?:\/\/(www\.)?jsfiddle\.net\/([\w\d]+\/[\w\d]+\/\d+\/?|[\w\d]+\/\d+\/?|[\w\d]+\/?)$/,
+        transformer: embedLink => `${embedLink.replace('http://', 'https://')}embedded/result,js,html,css/`
+      }
+    ]
   })
   .use(remark2rehype)
   .use(stringify)
 ```
 
-## Configuration fields:
+## Configuration
 
-- `tag`: HTML tag to use in rehype output, you most probably want `iframe`.
-- `width` and `height`: iframe size, set as `width="" height=""` HTML attributes.
-- `disabled`: Can be used to disable this provider. This is useful when you want to deal with multiple configurations from a common set of plugins.
-- `replace`: Rules passed to `String.prototype.replace` with the `input_url`. It's a list `[[from, to]]`, rules are applied sequentially on the output of the previous rule. Each rule only replaces the first occurrence.
-- `removeAfter`: Truncates the URL after the first occurrence of char. For example `http://dailymotion.com/video/?time=1&bla=2` will result in `http://dailymotion.com/video/?time=1` if `removeAfter` is set to `&`.
-- `append`: Any string you want to append to the URL, for example an API key.
-- `removeFileName`: If set to `true`, removes the filename (i.e last fragment before query string) from URL.
-- `match`: a regular expression passed to `String.prototype.test`, used to validate the URL.
-- `thumbnail`: a way to retrieve a thumbnail. This param is an object with a `format` key of this type: `'http://url/{param1}/{param2}'` you must then provide patterns `param: 'pattern'` to extract the value which will replace the corresponding `{param}` in the `format` URL.
-- `droppedQueryParameters`: a list of query parameters to remove from the iframe source URL.
-- `oembed`: an URL to the oEmbed API of the website you want to embed;
+This plugin can take the `providers` option, which contains a list of providers allowed for iframes. Any of the given providers object can have the following fields:
+
+- `hostname`: a hostname or list of hostnames matched;
+- `width` and `height`: iframe size, set as `width="" height=""` HTML attributes. If `oembed` is used (see below), these parameters overwrite the oEmbed response;
+- `disabled`: can be used to disable this provider. This is useful when you want to deal with multiple configurations from a common set of plugins;
 - `lazyLoad`: tell browsers to lazy load the iframe whenever possible, using the HTML `loading` attribute.
+
+Furthermore, one of the two possible ways to generate an embed URL should be configured: either an oEmbed provider or a manual transformer.
 
 ### oEmbed usage
 
-When using the `oembed` configuration parameter, the other parameters are discarded, excepted for `disabled`, which can be used freely; you may use `width` and `height` if really needed, altough it is not recommended by the oEmbed specification.
+Use the following parameter:
 
-The thumbnail is constructed from the oEmbed `thumbnail_url` response, so there is no need for providing any URL, and any configuration will not be taken into account.
+- `oembed`: an URL to the oEmbed API of the website you want to embed.
 
-### Thumbnail construction
+The thumbnail will be constructed automatically from the oEmbed `thumbnail_url` response, and both `width` and `height` will be extracted from the answer, unless overridden by configuration.
 
-when you configure the `thumbnail` as part of a provider, the URL of the thumbnail is computed following this algorithm:
+### Transformer usage
 
-```
-thumbnail_url_template = provider.thumbnail.format
-for each property of provider.thumbnail
-  if property is not "format":
-    regexp_for_current_property = provider.thumbnail[property]
-    extracted_value = video_url.search(regexp_for_current_property)[1]
-    thumbnail_url_template = thumbnail_url_template.replace('{' + property + '}', extracted_value)
-```
+Use the following parameters:
+
+- `match`: regular expression passed to `String.prototype.test`, used to validate the URL;
+- `transform`: function used to transform the Markdown URL in order to make the iframe `src` URL;
+- `thumbnail`: function used to retrieve a thumbnail. This param is either a (constant) string or a function that takes the final URL as a parameter.
 
 ## Example
 
-### Config:
+### Config
 
 ```javascript
 {
-    // Youtube RegEx example
-    'www.youtube.com': {
-      tag: 'iframe',
-      width: 560,
-      height: 315,
-      disabled: false,
-      replace: [
-        ['watch?v=', 'embed/'],
-        ['http://', 'https://'],
-      ],
-      thumbnail: {
-        format: 'http://img.youtube.com/vi/{id}/0.jpg',
-        id: '.+/(.+)$'
-      },
-      removeAfter: '&'
-    },
-    // Youtube oEmbed example
-    'youtu.be': {
+  providers: [
+    {
+      hostname: ['youtube.com', 'www.youtube.com', 'youtu.be'],
       width: 560,
       height: 315,
       disabled: false,
       oembed: 'https://www.youtube.com/oembed'
+    },
+    {
+      hostname: ['jsfiddle.net', 'www.jsfiddle.net'],
+      width: 560,
+      height: 560,
+      disabled: false,
+      match: /https?:\/\/(www\.)?jsfiddle\.net\/([\w\d]+\/[\w\d]+\/\d+\/?|[\w\d]+\/\d+\/?|[\w\d]+\/?)$/,
+      transformer: embedLink => `${embedLink.replace('http://', 'https://')}embedded/result,js,html,css/`
     }
+  ]
 }
 ```
 
-### Input:
+### Input
 
 ```markdown
 !(https://www.youtube.com/watch?v=8TQIvdFl4aU)
@@ -166,13 +151,13 @@ for each property of provider.thumbnail
     data: {
         hName: 'iframe',
         hProperties: {
-          src: 'https://www.youtube.com/embed/8TQIvdFl4aU',
+          src: 'https://www.youtube.com/embed/8TQIvdFl4aU?feature=oembed',
           width: 560,
           height: 315,
           allowfullscreen: true,
           frameborder: '0'
         }
-        thumbnail: 'https://image.youtube.com/8TQIvdFl4aU/0.jpg'
+        thumbnail: 'https://i.ytimg.com/vi/8TQIvdFl4aU/hqdefault.jpg'
       }
 }
 ```
@@ -180,7 +165,7 @@ for each property of provider.thumbnail
 ### Resulting HTML
 
 ```html
-<iframe src="https://www.youtube.com/embed/8TQIvdFl4aU" width="560" height="315"></iframe>
+<iframe src="https://www.youtube.com/embed/8TQIvdFl4aU?feature=oembed" width="560" height="315"></iframe>
 ```
 
 ## License
@@ -189,18 +174,14 @@ for each property of provider.thumbnail
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/zestedesavoir/zmarkdown.svg
-
-[build-status]: https://travis-ci.org/zestedesavoir/zmarkdown
-
-[coverage-badge]: https://img.shields.io/coveralls/zestedesavoir/zmarkdown.svg
-
-[coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown
-
 [license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/remark-iframes/LICENSE-MIT
 
 [zds]: https://zestedesavoir.com
 
 [npm]: https://www.npmjs.com/package/remark-iframes
 
+[remark]: https://github.com/remarkjs/remark 
+
 [rehype]: https://github.com/rehypejs/rehype
+
+[mdast]: https://github.com/syntax-tree/mdast
