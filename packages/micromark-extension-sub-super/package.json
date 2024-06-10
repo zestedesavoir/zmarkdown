@@ -1,0 +1,44 @@
+{
+  "name": "micromark-extension-sub-super",
+  "version": "0.0.0",
+  "description": "Add Markdown syntax to handle subscript and superscript",
+  "type": "module",
+  "keywords": [
+    "micromark",
+    "subscript",
+    "superscript",
+    "plugin",
+    "extension"
+  ],
+  "author": "Stalone <stalone+zmd@boxph.one>",
+  "homepage": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/micromark-extension-sub-super",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zestedesavoir/zmarkdown.git#master"
+  },
+  "scripts": {
+    "pretest": "eslint .",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+    "coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage"
+  },
+  "bugs": {
+    "url": "https://github.com/zestedesavoir/zmarkdown/issues"
+  },
+  "dependencies": {
+    "micromark-util-character": "^2.1.0",
+    "micromark-util-symbol": "^2.0.0"
+  },
+  "devDependencies": {
+    "micromark": "^4.0.0"
+  }
+}

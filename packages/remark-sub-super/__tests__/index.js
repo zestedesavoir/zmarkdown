@@ -1,10 +1,10 @@
 import dedent from 'dedent'
-import unified from 'unified'
+import {unified} from 'unified'
 import reParse from 'remark-parse'
 import rehypeStringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
 
-import plugin from '../src/'
+import plugin from '../lib/index'
 
 const render = text => unified()
   .use(reParse)
@@ -13,20 +13,19 @@ const render = text => unified()
   .use(rehypeStringify)
   .processSync(text)
 
-
 test('superscript', () => {
-  const {contents} = render(dedent`
+  const {value} = render(dedent`
     Foo ^sup^ kxcvj ^sup *string*^ bar
 
     not ^ here
 
     neither \^ here ^ because it's escaped
   `)
-  expect(contents).toMatchSnapshot()
+  expect(value).toMatchSnapshot()
 })
 
 test('subscript', () => {
-  const {contents} = render(dedent`
+  const {value} = render(dedent`
     Foo ~sup~ kxcvj ~sup *string*~ bar
 
     not ~ here
@@ -35,11 +34,11 @@ test('subscript', () => {
 
     foo ^^a^^ bar
   `)
-  expect(contents).toMatchSnapshot()
+  expect(value).toMatchSnapshot()
 })
 
 test('regression 1', () => {
-  const {contents} = render(dedent`
+  const {value} = render(dedent`
     a^b^ a^b^ a^b^ a^b^ a^b^
 
     a~b~ a~b~ a~b~ a~b~ a~b~
@@ -48,11 +47,11 @@ test('regression 1', () => {
 
     a^b^ a~b~ a^b^ a~b~ a^b^ a~b~
   `)
-  expect(contents).toMatchSnapshot()
+  expect(value).toMatchSnapshot()
 })
 
 test('regression 2', () => {
-  const {contents} = render(dedent`
+  const {value} = render(dedent`
     Literally s^e^lfies tbh lo-fi. Actually health go retro polaroid\
     sriracha. Kogi live-edge ^mixtape^ marfa street ~art~ synth. Godard\
     synth truffaut selfies, vape fanny  subway tile. Stumptown af pabst,\
@@ -67,12 +66,12 @@ test('regression 2', () => {
     etsy sartorial _YOLO_. Williamsburg salvia photo^a^ booth ^readymade^\
     listicle man braid. s^e^lfies
   `)
-  expect(contents).toMatchSnapshot()
+  expect(value).toMatchSnapshot()
 })
 
 test('disallow empty tags', () => {
-  const {contents} = render(dedent`
+  const {value} = render(dedent`
     ^^foo^^
   `)
-  expect(contents).toMatchSnapshot()
+  expect(value).toMatchSnapshot()
 })
