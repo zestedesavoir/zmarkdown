@@ -42,7 +42,6 @@ module.exports = {
     oembed: 'https://soundcloud.com/oembed'
   },
   'www.ina.fr': {
-    tag: 'iframe',
     width: 620,
     height: 349,
     disabled: false,
@@ -54,7 +53,6 @@ module.exports = {
     removeFileName: true
   },
   'www.jsfiddle.net': {
-    tag: 'iframe',
     width: 560,
     height: 560,
     disabled: false,
@@ -69,7 +67,6 @@ module.exports = {
     }
   },
   'jsfiddle.net': {
-    tag: 'iframe',
     width: 560,
     height: 560,
     disabled: false,

@@ -203,6 +203,22 @@ describe('HTML endpoint', () => {
     expect(content).toMatchSnapshot()
     expect(content).toContain('h2')
   })
+
+  it('can use custom iframe elements', async () => {
+    const text = dedent(`
+    # You won't get my data, Google!
+
+    !(https://www.youtube.com/watch?v=q3zqJs7JUCQ)
+    `)
+
+    const response = await a.post(html, {md: text, opts: {hide_iframes: true}})
+    expect(response.status).toBe(200)
+
+    const [content] = response.data
+    expect(content).not.toContain('iframe')
+    expect(content).toContain('hidden-frame')
+    expect(content).toMatchSnapshot()
+  })
 })
 
 describe('LaTeX endpoint', () => {
