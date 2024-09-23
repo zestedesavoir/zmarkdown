@@ -98,7 +98,7 @@ test('oembed falls back', async () => {
     !(https://www.youtube.com/watch?v=FdltlrKFr1w)
   `, {providers})
 
-  expect(result.messages[0].message).toContain('timeout')
+  expect(result.messages[0].message).toContain('failed')
   expect(result.value).toMatchSnapshot()
 })
 
