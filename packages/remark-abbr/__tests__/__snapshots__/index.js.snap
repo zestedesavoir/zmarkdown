@@ -27,22 +27,22 @@ exports[`compiles to markdown 3`] = `
 *[HTML]: HyperText Markup Language"
 `;
 
-exports[`empty object does not break with references in their own paragraphs 1`] = `"<p>Here is a test featuring <abbr title=\\"A B C\\">abc</abbr> and <abbr title=\\"D E F\\">def</abbr></p>"`;
+exports[`empty object does not break with references in their own paragraphs 1`] = `"<p>Here is a test featuring <abbr title="A B C">abc</abbr> and <abbr title="D E F">def</abbr></p>"`;
 
 exports[`empty object no reference 1`] = `"<p>No reference!</p>"`;
 
 exports[`empty object passes the first regression test 1`] = `
-"<p>The <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr> specification is maintained by the <abbr title=\\"World Wide Web Consortium\\">W3C</abbr>:<a href=\\"https://w3c.github.io/html/\\">link</a>, this line had an abbr before link.</p>
-<p>A line with <a href=\\"http://example.com\\">a link</a> before an abbr: <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>.</p>"
+"<p>The <abbr title="Hyper Text Markup Language">HTML</abbr> specification is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>:<a href="https://w3c.github.io/html/">link</a>, this line had an abbr before link.</p>
+<p>A line with <a href="http://example.com">a link</a> before an abbr: <abbr title="Hyper Text Markup Language">HTML</abbr>.</p>"
 `;
 
 exports[`empty object passes the retro test 1`] = `
-"<p>An <abbr title=\\"Abbreviation\\">ABBR</abbr>: \\"<abbr title=\\"Reference\\">REF</abbr>\\", ref and REFERENCE should be ignored.</p>
-<p>The <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr> specification is maintained by the <abbr title=\\"World Wide Web Consortium\\">W3C</abbr>.</p>"
+"<p>An <abbr title="Abbreviation">ABBR</abbr>: "<abbr title="Reference">REF</abbr>", ref and REFERENCE should be ignored.</p>
+<p>The <abbr title="Hyper Text Markup Language">HTML</abbr> specification is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>.</p>"
 `;
 
 exports[`empty object passes the retro test 2`] = `
-"An ABBR: \\"REF\\", ref and REFERENCE should be ignored.
+"An ABBR: "REF", ref and REFERENCE should be ignored.
 
 The HTML specification is maintained by the W3C.
 
@@ -53,33 +53,33 @@ The HTML specification is maintained by the W3C.
 `;
 
 exports[`empty object passes the second regression test 1`] = `
-"<p>The <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr> specification is maintained by the <abbr title=\\"World Wide Web Consortium\\">W3C</abbr>:<a href=\\"https://w3c.github.io/html/\\">link</a>, this line had an abbr before <strong>link</strong> <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>.</p>
-<p>A line with <a href=\\"http://example.com\\">a link</a> before an abbr: <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>.</p>"
+"<p>The <abbr title="Hyper Text Markup Language">HTML</abbr> specification is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>:<a href="https://w3c.github.io/html/">link</a>, this line had an abbr before <strong>link</strong> <abbr title="Hyper Text Markup Language">HTML</abbr>.</p>
+<p>A line with <a href="http://example.com">a link</a> before an abbr: <abbr title="Hyper Text Markup Language">HTML</abbr>.</p>"
 `;
 
 exports[`empty object renders references 1`] = `
-"<p>This is an abbreviation: <abbr title=\\"Reference\\">REF</abbr>.
+"<p>This is an abbreviation: <abbr title="Reference">REF</abbr>.
 ref and REFERENCE should be ignored.</p>
-<p>Here is another one in a link: <a href=\\"http://example.com\\"><abbr title=\\"Reference\\">FOO</abbr></a>.</p>
-<p>Here is the first one in a link: <a href=\\"http://example.com\\"><abbr title=\\"Reference\\">REF</abbr></a>.</p>"
+<p>Here is another one in a link: <a href="http://example.com"><abbr title="Reference">FOO</abbr></a>.</p>
+<p>Here is the first one in a link: <a href="http://example.com"><abbr title="Reference">REF</abbr></a>.</p>"
 `;
 
-exports[`expandFirst does not break with references in their own paragraphs 1`] = `"<p>Here is a test featuring A B C (<abbr title=\\"A B C\\">abc</abbr>) and D E F (<abbr title=\\"D E F\\">def</abbr>)</p>"`;
+exports[`expandFirst does not break with references in their own paragraphs 1`] = `"<p>Here is a test featuring A B C (<abbr title="A B C">abc</abbr>) and D E F (<abbr title="D E F">def</abbr>)</p>"`;
 
 exports[`expandFirst no reference 1`] = `"<p>No reference!</p>"`;
 
 exports[`expandFirst passes the first regression test 1`] = `
-"<p>The Hyper Text Markup Language (<abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>) specification is maintained by the World Wide Web Consortium (<abbr title=\\"World Wide Web Consortium\\">W3C</abbr>):<a href=\\"https://w3c.github.io/html/\\">link</a>, this line had an abbr before link.</p>
-<p>A line with <a href=\\"http://example.com\\">a link</a> before an abbr: <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>.</p>"
+"<p>The Hyper Text Markup Language (<abbr title="Hyper Text Markup Language">HTML</abbr>) specification is maintained by the World Wide Web Consortium (<abbr title="World Wide Web Consortium">W3C</abbr>):<a href="https://w3c.github.io/html/">link</a>, this line had an abbr before link.</p>
+<p>A line with <a href="http://example.com">a link</a> before an abbr: <abbr title="Hyper Text Markup Language">HTML</abbr>.</p>"
 `;
 
 exports[`expandFirst passes the retro test 1`] = `
-"<p>An <abbr title=\\"Abbreviation\\">ABBR</abbr>: \\"<abbr title=\\"Reference\\">REF</abbr>\\", ref and REFERENCE should be ignored.</p>
-<p>The <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr> specification is maintained by the <abbr title=\\"World Wide Web Consortium\\">W3C</abbr>.</p>"
+"<p>An <abbr title="Abbreviation">ABBR</abbr>: "<abbr title="Reference">REF</abbr>", ref and REFERENCE should be ignored.</p>
+<p>The <abbr title="Hyper Text Markup Language">HTML</abbr> specification is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>.</p>"
 `;
 
 exports[`expandFirst passes the retro test 2`] = `
-"An ABBR: \\"REF\\", ref and REFERENCE should be ignored.
+"An ABBR: "REF", ref and REFERENCE should be ignored.
 
 The HTML specification is maintained by the W3C.
 
@@ -90,33 +90,33 @@ The HTML specification is maintained by the W3C.
 `;
 
 exports[`expandFirst passes the second regression test 1`] = `
-"<p>The Hyper Text Markup Language (<abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>) specification is maintained by the World Wide Web Consortium (<abbr title=\\"World Wide Web Consortium\\">W3C</abbr>):<a href=\\"https://w3c.github.io/html/\\">link</a>, this line had an abbr before <strong>link</strong> <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>.</p>
-<p>A line with <a href=\\"http://example.com\\">a link</a> before an abbr: <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>.</p>"
+"<p>The Hyper Text Markup Language (<abbr title="Hyper Text Markup Language">HTML</abbr>) specification is maintained by the World Wide Web Consortium (<abbr title="World Wide Web Consortium">W3C</abbr>):<a href="https://w3c.github.io/html/">link</a>, this line had an abbr before <strong>link</strong> <abbr title="Hyper Text Markup Language">HTML</abbr>.</p>
+<p>A line with <a href="http://example.com">a link</a> before an abbr: <abbr title="Hyper Text Markup Language">HTML</abbr>.</p>"
 `;
 
 exports[`expandFirst renders references 1`] = `
-"<p>This is an abbreviation: Reference (<abbr title=\\"Reference\\">REF</abbr>).
+"<p>This is an abbreviation: Reference (<abbr title="Reference">REF</abbr>).
 ref and REFERENCE should be ignored.</p>
-<p>Here is another one in a link: <a href=\\"http://example.com\\">Reference (<abbr title=\\"Reference\\">FOO</abbr>)</a>.</p>
-<p>Here is the first one in a link: <a href=\\"http://example.com\\"><abbr title=\\"Reference\\">REF</abbr></a>.</p>"
+<p>Here is another one in a link: <a href="http://example.com">Reference (<abbr title="Reference">FOO</abbr>)</a>.</p>
+<p>Here is the first one in a link: <a href="http://example.com"><abbr title="Reference">REF</abbr></a>.</p>"
 `;
 
-exports[`no-config does not break with references in their own paragraphs 1`] = `"<p>Here is a test featuring <abbr title=\\"A B C\\">abc</abbr> and <abbr title=\\"D E F\\">def</abbr></p>"`;
+exports[`no-config does not break with references in their own paragraphs 1`] = `"<p>Here is a test featuring <abbr title="A B C">abc</abbr> and <abbr title="D E F">def</abbr></p>"`;
 
 exports[`no-config no reference 1`] = `"<p>No reference!</p>"`;
 
 exports[`no-config passes the first regression test 1`] = `
-"<p>The <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr> specification is maintained by the <abbr title=\\"World Wide Web Consortium\\">W3C</abbr>:<a href=\\"https://w3c.github.io/html/\\">link</a>, this line had an abbr before link.</p>
-<p>A line with <a href=\\"http://example.com\\">a link</a> before an abbr: <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>.</p>"
+"<p>The <abbr title="Hyper Text Markup Language">HTML</abbr> specification is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>:<a href="https://w3c.github.io/html/">link</a>, this line had an abbr before link.</p>
+<p>A line with <a href="http://example.com">a link</a> before an abbr: <abbr title="Hyper Text Markup Language">HTML</abbr>.</p>"
 `;
 
 exports[`no-config passes the retro test 1`] = `
-"<p>An <abbr title=\\"Abbreviation\\">ABBR</abbr>: \\"<abbr title=\\"Reference\\">REF</abbr>\\", ref and REFERENCE should be ignored.</p>
-<p>The <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr> specification is maintained by the <abbr title=\\"World Wide Web Consortium\\">W3C</abbr>.</p>"
+"<p>An <abbr title="Abbreviation">ABBR</abbr>: "<abbr title="Reference">REF</abbr>", ref and REFERENCE should be ignored.</p>
+<p>The <abbr title="Hyper Text Markup Language">HTML</abbr> specification is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>.</p>"
 `;
 
 exports[`no-config passes the retro test 2`] = `
-"An ABBR: \\"REF\\", ref and REFERENCE should be ignored.
+"An ABBR: "REF", ref and REFERENCE should be ignored.
 
 The HTML specification is maintained by the W3C.
 
@@ -127,13 +127,13 @@ The HTML specification is maintained by the W3C.
 `;
 
 exports[`no-config passes the second regression test 1`] = `
-"<p>The <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr> specification is maintained by the <abbr title=\\"World Wide Web Consortium\\">W3C</abbr>:<a href=\\"https://w3c.github.io/html/\\">link</a>, this line had an abbr before <strong>link</strong> <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>.</p>
-<p>A line with <a href=\\"http://example.com\\">a link</a> before an abbr: <abbr title=\\"Hyper Text Markup Language\\">HTML</abbr>.</p>"
+"<p>The <abbr title="Hyper Text Markup Language">HTML</abbr> specification is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>:<a href="https://w3c.github.io/html/">link</a>, this line had an abbr before <strong>link</strong> <abbr title="Hyper Text Markup Language">HTML</abbr>.</p>
+<p>A line with <a href="http://example.com">a link</a> before an abbr: <abbr title="Hyper Text Markup Language">HTML</abbr>.</p>"
 `;
 
 exports[`no-config renders references 1`] = `
-"<p>This is an abbreviation: <abbr title=\\"Reference\\">REF</abbr>.
+"<p>This is an abbreviation: <abbr title="Reference">REF</abbr>.
 ref and REFERENCE should be ignored.</p>
-<p>Here is another one in a link: <a href=\\"http://example.com\\"><abbr title=\\"Reference\\">FOO</abbr></a>.</p>
-<p>Here is the first one in a link: <a href=\\"http://example.com\\"><abbr title=\\"Reference\\">REF</abbr></a>.</p>"
+<p>Here is another one in a link: <a href="http://example.com"><abbr title="Reference">FOO</abbr></a>.</p>
+<p>Here is the first one in a link: <a href="http://example.com"><abbr title="Reference">REF</abbr></a>.</p>"
 `;
