@@ -1,11 +1,11 @@
 import dedent from 'dedent'
-import unified from 'unified'
+import { unified } from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
 import remarkStringify from 'remark-stringify'
 
-import remarkAbbr from '../src/'
+import remarkAbbr from '../lib/index'
 
 const render = (text, config) => unified()
   .use(reParse)

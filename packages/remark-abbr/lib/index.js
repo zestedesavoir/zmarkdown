@@ -1,6 +1,6 @@
-const visit = require('unist-util-visit')
+import { visit } from 'unist-util-visit'
 
-function plugin (options) {
+export default function plugin (options) {
   const opts = options || {}
   const expandFirst = opts.expandFirst
 
@@ -150,4 +150,3 @@ function plugin (options) {
   return transformer
 }
 
-module.exports = plugin
