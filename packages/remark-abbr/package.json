@@ -1,6 +1,8 @@
 {
   "name": "remark-abbr",
   "version": "1.4.2",
+  "description": "Parses custom Markdown syntax to support abbreviations",
+  "type": "module",
   "repository": {
     "url": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/remark-abbr",
     "type": "git"
@@ -13,22 +15,30 @@
   ],
   "scripts": {
     "pretest": "eslint .",
-    "build": "babel --root-mode upward --delete-dir-on-start --env-name production --out-dir dist src",
     "test": "jest",
     "coverage": "jest --coverage"
   },
-  "main": "dist/index.js",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
   "files": [
     "LICENSE-MIT",
-    "dist",
-    "src",
+    "lib",
     "README.md"
   ],
   "keywords": [
-    "remark"
+    "remark",
+    "abbreviation",
+    "abbreviations"
   ],
   "license": "MIT",
   "dependencies": {
-    "unist-util-visit": "^2.0.3"
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "remark-rehype": "^11.1.0",
+    "rehype-stringify": "^10.0.0",
+    "unified": "^11.0.4"
   }
 }
