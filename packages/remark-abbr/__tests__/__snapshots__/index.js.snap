@@ -26,6 +26,19 @@ exports[`compiles to markdown 2`] = `
 "
 `;
 
+exports[`compiles to markdown 3`] = `
+"*abbr* HTML
+
+> HTML inside quote
+
+*[abbr]: abbreviation
+
+*[noabbr]: explanation that does not match
+
+*[HTML]: HyperText Markup Language
+"
+`;
+
 exports[`empty object does not break with references in their own paragraphs 1`] = `"<p>Here is a test featuring <abbr title="A B C">abc</abbr> and <abbr title="D E F">def</abbr></p>"`;
 
 exports[`empty object no reference 1`] = `"<p>No reference!</p>"`;
@@ -88,10 +101,16 @@ exports[`expandFirst passes the retro test 2`] = `
 
 The HTML specification is maintained by the W3C.
 
-*[ABBR]: Abbreviation
 *[REF]: Reference
+
+*[ABBR]: This gets overridden by the next one.
+
+*[ABBR]: Abbreviation
+
 *[HTML]: Hyper Text Markup Language
-*[W3C]: World Wide Web Consortium"
+
+*[W3C]: World Wide Web Consortium
+"
 `;
 
 exports[`expandFirst passes the second regression test 1`] = `

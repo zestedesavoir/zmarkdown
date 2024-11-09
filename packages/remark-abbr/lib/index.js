@@ -1,7 +1,8 @@
 import { SKIP, CONTINUE, visit } from 'unist-util-visit'
 import { abbr, abbrTypes } from 'micromark-extension-abbr'
 
-function splitTextByAbbr (textNode, abbrDefinitions) {
+function splitTextByAbbr (textNode, abbrDefinitions, seenAbbreviations, opts) {
+  const expandFirst = opts.expandFirst || false
   const uniqueAbbreviationMap = new Map()
   for (const abbreviation of abbrDefinitions) {
     uniqueAbbreviationMap.set(abbreviation.identifier, abbreviation)
@@ -35,6 +36,11 @@ function splitTextByAbbr (textNode, abbrDefinitions) {
       )
     )
     .sort((l, r) => l.start - r.start)
+    .map(match => {
+      const firstOfItsKind = !seenAbbreviations.has(match.abbr.identifier)
+      seenAbbreviations.add(match.abbr.identifier)
+      return { ...match, firstOfItsKind }
+    })
 
   if (matches.length === 0) {
     return [textNode]
@@ -51,6 +57,14 @@ function splitTextByAbbr (textNode, abbrDefinitions) {
           start: updatePoint(textNode.position.start, currentIndex),
           end: updatePoint(textNode.position.start, match.start)
         }
+      })
+    }
+    const shouldExpand = expandFirst && match.firstOfItsKind
+    if (shouldExpand) {
+      // Add a text node for the expanded definition, up to the opening paren
+      nodes.push({
+        ...textNode,
+        value: match.abbr.value + ' ('
       })
     }
 
@@ -73,6 +87,13 @@ function splitTextByAbbr (textNode, abbrDefinitions) {
     }
     nodes.push(abbr)
 
+    if (shouldExpand) {
+      // Add a closing paren text node
+      nodes.push({
+        type: 'text',
+        value: ')'
+      })
+    }
     // Move the position forwards
     currentIndex = match.end + 1
   }
@@ -108,7 +129,7 @@ function splitTextByAbbr (textNode, abbrDefinitions) {
  * Create an extension for `mdast-util-from-markdown` to enable abbreviations
  * in markdown.
  */
-export function abbrFromMarkdown () {
+export function abbrFromMarkdown (opts) {
   return {
     enter: {
       abbrDefinition: enterAbbrDefinition,
@@ -129,13 +150,14 @@ export function abbrFromMarkdown () {
           return tree
         }
 
+        const seenAbbreviations = new Set()
         visit(tree, null, (node, index, parent) => {
           if (index === undefined || parent === undefined) {
             return CONTINUE
           }
 
           if (node.type === 'text') {
-            const newNodes = splitTextByAbbr(node, abbrDefinitions)
+            const newNodes = splitTextByAbbr(node, abbrDefinitions, seenAbbreviations, opts)
             parent.children.splice(index, 1, ...newNodes)
             return SKIP
           }
@@ -207,9 +229,7 @@ export function abbrToMarkdown () {
 }
 
 export default function plugin (options) {
-  // TODO - add support for expand first, or document that it's being removed
-  // const opts = options || {}
-  // const expandFirst = opts.expandFirst
+  const opts = options || {}
 
   const self = this
   const data = self.data()
@@ -222,6 +242,6 @@ export default function plugin (options) {
     data.toMarkdownExtensions || (data.toMarkdownExtensions = [])
 
   micromarkExtensions.push(abbr)
-  fromMarkdownExtensions.push(abbrFromMarkdown())
+  fromMarkdownExtensions.push(abbrFromMarkdown(opts))
   toMarkdownExtensions.push(abbrToMarkdown())
 }

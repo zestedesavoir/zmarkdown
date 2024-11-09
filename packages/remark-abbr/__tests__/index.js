@@ -34,8 +34,7 @@ const renderToMarkdown = (text, config) => {
 const configToTest = {
   'no-config': undefined,
   'empty object': {},
-  // TODO - add support for expandFirst
-  // expandFirst: {expandFirst: true},
+  expandFirst: {expandFirst: true},
 }
 
 for (const [configName, config] of Object.entries(configToTest)) {
