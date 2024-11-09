@@ -15,8 +15,8 @@
   ],
   "scripts": {
     "pretest": "eslint .",
-    "test": "jest",
-    "coverage": "jest --coverage"
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+    "coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage"
   },
   "main": "lib/index.js",
   "module": "lib/index.js",

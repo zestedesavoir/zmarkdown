@@ -1,0 +1,47 @@
+{
+  "name": "micromark-extension-abbr",
+  "version": "0.0.0",
+  "description": "Add Markdown syntax to handle abbreviations (syntax only)",
+  "type": "module",
+  "keywords": [
+    "micromark",
+    "kbd",
+    "keyboard",
+    "plugin",
+    "extension"
+  ],
+  "author": "Stalone <stalone+zmd@boxph.one>",
+  "homepage": "https://github.com/zestedesavoir/zmarkdown/tree/master/packages/micromark-extension-abbr",
+  "license": "MIT",
+  "main": "lib/syntax.js",
+  "module": "lib/syntax.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zestedesavoir/zmarkdown.git#master"
+  },
+  "scripts": {
+    "pretest": "eslint .",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+    "coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage"
+  },
+  "bugs": {
+    "url": "https://github.com/zestedesavoir/zmarkdown/issues"
+  },
+  "dependencies": {
+    "micromark-factory-label": "^2.0.0",
+    "micromark-factory-whitespace": "^2.0.0",
+    "micromark-util-character": "^2.1.0",
+    "micromark-util-symbol": "^2.0.0",
+    "micromark-util-types": "^2.0.0"
+  },
+  "devDependencies": {
+    "micromark": "^4.0.0"
+  }
+}
