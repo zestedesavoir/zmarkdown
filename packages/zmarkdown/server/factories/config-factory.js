@@ -50,6 +50,13 @@ module.exports = opts => {
     }
   }
 
+  // Allow using a custom element for iframes, initially for GDPR compliance
+  if (opts.hide_iframes) {
+    for (const providerName in mdastConfig.iframes) {
+      mdastConfig.iframes[providerName].tag = 'hidden-frame'
+    }
+  }
+
   if (opts.inline === true) {
     if (!Array.isArray(mdastConfig.disableTokenizers.block)) {
       mdastConfig.disableTokenizers.block = []

@@ -2,6 +2,11 @@
 
 exports[`HTML endpoint accepts POSTed markdown 1`] = `"<h1 id=\\"foo\\">foo<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#foo\\"><span class=\\"icon icon-link\\"></span></a></h1>"`;
 
+exports[`HTML endpoint can use custom iframe elements 1`] = `
+"<h3 id=\\"you-wont-get-my-data-google\\">You won’t get my data, Google!<a aria-hidden=\\"true\\" tabindex=\\"-1\\" href=\\"#you-wont-get-my-data-google\\"><span class=\\"icon icon-link\\"></span></a></h3>
+<hidden-frame src=\\"https://www.youtube.com/embed/q3zqJs7JUCQ?feature=oembed\\" width=\\"560\\" height=\\"315\\" allowfullscreen frameborder=\\"0\\"></hidden-frame>"
+`;
+
 exports[`HTML endpoint correctly renders manifest 1`] = `
 Object {
   "children": Array [
