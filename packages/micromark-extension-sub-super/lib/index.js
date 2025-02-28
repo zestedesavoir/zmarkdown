@@ -21,10 +21,21 @@ export default function micromarkSubSuper (options = {}) {
 }
 
 function tokenizeFactory (subCharCode, superCharCode) {
+  const CONSTRUCT_SUB_NAME = 'subString'
+  const CONSTRUCT_SUPER_NAME = 'superString'
+
   return tokenizeSubSuper
 
   function tokenizeSubSuper (effects, ok, nok) {
+    let constructSequenceName
     return start
+
+    function isMatchingConstruct (code) {
+      return (
+        (constructSequenceName !== CONSTRUCT_SUB_NAME && code === superCharCode) ||
+        (constructSequenceName !== CONSTRUCT_SUPER_NAME && code === subCharCode)
+      )
+    }
 
     function start (code) {
       // We should not have entered here at all
@@ -35,44 +46,32 @@ function tokenizeFactory (subCharCode, superCharCode) {
       effects.consume(code)
       effects.exit('subSuperSequence')
 
-      if (code === subCharCode) effects.enter('subString')
-      else if (code === superCharCode) effects.enter('superString')
-      effects.enter('data')
+      if (code === subCharCode) constructSequenceName = CONSTRUCT_SUB_NAME
+      else if (code === superCharCode) constructSequenceName = CONSTRUCT_SUPER_NAME
+
+      effects.enter(constructSequenceName)
+      effects.enter('chunkText', { contentType: 'text' })
 
       return afterStart
     }
 
     function afterStart (code) {
-      if (code === subCharCode ||
-          code === superCharCode ||
-          code === codes.space) return nok(code)
+      if (isMatchingConstruct(code) || code === codes.space) return nok(code)
 
       return content(code)
     }
 
     function content (code) {
-      if (code === subCharCode) return subEnd(code)
-      else if (code === superCharCode) return superEnd(code)
-
+      if (isMatchingConstruct(code)) return end(code)
       if (code === codes.eof || markdownLineEnding(code)) return nok(code)
 
       effects.consume(code)
       return content
     }
 
-    function subEnd (code) {
-      effects.exit('data')
-      effects.exit('subString')
-      return end(code)
-    }
-
-    function superEnd (code) {
-      effects.exit('data')
-      effects.exit('superString')
-      return end(code)
-    }
-
     function end (code) {
+      effects.exit('chunkText')
+      effects.exit(constructSequenceName)
       effects.enter('subSuperSequence')
       effects.consume(code)
       effects.exit('subSuperSequence')

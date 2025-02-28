@@ -19,11 +19,11 @@ const specificationTests = {
   'escaped - super': ['a\\^no\\^', '<p>a^no^</p>'],
   'escaped inside': ['a^\\^^', '<p>a<sup>^</sup></p>', true],
   'lone tilde': ['a ~ b', '<p>a ~ b</p>'],
-  'can contain inline - super': ['my ^*important*^ superscript', '<p>my <sup><em>important</em></sup> superscript</p>', true],
-  'can contain inline - sub': ['my ~*important*~ subscript', '<p>my <sub><em>important</em></sub> subscript</p>', true],
+  'can contain inline - super': ['my ^*important*^ superscript', '<p>my <sup><em>important</em></sup> superscript</p>'],
+  'can contain inline - sub': ['my ~*important*~ subscript', '<p>my <sub><em>important</em></sub> subscript</p>'],
   'can be contained': ['my *im~por~tant* subscript', '<p>my <em>im<sub>por</sub>tant</em> subscript</p>'],
   'can be self-contained': ['2^2^2^^ = 16', '<p>2<sup>2<sup>2</sup></sup> = 16</p>', true],
-  'can be cross-contained': ['remark-~sub-^super^~', '<p>remark-<sub>sub-<sup>super</sup></sub></p>', true]
+  'can be cross-contained': ['remark-~sub-^super^~', '<p>remark-<sub>sub-<sup>super</sup></sub></p>']
 }
 
 const renderString = (fixture) =>
