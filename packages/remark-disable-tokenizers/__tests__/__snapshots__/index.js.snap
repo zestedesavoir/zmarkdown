@@ -12,12 +12,6 @@ exports[`block 1`] = `
 <p>foo <code>bar</code> baz</p>"
 `;
 
-exports[`block throws + inline 1`] = `"Blockquote are not allowed!"`;
-
-exports[`block throws + inline throws 1`] = `"Blockquote are not allowed!"`;
-
-exports[`block throws 1`] = `"Blockquote are not allowed!"`;
-
 exports[`does nothing 1`] = `
 "<p><em>a</em></p>
 <blockquote>
@@ -32,13 +26,6 @@ exports[`inline 1`] = `
 <p>*a*</p>
 </blockquote>
 <p>foo <code>bar</code> baz</p>"
-`;
-
-exports[`inline throws 1`] = `"nope"`;
-
-exports[`regression: actually turn off the tokenizer #412 1`] = `
-"<p>hello
-world</p>"
 `;
 
 exports[`unknown tokenizer 1`] = `

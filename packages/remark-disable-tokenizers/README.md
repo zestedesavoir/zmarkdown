@@ -1,22 +1,10 @@
-# remark-disable-tokenizers [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
+# remark-disable-tokenizers
 
-This [remark][remark] plugin can disable any or all remark `blockTokenizers` and `inlineTokenizers`. It can not only disable the ones provided by remark core, but also any other tokenizer that has been added to the remark parser whether through plugins or not.
-
-Remark default tokenizers that can be disabled are listed [here][remark-doc]:
-
-* [blockTokenizers][blockTokenizers]
-* [inlineTokenizers][inlineTokenizers]
+This [remark][remark] plugin can disable any tokenizer, be it provided by CommonMark core, or by any other tokenizer that has been added to the remark parser whether through plugins or not.
 
 ## Configuration
 
-Two options can be passed, as a single argument object:
-
-    {block = [], inline = []}
-
-Each of these can contain both tokenizer names as strings or arrays `['tokenizerName', 'error message']`.
-
-* A string `name`: this tokenizer will be disabled
-* An array `[name, message]`: this tokenizer, if used, will throw an `Error` with the message `message`
+The only option that can be passed to this plugin is a list of underlying [micromark][micromark] tokenizers to be disabled.
 
 ## Motivation
 
@@ -39,7 +27,6 @@ const unified = require('unified')
 const remarkParse = require('remark-parse')
 const stringify = require('rehype-stringify')
 const remark2rehype = require('remark-rehype')
-
 const remarkDisableBlocks = require('remark-disable-tokenizers')
 ```
 
@@ -49,35 +36,11 @@ Usage:
 unified()
   .use(remarkParse)
   .use(remarkDisableTokenizers, {
-    block: [
-      'indentedCode',
-      'fencedCode',
-      // I'd like to ignore a bunch of blockTokenizers but specifically
-      // I want blockquotes to throw this `Error` if used in the input Markdown
-      ['blockquote', 'Blockquote are not allowed!'],
-      'atxHeading',
-      'setextHeading',
-      'footnote',
-      'table',
-      'custom_blocks'
-    ],
-    inline: [
-      'emphasis' // emphasis is the only inlineTokenizer I'm disallowing
-    ]
-  })
-  .use(remark2rehype)
-  .use(stringify)
-```
-
-## Caveats
-
-* `autoLink` is not working correctly -- in order to disable auto-linking, you have to pass `url` to the array of disabled inline tokenizers.
-
-```javascript
-unified()
-  .use(remarkParse)
-  .use(remarkDisableTokenizers, {
-    inline: ['url']
+  	// Emphasis + bold
+  	'attention',
+    'indentedCode',
+    'fencedCode',
+    'blockQuote'
   })
   .use(remark2rehype)
   .use(stringify)
@@ -89,14 +52,6 @@ unified()
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/zestedesavoir/zmarkdown.svg
-
-[build-status]: https://travis-ci.org/zestedesavoir/zmarkdown
-
-[coverage-badge]: https://img.shields.io/coveralls/zestedesavoir/zmarkdown.svg
-
-[coverage-status]: https://coveralls.io/github/zestedesavoir/zmarkdown
-
 [license]: https://github.com/zestedesavoir/zmarkdown/blob/master/packages/remark-disable-tokenizers/LICENSE-MIT
 
 [zds]: https://zestedesavoir.com
@@ -105,8 +60,4 @@ unified()
 
 [remark]: https://github.com/remarkjs/remark
 
-[remark-doc]: https://github.com/remarkjs/remark/tree/master/packages/remark-parse#parserblocktokenizers
-
-[blockTokenizers]: https://github.com/remarkjs/remark/tree/master/packages/remark-parse#parserblockmethods
-
-[inlineTokenizers]: https://github.com/remarkjs/remark/tree/master/packages/remark-parse#parserinlinemethods
+[micromark]: https://github.com/micromark/micromark

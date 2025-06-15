@@ -1,69 +1,17 @@
 import dedent from 'dedent'
-import unified from 'unified'
+import {unified} from 'unified'
 import reParse from 'remark-parse'
 import stringify from 'rehype-stringify'
 import remark2rehype from 'remark-rehype'
 
-import plugin from '../src/'
-
-test('block throws + inline', () => {
-  function t () {
-    unified()
-      .use(reParse)
-      .use(plugin, {
-        block: [
-          ['blockquote', 'Blockquote are not allowed!'],
-        ],
-        inline: [
-          'emphasis',
-        ],
-      })
-      .use(remark2rehype)
-      .use(stringify)
-      .processSync(dedent`
-        *a*
-
-        > *a*
-
-        foo \`bar\` baz
-      `)
-  }
-
-  expect(t).toThrowErrorMatchingSnapshot()
-})
-
-test('block + inline', () => {
-  const {contents} = unified()
-    .use(reParse)
-    .use(plugin, {
-      block: [
-        'blockquote',
-      ],
-      inline: [
-        'emphasis',
-      ],
-    })
-    .use(remark2rehype)
-    .use(stringify)
-    .processSync(dedent`
-      *a*
-
-      > *a*
-
-      foo \`bar\` baz
-    `)
-
-  expect(contents).toMatchSnapshot()
-})
+import plugin from '../lib/index'
 
 test('block', () => {
-  const {contents} = unified()
+  const {value} = unified()
     .use(reParse)
-    .use(plugin, {
-      block: [
-        'blockquote',
-      ],
-    })
+    .use(plugin, [
+      'blockQuote'
+    ])
     .use(remark2rehype)
     .use(stringify)
     .processSync(dedent`
@@ -74,17 +22,15 @@ test('block', () => {
       foo \`bar\` baz
     `)
 
-  expect(contents).toMatchSnapshot()
+  expect(value).toMatchSnapshot()
 })
 
 test('inline', () => {
-  const {contents} = unified()
+  const {value} = unified()
     .use(reParse)
-    .use(plugin, {
-      inline: [
-        'emphasis',
-      ],
-    })
+    .use(plugin, [
+      'attention'
+    ])
     .use(remark2rehype)
     .use(stringify)
     .processSync(dedent`
@@ -95,83 +41,31 @@ test('inline', () => {
       foo \`bar\` baz
     `)
 
-  expect(contents).toMatchSnapshot()
+  expect(value).toMatchSnapshot()
 })
 
-test('inline throws', () => {
-  function t () {
-    unified()
-      .use(reParse)
-      .use(plugin, {
-        inline: [
-          ['emphasis', 'nope'],
-        ],
-      })
-      .use(remark2rehype)
-      .use(stringify)
-      .processSync(dedent`
-        *a*
+test('block + inline', () => {
+  const {value} = unified()
+    .use(reParse)
+    .use(plugin, [
+      'blockQuote',
+      'attention'
+    ])
+    .use(remark2rehype)
+    .use(stringify)
+    .processSync(dedent`
+      *a*
 
-        > *a*
+      > *a*
 
-        foo \`bar\` baz
-      `)
-  }
+      foo \`bar\` baz
+    `)
 
-  expect(t).toThrowErrorMatchingSnapshot()
-})
-
-test('block throws', () => {
-  function t () {
-    unified()
-      .use(reParse)
-      .use(plugin, {
-        block: [
-          ['blockquote', 'Blockquote are not allowed!'],
-        ],
-      })
-      .use(remark2rehype)
-      .use(stringify)
-      .processSync(dedent`
-        *a*
-
-        > *a*
-
-        foo \`bar\` baz
-      `)
-  }
-
-  expect(t).toThrowErrorMatchingSnapshot()
-})
-
-test('block throws + inline throws', () => {
-  function t () {
-    unified()
-      .use(reParse)
-      .use(plugin, {
-        block: [
-          ['blockquote', 'Blockquote are not allowed!'],
-        ],
-        inline: [
-          ['emphasis', 'Nope.'],
-        ],
-      })
-      .use(remark2rehype)
-      .use(stringify)
-      .processSync(dedent`
-        *a*
-
-        > *a*
-
-        foo \`bar\` baz
-      `)
-  }
-
-  expect(t).toThrowErrorMatchingSnapshot()
+  expect(value).toMatchSnapshot()
 })
 
 test('does nothing', () => {
-  const {contents} = unified()
+  const {value} = unified()
     .use(reParse)
     .use(plugin)
     .use(remark2rehype)
@@ -184,18 +78,15 @@ test('does nothing', () => {
       foo \`bar\` baz
     `)
 
-  expect(contents).toMatchSnapshot()
+  expect(value).toMatchSnapshot()
 })
 
-
 test('unknown tokenizer', () => {
-  const {contents} = unified()
+  const {value} = unified()
     .use(reParse)
-    .use(plugin, {
-      inline: [
-        'foo bar',
-      ],
-    })
+    .use(plugin, [
+      'foo bar'
+    ])
     .use(remark2rehype)
     .use(stringify)
     .processSync(dedent`
@@ -206,23 +97,5 @@ test('unknown tokenizer', () => {
       foo \`bar\` baz
     `)
 
-  expect(contents).toMatchSnapshot()
-})
-
-test('regression: actually turn off the tokenizer #412', () => {
-  const {contents} = unified()
-    .use(reParse)
-    .use(plugin, {
-      block: [
-        ['html'],
-      ],
-      inline: [
-        ['html'],
-      ],
-    })
-    .use(remark2rehype)
-    .use(stringify)
-    .processSync(`hello\nworld`)
-
-  expect(contents).toMatchSnapshot()
+  expect(value).toMatchSnapshot()
 })
